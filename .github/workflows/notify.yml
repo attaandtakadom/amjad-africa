@@ -8,15 +8,15 @@ jobs:
   send_message:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Message
+      - name: Send Notification
         env:
-          BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          MSG: ${{ github.event.head_commit.message }}
         run: |
-          curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
+          curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
           --data-urlencode "chat_id=$CHAT_ID" \
           --data-urlencode "text=🔔 تم تحديث المنظومة بنجاح.
-
-📝 التعديلات الجديدة:
-$COMMIT_MSG"
+          
+          📝 التعديلات الجديدة:
+          $MSG"
