@@ -10,7 +10,9 @@ jobs:
     steps:
       - name: Send Arabic Notification
         run: |
-          TEXT="🔔 تم تحديث المنظومة بنجاح.%0A%0A📝 التعديلات الجديدة:%0A${{ github.event.head_commit.message }}"
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d "text=$TEXT"
+          --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          --data-urlencode "text=🔔 تم تحديث المنظومة بنجاح.
+
+📝 التعديلات الجديدة:
+${{ github.event.head_commit.message }}"
