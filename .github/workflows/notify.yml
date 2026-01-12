@@ -1,22 +1,15 @@
-name: Update Notification
+name: Notification
 on:
   push:
     branches:
       - main
 
 jobs:
-  send_message:
+  send:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Notification
-        env:
-          TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          MSG: ${{ github.event.head_commit.message }}
+      - name: Send
         run: |
-          curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
-          --data-urlencode "chat_id=$CHAT_ID" \
-          --data-urlencode "text=🔔 تم تحديث المنظومة بنجاح.
-          
-          📝 التعديلات الجديدة:
-          $MSG"
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+          --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          --data-urlencode "text=🔔 تم تحديث المنظومة بنجاح."
