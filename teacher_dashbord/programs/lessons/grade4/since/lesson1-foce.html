@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مؤسسة التقدم والعطاء - درس الكتلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --success: #7ed321;
+            --bg: #f0f4f8;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+            color: var(--text);
+        }
+
+        /* حاوية متوافقة مع النقال */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+.mhome { 
+    display: inline-block; 
+    padding: 12px 28px; 
+    background: linear-gradient(135deg, #0d47a1, #1976d2); 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 50px; 
+    font-weight: bold; 
+    margin-bottom: 25px; 
+    box-shadow: 0 6px 15px rgba(13, 71, 161, 0.3);
+    transition: all 0.3s;
+    border: 2px solid white;
+}
+
+.mhome:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(13, 71, 161, 0.4);
+}
+
+        .points-box {
+            background: #fff3cd;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .lesson-img {
+            width: 80%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .info-card {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* أزرار الأسئلة */
+        .options {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1.1rem;
+            font-family: 'Cairo';
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #eee;
+        }
+
+        .btn-option:hover { background: #ddd; }
+
+        .correct { background-color: var(--success) !important; color: white; }
+        .wrong { background-color: #ff5e5e !important; color: white; }
+
+        .btn-home {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        /* رسالة التشجيع */
+        #feedback {
+            height: 30px;
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+
+    <a href="../../../../../teacher_dashbord/sinces_dashboard.html" class="mhome">🏠 العودة للرئيسية</a>
+
+
+
+    <header>
+        <h2 style="color: var(--primary); margin:0;">مؤسسة التقدم والعطاء</h2>
+        <small>البيضاء - ليبيا</small>
+    </header>
+
+    <div class="points-box">نقاطك: <span id="score">0</span> ⭐</div>
+
+    <div id="section1">
+        <h3>ما هي الكتلة؟</h3>
+        <p>المادة لها <strong>كتلة</strong>.</p>
+        <div class="info-card">
+            الكتلة هي: كمية المادة التي يحتويها الشيء.
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/2928/2928158.png" class="lesson-img" alt="ميزان">
+        <p>نستخدم <strong>الميزان</strong> لمعرفة الكتلة.</p>
+        
+        <div class="options">
+            <p><strong>سؤال: ما الذي نستخدمه لقياس الكتلة؟</strong></p>
+            <button class="btn-option" onclick="checkAnswer(this, true, 1)">الميزان</button>
+            <button class="btn-option" onclick="checkAnswer(this, false, 1)">المسطرة</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="section2">
+        <h3>وحدات القياس</h3>
+        <div class="info-card">
+            تقاس الكتلة بـ: <br>
+            <strong>الجرام (جم)</strong> للأشياء الصغيرة.<br>
+            <strong>الكيلوجرام (كجم)</strong> للأشياء الكبيرة.
+        </div>
+        
+        <div class="options">
+            <p><strong>صح أم خطأ؟</strong><br>نقيس كتلة الطفل بالكيلوجرام (كجم).</p>
+            <button class="btn-option" onclick="checkAnswer(this, true, 2)">صح ✅</button>
+            <button class="btn-option" onclick="checkAnswer(this, false, 2)">خطأ ❌</button>
+        </div>
+    </div>
+
+    <div id="feedback"></div>
+    <a href="../../../../../teacher_dashbord/sinces_dashboard.html" class="mhome">🏠 العودة للرئيسية</a>
+
+</div>
+
+<script>
+    let score = 0;
+
+    function checkAnswer(btn, isCorrect, section) {
+        const feedback = document.getElementById('feedback');
+        const scoreDisplay = document.getElementById('score');
+        
+        // منع الضغط المتكرر على نفس السؤال
+        const parent = btn.parentElement;
+        const buttons = parent.querySelectorAll('button');
+        buttons.forEach(b => b.disabled = true);
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            score += 10;
+            feedback.innerHTML = "أحسنت! أنت ذكي جداً 🌟";
+            scoreDisplay.innerHTML = score;
+            // صوت تشجيع بسيط (اختياري)
+        } else {
+            btn.classList.add('wrong');
+            feedback.innerHTML = "حاول مرة أخرى يا بطل ❤️";
+        }
+    }
+</script>
+
+</body>
+</html>

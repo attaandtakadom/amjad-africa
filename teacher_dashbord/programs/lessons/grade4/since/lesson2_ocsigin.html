@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>دورة الغازات - مؤسسة التقدم والعطاء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sky: #e3f2fd;
+            --tree: #4caf50;
+            --human: #2196f3;
+            --accent: #9c27b0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--sky);
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+.mhome { 
+    display: inline-block; 
+    padding: 12px 28px; 
+    background: linear-gradient(135deg, #0d47a1, #1976d2); 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 50px; 
+    font-weight: bold; 
+    margin-bottom: 25px; 
+    box-shadow: 0 6px 15px rgba(13, 71, 161, 0.3);
+    transition: all 0.3s;
+    border: 2px solid white;
+}
+
+.mhome:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(13, 71, 161, 0.4);
+}
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #bbdefb;
+        }
+
+        .header {
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .points-badge {
+            background: #ffca28;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 0 #fbc02d;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        .card {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-right: 8px solid var(--tree);
+            animation: fadeIn 0.5s ease;
+        }
+
+        h3 { color: var(--text-dark); margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+
+        .options { display: grid; gap: 12px; margin-top: 15px; }
+
+        button {
+            padding: 15px;
+            font-size: 1.1rem;
+            font-family: 'Cairo';
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            background: #f5f5f5;
+            font-weight: bold;
+            transition: 0.2s;
+            box-shadow: 0 4px 0 #ddd;
+        }
+
+        button:active { transform: translateY(3px); box-shadow: none; }
+
+        .correct { background: #81c784 !important; color: white; box-shadow: 0 4px 0 #66bb6a !important; }
+        .wrong { background: #ef5350 !important; color: white; box-shadow: 0 4px 0 #e53935 !important; }
+
+        .hint-btn { background: #ce93d8; color: #4a148c; }
+        .reset-btn { background: #ba68c8; color: white; }
+        .home-btn { background: var(--human); color: white; width: 100%; margin-top: 20px; font-size: 1.2rem; }
+
+        #feedback, #sort-feedback {
+            text-align: center;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 10px 0;
+            min-height: 30px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <a href="../../../../../teacher_dashbord/sinces_dashboard.html" class="mhome">🏠 العودة للرئيسية</a>
+
+
+    <div class="header">
+        <h2 style="margin:0; color: #1976d2;">مؤسسة التقدم والعطاء</h2>
+        <small>مدينة البيضاء - ليبيا 🇱🇾</small>
+    </div>
+
+    <center><div class="points-badge">نجومي: <span id="score">0</span> ⭐</div></center>
+
+    <div class="card">
+        <h3>1. الأكسجين (O₂) 🌬️</h3>
+        <p>الشجرة تخرج الأكسجين، والإنسان يتنفسه ليعيش.</p>
+        <div class="options">
+            <p><strong>سؤال: ماذا تعطينا الشجرة؟</strong></p>
+            <button onclick="checkSimple(this, true, 10)">أكسجين</button>
+            <button onclick="checkSimple(this, false, 0)">تراب</button>
+        </div>
+    </div>
+
+    <div class="card" style="border-right-color: #ff9800; background: #fffde7;">
+        <h3>2. ثاني أكسيد الكربون (CO₂) ☁️</h3>
+        <p>الإنسان يخرج الزفير، والشجرة تأخذه لتصنع غذاءها.</p>
+        <div class="options">
+            <p><strong>صح أم خطأ؟</strong><br>الإنسان يخرج ثاني أكسيد الكربون.</p>
+            <button onclick="checkSimple(this, true, 10)">صح ✅</button>
+            <button onclick="checkSimple(this, false, 0)">خطأ ❌</button>
+        </div>
+    </div>
+
+    <div class="card" style="border-right-color: var(--accent); background: #f3e5f5;">
+        <h3>3. رتب دورة الغازات 🧩</h3>
+        <p>اضغط بالترتيب (1 ثم 2 ثم 3):</p>
+        
+        
+
+        <div id="sort-exercise" class="options">
+            <button class="sort-item" data-order="2" onclick="handleSort(this)">يتنفس الإنسان الأكسجين 🌬️</button>
+            <button class="sort-item" data-order="1" onclick="handleSort(this)">تخرج الشجرة الأكسجين 🌳</button>
+            <button class="sort-item" data-order="3" onclick="handleSort(this)">يخرج الإنسان ثاني أكسيد الكربون 🌬️</button>
+        </div>
+        
+        <div id="sort-feedback"></div>
+
+        <div style="display: flex; gap: 10px;">
+            <button class="hint-btn" onclick="showHint()">💡 تلميح</button>
+            <button class="reset-btn" onclick="resetSort()">🔄 إعادة</button>
+        </div>
+    </div>
+
+    <div id="feedback"></div>
+
+    <button class="home-btn" onclick="location.reload()">العودة للرئيسية</button>
+</div>
+
+<script>
+    let score = 0;
+    let currentStep = 1;
+
+    // دالة الأسئلة البسيطة
+    function checkSimple(btn, isCorrect, pts) {
+        const parent = btn.parentElement;
+        parent.querySelectorAll('button').forEach(b => b.disabled = true);
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            score += pts;
+            document.getElementById('score').innerText = score;
+            document.getElementById('feedback').innerText = "ممتاز يا بطل! 🌟";
+        } else {
+            btn.classList.add('wrong');
+            document.getElementById('feedback').innerText = "حاول مرة أخرى ❤️";
+        }
+    }
+
+    // دالة تمرين الترتيب
+    function handleSort(btn) {
+        const order = parseInt(btn.getAttribute('data-order'));
+        const fback = document.getElementById('sort-feedback');
+
+        if (order === currentStep) {
+            btn.classList.add('correct');
+            if(!btn.dataset.text) btn.dataset.text = btn.innerHTML;
+            btn.innerHTML = "⭐ " + currentStep + ". " + btn.dataset.text;
+            btn.disabled = true;
+            
+            if (currentStep === 3) {
+                fback.innerText = "🎉 مذهل! رتبتها كلها صحيحة";
+                score += 20;
+                document.getElementById('score').innerText = score;
+            } else {
+                fback.innerText = "خطوة صحيحة.. تابع!";
+            }
+            currentStep++;
+        } else {
+            btn.classList.add('wrong');
+            fback.innerText = "ابدأ برقم " + currentStep;
+            setTimeout(() => btn.classList.remove('wrong'), 500);
+        }
+    }
+
+    function showHint() {
+        document.getElementById('sort-feedback').innerText = "💡 ابحث عن الشجرة أولاً 🌳";
+    }
+
+    function resetSort() {
+        currentStep = 1;
+        document.getElementById('sort-feedback').innerText = "";
+        document.querySelectorAll('.sort-item').forEach(btn => {
+            btn.disabled = false;
+            btn.classList.remove('correct', 'wrong');
+            if(btn.dataset.text) btn.innerHTML = btn.dataset.text;
+        });
+    }
+</script>
+
+</body>
+</html>
