@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة الأمل - العلوم</title>
+    <style>
+        :root { --blue: #3498db; --green: #2ecc71; --gray: #95a5a6; }
+        body { font-family: 'Segoe UI', Arial; background: #f0f4f8; margin: 0; padding: 15px; display: flex; justify-content: center; }
+        .container { background: white; width: 100%; max-width: 880px; padding: 20px; border-radius: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        
+        h1 { color: var(--blue); text-align: center; font-size: 1.4rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .card { background: #fff; border: 3px solid #e1e8ed; border-radius: 20px; padding: 15px; margin-bottom: 20px; }
+        .card.correct { border-color: var(--green); background: #fafffa; }
+        
+        .question-text { font-size: 1.1rem; margin-bottom: 15px; font-weight: bold; color: #2c3e50; line-height: 1.5; }
+        .input-ans { width: 90%; padding: 15px; border: 2px solid #ddd; border-radius: 12px; font-size: 1.1rem; text-align: center; margin-bottom: 10px; outline: none; }
+        .input-ans:focus { border-color: var(--blue); }
+        
+        .feedback { display: none; color: var(--green); font-weight: bold; font-size: 1.2rem; margin-top: 10px; text-align: center; }
+        .clap-emoji { display: none; font-size: 2.5rem; text-align: center; }
+
+        .btn-check { width: 100%; padding: 15px; background: var(--blue); color: white; border: none; border-radius: 12px; font-size: 1.1rem; cursor: pointer; font-weight: bold; }
+        .btn-home { width: 100%; padding: 12px; background: var(--gray); color: white; border: none; border-radius: 12px; font-size: 1rem; cursor: pointer; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="../../../../../teacher_dashbord/s-da.html" class="mhome">🏠 العودة للرئيسية</a>
+    
+    <h1>📐 تمارين الحيز والحجم</h1>
+
+    <div class="card" id="q1">
+        <div class="question-text">يسمى مقدار الحيز الذي يشغله الجسم بـ:</div>
+        <input type="text" class="input-ans" id="ans1" placeholder="اكتب الإجابة هنا...">
+        <button class="btn-check" onclick="checkFlex('q1', 'ans1', ['الحجم', 'حجم', 'الحجوم'])">تأكيد الإجابة</button>
+        <div class="feedback">ممتاز! إجابة صحيحة 🌟</div>
+        <div class="clap-emoji">👏👏👏👏</div>
+    </div>
+
+    <div class="card" id="q2">
+        <div class="question-text">الخشب والحديد نعتبرهما ..... لأن لهما كتلة وحيز.</div>
+        <input type="text" class="input-ans" id="ans2" placeholder="اكتب الإجابة هنا...">
+        <button class="btn-check" onclick="checkFlex('q2', 'ans2', ['مادة', 'مواد', 'المواد', 'المادة'])">تأكيد الإجابة</button>
+        <div class="feedback">رائع! إجابة موفقة 🪵</div>
+        <div class="clap-emoji">👏👏👏👏</div>
+    </div>
+
+    <div class="card" id="q3">
+        <div class="question-text">عند نفخ الإطار، فإن ..... هو الذي يشغل الحيز.</div>
+        <input type="text" class="input-ans" id="ans3" placeholder="اكتب الإجابة هنا...">
+        <button class="btn-check" onclick="checkFlex('q3', 'ans3', ['الهواء', 'هواء', 'هوا'])">تأكيد الإجابة</button>
+        <div class="feedback">بطل! إجابة صحيحة 🌬️</div>
+        <div class="clap-emoji">👏👏👏👏</div>
+    </div>
+
+</div>
+
+<audio id="clap-sound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+
+<script>
+    function checkFlex(cardId, inputId, correctOptions) {
+        const userAns = document.getElementById(inputId).value.trim();
+        const card = document.getElementById(cardId);
+        
+        // التحقق مما إذا كانت إجابة الطالب موجودة ضمن قائمة الاحتمالات
+        if (correctOptions.includes(userAns)) {
+            card.classList.add('correct');
+            card.querySelector('.feedback').style.display = 'block';
+            card.querySelector('.clap-emoji').style.display = 'block';
+            
+            // تشغيل صوت التصفيق
+            const sound = document.getElementById('clap-sound');
+            sound.currentTime = 0;
+            sound.play();
+            
+            // اهتزاز النقال
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        } else {
+            alert("حاول مرة أخرى يا بطل، أنت تستطيع! ❤️");
+        }
+    }
+</script>
+
+</body>
+</html>
