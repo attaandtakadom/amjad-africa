@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة الكسور العشرية - الصف الرابع</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --success: #2ecc71;
+            --bg: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .page { display: none; animation: fadeIn 0.5s; }
+        .active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h1 { color: var(--primary); text-align: center; font-size: 1.5rem; }
+        .instruction {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-right: 5px solid var(--primary);
+            line-height: 1.6;
+        }
+        .example {
+            background: #fffbe6;
+            padding: 10px;
+            border: 1px dashed #f1c40f;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .exercise-card {
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn-check { background: var(--success); color: white; }
+        .btn-next { background: var(--primary); color: white; }
+        .btn-home { background: #95a5a6; color: white; }
+
+        .feedback { display: none; text-align: center; font-size: 1.3rem; margin-top: 10px; font-weight: bold; }
+        .clap { display: none; font-size: 3rem; text-align: center; }
+        
+        .point { font-weight: bold; color: #e74c3c; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div id="page1" class="page active">
+        <h1>➕➖ الجمع والطرح</h1>
+        <div class="instruction">
+            <strong>قاعدة بسيطة:</strong> ضع الفاصلة <span class="point">.</span> فوق الفاصلة <span class="point">.</span> ثم اجمع أو اطرح كأنها أرقام عادية.
+        </div>
+        <div class="example">
+            مثال: 0.5 + 0.2 = 0.7
+        </div>
+        <div class="exercise-card">
+            <p>حل المسألة: <b>0.4 + 0.3 = ؟</b></p>
+            <input type="text" id="ans1" placeholder="اكتب الحل هنا">
+            <button class="btn btn-check" onclick="check('ans1', '0.7', 'f1', 'c1')">تحقق ✅</button>
+            <div id="f1" class="feedback" style="color: var(--success);">أحسنت! الإجابة صحيحة ✨</div>
+            <div id="c1" class="clap">👏👏👏👏</div>
+        </div>
+        <button class="btn btn-next" onclick="showPage(2)">الدرس التالي: الضرب ⬅️</button>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>✖️ ضرب الكسور العشرية</h1>
+        <div class="instruction">
+            <strong>قاعدة بسيطة:</strong> اضرب الأرقام أولاً، ثم احسب كم رقماً بعد الفاصلة وضعه في الناتج.
+        </div>
+        <div class="example">
+            مثال: 0.2 × 3 = 0.6
+        </div>
+        <div class="exercise-card">
+            <p>حل المسألة: <b>0.5 × 2 = ؟</b></p>
+            <input type="text" id="ans2" placeholder="اكتب الحل هنا">
+            <button class="btn btn-check" onclick="check('ans2', '1', 'f2', 'c2')">تحقق ✅</button>
+            <div id="f2" class="feedback" style="color: var(--success);">رائع! الضرب سهل معك 🌟</div>
+            <div id="c2" class="clap">👏👏👏👏</div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn btn-home" onclick="showPage(1)">السابق</button>
+            <button class="btn btn-next" onclick="showPage(3)">التالي: القسمة ⬅️</button>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <h1>➗ قسمة الكسور العشرية</h1>
+        <div class="instruction">
+            <strong>قاعدة بسيطة:</strong> عند القسمة، نوزع العدد بالتساوي.
+        </div>
+        <div class="example">
+            مثال: 0.8 ÷ 2 = 0.4
+        </div>
+        <div class="exercise-card">
+            <p>حل المسألة: <b>0.6 ÷ 3 = ؟</b></p>
+            <input type="text" id="ans3" placeholder="اكتب الحل هنا">
+            <button class="btn btn-check" onclick="check('ans3', '0.2', 'f3', 'c3')">تحقق ✅</button>
+            <div id="f3" class="feedback" style="color: var(--success);">مذهل! أنت بطل القسمة 🏆</div>
+            <div id="c3" class="clap">👏👏👏👏</div>
+        </div>
+        <button onclick="window.location.href='../../../../math_dashboard.html'">🏠 العودة للرئيسية</button>    
+
+    </div>
+
+</div>
+
+<audio id="clap-sound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+
+<script>
+    function showPage(pageNum) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page' + pageNum).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    function check(inputId, correctAns, feedbackId, clapId) {
+        const userAns = document.getElementById(inputId).value.trim();
+        const feedback = document.getElementById(feedbackId);
+        const clap = document.getElementById(clapId);
+        const sound = document.getElementById('clap-sound');
+
+        if (userAns === correctAns) {
+            feedback.style.display = 'block';
+            clap.style.display = 'block';
+            sound.currentTime = 0;
+            sound.play();
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        } else {
+            alert("حاول مرة أخرى يا بطل، أنت تستطيع! ❤️");
+        }
+    }
+</script>
+
+</body>
+</html>

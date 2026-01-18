@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درس: كوكبنا الأرض</title>
+    <style>
+        :root { --land: #27ae60; --water: #2980b9; --air: #ecf0f1; --accent: #f39c12; }
+        body { font-family: 'Segoe UI', Tahoma; background: #eef2f3; margin: 0; padding: 15px; display: flex; justify-content: center; }
+        .container { background: white; width: 100%; max-width: 500px; padding: 20px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        .header { text-align: center; border-bottom: 3px solid var(--water); margin-bottom: 20px; padding-bottom: 10px; }
+        h1 { color: var(--water); font-size: 1.5rem; }
+        
+        .info-box { background: #f8f9fa; border-right: 5px solid var(--land); padding: 15px; border-radius: 10px; line-height: 1.6; margin-bottom: 20px; }
+        
+        /* تصميم الرسم البياني للدائرة */
+        .chart-container { display: flex; flex-direction: column; align-items: center; margin: 20px 0; }
+        .pie-chart {
+            width: 200px; height: 200px; border-radius: 50%;
+            background: conic-gradient(
+                #3498db 0% 78%,     /* نيتروجين */
+                #e74c3c 78% 99%,    /* أكسجين */
+                #f1c40f 99% 100%    /* غازات أخرى */
+            );
+            margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .legend { font-size: 0.9rem; text-align: right; width: 100%; }
+        .legend-item { display: flex; align-items: center; margin: 5px 0; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; margin-left: 8px; }
+
+        .card { background: #fff; border: 2px solid #eee; border-radius: 15px; padding: 15px; margin-bottom: 20px; }
+        .card.correct { border-color: var(--land); background: #f0fff4; }
+        
+        input { width: 85%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; text-align: center; font-size: 1rem; margin-bottom: 10px; }
+        .btn-check { width: 100%; padding: 12px; background: var(--water); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .btn-home { background: #7f8c8d; color: white; border: none; padding: 10px; border-radius: 10px; width: 100%; margin-bottom: 15px; cursor: pointer; }
+        
+        .feedback { display: none; color: var(--land); font-weight: bold; text-align: center; margin-top: 10px; }
+        .clap { display: none; font-size: 3rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+<button onclick="window.location.href='../../../../s-da.html'">🏠 العودة للرئيسية</button>    
+    <div class="header">
+        <h1>🌍 كوكبنا الأرض: مهد الحياة</h1>
+    </div>
+
+    <div class="info-box">
+        الأرض في موقع ممتاز! لا هي حارة جداً ولا باردة جداً. تحتوي على **الماء** و**الهواء** المناسبين لدعم الحياة.
+    </div>
+
+    <div class="chart-container">
+        <h3>📊 نسب الغازات في الهواء</h3>
+        
+        <div class="pie-chart"></div>
+        <div class="legend">
+            <div class="legend-item"><span class="dot" style="background:#3498db"></span> نيتروجين (78%) - للبكتيريا في التربة</div>
+            <div class="legend-item"><span class="dot" style="background:#e74c3c"></span> أكسجين (21%) - للتنفس والاشعال</div>
+            <div class="legend-item"><span class="dot" style="background:#f1c40f"></span> ثاني أكسيد الكربون (1%) - للبناء الضوئي</div>
+        </div>
+    </div>
+
+    <div class="card" id="q1">
+        <div class="question-text">1. أي غاز تستفيد منه بكتيريا التربة؟</div>
+        <input type="text" id="ans1" placeholder="اكتب اسم الغاز...">
+        <button class="btn-check" onclick="check('q1', 'ans1', ['نيتروجين', 'النيتروجين', 'نيتروجين'])">تحقق ✅</button>
+        <div class="feedback">ممتاز! النيتروجين مهم جداً للتربة 🌱</div>
+        <div class="clap">👏👏👏👏</div>
+    </div>
+
+    <div class="card" id="q2">
+        <div class="question-text">2. الغاز الضروري لعملية التنفس والاشعال هو:</div>
+        <input type="text" id="ans2" placeholder="اكتب اسم الغاز...">
+        <button class="btn-check" onclick="check('q2', 'ans2', ['أكسجين', 'الأكسجين', 'اكسجين', 'الاكسجين'])">تحقق ✅</button>
+        <div class="feedback">رائع! بدونه لا تستطيع المخلوقات التنفس 🌬️</div>
+        <div class="clap">👏👏👏👏</div>
+    </div>
+
+    <div class="card" id="q3">
+        <div class="question-text">3. هل الأرض هي الكوكب الوحيد الذي به حياة؟</div>
+        <input type="text" id="ans3" placeholder="نعم أم لا؟">
+        <button class="btn-check" onclick="check('q3', 'ans3', ['نعم', 'نعم'])">تحقق ✅</button>
+        <div class="feedback">صحيح! الأرض هي كوكب الحياة 🌏</div>
+        <div class="clap">👏👏👏👏</div>
+    </div>
+
+</div>
+
+<audio id="clap-sound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+
+<script>
+    function check(cardId, inputId, correctList) {
+        const val = document.getElementById(inputId).value.trim();
+        const card = document.getElementById(cardId);
+        
+        if (correctList.includes(val)) {
+            card.classList.add('correct');
+            card.querySelector('.feedback').style.display = 'block';
+            card.querySelector('.clap').style.display = 'block';
+            document.getElementById('clap-sound').play();
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        } else {
+            alert("حاول مرة أخرى يا بطل ❤️");
+        }
+    }
+</script>
+
+</body>
+</html>

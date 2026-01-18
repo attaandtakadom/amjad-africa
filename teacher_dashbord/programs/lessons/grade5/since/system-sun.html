@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة العلوم - النظام الشمسي</title>
+    <style>
+        :root {
+            --space-bg: #0b1a2d;
+            --earth-blue: #3498db;
+            --sun-yellow: #f1c40f;
+            --success: #2ecc71;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--space-bg);
+            color: white;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        h1 { color: var(--sun-yellow); text-align: center; font-size: 1.8rem; }
+        h2 { color: var(--earth-blue); border-right: 4px solid var(--earth-blue); padding-right: 10px; }
+        
+        .lesson-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .card {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .card.correct { border: 4px solid var(--success); background-color: #f0fff4; }
+        
+        .input-box {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .btn-check {
+            width: 100%;
+            padding: 15px;
+            background: var(--earth-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-home {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .feedback { display: none; color: var(--success); font-weight: bold; text-align: center; margin-top: 10px; }
+        .clap-img { display: none; width: 100px; margin: 10px auto; }
+        
+        img.lesson-img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+                .top-nav { background: #e1e2e4; padding: 10px 20px; display: flex; justify-content: flex-start; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+<div class="top-nav">
+        <a href="../../../../s-da.html" class="back-home"><i class="fas fa-home"></i> العودة للرئيسية</a>
+    </div>    
+    <h1>🚀 النظام الشمسي</h1>
+
+    <div class="lesson-box">
+        <h2>🌍 الأرض بيتنا</h2>
+        <p>تبدو الأرض مسطحة ولكنها في الحقيقة **كروية الشكل**. يغطيها الماء واليابسة، ويحيط بها **الغلاف الجوي** الذي يحمينا ويزودنا بالأكسجين.</p>
+        
+        
+        <h2>☀️ الشمس والنجوم</h2>
+        <p>الشمس هي مركز النظام الشمسي، وهي نجم يشع ضوءاً وحرارة. الأرض تدور حول الشمس، والدورة الكاملة تسمى **سنة كاملة**.</p>
+        
+    </div>
+
+    <div id="quiz-area">
+        
+        <div class="card" id="q1">
+            <span class="question-text">1. ما هو شكل الأرض الحقيقي؟</span>
+            <input type="text" class="input-box" id="ans1" placeholder="اكتب الإجابة هنا...">
+            <button class="btn-check" onclick="checkAnswer('q1', 'ans1', ['كرة', 'كروي', 'كروية', 'شكل كرة'])">تأكيد الإجابة</button>
+            <div class="feedback">رائع! الأرض كروية الشكل 🌍</div>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7qE1YN7bumnIc8so/giphy.gif" class="clap-img">
+        </div>
+
+        <div class="card" id="q2">
+            <span class="question-text">2. ماذا تسمى طبقة الغازات التي تحيط بالأرض؟</span>
+            <input type="text" class="input-box" id="ans2" placeholder="اكتب الإجابة هنا...">
+            <button class="btn-check" onclick="checkAnswer('q2', 'ans2', ['الغلاف الجوي', 'غلاف جوي', 'الغلاف الجوى'])">تأكيد الإجابة</button>
+            <div class="feedback">ممتاز! الغلاف الجوي يحمي كوكبنا 🛡️</div>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7qE1YN7bumnIc8so/giphy.gif" class="clap-img">
+        </div>
+
+        <div class="card" id="q3">
+            <span class="question-text">3. من الذي يتحرك حول الأرض: الشمس أم القمر؟</span>
+            <input type="text" class="input-box" id="ans3" placeholder="اكتب الإجابة هنا...">
+            <button class="btn-check" onclick="checkAnswer('q3', 'ans3', ['القمر', 'قمر'])">تأكيد الإجابة</button>
+            <div class="feedback">بطل! القمر فقط هو الذي يدور حول الأرض 🌙</div>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7qE1YN7bumnIc8so/giphy.gif" class="clap-img">
+        </div>
+
+    </div>
+</div>
+
+<audio id="clap-sound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+
+<script>
+    function checkAnswer(cardId, inputId, correctList) {
+        const userInput = document.getElementById(inputId).value.trim();
+        const card = document.getElementById(cardId);
+        
+        if (correctList.includes(userInput)) {
+            card.classList.add('correct');
+            card.querySelector('.feedback').style.display = 'block';
+            card.querySelector('.clap-img').style.display = 'block';
+            
+            // تشغيل صوت التصفيق
+            const sound = document.getElementById('clap-sound');
+            sound.currentTime = 0;
+            sound.play();
+            
+            // اهتزاز النقال للتعزيز
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        } else {
+            alert("حاول مرة أخرى يا مستكشف الفضاء الصغير! ❤️");
+        }
+    }
+</script>
+
+</body>
+</html>
