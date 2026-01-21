@@ -126,90 +126,83 @@
     <audio id="clapSnd" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
     <audio id="wrongSnd" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
 
-    <script>
+   <script>
+    const grid = document.getElementById('grid');
+    const targetDisplay = document.getElementById('targetDisplay');
+    let targetNum = 0;
+    let audioEnabled = false;
 
-document.body.addEventListener('touchstart', function() {
-    // تشغيل نطق فارغ لمرة واحدة لفك حظر المتصفح
-    const silent = new SpeechSynthesisUtterance('');
-    window.speechSynthesis.speak(silent);
-}, { once: true });
+    // دالة بناء الأرقام - جعلناها تعمل فوراً وبشكل مستقل
+    function initNumbers() {
+    if (!grid) return;
+    grid.innerHTML = '';
+    
+    // التعديل: نبدأ الحلقة من 0 بدلاً من 1
+    for (let i = 0; i <= 20; i++) { 
+        const card = document.createElement('div');
+        card.className = 'num-card c' + ((i % 5) + 1);
+        card.innerText = i;
+        card.onclick = function(e) {
+            e.stopPropagation();
+            checkAnswer(i, card);
+        };
+        grid.appendChild(card);
+    }
+}
 
-
-        const grid = document.getElementById('grid');
-        const targetDisplay = document.getElementById('targetDisplay');
-        let targetNum = 0;
-        let voices = [];
-
-        // تحميل الأصوات لضمان عملها على الجوال
-        function loadVoices() {
-            voices = window.speechSynthesis.getVoices();
-        }
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-        loadVoices();
-
-        function initNumbers() {
-            grid.innerHTML = '';
-            for (let i = 1; i <= 20; i++) {
-                const card = document.createElement('div');
-                const colorClass = 'c' + ((i % 5) + 1);
-                card.className = `num-card ${colorClass}`;
-                card.innerText = i;
-                card.onclick = () => checkAnswer(i, card);
-                grid.appendChild(card);
-            }
+function newQuestion() {
+    // التعديل: الآن نختار عشوائياً من 0 إلى 20
+    targetNum = Math.floor(Math.random() * 21); 
+    targetDisplay.innerText = "?";
+    setTimeout(repeatQuestion, 500);
+}
+    function enableAudio() {
+        if (!audioEnabled) {
+            audioEnabled = true;
+            const msg = new SpeechSynthesisUtterance("");
+            window.speechSynthesis.speak(msg);
             newQuestion();
         }
+    }
 
-        function newQuestion() {
-            targetNum = Math.floor(Math.random() * 20) + 1;
-            targetDisplay.innerText = "?";
-            repeatQuestion();
-        }
+    function newQuestion() {
+        targetNum = Math.floor(Math.random() * 20) + 1;
+        targetDisplay.innerText = "?";
+        setTimeout(repeatQuestion, 500);
+    }
 
-        // دالة إعادة السماع
-        function repeatQuestion() {
-            speak("Can you find number " + targetNum);
-        }
+    function repeatQuestion() {
+        speak("Can you find number " + targetNum);
+    }
 
-        function checkAnswer(selected, element) {
-            if (selected === targetNum) {
-                element.classList.add('success-anim');
-                targetDisplay.innerText = targetNum;
-                document.getElementById('clapSnd').play();
-                speak("Excellent! This is number " + selected);
-                
-                setTimeout(() => {
-                    element.classList.remove('success-anim');
-                    newQuestion();
-                }, 2500);
-            } else {
-                document.getElementById('wrongSnd').play();
-                speak("No, this is " + selected + ". Try again.");
-            }
-        }
-
-        function speak(text) {
-            window.speechSynthesis.cancel();
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'en-US';
+    function checkAnswer(selected, element) {
+        if (selected === targetNum) {
+            element.classList.add('success-anim');
+            targetDisplay.innerText = targetNum;
+            const clap = document.getElementById('clapSnd');
+            if(clap) clap.play();
+            speak("Excellent! This is " + selected);
             
-            // محاولة اختيار صوت إنجليزي واضح
-            if (voices.length === 0) voices = window.speechSynthesis.getVoices();
-            const enVoice = voices.find(v => v.lang.startsWith('en'));
-            if (enVoice) msg.voice = enVoice;
-
-            msg.rate = 0.8; 
-            msg.pitch = 1.1;
-            window.speechSynthesis.speak(msg);
+            setTimeout(() => {
+                element.classList.remove('success-anim');
+                newQuestion();
+            }, 2500);
+        } else {
+            speak("No, this is " + selected + ". Try again.");
         }
+    }
 
-        // تفعيل الصوت عند أول لمسة للجوال
-        document.addEventListener('touchstart', () => {
-            const s = new SpeechSynthesisUtterance("");
-            window.speechSynthesis.speak(s);
-        }, { once: true });
+    function speak(text) {
+        if (!window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = 'en-US';
+        msg.rate = 0.8;
+        window.speechSynthesis.speak(msg);
+    }
 
-        window.onload = initNumbers;
-    </script>
+    // تشغيل الدالة فوراً دون انتظار تحميل كامل الصفحة لضمان ظهورها في التطبيقات
+    initNumbers(); 
+</script>
 </body>
 </html>

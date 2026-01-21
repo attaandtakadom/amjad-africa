@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Learn Days of the Week - Exercise</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <title>Learn Days of the Week</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -12,316 +12,156 @@
             --primary-color: #ff6b81; 
             --correct-color: #55efc4;
             --wrong-color: #ff4757;
-            --text-color: #2d3436;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            font-family: 'Quicksand', sans-serif;
-            touch-action: manipulation;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Quicksand', sans-serif; }
 
         body {
             background-color: var(--bg-color);
             margin: 0;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 10px 10px 100px 10px; /* حشوة سفلية للأزرار */
+            display: flex; flex-direction: column; align-items: center;
             min-height: 100vh;
-            padding-bottom: 120px;
         }
 
         h1 {
             font-family: 'Fredoka One', cursive;
             color: var(--primary-color);
-            font-size: 26px;
-            margin-top: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            background: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            font-size: 22px; margin: 10px 0;
+            background: white; padding: 8px 15px;
+            border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .exercise-area {
-            width: 100%;
-            max-width: 450px;
-            background: white;
-            border-radius: 30px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border: 4px dashed var(--primary-color);
-            margin-bottom: 25px;
+            width: 100%; max-width: 400px;
+            background: white; border-radius: 25px;
+            padding: 15px; text-align: center;
+            border: 3px dashed var(--primary-color);
+            margin-bottom: 15px;
         }
-
-        /* تنسيق منطقة التعليمات مع زر الصوت */
-        .instruction-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .instruction {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-color);
-            margin: 0;
-        }
-
-        .repeat-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(255, 107, 129, 0.3);
-            transition: transform 0.2s;
-        }
-
-        .repeat-btn:active { transform: scale(0.9); }
 
         .target-day {
-            min-height: 70px;
-            width: 100%;
-            background: #f0f0f0;
-            border: 3px dashed #ccc;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            font-weight: 900;
-            color: #777;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+            min-height: 60px; width: 100%;
+            background: #f8f9fa; border: 2px solid #ddd;
+            border-radius: 15px; display: flex;
+            justify-content: center; align-items: center;
+            font-size: 22px; font-weight: 900; color: var(--primary-color);
+            margin-bottom: 15px;
         }
 
-        .target-day.drag-over { background-color: #e0f2f7; border-color: #a2d2ff; }
-        .target-day.correct-drop { background-color: var(--correct-color); border-color: #2eaf7e; color: white; }
-        .target-day.incorrect-drop { background-color: var(--wrong-color); border-color: #c93545; color: white; }
-
-        .draggable-options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+        .options-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 10px; width: 100%; max-width: 400px;
         }
 
-        .draggable-item {
-            background: #ffeaa7;
-            color: var(--text-color);
-            padding: 15px 20px;
-            border-radius: 25px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: grab;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-            border: 2px solid #fdcb6e;
+        .day-btn {
+            background: #ffeaa7; color: #2d3436;
+            padding: 15px 10px; border-radius: 15px;
+            font-size: 16px; font-weight: bold;
+            border: 2px solid #fdcb6e; cursor: pointer;
+            box-shadow: 0 3px 0 #fdcb6e; transition: 0.2s;
         }
 
-        .feedback-message { font-size: 22px; font-weight: bold; min-height: 30px; margin-top: 20px; }
-        .feedback-message.correct { color: var(--correct-color); animation: bounce 0.5s; }
-        .feedback-message.wrong { color: var(--wrong-color); animation: shake 0.5s; }
+        .day-btn:active { transform: translateY(3px); box-shadow: none; }
 
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+        .correct { background-color: var(--correct-color) !important; color: white !important; border-color: #2eaf7e !important; }
+        .wrong { background-color: var(--wrong-color) !important; color: white !important; border-color: #c93545 !important; }
 
         .nav-bar {
             position: fixed; bottom: 0; left: 0; right: 0;
-            display: flex; gap: 10px; padding: 15px;
-            background: white; box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-            border-radius: 25px 25px 0 0; z-index: 1000;
+            display: flex; gap: 8px; padding: 12px;
+            background: white; border-top: 1px solid #eee; z-index: 1000;
         }
 
         .nav-btn {
-            flex: 1; padding: 12px; border-radius: 15px;
+            flex: 1; padding: 12px; border-radius: 12px;
             text-decoration: none; text-align: center; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px;
+            font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 5px;
         }
-
         .home-btn { background: #f1f2f6; color: #2d3436; }
-        .alpha-btn { background: #a29bfe; color: white; }
+        .next-btn { background: #a29bfe; color: white; }
     </style>
 </head>
-<body>
+<body onclick="enableAudio()">
 
-    <h1>Drag & Drop the Days!</h1>
+    <h1>✨ Days Challenge ✨</h1>
 
     <div class="exercise-area">
-        <div class="instruction-container">
-            <p class="instruction" id="instruction">Drag 'Saturday' to its box!</p>
-            <button class="repeat-btn" onclick="repeatInstruction()">
-                <i class="fas fa-volume-up"></i>
-            </button>
-        </div>
-
-        <div class="target-day" id="targetBox" ondragover="event.preventDefault();" ondrop="drop(event)" ondragleave="dragLeave(event)">
-            <span id="targetDayText">Drag day here</span>
-        </div>
-
-        <div class="draggable-options" id="draggableOptions"></div>
-
-        <p class="feedback-message" id="feedbackMessage"></p>
+        <p style="font-weight: bold; color: #777;">Click the correct day:</p>
+        <div class="target-day" id="targetDisplay">...</div>
+        <button class="repeat-btn" onclick="repeatInstruction()" style="background:var(--primary-color); color:white; border:none; border-radius:50%; width:40px; height:40px;">
+            <i class="fas fa-volume-up"></i>
+        </button>
     </div>
+
+    <div class="options-grid" id="optionsGrid"></div>
 
     <div class="nav-bar">
-        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn home-btn">
-            <i class="fas fa-home"></i> الرئيسية
-        </a>
-        <a href="days.html" class="nav-btn alpha-btn">
-            <i class="fas fa-font"></i>  درس ايام الاسبوع
-        </a>
+        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn home-btn">🏠 Home</a>
+        <a href="days.html" class="nav-btn next-btn">📅 Lessons</a>
     </div>
 
-    <audio id="applauseSound" src="https://www.soundjay.com/human/sounds/applause-01.mp3" preload="auto"></audio>
-    <audio id="wrongSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3" preload="auto"></audio>
+    <audio id="clapSnd" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
 
     <script>
+        const days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+        let currentTarget = '';
+        let audioStarted = false;
 
-document.body.addEventListener('touchstart', function() {
-    // تشغيل نطق فارغ لمرة واحدة لفك حظر المتصفح
-    const silent = new SpeechSynthesisUtterance('');
-    window.speechSynthesis.speak(silent);
-}, { once: true });
+        function enableAudio() {
+            if (!audioStarted) {
+                audioStarted = true;
+                const msg = new SpeechSynthesisUtterance("");
+                window.speechSynthesis.speak(msg);
+                newQuestion();
+            }
+        }
 
+        function initGrid() {
+            const grid = document.getElementById('optionsGrid');
+            grid.innerHTML = '';
+            days.forEach(day => {
+                const btn = document.createElement('button');
+                btn.className = 'day-btn';
+                btn.innerText = day;
+                btn.onclick = (e) => { e.stopPropagation(); checkAnswer(day, btn); };
+                grid.appendChild(btn);
+            });
+        }
 
-        const days = [
-            {en: 'Saturday'}, {en: 'Sunday'}, {en: 'Monday'}, 
-            {en: 'Tuesday'}, {en: 'Wednesday'}, {en: 'Thursday'}, {en: 'Friday'}
-        ];
+        function newQuestion() {
+            currentTarget = days[Math.floor(Math.random() * days.length)];
+            document.getElementById('targetDisplay').innerText = currentTarget;
+            speak("Where is " + currentTarget);
+        }
 
-        let currentTargetDay = '';
-        const targetBox = document.getElementById('targetBox');
-        const instruction = document.getElementById('instruction');
-        const feedbackMessage = document.getElementById('feedbackMessage');
-        const draggableOptionsContainer = document.getElementById('draggableOptions');
+        function repeatInstruction() { speak(currentTarget); }
+
+        function checkAnswer(selected, btn) {
+            if (selected === currentTarget) {
+                btn.classList.add('correct');
+                document.getElementById('clapSnd').play();
+                speak("Excellent! " + selected);
+                setTimeout(() => {
+                    btn.classList.remove('correct');
+                    newQuestion();
+                }, 2000);
+            } else {
+                btn.classList.add('wrong');
+                speak("No, try again");
+                setTimeout(() => btn.classList.remove('wrong'), 500);
+            }
+        }
 
         function speak(text) {
             window.speechSynthesis.cancel();
             const msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'en-US';
             msg.rate = 0.8;
-            msg.pitch = 1.2;
             window.speechSynthesis.speak(msg);
         }
 
-        function repeatInstruction() {
-            speak(`Drag ${currentTargetDay} to its box!`);
-        }
-
-        function generateExercise() {
-            const targetIndex = Math.floor(Math.random() * days.length);
-            currentTargetDay = days[targetIndex].en;
-            
-            instruction.innerText = `Drag '${currentTargetDay}' to its box!`;
-            repeatInstruction();
-            
-            targetBox.innerText = 'Drag day here';
-            targetBox.classList.remove('correct-drop', 'incorrect-drop', 'drag-over');
-
-            let shuffledDays = [...days].sort(() => Math.random() - 0.5);
-            draggableOptionsContainer.innerHTML = '';
-            
-            shuffledDays.forEach(day => {
-                const item = document.createElement('div');
-                item.className = 'draggable-item';
-                item.innerText = day.en;
-                item.setAttribute('draggable', true);
-                item.id = day.en;
-                item.ondragstart = drag;
-                item.ontouchstart = touchStart;
-                item.ontouchmove = touchMove;
-                item.ontouchend = touchEnd;
-                draggableOptionsContainer.appendChild(item);
-            });
-            feedbackMessage.innerText = '';
-        }
-
-        // تحسين لضمان تفعيل الصوت عند أول لمسة للجوال
-        document.addEventListener('touchstart', () => {
-            const s = new SpeechSynthesisUtterance("");
-            window.speechSynthesis.speak(s);
-        }, { once: true });
-
-        // دوال السحب والإسقاط (Desktop)
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
-            targetBox.classList.add('drag-over');
-        }
-
-        function dragLeave(event) { targetBox.classList.remove('drag-over'); }
-
-        function drop(event) {
-            event.preventDefault();
-            targetBox.classList.remove('drag-over');
-            const data = event.dataTransfer.getData("text");
-            handleDrop(data);
-        }
-
-        // معالجة النتيجة
-        function handleDrop(draggedId) {
-            if (draggedId === currentTargetDay) {
-                targetBox.classList.add('correct-drop');
-                targetBox.innerText = currentTargetDay;
-                feedbackMessage.innerText = 'Fantastic! ✨';
-                feedbackMessage.className = 'feedback-message correct';
-                speak('Fantastic!');
-                document.getElementById('applauseSound').play();
-                setTimeout(generateExercise, 2000);
-            } else {
-                targetBox.classList.add('incorrect-drop');
-                feedbackMessage.innerText = 'Oops! Try again. 😕';
-                feedbackMessage.className = 'feedback-message wrong';
-                speak('Oops! Try again.');
-                document.getElementById('wrongSound').play();
-                setTimeout(() => targetBox.classList.remove('incorrect-drop'), 1000);
-            }
-        }
-
-        // دوال اللمس للجوال (Touch)
-        let currentDraggedItem = null;
-        function touchStart(event) {
-            currentDraggedItem = event.target;
-            currentDraggedItem.style.position = 'fixed';
-            targetBox.classList.add('drag-over');
-        }
-
-        function touchMove(event) {
-            if (!currentDraggedItem) return;
-            event.preventDefault();
-            const touch = event.touches[0];
-            currentDraggedItem.style.left = (touch.clientX - 50) + 'px';
-            currentDraggedItem.style.top = (touch.clientY - 25) + 'px';
-        }
-
-        function touchEnd(event) {
-            if (!currentDraggedItem) return;
-            const dropZoneRect = targetBox.getBoundingClientRect();
-            const touch = event.changedTouches[0];
-            
-            if (touch.clientX > dropZoneRect.left && touch.clientX < dropZoneRect.right &&
-                touch.clientY > dropZoneRect.top && touch.clientY < dropZoneRect.bottom) {
-                handleDrop(currentDraggedItem.id);
-            }
-            
-            currentDraggedItem.style.position = 'static';
-            targetBox.classList.remove('drag-over');
-            currentDraggedItem = null;
-        }
-
-        window.onload = generateExercise;
+        initGrid();
     </script>
 </body>
 </html>
