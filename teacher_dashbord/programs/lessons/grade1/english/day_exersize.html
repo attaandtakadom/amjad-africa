@@ -3,165 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Learn Days of the Week</title>
+    <title>Days Challenge - English</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #fcebeb; 
-            --primary-color: #ff6b81; 
-            --correct-color: #55efc4;
-            --wrong-color: #ff4757;
-        }
-
+        :root { --primary: #ff6b81; --bg: #fcebeb; --correct: #55efc4; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Quicksand', sans-serif; }
-
+        
         body {
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 10px 10px 100px 10px; /* حشوة سفلية للأزرار */
-            display: flex; flex-direction: column; align-items: center;
-            min-height: 100vh;
+            background-color: var(--bg); margin: 0;
+            padding: 10px 10px 120px 10px;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
         }
 
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--primary-color);
-            font-size: 22px; margin: 10px 0;
-            background: white; padding: 8px 15px;
-            border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        h1 { font-family: 'Fredoka One', cursive; color: var(--primary); font-size: 24px; margin: 10px 0; }
+
+        .quiz-container {
+            width: 100%; max-width: 400px; background: white; border-radius: 20px;
+            padding: 15px; text-align: center; border: 3px dashed var(--primary); margin-bottom: 15px;
         }
 
-        .exercise-area {
-            width: 100%; max-width: 400px;
-            background: white; border-radius: 25px;
-            padding: 15px; text-align: center;
-            border: 3px dashed var(--primary-color);
-            margin-bottom: 15px;
-        }
+        .target-day { font-size: 35px; font-family: 'Fredoka One'; color: var(--primary); min-height: 50px; }
 
-        .target-day {
-            min-height: 60px; width: 100%;
-            background: #f8f9fa; border: 2px solid #ddd;
-            border-radius: 15px; display: flex;
-            justify-content: center; align-items: center;
-            font-size: 22px; font-weight: 900; color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .options-grid {
+        .days-grid {
             display: grid; grid-template-columns: repeat(2, 1fr);
             gap: 10px; width: 100%; max-width: 400px;
         }
 
-        .day-btn {
-            background: #ffeaa7; color: #2d3436;
-            padding: 15px 10px; border-radius: 15px;
-            font-size: 16px; font-weight: bold;
-            border: 2px solid #fdcb6e; cursor: pointer;
-            box-shadow: 0 3px 0 #fdcb6e; transition: 0.2s;
+        .day-card {
+            background: #ffeaa7; color: #2d3436; padding: 18px 10px;
+            border-radius: 15px; font-size: 18px; font-weight: 900;
+            border: 2px solid #fdcb6e; cursor: pointer; text-align: center;
+            box-shadow: 0 4px 0 #fdcb6e; transition: 0.2s;
         }
-
-        .day-btn:active { transform: translateY(3px); box-shadow: none; }
-
-        .correct { background-color: var(--correct-color) !important; color: white !important; border-color: #2eaf7e !important; }
-        .wrong { background-color: var(--wrong-color) !important; color: white !important; border-color: #c93545 !important; }
+        .day-card:active { transform: translateY(3px); box-shadow: none; }
 
         .nav-bar {
             position: fixed; bottom: 0; left: 0; right: 0;
-            display: flex; gap: 8px; padding: 12px;
+            display: flex; gap: 10px; padding: 15px;
             background: white; border-top: 1px solid #eee; z-index: 1000;
         }
 
         .nav-btn {
-            flex: 1; padding: 12px; border-radius: 12px;
+            flex: 1; padding: 12px; border-radius: 15px;
             text-decoration: none; text-align: center; font-weight: bold;
-            font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 5px;
+            display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px;
         }
         .home-btn { background: #f1f2f6; color: #2d3436; }
         .next-btn { background: #a29bfe; color: white; }
+
+        .audio-btn {
+            background: var(--primary); color: white; border: none;
+            padding: 8px 15px; border-radius: 20px; margin-top: 10px; cursor: pointer; font-weight: bold;
+        }
     </style>
 </head>
-<body onclick="enableAudio()">
+<body onclick="activateAudio()">
 
     <h1>✨ Days Challenge ✨</h1>
 
-    <div class="exercise-area">
-        <p style="font-weight: bold; color: #777;">Click the correct day:</p>
-        <div class="target-day" id="targetDisplay">...</div>
-        <button class="repeat-btn" onclick="repeatInstruction()" style="background:var(--primary-color); color:white; border:none; border-radius:50%; width:40px; height:40px;">
-            <i class="fas fa-volume-up"></i>
-        </button>
+    <div class="quiz-container">
+        <div style="color: #7f8c8d; font-weight: bold;">Find the day:</div>
+        <div id="targetDisplay" class="target-day">Loading...</div>
+        <button class="audio-btn" onclick="repeat()"><i class="fas fa-volume-up"></i> Listen</button>
     </div>
 
-    <div class="options-grid" id="optionsGrid"></div>
+    <div class="days-grid" id="mainGrid"></div>
 
     <div class="nav-bar">
-        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn home-btn">🏠 Home</a>
-        <a href="days.html" class="nav-btn next-btn">📅 Lessons</a>
+        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn home-btn">
+            <i class="fas fa-home"></i> الرئيسية
+        </a>
+        <a href="alphabet.html" class="nav-btn next-btn">
+            الحروف <i class="fas fa-arrow-right"></i>
+        </a>
     </div>
 
     <audio id="clapSnd" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
 
     <script>
         const days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-        let currentTarget = '';
-        let audioStarted = false;
+        let currentTarget = "";
+        let audioEnabled = false;
 
-        function enableAudio() {
-            if (!audioStarted) {
-                audioStarted = true;
-                const msg = new SpeechSynthesisUtterance("");
-                window.speechSynthesis.speak(msg);
-                newQuestion();
-            }
-        }
-
+        // 1. وظيفة لبناء الأيام (تظهر فوراً)
         function initGrid() {
-            const grid = document.getElementById('optionsGrid');
+            const grid = document.getElementById('mainGrid');
             grid.innerHTML = '';
             days.forEach(day => {
-                const btn = document.createElement('button');
-                btn.className = 'day-btn';
-                btn.innerText = day;
-                btn.onclick = (e) => { e.stopPropagation(); checkAnswer(day, btn); };
-                grid.appendChild(btn);
+                const card = document.createElement('div');
+                card.className = 'day-card';
+                card.innerText = day;
+                card.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    if(!audioEnabled) activateAudio(); // تفعيل الصوت إذا لم يفعل
+                    check(day, card); 
+                };
+                grid.appendChild(card);
             });
         }
 
-        function newQuestion() {
+        // 2. اختيار السؤال (يظهر النص فوراً)
+        function pickQuestion() {
             currentTarget = days[Math.floor(Math.random() * days.length)];
             document.getElementById('targetDisplay').innerText = currentTarget;
-            speak("Where is " + currentTarget);
-        }
-
-        function repeatInstruction() { speak(currentTarget); }
-
-        function checkAnswer(selected, btn) {
-            if (selected === currentTarget) {
-                btn.classList.add('correct');
-                document.getElementById('clapSnd').play();
-                speak("Excellent! " + selected);
-                setTimeout(() => {
-                    btn.classList.remove('correct');
-                    newQuestion();
-                }, 2000);
-            } else {
-                btn.classList.add('wrong');
-                speak("No, try again");
-                setTimeout(() => btn.classList.remove('wrong'), 500);
+            if (audioEnabled) {
+                say("Find " + currentTarget);
             }
         }
 
-        function speak(text) {
+        // 3. تفعيل الصوت عند أول لمسة
+        function activateAudio() {
+            if (!audioEnabled) {
+                audioEnabled = true;
+                // نطق السؤال الحالي الذي ظهر مسبقاً
+                say("Find " + currentTarget);
+            }
+        }
+
+        function check(selected, element) {
+            if (selected === currentTarget) {
+                element.style.backgroundColor = "#55efc4";
+                document.getElementById('clapSnd').play();
+                say("Excellent! This is " + selected);
+                setTimeout(() => {
+                    element.style.backgroundColor = "#ffeaa7";
+                    pickQuestion();
+                }, 2000);
+            } else {
+                element.style.backgroundColor = "#ff7675";
+                say("No, try again");
+                setTimeout(() => { element.style.backgroundColor = "#ffeaa7"; }, 500);
+            }
+        }
+
+        function say(txt) {
+            if (!audioEnabled) return;
             window.speechSynthesis.cancel();
-            const msg = new SpeechSynthesisUtterance(text);
+            const msg = new SpeechSynthesisUtterance(txt);
             msg.lang = 'en-US';
             msg.rate = 0.8;
             window.speechSynthesis.speak(msg);
         }
 
-        initGrid();
+        function repeat() { 
+            if(!audioEnabled) audioEnabled = true;
+            say(currentTarget); 
+        }
+
+        // تشغيل البناء واختيار السؤال فور فتح الصفحة
+        window.onload = () => {
+            initGrid();
+            pickQuestion();
+        };
     </script>
 </body>
 </html>
