@@ -3,129 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Family Game - Fixed</title>
+    <title>Family Learning - stable version</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #FF6B6B; --secondary: #4ECDC4; --dark: #2C3E50; --success: #2ecc71; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
-        body { background: #f8f9fa; margin: 0; padding: 10px; display: flex; justify-content: center; min-height: 100vh; }
-        .app-container { max-width: 600px; width: 100%; background: white; border-radius: 30px; padding: 20px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .family-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
-        .family-card { background: white; border: 4px solid #eee; border-radius: 20px; padding: 15px; cursor: pointer; }
-        .family-card img { width: 100px; height: 100px; border-radius: 50%; pointer-events: none; }
-        .family-card h3 { font-size: 22px; margin: 10px 0; color: var(--dark); pointer-events: none; }
-        .quiz-section { background: #fff5f5; padding: 20px; border-radius: 20px; border: 4px dashed var(--primary); }
-        #target-name { font-size: 60px; color: var(--primary); font-weight: 900; display: block; margin: 10px 0; }
-        .feedback { font-size: 24px; font-weight: bold; min-height: 30px; margin-top: 10px; }
+        :root { --p: #FF6B6B; --s: #4ECDC4; --d: #2C3E50; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: sans-serif; }
+        body { background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        .app-container { max-width: 500px; width: 100%; background: white; border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .family-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
+        .card { background: white; border: 3px solid #eee; border-radius: 15px; padding: 10px; cursor: pointer; }
+        .card:active { background: #f9f9f9; transform: scale(0.95); }
+        .card img { width: 80px; height: 80px; border-radius: 50%; pointer-events: none; }
+        .quiz-box { background: #fff5f5; padding: 15px; border-radius: 15px; border: 2px dashed var(--p); }
+        #target { font-size: 40px; color: var(--p); font-weight: bold; margin: 10px 0; display: block; }
         .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px; display: flex; gap: 10px; border-top: 1px solid #eee; }
-        .nav-btn { flex: 1; padding: 12px; border-radius: 12px; text-decoration: none; background: #f1f2f6; color: var(--dark); font-weight: bold; text-align: center; border: none; }
+        .btn { flex: 1; padding: 12px; border-radius: 10px; text-decoration: none; text-align: center; font-weight: bold; border: none; cursor: pointer; }
     </style>
 </head>
-<body onclick="activateAudio()">
+<body onclick="unlockAudio()">
 
 <div class="app-container">
-    <div class="quiz-section">
-        <h2 style="margin:0; color:#555;">Who is:</h2>
-        <span id="target-name">...</span>
-        <button onclick="say(currentTarget)" style="background:var(--secondary); color:white; border:none; padding:10px 20px; border-radius:30px; cursor:pointer;">
-            <i class="fas fa-volume-up"></i> Hear Name
-        </button>
+    <div class="quiz-box">
+        <h2 style="margin:0; font-size: 18px;">Find the person:</h2>
+        <span id="target">...</span>
+        <p style="font-size: 12px; color: #888;">Tap anywhere to start sound</p>
     </div>
 
-    <div class="family-grid" id="mainGrid"></div>
-    <div id="feedback" class="feedback"></div>
+    <div class="family-grid" id="grid"></div>
+    <div id="msg" style="font-weight: bold; font-size: 20px; margin-top: 10px; min-height: 25px;"></div>
 </div>
 
 <div class="nav-bar">
-    <a href="../../../../teacher_dashbord/english_dashboard.html" class="nav-btn">🏠 الرئيسية</a>
-    <button onclick="location.reload()" class="nav-btn" style="background:var(--secondary); color:white;">🔄 إعادة تشغيل</button>
+    <a href="../../../../teacher_dashbord/english_dashboard.html" class="btn" style="background:#eee; color:#333;">🏠 Home</a>
+    <button onclick="location.reload()" class="btn" style="background:var(--s); color:white;">🔄 Restart</button>
 </div>
 
-<audio id="clapSound" src="https://actions.google.com/sounds/v1/human_voices/applause.ogg" preload="auto"></audio>
+<audio id="snd_correct" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+<audio id="snd_wrong" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
 
 <script>
-    const members = [
-        { n: 'Dad', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140048.png' },
-        { n: 'Mom', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png' },
-        { n: 'Uncle', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140061.png' },
-        { n: 'Aunt', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140045.png' },
-        { n: 'Grandpa', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140052.png' },
-        { n: 'Grandma', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140051.png' },
-        { n: 'Brother', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png' },
-        { n: 'Sister', i: 'https://cdn-icons-png.flaticon.com/512/4140/4140040.png' }
+    const data = [
+        {n:'Dad', i:'https://cdn-icons-png.flaticon.com/512/4140/4140048.png'},
+        {n:'Mom', i:'https://cdn-icons-png.flaticon.com/512/4140/4140047.png'},
+        {n:'Grandpa', i:'https://cdn-icons-png.flaticon.com/512/4140/4140052.png'},
+        {n:'Grandma', i:'https://cdn-icons-png.flaticon.com/512/4140/4140051.png'},
+        {n:'Brother', i:'https://cdn-icons-png.flaticon.com/512/4140/4140037.png'},
+        {n:'Sister', i:'https://cdn-icons-png.flaticon.com/512/4140/4140040.png'}
     ];
 
-    let currentTarget = "";
-    let isAudioActive = false;
-    let lock = false;
+    let goal = "";
+    let locked = false;
+    let audioReady = false;
 
-    function activateAudio() {
-        if (!isAudioActive) {
-            isAudioActive = true;
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance(""));
+    function unlockAudio() {
+        if(!audioReady) {
+            audioReady = true;
+            document.getElementById('snd_correct').play().then(()=> {
+                document.getElementById('snd_correct').pause();
+            }).catch(e=>{});
         }
     }
 
-    function build() {
-        const grid = document.getElementById('mainGrid');
-        grid.innerHTML = '';
-        members.forEach(m => {
-            const card = document.createElement('div');
-            card.className = 'family-card';
-            card.innerHTML = `<img src="${m.i}"><h3>${m.n}</h3>`;
-            card.onclick = (e) => { e.stopPropagation(); check(m.n, card); };
-            grid.appendChild(card);
+    function render() {
+        const g = document.getElementById('grid');
+        g.innerHTML = '';
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'card';
+            div.innerHTML = `<img src="${item.i}"><h3>${item.n}</h3>`;
+            div.onclick = () => check(item.n);
+            g.appendChild(div);
         });
         next();
     }
 
     function next() {
-        lock = false;
-        let pick;
-        do {
-            pick = members[Math.floor(Math.random() * members.length)].n;
-        } while (pick === currentTarget);
-        
-        currentTarget = pick;
-        document.getElementById('target-name').innerText = currentTarget;
-        document.getElementById('feedback').innerText = "";
-        if(isAudioActive) say("Find " + currentTarget);
+        locked = false;
+        let p;
+        do { p = data[Math.floor(Math.random() * data.length)].n; } while(p === goal);
+        goal = p;
+        document.getElementById('target').innerText = goal;
+        document.getElementById('msg').innerText = "";
     }
 
-    function check(name, card) {
-        if (lock) return;
-        const fb = document.getElementById('feedback');
-
-        if (name === currentTarget) {
-            lock = true; // منع الضغط المتعدد
-            fb.innerText = "Excellent! 🌟";
-            fb.style.color = "var(--success)";
+    function check(name) {
+        if(locked) return;
+        const m = document.getElementById('msg');
+        
+        if(name === goal) {
+            locked = true;
+            m.innerText = "Excellent! 🎉";
+            m.style.color = "green";
+            playSnd('snd_correct');
             
-            // تشغيل الصوت
-            try { document.getElementById('clapSound').play(); } catch(e) {}
-            say("Yes, this is " + name);
-
-            // أهم تعديل: الانتقال للسؤال التالي بشكل مستقل عن الصوت
-            setTimeout(() => {
-                next();
-            }, 2500);
-
+            // الانتقال للسؤال التالي "إجباري" بعد ثانيتين بغض النظر عن الصوت
+            setTimeout(next, 2000);
         } else {
-            fb.innerText = "Try again! ❌";
-            fb.style.color = "#e74c3c";
-            say("No, that is " + name);
+            m.innerText = "Try again ❌";
+            m.style.color = "red";
+            playSnd('snd_wrong');
         }
     }
 
-    function say(txt) {
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(txt);
-        u.lang = 'en-US';
-        u.rate = 0.9;
-        window.speechSynthesis.speak(u);
+    function playSnd(id) {
+        const s = document.getElementById(id);
+        if(s) {
+            s.currentTime = 0;
+            s.play().catch(e => console.log("Audio play blocked"));
+        }
     }
 
-    window.onload = build;
+    window.onload = render;
 </script>
 </body>
 </html>
