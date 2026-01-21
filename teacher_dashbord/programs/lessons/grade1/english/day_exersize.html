@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Days Challenge - Fix</title>
+    <title>Days Challenge - Stable Version</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #ff6b81; --bg: #fcebeb; --correct: #55efc4; }
+        :root { --primary: #ff6b81; --bg: #fcebeb; --correct: #55efc4; --wrong: #ff7675; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Quicksand', sans-serif; }
         body { background-color: var(--bg); margin: 0; padding: 10px 10px 120px 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        h1 { font-family: 'Fredoka One', cursive; color: var(--primary); font-size: 24px; margin: 10px 0; }
-        .quiz-container { width: 100%; max-width: 400px; background: white; border-radius: 20px; padding: 15px; text-align: center; border: 3px dashed var(--primary); margin-bottom: 15px; }
-        .target-day { font-size: 35px; font-family: 'Fredoka One'; color: var(--primary); min-height: 50px; }
-        .days-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; max-width: 400px; }
-        .day-card { background: #ffeaa7; color: #2d3436; padding: 18px 10px; border-radius: 15px; font-size: 18px; font-weight: 900; border: 2px solid #fdcb6e; cursor: pointer; text-align: center; box-shadow: 0 4px 0 #fdcb6e; }
+        h1 { font-family: 'Fredoka One', cursive; color: var(--primary); font-size: 28px; margin: 15px 0; text-shadow: 2px 2px 0px white; }
+        
+        .quiz-container { width: 100%; max-width: 400px; background: white; border-radius: 25px; padding: 20px; text-align: center; border: 4px dashed var(--primary); margin-bottom: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
+        .target-day { font-size: 42px; font-family: 'Fredoka One'; color: var(--primary); min-height: 60px; margin: 10px 0; text-transform: uppercase; }
+        
+        .days-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; max-width: 400px; }
+        .day-card { background: #ffeaa7; color: #2d3436; padding: 20px 10px; border-radius: 18px; font-size: 20px; font-weight: 900; border: 3px solid #fdcb6e; cursor: pointer; text-align: center; box-shadow: 0 5px 0 #fdcb6e; transition: 0.1s; }
+        .day-card:active { transform: translateY(3px); box-shadow: 0 2px 0 #fdcb6e; }
+        
         .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 10px; padding: 15px; background: white; border-top: 1px solid #eee; z-index: 1000; }
-        .nav-btn { flex: 1; padding: 12px; border-radius: 15px; text-decoration: none; text-align: center; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; background: #f1f2f6; color: #2d3436; }
-        .audio-btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 20px; margin-top: 10px; cursor: pointer; }
+        .nav-btn { flex: 1; padding: 14px; border-radius: 15px; text-decoration: none; text-align: center; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; background: #f1f2f6; color: #2d3436; border: none; }
     </style>
 </head>
-<body onclick="activateAudio()">
+<body onclick="startAudioEngine()">
 
     <h1>✨ Days Challenge ✨</h1>
 
     <div class="quiz-container">
-        <div style="color: #7f8c8d; font-weight: bold;">Find the day:</div>
-        <div id="targetDisplay" class="target-day">Loading...</div>
-        <button class="audio-btn" onclick="repeat()"><i class="fas fa-volume-up"></i> Listen</button>
+        <div style="color: #7f8c8d; font-weight: bold; font-size: 18px;">Find the day:</div>
+        <div id="targetDisplay" class="target-day">...</div>
+        <p style="font-size: 12px; color: #a29bfe;">Tap screen to enable sounds</p>
     </div>
 
     <div class="days-grid" id="mainGrid"></div>
@@ -37,13 +40,23 @@
         <button class="nav-btn" onclick="location.reload()" style="background:#a29bfe; color:white;">🔄 إعادة المحاولة</button>
     </div>
 
-    <audio id="clapSnd" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+    <audio id="sndCorrect" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
+    <audio id="sndWrong" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" preload="auto"></audio>
 
     <script>
         const days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
         let currentTarget = "";
-        let audioEnabled = false;
-        let isProcessing = false; // لمنع التداخل بين الأسئلة
+        let isLocked = false;
+        let audioActive = false;
+
+        function startAudioEngine() {
+            if (!audioActive) {
+                audioActive = true;
+                // تشغيل صامت لتفعيل الصوت في المتصفح
+                const s = document.getElementById('sndCorrect');
+                s.play().then(() => s.pause()).catch(() => {});
+            }
+        }
 
         function initGrid() {
             const grid = document.getElementById('mainGrid');
@@ -54,62 +67,55 @@
                 card.innerText = day;
                 card.onclick = (e) => { 
                     e.stopPropagation(); 
-                    if(!isProcessing) check(day, card); 
+                    checkAnswer(day, card); 
                 };
                 grid.appendChild(card);
             });
         }
 
         function pickQuestion() {
-            isProcessing = false; // فك القفل للسؤال الجديد
-            let newTarget;
+            isLocked = false;
+            let next;
             do {
-                newTarget = days[Math.floor(Math.random() * days.length)];
-            } while (newTarget === currentTarget); // التأكد من عدم تكرار نفس اليوم مرتين متتاليتين
+                next = days[Math.floor(Math.random() * days.length)];
+            } while (next === currentTarget);
             
-            currentTarget = newTarget;
+            currentTarget = next;
             document.getElementById('targetDisplay').innerText = currentTarget;
-            if (audioEnabled) say("Find " + currentTarget);
         }
 
-        function activateAudio() {
-            if (!audioEnabled) {
-                audioEnabled = true;
-                say("Find " + currentTarget);
-            }
-        }
+        function checkAnswer(selected, element) {
+            if (isLocked) return;
 
-        function check(selected, element) {
             if (selected === currentTarget) {
-                isProcessing = true; // قفل لمنع الضغط المتكرر
-                element.style.backgroundColor = "#55efc4";
-                document.getElementById('clapSnd').play();
-                say("Excellent! This is " + selected);
+                isLocked = true;
+                element.style.backgroundColor = "var(--correct)";
+                element.style.borderColor = "#2ecc71";
+                playSnd('sndCorrect');
                 
-                // الانتقال للسؤال التالي بعد ثانيتين
+                // الانتقال الإجباري للسؤال التالي بعد ثانيتين
                 setTimeout(() => {
                     element.style.backgroundColor = "#ffeaa7";
+                    element.style.borderColor = "#fdcb6e";
                     pickQuestion();
                 }, 2000);
             } else {
-                element.style.backgroundColor = "#ff7675";
-                say("No, try again");
-                setTimeout(() => { element.style.backgroundColor = "#ffeaa7"; }, 600);
+                element.style.backgroundColor = "var(--wrong)";
+                element.style.borderColor = "#e17055";
+                playSnd('sndWrong');
+                setTimeout(() => { 
+                    element.style.backgroundColor = "#ffeaa7"; 
+                    element.style.borderColor = "#fdcb6e";
+                }, 600);
             }
         }
 
-        function say(txt) {
-            window.speechSynthesis.cancel(); // مسح أي صوت قديم معلق
-            if (!audioEnabled) return;
-            const msg = new SpeechSynthesisUtterance(txt);
-            msg.lang = 'en-US';
-            msg.rate = 0.8;
-            window.speechSynthesis.speak(msg);
-        }
-
-        function repeat() { 
-            activateAudio();
-            say(currentTarget); 
+        function playSnd(id) {
+            const s = document.getElementById(id);
+            if (s) {
+                s.currentTime = 0;
+                s.play().catch(() => {});
+            }
         }
 
         window.onload = () => {
