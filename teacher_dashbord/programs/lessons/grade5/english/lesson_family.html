@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Family Learning Game</title>
+    <title>Family Learning Game - Stable</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #FF6B6B; --secondary: #4ECDC4; --dark: #2C3E50; --light: #F7F9FB; }
@@ -12,33 +12,31 @@
         .app-container { max-width: 500px; width: 100%; background: white; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 20px; text-align: center; }
         
         .family-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
-        .family-card { background: #fff; border: 2px solid #eee; border-radius: 20px; padding: 10px; cursor: pointer; transition: 0.2s; position: relative; }
-        .family-card:active { transform: scale(0.95); border-color: var(--secondary); }
-        .family-card img { width: 80px; height: 80px; border-radius: 50%; background: #f9f9f9; pointer-events: none; }
+        .family-card { background: #fff; border: 2px solid #eee; border-radius: 20px; padding: 10px; cursor: pointer; transition: 0.2s; }
+        .family-card:active { transform: scale(0.95); background: #f0f0f0; }
+        .family-card img { width: 80px; height: 80px; border-radius: 50%; pointer-events: none; }
         .family-card h3 { margin: 8px 0 2px 0; font-size: 18px; color: var(--dark); pointer-events: none; }
+        .family-card p { margin: 0; color: var(--primary); font-size: 14px; pointer-events: none; }
 
         .quiz-section { background: #fff0f0; padding: 15px; border-radius: 20px; border: 2px dashed var(--primary); }
-        .target-text { font-size: 32px; color: var(--primary); font-weight: 900; margin: 10px 0; display: block; }
+        .target-text { font-size: 38px; color: var(--primary); font-weight: 900; margin: 10px 0; display: block; }
         
         .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px; display: flex; gap: 10px; border-top: 1px solid #eee; }
         .nav-btn { flex: 1; padding: 12px; border-radius: 12px; text-decoration: none; background: #f1f2f6; color: var(--dark); font-weight: bold; text-align: center; border: none; font-size: 14px; }
     </style>
 </head>
-<body onclick="forceAudioStart()">
+<body onclick="initAudio()">
 
 <div class="app-container">
     <h1><i class="fas fa-users"></i> My Family</h1>
     
     <div class="quiz-section">
-        <p style="margin:0; color:#666;">Who is this?</p>
-        <span id="target-name" class="target-text">Waiting...</span>
-        <button onclick="repeatQuest()" style="background:var(--secondary); color:white; border:none; padding:8px 15px; border-radius:20px; cursor:pointer;">
-            <i class="fas fa-volume-up"></i> Listen
-        </button>
+        <p style="margin:0; color:#666; font-weight: bold;">Find this person:</p>
+        <span id="target-name" class="target-text">...</span>
     </div>
 
     <div class="family-grid" id="mainGrid"></div>
-    <div id="feedback" style="font-size: 20px; font-weight: bold; margin-top: 10px; min-height: 30px;"></div>
+    <div id="feedback" style="font-size: 22px; font-weight: bold; margin-top: 10px; min-height: 35px;"></div>
 </div>
 
 <div class="nav-bar">
@@ -46,7 +44,8 @@
     <button onclick="location.reload()" class="nav-btn" style="background:var(--secondary); color:white;">🔄 إعادة اللعب</button>
 </div>
 
-<audio id="clapSound" src="https://www.soundjay.com/human/sounds/applause-01.mp3" preload="auto"></audio>
+<audio id="soundCorrect" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
+<audio id="soundWrong" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" preload="auto"></audio>
 
 <script>
     const members = [
@@ -59,79 +58,73 @@
     ];
 
     let currentTarget = "";
-    let canClick = true;
-    let audioActivated = false;
+    let isLocked = false;
+    let audioStarted = false;
 
-    function forceAudioStart() {
-        if (!audioActivated) {
-            audioActivated = true;
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance(""));
-            if(currentTarget === "") nextQuest();
+    // تفعيل قناة الصوت عند أول لمسة
+    function initAudio() {
+        if (!audioStarted) {
+            audioStarted = true;
+            document.getElementById('soundCorrect').play().then(() => {
+                document.getElementById('soundCorrect').pause();
+            }).catch(() => {});
         }
     }
 
-    function buildGrid() {
+    function build() {
         const grid = document.getElementById('mainGrid');
         grid.innerHTML = '';
         members.forEach(m => {
             const card = document.createElement('div');
             card.className = 'family-card';
             card.innerHTML = `<img src="${m.i}"><h3>${m.n}</h3><p>${m.a}</p>`;
-            card.onclick = (e) => { e.stopPropagation(); checkAnswer(m.n, card); };
+            card.onclick = (e) => { e.stopPropagation(); check(m.n); };
             grid.appendChild(card);
         });
+        nextQuestion();
     }
 
-    function nextQuest() {
-        canClick = true;
-        let next;
+    function nextQuestion() {
+        isLocked = false; // فك قفل الاختيار
+        let pick;
         do {
-            next = members[Math.floor(Math.random() * members.length)].n;
-        } while (next === currentTarget);
+            pick = members[Math.floor(Math.random() * members.length)].n;
+        } while (pick === currentTarget);
         
-        currentTarget = next;
+        currentTarget = pick;
         document.getElementById('target-name').innerText = currentTarget;
         document.getElementById('feedback').innerText = "";
-        say("Find " + currentTarget);
     }
 
-    function checkAnswer(name, el) {
-        if (!canClick) return;
+    function check(selectedName) {
+        if (isLocked) return;
         const fb = document.getElementById('feedback');
         
-        if (name === currentTarget) {
-            canClick = false;
-            fb.innerText = "Great! 🎉";
+        if (selectedName === currentTarget) {
+            isLocked = true; // منع الضغط المتعدد أثناء الانتقال
+            fb.innerText = "Excellent! 🎉";
             fb.style.color = "#27ae60";
-            document.getElementById('clapSound').play();
-            say("Excellent! This is " + name);
-            setTimeout(nextQuest, 2500);
+            playSound('soundCorrect');
+            
+            // الانتقال الإجباري للسؤال التالي بعد ثانيتين
+            setTimeout(nextQuestion, 2000);
         } else {
-            fb.innerText = "Try again! 😊";
+            fb.innerText = "Try again! ❌";
             fb.style.color = "#e74c3c";
-            say("No, that is " + name);
+            playSound('soundWrong');
         }
     }
 
-    function say(txt) {
-        window.speechSynthesis.cancel(); // مسح الطابور الصوتي المعلق فوراً
-        const m = new SpeechSynthesisUtterance(txt);
-        m.lang = 'en-US';
-        m.rate = 0.8;
-        window.speechSynthesis.speak(m);
+    function playSound(id) {
+        const s = document.getElementById(id);
+        if (s) {
+            s.currentTime = 0;
+            s.play().catch(() => {});
+        }
     }
 
-    function repeatQuest() {
-        if(!audioActivated) forceAudioStart();
-        say(currentTarget);
-    }
-
-    // بناء الواجهة فوراً
-    buildGrid();
-    // اختيار سؤال مبدئي (نصي فقط حتى يتم التفاعل)
-    currentTarget = members[Math.floor(Math.random() * members.length)].n;
-    document.getElementById('target-name').innerText = currentTarget;
-
+    // التشغيل
+    window.onload = build;
 </script>
 </body>
 </html>
