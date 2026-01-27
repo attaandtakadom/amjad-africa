@@ -6,6 +6,8 @@
     <title>لوحة تحكم المعلم - اللغة العربية لجميع الصفوف</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <style>
         :root {
             --arabic-primary: #1E88E5;
@@ -32,6 +34,7 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
             color: var(--dark);
             min-height: 100vh;
+            direction: rtl;
         }
 
         /* الشريط العلوي */
@@ -51,7 +54,6 @@
             gap: 15px;
         }
 
-        
         .logo {
             width: 50px;
             height: 50px;
@@ -60,11 +62,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--arabic-primary);
-            font-size: 24px;
-            font-weight: bold;
-        
-    justify-content:center;
             color: var(--arabic-primary);
             font-size: 24px;
             font-weight: bold;
@@ -248,7 +245,7 @@
             }
         }
 
-        /* إحصائيات الصف */
+        /* إحصاءات الصف */
         .grade-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -433,6 +430,9 @@
             font-weight: 600;
             font-size: 14px;
             transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Cairo', sans-serif;
         }
 
         .lesson-btn.primary {
@@ -528,18 +528,15 @@
             .main-container {
                 flex-direction: column;
             }
-            
             .sidebar {
                 width: 100%;
                 padding: 15px;
             }
-            
             .sidebar-menu {
                 display: flex;
                 overflow-x: auto;
                 gap: 10px;
             }
-            
             .menu-item {
                 white-space: nowrap;
                 margin: 0;
@@ -552,17 +549,14 @@
                 gap: 15px;
                 text-align: center;
             }
-            
             .lessons-grid,
             .programs-grid,
             .grade-stats {
                 grid-template-columns: 1fr;
             }
-            
             .grades-tabs {
                 flex-wrap: wrap;
             }
-            
             .grade-tab {
                 flex: 1;
                 min-width: 120px;
@@ -574,221 +568,41 @@
             .content-container {
                 padding: 15px;
             }
-            
             .lessons-section,
             .programs-section {
                 padding: 20px;
             }
-            
             .lesson-actions {
                 flex-direction: column;
             }
         }
-/* تبويبات اللغة العربية - إصدار محسّن للجوال */
-@media (max-width: 768px) {
-    .grades-tabs {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        gap: 8px;
-        padding: 10px 5px 15px;
-        margin: 0 -10px 20px;
-        position: relative;
-    }
-    
-    /* خلفية للتبويبات لتوضيح وجود تمرير */
-    .grades-tabs::before {
-        content: '';
-        position: absolute;
-        right: 0;
-        left: 0;
-        bottom: -2px;
-        height: 2px;
-        background: linear-gradient(90deg, 
-            transparent 0%, 
-            #e2e8f0 20%, 
-            #e2e8f0 80%, 
-            transparent 100%
-        );
-    }
-    
-    .grade-tab {
-        flex: 0 0 auto;
-        min-width: 120px;
-        max-width: 150px;
-        padding: 12px 15px;
-        font-size: 14px;
-        text-align: center;
-        justify-content: center;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        margin: 0 2px;
-        transition: all 0.3s ease;
-    }
-    
-    .grade-tab i {
-        margin-bottom: 5px;
-        display: block;
-        font-size: 18px;
-    }
-    
-    .grade-tab .tab-badge {
-        display: block;
-        margin-top: 5px;
-        margin-right: 0;
-        font-size: 11px;
-        padding: 3px 8px;
-    }
-    
-    /* تحسين للشاشات الصغيرة جداً */
-    @media (max-width: 480px) {
-        .grade-tab {
-            min-width: 100px;
-            padding: 10px 12px;
-            font-size: 13px;
-        }
-        
-        .grade-tab i {
-            font-size: 16px;
-        }
-        
-        .grade-tab .tab-badge {
-            font-size: 10px;
-            padding: 2px 6px;
-        }
-        
-        .grades-tabs {
-            gap: 5px;
-            padding: 8px 3px 12px;
-        }
-    }
-    
-    @media (max-width: 360px) {
-        .grade-tab {
-            min-width: 90px;
-            padding: 8px 10px;
-            font-size: 12px;
-        }
-        
-        .grade-tab i {
-            font-size: 14px;
-        }
-    }
-    
-    /* تأثير اللمس للجوال */
-    .grade-tab:active {
-        transform: scale(0.95);
-        transition: transform 0.1s;
-    }
-    
-    /* تلميح للمستخدم بوجود تمرير */
-    .grades-tabs::-webkit-scrollbar {
-        height: 4px;
-    }
-    
-    .grades-tabs::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 10px;
-    }
-    
-    .grades-tabs::-webkit-scrollbar-thumb {
-        background: rgba(33, 150, 243, 0.5);
-        border-radius: 10px;
-    }
-    
-    .grades-tabs::-webkit-scrollbar-thumb:hover {
-        background: rgba(33, 150, 243, 0.7);
-    }
-}
-
-/* إضافة تأثيرات لتحسين تجربة الجوال */
-.grade-tab {
-    touch-action: manipulation; /* يقلل من التأخير على الجوال */
-    user-select: none; /* يمنع تحديد النص عند اللمس */
-}
-
-/* تحسين التبويب النشط للجوال */
-@media (max-width: 768px) {
-    .grade-tab.active {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-        transform: translateY(-2px);
-    }
-}
-
-/* مؤشر سهمي للتمرير (اختياري) */
-@media (max-width: 768px) {
-    .grades-tabs-container {
-        position: relative;
-    }
-    
-    .scroll-indicator {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 30px;
-        height: 30px;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        z-index: 10;
-        cursor: pointer;
-        opacity: 0.8;
-        transition: opacity 0.3s;
-    }
-    
-    .scroll-indicator:hover {
-        opacity: 1;
-    }
-    
-    .scroll-indicator.left {
-        right: 5px;
-    }
-    
-    .scroll-indicator.right {
-        left: 5px;
-    }
-    
-    .scroll-indicator i {
-        color: var(--english-primary);
-        font-size: 16px;
-    }
-}
-
-        
     </style>
 </head>
 <body>
     <!-- الشريط العلوي -->
     <div class="top-bar">
         <div class="logo-container">
-            <div class="logo">               
-             <img src="assets/images/logo.jpg" alt="شعار المؤسسة" class="logo">
-
-</div>
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+            </div>
             <div class="school-info">
-                <h1>منصة تعليم  العلوم</h1>
+                <h1>منصة تعليم العلوم</h1>
                 <p>الدروس والبرامج لجميع الصفوف من الأول إلى الخامس</p>
             </div>
         </div>
-        
-         <div class="teacher-info">
-        <div class="teacher-avatar">      <i class="fas fa-user-graduate"></i>            </div>
-
+        <div class="teacher-info">
+            <div class="teacher-avatar">
+                <i class="fas fa-user-graduate"></i>
+            </div>
             <div>
-                <div style="font-weight: 600;"> لوحة الطالب </div>
-                <div style="font-size: 13px; opacity: 0.9;">  </div>
+                <div style="font-weight: 600;">لوحة الطالب</div>
+                <div style="font-size: 13px; opacity: 0.9;"></div>
             </div>
             <div style="margin-right: auto; margin-left: 20px;">
                 <div id="current-time" style="font-size: 14px;"></div>
-                <div style="font-size: 12px; opacity: 0.8;">توقيت البيضاء </div>
+                <div style="font-size: 12px; opacity: 0.8;">توقيت البيضاء</div>
+            </div>
         </div>
-    </div>
-
     </div>
 
     <!-- المحتوى الرئيسي -->
@@ -841,599 +655,46 @@
         <!-- حاوية المحتوى -->
         <div class="content-container">
             <div class="page-title fade-in">
-                <h1>مرحباً بك في منصة  العلوم 📚</h1>
+                <h1>مرحباً بك في منصة العلوم 📚</h1>
                 <p>إدارة الدروس والبرامج التعليمية للصفوف من الأول إلى الخامس</p>
             </div>
 
             <!-- تبويبات الصفوف -->
-            <div class="grades-tabs fade-in"><!--
-                <div class="grade-tab active" onclick="showGrade('grade1')" style="color: var(--grade1); border-color: var(--grade1);">
-                    <i class="fas fa-1"></i>
-                    الصف الأول
-                    <span class="tab-badge" style="background: var(--grade1);">12 طالب</span>
-                </div>
-                <div class="grade-tab" onclick="showGrade('grade2')" style="color: var(--grade2); border-color: var(--grade2);">
-                    <i class="fas fa-2"></i>
-                    الصف الثاني
-                    <span class="tab-badge" style="background: var(--grade2);">10 طلاب</span>
-                </div>
-                <div class="grade-tab" onclick="showGrade('grade3')" style="color: var(--grade3); border-color: var(--grade3);">
-                    <i class="fas fa-3"></i>
-                    الصف الثالث
-                    <span class="tab-badge" style="background: var(--grade3);">11 طالب</span>
-                </div>-->
-                <div class="grade-tab" onclick="showGrade('grade4')" style="color: var(--grade4); border-color: var(--grade4);">
+            <div class="grades-tabs fade-in">
+                <div class="grade-tab active" onclick="showGrade('grade4')">
                     <i class="fas fa-4"></i>
                     الصف الرابع
-                    <span class="tab-badge" style="background: var(--grade4);">9 طلاب</span>
+                    <span class="tab-badge">9 طلاب</span>
                 </div>
-                <div class="grade-tab" onclick="showGrade('grade5')" style="color: var(--grade5); border-color: var(--grade5);">
+                <div class="grade-tab" onclick="showGrade('grade5')">
                     <i class="fas fa-5"></i>
                     الصف الخامس
-                    <span class="tab-badge" style="background: var(--grade5);">8 طلاب</span>
-                </div>
-            </div>
-
-            <!-- محتوى الصف الأول -->
-            <div id="grade1-content" class="grade-content active">
-                <!-- إحصائيات الصف الأول -->
-
-<!--
-
-                <div class="grade-stats fade-in">
-                    <div class="stat-card grade1">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">طالب مسجل</div>
-                    </div>
-                    <div class="stat-card grade1">
-                        <div class="stat-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="stat-value">8</div>
-                        <div class="stat-label">درس نشط</div>
-                    </div>
-                    <div class="stat-card grade1">
-                        <div class="stat-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-value">85%</div>
-                        <div class="stat-label">معدل الإنجاز</div>
-                    </div>
-                    <div class="stat-card grade1">
-                        <div class="stat-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="stat-value">9.2</div>
-                        <div class="stat-label">معدل التقييم</div>
-                    </div>
-                </div>
-            -->
-                <!-- دروس الصف الأول -
-                <div class="lessons-section fade-in">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-graduation-cap"></i> دروس الصف الأول
-                        </h2><!---
-                        <button class="lesson-btn primary" onclick="addNewLesson('grade1')">
-                            <i class="fas fa-plus"></i> إضافة درس جديد
-                        </button>
-                    </div>
-                                        <div class="lessons-grid">
-
-<div class="lesson-card grade1">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-font"></i>
-                                </div>
-                                <h3 class="lesson-title"> - العلوم</h3>
-                                <div class="lesson-subject">  - الوحدة الأولىالعلوم</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
--------------                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 5 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 28 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('hijaiyah_grade1')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- درس الحروف الهجائية -
-                        <div class="lesson-card grade1">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-font"></i>
-                                </div>
-                                <h3 class="lesson-title"> العلوم</h3>
-                                <div class="lesson-subject"> العلوم - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-.........................                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 5 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 28 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('hijaiyah_grade1')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- درس القراءة البسيطة -
-                        <div class="lesson-card grade1">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-book-reader"></i>
-                                </div>
-                                <h3 class="lesson-title"> </h3>
-                                <div class="lesson-subject">  - الوحدة الثانيةالعلوم</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-.....--------------                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 3 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 15 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('reading_grade1')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- درس الإملاء البسيط -
-                        <div class="lesson-card grade1">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-spell-check"></i>
-                                </div>
-                                <h3 class="lesson-title"> العلوم</h3>
-                                <div class="lesson-subject">العلوم  - الوحدة الثالثة</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-................                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 4 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 20 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-completed">مكتمل</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> معاودة الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('dictation_grade1')">
-                                        <i class="fas fa-chart-bar"></i> نتائج الطلاب
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- محتوى الصف الثاني --
-            <div id="grade2-content" class="grade-content">
-                <!-- إحصائيات الصف الثاني -->
-
-
-
-
-
-                 <!--
-                <div class="grade-stats fade-in">
-                    <div class="stat-card grade2">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-value">10</div>
-                        <div class="stat-label">طالب مسجل</div>
-                    </div>
-                    <div class="stat-card grade2">
-                        <div class="stat-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="stat-value">7</div>
-                        <div class="stat-label">درس نشط</div>
-                    </div>
-                    <div class="stat-card grade2">
-                        <div class="stat-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-value">78%</div>
-                        <div class="stat-label">معدل الإنجاز</div>
-                    </div>
-                    <div class="stat-card grade2">
-                        <div class="stat-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="stat-value">8.7</div>
-                        <div class="stat-label">معدل التقييم</div>
-                    </div>
-                </div>
-            -->
-                <!-- دروس الصف الثاني -
-                <div class="lessons-section fade-in">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-graduation-cap"></i> دروس الصف الثاني
-                        </h2><!--                        <button class="lesson-btn primary" onclick="addNewLesson('grade2')">
-                            <i class="fas fa-plus"></i> إضافة درس جديد
-                        </button>--
-                    </div>
-                    
-                    <div class="lessons-grid">
-<div class="lesson-card grade1">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-font"></i>
-                                </div>
-                                <h3 class="lesson-title"> .........</h3>
-                                <div class="lesson-subject"> العلوم - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-...........................                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 5 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 28 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('hijaiyah_grade1')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-                        <div class="lesson-card grade2">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-book-reader"></i>
-                                </div>
-                                <h3 class="lesson-title"> ........</h3>
-                                <div class="lesson-subject"> العلوم - الوحدة الثانية</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-..............................                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 3 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 15 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('reading_grade1')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-                        <!-- درس الجمل القصيرة --
-                        <div class="lesson-card grade2">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-align-right"></i>
-                                </div>
-                                <h3 class="lesson-title">..... </h3>
-                                <div class="lesson-subject">العلوم  - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-                                    تكوين     . تعلم ترتيب  في .....
-                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 4 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 18 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('sentences_grade2')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- درس القراءة المتقدمة -
-                        <div class="lesson-card grade2">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-book-open"></i>
-                                </div>
-                                <h3 class="lesson-title"> العلوم</h3>
-                                <div class="lesson-subject">  - الوحدة الثانية</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-                                      العلوم وفهمها. أسئلة استيعاب وتذكر.
-                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 5 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 22 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-upcoming">قادم</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-eye"></i> معاينة
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="scheduleLesson('reading_grade2')">
-                                        <i class="fas fa-calendar"></i> جدولة
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- محتوى الصف الثالث --
-            <div id="grade3-content" class="grade-content">
-                <!-- إحصائيات الصف الثالث -->
-
-                 <!--
-                <div class="grade-stats fade-in">
-                    <div class="stat-card grade3">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-value">11</div>
-                        <div class="stat-label">طالب مسجل</div>
-                    </div>
-                    <div class="stat-card grade3">
-                        <div class="stat-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="stat-value">9</div>
-                        <div class="stat-label">درس نشط</div>
-                    </div>
-                    <div class="stat-card grade3">
-                        <div class="stat-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-value">82%</div>
-                        <div class="stat-label">معدل الإنجاز</div>
-                    </div>
-                    <div class="stat-card grade3">
-                        <div class="stat-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="stat-value">9.0</div>
-                        <div class="stat-label">معدل التقييم</div>
-                    </div>
-                </div>
-            -->
-                <!-- دروس الصف الثالث -->
-                <div class="lessons-section fade-in">
-
-
-
-
-
-
-
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-graduation-cap"></i> دروس الصف الثالث
-                        </h2><!--
-                        <button class="lesson-btn primary" onclick="addNewLesson('grade3')">
-                            <i class="fas fa-plus"></i> إضافة درس جديد
-                        </button>-->
-                    </div>
-                    
-                    <div class="lessons-grid">
-
-
-
-<div class="lesson-card grade3">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-font"></i>
-                                </div>
-                                <h3 class="lesson-title"> </h3>
-                                <div class="lesson-subject"> العلوم - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-                                    تعلم   العلوم   . برنامج تفاعلي مع صور وأصوات.
-                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 5 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 28 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('hijaiyah_grade1')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                <div class="lesson-card grade3">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-book-reader"></i>
-                                </div>
-                                <h3 class="lesson-title"> العلوم</h3>
-                                <div class="lesson-subject">اللغة العربية - الوحدة الثانية</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-                                        العلوم. تدريب على العلوم الكلمات وفهم العلوم.
-                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 3 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 15 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('reading_grade1')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-                        <!-- درس الفهم القرائي -->
-                        <div class="lesson-card grade3">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-brain"></i>
-                                </div>
-                                <h3 class="lesson-title"> العلوم</h3>
-                                <div class="lesson-subject"> العلوم - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-                                    فهم العلوم والإجابة على الأسئلة. تنمية مهارات الاستيعاب.
-                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 6 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 25 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('comprehension_grade3')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <span class="tab-badge">8 طلاب</span>
                 </div>
             </div>
 
             <!-- محتوى الصف الرابع -->
-            <div id="grade4-content" class="grade-content">
-                <!-- إحصائيات الصف الرابع -->
-                 <!--
-                <div class="grade-stats fade-in">
-                    <div class="stat-card grade4">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-value">9</div>
-                        <div class="stat-label">طالب مسجل</div>
-                    </div>
-                    <div class="stat-card grade4">
-                        <div class="stat-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="stat-value">8</div>
-                        <div class="stat-label">درس نشط</div>
-                    </div>
-                    <div class="stat-card grade4">
-                        <div class="stat-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-value">75%</div>
-                        <div class="stat-label">معدل الإنجاز</div>
-                    </div>
-                    <div class="stat-card grade4">
-                        <div class="stat-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="stat-value">8.5</div>
-                        <div class="stat-label">معدل التقييم</div>
-                    </div>
-                </div>
-            -->
+            <div id="grade4-content" class="grade-content active">
                 <!-- دروس الصف الرابع -->
                 <div class="lessons-section fade-in">
                     <div class="section-header">
                         <h2 class="section-title">
                             <i class="fas fa-graduation-cap"></i> دروس الصف الرابع
-                        </h2><!--
-                        <button class="lesson-btn primary" onclick="addNewLesson('grade4')">
-                            <i class="fas fa-plus"></i> إضافة درس جديد
-                        </button>-->
+                        </h2>
                     </div>
-                    
                     <div class="lessons-grid">
-                        <!-- درس النصوص الأدبية -->
+                        <!-- درس الكتلة -->
                         <div class="lesson-card grade4">
                             <div class="lesson-header">
                                 <div class="lesson-icon">
                                     <i class="fas fa-file-alt"></i>
                                 </div>
-                                <h3 class="lesson-title">  '  درس الكتلة وقياسها - الصف الرابع</h3>
-                                <div class="lesson-subject">العلوم  - الوحدة الأولى</div>
+                                <h3 class="lesson-title">درس الكتلة وقياسها - الصف الرابع</h3>
+                                <div class="lesson-subject">العلوم - الوحدة الأولى</div>
                             </div>
                             <div class="lesson-content">
                                 <p class="lesson-desc">
-                                    قراءة وتحليل  '  درس الكتلة وقياسها -  الابع بسيطة. تعرف على عناصر  .
+                                    قراءة وتحليل درس الكتلة وقياسها - أبسط طريقة. تعرف على عناصر...
                                 </p>
                                 <div class="lesson-meta">
                                     <span><i class="far fa-clock"></i> 8 ساعات</span>
@@ -1450,18 +711,19 @@
                                 </div>
                             </div>
                         </div>
-<div class="lesson-card grade4">
+
+                        <!-- درس الأكسجين -->
+                        <div class="lesson-card grade4">
                             <div class="lesson-header">
                                 <div class="lesson-icon">
                                     <i class="fas fa-file-alt"></i>
                                 </div>
-                                <h3 class="lesson-title">   ( دورة الاكسجين وثاني اكسيد الكربون)
-</h3>
-                                <div class="lesson-subject"> العلوم - الوحدة الأولى</div>
+                                <h3 class="lesson-title">دورة الأكسجين وثاني أكسيد الكربون</h3>
+                                <div class="lesson-subject">العلوم - الوحدة الأولى</div>
                             </div>
                             <div class="lesson-content">
                                 <p class="lesson-desc">
-                                    دورة الاكسجين وثاني اكسيد الكربون    . تعرف على دورة الاكسجين وثاني اكسيد الكربون  .
+                                    دورة الأكسجين وثاني أكسيد الكربون. تعرف على دورة الأكسجين وثاني أكسيد الكربون.
                                 </p>
                                 <div class="lesson-meta">
                                     <span><i class="far fa-clock"></i> 8 ساعات</span>
@@ -1478,95 +740,69 @@
                                 </div>
                             </div>
                         </div>
-<div class="lesson-card grade4">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <h3 class="lesson-title">   ( >🔍 استكشاف حالات المادة الثلاث )
-</h3>
-                                <div class="lesson-subject">>🔍 استكشاف حالات المادة الثلاث  - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
->🔍 استكشاف حالات المادة الثلاث.                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 8 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 30 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="programs/lessons/grade4/since/stat.html" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('literature_grade4')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-<div class="lesson-card grade4">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <h3 class="lesson-title">   ( 📐 تمارين الحيز والحجم )
-</h3>
-                                <div class="lesson-subject">📐 تمارين الحيز والحجم  - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-🔍 استكشاف   .                               </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 8 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 30 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="programs/lessons/grade4/since/lesson-size.html" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('literature_grade4')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
                     </div>
                 </div>
             </div>
 
             <!-- محتوى الصف الخامس -->
             <div id="grade5-content" class="grade-content">
-                
                 <!-- دروس الصف الخامس -->
                 <div class="lessons-section fade-in">
                     <div class="section-header">
                         <h2 class="section-title">
                             <i class="fas fa-graduation-cap"></i> دروس الصف الخامس
-                        </h2><!--
-                        <button class="lesson-btn primary" onclick="addNewLesson('grade5')">
-                            <i class="fas fa-plus"></i> إضافة درس جديد
-                        </button>-->
+                        </h2>
                     </div>
-                                        <div class="lessons-grid">
+                    <div class="lessons-grid">
 
-                    <div class="lesson-card grade5">
+<div class="lesson-card grade5">
                             <div class="lesson-header">
                                 <div class="lesson-icon">
                                     <i class="fas fa-theater-masks"></i>
                                 </div>
-                                <h3 class="lesson-title"> درس النظام الشمسي</h3>
-                                <div class="lesson-subject"> درس النظام الشمسي - الوحدة الثانية</div>
+                                <h3 class="lesson-title">درس  الأجهزة</h3>
+                                <div class="lesson-subject">  الدرس الاول للفصل الثاني-الأجهزة  </div>
                             </div>
                             <div class="lesson-content">
                                 <p class="lesson-desc">
-                                    مقدمة في درس النظام الشمسي  .  مختارة وتحليل .
+  الأجهزة  -في جسم الانسان- النبات - الاجهزة الاكترونية -                                 </p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعات</span>
+                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="programs/lessons/grade5/since/lesson-dev1.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                        <!-- درس النظام الشمسي -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-theater-masks"></i>
+                                </div>
+                                <h3 class="lesson-title">درس النظام الشمسي</h3>
+                                <div class="lesson-subject">درس النظام الشمسي - الوحدة الثانية</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">
+                                    مقدمة في درس النظام الشمسي. مختارة وتحليل.
                                 </p>
                                 <div class="lesson-meta">
                                     <span><i class="far fa-clock"></i> 12 ساعات</span>
@@ -1583,17 +819,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- درس كوكبنا الأرض -->
                         <div class="lesson-card grade5">
                             <div class="lesson-header">
                                 <div class="lesson-icon">
                                     <i class="fas fa-theater-masks"></i>
                                 </div>
-                                <h3 class="lesson-title"> درس  كوكبنا الارض</h3>
-                                <div class="lesson-subject"> درس  كوكبنا الارض - الوحدة الثانية</div>
+                                <h3 class="lesson-title">درس كوكبنا الأرض</h3>
+                                <div class="lesson-subject">درس كوكبنا الأرض - الوحدة الثانية</div>
                             </div>
                             <div class="lesson-content">
                                 <p class="lesson-desc">
-                                    مقدمة في درس  كوكبنا الارض  .  مختارة وتحليل .
+                                    مقدمة في درس كوكبنا الأرض. مختارة وتحليل.
                                 </p>
                                 <div class="lesson-meta">
                                     <span><i class="far fa-clock"></i> 12 ساعات</span>
@@ -1610,66 +848,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-                        <!-- 'دراسة متقدمة للخلية النباتية والحيوانية -->
-                        <div class="lesson-card grade5">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-language"></i>
-                                </div>
-                                <h3 class="lesson-title"> 'دراسة متقدمة للخلية النباتية والحيوانية</h3>
-                                <div class="lesson-subject">  - الوحدة الأولى</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-'دراسة متقدمة للخلية النباتية والحيوانية                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 10 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 35 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-active">نشط</div>
-                                <div class="lesson-actions">
-                                    <a href="programs/lessons/grade5/since/gtade5_cells.html" class="lesson-btn primary">
-                                        <i class="fas fa-play"></i> بدء الدرس
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewLessonDetails('grammar_grade5')">
-                                        <i class="fas fa-info-circle"></i> التفاصيل
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- درس الأدب والبلاغة -->
-                        
-                        <!-- درس التعبير الكتابي -->
-                        <div class="lesson-card grade5">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-edit"></i>
-                                </div>
-                                <h3 class="lesson-title"> العلوم</h3>
-                                <div class="lesson-subject">  - الوحدة الثالثة</div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc">
-                                    تعلم كتابة العلوم  . تنمية مهارات .
-                                </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 8 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 25 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-completed">مكتمل</div>
-                                <div class="lesson-actions">
-                                    <a href="#" class="lesson-btn primary">
-                                        <i class="fas fa-redo"></i> مراجعة
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="viewResults('writing_grade5')">
-                                        <i class="fas fa-chart-bar"></i> النتائج
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1677,15 +855,15 @@
             <!-- برامج إضافية -->
             <div class="programs-section fade-in">
                 <h2 class="section-title">
-                    <i class="fas fa-puzzle-piece"></i> برامج إضافية  
+                    <i class="fas fa-puzzle-piece"></i> برامج إضافية
                 </h2>
                 <div class="programs-grid">
                     <a href="#" class="program-item">
                         <div class="program-icon">
                             <i class="fas fa-font"></i>
                         </div>
-                        <h3 class="program-title">العلوم </h3>
-                        <p class="program-desc">تعلم  مع الصور والأصوات</p>
+                        <h3 class="program-title">العلوم</h3>
+                        <p class="program-desc">تعلم مع الصور والأصوات</p>
                     </a>
                     <a href="#" class="program-item">
                         <div class="program-icon">
@@ -1693,34 +871,6 @@
                         </div>
                         <h3 class="program-title">برنامج .......</h3>
                         <p class="program-desc">تنمية مهارات القراءة والفهم</p>
-                    </a>
-                    <a href="#" class="program-item">
-                        <div class="program-icon">
-                            <i class="fas fa-pen"></i>
-                        </div>
-                        <h3 class="program-title">برنامج العلوم</h3>
-                        <p class="program-desc">العلوم   </p>
-                    </a>
-                    <a href="programs/lessons/grade5/since/gtade5_cells.html" class="program-item">
-                        <div class="program-icon">
-                            <i class="fas fa-language"></i>
-                        </div>
-                        <h3 class="program-title">برنامج </h3>
-                        <p class="program-desc"> 'دراسة متقدمة للخلية النباتية والحيوانية  </p>
-                    </a>
-                    <a href="#" class="program-item">
-                        <div class="program-icon">
-                            <i class="fas fa-spell-check"></i>
-                        </div>
-                        <h3 class="program-title">برنامج العلوم</h3>
-                        <p class="program-desc">تحسين العلوم </p>
-                    </a>
-                    <a href="#" class="program-item">
-                        <div class="program-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3 class="program-title">برنامج العلوم</h3>
-                        <p class="program-desc">تنمية مهارات العلوم </p>
                     </a>
                 </div>
             </div>
@@ -1736,109 +886,31 @@
                 minute: '2-digit',
                 second: '2-digit'
             });
-            
             document.getElementById('current-time').textContent = timeString;
         }
-        
         setInterval(updateTime, 1000);
         updateTime();
 
         // عرض محتوى الصف المحدد
-        // عرض محتوى الصف المحدد
-function showGrade(gradeId) {
-    // تحديث التبويبات النشطة
-    document.querySelectorAll('.grade-tab').forEach(tab => {
-        tab.classList.remove('active');
-        
-        // استعادة الألوان الأصلية
-        const color = getComputedStyle(document.documentElement).getPropertyValue(`--${gradeId}`);
-        if (tab.getAttribute('onclick')?.includes(gradeId)) {
-            tab.style.background = '';
-            tab.style.color = '';
-            tab.style.borderColor = '';
-        }
-    });
-    
-    // تلوين التبويب النشط
-    const activeTab = document.querySelector(`.grade-tab[onclick="showGrade('${gradeId}')"]`);
-    if (activeTab) {
-        activeTab.classList.add('active');
-        
-        // استخدام الألوان من CSS Variables
-        const colorMap = {
-            'grade1': '#FF6B6B',
-            'grade2': '#48CAE4', 
-            'grade3': '#52B788',
-            'grade4': '#FF9E00',
-            'grade5': '#9D4EDD'
-        };
-        
-        const color = colorMap[gradeId] || '#1E88E5';
-        activeTab.style.background = color;
-        activeTab.style.color = 'white';
-        activeTab.style.borderColor = color;
-    }
-    
-    // إخفاء جميع المحتويات
-    document.querySelectorAll('.grade-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    
-    // إظهار المحتوى المحدد
-    document.getElementById(`${gradeId}-content`).classList.add('active');
-}
-        // إضافة درس جديد
-        function addNewLesson(grade) {
-            const gradeNames = {
-                'grade1': 'الصف الأول',
-                'grade2': 'الصف الثاني',
-                'grade3': 'الصف الثالث',
-                'grade4': 'الصف الرابع',
-                'grade5': 'الصف الخامس'
-            };
-            
-            Swal.fire({
-                title: `إضافة درس جديد لـ ${gradeNames[grade]}`,
-                html: `
-                    <div style="text-align: right;">
-                        <input type="text" id="lesson-title" placeholder="عنوان الدرس" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #1E88E5;">
-                        <select id="lesson-subject" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #1E88E5;">
-                            <option value="">اختر المادة</option>
-                            <option value="arabic"> العلوم</option>
-                            <option value="reading">العلوم</option>
-                            <option value="writing">العلوم</option>
-                            <option value="grammar">العلوم</option>
-                            <option value="dictation">العلوم</option>
-                        </select>
-                        <textarea id="lesson-desc" placeholder="وصف الدرس" style="width: 100%; height: 100px; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #1E88E5;"></textarea>
-                        <input type="number" id="lesson-duration" placeholder="المدة بالساعات" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #1E88E5;">
-                    </div>
-                `,
-                showCancelButton: true,
-                confirmButtonText: 'إضافة',
-                cancelButtonText: 'إلغاء',
-                preConfirm: () => {
-                    const title = document.getElementById('lesson-title').value;
-                    const subject = document.getElementById('lesson-subject').value;
-                    const desc = document.getElementById('lesson-desc').value;
-                    const duration = document.getElementById('lesson-duration').value;
-                    
-                    if (!title || !subject || !desc || !duration) {
-                        Swal.showValidationMessage('يرجى ملء جميع الحقول');
-                    }
-                    
-                    return { title, subject, desc, duration };
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'تم الإضافة!',
-                        text: `تم إضافة درس "${result.value.title}" بنجاح`,
-                        icon: 'success',
-                        confirmButtonText: 'حسناً'
-                    });
-                }
+        function showGrade(gradeId) {
+            // تحديث التبويبات النشطة
+            document.querySelectorAll('.grade-tab').forEach(tab => {
+                tab.classList.remove('active');
             });
+            
+            // تلوين التبويب النشط
+            const activeTab = document.querySelector(`.grade-tab[onclick="showGrade('${gradeId}')"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+
+            // إخفاء جميع المحتويات
+            document.querySelectorAll('.grade-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // إظهار المحتوى المحدد
+            document.getElementById(`${gradeId}-content`).classList.add('active');
         }
 
         // عرض تفاصيل الدرس
@@ -1855,9 +927,6 @@ function showGrade(gradeId) {
                         </div>
                         <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
                             <strong>آخر نشاط:</strong> منذ ساعتين
-                        </div>
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
-                            <strong>التقييم العام:</strong> ⭐⭐⭐⭐☆ (4.2/5)
                         </div>
                     </div>
                 `,
@@ -1884,17 +953,7 @@ function showGrade(gradeId) {
                 `,
                 showCancelButton: true,
                 confirmButtonText: 'جدولة',
-                cancelButtonText: 'إلغاء',
-                preConfirm: () => {
-                    const date = document.getElementById('schedule-date').value;
-                    const classId = document.getElementById('schedule-class').value;
-                    
-                    if (!date || !classId) {
-                        Swal.showValidationMessage('يرجى ملء جميع الحقول');
-                    }
-                    
-                    return { date, classId };
-                }
+                cancelButtonText: 'إلغاء'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
@@ -1907,39 +966,7 @@ function showGrade(gradeId) {
             });
         }
 
-        // عرض نتائج الطلاب
-        function viewResults(lessonId) {
-            Swal.fire({
-                title: 'نتائج الطلاب',
-                html: `
-                    <div style="text-align: right; max-height: 300px; overflow-y: auto;">
-                        <div style="background: #e8f5e9; padding: 10px; margin: 5px; border-radius: 8px; border-right: 4px solid #4CAF50;">
-                            <strong>أحمد محمد</strong> - 95% ⭐⭐⭐⭐⭐
-                        </div>
-                        <div style="background: #e8f5e9; padding: 10px; margin: 5px; border-radius: 8px; border-right: 4px solid #4CAF50;">
-                            <strong>سارة خالد</strong> - 92% ⭐⭐⭐⭐⭐
-                        </div>
-                        <div style="background: #fff3e0; padding: 10px; margin: 5px; border-radius: 8px; border-right: 4px solid #FF9800;">
-                            <strong>فاطمة علي</strong> - 85% ⭐⭐⭐⭐
-                        </div>
-                        <div style="background: #fff3e0; padding: 10px; margin: 5px; border-radius: 8px; border-right: 4px solid #FF9800;">
-                            <strong>عبدالله سعيد</strong> - 78% ⭐⭐⭐⭐
-                        </div>
-                        <div style="background: #ffebee; padding: 10px; margin: 5px; border-radius: 8px; border-right: 4px solid #F44336;">
-                            <strong>مريم حسن</strong> - 65% ⭐⭐⭐
-                        </div>
-                    </div>
-                    <div style="margin-top: 20px; text-align: center;">
-                        <strong>المعدل العام:</strong> 83% ⭐⭐⭐⭐
-                    </div>
-                `,
-                showConfirmButton: false,
-                showCloseButton: true,
-                width: '500px'
-            });
-        }
-
-        // تأثيرات عند التحميل
+        // التأثيرات عند التحميل
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach((element, index) => {
@@ -1959,11 +986,6 @@ function showGrade(gradeId) {
                 });
             });
         });
-
-        // تحميل SweetAlert2 للإشعارات
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
-        document.head.appendChild(script);
     </script>
 </body>
 </html>
