@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامج حفظ السور القصيرة - مؤسسة التقدم والعطاء</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2E7D32;
+            --secondary-color: #4CAF50;
+            --accent-color: #FFD54F;
+            --light-bg: #F5F5F5;
+            --text-dark: #1B5E20;
+            --text-light: #FFFFFF;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* الهيدر */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .institute-name {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            padding: 8px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* شريط التقدم */
+        .progress-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            width: 12.5%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+        
+        /* شبكة السور */
+        .surahs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        /* بطاقة السورة */
+        .surah-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .surah-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .surah-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .surah-header:hover {
+            background: linear-gradient(to right, #1B5E20, #2E7D32);
+        }
+        
+        .surah-number {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .surah-name {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .surah-details {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .surah-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .surah-text {
+            font-size: 1.6rem;
+            line-height: 2.2;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-family: 'Amiri', serif;
+        }
+        
+        .surah-translation {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+            border-top: 1px dashed #eee;
+            padding-top: 15px;
+        }
+        
+        /* مشغل الفيديو */
+        .video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .video-wrapper {
+            width: 100%;
+            max-width: 800px;
+            background-color: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-player {
+            width: 100%;
+            height: 450px;
+            background-color: #000;
+        }
+        
+        .video-info {
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .close-video {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .close-video:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .video-button {
+            display: block;
+            background-color: #FF5722;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 5px rgba(255, 87, 34, 0.3);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .video-button:hover {
+            background-color: #E64A19;
+            transform: scale(1.03);
+        }
+        
+        .video-icon {
+            margin-left: 8px;
+        }
+        
+        /* التذييل */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .instructions {
+            background-color: white;
+            color: var(--text-dark);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .instructions h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .instructions-list {
+            list-style-type: none;
+            padding-right: 10px;
+        }
+        
+        .instructions-list li {
+            margin-bottom: 10px;
+            padding-right: 25px;
+            position: relative;
+        }
+        
+        .instructions-list li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .surahs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .surah-text {
+                font-size: 1.4rem;
+                line-height: 2;
+            }
+            
+            .video-player {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .surah-text {
+                font-size: 1.3rem;
+            }
+            
+            .video-player {
+                height: 250px;
+            }
+            
+            .video-wrapper {
+                border-radius: 0;
+            }
+        }
+        
+        /* تأثيرات تفاعلية */
+        .completed {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .completed::after {
+            content: "✓";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .check-btn {
+            background-color: #f0f0f0;
+            border: none;
+            color: #666;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .check-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .completed .check-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        /* عناصر تحكم الفيديو */
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background-color: #111;
+        }
+        
+        .control-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            background-color: #444;
+            transform: scale(1.1);
+        }
+        
+        /* رسالة عدم توفر الفيديو */
+        .no-video-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .no-video-message i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #FF9800;
+        }
+        
+        /* زر العودة */
+        .back-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #1B5E20;
+        }
+    </style>
+</head>
+<body>
+    <!-- مشغل الفيديو -->
+    <div class="video-container" id="videoContainer">
+        <div class="video-wrapper">
+            <div class="video-info">
+                <div class="video-title" id="videoTitle"></div>
+                <button class="close-video" id="closeVideo">&times;</button>
+            </div>
+            <iframe class="video-player" id="videoPlayer" frameborder="0" allowfullscreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+            <div class="video-controls">
+                <button class="control-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <button class="control-btn" id="muteBtn"><i class="fas fa-volume-up"></i></button>
+                <button class="control-btn" id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        <!-- الهيدر -->
+        <header class="header">
+            <h1>برنامج حفظ السور القصيرة للصف الأول الابتدائي</h1>
+            <p>تعلم وحفظ السور القرآنية الأساسية مع مشغل فيديو داخلي</p>
+            <div class="institute-name">مؤسسة التقدم والعطاء - ليبيا البيضاء</div>
+        </header>
+        
+        <!-- شريط التقدم -->
+        <div class="progress-container">
+            <div class="progress-text">
+                <span>التقدم في الحفظ</span>
+                <span id="progressText">١ من ٨ سور</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+        
+        <!-- شبكة السور -->
+        <div class="surahs-grid" id="surahsContainer">
+            <!-- سيتم إضافة البطاقات هنا عبر الجافاسكريبت -->
+        </div>
+        
+        <!-- التعليمات -->
+        <div class="instructions">
+            <h3>كيفية استخدام البرنامج</h3>
+            <ul class="instructions-list">
+                <li>اضغط على زر "مشاهدة الفيديو التعليمي" لفتح مشغل الفيديو داخل البرنامج</li>
+                <li>استمع للفيديو عدة مرات حتى تتقن النطق الصحيح</li>
+                <li>حاول ترديد السورة مع المقرئ في الفيديو</li>
+                <li>استخدم أزرار التحكم للتوقف، رفع الصوت، أو التكبير</li>
+                <li>بعد الحفظ، اضغط على زر "تم الحفظ" لتحديث تقدمك</li>
+                <li>انتقل للسورة التالية بعد إتقان حفظ السورة الحالية</li>
+            </ul>
+        </div>
+        
+        <!-- التذييل -->
+        <footer class="footer">
+            <p>مؤسسة التقدم والعطاء - ليبيا البيضاء</p>
+            <p>برنامج التربية الإسلامية للصف الأول الابتدائي</p>
+            <p>© 2023 - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <script>
+        // بيانات السور مع روابط الفيديو المضمنة
+        const surahs = [
+            {
+                id: 1,
+                name: "الفاتحة",
+                arabicName: "سُورَةُ الْفَاتِحَةِ",
+                verses: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ (1) الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ (2) الرَّحْمَٰنِ الرَّحِيمِ (3) مَالِكِ يَوْمِ الدِّينِ (4) إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ (5) اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ (6) صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ (7)",
+                translation: "بسم الله الرحمن الرحيم. الحمد لله رب العالمين، الرحمن الرحيم، مالك يوم الدين. إياك نعبد وإياك نستعين، اهدنا الصراط المستقيم، صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين.",
+                videoId: "pUb9EW770d0",
+                completed: false
+            },
+            {
+                id: 2,
+                name: "الفلق",
+                arabicName: "سُورَةُ الْفَلَقِ",
+                verses: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ (1) مِنْ شَرِّ مَا خَلَقَ (2) وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ (3) وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ (4) وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ (5)",
+                translation: "قل أعوذ برب الفلق، من شر ما خلق، ومن شر غاسق إذا وقب، ومن شر النفاثات في العقد، ومن شر حاسد إذا حسد.",
+                videoId: "bR3qVmsLBXQ",
+                completed: false
+            },
+            {
+                id: 3,
+                name: "الناس",
+                arabicName: "سُورَةُ النَّاسِ",
+                verses: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ (1) مَلِكِ النَّاسِ (2) إِلَٰهِ النَّاسِ (3) مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ (4) الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ (5) مِنَ الْجِنَّةِ وَالنَّاسِ (6)",
+                translation: "قل أعوذ برب الناس، ملك الناس، إله الناس، من شر الوسواس الخناس، الذي يوسوس في صدور الناس، من الجنة والناس.",
+                videoId: "PnT1wJBnJ-4",
+                completed: false
+            },
+            {
+                id: 4,
+                name: "الإخلاص",
+                arabicName: "سُورَةُ الْإِخْلَاصِ",
+                verses: "قُلْ هُوَ اللَّهُ أَحَدٌ (1) اللَّهُ الصَّمَدُ (2) لَمْ يَلِدْ وَلَمْ يُولَدْ (3) وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ (4)",
+                translation: "قل هو الله أحد، الله الصمد، لم يلد ولم يولد، ولم يكن له كفوا أحد.",
+                videoId: "oegEpUQXiQ4",
+                completed: false
+            },
+            {
+                id: 5,
+                name: "المسد",
+                arabicName: "سُورَةُ الْمَسَدِ",
+                verses: "تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ (1) مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ (2) سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ (3) وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ (4) فِي جِيدِهَا حَبْلٌ مِنْ مَسَدٍ (5)",
+                translation: "تبت يدا أبي لهب وتب، ما أغنى عنه ماله وما كسب، سيصلى نارا ذات لهب، وامرأته حمالة الحطب، في جيدها حبل من مسد.",
+                videoId: "QtHi7KDp3UM",
+                completed: false
+            },
+            {
+              id: 6,
+                name: "الكوثر",
+                arabicName: "سُورَةُ الْكَوْثَرِ",
+                verses: "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ (1) فَصَلِّ لِرَبِّكَ وَانْحَرْ (2) إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ (3)",
+                translation: "إنا أعطيناك الكوثر، فصل لربك وانحر، إن شانئك هو الأبتر.",
+                videoId: "7-c1e_GUoPM",
+                completed: false
+            },
+            {
+                id: 7,
+                name: "الكافرون",
+                arabicName: "سُورَةُ الْكَافِرُونَ",
+                verses: "قُلْ يَا أَيُّهَا الْكَافِرُونَ (1) لَا أَعْبُدُ مَا تَعْبُدُونَ (2) وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ (3) وَلَا أَنَا عَابِدٌ مَا عَبَدْتُمْ (4) وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ (5) لَكُمْ دِينُكُمْ وَلِيَ دِينِ (6)",
+                translation: "قل يا أيها الكافرون، لا أعبد ما تعبدون، ولا أنتم عابدون ما أعبد، ولا أنا عابد ما عبدتم، ولا أنتم عابدون ما أعبد، لكم دينكم ولي دين.",
+                videoId: "Mg494UBm4ro",
+                completed: false
+            },
+            {
+                id: 8,
+                name: "الماعون",
+                arabicName: "سُورَةُ الْمَاعُونِ",
+                verses: "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ (1) فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ (2) وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ (3) فَوَيْلٌ لِلْمُصَلِّينَ (4) الَّذِينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ (5) الَّذِينَ هُمْ يُرَاءُونَ (6) وَيَمْنَعُونَ الْمَاعُونَ (7)",
+                translation: "أرأيت الذي يكذب بالدين، فذلك الذي يدع اليتيم، ولا يحض على طعام المسكين، فويل للمصلين، الذين هم عن صلاتهم ساهون، الذين هم يراءون، ويمنعون الماعون.",
+                videoId: "-yZaY4wXhrE",
+                completed: false
+            }
+        ];
+
+        // DOM Elements
+        const surahsContainer = document.getElementById('surahsContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const videoContainer = document.getElementById('videoContainer');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoTitle = document.getElementById('videoTitle');
+        const closeVideo = document.getElementById('closeVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        
+        // حالة الفيديو الحالي
+        let currentVideoId = null;
+        let currentSurahName = "";
+        let player = null;
+        
+        // فتح مشغل الفيديو
+        function openVideoPlayer(surahId, surahName) {
+            const surah = surahs.find(s => s.id === surahId);
+            if (!surah) return;
+            
+            currentVideoId = surah.videoId;
+            currentSurahName = surahName;
+            
+            // تعيين رابط الفيديو المضمن
+// ابحثي عن هذا السطر في الكود وقومي باستبداله
+videoPlayer.src = `https://www.youtube.com/embed/${currentVideoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;            videoTitle.textContent = `سورة ${surahName} - تعليم التلاوة`;
+            
+            // إظهار مشغل الفيديو
+            videoContainer.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+        
+        // إغلاق مشغل الفيديو
+        function closeVideoPlayer() {
+            videoContainer.style.display = "none";
+            document.body.style.overflow = "auto";
+            
+            // إيقاف الفيديو
+            videoPlayer.src = "";
+            currentVideoId = null;
+            currentSurahName = "";
+        }
+        
+        // تحكم بالفيديو عبر YouTube IFrame API
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('videoPlayer', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        // تحديث شريط التقدم
+        function updateProgress() {
+            const completedSurahs = surahs.filter(surah => surah.completed).length;
+            const progressPercentage = (completedSurahs / surahs.length) * 100;
+            progressFill.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${completedSurahs} من ${surahs.length} سور`;
+        }
+        
+        // تعيين سورة كمكتملة
+        function toggleCompletion(surahId) {
+            const surahIndex = surahs.findIndex(s => s.id === surahId);
+            if (surahIndex !== -1) {
+                surahs[surahIndex].completed = !surahs[surahIndex].completed;
+                renderSurahs();
+                updateProgress();
+                saveProgress();
+            }
+        }
+        
+        // حفظ التقدم في localStorage
+        function saveProgress() {
+            const progressData = surahs.map(surah => ({
+                id: surah.id,
+                completed: surah.completed
+            }));
+            localStorage.setItem('surahProgress', JSON.stringify(progressData));
+        }
+        
+        // تحميل التقدم من localStorage
+        function loadProgress() {
+            const savedProgress = localStorage.getItem('surahProgress');
+            if (savedProgress) {
+                const progressData = JSON.parse(savedProgress);
+                progressData.forEach(item => {
+                    const surahIndex = surahs.findIndex(s => s.id === item.id);
+                    if (surahIndex !== -1) {
+                        surahs[surahIndex].completed = item.completed;
+                    }
+                });
+            }
+        }
+        
+        // عرض السور في الشبكة
+        function renderSurahs() {
+            surahsContainer.innerHTML = '';
+            
+            surahs.forEach(surah => {
+                const card = document.createElement('div');
+                card.className = `surah-card ${surah.completed ? 'completed' : ''}`;
+                
+                card.innerHTML = `
+                    <div class="surah-header" onclick="openVideoPlayer(${surah.id}, '${surah.name}')">
+                        <div class="surah-number">${surah.id}</div>
+                        <h2 class="surah-name">${surah.name}</h2>
+                        <div class="surah-details">${surah.arabicName}</div>
+                    </div>
+                    <div class="surah-content">
+                        <div class="surah-text">${surah.verses}</div>
+                        <div class="surah-translation">${surah.translation}</div>
+                        <button class="video-button" onclick="openVideoPlayer(${surah.id}, '${surah.name}')">
+                            <span>مشاهدة الفيديو التعليمي</span>
+                            <span class="video-icon">▶️</span>
+                        </button>
+                        <button class="check-btn" onclick="toggleCompletion(${surah.id})">
+                            ${surah.completed ? '✓ تم الحفظ' : 'اضغط بعد الحفظ'}
+                        </button>
+                    </div>
+                `;
+                
+                surahsContainer.appendChild(card);
+            });
+        }
+        
+        // تهيئة التطبيق
+        function init() {
+            loadProgress();
+            renderSurahs();
+            updateProgress();
+            
+            // إضافة مستمعي الأحداث
+            closeVideo.addEventListener('click', closeVideoPlayer);
+            
+            // إغلاق الفيديو بالضغط على الخلفية
+            videoContainer.addEventListener('click', function(e) {
+                if (e.target === videoContainer) {
+                    closeVideoPlayer();
+                }
+            });
+            
+            // إغلاق الفيديو بالضغط على مفتاح ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoContainer.style.display === 'flex') {
+                    closeVideoPlayer();
+                }
+            });
+            
+            // تحكم بأزرار التحكم (وهمية حالياً)
+            playPauseBtn.addEventListener('click', function() {
+                alert("سيتم تفعيل التحكم الكامل بالفيديو في النسخة المتقدمة");
+            });
+            
+            muteBtn.addEventListener('click', function() {
+                alert("سيتم تفعيل التحكم بالصوت في النسخة المتقدمة");
+            });
+            
+            fullscreenBtn.addEventListener('click', function() {
+                if (videoPlayer.requestFullscreen) {
+                    videoPlayer.requestFullscreen();
+                } else if (videoPlayer.mozRequestFullScreen) { /* Firefox */
+                    videoPlayer.mozRequestFullScreen();
+                } else if (videoPlayer.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                    videoPlayer.webkitRequestFullscreen();
+                } else if (videoPlayer.msRequestFullscreen) { /* IE/Edge */
+                    videoPlayer.msRequestFullscreen();
+                }
+            });
+        }
+        
+        // بدء التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', init);
+        
+        // جعل الدوال متاحة عالمياً
+        window.openVideoPlayer = openVideoPlayer;
+        window.toggleCompletion = toggleCompletion;
+        window.closeVideoPlayer = closeVideoPlayer;
+    </script>
+    
+    <!-- YouTube IFrame API -->
+    <script>
+        // تحميل YouTube IFrame API بشكل غير متزامن
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
+</body>
+</html>
