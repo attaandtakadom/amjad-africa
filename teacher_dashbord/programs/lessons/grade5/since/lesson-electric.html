@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامج تعليمي - الكهرباء للصف الخامس | مؤسسة التقدم والعطاء ليبيا البيضاء</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, #e6f2ff, #f0f7ff);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 150, 0.1);
+            overflow: hidden;
+            border: 1px solid #d0e4ff;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo i {
+            font-size: 50px;
+            color: #2a5298;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .teacher {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: #f0f7ff;
+            border-bottom: 2px solid #d0e4ff;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            color: #2a5298;
+        }
+        
+        .tab:hover {
+            background-color: #e1eeff;
+        }
+        
+        .tab.active {
+            background-color: white;
+            border-bottom: 3px solid #2a5298;
+            color: #1e3c72;
+        }
+        
+        .content {
+            padding: 30px;
+            min-height: 600px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .lesson-title {
+            color: #1e3c72;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e6f2ff;
+            display: flex;
+            align-items: center;
+        }
+        
+        .lesson-title i {
+            margin-left: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .lesson-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .text-section {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .image-section img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            border: 1px solid #d0e4ff;
+        }
+        
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        h3 {
+            color: #2a5298;
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+        
+        p, li {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul {
+            padding-right: 25px;
+            margin-bottom: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .questions-section {
+            background-color: #f8fbff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #e1eeff;
+        }
+        
+        .question-type {
+            margin-bottom: 30px;
+        }
+        
+        .question-type-title {
+            color: #1e3c72;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-type-title i {
+            margin-left: 10px;
+        }
+        
+        .question {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-right: 4px solid #d0e4ff;
+        }
+        
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .true-false-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .option {
+            padding: 10px 20px;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background-color: #e1eeff;
+        }
+        
+        .option.selected {
+            border-color: #2a5298;
+            background-color: #e1eeff;
+        }
+        
+        .true-false-options .option.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        
+        .true-false-options .option.wrong {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        
+        .multiple-choice-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .multiple-choice-options .option.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        
+        .multiple-choice-options .option.wrong {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        
+        .home-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px;
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.3);
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 82, 152, 0.4);
+        }
+        
+        .home-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #f0f7ff;
+            color: #2a5298;
+            border-top: 1px solid #d0e4ff;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .lesson-content {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1>برنامج تعليمي في الكهرباء للصف الخامس</h1>
+                <div class="subtitle">مؤسسة التقدم والعطاء ليبيا البيضاء</div>
+                <div class="teacher"> الأستاذة رغد</div>
+            </div>
+                    <a href="../../../../s-da.html" class="back-home"><i class="fas fa-home"></i> العودة للرئيسية</a>
+
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="1">موصلات وعوازل الكهرباء</div>
+            <div class="tab" data-tab="2">توليد الكهرباء ومصادر الطاقة</div>
+            <div class="tab" data-tab="3">السلامة الكهربائية وترشيد الاستهلاك</div>
+        </div>
+        
+        <div class="content">
+            <!-- تبويب 1 -->
+            <div id="tab-1" class="tab-content active">
+                <div class="lesson-title">
+                    <i class="fas fa-plug"></i>
+                    موصلات وعوازل الكهرباء (التعامل مع المادة)
+                </div>
+                
+                <div class="lesson-content">
+                    <div class="text-section">
+                        <p>يركز هذا الجزء على تصنيف المواد حسب قدرتها على تمرير التيار الكهربائي، وهو الأساس لفهم كيفية عمل الأجهزة وتصميمها بأمان.</p>
+                        
+                        <h3><i class="fas fa-bolt"></i> الموصلات الكهربائية</h3>
+                        <p>هي مواد تسمح بمرور التيار الكهربائي من خلالها بسهولة. معظم المعادن تعتبر موصلات جيدة، مثل:</p>
+                        <ul>
+                            <li>النحاس (المستخدم في الأسلاك)</li>
+                            <li>الألمنيوم</li>
+                            <li>الحديد</li>
+                            <li>الذهب والفضة</li>
+                        </ul>
+                        
+                        <h3><i class="fas fa-shield-alt"></i> العوازل الكهربائية</h3>
+                        <p>هي مواد لا تسمح بمرور التيار الكهربائي من خلالها. وظيفتها الأساسية هي الحماية ومنع تسرب الكهرباء، ومن أمثلتها:</p>
+                        <ul>
+                            <li>البلاستيك (اللدائن)</li>
+                            <li>المطاط</li>
+                            <li>الزجاج</li>
+                            <li>الخشب، الورق، والصلصال</li>
+                        </ul>
+                        
+                        <h3><i class="fas fa-tools"></i> التطبيقات العملية</h3>
+                        <p>تُغطى الأسلاك النحاسية بطبقة من البلاستيك (عازل) لحمايتنا من الصعق الكهربائي، بينما تُصنع رؤوس المقابس من معادن موصلة لنقل الطاقة.</p>
+                    </div>
+                    
+                    <div class="image-section">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="أسلاك كهربائية معزولة">
+                        <div class="image-caption">أسلاك كهربائية مغطاة بمواد عازلة للحماية</div>
+                        
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="مقابس كهربائية">
+                        <div class="image-caption">المقابس الكهربائية تحتوي على أجزاء موصلة ومعزولة</div>
+                    </div>
+                </div>
+                
+                <div class="questions-section">
+                    <div class="question-type">
+                        <div class="question-type-title">
+                            <i class="fas fa-check-circle"></i>
+                            أسئلة صح وخطأ
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">1. النحاس من الموصلات الجيدة للكهرباء.</div>
+                            <div class="true-false-options">
+                                <div class="option" data-correct="true">صح</div>
+                                <div class="option" data-correct="false">خطأ</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">2. البلاستيك من المواد الموصلة للكهرباء.</div>
+                            <div class="true-false-options">
+                                <div class="option" data-correct="false">صح</div>
+                                <div class="option" data-correct="true">خطأ</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type">
+                        <div class="question-type-title">
+                            <i class="fas fa-list-ol"></i>
+                            أسئلة اختيار متعدد
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">3. أي من المواد التالية تعتبر عازلاً للكهرباء؟</div>
+                            <div class="multiple-choice-options">
+                                <div class="option" data-correct="false">الحديد</div>
+                                <div class="option" data-correct="true">المطاط</div>
+                                <div class="option" data-correct="false">النحاس</div>
+                                <div class="option" data-correct="false">الذهب</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">4. لماذا تغطى الأسلاك الكهربائية بطبقة من البلاستيك؟</div>
+                            <div class="multiple-choice-options">
+                                <div class="option" data-correct="false">لجعلها أكثر مرونة</div>
+                                <div class="option" data-correct="false">لجعلها ملونة</div>
+                                <div class="option" data-correct="true">لحماية الناس من الصعق الكهربائي</div>
+                                <div class="option" data-correct="false">لجعلها أرخص ثمناً</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تبويب 2 -->
+            <div id="tab-2" class="tab-content">
+                <div class="lesson-title">
+                    <i class="fas fa-solar-panel"></i>
+                    طرق توليد الكهرباء ومصادر الطاقة
+                </div>
+                
+                <div class="lesson-content">
+                    <div class="text-section">
+                        <p>يشرح هذا التبويب رحلة الطاقة من المصدر الطبيعي حتى وصولها إلى منازلنا عبر محطات التوليد.</p>
+                        
+                        <h3><i class="fas fa-fire"></i> مصادر الطاقة غير المتجددة</h3>
+                        <p>تعتمد معظم المحطات على حرق الوقود الأحفوري مثل النفط، الفحم، والغاز الطبيعي. هذه المصادر تستغرق ملايين السنين لتتشكل، واستخدامها المفرط يؤدي لنضوبها.</p>
+                        
+                        <h3><i class="fas fa-industry"></i> آلية التوليد في المحطات</h3>
+                        <ul>
+                            <li>يتم حرق الوقود لتسخين المياه وتحويلها إلى بخار.</li>
+                            <li>يقوم البخار المضغوط بتدوير التوربينات.</li>
+                            <li>تتصل التوربينات بـ مولدات ضخمة تحول الحركة إلى طاقة كهربائية.</li>
+                        </ul>
+                        
+                        <h3><i class="fas fa-leaf"></i> مصادر بديلة ونظيفة</h3>
+                        <p>يمكن توليد الكهرباء أيضاً باستخدام قوة الرياح (عبر طواحين الهواء) أو قوة المياه الجارية في السدود (الطاقة الكهرومائية) أو باستخدام الطاقة الشمسية.</p>
+                    </div>
+                    
+                    <div class="image-section">
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="محطة توليد الكهرباء">
+                        <div class="image-caption">محطة توليد الكهرباء التقليدية</div>
+                        
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="طواحين الهواء">
+                        <div class="image-caption">طواحين الهواء لتوليد الكهرباء من طاقة الرياح</div>
+                    </div>
+                </div>
+                
+                <div class="questions-section">
+                    <div class="question-type">
+                        <div class="question-type-title">
+                            <i class="fas fa-check-circle"></i>
+                            أسئلة صح وخطأ
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">1. يمكن توليد الكهرباء من طاقة الرياح.</div>
+                            <div class="true-false-options">
+                                <div class="option" data-correct="true">صح</div>
+                                <div class="option" data-correct="false">خطأ</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">2. النفط والفحم من مصادر الطاقة المتجددة.</div>
+                            <div class="true-false-options">
+                                <div class="option" data-correct="false">صح</div>
+                                <div class="option" data-correct="true">خطأ</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type">
+                        <div class="question-type-title">
+                            <i class="fas fa-list-ol"></i>
+                            أسئلة اختيار متعدد
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">3. أي من مصادر الطاقة التالية يعتبر متجدداً؟</div>
+                            <div class="multiple-choice-options">
+                                <div class="option" data-correct="false">النفط</div>
+                                <div class="option" data-correct="false">الفحم</div>
+                                <div class="option" data-correct="true">الطاقة الشمسية</div>
+                                <div class="option" data-correct="false">الغاز الطبيعي</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">4. كيف يتم توليد الكهرباء في المحطات التقليدية؟</div>
+                            <div class="multiple-choice-options">
+                                <div class="option" data-correct="false">بتسخير طاقة الرياح مباشرة</div>
+                                <div class="option" data-correct="true">بحرق الوقود لإنتاج بخار يدير التوربينات</div>
+                                <div class="option" data-correct="false">باستخدام الألواح الشمسية</div>
+                                <div class="option" data-correct="false">بتحويل المياه مباشرة إلى كهرباء</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تبويب 3 -->
+            <div id="tab-3" class="tab-content">
+                <div class="lesson-title">
+                    <i class="fas fa-user-shield"></i>
+                    السلامة الكهربائية وترشيد الاستهلاك
+                </div>
+                
+                <div class="lesson-content">
+                    <div class="text-section">
+                        <p>يتناول هذا الجزء كيفية التعامل الآمن مع الكهرباء في حياتنا اليومية وأهمية الحفاظ عليها كفعل مسؤول.</p>
+                        
+                        <h3><i class="fas fa-exclamation-triangle"></i> قواعد السلامة (الوقاية من المخاطر)</h3>
+                        <ul>
+                            <li>تجنب لمس المفاتيح الكهربائية والأيدي مبللة بالماء (لأن الماء يوصل الكهرباء).</li>
+                            <li>عدم وضع أكثر من مقبس في مأخذ واحد لتجنب الحرائق الناتجة عن التحميل الزائد.</li>
+                            <li>استخدام المصهرات (Fuse) وقواطع الدائرة التي تفصل التيار تلقائياً عند حدوث خلل.</li>
+                            <li>عدم محاولة إصلاح الأجهزة التالفة أو لمس الأسلاك المكشوفة.</li>
+                        </ul>
+                        
+                        <h3><i class="fas fa-seedling"></i> ترشيد استهلاك الطاقة</h3>
+                        <ul>
+                            <li>إطفاء الأجهزة والمصابيح عند مغادرة الغرفة.</li>
+                            <li>استخدام المصابيح الموفرة للطاقة التي تستهلك كهرباء أقل وتنتج ضوءاً كافياً.</li>
+                            <li>الوعي بأن حفظ الطاقة يساعد في توفير المال وحماية الموارد الطبيعية للأجيال القادمة.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="image-section">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w-600&q=80" alt="سلامة كهربائية">
+                        <div class="image-caption">قواعد السلامة في التعامل مع الكهرباء</div>
+                        
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="ترشيد الطاقة">
+                        <div class="image-caption">ترشيد استهلاك الكهرباء لحماية البيئة</div>
+                    </div>
+                </div>
+                
+                <div class="questions-section">
+                    <div class="question-type">
+                        <div class="question-type-title">
+                            <i class="fas fa-check-circle"></i>
+                            أسئلة صح وخطأ
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">1. يمكن لمس المفاتيح الكهربائية بأيدي مبللة.</div>
+                            <div class="true-false-options">
+                                <div class="option" data-correct="false">صح</div>
+                                <div class="option" data-correct="true">خطأ</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">2. ترشيد استهلاك الكهرباء يحمي البيئة ويوفر المال.</div>
+                            <div class="true-false-options">
+                                <div class="option" data-correct="true">صح</div>
+                                <div class="option" data-correct="false">خطأ</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type">
+                        <div class="question-type-title">
+                            <i class="fas fa-list-ol"></i>
+                            أسئلة اختيار متعدد
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">3. ما هو الإجراء الصحيح عند ملاحظة سلك مكشوف؟</div>
+                            <div class="multiple-choice-options">
+                                <div class="option" data-correct="false">لمسه لمعرفة ما إذا كان نشطاً</div>
+                                <div class="option" data-correct="false">محاولة إصلاحه بنفسك</div>
+                                <div class="option" data-correct="true">إبلاغ شخص بالغ أو فني مختص</div>
+                                <div class="option" data-correct="false">تجاهله لأنه لا يمثل خطراً</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">4. لماذا يجب إطفاء الأنوار عند مغادرة الغرفة؟</div>
+                            <div class="multiple-choice-options">
+                                <div class="option" data-correct="false">لأن الضوء يزعج الآخرين</div>
+                                <div class="option" data-correct="false">لأن المصابيح تحتاج للراحة</div>
+                                <div class="option" data-correct="true">لترشيد استهلاك الطاقة وتوفير المال</div>
+                                <div class="option" data-correct="false">لأن ذلك يزيد من عمر المصباح فقط</div>
+                            </div>
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="home-btn" id="homeBtn">
+            <i class="fas fa-home"></i> العودة للرئيسية
+        </button>
+        
+        <footer>
+            <p>© 2023 مؤسسة التقدم والعطاء ليبيا البيضاء - جميع الحقوق محفوظة</p>
+            <p>برنامج تعليمي لطلبة الصف الخامس - إعداد الأستاذة رغد</p>
+        </footer>
+    </div>
+
+    <script>
+        // تبديل التبويبات
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // إزالة النشاط من جميع التبويبات والمحتويات
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // إضافة النشاط للتبويب المحدد
+                tab.classList.add('active');
+                
+                // إظهار المحتوى المطابق
+                const tabId = `tab-${tab.dataset.tab}`;
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // زر العودة للرئيسية
+        document.getElementById('homeBtn').addEventListener('click', () => {
+            // العودة للتبويب الأول
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            document.querySelector('[data-tab="1"]').classList.add('active');
+            document.getElementById('tab-1').classList.add('active');
+            
+            // التمرير لأعلى الصفحة
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        // التعامل مع أسئلة صح وخطأ
+        const trueFalseOptions = document.querySelectorAll('.true-false-options .option');
+        
+        trueFalseOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                const resultDiv = question.querySelector('.result');
+                const allOptions = question.querySelectorAll('.option');
+                
+                // إزالة التحديد من جميع الخيارات في هذا السؤال
+                allOptions.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'wrong');
+                });
+                
+                // تحديد الخيار المختار
+                this.classList.add('selected');
+                
+                // التحقق من الإجابة
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                    resultDiv.textContent = 'إجابة صحيحة! أحسنت!';
+                    resultDiv.style.color = '#28a745';
+                } else {
+                    this.classList.add('wrong');
+                    resultDiv.textContent = 'إجابة خاطئة، حاول مرة أخرى!';
+                    resultDiv.style.color = '#dc3545';
+                    
+                    // إظهار الإجابة الصحيحة
+                    const correctOption = question.querySelector('.option[data-correct="true"]');
+                    correctOption.classList.add('correct');
+                }
+            });
+        });
+        
+        // التعامل مع أسئلة الاختيار المتعدد
+        const multipleChoiceOptions = document.querySelectorAll('.multiple-choice-options .option');
+        
+        multipleChoiceOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                const resultDiv = question.querySelector('.result');
+                const allOptions = question.querySelectorAll('.option');
+                
+                // إزالة التحديد من جميع الخيارات في هذا السؤال
+                allOptions.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'wrong');
+                });
+                
+                // تحديد الخيار المختار
+                this.classList.add('selected');
+                
+                // التحقق من الإجابة
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                    resultDiv.textContent = 'إجابة صحيحة! أحسنت!';
+                    resultDiv.style.color = '#28a745';
+                } else {
+                    this.classList.add('wrong');
+                    resultDiv.textContent = 'إجابة خاطئة، حاول مرة أخرى!';
+                    resultDiv.style.color = '#dc3545';
+                    
+                    // إظهار الإجابة الصحيحة
+                    const correctOption = question.querySelector('.option[data-correct="true"]');
+                    correctOption.classList.add('correct');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

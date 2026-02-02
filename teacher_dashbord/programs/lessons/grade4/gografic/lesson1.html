@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الظواهر الطبيعية - مؤسسة التقدم والعطاء ليبيا البيضاء</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3c72;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab:hover {
+            background-color: #f5f9ff;
+        }
+        
+        .tab.active {
+            color: #1e3c72;
+            border-bottom: 3px solid #1e3c72;
+            background-color: #f0f7ff;
+        }
+        
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            min-height: 500px;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: #1e3c72;
+            border-right: 5px solid #4a90e2;
+            padding-right: 15px;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .lesson-card {
+            background-color: #f8fbff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-right: 4px solid #4a90e2;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .lesson-card h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .lesson-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .lesson-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .lesson-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .lesson-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .question-container {
+            background-color: #f8fbff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px dashed #4a90e2;
+        }
+        
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid #e1e8f0;
+        }
+        
+        .option:hover {
+            background-color: #f0f7ff;
+            border-color: #4a90e2;
+        }
+        
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+        
+        .true-false-options {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .true-false-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .true-btn {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 2px solid #c8e6c9;
+        }
+        
+        .false-btn {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 2px solid #ffcdd2;
+        }
+        
+        .true-btn:hover, .true-btn.selected {
+            background-color: #c8e6c9;
+            border-color: #2e7d32;
+        }
+        
+        .false-btn:hover, .false-btn.selected {
+            background-color: #ffcdd2;
+            border-color: #c62828;
+        }
+        
+        .submit-btn, .next-btn, .retry-btn, .home-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        
+        .submit-btn:hover, .next-btn:hover, .retry-btn:hover, .home-btn:hover {
+            background-color: #2a5298;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+        
+        .correct {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .incorrect {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .score-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            font-size: 20px;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #1e3c72;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .footer p {
+            margin-bottom: 5px;
+        }
+        
+        .teacher-name {
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            padding: 30px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .welcome-message h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        .definition-item {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-right: 3px solid #4a90e2;
+        }
+        
+        .definition-item h4 {
+            color: #1e3c72;
+            margin-bottom: 8px;
+        }
+        
+        .definition-item ul {
+            padding-right: 20px;
+            margin-top: 10px;
+        }
+        
+        .highlight {
+            background-color: #fff9c4;
+            padding: 10px;
+            border-radius: 5px;
+            border-right: 3px solid #ffd600;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .control-panel-btn {
+            display: block;
+            width: 250px;
+            margin: 30px auto;
+            background-color: #ffcc00;
+            color: #1e3c72;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .control-panel-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .lesson-content {
+                flex-direction: column;
+            }
+            
+            .lesson-text, .lesson-image {
+                min-width: 100%;
+            }
+            
+            .true-false-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">ج</div>
+            <div>
+                <h1>مؤسسة التقدم والعطاء - ليبيا البيضاء</h1>
+                <p>برنامج الظواهر الطبيعية للصف الرابع الابتدائي</p>
+            </div>
+        </div>
+        <p>مع الأستاذة: <span class="teacher-name">شريفة</span></p>
+        
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="../../../../jografic-dashboard.html" 
+               class="control-panel-btn">
+                <i class="fas fa-arrow-right"></i> العودة للوحة التحكم
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="welcome-message">
+            <h2>مرحباً بكم في برنامج الظواهر الطبيعية التفاعلي</h2>
+            <p>هذا البرنامج التعليمي تم تصميمه خصيصاً لطلاب الصف الرابع الابتدائي لمؤسسة التقدم والعطاء</p>
+            <p>ستجدون هنا دروس الظواهر الطبيعية مع صور توضيحية وأسئلة تفاعلية لاختبار معلوماتكم</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="home">الرئيسية</div>
+            <div class="tab" data-tab="astronomy">الظواهر الفلكية</div>
+            <div class="tab" data-tab="land">ظواهر اليابس</div>
+            <div class="tab" data-tab="water">الظواهر المائية</div>
+            <div class="tab" data-tab="test1">اختبار (أكمل الفراغات)</div>
+            <div class="tab" data-tab="test2">اختبار (صح أم خطأ)</div>
+            <div class="tab" data-tab="test3">اختبار (اختيار متعدد)</div>
+        </div>
+
+        <!-- الصفحة الرئيسية -->
+        <div id="home" class="content-section active">
+            <h2 class="section-title">الرئيسية - برنامج الظواهر الطبيعية</h2>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-home"></i>مرحباً بكم</h3>
+                <p>أهلاً وسهلاً بكم في برنامج الظواهر الطبيعية التفاعلي للصف الرابع الابتدائي.</p>
+                <p>تم تصميم هذا البرنامج لمساعدة الطلاب على فهم الظواهر الطبيعية بسهولة ومتعة.</p>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-info-circle"></i>كيفية استخدام البرنامج</h3>
+                <p>1. انتقل إلى تبويبات "الظواهر الفلكية" و"ظواهر اليابس" و"الظواهر المائية" لعرض الدروس التعليمية مع الصور التوضيحية.</p>
+                <p>2. انتقل إلى تبويبات الاختبارات المختلفة لاختبار معلوماتك.</p>
+                <p>3. في نهاية كل اختبار، يمكنك معاودة الأسئلة أو العودة إلى الرئيسية.</p>
+                <p>4. يمكنك الانتقال بين الأقسام بسهولة باستخدام التبويبات أعلى الصفحة.</p>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-book"></i>محتويات الدروس</h3>
+                <p>يتضمن البرنامج الدروس التالية:</p>
+                <ul style="padding-right: 20px; margin-top: 10px;">
+                    <li>الظواهر الفلكية (الشمس والقمر)</li>
+                    <li>ظواهر اليابس (تضاريس الأرض)</li>
+                    <li>الظواهر المائية والساحلية</li>
+                    <li>معلومات عن ليبيا وجغرافيتها</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-chalkboard-teacher"></i>إلى الأستاذة الفاضلة</h3>
+                <p>إلى المعلمة الفاضلة <strong>شريفة</strong>،</p>
+                <p>هذا البرنامج هو أداة تعليمية تفاعلية يمكن استخدامها في الفصل أو كوسيلة تعلم ذاتي للطلاب.</p>
+                <p>نتمنى أن يكون هذا البرنامج مفيداً لطلاب الصف الرابع الابتدائي في مؤسسة التقدم والعطاء.</p>
+            </div>
+        </div>
+
+        <!-- الظواهر الفلكية -->
+        <div id="astronomy" class="content-section">
+            <h2 class="section-title">الظواهر الفلكية (الشمس والقمر)</h2>
+            <p>تتعلق هذه الظواهر بحركة الأجرام السماوية وتأثيرها اليومي على حياتنا:</p>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-sun"></i>شروق الشمس وغروبها</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="definition-item">
+                            <h4>شروق الشمس:</h4>
+                            <p>هو ظهور الشمس من جهة الشرق في الصباح الباكر، وبه يبدأ النهار.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>غروب الشمس:</h4>
+                            <p>هو اختفاء الشمس جهة الغرب في نهاية النهار، وبه يبدأ الليل.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="الشمس والقمر">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">الشمس والقمر من الظواهر الفلكية المهمة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-moon"></i>القمر والهلال</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="definition-item">
+                            <h4>القمر:</h4>
+                            <p>جرم سماوي يستمد نوره من الشمس، وله فوائد عديدة منها:</p>
+                            <ul>
+                                <li>إنارة الأرض ليلاً</li>
+                                <li>معرفة الوقت وتحديد الشهور الهجرية (القمرية)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الهلال:</h4>
+                            <p>هو شكل القمر في بداية الشهر العربي (القمري)، ويدل على ميلاد شهر جديد.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1532978379173-523e6a4a115e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="القمر">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">الهلال في بداية الشهر العربي</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ظواهر اليابس -->
+        <div id="land" class="content-section">
+            <h2 class="section-title">ظواهر اليابس (تضاريس الأرض)</h2>
+            <p>تصف هذه التعريفات أشكال الأرض المختلفة من المرتفعات والمنخفضات:</p>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-mountain"></i>المرتفعات (الجبل والتل والهضبة)</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="definition-item">
+                            <h4>الجبل:</h4>
+                            <p>أرض شديدة الارتفاع ولها قمة حادة وجوانب شديدة الانحدار. مثل: <strong>الجبل الأخضر والجبل الغربي في ليبيا</strong>.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>التل:</h4>
+                            <p>يشبه الجبل لكنه أقل ارتفاعاً منه.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الهضبة:</h4>
+                            <p>أرض مرتفعة عما حولها لكن سطحها مستوٍ أو منبسط.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="الجبال">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">الجبال من أشهر تضاريس الأرض</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-landmark"></i>المنخفضات والسهول (السهل والصحراء والوادي)</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="definition-item">
+                            <h4>السهل:</h4>
+                            <p>أرض منبسطة وواسعة يسهل السكن والزراعة فيها. مثل: <strong>السهول الساحلية في ليبيا (سهل الجفارة، سهل بنغازي، سهل المرج)</strong>.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الصحراء:</h4>
+                            <p>أرض واسعة يقل فيها المطر والنبات، وتغطي معظم مساحة ليبيا.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الكثبان الرملية:</h4>
+                            <p>تجمعات من الرمال تحركها وتُشكلها الرياح.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الوادي:</h4>
+                            <p>مجرى مائي منخفض بين جبلين أو منطقتين مرتفعتين، تجري فيه المياه وقت المطر.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="الصحراء">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">الصحراء تغطي معظم مساحة ليبيا</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-tree"></i>الواحات والأودية في ليبيا</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="highlight">
+                            <p><i class="fas fa-info-circle"></i> معلومات مهمة عن الأودية في ليبيا:</p>
+                            <p>في ليبيا توجد أودية تجري بها المياه في موسم سقوط الأمطار فقط مثل:</p>
+                            <ul>
+                                <li>وادي سوف الجين</li>
+                                <li>وادي القطارة</li>
+                                <li>وادي المجينين</li>
+                            </ul>
+                            <p>وأودية تجري بها المياه طول العام مثل:</p>
+                            <ul>
+                                <li>وادي درنة (يغذيه عين بومنصور)</li>
+                                <li>وادي الرمل (يغذيه عين الشرشارة)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الواحات:</h4>
+                            <p>مناطق خضراء في الصحراء حيث تتوفر المياه. أشهر الواحات في ليبيا:</p>
+                            <ul>
+                                <li>واحة غدامس</li>
+                                <li>واحة سبها</li>
+                                <li>واحة جالو</li>
+                                <li>واحة أوجلة</li>
+                                <li>واحة الكفرة</li>
+                                <li>واحة زويلة</li>
+                            </ul>
+                            <p>يقوم سكان الواحات ببعض الصناعات اليدوية مثل: الحبال، الأطباق، المراوح، السلال.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>ملاحظة مهمة:</h4>
+                            <p><strong>لا توجد أنهار في ليبيا.</strong> لكن يوجد نهر النيل في مصر والسودان.</p>
+                            <p>من الحيوانات الصحراوية: <strong>الجمل (سفينة الصحراء)</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="الواحات">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">الواحات مناطق خضراء في الصحراء</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الظواهر المائية -->
+        <div id="water" class="content-section">
+            <h2 class="section-title">الظواهر المائية والساحلية</h2>
+            <p>تتعلق بالماء وعلاقته باليابسة، وهي مهمة جداً نظراً لطول ساحل ليبيا:</p>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-water"></i>المسطحات المائية (البحر والنهر)</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="definition-item">
+                            <h4>البحر:</h4>
+                            <p>مسطح مائي كبير من الماء المالح. مثل: <strong>البحر المتوسط شمال ليبيا</strong>.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>النهر:</h4>
+                            <p>مجرى مائي دائم من الماء العذب.</p>
+                            <div class="highlight">
+                                <p><strong>ملاحظة:</strong> ليبيا تعتمد على الوديان والمياه الجوفية لعدم وجود أنهار دائمة.</p>
+                                <p>يوجد نهر النيل في مصر والسودان.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>السهول الفيضية:</h4>
+                            <p>سهول تتكون نتيجة ترسب الطمي الذي يحمله النهر أثناء فيضانه. مثل: <strong>فيضان نهر النيل في مصر والسودان</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="البحر">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">البحر المتوسط شمال ليبيا</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-island-tropical"></i>الجزر والخلجان والمضائق</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="definition-item">
+                            <h4>الجزيرة:</h4>
+                            <p>مساحة من اليابس تحيط بها المياه من جميع الجهات. مثل: <strong>جزيرة فروة بالقرب من مدينة زوارة في ليبيا</strong>.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الخليج:</h4>
+                            <p>جزء من البحر ممتد داخل اليابسة. مثل: <strong>خليج سرت في ليبيا</strong>.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الشاطئ:</h4>
+                            <p>هو المنطقة التي تلتقي فيها اليابسة بماء البحر.</p>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>المضيق:</h4>
+                            <p>ممر مائي ضيق يصل بين بحرين أو مسطحين مائيين كبيرين. مثل:</p>
+                            <ul>
+                                <li>مضيق جبل طارق</li>
+                                <li>قناة السويس</li>
+                                <li>مضيق باب المندب</li>
+                                <li>مضيق هرمز</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="الجزر">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">الجزر محاطة بالماء من جميع الجهات</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lesson-card">
+                <h3><i class="fas fa-info-circle"></i>ملخص معلومات عن ليبيا</h3>
+                <div class="lesson-content">
+                    <div class="lesson-text">
+                        <div class="definition-item">
+                            <h4>معلومات جغرافية عن ليبيا:</h4>
+                            <ul>
+                                <li>يوجد في الشمال الليبي <strong>خليج سرت</strong></li>
+                                <li>من السهول الساحلية: <strong>سهل الجفارة، سهل بنغازي، سهل المرج</strong></li>
+                                <li>من الجبال: <strong>الجبل الأخضر، الجبل الغربي</strong></li>
+                                <li>تتميز ليبيا بوجود العديد من الواحات</li>
+                                <li>الصحاري تغطي معظم مساحة ليبيا</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="definition-item">
+                            <h4>الظواهر الطبيعية:</h4>
+                            <p>هي كل ما وجد في الطبيعة بصنع الله تعالى دون تدخل الإنسان، وتشمل ظواهر في السماء (شمس وقمر) وظواهر على سطح الأرض (جبال، بحار، صحاري).</p>
+                            <p>فهم هذه الظواهر يساعدنا في معرفة تضاريس بلادنا ليبيا وكيفية التكيف معها.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-image">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="ليبيا">
+                        <p style="text-align: center; margin-top: 10px; font-style: italic;">طبيعة ليبيا المتنوعة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- اختبار أكمل الفراغات -->
+        <div id="test1" class="content-section">
+            <h2 class="section-title">اختبار (أكمل الفراغات)</h2>
+            <p>أكمل الفراغات في الجمل التالية من خلال اختيار الإجابة الصحيحة:</p>
+            
+            <div class="question-container" id="q1-container">
+                <div class="question">1. الشمس تشرق من جهة ........ وتغرب في جهة ........</div>
+                <div class="options">
+                    <div class="option" data-correct="true" data-question="1">الشرق، الغرب</div>
+                    <div class="option" data-correct="false" data-question="1">الغرب، الشرق</div>
+                    <div class="option" data-correct="false" data-question="1">الشمال، الجنوب</div>
+                    <div class="option" data-correct="false" data-question="1">الجنوب، الشمال</div>
+                </div>
+                <div class="result" id="result1"></div>
+            </div>
+            
+            <div class="question-container" id="q2-container">
+                <div class="question">2. القمر يستمد نوره من ........</div>
+                <div class="options">
+                    <div class="option" data-correct="false" data-question="2">نفسه</div>
+                    <div class="option" data-correct="true" data-question="2">الشمس</div>
+                    <div class="option" data-correct="false" data-question="2">النجوم</div>
+                    <div class="option" data-correct="false" data-question="2">الكواكب</div>
+                </div>
+                <div class="result" id="result2"></div>
+            </div>
+            
+            <div class="question-container" id="q3-container">
+                <div class="question">3. الهلال هو شكل القمر في ........ الشهر العربي</div>
+                <div class="options">
+                    <div class="option" data-correct="true" data-question="3">بداية</div>
+                    <div class="option" data-correct="false" data-question="3">نهاية</div>
+                    <div class="option" data-correct="false" data-question="3">منتصف</div>
+                    <div class="option" data-correct="false" data-question="3">جميع أيام</div>
+                </div>
+                <div class="result" id="result3"></div>
+            </div>
+            
+            <div class="question-container" id="q4-container">
+                <div class="question">4. ........ أرض شديدة الارتفاع ولها قمة حادة وجوانب شديدة الانحدار</div>
+                <div class="options">
+                    <div class="option" data-correct="false" data-question="4">التل</div>
+                    <div class="option" data-correct="false" data-question="4">الهضبة</div>
+                    <div class="option" data-correct="true" data-question="4">الجبل</div>
+                    <div class="option" data-correct="false" data-question="4">السهل</div>
+                </div>
+                <div class="result" id="result4"></div>
+            </div>
+            
+            <button class="submit-btn" onclick="checkTest1()">تحقق من الإجابات</button>
+            <button class="retry-btn" onclick="retryTest1()">معاودة الأسئلة</button>
+            <button class="home-btn" onclick="switchTab('home')">العودة للرئيسية</button>
+            
+            <div class="score-container" id="score1" style="display: none;"></div>
+        </div>
+
+        <!-- اختبار صح أم خطأ -->
+        <div id="test2" class="content-section">
+            <h2 class="section-title">اختبار (صح أم خطأ)</h2>
+            <p>ضع علامة (✓) للعبارة الصحيحة وعلامة (✗) للعبارة الخاطئة:</p>
+            
+            <div class="question-container" id="tf1-container">
+                <div class="question">1. لا توجد أنهار دائمة في ليبيا.</div>
+                <div class="true-false-options">
+                    <div class="true-false-btn true-btn" data-correct="true" data-question="tf1">صح (✓)</div>
+                    <div class="true-false-btn false-btn" data-correct="false" data-question="tf1">خطأ (✗)</div>
+                </div>
+                <div class="result" id="result-tf1"></div>
+            </div>
+            
+            <div class="question-container" id="tf2-container">
+                <div class="question">2. الجمل يسمى سفينة الصحراء.</div>
+                <div class="true-false-options">
+                    <div class="true-false-btn true-btn" data-correct="true" data-question="tf2">صح (✓)</div>
+                    <div class="true-false-btn false-btn" data-correct="false" data-question="tf2">خطأ (✗)</div>
+                </div>
+                <div class="result" id="result-tf2"></div>
+            </div>
+            
+            <div class="question-container" id="tf3-container">
+                <div class="question">3. وادي درنة تجري به المياه طول العام.</div>
+                <div class="true-false-options">
+                    <div class="true-false-btn true-btn" data-correct="true" data-question="tf3">صح (✓)</div>
+                    <div class="true-false-btn false-btn" data-correct="false" data-question="tf3">خطأ (✗)</div>
+                </div>
+                <div class="result" id="result-tf3"></div>
+            </div>
+            
+            <div class="question-container" id="tf4-container">
+                <div class="question">4. البحر المتوسط يحد ليبيا من الجنوب.</div>
+                <div class="true-false-options">
+                    <div class="true-false-btn true-btn" data-correct="false" data-question="tf4">صح (✓)</div>
+                    <div class="true-false-btn false-btn" data-correct="true" data-question="tf4">خطأ (✗)</div>
+                </div>
+                <div class="result" id="result-tf4"></div>
+            </div>
+            
+            <button class="submit-btn" onclick="checkTest2()">تحقق من الإجابات</button>
+            <button class="retry-btn" onclick="retryTest2()">معاودة الأسئلة</button>
+            <button class="home-btn" onclick="switchTab('home')">العودة للرئيسية</button>
+            
+            <div class="score-container" id="score2" style="display: none;"></div>
+        </div>
+
+        <!-- اختبار اختيار متعدد -->
+        <div id="test3" class="content-section">
+            <h2 class="section-title">اختبار (اختيار متعدد)</h2>
+            <p>اختر الإجابة الصحيحة من بين الخيارات المتعددة:</p>
+            
+            <div class="question-container" id="mc1-container">
+                <div class="question">1. أي من هذه المناطق يغطي معظم مساحة ليبيا؟</div>
+                <div class="options">
+                    <div class="option" data-correct="false" data-question="mc1">الجبال</div>
+                    <div class="option" data-correct="true" data-question="mc1">الصحاري</div>
+                    <div class="option" data-correct="false" data-question="mc1">السهول</div>
+                    <div class="option" data-correct="false" data-question="mc1">الوديان</div>
+                </div>
+                <div class="result" id="result-mc1"></div>
+            </div>
+            
+            <div class="question-container" id="mc2-container">
+                <div class="question">2. أي من هذه الخلجان يوجد في ليبيا؟</div>
+                <div class="options">
+                    <div class="option" data-correct="false" data-question="mc2">خليج عدن</div>
+                    <div class="option" data-correct="false" data-question="mc2">خليج عمان</div>
+                    <div class="option" data-correct="true" data-question="mc2">خليج سرت</div>
+                    <div class="option" data-correct="false" data-question="mc2">خليج البنغال</div>
+                </div>
+                <div class="result" id="result-mc2"></div>
+            </div>
+            
+            <div class="question-container" id="mc3-container">
+                <div class="question">3. ما هو تعريف المضيق؟</div>
+                <div class="options">
+                    <div class="option" data-correct="false" data-question="mc3">جزء من البحر داخل اليابسة</div>
+                    <div class="option" data-correct="false" data-question="mc3">مساحة من اليابس محاطة بالماء</div>
+                    <div class="option" data-correct="true" data-question="mc3">ممر مائي ضيق يصل بين مسطحين مائيين</div>
+                    <div class="option" data-correct="false" data-question="mc3">مجمع مائي كبير من الماء المالح</div>
+                </div>
+                <div class="result" id="result-mc3"></div>
+            </div>
+            
+            <div class="question-container" id="mc4-container">
+                <div class="question">4. أي من هذه الجزر ليبية؟</div>
+                <div class="options">
+                    <div class="option" data-correct="false" data-question="mc4">جزيرة قبرص</div>
+                    <div class="option" data-correct="true" data-question="mc4">جزيرة فروة بالقرب من زوارة</div>
+                    <div class="option" data-correct="false" data-question="mc4">جزيرة صقلية</div>
+                    <div class="option" data-correct="false" data-question="mc4">جزيرة كريت</div>
+                </div>
+                <div class="result" id="result-mc4"></div>
+            </div>
+            
+            <button class="submit-btn" onclick="checkTest3()">تحقق من الإجابات</button>
+            <button class="retry-btn" onclick="retryTest3()">معاودة الأسئلة</button>
+            <button class="home-btn" onclick="switchTab('home')">العودة للرئيسية</button>
+            
+            <div class="score-container" id="score3" style="display: none;"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>مؤسسة التقدم والعطاء - ليبيا البيضاء</p>
+        <p>برنامج الظواهر الطبيعية للصف الرابع الابتدائي - مع الأستاذة شريفة</p>
+        <p>© 2023 - جميع الحقوق محفوظة</p>
+    </div>
+
+    <script>
+        // تبديل التبويبات
+        const tabs = document.querySelectorAll('.tab');
+        const contentSections = document.querySelectorAll('.content-section');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                switchTab(tabId);
+            });
+        });
+        
+        function switchTab(tabId) {
+            // إزالة النشاط من جميع التبويبات
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // إخفاء جميع أقسام المحتوى
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // إضافة النشاط للتبويب المحدد
+            document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+            
+            // إظهار قسم المحتوى المحدد
+            document.getElementById(tabId).classList.add('active');
+        }
+        
+        // اختبار أكمل الفراغات
+        const options1 = document.querySelectorAll('#test1 .option');
+        options1.forEach(option => {
+            option.addEventListener('click', function() {
+                const questionNum = this.getAttribute('data-question');
+                
+                // إزالة التحديد من جميع الخيارات لهذا السؤال
+                document.querySelectorAll(`#test1 .option[data-question="${questionNum}"]`).forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // تحديد الخيار المختار
+                this.classList.add('selected');
+            });
+        });
+        
+        function checkTest1() {
+            let correctAnswers = 0;
+            const totalQuestions = 4;
+            
+            // التحقق من كل سؤال
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`#test1 .option.selected[data-question="${i}"]`);
+                const resultElement = document.getElementById(`result${i}`);
+                
+                if (selectedOption) {
+                    const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+                    
+                    if (isCorrect) {
+                        resultElement.textContent = "إجابة صحيحة! ✓";
+                        resultElement.className = "result correct";
+                        correctAnswers++;
+                    } else {
+                        resultElement.textContent = "إجابة خاطئة! ✗";
+                        resultElement.className = "result incorrect";
+                    }
+                    resultElement.style.display = 'block';
+                } else {
+                    document.getElementById(`result${i}`).textContent = "لم تختر إجابة!";
+                    document.getElementById(`result${i}`).className = "result incorrect";
+                    document.getElementById(`result${i}`).style.display = 'block';
+                }
+            }
+            
+            // عرض النتيجة النهائية
+            const scoreElement = document.getElementById('score1');
+            scoreElement.textContent = `نتيجتك: ${correctAnswers} من ${totalQuestions}`;
+            scoreElement.style.display = 'block';
+        }
+        
+        function retryTest1() {
+            // إعادة تعيين جميع الأسئلة
+            document.querySelectorAll('#test1 .option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('#test1 .result').forEach(result => {
+                result.style.display = 'none';
+            });
+            
+            document.getElementById('score1').style.display = 'none';
+        }
+        
+        // اختبار صح أم خطأ
+        const trueFalseButtons = document.querySelectorAll('#test2 .true-false-btn');
+        trueFalseButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const questionNum = this.getAttribute('data-question');
+                
+                // إزالة التحديد من جميع الخيارات لهذا السؤال
+                document.querySelectorAll(`#test2 .true-false-btn[data-question="${questionNum}"]`).forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                
+                // تحديد الخيار المختار
+                this.classList.add('selected');
+            });
+        });
+        
+        function checkTest2() {
+            let correctAnswers = 0;
+            const totalQuestions = 4;
+            
+            // التحقق من كل سؤال
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedButton = document.querySelector(`#test2 .true-false-btn.selected[data-question="tf${i}"]`);
+                const resultElement = document.getElementById(`result-tf${i}`);
+                
+                if (selectedButton) {
+                    const isCorrect = selectedButton.getAttribute('data-correct') === 'true';
+                    
+                    if (isCorrect) {
+                        resultElement.textContent = "إجابة صحيحة! ✓";
+                        resultElement.className = "result correct";
+                        correctAnswers++;
+                    } else {
+                        resultElement.textContent = "إجابة خاطئة! ✗";
+                        resultElement.className = "result incorrect";
+                    }
+                    resultElement.style.display = 'block';
+                } else {
+                    document.getElementById(`result-tf${i}`).textContent = "لم تختر إجابة!";
+                    document.getElementById(`result-tf${i}`).className = "result incorrect";
+                    document.getElementById(`result-tf${i}`).style.display = 'block';
+                }
+            }
+            
+            // عرض النتيجة النهائية
+            const scoreElement = document.getElementById('score2');
+            scoreElement.textContent = `نتيجتك: ${correctAnswers} من ${totalQuestions}`;
+            scoreElement.style.display = 'block';
+        }
+        
+        function retryTest2() {
+            // إعادة تعيين جميع الأسئلة
+            document.querySelectorAll('#test2 .true-false-btn').forEach(button => {
+                button.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('#test2 .result').forEach(result => {
+                result.style.display = 'none';
+            });
+            
+            document.getElementById('score2').style.display = 'none';
+        }
+        
+        // اختبار اختيار متعدد
+        const mcOptions = document.querySelectorAll('#test3 .option');
+        mcOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const questionNum = this.getAttribute('data-question');
+                
+                // إزالة التحديد من جميع الخيارات لهذا السؤال
+                document.querySelectorAll(`#test3 .option[data-question="${questionNum}"]`).forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // تحديد الخيار المختار
+                this.classList.add('selected');
+            });
+        });
+        
+        function checkTest3() {
+            let correctAnswers = 0;
+            const totalQuestions = 4;
+            
+            // التحقق من كل سؤال
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`#test3 .option.selected[data-question="mc${i}"]`);
+                const resultElement = document.getElementById(`result-mc${i}`);
+                
+                if (selectedOption) {
+                    const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+                    
+                    if (isCorrect) {
+                        resultElement.textContent = "إجابة صحيحة! ✓";
+                        resultElement.className = "result correct";
+                        correctAnswers++;
+                    } else {
+                        resultElement.textContent = "إجابة خاطئة! ✗";
+                        resultElement.className = "result incorrect";
+                    }
+                    resultElement.style.display = 'block';
+                } else {
+                    document.getElementById(`result-mc${i}`).textContent = "لم تختر إجابة!";
+                    document.getElementById(`result-mc${i}`).className = "result incorrect";
+                    document.getElementById(`result-mc${i}`).style.display = 'block';
+                }
+            }
+            
+            // عرض النتيجة النهائية
+            const scoreElement = document.getElementById('score3');
+            scoreElement.textContent = `نتيجتك: ${correctAnswers} من ${totalQuestions}`;
+            scoreElement.style.display = 'block';
+        }
+        
+        function retryTest3() {
+            // إعادة تعيين جميع الأسئلة
+            document.querySelectorAll('#test3 .option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('#test3 .result').forEach(result => {
+                result.style.display = 'none';
+            });
+            
+            document.getElementById('score3').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

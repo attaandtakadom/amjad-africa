@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامج تاريخ للصف الرابع - مؤسسة التقدم والعطاء ليبيا البيضاء</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, #f9f9f9, #e6f2ff);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 2px solid #1e6bb8;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #1e6bb8, #2a8cff);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 5px solid #ffcc00;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 20px;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+        
+        .header h3 {
+            font-size: 18px;
+            font-weight: normal;
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section-title {
+            color: #1e6bb8;
+            border-right: 5px solid #ffcc00;
+            padding-right: 15px;
+            margin: 25px 0 15px 0;
+            font-size: 22px;
+        }
+        
+        .civilization-card {
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #cce5ff;
+            transition: transform 0.3s;
+        }
+        
+        .civilization-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .civilization-card h3 {
+            color: #1e6bb8;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 2px dashed #ffcc00;
+            padding-bottom: 8px;
+        }
+        
+        .info-box {
+            background-color: #e6f2ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-right: 4px solid #1e6bb8;
+        }
+        
+        .info-box h4 {
+            color: #1e6bb8;
+            margin-bottom: 10px;
+        }
+        
+        ul, ol {
+            padding-right: 20px;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .tribes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .tribe-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #1e6bb8;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tribe-card h4 {
+            color: #1e6bb8;
+            margin-bottom: 5px;
+        }
+        
+        .map-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e6f2ff;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            border: 2px dashed #1e6bb8;
+        }
+        
+        .map-placeholder span {
+            color: #1e6bb8;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background-color: #1e6bb8;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 5px solid #ffcc00;
+        }
+        
+        .footer p {
+            margin-bottom: 5px;
+        }
+        
+        .interactive-btn {
+            background-color: #ffcc00;
+            color: #1e6bb8;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .interactive-btn:hover {
+            background-color: #1e6bb8;
+            color: white;
+        }
+        
+        .quiz-section {
+            display: none;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid #1e6bb8;
+        }
+        
+        .question {
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+            
+            .tribes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>مؤسسة التقدم والعطاء - ليبيا البيضاء</h1>
+            <h2>برنامج مادة التاريخ للصف الرابع</h2>
+            <h3> مع الأستاذة شريفة </h3>
+            <h3>الوحدة: نماذج من الحضارات القديمة في الوطن العربي</h3>
+
+<div style="text-align: left; margin: 20px 0;">
+    <a href="../../../../jografic-dashboard.html" 
+       style="display: inline-flex; 
+              align-items: center; 
+              gap: 10px; 
+              background: #4CAF50; 
+              color: white; 
+              padding: 10px 20px; 
+              border-radius: 8px; 
+              text-decoration: none;
+              font-weight: bold;">
+        <i class="fas fa-arrow-right"></i>
+        العودة للوحة التحكم
+    </a>
+</div>
+
+
+
+
+        </div>
+        
+        <div class="content">
+            <h2 class="section-title">نماذج الحضارات القديمة في الوطن العربي</h2>
+            <p>تشمل المنطقة العربية العديد من الحضارات القديمة التي ازدهرت في مناطق مختلفة:</p>
+            
+            <div class="tribes-grid">
+                <div class="tribe-card">
+                    <h4>الشمال الأفريقي</h4>
+                    <p>حضارات المغرب العربي</p>
+                </div>
+                <div class="tribe-card">
+                    <h4>على نهر النيل</h4>
+                    <p>الحضارة المصرية القديمة</p>
+                </div>
+                <div class="tribe-card">
+                    <h4>بلاد الشام</h4>
+                    <p>حضارات سورية ولبنان وفلسطين</p>
+                </div>
+                <div class="tribe-card">
+                    <h4>حول نهري دجلة والفرات</h4>
+                    <p>الحضارة العراقية القديمة</p>
+                </div>
+                <div class="tribe-card">
+                    <h4>جنوب شبه الجزيرة العربية</h4>
+                    <p>حضارات اليمن وعُمان</p>
+                </div>
+            </div>
+            
+         <div class="map-section">
+    <h3 class="section-title">خريطة توضح مناطق الحضارات القديمة في الوطن العربي</h3>
+    <div style="text-align: center; margin: 15px 0;">
+        <img src="https://raw.githubusercontent.com/attaandtakadom/atta/main/lesson1.jpg" 
+             alt="خريطة الوطن العربي" 
+             style="max-width: 100%; height: auto; border-radius: 10px; border: 2px solid #1e6bb8; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    </div>
+</div>
+        <div style="margin-top: 20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+            <div style="display: flex; align-items: center;">
+                <div style="width: 20px; height: 20px; background-color: #ffcc00; margin-left: 10px;"></div>
+                <span>ليبيا (الحضارة الليبية)</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="width: 20px; height: 20px; background-color: #ff6b6b; margin-left: 10px;"></div>
+                <span>مصر (الحضارة الفرعونية)</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="width: 20px; height: 20px; background-color: #4ecdc4; margin-left: 10px;"></div>
+                <span>بلاد الشام (فينيقية/كنعانية)</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="width: 20px; height: 20px; background-color: #45b7d1; margin-left: 10px;"></div>
+                <span>العراق (حضارة بلاد الرافدين)</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="width: 20px; height: 20px; background-color: #96ceb4; margin-left: 10px;"></div>
+                <span>شبه الجزيرة العربية (سبأ/معين)</span>
+            </div>
+        </div>
+    </div>
+</div>
+                <button class="interactive-btn" onclick="showMapInfo()">معلومات عن الخريطة</button>
+            </div>
+            
+            <h2 class="section-title">الحضارة الليبية القديمة</h2>
+            
+            <div class="civilization-card">
+                <h3>مقدمة عن الحضارة الليبية القديمة</h3>
+                <p>عاش الإنسان القديم في هذه المنطقة حيث تتوافر الغابات والمياه. عاشت في ليبيا خلال العصور التاريخية القديمة قبائل متعددة.</p>
+                
+                <div class="info-box">
+                    <h4>القبائل الليبية القديمة</h4>
+                    <div class="tribes-grid">
+                        <div class="tribe-card">
+                            <h4>قبيلة التحنو</h4>
+                            <p>من أقدم القبائل الليبية</p>
+                        </div>
+                        <div class="tribe-card">
+                            <h4>قبيلة الليبو أو الريبو</h4>
+                            <p>منها اشتق اسم ليبيا</p>
+                        </div>
+                        <div class="tribe-card">
+                            <h4>المشواش</h4>
+                            <p>اشتهروا بالشجاعة في الحروب</p>
+                        </div>
+                        <div class="tribe-card">
+                            <h4>الجرمنت</h4>
+                            <p>قامت حضارتهم في الصحراء الليبية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>مظاهر الحضارة الليبية القديمة</h3>
+                
+                <div class="info-box">
+                    <h4>نظام الحكم</h4>
+                    <p>كان قائمًا على أساس:</p>
+                    <ol>
+                        <li><strong>الزعامة القبلية:</strong> لكل قبيلة رئيس يشترط فيه القدرة والكفاءة، ويكون منصبه وراثيًا.</li>
+                        <li><strong>مجلس الشورى:</strong> يساعد الرئيس مجلس يستشيره فيما يتعلق بشؤون الحكم.</li>
+                    </ol>
+                </div>
+                
+                <div class="info-box">
+                    <h4>الشؤون الاجتماعية</h4>
+                    <ul>
+                        <li><strong>الأسرة:</strong> كانت أساس تكوين المجتمع الليبي.</li>
+                        <li><strong>الملابس والحلي:</strong> استخدموا الملابس والأساور والحلي المصنوعة من الذهب.</li>
+                        <li><strong>المساكن والقلاع:</strong> تنوعت بين:
+                            <ul>
+                                <li>الكهوف</li>
+                                <li>الخيام</li>
+                                <li>الأكواخ المصنوعة من القصب</li>
+                                <li>القلاع المربعة الشكل بالقرب من بنغازي</li>
+                                <li>المباني المبنية من الحجارة وقوالب الطين</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h4>الكتابة الليبية القديمة</h4>
+                    <p>طور الليبيون القدماء نظام كتابة خاص بهم يعرف بالكتابة الليبية القديمة، والتي كانت تكتب على شكل اعمدة من اسفل الي اعلى وتتكون من ثلاثين حرفا.</p>
+                </div>
+                
+                <div class="info-box">
+                    <h4>الديانة الليبية القديمة</h4>
+                    <p>عبد الليبيون القدماء بعض المظاهر الطبيعية والحيوانات، وقدسوا الأشجار والسحب والرياح. كانت معتقداتهم مرتبطة ارتباطًا وثيقًا بالطبيعة التي عاشوا فيها.</p>
+                </div>
+            </div>
+            
+            <div class="map-section">
+                <h3 class="section-title">أنشطة تفاعلية</h3>
+                <p>اختبر معلوماتك عن الحضارة الليبية القديمة:</p>
+                <button class="interactive-btn" onclick="showQuiz()">اختبار معلوماتي</button>
+                <button class="interactive-btn" onclick="showSummary()">ملخص الوحدة</button>
+                
+                <div id="quiz-section" class="quiz-section">
+                    <h4>اختبار معلوماتي عن الحضارة الليبية القديمة</h4>
+                    <div class="question">
+                        <p>1. ما هي القبائل التي عاشت في ليبيا خلال العصور التاريخية القديمة؟</p>
+                        <input type="radio" id="q1a" name="q1">
+                        <label for="q1a">التحنو، الليبو، المشواش، الجرمنت</label><br>
+                        <input type="radio" id="q1b" name="q1">
+                        <label for="q1b">الفراعنة، الأشوريين، البابليين</label><br>
+                    </div>
+                    
+                    <div class="question">
+                        <p>2. ما كان أساس نظام الحكم في الحضارة الليبية القديمة؟</p>
+                        <input type="radio" id="q2a" name="q2">
+                        <label for="q2a">الزعامة القبلية الوراثية مع مجلس شورى</label><br>
+                        <input type="radio" id="q2b" name="q2">
+                        <label for="q2b">الحكم الديمقراطي المباشر</label><br>
+                    </div>
+                    
+                    <div class="question">
+                        <p>3. ماذا عبد الليبيون القدماء حسب معتقداتهم الدينية؟</p>
+                        <input type="radio" id="q3a" name="q3">
+                        <label for="q3a">المظاهر الطبيعية والحيوانات</label><br>
+                        <input type="radio" id="q3b" name="q3">
+                        <label for="q3b">الأصنام المصنوعة من الذهب فقط</label><br>
+                    </div>
+                    
+                    <button class="interactive-btn" onclick="checkQuiz()">تحقق من الإجابات</button>
+                    <button class="interactive-btn" onclick="hideQuiz()">إغلاق الاختبار</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>مؤسسة التقدم والعطاء - ليبيا البيضاء</p>
+            <p>برنامج مادة التاريخ للصف الرابع - إعداد الأستاذة شريفة</p>
+            <p>جميع الحقوق محفوظة © 2023</p>
+        </div>
+    </div>
+
+    <script>
+        function showQuiz() {
+            document.getElementById('quiz-section').style.display = 'block';
+        }
+        
+        function hideQuiz() {
+            document.getElementById('quiz-section').style.display = 'none';
+        }
+        
+        function showSummary() {
+            alert("ملخص الوحدة:\n\n1. الحضارة الليبية القديمة من أقدم الحضارات في المنطقة.\n2. عاشت في ليبيا قبائل متعددة: التحنو، الليبو، المشواش، الجرمنت.\n3. نظام الحكم كان قائماً على الزعامة القبلية الوراثية مع مجلس شورى.\n4. الأسرة كانت أساس المجتمع الليبي.\n5. عبد الليبيون القدماء مظاهر الطبيعة والحيوانات.");
+        }
+        
+        function showMapInfo() {
+            alert("تظهر الخريطة مناطق الحضارات القديمة في الوطن العربي:\n\n1. الشمال الأفريقي: الحضارات الليبية والمغاربية.\n2. على نهر النيل: الحضارة المصرية الفرعونية.\n3. بلاد الشام: الحضارات الفينيقية والكنعانية.\n4. حول نهري دجلة والفرات: الحضارة العراقية (السومرية، البابلية، الآشورية).\n5. جنوب شبه الجزيرة العربية: حضارات اليمن (سبأ، معين، حمير).");
+        }
+        
+        function checkQuiz() {
+            let score = 0;
+            
+            // Check question 1
+            if (document.getElementById('q1a').checked) score++;
+            
+            // Check question 2
+            if (document.getElementById('q2a').checked) score++;
+            
+            // Check question 3
+            if (document.getElementById('q3a').checked) score++;
+            
+            alert(`نتيجتك: ${score} من 3\n\n${score >= 2 ? "أحسنت! لديك معرفة جيدة عن الحضارة الليبية القديمة." : "حاول مراجعة الدرس مرة أخرى."}`);
+        }
+    </script>
+</body>
+</html>
