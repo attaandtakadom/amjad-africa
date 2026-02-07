@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خريطة الدبابيس - الوطن العربي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(to right, #1e6bb8, #2a8cff);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 5px solid #ffcc00;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 700px;
+        }
+        
+        /* Map Container */
+        .map-container {
+            flex: 3;
+            min-width: 300px;
+            position: relative;
+            background-color: #f0f8ff;
+            border-left: 1px solid #ddd;
+        }
+        
+        .map-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #e6f2ff;
+        }
+        
+        /* Controls Panel */
+        .controls-panel {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f9f9f9;
+            padding: 25px;
+            overflow-y: auto;
+        }
+        
+        .controls-title {
+            color: #1e6bb8;
+            border-right: 4px solid #ffcc00;
+            padding-right: 15px;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+        
+        /* Controls Section */
+        .controls-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e1e8f0;
+        }
+        
+        .section-title {
+            color: #1e6bb8;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            border-color: #1e6bb8;
+            outline: none;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            background-color: #1e6bb8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background-color: #2a8cff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-add {
+            background-color: #28a745;
+        }
+        
+        .btn-add:hover {
+            background-color: #218838;
+        }
+        
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+        
+        .btn-clear {
+            background-color: #ffc107;
+            color: #333;
+        }
+        
+        .btn-clear:hover {
+            background-color: #e0a800;
+        }
+        
+        /* Pins List */
+        .pins-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .pin-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #1e6bb8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .pin-item:hover {
+            background-color: #e9ecef;
+            transform: translateX(-5px);
+        }
+        
+        .pin-item.active {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        
+        .pin-title {
+            font-weight: bold;
+            color: #1e6bb8;
+            margin-bottom: 5px;
+        }
+        
+        .pin-location {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .pin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .pin-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .pin-btn-view {
+            background-color: #17a2b8;
+            color: white;
+        }
+        
+        .pin-btn-remove {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        /* Pin on Map */
+        .pin {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50% 50% 50% 0;
+            background: #dc3545;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .pin:hover {
+            transform: rotate(-45deg) scale(1.2);
+            z-index: 101;
+        }
+        
+        .pin::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            margin: 6px 0 0 6px;
+            background: white;
+            position: absolute;
+            border-radius: 50%;
+        }
+        
+        .pin-tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 102;
+            transform: translate(-50%, -40px);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .pin:hover .pin-tooltip {
+            opacity: 1;
+        }
+        
+        /* Color Options */
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .color-option.selected {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e6bb8;
+            color: white;
+            border-top: 5px solid #ffcc00;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .map-container {
+                height: 500px;
+                border-left: none;
+                border-bottom: 1px solid #ddd;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Instructions */
+        .instructions {
+            background-color: #e7f3ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border-right: 4px solid #1e6bb8;
+        }
+        
+        .instructions h4 {
+            color: #1e6bb8;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ul {
+            padding-right: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+/* تنسيقات إضافية لضمان صحة عرض الصورة */
+.map-container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f8ff;
+}
+
+.map-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* تحسين عرض الدبابيس لتكون متناسبة مع الصورة */
+.pin {
+    position: absolute;
+    transform: translate(-50%, -100%) rotate(-45deg);
+    transform-origin: bottom center;
+}
+
+.pin-tooltip {
+    transform: translate(-50%, -120%);
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-map-marked-alt"></i> خريطة الدبابيس التفاعلية - الوطن العربي</h1>
+            <p>أضف دبابيس على الخريطة، سجل ملاحظاتك، وشارك المعلومات الجغرافية</p>
+            <p style="margin-top: 10px; font-size: 16px;">مؤسسة التقدم والعطاء - ليبيا البيضاء | مع الأستاذة شريفة</p>
+            
+            <div style="margin-top: 15px;">
+                <a href="../../../../jografic-dashboard.html" class="btn" style="width: auto; display: inline-block; padding: 10px 20px;">
+                    <i class="fas fa-arrow-right"></i> العودة للوحة التحكم
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Map Container -->
+            <div class="map-container" id="mapContainer">
+                <!-- Map Image -->
+<img src="https://raw.githubusercontent.com/attaandtakadom/atta/main/lesson1.jpg" 
+     alt="خريطة الوطن العربي" 
+     class="map-image" 
+     id="mapImage"
+     style="width: 100%; height: auto; border-radius: 10px; border: 2px solid #1e6bb8; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+     onload="adjustMapForNewImage()">  <!-- Pins will be added here dynamically -->
+            </div>
+            
+            <!-- Controls Panel -->
+            <div class="controls-panel">
+                <h2 class="controls-title"><i class="fas fa-cogs"></i> لوحة التحكم</h2>
+                
+                <!-- Add Pin Section -->
+                <div class="controls-section">
+                    <h3 class="section-title"><i class="fas fa-thumbtack"></i> إضافة دبوس جديد</h3>
+                    
+                    <div class="input-group">
+                        <label for="pinTitle"><i class="fas fa-heading"></i> عنوان الدبوس</label>
+                        <input type="text" id="pinTitle" placeholder="مثال: عاصمة ليبيا">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pinDescription"><i class="fas fa-align-left"></i> الوصف</label>
+                        <textarea id="pinDescription" rows="3" placeholder="أضف وصفاً أو ملاحظات حول هذا الموقع..."></textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pinCategory"><i class="fas fa-tag"></i> الفئة</label>
+                        <select id="pinCategory">
+                            <option value="مدينة">مدينة</option>
+                            <option value="عاصمة">عاصمة</option>
+                            <option value="معلم تاريخي">معلم تاريخي</option>
+                            <option value="موقع أثري">موقع أثري</option>
+                            <option value="منطقة طبيعية">منطقة طبيعية</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-palette"></i> لون الدبوس</label>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #dc3545;" data-color="#dc3545"></div>
+                            <div class="color-option" style="background-color: #28a745;" data-color="#28a745"></div>
+                            <div class="color-option" style="background-color: #007bff;" data-color="#007bff"></div>
+                            <div class="color-option" style="background-color: #ffc107;" data-color="#ffc107"></div>
+                            <div class="color-option" style="background-color: #6f42c1;" data-color="#6f42c1"></div>
+                            <div class="color-option" style="background-color: #17a2b8;" data-color="#17a2b8"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-add" id="addPinBtn">
+                        <i class="fas fa-plus-circle"></i> إضافة دبوس على الخريطة
+                    </button>
+                    
+                    <div class="instructions">
+                        <h4><i class="fas fa-info-circle"></i> كيفية الاستخدام:</h4>
+                        <ul>
+                            <li>املأ بيانات الدبوس أولاً</li>
+                            <li>انقر على "إضافة دبوس على الخريطة"</li>
+                            <li>انقر على المكان المطلوب على الخريطة لوضع الدبوس</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Manage Pins Section -->
+                <div class="controls-section">
+                    <h3 class="section-title"><i class="fas fa-list"></i> الدبابيس المضافة</h3>
+                    
+                    <div class="pins-list" id="pinsList">
+                        <!-- Pins will be added here dynamically -->
+                        <div style="text-align: center; padding: 20px; color: #666;">
+                            <i class="fas fa-thumbtack" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                            <p>لم تتم إضافة أي دبابيس بعد</p>
+                            <p>أضف أول دبوس باستخدام النموذج أعلاه</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn btn-clear" id="clearAllBtn">
+                            <i class="fas fa-trash-alt"></i> حذف الكل
+                        </button>
+                        <button class="btn" id="savePinsBtn">
+                            <i class="fas fa-save"></i> حفظ الدبابيس
+                        </button>
+                    </div>
+                </div>
+                <!--
+                <div class="controls-section">
+                    <h3 class="section-title"><i class="fas fa-star"></i> دبابيس نموذجية</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <button class="btn" style="width: auto; flex: 1;" onclick="addSamplePin('طرابلس', 'عاصمة ليبيا وأكبر مدنها', 'عاصمة', '#dc3545', 40, 65)">
+                            <i class="fas fa-city"></i> طرابلس
+                        </button>
+                        <button class="btn" style="width: auto; flex: 1;" onclick="addSamplePin('القاهرة', 'عاصمة مصر وأكبر مدن أفريقيا', 'عاصمة', '#007bff', 55, 70)">
+                            <i class="fas fa-city"></i> القاهرة
+                        </button>
+                        <button class="btn" style="width: auto; flex: 1;" onclick="addSamplePin('الرياض', 'عاصمة المملكة العربية السعودية', 'عاصمة', '#28a745', 62, 78)">
+                            <i class="fas fa-city"></i> الرياض
+                        </button>
+                    </div>
+                </div>
+            -->
+
+
+
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>خريطة الدبابيس التفاعلية للوطن العربي - مؤسسة التقدم والعطاء ليبيا البيضاء</p>
+            <p>© 2023 - برنامج تعليمي تفاعلي للصف الرابع | مع الأستاذة شريفة</p>
+        </div>
+    </div>
+
+    <script>
+// متغيرات البرنامج
+let pins = [];
+let selectedColor = "#dc3545";
+let nextPinId = 1;
+let isAddingPin = false;
+let currentPinData = null;
+
+// عناصر DOM
+const mapContainer = document.getElementById('mapContainer');
+const mapImage = document.getElementById('mapImage');
+const pinsList = document.getElementById('pinsList');
+const addPinBtn = document.getElementById('addPinBtn');
+const clearAllBtn = document.getElementById('clearAllBtn');
+const savePinsBtn = document.getElementById('savePinsBtn');
+
+// عناصر إدخال البيانات
+const pinTitleInput = document.getElementById('pinTitle');
+const pinDescriptionInput = document.getElementById('pinDescription');
+const pinCategorySelect = document.getElementById('pinCategory');
+
+// تهيئة البرنامج
+document.addEventListener('DOMContentLoaded', function() {
+    // تحميل الدبابيس المحفوظة
+    loadPinsFromStorage();
+    
+    // إعداد مستمعي الأحداث
+    setupEventListeners();
+    
+    // إعداد خيارات الألوان
+    setupColorOptions();
+    
+    console.log('تم تحميل البرنامج بنجاح');
+});
+
+// إعداد مستمعي الأحداث
+function setupEventListeners() {
+    // زر إضافة دبوس جديد
+    addPinBtn.addEventListener('click', startAddingPin);
+    
+    // زر حذف جميع الدبابيس
+    clearAllBtn.addEventListener('click', function() {
+        if (pins.length > 0) {
+            if (confirm('هل أنت متأكد من حذف جميع الدبابيس؟')) {
+                clearAllPins();
+            }
+        } else {
+            alert('لا توجد دبابيس لحذفها');
+        }
+    });
+    
+    // زر حفظ الدبابيس
+    savePinsBtn.addEventListener('click', function() {
+        savePinsToStorage();
+        alert('تم حفظ الدبابيس بنجاح!');
+    });
+    
+    // النقر على الخريطة لوضع الدبوس - الحل الجديد
+    mapContainer.addEventListener('click', handleMapClick);
+}
+
+// دالة معالجة النقر على الخريطة
+function handleMapClick(event) {
+    if (!isAddingPin || !currentPinData) return;
+    
+    // منع النقر على الدبابيس الموجودة
+    if (event.target.classList.contains('pin') || 
+        event.target.classList.contains('pin-tooltip')) {
+        return;
+    }
+    
+    // حساب الموقع بالنسبة للصورة مباشرة
+    const rect = mapImage.getBoundingClientRect();
+    
+    // إحداثيات النقر داخل الصفحة
+    const pageX = event.clientX;
+    const pageY = event.clientY;
+    
+    // حساب موقع النقر داخل الصورة
+    const x = pageX - rect.left;
+    const y = pageY - rect.top;
+    
+    // التحقق من النقر داخل حدود الصورة
+    if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+        console.log('النقر خارج حدود الصورة');
+        showDebugInfo(`النقر خارج حدود الصورة\nإحداثيات النقر: X=${Math.round(x)}, Y=${Math.round(y)}\nأبعاد الصورة: ${Math.round(rect.width)}x${Math.round(rect.height)}`);
+        return;
+    }
+    
+    // حساب النسب المئوية للموقع
+    const xPercent = Math.round((x / rect.width) * 100);
+    const yPercent = Math.round((y / rect.height) * 100);
+    
+    console.log(`تم النقر على الخريطة: X=${xPercent}%, Y=${yPercent}%`);
+    
+    // إنشاء الدبوس
+    createPin(xPercent, yPercent);
+    
+    // إعادة تعيين حالة الإضافة
+    resetAddingState();
+}
+
+// بدء عملية إضافة دبوس جديد
+function startAddingPin() {
+    // التحقق من إدخال عنوان الدبوس
+    const title = pinTitleInput.value.trim();
+    if (!title) {
+        alert('يرجى إدخال عنوان للدبوس أولاً');
+        pinTitleInput.focus();
+        return;
+    }
+    
+    // تجميع بيانات الدبوس
+    currentPinData = {
+        title: title,
+        description: pinDescriptionInput.value.trim(),
+        category: pinCategorySelect.value,
+        color: selectedColor
+    };
+    
+    // تفعيل وضع الإضافة
+    if (isAddingPin) {
+        // إلغاء وضع الإضافة إذا كان مفعلاً بالفعل
+        resetAddingState();
+        alert('تم إلغاء وضع إضافة الدبوس');
+    } else {
+        // تفعيل وضع الإضافة
+        isAddingPin = true;
+        addPinBtn.innerHTML = '<i class="fas fa-times-circle"></i> انقر على الخريطة لوضع الدبوس (إلغاء)';
+        addPinBtn.classList.add('btn-delete');
+        alert('الآن انقر على المكان المطلوب على الخريطة لوضع الدبوس');
+    }
+}
+
+// إعادة تعيين حالة الإضافة
+function resetAddingState() {
+    isAddingPin = false;
+    addPinBtn.innerHTML = '<i class="fas fa-plus-circle"></i> إضافة دبوس على الخريطة';
+    addPinBtn.classList.remove('btn-delete');
+}
+
+// إعداد خيارات الألوان
+function setupColorOptions() {
+    const colorOptions = document.querySelectorAll('.color-option');
+    colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            colorOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedColor = this.getAttribute('data-color');
+        });
+    });
+}
+
+// إنشاء دبوس جديد على الخريطة
+function createPin(xPercent, yPercent) {
+    // إنشاء معرف فريد للدبوس
+    const pinId = nextPinId++;
+    
+    // إنشاء عنصر الدبوس
+    const pinElement = document.createElement('div');
+    pinElement.className = 'pin';
+    pinElement.id = `pin-${pinId}`;
+    pinElement.style.left = `${xPercent}%`;
+    pinElement.style.top = `${yPercent}%`;
+    pinElement.style.backgroundColor = currentPinData.color;
+    
+    // إضافة تلميح للدبوس
+    const tooltip = document.createElement('div');
+    tooltip.className = 'pin-tooltip';
+    tooltip.textContent = currentPinData.title;
+    pinElement.appendChild(tooltip);
+    
+    // إضافة مستمع حدث للنقر على الدبوس
+    pinElement.addEventListener('click', function(event) {
+        event.stopPropagation();
+        showPinDetails(pinId);
+    });
+    
+    // إضافة الدبوس إلى الخريطة
+    mapContainer.appendChild(pinElement);
+    
+    // حفظ بيانات الدبوس
+    const pinData = {
+        id: pinId,
+        x: xPercent,
+        y: yPercent,
+        title: currentPinData.title,
+        description: currentPinData.description,
+        category: currentPinData.category,
+        color: currentPinData.color,
+        date: new Date().toLocaleString('ar-EG')
+    };
+    
+    pins.push(pinData);
+    
+    // تحديث قائمة الدبابيس
+    updatePinsList();
+    
+    // إعادة تعيين نموذج الإدخال
+    resetInputForm();
+    
+    // عرض تفاصيل الدبوس المضاف حديثاً
+    showPinDetails(pinId);
+    
+    // عرض رسالة نجاح
+    alert(`تم وضع الدبوس "${currentPinData.title}" بنجاح في الموقع: ${xPercent}% , ${yPercent}%`);
+}
+
+// عرض تفاصيل الدبوس
+function showPinDetails(pinId) {
+    const pin = pins.find(p => p.id === pinId);
+    if (!pin) return;
+    
+    // تحديث النموذج ببيانات الدبوس
+    pinTitleInput.value = pin.title;
+    pinDescriptionInput.value = pin.description;
+    pinCategorySelect.value = pin.category;
+    
+    // تحديد لون الدبوس في خيارات الألوان
+    const colorOptions = document.querySelectorAll('.color-option');
+    colorOptions.forEach(option => {
+        option.classList.remove('selected');
+        if (option.getAttribute('data-color') === pin.color) {
+            option.classList.add('selected');
+            selectedColor = pin.color;
+        }
+    });
+    
+    // تمييز العنصر في القائمة
+    const pinItems = document.querySelectorAll('.pin-item');
+    pinItems.forEach(item => {
+        item.classList.remove('active');
+        if (parseInt(item.getAttribute('data-pin-id')) === pinId) {
+            item.classList.add('active');
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    });
+}
+
+// تحديث قائمة الدبابيس
+function updatePinsList() {
+    if (pins.length === 0) {
+        pinsList.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: #666;">
+                <i class="fas fa-thumbtack" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                <p>لم تتم إضافة أي دبابيس بعد</p>
+                <p>أضف أول دبوس باستخدام النموذج أعلاه</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    pins.forEach(pin => {
+        html += `
+            <div class="pin-item" data-pin-id="${pin.id}">
+                <div class="pin-title">
+                    <i class="fas fa-thumbtack" style="color: ${pin.color}; margin-left: 5px;"></i>
+                    ${pin.title}
+                </div>
+                <div class="pin-location">
+                    <i class="fas fa-map-marker-alt"></i> الموقع: ${pin.x}% , ${pin.y}%
+                    <span style="margin-right: 10px;">|</span>
+                    <i class="fas fa-tag"></i> ${pin.category}
+                </div>
+                <div class="pin-actions">
+                    <button class="pin-btn pin-btn-view" onclick="showPinDetails(${pin.id})">
+                        <i class="fas fa-eye"></i> عرض
+                    </button>
+                    <button class="pin-btn pin-btn-remove" onclick="removePin(${pin.id})">
+                        <i class="fas fa-trash"></i> حذف
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    pinsList.innerHTML = html;
+}
+
+// إزالة دبوس
+function removePin(pinId) {
+    if (!confirm('هل أنت متأكد من حذف هذا الدبوس؟')) return;
+    
+    // إزالة الدبوس من المصفوفة
+    pins = pins.filter(pin => pin.id !== pinId);
+    
+    // إزالة عنصر الدبوس من الخريطة
+    const pinElement = document.getElementById(`pin-${pinId}`);
+    if (pinElement) {
+        pinElement.remove();
+    }
+    
+    // تحديث قائمة الدبابيس
+    updatePinsList();
+}
+
+// حذف جميع الدبابيس
+function clearAllPins() {
+    // إزالة جميع عناصر الدبابيس من الخريطة
+    document.querySelectorAll('.pin').forEach(pin => pin.remove());
+    
+    // تفريغ مصفوفة الدبابيس
+    pins = [];
+    
+    // إعادة تعيين معرف الدبوس
+    nextPinId = 1;
+    
+    // تحديث قائمة الدبابيس
+    updatePinsList();
+    
+    // إعادة تعيين نموذج الإدخال
+    resetInputForm();
+    
+    // مسح التخزين المحلي
+    localStorage.removeItem('arabMapPins');
+    localStorage.removeItem('nextPinId');
+}
+
+// إعادة تعيين نموذج الإدخال
+function resetInputForm() {
+    pinTitleInput.value = '';
+    pinDescriptionInput.value = '';
+    pinCategorySelect.value = 'مدينة';
+    
+    // إعادة تعيين اللون إلى الأحمر
+    const colorOptions = document.querySelectorAll('.color-option');
+    colorOptions.forEach(option => {
+        option.classList.remove('selected');
+        if (option.getAttribute('data-color') === '#dc3545') {
+            option.classList.add('selected');
+            selectedColor = '#dc3545';
+        }
+    });
+    
+    currentPinData = null;
+}
+
+// حفظ الدبابيس في التخزين المحلي
+function savePinsToStorage() {
+    try {
+        localStorage.setItem('arabMapPins', JSON.stringify(pins));
+        localStorage.setItem('nextPinId', nextPinId.toString());
+        return true;
+    } catch (error) {
+        console.error('خطأ في حفظ الدبابيس:', error);
+        return false;
+    }
+}
+
+// تحميل الدبابيس من التخزين المحلي
+function loadPinsFromStorage() {
+    try {
+        const savedPins = localStorage.getItem('arabMapPins');
+        const savedNextId = localStorage.getItem('nextPinId');
+        
+        if (savedPins) {
+            pins = JSON.parse(savedPins);
+            nextPinId = savedNextId ? parseInt(savedNextId) : pins.length + 1;
+            
+            // إعادة إنشاء الدبابيس على الخريطة
+            pins.forEach(pin => {
+                const pinElement = document.createElement('div');
+                pinElement.className = 'pin';
+                pinElement.id = `pin-${pin.id}`;
+                pinElement.style.left = `${pin.x}%`;
+                pinElement.style.top = `${pin.y}%`;
+                pinElement.style.backgroundColor = pin.color;
+                
+                const tooltip = document.createElement('div');
+                tooltip.className = 'pin-tooltip';
+                tooltip.textContent = pin.title;
+                pinElement.appendChild(tooltip);
+                
+                pinElement.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    showPinDetails(pin.id);
+                });
+                
+                mapContainer.appendChild(pinElement);
+            });
+            
+            // تحديث قائمة الدبابيس
+            updatePinsList();
+        }
+    } catch (error) {
+        console.error('خطأ في تحميل الدبابيس:', error);
+    }
+}
+
+// عرض معلومات تصحيح
+function showDebugInfo(message) {
+    console.log(message);
+    
+    // يمكنك إضافة عنصر لعرض الرسائل في الواجهة
+    const debugDiv = document.getElementById('debugInfo') || createDebugDiv();
+    debugDiv.innerHTML = `<div style="background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; margin: 10px 0;">
+        <i class="fas fa-exclamation-triangle"></i> ${message}
+    </div>`;
+    debugDiv.style.display = 'block';
+}
+
+// إنشاء عنصر لعرض معلومات التصحيح
+function createDebugDiv() {
+    const debugDiv = document.createElement('div');
+    debugDiv.id = 'debugInfo';
+    debugDiv.style.display = 'none';
+    document.querySelector('.controls-panel').appendChild(debugDiv);
+    return debugDiv;
+}
+
+// حفظ الدبابيس تلقائياً عند إغلاق الصفحة
+window.addEventListener('beforeunload', savePinsToStorage);
+
+// دالة لضبط الخريطة للصورة الجديدة
+function adjustMapForNewImage() {
+    console.log('تم تحميل الخريطة الجديدة بنجاح');
+    
+    // يمكنك إضافة أي ضبط إضافي هنا
+    showDebugInfo('تم تحميل الخريطة بنجاح. يمكنك الآن إضافة دبابيس.');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة التقدم والعطاء</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #2c3e50; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .window { background: #ecf0f1; color: #333; width: 400px; padding: 30px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; border-top: 30px solid #34495e; position: relative; }
+        .window::before { content: "● ● ●"; position: absolute; top: -25px; left: 10px; color: #e74c3c; font-size: 12px; }
+        h2 { color: #2c3e50; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #bdc3c7; border-radius: 5px; }
+        button { width: 95%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button:hover { background: #219150; }
+    </style>
+</head>
+<body>
+    <div class="window">
+        <h2>منظومة التقدم والعطاء</h2>
+        <p>الرجاء إدخال بيانات الدخول</p>
+        <input type="text" placeholder="اسم المستخدم">
+        <input type="password" placeholder="كلمة المرور">
+        <button onclick="alert('جاري الاتصال بقاعدة البيانات...')">دخول للمنظومة</button>
+    </div>
+</body>
+</html>
