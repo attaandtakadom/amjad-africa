@@ -36,58 +36,68 @@
         .quran-img {
             display: block;
             margin: 0 auto;
-            width: 100px;
+            width: 80px;
             border-radius: 10px;
         }
         .quran-text {
             background-color: #fff9c4;
-            padding: 15px;
-            font-size: 1.1rem;
+            padding: 20px;
+            font-size: 1.2rem;
             text-align: center;
             border-right: 5px solid #fbc02d;
-            margin: 10px 0;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: #444;
+            font-weight: bold;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
         }
         th {
             background-color: #4caf50;
             color: white;
         }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
         .exercise {
             background-color: #e8f5e9;
             padding: 15px;
             border-radius: 10px;
             margin-top: 10px;
+            border: 1px solid #c8e6c9;
         }
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            border-radius: 8px;
+            border: 2px solid #ccc;
             box-sizing: border-box;
+            font-size: 1rem;
+            text-align: center;
         }
         button {
             background-color: #4caf50;
             color: white;
             border: none;
             padding: 12px 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             width: 100%;
-            margin-bottom: 5px;
+            font-weight: bold;
+            transition: 0.3s;
         }
-        /* تصميم زر العودة للرئيسية */
+        button:hover { background-color: #388e3c; }
+        
         .mhome {
             display: block;
             width: fit-content;
@@ -120,14 +130,14 @@
         <img src="https://cdn-icons-png.flaticon.com/512/2904/2904832.png" alt="مصحف شريف" class="quran-img">
         <h2>سورة لقمان (الآيات 16 - 18)</h2>
         <div class="quran-text">
-            يَا بُنَيَّ أَقِمِ الصَّلَاةَ وَأْمُرْ بِالْمَعْرُوفِ وَانْهَ عَنِ الْمُنكَرِ وَاصْبِرْ عَلَىٰ مَا أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ **عَزْمِ الْأُمُورِ** (17) 
-            وَلَا **تُصَعِّرْ خَدَّكَ** لِلنَّاسِ وَلَا تَمْشِ فِي الْأَرْضِ مَرَحًا... **وَاقْصِدْ فِي مَشْيِكَ وَاغْضُضْ مِن صَوْتِكَ**...
+            يَا بُنَيَّ أَقِمِ الصَّلَاةَ وَأْمُرْ بِالْمَعْرُوفِ وَانْهَ عَنِ الْمُنكَرِ وَاصْبِرْ عَلَىٰ مَا أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ الْأُمُورِ (17) 
+            وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِي الْأَرْضِ مَرَحًا... وَاقْصِدْ فِي مَشْيِكَ وَاغْضُضْ مِنْ صَوْتِكَ...
         </div>
         
         <div class="exercise">
             <p><strong>تمرين سريع:</strong> ما اسم السورة التي درستها؟</p>
             <input type="text" id="q1" placeholder="اكتب اسم السورة هنا">
-            <button onclick="checkAnswer('q1', 'لقمان', 'ans1')">تحقق ✅</button>
+            <button onclick="checkAnswer('q1', 'لقمان', 'ans1')">تحقق من إجابتي ✅</button>
             <p id="ans1" class="feedback"></p>
         </div>
     </div>
@@ -143,8 +153,8 @@
         
         <div class="exercise">
             <p><strong>تمرين:</strong> ما معنى "اغضض من صوتك"؟</p>
-            <button onclick="showFeedback('ans2', 'إجابة صحيحة! أحسنت', 'green')">اخفض صوتك</button>
-            <button onclick="showFeedback('ans2', 'حاول مرة أخرى', 'red')">ارفع صوتك</button>
+            <button onclick="showFeedback('ans2', 'إجابة صحيحة! أحسنتِ 🌟', 'green')">اخفض صوتك</button>
+            <button style="background-color: #9e9e9e; margin-top:5px;" onclick="showFeedback('ans2', 'حاول مرة أخرى يا بطل ❤️', 'orange')">ارفع صوتك</button>
             <p id="ans2" class="feedback"></p>
         </div>
     </div>
@@ -160,13 +170,12 @@
         <div class="exercise">
             <p><strong>تمرين:</strong> ما هو عكس كلمة (التواضع)؟</p>
             <input type="text" id="q3" placeholder="اكتب العكس هنا">
-            <button onclick="checkAnswer('q3', 'التكبر', 'ans3')">تحقق ✅</button>
+            <button onclick="checkAnswer('q3', 'التكبر', 'ans3')">تحقق من إجابتي ✅</button>
             <p id="ans3" class="feedback"></p>
         </div>
     </div>
 
-    <a href="../../../../../teacher_dashbord/arabic_dashboard.html" class="mhome">🏠 العودة للرئيسية</a>
-
+    <a href="#" class="mhome">🏠 العودة للرئيسية</a>
 </div>
 
 <script>

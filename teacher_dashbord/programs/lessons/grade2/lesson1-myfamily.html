@@ -2,102 +2,58 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>برنامج لغتي - مؤسسة التقدم والعطاء</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #e3f2fd; text-align: center; padding: 10px; margin: 0; }
-        .container { background: white;  border-radius: 30px;
-             border: 8px solid #2196F3; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    width: 80%;      /* ليأخذ مساحة الشاشة كاملة في النقال */
-    max-width: 900px; 
-    margin: 10px auto; 
-    padding: 20px; 
-    box-sizing: border-box; /* يمنع خروج المحتوى عن الحواف */
-}
-        
-        /* الشخصيات */
+        body { font-family: 'Arial', sans-serif; background-color: #e3f2fd; text-align: center; padding: 10px; margin: 0; transition: background 0.5s; }
+        .container { background: white; border-radius: 30px; border: 8px solid #2196F3; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 95%; max-width: 700px; margin: 10px auto; padding: 20px; box-sizing: border-box; }
         .character-box { display: flex; justify-content: space-around; background: #fff9c4; padding: 15px; border-radius: 20px; margin-bottom: 20px; border: 2px solid #ffd54f; }
-        
-        /* الخطوط الكبيرة */
-        .big-text { font-size: 38px; font-weight: bold; line-height: 1.8; color: #2c3e50; margin: 20px 0; }
-        
-        /* الصورة */
+        .big-text { font-size: 28px; font-weight: bold; line-height: 1.8; color: #2c3e50; margin: 20px 0; }
         .family-img { width: 100%; max-height: 350px; border-radius: 20px; border: 4px solid #ddd; object-fit: cover; margin-bottom: 20px; }
-
-        /* الأزرار */
-        .btn { background: #4CAF50; color: white; padding: 15px 40px; font-size: 24px; border: none; border-radius: 50px; cursor: pointer; margin: 10px; box-shadow: 0 4px #2e7d32; }
-        .btn:active { box-shadow: 0 2px #2e7d32; transform: translateY(2px); }
-        .btn-choice { background: #2196F3; padding: 10px 30px; font-size: 22px; }
-        .btn-back { background: #f44336; box-shadow: 0 4px #b71c1c; }
-
-        /* الأقسام */
+        .btn { background: #4CAF50; color: white; padding: 12px 30px; font-size: 22px; border: none; border-radius: 50px; cursor: pointer; margin: 10px; box-shadow: 0 4px #2e7d32; }
+        .btn-choice { background: #2196F3; padding: 10px 30px; }
+        .btn-back { background: #f44336; box-shadow: 0 4px #b71c1c; font-size: 18px; }
+        .btn-reset { background: #ff9800; box-shadow: 0 4px #e65100; font-size: 18px; }
         .step { display: none; }
         .active { display: block; }
-
-        /* الإدخال */
-        input { font-size: 30px; width: 80%; text-align: center; border: 4px solid #2196F3; border-radius: 15px; padding: 10px; margin-top: 15px; }
-        
-        /* التغذية الراجعة */
-        #feedback { font-size: 35px; font-weight: bold; margin: 20px; min-height: 50px; }
-        .success-flash { background-color: #c8e6c9 !important; transition: 0.3s; }
-
- .home-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: var(--primary);
-            color: rgb(13, 76, 211);
-            text-decoration: none;
-            border-radius: 50px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(30, 136, 229, 0.3);
-        }
-
-
+        input { font-size: 26px; width: 85%; text-align: center; border: 4px solid #2196F3; border-radius: 15px; padding: 10px; margin-top: 15px; }
+        #feedback { font-size: 30px; font-weight: bold; margin: 20px; min-height: 50px; }
     </style>
 </head>
 <body id="mainBody">
 
 <div class="container" id="mainCard">
-
-       <!-- <a href="../../../../../teacher_dashbord/arabic_dashboard.html" class="home-btn">الرئيسية</a>-->
-
-
     <h2 style="color: #0d47a1; margin-top: 0;">مؤسسة التقدم والعطاء بالبيضاء - ليبيا</h2>
     
     <div class="character-box">
-        <div><h2 style="color: blue; margin:0;">👦 أنس</h2><p>7 سنوات - الصف الثاني</p></div>
-        <div><h2 style="color: #e91e63; margin:0;">👧 بثينة</h2><p>7 سنوات - الصف الثاني</p></div>
+        <div><h2 style="color: blue; margin:0;">👦 أنس</h2><p>الصف الثاني</p></div>
+        <div><h2 style="color: #e91e63; margin:0;">👧 بثينة</h2><p>الصف الثاني</p></div>
     </div>
 
     <div id="step1" class="step active">
         <img src="../../images/myfamily.jpg" class="family-img" alt="صورة العائلة">
         <div class="big-text">
-            أنا احب أمي<br>
-            أنا احب أبي<br>
-            أنا أحب أخي<br>
-            أنا أحب أختي<br>
-            أنا أحب مدرستي<br>
+            أنا أحب أمي <br>
+            أنا أحب أبي <br>
+            أنا أحب أخي <br>
+            أنا أحب أختي <br>
+            أنا أحب مدرستي <br>
             أنا أحب وطني
         </div>
-        <p style="font-size: 22px; color: #555;">"بيتنا فيه أسرتي، فيه نحيا بحب وأمان، هو كالوطن"</p>
         <button class="btn" onclick="goToStep(2)">نبدأ التمارين ➔</button>
     </div>
 
     <div id="step2" class="step">
         <div class="big-text">اختر الكلمة الصحيحة:</div>
-        <div class="big-text">
-            ..... أبي <br>
-            <button class="btn btn-choice" onclick="playSuccess(null, 'هذا')">هذا</button>
-            <button class="btn btn-choice" onclick="playError()">هذه</button>
-        </div>
+        <div class="big-text">..... أبي</div>
+        <button class="btn btn-choice" onclick="showFeedback(true, 'هذا', 1)">هذا</button>
+        <button class="btn btn-choice" onclick="showFeedback(false)">هذه</button>
         <hr>
-        <div class="big-text">
-            ..... أمي <br>
-            <button class="btn btn-choice" onclick="playError()">هذا</button>
-            <button class="btn btn-choice" onclick="playSuccess(3, 'هذه')">هذه</button>
-        </div>
+        <div class="big-text">..... أمي</div>
+        <button class="btn btn-choice" onclick="showFeedback(false)">هذا</button>
+        <button class="btn btn-choice" onclick="showFeedback(true, 'هذه', 2)">هذه</button>
+        <br>
+        <button class="btn btn-back" onclick="goToStep(1)">⬅ رجوع</button>
     </div>
 
     <div id="step3" class="step">
@@ -106,7 +62,9 @@
         <div class="big-text">أنا أحب أبي .. أبي <br>
             <input type="text" id="qInput" placeholder="اكتب الكلمة هنا">
         </div>
-        <button class="btn" onclick="checkQ()">تحقق ✅</button>
+        <button class="btn" onclick="checkWriting()">تحقق ✅</button>
+        <br>
+        <button class="btn btn-back" onclick="goToStep(2)">⬅ رجوع</button>
     </div>
 
     <div id="step4" class="step">
@@ -115,73 +73,56 @@
         <input type="text" id="orderInput" placeholder="اكتب الجملة مرتبة">
         <br>
         <button class="btn" onclick="checkOrder()">إنهاء التمرين ✨</button>
+        <br>
+        <button class="btn btn-back" onclick="goToStep(3)">⬅ رجوع</button>
+        <button class="btn btn-reset" onclick="location.reload()">🔄 إعادة الكل</button>
     </div>
 
     <div id="feedback"></div>
-    <button id="backBtn" class="btn btn-back" style="display:none;" onclick="location.reload()">عودة للبداية ↩️</button>
 </div>
 
-<audio id="bell" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
-<audio id="applause" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
-
 <script>
-    let correctCount = 0;
+    let correctTasks = 0;
 
     function goToStep(n) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('step' + n).classList.add('active');
         document.getElementById('feedback').innerText = "";
-        document.getElementById('mainCard').classList.remove('success-flash');
+        document.body.style.backgroundColor = "#e3f2fd";
     }
 
-    function playSuccess(nextStep, word = "") {
-        document.getElementById('bell').play();
-        document.getElementById('feedback').innerText = "ممتاز! " + word;
-        document.getElementById('feedback').style.color = "#4CAF50";
-        correctCount++;
-        
-        if (correctCount >= 3) {
-            document.getElementById('applause').play();
-            correctCount = 0;
+    function showFeedback(isCorrect, word = "", taskNum = 0) {
+        const fb = document.getElementById('feedback');
+        if (isCorrect) {
+            fb.innerText = "ممتاز! " + word;
+            fb.style.color = "#4CAF50";
+            document.body.style.backgroundColor = "#c8e6c9";
+            if(taskNum === 2) setTimeout(() => goToStep(3), 1500);
+        } else {
+            fb.innerText = "حاول مرة أخرى يا بطل ✍️";
+            fb.style.color = "#f44336";
+            document.body.style.backgroundColor = "#ffcdd2";
         }
-
-        if(nextStep) setTimeout(() => goToStep(nextStep), 1500);
     }
 
-    function playError() {
-        document.getElementById('feedback').innerText = "حاول مرة أخرى يا بطل ✍️";
-        document.getElementById('feedback').style.color = "#f44336";
-        correctCount = 0;
-    }
-
-    function checkQ() {
-        // نأخذ النص، نحذف المسافات من الطرفين
+    function checkWriting() {
         let val = document.getElementById('qInput').value.trim();
-        
-        // تحويل النص ليكون مرناً:
-        // 1. استبدال الألف الممدودة بألف عادية
-        // 2. استبدال الياء في آخر الكلمة بألف مقصورة (لضمان قبول كل أنواع الكتابة)
-        let cleanVal = val.replace(/أ/g, 'ا').replace(/ي$/g, 'ى');
-        let correctAnswer = "يحبنى"; // النسخة المنظفة من "يحبني"
-
-        if(cleanVal === correctAnswer || val === 'يحبني') {
-            playSuccess(4); // ينتقل للتمرين الرابع
+        if(val === 'تحبني' || val === 'تحبنى' || val === 'يحبني') {
+            showFeedback(true, "إجابة صحيحة");
+            setTimeout(() => goToStep(4), 1500);
         } else {
-            playError();
+            showFeedback(false);
         }
     }
+
     function checkOrder() {
-        let val = document.getElementById('orderInput').value.trim();
-        // تنظيف النص لقبول الإجابة بكل أشكالها (بهمزة أو بدون)
-        let cleanVal = val.replace(/\s+/g, ' ').replace(/أ/g, 'ا');
-        if(cleanVal === 'انا في الصف الثاني') {
-            document.getElementById('bell').play();
-            document.getElementById('applause').play();
-            document.getElementById('feedback').innerText = "رائع جداً! اكتملت المهمة بنجاح";
-            document.getElementById('mainCard').classList.add('success-flash');
-            document.getElementById('backBtn').style.display = 'inline-block';
+        let val = document.getElementById('orderInput').value.trim().replace(/\s+/g, ' ');
+        if(val === 'أنا في الصف الثاني' || val === 'انا في الصف الثاني') {
+            document.getElementById('feedback').innerText = "رائع جداً! اكتملت كل التمارين بنجاح 🏆";
+            document.getElementById('feedback').style.color = "#4CAF50";
+            document.body.style.backgroundColor = "#c8e6c9";
         } else {
-            playError();
+            showFeedback(false);
         }
     }
 </script>

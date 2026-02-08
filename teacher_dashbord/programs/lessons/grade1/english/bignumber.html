@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Big Numbers Spinner</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Big Numbers Spinner - Clean</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f7f6; text-align: center; margin: 0; padding: 20px; }
+        :root { --primary: #6c5ce7; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); text-align: center; margin: 0; padding: 20px; transition: background 0.5s; }
         .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
         /* السهم العلوي */
@@ -16,7 +17,7 @@
             margin: 0 auto -20px auto; position: relative; z-index: 10;
         }
 
-        .wheel-container { width: 300px; height: 300px; margin: 0 auto; position: relative; }
+        .wheel-container { width: 280px; height: 280px; margin: 0 auto; position: relative; }
         .wheel { 
             width: 100%; height: 100%; border-radius: 50%; 
             border: 10px solid #2f3542; position: relative; overflow: hidden;
@@ -33,30 +34,29 @@
         .s5 { background: #e67e22; transform: rotate(240deg); }
         .s6 { background: #e74c3c; transform: rotate(300deg); }
 
-        /* الأرقام داخل العجلة */
-        .num { position: absolute; width: 100%; height: 100%; top:0; left:0; font-weight: bold; color: white; font-size: 1.4rem; pointer-events: none; }
-        .num span { position: absolute; left: 50%; transform: translateX(-50%); top: 30px; }
+        .num { position: absolute; width: 100%; height: 100%; top:0; left:0; font-weight: bold; color: white; font-size: 1.2rem; pointer-events: none; }
+        .num span { position: absolute; left: 50%; transform: translateX(-50%); top: 25px; }
 
-        .spin-btn { background: #6c5ce7; color: white; border: none; padding: 15px 40px; border-radius: 50px; font-size: 1.5rem; cursor: pointer; margin-top: 30px; box-shadow: 0 5px 0 #4834d4; }
+        .spin-btn { background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-size: 1.5rem; cursor: pointer; margin-top: 30px; box-shadow: 0 5px 0 #4834d4; }
+        .spin-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
         
-        /* قسم النتيجة المطور */
         #result { 
             margin-top: 25px; display: none; border-top: 2px dashed #ddd; padding-top: 15px;
             animation: fadeIn 0.5s ease;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .result-row { display: flex; align-items: center; justify-content: center; gap: 15px; }
-        .big-txt { font-size: 3.5rem; color: #6c5ce7; margin: 0; font-weight: bold; }
-        .speak-btn { background: #6c5ce7; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-        .speak-btn:hover { background: #4834d4; transform: scale(1.1); }
-        .word-txt { font-size: 1.8rem; color: #2f3542; margin-top: 5px; font-style: italic; }
+        .big-txt { font-size: 3.5rem; color: var(--primary); margin: 0; font-weight: bold; }
+        .word-txt { font-size: 1.8rem; color: #2f3542; margin: 5px 0; font-weight: bold; }
+
+        .nav-bar { margin-top: 30px; display: flex; gap: 10px; justify-content: center; }
+        .nav-btn { text-decoration: none; padding: 10px 20px; background: #eee; color: #333; border-radius: 10px; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Spin & Learn 🎡</h1>
+    <h1 style="color: #2f3542;">Spin & Learn 🎡</h1>
     
     <div class="pointer"></div>
     <div class="wheel-container">
@@ -76,26 +76,16 @@
     <button class="spin-btn" id="btn" onclick="spin()">SPIN!</button>
 
     <div id="result">
-        <div class="result-row">
-            <p class="big-txt" id="res-num"></p>
-            <button class="speak-btn" onclick="speak()">
-                <i class="fas fa-volume-up"></i>
-            </button>
-        </div>
+        <p class="big-txt" id="res-num"></p>
         <p id="res-word" class="word-txt"></p>
+        <p style="color: #27ae60; font-weight: bold;">Great Job! ✨</p>
     </div>
 </div>
-<div class="nav-bar">
-        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn home">
-            <i class="fas fa-home"></i> الرئيسية
-        </a>
-        <a href="A_Z.html" class="nav-btn back">
-            <i class="fas fa-font"></i> تعلم الحروف
-        </a>
-    </div>
 
-<audio id="sSound" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
-<audio id="wSound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+<div class="nav-bar">
+    <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn">🏠 الرئيسية</a>
+    <a href="A_Z.html" class="nav-btn">🔤 تعلم الحروف</a>
+</div>
 
 <script>
     let currentDeg = 0;
@@ -110,56 +100,28 @@
 
     function spin() {
         const btn = document.getElementById('btn');
+        const resultDiv = document.getElementById('result');
+        
         btn.disabled = true;
-        document.getElementById('result').style.display = 'none';
-        document.getElementById('sSound').play();
+        resultDiv.style.display = 'none';
+        document.body.style.backgroundColor = "#f4f7f6";
 
+        // اختيار نتيجة عشوائية
         const res = config[Math.floor(Math.random() * config.length)];
+        
+        // حساب الدوران (10 دورات كاملة + الزاوية المطلوبة)
         currentDeg += 3600 + (360 - (currentDeg % 360)) + res.targetDeg;
-
         document.getElementById('wheel').style.transform = `rotate(${currentDeg}deg)`;
 
         setTimeout(() => {
-            document.getElementById('wSound').play();
             document.getElementById('res-num').innerText = res.n;
             document.getElementById('res-word').innerText = res.w;
-            document.getElementById('result').style.display = 'block';
+            resultDiv.style.display = 'block';
+            document.body.style.backgroundColor = "#d1f7d1"; // تمييز بصري عند التوقف
             btn.disabled = false;
         }, 4000);
     }
-
-    // نستخدم هذا المتغير لضمان تفعيل الصوت عند أول لمسة للمستخدم
-    let voiceReady = false;
-
-    function speak() {
-        const text = document.getElementById('res-word').innerText;
-        
-        // محاولة تنشيط محرك الصوت
-        if (window.speechSynthesis) {
-            // إلغاء أي صوت يعمل حالياً لمنع التداخل
-            window.speechSynthesis.cancel(); 
-            
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'en-US';
-            msg.rate = 0.9; // سرعة نطق هادئة للطلاب
-            
-            // إضافة معالج للأخطاء
-            msg.onerror = (e) => console.error("Speech error", e);
-            
-            window.speechSynthesis.speak(msg);
-        } else {
-            alert("عذراً، هاتفك لا يدعم خاصية نطق الأصوات");
-        }
-    }
-
-    // تفعيل المحرك بمجرد لمس المستخدم لأي مكان (شرط تقني للهواتف)
-    document.body.addEventListener('touchstart', function() {
-        if(!voiceReady) {
-            const msg = new SpeechSynthesisUtterance("");
-            window.speechSynthesis.speak(msg);
-            voiceReady = true;
-        }
-    }, {once: true});
 </script>
+
 </body>
 </html>

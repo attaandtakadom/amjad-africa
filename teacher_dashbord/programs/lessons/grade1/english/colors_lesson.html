@@ -4,122 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>عالم الألوان الممتع</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #f7f9fc;
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        h1 {
-            color: #4b4b4b;
-            font-size: 28px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+        :root { --bg-color: #f7f9fc; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--bg-color); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        h1 { color: #4b4b4b; font-size: 24px; margin-bottom: 20px; text-align: center; }
 
         .color-display {
-            width: 100%;
-            max-width: 400px;
-            height: 200px;
-            border-radius: 30px;
-            background-color: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-            transition: all 0.5s ease;
-            border: 8px solid white;
+            width: 100%; max-width: 400px; height: 180px; border-radius: 30px;
+            background-color: #ff4757; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 30px; transition: all 0.4s ease; border: 8px solid white;
         }
 
-        #colorName {
-            font-size: 45px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+        #colorName { font-size: 40px; font-weight: 900; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
 
         .colors-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: 100px;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 15px; width: 100%; max-width: 400px; margin-bottom: 100px;
         }
 
         .color-item {
-            aspect-ratio: 1/1;
-            border-radius: 20px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.2s;
-            border: 4px solid white;
+            aspect-ratio: 1/1; border-radius: 20px; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.2s; border: 4px solid white;
         }
+        .color-item:active { transform: scale(0.9); }
 
-        .color-item:active {
-            transform: scale(0.9);
-        }
+        /* الألوان */
+        .red { background-color: #ff4757; } .blue { background-color: #1e90ff; }
+        .green { background-color: #2ed573; } .yellow { background-color: #eccc68; }
+        .orange { background-color: #ffa502; } .purple { background-color: #a442ee; }
+        .pink { background-color: #ff6b81; } .black { background-color: #2f3542; }
+        .brown { background-color: #8b4513; } .white { background-color: #ffffff; border: 4px solid #ddd !important; }
+        .grey { background-color: #a1a1a1; } .gold { background-color: #ffd700; }
 
-        /* تعريف الألوان الجديدة والأساسية */
-        .red { background-color: #ff4757; }
-        .blue { background-color: #1e90ff; }
-        .green { background-color: #2ed573; }
-        .yellow { background-color: #eccc68; }
-        .orange { background-color: #ffa502; }
-        .purple { background-color: #a442ee; }
-        .pink { background-color: #ff6b81; }
-        .black { background-color: #2f3542; }
-        .brown { background-color: #8b4513; }
-        .white { background-color: #ffffff; border: 4px solid #ddd !important; } /* أبيض بحدود رمادية لبيانه */
-        .grey { background-color: #a1a1a1; } /* رمادي / رصاصي */
-        .gold { background-color: #ffd700; } /* ذهبي - اللون الثالث */
-
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            gap: 10px;
-            padding: 15px;
-            background: white;
-            border-top: 2px solid #eee;
-            z-index: 1000;
-        }
-
-        .nav-btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: 15px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-
-        .home { background: #f1f2f6; color: #2f3542; }
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 10px; padding: 15px; background: white; border-top: 2px solid #eee; z-index: 1000; }
+        .nav-btn { flex: 1; padding: 12px; border-radius: 15px; text-decoration: none; text-align: center; font-weight: bold; font-size: 14px; background: #f1f2f6; color: #2f3542; }
         .back { background: #6c5ce7; color: white; }
     </style>
 </head>
@@ -127,7 +47,7 @@
 
     <h1>🎨 عالم الألوان الممتع</h1>
 
-    <div class="color-display" id="mainDisplay" style="background-color: #ff4757;">
+    <div class="color-display" id="mainDisplay">
         <span id="colorName">أحمر</span>
     </div>
 
@@ -141,23 +61,18 @@
         <div class="color-item pink" onclick="showColor('#ff6b81', 'وردي')"></div>
         <div class="color-item black" onclick="showColor('#2f3542', 'أسود')"></div>
         <div class="color-item brown" onclick="showColor('#8b4513', 'بني')"></div>
-        
         <div class="color-item white" onclick="showColor('#ffffff', 'أبيض')"></div>
         <div class="color-item grey" onclick="showColor('#a1a1a1', 'رصاصي')"></div>
         <div class="color-item gold" onclick="showColor('#ffd700', 'ذهبي')"></div>
     </div>
 
     <div class="nav-bar">
-        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn home">
-            <i class="fas fa-home"></i> الرئيسية
-        </a>
-        <a href="A_Z.html" class="nav-btn back">
-            <i class="fas fa-font"></i> تعلم الحروف
-        </a>
+        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn">🏠 الرئيسية</a>
+        <a href="a-z.html" class="nav-btn back">🔤 تعلم الحروف</a>
     </div>
 
     <script>
-        // مصفوفة الروابط الصوتية المحدثة
+        // مصفوفة الروابط الصوتية (الأبلة منال)
         const audioFiles = {
             'أحمر': '../../../sound/english/color/red.mp3',
             'أزرق': '../../../sound/english/color/blue.mp3',
@@ -168,7 +83,6 @@
             'وردي': '../../../sound/english/color/pink.mp3',
             'أسود': '../../../sound/english/color/black.mp3',
             'بني': '../../../sound/english/color/bron.mp3',
-            // مسارات الأصوات الجديدة (تأكد من مطابقة الأسماء في المجلد لديك)
             'أبيض': '../../../sound/english/color/white.mp3',
             'رصاصي': '../../../sound/english/color/grey.mp3',
             'ذهبي': '../../../sound/english/color/gold.mp3'
@@ -183,19 +97,20 @@
             display.style.backgroundColor = hex;
             text.innerText = nameAr;
 
-            // ضبط لون النص ليكون ظاهراً عند اختيار اللون الأبيض
+            // ضبط لون النص للأبيض
             if (hex === '#ffffff') {
                 text.style.color = '#333';
                 text.style.textShadow = 'none';
             } else {
                 text.style.color = '#fff';
-                text.style.textShadow = '2px 2px 4px rgba(0,0,0,0.3)';
+                text.style.textShadow = '2px 2px 4px rgba(0,0,0,0.2)';
             }
 
-            playAudio(nameAr);
+            playLocalAudio(nameAr);
         }
 
-        function playAudio(colorName) {
+        function playLocalAudio(colorName) {
+            // إيقاف أي صوت يعمل حالياً
             if (currentAudio) {
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
@@ -204,36 +119,12 @@
             const audioUrl = audioFiles[colorName];
 
             if (audioUrl) {
-                currentAudio = new Audio();
-                currentAudio.src = audioUrl;
-                
+                currentAudio = new Audio(audioUrl);
                 currentAudio.play().catch(error => {
-                    console.log("فشل تشغيل الملف، سيتم استخدام نطق الآلة:", error);
-                    fallbackSpeech(colorName);
+                    console.log("صوت الأبلة منال غير موجود في المسار أو يحتاج تفاعل:");
                 });
-            } else {
-                fallbackSpeech(colorName);
             }
         }
-
-        function fallbackSpeech(text) {
-            window.speechSynthesis.cancel();
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'ar-SA';
-            msg.rate = 0.8;
-            window.speechSynthesis.speak(msg);
-        }
-
-        document.body.addEventListener('touchstart', function() {
-            const silent = new SpeechSynthesisUtterance('');
-            window.speechSynthesis.speak(silent);
-        }, { once: true });
-
-        window.onload = () => {
-            setTimeout(() => {
-                fallbackSpeech("هيا نتعلم الألوان");
-            }, 500);
-        };
     </script>
 </body>
 </html>
