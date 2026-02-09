@@ -31,7 +31,33 @@
 </head>
 <body>
 
+
+<style>
+    .home-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-weight: bold;
+
+            transition: all 0.3s;
+         box-shadow: 0 4px 10px rgba(30, 136, 229, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+</style>
     <div class="app-container">
+
+<a href="../../../../../teacher_dashbord/arabic_dashboard.html" class="home-btn">
+            <i class="fas fa-arrow-left"></i> الرئيسية
+        </a>
+
         <div id="home-screen" class="screen active">
             <h1 style="color: var(--primary); margin-top: 40px;">مرحباً يا بطل 🌟</h1>
             <img src="../../../images/taalm.png" class="shape-img">

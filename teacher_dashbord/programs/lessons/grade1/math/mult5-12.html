@@ -1,108 +1,363 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>مغامرة الأرقام - التقدم والعطاء</title>
-    <style>
-        :root { --primary: #673ab7; --success: #4CAF50; --error: #f44336; }
-        body { font-family: 'Arial', sans-serif; background-color: #f3e5f5; text-align: center; margin: 0; padding: 15px; }
-        .container { max-width: 800px; background: white; margin: auto; padding: 25px; border-radius: 40px; border: 10px solid var(--primary); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        
-        .header-title { color: #4527a0; font-size: 28px; margin-bottom: 10px; border-bottom: 3px solid #eee; padding-bottom: 10px; }
-        .character-box { display: flex; justify-content: space-around; background: #e1f5fe; padding: 15px; border-radius: 25px; margin-bottom: 25px; border: 3px solid #81d4fa; }
-        
-        /* منطقة السؤال */
-        .math-box { font-size: 80px; font-weight: bold; color: #2c3e50; margin: 40px 0; background: #fffde7; border-radius: 20px; padding: 20px; border: 3px dashed #ffd54f; }
-        .math-box span { display: inline-block; min-width: 80px; }
+<meta charset="UTF-8">
+<title>مغامرة الأرقام - التقدم والعطاء</title>
+<style>
+:root { 
+    --primary: #673ab7; 
+    --success: #4CAF50; 
+    --error: #f44336; 
+    --bg: #f3e5f5;
+}
 
-        .btn { background: var(--success); color: white; padding: 18px 45px; font-size: 28px; border: none; border-radius: 60px; cursor: pointer; margin: 15px; box-shadow: 0 6px #2e7d32; transition: 0.2s; }
-        .btn:active { box-shadow: 0 2px #2e7d32; transform: translateY(4px); }
-        .btn-red { background: var(--error); box-shadow: 0 6px #b71c1c; }
+body { 
+    font-family: 'Arial', sans-serif; 
+    background-color: var(--bg); 
+    text-align: center; 
+    margin: 0; 
+    padding: 15px; 
+}
 
-        input { font-size: 50px; width: 150px; text-align: center; border: 5px solid var(--primary); border-radius: 20px; padding: 10px; outline: none; background: #f9f9f9; }
-        
-        #feedback { font-size: 40px; font-weight: bold; margin: 25px; min-height: 60px; }
-        .score-box { font-size: 24px; color: #666; font-weight: bold; }
-    </style>
+.container { 
+    max-width: 800px; 
+    background: white; 
+    margin: auto; 
+    padding: 25px; 
+    border-radius: 40px; 
+    border: 10px solid var(--primary); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+    position: relative;
+}
+
+/* زر العودة للرئيسية */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #34495E;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.home-btn:hover {
+    background: #2C3E50;
+    transform: translateY(-2px);
+    transition: all 0.3s;
+}
+
+.header-title { 
+    color: #4527a0; 
+    font-size: 28px; 
+    margin-bottom: 10px; 
+    border-bottom: 3px solid #eee; 
+    padding-bottom: 10px; 
+    padding-top: 10px;
+}
+
+.character-box { 
+    display: flex; 
+    justify-content: space-around; 
+    background: #e1f5fe; 
+    padding: 15px; 
+    border-radius: 25px; 
+    margin-bottom: 25px; 
+    border: 3px solid #81d4fa; 
+}
+
+/* منطقة السؤال */
+.math-box { 
+    font-size: 80px; 
+    font-weight: bold; 
+    color: #2c3e50; 
+    margin: 40px 0; 
+    background: #fffde7; 
+    border-radius: 20px; 
+    padding: 20px; 
+    border: 3px dashed #ffd54f; 
+}
+
+.math-box span { 
+    display: inline-block; 
+    min-width: 80px; 
+}
+
+/* شريط التقدم */
+.progress-container {
+    margin: 15px 0 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 25px;
+    background-color: #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid #ddd;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    width: 0%;
+    transition: width 0.7s ease-in-out;
+}
+
+.progress-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-stars {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.star {
+    font-size: 30px;
+    color: #ddd;
+    transition: all 0.3s;
+}
+
+.star.active {
+    color: #FFD700;
+    transform: scale(1.2);
+}
+
+.btn { 
+    background: var(--success); 
+    color: white; 
+    padding: 18px 45px; 
+    font-size: 28px; 
+    border: none; 
+    border-radius: 60px; 
+    cursor: pointer; 
+    margin: 15px; 
+    box-shadow: 0 6px #2e7d32; 
+    transition: 0.2s; 
+}
+
+.btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn:active { 
+    box-shadow: 0 2px #2e7d32; 
+    transform: translateY(4px); 
+}
+
+.btn-red { 
+    background: var(--error); 
+    box-shadow: 0 6px #b71c1c; 
+}
+
+input { 
+    font-size: 50px; 
+    width: 150px; 
+    text-align: center; 
+    border: 5px solid var(--primary); 
+    border-radius: 20px; 
+    padding: 10px; 
+    outline: none; 
+    background: #f9f9f9; 
+}
+
+#feedback { 
+    font-size: 40px; 
+    font-weight: bold; 
+    margin: 25px; 
+    min-height: 60px; 
+    transition: all 0.3s;
+}
+
+.score-box { 
+    font-size: 24px; 
+    color: #666; 
+    font-weight: bold; 
+    margin-bottom: 10px;
+}
+
+.celebration {
+    animation: celebration 1s ease-in-out;
+    color: #FF5722;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+@keyframes celebration {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+</style>
 </head>
 <body>
 
 <div class="container" id="mainCard">
+    <!-- زر العودة للرئيسية -->
+    <a href="../../../../math_dashboard.html" class="home-btn">
+        <span>🏠</span> الرئيسية
+    </a>
+    
     <div class="header-title">مؤسسة التقدم والعطاء - مغامرة الضرب</div>
     
     <div class="character-box">
         <div><h2 style="color: blue; margin:0;">👦 أنس</h2><p>بطل الرياضيات</p></div>
         <div><h2 style="color: #e91e63; margin:0;">👧 بثينة</h2><p>ذكية الأرقام</p></div>
     </div>
-
+    
     <div class="score-box">أحسنت في: <span id="score">0</span> مسائل</div>
-
+    
+    <!-- شريط التقدم للتصفيق -->
+    <div class="progress-container">
+        <div class="progress-text">
+            <span>🌟</span>
+            التقدم نحو التصفيق: <span id="progress-count">0</span>/4
+            <span>🌟</span>
+        </div>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="progress-stars" id="progress-stars">
+            <div class="star">★</div>
+            <div class="star">★</div>
+            <div class="star">★</div>
+            <div class="star">★</div>
+        </div>
+    </div>
+    
     <div class="math-box">
         <span id="num1">?</span> × <span id="num2">?</span> = 
         <input type="number" id="userAnswer" autofocus>
     </div>
-
-    <button class="btn" onclick="checkMath()">تحقق من ذكائك ✅</button>
     
+    <button class="btn" onclick="checkMath()">تحقق من ذكائك ✓</button>
     <div id="feedback"></div>
     <button id="backBtn" class="btn btn-red" style="display:none;" onclick="location.reload()">إعادة من جديد ↩️</button>
 </div>
 
-<audio id="bell" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
-<audio id="applause" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
+<!-- ملفات الصوت المحلية -->
+<audio id="bell" src="../../../../../sound/correct-sound.mp3" preload="auto"></audio>
+<audio id="applause" src="../../../../../sound/applause.mp3" preload="auto"></audio>
 
 <script>
-    let correctCount = 0;
-    let n1, n2;
+let correctCount = 0;
+let n1, n2;
+let correctStreak = 0; // عداد الإجابات الصحيحة المتتالية
 
-    // توليد مسألة جديدة (من 1 إلى 5)
-    function generateQuestion() {
-        n1 = Math.floor(Math.random() * 5) + 1; // رقم من 1 إلى 5
-        n2 = Math.floor(Math.random() * 10) + 1; // رقم من 1 إلى 10
-        document.getElementById('num1').innerText = n1;
-        document.getElementById('num2').innerText = n2;
+// توليد مسألة جديدة (من 1 إلى 5)
+function generateQuestion() {
+    n1 = Math.floor(Math.random() * 5) + 1; // رقم من 1 إلى 5
+    n2 = Math.floor(Math.random() * 10) + 1; // رقم من 1 إلى 10
+    document.getElementById('num1').innerText = n1;
+    document.getElementById('num2').innerText = n2;
+    document.getElementById('userAnswer').value = "";
+    document.getElementById('userAnswer').focus();
+}
+
+// تحديث شريط التقدم
+function updateProgress() {
+    const progressFill = document.getElementById('progress-fill');
+    const progressCount = document.getElementById('progress-count');
+    const stars = document.querySelectorAll('.star');
+    
+    // تحديث شريط التقدم
+    const progressPercent = (correctStreak % 4) * 25;
+    progressFill.style.width = progressPercent + "%";
+    progressCount.textContent = correctStreak % 4;
+    
+    // تحديث النجوم
+    stars.forEach((star, index) => {
+        if (index < (correctStreak % 4)) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+function checkMath() {
+    let userVal = parseInt(document.getElementById('userAnswer').value);
+    let feedback = document.getElementById('feedback');
+    let correctAnswer = n1 * n2;
+    
+    if (userVal === correctAnswer) {
+        // إجابة صحيحة
+        document.getElementById('bell').play();
+        feedback.innerText = "🌟 ممتاز! " + n1 + " × " + n2 + " = " + correctAnswer;
+        feedback.style.color = "var(--success)";
+        feedback.classList.remove('celebration');
+        
+        correctCount++;
+        correctStreak++;
+        
+        document.getElementById('score').innerText = correctCount;
+        
+        // تحديث شريط التقدم
+        updateProgress();
+        
+        // تصفيق بعد 4 إجابات صحيحة متتالية
+        if (correctStreak % 4 === 0) {
+            document.getElementById('applause').play();
+            feedback.innerText = "🎉 🎉 تهانينا! 4 إجابات صحيحة متتالية! 🎉 🎉";
+            feedback.style.color = "#FF5722";
+            feedback.classList.add('celebration');
+            
+            // إعادة تعيين العداد بعد التصفيق
+            setTimeout(() => {
+                correctStreak = 0;
+                updateProgress();
+                generateQuestion();
+            }, 3000);
+        } else {
+            // توليد سؤال جديد بعد ثانيتين
+            setTimeout(generateQuestion, 1500);
+        }
+        
+    } else {
+        // إجابة خاطئة
+        feedback.innerText = "فكر مرة أخرى يا بطل..";
+        feedback.style.color = "var(--error)";
+        
+        // إعادة تعيين سلسلة الإجابات الصحيحة في حالة الخطأ
+        correctStreak = 0;
+        updateProgress();
+        
         document.getElementById('userAnswer').value = "";
         document.getElementById('userAnswer').focus();
     }
+}
 
-    function checkMath() {
-        let userVal = parseInt(document.getElementById('userAnswer').value);
-        let feedback = document.getElementById('feedback');
-        let correctAnswer = n1 * n2;
-
-        if (userVal === correctAnswer) {
-            // إجابة صحيحة
-            document.getElementById('bell').play();
-            feedback.innerText = "🌟 ممتاز! " + n1 + " × " + n2 + " = " + correctAnswer;
-            feedback.style.color = "var(--success)";
-            correctCount++;
-            document.getElementById('score').innerText = correctCount;
-
-            // تصفيق عند كل 3 إجابات صحيحة
-            if (correctCount % 3 === 0) {
-                document.getElementById('applause').play();
-            }
-
-            // توليد سؤال جديد بعد ثانية ونصف
-            setTimeout(generateQuestion, 1500);
-        } else {
-            // إجابة خاطئة
-            feedback.innerText = "فكر مرة أخرى يا بطل..";
-            feedback.style.color = "var(--error)";
-            document.getElementById('userAnswer').value = "";
-            document.getElementById('userAnswer').focus();
-        }
+// لتشغيل الزر عند الضغط على Enter
+document.getElementById('userAnswer').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        checkMath();
     }
+});
 
-    // لتشغيل الزر عند الضغط على Enter
-    document.getElementById('userAnswer').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            checkMath();
-        }
-    });
-
-    // ابدأ السؤال الأول عند التحميل
-    window.onload = generateQuestion;
+// بدأ السؤال الأول عند التحميل
+window.onload = function() {
+    generateQuestion();
+    updateProgress();
+};
 </script>
 
 </body>

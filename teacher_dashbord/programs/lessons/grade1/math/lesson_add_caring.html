@@ -1,169 +1,162 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الجمع مع الحمل - مؤسسة التقدم والعطاء</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --primary: #6C5CE7; --carry: #D63031; --success: #00B894; --bg: #F8F9FA; --warning: #F39C12; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .app-container { width: 100%; max-width: 500px; background: white; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); padding: 25px; text-align: center; }
-        
-        .math-grid {
-            display: grid;
-            grid-template-columns: 50px 120px 80px;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 65px;
-            color: #2D3436;
-            row-gap: 15px;
-            direction: ltr;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الجمع مع الحمل - مؤسسة التقدم والعطاء</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root { --primary: #6C5CE7; --carry: #D63031; --success: #00B894; --bg: #F8F9FA; --warning: #F39C12; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
-        .carry-spot {
-            grid-column: 2;
-            height: 60px; width: 60px; font-size: 40px;
-            color: var(--carry); border: 4px dashed var(--carry);
-            border-radius: 12px; display: flex; align-items: center;
-            justify-content: center; visibility: hidden; background: #fff5f5;
-            margin: 0 auto;
-        }
-        .show-carry { visibility: visible !important; }
+/* زر العودة العلوي الثابت */
+.top-nav { width: 100%; max-width: 500px; display: flex; justify-content: flex-start; margin-bottom: 15px; }
+.back-home { padding: 10px 20px; background: #34495E; color: white; text-decoration: none; border-radius: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 4px 0 #2c3e50; }
+.back-home:hover { background: #2c3e50; }
 
-        .line-separator { grid-column: 1 / span 3; height: 6px; background: #2D3436; margin: 5px 0; }
+.app-container { width: 100%; max-width: 500px; background: white; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); padding: 25px; text-align: center; }
 
-        .digit-input {
-            height: 85px; font-size: 55px;
-            text-align: center; border: 3px solid #DDD;
-            border-radius: 15px; font-family: 'Courier New', monospace;
-            font-weight: bold; color: var(--primary);
-            padding: 0;
-        }
-        
-        .nav-buttons { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 25px; }
-        .nav-btn { flex: 1; padding: 12px; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; color: white; transition: 0.3s; border: none; cursor: pointer; }
-        .home-btn { background: #34495E; }
-        .sub-btn { background: var(--warning); }
-
-        #ans-tens { width: 110px; grid-column: 2; justify-self: center; }
-        #ans-units { width: 80px; grid-column: 3; justify-self: center; }
-        
-        .digit-input:focus { border-color: var(--primary); outline: none; background: #f0eeff; }
-
-        .check-btn { margin-top: 30px; width: 100%; padding: 18px; font-size: 24px; background: var(--success); color: white; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 6px 0 #009476; }
-        .feedback-msg { font-size: 24px; font-weight: bold; margin-top: 20px; min-height: 40px; }
-    </style>
+.math-grid {
+    display: grid;
+    grid-template-columns: 50px 120px 80px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 65px;
+    color: #2D3436;
+    row-gap: 15px;
+    direction: ltr;
+}
+.carry-spot {
+    grid-column: 2;
+    height: 60px; width: 60px; font-size: 40px;
+    color: var(--carry); border: 4px dashed var(--carry);
+    border-radius: 12px; display: flex; align-items: center;
+    justify-content: center; visibility: hidden; background: #fff5f5;
+    margin: 0 auto;
+}
+.show-carry { visibility: visible !important; }
+.line-separator { grid-column: 1 / span 3; height: 6px; background: #2D3436; margin: 5px 0; }
+.digit-input {
+    height: 85px; font-size: 55px;
+    text-align: center; border: 3px solid #DDD;
+    border-radius: 15px; font-family: 'Courier New', monospace;
+    font-weight: bold; color: var(--primary);
+    padding: 0; width: 100%;
+}
+.check-btn { margin-top: 30px; width: 100%; padding: 18px; font-size: 24px; background: var(--success); color: white; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 6px 0 #009476; transition: 0.2s; }
+.check-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 #009476; }
+.feedback-msg { font-size: 24px; font-weight: bold; margin-top: 20px; min-height: 40px; }
+.score-badge { display: inline-block; background: #E0E7FF; color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 16px; margin-bottom: 10px; }
+</style>
 </head>
 <body>
 
-<div class="app-container">
-    <div class="nav-buttons">
-        <a href="#" class="nav-btn home-btn" onclick="location.reload()"><i class="fas fa-sync"></i> سؤال جديد</a>
-        <a href="sub.html" class="nav-btn sub-btn"><i class="fas fa-minus-circle"></i> درس الطرح</a>
-    </div>
-    <div style="font-size: 18px; color: var(--primary); font-weight: bold; margin-bottom: 20px;">مؤسسة التقدم والعطاء - الجمع مع الحمل</div>
+<div class="top-nav">
+    <a href="../../../../math_dashboard.html" class="back-home">
+        <i class="fas fa-arrow-right"></i> الرئيسية
+    </a>
+</div>
 
+<div class="app-container">
+    <div class="score-badge">الإجابات الصحيحة: <span id="score-val">0</span></div>
+    <div style="font-size: 18px; color: var(--primary); font-weight: bold; margin-bottom: 20px;">الجمع مع الحمل</div>
+    
     <div class="math-grid">
         <div></div>
         <div id="carry" class="carry-spot">1</div>
         <div></div>
-
+        
         <div></div>
         <div id="num1_tens">0</div>
         <div id="num1_units">0</div>
-
+        
         <div style="font-size:40px">+</div>
         <div id="num2_tens">0</div>
         <div id="num2_units">0</div>
-
+        
         <div class="line-separator"></div>
-
+        
         <div></div>
         <input type="number" id="ans-tens" class="digit-input" placeholder="0">
         <input type="number" id="ans-units" class="digit-input" placeholder="0">
     </div>
-
-    <button class="check-btn" onclick="checkAnswer()">تحقق من الإجابة ✅</button>
+    
+    <button id="main-btn" class="check-btn" onclick="checkAnswer()">تحقق من الإجابة ✓</button>
     <div id="status" class="feedback-msg"></div>
 </div>
 
-<audio id="snd-win" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
-<audio id="snd-fail" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+<audio id="snd-win" src="../../../../../sound/correct-sound.mp3" preload="auto"></audio>
+<audio id="snd-applause" src="../../../../../sound/applause.mp3" preload="auto"></audio>
 
 <script>
-    let correctAnswer;
+let correctAnswer;
+let score = 0;
 
-    function start() {
-        // توليد أرقام تضمن وجود حمل (الآحاد مجموعها > 10)
-        let u1 = Math.floor(Math.random() * 9) + 1; 
-        let u2 = Math.floor(Math.random() * 5) + 6; 
-        let t1 = Math.floor(Math.random() * 4) + 1; 
-        let t2 = Math.floor(Math.random() * 4) + 1; 
+function start() {
+    let u1 = Math.floor(Math.random() * 9) + 1; 
+    let u2 = Math.floor(Math.random() * 5) + 6; 
+    let t1 = Math.floor(Math.random() * 4) + 1; 
+    let t2 = Math.floor(Math.random() * 3) + 1; 
+    
+    correctAnswer = (t1 * 10 + u1) + (t2 * 10 + u2);
+    
+    document.getElementById('num1_tens').innerText = t1;
+    document.getElementById('num1_units').innerText = u1;
+    document.getElementById('num2_tens').innerText = t2;
+    document.getElementById('num2_units').innerText = u2;
+    
+    document.getElementById('ans-units').value = "";
+    document.getElementById('ans-tens').value = "";
+    document.getElementById('carry').classList.remove('show-carry');
+    document.getElementById('status').innerText = "";
+    document.getElementById('main-btn').disabled = false;
+}
 
-        let val1 = (t1 * 10) + u1;
-        let val2 = (t2 * 10) + u2;
-        correctAnswer = val1 + val2;
+document.getElementById('ans-units').oninput = function() {
+    if(this.value !== "") {
+        document.getElementById('carry').classList.add('show-carry');
+    }
+}
 
-        document.getElementById('num1_tens').innerText = t1;
-        document.getElementById('num1_units').innerText = u1;
-        document.getElementById('num2_tens').innerText = t2;
-        document.getElementById('num2_units').innerText = u2;
+function checkAnswer() {
+    const u = parseInt(document.getElementById('ans-units').value);
+    const t = parseInt(document.getElementById('ans-tens').value);
+    
+    if(isNaN(u) || isNaN(t)) {
+        alert("من فضلك ادخل الإجابة كاملة");
+        return;
+    }
 
-        // تصفير الخانات
-        document.getElementById('ans-units').value = "";
-        document.getElementById('ans-tens').value = "";
-        document.getElementById('carry').classList.remove('show-carry');
-        document.getElementById('status').innerText = "";
+    const userAns = (t * 10) + u;
+    const s = document.getElementById('status');
+    
+    if(userAns === correctAnswer) {
+        score++;
+        document.getElementById('score-val').innerText = score;
+        s.innerText = "أحسنت! إجابة صحيحة 🌟";
+        s.style.color = "var(--success)";
+        document.getElementById('snd-win').play();
         
-        speak(`كم ناتج جمع ${val1} زائد ${val2}`);
-    }
+        document.getElementById('main-btn').disabled = true;
 
-    // إظهار الحمل تلقائياً عند كتابة الآحاد
-    document.getElementById('ans-units').oninput = function() {
-        if(this.value !== "") {
-            document.getElementById('carry').classList.add('show-carry');
-        }
-    }
-
-    function checkAnswer() {
-        const u = document.getElementById('ans-units').value;
-        const t = document.getElementById('ans-tens').value;
-        
-        if(u === "" || t === "") {
-            alert("من فضلك ادخل الإجابة كاملة");
-            return;
+        // ميزة التصفيق عند كل 3 إجابات (3, 6, 9...) دون توقف البرنامج
+        if (score % 3 === 0) {
+            setTimeout(() => {
+                document.getElementById('snd-applause').play();
+                s.innerText = "🎉 بطل! 3 إجابات متتالية 🎉";
+            }, 500);
         }
 
-        // دمج العشرات والآحاد كأرقام وليس كنص
-        const userAns = parseInt(t) * 10 + parseInt(u);
-        const s = document.getElementById('status');
-
-        if(userAns === correctAnswer) {
-            s.innerText = "أحسنت! إجابة صحيحة 🌟";
-            s.style.color = "var(--success)";
-            document.getElementById('snd-win').play();
-            speak("ممتاز، إجابة صحيحة");
-            // الانتقال لسؤال جديد بعد 3 ثواني
-            setTimeout(start, 3000);
-        } else {
-            s.innerText = "خطأ، حاول مرة أخرى 😊";
-            s.style.color = "var(--carry)";
-            document.getElementById('snd-fail').play();
-            speak("الإجابة غير صحيحة، حاول مرة ثانية");
-        }
+        setTimeout(start, 2500);
+    } else {
+        s.innerText = "خطأ، حاول مرة أخرى 😊";
+        s.style.color = "var(--carry)";
     }
+}
 
-    function speak(t) {
-        window.speechSynthesis.cancel();
-        const m = new SpeechSynthesisUtterance(t);
-        m.lang = 'ar-SA';
-        window.speechSynthesis.speak(m);
-    }
-
-    window.onload = start;
+window.onload = start;
 </script>
 
 </body>
