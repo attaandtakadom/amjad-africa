@@ -192,6 +192,40 @@
         audio.load();
         audio.play().catch(e => console.log("Audio play failed. Interact with page first."));
     }
+
+// في دالة playSound
+function playSound(soundId) {
+    if (!audioActive) {
+        startAudioEngine();
+    }
+    
+    const sound = document.getElementById(soundId);
+    if (sound) {
+        sound.currentTime = 0;
+        
+        // التحكم في مستوى الصوت حسب نوع الصوت
+        if (soundId === 'sndApplause') {
+            sound.volume = 0.2; // ✅ تصفيق 20% فقط
+        } else if (soundId === 'sndCorrect') {
+            sound.volume = 0.7; // ✅ صوت صحيح 70%
+        } else if (soundId === 'sndWrong') {
+            sound.volume = 0.5; // ✅ صوت خطأ 50%
+        } else {
+            sound.volume = 0.8; // ✅ أصوات أخرى 80%
+        }
+        
+        const playPromise = sound.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("خطأ في تشغيل الصوت:", error);
+            });
+        }
+    }
+}
+
+
+
     </script>
 </body>
 </html>

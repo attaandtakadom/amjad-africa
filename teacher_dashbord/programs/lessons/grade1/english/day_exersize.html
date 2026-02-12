@@ -1,125 +1,444 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Days Challenge - Stable Version</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root { --primary: #ff6b81; --bg: #fcebeb; --correct: #55efc4; --wrong: #ff7675; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Quicksand', sans-serif; }
-        body { background-color: var(--bg); margin: 0; padding: 10px 10px 120px 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        h1 { font-family: 'Fredoka One', cursive; color: var(--primary); font-size: 28px; margin: 15px 0; text-shadow: 2px 2px 0px white; }
-        
-        .quiz-container { width: 100%; max-width: 400px; background: white; border-radius: 25px; padding: 20px; text-align: center; border: 4px dashed var(--primary); margin-bottom: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
-        .target-day { font-size: 42px; font-family: 'Fredoka One'; color: var(--primary); min-height: 60px; margin: 10px 0; text-transform: uppercase; }
-        
-        .days-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; max-width: 400px; }
-        .day-card { background: #ffeaa7; color: #2d3436; padding: 20px 10px; border-radius: 18px; font-size: 20px; font-weight: 900; border: 3px solid #fdcb6e; cursor: pointer; text-align: center; box-shadow: 0 5px 0 #fdcb6e; transition: 0.1s; }
-        .day-card:active { transform: translateY(3px); box-shadow: 0 2px 0 #fdcb6e; }
-        
-        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 10px; padding: 15px; background: white; border-top: 1px solid #eee; z-index: 1000; }
-        .nav-btn { flex: 1; padding: 14px; border-radius: 15px; text-decoration: none; text-align: center; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; background: #f1f2f6; color: #2d3436; border: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Days Challenge - No Sound Overlap</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght=700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root { --primary: #ff6b81; --bg: #fcebeb; --correct: #55efc4; --wrong: #ff7675; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Quicksand', sans-serif; }
+body { background-color: var(--bg); margin: 0; padding: 10px 10px 120px 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+h1 { font-family: 'Fredoka One', cursive; color: var(--primary); font-size: 28px; margin: 15px 0; text-shadow: 2px 2px 0px white; }
+.quiz-container { width: 100%; max-width: 400px; background: white; border-radius: 25px; padding: 20px; text-align: center; border: 4px dashed var(--primary); margin-bottom: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
+.target-day { font-size: 42px; font-family: 'Fredoka One'; color: var(--primary); min-height: 60px; margin: 10px 0; text-transform: uppercase; }
+.sound-icon { font-size: 24px; cursor: pointer; color: var(--primary); margin-left: 10px; transition: transform 0.2s; }
+.sound-icon:hover { transform: scale(1.2); }
+.sound-icon:active { transform: scale(0.9); }
+.sound-icon.disabled { opacity: 0.5; pointer-events: none; }
+.days-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; max-width: 400px; }
+.day-card { background: #ffeaa7; color: #2d3436; padding: 20px 10px; border-radius: 18px; font-size: 20px; font-weight: 900; border: 3px solid #fdcb6e; cursor: pointer; text-align: center; box-shadow: 0 5px 0 #fdcb6e; transition: 0.1s; position: relative; }
+.day-card:active { transform: translateY(3px); box-shadow: 0 2px 0 #fdcb6e; }
+.day-card.correct { background: var(--correct); border-color: #2ecc71; pointer-events: none; opacity: 0.8; transform: translateY(3px); box-shadow: 0 2px 0 #2ecc71; }
+.speaker-btn { position: absolute; top: 5px; right: 5px; background: rgba(255,255,255,0.5); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; color: #2d3436; border: 1px solid #fdcb6e; }
+.speaker-btn:hover { background: rgba(255,255,255,0.8); }
+.speaker-btn.disabled { opacity: 0.5; pointer-events: none; }
+.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 10px; padding: 15px; background: white; border-top: 1px solid #eee; z-index: 1000; }
+.nav-btn { flex: 1; padding: 14px; border-radius: 15px; text-decoration: none; text-align: center; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; background: #f1f2f6; color: #2d3436; border: none; cursor: pointer; }
+.progress-bar { width: 100%; max-width: 400px; background: white; border-radius: 50px; padding: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; border: 2px solid var(--primary); }
+.progress-text { font-weight: bold; color: var(--primary); font-size: 18px; }
+.complete-badge { background: #a29bfe; color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; animation: pulse 1.5s infinite; display: none; }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+.celebration-emoji { font-size: 30px; animation: bounce 0.5s infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.target-container { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.playing-indicator { display: inline-block; width: 12px; height: 12px; background: #55efc4; border-radius: 50%; margin-left: 5px; animation: blink 0.8s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+</style>
 </head>
 <body onclick="startAudioEngine()">
 
-    <h1>✨ Days Challenge ✨</h1>
+<h1>✨ Days Challenge ✨</h1>
 
-    <div class="quiz-container">
-        <div style="color: #7f8c8d; font-weight: bold; font-size: 18px;">Find the day:</div>
+<div class="progress-bar">
+    <span class="progress-text" id="progressText">0/7 Completed</span>
+    <span class="complete-badge" id="completeBadge">🏆 أكملت التحدي! 🏆</span>
+</div>
+
+<div class="quiz-container">
+    <div style="color: #7f8c8d; font-weight: bold; font-size: 18px;">Find the day:</div>
+    <div class="target-container">
         <div id="targetDisplay" class="target-day">...</div>
-        <p style="font-size: 12px; color: #a29bfe;">Tap screen to enable sounds</p>
+        <i class="fas fa-volume-up sound-icon" id="speakTargetBtn" onclick="pronounceCurrentTarget(event)"></i>
     </div>
+    <p style="font-size: 12px; color: #a29bfe;">اضغط على مكبر الصوت لسماع نطق اليوم</p>
+</div>
 
-    <div class="days-grid" id="mainGrid"></div>
+<div class="days-grid" id="mainGrid"></div>
 
-    <div class="nav-bar">
-        <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn">🏠 الرئيسية</a>
-        <button class="nav-btn" onclick="location.reload()" style="background:#a29bfe; color:white;">🔄 إعادة المحاولة</button>
-    </div>
+<div class="nav-bar">
+    <a href="../../../../../teacher_dashbord/english_dashboard.html" class="nav-btn">🏠 الرئيسية</a>
+    <button class="nav-btn" onclick="resetGame()" style="background:#a29bfe; color:white;">🔄 إعادة المحاولة</button>
+</div>
 
+<!-- Audio elements -->
+<audio id="sndCorrect" preload="auto">
+    <source src="../../../../../sound/correct-sound.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="sndWrong" preload="auto">
+    <source src="../../../../../sound/wrong-sound.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="sndApplause" preload="auto">
+    <source src="../../../../../sound/applause.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Dynamic audio element for day pronunciation -->
+<audio id="dayPronunciation" preload="auto">
+    <source src="" type="audio/mpeg">
+</audio>
+
+<script>
+// مصفوفة أصوات الأيام
+const soundsMap = {
+    'saturday': 'sounds/days/sutrday.mp3',
+    'sunday': 'sounds/days/sunday.mp3',
+    'monday': 'sounds/days/munday.mp3',
+    'tuesday': 'sounds/days/tusday.mp3',
+    'wednesday': 'sounds/days/wensday.mp3',
+    'thursday': 'sounds/days/thursday.mp3',
+    'friday': 'sounds/days/friday.mp3'
+};
+
+const soundsMapShort = {
+    'sat': 'sounds/days/sutrday.mp3',
+    'sun': 'sounds/days/sunday.mp3',
+    'mon': 'sounds/days/munday.mp3',
+    'tue': 'sounds/days/tusday.mp3',
+    'wed': 'sounds/days/wensday.mp3',
+    'thu': 'sounds/days/thursday.mp3',
+    'fri': 'sounds/days/friday.mp3'
+};
+
+const days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+let currentTarget = "";
+let isLocked = false;
+let audioActive = false;
+let completedDays = [];
+let isPlaying = false; // منع تشغيل أكثر من صوت في نفس الوقت
+
+function startAudioEngine() {
+    if (!audioActive) {
+        audioActive = true;
+        const silentSound = new Audio();
+        silentSound.volume = 0.01;
+        silentSound.play().then(() => {
+            silentSound.pause();
+        }).catch(() => {});
+    }
+}
+
+function initGrid() {
+    const grid = document.getElementById('mainGrid');
+    grid.innerHTML = '';
+    days.forEach((day) => {
+        const card = document.createElement('div');
+        card.className = 'day-card';
+        card.innerText = day;
+        card.dataset.day = day;
+        
+        const speakerBtn = document.createElement('span');
+        speakerBtn.className = 'speaker-btn';
+        speakerBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        speakerBtn.onclick = (e) => {
+            e.stopPropagation();
+            pronounceDay(day, speakerBtn);
+        };
+        card.appendChild(speakerBtn);
+        
+        card.onclick = (e) => { 
+            e.stopPropagation(); 
+            checkAnswer(day, card); 
+        };
+        grid.appendChild(card);
+    });
+}
+
+function pronounceCurrentTarget(event) {
+    if (event) {
+        event.stopPropagation();
+    }
+    if (currentTarget && currentTarget !== "...") {
+        const targetBtn = document.getElementById('speakTargetBtn');
+        pronounceDay(currentTarget, targetBtn);
+    }
+}
+
+// دالة نطق الأيام مع منع التداخل
+function pronounceDay(dayName, buttonElement) {
+    // إذا كان هناك صوت قيد التشغيل، نوقفه أولاً
+    if (isPlaying) {
+        stopAllSounds();
+    }
     
-    <script>
-        const days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-        let currentTarget = "";
-        let isLocked = false;
-        let audioActive = false;
-
-        function startAudioEngine() {
-            if (!audioActive) {
-                audioActive = true;
-                // تشغيل صامت لتفعيل الصوت في المتصفح
-                const s = document.getElementById('sndCorrect');
-                s.play().then(() => s.pause()).catch(() => {});
-            }
+    if (!audioActive) {
+        startAudioEngine();
+    }
+    
+    const dayLower = dayName.toLowerCase();
+    let soundPath = soundsMap[dayLower];
+    
+    if (!soundPath) {
+        const shortKey = dayLower.substring(0, 3);
+        soundPath = soundsMapShort[shortKey];
+    }
+    
+    if (soundPath) {
+        // تعطيل الزر مؤقتاً
+        if (buttonElement) {
+            buttonElement.classList.add('disabled');
         }
+        
+        const pronunciationAudio = document.getElementById('dayPronunciation');
+        pronunciationAudio.src = soundPath;
+        pronunciationAudio.currentTime = 0;
+        
+        // إضافة مؤشر التشغيل
+        const playingIndicator = document.createElement('span');
+        playingIndicator.className = 'playing-indicator';
+        playingIndicator.id = 'playingIndicator';
+        document.querySelector('.target-container').appendChild(playingIndicator);
+        
+        isPlaying = true;
+        
+        pronunciationAudio.play()
+            .then(() => {
+                console.log(`جاري تشغيل صوت: ${dayName}`);
+            })
+            .catch(error => {
+                console.log(`خطأ في تشغيل صوت ${dayName}:`, error);
+                isPlaying = false;
+                if (buttonElement) {
+                    buttonElement.classList.remove('disabled');
+                }
+                document.getElementById('playingIndicator')?.remove();
+            });
+        
+        // عند انتهاء الصوت
+        pronunciationAudio.onended = () => {
+            isPlaying = false;
+            if (buttonElement) {
+                buttonElement.classList.remove('disabled');
+            }
+            document.getElementById('playingIndicator')?.remove();
+        };
+        
+        // مهلة أمان - إذا استغرق الصوت أكثر من 5 ثواني
+        setTimeout(() => {
+            if (isPlaying) {
+                pronunciationAudio.pause();
+                pronunciationAudio.currentTime = 0;
+                isPlaying = false;
+                if (buttonElement) {
+                    buttonElement.classList.remove('disabled');
+                }
+                document.getElementById('playingIndicator')?.remove();
+            }
+        }, 5000);
+    } else {
+        console.log(`ملف الصوت لليوم ${dayName} غير موجود`);
+    }
+}
 
-        function initGrid() {
-            const grid = document.getElementById('mainGrid');
-            grid.innerHTML = '';
-            days.forEach(day => {
-                const card = document.createElement('div');
-                card.className = 'day-card';
-                card.innerText = day;
-                card.onclick = (e) => { 
-                    e.stopPropagation(); 
-                    checkAnswer(day, card); 
-                };
-                grid.appendChild(card);
+// إيقاف جميع الأصوات
+function stopAllSounds() {
+    // إيقاف صوت نطق اليوم
+    const pronunciationAudio = document.getElementById('dayPronunciation');
+    pronunciationAudio.pause();
+    pronunciationAudio.currentTime = 0;
+    
+    // إيقاف أصوات الإجابات
+    const correctSound = document.getElementById('sndCorrect');
+    correctSound.pause();
+    correctSound.currentTime = 0;
+    
+    const wrongSound = document.getElementById('sndWrong');
+    wrongSound.pause();
+    wrongSound.currentTime = 0;
+    
+    const applauseSound = document.getElementById('sndApplause');
+    applauseSound.pause();
+    applauseSound.currentTime = 0;
+    
+    isPlaying = false;
+    
+    // إزالة مؤشر التشغيل
+    document.getElementById('playingIndicator')?.remove();
+    
+    // إعادة تفعيل جميع أزرار الصوت
+    document.querySelectorAll('.speaker-btn, .sound-icon').forEach(btn => {
+        btn.classList.remove('disabled');
+    });
+}
+
+function pickQuestion() {
+    if (completedDays.length === days.length) {
+        document.getElementById('targetDisplay').innerHTML = '<span class="celebration-emoji">🎉🎊🏆</span> كل الأيام تمت! <span class="celebration-emoji">🏆🎊🎉</span>';
+        return;
+    }
+    
+    isLocked = false;
+    let availableDays = days.filter(day => !completedDays.includes(day));
+    
+    if (availableDays.length > 0) {
+        const randomIndex = Math.floor(Math.random() * availableDays.length);
+        currentTarget = availableDays[randomIndex];
+        document.getElementById('targetDisplay').innerText = currentTarget;
+        
+        // إزالة أي مؤشر تشغيل سابق
+        document.getElementById('playingIndicator')?.remove();
+        
+        // تشغيل نطق اليوم الجديد بعد تأخير بسيط
+        setTimeout(() => {
+            if (!isPlaying) {
+                const targetBtn = document.getElementById('speakTargetBtn');
+                pronounceDay(currentTarget, targetBtn);
+            }
+        }, 800);
+    }
+}
+
+function checkAnswer(selected, element) {
+    if (isLocked || completedDays.includes(selected)) return;
+    
+    if (selected === currentTarget) {
+        // إجابة صحيحة - نوقف أي صوت نطق قيد التشغيل
+        if (isPlaying) {
+            stopAllSounds();
+        }
+        
+        element.classList.add('correct');
+        completedDays.push(selected);
+        updateProgress();
+        playSound('sndCorrect');
+        isLocked = true;
+        
+        if (completedDays.length === days.length) {
+            setTimeout(() => {
+                playSound('sndApplause');
+                showCompletionCelebration();
+            }, 500);
+            document.getElementById('targetDisplay').innerHTML = '<span class="celebration-emoji">🎉✨🏆</span> مبروك! أكملت التحدي! <span class="celebration-emoji">🏆✨🎉</span>';
+        } else {
+            setTimeout(() => {
+                pickQuestion();
+            }, 1500);
+        }
+    } else {
+        // إجابة خاطئة - نوقف أي صوت نطق قيد التشغيل
+        if (isPlaying) {
+            stopAllSounds();
+        }
+        
+        element.style.backgroundColor = "var(--wrong)";
+        element.style.borderColor = "#e17055";
+        element.style.boxShadow = "0 2px 0 #e17055";
+        playSound('sndWrong');
+        
+        setTimeout(() => { 
+            if (!element.classList.contains('correct')) {
+                element.style.backgroundColor = "#ffeaa7"; 
+                element.style.borderColor = "#fdcb6e";
+                element.style.boxShadow = "0 5px 0 #fdcb6e";
+            }
+        }, 600);
+    }
+}
+
+function updateProgress() {
+    const progressText = document.getElementById('progressText');
+    const completeBadge = document.getElementById('completeBadge');
+    
+    progressText.innerText = `${completedDays.length}/${days.length} Completed`;
+    
+    if (completedDays.length === days.length) {
+        progressText.style.display = 'none';
+        completeBadge.style.display = 'inline';
+    } else {
+        progressText.style.display = 'inline';
+        completeBadge.style.display = 'none';
+    }
+}
+
+function showCompletionCelebration() {
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            const cards = document.querySelectorAll('.day-card');
+            cards.forEach(card => {
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }, i * 200);
+    }
+}
+
+// في دالة playSound
+function playSound(soundId) {
+    if (!audioActive) {
+        startAudioEngine();
+    }
+    
+    const sound = document.getElementById(soundId);
+    if (sound) {
+        sound.currentTime = 0;
+        
+        // التحكم في مستوى الصوت حسب نوع الصوت
+        if (soundId === 'sndApplause') {
+            sound.volume = 0.2; // ✅ تصفيق 20% فقط
+        } else if (soundId === 'sndCorrect') {
+            sound.volume = 0.7; // ✅ صوت صحيح 70%
+        } else if (soundId === 'sndWrong') {
+            sound.volume = 0.5; // ✅ صوت خطأ 50%
+        } else {
+            sound.volume = 0.8; // ✅ أصوات أخرى 80%
+        }
+        
+        const playPromise = sound.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("خطأ في تشغيل الصوت:", error);
             });
         }
+    }
+}function resetGame() {
+    // إيقاف جميع الأصوات عند إعادة اللعبة
+    stopAllSounds();
+    
+    completedDays = [];
+    isLocked = false;
+    currentTarget = "";
+    audioActive = false;
+    isPlaying = false;
+    
+    const cards = document.querySelectorAll('.day-card');
+    cards.forEach(card => {
+        card.classList.remove('correct');
+        card.style.backgroundColor = "#ffeaa7";
+        card.style.borderColor = "#fdcb6e";
+        card.style.boxShadow = "0 5px 0 #fdcb6e";
+        card.style.pointerEvents = 'auto';
+        card.style.opacity = '1';
+        card.style.transform = 'scale(1)';
+    });
+    
+    updateProgress();
+    document.getElementById('completeBadge').style.display = 'none';
+    document.getElementById('progressText').style.display = 'inline';
+    document.getElementById('playingIndicator')?.remove();
+    
+    pickQuestion();
+}
 
-        function pickQuestion() {
-            isLocked = false;
-            let next;
-            do {
-                next = days[Math.floor(Math.random() * days.length)];
-            } while (next === currentTarget);
-            
-            currentTarget = next;
-            document.getElementById('targetDisplay').innerText = currentTarget;
-        }
+window.onload = () => {
+    initGrid();
+    pickQuestion();
+    updateProgress();
+};
 
-        function checkAnswer(selected, element) {
-            if (isLocked) return;
+document.addEventListener('DOMContentLoaded', () => {
+    startAudioEngine();
+});
 
-            if (selected === currentTarget) {
-                isLocked = true;
-                element.style.backgroundColor = "var(--correct)";
-                element.style.borderColor = "#2ecc71";
-                playSnd('sndCorrect');
-                
-                // الانتقال الإجباري للسؤال التالي بعد ثانيتين
-                setTimeout(() => {
-                    element.style.backgroundColor = "#ffeaa7";
-                    element.style.borderColor = "#fdcb6e";
-                    pickQuestion();
-                }, 2000);
-            } else {
-                element.style.backgroundColor = "var(--wrong)";
-                element.style.borderColor = "#e17055";
-                playSnd('sndWrong');
-                setTimeout(() => { 
-                    element.style.backgroundColor = "#ffeaa7"; 
-                    element.style.borderColor = "#fdcb6e";
-                }, 600);
-            }
-        }
 
-        function playSnd(id) {
-            const s = document.getElementById(id);
-            if (s) {
-                s.currentTime = 0;
-                s.play().catch(() => {});
-            }
-        }
 
-        window.onload = () => {
-            initGrid();
-            pickQuestion();
-        };
-    </script>
+
+
+</script>
+
 </body>
 </html>
