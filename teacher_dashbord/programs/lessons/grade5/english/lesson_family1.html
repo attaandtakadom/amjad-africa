@@ -74,9 +74,9 @@
     </div>
 </div>
 
-<audio id="bg-music" loop src="https://www.soundjay.com/free-music/sounds/barn-beat-01.mp3"></audio>
-<audio id="applause-sound" src="https://www.soundjay.com/human/sounds/applause-01.mp3"></audio>
-<audio id="error-sound" src="https://www.soundjay.com/buttons/sounds/button-05.mp3"></audio>
+<audio id="bg-music" loop src="../../../sound/exland-getjob.mp3"></audio>
+<audio id="applause-sound" src="../../../sound/applause.mp3"></audio>
+<audio id="error-sound" src="../../../sound/can-you-tryagin.mp3"></audio>
 
 <script>
     const familyMembers = [
@@ -90,7 +90,8 @@
         { name: 'Brother', arabic: 'الأخ', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png' },
         { name: 'Sister', arabic: 'الأخت', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140040.png' }
     ];
-
+// هذا الأمر يمنع أي كود خارجي من تعديل أو إضافة أفراد عائلة جدد أثناء تشغيل اللعبة
+Object.freeze(familyMembers);
     let currentTarget = "";
 
     function initApp() {

@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحولات الكهربائية - شرح وتفاعل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            padding: 15px;
+            gap: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: white;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .tab-btn.active {
+            background: #764ba2;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(118, 75, 162, 0.3);
+        }
+        
+        .tab-btn i {
+            margin-left: 8px;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* أنماط بطاقات الشرح */
+        .theory-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-right: 8px solid #764ba2;
+        }
+        
+        .theory-card h2 {
+            color: #764ba2;
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .theory-card h3 {
+            color: #667eea;
+            font-size: 22px;
+            margin: 20px 0 10px;
+        }
+        
+        .theory-card p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.3);
+        }
+        
+        .formula-box small {
+            display: block;
+            font-size: 16px;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .info-card i {
+            font-size: 40px;
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+        
+        .info-card h4 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .info-card p {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* أنماط الأسئلة */
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .question-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .question-text {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .option-btn {
+            padding: 15px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .option-btn.selected {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        
+        .option-btn.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        
+        .option-btn.wrong {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+        
+        .question-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            display: none;
+        }
+        
+        .question-feedback.show {
+            display: block;
+        }
+        
+        .feedback-correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback-wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* أنماط المسائل */
+        .problems-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .problem-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .problem-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .problem-data {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .data-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .data-item i {
+            width: 30px;
+            color: #764ba2;
+        }
+        
+        .problem-input {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .problem-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 18px;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .problem-input input:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+        
+        .solve-btn {
+            padding: 15px 30px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .solve-btn:hover {
+            background: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .problem-solution {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .problem-solution.show {
+            display: block;
+            animation: slideIn 0.5s;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .solution-steps {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 2;
+            font-size: 18px;
+        }
+        
+        .result-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .result-correct {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .result-wrong {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* أزرار التحكم */
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn.primary {
+            background: #764ba2;
+            color: white;
+        }
+        
+        .control-btn.success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .control-btn.warning {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .score-box {
+            background: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        /* تذييل */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-bolt"></i> المحولات الكهربائية <i class="fas fa-bolt"></i></h1>
+            <p>شرح مبسط مع أسئلة تفاعلية ومسائل تطبيقية</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('theory')">
+                <i class="fas fa-book"></i> الشرح النظري
+            </button>
+            <button class="tab-btn" onclick="showTab('quiz')">
+                <i class="fas fa-question-circle"></i> أسئلة الاختيار المتعدد
+            </button>
+            <button class="tab-btn" onclick="showTab('problems')">
+                <i class="fas fa-calculator"></i> مسائل وتطبيقات
+            </button>
+        </div>
+        
+        <!-- قسم الشرح النظري -->
+        <div id="theory" class="tab-content active">
+            <div class="theory-card">
+                <h2><i class="fas fa-flask"></i> أولاً: قانون المحولات الكهربائية</h2>
+                <div class="formula-box">
+                    <i class="fas fa-equals"></i> V<sub>p</sub> / V<sub>s</sub> = N<sub>p</sub> / N<sub>s</sub> <i class="fas fa-equals"></i>
+                    <br>
+                    <i class="fas fa-equals"></i> I<sub>p</sub> / I<sub>s</sub> = N<sub>s</sub> / N<sub>p</sub> <i class="fas fa-equals"></i>
+                    <br>
+                    <small>القانون العام للمحولات الكهربائية</small>
+                </div>
+                
+                <p><strong>حيث أن:</strong></p>
+                <ul style="font-size: 18px; line-height: 2; margin-right: 30px;">
+                    <li>V<sub>p</sub> : جهد الملف الابتدائي</li>
+                    <li>V<sub>s</sub> : جهد الملف الثانوي</li>
+                    <li>N<sub>p</sub> : عدد لفات الملف الابتدائي</li>
+                    <li>N<sub>s</sub> : عدد لفات الملف الثانوي</li>
+                    <li>I<sub>p</sub> : تيار الملف الابتدائي</li>
+                    <li>I<sub>s</sub> : تيار الملف الثانوي</li>
+                </ul>
+                
+                <div class="grid-2">
+                    <div class="info-card">
+                        <i class="fas fa-arrow-up"></i>
+                        <h4>محول رفع الجهد</h4>
+                        <p>N<sub>s</sub> > N<sub>p</sub><br>V<sub>s</sub> > V<sub>p</sub><br>I<sub>s</sub> < I<sub>p</sub></p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-arrow-down"></i>
+                        <h4>محول خفض الجهد</h4>
+                        <p>N<sub>s</sub> < N<sub>p</sub><br>V<sub>s</sub> < V<sub>p</sub><br>I<sub>s</sub> > I<sub>p</sub></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <h2><i class="fas fa-power-off"></i> ثانياً: نقل القدرة وتقليل الفقد</h2>
+                <div class="formula-box">
+                    P<sub>f</sub> = I²R = (P/V)² × R
+                    <br>
+                    <small>قدرة الفقد = مربع التيار × المقاومة</small>
+                </div>
+                
+                <h3>طرق تقليل الفقد في القدرة:</h3>
+                <div class="grid-2">
+                    <div class="info-card">
+                        <i class="fas fa-bolt"></i>
+                        <h4>1. رفع الجهد الكهربائي</h4>
+                        <p>P<sub>f</sub> ∝ 1/V²<br>مضاعفة الجهد تقلل الفقد إلى الربع</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-wire"></i>
+                        <h4>2. تقليل مقاومة الموصلات</h4>
+                        <p>R = ρL/A<br>زيادة مساحة المقطع تقلل المقاومة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <h2><i class="fas fa-magnet"></i> ثالثاً: قانون لينز (Lenz's Law)</h2>
+                <div class="formula-box">
+                    ε = -N dΦ/dt
+                    <br>
+                    <small>القوة الدافعة الكهربائية الحثية</small>
+                </div>
+                
+                <p><strong>نص القانون:</strong> "يكون اتجاه التيار الحثي بحيث يقاوم التغير في التدفق المغناطيسي الذي سببه"</p>
+                
+                <h3>تطبيقات قانون لينز:</h3>
+                <ul style="font-size: 18px; line-height: 2; margin-right: 30px;">
+                    <li>تحديد اتجاه التيار الحثي</li>
+                    <li>الفرامل المغناطيسية</li>
+                    <li>الرفع المغناطيسي (ماجليف)</li>
+                    <li>توليد التيارات الدوامية</li>
+                </ul>
+            </div>
+            
+            <div class="theory-card">
+                <h2><i class="fas fa-balance-scale"></i> رابعاً: قاعدة حفظ الطاقة</h2>
+                <div class="formula-box">
+                    P<sub>in</sub> = P<sub>out</sub> + P<sub>loss</sub>
+                    <br>
+                    <small>القدرة الداخلة = القدرة الخارجة + الفقد</small>
+                </div>
+                
+                <p><strong>في المحول المثالي:</strong> P<sub>in</sub> = P<sub>out</sub> → V<sub>p</sub>I<sub>p</sub> = V<sub>s</sub>I<sub>s</sub></p>
+                
+                <p><strong>كفاءة المحول:</strong></p>
+                <div class="formula-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    η = (P<sub>out</sub> / P<sub>in</sub>) × 100%
+                </div>
+            </div>
+        </div>
+        
+        <!-- قسم أسئلة الاختيار المتعدد -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-container">
+                <div class="score-box">
+                    <i class="fas fa-star"></i> النتيجة: <span id="quizScore">0</span> / <span id="totalQuestions">10</span>
+                </div>
+                
+                <div class="control-buttons">
+                    <button class="control-btn primary" onclick="checkAllAnswers()">
+                        <i class="fas fa-check-circle"></i> تصحيح الكل
+                    </button>
+                    <button class="control-btn success" onclick="showAllAnswers()">
+                        <i class="fas fa-lightbulb"></i> عرض الإجابات
+                    </button>
+                    <button class="control-btn warning" onclick="resetQuiz()">
+                        <i class="fas fa-redo-alt"></i> إعادة المحاولة
+                    </button>
+                </div>
+                
+                <div id="quizQuestions"></div>
+            </div>
+        </div>
+        
+        <!-- قسم المسائل -->
+        <div id="problems" class="tab-content">
+            <div class="problems-container">
+                <!-- المسألة 1: قانون المحولات -->
+                <div class="problem-card">
+                    <div class="problem-title">
+                        <i class="fas fa-calculator"></i> مسألة 1: قانون المحولات
+                    </div>
+                    <div class="problem-data">
+                        <div class="data-item"><i class="fas fa-circle"></i> ملف ابتدائي عدد لفاته 500 لفة، جهد الابتدائي 220V</div>
+                        <div class="data-item"><i class="fas fa-circle"></i> الملف الثانوي عدد لفاته 50 لفة</div>
+                        <div class="data-item"><i class="fas fa-question"></i> المطلوب: حساب جهد الثانوي وتيار الثانوي (إذا كان تيار الابتدائي 2A)</div>
+                    </div>
+                    <div class="problem-input">
+                        <input type="number" id="prob1Vs" placeholder="جهد الثانوي (V)">
+                        <input type="number" id="prob1Is" placeholder="تيار الثانوي (A)">
+                        <button class="solve-btn" onclick="solveProblem1()"><i class="fas fa-calculator"></i> حل المسألة</button>
+                    </div>
+                    <div id="prob1Solution" class="problem-solution"></div>
+                </div>
+                
+                <!-- المسألة 2: نقل القدرة وتقليل الفقد -->
+                <div class="problem-card">
+                    <div class="problem-title">
+                        <i class="fas fa-bolt"></i> مسألة 2: نقل القدرة الكهربائية
+                    </div>
+                    <div class="problem-data">
+                        <div class="data-item"><i class="fas fa-circle"></i> قدرة محطة توليد: 100 MW</div>
+                        <div class="data-item"><i class="fas fa-circle"></i> مقاومة الخط: 10 Ω</div>
+                        <div class="data-item"><i class="fas fa-circle"></i> جهد النقل: 220 kV</div>
+                        <div class="data-item"><i class="fas fa-question"></i> المطلوب: حساب قدرة الفقد في الخط</div>
+                    </div>
+                    <div class="problem-input">
+                        <input type="number" id="prob2Loss" placeholder="قدرة الفقد (MW)">
+                        <button class="solve-btn" onclick="solveProblem2()"><i class="fas fa-calculator"></i> حل المسألة</button>
+                    </div>
+                    <div id="prob2Solution" class="problem-solution"></div>
+                </div>
+                
+                <!-- المسألة 3: قانون لينز وحفظ الطاقة -->
+                <div class="problem-card">
+                    <div class="problem-title">
+                        <i class="fas fa-magnet"></i> مسألة 3: قانون لينز وكفاءة المحول
+                    </div>
+                    <div class="problem-data">
+                        <div class="data-item"><i class="fas fa-circle"></i> محول قدرته الداخلة 500 W، قدرته الخارجة 450 W</div>
+                        <div class="data-item"><i class="fas fa-question"></i> المطلوب: حساب كفاءة المحول وفقد القدرة</div>
+                    </div>
+                    <div class="problem-input">
+                        <input type="number" id="prob3Efficiency" placeholder="الكفاءة (%)">
+                        <input type="number" id="prob3Loss" placeholder="الفقد (W)">
+                        <button class="solve-btn" onclick="solveProblem3()"><i class="fas fa-calculator"></i> حل المسألة</button>
+                    </div>
+                    <div id="prob3Solution" class="problem-solution"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 - جميع الحقوق محفوظة - مؤسسة التقدم والعطاء</p>
+        </div>
+    </div>
+    
+    <script>
+        // بيانات الأسئلة
+        const questions = [
+            {
+                question: "قانون المحولات الكهربائية يعبر عن العلاقة بين:",
+                options: [
+                    "الجهد وعدد اللفات فقط",
+                    "الجهد وعدد اللفات والتيار",
+                    "المقاومة والتيار فقط",
+                    "القدرة والمقاومة فقط"
+                ],
+                correct: 1,
+                explanation: "القانون العام: Vp/Vs = Np/Ns = Is/Ip"
+            },
+            {
+                question: "في محول رفع الجهد، أي العلاقات التالية صحيحة؟",
+                options: [
+                    "Ns > Np , Vs < Vp , Is > Ip",
+                    "Ns < Np , Vs < Vp , Is > Ip", 
+                    "Ns > Np , Vs > Vp , Is < Ip",
+                    "Ns < Np , Vs > Vp , Is < Ip"
+                ],
+                correct: 2,
+                explanation: "في محول الرفع: عدد لفات الثانوي أكبر، جهد الثانوي أكبر، تيار الثانوي أقل"
+            },
+            {
+                question: "أي من الطرق التالية تستخدم لتقليل الفقد في القدرة الكهربائية أثناء النقل؟",
+                options: [
+                    "خفض الجهد الكهربائي",
+                    "رفع الجهد الكهربائي", 
+                    "زيادة تيار النقل",
+                    "استخدام موصلات أرق"
+                ],
+                correct: 1,
+                explanation: "رفع الجهد يقلل التيار، وبالتالي يقل الفقد (Pf = I²R)"
+            },
+            {
+                question: "ينص قانون لينز على أن التيار الحثي يتخذ اتجاهاً بحيث:",
+                options: [
+                    "يساعد التغير في التدفق المغناطيسي",
+                    "يقاوم التغير في التدفق المغناطيسي",
+                    "يزيد من التدفق المغناطيسي",
+                    "يلغي التدفق المغناطيسي تماماً"
+                ],
+                correct: 1,
+                explanation: "قانون لينز: التيار الحثي يقاوم التغير في التدفق المغناطيسي الذي سببه"
+            },
+            {
+                question: "في المحول المثالي، القدرة الداخلة تساوي:",
+                options: [
+                    "القدرة الخارجة",
+                    "نصف القدرة الخارجة", 
+                    "ضعف القدرة الخارجة",
+                    "صفر"
+                ],
+                correct: 0,
+                explanation: "المحول المثالي لا يوجد به فقد، لذلك Pin = Pout"
+            },
+            {
+                question: "إذا تضاعف جهد النقل، فإن قدرة الفقد تقل بمقدار:",
+                options: [
+                    "النصف",
+                    "الربع",
+                    "الضعف", 
+                    "تبقى كما هي"
+                ],
+                correct: 1,
+                explanation: "Pf ∝ 1/V²، مضاعفة الجهد تقلل الفقد إلى الربع"
+            },
+            {
+                question: "وحدة قياس كفاءة المحول هي:",
+                options: [
+                    "الفولت",
+                    "الأمبير",
+                    "الواط",
+                    "النسبة المئوية"
+                ],
+                correct: 3,
+                explanation: "الكفاءة = (Pout/Pin) × 100%"
+            },
+            {
+                question: "أي العوامل التالية لا يؤثر في قيمة الفقد الحراري في الموصلات؟",
+                options: [
+                    "مقاومة الموصل",
+                    "شدة التيار", 
+                    "جهد المصدر",
+                    "طول الموصل"
+                ],
+                correct: 2,
+                explanation: "الفقد = I²R، يتأثر بالتيار والمقاومة (التي تعتمد على الطول والمساحة)"
+            },
+            {
+                question: "في قانون فاراداي، الإشارة السالبة تمثل:",
+                options: [
+                    "قانون حفظ الطاقة",
+                    "قاعدة لنز",
+                    "قانون أوم",
+                    "قانون كيرشوف"
+                ],
+                correct: 1,
+                explanation: "الإشارة السالبة في قانون فاراداي ε = -N dΦ/dt تمثل قانون لينز"
+            },
+            {
+                question: "لتقليل فقد القدرة إلى 25% من قيمتها، يجب رفع الجهد إلى:",
+                options: [
+                    "مثل قيمته",
+                    "ضعف قيمته",
+                    "ثلاثة أضعاف", 
+                    "أربعة أضعاف"
+                ],
+                correct: 1,
+                explanation: "Pf ∝ 1/V²، مضاعفة الجهد تقلل الفقد إلى الربع (25%)"
+            }
+        ];
+        
+        let userAnswers = new Array(questions.length).fill(null);
+        
+        // عرض الأسئلة
+        function displayQuestions() {
+            const container = document.getElementById('quizQuestions');
+            container.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionBox = document.createElement('div');
+                questionBox.className = 'question-box';
+                questionBox.id = `q${index}`;
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.innerHTML = `${index + 1}. ${q.question}`;
+                
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                
+                q.options.forEach((opt, optIndex) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    if (userAnswers[index] === optIndex) {
+                        btn.classList.add('selected');
+                    }
+                    btn.innerHTML = opt;
+                    btn.onclick = () => selectAnswer(index, optIndex);
+                    optionsDiv.appendChild(btn);
+                });
+                
+                const feedback = document.createElement('div');
+                feedback.className = 'question-feedback';
+                feedback.id = `fb${index}`;
+                
+                questionBox.appendChild(questionText);
+                questionBox.appendChild(optionsDiv);
+                questionBox.appendChild(feedback);
+                container.appendChild(questionBox);
+            });
+            
+            updateScore();
+        }
+        
+        // اختيار إجابة
+        function selectAnswer(qIndex, optIndex) {
+            userAnswers[qIndex] = optIndex;
+            
+            // تحديث واجهة الأزرار
+            const questionDiv = document.getElementById(`q${qIndex}`);
+            const buttons = questionDiv.querySelectorAll('.option-btn');
+            buttons.forEach((btn, i) => {
+                if (i === optIndex) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+                btn.classList.remove('correct', 'wrong');
+            });
+            
+            // إخفاء الفeedback
+            document.getElementById(`fb${qIndex}`).classList.remove('show');
+            
+            updateScore();
+        }
+        
+        // تصحيح جميع الإجابات
+        function checkAllAnswers() {
+            let correctCount = 0;
+            
+            questions.forEach((q, index) => {
+                const fb = document.getElementById(`fb${index}`);
+                const buttons = document.querySelectorAll(`#q${index} .option-btn`);
+                
+                if (userAnswers[index] !== null) {
+                    buttons.forEach((btn, i) => {
+                        btn.classList.remove('selected');
+                        if (i === q.correct) {
+                            btn.classList.add('correct');
+                        } else if (i === userAnswers[index] && i !== q.correct) {
+                            btn.classList.add('wrong');
+                        }
+                    });
+                    
+                    if (userAnswers[index] === q.correct) {
+                        correctCount++;
+                        fb.innerHTML = `✓ ${q.explanation}`;
+                        fb.className = 'question-feedback show feedback-correct';
+                    } else {
+                        fb.innerHTML = `✗ ${q.explanation}`;
+                        fb.className = 'question-feedback show feedback-wrong';
+                    }
+                } else {
+                    fb.innerHTML = '⚠ لم تختار إجابة بعد';
+                    fb.className = 'question-feedback show feedback-wrong';
+                }
+            });
+            
+            document.getElementById('quizScore').textContent = correctCount;
+        }
+        
+        // عرض جميع الإجابات الصحيحة
+        function showAllAnswers() {
+            questions.forEach((q, index) => {
+                const buttons = document.querySelectorAll(`#q${index} .option-btn`);
+                buttons.forEach((btn, i) => {
+                    btn.classList.remove('selected', 'wrong');
+                    if (i === q.correct) {
+                        btn.classList.add('correct');
+                    }
+                });
+                
+                const fb = document.getElementById(`fb${index}`);
+                fb.innerHTML = `✓ الإجابة الصحيحة: ${q.options[q.correct]}<br>${q.explanation}`;
+                fb.className = 'question-feedback show feedback-correct';
+            });
+            
+            document.getElementById('quizScore').textContent = questions.length;
+        }
+        
+        // إعادة تعيين الاختبار
+        function resetQuiz() {
+            userAnswers = new Array(questions.length).fill(null);
+            displayQuestions();
+            document.getElementById('quizScore').textContent = '0';
+        }
+        
+        // تحديث النتيجة
+        function updateScore() {
+            const answered = userAnswers.filter(a => a !== null).length;
+            document.getElementById('totalQuestions').textContent = questions.length;
+        }
+        
+        // حل المسألة 1
+        function solveProblem1() {
+            const Np = 500, Ns = 50, Vp = 220, Ip = 2;
+            const Vs = (Vp * Ns) / Np;
+            const Is = (Ip * Np) / Ns;
+            
+            const userVs = parseFloat(document.getElementById('prob1Vs').value);
+            const userIs = parseFloat(document.getElementById('prob1Is').value);
+            
+            const solution = document.getElementById('prob1Solution');
+            solution.className = 'problem-solution show';
+            
+            let result = '<div class="solution-steps">';
+            result += '<strong>الحل:</strong><br><br>';
+            result += '1. حساب جهد الثانوي:<br>';
+            result += `Vs = (Vp × Ns) / Np = (220 × 50) / 500 = ${Vs.toFixed(2)} V<br><br>`;
+            result += '2. حساب تيار الثانوي:<br>';
+            result += `Is = (Ip × Np) / Ns = (2 × 500) / 50 = ${Is.toFixed(2)} A<br><br>`;
+            
+            if (Math.abs(userVs - Vs) < 0.1 && Math.abs(userIs - Is) < 0.1) {
+                result += '<span class="result-badge result-correct">✓ إجابة صحيحة! أحسنت</span>';
+            } else {
+                result += '<span class="result-badge result-wrong">✗ إجابة خاطئة، حاول مرة أخرى</span>';
+            }
+            
+            result += '</div>';
+            solution.innerHTML = result;
+        }
+        
+        // حل المسألة 2
+        function solveProblem2() {
+            const P = 100e6; // 100 MW بالواط
+            const R = 10;
+            const V = 220e3; // 220 kV بالفلط
+            
+            const I = P / V;
+            const Ploss = I * I * R / 1e6; // تحويل النتيجة لـ MW
+            
+            const userLoss = parseFloat(document.getElementById('prob2Loss').value);
+            
+            const solution = document.getElementById('prob2Solution');
+            solution.className = 'problem-solution show';
+            
+            let result = '<div class="solution-steps">';
+            result += '<strong>الحل:</strong><br><br>';
+            result += '1. حساب تيار النقل:<br>';
+            result += `I = P / V = ${P.toExponential(2)} / ${V.toExponential(2)} = ${I.toFixed(2)} A<br><br>`;
+            result += '2. حساب قدرة الفقد:<br>';
+            result += `Pf = I² × R = (${I.toFixed(2)})² × 10 = ${(I*I*R).toExponential(2)} W<br>`;
+            result += `Pf = ${Ploss.toFixed(4)} MW<br><br>`;
+            
+            if (Math.abs(userLoss - Ploss) < 0.1) {
+                result += '<span class="result-badge result-correct">✓ إجابة صحيحة! أحسنت</span>';
+            } else {
+                result += '<span class="result-badge result-wrong">✗ إجابة خاطئة، حاول مرة أخرى</span>';
+            }
+            
+            result += '</div>';
+            solution.innerHTML = result;
+        }
+        
+        // حل المسألة 3
+        function solveProblem3() {
+            const Pin = 500, Pout = 450;
+            const efficiency = (Pout / Pin) * 100;
+            const loss = Pin - Pout;
+            
+            const userEff = parseFloat(document.getElementById('prob3Efficiency').value);
+            const userLoss = parseFloat(document.getElementById('prob3Loss').value);
+            
+            const solution = document.getElementById('prob3Solution');
+            solution.className = 'problem-solution show';
+            
+            let result = '<div class="solution-steps">';
+            result += '<strong>الحل:</strong><br><br>';
+            result += '1. حساب كفاءة المحول:<br>';
+            result += `η = (Pout / Pin) × 100% = (450 / 500) × 100% = ${efficiency.toFixed(1)}%<br><br>`;
+            result += '2. حساب قدرة الفقد:<br>';
+            result += `Ploss = Pin - Pout = 500 - 450 = ${loss} W<br><br>`;
+            
+            if (Math.abs(userEff - efficiency) < 0.1 && Math.abs(userLoss - loss) < 0.1) {
+                result += '<span class="result-badge result-correct">✓ إجابة صحيحة! أحسنت</span>';
+            } else {
+                result += '<span class="result-badge result-wrong">✗ إجابة خاطئة، حاول مرة أخرى</span>';
+            }
+            
+            result += '</div>';
+            solution.innerHTML = result;
+        }
+        
+        // تبديل التبويبات
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (tabId === 'quiz') {
+                displayQuestions();
+            }
+        }
+        
+        // تهيئة الصفحة
+        window.onload = function() {
+            displayQuestions();
+        };
+    </script>
+</body>
+</html>
