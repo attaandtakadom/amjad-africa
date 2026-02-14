@@ -1121,9 +1121,41 @@
         </div>
     </footer>
 
-
-<script src="js/simple-auth.js"></script>
+<!--
+<script src="js/simple-auth.js"></script>-->
 <script>
+//start lock
+(function() {
+    // التاريخ المحدد: 31 مارس 2026 الساعة 11:59 ليلاً
+    const expiryDate = new Date(2026, 2, 31, 23, 59, 59); // شهر مارس في البرمجة هو الرقم 2
+    const today = new Date();
+
+    if (today > expiryDate) {
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.innerHTML = `
+                <div style="direction:rtl; text-align:center; padding:100px 20px; font-family:sans-serif; background:#ffffff; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div style="font-size:80px; margin-bottom:20px;">🔒</div>
+                    <h1 style="color:#2c3e50; margin-bottom:10px;">انتهت فترة المعاينة الرسمية</h1>
+                    <p style="font-size:18px; color:#576574; max-width:500px; line-height:1.6;">
+                        لقد انتهت الصلاحية الزمنية للنسخة التجريبية (نسخة رمضان). <br>
+                        للحصول على <b>مفتاح التفعيل الدائم</b> والاستمرار في العمل، يرجى التواصل مع مطورة المنظومة.
+                    </p>
+                    <div style="margin-top:30px; padding:15px; border-top:1px solid #eee; color:#aaa; font-size:14px;">
+                        جميع الحقوق محفوظة © 2026
+                    </div>
+                </div>`;
+        });
+        window.stop();
+    }
+})();
+
+//end lock
+
+
+
+
+
+
     // كود مبسط يعمل مباشرة
     document.addEventListener('DOMContentLoaded', function() {
         console.log('🚀 بدء تشغيل المنصة...');
@@ -1154,22 +1186,10 @@
         });
     }
     
-    function initializeSimpleSystem() {
-        console.log('🔧 تهيئة النظام المبسط...');
-        
-        // استخدام النظام المبسط
-        if (window.SimpleAuth) {
-            SimpleAuth.init().then(() => {
-                console.log('✅ النظام المبسط جاهز');
-                showWelcomeMessage();
-            });
-        } else {
-            console.log('⚠️ استخدام النظام الافتراضي');
-            showWelcomeMessage();
-        }
-    }
-    
-    function showWelcomeMessage() {
+//-==
+// ==============
+
+  function showWelcomeMessage() {
         // يمكنك إضافة رسالة ترحيب
         console.log('👋 مرحباً بك في منصة تعليم أطفال التوحد');
     }

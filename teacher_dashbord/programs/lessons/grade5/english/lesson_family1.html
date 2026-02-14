@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Learning Game - With Question Voice</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Family Learning Game - مع صوت للجوال</title>
     <style>
         :root {
             --primary: #FF6B6B;
@@ -32,132 +31,422 @@
             padding: 15px; cursor: pointer; transition: 0.3s; position: relative;
         }
         .family-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
-        .family-card img { width: 90px; height: 90px; border-radius: 50%; margin-bottom: 10px; }
-        
+        .family-card.correct-highlight {
+            border-color: var(--success);
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+        .family-card.wrong-highlight {
+            border-color: var(--danger);
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+        .emoji-icon {
+            font-size: 80px;
+            margin-bottom: 10px;
+        }
         .speaker-btn {
             background: var(--secondary); color: white; border-radius: 50%;
-            width: 35px; height: 35px; line-height: 35px; display: inline-block; margin-top: 5px;
+            width: 40px; height: 40px; line-height: 40px; display: inline-block; margin-top: 5px;
+            cursor: pointer; font-size: 20px;
         }
-
         .quiz-section {
             background: #f9f9f9; padding: 25px; border-radius: 30px; border: 4px dashed var(--primary);
         }
         .instruction-text { color: #576574; font-size: 18px; margin-bottom: 5px; }
         #target-name { font-size: 55px; color: var(--primary); font-weight: 900; display: block; margin: 10px 0; }
-        .feedback { font-size: 26px; font-weight: bold; min-height: 40px; margin-top: 15px; }
-
+        .feedback { font-size: 26px; font-weight: bold; min-height: 60px; margin-top: 15px; padding: 10px; }
         .btn-music { background: var(--dark); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-bottom: 20px; }
-        
-        /* زر إعادة سماع السؤال */
         .repeat-btn {
-            background: var(--primary); color: white; border: none; padding: 8px 15px; 
-            border-radius: 15px; cursor: pointer; font-size: 16px; margin-top: 10px;
+            background: var(--primary); color: white; border: none; padding: 12px 25px; 
+            border-radius: 25px; cursor: pointer; font-size: 18px; margin: 10px 5px;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            font-size: 18px;
+            color: var(--dark);
+        }
+        .stats span {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .reset-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .sound-warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .mobile-sound-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <button class="btn-music" onclick="toggleMusic()"><i class="fas fa-music"></i> تشغيل/إيقاف الموسيقى</button>
+
+<div style="text-align: left; margin: 20px 0;">
+    <a href="../../../../english_dashboard.html" 
+       style="display: inline-flex; 
+              align-items: center; 
+              gap: 10px; 
+              background: #4CAF50; 
+              color: white; 
+              padding: 10px 20px; 
+              border-radius: 8px; 
+              text-decoration: none;
+              font-weight: bold;">
+        <i class="fas fa-arrow-right"></i>
+        العودة للوحة التحكم
+    </a>
+</div>
+
+
+
+
+
+    <div class="sound-warning" id="soundWarning">
+        🔊 اضغط على الزر الأخضر لتفعيل الصوت في الجوال
+    </div>
     
-    <h1>Family Members Tree</h1>
+    <button class="mobile-sound-btn" onclick="activateMobileSound()" id="activateSoundBtn">
+        <span>🔊</span> اضغط هنا لتفعيل الصوت
+    </button>
+    
+    <button class="btn-music" onclick="toggleMusic()"><span>🎵</span> موسيقى خلفية</button>
+    <h1>👨‍👩‍👧‍👦 Family Members Tree</h1>
+    
+    <div class="stats">
+        <div>✅ الصحيح: <span id="correct-count">0</span></div>
+        <div>🔄 الإجمالي: <span id="total-questions">0</span></div>
+    </div>
+    
     <div class="family-grid" id="familyGrid"></div>
 
     <div class="quiz-section">
-        <p class="instruction-text">Click on the correct picture above!</p>
+        <p class="instruction-text">👉 اضغط على الصورة الصحيحة أعلاه!</p>
         <h2 style="margin:0">Who is:</h2>
         <span id="target-name">...</span>
-        <button class="repeat-btn" onclick="speakQuestion()">
-            <i class="fas fa-volume-up"></i> Listen to Question
-        </button>
+        <div>
+            <button class="repeat-btn" onclick="speakQuestion()">
+                <span>🔊</span> استمع للسؤال
+            </button>
+            <button class="repeat-btn" onclick="speakSlowly()">
+                <span>🐢</span> استمع ببطء
+            </button>
+        </div>
         <div id="feedback" class="feedback"></div>
+        <button class="reset-btn" onclick="resetGame()">🔄 بدء لعبة جديدة</button>
     </div>
 </div>
 
-<audio id="bg-music" loop src="../../../sound/exland-getjob.mp3"></audio>
-<audio id="applause-sound" src="../../../sound/applause.mp3"></audio>
-<audio id="error-sound" src="../../../sound/can-you-tryagin.mp3"></audio>
-
 <script>
+    // قائمة أفراد العائلة
     const familyMembers = [
-        { name: 'Dad', arabic: 'بابا', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140048.png' },
-        { name: 'Mom', arabic: 'ماما', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png' },
-        { name: 'Uncle', arabic: 'العم/الخال', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140061.png' },
-        { name: 'Aunt', arabic: 'العمة/الخالة', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140045.png' },
-        { name: 'Cousin', arabic: 'ابن العم/الخال', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140039.png' },
-        { name: 'Grandpa', arabic: 'الجد', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140052.png' },
-        { name: 'Grandma', arabic: 'الجدة', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140051.png' },
-        { name: 'Brother', arabic: 'الأخ', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140037.png' },
-        { name: 'Sister', arabic: 'الأخت', img: 'https://cdn-icons-png.flaticon.com/512/4140/4140040.png' }
+        { name: 'Dad', arabic: 'بابا', emoji: '👨' },
+        { name: 'Mom', arabic: 'ماما', emoji: '👩' },
+        { name: 'Uncle', arabic: 'العم/الخال', emoji: '👨‍🦰' },
+        { name: 'Aunt', arabic: 'العمة/الخالة', emoji: '👩‍🦰' },
+        { name: 'Cousin', arabic: 'ابن العم/الخال', emoji: '🧑' },
+        { name: 'Grandpa', arabic: 'الجد', emoji: '👴' },
+        { name: 'Grandma', arabic: 'الجدة', emoji: '👵' },
+        { name: 'Brother', arabic: 'الأخ', emoji: '👦' },
+        { name: 'Sister', arabic: 'الأخت', emoji: '👧' }
     ];
-// هذا الأمر يمنع أي كود خارجي من تعديل أو إضافة أفراد عائلة جدد أثناء تشغيل اللعبة
-Object.freeze(familyMembers);
-    let currentTarget = "";
 
+    // متغيرات اللعبة
+    let currentTarget = "";
+    let correctAnswers = 0;
+    let totalQuestions = 0;
+    let canAnswer = true;
+    let soundEnabled = false;
+    let audioContext = null;
+    
+    // تفعيل الصوت في الجوال
+    function activateMobileSound() {
+        soundEnabled = true;
+        
+        // إخفاء التحذير
+        document.getElementById('soundWarning').style.display = 'none';
+        document.getElementById('activateSoundBtn').style.display = 'none';
+        
+        // تشغيل صوت تجريبي
+        try {
+            // محاولة تشغيل صوت عبر HTML5 Audio
+            const silentSound = new Audio();
+            silentSound.volume = 0.01;
+            silentSound.play().then(() => {
+                console.log("الصوت مفعل");
+            }).catch(e => console.log("خطأ في تفعيل الصوت"));
+            
+            // تهيئة Web Audio
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            // محاولة نطق جملة تجريبية
+            const testMsg = new SpeechSynthesisUtterance("Sound activated");
+            testMsg.volume = 1;
+            testMsg.rate = 0.9;
+            window.speechSynthesis.speak(testMsg);
+            
+        } catch (e) {
+            console.log("خطأ في تفعيل الصوت");
+        }
+    }
+    
+    // تشغيل صوت بسيط
+    function playBeep(type) {
+        if (!soundEnabled) {
+            alert("❌ اضغط على زر تفعيل الصوت أولاً!");
+            return;
+        }
+        
+        try {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            if (type === 'success') {
+                oscillator.frequency.value = 523.25;
+                gainNode.gain.value = 0.2;
+                
+                // نغمتين للنجاح
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.15);
+                
+                setTimeout(() => {
+                    const osc2 = audioContext.createOscillator();
+                    const gain2 = audioContext.createGain();
+                    osc2.connect(gain2);
+                    gain2.connect(audioContext.destination);
+                    osc2.frequency.value = 659.25;
+                    gain2.gain.value = 0.2;
+                    osc2.start();
+                    osc2.stop(audioContext.currentTime + 0.15);
+                }, 150);
+                
+            } else {
+                oscillator.frequency.value = 220;
+                gainNode.gain.value = 0.15;
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.2);
+            }
+        } catch (e) {
+            console.log("خطأ في تشغيل الصوت");
+        }
+    }
+
+    // تهيئة التطبيق
     function initApp() {
         const grid = document.getElementById('familyGrid');
+        grid.innerHTML = '';
+        
         familyMembers.forEach(member => {
             const card = document.createElement('div');
             card.className = 'family-card';
-            card.onclick = () => handleChoice(member.name);
+            card.id = `card-${member.name}`;
+            card.onclick = () => handleChoice(member.name, card);
+            
             card.innerHTML = `
-                <img src="${member.img}">
+                <div class="emoji-icon">${member.emoji}</div>
                 <h3>${member.name}</h3>
                 <p style="color:#666; font-size:14px; margin:0">${member.arabic}</p>
-                <div class="speaker-btn"><i class="fas fa-volume-up"></i></div>
+                <div class="speaker-btn" onclick="event.stopPropagation(); speakName('${member.name}')">
+                    <span>🔊</span>
+                </div>
             `;
+            
             grid.appendChild(card);
         });
-        generateQuestion();
+        
+        resetGame();
+        
+        // التحقق من متصفح الجوال
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // جوال - نعرض رسالة تفعيل الصوت
+            document.getElementById('soundWarning').style.display = 'block';
+            document.getElementById('activateSoundBtn').style.display = 'block';
+        } else {
+            // كمبيوتر - نفعّل الصوت تلقائياً
+            soundEnabled = true;
+            document.getElementById('soundWarning').style.display = 'none';
+            document.getElementById('activateSoundBtn').style.display = 'none';
+        }
     }
 
+    // نطق الاسم
+    function speakName(name) {
+        if (!soundEnabled) {
+            alert("❌ اضغط على زر تفعيل الصوت أولاً!");
+            return;
+        }
+        speak(name);
+    }
+
+    // توليد سؤال جديد
     function generateQuestion() {
-        const random = familyMembers[Math.floor(Math.random() * familyMembers.length)];
-        currentTarget = random.name;
+        document.querySelectorAll('.family-card').forEach(card => {
+            card.classList.remove('correct-highlight', 'wrong-highlight');
+        });
+        
+        const randomIndex = Math.floor(Math.random() * familyMembers.length);
+        currentTarget = familyMembers[randomIndex].name;
+        
         document.getElementById('target-name').textContent = currentTarget;
         document.getElementById('feedback').textContent = "";
         
-        // نطق السؤال تلقائياً فور ظهوره
-        setTimeout(speakQuestion, 500); 
+        canAnswer = true;
+        
+        // نطق السؤال تلقائياً إذا الصوت مفعل
+        if (soundEnabled) {
+            setTimeout(speakQuestion, 500);
+        }
     }
 
     function speakQuestion() {
+        if (!soundEnabled) {
+            alert("❌ اضغط على زر تفعيل الصوت أولاً!");
+            return;
+        }
         speak("Where is " + currentTarget + "?");
     }
+    
+    function speakSlowly() {
+        if (!soundEnabled) {
+            alert("❌ اضغط على زر تفعيل الصوت أولاً!");
+            return;
+        }
+        const msg = new SpeechSynthesisUtterance("Where is " + currentTarget + "?");
+        msg.rate = 0.5; // أبطأ
+        window.speechSynthesis.speak(msg);
+    }
 
-    function handleChoice(selectedName) {
+    function handleChoice(selectedName, cardElement) {
+        if (!canAnswer) return;
+        
+        if (!soundEnabled) {
+            alert("❌ اضغط على زر تفعيل الصوت أولاً!");
+            return;
+        }
+        
         const feedback = document.getElementById('feedback');
+        
+        totalQuestions++;
+        document.getElementById('total-questions').textContent = totalQuestions;
+        
         if(selectedName === currentTarget) {
-            feedback.textContent = "Excellent! 👏🌟";
+            correctAnswers++;
+            document.getElementById('correct-count').textContent = correctAnswers;
+            
+            feedback.textContent = "✅ إجابة صحيحة! أحسنت 🌟";
             feedback.style.color = "var(--success)";
-            document.getElementById('applause-sound').play();
-            speak("Yes! That is " + selectedName);
-            setTimeout(generateQuestion, 3000);
+            
+            cardElement.classList.add('correct-highlight');
+            
+            playBeep('success');
+            speak("Yes! Very good!");
+            
+            canAnswer = false;
+            setTimeout(generateQuestion, 2000);
+            
         } else {
-            feedback.textContent = "No, that's " + selectedName + "! Try again 😊";
+            feedback.textContent = "❌ لا، هذا " + selectedName + "! حاول مرة أخرى 😊";
             feedback.style.color = "var(--danger)";
-            document.getElementById('error-sound').play();
-            speak("No, that is " + selectedName + ". Try again.");
+            
+            cardElement.classList.add('wrong-highlight');
+            
+            playBeep('error');
+            speak("No, this is " + selectedName + ". Try again.");
+            
+            setTimeout(() => {
+                cardElement.classList.remove('wrong-highlight');
+            }, 1000);
         }
     }
 
     function speak(text) {
-        // إلغاء أي نطق جاري حالياً لتجنب تداخل الأصوات
-        window.speechSynthesis.cancel();
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'en-US';
-        msg.rate = 0.9; // سرعة النطق (أبطأ قليلاً للتعلم)
-        window.speechSynthesis.speak(msg);
+        try {
+            window.speechSynthesis.cancel();
+            
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.lang = 'en-US';
+            msg.rate = 0.9;
+            msg.volume = 1;
+            msg.pitch = 1;
+            
+            // اختيار الصوت المناسب للجوال
+            const voices = window.speechSynthesis.getVoices();
+            const englishVoice = voices.find(voice => voice.lang.includes('en'));
+            if (englishVoice) {
+                msg.voice = englishVoice;
+            }
+            
+            window.speechSynthesis.speak(msg);
+        } catch (e) {
+            console.log("خطأ في النطق");
+        }
     }
 
-    let isMusicOn = false;
     function toggleMusic() {
-        const music = document.getElementById('bg-music');
-        if(!isMusicOn) { music.play(); isMusicOn = true; }
-        else { music.pause(); isMusicOn = false; }
+        playBeep('success');
+    }
+    
+    function resetGame() {
+        correctAnswers = 0;
+        totalQuestions = 0;
+        canAnswer = true;
+        
+        document.getElementById('correct-count').textContent = '0';
+        document.getElementById('total-questions').textContent = '0';
+        
+        document.querySelectorAll('.family-card').forEach(card => {
+            card.classList.remove('correct-highlight', 'wrong-highlight');
+        });
+        
+        generateQuestion();
     }
 
-    window.onload = initApp;
+    window.onload = () => {
+        initApp();
+        
+        // تحميل قائمة الأصوات
+        window.speechSynthesis.onvoiceschanged = function() {
+            console.log("الأصوات جاهزة");
+        };
+    };
 </script>
+
 </body>
 </html>
