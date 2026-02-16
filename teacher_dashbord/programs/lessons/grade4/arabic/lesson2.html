@@ -1,726 +1,239 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>قواعد لغوية: الجملة المفيدة</title>
-<style>
-:root { 
-    --primary: #2196F3; 
-    --secondary: #4CAF50; 
-    --accent: #FFC107; 
-    --error: #f44336;
-    --success: #4CAF50;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قواعد لغوية: الجملة المفيدة - أبلة منال</title>
+    <style>
+        :root { 
+            --primary: #2196F3; 
+            --secondary: #4CAF50; 
+            --accent: #FFC107; 
+            --error: #f44336;
+            --success: #c8e6c9;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            margin: 0; padding: 15px; text-align: center; direction: rtl;
+        }
 
-body { 
-    font-family: 'Segoe UI', Tahoma, sans-serif; 
-    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-    margin: 0; 
-    padding: 15px; 
-    text-align: center;
-    min-height: 100vh;
-}
+        .container { 
+            max-width: 850px; background: white; margin: 20px auto; 
+            padding: 25px; border-radius: 25px; border: 5px solid var(--primary); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
+        }
 
-.container { 
-    max-width: 900px; 
-    background: white; 
-    margin: 20px auto; 
-    padding: 25px; 
-    border-radius: 25px; 
-    border: 5px solid var(--primary); 
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
-    position: relative;
-    overflow: hidden;
-}
+        .mhome { 
+            display: inline-block; padding: 10px 25px; background: #0d47a1; 
+            color: white; text-decoration: none; border-radius: 50px; 
+            font-weight: bold; margin-bottom: 20px; border: 2px solid white;
+        }
 
-.container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-}
+        .section { 
+            background: #f9f9f9; padding: 20px; border-radius: 20px; 
+            margin-bottom: 25px; border-right: 5px solid var(--primary); text-align: right; 
+        }
 
-.mhome { 
-    display: inline-block; 
-    padding: 12px 28px; 
-    background: linear-gradient(135deg, #0d47a1, #1976d2); 
-    color: white; 
-    text-decoration: none; 
-    border-radius: 50px; 
-    font-weight: bold; 
-    margin-bottom: 25px; 
-    box-shadow: 0 6px 15px rgba(13, 71, 161, 0.3);
-    transition: all 0.3s;
-    border: 2px solid white;
-}
+        .quran-text { 
+            background: #fffde7; padding: 20px; border-radius: 15px; 
+            font-size: 1.3rem; line-height: 2; border: 2px dashed #fbc02d; text-align: center; 
+        }
 
-.mhome:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(13, 71, 161, 0.4);
-}
+        .btn { 
+            background: var(--secondary); color: white; border: none; 
+            padding: 15px; border-radius: 15px; cursor: pointer; 
+            width: 100%; font-weight: bold; font-size: 1.1rem; margin: 10px 0;
+            box-shadow: 0 4px 0 #2e7d32;
+        }
 
-h1 { 
-    color: #0d47a1; 
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 3px solid var(--accent);
-    display: inline-block;
-}
+        .btn:active { transform: translateY(3px); box-shadow: none; }
 
-.section { 
-    background: linear-gradient(to left, #f9f9f9, #ffffff); 
-    padding: 20px; 
-    border-radius: 20px; 
-    margin-bottom: 25px; 
-    border-right: 5px solid var(--primary); 
-    text-align: right;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
+        .step { display: none; animation: fadeIn 0.5s; }
+        .active { display: block; }
 
-.quran-text { 
-    background: linear-gradient(to right, #fff9c4, #fffde7); 
-    padding: 20px; 
-    border-radius: 15px; 
-    font-size: 1.2rem; 
-    line-height: 1.8; 
-    color: #5d4037; 
-    margin: 15px 0; 
-    border: 2px dashed #fbc02d;
-    text-align: center;
-    direction: rtl;
-}
+        input[type="text"] { 
+            width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; 
+            border-radius: 12px; text-align: center; font-size: 1.1rem; 
+        }
 
-.question-box { 
-    background: linear-gradient(to left, #e8f5e9, #f1f8e9); 
-    padding: 20px; 
-    border-radius: 20px; 
-    margin-top: 15px; 
-    border: 2px solid #c8e6c9; 
-}
+        .feedback { font-weight: bold; margin: 10px 0; padding: 15px; border-radius: 12px; display: none; }
 
-.btn { 
-    background: linear-gradient(135deg, var(--secondary), #43a047); 
-    color: white; 
-    border: none; 
-    padding: 15px 25px; 
-    border-radius: 15px; 
-    cursor: pointer; 
-    font-size: 1.1rem; 
-    width: 100%; 
-    margin: 12px 0; 
-    font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 6px 0 #2e7d32;
-    position: relative;
-    overflow: hidden;
-}
+        .conclusion { 
+            background: #fff3e0; padding: 20px; border-radius: 15px; 
+            border: 3px solid #ff9800; font-weight: bold; font-size: 1.3rem; color: #e65100;
+        }
 
-.btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.1);
-    transform: translateX(-100%);
-    transition: transform 0.3s;
-}
+        /* تمرين العصافير */
+        .birds-container { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 20px 0; }
+        .bird { 
+            background: white; border: 2px solid var(--primary); padding: 10px 15px; 
+            border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-.btn:hover::after {
-    transform: translateX(100%);
-}
+        #praiseZone { 
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #ffeb3b; padding: 30px; border-radius: 30px; border: 5px solid #f57f17;
+            font-size: 2.2em; font-weight: bold; z-index: 2000; box-shadow: 0 0 50px rgba(0,0,0,0.3);
+            animation: bounce 0.5s infinite alternate;
+        }
 
-.btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 2px 0 #2e7d32;
-}
-
-.btn-alt {
-    background: linear-gradient(135deg, var(--primary), #1976d2);
-    box-shadow: 0 6px 0 #1565c0;
-}
-
-.conclusion { 
-    background: linear-gradient(to left, #fff3e0, #fff8e1); 
-    padding: 20px; 
-    border-radius: 20px; 
-    border: 3px solid #ff9800; 
-    font-weight: bold; 
-    color: #e65100; 
-    font-size: 1.3rem;
-    margin: 20px 0;
-    text-align: center;
-}
-
-/* تمرين العصافير */
-.birds-container { 
-    display: flex; 
-    justify-content: center; 
-    flex-wrap: wrap; 
-    margin: 25px 0; 
-    gap: 15px;
-}
-
-.bird { 
-    background: white; 
-    border: 3px solid var(--primary); 
-    padding: 15px; 
-    border-radius: 50% 50% 0 50%; 
-    position: relative; 
-    width: 90px; 
-    height: 90px;
-    font-weight: bold; 
-    color: var(--primary); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
-    transition: all 0.3s;
-    cursor: pointer;
-}
-
-.bird:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
-}
-
-.bird::after {
-    content: '🐦';
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 1.5rem;
-}
-
-input[type="text"] { 
-    width: 100%; 
-    padding: 15px; 
-    margin: 12px 0; 
-    border: 3px solid #ddd; 
-    border-radius: 12px; 
-    box-sizing: border-box; 
-    text-align: center; 
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: all 0.3s;
-    background: #f9f9f9;
-}
-
-input[type="text"]:focus {
-    border-color: var(--primary);
-    background: white;
-    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
-    outline: none;
-}
-
-.kid-img { 
-    width: 140px; 
-    margin: 20px auto;
-    display: block;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-}
-
-.feedback { 
-    font-weight: bold; 
-    margin: 15px; 
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 1.2rem;
-    text-align: center;
-    animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.success-feedback {
-    background: linear-gradient(to right, #c8e6c9, #dcedc8);
-    color: #2e7d32;
-    border: 2px solid #4CAF50;
-}
-
-.error-feedback {
-    background: linear-gradient(to right, #ffebee, #ffcdd2);
-    color: #c62828;
-    border: 2px solid #f44336;
-}
-
-.step { 
-    display: none; 
-    animation: slideIn 0.5s;
-}
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.active { 
-    display: block; 
-}
-
-.score-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: white;
-    padding: 10px 20px;
-    border-radius: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    font-weight: bold;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    z-index: 1000;
-}
-
-.score-container span {
-    color: var(--secondary);
-    font-size: 1.5rem;
-    margin-right: 5px;
-}
-
-/* تأثيرات بصرية */
-.correct-answer {
-    animation: correctPulse 0.5s;
-    border-color: var(--success) !important;
-    background: #e8f5e9 !important;
-}
-
-@keyframes correctPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.wrong-answer {
-    animation: shake 0.5s;
-    border-color: var(--error) !important;
-    background: #ffebee !important;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-}
-
-.completion-celebration {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    animation: fadeIn 0.5s;
-}
-
-.completion-celebration h2 {
-    font-size: 3rem;
-    color: var(--primary);
-    text-shadow: 3px 3px 0 var(--accent);
-    animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-        margin: 10px auto;
-    }
-    
-    .bird {
-        width: 80px;
-        height: 80px;
-        font-size: 0.9rem;
-    }
-    
-    h1 {
-        font-size: 1.4rem;
-    }
-    
-    .score-container {
-        position: relative;
-        top: 0;
-        left: 0;
-        margin: 10px auto;
-        width: fit-content;
-    }
-}
-</style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.05); } }
+    </style>
 </head>
-
 <body>
-<!-- عداد النقاط -->
-<div class="score-container">
-    النقاط: <span id="score">0</span> 🏆
-</div>
 
 <div class="container">
-    <a href="../../../../../teacher_dashbord/arabic_dashboard.html" class="mhome">🏠 العودة للرئيسية</a>
-    
-    <h1>قواعد لغوية: الجملة المفيدة</h1>
-    
-    <!-- الخطوة 1 -->
+    <a href="../../../../arabic_dashboard.html" class="mhome">🏠 العودة للرئيسية</a>
+
+    <div id="praiseZone">🌟 مـاشاء الله! مية مية 🌟</div>
+
+    <audio id="localApplause" src="../../../../../sound/applause.mp3"></audio>
+    <audio id="localSuccess" src="../../../../../sound/correct-sound.mp3"></audio>
+
     <div id="step1" class="step active">
-        <div class="section">
-            <h3>📖 أمثلة من القرآن الكريم:</h3>
-            <div class="quran-text">
-                • أقِمِ الصَّلاةَ <br>
-                • لا تُصَعِّرْ خَدَّكَ لِلنَّاسِ <br>
-                • اصْبِرْ عَلَى مَا أَصَابَكَ <br>
-                • إِنَّ اللَّهَ لا يُحِبُّ كُلَّ مُخْتالٍ فَخُورٍ <br>
-                • اغْضُضْ مِنْ صَوْتِكَ <br>
-                • إِنَّ أَنكَرَ الأَصْوَاتِ لَصَوْتُ الْحَمِيرِ
-            </div>
+        <h2 style="color: #0d47a1;">📖 تأمل الجمل الآتية من القرآن الكريم:</h2>
+        <div class="quran-text">
+            • أَقِمِ الصَّلاةَ <br>
+            • لا تُصَعِّرْ خَدَّكَ لِلنَّاسِ <br>
+            • اصْبِرْ عَلَى مَا أَصَابَكَ <br>
+            • إِنَّ اللَّهَ لا يُحِبُّ كُلَّ مُخْتالٍ فَخُورٍ <br>
+            • اغْضُضْ مِنْ صَوْتِكَ <br>
+            • إِنَّ أَنكَرَ الأَصْوَاتِ لَصَوْتُ الْحَمِيرِ
         </div>
-        <button class="btn" onclick="nextStep(2)">تأمل الأمثلة وأجب ➤</button>
+        <button class="btn" onclick="nextStep(2)">تأمل الأمثلة وأجب ➔</button>
     </div>
-    
-    <!-- الخطوة 2 -->
+
     <div id="step2" class="step">
-        <div class="question-box">
+        <div class="section">
             <p><strong>س1:</strong> مما تتألف كل جملة؟</p>
-            <button class="btn btn-alt" onclick="checkAnswer('ans1', 'تتألف من مجموعة كلمات.', true)">التحقق من الإجابة</button>
-            <p id="ans1" class="feedback"></p>
-            
+            <input type="text" id="q1" placeholder="اكتب الإجابة هنا">
+            <button class="btn" style="background:var(--primary)" onclick="checkLogic('q1', 'كلمات')">التحقق من الإجابة</button>
+            <div id="fb_q1" class="feedback"></div>
+
             <p><strong>س2:</strong> هل أعطت كل جملة معنى تاماً ومفيداً؟</p>
-            <button class="btn btn-alt" onclick="checkAnswer('ans2', 'نعم.', true)">التحقق من الإجابة</button>
-            <p id="ans2" class="feedback"></p>
-            
+            <input type="text" id="q2" placeholder="نعم / لا">
+            <button class="btn" style="background:var(--primary)" onclick="checkLogic('q2', 'نعم')">التحقق من الإجابة</button>
+            <div id="fb_q2" class="feedback"></div>
+
             <p><strong>س3:</strong> ماذا نسمي الكلام الذي يؤدي معنى تاماً ومفيداً؟</p>
-            <button class="btn btn-alt" onclick="checkAnswer('ans3', 'نسميه: جملةً مفيدةً.', true)">التحقق من الإجابة</button>
-            <p id="ans3" class="feedback"></p>
+            <input type="text" id="q3" placeholder="اكتب المصطلح">
+            <button class="btn" style="background:var(--primary)" onclick="checkLogic('q3', 'جملة مفيدة')">التحقق من الإجابة</button>
+            <div id="fb_q3" class="feedback"></div>
         </div>
-        
+
         <div class="conclusion">
             💡 الاستنتاج: <br>
             الجملة المفيدة تتكون من كلمات تؤدي معنى تاماً.
         </div>
         <button class="btn" onclick="nextStep(3)">انتقل للتمارين ✨</button>
     </div>
-    
-    <!-- الخطوة 3 -->
+
     <div id="step3" class="step">
-        <h3>🧩 رتب الكلمات لتعطي معنى تاماً:</h3>
+        <h3 style="color: #0d47a1;">🧩 رتب الكلمات لتعطي معنى تاماً:</h3>
         <div class="section">
-            <p>(المؤمن - الصلاة - على - يحرص)</p>
-            <input type="text" id="order1" placeholder="اكتب الجملة هنا">
-            <button class="btn btn-alt" onclick="checkOrder(1)">تحقق</button>
-            <p id="feedback1" class="feedback"></p>
-            
-            <p>(النظافة - الإيمان - من)</p>
-            <input type="text" id="order2" placeholder="اكتب الجملة هنا">
-            <button class="btn btn-alt" onclick="checkOrder(2)">تحقق</button>
-            <p id="feedback2" class="feedback"></p>
-            
-            <p>(في - قوة - الاتحاد)</p>
-            <input type="text" id="order3" placeholder="اكتب الجملة هنا">
-            <button class="btn btn-alt" onclick="checkOrder(3)">تحقق</button>
-            <p id="feedback3" class="feedback"></p>
+            <p>1. (المؤمن - الصلاة - على - يحرص)</p>
+            <input type="text" id="order1" placeholder="رتب الجملة هنا">
+            <button class="btn" style="background:var(--primary)" onclick="checkOrder(1, 'يحرص المؤمن على الصلاة')">تحقق ✅</button>
+            <div id="fb_order1" class="feedback"></div>
+
+            <p>2. (النظافة - الإيمان - من)</p>
+            <input type="text" id="order2" placeholder="رتب الجملة هنا">
+            <button class="btn" style="background:var(--primary)" onclick="checkOrder(2, 'النظافة من الإيمان')">تحقق ✅</button>
+            <div id="fb_order2" class="feedback"></div>
+
+            <p>3. (في - قوة - الاتحاد)</p>
+            <input type="text" id="order3" placeholder="رتب الجملة هنا">
+            <button class="btn" style="background:var(--primary)" onclick="checkOrder(3, 'في الاتحاد قوة')">تحقق ✅</button>
+            <div id="fb_order3" class="feedback"></div>
         </div>
-        
-        <div id="step3-feedback" class="feedback"></div>
-        <button class="btn" onclick="nextStep(4)" id="nextToStep4" style="display:none;">الانتقال للعصافير 🐦</button>
+        <button class="btn" onclick="nextStep(4)">تمرين العصافير 🐦</button>
     </div>
-    
-    <!-- الخطوة 4 -->
+
     <div id="step4" class="step">
-        <h3>🐦 كلمات العصافير:</h3>
+        <h3>🐦 تمرين العصافير: املأ الفراغات</h3>
         <div class="birds-container">
             <div class="bird" onclick="fillGap('gap1', 'نور')">نور ✨</div>
             <div class="bird" onclick="fillGap('gap2', 'الرحيق')">الرحيق 🌸</div>
             <div class="bird" onclick="fillGap('gap3', 'الخبز')">الخبز 🍞</div>
-            <div class="bird" onclick="fillGap('gap4', 'الحق')">الحق ⚖️</div>
         </div>
-        
         <div class="section">
-            <p>العلم <input type="text" id="gap1" style="width:150px"> </p>
-            <p>يمتص النحل <input type="text" id="gap2" style="width:150px"> </p>
-            <p>ينخل <input type="text" id="gap3" style="width:150px"> الدقيق</p>
-            <p>انتصر <input type="text" id="gap4" style="width:150px"> </p>
+            <p>• العلم <input type="text" id="gap1" style="width:120px" readonly> .</p>
+            <p>• يمتص النحل <input type="text" id="gap2" style="width:120px" readonly> .</p>
+            <p>• يخبز الخباز <input type="text" id="gap3" style="width:120px" readonly> .</p>
+            <button class="btn" onclick="checkFinal()">إنهاء الدرس بنجاح ✅</button>
+            <div id="fb_final" class="feedback"></div>
         </div>
-        
-        <div id="final-feedback" class="feedback"></div>
-        <button class="btn" onclick="checkFinal()">إنهاء الدرس ✓</button>
     </div>
-    
-    <img src="" class="kid-img" alt="ولد يضحك">
-    
-    <br>
-    <a href="../../../../../teacher_dashbord/arabic_dashboard.html" class="mhome" style="margin-top:20px">🏠 العودة للرئيسية</a>
 </div>
 
-<!-- عناصر الصوت -->
-
-
 <script>
-// تهيئة المتغيرات
-let score = 0;
-let correctAnswers = 0;
-const totalQuestions = 7; // إجمالي عدد الأسئلة
-let answeredQuestions = new Set();
-
-// تحميل الأصوات مسبقاً
-window.addEventListener('load', function() {
-    const bell = document.getElementById('bellSound');
-    const applause = document.getElementById('applauseSound');
-    const error = document.getElementById('errorSound');
-    
-    // تحميل الأصوات
-    bell.load();
-    applause.load();
-    error.load();
-});
-
-// تحديث النقاط
-function updateScore(points) {
-    score += points;
-    document.getElementById('score').textContent = score;
-    
-    // تأثير بسيع للنقاط
-    const scoreElement = document.getElementById('score');
-    scoreElement.style.transform = 'scale(1.3)';
-    setTimeout(() => {
-        scoreElement.style.transform = 'scale(1)';
-    }, 300);
-}
-
-// تشغيل الصوت
-function playSound(soundId) {
-    const sound = document.getElementById(soundId);
-    sound.currentTime = 0;
-    sound.play().catch(e => console.log("خطأ في تشغيل الصوت:", e));
-}
-
-// الانتقال للخطوة التالية
-function nextStep(n) {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    document.getElementById('step' + n).classList.add('active');
-    window.scrollTo(0, 0);
-    
-    // تشغيل صوت الانتقال
-    playSound('bellSound');
-}
-
-// التحقق من إجابة الأسئلة النصية
-function checkAnswer(elementId, correctAnswer, isTrueFalse = false) {
-    const element = document.getElementById(elementId);
-    const questionId = elementId;
-    
-    // إذا كانت الإجابة قد تم التحقق منها مسبقاً
-    if (answeredQuestions.has(questionId)) {
-        element.innerHTML = "لقد أجبت على هذا السؤال مسبقاً!";
-        element.className = "feedback success-feedback";
-        return;
+    function nextStep(n) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + n).classList.add('active');
+        window.scrollTo(0,0);
     }
-    
-    // عرض الإجابة الصحيحة
-    element.innerHTML = `<strong>الإجابة الصحيحة:</strong> ${correctAnswer}`;
-    element.className = "feedback success-feedback";
-    
-    // إضافة النقاط وتسجيل الإجابة
-    if (!answeredQuestions.has(questionId)) {
-        updateScore(10);
-        correctAnswers++;
-        answeredQuestions.add(questionId);
-        playSound('bellSound');
-    }
-    
-    // تحقق إذا كانت جميع أسئلة هذه الخطوة مجابة
-    if (document.getElementById('step2').classList.contains('active')) {
-        const allQuestions = ['ans1', 'ans2', 'ans3'];
-        const allAnswered = allQuestions.every(id => answeredQuestions.has(id));
+
+    function triggerSuccess() {
+        const applause = document.getElementById('localApplause');
+        const successVoice = document.getElementById('localSuccess');
+        const praise = document.getElementById('praiseZone');
         
-        if (allAnswered) {
-            playSound('applauseSound');
-            setTimeout(() => {
-                document.querySelector('#step2 .conclusion').style.animation = 'correctPulse 1s';
-            }, 500);
-        }
+        applause.currentTime = 0;
+        successVoice.currentTime = 0;
+        applause.play().catch(e => console.log("الصوت غير موجود"));
+        successVoice.play().catch(e => console.log("الصوت غير موجود"));
+
+        praise.style.display = "block";
+        setTimeout(() => { praise.style.display = "none"; }, 3500);
     }
-}
 
-// التحقق من ترتيب الجمل
-function checkOrder(orderNumber) {
-    const input = document.getElementById('order' + orderNumber);
-    const feedback = document.getElementById('feedback' + orderNumber);
-    const questionId = 'order' + orderNumber;
-    
-    // الإجابات الصحيحة
-    const correctAnswersMap = {
-        1: 'يحرص المؤمن على الصلاة',
-        2: 'النظافة من الإيمان',
-        3: 'في الاتحاد قوة'
-    };
-    
-    let userAnswer = input.value.trim().replace(/\s+/g, ' ');
-    
-    // تنظيف الإجابة للتحقق المرن
-    const cleanAnswer = (text) => {
-        return text
-            .replace(/أ/g, 'ا')
-            .replace(/إ/g, 'ا')
-            .replace(/آ/g, 'ا')
-            .replace(/ة/g, 'ه')
-            .replace(/ى/g, 'ي')
-            .toLowerCase();
-    };
-    
-    const userClean = cleanAnswer(userAnswer);
-    const correctClean = cleanAnswer(correctAnswersMap[orderNumber]);
-    
-    if (userClean === correctClean) {
-        // إذا كانت الإجابة صحيحة
-        if (!answeredQuestions.has(questionId)) {
-            input.className = 'correct-answer';
-            feedback.innerHTML = '<span style="color:green;font-size:1.5rem">✓</span> إجابة صحيحة! أحسنت!';
-            feedback.className = 'feedback success-feedback';
-            updateScore(15);
-            correctAnswers++;
-            answeredQuestions.add(questionId);
-            playSound('bellSound');
-            
-            // تحقق إذا كانت جميع الأسئلة في هذه الخطوة مجابة
-            const allOrders = [1, 2, 3];
-            const allAnswered = allOrders.every(num => answeredQuestions.has('order' + num));
-            
-            if (allAnswered) {
-                document.getElementById('step3-feedback').innerHTML = 
-                    '<div style="background:linear-gradient(135deg,#4CAF50,#2E7D32);color:white;padding:20px;border-radius:15px;margin:20px 0;">' +
-                    '<h3>🎉 أحسنت! جميع إجاباتك صحيحة</h3>' +
-                    '<p>يمكنك الآن الانتقال للتمرين التالي</p>' +
-                    '</div>';
-                document.getElementById('nextToStep4').style.display = 'block';
-                playSound('applauseSound');
-            }
-        }
-    } else {
-        // إذا كانت الإجابة خاطئة
-        input.className = 'wrong-answer';
-        feedback.innerHTML = '<span style="color:red;font-size:1.5rem">✗</span> حاول مرة أخرى! تأكد من ترتيب الكلمات بشكل صحيح.';
-        feedback.className = 'feedback error-feedback';
-        playSound('errorSound');
-        
-        // عرض الإجابة الصحيحة بعد ثانيتين
-        setTimeout(() => {
-            feedback.innerHTML += `<br><small><strong>الإجابة الصحيحة:</strong> ${correctAnswersMap[orderNumber]}</small>`;
-        }, 2000);
-    }
-}
-
-// ملء الفراغات بالعصافير
-function fillGap(gapId, word) {
-    const gap = document.getElementById(gapId);
-    gap.value = word;
-    gap.className = 'correct-answer';
-    playSound('bellSound');
-}
-
-// التحقق النهائي
-function checkFinal() {
-    const gaps = ['gap1', 'gap2', 'gap3', 'gap4'];
-    const correctWords = ['نور', 'الرحيق', 'الخبز', 'الحق'];
-    let allCorrect = true;
-    
-    gaps.forEach((gapId, index) => {
-        const gap = document.getElementById(gapId);
-        if (gap.value.trim() !== correctWords[index]) {
-            allCorrect = false;
-            gap.className = 'wrong-answer';
+    function checkLogic(id, correct) {
+        let val = document.getElementById(id).value.trim();
+        let fb = document.getElementById('fb_' + id);
+        if (val.includes(correct) || val === correct) {
+            fb.innerHTML = "✅ صحيت! إجابة دقيقة.";
+            fb.style.display = "block"; fb.style.background = "#c8e6c9";
+            triggerSuccess();
         } else {
-            gap.className = 'correct-answer';
+            fb.innerHTML = "❌ حاول مرة أخرى.";
+            fb.style.display = "block"; fb.style.background = "#ffcdd2";
         }
-    });
-    
-    const finalFeedback = document.getElementById('final-feedback');
-    
-    if (allCorrect) {
-        // احتساب النقاط الإضافية إذا لم تكن محسوبة
-        gaps.forEach(gapId => {
-            if (!answeredQuestions.has(gapId)) {
-                updateScore(10);
-                answeredQuestions.add(gapId);
-                correctAnswers++;
-            }
-        });
-        
-        playSound('applauseSound');
-        
-        finalFeedback.innerHTML = 
-            '<div style="background:linear-gradient(135deg,#4CAF50,#2E7D32);color:white;padding:25px;border-radius:20px;margin:20px 0;">' +
-            '<h2 style="font-size:2rem;margin-bottom:10px;">🎊 أحسنت يا بطل! 🎊</h2>' +
-            '<p style="font-size:1.3rem;">إجاباتك كلها صحيحة 🌟</p>' +
-            '<p style="font-size:1.2rem;margin-top:10px;">مجموع نقاطك: ' + score + ' نقطة 🏆</p>' +
-            '<p style="font-size:1.2rem;">الإجابات الصحيحة: ' + correctAnswers + ' من ' + totalQuestions + ' ✅</p>' +
-            '</div>';
-        finalFeedback.className = 'feedback success-feedback';
-        
-        // عرض رسالة الإنجاز
-        setTimeout(() => {
-            const celebration = document.createElement('div');
-            celebration.className = 'completion-celebration';
-            celebration.innerHTML = '<h2>مبروك! أكملت الدرس 🎉</h2>';
-            document.body.appendChild(celebration);
-            
-            // إزالة الرسالة بعد 3 ثوانٍ
-            setTimeout(() => {
-                celebration.remove();
-            }, 3000);
-        }, 1000);
-        
-    } else {
-        playSound('errorSound');
-        finalFeedback.innerHTML = 
-            '<div style="background:linear-gradient(135deg,#f44336,#d32f2f);color:white;padding:20px;border-radius:20px;margin:20px 0;">' +
-            '<h3>⚠️ هناك أخطاء</h3>' +
-            '<p>تأكد من ملء جميع الفراغات بشكل صحيح باستخدام كلمات العصافير!</p>' +
-            '</div>';
-        finalFeedback.className = 'feedback error-feedback';
     }
-}
 
-// تهيئة الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    // إضافة تأثير عند تحميل الصفحة
-    document.querySelector('.container').style.animation = 'fadeIn 0.8s';
-    
-    // إضافة دعم لوحة المفاتيح
-    document.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            const activeStep = document.querySelector('.step.active');
-            const activeInput = activeStep.querySelector('input:focus');
-            if (activeInput) {
-                const inputId = activeInput.id;
-                if (inputId.startsWith('order')) {
-                    const num = inputId.replace('order', '');
-                    checkOrder(num);
-                }
-            }
+    function checkOrder(num, correct) {
+        let val = document.getElementById('order' + num).value.trim().replace(/[\u064B-\u0652]/g, "");
+        let cleanCorrect = correct.replace(/[\u064B-\u0652]/g, "");
+        let fb = document.getElementById('fb_order' + num);
+        if (val === cleanCorrect) {
+            fb.innerHTML = "✅ ترتيب رائع ومفيد!";
+            fb.style.display = "block"; fb.style.background = "#c8e6c9";
+            triggerSuccess();
+        } else {
+            fb.innerHTML = "❌ الترتيب ناقص أو به خطأ.";
+            fb.style.display = "block"; fb.style.background = "#ffcdd2";
         }
-    });
-});
+    }
+
+    function fillGap(id, word) {
+        document.getElementById(id).value = word;
+    }
+
+    function checkFinal() {
+        let g1 = document.getElementById('gap1').value;
+        let g2 = document.getElementById('gap2').value;
+        let g3 = document.getElementById('gap3').value;
+        if (g1 === 'نور' && g2 === 'الرحيق' && g3 === 'الخبز') {
+            document.getElementById('fb_final').innerHTML = "🎊 ممتاز! لقد أتقنت درس الجملة المفيدة اليوم.";
+            document.getElementById('fb_final').style.display = "block";
+            document.getElementById('fb_final').style.background = "#c8e6c9";
+            triggerSuccess();
+        } else {
+            alert("يرجى إكمال جميع الفراغات بالعصافير!");
+        }
+    }
 </script>
 </body>
 </html>

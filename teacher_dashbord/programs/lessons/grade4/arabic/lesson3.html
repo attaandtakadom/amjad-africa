@@ -2,146 +2,169 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>إملاء: الهمزة في أول الكلمة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة الإملاء التفاعلية - أبلة منال</title>
     <style>
-        :root { --primary: #673AB7; --secondary: #009688; --accent: #FF5722; }
+        :root { --primary: #673AB7; --secondary: #009688; --accent: #FF5722; --success: #c8e6c9; --error: #ffcdd2; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f3e5f5; margin: 0; padding: 10px; text-align: center; }
-        .container { max-width: 800px; background: white; margin: auto; padding: 20px; border-radius: 25px; border: 5px solid var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.1); box-sizing: border-box; }
-        
+        .container { max-width: 800px; background: white; margin: auto; padding: 20px; border-radius: 25px; border: 5px solid var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .mhome { display: inline-block; padding: 10px 25px; background: #4527a0; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-bottom: 20px; }
-        
         .group-container { display: flex; justify-content: space-around; margin-bottom: 20px; flex-wrap: wrap; }
-        .group { background: #ede7f6; padding: 10px; border-radius: 15px; border: 2px solid var(--primary); width: 30%; min-width: 100px; margin: 5px; }
-        .group h4 { margin: 5px 0; color: var(--primary); }
-
+        .group { background: #ede7f6; padding: 15px; border-radius: 15px; border: 2px solid var(--primary); width: 28%; min-width: 120px; margin: 5px; }
         .section { background: #f9f9f9; padding: 15px; border-radius: 15px; margin-bottom: 20px; text-align: right; }
-        .quran-text { background: #fffde7; padding: 15px; border-radius: 10px; font-size: 1.1rem; line-height: 1.8; border: 1px solid #fbc02d; text-align: center; }
-        
-        .btn { background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 12px; cursor: pointer; width: 100%; margin: 5px 0; font-weight: bold; }
-        .conclusion { background: #e0f2f1; padding: 15px; border-radius: 15px; border: 2px solid var(--secondary); font-weight: bold; margin: 15px 0; }
-
-        input[type="text"] { width: 100%; padding: 10px; margin: 5px 0; border: 2px solid #ddd; border-radius: 10px; text-align: center; }
-        
-        .story-box { background: #fff8e1; padding: 15px; border-radius: 15px; border-left: 5px solid #ffb300; text-align: right; line-height: 1.8; }
-        .img-story { width: 100%; border-radius: 15px; margin: 10px 0; }
-
+        .btn { background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 12px; cursor: pointer; width: 100%; margin: 10px 0; font-weight: bold; font-size: 1.1em; }
         .step { display: none; }
-        .active { display: block; }
-        .feedback { font-weight: bold; margin: 10px; display: none; padding: 10px; border-radius: 10px; }
+        .active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        input[type="text"] { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #ddd; border-radius: 10px; text-align: center; font-size: 1.1em; box-sizing: border-box; }
+        .feedback { font-weight: bold; margin: 10px 0; display: none; padding: 15px; border-radius: 10px; }
+        #praiseZone { 
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #ffeb3b; color: #000; padding: 30px; border-radius: 30px; 
+            border: 5px solid #f57f17; font-size: 2em; font-weight: bold; z-index: 1000;
+            box-shadow: 0 0 50px rgba(0,0,0,0.3); animation: bounce 0.5s infinite alternate;
+        }
+        @keyframes bounce { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.1); } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="../../../../../teacher_dashbord/arabic_dashboard.html" class="mhome">🏠 الرئيسية</a>
+    <a href="../../../../arabic_dashboard.html" class="mhome">🏠 الرئيسية</a>
+
+    <div id="praiseZone">🌟 مـاشاء الله عليك! مية مية 🌟</div>
+
+    <audio id="localApplause" src="../../../../../sound/applause.mp3"></audio>
+    <audio id="localSuccess" src="../../../../../sound/correct-sound.mp3"></audio>
 
     <div id="step1" class="step active">
         <h2>أشكال الهمزة في أول الكلمة</h2>
         <div class="group-container">
-            <div class="group"><h4>مفتوحة (أَ)</h4>أب<br>أقم</div>
-            <div class="group"><h4>مضمومة (أُ)</h4>أُسس<br>أُمور</div>
-            <div class="group"><h4>مكسورة (إِ)</h4>إرساء<br>إلى</div>
+            <div class="group"><h4>مفتوحة (أَ)</h4>أب - أكل</div>
+            <div class="group"><h4>مضمومة (أُ)</h4>أُسرة - أُم</div>
+            <div class="group"><h4>مكسورة (إِ)</h4>إبريق - إلى</div>
         </div>
         <div class="section">
-            <p><strong>س1:</strong> ما نوع حركة الهمزة في المجموعة الأولى؟</p>
-            <input type="text" id="sq1" placeholder="اجب هنا">
-            <p><strong>س2:</strong> ما نوع حركة الهمزة في المجموعة الثانية؟</p>
-            <input type="text" id="sq2" placeholder="اجب هنا">
-            <p><strong>س3:</strong> أين كتبت الهمزة في المجموعة الثالثة؟</p>
-            <input type="text" id="sq3" placeholder="اجب هنا">
-            <button class="btn" onclick="checkQuestions()">تحقق من فهمك ✅</button>
-            <div id="q-fb" class="feedback"></div>
+            <p><strong>س1:</strong> ما حركة الهمزة في كلمة (أَحمد)؟</p>
+            <input type="text" id="sq1" placeholder="اكتب: فتحة أو ضمة أو كسرة">
+            <p><strong>س2:</strong> ما حركة الهمزة في كلمة (أُسامة)؟</p>
+            <input type="text" id="sq2" placeholder="اكتب الإجابة هنا">
+            <button class="btn" onclick="checkStep1()">تحقق من الإجابة ✅</button>
+            <div id="fb1" class="feedback"></div>
         </div>
-        <div class="conclusion">
-            💡 استنتاج: همزة القطع تكتب في أول الكلمة وتكون إما مفتوحة (أَ) أو مضمومة (أُ) أو مكسورة (إِ).
-        </div>
-        <button class="btn" style="background:var(--primary)" onclick="nextStep(2)">تمرين الآية الكريمة ➔</button>
+        <button class="btn" style="background:var(--primary)" onclick="nextStep(2)">انتقل للتمرين التالي ➔</button>
     </div>
 
     <div id="step2" class="step">
-        <h3>📖 استخرج من الآية الكريمة</h3>
-        <div class="quran-text">
-            "قُلْ إِنِّي أُمِرْتُ أَنْ أَعْبُدَ اللَّهَ مُخْلِصًا لَّهُ الدِّينَ وَأُمِرْتُ لِأَنْ أَكُونَ أَوَّلَ الْمُسْلِمِينَ"
+        <h3>📖 استخراج من القرآن الكريم</h3>
+        <div style="background: #fffde7; padding: 20px; border-radius: 15px; border: 2px solid #fbc02d; font-size: 1.2em; line-height: 1.8;">
+            "قُلْ <b>إِنِّي</b> <b>أُمِرْتُ</b> <b>أَنْ</b> <b>أَعْبُدَ</b> اللَّهَ"
         </div>
         <div class="section">
-            <p>كلمات بها همزة <b>فوق</b> الألف (أ):</p>
-            <input type="text" id="topA" placeholder="مثال: أمرت، أن...">
-            <p>كلمات بها همزة <b>تحت</b> الألف (إ):</p>
-            <input type="text" id="botA" placeholder="مثال: إني">
-            <button class="btn" onclick="checkQuran()">تحقق ✅</button>
-            <div id="quran-fb" class="feedback"></div>
+            <p>استخرج كلمة تبدأ بهزة <b>تحت</b> الألف (إ):</p>
+            <input type="text" id="quran1" placeholder="اكتب الكلمة هنا">
+            <p>استخرج كلمة تبدأ بهزة <b>فوق</b> الألف (أ):</p>
+            <input type="text" id="quran2" placeholder="اكتب الكلمة هنا">
+            <button class="btn" onclick="checkStep2()">تحقق ✅</button>
+            <div id="fb2" class="feedback"></div>
         </div>
-        <button class="btn" style="background:var(--primary)" onclick="nextStep(3)">تمرين رسم الهمزة ➔</button>
+        <button class="btn" style="background:var(--primary)" onclick="nextStep(3)">تمرين الرسم النهائي ➔</button>
     </div>
 
     <div id="step3" class="step">
-        <h3>✍️ ارسم الهمزة بشكلها المناسب</h3>
-        <p>ضع (أ) أو (إ) قبل الكلمات التالية:</p>
-        <div class="section" style="text-align:center">
-            __حمد: <input type="text" id="e1" style="width:50px"> | __يمان: <input type="text" id="e2" style="width:50px"><br>
-            __سامة: <input type="text" id="e3" style="width:50px"> | __جلاء: <input type="text" id="e4" style="width:50px"><br>
-            __م: <input type="text" id="e5" style="width:50px"> | __سد: <input type="text" id="e6" style="width:50px">
-            <button class="btn" onclick="checkDrawing()">تحقق من الرسم ✅</button>
-            <div id="draw-fb" class="feedback"></div>
+        <h3>✍️ ارسم الهمزة الصحيحة</h3>
+        <div class="section" style="text-align: center;">
+            <p>ضع (أ) أو (إ) في الفراغ:</p>
+            <b>__سد</b> <input type="text" id="draw1" style="width:60px"> 
+            <span style="margin: 0 20px;"></span>
+            <b>__كرام</b> <input type="text" id="draw2" style="width:60px">
+            <button class="btn" onclick="checkStep3()">تحقق من رسمك ✅</button>
+            <div id="fb3" class="feedback"></div>
         </div>
-        <button class="btn" style="background:var(--accent)" onclick="nextStep(4)">قصة الوصية الغالية 📖</button>
     </div>
-
-    <div id="step4" class="step">
-        <h3>👴 وصية أب لأبنائه</h3>
-        <img src="gold-man.avif" class="img-story" alt="رجل مسن مع أولاده">
-        <div class="story-box">
-            يحكى أن <b>أباً</b> حكيماً جمع <b>أولاده</b> حوله عندما اشتد به المرض. قال لهم: "يا <b>أبنائي</b>، <b>إني</b> أوصيكم بحب بعضكم البعض، ففي الاتحاد قوة. <b>أقيموا</b> الصلاة و<b>أطيعوا</b> الله، و<b>احرصوا</b> على <b>إرشاد</b> الناس للخير، فبذلك <b>أحقق</b> لكم سعادة الدنيا والآخرة". تأثر الأولاد بكلمات <b>أبيهم</b> ووعدوه بـ<b>إخلاص</b> العمل بالوصية.
-        </div>
-        <div class="conclusion" style="background:#fff3e0">لاحظ الكلمات المغمقة   ، كلها تبدأ بهمزة قطع!</div>
-        <button class="btn" style="background:var(--secondary)" onclick="finishLesson()">إنهاء الدرس 👏</button>
-    </div>
-
 </div>
-
-
 <script>
+let correctCount = 0;
+
     function nextStep(n) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         document.getElementById('step' + n).classList.add('active');
         window.scrollTo(0,0);
     }
 
-    function checkQuestions() {
-        let q1 = document.getElementById('sq1').value;
-        let q2 = document.getElementById('sq2').value;
-        if(q1.includes("فتحة") || q2.includes("ضمة")) {
-            document.getElementById('bell').play();
-            alert("إجابات صحيحة! الهمزة تتغير حركتها.");
+    // وظيفة التشغيل الصوتي والاحتفال
+    function handleSuccess() {
+        correctCount++;
+        const applause = document.getElementById('localApplause');
+        const successVoice = document.getElementById('localSuccess');
+        const zone = document.getElementById('praiseZone');
+
+        // سيشتغل الصوت من أول إجابة صحيحة للتأكد
+        applause.currentTime = 0;
+        successVoice.currentTime = 0;
+        
+        applause.play().catch(e => console.log("تأكد من اسم ملف التصفيق"));
+        successVoice.play().catch(e => console.log("تأكد من اسم ملف أحسنت"));
+
+        zone.style.display = "block";
+        setTimeout(() => { zone.style.display = "none"; }, 4000);
+    }
+
+    // تصحيح المرحلة الأولى (الحركات)
+    function checkStep1() {
+        // .replace هو كود ذكي لجعل "ه" تساوي "ة" دائماً
+        let s1 = document.getElementById('sq1').value.trim().replace('ه', 'ة');
+        let s2 = document.getElementById('sq2').value.trim().replace('ه', 'ة');
+        let fb = document.getElementById('fb1');
+
+        if (s1 === "فتحة" && s2 === "ضمة") {
+            fb.innerHTML = "✅ صحيت! إجابة دقيقة جداً.";
+            fb.style.display = "block"; 
+            fb.style.background = "var(--success)";
+            handleSuccess();
+        } else {
+            fb.innerHTML = "❌ الإجابة غير صحيحة. اكتب (فتحة) للسؤال الأول و(ضمة) للثاني.";
+            fb.style.display = "block";
+            fb.style.background = "var(--error)";
         }
     }
 
-    function checkQuran() {
-        let t = document.getElementById('topA').value;
-        let b = document.getElementById('botA').value;
-        if(t !== "" && b !== "") {
-            document.getElementById('bell').play();
-            document.getElementById('quran-fb').style.display="block";
-            document.getElementById('quran-fb').innerHTML="أحسنت! فوق الألف (أمرت، أن، أعبد، أكون، أول). وتحت الألف (إني).";
-            document.getElementById('quran-fb').style.background="#c8e6c9";
+    // تصحيح المرحلة الثانية (القرآن)
+    function checkStep2() {
+        let q1 = document.getElementById('quran1').value.trim();
+        let q2 = document.getElementById('quran2').value.trim();
+        let fb = document.getElementById('fb2');
+
+        // التحقق من وجود الكلمات الصحيحة
+        if (q1 === "إني" && (q2 === "أمرت" || q2 === "أن" || q2 === "أعبد")) {
+            fb.innerHTML = "✅ برافو! استخراجك من الآية صحيح.";
+            fb.style.display = "block"; 
+            fb.style.background = "var(--success)";
+            handleSuccess();
+        } else {
+            fb.innerHTML = "❌ تأكد من كتابة الكلمات كما هي في الآية (إني) و (أمرت).";
+            fb.style.display = "block";
+            fb.style.background = "var(--error)";
         }
     }
 
-    function checkDrawing() {
-        let e1=document.getElementById('e1').value; 
-        let e2=document.getElementById('e2').value;
-        if(e1 === "أ" && e2 === "إ") {
-            document.getElementById('bell').play();
-            alert("رسمك للهمزة رائع!");
-        } else { alert("تأكد من رسم الهمزة (أ) للمفتوح والمضموم و (إ) للمكسور"); }
-    }
+    // تصحيح المرحلة الثالثة (الرسم)
+    function checkStep3() {
+        let d1 = document.getElementById('draw1').value.trim();
+        let d2 = document.getElementById('draw2').value.trim();
+        let fb = document.getElementById('fb3');
 
-    function finishLesson() {
-        document.getElementById('applause').play();
-        alert("مبروك! لقد أكملت درس همزة القطع بنجاح.");
+        if (d1 === "أ" && d2 === "إ") {
+            fb.innerHTML = "✅ ممتاز! رسمك للهزة صحيح مية مية.";
+            fb.style.display = "block"; 
+            fb.style.background = "var(--success)";
+            handleSuccess();
+        } else {
+            fb.innerHTML = "❌ خطأ في الرسم. تذكر: أسد (أ) ، إكرام (إ).";
+            fb.style.display = "block";
+            fb.style.background = "var(--error)";
+        }
     }
 </script>
-
 </body>
 </html>

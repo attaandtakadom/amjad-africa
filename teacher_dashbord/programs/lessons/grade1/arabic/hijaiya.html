@@ -799,7 +799,7 @@
 
 <audio id="success-chime" src="../../../../../sound/correct-sound.mp3"></audio>
 
-<audio id="applause-sound" src="sound/applause.mp3"></audio>
+<audio id="applause-sound" src="../../../../../sound/applause.mp3"></audio>
 
 
 
@@ -1188,26 +1188,28 @@
 
             // تشغيل صوت النجاح
             function playSuccessSound() {
-                const chime = document.getElementById('success-chime');
-                const applause = document.getElementById('applause-sound');
-                
-                try {
-                    chime.currentTime = 0;
-                    chime.play().catch(e => console.log("خطأ في تشغيل صوت النجاح:", e));
-                    
-                    setTimeout(() => {
-                        applause.currentTime = 0;
-                        applause.play().catch(e => console.log("خطأ في تشغيل التصفيق:", e));
-                    }, 300);
-                } catch (error) {
-                    console.log("خطأ في تشغيل الأصوات:", error);
-                }
-                
-                // إضافة تأثير اهتزاز بسيط للشاشة للاحتفال
-                document.body.style.animation = "celebrate 0.5s ease";
-                setTimeout(() => { document.body.style.animation = ""; }, 500);
-            }
-
+    const chime = document.getElementById('success-chime');
+    const applause = document.getElementById('applause-sound');
+    
+    try {
+        chime.currentTime = 0;
+        chime.play().catch(e => console.log("خطأ في تشغيل صوت النجاح:", e));
+        
+        // تشغيل التصفيق بعد كل 3 إجابات صحيحة
+        if (correctCount > 0 && correctCount % 3 === 0) {
+            setTimeout(() => {
+                applause.currentTime = 0;
+                applause.play().catch(e => console.log("خطأ في تشغيل التصفيق:", e));
+            }, 300);
+        }
+    } catch (error) {
+        console.log("خطأ في تشغيل الأصوات:", error);
+    }
+    
+    // إضافة تأثير اهتزاز بسيط للشاشة للاحتفال
+    document.body.style.animation = "celebrate 0.5s ease";
+    setTimeout(() => { document.body.style.animation = ""; }, 500);
+}
             // تشغيل صوت الخطأ
             function playErrorSound() {
                 // نغمة خطأ بسيطة باستخدام Web Audio API
