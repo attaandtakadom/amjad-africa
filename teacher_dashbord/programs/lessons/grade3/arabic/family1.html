@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامجي التفاعلي - أسرتي وجدتي</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f9f3e6 0%, #f0e4d0 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .program-container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #fff9f0;
+            border-radius: 60px 60px 40px 40px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1), 0 8px 15px rgba(98, 67, 27, 0.2);
+            border: 5px solid #ffd89c;
+            overflow: hidden;
+            position: relative;
+        }
+        /* رأس البرنامج */
+        .header {
+            background-color: #5babca;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            border-bottom: 5px solid #f9b83c;
+            background-image: radial-gradient(circle at 10px 10px, #c79a6e 2px, transparent 2px), 
+                              radial-gradient(circle at 30px 25px, #c79a6e 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0 #6b4f33;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+        .header h2 {
+            margin: 5px 0 0;
+            font-size: 1.8rem;
+            background-color: #fdeacb;
+            display: inline-block;
+            padding: 5px 30px;
+            border-radius: 40px;
+            color: #7b4b2b;
+            border: 2px solid #ffb882;
+        }
+        /* منطقة عرض الصور والمكافآت */
+        .rewards-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffeac2;
+            padding: 15px 25px;
+            border-bottom: 3px dashed #b4865b;
+        }
+        .stars {
+            font-size: 2rem;
+            color: #c99c00;
+            text-shadow: 0 0 5px gold;
+            letter-spacing: 8px;
+        }
+        .sound-badge {
+            background-color: #5f9ea0;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 0 #3b6e70;
+        }
+        .sound-badge span {
+            margin: 0 5px;
+        }
+        /* محتوى الدرس */
+        .lesson-content {
+            padding: 25px 30px;
+        }
+        .summary-box {
+            background-color: #e7f3d3;
+            border-right: 15px solid #98b87c;
+            padding: 15px 20px;
+            border-radius: 30px 10px 10px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 0 #b1cf9a;
+        }
+        .summary-box h3 {
+            font-size: 1.8rem;
+            color: #2f6b2f;
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #7b9f5e;
+            padding-bottom: 5px;
+        }
+        .summary-box ul {
+            list-style-type: '🌟 ';
+            padding-right: 25px;
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #1e4a1e;
+            font-weight: 500;
+        }
+        .summary-box li {
+            margin: 8px 0;
+        }
+        /* صورة الأسرة */
+        .family-image {
+            text-align: center;
+            margin: 20px 0;
+            background-color: #ffedd4;
+            padding: 40px;
+            border-radius: 50px;
+            border: 4px solid #d4a76a;
+        }
+        .family-image img {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 30px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            border: 5px solid white;
+            background-color: #eee;
+            color: #835e3b;
+            font-size: 1.2rem;
+            padding: 20px;
+        }
+        .family-image p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #9b5e2e;
+            font-size: 1.2rem;
+        }
+        
+        /* قسم النشيد الجديد */
+        .poem-section {
+            background: linear-gradient(165deg, #fff1d6, #fde3b5);
+            border: 5px solid #e4a56e;
+            border-radius: 60px 60px 30px 30px;
+            padding: 25px;
+            margin: 25px 30px;
+            box-shadow: 0 10px 0 #b57a48;
+            position: relative;
+        }
+        .poem-title {
+            background-color: #c44f4f;
+            color: white;
+            display: inline-block;
+            padding: 10px 35px;
+            border-radius: 50px;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: -50px;
+            margin-bottom: 20px;
+            border: 3px solid #ffcf9a;
+            box-shadow: 0 5px 0 #772222;
+        }
+        .poem-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #4a2e1b;
+            background-color: #fffae9;
+            padding: 25px;
+            border-radius: 40px;
+            border: 3px dashed #d98d4b;
+        }
+        .poem-verse {
+            background: #fdebd0;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 0 #b47d56;
+            border: 2px solid #bc7a3f;
+            text-align: center;
+            min-width: 200px;
+        }
+        .poem-verse:before {
+            content: "🎵";
+            margin-left: 10px;
+            font-size: 1.8rem;
+        }
+        
+        /* منطقة التمارين */
+        .exercises {
+            background: #fef7e9;
+            border-radius: 40px;
+            padding: 20px;
+            margin: 0 30px 30px 30px;
+            border: 3px solid #f7c46e;
+        }
+        .exercise-tab {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        .ex-btn {
+            background: #ffe3b7;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #6b3f1c;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #b87b4b;
+            transition: 0.1s ease;
+            border: 2px solid #dba670;
+            flex: 1 0 auto;
+        }
+        .ex-btn.active {
+            background: #ffc489;
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #b87b4b;
+        }
+        .question-panel {
+            background: #f9e1b5;
+            padding: 20px;
+            border-radius: 30px;
+            font-size: 1.3rem;
+        }
+        .question-text {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 60px;
+            margin: 15px 0;
+            border: 3px solid #c19454;
+            font-weight: 600;
+        }
+        .options-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        .option-btn, .tf-btn, .mc-btn {
+            background: #b0d3b0;
+            border: none;
+            border-radius: 40px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e4a1e;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #598b4c;
+            transition: 0.1s ease;
+            border: 2px solid #6b8f5c;
+            min-width: 150px;
+        }
+        .tf-btn {
+            background: #f4b8b8;
+            color: #771f1f;
+            box-shadow: 0 5px 0 #b15252;
+        }
+        .fill-input {
+            border: 3px solid #a5672b;
+            border-radius: 50px;
+            padding: 15px;
+            font-size: 1.3rem;
+            width: 200px;
+            text-align: center;
+            background: #fff9e6;
+        }
+        .submit-btn {
+            background: #f1c40f;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 35px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 7px 0 #b08a1d;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .feedback {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 40px;
+            text-align: center;
+            background-color: #fff6d9;
+        }
+        .green-feedback { background-color: #c8e6c9; color: #1f5a2e; border: 3px solid #2e7d32; }
+        .red-feedback { background-color: #ffcdd2; color: #981b1b; border: 3px solid #b71c1c; }
+        .footer-bar {
+            background-color: #cba87a;
+            padding: 20px;
+            text-align: center;
+            border-top: 5px solid #f0c27b;
+        }
+        .home-btn {
+            background: #fdebd0;
+            border: none;
+            border-radius: 60px;
+            padding: 15px 45px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #784e2e;
+            box-shadow: 0 8px 0 #ac6f3c;
+            cursor: pointer;
+            transition: 0.1s ease;
+            border: 3px solid #e7b875;
+            display: inline-block;
+        }
+        .home-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #ac6f3c;
+        }
+        .counter {
+            background: #3a6b5b;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="program-container" id="mainProgram">
+
+    <!-- رأس البرنامج -->
+    <div class="header">
+        <h1>📚 لغتي الجميلة 📚</h1>
+        <h2>أسرتي وجدتي - الصف الثالث</h2>
+    </div>
+
+    <!-- شريط المكافآت والصورة -->
+    <div class="rewards-area">
+        <div class="stars" id="starDisplay">⭐⭐⭐</div>
+        <div class="sound-badge">
+            <span>🔊</span> أصوات التشجيع <span>👏</span>
+        </div>
+    </div>
+
+    <!-- صورة الأسرة (ضع رابط صورتك هنا) -->
+    <div class="family-image">
+        <img src="family.jpg" 
+             alt="صورتي العائلية" 
+             onerror="this.src='data:image/+xml;utf8,<svg xmlns=%22http://ww.w3.org/2000/svg%22 width=%22600%22 height=%22250%22 viewBox=%220 0 600 250%22><rect width=%22600%22 height=%22250%22 fill=%22%23f7d9aa%22/><text x=%2230%22 y=%22140%22 font-size=%2230%22 fill=%22%237a4c2b%22>🎉 أسرتي السعيدة (ضع صورتك هنا) 🎉</text></svg>'">
+        <p>❤️ أسرتي الحبيبة: أب، أم، إخوة، جدتي ❤️</p>
+    </div>
+
+    <!-- النشيد الجديد - أضفته هنا كما طلبت -->
+    <div class="poem-section">
+        <div class="poem-title">🎤 نشيد جدتي 🎤</div>
+        <div class="poem-content">
+            <div class="poem-verse">  لي جدة ترأف بي <br >   احنى على من ابي           </div>
+            <div class="poem-verse">  وكل شيء سرني <br>تذهب فيه مذهبي</div>
+            <div class="poem-verse">    فجعلتني خلفها <br>   أنجو بها وأختبر     </div>
+            <div class="poem-verse">وهي تقول لأبي<br> بلهجت المؤنب</div>
+            <div class="poem-verse"  >  ألم تكن تصنع ما     <br>يصنع إذ أنت صبي </div>
+        </div>
+        <p style="text-align: center; margin-top: 15px; font-size: 1.3rem; color: #9b4b2b;">✨ أنشودة جميلة عن حنان الجدة ✨</p>
+    </div>
+
+    <!-- ملخص الدرس -->
+    <div class="lesson-content">
+        <div class="summary-box">
+            <h3>أولاً: ملخص الدرس (أسرتي وجدتي)</h3>
+            <ul>
+                <li>التعاون الأسري: أفراد الأسرة (الأب، الأم، الإخوة) يتعاونون جميعاً في أعمال المنزل وتربية الأولاد.</li>
+                <li>واجبات الوالدين: ينفق الوالدان عمرهما في رعاية الأبناء، وتوفير الطعام والشراب والتعليم لهم.</li>
+                <li>العلاقة بين الأجيال: تقوم الأسرة على عطف الكبير على الصغير، واحترام الصغير للكبير.</li>
+                <li>مكانة الجدة: يبرز الدرس حنان الجدة الفائق، فهي أحنى على الحفيد من أبيه، وتكون ملجأه وملاذه عند غضب الأهل.</li>
+                <li>المشاركة الاجتماعية: الأسرة السعيدة هي التي تتعاون في خدمة المجتمع والآخرين.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- التمارين التفاعلية -->
+    <div class="exercises">
+        <div class="exercise-tab">
+            <button class="ex-btn active" onclick="showExercise('truefalse')">✔️ صح وخطأ</button>
+            <button class="ex-btn" onclick="showExercise('fillblank')">🔤 أكمل الفراغات</button>
+            <button class="ex-btn" onclick="showExercise('multiple')">🔢 اختيار من متعدد</button>
+        </div>
+
+        <!-- لوحة الأسئلة -->
+        <div id="exercisePanel" class="question-panel">
+            <!-- سيتم ملؤها بواسطة JavaScript -->
+        </div>
+
+        <!-- عداد الإجابات الصحيحة -->
+        <div class="counter" id="correctCounter">الإجابات الصحيحة: 0</div>
+    </div>
+
+    <!-- زر العودة للرئيسية -->
+    <div class="footer-bar">
+    <a href="../../../../../teacher_dashbord/arabic_dashboard.html" class="mhome">🏠 العودة للرئيسية</a>
+
+
+    </div>
+</div>
+
+<!-- عناصر الصوت (مخفية) -->
+<audio id="soundAhsant" preload="auto">
+    <source src="../../../../../sound/correct-sound.mp3" type="audio/mpeg">
+</audio>
+<audio id="soundClap" preload="auto">
+    <source src="../../../../../sound/applause.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    // ----------------------------- إدارة البرنامج ---------------------------------
+    // إجابات نموذجية
+    const answers = {
+        tf: ['صحيح', 'خطأ', 'خطأ', 'صحيح', 'خطأ'],
+        fill: ['الكبر', 'أبيه', 'المجتمع', 'الجدة', 'الثامنة'],
+        mc: ['ب', 'ب', 'ج', 'ب', 'أ']
+    };
+
+    let currentEx = 'truefalse';
+    let correctCount = 0;
+    let tfIndex = 0, fillIndex = 0, mcIndex = 0;
+    let canAnswer = true;
+
+    const starDisplay = document.getElementById('starDisplay');
+    const correctSpan = document.getElementById('correctCounter');
+    const soundAhsant = document.getElementById('soundAhsant');
+    const soundClap = document.getElementById('soundClap');
+
+    // بيانات الأسئلة
+    const tfQuestions = [
+        "1. تتعاون عائشة مع إخوتها وأمها في نظافة البيت. (   )",
+        "2. الوالدان يهتمان بتوفير الطعام والشراب والكساء للأبناء فقط.",
+        "3. الجدة في القصيدة قاسية وتساعد الأب في ضرب حفيده.",
+        "4. الأسرة السعيدة هي التي يحترم فيها الصغيرُ الكبيرَ.",
+        "5. اقترح أحد التلاميذ أن يكون موضوع الدرس عن 'المدرسة'."
+    ];
+
+    const fillQuestions = [
+        "1. ينفق الوالدان عمرهما في رعاية الأبناء في زمن ............",
+        "2. الجدة أحنى على الطفل من ............",
+        "3. تعمل الأسرة السعيدة في خدمة ............ والجماعة.",
+        "4. يذهب الحفيد إلى ............ عندما يغضب عليه والده.",
+        "5. يبدأ الأب جهده للعمل من الساعة ............ صباحاً."
+    ];
+
+    const mcQuestions = [
+        {q: "1. من واجب الأبناء تجاه الوالدين في كبرهما:", a: "أ) الإهمال", b: "ب) المكافأة بالعناية والرعاية", c: "ج) الترك", correct: 'ب'},
+        {q: "2. الجدة في القصيدة هي التي:", a: "أ) تخوف الطفل", b: "ب) تُرأف بالطفل وتحميه", c: "ج) تطلب من الأب ضرب الطفل", correct: 'ب'},
+        {q: "3. الحصة التي دار فيها الحوار عن الأسرة هي حصة:", a: "أ) الحساب", b: "ب) العلوم", c: "ج) التعبير", correct: 'ج'},
+        {q: "4. معنى 'عزم الأمور' كما ذُكر في سياق رعاية الوالدين:", a: "أ) الشيء السهل", b: "ب) قوة الإرادة والواجب العظيم", c: "ج) التعب البسيط", correct: 'ب'},
+        {q: "5. الطفل في القصيدة يصف جدته بأنها:", a: "أ) لي جدة تُرأف بي", b: "ب) لي جدة تضربني", c: "ج) لي جدة تهملني", correct: 'أ'}
+    ];
+
+    function playSound(audioElement) {
+        audioElement.play().catch(e => {
+            console.log("لم يتم تشغيل الصوت تلقائياً: ", e);
+            alert("🔊 أحسنت! (صوت تشجيع)");
+        });
+    }
+
+    function updateStars() {
+        let stars = '';
+        for (let i=0; i<3; i++) {
+            stars += (i < correctCount) ? '⭐' : '☆';
+        }
+        starDisplay.innerText = stars;
+    }
+
+    function addCorrectAnswer() {
+        if (correctCount < 3) {
+            correctCount++;
+            correctSpan.innerText = `الإجابات الصحيحة: ${correctCount}`;
+            updateStars();
+
+            if (correctCount === 3) {
+                playSound(soundAhsant);
+                setTimeout(() => {
+                    playSound(soundClap);
+                }, 600);
+                alert("🎉 رائع! حصلت على ثلاث إجابات صحيحة: أحسنت 👏");
+            } else {
+                playSound(soundAhsant);
+            }
+        } else {
+            if (correctCount >= 3) {
+                playSound(soundClap);
+                alert("🌟 أنت بطل! استمر في التألق 🌟");
+            }
+        }
+    }
+
+    function renderExercise() {
+        const panel = document.getElementById('exercisePanel');
+        let html = '';
+
+        if (currentEx === 'truefalse') {
+            const q = tfQuestions[tfIndex];
+            html = `<div class="question-text">${q}</div>
+                    <div class="options-area">
+                        <button class="tf-btn" onclick="checkTF(true)">✔️ صحيح</button>
+                        <button class="tf-btn" onclick="checkTF(false)">❌ خطأ</button>
+                    </div>`;
+        } else if (currentEx === 'fillblank') {
+            const q = fillQuestions[fillIndex];
+            html = `<div class="question-text">${q}</div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        <input type="text" id="fillInput" class="fill-input" placeholder="اكتب الكلمة" autocomplete="off">
+                        <button class="submit-btn" onclick="checkFill()">↵ تحقق</button>
+                    </div>`;
+        } else if (currentEx === 'multiple') {
+            const q = mcQuestions[mcIndex];
+            html = `<div class="question-text">${q.q}</div>
+                    <div class="options-area">
+                        <button class="mc-btn" onclick="checkMC('أ')">${q.a}</button>
+                        <button class="mc-btn" onclick="checkMC('ب')">${q.b}</button>
+                        <button class="mc-btn" onclick="checkMC('ج')">${q.c}</button>
+                    </div>`;
+        }
+
+        html += `<div id="questionFeedback" class="feedback"></div>`;
+        panel.innerHTML = html;
+    }
+
+    window.showExercise = function(type) {
+        currentEx = type;
+        tfIndex = 0;
+        fillIndex = 0;
+        mcIndex = 0;
+        canAnswer = true;
+        renderExercise();
+        document.querySelectorAll('.ex-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    };
+
+    window.checkTF = function(userChoice) {
+        if (!canAnswer) return;
+        const correct = (answers.tf[tfIndex] === 'صحيح');
+        const fbDiv = document.getElementById('questionFeedback');
+        if (userChoice === correct) {
+            fbDiv.innerText = '✅ إجابة صحيحة!';
+            fbDiv.className = 'feedback green-feedback';
+            addCorrectAnswer();
+            tfIndex = (tfIndex + 1) % tfQuestions.length;
+        } else {
+            fbDiv.innerText = '❌ إجابة خاطئة، حاول مرة أخرى.';
+            fbDiv.className = 'feedback red-feedback';
+        }
+        canAnswer = false;
+        setTimeout(() => {
+            renderExercise();
+            canAnswer = true;
+        }, 1500);
+    };
+
+    window.checkFill = function() {
+        if (!canAnswer) return;
+        const userAnswer = document.getElementById('fillInput').value.trim();
+        const fbDiv = document.getElementById('questionFeedback');
+        if (userAnswer === answers.fill[fillIndex]) {
+            fbDiv.innerText = '✅ ممتاز! صحيح';
+            fbDiv.className = 'feedback green-feedback';
+            addCorrectAnswer();
+            fillIndex = (fillIndex + 1) % fillQuestions.length;
+        } else {
+            fbDiv.innerText = `❌ خطأ... الكلمة الصحيحة هي: ${answers.fill[fillIndex]}`;
+            fbDiv.className = 'feedback red-feedback';
+        }
+        canAnswer = false;
+        setTimeout(() => {
+            renderExercise();
+            canAnswer = true;
+        }, 2000);
+    };
+
+    window.checkMC = function(choice) {
+        if (!canAnswer) return;
+        const correct = mcQuestions[mcIndex].correct;
+        const fbDiv = document.getElementById('questionFeedback');
+        if (choice === correct) {
+            fbDiv.innerText = '✅ إجابة موفقة!';
+            fbDiv.className = 'feedback green-feedback';
+            addCorrectAnswer();
+            mcIndex = (mcIndex + 1) % mcQuestions.length;
+        } else {
+            fbDiv.innerText = '❌ حاول مرة أخرى';
+            fbDiv.className = 'feedback red-feedback';
+        }
+        canAnswer = false;
+        setTimeout(() => {
+            renderExercise();
+            canAnswer = true;
+        }, 1500);
+    };
+
+    window.goHome = function() {
+        correctCount = 0;
+        correctSpan.innerText = `الإجابات الصحيحة: 0`;
+        updateStars();
+        tfIndex = 0; fillIndex = 0; mcIndex = 0;
+        currentEx = 'truefalse';
+        renderExercise();
+        alert("أهلاً بك مرة أخرى في درس أسرتي!");
+    };
+
+    window.onload = function() {
+        renderExercise();
+        correctSpan.innerText = `الإجابات الصحيحة: 0`;
+        updateStars();
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درس أسرتي وجدتي - أبلة منال</title>
+    <style>
+        :root { --primary: #ff6f61; --secondary: #4caf50; --bg: #fff9f0; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 15px; text-align: center; direction: rtl; }
+        .container { max-width: 800px; background: white; margin: auto; padding: 20px; border-radius: 25px; border: 4px solid var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        
+        .mhome { display: inline-block; padding: 10px 20px; background: #0d47a1; color: white; text-decoration: none; border-radius: 50px; margin-bottom: 15px; }
+        
+        .lesson-img { width: 100%; max-width: 400px; border-radius: 15px; margin: 15px 0; border: 3px solid #ffccbc; }
+        
+        .summary { background: #fff3e0; padding: 20px; border-radius: 15px; text-align: right; border-right: 5px solid #ff9800; margin-bottom: 20px; }
+        
+        .exercise-box { background: #f1f8e9; padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 2px solid #c8e6c9; text-align: right; }
+        
+        .btn { background: var(--secondary); color: white; border: none; padding: 12px 25px; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.1rem; margin: 10px 0; width: 100%; }
+        .option-btn { background: white; color: #333; border: 2px solid #ddd; margin: 5px; width: 45%; }
+        
+        .score-board { background: #00bcd4; color: white; padding: 10px; border-radius: 10px; font-size: 1.2rem; margin-bottom: 15px; display: inline-block; }
+        
+        input[type="text"] { width: 100%; padding: 10px; border-radius: 8px; border: 2px solid #ddd; text-align: center; margin: 10px 0; }
+
+        #praiseZone { 
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #ffeb3b; padding: 40px; border-radius: 30px; border: 8px solid #f57f17;
+            font-size: 2.5em; font-weight: bold; z-index: 2000; box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            animation: celebrate 0.5s infinite alternate;
+        }
+
+        @keyframes celebrate { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.1); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="#" class="mhome">🏠 العودة للرئيسية</a>
+    
+    <h1>👨‍👩‍👧‍👦 درس: أسـرتـي الـسـعـيـدة</h1>
+
+    <img src="family.jpg" alt="صورة الأسرة" class="lesson-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3076/3076752.png'">
+
+    <div class="summary">
+        <h3>📖 ملخص الدرس:</h3>
+        <ul>
+            <li>الأسرة السعيدة تقوم على <b>التعاون والاحترام</b> بين الصغير والكبير.</li>
+            <li>الوالدان يبذلان جهداً كبيراً لتوفير <b>الغذاء والكساء والتعليم</b>.</li>
+            <li>الجدة هي رمز <b>الحنان</b>، وهي الملجأ الآمن للحفيد.</li>
+        </ul>
+    </div>
+
+    <div class="score-board">الإجابات الصحيحة: <span id="score">0</span> / 3</div>
+
+    <div class="exercise-box">
+        <p><b>1. (صح أم خطأ):</b> الجدة في القصيدة قاسية وتساعد الأب في ضرب حفيده.</p>
+        <button class="option-btn" onclick="checkAnswer(false, this)">صح √</button>
+        <button class="option-btn" onclick="checkAnswer(true, this)">خطأ ×</button>
+    </div>
+
+    <div class="exercise-box">
+        <p><b>2. (أكمل):</b> الجدة أحنى على الطفل من .........</p>
+        <input type="text" id="q2" placeholder="اكتب الكلمة هنا">
+        <button class="btn" onclick="checkInputAnswer('q2', 'أبيه')">تحقق ✅</button>
+    </div>
+
+    <div class="exercise-box">
+        <p><b>3. (اختر):</b> ما واجب الأبناء تجاه الوالدين في كبرهما؟</p>
+        <button class="option-btn" onclick="checkAnswer(false, this)">الإهمال</button>
+        <button class="option-btn" onclick="checkAnswer(true, this)">العناية والرعاية</button>
+    </div>
+
+    <div id="praiseZone">🎊 أحسنتِ! أنتي مبدعة 🎊<br>👏👏👏👏</div>
+
+    <audio id="applause" src="applause.mp3"></audio>
+    <audio id="ahsant" src="ahsant.mp3"></audio>
+
+</div>
+
+<script>
+    let score = 0;
+    let completed = [false, false, false];
+
+    function checkAnswer(isCorrect, btn) {
+        if (isCorrect) {
+            btn.style.background = "#c8e6c9";
+            btn.disabled = true;
+            updateScore();
+        } else {
+            btn.style.background = "#ffcdd2";
+            alert("حاول مرة أخرى يا بطل!");
+        }
+    }
+
+    function checkInputAnswer(id, correctWord) {
+        let val = document.getElementById(id).value.trim();
+        if (val === correctWord || val === "ابيه") {
+            document.getElementById(id).style.background = "#c8e6c9";
+            document.getElementById(id).disabled = true;
+            updateScore();
+        } else {
+            alert("الإجابة غير صحيحة، فكر في اسم الأب.");
+        }
+    }
+
+    function updateScore() {
+        score++;
+        document.getElementById('score').innerText = score;
+        
+        // إذا وصل الطالب لـ 3 إجابات صحيحة يعمل التصفيق
+        if (score === 3) {
+            playCelebrate();
+        }
+    }
+
+    function playCelebrate() {
+        const audio1 = document.getElementById('applause');
+        const audio2 = document.getElementById('ahsant');
+        const praise = document.getElementById('praiseZone');
+
+        audio1.play();
+        audio2.play();
+        
+        praise.style.display = "block";
+        setTimeout(() => { 
+            praise.style.display = "none";
+            // إعادة التصفير للاستمرار في اللعب إذا رغبتِ
+        }, 5000);
+    }
+</script>
+
+</body>
+</html>
