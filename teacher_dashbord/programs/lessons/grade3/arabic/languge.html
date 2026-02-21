@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار أسرتي الشامل - أبلة منال</title>
+    <style>
+        :root { --primary: #2e7d32; --secondary: #1565c0; --accent: #ff9800; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #eef2f3; margin: 0; padding: 10px; text-align: center; }
+        .container { max-width: 850px; background: white; margin: 20px auto; padding: 25px; border-radius: 25px; border: 6px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .mhome { display: inline-block; padding: 8px 20px; background: #1a237e; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-bottom: 20px; }
+        
+        h2 { color: var(--primary); background: #f1f8e9; padding: 10px; border-radius: 10px; font-size: 1.3rem; }
+        .exercise-card { background: #fff; border: 2px solid #e0e0e0; padding: 15px; border-radius: 15px; margin-bottom: 20px; text-align: right; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
+        .done { border: 2px solid var(--primary); background: #f1f8e9; }
+
+        .btn { background: #fff; color: #333; border: 2px solid #ddd; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
+        .btn:hover { border-color: var(--primary); background: #f1f8e9; }
+        .btn.correct { background: var(--primary) !important; color: white !important; border-color: var(--primary); }
+        
+        .score-box { background: var(--accent); color: white; padding: 10px 30px; border-radius: 50px; display: inline-block; font-weight: bold; font-size: 1.2rem; margin-bottom: 20px; }
+        
+        #celebration { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ffeb3b; padding: 40px; border-radius: 30px; border: 10px solid #fb8c00; z-index: 1000; font-size: 2.2rem; font-weight: bold; box-shadow: 0 0 100px rgba(0,0,0,0.5); animation: bounce 0.5s infinite alternate; }
+        @keyframes bounce { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.1); } }
+        
+        textarea { width: 100%; padding: 10px; border-radius: 10px; border: 2px solid #ddd; font-family: inherit; font-size: 1rem; resize: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="#" class="mhome">🏠 العودة للرئيسية</a>
+    <div class="score-box">⭐ الإنجاز: <span id="score">0</span> / 11</div>
+
+    <h2>س١: ضع علامة (✓) أو (✗)</h2>
+    
+    <div class="exercise-card" id="q1">
+        <p>١. الأسرة السعيدة هي التي لا يتعاون أفرادها.</p>
+        <button class="btn" onclick="wrong(this)">✓ صح</button>
+        <button class="btn" onclick="right(this, 1)">✗ خطأ</button>
+    </div>
+
+    <div class="exercise-card" id="q2">
+        <p>٢. من صفات الطفل المسلم الصدق والأمانة.</p>
+        <button class="btn" onclick="right(this, 2)">✓ صح</button>
+        <button class="btn" onclick="wrong(this)">✗ خطأ</button>
+    </div>
+
+    <div class="exercise-card" id="q3">
+        <p>٣. الجدة هي أحنى الناس على الحفيد في حال غضب الأب.</p>
+        <button class="btn" onclick="right(this, 3)">✓ صح</button>
+        <button class="btn" onclick="wrong(this)">✗ خطأ</button>
+    </div>
+
+    <div class="exercise-card" id="q4">
+        <p>٤. يذهب الطفل للمدرسة ليلعب فقط ولا يتعلم العلوم.</p>
+        <button class="btn" onclick="wrong(this)">✓ صح</button>
+        <button class="btn" onclick="right(this, 4)">✗ خطأ</button>
+    </div>
+
+    <h2>س٢: أكمل العبارات (اختر الكلمة المناسبة)</h2>
+    
+    <div class="exercise-card" id="q5">
+        <p>١. ينفق الوالدان عمرهما في رعاية الأبناء في زمن ........</p>
+        <button class="btn" onclick="right(this, 5)">الطفولة</button>
+        <button class="btn" onclick="wrong(this)">الشيخوخة</button>
+    </div>
+
+    <div class="exercise-card" id="q6">
+        <p>٢. أطيع ربي الذي ........</p>
+        <button class="btn" onclick="right(this, 6)">خلقني</button>
+        <button class="btn" onclick="wrong(this)">أنسيني</button>
+    </div>
+
+    <div class="exercise-card" id="q7">
+        <p>٣. أعتني بأسرتي وأطيع ........ وأمي</p>
+        <button class="btn" onclick="right(this, 7)">أبي</button>
+        <button class="btn" onclick="wrong(this)">جاري</button>
+    </div>
+
+    <div class="exercise-card" id="q8">
+        <p>٤. أنا طفل مسلم أنظف ثيابي و ........</p>
+        <button class="btn" onclick="right(this, 8)">أسناني</button>
+        <button class="btn" onclick="wrong(this)">ألعابي</button>
+    </div>
+
+    <h2>س٣: اختر الإجابة الصحيحة</h2>
+
+    <div class="exercise-card" id="q9">
+        <p>١. بأي شيء يملأ الطفل المسلم فمه؟</p>
+        <button class="btn" onclick="wrong(this)">بالبكاء</button>
+        <button class="btn" onclick="right(this, 9)">بالبسمات</button>
+        <button class="btn" onclick="wrong(this)">بالصراخ</button>
+    </div>
+
+    <div class="exercise-card" id="q10">
+        <p>٢. ماذا يفعل الأب من الساعة الثامنة صباحاً؟</p>
+        <button class="btn" onclick="wrong(this)">ينام</button>
+        <button class="btn" onclick="right(this, 10)">يعمل ليوفر ما نحتاج</button>
+    </div>
+
+    <div class="exercise-card" id="q11">
+        <p>٣. إلى من يلجأ الحفيد إذا غضب عليه الأهل؟</p>
+        <button class="btn" onclick="wrong(this)">إلى جيرانه</button>
+        <button class="btn" onclick="right(this, 11)">إلى جدته</button>
+    </div>
+
+    <h2>س٤: أجب بنفسك (تأمل)</h2>
+    <div class="exercise-card">
+        <p>كيف تساعد والديك في شؤون البيت؟</p>
+        <textarea rows="3" placeholder="اكتب طريقتك الجميلة هنا يا بطل..."></textarea>
+    </div>
+
+    <div id="celebration">🎊 أحسنتِ يا أبلة منال 🎊<br>🌟 مية مية 🌟<br>👏👏👏👏</div>
+
+    <audio id="applause" src="../../../../../sound/applause.mp3"></audio>
+    <audio id="ahsant" src="ahsant.mp3"></audio>
+
+</div>
+
+<script>
+    let score = 0;
+    let solved = {};
+
+    function right(btn, qNum) {
+        if (!solved[qNum]) {
+            solved[qNum] = true;
+            btn.classList.add('correct');
+            score++;
+            document.getElementById('score').innerText = score;
+            btn.parentElement.classList.add('done');
+            if (score === 11) {
+                document.getElementById('applause').play();
+                document.getElementById('ahsant').play();
+                document.getElementById('celebration').style.display = "block";
+                setTimeout(() => { document.getElementById('celebration').style.display = "none"; }, 6000);
+            }
+        }
+    }
+
+    function wrong(btn) {
+        btn.style.backgroundColor = "#ffebee";
+        btn.style.borderColor = "#f44336";
+        alert("حاول مرة أخرى!");
+    }
+</script>
+
+</body>
+</html>

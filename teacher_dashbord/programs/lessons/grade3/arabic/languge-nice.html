@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>البرنامج التعليمي - الصف الثالث الابتدائي (المنهج الليبي)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(145deg, #f9f3e6 0%, #fff4e4 100%);
+            min-height: 100vh;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 40px 40px 30px 30px;
+            box-shadow: 0 20px 40px rgba(0, 20, 10, 0.2);
+            overflow: hidden;
+            border: 2px solid #c9a77d;
+        }
+
+        /* رأس الصفحة مع رابط العودة */
+        .header-bar {
+            background: #1e5f4b;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 4px solid #f4b740;
+        }
+
+        .home-link {
+            background: #f4b740;
+            color: #1e5f4b;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 0 #b47d2c;
+            transition: 0.1s ease;
+            border: 1px solid #ffe1a0;
+        }
+
+        .home-link:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .title-main {
+            font-size: 1.7rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 0 #0d3d2f;
+            letter-spacing: 1px;
+        }
+
+        /* شريط التقدم والإنجاز */
+        .progress-bar {
+            background: #f0e5d5;
+            padding: 15px 20px;
+            border-bottom: 2px solid #d4b48c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .score-display {
+            background: #1e5f4b;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #0d3d2f;
+        }
+
+        .counter-badge {
+            background: #f4b740;
+            color: #1e5f4b;
+            padding: 10px 25px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #b47d2c;
+        }
+
+        .celebration {
+            background: #ffd966;
+            color: #1e5f4b;
+            padding: 15px;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            animation: bounce 0.5s ease;
+            margin: 10px 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* الأقسام */
+        .section {
+            padding: 25px 20px;
+            border-bottom: 2px dashed #d4b48c;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #1e5f4b;
+            font-size: 1.9rem;
+            margin-bottom: 20px;
+            padding-right: 10px;
+            border-right: 8px solid #f4b740;
+            background: linear-gradient(to left, transparent, #fcf2e1);
+            width: fit-content;
+            padding-left: 20px;
+        }
+
+        h3 {
+            color: #b45f2b;
+            font-size: 1.5rem;
+            margin: 20px 0 15px;
+        }
+
+        /* بطاقات النقاط */
+        .points-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .point-card {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 50px 20px 20px 50px;
+            box-shadow: 0 5px 0 #d8b48c;
+            border: 1px solid #efd3b0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .point-marker {
+            background: #f4b740;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e5f4b;
+            font-weight: bold;
+            font-size: 1.4rem;
+            box-shadow: 0 3px 0 #b47d2c;
+        }
+
+        /* النشيد */
+        .poem-box {
+            background: #f4ede3;
+            border: 4px double #1e5f4b;
+            padding: 25px 20px;
+            border-radius: 70px 70px 30px 30px;
+            font-size: 1.4rem;
+            line-height: 2.2rem;
+            text-align: center;
+            font-weight: 500;
+            color: #1d3e2f;
+            box-shadow: inset 0 0 10px #b9a386;
+        }
+
+        .poem-line {
+            margin: 12px 0;
+            border-bottom: 1px dotted #c9a77d;
+            padding-bottom: 8px;
+        }
+
+        /* مكان الصورة الثابتة */
+        .fixed-image-container {
+            background: #e7d6bd;
+            border: 4px solid #1e5f4b;
+            border-radius: 40px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 0 #b48b5a;
+        }
+
+        .fixed-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 30px;
+            border: 3px solid #f4b740;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .image-caption {
+            margin-top: 15px;
+            font-size: 1.3rem;
+            color: #1e5f4b;
+            font-weight: bold;
+            background: #f4b740;
+            display: inline-block;
+            padding: 8px 30px;
+            border-radius: 60px;
+        }
+
+        /* التمارين التفاعلية */
+        .exercise {
+            background: #e9f2ec;
+            padding: 20px;
+            border-radius: 40px;
+            margin: 30px 0;
+            border: 2px solid #b8a077;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 0 #b8a077;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .option-btn {
+            background: #f4b740;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1e5f4b;
+            box-shadow: 0 5px 0 #b47d2c;
+            transition: 0.05s linear;
+            cursor: pointer;
+            font-family: inherit;
+            flex: 1 1 auto;
+            min-width: 150px;
+            border: 2px solid #ffe39c;
+        }
+
+        .option-btn:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+
+        .option-btn.correct:disabled {
+            background: #4caf50;
+            color: white;
+            box-shadow: 0 5px 0 #2e7d32;
+        }
+
+        .option-btn.wrong:disabled {
+            background: #d9534f;
+            color: white;
+            box-shadow: 0 5px 0 #9d2b27;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            min-height: 70px;
+            padding: 15px;
+            border-radius: 50px;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .fill-blank {
+            background: #fff1d6;
+            padding: 15px;
+            border-radius: 40px;
+            font-size: 1.4rem;
+        }
+
+        .fill-input {
+            background: white;
+            border: 3px solid #1e5f4b;
+            border-radius: 60px;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            width: 100%;
+            margin: 15px 0;
+            font-family: inherit;
+            text-align: right;
+        }
+
+        .footer-nav {
+            background: #1e5f4b;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-to-home {
+            background: #f4b740;
+            color: #1e5f4b;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 0 #b47d2c;
+        }
+
+        .back-to-home:active {
+            transform: translateY(6px);
+            box-shadow: none;
+        }
+
+        /* رسالة توضيحية */
+        .path-note {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+            border: 2px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- شريط العنوان مع رابط الرئيسية -->
+        <div class="header-bar">
+            <a href="../../../../arabic_dashboard.html" class="home-link" onclick="window.location.href='../../../../arabic_dashboard.html'; return false;">🏠 الرئيسية</a>
+            <span class="title-main">📘  انا طفل مسلم -  الصف الثالث</span>
+        </div>
+
+        <!-- شريط التقدم والإنجاز -->
+        <div class="progress-bar">
+            <div class="score-display" id="scoreDisplay">🏆 0</div>
+            <div class="counter-badge" id="counterDisplay">✅ 0/3 للتصفيق</div>
+        </div>
+
+        <!-- منطقة الاحتفال (تظهر عند التصفيق) -->
+        <div id="celebrationArea"></div>
+
+        <!-- قسم ملخص البرنامج -->
+        <div class="section">
+            <h2>📌 أولاً: ملخص البرنامج (الدروس)</h2>
+            <div class="points-grid">
+                <div class="point-card"><span class="point-marker">١</span>الأسرة: الوحدة الأساسية يسودها الحب والتعاون</div>
+                <div class="point-card"><span class="point-marker">٢</span>دور الوالدين: يبذلان الجهد في الغذاء والكساء والتعليم</div>
+                <div class="point-card"><span class="point-marker">٣</span>بر الوالدين: طاعتهما، مساعدتهما، ورعايتهما عند الكبر</div>
+                <div class="point-card"><span class="point-marker">٤</span>صفات الطفل المسلم: الصدق، الأمانة، النظافة، اللطف</div>
+                <div class="point-card"><span class="point-marker">٥</span>العبادات: طاعة الله ورسوله، الصلاة، مساعدة الناس</div>
+                <div class="point-card"><span class="point-marker">٦</span>صلة الرحم: الاهتمام بالأقارب والإخوة</div>
+            </div>
+        </div>
+
+        <!-- قسم النشيد مع الصورة الثابتة -->
+        <div class="section">
+            <h2>🎵 ثانياً: نشيد "دعاء الطفل" كاملاً</h2>
+            
+            <!-- رسالة توضيحية لمسار الصورة -->
+            <div class="path-note">
+                <strong>🖼️ ملاحظة:</strong> غير مسار الصورة إلى اسم ملفك (src="./صورتك.jpg")
+            </div>
+
+            <!-- مكان الصورة الثابتة -->
+            <div class="fixed-image-container">
+                <!-- غير المسار التالي إلى اسم صورتك -->
+                <img class="fixed-image" src="./doaa.jpg" alt="صورة الدرس" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\' viewBox=\'0 0 300 200\'><rect width=\'300\' height=\'200\' fill=\'%23e7d6bd\'/><text x=\'50\' y=\'115\' font-family=\'Arial\' font-size=\'18\' fill=\'%231e5f4b\'>ضع صورتك هنا</text><text x=\'30\' y=\'145\' font-family=\'Arial\' font-size=\'14\' fill=\'%23b45f2b\'>عدل المسار: src='./صورتك.jpg'</text></svg>'">
+                <div class="image-caption">🖼️ من درس "الأسرة المسلمة"</div>
+            </div>
+
+            <div class="poem-box">
+                <div class="poem-line">يا إلهي يا إلهي ... اجعل اليوم سعيداً واملأ الصدر انشراحاً ...</div>
+                <div class="poem-line">وأعني في دروسي وأنر عقلي وقلبي ... واجعل التوفيق حظي</div>
+                <div class="poem-line">واحمني واحمِ بلادي ... واملأ الدنيا سلاماً</div>
+                <div class="poem-line">يا إلهي يا إلهي يا مجيب الدعوات ... وكثير البركات</div>
+                <div class="poem-line">وفمي بالبسمات ... وأداء الواجبات بالعلوم النافعات</div>
+                <div class="poem-line">ونصيبي في الحياة من شرور الحادثات ... شاملاً كل الجهات</div>
+                <div class="poem-line">يا مجيب الدعوات</div>
+            </div>
+        </div>
+
+        <!-- قسم التمارين التفاعلية -->
+        <div class="section">
+            <h2>📝 ثالثاً: أسئلة تفاعلية (تمارين)</h2>
+
+            <!-- س1: صح وخطأ -->
+            <div class="exercise">
+                <h3>س١: ضع علامة (✓) أو (✗)</h3>
+                <div class="question" id="q1">
+                    <p>١. الأسرة السعيدة هي التي  يتعاون أفرادها. (   )</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q1')">✗ خطأ</button>
+                        <button class="option-btn" onclick="checkAnswer(this, true, 'q1')">✓ صح</button>
+                    </div>
+                </div>
+                <div class="question" id="q2">
+                    <p>٢. من صفات الطفل المسلم الصدق والأمانة. (   )</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(this, true, 'q2')">✓ صح</button>
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q2')">✗ خطأ</button>
+                    </div>
+                </div>
+                <div class="question" id="q3">
+                    <p>٣. الجدة هي أحنى الناس على الحفيد في حال غضب الأب. (   )</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(this, true, 'q3')">✓ صح</button>
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q3')">✗ خطأ</button>
+                    </div>
+                </div>
+                <div class="question" id="q4">
+                    <p>٤. يذهب الطفل للمدرسة ليلعب و يتعلم العلوم. (   )</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q4')">✗ خطأ</button>
+                        <button class="option-btn" onclick="checkAnswer(this, true, 'q4')">✓ صح</button>
+                    </div>
+                </div>
+            </div>,
+
+            <!-- س3: اختر الإجابة الصحيحة -->
+            <div class="exercise">
+                <h3>س٣: اختر الإجابة الصحيحة</h3>
+                <div class="question" id="q31">
+                    <p>١. بأي شيء يملأ الطفل المسلم فمه؟</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q31')">بالبكاء</button>
+                        <button class="option-btn" onclick="checkAnswer(this, true, 'q31')">بالسمات</button>
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q31')">بالصراخ</button>
+                    </div>
+                </div>
+                <div class="question" id="q32">
+                    <p>٢. ماذا يفعل الأب من الساعة الثامنة صباحاً؟</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q32')">ينام</button>
+                        <button class="option-btn" onclick="checkAnswer(this, true, 'q32')">يعمل ليوفر ما نحتاج</button>
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q32')">يلعب</button>
+                    </div>
+                </div>
+                <div class="question" id="q33">
+                    <p>٣. إلى من يلجأ الحفيد إذا غضب عليه الأهل؟</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q33')">إلى جيرانه</button>
+                        <button class="option-btn" onclick="checkAnswer(this, true, 'q33')">إلى جدته</button>
+                        <button class="option-btn" onclick="checkAnswer(this, false, 'q33')">إلى أصدقائه</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- س4: أسئلة مفتوحة -->
+            <div class="exercise">
+                <h3>س٤: أجب بنفسك</h3>
+                <div class="question">
+                    <p>كيف تساعد والديك في شؤون البيت؟</p>
+                    <textarea class="fill-input" rows="2" placeholder="اكتب إجابتك هنا ..."></textarea>
+                </div>
+                <div class="question">
+                    <p>لماذا تذهب إلى المدرسة؟</p>
+                    <textarea class="fill-input" rows="2" placeholder="اكتب إجابتك هنا ..."></textarea>
+                </div>
+                <div class="question">
+                    <p>اذكر اثنين من معاني الكلمات: الانشراح - البركات</p>
+                    <textarea class="fill-input" rows="3" placeholder="الانشراح = سعادة، البركات = الخير الكثير"></textarea>
+                </div>
+            </div>
+
+            <!-- منطقة عرض التغذية الراجعة -->
+            <div class="feedback" id="globalFeedback"></div>
+        </div>
+
+        <!-- رابط العودة للرئيسية -->
+        <div class="footer-nav">
+            <a href="../../../../arabic_dashboard.html" class="back-to-home" onclick="window.location.href='../../../../arabic_dashboard.html'; return false;">🔙 العودة للرئيسية</a>
+        </div>
+    </div>
+
+    <script>
+        // متغيرات للأصوات والعد
+        let ahsantSound = null;
+        let clapSound = null;
+        let correctCount = 0;        // عداد الإجابات الصحيحة المتتالية
+        let totalScore = 0;           // إجمالي النقاط
+        let lastQuestionId = null;     // لمنع تكرار الإجابة على نفس السؤال
+
+        // تحميل الأصوات عند بدء الصفحة (غير المسارات إلى ملفاتك)
+        function loadSounds() {
+            try {
+                // غير هذه المسارات إلى موقع ملفات الصوت الخاصة بك
+                ahsantSound = new Audio('../../../../../sound/correct-sound.mp3');
+
+                clapSound = new Audio('../../../../../sound/applause.mp3');
+                
+                // اختبار إذا كانت الملفات موجودة
+                ahsantSound.onerror = function() {
+                    console.log('⚠️ لم يتم العثور على ملف صوت أحسنت');
+                };
+                clapSound.onerror = function() {
+                    console.log('⚠️ لم يتم العثور على ملف صوت التصفيق');
+                };
+            } catch(e) {
+                console.log('خطأ في تحميل الأصوات');
+            }
+        }
+
+        // تشغيل صوت أحسنت
+        function playAhsant() {
+            if (ahsantSound) {
+                ahsantSound.currentTime = 0;
+                ahsantSound.play().catch(e => console.log('لا يمكن تشغيل صوت أحسنت'));
+            }
+        }
+
+        // تشغيل صوت التصفيق مع تأثير بصري
+        function playClapWithCelebration() {
+            // تشغيل الصوت
+            if (clapSound) {
+                clapSound.currentTime = 0;
+                clapSound.play().catch(e => console.log('لا يمكن تشغيل صوت التصفيق'));
+            }
+            
+            // عرض تأثير احتفالي
+            const celebrationDiv = document.getElementById('celebrationArea');
+            celebrationDiv.innerHTML = '<div class="celebration">🎉 👏 مبروك! 3 إجابات صحيحة! 👏 🎉</div>';
+            
+            // إخفاء التأثير بعد 3 ثوان
+            setTimeout(() => {
+                celebrationDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            document.getElementById('scoreDisplay').innerHTML = `🏆 ${totalScore}`;
+            document.getElementById('counterDisplay').innerHTML = `✅ ${correctCount}/3 للتصفيق`;
+        }
+
+        // دالة التحقق من الإجابات
+        function checkAnswer(btn, isCorrect, questionId) {
+            // منع إعادة الإجابة على نفس السؤال
+            if (lastQuestionId === questionId) {
+                return;
+            }
+            lastQuestionId = questionId;
+            
+            // تعطيل جميع أزرار هذا السؤال
+            const questionDiv = document.getElementById(questionId);
+            const buttons = questionDiv.querySelectorAll('.option-btn');
+            buttons.forEach(b => b.disabled = true);
+            
+            if (isCorrect) {
+                btn.classList.add('correct');
+                
+                // إجابة صحيحة: زيادة العداد والنقاط
+                correctCount++;
+                totalScore++;
+                
+                // تشغيل صوت أحسنت
+                playAhsant();
+                
+                // التحقق إذا وصلنا إلى 3 إجابات صحيحة
+                if (correctCount === 3) {
+                    playClapWithCelebration();
+                    correctCount = 0; // إعادة تعيين العداد
+                }
+                
+                showFeedback("✅ أحسنت! إجابة صحيحة", true);
+            } else {
+                btn.classList.add('wrong');
+                
+                // إجابة خاطئة: إعادة تعيين عداد الإجابات الصحيحة المتتالية
+                correctCount = 0;
+                
+                showFeedback("❌ إجابة خاطئة - حاول مرة أخرى في السؤال القادم", false);
+            }
+            
+            // تحديث شريط التقدم
+            updateProgress();
+        }
+
+        function showFeedback(msg, isSuccess) {
+            const feedbackDiv = document.getElementById('globalFeedback');
+            feedbackDiv.innerHTML = msg;
+            feedbackDiv.className = 'feedback ' + (isSuccess ? 'success' : 'error');
+        }
+
+        // تحميل الأصوات عند بدء الصفحة
+        window.onload = function() {
+            loadSounds();
+            updateProgress();
+        };
+    </script>
+</body>
+</html>

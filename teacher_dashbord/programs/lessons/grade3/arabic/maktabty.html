@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>مكتبتي الصغيرة - الصف الثالث الابتدائي (المنهج الليبي)</title>
+    <style>
+        /* نفس التنسيقات السابقة مع إضافة تنسيقات جديدة */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(145deg, #f0f7fa 0%, #e6f0f5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 40px 40px 30px 30px;
+            box-shadow: 0 20px 40px rgba(0, 40, 80, 0.2);
+            overflow: hidden;
+            border: 2px solid #8b9eb0;
+        }
+
+        .header-bar {
+            background: #2c5f8a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 4px solid #f9d56e;
+        }
+
+        .home-link {
+            background: #f9d56e;
+            color: #2c5f8a;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 0 #c49b3f;
+            transition: 0.1s ease;
+            border: 1px solid #ffe39c;
+        }
+
+        .home-link:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .title-main {
+            font-size: 1.7rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 0 #1a3f5a;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            background: #e1eef6;
+            padding: 15px 20px;
+            border-bottom: 2px solid #8b9eb0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .score-display {
+            background: #2c5f8a;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #1a3f5a;
+        }
+
+        .counter-badge {
+            background: #f9d56e;
+            color: #2c5f8a;
+            padding: 10px 25px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #c49b3f;
+        }
+
+        .celebration {
+            background: #ffd966;
+            color: #1e5f4b;
+            padding: 15px;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            animation: bounce 0.5s ease;
+            margin: 10px 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .section {
+            padding: 25px 20px;
+            border-bottom: 2px dashed #8b9eb0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #2c5f8a;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            padding-right: 10px;
+            border-right: 8px solid #f9d56e;
+            background: linear-gradient(to left, transparent, #f0f7fa);
+            width: fit-content;
+            padding-left: 20px;
+        }
+
+        h3 {
+            color: #b45f2b;
+            font-size: 1.6rem;
+            margin: 20px 0 15px;
+            border-bottom: 2px dotted #f9d56e;
+            padding-bottom: 8px;
+        }
+
+        .points-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .point-card {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 50px 20px 20px 50px;
+            box-shadow: 0 5px 0 #8b9eb0;
+            border: 1px solid #c9dae8;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .point-marker {
+            background: #f9d56e;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c5f8a;
+            font-weight: bold;
+            font-size: 1.4rem;
+            box-shadow: 0 3px 0 #c49b3f;
+        }
+
+        .poem-box {
+            background: #f9f3e6;
+            border: 4px double #2c5f8a;
+            padding: 25px 20px;
+            border-radius: 70px 70px 30px 30px;
+            font-size: 1.4rem;
+            line-height: 2.2rem;
+            text-align: center;
+            font-weight: 500;
+            color: #1d3e2f;
+            box-shadow: inset 0 0 10px #b9a386;
+        }
+
+        .poem-line {
+            margin: 12px 0;
+            border-bottom: 1px dotted #8b9eb0;
+            padding-bottom: 8px;
+        }
+
+        .fixed-image-container {
+            background: #e1eef6;
+            border: 4px solid #2c5f8a;
+            border-radius: 40px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 0 #5a7a94;
+        }
+
+        .fixed-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 30px;
+            border: 3px solid #f9d56e;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .image-caption {
+            margin-top: 15px;
+            font-size: 1.3rem;
+            color: #2c5f8a;
+            font-weight: bold;
+            background: #f9d56e;
+            display: inline-block;
+            padding: 8px 30px;
+            border-radius: 60px;
+        }
+
+        .exercise {
+            background: #e1eef6;
+            padding: 20px;
+            border-radius: 40px;
+            margin: 30px 0;
+            border: 2px solid #8b9eb0;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 0 #8b9eb0;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .option-btn {
+            background: #f9d56e;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c5f8a;
+            box-shadow: 0 4px 0 #c49b3f;
+            transition: 0.05s linear;
+            cursor: pointer;
+            font-family: inherit;
+            flex: 1 1 auto;
+            min-width: 120px;
+            border: 2px solid #ffe39c;
+        }
+
+        .option-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .option-btn.correct:disabled {
+            background: #4caf50;
+            color: white;
+            box-shadow: 0 4px 0 #2e7d32;
+        }
+
+        .option-btn.wrong:disabled {
+            background: #d9534f;
+            color: white;
+            box-shadow: 0 4px 0 #9d2b27;
+        }
+
+        /* تحسين جداول المفرد والجمع */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .word-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .word-table th {
+            background: #2c5f8a;
+            color: white;
+            padding: 15px;
+            font-size: 1.3rem;
+        }
+
+        .word-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 1.2rem;
+        }
+
+        .word-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .word-input {
+            width: 140px;
+            padding: 10px;
+            border: 2px solid #8b9eb0;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .word-input.correct-input {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .word-input.wrong-input {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .check-btn {
+            background: #f9d56e;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #c49b3f;
+            font-weight: bold;
+        }
+
+        .check-btn:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .check-btn.success {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 3px 0 #1e7e34;
+        }
+
+        /* تحسين التضاد */
+        .opposite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .opposite-card {
+            background: white;
+            padding: 15px;
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 0 #8b9eb0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .word-badge {
+            background: #2c5f8a;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+        }
+
+        .opposite-select {
+            padding: 8px 15px;
+            border: 2px solid #f9d56e;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            width: 140px;
+            text-align: center;
+            background: white;
+        }
+
+        .opposite-select.correct-select {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        /* تحسين ترتيب الجمل */
+        .sentence-box {
+            background: #f0f7fa;
+            padding: 15px;
+            border-radius: 30px;
+            margin: 15px 0;
+        }
+
+        .words-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 50px;
+            border: 2px dashed #2c5f8a;
+        }
+
+        .word-chip {
+            background: #f9d56e;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 3px 0 #c49b3f;
+            border: 1px solid #ffe39c;
+            transition: all 0.2s;
+        }
+
+        .word-chip:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .word-chip.selected {
+            background: #2c5f8a;
+            color: white;
+        }
+
+        .sentence-input {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #2c5f8a;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            margin: 10px 0;
+            font-family: inherit;
+            text-align: right;
+        }
+
+        .sentence-input.correct-input {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .sentence-input.wrong-input {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        /* تحسين الضمائر */
+        .pronoun-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pronoun-card {
+            background: white;
+            padding: 15px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 4px 0 #8b9eb0;
+        }
+
+        .pronoun-example {
+            font-size: 1.3rem;
+            margin: 10px 0;
+            color: #2c5f8a;
+            font-weight: bold;
+        }
+
+        .pronoun-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #f9d56e;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .pronoun-input.correct-input {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            min-height: 70px;
+            padding: 15px;
+            border-radius: 50px;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .footer-nav {
+            background: #2c5f8a;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-to-home {
+            background: #f9d56e;
+            color: #2c5f8a;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 0 #c49b3f;
+        }
+
+        .back-to-home:active {
+            transform: translateY(6px);
+            box-shadow: none;
+        }
+
+        .path-note {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 10px 0;
+            border: 2px solid #ffeeba;
+        }
+
+        /* تلميحات للكتابة */
+        .hint-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- شريط العنوان -->
+        <div class="header-bar">
+            <a href="../../../../arabic_dashboard.html" class="home-link" onclick="window.location.href='../../../../arabic_dashboard.html'; return false;">🏠 الرئيسية</a>
+            <span class="title-main">📚 مكتبتي الصغيرة - صف ثالث</span>
+        </div>
+
+        <!-- شريط التقدم -->
+        <div class="progress-bar">
+            <div class="score-display" id="scoreDisplay">🏆 0</div>
+            <div class="counter-badge" id="counterDisplay">✅ 0/3 للتصفيق</div>
+        </div>
+
+        <!-- منطقة الاحتفال -->
+        <div id="celebrationArea"></div>
+
+        <!-- قسم ملخص الدرس -->
+        <div class="section">
+            <h2>📌 ملخص الدرس الأول: مكتبتي الصغيرة</h2>
+            <div class="points-grid">
+                <div class="point-card"><span class="point-marker">📖</span>حب القراءة وتدوين الفوائد في المذكرات</div>
+                <div class="point-card"><span class="point-marker">🏪</span>إنشاء مكتبة خاصة ولو بكتاب واحد من المصروف</div>
+                <div class="point-card"><span class="point-marker">🏛️</span>دور الدولة في إنشاء المكتبات العامة ومعارض الكتاب</div>
+                <div class="point-card"><span class="point-marker">💡</span>القراءة بتأمل خير من قراءة كثيرة بعجلة</div>
+                <div class="point-card"><span class="point-marker">🧠</span>المطالعة تنمي العقل وتطلعنا على كل جديد</div>
+            </div>
+        </div>
+
+        <!-- قسم القصيدة -->
+        <div class="section">
+            <h2>📖 القصيدة: الكتاب</h2>
+            
+
+
+
+
+
+
+
+
+            
+            <div class="fixed-image-container">
+                <img class="fixed-image" src="./maktibty.png" alt="صورة الكتاب" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\' viewBox=\'0 0 300 200\'><rect width=\'300\' height=\'200\' fill=\'%23e1eef6\'/><text x=\'50\' y=\'115\' font-family=\'Arial\' font-size=\'18\' fill=\'%232c5f8a\'>ضع صورة الكتاب هنا</text></svg>'">
+                <div class="image-caption">📚 صورة من الدرس</div>
+            </div>
+
+            <div class="poem-box">
+                <style>
+    .poem-section {
+        background: #ffffff;
+        border: 4px solid #0288d1;
+        border-radius: 20px;
+        padding: 30px;
+        margin: 20px auto;
+        max-width: 700px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        font-family: 'Cairo', sans-serif;
+    }
+    .poem-header {
+        color: #d84315;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        border-bottom: 2px dashed #0288d1;
+        padding-bottom: 10px;
+    }
+    .poem-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        text-align: center;
+    }
+    .shatr {
+        padding: 12px;
+        background: #f1f8ff;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 1.2rem;
+        color: #333;
+        border: 1px solid transparent;
+    }
+    .shatr:hover {
+        background: #e1f5fe;
+        border-color: #0288d1;
+    }
+    .shatr:active { transform: scale(0.95); }
+    
+    .institution-tag {
+        margin-top: 25px;
+        font-size: 0.9rem;
+        color: #78909c;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+</style>
+
+<div class="poem-section" id="poemSection">
+    <div class="poem-header">📖 نشيد: خيري جليس (الكتاب)</div>
+    
+    <div class="poem-grid">
+        <div class="shatr" onclick="markRead(this)">لي في مدرستي صاحبُ</div>
+        <div class="shatr" onclick="markRead(this)">نِعمَ الصاحبُ والخلّانُ</div>
+        
+        <div class="shatr" onclick="markRead(this)">ألقاهُ دوماً في صفي</div>
+        <div class="shatr" onclick="markRead(this)">يملأُ عقلي بالإيمانُ</div>
+        
+        <div class="shatr" onclick="markRead(this)">وفي البيتِ هو السّميرُ</div>
+        <div class="shatr" onclick="markRead(this)">يؤنسُ وقتي في الحِجْرانُ</div>
+        
+        <div class="shatr" onclick="markRead(this)">كتابي نُورٌ لِحياتي</div>
+        <div class="shatr" onclick="markRead(this)">جامِعُ ثمراتِ الأذهانُ</div>
+    </div>
+
+    <div class="institution-tag">
+        ⭐ إعداد أبلة  | مؤسسة التقدم والعطاء ⭐
+    </div>
+</div>
+
+<script>
+    function markRead(element) {
+        if(!element.innerHTML.includes('🌟')) {
+            element.innerHTML += ' 🌟';
+            element.style.background = '#e8f5e9';
+            element.style.borderColor = '#4caf50';
+        }
+    }
+</script>
+        </div>
+
+
+
+
+        <!-- قسم التمارين التفاعلية -->
+        <div class="section">
+            <h2>📝 تمارين تفاعلية</h2>
+
+            <!-- س١: المفرد والجمع -->
+            <div class="exercise">
+                <h3>📊 س١: أكمل جدول المفرد والجمع</h3>
+                <div class="table-container">
+                    <table class="word-table">
+                        <tr><th>المفرد</th><th>الجمع</th><th>تحقق</th></tr>
+                        <tr>
+                            <td>مُعلّم</td>
+                            <td><input type="text" class="word-input" id="sp1" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp1', 'مُعلّمون')">تحقق</button></td>
+                        </tr>
+                        <tr>
+                            <td>مُعلّمة</td>
+                            <td><input type="text" class="word-input" id="sp2" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp2', 'مُعلّمات')">تحقق</button></td>
+                        </tr>
+                        <tr>
+                            <td>كتاب</td>
+                            <td><input type="text" class="word-input" id="sp3" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp3', 'كُتب')">تحقق</button></td>
+                        </tr>
+                        <tr>
+                            <td>يوم</td>
+                            <td><input type="text" class="word-input" id="sp4" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp4', 'أيام')">تحقق</button></td>
+                        </tr>
+                        <tr>
+                            <td>ولد</td>
+                            <td><input type="text" class="word-input" id="sp5" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp5', 'أولاد')">تحقق</button></td>
+                        </tr>
+                        <tr>
+                            <td>أسبوع</td>
+                            <td><input type="text" class="word-input" id="sp6" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp6', 'أسابيع')">تحقق</button></td>
+                        </tr>
+                        <tr>
+                            <td>زميل</td>
+                            <td><input type="text" class="word-input" id="sp7" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp7', 'زملاء')">تحقق</button></td>
+                        </tr>
+                        <tr>
+                            <td>وصيّة</td>
+                            <td><input type="text" class="word-input" id="sp8" placeholder="أدخل الجمع"></td>
+                            <td><button class="check-btn" onclick="checkSingularPlural('sp8', 'وصايا')">تحقق</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="hint-text">💡 اكتب الكلمة كما هي في الجدول (مثال: مُعلّمون)</p>
+            </div>
+
+            <!-- س٢: التضاد -->
+            <div class="exercise">
+                <h3>🔄 س٢: اختر عكس الكلمة</h3>
+                <div class="opposite-grid">
+                    <div class="opposite-card">
+                        <span class="word-badge">أُحب</span> 
+                        <span>←</span> 
+                        <select class="opposite-select" id="op1" onchange="checkOpposite('op1', 'أكره')">
+                            <option value="">اختر العكس</option>
+                            <option value="أكره">أكره</option>
+                            <option value="ألعب">ألعب</option>
+                            <option value="أنام">أنام</option>
+                        </select>
+                    </div>
+                    <div class="opposite-card">
+                        <span class="word-badge">الجديد</span> 
+                        <span>←</span> 
+                        <select class="opposite-select" id="op2" onchange="checkOpposite('op2', 'القديم')">
+                            <option value="">اختر العكس</option>
+                            <option value="الجميل">الجميل</option>
+                            <option value="القديم">القديم</option>
+                            <option value="الكبير">الكبير</option>
+                        </select>
+                    </div>
+                    <div class="opposite-card">
+                        <span class="word-badge">كثيرة</span> 
+                        <span>←</span> 
+                        <select class="opposite-select" id="op3" onchange="checkOpposite('op3', 'قليلة')">
+                            <option value="">اختر العكس</option>
+                            <option value="جميلة">جميلة</option>
+                            <option value="قليلة">قليلة</option>
+                            <option value="مفيدة">مفيدة</option>
+                        </select>
+                    </div>
+                    <div class="opposite-card">
+                        <span class="word-badge">أشتري</span> 
+                        <span>←</span> 
+                        <select class="opposite-select" id="op4" onchange="checkOpposite('op4', 'أبيع')">
+                            <option value="">اختر العكس</option>
+                            <option value="أقرأ">أقرأ</option>
+                            <option value="أبيع">أبيع</option>
+                            <option value="أكتب">أكتب</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- س٣: ترتيب الجمل -->
+            <div class="exercise">
+                <h3>🔤 س٣: رتب الكلمات لتكون جملة مفيدة</h3>
+                <p class="hint-text">💡 اضغط على الكلمات بالترتيب الصحيح لتكوين الجملة</p>
+                
+                <div class="sentence-box">
+                    <p>١. (في - أنا - التلميذ - الثالث - الصف)</p>
+                    <div class="words-container" id="words1">
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence1')">في</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence1')">أنا</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence1')">التلميذ</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence1')">الثالث</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence1')">الصف</span>
+                    </div>
+                    <input type="text" class="sentence-input" id="sentence1" placeholder="ستظهر الجملة هنا" readonly>
+                    <button class="check-btn" onclick="checkSentence('sentence1', 'أنا تلميذ في الصف الثالث')">تحقق</button>
+                    <button class="check-btn" onclick="resetSentence('sentence1', 'words1')" style="background: #6c757d; color: white;">إعادة</button>
+                </div>
+
+                <div class="sentence-box">
+                    <p>٢. (قرأ - الكتاب - خالد)</p>
+                    <div class="words-container" id="words2">
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence2')">قرأ</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence2')">الكتاب</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence2')">خالد</span>
+                    </div>
+                    <input type="text" class="sentence-input" id="sentence2" placeholder="ستظهر الجملة هنا" readonly>
+                    <button class="check-btn" onclick="checkSentence('sentence2', 'قرأ خالد الكتاب')">تحقق</button>
+                    <button class="check-btn" onclick="resetSentence('sentence2', 'words2')" style="background: #6c757d; color: white;">إعادة</button>
+                </div>
+
+                <div class="sentence-box">
+                    <p>٣. (تعودت - أن - أكتب - مساءً)</p>
+                    <div class="words-container" id="words3">
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence3')">تعودت</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence3')">أن</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence3')">أكتب</span>
+                        <span class="word-chip" onclick="addToSentence(this, 'sentence3')">مساءً</span>
+                    </div>
+                    <input type="text" class="sentence-input" id="sentence3" placeholder="ستظهر الجملة هنا" readonly>
+                    <button class="check-btn" onclick="checkSentence('sentence3', 'تعودت أن أكتب مساءً')">تحقق</button>
+                    <button class="check-btn" onclick="resetSentence('sentence3', 'words3')" style="background: #6c757d; color: white;">إعادة</button>
+                </div>
+            </div>
+
+            <!-- س٤: الضمائر -->
+            <div class="exercise">
+                <h3>👥 س٤: حول الضمائر</h3>
+                <p class="hint-text">💡 اكتب الجملة كاملة (مثال: نحن نقرأُ)</p>
+                <div class="pronoun-grid">
+                    <div class="pronoun-card">
+                        <div class="pronoun-example">أنا أقرأُ ←</div>
+                        <input type="text" class="pronoun-input" id="pro1" placeholder="نحن ...">
+                        <button class="check-btn" onclick="checkPronoun('pro1', 'نحن نقرأُ')">تحقق</button>
+                    </div>
+                    <div class="pronoun-card">
+                        <div class="pronoun-example">أنا أكتبُ ←</div>
+                        <input type="text" class="pronoun-input" id="pro2" placeholder="نحن ...">
+                        <button class="check-btn" onclick="checkPronoun('pro2', 'نحن نكتبُ')">تحقق</button>
+                    </div>
+                    <div class="pronoun-card">
+                        <div class="pronoun-example">أنتَ تقرأُ ←</div>
+                        <input type="text" class="pronoun-input" id="pro3" placeholder="أنتم ...">
+                        <button class="check-btn" onclick="checkPronoun('pro3', 'أنتم تقرؤون')">تحقق</button>
+                    </div>
+                    <div class="pronoun-card">
+                        <div class="pronoun-example">هو يقرأُ ←</div>
+                        <input type="text" class="pronoun-input" id="pro4" placeholder="هم ...">
+                        <button class="check-btn" onclick="checkPronoun('pro4', 'هم يقرؤون')">تحقق</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- س٥: أسئلة الفهم -->
+            <div class="exercise">
+                <h3>❓ س٥: أسئلة الفهم والاستيعاب</h3>
+                
+                <div class="question" id="q1">
+                    <p>ما الغرض من إقامة معارض الكتاب؟</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkComprehension(this, true, 'q1')">ليطلع القراء على كل جديد ومفيد</button>
+                        <button class="option-btn" onclick="checkComprehension(this, false, 'q1')">للبيع فقط</button>
+                    </div>
+                </div>
+
+                <div class="question" id="q2">
+                    <p>لماذا أداوم على المطالعة؟</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkComprehension(this, true, 'q2')">لأنها تنمي العقل وتغذي الروح</button>
+                        <button class="option-btn" onclick="checkComprehension(this, false, 'q2')">لأنه واجب مدرسي</button>
+                    </div>
+                </div>
+
+                <div class="question" id="q3">
+                    <p>لماذا كان التلميذ يدون وصايا المعلم؟</p>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkComprehension(this, true, 'q3')">ليعرضها على والديه ويستفيد منها</button>
+                        <button class="option-btn" onclick="checkComprehension(this, false, 'q3')">لأن المعلم أجبره</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منطقة عرض التغذية الراجعة -->
+            <div class="feedback" id="globalFeedback"></div>
+        </div>
+
+        <!-- رابط العودة للرئيسية -->
+        <div class="footer-nav">
+            <a href="../../../../arabic_dashboard.html" class="back-to-home" onclick="window.location.href='../../../../arabic_dashboard.html'; return false;">🔙 العودة للرئيسية</a>
+        </div>
+    </div>
+
+    <script>
+        // متغيرات للأصوات والعد
+        let ahsantSound = null;
+        let clapSound = null;
+        let correctCount = 0;
+        let totalScore = 0;
+        let answeredQuestions = new Set(); // لتتبع الأسئلة التي تمت إجابتها
+
+        // تحميل الأصوات
+        function loadSounds() {
+            try {
+                ahsantSound = new Audio('../../../../../sound/correct-sound.mp3');
+                clapSound = new Audio('../../../../../sound/applause.mp3');
+            } catch(e) {
+                console.log('خطأ في تحميل الأصوات');
+            }
+        }
+
+        // تشغيل صوت أحسنت
+        function playAhsant() {
+            if (ahsantSound) {
+                ahsantSound.currentTime = 0;
+                ahsantSound.play().catch(e => console.log('لا يمكن تشغيل صوت أحسنت'));
+            }
+        }
+
+        // تشغيل صوت التصفيق
+        function playClap() {
+            if (clapSound) {
+                clapSound.currentTime = 0;
+                clapSound.play().catch(e => console.log('لا يمكن تشغيل صوت التصفيق'));
+            }
+            
+            const celebrationDiv = document.getElementById('celebrationArea');
+            celebrationDiv.innerHTML = '<div class="celebration">🎉 👏 مبروك! 3 إجابات صحيحة! 👏 🎉</div>';
+            
+            setTimeout(() => {
+                celebrationDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        // تحديث التقدم
+        function updateProgress() {
+            document.getElementById('scoreDisplay').innerHTML = `🏆 ${totalScore}`;
+            document.getElementById('counterDisplay').innerHTML = `✅ ${correctCount}/3 للتصفيق`;
+        }
+
+        // دالة تنظيف النص للمقارنة (إزالة المسافات الزائدة والتشكيل)
+        function cleanText(text) {
+            return text.trim()
+                      .replace(/\s+/g, ' ')  // توحيد المسافات
+                      .replace(/[ًٌٍَُِّْ]/g, '') // إزالة التشكيل
+                      .trim();
+        }
+
+        // معالجة الإجابات الصحيحة
+        function handleCorrectAnswer(questionId = null) {
+            if (questionId) {
+                if (answeredQuestions.has(questionId)) {
+                    showFeedback("⚠️ لقد أجبت على هذا السؤال من قبل", false);
+                    return false;
+                }
+                answeredQuestions.add(questionId);
+            }
+            
+            playAhsant();
+            correctCount++;
+            totalScore++;
+            
+            if (correctCount === 3) {
+                playClap();
+                correctCount = 0;
+            }
+            
+            updateProgress();
+            showFeedback("✅ أحسنت! إجابة صحيحة", true);
+            return true;
+        }
+
+        // معالجة الإجابات الخاطئة
+        function handleWrongAnswer() {
+            correctCount = 0;
+            updateProgress();
+            showFeedback("❌ إجابة خاطئة - حاول مرة أخرى", false);
+        }
+
+        // التحقق من المفرد والجمع (محسنة)
+        function checkSingularPlural(inputId, correctAnswer) {
+            const input = document.getElementById(inputId);
+            const userAnswer = cleanText(input.value);
+            const cleanCorrect = cleanText(correctAnswer);
+            
+            // إزالة التشكيل من الإجابة الصحيحة أيضاً
+            const possibleAnswers = [cleanCorrect, correctAnswer.replace(/[ًٌٍَُِّْ]/g, '')];
+            
+            if (possibleAnswers.includes(userAnswer)) {
+                input.classList.add('correct-input');
+                input.classList.remove('wrong-input');
+                handleCorrectAnswer(inputId);
+            } else {
+                input.classList.add('wrong-input');
+                input.classList.remove('correct-input');
+                handleWrongAnswer();
+            }
+        }
+
+        // التحقق من التضاد
+        function checkOpposite(selectId, correctAnswer) {
+            const select = document.getElementById(selectId);
+            if (select.value === correctAnswer) {
+                select.classList.add('correct-select');
+                handleCorrectAnswer(selectId);
+            } else {
+                select.classList.remove('correct-select');
+                handleWrongAnswer();
+            }
+        }
+
+        // إضافة كلمة للجملة
+        function addToSentence(element, sentenceId) {
+            const sentenceInput = document.getElementById(sentenceId);
+            const currentText = sentenceInput.value;
+            const word = element.textContent;
+            
+            // إضافة الكلمة مع مسافة إذا لزم الأمر
+            if (currentText) {
+                sentenceInput.value = currentText + ' ' + word;
+            } else {
+                sentenceInput.value = word;
+            }
+            
+            // تعطيل الكلمة بعد استخدامها
+            element.style.opacity = '0.5';
+            element.style.pointerEvents = 'none';
+        }
+
+        // إعادة تعيين الجملة
+        function resetSentence(sentenceId, wordsContainerId) {
+            document.getElementById(sentenceId).value = '';
+            const words = document.getElementById(wordsContainerId).getElementsByClassName('word-chip');
+            for (let word of words) {
+                word.style.opacity = '1';
+                word.style.pointerEvents = 'auto';
+            }
+        }
+
+        // التحقق من الجمل (محسنة)
+        function checkSentence(inputId, correctAnswer) {
+            const input = document.getElementById(inputId);
+            const userAnswer = cleanText(input.value);
+            const cleanCorrect = cleanText(correctAnswer);
+            
+            if (userAnswer === cleanCorrect) {
+                input.classList.add('correct-input');
+                input.classList.remove('wrong-input');
+                handleCorrectAnswer(inputId);
+            } else {
+                input.classList.add('wrong-input');
+                input.classList.remove('correct-input');
+                handleWrongAnswer();
+            }
+        }
+
+        // التحقق من الضمائر (محسنة)
+        function checkPronoun(inputId, correctAnswer) {
+            const input = document.getElementById(inputId);
+            const userAnswer = cleanText(input.value);
+            const cleanCorrect = cleanText(correctAnswer);
+            
+            // قائمة بالإجابات المحتملة (مع أو بدون التشكيل)
+            const possibleAnswers = [
+                cleanCorrect,
+                correctAnswer.replace(/[ًٌٍَُِّْ]/g, ''),
+                'نحن نقرا',
+                'نحن نكتب',
+                'انتم تقرؤون',
+                'انتم تقرون',
+                'هم يقرؤون',
+                'هم يقرون'
+            ];
+            
+            if (possibleAnswers.includes(userAnswer) || userAnswer === cleanCorrect) {
+                input.classList.add('correct-input');
+                input.classList.remove('wrong-input');
+                handleCorrectAnswer(inputId);
+            } else {
+                input.classList.add('wrong-input');
+                input.classList.remove('correct-input');
+                handleWrongAnswer();
+            }
+        }
+
+        // التحقق من أسئلة الفهم
+        function checkComprehension(btn, isCorrect, questionId) {
+            const questionDiv = document.getElementById(questionId);
+            const buttons = questionDiv.querySelectorAll('.option-btn');
+            
+            // منع إعادة الإجابة
+            if (answeredQuestions.has(questionId)) {
+                showFeedback("⚠️ لقد أجبت على هذا السؤال من قبل", false);
+                return;
+            }
+            
+            buttons.forEach(b => b.disabled = true);
+            
+            if (isCorrect) {
+                btn.classList.add('correct');
+                handleCorrectAnswer(questionId);
+            } else {
+                btn.classList.add('wrong');
+                handleWrongAnswer();
+            }
+        }
+
+        function showFeedback(msg, isSuccess) {
+            const feedbackDiv = document.getElementById('globalFeedback');
+            feedbackDiv.innerHTML = msg;
+            feedbackDiv.className = 'feedback ' + (isSuccess ? 'success' : 'error');
+        }
+
+        // تحميل الأصوات عند بدء الصفحة
+        window.onload = function() {
+            loadSounds();
+            updateProgress();
+        };
+    </script>
+</body>
+</html>
