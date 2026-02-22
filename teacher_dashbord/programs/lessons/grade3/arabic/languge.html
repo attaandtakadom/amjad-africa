@@ -3,147 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار أسرتي الشامل - أبلة منال</title>
+    <title>📚 لغتي الجميلة - أبلة منال</title>
     <style>
-        :root { --primary: #2e7d32; --secondary: #1565c0; --accent: #ff9800; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #eef2f3; margin: 0; padding: 10px; text-align: center; }
-        .container { max-width: 850px; background: white; margin: 20px auto; padding: 25px; border-radius: 25px; border: 6px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .mhome { display: inline-block; padding: 8px 20px; background: #1a237e; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-bottom: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Amiri', 'Traditional Arabic', Tahoma, Geneva, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f0e7, #e8d9c5);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #fffdf9;
+            border-radius: 40px 40px 30px 30px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #dccbb8;
+        }
+        .header {
+            background: linear-gradient(to right, #1e4a6b, #2c6a8c);
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            border-bottom: 5px solid #f5b041;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 0 #0f2c3b;
+        }
+        .header h1 span {
+            color: #fad890;
+        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+        .content {
+            padding: 30px 35px;
+        }
+        .summary {
+            background-color: #fef8e7;
+            border-left: 8px solid #c49a6c;
+            padding: 20px 25px;
+            border-radius: 8px 20px 20px 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+        }
+        .summary h2 {
+            color: #1e4a6b;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px dashed #c49a6c;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        .summary ul {
+            list-style: none;
+        }
+        .summary li {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .summary li::before {
+            content: "✨";
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
         
-        h2 { color: var(--primary); background: #f1f8e9; padding: 10px; border-radius: 10px; font-size: 1.3rem; }
-        .exercise-card { background: #fff; border: 2px solid #e0e0e0; padding: 15px; border-radius: 15px; margin-bottom: 20px; text-align: right; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
-        .done { border: 2px solid var(--primary); background: #f1f8e9; }
-
-        .btn { background: #fff; color: #333; border: 2px solid #ddd; padding: 10px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
-        .btn:hover { border-color: var(--primary); background: #f1f8e9; }
-        .btn.correct { background: var(--primary) !important; color: white !important; border-color: var(--primary); }
+        /* قسم نشاط مد الحروف */
+        .madd-activity {
+            background: linear-gradient(145deg, #faf3e8, #f5e5d5);
+            border-radius: 40px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 3px solid #c49a6c;
+            box-shadow: 0 8px 0 #8b6f50;
+        }
+        .madd-activity h3 {
+            color: #1e4a6b;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #e6d5b8;
+        }
+        .madd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .madd-card {
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 0 #b2967a;
+            border: 2px solid #d4b08c;
+        }
+        .madd-word {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c6a8c;
+            margin-bottom: 15px;
+            background: #f0ebdf;
+            padding: 15px;
+            border-radius: 50px;
+            border: 2px dashed #c49a6c;
+        }
+        .madd-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .madd-option {
+            background: #e7d8c5;
+            border: 3px solid #9b7b5e;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #2d2d2d;
+            min-width: 80px;
+        }
+        .madd-option:hover {
+            background: #d4b08c;
+            transform: scale(1.05);
+        }
+        .madd-option.selected {
+            background: #2e7d5e;
+            border-color: #1b4f3a;
+            color: white;
+            box-shadow: 0 0 0 3px #a5d6b8;
+        }
+        .madd-option.correct-highlight {
+            background: #2e7d5e;
+            border-color: #1b4f3a;
+            color: white;
+        }
+        .madd-option.wrong-highlight {
+            background: #b85c5c;
+            border-color: #8b3c3c;
+            color: white;
+        }
+        .madd-feedback {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
         
-        .score-box { background: var(--accent); color: white; padding: 10px 30px; border-radius: 50px; display: inline-block; font-weight: bold; font-size: 1.2rem; margin-bottom: 20px; }
-        
-        #celebration { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ffeb3b; padding: 40px; border-radius: 30px; border: 10px solid #fb8c00; z-index: 1000; font-size: 2.2rem; font-weight: bold; box-shadow: 0 0 100px rgba(0,0,0,0.5); animation: bounce 0.5s infinite alternate; }
-        @keyframes bounce { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.1); } }
-        
-        textarea { width: 100%; padding: 10px; border-radius: 10px; border: 2px solid #ddd; font-family: inherit; font-size: 1rem; resize: none; }
+        .image-section {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #e7d8c5;
+            padding: 120px;
+            border-radius: 35px;
+        }
+        .image-section h3 {
+            color: #412d1b;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        .image-section img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 25px;
+            box-shadow: 0 10px 18px rgba(0,0,0,0.2);
+            border: 4px solid white;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .score-card {
+            background: #1e4a6b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #0a2a3a;
+        }
+        .btn {
+            background-color: #f5b041;
+            border: none;
+            color: #2d2d2d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #b96f1b;
+            transition: 0.1s ease;
+            border: 1px solid #e09d34;
+        }
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #b96f1b;
+        }
+        .btn.secondary {
+            background-color: #b0c4d9;
+            box-shadow: 0 6px 0 #6f8da0;
+            color: #1e3b4f;
+        }
+        .home-btn {
+            background-color: #6c8c9c;
+            box-shadow: 0 6px 0 #3a5a6b;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .questions-area {
+            margin-top: 25px;
+        }
+        .question-block {
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #dccbb8;
+            box-shadow: 0 5px 0 #cbb59b;
+        }
+        .question-text {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            padding-right: 10px;
+        }
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .option-btn {
+            background-color: #f0ebdf;
+            border: 2px solid #b2967a;
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-size: 1.15rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 100px;
+            color: #2d2d2d;
+        }
+        .option-btn:hover {
+            background-color: #e0d3c0;
+        }
+        .option-btn.selected-correct {
+            background-color: #2e7d5e;
+            border-color: #1b4f3a;
+            color: white;
+            box-shadow: 0 0 0 3px #a5d6b8;
+        }
+        .option-btn.selected-wrong {
+            background-color: #b85c5c;
+            border-color: #8b3c3c;
+            color: white;
+            box-shadow: 0 0 0 3px #f3b5b5;
+            text-decoration: line-through wavy white 1px;
+        }
+        .option-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        .feedback-msg {
+            margin-top: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .footer {
+            background-color: #dbcbb9;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-top: 1px solid #b2967a;
+        }
+        .audio-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: normal;
+            text-align: center;
+            margin: 15px 0;
+        }
+        .instructions-box {
+            background-color: #d9eaf5;
+            border-right: 5px solid #1e4a6b;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #0a2a3a;
+        }
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px 15px;
+            }
+            .options {
+                justify-content: center;
+            }
+            .controls {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="container" id="app">
+        <div class="header">
+            <h1>🌸 <span>لغتي الجميلة</span> 🌸</h1>
+        </div>
 
-<div class="container">
-    <a href="#" class="mhome">🏠 العودة للرئيسية</a>
-    <div class="score-box">⭐ الإنجاز: <span id="score">0</span> / 11</div>
+        <div class="content">
+            <!-- تعليمات الصوت -->
+            
+            <!-- ملخص الدرس -->
+            <div class="summary">
+                <h2>📝 ملخص الدرس</h2>
+                <ul>
+                    <li><strong>اللغة العربية</strong> وعاء الفكر، أداة الفهم، أساس الحوار والإبداع.</li>
+                    <li><strong>محفوظة</strong> بفضل القرآن الكريم من الضياع.</li>
+                    <li><strong>ميزتها:</strong> التجدد والبقاء والخلود.</li>
+                    <li><strong>قوة الأمم</strong> تقاس بقوة لغتها وغزارة إنتاجها.</li>
+                    <li><strong>هي لغة</strong> العلم والمعرفة والحضارة.</li>
+                </ul>
+            </div>
 
-    <h2>س١: ضع علامة (✓) أو (✗)</h2>
-    
-    <div class="exercise-card" id="q1">
-        <p>١. الأسرة السعيدة هي التي لا يتعاون أفرادها.</p>
-        <button class="btn" onclick="wrong(this)">✓ صح</button>
-        <button class="btn" onclick="right(this, 1)">✗ خطأ</button>
+            <!-- نشاط مد الحروف (اختيار من متعدد) -->
+            <div class="madd-activity">
+                <h3>🔤 نشاط مد الحروف</h3>
+                <p style="text-align: center; font-size: 1.2rem; color: #5a3e2b;">اختاري المد المناسب لكل كلمة:</p>
+                
+                <div class="madd-grid" id="maddGrid">
+                    <!-- هنا راح تظهر بطاقات المد -->
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;" id="maddMessage"></div>
+            </div>
+
+            <!-- صورة محلية -->
+            <div class="image-section">
+                <h3>🖼️ نشاط مد الحروف - الصورة</h3>
+                <img src="image.jpg" alt="نشاط أصل الكلمة بمدها" id="localImage">
+            </div>
+
+            <!-- لوحة التحكم -->
+            <div class="controls">
+                <div class="score-card">
+                    ✅ الإجابات الصحيحة: <span id="scoreDisplay">0</span> / <span id="totalQuestionsSpan">15</span>
+                </div>
+                <div>
+                    <button class="btn secondary" id="resetBtn">🔄 إعادة الاختبار</button>
+                    <button class="btn" id="enableAudioBtn">🔊 تفعيل الأصوات</button>
+                </div>
+            </div>
+
+            <!-- الأسئلة الأخرى -->
+            <div class="questions-area" id="questionsArea"></div>
+
+            <!-- رسالة صوتية -->
+            <div id="audioMessage" class="audio-warning">
+                ⚡ اضغطي على "تفعيل الأصوات" ثم أي إجابة لسماع المؤثرات
+            </div>
+        </div>
+        <!-- زر العودة -->
+        <div class="footer">
+            <a href="../../../../arabic_dashboard.html" class="btn home-btn">🏠 العودة للصفحة الرئيسية</a>
+        </div>
     </div>
+<!-- ضعي هذا في أي مكان في الصفحة للتجربة -->
+    <script>
+        (function() {
+            // ---------- بيانات نشاط مد الحروف ----------
+            const maddQuestions = [
+                { word: "لُغَات", correct: "الألف", options: ["الألف", "الواو", "الياء"] },
+                { word: "سُلُوك", correct: "الواو", options: ["الألف", "الواو", "الياء"] },
+                { word: "وَسِيلَة", correct: "الياء", options: ["الألف", "الواو", "الياء"] },
+                { word: "كِتَاب", correct: "الألف", options: ["الألف", "الواو", "الياء"] },
+                { word: "قُرُوْب", correct: "الواو", options: ["الألف", "الواو", "الياء"] }
+            ];
 
-    <div class="exercise-card" id="q2">
-        <p>٢. من صفات الطفل المسلم الصدق والأمانة.</p>
-        <button class="btn" onclick="right(this, 2)">✓ صح</button>
-        <button class="btn" onclick="wrong(this)">✗ خطأ</button>
-    </div>
+            // ---------- بيانات الأسئلة الأخرى ----------
+            const otherQuestions = [
+                {
+                    type: 'mcq',
+                    question: '١. اللغة العربية هي أداة:',
+                    options: ['النوم والراحة', 'الفهم والسلوك والأداء', 'اللعب والمرح'],
+                    correct: 1
+                },
+                {
+                    type: 'mcq',
+                    question: '٢. ما الذي حفظ اللغة العربية من الضياع؟',
+                    options: ['القصص الخيالية', 'القرآن الكريم', 'الألعاب الإلكترونية'],
+                    correct: 1
+                },
+                {
+                    type: 'mcq',
+                    question: '٣. تُقاس قوة الأمم بـ:',
+                    options: ['قوة لغتها وغزارة إنتاجها', 'كثرة أموالها فقط', 'مساحة أراضيها'],
+                    correct: 0
+                },
+                {
+                    type: 'tf',
+                    question: '٤. اللغة العربية هي وعاء للفكر وأداة للحوار.',
+                    correct: true
+                },
+                {
+                    type: 'tf',
+                    question: '٥. اللغة العربية لغة قديمة لا تستطيع التجدد.',
+                    correct: false
+                },
+                {
+                    type: 'tf',
+                    question: '٦. اللغة العربية هي لغة العلم والمعرفة والحضارة.',
+                    correct: true
+                },
+                {
+                    type: 'tf',
+                    question: '٧. يجب على المعلم أن يشجع تلاميذه على الاعتزاز باللغة العربية.',
+                    correct: true
+                }
+            ];
 
-    <div class="exercise-card" id="q3">
-        <p>٣. الجدة هي أحنى الناس على الحفيد في حال غضب الأب.</p>
-        <button class="btn" onclick="right(this, 3)">✓ صح</button>
-        <button class="btn" onclick="wrong(this)">✗ خطأ</button>
-    </div>
+            // دمج كل الأسئلة
+            const allQuestions = [...maddQuestions.map(q => ({
+                type: 'madd',
+                word: q.word,
+                options: q.options,
+                correct: q.correct
+            })), ...otherQuestions];
 
-    <div class="exercise-card" id="q4">
-        <p>٤. يذهب الطفل للمدرسة ليلعب فقط ولا يتعلم العلوم.</p>
-        <button class="btn" onclick="wrong(this)">✓ صح</button>
-        <button class="btn" onclick="right(this, 4)">✗ خطأ</button>
-    </div>
+            // ---------- متغيرات الحالة ----------
+            let userAnswers = new Array(allQuestions.length).fill(null);
+            let score = 0;
+            let audioEnabled = false;
+            let consecutiveCorrect = 0;
 
-    <h2>س٢: أكمل العبارات (اختر الكلمة المناسبة)</h2>
-    
-    <div class="exercise-card" id="q5">
-        <p>١. ينفق الوالدان عمرهما في رعاية الأبناء في زمن ........</p>
-        <button class="btn" onclick="right(this, 5)">الطفولة</button>
-        <button class="btn" onclick="wrong(this)">الشيخوخة</button>
-    </div>
+            // عناصر الصوت (المسار المجلد sounds)
+            const audioYes = new Audio('../../../../../sound/correct-sound.mp3');
+            const audioClap = new Audio('../../../../../sound/applause.mp3');
 
-    <div class="exercise-card" id="q6">
-        <p>٢. أطيع ربي الذي ........</p>
-        <button class="btn" onclick="right(this, 6)">خلقني</button>
-        <button class="btn" onclick="wrong(this)">أنسيني</button>
-    </div>
+            // عناصر DOM
+            const questionsDiv = document.getElementById('questionsArea');
+            const maddGrid = document.getElementById('maddGrid');
+            const maddMessage = document.getElementById('maddMessage');
+            const scoreSpan = document.getElementById('scoreDisplay');
+            const totalSpan = document.getElementById('totalQuestionsSpan');
+            const resetBtn = document.getElementById('resetBtn');
+            const enableAudioBtn = document.getElementById('enableAudioBtn');
+            const audioMsg = document.getElementById('audioMessage');
 
-    <div class="exercise-card" id="q7">
-        <p>٣. أعتني بأسرتي وأطيع ........ وأمي</p>
-        <button class="btn" onclick="right(this, 7)">أبي</button>
-        <button class="btn" onclick="wrong(this)">جاري</button>
-    </div>
+            // تحديث العدد الكلي للأسئلة
+            totalSpan.textContent = allQuestions.length;
 
-    <div class="exercise-card" id="q8">
-        <p>٤. أنا طفل مسلم أنظف ثيابي و ........</p>
-        <button class="btn" onclick="right(this, 8)">أسناني</button>
-        <button class="btn" onclick="wrong(this)">ألعابي</button>
-    </div>
-
-    <h2>س٣: اختر الإجابة الصحيحة</h2>
-
-    <div class="exercise-card" id="q9">
-        <p>١. بأي شيء يملأ الطفل المسلم فمه؟</p>
-        <button class="btn" onclick="wrong(this)">بالبكاء</button>
-        <button class="btn" onclick="right(this, 9)">بالبسمات</button>
-        <button class="btn" onclick="wrong(this)">بالصراخ</button>
-    </div>
-
-    <div class="exercise-card" id="q10">
-        <p>٢. ماذا يفعل الأب من الساعة الثامنة صباحاً؟</p>
-        <button class="btn" onclick="wrong(this)">ينام</button>
-        <button class="btn" onclick="right(this, 10)">يعمل ليوفر ما نحتاج</button>
-    </div>
-
-    <div class="exercise-card" id="q11">
-        <p>٣. إلى من يلجأ الحفيد إذا غضب عليه الأهل؟</p>
-        <button class="btn" onclick="wrong(this)">إلى جيرانه</button>
-        <button class="btn" onclick="right(this, 11)">إلى جدته</button>
-    </div>
-
-    <h2>س٤: أجب بنفسك (تأمل)</h2>
-    <div class="exercise-card">
-        <p>كيف تساعد والديك في شؤون البيت؟</p>
-        <textarea rows="3" placeholder="اكتب طريقتك الجميلة هنا يا بطل..."></textarea>
-    </div>
-
-    <div id="celebration">🎊 أحسنتِ يا أبلة منال 🎊<br>🌟 مية مية 🌟<br>👏👏👏👏</div>
-
-    <audio id="applause" src="../../../../../sound/applause.mp3"></audio>
-    <audio id="ahsant" src="ahsant.mp3"></audio>
-
-</div>
-
-<script>
-    let score = 0;
-    let solved = {};
-
-    function right(btn, qNum) {
-        if (!solved[qNum]) {
-            solved[qNum] = true;
-            btn.classList.add('correct');
-            score++;
-            document.getElementById('score').innerText = score;
-            btn.parentElement.classList.add('done');
-            if (score === 11) {
-                document.getElementById('applause').play();
-                document.getElementById('ahsant').play();
-                document.getElementById('celebration').style.display = "block";
-                setTimeout(() => { document.getElementById('celebration').style.display = "none"; }, 6000);
+            // دالة تحديث عرض النتيجة
+            function updateScoreDisplay() {
+                scoreSpan.textContent = score;
             }
-        }
-    }
 
-    function wrong(btn) {
-        btn.style.backgroundColor = "#ffebee";
-        btn.style.borderColor = "#f44336";
-        alert("حاول مرة أخرى!");
-    }
-</script>
+            // دالة تشغيل الصوت
+            function playSound(sound) {
+                if (!audioEnabled) return;
+                try {
+                    const soundClone = sound.cloneNode();
+                    soundClone.volume = 0.8;
+                    soundClone.play().catch(e => console.log("لم يتم تشغيل الصوت:", e));
+                } catch (e) {
+                    console.warn("خطأ في تشغيل الصوت", e);
+                }
+            }
 
+            // دالة فحص وتشغيل التصفيق
+            function checkAndPlayClap() {
+                if (consecutiveCorrect >= 3) {
+                    playSound(audioClap);
+                }
+            }
+
+            // دالة إعادة حساب النتيجة
+            function recalcScoreAndConsecutive() {
+                let newScore = 0;
+                let tempSeq = 0;
+                let maxSeq = 0;
+
+                for (let i = 0; i < allQuestions.length; i++) {
+                    const q = allQuestions[i];
+                    const ans = userAnswers[i];
+                    
+                    if (ans !== null) {
+                        let correct = false;
+                        if (q.type === 'mcq') correct = (ans === q.correct);
+                        else if (q.type === 'tf') correct = (ans === q.correct);
+                        else if (q.type === 'madd') correct = (ans === q.correct);
+                        
+                        if (correct) {
+                            newScore++;
+                            tempSeq++;
+                            if (tempSeq > maxSeq) maxSeq = tempSeq;
+                        } else {
+                            tempSeq = 0;
+                        }
+                    } else {
+                        tempSeq = 0;
+                    }
+                }
+                
+                score = newScore;
+                consecutiveCorrect = maxSeq;
+            }
+
+            // دالة تقييم إجابة
+            function answerQuestion(qIndex, selectedValue) {
+                const q = allQuestions[qIndex];
+                
+                userAnswers[qIndex] = selectedValue;
+                recalcScoreAndConsecutive();
+
+                let isCorrect = false;
+                if (q.type === 'mcq') isCorrect = (selectedValue === q.correct);
+                else if (q.type === 'tf') isCorrect = (selectedValue === q.correct);
+                else if (q.type === 'madd') isCorrect = (selectedValue === q.correct);
+                
+                if (isCorrect && audioEnabled) {
+                    playSound(audioYes);
+                }
+
+                checkAndPlayClap();
+                renderAll();
+            }
+
+            // رسم نشاط المد
+            function renderMadd() {
+                let html = '';
+                const startIndex = 0;
+                
+                maddQuestions.forEach((q, idx) => {
+                    const globalIndex = idx;
+                    const userAns = userAnswers[globalIndex];
+                    
+                    html += `<div class="madd-card">`;
+                    html += `<div class="madd-word">${q.word}</div>`;
+                    html += `<div class="madd-options">`;
+                    
+                    q.options.forEach(opt => {
+                        let btnClass = 'madd-option';
+                        if (userAns !== null) {
+                            if (opt === q.correct) {
+                                btnClass += ' correct-highlight';
+                            }
+                            if (userAns === opt && userAns !== q.correct) {
+                                btnClass += ' wrong-highlight';
+                            } else if (userAns === opt && userAns === q.correct) {
+                                btnClass += ' selected';
+                            }
+                        }
+                        
+                        const disabled = userAns !== null ? 'disabled' : '';
+                        html += `<button class="${btnClass}" ${disabled} data-madd-index="${globalIndex}" data-madd-opt="${opt}">${opt}</button>`;
+                    });
+                    
+                    html += `</div>`;
+                    
+                    if (userAns !== null) {
+                        const isCorrect = (userAns === q.correct);
+                        html += `<div class="madd-feedback" style="color: ${isCorrect ? '#1e7e5a' : '#b33c3c'};">`;
+                        html += isCorrect ? '✓ إجابة صحيحة' : `✗ الإجابة الصحيحة: ${q.correct}`;
+                        html += `</div>`;
+                    }
+                    
+                    html += `</div>`;
+                });
+                
+                maddGrid.innerHTML = html;
+                
+                // إضافة الأحداث لأزرار المد
+                document.querySelectorAll('.madd-option:not(:disabled)').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const idx = parseInt(btn.dataset.maddIndex);
+                        const optValue = btn.dataset.maddOpt;
+                        answerQuestion(idx, optValue);
+                    });
+                });
+            }
+
+            // رسم الأسئلة الأخرى
+            function renderOtherQuestions() {
+                let htmlStr = '';
+                const startIdx = maddQuestions.length;
+                
+                for (let i = 0; i < otherQuestions.length; i++) {
+                    const globalIdx = startIdx + i;
+                    const q = otherQuestions[i];
+                    const userAns = userAnswers[globalIdx];
+
+                    if (q.type === 'mcq') {
+                        htmlStr += `<div class="question-block">`;
+                        htmlStr += `<div class="question-text">${q.question}</div>`;
+                        htmlStr += `<div class="options">`;
+                        q.options.forEach((opt, optIndex) => {
+                            let btnClass = 'option-btn';
+                            if (userAns !== null) {
+                                if (optIndex === q.correct) {
+                                    btnClass += ' selected-correct';
+                                }
+                                if (userAns === optIndex && userAns !== q.correct) {
+                                    btnClass += ' selected-wrong';
+                                }
+                            }
+                            const disabledAttr = (userAns !== null) ? 'disabled' : '';
+                            htmlStr += `<button class="${btnClass}" ${disabledAttr} data-q="${globalIdx}" data-opt="${optIndex}">${opt}</button>`;
+                        });
+                        htmlStr += `</div>`;
+                        if (userAns !== null) {
+                            const isCorrect = (userAns === q.correct);
+                            htmlStr += `<div class="feedback-msg" style="color: ${isCorrect ? '#1e7e5a' : '#b33c3c'};">${isCorrect ? '✓ إجابة صحيحة' : '✗ إجابة خاطئة'}</div>`;
+                        }
+                        htmlStr += `</div>`;
+                    } else {
+                        htmlStr += `<div class="question-block">`;
+                        htmlStr += `<div class="question-text">${q.question}</div>`;
+                        htmlStr += `<div class="options">`;
+                        const tfOptions = ['صح', 'خطأ'];
+                        tfOptions.forEach((opt, idx) => {
+                            const boolVal = (idx === 0);
+                            let btnClass = 'option-btn';
+                            if (userAns !== null) {
+                                if (boolVal === q.correct) {
+                                    btnClass += ' selected-correct';
+                                }
+                                if (userAns === boolVal && userAns !== q.correct) {
+                                    btnClass += ' selected-wrong';
+                                }
+                            }
+                            const disabledAttr = (userAns !== null) ? 'disabled' : '';
+                            htmlStr += `<button class="${btnClass}" ${disabledAttr} data-q="${globalIdx}" data-opt="${boolVal}">${opt}</button>`;
+                        });
+                        htmlStr += `</div>`;
+                        if (userAns !== null) {
+                            const isCorrect = (userAns === q.correct);
+                            htmlStr += `<div class="feedback-msg" style="color: ${isCorrect ? '#1e7e5a' : '#b33c3c'};">${isCorrect ? '✓ إجابة صحيحة' : '✗ إجابة خاطئة'}</div>`;
+                        }
+                        htmlStr += `</div>`;
+                    }
+                }
+                
+                questionsDiv.innerHTML = htmlStr;
+
+                // إضافة الأحداث للأزرار
+                document.querySelectorAll('.option-btn:not(:disabled)').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const qIndex = parseInt(btn.dataset.q);
+                        const optValue = btn.dataset.opt;
+
+                        let parsedValue;
+                        if (optValue === 'true') parsedValue = true;
+                        else if (optValue === 'false') parsedValue = false;
+                        else parsedValue = parseInt(optValue);
+
+                        answerQuestion(qIndex, parsedValue);
+                    });
+                });
+            }
+
+            // دالة الرسم الكامل
+            function renderAll() {
+                renderMadd();
+                renderOtherQuestions();
+                updateScoreDisplay();
+            }
+
+            // تفعيل الأصوات
+            function enableAudioManually() {
+                audioEnabled = true;
+                audioMsg.innerHTML = '🔊 الأصوات مفعلة! استمعي للإجابات الصحيحة والتصفيق.';
+                audioMsg.style.backgroundColor = '#d4edda';
+                audioMsg.style.color = '#155724';
+            }
+
+            // إعادة تعيين الاختبار
+            function resetQuiz() {
+                userAnswers = new Array(allQuestions.length).fill(null);
+                score = 0;
+                consecutiveCorrect = 0;
+                renderAll();
+                updateScoreDisplay();
+            }
+
+            // أحداث الأزرار
+            resetBtn.addEventListener('click', resetQuiz);
+            enableAudioBtn.addEventListener('click', enableAudioManually);
+
+            // تحميل الصفحة
+            window.onload = () => {
+                renderAll();
+
+                // معالجة خطأ الصورة
+                const img = document.getElementById('localImage');
+                img.onerror = () => {
+                    img.src = 'data:image/svg+mg" viewBox="0 0 200 150" width="200" height="150"><rect width="200" height="150" fill="%23e0d6c3"/><text x="20" y="80" font-size="16" fill="%233d2b1a" font-family="Arial">ضعي الصورة هنا</text></svg>';
+                };
+            };
+        })();
+    </script>
 </body>
 </html>
