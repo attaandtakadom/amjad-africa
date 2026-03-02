@@ -18,7 +18,7 @@
         .active { display: block; }
         input { font-size: 26px; width: 85%; text-align: center; border: 4px solid #2196F3; border-radius: 15px; padding: 10px; margin-top: 15px; }
         #feedback { font-size: 30px; font-weight: bold; margin: 20px; min-height: 50px; }
-    .home-btn { 
+        .home-btn { 
             display: inline-block; 
             padding: 10px 20px; 
             background: #0d47a1; 
@@ -28,117 +28,244 @@
             margin-bottom: 10px; 
             font-size: 0.9rem;
         }
-    
-    
     </style>
 </head>
 <body id="mainBody">
     <a href="../../../arabic_dashboard.html" class="home-btn">الرئيسية</a>
 
-<div class="container" id="mainCard">
-    <h2 style="color: #0d47a1; margin-top: 0;">مؤسسة التقدم والعطاء بالبيضاء - ليبيا</h2>
-    
-    <div class="character-box">
-        <div><h2 style="color: blue; margin:0;">👦 أنس</h2><p>الصف الثاني</p></div>
-        <div><h2 style="color: #e91e63; margin:0;">👧 بثينة</h2><p>الصف الثاني</p></div>
-    </div>
-
-    <div id="step1" class="step active">
-        <img src="../../images/myfamily.jpg" class="family-img" alt="صورة العائلة">
-        <div class="big-text">
-            أنا أحب أمي <br>
-            أنا أحب أبي <br>
-            أنا أحب أخي <br>
-            أنا أحب أختي <br>
-            أنا أحب مدرستي <br>
-            أنا أحب وطني
+    <div class="container" id="mainCard">
+        <h2 style="color: #0d47a1; margin-top: 0;">مؤسسة التقدم والعطاء بالبيضاء - ليبيا</h2>
+        <div class="character-box">
+            <div><h2 style="color: blue; margin:0;">👦 أنس</h2><p>الصف الثاني</p></div>
+            <div><h2 style="color: #e91e63; margin:0;">👧 بثينة</h2><p>الصف الثاني</p></div>
         </div>
-        <button class="btn" onclick="goToStep(2)">نبدأ التمارين ➔</button>
-    </div>
 
-    <div id="step2" class="step">
-        <div class="big-text">اختر الكلمة الصحيحة:</div>
-        <div class="big-text">..... أبي</div>
-        <button class="btn btn-choice" onclick="showFeedback(true, 'هذا', 1)">هذا</button>
-        <button class="btn btn-choice" onclick="showFeedback(false)">هذه</button>
-        <hr>
-        <div class="big-text">..... أمي</div>
-        <button class="btn btn-choice" onclick="showFeedback(false)">هذا</button>
-        <button class="btn btn-choice" onclick="showFeedback(true, 'هذه', 2)">هذه</button>
-        <br>
-        <button class="btn btn-back" onclick="goToStep(1)">⬅ رجوع</button>
-    </div>
-
-    <div id="step3" class="step">
-        <div class="big-text">أكمل الجملة:</div>
-        <div class="big-text">أنا أحب أمي .. أمي تحبني</div>
-        <div class="big-text">أنا أحب أبي .. أبي <br>
-            <input type="text" id="qInput" placeholder="اكتب الكلمة هنا">
+        <!-- الخطوة 1: البداية -->
+        <div id="step1" class="step active">
+            <img src="../../images/myfamily.jpg" class="family-img" alt="صورة العائلة" onerror="this.style.display='none'">
+            <div class="big-text">
+                أنا أحب أمي <br>
+                أنا أحب أبي <br>
+                أنا أحب أخي <br>
+                أنا أحب أختي <br>
+                أنا أحب مدرستي <br>
+                أنا أحب وطني
+            </div>
+            <button class="btn" onclick="goToStep(2)">نبدأ التمارين ➔</button>
         </div>
-        <button class="btn" onclick="checkWriting()">تحقق ✅</button>
-        <br>
-        <button class="btn btn-back" onclick="goToStep(2)">⬅ رجوع</button>
+
+        <!-- الخطوة 2: اختر الكلمة الصحيحة (هذا - هذه) -->
+        <div id="step2" class="step">
+            <div class="big-text">اختر الكلمة الصحيحة:</div>
+            <div class="big-text" id="q1">..... أبي</div>
+            <button class="btn btn-choice" onclick="checkChoice(1, 'هذا')">هذا</button>
+            <button class="btn btn-choice" onclick="checkChoice(1, 'هذه')">هذه</button>
+            <hr>
+            <div class="big-text" id="q2">..... أمي</div>
+            <button class="btn btn-choice" onclick="checkChoice(2, 'هذا')">هذا</button>
+            <button class="btn btn-choice" onclick="checkChoice(2, 'هذه')">هذه</button>
+            <br>
+            <button class="btn btn-back" onclick="goToStep(1)">⬅ رجوع</button>
+        </div>
+
+        <!-- الخطوة 3: أكمل الجملة -->
+        <div id="step3" class="step">
+            <div class="big-text">أكمل الجملة:</div>
+            <div class="big-text">أنا أحب أمي .. أمي تحبني</div>
+            <div class="big-text">أنا أحب أبي .. أبي <br>
+                <input type="text" id="qInput" placeholder="اكتب الكلمة هنا">
+            </div>
+            <button class="btn" onclick="checkWriting()">تحقق ✅</button>
+            <br>
+            <button class="btn btn-back" onclick="goToStep(2)">⬅ رجوع</button>
+        </div>
+
+        <!-- الخطوة 4: رتب الجملة -->
+        <div id="step4" class="step">
+            <div class="big-text">رتب الجملة التالية:</div>
+            <div class="big-text" style="color: #666; background: #eee; padding: 10px; border-radius: 15px;">( أنا - الصف - في - الثاني )</div>
+            <input type="text" id="orderInput" placeholder="اكتب الجملة مرتبة">
+            <br>
+            <button class="btn" onclick="checkOrder()">إنهاء التمرين ✨</button>
+            <br>
+            <button class="btn btn-back" onclick="goToStep(3)">⬅ رجوع</button>
+            <button class="btn btn-reset" onclick="location.reload()">🔄 إعادة الكل</button>
+        </div>
+
+        <!-- مكان عرض الرسائل -->
+        <div id="feedback"></div>
     </div>
 
-    <div id="step4" class="step">
-        <div class="big-text">رتب الجملة التالية:</div>
-        <div class="big-text" style="color: #666; background: #eee; padding: 10px; border-radius: 15px;">( أنا - الصف - في - الثاني )</div>
-        <input type="text" id="orderInput" placeholder="اكتب الجملة مرتبة">
-        <br>
-        <button class="btn" onclick="checkOrder()">إنهاء التمرين ✨</button>
-        <br>
-        <button class="btn btn-back" onclick="goToStep(3)">⬅ رجوع</button>
-        <button class="btn btn-reset" onclick="location.reload()">🔄 إعادة الكل</button>
-    </div>
+    <script>
+        // تحميل الملفات الصوتية
+        const audioYes = new Audio('../../../../../sound/correct-sound.mp3');
+        const audioClap = new Audio('../../../../../sound/applause.mp3');
+        
+        // إعداد الصوت ليعمل على الأجهزة المحمولة
+        audioYes.preload = 'auto';
+        audioClap.preload = 'auto';
+        
+        // حل مشكلة تشغيل الصوت في بعض المتصفحات (خاصة Safari)
+        document.addEventListener('touchstart', function() {
+            audioYes.load();
+            audioClap.load();
+        }, { once: true });
 
-    <div id="feedback"></div>
-</div>
+        let correctTasks = 0; // عداد المهام الصحيحة
 
-<script>
-    let correctTasks = 0;
-
-    function goToStep(n) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step' + n).classList.add('active');
-        document.getElementById('feedback').innerText = "";
-        document.body.style.backgroundColor = "#e3f2fd";
-    }
-
-    function showFeedback(isCorrect, word = "", taskNum = 0) {
-        const fb = document.getElementById('feedback');
-        if (isCorrect) {
-            fb.innerText = "ممتاز! " + word;
-            fb.style.color = "#4CAF50";
-            document.body.style.backgroundColor = "#c8e6c9";
-            if(taskNum === 2) setTimeout(() => goToStep(3), 1500);
-        } else {
-            fb.innerText = "حاول مرة أخرى يا بطل ✍️";
-            fb.style.color = "#f44336";
-            document.body.style.backgroundColor = "#ffcdd2";
+        // دالة للانتقال بين الخطوات
+        function goToStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
+            document.getElementById('feedback').innerText = "";
+            document.body.style.backgroundColor = "#e3f2fd";
         }
-    }
 
-    function checkWriting() {
-        let val = document.getElementById('qInput').value.trim();
-        if(val === 'تحبني' || val === 'تحبنى' || val === 'يحبني') {
-            showFeedback(true, "إجابة صحيحة");
-            setTimeout(() => goToStep(4), 1500);
-        } else {
-            showFeedback(false);
+        // دالة لتشغيل صوت أحسنت مع معالجة الأخطاء
+        function playYesSound() {
+            try {
+                // إعادة تعيين الصوت إلى البداية إذا كان لا يزال يعمل
+                audioYes.pause();
+                audioYes.currentTime = 0;
+                
+                // تشغيل الصوت
+                let playPromise = audioYes.play();
+                
+                // التعامل مع وعد التشغيل (للمتصفحات الحديثة)
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("تعذر تشغيل الصوت:", error);
+                        // يمكن إضافة تنبيه بسيط هنا إذا أردت
+                    });
+                }
+            } catch (e) {
+                console.log("خطأ في تشغيل الصوت:", e);
+            }
         }
-    }
 
-    function checkOrder() {
-        let val = document.getElementById('orderInput').value.trim().replace(/\s+/g, ' ');
-        if(val === 'أنا في الصف الثاني' || val === 'انا في الصف الثاني') {
-            document.getElementById('feedback').innerText = "رائع جداً! اكتملت كل التمارين بنجاح 🏆";
-            document.getElementById('feedback').style.color = "#4CAF50";
-            document.body.style.backgroundColor = "#c8e6c9";
-        } else {
-            showFeedback(false);
+        // دالة لتشغيل صوت التصفيق مع معالجة الأخطاء
+        function playClapSound() {
+            try {
+                // إعادة تعيين الصوت إلى البداية
+                audioClap.pause();
+                audioClap.currentTime = 0;
+                
+                // تشغيل الصوت
+                let playPromise = audioClap.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("تعذر تشغيل صوت التصفيق:", error);
+                    });
+                }
+            } catch (e) {
+                console.log("خطأ في تشغيل صوت التصفيق:", e);
+            }
         }
-    }
-</script>
 
+        // دالة للتحقق من اختيارات الخطوة 2
+        function checkChoice(questionNumber, chosenAnswer) {
+            const fb = document.getElementById('feedback');
+            let isCorrect = false;
+            
+            if (questionNumber === 1 && chosenAnswer === 'هذا') {
+                isCorrect = true;
+            } else if (questionNumber === 2 && chosenAnswer === 'هذه') {
+                isCorrect = true;
+            }
+
+            if (isCorrect) {
+                fb.innerText = "ممتاز! إجابة صحيحة";
+                fb.style.color = "#4CAF50";
+                document.body.style.backgroundColor = "#c8e6c9";
+                
+                // تشغيل صوت أحسنت
+                playYesSound();
+
+                // زيادة العداد
+                correctTasks++;
+                
+                // التحقق من الوصول إلى مهمتين صحيحتين
+                if (correctTasks === 2) {
+                    playClapSound(); // تشغيل صوت التصفيق
+                }
+
+                // بعد الإجابة الصحيحة على السؤال الثاني، الانتقال للخطوة 3
+                if (questionNumber === 2) {
+                    setTimeout(() => goToStep(3), 1500);
+                }
+            } else {
+                fb.innerText = "حاول مرة أخرى يا بطل ✏️";
+                fb.style.color = "#f44336";
+                document.body.style.backgroundColor = "#ffcdd2";
+            }
+        }
+
+        // دالة للتحقق من كتابة الجملة في الخطوة 3
+        function checkWriting() {
+            let val = document.getElementById('qInput').value.trim();
+            const fb = document.getElementById('feedback');
+            
+            // الإجابات المقبولة (مع مراعاء اللهجة الليبية)
+            if(val === 'تحبني' || val === 'يحبني' || val === 'تحبني' || val === 'يحبني') {
+                fb.innerText = "إجابة صحيحة!";
+                fb.style.color = "#4CAF50";
+                document.body.style.backgroundColor = "#c8e6c9";
+                
+                // تشغيل صوت أحسنت
+                playYesSound();
+                
+                // زيادة العداد
+                correctTasks++;
+                
+                // التحقق من الوصول إلى مهمتين صحيحتين
+                if (correctTasks === 2) {
+                    playClapSound();
+                }
+                
+                setTimeout(() => goToStep(4), 1500);
+            } else {
+                fb.innerText = "حاول مرة أخرى، الكلمة هي (تحبني)";
+                fb.style.color = "#f44336";
+                document.body.style.backgroundColor = "#ffcdd2";
+            }
+        }
+
+        // دالة للتحقق من ترتيب الجملة في الخطوة 4
+        function checkOrder() {
+            let val = document.getElementById('orderInput').value.trim().replace(/\s+/g, ' ');
+            const fb = document.getElementById('feedback');
+            
+            if(val === 'أنا في الصف الثاني' || val === 'انا في الصف الثاني') {
+                fb.innerText = "رائع جداً! أكملت كل التمارين بنجاح 🏆";
+                fb.style.color = "#4CAF50";
+                document.body.style.backgroundColor = "#c8e6c9";
+                
+                // تشغيل صوت أحسنت
+                playYesSound();
+                
+                // تشغيل صوت تصفيق للاحتفال
+                setTimeout(() => playClapSound(), 500);
+                
+                // رسالة تهنئة إضافية
+                setTimeout(() => {
+                    fb.innerText = "أحسنت يا بطل! 🎉🎉🎉";
+                }, 1000);
+                
+            } else {
+                fb.innerText = "الجملة الصحيحة: أنا في الصف الثاني";
+                fb.style.color = "#f44336";
+                document.body.style.backgroundColor = "#ffcdd2";
+            }
+        }
+
+        // تجهيز الصوت للتفاعل مع اللمس (للهواتف)
+        document.body.addEventListener('click', function initAudio() {
+            audioYes.load();
+            audioClap.load();
+            document.body.removeEventListener('click', initAudio);
+        }, { once: true });
+
+    </script>
 </body>
 </html>

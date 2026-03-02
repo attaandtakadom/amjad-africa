@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>السلام وهمزة القطع - الصف الرابع</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center; 
+            padding: 10px; 
+            margin: 0; 
+            min-height: 100vh;
+            transition: background 0.5s; 
+        }
+        .container { 
+            background: white; 
+            border-radius: 30px; 
+            border: 8px solid #4CAF50; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+            width: 95%; 
+            max-width: 800px; 
+            margin: 10px auto; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+        .header {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .character-box { 
+            display: flex; 
+            justify-content: space-around; 
+            background: #fff9c4; 
+            padding: 15px; 
+            border-radius: 20px; 
+            margin-bottom: 20px; 
+            border: 3px solid #ffd54f; 
+        }
+        .big-text { 
+            font-size: 26px; 
+            font-weight: bold; 
+            line-height: 1.8; 
+            color: #2c3e50; 
+            margin: 20px 0; 
+        }
+        .lesson-img { 
+            width: 100%; 
+            max-height: 300px; 
+            border-radius: 20px; 
+            border: 5px solid #4CAF50; 
+            object-fit: cover; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .summary-box {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            text-align: right;
+            border-right: 8px solid #4CAF50;
+        }
+        .summary-title {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .rule-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border-right: 8px solid #ff9800;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+            padding: 12px;
+            font-size: 18px;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        .btn { 
+            background: #4CAF50; 
+            color: white; 
+            padding: 15px 40px; 
+            font-size: 24px; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            margin: 15px; 
+            box-shadow: 0 6px #2e7d32;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px #2e7d32;
+        }
+        .btn-choice { 
+            background: #2196F3; 
+            padding: 12px 30px;
+            margin: 5px;
+            font-size: 20px;
+            box-shadow: 0 4px #1976D2;
+        }
+        .btn-back { 
+            background: #f44336; 
+            box-shadow: 0 4px #b71c1c; 
+            font-size: 20px; 
+        }
+        .btn-reset { 
+            background: #ff9800; 
+            box-shadow: 0 4px #e65100; 
+            font-size: 20px; 
+        }
+        .step { 
+            display: none; 
+        }
+        .active { 
+            display: block; 
+        }
+        input { 
+            font-size: 24px; 
+            width: 85%; 
+            text-align: center; 
+            border: 4px solid #4CAF50; 
+            border-radius: 15px; 
+            padding: 12px; 
+            margin: 15px 0; 
+        }
+        #feedback { 
+            font-size: 28px; 
+            font-weight: bold; 
+            margin: 20px; 
+            min-height: 60px; 
+            padding: 10px;
+            border-radius: 15px;
+        }
+        .home-btn { 
+            display: inline-block; 
+            padding: 12px 25px; 
+            background: #0d47a1; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 10px; 
+            margin-bottom: 10px; 
+            font-size: 1rem;
+            box-shadow: 0 4px #092b5c;
+        }
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .true-false {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        .correct-answer {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .highlight {
+            background: #fff9c4;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #f57c00;
+        }
+    </style>
+</head>
+<body>
+    <a href="../../../../arabic_dashboard.html" class="home-btn">🏠 الرئيسية</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 السلام وهمزة القطع</h1>
+            <h2>الصف الرابع الابتدائي</h2>
+        </div>
+        
+        <div class="character-box">
+            <div>
+                <h2 style="color: blue; margin:0;">👦 أحمد</h2>
+                <p>الصف الرابع</p>
+            </div>
+            <div>
+                <h2 style="color: #e91e63; margin:0;">👧 فاطمة</h2>
+                <p>الصف الرابع</p>
+            </div>
+        </div>
+
+        <!-- الخطوة 1: شرح الدرس -->
+        <div id="step1" class="step active">
+            <!-- صورة محلية - يمكنك تغيير المسار حسب مكان الصورة -->
+            <img src="../../images/peace-lesson.jpg" class="lesson-img" alt="درس السلام" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22><rect width=%22200%22 height=%22200%22 fill=%22%234CAF50%22/><text x=%2250%22 y=%22120%22 fill=%22white%22 font-size=%2220%22>📖 درس السلام</text></svg>'">
+            
+            <div class="summary-box">
+                <div class="summary-title">
+                    <span>🔑 مفتاح المحبة</span>
+                    <span style="font-size: 30px;">🤝</span>
+                </div>
+                <p><strong>مفهوم السلام:</strong> هو تحية الإسلام، وهو اسم من أسماء الله الحسنى، ومعناه الأمان والاطمئنان.</p>
+                <p><strong>فضل إفشاء السلام:</strong> هو خير الأعمال في الإسلام، وهو سبب لزرع المحبة والمودة بين أفراد المجتمع.</p>
+                <p><strong>آداب السلام:</strong></p>
+                <ul style="list-style-type: none; padding-right: 20px;">
+                    <li>✨ يسلم الراكب على الماشي</li>
+                    <li>✨ يسلم القائم على القاعد</li>
+                    <li>✨ يسلم القليل على الكثير</li>
+                    <li>✨ يسلم الصغير على الكبير</li>
+                </ul>
+                <p><strong>أثر السلام:</strong> يقوي الروابط الاجتماعية، ينشر الخير، ويدفع الضر والأذى.</p>
+            </div>
+
+            <div class="rule-box">
+                <div class="summary-title">
+                    <span>📝 همزة القطع</span>
+                    <span style="font-size: 30px;">✍️</span>
+                </div>
+                <p><strong>تعريفها:</strong> هي همزة تظهر في النطق والكتابة في أول الكلمة.</p>
+                <p><strong>رسمها:</strong></p>
+                <ul style="list-style-type: none; padding-right: 20px;">
+                    <li>📌 تكتب فوق الألف (<span class="highlight">أ</span>) إذا كانت <strong>مفتوحة</strong> (مثل: أَحمد)</li>
+                    <li>📌 تكتب فوق الألف (<span class="highlight">أ</span>) إذا كانت <strong>مضمومة</strong> (مثل: أُسامة)</li>
+                    <li>📌 تكتب تحت الألف (<span class="highlight">إ</span>) إذا كانت <strong>مكسورة</strong> (مثل: إِيمان، إِرضاء)</li>
+                </ul>
+                <p><strong>موقعها:</strong> تأتي في الأسماء، والأفعال، والحروف.</p>
+            </div>
+
+            <button class="btn" onclick="goToStep(2)">▶ ابدأ التمارين</button>
+        </div>
+
+        <!-- الخطوة 2: أسئلة الاختيار من متعدد -->
+        <div id="step2" class="step">
+            <h2 style="color: #4CAF50;">📝 أسئلة الاختيار من متعدد</h2>
+            
+            <div class="big-text">1️⃣ معنى كلمة "إفشاء" في جملة "إفشاء السلام":</div>
+            <div class="option-grid">
+                <button class="btn btn-choice" onclick="checkMCQ(1, 'أ')">(أ) كتمان</button>
+                <button class="btn btn-choice" onclick="checkMCQ(1, 'ب')">(ب) نشر وإظهار</button>
+                <button class="btn btn-choice" onclick="checkMCQ(1, 'ج')">(ج) نسيان</button>
+            </div>
+
+            <div class="big-text">2️⃣ الذي يسلم على الماشي هو:</div>
+            <div class="option-grid">
+                <button class="btn btn-choice" onclick="checkMCQ(2, 'أ')">(أ) القاعد</button>
+                <button class="btn btn-choice" onclick="checkMCQ(2, 'ب')">(ب) الراكب</button>
+                <button class="btn btn-choice" onclick="checkMCQ(2, 'ج')">(ج) الصغير</button>
+            </div>
+
+            <div class="big-text">3️⃣ تكتب همزة القطع تحت الألف إذا كانت:</div>
+            <div class="option-grid">
+                <button class="btn btn-choice" onclick="checkMCQ(3, 'أ')">(أ) مفتوحة</button>
+                <button class="btn btn-choice" onclick="checkMCQ(3, 'ب')">(ب) مضمومة</button>
+                <button class="btn btn-choice" onclick="checkMCQ(3, 'ج')">(ج) مكسورة</button>
+            </div>
+
+            <div class="big-text">4️⃣ الكلمة التي تبدأ بـ "همزة قطع" هي:</div>
+            <div class="option-grid">
+                <button class="btn btn-choice" onclick="checkMCQ(4, 'أ')">(أ) السلام</button>
+                <button class="btn btn-choice" onclick="checkMCQ(4, 'ب')">(ب) أطعم</button>
+                <button class="btn btn-choice" onclick="checkMCQ(4, 'ج')">(ج) المحبة</button>
+            </div>
+
+            <div class="big-text">5️⃣ "المودة" و "المحبة" بينهما علاقة:</div>
+            <div class="option-grid">
+                <button class="btn btn-choice" onclick="checkMCQ(5, 'أ')">(أ) تضاد (عكس)</button>
+                <button class="btn btn-choice" onclick="checkMCQ(5, 'ب')">(ب) ترادف (نفس المعنى)</button>
+                <button class="btn btn-choice" onclick="checkMCQ(5, 'ج')">(ج) لا علاقة بينهما</button>
+            </div>
+
+            <br>
+            <button class="btn btn-back" onclick="goToStep(1)">⬅ رجوع للشرح</button>
+            <button class="btn" onclick="goToStep(3)">▶ التالي: صح أو خطأ</button>
+        </div>
+
+        <!-- الخطوة 3: أسئلة صح أو خطأ -->
+        <div id="step3" class="step">
+            <h2 style="color: #4CAF50;">✅ أسئلة صح أو خطأ</h2>
+            
+            <div class="big-text">1️⃣ السلام هو مفتاح المحبة بين الناس.</div>
+            <div class="true-false">
+                <button class="btn btn-choice" onclick="checkTF(1, true)">✅ صح</button>
+                <button class="btn btn-choice" onclick="checkTF(1, false)">❌ خطأ</button>
+            </div>
+            <div id="tf1-feedback" class="feedback-small"></div>
+
+            <div class="big-text">2️⃣ يسلم الماشي على الراكب.</div>
+            <div class="true-false">
+                <button class="btn btn-choice" onclick="checkTF(2, false)">✅ صح</button>
+                <button class="btn btn-choice" onclick="checkTF(2, true)">❌ خطأ</button>
+            </div>
+            <div id="tf2-feedback" class="feedback-small"></div>
+
+            <div class="big-text">3️⃣ همزة القطع في كلمة "أُسامة" كتبت فوق الألف لأنها مضمومة.</div>
+            <div class="true-false">
+                <button class="btn btn-choice" onclick="checkTF(3, true)">✅ صح</button>
+                <button class="btn btn-choice" onclick="checkTF(3, false)">❌ خطأ</button>
+            </div>
+            <div id="tf3-feedback" class="feedback-small"></div>
+
+            <div class="big-text">4️⃣ إفشاء السلام يسبب الفرقة والبغضاء بين المسلمين.</div>
+            <div class="true-false">
+                <button class="btn btn-choice" onclick="checkTF(4, false)">✅ صح</button>
+                <button class="btn btn-choice" onclick="checkTF(4, true)">❌ خطأ</button>
+            </div>
+            <div id="tf4-feedback" class="feedback-small"></div>
+
+            <div class="big-text">5️⃣ كلمة "إيمان" تبدأ بـ همزة قطع مكسورة.</div>
+            <div class="true-false">
+                <button class="btn btn-choice" onclick="checkTF(5, true)">✅ صح</button>
+                <button class="btn btn-choice" onclick="checkTF(5, false)">❌ خطأ</button>
+            </div>
+            <div id="tf5-feedback" class="feedback-small"></div>
+
+            <div class="big-text">6️⃣ الجملة المفيدة هي التي تؤدي معنى تاماً.</div>
+            <div class="true-false">
+                <button class="btn btn-choice" onclick="checkTF(6, false)">✅ صح</button>
+                <button class="btn btn-choice" onclick="checkTF(6, true)">❌ خطأ</button>
+            </div>
+            <div id="tf6-feedback" class="feedback-small"></div>
+
+            <br>
+            <button class="btn btn-back" onclick="goToStep(2)">⬅ رجوع</button>
+            <button class="btn" onclick="goToStep(4)">▶ التالي: تطبيق القواعد</button>
+        </div>
+
+        <!-- الخطوة 4: تطبيق القواعد (أكمل الجدول) -->
+        <div id="step4" class="step">
+            <h2 style="color: #4CAF50;">📊 تطبيق القواعد - أكمل الجدول</h2>
+            
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>الكلمة المهموزة</th>
+                        <th>حركة الهمزة</th>
+                        <th>مكان الهمزة</th>
+                    </tr>
+                    <tr>
+                        <td>أَحمد</td>
+                        <td>
+                            <select id="row1-haraka" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فتحة">فتحة</option>
+                                <option value="كسرة">كسرة</option>
+                                <option value="ضمة">ضمة</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="row1-place" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فوق الألف">فوق الألف</option>
+                                <option value="تحت الألف">تحت الألف</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>إِحسان</td>
+                        <td>
+                            <select id="row2-haraka" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فتحة">فتحة</option>
+                                <option value="كسرة">كسرة</option>
+                                <option value="ضمة">ضمة</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="row2-place" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فوق الألف">فوق الألف</option>
+                                <option value="تحت الألف">تحت الألف</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>أُسامة</td>
+                        <td>
+                            <select id="row3-haraka" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فتحة">فتحة</option>
+                                <option value="كسرة">كسرة</option>
+                                <option value="ضمة">ضمة</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="row3-place" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فوق الألف">فوق الألف</option>
+                                <option value="تحت الألف">تحت الألف</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>إِلى</td>
+                        <td>
+                            <select id="row4-haraka" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فتحة">فتحة</option>
+                                <option value="كسرة">كسرة</option>
+                                <option value="ضمة">ضمة</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="row4-place" class="table-select">
+                                <option value="">اختر</option>
+                                <option value="فوق الألف">فوق الألف</option>
+                                <option value="تحت الألف">تحت الألف</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <button class="btn" onclick="checkTable()">✅ تحقق من الإجابات</button>
+            <br>
+            <button class="btn btn-back" onclick="goToStep(3)">⬅ رجوع</button>
+            <button class="btn btn-reset" onclick="resetTable()">🔄 إعادة تعيين</button>
+            <button class="btn" onclick="showAnswers()">🔍 عرض الإجابات الصحيحة</button>
+        </div>
+
+        <!-- الخطوة 5: النتيجة النهائية -->
+        <div id="step5" class="step">
+            <div class="summary-box" style="text-align: center;">
+                <h1 style="color: #4CAF50; font-size: 50px;">🎉</h1>
+                <h2 style="color: #4CAF50;">أحسنت! أكملت جميع التمارين</h2>
+                <p class="big-text" id="final-score"></p>
+                <button class="btn" onclick="location.reload()">🔄 بدء من جديد</button>
+                <button class="btn btn-back" onclick="goToStep(1)">📖 العودة للشرح</button>
+            </div>
+        </div>
+
+        <!-- مكان عرض الرسائل -->
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        // الملفات الصوتية
+        const audioYes = new Audio('../../../../../sound/correct-sound.mp3');
+        const audioClap = new Audio('../../../../../sound/applause.mp3');
+        
+        audioYes.preload = 'auto';
+        audioClap.preload = 'auto';
+
+        // متغيرات التتبع
+        let correctAnswers = 0;
+        let totalQuestions = 17; // 5 MCQ + 6 TF + 6 جدول
+        let mcqCorrect = [false, false, false, false, false];
+        let tfCorrect = [false, false, false, false, false, false];
+        let tableCorrect = [false, false, false, false];
+
+        // دالة تشغيل الصوت
+        function playYesSound() {
+            try {
+                audioYes.pause();
+                audioYes.currentTime = 0;
+                audioYes.play().catch(e => console.log("خطأ في تشغيل الصوت"));
+            } catch (e) {
+                console.log("خطأ:", e);
+            }
+        }
+
+        function playClapSound() {
+            try {
+                audioClap.pause();
+                audioClap.currentTime = 0;
+                audioClap.play().catch(e => console.log("خطأ في تشغيل التصفيق"));
+            } catch (e) {
+                console.log("خطأ:", e);
+            }
+        }
+
+        // دالة الانتقال
+        function goToStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
+            document.getElementById('feedback').innerText = "";
+            
+            if (n === 5) {
+                updateFinalScore();
+            }
+        }
+
+        // دالة التحقق من MCQ
+        function checkMCQ(questionNum, answer) {
+            const fb = document.getElementById('feedback');
+            let isCorrect = false;
+            
+            const correctAnswers = {
+                1: 'ب', // نشر وإظهار
+                2: 'ب', // الراكب
+                3: 'ج', // مكسورة
+                4: 'ب', // أطعم
+                5: 'ب'  // ترادف
+            };
+            
+            if (answer === correctAnswers[questionNum]) {
+                isCorrect = true;
+                mcqCorrect[questionNum-1] = true;
+            }
+            
+            if (isCorrect) {
+                fb.innerText = "✅ إجابة صحيحة!";
+                fb.style.color = "#4CAF50";
+                fb.style.background = "#e8f5e9";
+                document.body.style.background = "linear-gradient(135deg, #a8e6cf 0%, #d4edf5 100%)";
+                playYesSound();
+                
+                // التحقق من اكتمال جميع MCQ
+                if (mcqCorrect.every(v => v === true)) {
+                    playClapSound();
+                    fb.innerText += " 🎉 أحسنت! أكملت جميع أسئلة الاختيار";
+                }
+            } else {
+                fb.innerText = "❌ إجابة خاطئة، حاول مرة أخرى";
+                fb.style.color = "#f44336";
+                fb.style.background = "#ffebee";
+                document.body.style.background = "linear-gradient(135deg, #ffcdd2 0%, #f8bbd0 100%)";
+            }
+        }
+
+        // دالة التحقق من صح وخطأ
+        function checkTF(questionNum, answer) {
+            const fb = document.getElementById('feedback');
+            const tfFb = document.getElementById('tf' + questionNum + '-feedback');
+            let isCorrect = false;
+            
+            const correctAnswers = {
+                1: true,  // صح
+                2: false, // خطأ (يسلم الماشي على الراكب)
+                3: true,  // صح
+                4: false, // خطأ (ينشر المحبة)
+                5: true,  // صح
+                6: false  // خطأ (تؤدي معنى تاماً)
+            };
+            
+            if (answer === correctAnswers[questionNum]) {
+                isCorrect = true;
+                tfCorrect[questionNum-1] = true;
+            }
+            
+            if (isCorrect) {
+                fb.innerText = "✅ إجابة صحيحة!";
+                fb.style.color = "#4CAF50";
+                fb.style.background = "#e8f5e9";
+                
+                if (tfFb) {
+                    tfFb.innerText = "✓ صحيح";
+                    tfFb.style.color = "#4CAF50";
+                }
+                
+                playYesSound();
+                
+                // التحقق من اكتمال جميع TF
+                if (tfCorrect.every(v => v === true)) {
+                    playClapSound();
+                    fb.innerText += " 🎉 أحسنت! أكملت جميع أسئلة صح وخطأ";
+                }
+            } else {
+                fb.innerText = "❌ إجابة خاطئة";
+                fb.style.color = "#f44336";
+                fb.style.background = "#ffebee";
+                
+                if (tfFb) {
+                    tfFb.innerText = "✗ خطأ";
+                    tfFb.style.color = "#f44336";
+                }
+            }
+        }
+
+        // دالة التحقق من الجدول
+        function checkTable() {
+            const fb = document.getElementById('feedback');
+            
+            const correctHaraka = {
+                row1: 'فتحة',
+                row2: 'كسرة',
+                row3: 'ضمة',
+                row4: 'كسرة'
+            };
+            
+            const correctPlace = {
+                row1: 'فوق الألف',
+                row2: 'تحت الألف',
+                row3: 'فوق الألف',
+                row4: 'تحت الألف'
+            };
+            
+            let allCorrect = true;
+            
+            for (let i = 1; i <= 4; i++) {
+                const haraka = document.getElementById(`row${i}-haraka`).value;
+                const place = document.getElementById(`row${i}-place`).value;
+                
+                const harakaCorrect = (haraka === correctHaraka[`row${i}`]);
+                const placeCorrect = (place === correctPlace[`row${i}`]);
+                
+                tableCorrect[i-1] = harakaCorrect && placeCorrect;
+                
+                if (!harakaCorrect || !placeCorrect) {
+                    allCorrect = false;
+                }
+            }
+            
+            if (allCorrect) {
+                fb.innerText = "🎉 ممتاز! جميع إجابات الجدول صحيحة";
+                fb.style.color = "#4CAF50";
+                fb.style.background = "#e8f5e9";
+                playYesSound();
+                playClapSound();
+                
+                // الانتقال للنتيجة النهائية
+                setTimeout(() => goToStep(5), 2000);
+            } else {
+                fb.innerText = "❌ بعض الإجابات خاطئة، حاول مرة أخرى";
+                fb.style.color = "#f44336";
+                fb.style.background = "#ffebee";
+            }
+        }
+
+        // دالة إعادة تعيين الجدول
+        function resetTable() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`row${i}-haraka`).value = '';
+                document.getElementById(`row${i}-place`).value = '';
+            }
+            document.getElementById('feedback').innerText = 'تم إعادة تعيين الجدول';
+        }
+
+        // دالة عرض الإجابات الصحيحة
+        function showAnswers() {
+            const correctHaraka = {
+                row1: 'فتحة',
+                row2: 'كسرة',
+                row3: 'ضمة',
+                row4: 'كسرة'
+            };
+            
+            const correctPlace = {
+                row1: 'فوق الألف',
+                row2: 'تحت الألف',
+                row3: 'فوق الألف',
+                row4: 'تحت الألف'
+            };
+            
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`row${i}-haraka`).value = correctHaraka[`row${i}`];
+                document.getElementById(`row${i}-place`).value = correctPlace[`row${i}`];
+            }
+            
+            document.getElementById('feedback').innerText = '📝 تم عرض الإجابات الصحيحة';
+        }
+
+        // دالة تحديث النتيجة النهائية
+        function updateFinalScore() {
+            const mcqCount = mcqCorrect.filter(v => v).length;
+            const tfCount = tfCorrect.filter(v => v).length;
+            const tableCount = tableCorrect.filter(v => v).length;
+            const total = mcqCount + tfCount + tableCount;
+            
+            document.getElementById('final-score').innerHTML = `
+                لقد حصلت على ${total} من ${totalQuestions} <br>
+                ⭐ أسئلة الاختيار: ${mcqCount}/5<br>
+                ⭐ أسئلة صح وخطأ: ${tfCount}/6<br>
+                ⭐ تطبيق القواعد: ${tableCount}/6<br>
+                ${total === totalQuestions ? '🎊 أحسنت! إتقان كامل' : '💪 واصل التدريب'}
+            `;
+        }
+
+        // تجهيز الصوت للتفاعل مع اللمس
+        document.body.addEventListener('click', function initAudio() {
+            audioYes.load();
+            audioClap.load();
+            document.body.removeEventListener('click', initAudio);
+        }, { once: true });
+
+    </script>
+</body>
+</html>
