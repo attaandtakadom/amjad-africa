@@ -33,7 +33,7 @@
         /* رأس الصفحة والعودة */
         .header-bar {
             display: flex;
- justify-content: space-between;
+            justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
@@ -77,7 +77,59 @@
             box-shadow: 0 0px 0 #9e6d1f, 0 6px 12px black;
         }
 
-        /* بطاقات الشرح */
+        /* شريط التقييم والدرجات */
+        .score-bar {
+            background: linear-gradient(45deg, #1e3b4a, #0f2835);
+            border-radius: 60px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #ffc857;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .score-item {
+            text-align: center;
+            min-width: 120px;
+        }
+        .score-label {
+            color: #ffd966;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .score-value {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: #00000040;
+            padding: 5px 20px;
+            border-radius: 40px;
+            border: 1px solid #ffb347;
+        }
+        .score-percentage {
+            background: #ff9800;
+            color: #000;
+            font-size: 2.5rem;
+            font-weight: bold;
+            padding: 10px 30px;
+            border-radius: 60px;
+        }
+        .rating {
+            font-size: 1.5rem;
+            color: #fff;
+            background: #2ecc71;
+            padding: 10px 25px;
+            border-radius: 40px;
+        }
+        .rating.bad { background: #e74c3c; }
+        .rating.medium { background: #f39c12; }
+        .rating.good { background: #3498db; }
+        .rating.excellent { background: #2ecc71; }
+
+        /* باقي التنسيقات كما هي */
         .lesson-summary {
             background: #14222e;
             border-radius: 36px;
@@ -273,7 +325,25 @@
             box-shadow: 0 0px 0 #9e621b;
         }
 
-        /* زر الرجوع داخل الصفحة للقائمة */
+        /* زر إعادة التقييم */
+        .reset-btn {
+            background: #e67e22;
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 15px;
+            box-shadow: 0 4px 0 #b85e0f;
+            transition: 0.1s;
+        }
+        .reset-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
         .scroll-top {
             display: flex;
             justify-content: center;
@@ -301,15 +371,64 @@
             margin-top: 25px;
             font-size: 1.1rem;
         }
+
+        @media (max-width: 700px) {
+            .header-bar h1 { font-size: 1.6rem; }
+            .home-btn { font-size: 1rem; padding: 8px 16px; }
+            .card p { font-size: 1rem; }
+            .score-bar { flex-direction: column; gap: 15px; }
+        }
+        .check-btn {
+            background: #ffae42;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 5px;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #b2620e;
+            transition: 0.1s;
+        }
+        .check-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+        .option input, .tf-option input {
+            transform: scale(1.2);
+            margin-left: 8px;
+        }
     </style>
 </head>
 <body>
 <div class="container" id="mainContainer">
-    <!-- شريط العنوان مع زر العودة للرئيسية (المنزل) -->
+    <!-- شريط العنوان مع زر العودة للرئيسية -->
     <div class="header-bar">
-        <h1>☢️ الإشعاعات وعمر النصف</h1>    
+        <h1>☢️ الإشعاعات وعمر النصف</h1>
+        <div>
+            <button class="reset-btn" onclick="resetScore()">🔄 إعادة تعيين التقييم</button>
+            <button class="home-btn" onclick="window.location.href='#'" id="homeMainBtn">🏠 العودة للرئيسية</button>
+        </div>
+    </div>
 
-        <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn">🏠 العودة للرئيسية</button>
+    <!-- شريط التقييم والدرجات -->
+    <div class="score-bar" id="scoreBar">
+        <div class="score-item">
+            <span class="score-label">✅ الإجابات الصحيحة</span>
+            <span class="score-value" id="correctCount">0</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">❌ الإجابات الخاطئة</span>
+            <span class="score-value" id="wrongCount">0</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">📊 النسبة</span>
+            <span class="score-percentage" id="percentage">0%</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">🏆 التقييم</span>
+            <span class="rating" id="rating">لم يبدأ</span>
+        </div>
     </div>
 
     <!-- ملخص الدرس -->
@@ -349,48 +468,48 @@
             <div class="question-item" id="q1">
                 <div class="q-text">1️⃣ أي الإشعاعات لا ينحرف في مجال مغناطيسي؟</div>
                 <div class="options">
-                    <label class="option"><input type="radio" name="q1" value="a"> أ) جسيمات ألفا</label>
-                    <label class="option"><input type="radio" name="q1" value="b"> ب) جسيمات بيتا</label>
-                    <label class="option"><input type="radio" name="q1" value="c"> ج) أشعة جاما</label>
-                    <label class="option"><input type="radio" name="q1" value="d"> د) البروتونات</label>
+                    <label class="option"><input type="radio" name="q1" value="a" onclick="resetQuestionFeedback('q1')"> أ) جسيمات ألفا</label>
+                    <label class="option"><input type="radio" name="q1" value="b" onclick="resetQuestionFeedback('q1')"> ب) جسيمات بيتا</label>
+                    <label class="option"><input type="radio" name="q1" value="c" onclick="resetQuestionFeedback('q1')"> ج) أشعة جاما</label>
+                    <label class="option"><input type="radio" name="q1" value="d" onclick="resetQuestionFeedback('q1')"> د) البروتونات</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q1','c')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q1','c','ج) أشعة جاما')">🔍 تحقق</button>
                 <span id="fb_q1" class="feedback"></span>
             </div>
             <!-- س2 -->
             <div class="question-item" id="q2">
                 <div class="q-text">2️⃣ جهاز يعتمد على تأين غاز الأرجون؟</div>
                 <div class="options">
-                    <label class="option"><input type="radio" name="q2" value="a"> أ) الكشاف الكهربائي</label>
-                    <label class="option"><input type="radio" name="q2" value="b"> ب) أنبوب جيجر-مولر</label>
-                    <label class="option"><input type="radio" name="q2" value="c"> ج) المجهر الإلكتروني</label>
-                    <label class="option"><input type="radio" name="q2" value="d"> د) تلسكوب راديوي</label>
+                    <label class="option"><input type="radio" name="q2" value="a" onclick="resetQuestionFeedback('q2')"> أ) الكشاف الكهربائي</label>
+                    <label class="option"><input type="radio" name="q2" value="b" onclick="resetQuestionFeedback('q2')"> ب) أنبوب جيجر-مولر</label>
+                    <label class="option"><input type="radio" name="q2" value="c" onclick="resetQuestionFeedback('q2')"> ج) المجهر الإلكتروني</label>
+                    <label class="option"><input type="radio" name="q2" value="d" onclick="resetQuestionFeedback('q2')"> د) تلسكوب راديوي</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q2','b')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q2','b','ب) أنبوب جيجر-مولر')">🔍 تحقق</button>
                 <span id="fb_q2" class="feedback"></span>
             </div>
             <!-- س3 -->
             <div class="question-item" id="q3">
-                <div class="q-text">3️⃣ عمر النصف = 4 أيام، فما النشاط بعد 8 أيام؟</div>
+                <div class="q-text">3️⃣ عمر النصف = ٤ أيام، فما النشاط بعد ٨ أيام؟</div>
                 <div class="options">
-                    <label class="option"><input type="radio" name="q3" value="a"> أ) النصف</label>
-                    <label class="option"><input type="radio" name="q3" value="b"> ب) الربع</label>
-                    <label class="option"><input type="radio" name="q3" value="c"> ج) الثمن</label>
-                    <label class="option"><input type="radio" name="q3" value="d"> د) صفر</label>
+                    <label class="option"><input type="radio" name="q3" value="a" onclick="resetQuestionFeedback('q3')"> أ) النصف</label>
+                    <label class="option"><input type="radio" name="q3" value="b" onclick="resetQuestionFeedback('q3')"> ب) الربع</label>
+                    <label class="option"><input type="radio" name="q3" value="c" onclick="resetQuestionFeedback('q3')"> ج) الثمن</label>
+                    <label class="option"><input type="radio" name="q3" value="d" onclick="resetQuestionFeedback('q3')"> د) صفر</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q3','b')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q3','b','ب) الربع')">🔍 تحقق</button>
                 <span id="fb_q3" class="feedback"></span>
             </div>
             <!-- س4 -->
             <div class="question-item" id="q4">
                 <div class="q-text">4️⃣ جسيمات بيتا عبارة عن؟</div>
                 <div class="options">
-                    <label class="option"><input type="radio" name="q4" value="a"> أ) بروتونات</label>
-                    <label class="option"><input type="radio" name="q4" value="b"> ب) نيوترونات</label>
-                    <label class="option"><input type="radio" name="q4" value="c"> ج) إلكترونات سريعة</label>
-                    <label class="option"><input type="radio" name="q4" value="d"> د) أنوية هيليوم</label>
+                    <label class="option"><input type="radio" name="q4" value="a" onclick="resetQuestionFeedback('q4')"> أ) بروتونات</label>
+                    <label class="option"><input type="radio" name="q4" value="b" onclick="resetQuestionFeedback('q4')"> ب) نيوترونات</label>
+                    <label class="option"><input type="radio" name="q4" value="c" onclick="resetQuestionFeedback('q4')"> ج) إلكترونات سريعة</label>
+                    <label class="option"><input type="radio" name="q4" value="d" onclick="resetQuestionFeedback('q4')"> د) أنوية هيليوم</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q4','c')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q4','c','ج) إلكترونات سريعة')">🔍 تحقق</button>
                 <span id="fb_q4" class="feedback"></span>
             </div>
         </div>
@@ -402,50 +521,50 @@
             <div class="question-item" id="tf1">
                 <div class="q-text">5️⃣ يمكن تسريع الاضمحلال الإشعاعي برفع الحرارة.</div>
                 <div class="true-false-row">
-                    <label class="tf-option"><input type="radio" name="tf1" value="true"> ✅ صح</label>
-                    <label class="tf-option"><input type="radio" name="tf1" value="false"> ❌ خطأ</label>
+                    <label class="tf-option"><input type="radio" name="tf1" value="true" onclick="resetQuestionFeedback('tf1')"> ✅ صح</label>
+                    <label class="tf-option"><input type="radio" name="tf1" value="false" onclick="resetQuestionFeedback('tf1')"> ❌ خطأ</label>
                 </div>
-                <button class="check-btn" onclick="checkTF('tf1','false')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkTF('tf1','false','خطأ')">🔍 تحقق</button>
                 <span id="fb_tf1" class="feedback"></span>
             </div>
             <!-- س6 -->
             <div class="question-item" id="tf2">
                 <div class="q-text">6️⃣ جسيمات ألفا الأكثر قدرة على تأيين الغازات.</div>
                 <div class="true-false-row">
-                    <label class="tf-option"><input type="radio" name="tf2" value="true"> ✅ صح</label>
-                    <label class="tf-option"><input type="radio" name="tf2" value="false"> ❌ خطأ</label>
+                    <label class="tf-option"><input type="radio" name="tf2" value="true" onclick="resetQuestionFeedback('tf2')"> ✅ صح</label>
+                    <label class="tf-option"><input type="radio" name="tf2" value="false" onclick="resetQuestionFeedback('tf2')"> ❌ خطأ</label>
                 </div>
-                <button class="check-btn" onclick="checkTF('tf2','true')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkTF('tf2','true','صح')">🔍 تحقق</button>
                 <span id="fb_tf2" class="feedback"></span>
             </div>
             <!-- س7 -->
             <div class="question-item" id="tf3">
                 <div class="q-text">7️⃣ أشعة جاما لها طبيعة جسيمية مشحونة.</div>
                 <div class="true-false-row">
-                    <label class="tf-option"><input type="radio" name="tf3" value="true"> ✅ صح</label>
-                    <label class="tf-option"><input type="radio" name="tf3" value="false"> ❌ خطأ</label>
+                    <label class="tf-option"><input type="radio" name="tf3" value="true" onclick="resetQuestionFeedback('tf3')"> ✅ صح</label>
+                    <label class="tf-option"><input type="radio" name="tf3" value="false" onclick="resetQuestionFeedback('tf3')"> ❌ خطأ</label>
                 </div>
-                <button class="check-btn" onclick="checkTF('tf3','false')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkTF('tf3','false','خطأ')">🔍 تحقق</button>
                 <span id="fb_tf3" class="feedback"></span>
             </div>
             <!-- س8 -->
             <div class="question-item" id="tf4">
                 <div class="q-text">8️⃣ اضمحلال النواة عملية عشوائية لا يمكن التنبؤ بها.</div>
                 <div class="true-false-row">
-                    <label class="tf-option"><input type="radio" name="tf4" value="true"> ✅ صح</label>
-                    <label class="tf-option"><input type="radio" name="tf4" value="false"> ❌ خطأ</label>
+                    <label class="tf-option"><input type="radio" name="tf4" value="true" onclick="resetQuestionFeedback('tf4')"> ✅ صح</label>
+                    <label class="tf-option"><input type="radio" name="tf4" value="false" onclick="resetQuestionFeedback('tf4')"> ❌ خطأ</label>
                 </div>
-                <button class="check-btn" onclick="checkTF('tf4','true')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkTF('tf4','true','صح')">🔍 تحقق</button>
                 <span id="fb_tf4" class="feedback"></span>
             </div>
             <!-- س9 -->
             <div class="question-item" id="tf5">
                 <div class="q-text">9️⃣ الرصاص السميك يُستخدم لإيقاف أشعة جاما.</div>
                 <div class="true-false-row">
-                    <label class="tf-option"><input type="radio" name="tf5" value="true"> ✅ صح</label>
-                    <label class="tf-option"><input type="radio" name="tf5" value="false"> ❌ خطأ</label>
+                    <label class="tf-option"><input type="radio" name="tf5" value="true" onclick="resetQuestionFeedback('tf5')"> ✅ صح</label>
+                    <label class="tf-option"><input type="radio" name="tf5" value="false" onclick="resetQuestionFeedback('tf5')"> ❌ خطأ</label>
                 </div>
-                <button class="check-btn" onclick="checkTF('tf5','true')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkTF('tf5','true','صح')">🔍 تحقق</button>
                 <span id="fb_tf5" class="feedback"></span>
             </div>
         </div>
@@ -457,48 +576,48 @@
             <div class="question-item" id="q5">
                 <div class="q-text">🔟 مصدر الإشعاع الخلفي الطبيعي؟</div>
                 <div class="options">
-                    <label><input type="radio" name="q5" value="a"> أ) الأشعة السينية</label>
-                    <label><input type="radio" name="q5" value="b"> ب) غاز الرادون من الصخور</label>
-                    <label><input type="radio" name="q5" value="c"> ج) تسرب المفاعلات</label>
-                    <label><input type="radio" name="q5" value="d"> د) الأجهزة الإلكترونية</label>
+                    <label><input type="radio" name="q5" value="a" onclick="resetQuestionFeedback('q5')"> أ) الأشعة السينية</label>
+                    <label><input type="radio" name="q5" value="b" onclick="resetQuestionFeedback('q5')"> ب) غاز الرادون من الصخور</label>
+                    <label><input type="radio" name="q5" value="c" onclick="resetQuestionFeedback('q5')"> ج) تسرب المفاعلات</label>
+                    <label><input type="radio" name="q5" value="d" onclick="resetQuestionFeedback('q5')"> د) الأجهزة الإلكترونية</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q5','b')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q5','b','ب) غاز الرادون من الصخور')">🔍 تحقق</button>
                 <span id="fb_q5" class="feedback"></span>
             </div>
             <!-- س11 (q6) -->
             <div class="question-item" id="q6">
                 <div class="q-text">1️⃣1️⃣ أيها ينحرف بزاوية أكبر في مجال كهربائي؟</div>
                 <div class="options">
-                    <label><input type="radio" name="q6" value="a"> أ) ألفا (ثقيلة)</label>
-                    <label><input type="radio" name="q6" value="b"> ب) بيتا (كتلة صغيرة)</label>
-                    <label><input type="radio" name="q6" value="c"> ج) جاما</label>
-                    <label><input type="radio" name="q6" value="d"> د) نفس الزاوية</label>
+                    <label><input type="radio" name="q6" value="a" onclick="resetQuestionFeedback('q6')"> أ) ألفا (ثقيلة)</label>
+                    <label><input type="radio" name="q6" value="b" onclick="resetQuestionFeedback('q6')"> ب) بيتا (كتلة صغيرة)</label>
+                    <label><input type="radio" name="q6" value="c" onclick="resetQuestionFeedback('q6')"> ج) جاما</label>
+                    <label><input type="radio" name="q6" value="d" onclick="resetQuestionFeedback('q6')"> د) نفس الزاوية</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q6','b')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q6','b','ب) بيتا (كتلة صغيرة)')">🔍 تحقق</button>
                 <span id="fb_q6" class="feedback"></span>
             </div>
             <!-- س12 (q7) -->
             <div class="question-item" id="q7">
                 <div class="q-text">2️⃣1️⃣ وحدة النشاط الإشعاعي هي؟</div>
                 <div class="options">
-                    <label><input type="radio" name="q7" value="a"> أ) متر/ث</label>
-                    <label><input type="radio" name="q7" value="b"> ب) نيوتن</label>
-                    <label><input type="radio" name="q7" value="c"> ج) بيكريل (Bq)</label>
-                    <label><input type="radio" name="q7" value="d"> د) درجة مئوية</label>
+                    <label><input type="radio" name="q7" value="a" onclick="resetQuestionFeedback('q7')"> أ) متر/ث</label>
+                    <label><input type="radio" name="q7" value="b" onclick="resetQuestionFeedback('q7')"> ب) نيوتن</label>
+                    <label><input type="radio" name="q7" value="c" onclick="resetQuestionFeedback('q7')"> ج) بيكريل (Bq)</label>
+                    <label><input type="radio" name="q7" value="d" onclick="resetQuestionFeedback('q7')"> د) درجة مئوية</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q7','c')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q7','c','ج) بيكريل (Bq)')">🔍 تحقق</button>
                 <span id="fb_q7" class="feedback"></span>
             </div>
             <!-- س13 (q8) -->
             <div class="question-item" id="q8">
                 <div class="q-text">3️⃣1️⃣ فائدة النافذة الرقيقة في أنبوب جيجر؟</div>
                 <div class="options">
-                    <label><input type="radio" name="q8" value="a"> أ) للتبريد</label>
-                    <label><input type="radio" name="q8" value="b"> ب) دخول إشعاعات ضعيفة (ألفا)</label>
-                    <label><input type="radio" name="q8" value="c"> ج) زيادة الضغط</label>
-                    <label><input type="radio" name="q8" value="d"> د) منع خروج الأرجون</label>
+                    <label><input type="radio" name="q8" value="a" onclick="resetQuestionFeedback('q8')"> أ) للتبريد</label>
+                    <label><input type="radio" name="q8" value="b" onclick="resetQuestionFeedback('q8')"> ب) دخول إشعاعات ضعيفة (ألفا)</label>
+                    <label><input type="radio" name="q8" value="c" onclick="resetQuestionFeedback('q8')"> ج) زيادة الضغط</label>
+                    <label><input type="radio" name="q8" value="d" onclick="resetQuestionFeedback('q8')"> د) منع خروج الأرجون</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q8','b')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q8','b','ب) دخول إشعاعات ضعيفة (ألفا)')">🔍 تحقق</button>
                 <span id="fb_q8" class="feedback"></span>
             </div>
         </div>
@@ -509,26 +628,26 @@
             <!-- tf6 -->
             <div class="question-item" id="tf6">
                 <div class="q-text">1️⃣4️⃣ جسيمات ألفا نواة هيليوم (بروتونان + نيوترونان).</div>
-                <div><label><input type="radio" name="tf6" value="true"> صح</label> <label><input type="radio" name="tf6" value="false"> خطأ</label></div>
-                <button class="check-btn" onclick="checkTF('tf6','true')">🔍 تحقق</button> <span id="fb_tf6"></span>
+                <div><label><input type="radio" name="tf6" value="true" onclick="resetQuestionFeedback('tf6')"> صح</label> <label><input type="radio" name="tf6" value="false" onclick="resetQuestionFeedback('tf6')"> خطأ</label></div>
+                <button class="check-btn" onclick="checkTF('tf6','true','صح')">🔍 تحقق</button> <span id="fb_tf6"></span>
             </div>
             <!-- tf7 -->
             <div class="question-item" id="tf7">
                 <div class="q-text">1️⃣5️⃣ إشعاع الخلفية الطبيعي موجود دائماً.</div>
-                <div><label><input type="radio" name="tf7" value="true"> صح</label> <label><input type="radio" name="tf7" value="false"> خطأ</label></div>
-                <button class="check-btn" onclick="checkTF('tf7','true')">🔍 تحقق</button> <span id="fb_tf7"></span>
+                <div><label><input type="radio" name="tf7" value="true" onclick="resetQuestionFeedback('tf7')"> صح</label> <label><input type="radio" name="tf7" value="false" onclick="resetQuestionFeedback('tf7')"> خطأ</label></div>
+                <button class="check-btn" onclick="checkTF('tf7','true','صح')">🔍 تحقق</button> <span id="fb_tf7"></span>
             </div>
             <!-- tf8 -->
             <div class="question-item" id="tf8">
                 <div class="q-text">1️⃣6️⃣ جاما تخترق الورق، وألفا لا تخترقه.</div>
-                <div><label><input type="radio" name="tf8" value="true"> صح</label> <label><input type="radio" name="tf8" value="false"> خطأ</label></div>
-                <button class="check-btn" onclick="checkTF('tf8','true')">🔍 تحقق</button> <span id="fb_tf8"></span>
+                <div><label><input type="radio" name="tf8" value="true" onclick="resetQuestionFeedback('tf8')"> صح</label> <label><input type="radio" name="tf8" value="false" onclick="resetQuestionFeedback('tf8')"> خطأ</label></div>
+                <button class="check-btn" onclick="checkTF('tf8','true','صح')">🔍 تحقق</button> <span id="fb_tf8"></span>
             </div>
             <!-- tf10 -->
             <div class="question-item" id="tf10">
                 <div class="q-text">1️⃣7️⃣ جسيمات بيتا تنحرف نحو الصفيحة السالبة (خطأ، بل نحو الموجب).</div>
-                <div><label><input type="radio" name="tf10" value="true"> صح</label> <label><input type="radio" name="tf10" value="false"> خطأ</label></div>
-                <button class="check-btn" onclick="checkTF('tf10','false')">🔍 تحقق</button> <span id="fb_tf10"></span>
+                <div><label><input type="radio" name="tf10" value="true" onclick="resetQuestionFeedback('tf10')"> صح</label> <label><input type="radio" name="tf10" value="false" onclick="resetQuestionFeedback('tf10')"> خطأ</label></div>
+                <button class="check-btn" onclick="checkTF('tf10','false','خطأ (تنحرف نحو الموجب)')">🔍 تحقق</button> <span id="fb_tf10"></span>
             </div>
         </div>
 
@@ -551,8 +670,46 @@
 </div>
 
 <script>
-    // دوال التصحيح
-    function checkMCQ(questionId, correctValue) {
+    // متغيرات التقييم
+    let correctAnswers = 0;
+    let wrongAnswers = 0;
+    const totalQuestions = 17; // إجمالي عدد الأسئلة
+    let answeredQuestions = new Set(); // لتخزين الأسئلة التي تمت الإجابة عليها
+
+    // دالة تحديث شريط التقييم
+    function updateScoreBoard() {
+        document.getElementById('correctCount').textContent = correctAnswers;
+        document.getElementById('wrongCount').textContent = wrongAnswers;
+        
+        const total = correctAnswers + wrongAnswers;
+        let percentage = 0;
+        if (total > 0) {
+            percentage = Math.round((correctAnswers / total) * 100);
+        }
+        document.getElementById('percentage').textContent = percentage + '%';
+        
+        // تحديث التقييم
+        const ratingSpan = document.getElementById('rating');
+        if (total === 0) {
+            ratingSpan.textContent = 'لم يبدأ';
+            ratingSpan.className = 'rating';
+        } else if (percentage >= 90) {
+            ratingSpan.textContent = '🏆 ممتاز';
+            ratingSpan.className = 'rating excellent';
+        } else if (percentage >= 75) {
+            ratingSpan.textContent = '🌟 جيد جداً';
+            ratingSpan.className = 'rating good';
+        } else if (percentage >= 50) {
+            ratingSpan.textContent = '👍 مقبول';
+            ratingSpan.className = 'rating medium';
+        } else {
+            ratingSpan.textContent = '📚 يحتاج مذاكرة';
+            ratingSpan.className = 'rating bad';
+        }
+    }
+
+    // دالة تصحيح الاختيار من متعدد
+    function checkMCQ(questionId, correctValue, correctAnswerText) {
         const radios = document.getElementsByName(questionId);
         let selected = null;
         for (let radio of radios) {
@@ -562,21 +719,36 @@
             }
         }
         const fbSpan = document.getElementById('fb_' + questionId);
+        
         if (!selected) {
             fbSpan.innerHTML = '⚠️ اختر إجابة أولاً.';
             fbSpan.className = 'feedback wrong-feedback';
             return;
         }
+
+        // التأكد أن السؤال لم يتم الإجابة عليه من قبل
+        if (answeredQuestions.has(questionId)) {
+            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+            fbSpan.className = 'feedback wrong-feedback';
+            return;
+        }
+
         if (selected === correctValue) {
             fbSpan.innerHTML = '✅ إجابة صحيحة! أحسنت.';
             fbSpan.className = 'feedback correct-feedback';
+            correctAnswers++;
         } else {
-            fbSpan.innerHTML = '❌ إجابة خاطئة، حاول مرة أخرى.';
+            fbSpan.innerHTML = '❌ إجابة خاطئة. الإجابة الصحيحة هي: ' + correctAnswerText;
             fbSpan.className = 'feedback wrong-feedback';
+            wrongAnswers++;
         }
+
+        answeredQuestions.add(questionId);
+        updateScoreBoard();
     }
 
-    function checkTF(questionId, correctValue) {
+    // دالة تصحيح صح وخطأ
+    function checkTF(questionId, correctValue, correctAnswerText) {
         const radios = document.getElementsByName(questionId);
         let selected = null;
         for (let radio of radios) {
@@ -586,67 +758,80 @@
             }
         }
         const fbSpan = document.getElementById('fb_' + questionId);
+        
         if (!selected) {
             fbSpan.innerHTML = '⚠️ اختر (صح) أو (خطأ).';
             fbSpan.className = 'feedback wrong-feedback';
             return;
         }
-        if (selected === correctValue) {
-            fbSpan.innerHTML = '✅ صحيح.';
-            fbSpan.className = 'feedback correct-feedback';
-        } else {
-            fbSpan.innerHTML = '❌ خطأ. راجع المعلومة.';
+
+        if (answeredQuestions.has(questionId)) {
+            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
             fbSpan.className = 'feedback wrong-feedback';
+            return;
+        }
+
+        if (selected === correctValue) {
+            fbSpan.innerHTML = '✅ إجابة صحيحة! أحسنت.';
+            fbSpan.className = 'feedback correct-feedback';
+            correctAnswers++;
+        } else {
+            fbSpan.innerHTML = '❌ إجابة خاطئة. الإجابة الصحيحة هي: ' + correctAnswerText;
+            fbSpan.className = 'feedback wrong-feedback';
+            wrongAnswers++;
+        }
+
+        answeredQuestions.add(questionId);
+        updateScoreBoard();
+    }
+
+    // دالة إعادة تعيين التقييم
+    function resetScore() {
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        answeredQuestions.clear();
+        updateScoreBoard();
+        
+        // إعادة تعيين جميع رسائل التغذية الراجعة
+        const feedbacks = document.querySelectorAll('[id^="fb_"]');
+        feedbacks.forEach(fb => {
+            fb.innerHTML = '';
+            fb.className = 'feedback';
+        });
+        
+        // إعادة تعيين جميع الاختيارات
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+        });
+    }
+
+    // دالة إعادة تعيين رسالة السؤال عند تغيير الإجابة
+    function resetQuestionFeedback(questionId) {
+        const fbSpan = document.getElementById('fb_' + questionId);
+        if (fbSpan) {
+            fbSpan.innerHTML = '';
+            fbSpan.className = 'feedback';
         }
     }
 
+    // دالة حل المسألة
     function solveMath() {
         const solDiv = document.getElementById('mathSolution');
         solDiv.innerHTML = `
             <p style="color:#ddd;">📘 الخطوات:</p>
-            <p>عمر النصف = ٣ ساعات ، المدة = ٩ ساعات ← عدد فترات عمر النصف = ٩/٣ = ٣ فترات.</p>
+            <p>عمر النصف = ٣ ساعات ، المدة = ٩ ساعات ← عدد فترات عمر النصف = 9/3 = 3 فترات.</p>
             <p>النشاط بعد كل فترة يُقسم على ٢:</p>
-            <p>بعد ٣ ساعات: ١٦٠٠ ÷ ٢ = ٨٠٠<br>بعد ٦ ساعات: ٨٠٠ ÷ ٢ = ٤٠٠<br>بعد ٩ ساعات: ٤٠٠ ÷ ٢ = ٢٠٠</p>
-            <p style="font-size:2rem; color:#ffd966;">✔️ النشاط المتبقي = ٢٠٠ وحدة.</p>
+            <p>بعد ٣ ساعات: 1600 ÷ 2 = 800<br>بعد 6 ساعات: 800 ÷ 2 = 400<br>بعد 9 ساعات: 400 ÷ 2 = 200</p>
+            <p style="font-size:2rem; color:#ffd966;">✔️ النشاط المتبقي = 200 وحدة.</p>
         `;
     }
 
-    // محاكاة زر العودة للرئيسية (لأنه ربط بـ # فقط، سنضيف سلوك تمرير للأعلى)
+    // زر العودة للرئيسية
     document.getElementById('homeMainBtn').addEventListener('click', function(e) {
         e.preventDefault();
         document.getElementById('mainContainer').scrollIntoView({behavior: 'smooth'});
     });
-
-    // لجعل أزرار التحقق تعمل بعد الإضافة، لا بأس
 </script>
-
-<!-- بعض التنسيقات الإضافية البسيطة للاستجابة -->
-<style>
-    @media (max-width: 700px) {
-        .header-bar h1 { font-size: 1.6rem; }
-        .home-btn { font-size: 1rem; padding: 8px 16px; }
-        .card p { font-size: 1rem; }
-    }
-    .check-btn {
-        background: #ffae42;
-        border: none;
-        padding: 8px 25px;
-        border-radius: 40px;
-        font-weight: 700;
-        font-size: 1.2rem;
-        margin-top: 5px;
-        cursor: pointer;
-        box-shadow: 0 3px 0 #b2620e;
-        transition: 0.1s;
-    }
-    .check-btn:active {
-        transform: translateY(4px);
-        box-shadow: none;
-    }
-    .option input, .tf-option input {
-        transform: scale(1.2);
-        margin-left: 8px;
-    }
-</style>
 </body>
 </html>
