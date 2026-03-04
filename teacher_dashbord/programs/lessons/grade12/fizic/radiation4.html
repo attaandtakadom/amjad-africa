@@ -2,8 +2,8 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>النظائر المشعة - الثالث الثانوي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>النظائر المشعة - متوافق مع الجوال</title>
     <style>
         * {
             margin: 0;
@@ -16,7 +16,7 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 25px 15px;
+            padding: 15px 10px;
         }
         .container {
             max-width: 1200px;
@@ -24,171 +24,231 @@
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 30px 25px;
+            border-radius: 30px;
+            padding: 20px 15px;
             box-shadow: 0 25px 50px -8px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        /* رأس الصفحة */
+        /* رأس الصفحة - متجاوب */
         .header-bar {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-bottom: 2px solid #ffc857;
             padding-bottom: 15px;
         }
+        @media (min-width: 600px) {
+            .header-bar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
         .header-bar h1 {
             color: #ffd966;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             text-shadow: 0 4px 8px #00000040;
             letter-spacing: 1px;
             background: rgba(0,0,0,0.3);
-            padding: 8px 25px;
+            padding: 8px 20px;
             border-radius: 60px;
             backdrop-filter: blur(4px);
+            text-align: center;
+            width: 100%;
         }
-        .home-btn {
-            background: #ffc857;
+        @media (min-width: 600px) {
+            .header-bar h1 {
+                font-size: 2.2rem;
+                width: auto;
+            }
+        }
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .home-btn, .reset-btn {
             border: none;
-            color: #0e1a26;
             font-weight: 700;
-            font-size: 1.3rem;
-            padding: 10px 30px;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 6px 0 #9e6d1f, 0 10px 20px rgba(0,0,0,0.3);
             transition: 0.1s ease-out;
-            border: 1px solid #ffe39c;
+            padding: 12px 20px;
+            font-size: 1.1rem;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            justify-content: center;
         }
-        .home-btn:hover {
+        .home-btn {
+            background: #ffc857;
+            color: #0e1a26;
+            box-shadow: 0 4px 0 #9e6d1f, 0 6px 12px rgba(0,0,0,0.3);
+            border: 1px solid #ffe39c;
+            flex: 1;
+        }
+        .reset-btn {
+            background: #e67e22;
+            color: white;
+            box-shadow: 0 4px 0 #b85e0f, 0 6px 12px rgba(0,0,0,0.3);
+            flex: 1;
+        }
+        .home-btn:active, .reset-btn:active {
             transform: translateY(4px);
-            box-shadow: 0 2px 0 #9e6d1f, 0 8px 16px rgba(0,0,0,0.4);
-            background: #ffdb8b;
-        }
-        .home-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 0px 0 #9e6d1f, 0 6px 12px black;
+            box-shadow: 0 2px 0 #9e6d1f, 0 6px 12px rgba(0,0,0,0.4);
         }
 
-        /* شريط التقييم */
+        /* شريط التقييم - متجاوب */
         .score-bar {
             background: linear-gradient(45deg, #1e3b4a, #0f2835);
-            border-radius: 60px;
-            padding: 20px 30px;
-            margin-bottom: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
+            border-radius: 30px;
+            padding: 15px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             border: 2px solid #ffc857;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
+        @media (min-width: 600px) {
+            .score-bar {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 20px 30px;
+            }
+        }
         .score-item {
             text-align: center;
-            min-width: 120px;
         }
         .score-label {
             color: #ffd966;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             display: block;
             margin-bottom: 5px;
         }
+        @media (min-width: 600px) {
+            .score-label {
+                font-size: 1.2rem;
+            }
+        }
         .score-value {
             color: white;
-            font-size: 2.2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             background: #00000040;
-            padding: 5px 20px;
-            border-radius: 40px;
+            padding: 5px 10px;
+            border-radius: 30px;
             border: 1px solid #ffb347;
+            display: inline-block;
+            min-width: 60px;
+        }
+        @media (min-width: 600px) {
+            .score-value {
+                font-size: 2.2rem;
+                padding: 5px 20px;
+            }
         }
         .score-percentage {
             background: #ff9800;
             color: #000;
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            padding: 10px 30px;
-            border-radius: 60px;
+            padding: 5px 15px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        @media (min-width: 600px) {
+            .score-percentage {
+                font-size: 2.5rem;
+                padding: 10px 30px;
+            }
         }
         .rating {
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: #fff;
             background: #2ecc71;
-            padding: 10px 25px;
-            border-radius: 40px;
+            padding: 5px 15px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        @media (min-width: 600px) {
+            .rating {
+                font-size: 1.5rem;
+                padding: 10px 25px;
+            }
         }
         .rating.bad { background: #e74c3c; }
         .rating.medium { background: #f39c12; }
         .rating.good { background: #3498db; }
         .rating.excellent { background: #2ecc71; }
 
-        /* بطاقات الشرح */
+        /* بطاقات الشرح - متجاوبة */
         .lesson-summary {
             background: #14222e;
-            border-radius: 36px;
-            padding: 25px;
-            margin-bottom: 35px;
+            border-radius: 30px;
+            padding: 20px 15px;
+            margin-bottom: 25px;
             border: 1px solid #3a5a6f;
             box-shadow: inset 0 2px 6px #00000077, 0 20px 30px -12px black;
         }
         .section-title {
             color: #ffc857;
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             border-right: 8px solid #ff9800;
-            padding-right: 20px;
+            padding-right: 15px;
             background: linear-gradient(to left, #ffc85720, transparent);
-            border-radius: 0 40px 40px 0;
+            border-radius: 0 30px 30px 0;
+        }
+        @media (min-width: 600px) {
+            .section-title {
+                font-size: 2rem;
+            }
         }
         .subsection-title {
             color: #ffb85c;
-            font-size: 1.7rem;
-            margin: 25px 0 15px;
+            font-size: 1.3rem;
+            margin: 20px 0 10px;
             padding-right: 15px;
             border-right: 5px solid #ff9800;
         }
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
             margin-bottom: 20px;
+        }
+        @media (min-width: 600px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 900px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         .card {
             background: #1f3341;
-            border-radius: 32px;
-            padding: 20px;
+            border-radius: 25px;
+            padding: 15px;
             border: 1px solid #45758b;
             transition: 0.2s;
             box-shadow: 0 12px 20px -12px black;
         }
-        .card:hover {
-            transform: scale(1.02);
-            border-color: #ffb347;
-            background: #253c4b;
-        }
         .card h3 {
             color: #ffb85c;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             border-bottom: 2px dashed #ffb85c70;
             padding-bottom: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .card p, .card li {
             color: #e2eef9;
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin-right: 15px;
-        }
-        .card ul {
-            list-style-type: disc;
-            padding-right: 25px;
+            font-size: 1rem;
+            line-height: 1.6;
         }
         .highlight {
             color: #ffd966;
@@ -196,106 +256,127 @@
         }
         .definition {
             background: #0a1f2b;
-            padding: 15px 20px;
-            border-radius: 30px;
-            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 25px;
+            margin: 10px 0;
             border-right: 5px solid #ff9800;
-            font-size: 1.3rem;
+            font-size: 1rem;
             color: #f0f0f0;
+        }
+        
+        /* الجدول - مع تمرير أفقي */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 20px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             background: #0f1e28;
             border-radius: 20px;
-            overflow: hidden;
-            margin: 15px 0;
+            min-width: 500px;
         }
         th {
             background: #ff9800;
             color: #0a121c;
             font-weight: bold;
-            padding: 12px;
-            font-size: 1.2rem;
+            padding: 10px;
+            font-size: 1rem;
         }
         td {
             border: 1px solid #366077;
-            padding: 10px;
+            padding: 8px;
             color: #cfecff;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
         .nuclear-equation {
             background: #0d262f;
-            padding: 20px;
-            border-radius: 30px;
-            font-size: 1.8rem;
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 1.3rem;
             text-align: center;
             color: #ffd966;
             font-weight: bold;
             margin: 15px 0;
             direction: ltr;
+            overflow-x: auto;
+            white-space: nowrap;
         }
         .tip-box {
             background: #1a3a44;
             border: 2px solid #ffaa22;
-            border-radius: 30px;
-            padding: 20px;
+            border-radius: 25px;
+            padding: 15px;
             margin: 20px 0;
             color: #fff3d1;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
-        /* منطقة الأسئلة */
+        /* منطقة الأسئلة - متجاوبة */
         .questions-panel {
             background: #10212b;
-            border-radius: 40px;
-            padding: 25px;
+            border-radius: 30px;
+            padding: 20px 15px;
             border: 1px solid #f6b83e60;
         }
         .q-section {
             background: #1d3140;
-            border-radius: 28px;
-            padding: 20px;
-            margin-bottom: 35px;
-            border-right: 7px solid #ffb02e;
+            border-radius: 25px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-right: 5px solid #ffb02e;
         }
         .q-title {
             color: #ffe393;
-            font-size: 1.9rem;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
         }
         .question-item {
             background: #15303f;
-            border-radius: 30px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
+            border-radius: 25px;
+            padding: 15px;
+            margin-bottom: 15px;
             border: 1px solid #ffc85740;
-            box-shadow: 0 6px 0 #08202b;
+            box-shadow: 0 4px 0 #08202b;
         }
         .q-text {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #f9e0a0;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .options {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px 30px;
+            flex-direction: column;
+            gap: 10px;
             margin: 12px 0;
+        }
+        @media (min-width: 500px) {
+            .options {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
         }
         .option {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             background: #1b3d4e;
-            padding: 8px 20px;
+            padding: 12px 15px;
             border-radius: 40px;
             border: 1px solid #ffbb4a;
             color: #f0f9ff;
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: 0.1s;
+            width: 100%;
+        }
+        @media (min-width: 500px) {
+            .option {
+                width: auto;
+                flex: 1 0 calc(50% - 20px);
+            }
         }
         .option input {
             width: 20px;
@@ -304,15 +385,18 @@
             transform: scale(1.1);
             margin-left: 8px;
             cursor: pointer;
+            flex-shrink: 0;
         }
         .feedback {
             margin-top: 12px;
-            padding: 10px 20px;
-            border-radius: 40px;
+            padding: 10px 15px;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1rem;
             display: inline-block;
             background: #061e28;
+            width: 100%;
+            box-sizing: border-box;
         }
         .correct-feedback {
             color: #b8ffb0;
@@ -324,21 +408,27 @@
             border-right: 6px solid #e74c3c;
             background: #3d1e1e;
         }
-
-        .reset-btn {
-            background: #e67e22;
+        .check-btn {
+            background: #ffae42;
             border: none;
-            color: white;
-            font-weight: bold;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            color: black;
+            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            margin-top: 10px;
             cursor: pointer;
-            margin-right: 15px;
-            box-shadow: 0 4px 0 #b85e0f;
+            box-shadow: 0 3px 0 #b2620e;
             transition: 0.1s;
+            width: 100%;
         }
-        .reset-btn:active {
+        @media (min-width: 500px) {
+            .check-btn {
+                width: auto;
+                padding: 8px 30px;
+            }
+        }
+        .check-btn:active {
             transform: translateY(4px);
             box-shadow: none;
         }
@@ -346,56 +436,31 @@
         .scroll-top {
             display: flex;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         .second-home {
             background: #3d5f73;
             color: white;
             border: none;
-            padding: 15px 45px;
+            padding: 15px 30px;
             border-radius: 60px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             border: 1px solid #ffc285;
             transition: 0.2s;
+            width: 100%;
         }
-        .second-home:hover {
-            background: #577b94;
-            transform: scale(1.02);
+        @media (min-width: 500px) {
+            .second-home {
+                width: auto;
+            }
         }
 
         footer {
             color: #8bb9d0;
             text-align: center;
-            margin-top: 25px;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 700px) {
-            .header-bar h1 { font-size: 1.6rem; }
-            .home-btn { font-size: 1rem; padding: 8px 16px; }
-            .card p { font-size: 1rem; }
-            .score-bar { flex-direction: column; gap: 15px; }
-        }
-        .check-btn {
-            background: #ffae42;
-            border: none;
-            padding: 8px 25px;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-top: 5px;
-            cursor: pointer;
-            box-shadow: 0 3px 0 #b2620e;
-            transition: 0.1s;
-        }
-        .check-btn:active {
-            transform: translateY(4px);
-            box-shadow: none;
-        }
-        .option input, .tf-option input {
-            transform: scale(1.2);
-            margin-left: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -403,24 +468,22 @@
 <div class="container" id="mainContainer">
     <!-- شريط العنوان -->
     <div class="header-bar">
-        <h1>☢️ النظائر المشعة </h1>
-        <div>
-            <button class="reset-btn" onclick="resetScore()">🔄 إعادة تعيين التقييم</button>
-            <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn">🏠 العودة للرئيسية</button>
+        <h1>☢️ النظائر المشعة</h1>
+        <div class="header-buttons">
+            <button class="reset-btn" onclick="resetScore()">🔄 إعادة تعيين</button>
+ <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn">🏠 العودة للرئيسية</button>
             <button class="home-btn" onclick="window.location.href='radiation3.html'" id="homeMainBtn">🏠 اختبار صغير’كوز’ </button>
-
-       
         </div>
     </div>
 
     <!-- شريط التقييم -->
     <div class="score-bar" id="scoreBar">
         <div class="score-item">
-            <span class="score-label">✅ الإجابات الصحيحة</span>
+            <span class="score-label">✅ الصحيحة</span>
             <span class="score-value" id="correctCount">0</span>
         </div>
         <div class="score-item">
-            <span class="score-label">❌ الإجابات الخاطئة</span>
+            <span class="score-label">❌ الخاطئة</span>
             <span class="score-value" id="wrongCount">0</span>
         </div>
         <div class="score-item">
@@ -435,94 +498,69 @@
 
     <!-- شرح النظائر -->
     <div class="lesson-summary">
-        <h2 class="section-title">1. ما هي النظائر؟ (مراجعة سريعة)</h2>
+        <h2 class="section-title">1. ما هي النظائر؟</h2>
         
         <div class="definition">
-            <span class="highlight">النظائر:</span> هي ذرات لنفس العنصر، تتفق في <span class="highlight">العدد الذري (عدد البروتونات)</span> وتختلف في <span class="highlight">العدد الكتلي (بسبب اختلاف عدد النيوترونات)</span>.
+            <span class="highlight">النظائر:</span> ذرات لنفس العنصر، تتفق في <span class="highlight">العدد الذري</span> وتختلف في <span class="highlight">العدد الكتلي</span>.
         </div>
 
         <div class="definition">
-            <span class="highlight">النظائر المشعة (Radioisotopes):</span> هي نظائر غير مستقرة، تحتوي أنويتها على طاقة زائدة أو خلل في التوازن بين عدد البروتونات والنيوترونات، مما يدفعها لإطلاق إشعاعات (ألفا، بيتا، أو جاما) لتصل إلى حالة الاستقرار.
+            <span class="highlight">النظائر المشعة:</span> نظائر غير مستقرة تطلق إشعاعات لتصل للاستقرار.
         </div>
     </div>
 
     <!-- أمثلة هامة -->
     <div class="lesson-summary">
-        <h2 class="section-title">2. أمثلة هامة من المنهج (نظائر الهيدروجين)</h2>
+        <h2 class="section-title">2. نظائر الهيدروجين</h2>
         
-        <p style="color:#e2eef9; font-size:1.3rem; margin-bottom:15px;">يعتبر الهيدروجين المثال الأبرز في دروسك، وله ثلاثة نظائر أساسية:</p>
-        
-        <table>
-            <tr>
-                <th>الاسم</th>
-                <th>الرمز</th>
-                <th>عدد البروتونات</th>
-                <th>عدد النيوترونات</th>
-                <th>الحالة</th>
-            </tr>
-            <tr>
-                <td>بروتيوم</td>
-                <td>$^1_1H$</td>
-                <td>1</td>
-                <td>0</td>
-                <td>مستقر</td>
-            </tr>
-            <tr>
-                <td>ديتريوم</td>
-                <td>$^2_1H$</td>
-                <td>1</td>
-                <td>1</td>
-                <td>مستقر</td>
-            </tr>
-            <tr>
-                <td>تريتيوم</td>
-                <td>$^3_1H$</td>
-                <td>1</td>
-                <td>2</td>
-                <td><span class="highlight">مشع</span></td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- كيف تنشأ النظائر المشعة -->
-    <div class="lesson-summary">
-        <h2 class="section-title">3. كيف تنشأ النظائر المشعة؟ (التفاعلات النووية)</h2>
-        
-        <div class="cards-grid">
-            <div class="card">
-                <h3>🌋 التحول الطبيعي</h3>
-                <p>عندما تفقد نواة ثقيلة (مثل اليورانيوم) جسيمات لتتحول لنظير عنصر آخر.</p>
-                <div class="nuclear-equation">²³⁸₉₂U → ²³⁴₉₀Th + α</div>
-            </div>
-            <div class="card">
-                <h3>🎯 الاصطدام (القذف النووي)</h3>
-                <p>قذف نواة مستقرة بجسيمات مثل (النيوترونات) لتصبح غير مستقرة.</p>
-                <div class="nuclear-equation">⁵⁹₂₇Co + n → ⁶⁰₂₇Co</div>
-                <p>مثال: تحول الكوبالت-59 المستقر إلى كوبالت-60 المشع</p>
-            </div>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>الاسم</th>
+                    <th>الرمز</th>
+                    <th>بروتونات</th>
+                    <th>نيوترونات</th>
+                    <th>الحالة</th>
+                </tr>
+                <tr>
+                    <td>بروتيوم</td>
+                    <td>$^1_1H$</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>مستقر</td>
+                </tr>
+                <tr>
+                    <td>ديتريوم</td>
+                    <td>$^2_1H$</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>مستقر</td>
+                </tr>
+                <tr>
+                    <td>تريتيوم</td>
+                    <td>$^3_1H$</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td><span class="highlight">مشع</span></td>
+                </tr>
+            </table>
         </div>
     </div>
 
-    <!-- نصيحة للمذاكرة -->
-    <div class="tip-box">
-        <span class="highlight">💡 نصيحة للمذاكرة:</span> دائماً تذكر أن الرقم الموجود في الأعلى (A) يتغير عند انبعاث ألفا أو بيتا، لكن الرقم في الأسفل (Z) هو "البصمة"؛ إذا تغير تغير اسم العنصر تماماً.
-    </div>
-
-    <!-- الأسئلة التدريبية - اختيار من متعدد فقط -->
+    <!-- الأسئلة - اختيار من متعدد -->
     <div class="questions-panel" id="questionsArea">
-        <h2 class="section-title" style="border-right-color: #ff6565;">4. أسئلة تدريبية (اختيار من متعدد)</h2>
+        <h2 class="section-title" style="border-right-color: #ff6565;">3. أسئلة تدريبية</h2>
 
-        <!-- المجموعة الأولى: أسئلة عامة -->
+        <!-- المجموعة الأولى -->
         <div class="q-section">
-            <h3 class="q-title">🔹 المجموعة الأولى: أسئلة عامة</h3>
+            <h3 class="q-title">🔹 المجموعة الأولى</h3>
             
             <div class="question-item" id="q1">
-                <div class="q-text">1️⃣ تعريف النظائر: هي ذرات لنفس العنصر تتفق في ........ وتختلف في ........</div>
+                <div class="q-text">1️⃣ تعريف النظائر: تتفق في ........ وتختلف في ........</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q1" value="a" onclick="resetQuestionFeedback('q1')"> أ) العدد الكتلي - العدد الذري</label>
                     <label class="option"><input type="radio" name="q1" value="b" onclick="resetQuestionFeedback('q1')"> ب) العدد الذري - العدد الكتلي</label>
                     <label class="option"><input type="radio" name="q1" value="c" onclick="resetQuestionFeedback('q1')"> ج) عدد النيوترونات - عدد البروتونات</label>
-                    <label class="option"><input type="radio" name="q1" value="d" onclick="resetQuestionFeedback('q1')"> د) عدد الإلكترونات - عدد النيوترونات</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q1','b','ب) العدد الذري - العدد الكتلي')">🔍 تحقق</button>
                 <span id="fb_q1" class="feedback"></span>
@@ -534,145 +572,123 @@
                     <label class="option"><input type="radio" name="q2" value="a" onclick="resetQuestionFeedback('q2')"> أ) البروتيوم</label>
                     <label class="option"><input type="radio" name="q2" value="b" onclick="resetQuestionFeedback('q2')"> ب) الديتريوم</label>
                     <label class="option"><input type="radio" name="q2" value="c" onclick="resetQuestionFeedback('q2')"> ج) التريتيوم</label>
-                    <label class="option"><input type="radio" name="q2" value="d" onclick="resetQuestionFeedback('q2')"> د) الهيليوم</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q2','c','ج) التريتيوم')">🔍 تحقق</button>
                 <span id="fb_q2" class="feedback"></span>
             </div>
 
             <div class="question-item" id="q3">
-                <div class="q-text">3️⃣ الجسيم الذي يحدد هوية العنصر ونوعه هو:</div>
+                <div class="q-text">3️⃣ الجسيم الذي يحدد هوية العنصر هو:</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q3" value="a" onclick="resetQuestionFeedback('q3')"> أ) النيوترون</label>
                     <label class="option"><input type="radio" name="q3" value="b" onclick="resetQuestionFeedback('q3')"> ب) البروتون</label>
                     <label class="option"><input type="radio" name="q3" value="c" onclick="resetQuestionFeedback('q3')"> ج) الإلكترون</label>
-                    <label class="option"><input type="radio" name="q3" value="d" onclick="resetQuestionFeedback('q3')"> د) الفوتون</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q3','b','ب) البروتون')">🔍 تحقق</button>
                 <span id="fb_q3" class="feedback"></span>
             </div>
         </div>
 
-        <!-- المجموعة الثانية: نظائر الهيدروجين -->
+        <!-- المجموعة الثانية -->
         <div class="q-section">
             <h3 class="q-title">🔹 المجموعة الثانية: نظائر الهيدروجين</h3>
             
             <div class="question-item" id="q4">
-                <div class="q-text">4️⃣ عدد النيوترونات في نواة التريتيوم ($^3_1H$) هو:</div>
+                <div class="q-text">4️⃣ عدد النيوترونات في التريتيوم ($^3_1H$) هو:</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q4" value="a" onclick="resetQuestionFeedback('q4')"> أ) 0</label>
                     <label class="option"><input type="radio" name="q4" value="b" onclick="resetQuestionFeedback('q4')"> ب) 1</label>
                     <label class="option"><input type="radio" name="q4" value="c" onclick="resetQuestionFeedback('q4')"> ج) 2</label>
-                    <label class="option"><input type="radio" name="q4" value="d" onclick="resetQuestionFeedback('q4')"> د) 3</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q4','c','ج) 2')">🔍 تحقق</button>
                 <span id="fb_q4" class="feedback"></span>
             </div>
 
             <div class="question-item" id="q5">
-                <div class="q-text">5️⃣ أي من نظائر الهيدروجين التالية مستقر (غير مشع)؟</div>
+                <div class="q-text">5️⃣ أي نظائر الهيدروجين مستقر؟</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q5" value="a" onclick="resetQuestionFeedback('q5')"> أ) التريتيوم فقط</label>
                     <label class="option"><input type="radio" name="q5" value="b" onclick="resetQuestionFeedback('q5')"> ب) البروتيوم والديتريوم</label>
-                    <label class="option"><input type="radio" name="q5" value="c" onclick="resetQuestionFeedback('q5')"> ج) الديتريوم والتريتيوم</label>
-                    <label class="option"><input type="radio" name="q5" value="d" onclick="resetQuestionFeedback('q5')"> د) جميعها مستقرة</label>
+                    <label class="option"><input type="radio" name="q5" value="c" onclick="resetQuestionFeedback('q5')"> ج) جميعها مستقرة</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q5','b','ب) البروتيوم والديتريوم')">🔍 تحقق</button>
                 <span id="fb_q5" class="feedback"></span>
             </div>
 
             <div class="question-item" id="q6">
-                <div class="q-text">6️⃣ العدد الكتلي لنظير الديتريوم هو:</div>
+                <div class="q-text">6️⃣ العدد الكتلي للديتريوم هو:</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q6" value="a" onclick="resetQuestionFeedback('q6')"> أ) 1</label>
                     <label class="option"><input type="radio" name="q6" value="b" onclick="resetQuestionFeedback('q6')"> ب) 2</label>
                     <label class="option"><input type="radio" name="q6" value="c" onclick="resetQuestionFeedback('q6')"> ج) 3</label>
-                    <label class="option"><input type="radio" name="q6" value="d" onclick="resetQuestionFeedback('q6')"> د) 4</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q6','b','ب) 2')">🔍 تحقق</button>
                 <span id="fb_q6" class="feedback"></span>
             </div>
         </div>
 
-        <!-- المجموعة الثالثة: الكربون والتحلل -->
+        <!-- المجموعة الثالثة -->
         <div class="q-section">
-            <h3 class="q-title">🔹 المجموعة الثالثة: الكربون والتحلل الإشعاعي</h3>
+            <h3 class="q-title">🔹 المجموعة الثالثة: الكربون</h3>
             
             <div class="question-item" id="q7">
-                <div class="q-text">7️⃣ الكربون-14 (¹⁴C) يختلف عن الكربون-12 (¹²C) في:</div>
+                <div class="q-text">7️⃣ الكربون-14 يختلف عن الكربون-12 في:</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q7" value="a" onclick="resetQuestionFeedback('q7')"> أ) عدد البروتونات</label>
                     <label class="option"><input type="radio" name="q7" value="b" onclick="resetQuestionFeedback('q7')"> ب) عدد النيوترونات</label>
                     <label class="option"><input type="radio" name="q7" value="c" onclick="resetQuestionFeedback('q7')"> ج) عدد الإلكترونات</label>
-                    <label class="option"><input type="radio" name="q7" value="d" onclick="resetQuestionFeedback('q7')"> د) جميع ما ذكر</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q7','b','ب) عدد النيوترونات')">🔍 تحقق</button>
                 <span id="fb_q7" class="feedback"></span>
             </div>
 
             <div class="question-item" id="q8">
-                <div class="q-text">8️⃣ عند اضمحلال الكربون-14 بإطلاق جسيم بيتا، يتحول إلى:</div>
+                <div class="q-text">8️⃣ عند اضمحلال الكربون-14 يتحول إلى:</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q8" value="a" onclick="resetQuestionFeedback('q8')"> أ) الكربون-12</label>
                     <label class="option"><input type="radio" name="q8" value="b" onclick="resetQuestionFeedback('q8')"> ب) النيتروجين-14</label>
                     <label class="option"><input type="radio" name="q8" value="c" onclick="resetQuestionFeedback('q8')"> ج) الأكسجين-16</label>
-                    <label class="option"><input type="radio" name="q8" value="d" onclick="resetQuestionFeedback('q8')"> د) البورون-14</label>
                 </div>
                 <button class="check-btn" onclick="checkMCQ('q8','b','ب) النيتروجين-14')">🔍 تحقق</button>
                 <span id="fb_q8" class="feedback"></span>
             </div>
 
             <div class="question-item" id="q9">
-                <div class="q-text">9️⃣ في معادلة التحلل: ²³⁸₉₂U → ²³⁴₉₀Th + ........ ، الجسيم الناقص هو:</div>
+                <div class="q-text">9️⃣ في معادلة: ²³⁸U → ²³⁴Th + ........ ، الناقص هو:</div>
                 <div class="options">
-                    <label class="option"><input type="radio" name="q9" value="a" onclick="resetQuestionFeedback('q9')"> أ) جسيم بيتا</label>
-                    <label class="option"><input type="radio" name="q9" value="b" onclick="resetQuestionFeedback('q9')"> ب) جسيم ألفا</label>
-                    <label class="option"><input type="radio" name="q9" value="c" onclick="resetQuestionFeedback('q9')"> ج) أشعة جاما</label>
-                    <label class="option"><input type="radio" name="q9" value="d" onclick="resetQuestionFeedback('q9')"> د) نيوترون</label>
+                    <label class="option"><input type="radio" name="q9" value="a" onclick="resetQuestionFeedback('q9')"> أ) بيتا</label>
+                    <label class="option"><input type="radio" name="q9" value="b" onclick="resetQuestionFeedback('q9')"> ب) ألفا</label>
+                    <label class="option"><input type="radio" name="q9" value="c" onclick="resetQuestionFeedback('q9')"> ج) جاما</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q9','b','ب) جسيم ألفا')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q9','b','ب) ألفا')">🔍 تحقق</button>
                 <span id="fb_q9" class="feedback"></span>
             </div>
         </div>
 
-        <!-- المجموعة الرابعة: تكوين النظائر -->
+        <!-- المجموعة الرابعة -->
         <div class="q-section">
-            <h3 class="q-title">🔹 المجموعة الرابعة: تكوين النظائر المشعة</h3>
+            <h3 class="q-title">🔹 المجموعة الرابعة: متنوع</h3>
             
             <div class="question-item" id="q10">
-                <div class="q-text">🔟 أي من الطرق التالية يؤدي إلى تكوين نظير مشع؟</div>
+                <div class="q-text">🔟 تكوين نظير مشع يتم بـ:</div>
                 <div class="options">
-                    <label class="option"><input type="radio" name="q10" value="a" onclick="resetQuestionFeedback('q10')"> أ) قذف نواة مستقرة بنيوترونات</label>
-                    <label class="option"><input type="radio" name="q10" value="b" onclick="resetQuestionFeedback('q10')"> ب) تسخين المادة لدرجة حرارة عالية</label>
-                    <label class="option"><input type="radio" name="q10" value="c" onclick="resetQuestionFeedback('q10')"> ج) تبريد المادة لدرجة حرارة منخفضة</label>
-                    <label class="option"><input type="radio" name="q10" value="d" onclick="resetQuestionFeedback('q10')"> د) تعريض المادة لضغط عالٍ</label>
+                    <label class="option"><input type="radio" name="q10" value="a" onclick="resetQuestionFeedback('q10')"> أ) قذف النواة بنيوترونات</label>
+                    <label class="option"><input type="radio" name="q10" value="b" onclick="resetQuestionFeedback('q10')"> ب) تسخين المادة</label>
+                    <label class="option"><input type="radio" name="q10" value="c" onclick="resetQuestionFeedback('q10')"> ج) تبريد المادة</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q10','a','أ) قذف نواة مستقرة بنيوترونات')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q10','a','أ) قذف النواة بنيوترونات')">🔍 تحقق</button>
                 <span id="fb_q10" class="feedback"></span>
             </div>
 
             <div class="question-item" id="q11">
-                <div class="q-text">1️⃣1️⃣ أي من التفاعلات التالية يمثل تحول الكوبالت-59 المستقر إلى كوبالت-60 المشع؟</div>
+                <div class="q-text">1️⃣1️⃣ لماذا تتشابه الخواص الكيميائية للنظائر؟</div>
                 <div class="options">
-                    <label class="option"><input type="radio" name="q11" value="a" onclick="resetQuestionFeedback('q11')"> أ) ⁵⁹₂₇Co → ⁶⁰₂₇Co + β</label>
-                    <label class="option"><input type="radio" name="q11" value="b" onclick="resetQuestionFeedback('q11')"> ب) ⁵⁹₂₇Co + n → ⁶⁰₂₇Co</label>
-                    <label class="option"><input type="radio" name="q11" value="c" onclick="resetQuestionFeedback('q11')"> ج) ⁵⁹₂₇Co → ⁶⁰₂₇Co + α</label>
-                    <label class="option"><input type="radio" name="q11" value="d" onclick="resetQuestionFeedback('q11')"> د) ⁵⁹₂₇Co + p → ⁶⁰₂₇Co</label>
+                    <label class="option"><input type="radio" name="q11" value="a" onclick="resetQuestionFeedback('q11')"> أ) لنفس عدد البروتونات</label>
+                    <label class="option"><input type="radio" name="q11" value="b" onclick="resetQuestionFeedback('q11')"> ب) لنفس عدد النيوترونات</label>
+                    <label class="option"><input type="radio" name="q11" value="c" onclick="resetQuestionFeedback('q11')"> ج) لنفس الكتلة</label>
                 </div>
-                <button class="check-btn" onclick="checkMCQ('q11','b','ب) ⁵⁹₂₇Co + n → ⁶⁰₂₇Co')">🔍 تحقق</button>
+                <button class="check-btn" onclick="checkMCQ('q11','a','أ) لنفس عدد البروتونات')">🔍 تحقق</button>
                 <span id="fb_q11" class="feedback"></span>
-            </div>
-
-            <div class="question-item" id="q12">
-                <div class="q-text">1️⃣2️⃣ لماذا تختلف الخواص الفيزيائية للنظائر بينما تتشابه خواصها الكيميائية؟</div>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q12" value="a" onclick="resetQuestionFeedback('q12')"> أ) لأن عدد البروتونات يختلف</label>
-                    <label class="option"><input type="radio" name="q12" value="b" onclick="resetQuestionFeedback('q12')"> ب) لأن عدد الإلكترونات يختلف</label>
-                    <label class="option"><input type="radio" name="q12" value="c" onclick="resetQuestionFeedback('q12')"> ج) لأن عدد النيوترونات يختلف مما يؤثر على الكتلة</label>
-                    <label class="option"><input type="radio" name="q12" value="d" onclick="resetQuestionFeedback('q12')"> د) لأنها عناصر مختلفة تماماً</label>
-                </div>
-                <button class="check-btn" onclick="checkMCQ('q12','c','ج) لأن عدد النيوترونات يختلف مما يؤثر على الكتلة')">🔍 تحقق</button>
-                <span id="fb_q12" class="feedback"></span>
             </div>
         </div>
 
@@ -680,7 +696,7 @@
         <div class="scroll-top">
             <button class="second-home" onclick="document.getElementById('mainContainer').scrollIntoView({behavior:'smooth'});">⬆️ العودة للرئيسية</button>
         </div>
-        <footer>⭐ الصف الثالث الثانوي - الفيزياء النووية ⭐</footer>
+        <footer>⭐ الثالث الثانوي - الفيزياء النووية ⭐</footer>
     </div>
 </div>
 
@@ -690,7 +706,6 @@
     let wrongAnswers = 0;
     let answeredQuestions = new Set();
 
-    // تحديث شريط التقييم
     function updateScoreBoard() {
         document.getElementById('correctCount').textContent = correctAnswers;
         document.getElementById('wrongCount').textContent = wrongAnswers;
@@ -721,7 +736,6 @@
         }
     }
 
-    // تصحيح اختيار من متعدد
     function checkMCQ(questionId, correctValue, correctAnswerText) {
         const radios = document.getElementsByName(questionId);
         let selected = null;
@@ -734,23 +748,23 @@
         const fbSpan = document.getElementById('fb_' + questionId);
         
         if (!selected) {
-            fbSpan.innerHTML = '⚠️ اختر إجابة أولاً.';
+            fbSpan.innerHTML = '⚠️ اختر إجابة أولاً';
             fbSpan.className = 'feedback wrong-feedback';
             return;
         }
 
         if (answeredQuestions.has(questionId)) {
-            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+            fbSpan.innerHTML = '⚠️ لقد أجبت مسبقاً';
             fbSpan.className = 'feedback wrong-feedback';
             return;
         }
 
         if (selected === correctValue) {
-            fbSpan.innerHTML = '✅ إجابة صحيحة! أحسنت.';
+            fbSpan.innerHTML = '✅ إجابة صحيحة!';
             fbSpan.className = 'feedback correct-feedback';
             correctAnswers++;
         } else {
-            fbSpan.innerHTML = '❌ إجابة خاطئة. الإجابة الصحيحة هي: ' + correctAnswerText;
+            fbSpan.innerHTML = '❌ خاطئة. الصحيحة: ' + correctAnswerText;
             fbSpan.className = 'feedback wrong-feedback';
             wrongAnswers++;
         }
@@ -759,7 +773,6 @@
         updateScoreBoard();
     }
 
-    // إعادة تعيين التقييم
     function resetScore() {
         correctAnswers = 0;
         wrongAnswers = 0;
