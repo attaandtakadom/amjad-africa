@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اختبار النظائر - عرض الإجابات</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #eceff1; padding: 20px; text-align: center; }
+        .container { max-width: 650px; background: white; margin: auto; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; margin-bottom: 30px; }
+        .question-box { text-align: right; margin-bottom: 25px; padding: 15px; border-radius: 10px; border: 1px solid #ddd; transition: 0.3s; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin: 12px 0; padding: 8px; border-radius: 5px; }
+        
+        /* ألوان النتيجة */
+        .correct-answer { background-color: #d4edda !important; border: 1px solid #c3e6cb; color: #155724; font-weight: bold; }
+        .wrong-answer { background-color: #f8d7da !important; border: 1px solid #f5c6cb; color: #721c24; }
+        
+        button { background-color: #27ae60; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 17px; margin: 10px; }
+        button:hover { background-color: #219150; }
+        .home-btn { background-color: #34495e; }
+        #result-summary { font-size: 1.5em; margin: 20px 0; display: none; padding: 15px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>مراجعة النظائر المشعة</h1>
+    
+    <div id="quiz-area">
+        <div class="question-box" id="q1-container">
+            <p><strong>س1: ذرات لها نفس عدد البروتونات وتختلف في عدد النيوترونات:</strong></p>
+            <ul class="options">
+                <li id="q1-opt1"><input type="radio" name="q1" value="0"> الأيونات</li>
+                <li id="q1-opt2"><input type="radio" name="q1" value="1"> النظائر</li>
+                <li id="q1-opt3"><input type="radio" name="q1" value="0"> الجزيئات</li>
+            </ul>
+        </div>
+
+        <div class="question-box" id="q2-container">
+            <p><strong>س2: نظير الهيدروجين "التريتيوم" يحتوي على:</strong></p>
+            <ul class="options">
+                <li id="q2-opt1"><input type="radio" name="q2" value="0"> بروتون واحد ونيوترون واحد</li>
+                <li id="q2-opt2"><input type="radio" name="q2" value="1"> بروتون واحد ونيوترونين</li>
+                <li id="q2-opt3"><input type="radio" name="q2" value="0"> بروتونين ونيوترون واحد</li>
+            </ul>
+        </div>
+
+        <div class="question-box" id="q3-container">
+            <p><strong>س3: ماذا يحدث للعدد الذري عند انبعاث جسيم ألفا؟</strong></p>
+            <ul class="options">
+                <li id="q3-opt1"><input type="radio" name="q3" value="0"> يزداد بمقدار 1</li>
+                <li id="q3-opt2"><input type="radio" name="q3" value="1"> ينقص بمقدار 2</li>
+                <li id="q3-opt3"><input type="radio" name="q3" value="0"> لا يتغير</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="result-summary"></div>
+
+    <button onclick="submitQuiz()">تحقق من الإجابات</button>
+    <button class="home-btn" onclick="location.reload()">إعادة الاختبار</button>
+  <button class="home-btn" onclick="window.location.href='radiation4.html'" id="homeMainBtn">🏠  العودة للدرس </button>
+
+</div>
+
+<script>
+    function submitQuiz() {
+        let score = 0;
+        const total = 3;
+        
+        // تعريف الإجابات الصحيحة (الخيار الثاني دائماً في هذا المثال لتبسيط الكود)
+        const correctAnswers = {
+            q1: "q1-opt2",
+            q2: "q2-opt2",
+            q3: "q3-opt2"
+        };
+
+        for (let i = 1; i <= total; i++) {
+            const qName = 'q' + i;
+            const selected = document.querySelector(`input[name="${qName}"]:checked`);
+            
+            // تلوين الإجابة الصحيحة بالأخضر دائماً
+            document.getElementById(correctAnswers[qName]).classList.add('correct-answer');
+
+            if (selected) {
+                if (selected.value === "1") {
+                    score++;
+                } else {
+                    // تلوين إجابة الطالب الخاطئة بالأحمر
+                    selected.parentElement.classList.add('wrong-answer');
+                }
+            }
+        }
+
+        // عرض النتيجة النهائية
+        const summary = document.getElementById('result-summary');
+        summary.style.display = 'block';
+        summary.style.backgroundColor = score === total ? '#d4edda' : '#fff3cd';
+        summary.innerHTML = `نتيجتك: ${score} من ${total} <br> <small>تم تحديد الإجابات الصحيحة بالأخضر</small>`;
+        
+        // تعطيل الأزرار بعد الحل
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => input.disabled = true);
+    }
+</script>
+
+</body>
+</html>
