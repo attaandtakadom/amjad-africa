@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>الميكانيكا - القدرة والاحتكاك</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #1a2f3f 0%, #0e1a26 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 15px 10px;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 20px 15px;
+            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .header-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ffc857;
+            padding-bottom: 15px;
+        }
+        @media (min-width: 600px) {
+            .header-bar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        .header-bar h1 {
+            color: #ffd966;
+            font-size: 1.8rem;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 20px;
+            border-radius: 60px;
+            text-align: center;
+            width: 100%;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .home-btn, .reset-btn {
+            border: none;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.1s;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            flex: 1;
+        }
+        .home-btn {
+            background: #ffc857;
+            color: #0e1a26;
+            box-shadow: 0 4px 0 #9e6d1f;
+        }
+        .reset-btn {
+            background: #e67e22;
+            color: white;
+            box-shadow: 0 4px 0 #b85e0f;
+        }
+        .home-btn:active, .reset-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .score-bar {
+            background: linear-gradient(45deg, #1e3b4a, #0f2835);
+            border-radius: 30px;
+            padding: 15px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            border: 2px solid #ffc857;
+        }
+        @media (min-width: 600px) {
+            .score-bar {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 20px 30px;
+            }
+        }
+        .score-item {
+            text-align: center;
+        }
+        .score-label {
+            color: #ffd966;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .score-value {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: #00000040;
+            padding: 5px 10px;
+            border-radius: 30px;
+            border: 1px solid #ffb347;
+            display: inline-block;
+            min-width: 60px;
+        }
+        .score-percentage {
+            background: #ff9800;
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .rating {
+            font-size: 1rem;
+            color: #fff;
+            background: #2ecc71;
+            padding: 5px 15px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .rating.bad { background: #e74c3c; }
+        .rating.medium { background: #f39c12; }
+        .rating.good { background: #3498db; }
+        .rating.excellent { background: #2ecc71; }
+
+        .questions-panel {
+            background: #10212b;
+            border-radius: 30px;
+            padding: 20px 15px;
+        }
+        .q-section {
+            background: #1d3140;
+            border-radius: 25px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-right: 5px solid #ffb02e;
+        }
+        .q-title {
+            color: #ffe393;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        .question-item {
+            background: #15303f;
+            border-radius: 25px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ffc85740;
+            box-shadow: 0 4px 0 #08202b;
+        }
+        .q-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f9e0a0;
+            margin-bottom: 12px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 12px 0;
+        }
+        @media (min-width: 500px) {
+            .options {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1b3d4e;
+            padding: 12px 15px;
+            border-radius: 40px;
+            border: 1px solid #ffbb4a;
+            color: #f0f9ff;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        @media (min-width: 500px) {
+            .option {
+                width: auto;
+                flex: 1 0 calc(50% - 20px);
+            }
+        }
+        .option input {
+            width: 20px;
+            height: 20px;
+            accent-color: #ffaa22;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .feedback {
+            margin-top: 12px;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            background: #061e28;
+            width: 100%;
+            display: none;
+        }
+        .correct-feedback {
+            color: #b8ffb0;
+            border-right: 6px solid #2ecc71;
+            background: #0a302a;
+            display: block;
+        }
+        .wrong-feedback {
+            color: #ffc2c2;
+            border-right: 6px solid #e74c3c;
+            background: #3d1e1e;
+            display: block;
+        }
+        .check-btn {
+            background: #ffae42;
+            border: none;
+            color: black;
+            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #b2620e;
+            width: 100%;
+        }
+        .check-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+        .scroll-top {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .second-home {
+            background: #3d5f73;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        footer {
+            color: #8bb9d0;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="mainContainer">
+    <div class="header-bar">
+        <h1>⚙️ الميكانيكا -اسئلة من امتحان 2025- القدرة والاحتكاك</h1>
+        <div class="header-buttons">
+            <button class="reset-btn" onclick="resetScore()">🔄 إعادة تعيين</button>
+            <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn">🏠 الرئيسية</button>
+        </div>
+    </div>
+
+    <div class="score-bar" id="scoreBar">
+        <div class="score-item">
+            <span class="score-label">✅ الصحيحة</span>
+            <span class="score-value" id="correctCount">0</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">❌ الخاطئة</span>
+            <span class="score-value" id="wrongCount">0</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">📊 النسبة</span>
+            <span class="score-percentage" id="percentage">0%</span>
+        </div>
+        <div class="score-item">
+            <span class="score-label">🏆 التقييم</span>
+            <span class="rating" id="rating">لم يبدأ</span>
+        </div>
+    </div>
+
+    <div class="questions-panel">
+        <h2 style="color:#ffd966; font-size:1.8rem; text-align:center; margin-bottom:20px;">🔴 ميكانيكا نيوتن</h2>
+
+        <!-- قسم القدرة -->
+        <div class="q-section">
+            <h3 class="q-title">🔹 القدرة</h3>
+            
+            <!-- س 7 -->
+            <div class="question-item" id="q7">
+                <div class="q-text">س 7: تُعرف قدرة الجسم على أنها حاصل ضرب القوة المؤثرة في سرعته غير المنتظمة.</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q7" value="a"> أ) صح</label>
+                    <label class="option"><input type="radio" name="q7" value="b"> ب) خطأ</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('q7','b','ب) خطأ. التعريف الصحيح: القدرة = الشغل / الزمن (P = W/t)')">🔍 تحقق</button>
+                <span id="fb_q7" class="feedback"></span>
+            </div>
+
+            <!-- قانون القدرة -->
+            <div class="question-item" id="qlaw1">
+                <div class="q-text">قانون القدرة اللحظية يعطى بالعلاقة:</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="qlaw1" value="a"> أ) P = F × v</label>
+                    <label class="option"><input type="radio" name="qlaw1" value="b"> ب) P = F × t</label>
+                    <label class="option"><input type="radio" name="qlaw1" value="c"> ج) P = W × t</label>
+                    <label class="option"><input type="radio" name="qlaw1" value="d"> د) P = m × a</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('qlaw1','a','أ) P = F × v (القدرة اللحظية = القوة × السرعة اللحظية)')">🔍 تحقق</button>
+                <span id="fb_qlaw1" class="feedback"></span>
+            </div>
+        </div>
+
+        <!-- قسم الاحتكاك -->
+        <div class="q-section">
+            <h3 class="q-title">🔹 الاحتكاك</h3>
+            
+            <!-- س 11 -->
+            <div class="question-item" id="q11">
+                <div class="q-text">س 11: عندما ينزلق جسم على سطح ثابت تكون قيمة قوة الاحتكاك مساوية للنهاية القصوى.</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q11" value="a"> أ) صح</label>
+                    <label class="option"><input type="radio" name="q11" value="b"> ب) خطأ</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('q11','a','أ) صح. عند الانزلاق يصل الاحتكاك للقيمة القصوى (الاحتكاك الحركي)')">🔍 تحقق</button>
+                <span id="fb_q11" class="feedback"></span>
+            </div>
+
+            <!-- س 13 -->
+            <div class="question-item" id="q13">
+                <div class="q-text">س 13: المسافة التي يقطعها جسم حتى يتوقف إذا كانت سرعته الابتدائية u ومعامل الاحتكاك μ هي:</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q13" value="a"> أ) s = u/μg</label>
+                    <label class="option"><input type="radio" name="q13" value="b"> ب) s = u²/μg</label>
+                    <label class="option"><input type="radio" name="q13" value="c"> ج) s = u²/2μg</label>
+                    <label class="option"><input type="radio" name="q13" value="d"> د) s = 2u²/μg</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('q13','c','ج) s = u²/2μg (من معادلة الحركة v² = u² - 2μgs)')">🔍 تحقق</button>
+                <span id="fb_q13" class="feedback"></span>
+            </div>
+        </div>
+
+        <!-- قسم القوى والحركة -->
+        <div class="q-section">
+            <h3 class="q-title">🔹 القوى والحركة</h3>
+            
+            <!-- س 17 -->
+            <div class="question-item" id="q17">
+                <div class="q-text">س 17: جسم كتلته 2kg يسقط في الهواء ومقاومة الهواء R = 0.06V². السرعة النهائية (g=10) هي:</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q17" value="a"> أ) 18.25 m/s</label>
+                    <label class="option"><input type="radio" name="q17" value="b"> ب) 20 m/s</label>
+                    <label class="option"><input type="radio" name="q17" value="c"> ج) 15 m/s</label>
+                    <label class="option"><input type="radio" name="q17" value="d"> د) 25 m/s</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('q17','a','أ) 18.25 m/s. الحل: 0.06V² = 20 → V² = 333.33 → V = 18.25 m/s')">🔍 تحقق</button>
+                <span id="fb_q17" class="feedback"></span>
+            </div>
+
+            <!-- س 30 -->
+            <div class="question-item" id="q30">
+                <div class="q-text">س 30: ثلاث كتل متصلة (mA=2kg, mB=1kg, mC=3kg) تؤثر عليها قوة 12N. محصلة القوى على الكتلة B تساوي:</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q30" value="a"> أ) 12 N</label>
+                    <label class="option"><input type="radio" name="q30" value="b"> ب) 6 N</label>
+                    <label class="option"><input type="radio" name="q30" value="c"> ج) 4 N</label>
+                    <label class="option"><input type="radio" name="q30" value="d"> د) 2 N</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('q30','d','د) 2 N. الحل: a = F/M = 12/6 = 2 m/s² → FB = 1 × 2 = 2 N')">🔍 تحقق</button>
+                <span id="fb_q30" class="feedback"></span>
+            </div>
+
+            <!-- قانون نيوتن الثاني -->
+            <div class="question-item" id="qlaw3">
+                <div class="q-text">العلاقة الصحيحة لحساب العجلة (التسارع) هي:</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="qlaw3" value="a"> أ) a = F × m</label>
+                    <label class="option"><input type="radio" name="qlaw3" value="b"> ب) a = F/m</label>
+                    <label class="option"><input type="radio" name="qlaw3" value="c"> ج) a = m/F</label>
+                    <label class="option"><input type="radio" name="qlaw3" value="d"> د) a = F - m</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('qlaw3','b','ب) a = F/m (قانون نيوتن الثاني)')">🔍 تحقق</button>
+                <span id="fb_qlaw3" class="feedback"></span>
+            </div>
+        </div>
+
+        <!-- قسم السرعة النهائية -->
+        <div class="q-section">
+            <h3 class="q-title">🔹 السرعة النهائية (Terminal Velocity)</h3>
+            
+            <div class="question-item" id="qlaw2">
+                <div class="q-text">عند السقوط الحر مع مقاومة هواء، تصل السرعة للقيمة النهائية عندما:</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="qlaw2" value="a"> أ) R = 0</label>
+                    <label class="option"><input type="radio" name="qlaw2" value="b"> ب) R = mg</label>
+                    <label class="option"><input type="radio" name="qlaw2" value="c"> ج) R > mg</label>
+                    <label class="option"><input type="radio" name="qlaw2" value="d"> د) R &#60; mg</label>
+                </div>
+                <button class="check-btn" onclick="checkMCQ('qlaw2','b','ب) R = mg (عندما تتساوى مقاومة الهواء مع الوزن)')">🔍 تحقق</button>
+                <span id="fb_qlaw2" class="feedback"></span>
+            </div>
+        </div>
+
+        <div class="scroll-top">
+            <button class="second-home" onclick="document.getElementById('mainContainer').scrollIntoView({behavior:'smooth'});">⬆️ العودة للرئيسية</button>
+        </div>
+        <footer>⚡ الصف الثالث الثانوي - الميكانيكا ⚡</footer>
+    </div>
+</div>
+
+<script>
+    let correctAnswers = 0;
+    let wrongAnswers = 0;
+    let answeredQuestions = new Set();
+
+    function updateScoreBoard() {
+        document.getElementById('correctCount').textContent = correctAnswers;
+        document.getElementById('wrongCount').textContent = wrongAnswers;
+        
+        const total = correctAnswers + wrongAnswers;
+        let percentage = 0;
+        if (total > 0) {
+            percentage = Math.round((correctAnswers / total) * 100);
+        }
+        document.getElementById('percentage').textContent = percentage + '%';
+        
+        const ratingSpan = document.getElementById('rating');
+        if (total === 0) {
+            ratingSpan.textContent = 'لم يبدأ';
+            ratingSpan.className = 'rating';
+        } else if (percentage >= 90) {
+            ratingSpan.textContent = '🏆 ممتاز';
+            ratingSpan.className = 'rating excellent';
+        } else if (percentage >= 75) {
+            ratingSpan.textContent = '🌟 جيد جداً';
+            ratingSpan.className = 'rating good';
+        } else if (percentage >= 50) {
+            ratingSpan.textContent = '👍 مقبول';
+            ratingSpan.className = 'rating medium';
+        } else {
+            ratingSpan.textContent = '📚 يحتاج مذاكرة';
+            ratingSpan.className = 'rating bad';
+        }
+    }
+
+    function checkMCQ(questionId, correctValue, correctAnswerText) {
+        const radios = document.getElementsByName(questionId);
+        let selected = null;
+        for (let radio of radios) {
+            if (radio.checked) {
+                selected = radio.value;
+                break;
+            }
+        }
+        const fbSpan = document.getElementById('fb_' + questionId);
+        
+        if (!selected) {
+            fbSpan.innerHTML = '⚠️ اختر إجابة أولاً';
+            fbSpan.className = 'feedback wrong-feedback';
+            return;
+        }
+
+        if (answeredQuestions.has(questionId)) {
+            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+            fbSpan.className = 'feedback wrong-feedback';
+            return;
+        }
+
+        if (selected === correctValue) {
+            fbSpan.innerHTML = '✅ إجابة صحيحة! أحسنت.';
+            fbSpan.className = 'feedback correct-feedback';
+            correctAnswers++;
+        } else {
+            fbSpan.innerHTML = '❌ إجابة خاطئة. الإجابة الصحيحة هي: ' + correctAnswerText;
+            fbSpan.className = 'feedback wrong-feedback';
+            wrongAnswers++;
+        }
+
+        answeredQuestions.add(questionId);
+        updateScoreBoard();
+    }
+
+    function resetScore() {
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        answeredQuestions.clear();
+        updateScoreBoard();
+        
+        const feedbacks = document.querySelectorAll('[id^="fb_"]');
+        feedbacks.forEach(fb => {
+            fb.innerHTML = '';
+            fb.className = 'feedback';
+        });
+        
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+        });
+    }
+
+    function resetQuestionFeedback(questionId) {
+        const fbSpan = document.getElementById('fb_' + questionId);
+        if (fbSpan) {
+            fbSpan.innerHTML = '';
+            fbSpan.className = 'feedback';
+        }
+    }
+
+    document.getElementById('homeMainBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('mainContainer').scrollIntoView({behavior: 'smooth'});
+    });
+</script>
+</body>
+</html>
