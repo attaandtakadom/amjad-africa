@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>الفيزياء النووية - جميع الأسئلة كاملة</title>
+    <title>الفيزياء النووية - مع جميع الرسومات</title>
     <!-- Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- خط Cairo للعربية -->
@@ -13,35 +13,30 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', sans-serif;
         }
         body {
             background: linear-gradient(145deg, #f0f5fa 0%, #e6edf4 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 15px 10px;
+            padding: 10px;
         }
         .container {
-            max-width: 1300px;
-            width: 100%;
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 25px 20px;
-            box-shadow: 0 25px 50px -8px rgba(0,20,40,0.25), inset 0 2px 4px rgba(255,255,255,0.8);
-            border: 1px solid rgba(255,255,255,0.6);
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         /* رأس الصفحة */
         .header-bar {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 15px;
             border-bottom: 3px solid #1e4a6b;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
         @media (min-width: 600px) {
             .header-bar {
@@ -52,34 +47,32 @@
         }
         .header-bar h1 {
             color: #1e4a6b;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-            background: rgba(30,74,107,0.05);
-            padding: 8px 25px;
-            border-radius: 60px;
             text-align: center;
+            background: rgba(30,74,107,0.05);
+            padding: 8px 15px;
+            border-radius: 40px;
             width: 100%;
-            letter-spacing: 1px;
         }
         .header-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
-            flex-wrap: wrap;
         }
         .home-btn, .reset-btn {
             border: none;
             font-weight: 700;
-            border-radius: 50px;
+            border-radius: 40px;
             cursor: pointer;
-            padding: 12px 28px;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 0 #0d2a3b;
+            padding: 10px 20px;
+            font-size: 1rem;
+            box-shadow: 0 3px 0 #0d2a3b;
             transition: 0.1s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
+            flex: 1;
         }
         .home-btn {
             background: #1e4a6b;
@@ -88,29 +81,28 @@
         .reset-btn {
             background: #ff9800;
             color: white;
-            box-shadow: 0 4px 0 #b86600;
+            box-shadow: 0 3px 0 #b86600;
         }
         .home-btn:active, .reset-btn:active {
-            transform: translateY(4px);
+            transform: translateY(3px);
             box-shadow: none;
         }
 
         /* شريط التقييم */
         .score-bar {
-            background: linear-gradient(145deg, #ffffff, #f0f7ff);
-            border-radius: 60px;
-            padding: 20px 25px;
-            margin-bottom: 30px;
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 15px;
+            margin-bottom: 20px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 10px;
             border: 2px solid #b0c9dd;
-            box-shadow: 0 10px 20px rgba(0,30,50,0.1);
         }
         @media (min-width: 600px) {
             .score-bar {
                 grid-template-columns: repeat(4, 1fr);
-                padding: 20px 30px;
+                padding: 15px 20px;
             }
         }
         .score-item {
@@ -118,40 +110,32 @@
         }
         .score-label {
             color: #1e4a6b;
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 600;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
-        .score-value {
-            color: #0d2a3b;
-            font-size: 1.8rem;
+        .score-value, .score-percentage {
+            font-size: 1.3rem;
             font-weight: 800;
             background: rgba(30,74,107,0.1);
-            padding: 5px 15px;
-            border-radius: 40px;
+            padding: 3px 10px;
+            border-radius: 30px;
             border: 2px solid #1e4a6b;
             display: inline-block;
-            min-width: 70px;
+            min-width: 50px;
         }
         .score-percentage {
-            color: #0d2a3b;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: rgba(255,152,0,0.2);
-            padding: 5px 15px;
-            border-radius: 40px;
-            border: 2px solid #ff9800;
-            display: inline-block;
-            min-width: 70px;
+            border-color: #ff9800;
+            background: rgba(255,152,0,0.1);
         }
         .rating {
             color: white;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
             background: #2ecc71;
-            padding: 5px 20px;
-            border-radius: 40px;
+            padding: 3px 15px;
+            border-radius: 30px;
             display: inline-block;
         }
         .rating.bad { background: #e74c3c; }
@@ -162,98 +146,109 @@
         /* بطاقات الأسئلة */
         .section-card {
             background: #ffffff;
-            border-radius: 30px;
-            padding: 25px;
-            margin-bottom: 30px;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
             border: 2px solid #c0d4e6;
-            box-shadow: 0 15px 30px rgba(0,30,50,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         .section-title {
             color: #1e4a6b;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            border-right: 8px solid #ff9800;
-            padding-right: 20px;
-            background: linear-gradient(to left, #eef6ff, transparent);
-            border-radius: 0 40px 40px 0;
+            margin-bottom: 15px;
+            border-right: 5px solid #ff9800;
+            padding-right: 10px;
         }
         .question-box {
             background: #f5faff;
-            border-radius: 25px;
-            padding: 20px;
-            margin-bottom: 25px;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             border: 2px solid #b8d0e5;
-            box-shadow: 0 5px 0 #9bb0c5;
         }
         .question-text {
             color: #003153;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
         }
         .question-text i {
             color: #ff9800;
-            font-size: 1.4rem;
+            font-size: 1.1rem;
         }
         .math {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #1e4a6b;
             background: #e1f0fa;
-            padding: 5px 15px;
-            border-radius: 30px;
+            padding: 2px 10px;
+            border-radius: 20px;
             display: inline-block;
-            margin: 5px 0;
+            margin: 3px 0;
         }
         
-        /* الرسم البياني */
+        /* الجداول */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            min-width: 500px;
+        }
+        th {
+            background: #1e4a6b;
+            color: white;
+            padding: 8px;
+            font-size: 0.9rem;
+        }
+        td {
+            border: 1px solid #b0c9dd;
+            padding: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        /* الرسومات - متجاوبة */
         .graph-container {
             background: #ffffff;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 15px;
             margin: 15px 0;
             border: 2px solid #b0c9dd;
-            text-align: center;
+            overflow-x: auto;
         }
         .graph-title {
             color: #1e4a6b;
             font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        /* جدول الرادون */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .data-table th {
-            background: #1e4a6b;
-            color: white;
-            padding: 10px;
-        }
-        .data-table td {
-            border: 1px solid #b0c9dd;
-            padding: 8px;
             text-align: center;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
-        
-        /* رسم سلسلة الاضمحلال */
-        .decay-graph {
+        .canvas-wrapper {
+            min-width: 300px;
             position: relative;
-            width: 100%;
-            height: 300px;
+            height: 250px;
+            background: #f9f9f9;
             border: 2px solid #333;
             border-radius: 10px;
-            margin: 20px 0;
-            background: #f9f9f9;
+            margin: 10px 0;
+        }
+        
+        /* رسم المنحنى */
+        .graph-canvas {
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
         .grid-line {
             position: absolute;
@@ -269,157 +264,216 @@
         }
         .point {
             position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e4a6b;
+        }
+        .axis-label {
+            position: absolute;
+            font-size: 0.8rem;
+            color: #333;
+        }
+        
+        /* رسم الذرة */
+        .atom-diagram {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .nucleus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #ff9800;
+            border-radius: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        .electron-shell {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #1e4a6b;
+            border-radius: 50%;
+        }
+        .electron {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* رسم سلسلة الاضمحلال */
+        .decay-diagram {
+            position: relative;
+            min-width: 350px;
+            height: 300px;
+            background: #f9f9f9;
+            border: 2px solid #333;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .decay-point {
+            position: absolute;
             width: 14px;
             height: 14px;
             border-radius: 50%;
             transform: translate(-50%, -50%);
             cursor: pointer;
+            z-index: 3;
         }
-        .point.A { background: #e74c3c; }
-        .point.B { background: #f39c12; }
-        .point.C { background: #3498db; }
-        .point.D { background: #2ecc71; }
-        .point.E { background: #9b59b6; }
+        .point-A { background: #e74c3c; }
+        .point-B { background: #f39c12; }
+        .point-C { background: #3498db; }
+        .point-D { background: #2ecc71; }
+        .point-E { background: #9b59b6; }
         .point-label {
             position: absolute;
-            font-size: 14px;
+            font-size: 0.8rem;
             font-weight: 700;
-            transform: translate(-50%, -100%);
-            margin-top: -5px;
+            transform: translate(-50%, -150%);
+            background: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            white-space: nowrap;
+        }
+        .decay-arrow {
+            position: absolute;
+            height: 2px;
+            background: #1e4a6b;
+            transform-origin: 0 0;
+            z-index: 2;
+        }
+        .arrow-head {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 10px solid #1e4a6b;
+            transform: translate(-50%, -50%);
         }
         
         .options {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 15px 0;
-        }
-        @media (min-width: 600px) {
-            .options {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
+            gap: 8px;
+            margin: 10px 0;
         }
         .option {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: #ffffff;
-            padding: 12px 20px;
-            border-radius: 50px;
+            gap: 8px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 40px;
             border: 2px solid #b0c9dd;
             color: #003153;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.1s;
             width: 100%;
         }
-        @media (min-width: 600px) {
-            .option {
-                width: auto;
-                flex: 1 0 calc(50% - 20px);
-            }
-        }
-        .option:hover {
-            background: #e1f0fa;
-            border-color: #1e4a6b;
-        }
         .option input {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             accent-color: #1e4a6b;
-            margin-left: 8px;
-            cursor: pointer;
+            margin-left: 5px;
         }
         .check-btn {
             background: #1e4a6b;
             color: white;
             border: none;
             font-weight: 700;
-            border-radius: 50px;
+            border-radius: 40px;
             cursor: pointer;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            margin-top: 10px;
-            box-shadow: 0 4px 0 #0d2a3b;
+            padding: 10px 20px;
+            font-size: 1rem;
+            box-shadow: 0 3px 0 #0d2a3b;
             transition: 0.1s;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 5px;
         }
         .check-btn:active {
-            transform: translateY(4px);
+            transform: translateY(3px);
             box-shadow: none;
         }
         .feedback {
-            margin-top: 15px;
-            padding: 15px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 1.1rem;
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.95rem;
             display: none;
         }
         .correct-feedback {
             background: #d4edda;
-            border-right: 8px solid #2ecc71;
+            border-right: 5px solid #2ecc71;
             color: #155724;
             display: block;
         }
         .wrong-feedback {
             background: #f8d7da;
-            border-right: 8px solid #e74c3c;
+            border-right: 5px solid #e74c3c;
             color: #721c24;
             display: block;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 15px 0;
-            border: 2px solid #b0c9dd;
-        }
-        th {
-            background: #1e4a6b;
-            color: white;
-            padding: 12px;
-        }
-        td {
-            border: 1px solid #b0c9dd;
-            padding: 10px;
-            color: #003153;
-        }
+        
         .scroll-top {
             display: flex;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         .second-home {
             background: #ff9800;
             color: white;
             border: none;
-            padding: 15px 35px;
-            border-radius: 60px;
-            font-size: 1.3rem;
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 6px 0 #b86600;
-            transition: 0.1s;
+            box-shadow: 0 4px 0 #b86600;
             width: 100%;
-            max-width: 300px;
+            max-width: 250px;
         }
         .second-home:active {
-            transform: translateY(6px);
+            transform: translateY(4px);
             box-shadow: none;
         }
         footer {
             color: #1e4a6b;
             text-align: center;
-            margin-top: 25px;
-            font-size: 1rem;
-            font-weight: 600;
+            margin-top: 15px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -427,346 +481,328 @@
 <div class="container" id="mainContainer">
     <!-- شريط العنوان -->
     <div class="header-bar">
-        <h1><i class="fas fa-atom" style="margin-left:10px;"></i> اسئلة الباب التاسع  - جميع الأسئلة كاملة</h1>
+        <h1><i class="fas fa-atom"></i> الفيزياء النووية</h1>
         <div class="header-buttons">
-            <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة تعيين</button>
-            <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+            <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة</button>
+            <button class="home-btn" onclick="window.location.href='#'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
         </div>
     </div>
 
     <!-- شريط التقييم -->
     <div class="score-bar" id="scoreBar">
         <div class="score-item">
-            <span class="score-label"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> الصحيحة</span>
+            <span class="score-label">✅ الصحيحة</span>
             <span class="score-value" id="correctCount">0</span>
         </div>
         <div class="score-item">
-            <span class="score-label"><i class="fas fa-times-circle" style="color:#e74c3c;"></i> الخاطئة</span>
+            <span class="score-label">❌ الخاطئة</span>
             <span class="score-value" id="wrongCount">0</span>
         </div>
         <div class="score-item">
-            <span class="score-label"><i class="fas fa-percent"></i> النسبة</span>
+            <span class="score-label">📊 النسبة</span>
             <span class="score-percentage" id="percentage">0%</span>
         </div>
         <div class="score-item">
-            <span class="score-label"><i class="fas fa-star"></i> التقييم</span>
+            <span class="score-label">🏆 التقييم</span>
             <span class="rating" id="rating">لم يبدأ</span>
         </div>
     </div>
 
-    <!-- الجزء الأول: أسئلة الاختيار من متعدد (1-5) -->
+    <!-- الأسئلة 1-3 -->
     <div class="section-card">
-        <h2 class="section-title"><i class="fas fa-check-square" style="margin-left:10px;"></i> الجزء الأول: أسئلة الاختيار من متعدد</h2>
+        <h2 class="section-title"><i class="fas fa-check-square"></i> أسئلة الاختيار</h2>
         
         <!-- سؤال 1 -->
         <div class="question-box" id="q1">
             <div class="question-text"><i class="fas fa-question-circle"></i> 1. جسيمات ألفا (α) هي :</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q1" value="a"> (أ) بروتونات موجبة الشحن .</label>
-                <label class="option"><input type="radio" name="q1" value="b"> (ب) أيونات هيدروجين موجبة الشحن .</label>
-                <label class="option"><input type="radio" name="q1" value="c"> (جـ) نوى هيليوم موجبة الشحن .</label>
-                <label class="option"><input type="radio" name="q1" value="d"> (د) ذرات هيليوم متعادلة .</label>
+                <label class="option"><input type="radio" name="q1" value="a"> أ) بروتونات موجبة</label>
+                <label class="option"><input type="radio" name="q1" value="b"> ب) أيونات هيدروجين</label>
+                <label class="option"><input type="radio" name="q1" value="c"> ج) نوى هيليوم موجبة</label>
+                <label class="option"><input type="radio" name="q1" value="d"> د) ذرات هيليوم متعادلة</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q1','c','جسيمات ألفا هي نوى هيليوم (بروتونان + نيوترونان) بشحنة +2')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q1','c','جسيمات ألفا = نواة هيليوم (بروتونان + نيوترونان)')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q1" class="feedback"></div>
         </div>
 
         <!-- سؤال 2 -->
         <div class="question-box" id="q2">
-            <div class="question-text"><i class="fas fa-question-circle"></i> 2. تضمحل النوى المشعة <span class="math">Z^{123}_{60}</span> لتعطي 119 ما نوع الإشعاع المنبعث؟</div>
+            <div class="question-text"><i class="fas fa-question-circle"></i> 2. <span class="math">Z^{123}_{60}</span> → 119 نوع الإشعاع؟</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q2" value="a"> (أ) جسيمات ألفا (α) فقط .</label>
-                <label class="option"><input type="radio" name="q2" value="b"> (ب) جسيمات بيتا (β) فقط .</label>
-                <label class="option"><input type="radio" name="q2" value="c"> (جـ) أشعة جاما (γ) فقط .</label>
-                <label class="option"><input type="radio" name="q2" value="d"> (د) جسيمات ألفا (α) وبيتا (β) فقط .</label>
+                <label class="option"><input type="radio" name="q2" value="a"> أ) ألفا فقط</label>
+                <label class="option"><input type="radio" name="q2" value="b"> ب) بيتا فقط</label>
+                <label class="option"><input type="radio" name="q2" value="c"> ج) جاما فقط</label>
+                <label class="option"><input type="radio" name="q2" value="d"> د) ألفا وبيتا</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q2','a','النقص في العدد الكتلي = 123 - 119 = 4 (وهو جسيم ألفا)')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q2','a','النقص = 4 (جسيم ألفا)')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q2" class="feedback"></div>
         </div>
 
         <!-- سؤال 3 -->
         <div class="question-box" id="q3">
-            <div class="question-text"><i class="fas fa-question-circle"></i> 3. يستخدم أنبوب وعداد جيجر-مولر للكشف عن الإشعاع. إذا اشتمل الإشعاع على أشعة جاما، سيتناقص معدل التعداد عندما يكون:</div>
+            <div class="question-text"><i class="fas fa-question-circle"></i> 3. لإيقاف أشعة جاما نستخدم:</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q3" value="a"> (أ) ورق - عدة سنتيمترات</label>
-                <label class="option"><input type="radio" name="q3" value="b"> (ب) ألومنيوم - واحد متر</label>
-                <label class="option"><input type="radio" name="q3" value="c"> (ج) رصاص - عدة سنتيمترات</label>
+                <label class="option"><input type="radio" name="q3" value="a"> أ) ورق</label>
+                <label class="option"><input type="radio" name="q3" value="b"> ب) ألومنيوم</label>
+                <label class="option"><input type="radio" name="q3" value="c"> ج) رصاص سميك</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q3','c','أشعة جاما شديدة النفاذ وتحتاج إلى رصاص سميك')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q3','c','أشعة جاما تحتاج رصاص سميك')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q3" class="feedback"></div>
         </div>
+    </div>
 
-        <!-- سؤال 4 - مع الرسم البياني -->
+    <!-- السؤال 4 - مع الرسم البياني -->
+    <div class="section-card">
+        <h2 class="section-title"><i class="fas fa-chart-line"></i> السؤال 4: الرسم البياني</h2>
+        
         <div class="question-box" id="q4">
-            <div class="question-text"><i class="fas fa-question-circle"></i> 4. يبين الرسم البياني معدل التعداد لعينة مشعة مقابل الزمن.</div>
+            <div class="question-text"><i class="fas fa-question-circle"></i> 4. الرسم البياني يبين معدل التعداد مقابل الزمن:</div>
             
             <!-- الرسم البياني -->
             <div class="graph-container">
                 <div class="graph-title">معدل التعداد (عدد/دقيقة)</div>
-                <div style="position: relative; height: 250px; border: 2px solid #333; border-radius: 10px; margin: 20px 0; background: #f9f9f9;">
-                    <!-- المحاور والتدرج -->
-                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #333;"></div>
-                    <div style="position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: #333;"></div>
-                    
-                    <!-- نقاط البيانات -->
-                    <div style="position: absolute; bottom: 0%; left: 0%;">0</div>
-                    <div style="position: absolute; bottom: 0%; left: 25%;">20</div>
-                    <div style="position: absolute; bottom: 0%; left: 50%;">40</div>
-                    <div style="position: absolute; bottom: 0%; left: 75%;">60</div>
-                    <div style="position: absolute; bottom: 0%; left: 100%;">80</div>
-                    
-                    <div style="position: absolute; bottom: 0%; left: -5%;">0</div>
-                    <div style="position: absolute; bottom: 25%; left: -5%;">1250</div>
-                    <div style="position: absolute; bottom: 50%; left: -5%;">2500</div>
-                    <div style="position: absolute; bottom: 75%; left: -5%;">3750</div>
-                    <div style="position: absolute; bottom: 100%; left: -5%;">5000</div>
-                    
-                    <!-- نقاط المنحنى -->
-                    <div style="position: absolute; bottom: 100%; left: 0%; width: 10px; height: 10px; background: #1e4a6b; border-radius: 50%; transform: translate(-50%, 50%);"></div>
-                    <div style="position: absolute; bottom: 50%; left: 50%; width: 10px; height: 10px; background: #1e4a6b; border-radius: 50%; transform: translate(-50%, 50%);"></div>
-                    <div style="position: absolute; bottom: 25%; left: 100%; width: 10px; height: 10px; background: #1e4a6b; border-radius: 50%; transform: translate(-50%, 50%);"></div>
-                    
-                    <!-- خط المنحنى -->
-                    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M 0,0 L 50,50 L 100,75" stroke="#1e4a6b" stroke-width="2" fill="none"/>
-                    </svg>
+                <div class="canvas-wrapper">
+                    <div style="position: relative; width: 100%; height: 100%;">
+                        <!-- المحور الرأسي -->
+                        <div style="position: absolute; bottom: 30px; left: 30px; font-size:0.7rem;">0</div>
+                        <div style="position: absolute; bottom: 80px; left: 30px; font-size:0.7rem;">1000</div>
+                        <div style="position: absolute; bottom: 130px; left: 30px; font-size:0.7rem;">2000</div>
+                        <div style="position: absolute; bottom: 180px; left: 30px; font-size:0.7rem;">3000</div>
+                        <div style="position: absolute; bottom: 230px; left: 30px; font-size:0.7rem;">4000</div>
+                        <div style="position: absolute; bottom: 280px; left: 30px; font-size:0.7rem;">5000</div>
+                        
+                        <!-- المحور الأفقي -->
+                        <div style="position: absolute; bottom: 20px; left: 60px; font-size:0.7rem;">0</div>
+                        <div style="position: absolute; bottom: 20px; left: 110px; font-size:0.7rem;">20</div>
+                        <div style="position: absolute; bottom: 20px; left: 160px; font-size:0.7rem;">40</div>
+                        <div style="position: absolute; bottom: 20px; left: 210px; font-size:0.7rem;">60</div>
+                        <div style="position: absolute; bottom: 20px; left: 260px; font-size:0.7rem;">80</div>
+                        
+                        <!-- خطوط الشبكة -->
+                        <div style="position: absolute; bottom: 30px; left: 50px; width: 1px; height: 250px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 30px; left: 100px; width: 1px; height: 250px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 30px; left: 150px; width: 1px; height: 250px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 30px; left: 200px; width: 1px; height: 250px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 30px; left: 250px; width: 1px; height: 250px; background: #ccc;"></div>
+                        
+                        <div style="position: absolute; bottom: 30px; left: 50px; width: 250px; height: 1px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 80px; left: 50px; width: 250px; height: 1px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 130px; left: 50px; width: 250px; height: 1px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 180px; left: 50px; width: 250px; height: 1px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 230px; left: 50px; width: 250px; height: 1px; background: #ccc;"></div>
+                        <div style="position: absolute; bottom: 280px; left: 50px; width: 250px; height: 1px; background: #ccc;"></div>
+                        
+                        <!-- نقاط المنحنى -->
+                        <div class="point" style="bottom: 280px; left: 50px;"></div>
+                        <div class="point" style="bottom: 180px; left: 150px;"></div>
+                        <div class="point" style="bottom: 80px; left: 250px;"></div>
+                        
+                        <!-- خط المنحنى -->
+                        <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" viewBox="0 0 300 280">
+                            <line x1="50" y1="0" x2="150" y2="100" stroke="#1e4a6b" stroke-width="2"/>
+                            <line x1="150" y1="100" x2="250" y2="200" stroke="#1e4a6b" stroke-width="2"/>
+                        </svg>
+                        
+                        <!-- عنوان المحاور -->
+                        <div style="position: absolute; top: 5px; left: 150px; font-weight:700; font-size:0.8rem;">المنحنى</div>
+                    </div>
                 </div>
-                <div style="text-align: center; margin-top: 10px;">الزمن (بالدقائق)</div>
+                <div style="text-align: center; margin-top: 10px; font-weight:600;">الزمن (بالدقائق)</div>
             </div>
             
-            <div class="question-text">عمر نصف العينة المشعة بالدقائق، هو:</div>
+            <div class="question-text">عمر النصف =</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q4" value="a"> (أ) 10</label>
-                <label class="option"><input type="radio" name="q4" value="b"> (ب) 30</label>
-                <label class="option"><input type="radio" name="q4" value="c"> (ج) 60</label>
-                <label class="option"><input type="radio" name="q4" value="d"> (د) 40</label>
+                <label class="option"><input type="radio" name="q4" value="a"> 10 دقائق</label>
+                <label class="option"><input type="radio" name="q4" value="b"> 30 دقيقة</label>
+                <label class="option"><input type="radio" name="q4" value="c"> 40 دقيقة</label>
+                <label class="option"><input type="radio" name="q4" value="d"> 60 دقيقة</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q4','d','عند t=0: 5000، عند t=40: 2500 (نصف القيمة)')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q4','c','عند t=0: 5000، عند t=40: 2500 (نصف القيمة)')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q4" class="feedback"></div>
         </div>
+    </div>
 
-        <!-- سؤال 5 - رسم الذرة -->
+    <!-- السؤال 5 - رسم الذرة -->
+    <div class="section-card">
+        <h2 class="section-title"><i class="fas fa-atom"></i> السؤال 5: رسم الذرة</h2>
+        
         <div class="question-box" id="q5">
-            <div class="question-text"><i class="fas fa-question-circle"></i> 5. يمثل الرسم ذرة عنصر ما. (P: بروتون، n: نيوترون، e: إلكترون)</div>
+            <div class="question-text"><i class="fas fa-question-circle"></i> 5. يمثل الرسم ذرة عنصر ما (P: بروتون، n: نيوترون، e: إلكترون)</div>
             
             <!-- رسم الذرة -->
             <div class="graph-container">
-                <div style="position: relative; width: 200px; height: 200px; margin: 0 auto;">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: #ff9800; border-radius: 50%; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 10px; color: white; font-weight: 700;">
+                <div class="atom-diagram">
+                    <div class="nucleus">
                         <div>5p</div>
                         <div>6n</div>
                     </div>
-                    <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">e</div>
-                    <div style="position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">e</div>
+                    <div class="electron-shell"></div>
+                    <div class="electron" style="top: 30%; left: 70%;">e</div>
+                    <div class="electron" style="top: 70%; left: 30%;">e</div>
                 </div>
             </div>
             
-            <div class="question-text">العدد الذري، والعدد الكتلي، والشحنة على نواة الذرة هي:</div>
+            <div class="question-text">العدد الذري =</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q5" value="a"> (أ) 5</label>
-                <label class="option"><input type="radio" name="q5" value="b"> (ب) 11</label>
-                <label class="option"><input type="radio" name="q5" value="c"> (ج) 16</label>
+                <label class="option"><input type="radio" name="q5" value="a"> 5</label>
+                <label class="option"><input type="radio" name="q5" value="b"> 11</label>
+                <label class="option"><input type="radio" name="q5" value="c"> 16</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q5','b','العدد الذري = 11، العدد الكتلي = 11، الشحنة موجبة')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q5','b','العدد الذري = عدد البروتونات = 11')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q5" class="feedback"></div>
         </div>
     </div>
 
-    <!-- السؤال 7 - الرادون 220 -->
+    <!-- السؤال 7 - الرادون -->
     <div class="section-card">
-        <h2 class="section-title"><i class="fas fa-radiation" style="margin-left:10px;"></i> السؤال 7: تجربة الرادون 220</h2>
+        <h2 class="section-title"><i class="fas fa-radiation"></i> سؤال 7: الرادون 220</h2>
         
         <div class="question-box">
-            <div class="question-text"><i class="fas fa-question-circle"></i> 7. في تجربة لتحديد عمر النصف لنواة رادون 220، تم التوصل إلى النتائج التالية:</div>
-            
-            <table class="data-table">
-                <tr>
-                    <th>الزمن (s)</th>
-                    <th>0</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th><th>70</th>
-                </tr>
-                <tr>
-                    <td>معدل التعداد (s⁻¹)</td>
-                    <td>12</td><td>18</td><td>16</td><td>14</td><td>12</td><td>10</td><td>8</td><td>6</td>
-                </tr>
-            </table>
-            
-            <!-- 7(أ) -->
-            <div class="question-text">(أ) عمر النصف للرادون 220 =</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q7a" value="a"> 20 ثانية</label>
-                <label class="option"><input type="radio" name="q7a" value="b"> 30 ثانية</label>
-                <label class="option"><input type="radio" name="q7a" value="c"> 40 ثانية</label>
-                <label class="option"><input type="radio" name="q7a" value="d"> 50 ثانية</label>
+            <div class="table-responsive">
+                <table>
+                    <tr><th>الزمن (s)</th><th>0</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th><th>70</th></tr>
+                    <tr><td>معدل التعداد</td><td>12</td><td>18</td><td>16</td><td>14</td><td>12</td><td>10</td><td>8</td><td>6</td></tr>
+                </table>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q7a','c','بطرح الخلفية (6)، النشاط عند t=0 = 6، عند t=40 = 6 (نصف القيمة)')"><i class="fas fa-check"></i> تحقق</button>
+            
+            <div class="question-text">(أ) عمر النصف =</div>
+            <div class="options">
+                <label class="option"><input type="radio" name="q7a" value="a"> 20 ث</label>
+                <label class="option"><input type="radio" name="q7a" value="b"> 40 ث</label>
+                <label class="option"><input type="radio" name="q7a" value="c"> 60 ث</label>
+            </div>
+            <button class="check-btn" onclick="checkMCQ('q7a','b','بطرح الخلفية (6): عند t=0: 6، t=40: 6 (نصف القيمة)')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q7a" class="feedback"></div>
             
-            <!-- 7(ب) -->
-            <div class="question-text" style="margin-top:20px;">(ب) تعداد الخلفية =</div>
+            <div class="question-text">(ب) تعداد الخلفية =</div>
             <div class="options">
                 <label class="option"><input type="radio" name="q7b" value="a"> 4 s⁻¹</label>
                 <label class="option"><input type="radio" name="q7b" value="b"> 6 s⁻¹</label>
                 <label class="option"><input type="radio" name="q7b" value="c"> 8 s⁻¹</label>
-                <label class="option"><input type="radio" name="q7b" value="d"> 10 s⁻¹</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q7b','b','القراءة عند الزمن 70s = 6 (بعد اضمحلال كامل)')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q7b','b','آخر قراءة = 6 (بعد الاضمحلال)')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q7b" class="feedback"></div>
             
-            <!-- 7(جـ1) -->
-            <div class="question-text" style="margin-top:20px;">(جـ1) ما هو جسيم ألفا (α) ؟</div>
+            <div class="question-text">(جـ) جسيم ألفا هو:</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q7c1" value="a"> إلكترون</label>
-                <label class="option"><input type="radio" name="q7c1" value="b"> نواة هيليوم (بروتونان + نيوترونان)</label>
-                <label class="option"><input type="radio" name="q7c1" value="c"> بروتون</label>
-                <label class="option"><input type="radio" name="q7c1" value="d"> نيوترون</label>
+                <label class="option"><input type="radio" name="q7c" value="a"> إلكترون</label>
+                <label class="option"><input type="radio" name="q7c" value="b"> نواة هيليوم</label>
+                <label class="option"><input type="radio" name="q7c" value="c"> بروتون</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q7c1','b','جسيم ألفا = نواة هيليوم (⁴₂He)')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q7c1" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q7c','b','⁴₂He (بروتونان + نيوترونان)')"><i class="fas fa-check"></i> تحقق</button>
+            <div id="fb_q7c" class="feedback"></div>
             
-            <!-- 7(جـ2) -->
-            <div class="question-text" style="margin-top:20px;">(جـ2) عندما ينبعث جسيم ألفا من <span class="math">²²⁰₈₆Rn</span>، يتحول إلى بولونيوم (Po). المعادلة الصحيحة هي:</div>
+            <div class="question-text">(د) <span class="math">²²⁰₈₆Rn → α + ?</span></div>
             <div class="options">
-                <label class="option"><input type="radio" name="q7c2" value="a"> <span class="math">²²⁰₈₆Rn → ²¹⁶₈₄Po + α</span></label>
-                <label class="option"><input type="radio" name="q7c2" value="b"> <span class="math">²²⁰₈₆Rn → ²²⁰₈₄Po + α</span></label>
-                <label class="option"><input type="radio" name="q7c2" value="c"> <span class="math">²²⁰₈₆Rn → ²²²₈₈Po + α</span></label>
-                <label class="option"><input type="radio" name="q7c2" value="d"> <span class="math">²²⁰₈₆Rn → ²¹⁸₈₅Po + α</span></label>
+                <label class="option"><input type="radio" name="q7d" value="a"> ²¹⁶₈₄Po</label>
+                <label class="option"><input type="radio" name="q7d" value="b"> ²²⁰₈₄Po</label>
+                <label class="option"><input type="radio" name="q7d" value="c"> ²¹⁸₈₆Po</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q7c2','a','اضمحلال ألفا: نقص 2 في Z و 4 في A → ²¹⁶₈₄Po')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q7c2" class="feedback"></div>
-            
-            <!-- 7(د) -->
-            <div class="question-text" style="margin-top:20px;">(د) لماذا من المهم عدم إمساك المصدر بالقرب من جسم الإنسان، ومنع تناول الطعام في المعمل؟</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q7d" value="a"> لتجنب التلوث الإشعاعي وابتلاع المواد المشعة</label>
-                <label class="option"><input type="radio" name="q7d" value="b"> لتجنب الحرارة المرتفعة</label>
-                <label class="option"><input type="radio" name="q7d" value="c"> لمنع كسر المصدر</label>
-                <label class="option"><input type="radio" name="q7d" value="d"> لا يوجد سبب مهم</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q7d','a','لتجنب تعرض الأعضاء الحيوية للإشعاع ومنع ابتلاع جسيمات مشعة')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q7d','a','نقص 2 في Z و 4 في A → ²¹⁶₈₄Po')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q7d" class="feedback"></div>
         </div>
     </div>
 
-    <!-- السؤال 8 - سلسلة الاضمحلال -->
+    <!-- السؤال 8 - سلسلة الاضمحلال مع الرسم -->
     <div class="section-card">
-        <h2 class="section-title"><i class="fas fa-project-diagram" style="margin-left:10px;"></i> السؤال 8: سلسلة الاضمحلال الإشعاعي</h2>
+        <h2 class="section-title"><i class="fas fa-project-diagram"></i> سؤال 8: سلسلة الاضمحلال</h2>
         
         <div class="question-box">
-            <div class="question-text"><i class="fas fa-question-circle"></i> 8. يوضح الرسم سلسلة اضمحلال إشعاعي. تضمحل النواة A إلى النواة B وفي مراحل متتالية إلى النواة E والتي لها عدد بروتوني 90 وعدد نووي 230.</div>
+            <div class="question-text"><i class="fas fa-question-circle"></i> 8. سلسلة اضمحلال من A إلى E (E: Z=90, A=230)</div>
             
             <!-- رسم سلسلة الاضمحلال -->
             <div class="graph-container">
                 <div class="graph-title">سلسلة الاضمحلال الإشعاعي</div>
-                <div style="position: relative; height: 300px; border: 2px solid #333; border-radius: 10px; margin: 20px 0; background: #f9f9f9;">
-                    <!-- المحاور -->
-                    <div style="position: absolute; bottom: 30px; left: 50px; font-weight:700;">88</div>
-                    <div style="position: absolute; bottom: 30px; left: 100px; font-weight:700;">89</div>
-                    <div style="position: absolute; bottom: 30px; left: 150px; font-weight:700;">90</div>
-                    <div style="position: absolute; bottom: 30px; left: 200px; font-weight:700;">91</div>
-                    <div style="position: absolute; bottom: 30px; left: 250px; font-weight:700;">92</div>
-                    <div style="position: absolute; bottom: 30px; left: 300px; font-weight:700;">93</div>
+                <div class="decay-diagram">
+                    <!-- شبكة الإحداثيات -->
+                    <div style="position: absolute; bottom: 50px; left: 50px; font-size:0.7rem;">88</div>
+                    <div style="position: absolute; bottom: 50px; left: 100px; font-size:0.7rem;">89</div>
+                    <div style="position: absolute; bottom: 50px; left: 150px; font-size:0.7rem;">90</div>
+                    <div style="position: absolute; bottom: 50px; left: 200px; font-size:0.7rem;">91</div>
+                    <div style="position: absolute; bottom: 50px; left: 250px; font-size:0.7rem;">92</div>
+                    <div style="position: absolute; bottom: 50px; left: 300px; font-size:0.7rem;">93</div>
                     
-                    <div style="position: absolute; bottom: 30px; left: 20px; transform: rotate(-90deg);">228</div>
-                    <div style="position: absolute; bottom: 80px; left: 20px; transform: rotate(-90deg);">230</div>
-                    <div style="position: absolute; bottom: 130px; left: 20px; transform: rotate(-90deg);">232</div>
-                    <div style="position: absolute; bottom: 180px; left: 20px; transform: rotate(-90deg);">234</div>
-                    <div style="position: absolute; bottom: 230px; left: 20px; transform: rotate(-90deg);">236</div>
-                    <div style="position: absolute; bottom: 280px; left: 20px; transform: rotate(-90deg);">238</div>
-                    <div style="position: absolute; bottom: 330px; left: 20px; transform: rotate(-90deg);">240</div>
+                    <div style="position: absolute; bottom: 30px; left: 20px; font-size:0.7rem;">228</div>
+                    <div style="position: absolute; bottom: 80px; left: 20px; font-size:0.7rem;">230</div>
+                    <div style="position: absolute; bottom: 130px; left: 20px; font-size:0.7rem;">232</div>
+                    <div style="position: absolute; bottom: 180px; left: 20px; font-size:0.7rem;">234</div>
+                    <div style="position: absolute; bottom: 230px; left: 20px; font-size:0.7rem;">236</div>
+                    <div style="position: absolute; bottom: 280px; left: 20px; font-size:0.7rem;">238</div>
+                    <div style="position: absolute; bottom: 330px; left: 20px; font-size:0.7rem;">240</div>
                     
-                    <!-- نقاط السلسلة -->
-                    <div class="point A" style="bottom: 280px; left: 250px;" title="A (92,238)"></div>
+                    <!-- النقاط -->
+                    <div class="decay-point point-A" style="bottom: 280px; left: 250px;" title="A (92,238)"></div>
                     <div class="point-label" style="bottom: 280px; left: 250px;">A</div>
                     
-                    <div class="point B" style="bottom: 230px; left: 200px;" title="B (90,234)"></div>
-                    <div class="point-label" style="bottom: 230px; left: 200px;">B</div>
+                    <div class="decay-point point-B" style="bottom: 180px; left: 200px;" title="B (90,234)"></div>
+                    <div class="point-label" style="bottom: 180px; left: 200px;">B</div>
                     
-                    <div class="point C" style="bottom: 180px; left: 150px;" title="C (88,230)"></div>
-                    <div class="point-label" style="bottom: 180px; left: 150px;">C</div>
+                    <div class="decay-point point-C" style="bottom: 80px; left: 150px;" title="C (88,230)"></div>
+                    <div class="point-label" style="bottom: 80px; left: 150px;">C</div>
                     
-                    <div class="point D" style="bottom: 130px; left: 200px;" title="D (90,230)"></div>
+                    <div class="decay-point point-D" style="bottom: 130px; left: 200px;" title="D (90,230)"></div>
                     <div class="point-label" style="bottom: 130px; left: 200px;">D</div>
                     
-                    <div class="point E" style="bottom: 130px; left: 200px;" title="E (90,230)"></div>
+                    <div class="decay-point point-E" style="bottom: 130px; left: 200px;" title="E (90,230)"></div>
                     <div class="point-label" style="bottom: 130px; left: 200px;">E</div>
                     
                     <!-- الأسهم -->
-                    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" viewBox="0 0 400 400">
+                    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" viewBox="0 0 350 350">
                         <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
                                 <polygon points="0 0, 10 5, 0 10" fill="#1e4a6b"/>
                             </marker>
                         </defs>
-                        <line x1="250" y1="70" x2="200" y2="120" stroke="#1e4a6b" stroke-width="2" marker-end="url(#arrowhead)"/>
-                        <line x1="200" y1="120" x2="150" y2="170" stroke="#1e4a6b" stroke-width="2" marker-end="url(#arrowhead)"/>
-                        <line x1="150" y1="170" x2="200" y2="220" stroke="#1e4a6b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="250" y1="70" x2="200" y2="170" stroke="#1e4a6b" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="200" y1="170" x2="150" y2="270" stroke="#1e4a6b" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="150" y1="270" x2="200" y2="220" stroke="#1e4a6b" stroke-width="2" marker-end="url(#arrow)"/>
                     </svg>
                 </div>
             </div>
             
-            <!-- 8(أ) -->
-            <div class="question-text">(أ) كم عدد النيوترونات الموجودة في النواة A؟</div>
+            <div class="question-text">(أ) عدد نيوترونات A =</div>
             <div class="options">
                 <label class="option"><input type="radio" name="q8a" value="a"> 92</label>
                 <label class="option"><input type="radio" name="q8a" value="b"> 146</label>
                 <label class="option"><input type="radio" name="q8a" value="c"> 238</label>
-                <label class="option"><input type="radio" name="q8a" value="d"> 330</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q8a','b','عدد النيوترونات = العدد الكتلي - العدد الذري = 238 - 92 = 146')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q8a','b','238 - 92 = 146 نيوترون')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q8a" class="feedback"></div>
             
-            <!-- 8(ب1) -->
-            <div class="question-text" style="margin-top:20px;">(ب1) الإشعاع المنبعث من A إلى C هو:</div>
+            <div class="question-text">(ب1) A → C إشعاع:</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q8b1" value="a"> اضمحلال ألفا (α)</label>
-                <label class="option"><input type="radio" name="q8b1" value="b"> اضمحلال بيتا (β⁻)</label>
-                <label class="option"><input type="radio" name="q8b1" value="c"> أشعة جاما (γ)</label>
-                <label class="option"><input type="radio" name="q8b1" value="d"> اضمحلال β⁺</label>
+                <label class="option"><input type="radio" name="q8b1" value="a"> ألفا (α)</label>
+                <label class="option"><input type="radio" name="q8b1" value="b"> بيتا (β⁻)</label>
+                <label class="option"><input type="radio" name="q8b1" value="c"> جاما (γ)</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q8b1','a','نقص 2 في Z و 4 في A = اضمحلال ألفا')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q8b1','a','نقص 2 في Z و 4 في A = ألفا')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q8b1" class="feedback"></div>
             
-            <!-- 8(ب2) -->
-            <div class="question-text" style="margin-top:20px;">(ب2) الإشعاع المنبعث من C إلى D هو:</div>
+            <div class="question-text">(ب2) C → D إشعاع:</div>
             <div class="options">
-                <label class="option"><input type="radio" name="q8b2" value="a"> اضمحلال ألفا (α)</label>
-                <label class="option"><input type="radio" name="q8b2" value="b"> اضمحلال بيتا (β⁻)</label>
-                <label class="option"><input type="radio" name="q8b2" value="c"> أشعة جاما (γ)</label>
-                <label class="option"><input type="radio" name="q8b2" value="d"> اضمحلال β⁺</label>
+                <label class="option"><input type="radio" name="q8b2" value="a"> ألفا (α)</label>
+                <label class="option"><input type="radio" name="q8b2" value="b"> بيتا (β⁻)</label>
+                <label class="option"><input type="radio" name="q8b2" value="c"> جاما (γ)</label>
             </div>
-            <button class="check-btn" onclick="checkMCQ('q8b2','b','زيادة 1 في Z مع ثبات A = اضمحلال بيتا')"><i class="fas fa-check"></i> تحقق</button>
+            <button class="check-btn" onclick="checkMCQ('q8b2','b','زيادة 1 في Z مع ثبات A = بيتا')"><i class="fas fa-check"></i> تحقق</button>
             <div id="fb_q8b2" class="feedback"></div>
-            
-            <!-- 8(ج) -->
-            <div class="question-text" style="margin-top:20px;">(ج) النواة D ونواة أخرى هما نظيران. ما هي النواة الأخرى؟</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q8c" value="a"> ²³⁰₉₀Th</label>
-                <label class="option"><input type="radio" name="q8c" value="b"> ²³⁰₉₁Pa</label>
-                <label class="option"><input type="radio" name="q8c" value="c"> ²³⁴₉₀Th</label>
-                <label class="option"><input type="radio" name="q8c" value="d"> ²³⁸₉₂U</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q8c','a','D عند (90,230)، نظيرها الآخر هو الثوريوم-230 (²³⁰₉₀Th)')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q8c" class="feedback"></div>
         </div>
     </div>
 
     <!-- زر العودة -->
     <div class="scroll-top">
-        <button class="second-home" onclick="document.getElementById('mainContainer').scrollIntoView({behavior:'smooth'});"><i class="fas fa-arrow-up"></i> العودة للأعلى</button>
+        <button class="second-home" onclick="document.getElementById('mainContainer').scrollIntoView({behavior:'smooth'});"><i class="fas fa-arrow-up"></i> للأعلى</button>
     </div>
     <footer>
-        <i class="fas fa-book"></i> جميع الأسئلة كاملة مع الرسوم البيانية - الفيزياء النووية <i class="fas fa-flask"></i>
+        <i class="fas fa-atom"></i> جميع الرسومات - متوافق مع الجوال 100%
     </footer>
 </div>
 
 <script>
-    // متغيرات التقييم
     let correctAnswers = 0;
     let wrongAnswers = 0;
     let answeredQuestions = new Set();
-    const totalQuestions = 13; // عدد الأسئلة الكلي
 
-    // تحديث شريط التقييم
     function updateScoreBoard() {
         document.getElementById('correctCount').textContent = correctAnswers;
         document.getElementById('wrongCount').textContent = wrongAnswers;
@@ -783,21 +819,20 @@
             ratingSpan.textContent = 'لم يبدأ';
             ratingSpan.className = 'rating';
         } else if (percentage >= 90) {
-            ratingSpan.textContent = '🏆 ممتاز';
+            ratingSpan.textContent = 'ممتاز';
             ratingSpan.className = 'rating excellent';
         } else if (percentage >= 75) {
-            ratingSpan.textContent = '🌟 جيد جداً';
+            ratingSpan.textContent = 'جيد جداً';
             ratingSpan.className = 'rating good';
         } else if (percentage >= 50) {
-            ratingSpan.textContent = '👍 مقبول';
+            ratingSpan.textContent = 'مقبول';
             ratingSpan.className = 'rating medium';
         } else {
-            ratingSpan.textContent = '📚 يحتاج مذاكرة';
+            ratingSpan.textContent = 'حاول مرة';
             ratingSpan.className = 'rating bad';
         }
     }
 
-    // دالة تصحيح الاختيار من متعدد
     function checkMCQ(questionId, correctValue, explanation) {
         const radios = document.getElementsByName(questionId);
         let selected = null;
@@ -810,23 +845,23 @@
         const fbSpan = document.getElementById('fb_' + questionId);
         
         if (!selected) {
-            fbSpan.innerHTML = '⚠️ من فضلك اختر إجابة أولاً';
+            fbSpan.innerHTML = '⚠️ اختر إجابة';
             fbSpan.className = 'feedback wrong-feedback';
             return;
         }
 
         if (answeredQuestions.has(questionId)) {
-            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+            fbSpan.innerHTML = '⚠️ أجبت مسبقاً';
             fbSpan.className = 'feedback wrong-feedback';
             return;
         }
 
         if (selected === correctValue) {
-            fbSpan.innerHTML = '✅ إجابة صحيحة! أحسنت.';
+            fbSpan.innerHTML = '✅ إجابة صحيحة!';
             fbSpan.className = 'feedback correct-feedback';
             correctAnswers++;
         } else {
-            fbSpan.innerHTML = '❌ إجابة خاطئة. الإجابة الصحيحة هي: ' + explanation;
+            fbSpan.innerHTML = '❌ خاطئة. ' + explanation;
             fbSpan.className = 'feedback wrong-feedback';
             wrongAnswers++;
         }
@@ -835,21 +870,18 @@
         updateScoreBoard();
     }
 
-    // إعادة تعيين جميع الأسئلة
     function resetAllQuestions() {
         correctAnswers = 0;
         wrongAnswers = 0;
         answeredQuestions.clear();
         updateScoreBoard();
         
-        const feedbacks = document.querySelectorAll('[id^="fb_"]');
-        feedbacks.forEach(fb => {
+        document.querySelectorAll('[id^="fb_"]').forEach(fb => {
             fb.innerHTML = '';
             fb.className = 'feedback';
         });
         
-        const radios = document.querySelectorAll('input[type="radio"]');
-        radios.forEach(radio => {
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.checked = false;
         });
     }
