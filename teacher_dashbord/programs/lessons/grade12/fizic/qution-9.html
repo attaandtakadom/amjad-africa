@@ -553,11 +553,11 @@
             margin-top: 15px;
             font-size: 0.9rem;
         }
-.canvas-wrapper svg {
-    max-width: 100%;
-    height: auto;
-}
 
+        .canvas-wrapper svg {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -568,9 +568,11 @@
             <h1><i class="fas fa-atom"></i> الفيزياء النووية</h1>
             <div class="header-buttons">
                 <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة</button>
-                <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn"><i class="fas fa-home"></i>
+                <button class="home-btn"
+                    onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'"
+                    id="homeMainBtn"><i class="fas fa-home"></i>
                     الرئيسية</button>
-            
+
 
             </div>
         </div>
@@ -654,25 +656,27 @@
                 <!-- الرسم البياني -->
                 <div class="graph-container">
     <div class="graph-title">معدل التعداد (عد/دقيقة)</div>
-    <div class="canvas-wrapper" style="height: 300px;">
-        <svg viewBox="0 0 400 300" style="width: 100%; height: 100%;">
-            <line x1="50" y1="250" x2="350" y2="250" stroke="black" stroke-width="2"/> <line x1="50" y1="250" x2="50" y2="20" stroke="black" stroke-width="2"/>  <text x="10" y="25" font-size="12">5000</text>
-            <text x="10" y="140" font-size="12">2500</text>
-            <text x="35" y="255" font-size="12">0</text>
+    <div class="canvas-wrapper" style="height: 250px; overflow: visible;">
+        <svg viewBox="0 0 500 300" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; overflow: visible;">
+            <line x1="100" y1="250" x2="450" y2="250" stroke="black" stroke-width="3"/> <line x1="100" y1="250" x2="100" y2="20" stroke="black" stroke-width="3"/>  <text x="90" y="30" font-size="18" font-weight="bold" text-anchor="end">5000</text>
+            <text x="90" y="145" font-size="18" font-weight="bold" text-anchor="end">2500</text>
+            <text x="90" y="255" font-size="18" font-weight="bold" text-anchor="end">0</text>
 
-            <text x="50" y="270" font-size="12">0</text>
-            <text x="145" y="270" font-size="12">40</text>
-            <text x="245" y="270" font-size="12">80</text>
+            <text x="100" y="285" font-size="18" font-weight="bold" text-anchor="middle">0</text>
+            <text x="212" y="285" font-size="18" font-weight="bold" text-anchor="middle">40</text>
+            <text x="325" y="285" font-size="18" font-weight="bold" text-anchor="middle">80</text>
 
-            <line x1="50" y1="135" x2="150" y2="135" stroke="#999" stroke-dasharray="5,5"/>
-            <line x1="150" y1="135" x2="150" y2="250" stroke="#999" stroke-dasharray="5,5"/>
+            <line x1="100" y1="140" x2="212" y2="140" stroke="#999" stroke-dasharray="8,5" stroke-width="2"/>
+            <line x1="212" y1="140" x2="212" y2="250" stroke="#999" stroke-dasharray="8,5" stroke-width="2"/>
 
-            <path d="M 50 20 Q 110 100 150 135 T 320 230" fill="none" stroke="#1e4a6b" stroke-width="3"/>
+            <path d="M 100 20 Q 150 100 212 140 T 430 235" fill="none" stroke="#1e4a6b" stroke-width="4"/>
 
-            <circle cx="50" cy="20" r="4" fill="#e74c3c"/> <circle cx="150" cy="135" r="4" fill="#e74c3c"/> </svg>
+            <circle cx="100" cy="20" r="6" fill="#e74c3c"/>
+            <circle cx="212" cy="140" r="6" fill="#e74c3c"/>
+        </svg>
     </div>
-    <div style="text-align: center; margin-top: 10px; font-weight:700; color: #1e4a6b;">الزمن (بالدقائق)</div>
-</div>                <div class="question-text">عمر النصف =</div>
+    <div style="text-align: center; margin-top: 25px; font-weight:700; color: #1e4a6b;">الزمن (بالدقائق)</div>
+</div><div class="question-text">عمر النصف =</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q4" value="a"> 10 دقائق</label>
                     <label class="option"><input type="radio" name="q4" value="b"> 30 دقيقة</label>
@@ -803,43 +807,47 @@
 
                 <!-- رسم سلسلة الاضمحلال -->
                 <div class="graph-container">
-    <div class="graph-title">سلسلة الاضمحلال الإشعاعي (Z vs A)</div>
-    <div class="canvas-wrapper" style="height: 320px;">
-        <svg viewBox="0 0 400 320" style="width: 100%; height: 100%;">
-    <defs>
-        <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill="#1e4a6b" />
-        </marker>
-    </defs>
+                    <div class="graph-title">سلسلة الاضمحلال الإشعاعي (Z vs A)</div>
+                    <div class="canvas-wrapper" style="height: 320px;">
+                        <svg viewBox="0 0 400 320" style="width: 100%; height: 100%;">
+                            <defs>
+                                <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#1e4a6b" />
+                                </marker>
+                            </defs>
 
-    <line x1="60" y1="280" x2="360" y2="280" stroke="black" stroke-width="2"/> 
-    <line x1="60" y1="280" x2="60" y2="20" stroke="black" stroke-width="2"/>
+                            <line x1="60" y1="280" x2="360" y2="280" stroke="black" stroke-width="2" />
+                            <line x1="60" y1="280" x2="60" y2="20" stroke="black" stroke-width="2" />
 
-    <text x="180" y="315" font-weight="bold">العدد البروتوني (Z)</text>
-    <text x="10" y="150" font-weight="bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">العدد الكتلي (A)</text>
+                            <text x="180" y="315" font-weight="bold">العدد البروتوني (Z)</text>
+                            <text x="10" y="150" font-weight="bold"
+                                style="writing-mode: vertical-rl; transform: rotate(180deg);">العدد الكتلي (A)</text>
 
-    <text x="55" y="295" font-size="10">88</text>
-    <text x="155" y="295" font-size="10">90</text>
-    <text x="255" y="295" font-size="10">92</text>
-    
-    <text x="35" y="285" font-size="10">228</text>
-    <text x="35" y="215" font-size="10">230</text>
-    <text x="35" y="145" font-size="10">234</text>
-    <text x="35" y="75" font-size="10">238</text>
+                            <text x="55" y="295" font-size="10">88</text>
+                            <text x="155" y="295" font-size="10">90</text>
+                            <text x="255" y="295" font-size="10">92</text>
 
-    <line x1="260" y1="75" x2="165" y2="145" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
-    <circle cx="260" cy="75" r="4" fill="black"/><text x="265" y="70">A</text>
-    <circle cx="160" cy="145" r="4" fill="black"/><text x="150" y="140">B</text>
+                            <text x="35" y="285" font-size="10">228</text>
+                            <text x="35" y="215" font-size="10">230</text>
+                            <text x="35" y="145" font-size="10">234</text>
+                            <text x="35" y="75" font-size="10">238</text>
 
-    <line x1="160" y1="145" x2="260" y2="145" stroke="#3498db" stroke-width="2" marker-end="url(#arrow)"/>
-    <circle cx="210" cy="145" r="3" fill="gray"/><text x="210" y="140">C</text>
-    <circle cx="260" cy="145" r="4" fill="black"/><text x="265" y="140">D</text>
+                            <line x1="260" y1="75" x2="165" y2="145" stroke="#e74c3c" stroke-width="2"
+                                marker-end="url(#arrow)" />
+                            <circle cx="260" cy="75" r="4" fill="black" /><text x="265" y="70">A</text>
+                            <circle cx="160" cy="145" r="4" fill="black" /><text x="150" y="140">B</text>
 
-    <line x1="260" y1="145" x2="165" y2="215" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
-    <circle cx="160" cy="215" r="4" fill="black"/><text x="150" y="210">E</text>
-</svg>
-    </div>
-</div>
+                            <line x1="160" y1="145" x2="260" y2="145" stroke="#3498db" stroke-width="2"
+                                marker-end="url(#arrow)" />
+                            <circle cx="210" cy="145" r="3" fill="gray" /><text x="210" y="140">C</text>
+                            <circle cx="260" cy="145" r="4" fill="black" /><text x="265" y="140">D</text>
+
+                            <line x1="260" y1="145" x2="165" y2="215" stroke="#e74c3c" stroke-width="2"
+                                marker-end="url(#arrow)" />
+                            <circle cx="160" cy="215" r="4" fill="black" /><text x="150" y="210">E</text>
+                        </svg>
+                    </div>
+                </div>
                 <div class="question-text">(أ) عدد نيوترونات A =</div>
                 <div class="options">
                     <label class="option"><input type="radio" name="q8a" value="a"> 92</label>
@@ -871,88 +879,102 @@
                 <div id="fb_q8b2" class="feedback"></div>
             </div>
         </div>
-<div class="section-card">
-    <h2 class="section-title"><i class="fas fa-shield-alt"></i> الجزء الثالث: السلامة الإشعاعية</h2>
-    
-    <div class="question-box">
-        <div class="question-text">
-            <i class="fas fa-exclamation-triangle"></i> 9. لماذا يُمنع تناول الطعام أو الشراب بالقرب من المصادر المشعة في المعمل؟
-        </div>
-        <div class="options">
-            <label class="option"><input type="radio" name="q9" value="a"> أ) لأن الطعام يمتص الإشعاع ويفسد</label>
-            <label class="option"><input type="radio" name="q9" value="b"> ب) لتجنب دخول المواد المشعة للجسم (التلوث الداخلي)</label>
-            <label class="option"><input type="radio" name="q9" value="c"> ج) لأن الإشعاع يغير طعم الأكل</label>
-        </div>
-        <button class="check-btn" onclick="checkMCQ('q9','b','لمنع وصول جزيئات المادة المشعة إلى الجهاز الهضمي والدم')">
-            <i class="fas fa-check"></i> تحقق
-        </button>
-        <div id="fb_q9" class="feedback"></div>
-    </div>
+        <div class="section-card">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الجزء الثالث: السلامة الإشعاعية</h2>
 
-    <div class="question-box">
-        <div class="question-text">
-            <i class="fas fa-hands-wash"></i> 10. أي من الإجراءات التالية يقلل من التعرض للإشعاع الخارجي؟
-        </div>
-        <div class="options">
-            <label class="option"><input type="radio" name="q10" value="a"> أ) زيادة المسافة باستخدام ملقط طويل</label>
-            <label class="option"><input type="radio" name="q10" value="b"> ب) تقليل زمن التعرض للمصدر</label>
-            <label class="option"><input type="radio" name="q10" value="c"> ج) جميع ما سبق</label>
-        </div>
-        <button class="check-btn" onclick="checkMCQ('q10','c','المسافة والزمن والدروع هي الركائز الثلاث للحماية')">
-            <i class="fas fa-check"></i> تحقق
-        </button>
-        <div id="fb_q10" class="feedback"></div>
-    </div>
-</div>
+            <div class="question-box">
+                <div class="question-text">
+                    <i class="fas fa-exclamation-triangle"></i> 9. لماذا يُمنع تناول الطعام أو الشراب بالقرب من المصادر
+                    المشعة في المعمل؟
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q9" value="a"> أ) لأن الطعام يمتص الإشعاع
+                        ويفسد</label>
+                    <label class="option"><input type="radio" name="q9" value="b"> ب) لتجنب دخول المواد المشعة للجسم
+                        (التلوث الداخلي)</label>
+                    <label class="option"><input type="radio" name="q9" value="c"> ج) لأن الإشعاع يغير طعم الأكل</label>
+                </div>
+                <button class="check-btn"
+                    onclick="checkMCQ('q9','b','لمنع وصول جزيئات المادة المشعة إلى الجهاز الهضمي والدم')">
+                    <i class="fas fa-check"></i> تحقق
+                </button>
+                <div id="fb_q9" class="feedback"></div>
+            </div>
 
-<div class="section-card" style="border: 2px solid #f39c12;">
-    <h2 class="section-title" style="color: #f39c12;"><i class="fas fa-star"></i> كويز التحدي: هل أنت خبير نووي؟</h2>
-    
-    <div class="question-box">
-        <div class="question-text">
-            <i class="fas fa-microscope"></i> 11. إذا فقدت نواة عنصر ما جسيم "ألفا" ثم جسيمي "بيتا"، فإن النواة الناتجة تكون:
+            <div class="question-box">
+                <div class="question-text">
+                    <i class="fas fa-hands-wash"></i> 10. أي من الإجراءات التالية يقلل من التعرض للإشعاع الخارجي؟
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q10" value="a"> أ) زيادة المسافة باستخدام ملقط
+                        طويل</label>
+                    <label class="option"><input type="radio" name="q10" value="b"> ب) تقليل زمن التعرض للمصدر</label>
+                    <label class="option"><input type="radio" name="q10" value="c"> ج) جميع ما سبق</label>
+                </div>
+                <button class="check-btn"
+                    onclick="checkMCQ('q10','c','المسافة والزمن والدروع هي الركائز الثلاث للحماية')">
+                    <i class="fas fa-check"></i> تحقق
+                </button>
+                <div id="fb_q10" class="feedback"></div>
+            </div>
         </div>
-        <div class="options">
-            <label class="option"><input type="radio" name="q11" value="a"> أ) نظير للنواة الأصلية (نفس Z)</label>
-            <label class="option"><input type="radio" name="q11" value="b"> ب) عنصر جديد تماماً</label>
-            <label class="option"><input type="radio" name="q11" value="c"> ج) نواة لها نفس العدد الكتلي A</label>
-        </div>
-        <button class="check-btn" onclick="checkMCQ('q11','a','ألفا ينقص Z بـ 2، ثم 2 بيتا يزيدان Z بـ 2، فنعود لنفس العدد الذري (نظير)')">
-            <i class="fas fa-check"></i> تحقق
-        </button>
-        <div id="fb_q11" class="feedback"></div>
-    </div>
 
-    <div class="question-box">
-        <div class="question-text">
-            <i class="fas fa-hourglass-half"></i> 12. عينة إشعاعية عمر نصفها (20 يوم)، كم يتبقى منها بعد مرور (60 يوم)؟
-        </div>
-        <div class="options">
-            <label class="option"><input type="radio" name="q12" value="a"> أ) نصف العينة</label>
-            <label class="option"><input type="radio" name="q12" value="b"> ب) ربع العينة</label>
-            <label class="option"><input type="radio" name="q12" value="c"> ج) ثُمن العينة (12.5%)</label>
-        </div>
-        <button class="check-btn" onclick="checkMCQ('q12','c','60 يوم تعادل 3 أعمار نصف: (1/2) × (1/2) × (1/2) = 1/8')">
-            <i class="fas fa-check"></i> تحقق
-        </button>
-        <div id="fb_q12" class="feedback"></div>
-    </div>
+        <div class="section-card" style="border: 2px solid #f39c12;">
+            <h2 class="section-title" style="color: #f39c12;"><i class="fas fa-star"></i> كويز التحدي: هل أنت خبير نووي؟
+            </h2>
 
-    <div class="question-box">
-        <div class="question-text">
-            <i class="fas fa-bolt"></i> 13. أي من الإشعاعات التالية لا يتأثر بالمجال الكهربائي أو المغناطيسي؟
+            <div class="question-box">
+                <div class="question-text">
+                    <i class="fas fa-microscope"></i> 11. إذا فقدت نواة عنصر ما جسيم "ألفا" ثم جسيمي "بيتا"، فإن النواة
+                    الناتجة تكون:
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q11" value="a"> أ) نظير للنواة الأصلية (نفس
+                        Z)</label>
+                    <label class="option"><input type="radio" name="q11" value="b"> ب) عنصر جديد تماماً</label>
+                    <label class="option"><input type="radio" name="q11" value="c"> ج) نواة لها نفس العدد الكتلي
+                        A</label>
+                </div>
+                <button class="check-btn"
+                    onclick="checkMCQ('q11','a','ألفا ينقص Z بـ 2، ثم 2 بيتا يزيدان Z بـ 2، فنعود لنفس العدد الذري (نظير)')">
+                    <i class="fas fa-check"></i> تحقق
+                </button>
+                <div id="fb_q11" class="feedback"></div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-text">
+                    <i class="fas fa-hourglass-half"></i> 12. عينة إشعاعية عمر نصفها (20 يوم)، كم يتبقى منها بعد مرور
+                    (60 يوم)؟
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q12" value="a"> أ) نصف العينة</label>
+                    <label class="option"><input type="radio" name="q12" value="b"> ب) ربع العينة</label>
+                    <label class="option"><input type="radio" name="q12" value="c"> ج) ثُمن العينة (12.5%)</label>
+                </div>
+                <button class="check-btn"
+                    onclick="checkMCQ('q12','c','60 يوم تعادل 3 أعمار نصف: (1/2) × (1/2) × (1/2) = 1/8')">
+                    <i class="fas fa-check"></i> تحقق
+                </button>
+                <div id="fb_q12" class="feedback"></div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-text">
+                    <i class="fas fa-bolt"></i> 13. أي من الإشعاعات التالية لا يتأثر بالمجال الكهربائي أو المغناطيسي؟
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q13" value="a"> أ) أشعة جاما (γ)</label>
+                    <label class="option"><input type="radio" name="q13" value="b"> ب) جسيمات بيتا (β)</label>
+                    <label class="option"><input type="radio" name="q13" value="c"> ج) جسيمات ألفا (α)</label>
+                </div>
+                <button class="check-btn"
+                    onclick="checkMCQ('q13','a','جاما عبارة عن فوتونات متعادلة الشحنة فلا تنحرف')">
+                    <i class="fas fa-check"></i> تحقق
+                </button>
+                <div id="fb_q13" class="feedback"></div>
+            </div>
         </div>
-        <div class="options">
-            <label class="option"><input type="radio" name="q13" value="a"> أ) أشعة جاما (γ)</label>
-            <label class="option"><input type="radio" name="q13" value="b"> ب) جسيمات بيتا (β)</label>
-            <label class="option"><input type="radio" name="q13" value="c"> ج) جسيمات ألفا (α)</label>
-        </div>
-        <button class="check-btn" onclick="checkMCQ('q13','a','جاما عبارة عن فوتونات متعادلة الشحنة فلا تنحرف')">
-            <i class="fas fa-check"></i> تحقق
-        </button>
-        <div id="fb_q13" class="feedback"></div>
-    </div>
-</div>
 
 
 
