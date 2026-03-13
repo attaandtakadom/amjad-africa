@@ -565,13 +565,13 @@
     <div class="container" id="mainContainer">
         <!-- شريط العنوان -->
         <div class="header-bar">
-            <h1><i class="fas fa-atom"></i> الفيزياء النووية</h1>
+            <h1><i class="fas fa-atom"></i>    --الفيزياء النووية-- حل اسئلة الوحدة التاسعة</h1>
             <div class="header-buttons">
                 <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة</button>
                 <button class="home-btn"
                     onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'"
                     id="homeMainBtn"><i class="fas fa-home"></i>
-                    الرئيسية</button>
+                    الرئيسية</button> 
 
 
             </div>
@@ -617,21 +617,39 @@
             </div>
 
             <!-- سؤال 2 -->
-            <div class="question-box" id="q2">
-                <div class="question-text"><i class="fas fa-question-circle"></i> 2. <span
-                        class="math">Z^{123}_{60}</span> → 119 نوع الإشعاع؟</div>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q2" value="a"> أ) ألفا فقط</label>
-                    <label class="option"><input type="radio" name="q2" value="b"> ب) بيتا فقط</label>
-                    <label class="option"><input type="radio" name="q2" value="c"> ج) جاما فقط</label>
-                    <label class="option"><input type="radio" name="q2" value="d"> د) ألفا وبيتا</label>
-                </div>
-                <button class="check-btn" onclick="checkMCQ('q2','a','النقص = 4 (جسيم ألفا)')"><i
-                        class="fas fa-check"></i> تحقق</button>
-                <div id="fb_q2" class="feedback"></div>
-            </div>
+            <!-- سؤال 2 - باستخدام sub و sup -->
 
-            <!-- سؤال 3 -->
+<div class="question-box" id="q2">
+<div class="question-number">سؤال 2</div>
+<div class="question-text">
+<i class="fas fa-question-circle"></i>
+2. تضمحل النوى المشعة
+<span style="display: inline-block; vertical-align: middle; line-height: 1; text-align: center; margin: 0 5px;">
+<sup style="display: block; font-size: 0.8em;">123</sup>
+<sub style="display: block; font-size: 0.8em;">60</sub>
+</span>Y
+لتعطي
+<span style="display: inline-block; vertical-align: middle; line-height: 1; text-align: center; margin: 0 5px;">
+<sup style="display: block; font-size: 0.8em;">119</sup>
+<sub style="display: block; font-size: 0.8em;">58</sub>
+</span>Z
+. ما نوع الإشعاع المنبعث؟
+</div>
+<div class="options">
+<label class="option"><input type="radio" name="q2" value="a"> أ) جسيمات ألفا (α) فقط</label>
+<label class="option"><input type="radio" name="q2" value="b"> ب) جسيمات بيتا (β) فقط</label>
+<label class="option"><input type="radio" name="q2" value="c"> ج) أشعة جاما (γ) فقط</label>
+<label class="option"><input type="radio" name="q2" value="d"> د) جسيمات ألفا (α) وبيتا (β)</label>
+</div>
+<button class="check-btn" onclick="checkMCQ('q2','a','النقص في العدد الكتلي = 4 والعدد الذري = 2 يعود لجسيم ألفا.')">
+<i class="fas fa-check"></i> تحقق
+</button>
+<div id="fb_q2" class="feedback"></div>
+</div>
+
+
+<!-- سؤال 2 - باستخدام sub و sup مع المسافات -->
+<!-- سؤال 3 -->
             <div class="question-box" id="q3">
                 <div class="question-text"><i class="fas fa-question-circle"></i> 3. لإيقاف أشعة جاما نستخدم:</div>
                 <div class="options">
@@ -988,7 +1006,43 @@
             <i class="fas fa-atom"></i> جميع الرسومات - متوافق مع الجوال 100%
         </footer>
     </div>
+<button id="backToTop" class="top-btn" title="العودة للأعلى">↑</button>
 
+<style>
+.top-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background-color: #ff4757; /* لون أحمر واضح للتجربة */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999 !important; /* لضمان الظهور فوق كل شيء */
+    display: none; /* سيظهر عند النزول */
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+</style>
+
+<script>
+    window.onscroll = function() {
+        const btn = document.getElementById("backToTop");
+        // إذا نزل المستخدم أكثر من 100 بكسل يظهر السهم
+        if (window.pageYOffset > 100) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    document.getElementById("backToTop").onclick = function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+</script>
     <script>
         let correctAnswers = 0;
         let wrongAnswers = 0;

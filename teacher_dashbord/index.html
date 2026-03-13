@@ -1251,7 +1251,44 @@
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-chevron-up"></i>
     </div>
+<!------  كود السهم -->      
+<button id="backToTop" class="top-btn" title="العودة للأعلى">↑</button>
 
+<style>
+.top-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background-color: #ff4757; /* لون أحمر واضح للتجربة */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999 !important; /* لضمان الظهور فوق كل شيء */
+    display: none; /* سيظهر عند النزول */
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+</style>
+
+<script>
+    window.onscroll = function() {
+        const btn = document.getElementById("backToTop");
+        // إذا نزل المستخدم أكثر من 100 بكسل يظهر السهم
+        if (window.pageYOffset > 100) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    document.getElementById("backToTop").onclick = function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+</script>
     <script>
         // بيانات البرامج
         const programsData = {

@@ -861,6 +861,34 @@
                             </div>
                         
                         </div>
+<div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-theater-masks"></i>
+                                </div>
+                                <h3 class="lesson-title">  -اسئلة الباب السابع --الحث الكهرومغناطيسي</h3>
+                                <div class="lesson-subject">   - 🎗️🎗️ اسئلة الباب السابع</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">
+                                   الحث الكهرومغناطيسي  اسئلة الباب السابع    . مختارةالحث الكهرومغناطيسي  وتحليل.
+                                </p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعات</span>
+                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span> 
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/fizic/quetion-7.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
 
  <div class="lesson-card grade5">
                             <div class="lesson-header">
@@ -868,7 +896,7 @@
                                     <i class="fas fa-theater-masks"></i>
                                 </div>
                                 <h3 class="lesson-title"> 🥉🥉اسئلة الباب التاسع </h3>
-                                <div class="lesson-subject">\   -  اسئلة الباب التاسع</div>
+                                <div class="lesson-subject">\   -  اسئلة الباب التاسع --الفيزياء النووية</div>
                             </div>
                             <div class="lesson-content">
                                 <p class="lesson-desc">
@@ -1121,7 +1149,90 @@
             </div>
         </div>
     </div>
+<button id="backToTop" class="top-btn" title="العودة للأعلى">↑</button>
+<!--<style>
+/* تنسيق السهم وتثبيته في الزاوية */
+.top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #1e4a6b; /* لون مناسب لتصميمك */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* مخفي في البداية */
+    font-size: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: opacity 0.3s, transform 0.3s;
+}
 
+.top-btn:hover {
+    transform: scale(1.1);
+    background-color: #2c3e50;
+}
+</style>
+
+<script>
+    const topBtn = document.getElementById("backToTop");
+
+    // إظهار السهم فقط عندما ينزل المستخدم للأسفل 300 بكسل
+    window.onscroll = function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            topBtn.style.display = "block";
+        } else {
+            topBtn.style.display = "none";
+        }
+    };
+
+    // وظيفة التنقل السلس للأعلى عند الضغط
+    topBtn.addEventListener("click", function() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // هذا ما يجعله يتحرك بنعومة وليس فجأة
+        });
+    });
+</script>
+<!كود السهم-->
+<style>
+.top-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background-color: #ff4757; /* لون أحمر واضح للتجربة */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999 !important; /* لضمان الظهور فوق كل شيء */
+    display: none; /* سيظهر عند النزول */
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+</style>
+
+<script>
+    window.onscroll = function() {
+        const btn = document.getElementById("backToTop");
+        // إذا نزل المستخدم أكثر من 100 بكسل يظهر السهم
+        if (window.pageYOffset > 100) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    document.getElementById("backToTop").onclick = function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+</script>
+<!--end كود السهم-->
     <script>
         // تحديث الوقت
         function updateTime() {
@@ -1232,5 +1343,12 @@
             });
         });
     </script>
+
+
+
+
+
+
+    
 </body>
 </html>
