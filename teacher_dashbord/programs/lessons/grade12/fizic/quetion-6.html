@@ -1199,187 +1199,114 @@
     <button class="check-btn" onclick="checkMCQ('q_structural_4_rule','b','القاعدة المطبقة هي قاعدة فليمنج لليد اليسرى (قاعدة المحرك) لتحديد اتجاه القوة')"><i class="fas fa-check"></i> تحقق من القاعدة</button>
 </div>
 <!-- سؤال 5 - مكبر الصوت ذو الملف المتحرك -->
-<div class="question-box" id="q_structural_5">
-    <div class="question-number">سؤال 5</div>
-    <div class="question-text">
-        اشرح مع الرسم والبيانات عمل مكبر الصوت ذي الملف المتحرك.
-    </div>
+<style>
+    /* تثبيت عرض الصفحة ومنع التشوه */
+    .speaker-box { 
+        font-family: 'Segoe UI', Tahoma, sans-serif; 
+        direction: rtl; 
+        background: #ffffff; 
+        border-radius: 15px; 
+        padding: 20px; 
+        max-width: 450px; 
+        margin: 20px auto; 
+        border: 2px solid #eee; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        box-sizing: border-box;
+    }
+    .speaker-number { 
+        background: #e67e22; 
+        color: white; 
+        padding: 4px 12px; 
+        border-radius: 20px; 
+        font-size: 14px; 
+    }
+    .speaker-text { font-size: 18px; font-weight: bold; margin: 15px 0; color: #2c3e50; }
     
-    <!-- رسم توضيحي لمكبر الصوت -->
-    <div style="text-align: center; margin: 30px auto; background: #f9f9f9; padding: 20px; border-radius: 15px;">
-        <svg viewBox="0 0 400 300" width="100%" style="max-width: 400px;">
-            <!-- المغناطيس الدائم على شكل حلقة -->
-            <rect x="120" y="80" width="160" height="40" fill="#e74c3c" stroke="#333" stroke-width="2" rx="5" />
-            <text x="200" y="105" font-size="14" fill="white" text-anchor="middle">مغناطيس دائم N</text>
-            
-            <rect x="120" y="180" width="160" height="40" fill="#3498db" stroke="#333" stroke-width="2" rx="5" />
-            <text x="200" y="205" font-size="14" fill="white" text-anchor="middle">مغناطيس دائم S</text>
-            
-            <!-- الفجوة الهوائية (المجال المغناطيسي) -->
-            <rect x="180" y="120" width="40" height="60" fill="#f0f0f0" stroke="#333" stroke-width="1" stroke-dasharray="3,3" />
-            <text x="200" y="150" font-size="10" text-anchor="middle">مجال</text>
-            <text x="200" y="165" font-size="10" text-anchor="middle">مغناطيسي</text>
-            
-            <!-- الملف الصوتي (في الفجوة) -->
-            <rect x="185" y="130" width="30" height="40" fill="#ff9800" stroke="#333" stroke-width="2" rx="3" />
-            <text x="200" y="155" font-size="8" fill="white" text-anchor="middle">ملف</text>
-            
-            <!-- المخروط الورقي -->
-            <path d="M 200 150 Q 250 130 300 100 Q 320 120 300 140 Q 280 160 250 170 Q 220 180 200 180 Q 180 180 150 170 Q 120 160 100 140 Q 80 120 100 100 Q 120 80 150 90 Q 180 100 200 150" fill="#f5deb3" stroke="#333" stroke-width="2" opacity="0.8" />
-            <text x="250" y="80" font-size="12" fill="#8b4513">المخروط</text>
-            
-            <!-- حامل المخروط (السلة) -->
-            <line x1="150" y1="180" x2="100" y2="250" stroke="#333" stroke-width="2" />
-            <line x1="250" y1="180" x2="300" y2="250" stroke="#333" stroke-width="2" />
-            <line x1="100" y1="250" x2="300" y2="250" stroke="#333" stroke-width="2" />
-            
-            <!-- الأسلاك الكهربائية -->
-            <line x1="185" y1="170" x2="150" y2="220" stroke="#e74c3c" stroke-width="2" />
-            <text x="140" y="210" font-size="10" fill="#e74c3c">P</text>
-            
-            <line x1="215" y1="170" x2="250" y2="220" stroke="#3498db" stroke-width="2" />
-            <text x="260" y="210" font-size="10" fill="#3498db">Q</text>
-            
-            <!-- مصدر التيار المتردد -->
-            <circle cx="200" cy="260" r="15" fill="#fff" stroke="#333" stroke-width="2" />
-            <text x="200" y="265" font-size="12" text-anchor="middle">~</text>
-            <text x="200" y="280" font-size="10" text-anchor="middle">مصدر متردد</text>
-            
-            <!-- موجات الصوت -->
-            <path d="M 320 130 Q 340 120 360 130" stroke="#2ecc71" stroke-width="2" fill="none" />
-            <path d="M 320 150 Q 350 140 380 150" stroke="#2ecc71" stroke-width="2" fill="none" />
-            <path d="M 320 170 Q 340 160 360 170" stroke="#2ecc71" stroke-width="2" fill="none" />
-            <text x="350" y="100" font-size="14" fill="#2ecc71">موجات صوتية</text>
+    /* تنسيق الخيارات */
+    .opt { 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px; 
+        margin: 10px 0; 
+        border: 2px solid #f0f2f5; 
+        border-radius: 10px; 
+        cursor: pointer; 
+        transition: 0.2s; 
+        background: #fdfdfd; 
+    }
+    .opt:hover { border-color: #e67e22; }
+    
+    /* حالات الإجابة */
+    .is-correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; pointer-events: none; }
+    .is-wrong { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+    .res-tag { font-weight: bold; font-size: 14px; }
+</style>
+
+<div class="speaker-box">
+    <span class="speaker-number">سؤال 5</span>
+    <div class="speaker-text">لماذا نستخدم المخروط الورقي في مكبر الصوت؟</div>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <svg viewBox="0 0 400 200" width="100%" style="max-width: 300px;">
+            <rect x="100" y="20" width="200" height="30" fill="#e74c3c" rx="5" />
+            <rect x="100" y="150" width="200" height="30" fill="#3498db" rx="5" />
+            <rect x="180" y="70" width="40" height="60" fill="#f39c12" stroke="#d35400" />
+            <path d="M 220 100 L 340 30 L 340 170 L 220 100" fill="#f5deb3" stroke="#8b4513" stroke-width="2" opacity="0.8" />
         </svg>
     </div>
-    
-    <!-- شرح عمل مكبر الصوت -->
-    <div class="solution-details" style="margin-bottom: 25px;">
-        <div class="solution-title"><i class="fas fa-lightbulb"></i> عمل مكبر الصوت ذي الملف المتحرك:</div>
-        <p>• يتكون مكبر الصوت من: <span class="highlight">مغناطيس دائم</span> على شكل حلقة، <span class="highlight">ملف صوتي</span> موضوع في الفجوة الهوائية للمغناطيس، و<span class="highlight">مخروط ورقي</span> متصل بالملف.<br>
-        • يمر في الملف الصوتي <span class="highlight">تيار كهربائي متردد</span> يمثل الإشارة الصوتية المراد تضخيمها.<br>
-        • يتفاعل التيار المتردد في الملف مع <span class="highlight">المجال المغناطيسي</span> للمغناطيس الدائم.<br>
-        • هذا التفاعل يولد <span class="highlight">قوة مغناطيسية متغيرة</span> (F = BIL) تجعل الملف يتحرك ذهاباً وإياباً.<br>
-        • تنتقل حركة الملف إلى <span class="highlight">المخروط الورقي</span> المتصل به، فيتحرك المخروط بنفس التردد.<br>
-        • حركة المخروط تحدث <span class="highlight">تضاغطات وتخلخلات</span> في الهواء المحيط، مكونة <span class="highlight">موجات صوتية</span> تطابق الإشارة الأصلية.</p>
-    </div>
-    
-    <!-- أهمية المخروط -->
-    <div style="margin: 25px 0;">
-        <h3 style="color: #1e4a6b; margin-bottom: 15px;">لماذا يكون المخروط ضرورياً؟</h3>
-        
-        <div class="vertical-options">
-            <label><input type="radio" name="q_structural_5_cone" value="a"> (أ) لزيادة كتلة الملف</label>
-            <label><input type="radio" name="q_structural_5_cone" value="b"> (ب) لتحويل الحركة الميكانيكية الصغيرة إلى موجات صوتية مسموعة</label>
-            <label><input type="radio" name="q_structural_5_cone" value="c"> (ج) لتجميل شكل السماعة</label>
-            <label><input type="radio" name="q_structural_5_cone" value="d"> (د) لعزل الملف عن الرطوبة</label>
+
+    <div class="group">
+        <p><b>1. الدور الأساسي للمخروط:</b></p>
+        <div class="opt" onclick="runCheck(this, false)">
+            <span>(أ) زيادة قوة المغناطيس</span>
+            <span class="res-tag"></span>
         </div>
-        
-        <div class="solution-details" style="margin-top: 15px;">
-            <div class="solution-title"><i class="fas fa-lightbulb"></i> أهمية المخروط:</div>
-            <p>• المخروط <span class="highlight">يضخم الحركة</span> الميكانيكية الصغيرة للملف ويحولها إلى حركة كبيرة للهواء.<br>
-            • <span class="highlight">مساحة سطح المخروط الكبيرة</span> تسمح بدفع كمية أكبر من الهواء، مما ينتج صوتاً أعلى.<br>
-            • المخروط مصنوع من مواد <span class="highlight">خفيفة وصلبة</span> في نفس الوقت (مثل الورق أو الألياف) ليستجيب بسرعة لتغيرات التيار.<br>
-            • بدون المخروط، سيكون الصوت الناتج <span class="highlight">ضعيفاً جداً</span> وغير مسموع لأن الملف صغير ولا يستطيع تحريك كمية كافية من الهواء.</p>
+        <div class="opt" onclick="runCheck(this, true)">
+            <span>(ب) تحويل الاهتزاز لموجات مسموعة</span>
+            <span class="res-tag"></span>
         </div>
     </div>
-    
-    <!-- تأثير وضع مكبر الصوت في الفراغ -->
-    <div style="margin: 25px 0;">
-        <h3 style="color: #1e4a6b; margin-bottom: 15px;">ناقش تأثير وضع مكبر الصوت في الفراغ:</h3>
-        
-        <div class="vertical-options">
-            <label><input type="radio" name="q_structural_5_vacuum" value="a"> (أ) يعمل بشكل أفضل لأن الفراغ يوصل الصوت بسرعة أكبر</label>
-            <label><input type="radio" name="q_structural_5_vacuum" value="b"> (ب) لا نسمع صوتاً لأن الصوت يحتاج إلى وسط مادي لينتقل</label>
-            <label><input type="radio" name="q_structural_5_vacuum" value="c"> (ج) يعمل بشكل طبيعي ولا فرق بين الفراغ والهواء</label>
-            <label><input type="radio" name="q_structural_5_vacuum" value="d"> (د) ينتج صوتاً أقوى بسبب عدم وجود مقاومة للهواء</label>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="group">
+        <p><b>2. عند وضع المكبر في الفراغ:</b></p>
+        <div class="opt" onclick="runCheck(this, false)">
+            <span>(أ) نسمع صوتاً أقوى</span>
+            <span class="res-tag"></span>
         </div>
-        
-        <div class="solution-details" style="margin-top: 15px;">
-            <div class="solution-title"><i class="fas fa-lightbulb"></i> تأثير الفراغ على مكبر الصوت:</div>
-            <p>• عند وضع مكبر الصوت في الفراغ، <span class="highlight">لا نسمع أي صوت</span> على الرغم من أن الملف يتحرك والمخروط يهتز.<br>
-            • السبب: <span class="highlight">الموجات الصوتية تحتاج إلى وسط مادي</span> (مثل الهواء أو الماء أو المواد الصلبة) لتنتقل.<br>
-            • الصوت هو <span class="highlight">اهتزازات ميكانيكية</span> تنتقل عبر جزيئات الوسط. في الفراغ، لا توجد جزيئات لتحمل هذه الاهتزازات.<br>
-            • مثال: لو وضعنا جرساً في ناقوس زجاجي وفرغنا الهواء، لن نسمع رنينه رغم أننا نرى المطرقة تضرب الجرس.<br>
-            • هذا يثبت أن <span class="highlight">الصوت لا ينتشر في الفراغ</span>، بينما الضوء ينتشر (لأنه موجة كهرومغناطيسية).</p>
+        <div class="opt" onclick="runCheck(this, true)">
+            <span>(ب) لا نسمع صوتاً</span>
+            <span class="res-tag"></span>
         </div>
     </div>
-    
-    <!-- ملخص البيانات -->
-    <div style="margin: 25px 0; background: #f0f8ff; padding: 15px; border-radius: 10px; border-right: 5px solid #1e4a6b;">
-        <h3 style="color: #1e4a6b; margin-bottom: 10px;">📊 البيانات الأساسية:</h3>
-        <p><strong>• المغناطيس الدائم:</strong> يخلق مجالاً مغناطيسياً ثابتاً في الفجوة الهوائية.<br>
-        <strong>• الملف الصوتي:</strong> عدد لفاته (N)، مقاومته (R)، يمر به تيار متردد (I).<br>
-        <strong>• القوة المؤثرة:</strong> F = B I L (حيث B كثافة الفيض، I التيار، L طول السلك).<br>
-        <strong>• التردد:</strong> يحدد نغمة الصوت (عالية/منخفضة).<br>
-        <strong>• شدة الصوت:</strong> تتناسب مع سعة اهتزاز المخروط (قوة التيار).</p>
-    </div>
-    
-    <!-- أسئلة الاختيار -->
-    <div style="margin-top: 20px;">
-        <p><strong>اختر الإجابة الصحيحة:</strong></p>
-        
-        <p><strong>1. سبب ضرورة المخروط في مكبر الصوت:</strong></p>
-        <div class="vertical-options">
-            <label><input type="radio" name="q_structural_5_q1" value="a"> (أ) لزيادة كتلة الملف</label>
-            <label><input type="radio" name="q_structural_5_q1" value="b"> (ب) لتحويل الحركة الميكانيكية الصغيرة إلى موجات صوتية مسموعة</label>
-            <label><input type="radio" name="q_structural_5_q1" value="c"> (ج) لتجميل شكل السماعة</label>
-        </div>
-        
-        <p><strong>2. عند وضع مكبر الصوت في الفراغ:</strong></p>
-        <div class="vertical-options">
-            <label><input type="radio" name="q_structural_5_q2" value="a"> (أ) نسمع صوتاً أقوى</label>
-            <label><input type="radio" name="q_structural_5_q2" value="b"> (ب) لا نسمع صوتاً لأن الصوت يحتاج إلى وسط مادي</label>
-            <label><input type="radio" name="q_structural_5_q2" value="c"> (ج) نسمع صوتاً أضعف</label>
-        </div>
-    </div>
-    
-    <div id="fb_q_structural_5" class="feedback"></div>
-    <button class="check-btn" onclick="checkStructuralQ5()"><i class="fas fa-check"></i> تحقق من الإجابات</button>
 </div>
 
-<!-- إضافة دالة للتحقق من السؤال الخامس -->
 <script>
-    function checkStructuralQ5() {
-        const q1 = document.querySelector('input[name="q_structural_5_q1"]:checked');
-        const q2 = document.querySelector('input[name="q_structural_5_q2"]:checked');
-        
-        const fbSpan = document.getElementById('fb_q_structural_5');
-        
-        if (!q1 || !q2) {
-            fbSpan.innerHTML = '⚠️ أجب على جميع الأسئلة أولاً';
-            fbSpan.className = 'feedback wrong-feedback';
-            return;
-        }
-        
-        if (answeredQuestions.has('q_structural_5')) {
-            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
-            fbSpan.className = 'feedback wrong-feedback';
-            return;
-        }
-        
-        const correct1 = (q1.value === 'b');
-        const correct2 = (q2.value === 'b');
-        
-        if (correct1 && correct2) {
-            fbSpan.innerHTML = '✅ إجابات صحيحة! أحسنت.';
-            fbSpan.className = 'feedback correct-feedback';
-            correctAnswers++;
+    function runCheck(el, isRight) {
+        // العثور على الخيارات في نفس المجموعة الحالية فقط
+        const currentGroup = el.parentElement;
+        const allOpts = currentGroup.querySelectorAll('.opt');
+
+        if (isRight) {
+            // مسح أي "خطأ" سابق في نفس السؤال
+            allOpts.forEach(o => {
+                o.classList.remove('is-wrong');
+                o.querySelector('.res-tag').innerHTML = '';
+            });
+            // تمييز الصحيح وقفل المجموعة
+            el.classList.add('is-correct');
+            el.querySelector('.res-tag').innerHTML = '✅ صحيح';
+            allOpts.forEach(o => o.style.pointerEvents = 'none');
         } else {
-            let wrongParts = [];
-            if (!correct1) wrongParts.push('السؤال 1');
-            if (!correct2) wrongParts.push('السؤال 2');
-            
-            fbSpan.innerHTML = '❌ إجابات خاطئة في: ' + wrongParts.join('، ') + '. راجع الشرح أعلاه.';
-            fbSpan.className = 'feedback wrong-feedback';
-            wrongAnswers++;
+            // تمييز الخطأ فقط والسماح بإعادة المحاولة
+            el.classList.add('is-wrong');
+            el.querySelector('.res-tag').innerHTML = '❌ خطأ';
         }
-        
-        answeredQuestions.add('q_structural_5');
-        updateScoreBoard();
     }
 </script>
- <!-- سؤال 6 -->
+<!-- سؤال 6 -->
         <div class="question-box" id="q_mag_6">
             <div class="question-number">سؤال 6</div>
             <div class="question-text">
