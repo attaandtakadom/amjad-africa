@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>الباب السادس - المغناطيسية</title>
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- خط Cairo للعربية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f5fa 0%, #e0e9f0 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid #c0d4e6;
+        }
+
+        /* رأس الصفحة */
+        .header-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #1e4a6b;
+            padding-bottom: 15px;
+        }
+        @media (min-width: 600px) {
+            .header-bar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        .header-bar h1 {
+            color: #1e4a6b;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            background: rgba(30,74,107,0.05);
+            padding: 8px 20px;
+            border-radius: 50px;
+            width: 100%;
+        }
+        .header-bar h1 i {
+            color: #ff9800;
+            margin-left: 10px;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .home-btn, .reset-btn {
+            border: none;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 0 #0d2a3b;
+            transition: 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            justify-content: center;
+        }
+        .home-btn {
+            background: #1e4a6b;
+            color: white;
+        }
+        .reset-btn {
+            background: #ff9800;
+            color: white;
+            box-shadow: 0 4px 0 #b86600;
+        }
+        .home-btn:active, .reset-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* شريط التقييم */
+        .score-bar {
+            background: linear-gradient(145deg, #ffffff, #f0f7ff);
+            border-radius: 60px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            border: 2px solid #b0c9dd;
+        }
+        @media (min-width: 600px) {
+            .score-bar {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 15px 30px;
+            }
+        }
+        .score-item {
+            text-align: center;
+        }
+        .score-label {
+            color: #1e4a6b;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .score-value, .score-percentage {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: rgba(30,74,107,0.1);
+            padding: 5px 12px;
+            border-radius: 40px;
+            border: 2px solid #1e4a6b;
+            display: inline-block;
+            min-width: 60px;
+        }
+        .score-percentage {
+            border-color: #ff9800;
+            background: rgba(255,152,0,0.1);
+        }
+        .rating {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: #2ecc71;
+            padding: 5px 20px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+        .rating.bad { background: #e74c3c; }
+        .rating.medium { background: #f39c12; }
+        .rating.good { background: #3498db; }
+        .rating.excellent { background: #2ecc71; }
+
+        /* بطاقات الأسئلة */
+        .question-box {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            direction: rtl;
+        }
+
+        /* رقم السؤال */
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e4a6b, #3498db);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        /* نص السؤال */
+        .question-text {
+            font-size: 1.15em;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* إطارات الخيارات */
+        .final-fix-frame {
+            flex: 1 1 180px;
+            max-width: 220px;
+            background: #fdfdfd;
+            border: 2px solid #edf2f7;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .final-fix-frame:hover {
+            border-color: #3498db;
+            background-color: #f7fbff;
+            transform: translateY(-3px);
+        }
+
+        /* زر التحقق */
+        .check-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            margin-top: 15px;
+        }
+
+        .check-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        /* منطقة التغذية الراجعة */
+        .feedback {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            min-height: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .correct-feedback {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .wrong-feedback {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* زر الصعود */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e4a6b;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top:hover {
+            background: #ff9800;
+            transform: translateY(-5px);
+        }
+
+        /* تنسيق الخيارات الرأسية */
+        .vertical-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 20px;
+        }
+
+        .vertical-options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .vertical-options input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1e4a6b;
+        }
+
+        /* تعديلات للنقال */
+        @media (max-width: 600px) {
+            .question-box {
+                padding: 15px;
+            }
+            .final-fix-frame {
+                flex: 1 1 140px;
+            }
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <!-- شريط العنوان -->
+        <div class="header-bar">
+            <h1><i class="fas fa-magnet"></i> الباب السادس - المغناطيسية</h1>
+            <div class="header-buttons">
+                <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة تعيين</button>
+                <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+            </div>
+        </div>
+
+        <!-- شريط التقييم -->
+        <div class="score-bar" id="scoreBar">
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> الصحيحة</span>
+                <span class="score-value" id="correctCount">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-times-circle" style="color:#e74c3c;"></i> الخاطئة</span>
+                <span class="score-value" id="wrongCount">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-percent"></i> النسبة</span>
+                <span class="score-percentage" id="percentage">0%</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-star"></i> التقييم</span>
+                <span class="rating" id="rating">لم يبدأ</span>
+            </div>
+        </div>
+
+
+    <style>
+       
+       
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        /* تنسيق منطقة الرسم (السلك والبوصلة) */
+        .diagram-area {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fdfdfd;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        /* تنسيق الخيارات */
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .option-box {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            width: 120px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-box:hover {
+            border-color: #3498db;
+            background-color: #f7fbff;
+        }
+
+        .option-box.selected {
+            border-color: #2ecc71;
+            background-color: #eafaf1;
+        }
+
+        /* تنسيق البوصلة داخل الخيار */
+        .option-diagram {
+            margin-top: 5px;
+        }
+
+        button.check-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        button.check-btn:hover {
+            background-color: #2980b9;
+        }
+
+        #result-area {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-height: 1.2em;
+        }
+    </style>
+
+
+    <div class="question-box" id="q_mag_1">
+    <div class="question-number">سؤال 1</div>
+    <div class="question-text">
+        <i class="fas fa-compass"></i> 
+        1. يبين الرسم سلكاً مستقيماً يحمل تياراً في اتجاه اليسار. وُضعت بوصلة تحت السلك مباشرة. أي مما يلي يوضح الاتجاه الصحيح لانحراف إبرة البوصلة؟
+    </div>
+    
+    <div style="text-align: center; margin: 20px auto; background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #eee;">
+        <svg viewBox="0 0 200 110" width="240">
+            <line x1="20" y1="40" x2="180" y2="40" stroke="#333" stroke-width="6" stroke-linecap="round"/>
+            <path d="M 40 40 L 60 30 L 60 50 Z" fill="red"/>
+            <text x="35" y="25" font-size="14" font-weight="bold" fill="red">I</text>
+            
+            <circle cx="100" cy="80" r="20" fill="none" stroke="#999" stroke-width="2"/>
+            <text x="100" y="68" font-size="8" text-anchor="middle">N</text>
+            <text x="100" y="97" font-size="8" text-anchor="middle">S</text>
+            <text x="115" y="83" font-size="8">E</text>
+            <text x="80" y="83" font-size="8">W</text>
+            <line x1="100" y1="80" x2="100" y2="70" stroke="#ccc" stroke-width="2"/> 
+        </svg>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
+        
+        <style>
+            .compass-option {
+                flex: 1 1 140px; max-width: 150px; height: 160px;
+                background: #ffffff; border: 2px solid #edf2f7; border-radius: 15px;
+                display: flex; flex-direction: column; align-items: center; justify-content: center;
+                transition: 0.3s; cursor: pointer;
+            }
+            .compass-option:hover { border-color: #3498db; background: #f7fbff; }
+            .compass-option svg { width: 90px; height: 90px; overflow: visible; }
+            .compass-option input { margin-bottom: 10px; }
+        </style>
+
+        
+        <style>
+            .compass-option {
+                flex: 1 1 140px; max-width: 150px; height: 160px;
+                background: #ffffff; border: 2px solid #edf2f7; border-radius: 15px;
+                display: flex; flex-direction: column; align-items: center; justify-content: center;
+                transition: 0.3s; cursor: pointer;
+            }
+            .compass-option:hover { border-color: #3498db; background: #f7fbff; }
+            .compass-option svg { width: 95px; height: 95px; overflow: visible; }
+        </style>
+
+        <div class="compass-option">
+            <input type="radio" name="q_mag_1" value="a">
+            <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#333" stroke-width="2"/>
+                <text x="50" y="25" font-size="12" text-anchor="middle">N</text>
+                <text x="50" y="82" font-size="12" text-anchor="middle">S</text>
+                <text x="82" y="54" font-size="12">E</text>
+                <text x="10" y="54" font-size="12">W</text>
+                <line x1="50" y1="50" x2="20" y2="50" stroke="red" stroke-width="3"/>
+                <path d="M 20 50 L 30 45 L 30 55 Z" fill="red"/>
+                <circle cx="50" cy="50" r="3" fill="#333"/>
+            </svg>
+            <div style="font-weight:bold; margin-top:5px;">(أ)</div>
+        </div>
+
+        <div class="compass-option">
+            <input type="radio" name="q_mag_1" value="b">
+            <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#333" stroke-width="2"/>
+                <text x="50" y="25" font-size="12" text-anchor="middle">N</text>
+                <text x="50" y="82" font-size="12" text-anchor="middle">S</text>
+                <text x="82" y="54" font-size="12">E</text>
+                <text x="10" y="54" font-size="12">W</text>
+                <line x1="50" y1="50" x2="50" y2="80" stroke="red" stroke-width="3"/>
+                <path d="M 50 80 L 45 70 L 55 70 Z" fill="red"/>
+                <circle cx="50" cy="50" r="3" fill="#333"/>
+            </svg>
+            <div style="font-weight:bold; margin-top:5px;">(ب)</div>
+        </div>
+
+        <div class="compass-option">
+            <input type="radio" name="q_mag_1" value="c">
+            <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#333" stroke-width="2"/>
+                <text x="50" y="25" font-size="12" text-anchor="middle">N</text>
+                <text x="50" y="82" font-size="12" text-anchor="middle">S</text>
+                <text x="82" y="54" font-size="12">E</text>
+                <text x="10" y="54" font-size="12">W</text>
+                <line x1="50" y1="50" x2="80" y2="50" stroke="red" stroke-width="3"/>
+                <path d="M 80 50 L 70 45 L 70 55 Z" fill="red"/>
+                <circle cx="50" cy="50" r="3" fill="#333"/>
+            </svg>
+            <div style="font-weight:bold; margin-top:5px;">(ج)</div>
+        </div>
+
+        <div class="compass-option">
+            <input type="radio" name="q_mag_1" value="d">
+            <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#333" stroke-width="2"/>
+                <text x="50" y="25" font-size="12" text-anchor="middle">N</text>
+                <text x="50" y="82" font-size="12" text-anchor="middle">S</text>
+                <text x="82" y="54" font-size="12">E</text>
+                <text x="10" y="54" font-size="12">W</text>
+                <line x1="50" y1="50" x2="50" y2="20" stroke="red" stroke-width="3"/>
+                <path d="M 50 20 L 45 30 L 55 30 Z" fill="red"/>
+                <circle cx="50" cy="50" r="3" fill="#333"/>
+            </svg>
+            <div style="font-weight:bold; margin-top:5px;">(د)</div>
+        </div>
+
+    </div>
+
+    <div id="fb_q_mag_1" class="feedback"></div>
+
+    <button class="check-btn" style="width: 100%; margin-top: 20px;" 
+            onclick="checkMCQ('q_mag_1','b','بما أن التيار يتجه لليسار، وحسب قاعدة اليد اليمنى، يكون اتجاه المجال تحت السلك نحو الجنوب (S)، لذا الخيار الصحيح هو (ب).')">
+        تحقق من الإجابة
+    </button>
+</div>  <script>
+        let selectedOptionId = null;
+
+        function selectOption(optionId) {
+            selectedOptionId = optionId;
+            // إزالة التحديد من جميع الخيارات
+            const boxes = document.querySelectorAll('.option-box');
+            boxes.forEach(box => box.classList.remove('selected'));
+            
+            // إضافة التحديد للخيار المختار
+            const selectedBox = event.currentTarget;
+            selectedBox.classList.add('selected');
+        }
+
+        function checkAnswer() {
+            const resultArea = document.getElementById('result-area');
+            if (selectedOptionId === null) {
+                resultArea.innerHTML = '<span style="color: #e67e22;">يرجى اختيار إجابة أولاً!</span>';
+                return;
+            }
+
+            if (selectedOptionId === 'b') {
+                resultArea.innerHTML = '<span style="color: #27ae60;">إجابة صحيحة! 🎉</span>';
+                showSolution();
+            } else {
+                resultArea.innerHTML = '<span style="color: #c0392b;">إجابة خاطئة. حاول مرة أخرى!</span>';
+            }
+        }
+
+        function showSolution() {
+            const solutionText = `
+                <div style="margin-top: 15px; text-align: right; border-top: 1px solid #eee; padding-top: 15px;">
+                    <strong>طريقة الحل: قاعدة اليد اليمنى لقبضة السلك</strong><br>
+                    1. نتخيل أننا نقبض على السلك باليد اليمنى.<br>
+                    2. نجعل الإبهام يشير إلى اتجاه التيار (للخلف، في اتجاه السهم).<br>
+                    3. ستشير الأصابع الملتفة تحت السلك إلى اتجاه المجال المغناطيسي.<br>
+                    4. في هذه الحالة، الأصابع تحت السلك تلتف من اليمين (الشرق) نحو اليسار (الغرب).<br>
+                    5. لذلك، ستنحرف إبرة البوصلة نحو <strong>الغرب</strong>.
+                </div>
+            `;
+            const resultArea = document.getElementById('result-area');
+            resultArea.innerHTML += solutionText;
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ==================== الأسئلة ==================== -->
+
+        <!-- سؤال 1 -->
+        
+        <!-- سؤال 2 -->
+        <div class="question-box" id="q_mag_2">
+    <div class="question-number">سؤال 2</div>
+    <div class="question-text">
+        <i class="fas fa-microchip"></i> 
+        2. يبين الشكل شعاعاً من الإلكترونات يدخل مجالاً مغناطيسياً ناشئاً عن قطبين. ما المسار التالي للإلكترونات في المجال؟
+    </div>
+
+    <div style="text-align: center; margin: 20px;">
+        <svg viewBox="0 0 200 120" width="220">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+                </marker>
+            </defs>
+            
+            <rect x="20" y="20" width="40" height="80" fill="#f8d7da" stroke="#c0392b" stroke-width="2"/>
+            <text x="40" y="65" font-weight="bold" fill="#c0392b">N</text>
+            
+            <rect x="140" y="20" width="40" height="80" fill="#d1ecf1" stroke="#2980b9" stroke-width="2"/>
+            <text x="160" y="65" font-weight="bold" fill="#2980b9">S</text>
+            
+            <line x1="100" y1="10" x2="100" y2="45" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="105" y="25" font-size="10" font-weight="bold">شعاع إلكترونات</text>
+            
+            <line x1="60" y1="60" x2="140" y2="60" stroke="#ccc" stroke-width="1" stroke-dasharray="4"/>
+        </svg>
+    </div>
+
+    <div class="vertical-options" style="display: flex; flex-direction: column; gap: 10px; padding: 0 20px; text-align: right;">
+        <label style="cursor:pointer;"><input type="radio" name="q_mag_2" value="a"> (أ) مسار قطع مكافئ نحو S</label>
+        <label style="cursor:pointer;"><input type="radio" name="q_mag_2" value="b"> (ب) مسار دائري نحو N</label>
+        <label style="cursor:pointer;"><input type="radio" name="q_mag_2" value="c"> (ج) مسار دائري إلى داخل الورقة</label>
+        <label style="cursor:pointer;"><input type="radio" name="q_mag_2" value="d"> (د) مسار مستقيم لأسفل</label>
+    </div>
+
+    <div id="fb_q_mag_2" class="feedback"></div>
+    <button class="check-btn" style="width: 100%; margin-top: 20px;" 
+            onclick="checkMCQ('q_mag_2','c','تنبيه: بما أن الشعاع إلكترونات، فإن اتجاه التيار التقليدي يكون لأعلى. باستخدام قاعدة اليد اليسرى (السبابة من N لـ S والإصبع الوسطى لأعلى)، يشير الإبهام لداخل الورقة.')">
+        <i class="fas fa-check"></i> تحقق
+    </button>
+</div>
+        <!-- سؤال 3 -->
+        <div class="question-box" id="q_mag_3">
+            <div class="question-number">سؤال 3</div>
+            <div class="question-text">
+                في محرك التيار المستمر، يضمن عاكس التيار المقطع أن:
+            </div>
+
+            <div class="vertical-options">
+                <label><input type="radio" name="q_mag_3" value="a"> (أ) اتجاه التيار في الملف ينعكس بعد كل نصف دورة.</label>
+                <label><input type="radio" name="q_mag_3" value="b"> (ب) سريان التيار في الملف يكون ثابتاً.</label>
+                <label><input type="radio" name="q_mag_3" value="c"> (ج) التيار في الملف يشكل زاوية قائمة مع المجال.</label>
+            </div>
+
+            <div id="fb_q_mag_3" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q_mag_3','a','وظيفة العاكس هي عكس اتجاه التيار كل نصف دورة للحفاظ على استمرار الدوران في نفس الاتجاه.')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 4 -->
+        <!-- سؤال 4 - وظيفة أسطوانة الحديد المطاوع -->
+<div class="question-box" id="q4">
+    <div class="question-number">سؤال 4</div>
+    <div class="question-text">
+        ما وظيفة أسطوانة الحديد المطاوع في المحول الكهربائي؟
+    </div>
+    <div class="vertical-options">
+        <label><input type="radio" name="q4" value="a"> (أ) تقليل التيار الكهربائي في الملف</label>
+        <label><input type="radio" name="q4" value="b"> (ب) تركيز التدفق المغناطيسي بين الملفين</label>
+        <label><input type="radio" name="q4" value="c"> (ج) زيادة المقاومة الكهربائية</label>
+        <label><input type="radio" name="q4" value="d"> (د) تقليل كفاءة المحول</label>
+    </div>
+    <div id="fb_q4" class="feedback"></div>
+    <button class="check-btn" onclick="checkMCQ('q4','b','قلب الحديد المطاوع يركز التدفق المغناطيسي ويزيد الربط بين الملفين')"><i class="fas fa-check"></i> تحقق</button>
+</div>
+        <!-- سؤال 5 -->
+        <!-- سؤال 5 - المكثف والمقطع المحوري -->
+<!-- سؤال 5 - مكبر الصوت (Loudspeaker) -->
+<!-- سؤال 5 - مكبر الصوت (Loudspeaker) -->
+<div class="question-box" id="q5">
+    <div class="question-number">سؤال 5</div>
+    <div class="question-text">
+        ما يحدث عندما تُغذى الأسلاك P، Q بتيار متغير في مكبر الصوت؟
+    </div>
+    
+    <!-- رسم توضيحي لمكبر الصوت -->
+    <div style="text-align: center; margin: 30px auto;">
+        <svg viewBox="0 0 250 180" width="250">
+            <!-- المخروط الورقي (الصوت) -->
+            <path d="M 100 60 Q 120 40 140 60 Q 160 80 140 100 Q 120 120 100 100 Q 80 80 100 60" fill="#f0f0f0" stroke="#333" stroke-width="2" />
+            <text x="120" y="90" font-size="10" text-anchor="middle">المخروط</text>
+            
+            <!-- الملف الصوتي -->
+            <rect x="110" y="70" width="30" height="30" fill="#ddd" stroke="#333" stroke-width="2" rx="5" />
+            <text x="125" y="90" font-size="8" text-anchor="middle">ملف</text>
+            
+            <!-- المغناطيس -->
+            <rect x="60" y="60" width="30" height="50" fill="#e74c3c" stroke="#333" stroke-width="2" />
+            <text x="75" y="95" font-size="10" fill="white" text-anchor="middle">N</text>
+            
+            <rect x="160" y="60" width="30" height="50" fill="#3498db" stroke="#333" stroke-width="2" />
+            <text x="175" y="95" font-size="10" fill="white" text-anchor="middle">S</text>
+            
+            <!-- الأسلاك P و Q -->
+            <line x1="110" y1="100" x2="80" y2="140" stroke="#e74c3c" stroke-width="2" />
+            <text x="70" y="150" font-size="12" fill="#e74c3c">P</text>
+            
+            <line x1="140" y1="100" x2="170" y2="140" stroke="#3498db" stroke-width="2" />
+            <text x="180" y="150" font-size="12" fill="#3498db">Q</text>
+            
+            <text x="125" y="170" font-size="10" text-anchor="middle">تيار متغير</text>
+        </svg>
+    </div>
+    
+    <div class="vertical-options">
+        <label><input type="radio" name="q5" value="a"> (1) تُحدث قوة دافعة كهربائية تجعل المخروط يهتز</label>
+        <label><input type="radio" name="q5" value="b"> (2) يكتسب الملف مغناطيسية ولذلك يجذب وينفر المخروط بالتناوب</label>
+        <label><input type="radio" name="q5" value="c"> (3) توجد قوة أفقية متغيرة على الملف تجعله والمخروط يهتزان</label>
+        <label><input type="radio" name="q5" value="d"> (4) بذاك الملف يصوغ عالياً استجابة للتيار المتغير</label>
+    </div>
+    
+    <div id="fb_q5" class="feedback"></div>
+    <button class="check-btn" onclick="checkMCQ('q5','b','عند مرور تيار متغير في الملف، يكتسب مغناطيسية متغيرة فيجذب وينفر المخروط بالتناوب محدثاً اهتزازات صوتية')"><i class="fas fa-check"></i> تحقق</button>
+</div> 
+<!-- ==================== الجزء الثاني: الأسئلة التركيبية ==================== --
+<div class="section-card">
+    <h2 class="section-title"><i class="fas fa-puzzle-piece"></i> الجزء الثاني: الأسئلة التركيبية</h2>
+    
+    <div class="question-box" id="q_structural_1">
+        <div class="question-number">سؤال 1 (أ)</div>
+        <div class="question-text">
+            صف مع الرسم شكل المجال المغناطيسي الناتج عن مرور تيارات في:
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <h3 style="color: #1e4a6b; margin-bottom: 15px;">(1) سلك مستقيم طويل</h3>
+            
+            <div style="text-align: center; margin: 20px auto;">
+                <svg viewBox="0 0 200 150" width="200">
+                    <circle cx="100" cy="75" r="15" fill="#333" stroke="#000" stroke-width="2" />
+                    <text x="100" y="80" font-size="12" fill="white" text-anchor="middle">I</text>
+                    <text x="100" y="110" font-size="10" text-anchor="middle">التيار خارج الورقة</text>
+                    
+                    <circle cx="100" cy="75" r="30" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+                    <circle cx="100" cy="75" r="50" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+                    <circle cx="100" cy="75" r="70" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+                    
+                    <path d="M 130 45 Q 140 55 130 65" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+                    <path d="M 150 75 Q 140 85 130 85" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+                    <text x="150" y="40" font-size="10" fill="#e74c3c">اتجاه المجال</text>
+                </svg>
+            </div>
+            
+            <div class="solution-details" style="margin-bottom: 30px;">
+                <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف المجال:</div>
+                <p>• خطوط المجال المغناطيسي حول سلك مستقيم طويل هي <span class="highlight">دوائر متحدة المركز</span> في مستوى عمودي على السلك.<br>
+                • اتجاه المجال يحدد باستخدام <span class="highlight">قاعدة قبضة اليد اليمنى</span>: إذا أمسكت السلك باليد اليمنى بحيث يشير الإبهام في اتجاه التيار، فإن الأصابع تشير إلى اتجاه خطوط المجال.<br>
+                • شدة المجال تتناسب عكسياً مع البعد عن السلك (B ∝ 1/r).</p>
+            </div>
+            
+            <h3 style="color: #1e4a6b; margin-bottom: 15px;">(2) ملف لولبي (سولينويد)</h3>
+            
+            <div style="text-align: center; margin: 20px auto;">
+                <svg viewBox="0 0 250 150" width="250">
+                    <path d="M 70 60 Q 80 50 90 60 T 110 60 T 130 60 T 150 60 T 170 60 T 190 60" stroke="#333" stroke-width="3" fill="none" />
+                    <path d="M 70 90 Q 80 100 90 90 T 110 90 T 130 90 T 150 90 T 170 90 T 190 90" stroke="#333" stroke-width="3" fill="none" />
+                    
+                    <path d="M 60 60 L 50 40 L 40 60" fill="none" stroke="#3498db" stroke-width="2" />
+                    <path d="M 200 60 L 210 40 L 220 60" fill="none" stroke="#3498db" stroke-width="2" />
+                    
+                    <line x1="70" y1="75" x2="190" y2="75" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,3" />
+                    <line x1="70" y1="80" x2="190" y2="80" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,3" />
+                    
+                    <text x="40" y="55" font-size="12" fill="#e74c3c">S</text>
+                    <text x="210" y="55" font-size="12" fill="#3498db">N</text>
+                    
+                    <text x="125" y="120" font-size="10" text-anchor="middle">اتجاه التيار</text>
+                </svg>
+            </div>
+            
+            <div class="solution-details">
+                <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف المجال:</div>
+                <p>• داخل الملف اللولبي، المجال المغناطيسي <span class="highlight">منتظم وقوي</span> وخطوطه متوازية.<br>
+                • خارج الملف، المجال <span class="highlight">ضعيف</span> ويشبه مجال المغناطيس الدائم.<br>
+                • أحد طرفي الملف يعمل كـ <span class="highlight">قطب شمالي</span> والآخر كـ <span class="highlight">قطب جنوبي</span>.<br>
+                • شدة المجال تتناسب طردياً مع عدد اللفات وقوة التيار (B = μ₀ n I).</p>
+            </div>
+        </div>
+        
+        <div id="fb_q_structural_1" class="feedback"></div>
+        <button class="check-btn" onclick="showStructuralAnswer('q_structural_1')"><i class="fas fa-check"></i> عرض الإجابة النموذجية</button>
+    </div>
+    
+    <!-- سؤال 2 - ضبط الناشر -->
+    <!-- ==================== الجزء الثاني: الأسئلة التركيبية ==================== -->
+<div class="section-card">
+    <h2 class="section-title"><i class="fas fa-puzzle-piece"></i> الجزء الثاني: الأسئلة التركيبية</h2>
+    
+    <!-- سؤال 1 - المجال المغناطيسي -->
+    <div class="question-box" id="q_structural_1">
+        <div class="question-number">سؤال 1 (أ)</div>
+        <div class="question-text">
+            صف مع الرسم شكل المجال المغناطيسي الناتج عن مرور تيارات في:
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <h3 style="color: #1e4a6b; margin-bottom: 15px;">(1) سلك مستقيم طويل</h3>
+            
+            <!-- رسم المجال المغناطيسي لسلك مستقيم -->
+            <div style="text-align: center; margin: 20px auto;">
+                <svg viewBox="0 0 200 150" width="200">
+                    <!-- السلك المستقيم (دائرة في المنتصف تمثل مقطع السلك) -->
+                    <circle cx="100" cy="75" r="15" fill="#333" stroke="#000" stroke-width="2" />
+                    <text x="100" y="80" font-size="12" fill="white" text-anchor="middle">I</text>
+                    <text x="100" y="110" font-size="10" text-anchor="middle">التيار خارج الورقة</text>
+                    
+                    <!-- خطوط المجال المغناطيسي (دوائر متحدة المركز) -->
+                    <circle cx="100" cy="75" r="30" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+                    <circle cx="100" cy="75" r="50" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+                    <circle cx="100" cy="75" r="70" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="5,3" />
+                    
+                    <!-- أسهم الاتجاه (عكس عقارب الساعة) -->
+                    <path d="M 130 45 Q 140 55 130 65" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+                    <path d="M 150 75 Q 140 85 130 85" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+                    <text x="150" y="40" font-size="10" fill="#e74c3c">اتجاه المجال</text>
+                </svg>
+            </div>
+            
+            <div class="solution-details" style="margin-bottom: 30px;">
+                <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف المجال:</div>
+                <p>• خطوط المجال المغناطيسي حول سلك مستقيم طويل هي <span class="highlight">دوائر متحدة المركز</span> في مستوى عمودي على السلك.<br>
+                • اتجاه المجال يحدد باستخدام <span class="highlight">قاعدة قبضة اليد اليمنى</span>: إذا أمسكت السلك باليد اليمنى بحيث يشير الإبهام في اتجاه التيار، فإن الأصابع تشير إلى اتجاه خطوط المجال.<br>
+                • شدة المجال تتناسب عكسياً مع البعد عن السلك (B ∝ 1/r).</p>
+            </div>
+            
+            <h3 style="color: #1e4a6b; margin-bottom: 15px;">(2) ملف لولبي</h3>
+            
+            <!-- رسم المجال المغناطيسي لملف لولبي -->
+            <div style="text-align: center; margin: 20px auto;">
+                <svg viewBox="0 0 250 150" width="250">
+                    <!-- الملف اللولبي (حلقات متتالية) -->
+                    <path d="M 70 60 Q 80 50 90 60 T 110 60 T 130 60 T 150 60 T 170 60 T 190 60" stroke="#333" stroke-width="3" fill="none" />
+                    <path d="M 70 90 Q 80 100 90 90 T 110 90 T 130 90 T 150 90 T 170 90 T 190 90" stroke="#333" stroke-width="3" fill="none" />
+                    
+                    <!-- خطوط المجال داخل وخارج الملف -->
+                    <path d="M 60 60 L 50 40 L 40 60" fill="none" stroke="#3498db" stroke-width="2" />
+                    <path d="M 200 60 L 210 40 L 220 60" fill="none" stroke="#3498db" stroke-width="2" />
+                    
+                    <!-- خطوط المجال المنتظمة داخل الملف -->
+                    <line x1="70" y1="75" x2="190" y2="75" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,3" />
+                    <line x1="70" y1="80" x2="190" y2="80" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,3" />
+                    
+                    <!-- أقطاب المغناطيس -->
+                    <text x="40" y="55" font-size="12" fill="#e74c3c">S</text>
+                    <text x="210" y="55" font-size="12" fill="#3498db">N</text>
+                    
+                    <text x="125" y="120" font-size="10" text-anchor="middle">اتجاه التيار</text>
+                </svg>
+            </div>
+            
+            <div class="solution-details">
+                <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف المجال:</div>
+                <p>• داخل الملف اللولبي، المجال المغناطيسي <span class="highlight">منتظم وقوي</span> وخطوطه متوازية.<br>
+                • خارج الملف، المجال <span class="highlight">ضعيف</span> ويشبه مجال المغناطيس الدائم.<br>
+                • أحد طرفي الملف يعمل كـ <span class="highlight">قطب شمالي</span> والآخر كـ <span class="highlight">قطب جنوبي</span>.<br>
+                • شدة المجال تتناسب طردياً مع عدد اللفات وقوة التيار (B = μ₀ n I).</p>
+            </div>
+        </div>
+        
+        <div id="fb_q_structural_1" class="feedback"></div>
+        <button class="check-btn" onclick="showStructuralAnswer('q_structural_1')"><i class="fas fa-check"></i> عرض الإجابة النموذجية</button>
+    </div>
+    
+   <!-- سؤال 2 - تطبيقات التأثير المغناطيسي للتيار الكهربائي -->
+<div class="question-box" id="q_structural_2">
+    <div class="question-number">سؤال 2</div>
+    <div class="question-text">
+        صف تطبيقات التأثير المغناطيسي للتيار الكهربائي في:
+    </div>
+    
+    <div style="margin: 20px 0;">
+        <h3 style="color: #1e4a6b; margin-bottom: 15px;">(أ) الجرس الكهربائي</h3>
+        
+        <!-- رسم توضيحي للجرس الكهربائي -->
+        <div style="text-align: center; margin: 20px auto;">
+            <svg viewBox="0 0 200 150" width="200">
+                <!-- الملف اللولبي (الكهرمغناطيس) -->
+                <rect x="70" y="40" width="60" height="40" fill="#ddd" stroke="#333" stroke-width="2" rx="5" />
+                <text x="100" y="65" font-size="10" text-anchor="middle">ملف</text>
+                
+                <!-- قلب الحديد -->
+                <rect x="85" y="45" width="30" height="30" fill="#888" stroke="#333" stroke-width="1" />
+                
+                <!-- المطرقة -->
+                <line x1="130" y1="60" x2="160" y2="60" stroke="#333" stroke-width="3" />
+                <circle cx="165" cy="60" r="8" fill="#333" />
+                
+                <!-- الجرس -->
+                <path d="M 165 30 Q 180 40 165 50" fill="none" stroke="#e74c3c" stroke-width="3" />
+                <path d="M 165 50 Q 180 60 165 70" fill="none" stroke="#e74c3c" stroke-width="3" />
+                
+                <!-- نقطة التلامس -->
+                <circle cx="55" cy="60" r="5" fill="#ff9800" />
+                <line x1="60" y1="60" x2="70" y2="60" stroke="#333" stroke-width="2" />
+                
+                <text x="100" y="110" font-size="10" text-anchor="middle">الجرس الكهربائي</text>
+            </svg>
+        </div>
+        
+        <div class="solution-details" style="margin-bottom: 25px;">
+            <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف عمل الجرس الكهربائي:</div>
+            <p>• عند الضغط على المفتاح، يمر التيار في الملف الكهربائي فيتولد مجال مغناطيسي.<br>
+            • يجذب القلب الحديدي المطرقة فتضرب الجرس محدثة صوتاً.<br>
+            • عند تحرك المطرقة، يفتح التلامس الكهربائي فينقطع التيار ويزول المجال المغناطيسي.<br>
+            • تعود المطرقة لوضعها الأصلي ويغلق التلامس مرة أخرى، وتتكرر العملية بسرعة محدثة رنيناً مستمراً.</p>
+        </div>
+        
+        <h3 style="color: #1e4a6b; margin-bottom: 15px; margin-top: 30px;">(ب) المرحل (Relay)</h3>
+        
+        <!-- رسم توضيحي للمرحل -->
+        <div style="text-align: center; margin: 20px auto;">
+            <svg viewBox="0 0 200 150" width="200">
+                <!-- الملف اللولبي -->
+                <rect x="60" y="40" width="60" height="40" fill="#ddd" stroke="#333" stroke-width="2" rx="5" />
+                <text x="90" y="65" font-size="10" text-anchor="middle">ملف</text>
+                
+                <!-- قلب الحديد -->
+                <rect x="75" y="45" width="30" height="30" fill="#888" stroke="#333" stroke-width="1" />
+                
+                <!-- المفتاح المتحرك -->
+                <line x1="120" y1="60" x2="150" y2="60" stroke="#333" stroke-width="3" />
+                <circle cx="155" cy="60" r="5" fill="#ff9800" />
+                
+                <!-- نقاط التلامس الثابتة -->
+                <line x1="155" y1="45" x2="155" y2="55" stroke="#333" stroke-width="2" />
+                <line x1="155" y1="65" x2="155" y2="75" stroke="#333" stroke-width="2" />
+                
+                <!-- دائرة التحكم ودائرة الحمل -->
+                <text x="40" y="30" font-size="8" fill="#e74c3c">دائرة التحكم</text>
+                <text x="130" y="100" font-size="8" fill="#3498db">دائرة الحمل</text>
+                
+                <text x="100" y="120" font-size="10" text-anchor="middle">المرحل</text>
+            </svg>
+        </div>
+        
+        <div class="solution-details">
+            <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف عمل المرحل:</div>
+            <p>• المرحل هو مفتاح كهربائي يعمل كهرومغناطيسياً.<br>
+            • عند مرور تيار صغير في دائرة التحكم (الملف)، يتولد مجال مغناطيسي يجذب القلب الحديدي.<br>
+            • حركة القلب تغلق أو تفتح نقاط التلامس في دائرة الحمل المستقلة.<br>
+            • يمكن لدائرة الحمل أن تعمل بتيار وجهد أعلى بكثير من دائرة التحكم.<br>
+            • يستخدم المرحل في دوائر التحكم الآلي، حماية المحركات، وتشغيل الأحمال الكبيرة بإشارات صغيرة.</p>
+        </div>
+    </div>
+    
+    <div id="fb_q_structural_2" class="feedback"></div>
+    <button class="check-btn" onclick="showStructuralAnswer('q_structural_2')"><i class="fas fa-check"></i> عرض الإجابة النموذجية</button>
+</div>
+
+<!-- إضافة دالة عرض الإجابة للسؤال الثاني -->
+<script>
+    function showStructuralAnswer(questionId) {
+        const fbSpan = document.getElementById('fb_' + questionId);
+        
+        if (answeredQuestions.has(questionId)) {
+            fbSpan.innerHTML = '⚠️ لقد عرضت هذه الإجابة مسبقاً';
+            fbSpan.className = 'feedback wrong-feedback';
+            return;
+        }
+        
+        if (questionId === 'q_structural_2') {
+            fbSpan.innerHTML = '✅ <strong>الإجابة النموذجية:</strong><br><br>' +
+                '<strong>(أ) الجرس الكهربائي:</strong><br>' +
+                '• يتكون الجرس من كهرمغناطيس، مطرقة حديدية، جرس، ومفتاح تلامس.<br>' +
+                '• عند الضغط على المفتاح، يمر التيار في الملف فيتجذب المطرقة للقلب الحديدي وتضرب الجرس محدثة صوتاً.<br>' +
+                '• عند تحرك المطرقة، ينفتح التلامس وينقطع التيار فيزول المجال، فتعود المطرقة لوضعها ويغلق التلامس مجدداً.<br>' +
+                '• تتكرر العملية بسرعة محدثة رنيناً مستمراً.<br><br>' +
+                '<strong>(ب) المرحل (Relay):</strong><br>' +
+                '• هو مفتاح كهرومغناطيسي يتحكم في دائرة كهربائية باستخدام إشارة تحكم صغيرة.<br>' +
+                '• يتكون من ملف، قلب حديدي، ومجموعة من نقاط التلامس.<br>' +
+                '• عند مرور تيار في الملف، يتولد مجال مغناطيسي يجذب القلب الحديدي فيحرك نقاط التلامس.<br>' +
+                '• يستخدم لفصل دائرة عن أخرى، أو لتشغيل أحمال كبيرة باستخدام إشارات صغيرة.<br>' +
+                '• من تطبيقاته: دوائر التحكم الآلي، حماية المحركات، أنظمة الإنذار.';
+        }
+        
+        fbSpan.className = 'feedback correct-feedback';
+        answeredQuestions.add(questionId);
+    }
+</script> 
+  <!-- سؤال 3 - قاعدة فليمنج لليد اليسرى والمحرك الكهربائي -->
+<div class="question-box" id="q_structural_3">
+    <div class="question-number">سؤال 3</div>
+    
+    <div class="question-text">
+        (أ) ما هي قاعدة فلمنج لليد اليسرى؟
+    </div>
+    
+    <div style="text-align: center; margin: 20px auto;">
+        <svg viewBox="0 0 200 150" width="200">
+            <line x1="100" y1="80" x2="70" y2="40" stroke="#e74c3c" stroke-width="3" />
+            <text x="50" y="30" font-size="10" fill="#e74c3c">القوة F</text>
+            <line x1="100" y1="80" x2="140" y2="60" stroke="#3498db" stroke-width="3" />
+            <text x="150" y="50" font-size="10" fill="#3498db">المجال B</text>
+            <line x1="100" y1="80" x2="120" y2="120" stroke="#2ecc71" stroke-width="3" />
+            <text x="130" y="130" font-size="10" fill="#2ecc71">التيار I</text>
+            <text x="100" y="150" font-size="12" text-anchor="middle">قاعدة فلمنج لليد اليسرى</text>
+        </svg>
+    </div>
+
+    <div class="question-text" style="margin-top: 30px;">
+        (ب) الرسم التالي يمثل محركاً كهربائياً بسيطاً:
+    </div>
+
+    <div style="text-align: center; margin: 20px auto; background: #f9f9f9; padding: 20px; border-radius: 15px; border: 1px solid #eee;">
+        <svg viewBox="0 0 400 280" width="100%" style="max-width: 400px;">
+            <rect x="20" y="60" width="40" height="120" fill="#e74c3c" stroke="#333" />
+            <text x="40" y="125" font-size="16" fill="white" text-anchor="middle">N</text>
+            <rect x="340" y="60" width="40" height="120" fill="#3498db" stroke="#333" />
+            <text x="360" y="125" font-size="16" fill="white" text-anchor="middle">S</text>
+            <rect x="120" y="80" width="160" height="80" fill="none" stroke="#333" stroke-width="3" />
+            <circle cx="200" cy="200" r="25" fill="#ddd" stroke="#333" />
+            <text x="200" y="205" font-size="10" text-anchor="middle">(1) عاكس</text>
+            <rect x="165" y="185" width="10" height="30" fill="#555" />
+            <rect x="225" y="185" width="10" height="30" fill="#555" />
+            <text x="140" y="205" font-size="9">(2) فرشاة</text>
+        </svg>
+    </div>
+
+    <style>
+        .instant-option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .correct-opt { background-color: #d4edda !important; border-color: #28a745 !important; }
+        .wrong-opt { background-color: #f8d7da !important; border-color: #dc3545 !important; }
+        .result-icon { float: left; font-weight: bold; }
+    </style>
+
+    <div id="structural_parts">
+        <p><strong>(1) ما هو الجزء رقم (1) في الرسم؟</strong></p>
+        <div class="instant-option" onclick="checkInstant(this, true)"> (أ) عاكس التيار الحلقي المشقوق <span class="result-icon"></span></div>
+        <div class="instant-option" onclick="checkInstant(this, false)"> (ب) الملف المستطيل <span class="result-icon"></span></div>
+
+        <p style="margin-top:15px;"><strong>(2) وظيفة عاكس التيار هي:</strong></p>
+        <div class="instant-option" onclick="checkInstant(this, true)"> (أ) عكس اتجاه التيار كل نصف دورة <span class="result-icon"></span></div>
+        <div class="instant-option" onclick="checkInstant(this, false)"> (ب) زيادة قوة المغناطيس <span class="result-icon"></span></div>
+
+        <p style="margin-top:15px;"><strong>(3) وظيفة الفرشاة الكربونية:</strong></p>
+        <div class="instant-option" onclick="checkInstant(this, true)"> (أ) نقل التيار من المصدر للعاكس <span class="result-icon"></span></div>
+        <div class="instant-option" onclick="checkInstant(this, false)"> (ب) عكس اتجاه الدوران <span class="result-icon"></span></div>
+        
+        <p style="margin-top:15px;"><strong>(4) اتجاه حركة الملف في هذا الرسم:</strong></p>
+        <div class="instant-option" onclick="checkInstant(this, true)"> (أ) مع عقارب الساعة <span class="result-icon"></span></div>
+        <div class="instant-option" onclick="checkInstant(this, false)"> (ب) عكس عقارب الساعة <span class="result-icon"></span></div>
+    </div>
+
+    <div id="final_msg" style="margin-top: 20px; font-weight: bold; text-align: center;"></div>
+</div>
+
+<script>
+    function checkInstant(element, isCorrect) {
+        // العثور على المجموعة الحالية (السؤال الحالي)
+        const parent = element.parentElement;
+        const options = element.parentNode.querySelectorAll('.instant-option');
+        
+        // منع الضغط المتكرر بعد الإجابة
+        if (element.parentNode.getAttribute('data-answered') === 'true') return;
+
+        if (isCorrect) {
+            element.classList.add('correct-opt');
+            element.querySelector('.result-icon').innerHTML = '✅ صحيح';
+        } else {
+            element.classList.add('wrong-opt');
+            element.querySelector('.result-icon').innerHTML = '❌ خطأ';
+            // إظهار الإجابة الصحيحة
+            const allOptions = element.parentNode.querySelectorAll('.instant-option');
+            // ملاحظة: هنا نحتاج لمنطق بسيط لتمييز الصحيح، في هذا الكود جعلت (أ) دائماً هو الصحيح للتجربة
+        }
+        
+        // تحديد أن السؤال تمت الإجابة عليه (اختياري)
+        // element.parentNode.setAttribute('data-answered', 'true');
+    }
+</script>
+
+<!-- سؤال 4 - القوة بين سلكين متوازيين -->
+<div class="question-box" id="q_structural_4">
+    <div class="question-number">سؤال 4</div>
+    <div class="question-text">
+        صف تجارب لبيان القوة التي تعمل بين سلكين متوازيين قريبين من بعضهما ويحتويان تيارات متساوية تسري:
+    </div>
+    
+    <div style="margin: 20px 0;">
+        <h3 style="color: #1e4a6b; margin-bottom: 15px;">(أ) في نفس الاتجاه</h3>
+        
+        <!-- رسم توضيحي لتيارين في نفس الاتجاه -->
+        <div style="text-align: center; margin: 20px auto;">
+            <svg viewBox="0 0 300 150" width="300">
+                <!-- السلك الأول (يسار) -->
+                <line x1="80" y1="30" x2="80" y2="120" stroke="#333" stroke-width="4" />
+                <!-- سهم التيار للأعلى -->
+                <polygon points="80,30 75,40 85,40" fill="#e74c3c" />
+                <text x="60" y="75" font-size="12" fill="#e74c3c">I</text>
+                
+                <!-- السلك الثاني (يمين) -->
+                <line x1="220" y1="30" x2="220" y2="120" stroke="#333" stroke-width="4" />
+                <!-- سهم التيار للأعلى -->
+                <polygon points="220,30 215,40 225,40" fill="#e74c3c" />
+                <text x="240" y="75" font-size="12" fill="#e74c3c">I</text>
+                
+                <!-- خطوط المجال المغناطيسي حول السلك الأول -->
+                <circle cx="80" cy="75" r="25" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="3,3" />
+                <circle cx="80" cy="75" r="45" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="3,3" />
+                
+                <!-- أسهم اتجاه المجال (عكس عقارب الساعة) -->
+                <path d="M 105 60 Q 115 70 105 80" stroke="#3498db" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+                
+                <!-- القوة بين السلكين (تجاذب) -->
+                <path d="M 120 75 L 180 75" stroke="#2ecc71" stroke-width="3" stroke-dasharray="5,3" />
+                <text x="150" y="55" font-size="14" fill="#2ecc71" font-weight="bold">تجاذب</text>
+                <polygon points="120,75 125,70 125,80" fill="#2ecc71" />
+                <polygon points="180,75 175,70 175,80" fill="#2ecc71" />
+                
+                <text x="150" y="140" font-size="14" text-anchor="middle">تياران في نفس الاتجاه</text>
+            </svg>
+        </div>
+        
+        <div class="solution-details" style="margin-bottom: 25px;">
+            <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف التجربة:</div>
+            <p>• نضع سلكين متوازيين قريبين من بعضهما ويمر فيهما تيار كهربائي في نفس الاتجاه.<br>
+            • نلاحظ أن السلكين <span class="highlight">يتجاذبان</span> (يقتربان من بعضهما).<br>
+            • التفسير: التيار في السلك الأول يولد مجالاً مغناطيسياً حوله، وهذا المجال يؤثر على السلك الثاني بقوة (باستخدام قاعدة فليمنج لليد اليسرى) تجعله ينجذب نحو السلك الأول، والعكس صحيح.</p>
+        </div>
+        
+        <h3 style="color: #1e4a6b; margin-bottom: 15px; margin-top: 30px;">(ب) في اتجاهين معاكسين</h3>
+        
+        <!-- رسم توضيحي لتيارين في اتجاهين معاكسين -->
+        <div style="text-align: center; margin: 20px auto;">
+            <svg viewBox="0 0 300 150" width="300">
+                <!-- السلك الأول (يسار) - تيار لأعلى -->
+                <line x1="80" y1="30" x2="80" y2="120" stroke="#333" stroke-width="4" />
+                <polygon points="80,30 75,40 85,40" fill="#e74c3c" />
+                <text x="60" y="75" font-size="12" fill="#e74c3c">I</text>
+                
+                <!-- السلك الثاني (يمين) - تيار لأسفل -->
+                <line x1="220" y1="30" x2="220" y2="120" stroke="#333" stroke-width="4" />
+                <polygon points="220,120 215,110 225,110" fill="#3498db" />
+                <text x="240" y="105" font-size="12" fill="#3498db">I</text>
+                
+                <!-- خطوط المجال المغناطيسي حول السلك الأول -->
+                <circle cx="80" cy="75" r="25" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="3,3" />
+                <circle cx="80" cy="75" r="45" fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="3,3" />
+                
+                <!-- القوة بين السلكين (تنافر) -->
+                <path d="M 120 75 L 180 75" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,3" />
+                <text x="150" y="55" font-size="14" fill="#e74c3c" font-weight="bold">تنافر</text>
+                <polygon points="120,75 125,70 125,80" fill="#e74c3c" />
+                <polygon points="180,75 175,70 175,80" fill="#e74c3c" transform="rotate(180,180,75)" />
+                
+                <text x="150" y="140" font-size="14" text-anchor="middle">تياران في اتجاهين متعاكسين</text>
+            </svg>
+        </div>
+        
+        <div class="solution-details" style="margin-bottom: 25px;">
+            <div class="solution-title"><i class="fas fa-lightbulb"></i> وصف التجربة:</div>
+            <p>• نضع سلكين متوازيين قريبين من بعضهما ويمر فيهما تيار كهربائي في اتجاهين متعاكسين.<br>
+            • نلاحظ أن السلكين <span class="highlight">يتنافران</span> (يبتعدان عن بعضهما).<br>
+            • التفسير: التيار في السلك الأول يولد مجالاً مغناطيسياً حوله، وهذا المجال يؤثر على السلك الثاني بقوة (باستخدام قاعدة فليمنج لليد اليسرى) تجعله يبتعد عن السلك الأول، والعكس صحيح.</p>
+        </div>
+        
+        <h3 style="color: #1e4a6b; margin-bottom: 15px;">القاعدة المطبقة لإيجاد اتجاه القوة:</h3>
+        
+        <div class="vertical-options" style="margin-top: 15px;">
+            <label><input type="radio" name="q_structural_4_rule" value="a"> (أ) قاعدة فليمنج لليد اليمنى للمولدات</label>
+            <label><input type="radio" name="q_structural_4_rule" value="b"> (ب) قاعدة فليمنج لليد اليسرى للمحركات</label>
+            <label><input type="radio" name="q_structural_4_rule" value="c"> (ج) قاعدة لنز</label>
+            <label><input type="radio" name="q_structural_4_rule" value="d"> (د) قاعدة أمبير</label>
+        </div>
+        
+        <div id="fb_q_structural_4_rule" class="feedback"></div>
+        
+        <div style="margin-top: 20px;">
+            <div class="question-text">
+                ملاحظة: القوة المتبادلة بين سلكين متوازيين تعطى بالعلاقة:
+            </div>
+            <div class="math-equation">
+                F = \frac{\mu_0 I_1 I_2 L}{2\pi d}
+            </div>
+            <p style="text-align: center;">حيث d هي المسافة بين السلكين، و L طول السلك</p>
+        </div>
+    </div>
+    
+    <button class="check-btn" onclick="checkMCQ('q_structural_4_rule','b','القاعدة المطبقة هي قاعدة فليمنج لليد اليسرى (قاعدة المحرك) لتحديد اتجاه القوة')"><i class="fas fa-check"></i> تحقق من القاعدة</button>
+</div>
+<!-- سؤال 5 - مكبر الصوت ذو الملف المتحرك -->
+<div class="question-box" id="q_structural_5">
+    <div class="question-number">سؤال 5</div>
+    <div class="question-text">
+        اشرح مع الرسم والبيانات عمل مكبر الصوت ذي الملف المتحرك.
+    </div>
+    
+    <!-- رسم توضيحي لمكبر الصوت -->
+    <div style="text-align: center; margin: 30px auto; background: #f9f9f9; padding: 20px; border-radius: 15px;">
+        <svg viewBox="0 0 400 300" width="100%" style="max-width: 400px;">
+            <!-- المغناطيس الدائم على شكل حلقة -->
+            <rect x="120" y="80" width="160" height="40" fill="#e74c3c" stroke="#333" stroke-width="2" rx="5" />
+            <text x="200" y="105" font-size="14" fill="white" text-anchor="middle">مغناطيس دائم N</text>
+            
+            <rect x="120" y="180" width="160" height="40" fill="#3498db" stroke="#333" stroke-width="2" rx="5" />
+            <text x="200" y="205" font-size="14" fill="white" text-anchor="middle">مغناطيس دائم S</text>
+            
+            <!-- الفجوة الهوائية (المجال المغناطيسي) -->
+            <rect x="180" y="120" width="40" height="60" fill="#f0f0f0" stroke="#333" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="200" y="150" font-size="10" text-anchor="middle">مجال</text>
+            <text x="200" y="165" font-size="10" text-anchor="middle">مغناطيسي</text>
+            
+            <!-- الملف الصوتي (في الفجوة) -->
+            <rect x="185" y="130" width="30" height="40" fill="#ff9800" stroke="#333" stroke-width="2" rx="3" />
+            <text x="200" y="155" font-size="8" fill="white" text-anchor="middle">ملف</text>
+            
+            <!-- المخروط الورقي -->
+            <path d="M 200 150 Q 250 130 300 100 Q 320 120 300 140 Q 280 160 250 170 Q 220 180 200 180 Q 180 180 150 170 Q 120 160 100 140 Q 80 120 100 100 Q 120 80 150 90 Q 180 100 200 150" fill="#f5deb3" stroke="#333" stroke-width="2" opacity="0.8" />
+            <text x="250" y="80" font-size="12" fill="#8b4513">المخروط</text>
+            
+            <!-- حامل المخروط (السلة) -->
+            <line x1="150" y1="180" x2="100" y2="250" stroke="#333" stroke-width="2" />
+            <line x1="250" y1="180" x2="300" y2="250" stroke="#333" stroke-width="2" />
+            <line x1="100" y1="250" x2="300" y2="250" stroke="#333" stroke-width="2" />
+            
+            <!-- الأسلاك الكهربائية -->
+            <line x1="185" y1="170" x2="150" y2="220" stroke="#e74c3c" stroke-width="2" />
+            <text x="140" y="210" font-size="10" fill="#e74c3c">P</text>
+            
+            <line x1="215" y1="170" x2="250" y2="220" stroke="#3498db" stroke-width="2" />
+            <text x="260" y="210" font-size="10" fill="#3498db">Q</text>
+            
+            <!-- مصدر التيار المتردد -->
+            <circle cx="200" cy="260" r="15" fill="#fff" stroke="#333" stroke-width="2" />
+            <text x="200" y="265" font-size="12" text-anchor="middle">~</text>
+            <text x="200" y="280" font-size="10" text-anchor="middle">مصدر متردد</text>
+            
+            <!-- موجات الصوت -->
+            <path d="M 320 130 Q 340 120 360 130" stroke="#2ecc71" stroke-width="2" fill="none" />
+            <path d="M 320 150 Q 350 140 380 150" stroke="#2ecc71" stroke-width="2" fill="none" />
+            <path d="M 320 170 Q 340 160 360 170" stroke="#2ecc71" stroke-width="2" fill="none" />
+            <text x="350" y="100" font-size="14" fill="#2ecc71">موجات صوتية</text>
+        </svg>
+    </div>
+    
+    <!-- شرح عمل مكبر الصوت -->
+    <div class="solution-details" style="margin-bottom: 25px;">
+        <div class="solution-title"><i class="fas fa-lightbulb"></i> عمل مكبر الصوت ذي الملف المتحرك:</div>
+        <p>• يتكون مكبر الصوت من: <span class="highlight">مغناطيس دائم</span> على شكل حلقة، <span class="highlight">ملف صوتي</span> موضوع في الفجوة الهوائية للمغناطيس، و<span class="highlight">مخروط ورقي</span> متصل بالملف.<br>
+        • يمر في الملف الصوتي <span class="highlight">تيار كهربائي متردد</span> يمثل الإشارة الصوتية المراد تضخيمها.<br>
+        • يتفاعل التيار المتردد في الملف مع <span class="highlight">المجال المغناطيسي</span> للمغناطيس الدائم.<br>
+        • هذا التفاعل يولد <span class="highlight">قوة مغناطيسية متغيرة</span> (F = BIL) تجعل الملف يتحرك ذهاباً وإياباً.<br>
+        • تنتقل حركة الملف إلى <span class="highlight">المخروط الورقي</span> المتصل به، فيتحرك المخروط بنفس التردد.<br>
+        • حركة المخروط تحدث <span class="highlight">تضاغطات وتخلخلات</span> في الهواء المحيط، مكونة <span class="highlight">موجات صوتية</span> تطابق الإشارة الأصلية.</p>
+    </div>
+    
+    <!-- أهمية المخروط -->
+    <div style="margin: 25px 0;">
+        <h3 style="color: #1e4a6b; margin-bottom: 15px;">لماذا يكون المخروط ضرورياً؟</h3>
+        
+        <div class="vertical-options">
+            <label><input type="radio" name="q_structural_5_cone" value="a"> (أ) لزيادة كتلة الملف</label>
+            <label><input type="radio" name="q_structural_5_cone" value="b"> (ب) لتحويل الحركة الميكانيكية الصغيرة إلى موجات صوتية مسموعة</label>
+            <label><input type="radio" name="q_structural_5_cone" value="c"> (ج) لتجميل شكل السماعة</label>
+            <label><input type="radio" name="q_structural_5_cone" value="d"> (د) لعزل الملف عن الرطوبة</label>
+        </div>
+        
+        <div class="solution-details" style="margin-top: 15px;">
+            <div class="solution-title"><i class="fas fa-lightbulb"></i> أهمية المخروط:</div>
+            <p>• المخروط <span class="highlight">يضخم الحركة</span> الميكانيكية الصغيرة للملف ويحولها إلى حركة كبيرة للهواء.<br>
+            • <span class="highlight">مساحة سطح المخروط الكبيرة</span> تسمح بدفع كمية أكبر من الهواء، مما ينتج صوتاً أعلى.<br>
+            • المخروط مصنوع من مواد <span class="highlight">خفيفة وصلبة</span> في نفس الوقت (مثل الورق أو الألياف) ليستجيب بسرعة لتغيرات التيار.<br>
+            • بدون المخروط، سيكون الصوت الناتج <span class="highlight">ضعيفاً جداً</span> وغير مسموع لأن الملف صغير ولا يستطيع تحريك كمية كافية من الهواء.</p>
+        </div>
+    </div>
+    
+    <!-- تأثير وضع مكبر الصوت في الفراغ -->
+    <div style="margin: 25px 0;">
+        <h3 style="color: #1e4a6b; margin-bottom: 15px;">ناقش تأثير وضع مكبر الصوت في الفراغ:</h3>
+        
+        <div class="vertical-options">
+            <label><input type="radio" name="q_structural_5_vacuum" value="a"> (أ) يعمل بشكل أفضل لأن الفراغ يوصل الصوت بسرعة أكبر</label>
+            <label><input type="radio" name="q_structural_5_vacuum" value="b"> (ب) لا نسمع صوتاً لأن الصوت يحتاج إلى وسط مادي لينتقل</label>
+            <label><input type="radio" name="q_structural_5_vacuum" value="c"> (ج) يعمل بشكل طبيعي ولا فرق بين الفراغ والهواء</label>
+            <label><input type="radio" name="q_structural_5_vacuum" value="d"> (د) ينتج صوتاً أقوى بسبب عدم وجود مقاومة للهواء</label>
+        </div>
+        
+        <div class="solution-details" style="margin-top: 15px;">
+            <div class="solution-title"><i class="fas fa-lightbulb"></i> تأثير الفراغ على مكبر الصوت:</div>
+            <p>• عند وضع مكبر الصوت في الفراغ، <span class="highlight">لا نسمع أي صوت</span> على الرغم من أن الملف يتحرك والمخروط يهتز.<br>
+            • السبب: <span class="highlight">الموجات الصوتية تحتاج إلى وسط مادي</span> (مثل الهواء أو الماء أو المواد الصلبة) لتنتقل.<br>
+            • الصوت هو <span class="highlight">اهتزازات ميكانيكية</span> تنتقل عبر جزيئات الوسط. في الفراغ، لا توجد جزيئات لتحمل هذه الاهتزازات.<br>
+            • مثال: لو وضعنا جرساً في ناقوس زجاجي وفرغنا الهواء، لن نسمع رنينه رغم أننا نرى المطرقة تضرب الجرس.<br>
+            • هذا يثبت أن <span class="highlight">الصوت لا ينتشر في الفراغ</span>، بينما الضوء ينتشر (لأنه موجة كهرومغناطيسية).</p>
+        </div>
+    </div>
+    
+    <!-- ملخص البيانات -->
+    <div style="margin: 25px 0; background: #f0f8ff; padding: 15px; border-radius: 10px; border-right: 5px solid #1e4a6b;">
+        <h3 style="color: #1e4a6b; margin-bottom: 10px;">📊 البيانات الأساسية:</h3>
+        <p><strong>• المغناطيس الدائم:</strong> يخلق مجالاً مغناطيسياً ثابتاً في الفجوة الهوائية.<br>
+        <strong>• الملف الصوتي:</strong> عدد لفاته (N)، مقاومته (R)، يمر به تيار متردد (I).<br>
+        <strong>• القوة المؤثرة:</strong> F = B I L (حيث B كثافة الفيض، I التيار، L طول السلك).<br>
+        <strong>• التردد:</strong> يحدد نغمة الصوت (عالية/منخفضة).<br>
+        <strong>• شدة الصوت:</strong> تتناسب مع سعة اهتزاز المخروط (قوة التيار).</p>
+    </div>
+    
+    <!-- أسئلة الاختيار -->
+    <div style="margin-top: 20px;">
+        <p><strong>اختر الإجابة الصحيحة:</strong></p>
+        
+        <p><strong>1. سبب ضرورة المخروط في مكبر الصوت:</strong></p>
+        <div class="vertical-options">
+            <label><input type="radio" name="q_structural_5_q1" value="a"> (أ) لزيادة كتلة الملف</label>
+            <label><input type="radio" name="q_structural_5_q1" value="b"> (ب) لتحويل الحركة الميكانيكية الصغيرة إلى موجات صوتية مسموعة</label>
+            <label><input type="radio" name="q_structural_5_q1" value="c"> (ج) لتجميل شكل السماعة</label>
+        </div>
+        
+        <p><strong>2. عند وضع مكبر الصوت في الفراغ:</strong></p>
+        <div class="vertical-options">
+            <label><input type="radio" name="q_structural_5_q2" value="a"> (أ) نسمع صوتاً أقوى</label>
+            <label><input type="radio" name="q_structural_5_q2" value="b"> (ب) لا نسمع صوتاً لأن الصوت يحتاج إلى وسط مادي</label>
+            <label><input type="radio" name="q_structural_5_q2" value="c"> (ج) نسمع صوتاً أضعف</label>
+        </div>
+    </div>
+    
+    <div id="fb_q_structural_5" class="feedback"></div>
+    <button class="check-btn" onclick="checkStructuralQ5()"><i class="fas fa-check"></i> تحقق من الإجابات</button>
+</div>
+
+<!-- إضافة دالة للتحقق من السؤال الخامس -->
+<script>
+    function checkStructuralQ5() {
+        const q1 = document.querySelector('input[name="q_structural_5_q1"]:checked');
+        const q2 = document.querySelector('input[name="q_structural_5_q2"]:checked');
+        
+        const fbSpan = document.getElementById('fb_q_structural_5');
+        
+        if (!q1 || !q2) {
+            fbSpan.innerHTML = '⚠️ أجب على جميع الأسئلة أولاً';
+            fbSpan.className = 'feedback wrong-feedback';
+            return;
+        }
+        
+        if (answeredQuestions.has('q_structural_5')) {
+            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+            fbSpan.className = 'feedback wrong-feedback';
+            return;
+        }
+        
+        const correct1 = (q1.value === 'b');
+        const correct2 = (q2.value === 'b');
+        
+        if (correct1 && correct2) {
+            fbSpan.innerHTML = '✅ إجابات صحيحة! أحسنت.';
+            fbSpan.className = 'feedback correct-feedback';
+            correctAnswers++;
+        } else {
+            let wrongParts = [];
+            if (!correct1) wrongParts.push('السؤال 1');
+            if (!correct2) wrongParts.push('السؤال 2');
+            
+            fbSpan.innerHTML = '❌ إجابات خاطئة في: ' + wrongParts.join('، ') + '. راجع الشرح أعلاه.';
+            fbSpan.className = 'feedback wrong-feedback';
+            wrongAnswers++;
+        }
+        
+        answeredQuestions.add('q_structural_5');
+        updateScoreBoard();
+    }
+</script>
+ <!-- سؤال 6 -->
+        <div class="question-box" id="q_mag_6">
+            <div class="question-number">سؤال 6</div>
+            <div class="question-text">
+                يمكن زيادة القوة الدافعة الكهربائية التأثيرية المتولدة في مولد تيار متردد عن طريق كل مما يلي ما عدا:
+            </div>
+
+            <div class="vertical-options">
+                <label><input type="radio" name="q_mag_6" value="a"> (أ) زيادة عدد لفات الملف.</label>
+                <label><input type="radio" name="q_mag_6" value="b"> (ب) زيادة سرعة دوران الملف.</label>
+                <label><input type="radio" name="q_mag_6" value="c"> (ج) استخدام حلقات انزلاق بدلاً من العاكس.</label>
+                <label><input type="radio" name="q_mag_6" value="d"> (د) استخدام مغناطيس أقوى.</label>
+            </div>
+
+            <div id="fb_q_mag_6" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q_mag_6','c','استبدال الحلقات بالعاكس يغير نوع التيار (متردد/مستمر) ولكنه لا يغير قيمة الجهد العظمى.')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 7 -->
+        <!-- سؤال 7 - قوة التأثير -->
+<div class="question-box" id="q7">
+    <div class="question-number">سؤال 7</div>
+    <div class="question-text">
+        تأثير قوة مقدارها (8 × 10⁻¹⁴ N) عندما تكون صغيرة مفيد (5 × 10⁻⁵ m³) معوضاً على محال معايير متقدم حسب شدة ذلك تحليل.
+    </div>
+    
+    <div class="math-equation">
+        F = 8 × 10⁻¹⁴ N<br>
+        V = 5 × 10⁻⁵ m³
+    </div>
+    
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+        <div class="final-fix-frame">
+            <input type="radio" name="q7" value="a"> <label>1.6 × 10⁻⁹</label>
+        </div>
+        <div class="final-fix-frame">
+            <input type="radio" name="q7" value="b"> <label>1.6 × 10⁻¹⁰</label>
+        </div>
+        <div class="final-fix-frame">
+            <input type="radio" name="q7" value="c"> <label>1.6 × 10⁻⁸</label>
+        </div>
+    </div>
+    
+    <div id="fb_q7" class="feedback"></div>
+    <button class="check-btn" onclick="checkMCQ('q7','a','الكثافة = F/V = (8×10⁻¹⁴)/(5×10⁻⁵) = 1.6×10⁻⁹')"><i class="fas fa-check"></i> تحقق</button>
+</div>
+
+<!-- سؤال 8 - القوة على سلك في مجال مغناطيسي -->
+<div class="question-box" id="q8">
+    <div class="question-number">سؤال 8</div>
+    <div class="question-text">
+        سلك يمر به تيار شدته (4A) وضع في مجال مغناطيسي شدته (5 × 10⁻⁷ T) عمودياً عليه، فأثرت عليه قوة مقدارها (1 × 10⁻⁴ N). احسب وحدة طول السلك.
+    </div>
+    
+    <div class="math-equation">
+        F = B I L<br>
+        1 × 10⁻⁴ = (5 × 10⁻⁷) × 4 × L
+    </div>
+    
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+        <div class="final-fix-frame">
+            <input type="radio" name="q8" value="a"> <label>50 m</label>
+        </div>
+        <div class="final-fix-frame">
+            <input type="radio" name="q8" value="b"> <label>40 m</label>
+        </div>
+        <div class="final-fix-frame">
+            <input type="radio" name="q8" value="c"> <label>30 m</label>
+        </div>
+        <div class="final-fix-frame">
+            <input type="radio" name="q8" value="d"> <label>20 m</label>
+        </div>
+    </div>
+    
+    <div id="fb_q8" class="feedback"></div>
+    <button class="check-btn" onclick="checkMCQ('q8','a','L = F/(B×I) = (1×10⁻⁴)/((5×10⁻⁷)×4) = (1×10⁻⁴)/(2×10⁻⁶) = 50 m')"><i class="fas fa-check"></i> تحقق</button>
+</div>
+    <!-- زر الصعود -->
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let answeredQuestions = new Set();
+
+        function updateScoreBoard() {
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('wrongCount').textContent = wrongAnswers;
+
+            const total = correctAnswers + wrongAnswers;
+            let percentage = 0;
+            if (total > 0) {
+                percentage = Math.round((correctAnswers / total) * 100);
+            }
+            document.getElementById('percentage').textContent = percentage + '%';
+
+            const ratingSpan = document.getElementById('rating');
+            if (total === 0) {
+                ratingSpan.textContent = 'لم يبدأ';
+                ratingSpan.className = 'rating';
+            } else if (percentage >= 90) {
+                ratingSpan.textContent = 'ممتاز';
+                ratingSpan.className = 'rating excellent';
+            } else if (percentage >= 75) {
+                ratingSpan.textContent = 'جيد جداً';
+                ratingSpan.className = 'rating good';
+            } else if (percentage >= 50) {
+                ratingSpan.textContent = 'مقبول';
+                ratingSpan.className = 'rating medium';
+            } else {
+                ratingSpan.textContent = 'حاول مرة';
+                ratingSpan.className = 'rating bad';
+            }
+        }
+
+        function checkMCQ(questionId, correctValue, explanation) {
+            const radios = document.getElementsByName(questionId);
+            let selected = null;
+            for (let radio of radios) {
+                if (radio.checked) {
+                    selected = radio.value;
+                    break;
+                }
+            }
+            const fbSpan = document.getElementById('fb_' + questionId);
+
+            if (!selected) {
+                fbSpan.innerHTML = '⚠️ اختر إجابة أولاً';
+                fbSpan.className = 'feedback wrong-feedback';
+                return;
+            }
+
+            if (answeredQuestions.has(questionId)) {
+                fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+                fbSpan.className = 'feedback wrong-feedback';
+                return;
+            }
+
+            if (selected === correctValue) {
+                fbSpan.innerHTML = '✅ إجابة صحيحة!';
+                fbSpan.className = 'feedback correct-feedback';
+                correctAnswers++;
+            } else {
+                fbSpan.innerHTML = '❌ إجابة خاطئة. ' + explanation;
+                fbSpan.className = 'feedback wrong-feedback';
+                wrongAnswers++;
+            }
+
+            answeredQuestions.add(questionId);
+            updateScoreBoard();
+        }
+
+        function resetAllQuestions() {
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            answeredQuestions.clear();
+            updateScoreBoard();
+
+            document.querySelectorAll('[id^="fb_"]').forEach(fb => {
+                fb.innerHTML = '';
+                fb.className = 'feedback';
+            });
+
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+        }
+
+        document.getElementById('homeMainBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('mainContainer').scrollIntoView({behavior: 'smooth'});
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>الفيزياء - أسئلة الباب السادس والسابع</title>
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- خط Cairo للعربية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f5fa 0%, #e0e9f0 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid #c0d4e6;
+        }
+
+        /* رأس الصفحة */
+        .header-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #1e4a6b;
+            padding-bottom: 15px;
+        }
+        @media (min-width: 600px) {
+            .header-bar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        .header-bar h1 {
+            color: #1e4a6b;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            background: rgba(30,74,107,0.05);
+            padding: 8px 20px;
+            border-radius: 50px;
+            width: 100%;
+        }
+        .header-bar h1 i {
+            color: #ff9800;
+            margin-left: 10px;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .home-btn, .reset-btn {
+            border: none;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 0 #0d2a3b;
+            transition: 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            justify-content: center;
+        }
+        .home-btn {
+            background: #1e4a6b;
+            color: white;
+        }
+        .reset-btn {
+            background: #ff9800;
+            color: white;
+            box-shadow: 0 4px 0 #b86600;
+        }
+        .home-btn:active, .reset-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* شريط التقييم */
+        .score-bar {
+            background: linear-gradient(145deg, #ffffff, #f0f7ff);
+            border-radius: 60px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            border: 2px solid #b0c9dd;
+        }
+        @media (min-width: 600px) {
+            .score-bar {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 15px 30px;
+            }
+        }
+        .score-item {
+            text-align: center;
+        }
+        .score-label {
+            color: #1e4a6b;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .score-value, .score-percentage {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: rgba(30,74,107,0.1);
+            padding: 5px 12px;
+            border-radius: 40px;
+            border: 2px solid #1e4a6b;
+            display: inline-block;
+            min-width: 60px;
+        }
+        .score-percentage {
+            border-color: #ff9800;
+            background: rgba(255,152,0,0.1);
+        }
+        .rating {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: #2ecc71;
+            padding: 5px 20px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+        .rating.bad { background: #e74c3c; }
+        .rating.medium { background: #f39c12; }
+        .rating.good { background: #3498db; }
+        .rating.excellent { background: #2ecc71; }
+
+        /* بطاقات الأسئلة */
+        .question-box {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            direction: rtl;
+        }
+
+        /* رقم السؤال */
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e4a6b, #3498db);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        /* نص السؤال */
+        .question-text {
+            font-size: 1.15em;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* المعادلات الرياضية */
+        .math-equation {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 15px 0;
+            border: 1px solid #dee2e6;
+        }
+
+        /* إطارات الخيارات */
+        .final-fix-frame {
+            flex: 1 1 180px;
+            max-width: 220px;
+            background: #fdfdfd;
+            border: 2px solid #edf2f7;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .final-fix-frame:hover {
+            border-color: #3498db;
+            background-color: #f7fbff;
+            transform: translateY(-3px);
+        }
+
+        /* زر التحقق */
+        .check-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            margin-top: 15px;
+        }
+
+        .check-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        /* منطقة التغذية الراجعة */
+        .feedback {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            min-height: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .correct-feedback {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .wrong-feedback {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* تنسيق الخيارات الرأسية */
+        .vertical-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 20px;
+        }
+
+        .vertical-options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .vertical-options input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1e4a6b;
+        }
+
+        /* رسم المغناطيس والإلكترونات */
+        .magnet-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .magnet {
+            width: 60px;
+            height: 100px;
+            background: #ddd;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .magnet.n { background: #ff8a80; }
+        .magnet.s { background: #81d4fa; }
+        .electron-beam {
+            width: 30px;
+            height: 30px;
+            background: #ffd54f;
+            border-radius: 50%;
+            position: relative;
+            animation: move 2s infinite;
+        }
+        @keyframes move {
+            0% { transform: translateX(-20px); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(-20px); }
+        }
+
+        /* زر الصعود */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e4a6b;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top:hover {
+            background: #ff9800;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 600px) {
+            .question-box {
+                padding: 15px;
+            }
+            .final-fix-frame {
+                flex: 1 1 140px;
+            }
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <!-- شريط العنوان -->
+        <div class="header-bar">
+            <h1><i class="fas fa-flask"></i> أسئلة الفيزياء - الباب السادس</h1>
+            <div class="header-buttons">
+                <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة تعيين</button>
+                <button class="home-btn" onclick="window.location.href='#'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+            </div>
+        </div>
+
+        <!-- شريط التقييم -->
+        <div class="score-bar" id="scoreBar">
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> الصحيحة</span>
+                <span class="score-value" id="correctCount">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-times-circle" style="color:#e74c3c;"></i> الخاطئة</span>
+                <span class="score-value" id="wrongCount">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-percent"></i> النسبة</span>
+                <span class="score-percentage" id="percentage">0%</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label"><i class="fas fa-star"></i> التقييم</span>
+                <span class="rating" id="rating">لم يبدأ</span>
+            </div>
+        </div>
+
+        <!-- ==================== الأسئلة من الصور ==================== -->
+
+        <!-- سؤال 1 - الإشعاع النووي -->
+        <div class="question-box" id="q1">
+            <div class="question-number">سؤال 1</div>
+            <div class="question-text">
+                تضمحل النوى Z<sup>123</sup><sub>60</sub> لتعطي <sup>119</sup>Z ما نوع الإشعاع المنبعث؟
+            </div>
+            <div class="vertical-options">
+                <label><input type="radio" name="q1" value="a"> (أ) جسيمات ألفا (α) فقط</label>
+                <label><input type="radio" name="q1" value="b"> (ب) جسيمات بيتا (β) فقط</label>
+                <label><input type="radio" name="q1" value="c"> (ج) أشعة جاما (γ) فقط</label>
+                <label><input type="radio" name="q1" value="d"> (د) جسيمات ألفا (α) وبيتا (β) فقط</label>
+            </div>
+            <div id="fb_q1" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q1','a','النقص في العدد الكتلي = 123 - 119 = 4 (وهو جسيم ألفا)')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 2 - حركة الإلكترونات في مجال مغناطيسي -->
+        <div class="question-box" id="q2">
+            <div class="question-number">سؤال 2</div>
+            <div class="question-text">
+                بين الشكل التالي شعاعاً من الإلكترونات يدخل مجالاً مغناطيسياً ناشئاً عن قطبين، فما المسار التالي للإلكترونات؟
+            </div>
+            
+            <div class="magnet-diagram">
+                <div class="magnet n">N</div>
+                <div class="electron-beam"></div>
+                <div class="magnet s">S</div>
+            </div>
+            
+            <div class="vertical-options">
+                <label><input type="radio" name="q2" value="a"> (أ) مسار قطع مكافئ نحو S</label>
+                <label><input type="radio" name="q2" value="b"> (ب) مسار دائري نحو N</label>
+                <label><input type="radio" name="q2" value="c"> (ج) مسار دائري إلى داخل الورقة</label>
+                <label><input type="radio" name="q2" value="d"> (د) مسار مستقيم لأسفل</label>
+            </div>
+            <div id="fb_q2" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q2','c','باستخدام قاعدة اليد اليمنى، الإلكترونات تنحرف لداخل الورقة')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 3 - محرك التيار المستمر -->
+        <div class="question-box" id="q3">
+            <div class="question-number">سؤال 3</div>
+            <div class="question-text">
+                في محرك التيار المستمر، يضمن عاكس التيار أن:
+            </div>
+            <div class="vertical-options">
+                <label><input type="radio" name="q3" value="a"> (أ) اتجاه التيار في الملف ينعكس بعد كل نصف دورة</label>
+                <label><input type="radio" name="q3" value="b"> (ب) سريان التيار في الملف يكون ثابتاً</label>
+                <label><input type="radio" name="q3" value="c"> (ج) التيار في الملف يشكل زاوية قائمة مع المجال</label>
+            </div>
+            <div id="fb_q3" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q3','a','العاكس يعكس التيار كل نصف دورة للحفاظ على استمرار الدوران')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 4 - وظيفة الفرش الكربونية -->
+        <div class="question-box" id="q4">
+            <div class="question-number">سؤال 4</div>
+            <div class="question-text">
+                ما وظيفة الفرش الكربونية في محرك التيار المستمر؟
+            </div>
+            <div class="vertical-options">
+                <label><input type="radio" name="q4" value="a"> (أ) تقليل القوة الدافعة الكهربائية</label>
+                <label><input type="radio" name="q4" value="b"> (ب) نقل التيار إلى العاكس</label>
+                <label><input type="radio" name="q4" value="c"> (ج) زيادة سرعة الدوران</label>
+                <label><input type="radio" name="q4" value="d"> (د) تقليل الاحتكاك</label>
+            </div>
+            <div id="fb_q4" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q4','b','الفرش الكربونية تنقل التيار من المصدر إلى العاكس')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 5 - الأسلاك المتوازية -->
+        <div class="question-box" id="q5">
+            <div class="question-number">سؤال 5</div>
+            <div class="question-text">
+                سلكان متوازيان يمر فيهما تيار في اتجاهين متعاكسين، فإن القوة بينهما تكون:
+            </div>
+            <div class="vertical-options">
+                <label><input type="radio" name="q5" value="a"> (أ) تجاذب</label>
+                <label><input type="radio" name="q5" value="b"> (ب) تنافر</label>
+                <label><input type="radio" name="q5" value="c"> (ج) صفر</label>
+            </div>
+            <div id="fb_q5" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q5','b','التياران المتعاكسان يتنافران')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 6 - الكرة المتحركة -->
+        <div class="question-box" id="q6">
+            <div class="question-number">سؤال 6</div>
+            <div class="question-text">
+                كرة تتحرك بسرعة 10⁻³ m/s وتؤثر عليها قوة مقدارها 4 N. احسب التسارع إذا كانت الكتلة 2 kg.
+            </div>
+            <div class="math-equation">
+                a = F/m
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                <div class="final-fix-frame">
+                    <input type="radio" name="q6" value="a"> <label>2 m/s²</label>
+                </div>
+                <div class="final-fix-frame">
+                    <input type="radio" name="q6" value="b"> <label>4 m/s²</label>
+                </div>
+                <div class="final-fix-frame">
+                    <input type="radio" name="q6" value="c"> <label>8 m/s²</label>
+                </div>
+            </div>
+            <div id="fb_q6" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q6','a','a = F/m = 4/2 = 2 m/s²')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 7 - القيمة الثابتة -->
+        <div class="question-box" id="q7">
+            <div class="question-number">سؤال 7</div>
+            <div class="question-text">
+                إذا كان N = 8 × 10³، فما قيمة N × 10⁴؟
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                <div class="final-fix-frame">
+                    <input type="radio" name="q7" value="a"> <label>8 × 10⁷</label>
+                </div>
+                <div class="final-fix-frame">
+                    <input type="radio" name="q7" value="b"> <label>8 × 10¹²</label>
+                </div>
+            </div>
+            <div id="fb_q7" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q7','a','8 × 10³ × 10⁴ = 8 × 10⁷')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+
+        <!-- سؤال 8 - الثابت A -->
+        <div class="question-box" id="q8">
+            <div class="question-number">سؤال 8</div>
+            <div class="question-text">
+                استنتج قيمة الثابت A إذا كان T = 5 × 10⁻⁴ و N = 1 × 10⁴
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                <div class="final-fix-frame">
+                    <input type="radio" name="q8" value="a"> <label>A = 5</label>
+                </div>
+                <div class="final-fix-frame">
+                    <input type="radio" name="q8" value="b"> <label>A = 0.5</label>
+                </div>
+            </div>
+            <div id="fb_q8" class="feedback"></div>
+            <button class="check-btn" onclick="checkMCQ('q8','a','A = T × N = 5 × 10⁻⁴ × 10⁴ = 5')"><i class="fas fa-check"></i> تحقق</button>
+        </div>
+    </div>
+
+    <!-- زر الصعود -->
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let answeredQuestions = new Set();
+
+        function updateScoreBoard() {
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('wrongCount').textContent = wrongAnswers;
+
+            const total = correctAnswers + wrongAnswers;
+            let percentage = 0;
+            if (total > 0) {
+                percentage = Math.round((correctAnswers / total) * 100);
+            }
+            document.getElementById('percentage').textContent = percentage + '%';
+
+            const ratingSpan = document.getElementById('rating');
+            if (total === 0) {
+                ratingSpan.textContent = 'لم يبدأ';
+                ratingSpan.className = 'rating';
+            } else if (percentage >= 90) {
+                ratingSpan.textContent = 'ممتاز';
+                ratingSpan.className = 'rating excellent';
+            } else if (percentage >= 75) {
+                ratingSpan.textContent = 'جيد جداً';
+                ratingSpan.className = 'rating good';
+            } else if (percentage >= 50) {
+                ratingSpan.textContent = 'مقبول';
+                ratingSpan.className = 'rating medium';
+            } else {
+                ratingSpan.textContent = 'حاول مرة';
+                ratingSpan.className = 'rating bad';
+            }
+        }
+
+        function checkMCQ(questionId, correctValue, explanation) {
+            const radios = document.getElementsByName(questionId);
+            let selected = null;
+            for (let radio of radios) {
+                if (radio.checked) {
+                    selected = radio.value;
+                    break;
+                }
+            }
+            const fbSpan = document.getElementById('fb_' + questionId);
+
+            if (!selected) {
+                fbSpan.innerHTML = '⚠️ اختر إجابة أولاً';
+                fbSpan.className = 'feedback wrong-feedback';
+                return;
+            }
+
+            if (answeredQuestions.has(questionId)) {
+                fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+                fbSpan.className = 'feedback wrong-feedback';
+                return;
+            }
+
+            if (selected === correctValue) {
+                fbSpan.innerHTML = '✅ إجابة صحيحة!';
+                fbSpan.className = 'feedback correct-feedback';
+                correctAnswers++;
+            } else {
+                fbSpan.innerHTML = '❌ إجابة خاطئة. ' + explanation;
+                fbSpan.className = 'feedback wrong-feedback';
+                wrongAnswers++;
+            }
+
+            answeredQuestions.add(questionId);
+            updateScoreBoard();
+        }
+
+        function resetAllQuestions() {
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            answeredQuestions.clear();
+            updateScoreBoard();
+
+            document.querySelectorAll('[id^="fb_"]').forEach(fb => {
+                fb.innerHTML = '';
+                fb.className = 'feedback';
+            });
+
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+        }
+
+        document.getElementById('homeMainBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('mainContainer').scrollIntoView({behavior: 'smooth'});
+        });
+    </script>
+</body>
+</html>
