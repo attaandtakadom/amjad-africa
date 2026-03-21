@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فيجوال بيسك - الإجراءات الفرعية والدوال | درس متكامل مع تصحيح الأخطاء</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            color: #1e3c72;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .nav-btn.lesson { background: #2ecc71; color: white; }
+        .nav-btn.exercise { background: #e67e22; color: white; }
+        .nav-btn.debug { background: #9b59b6; color: white; }
+        .nav-btn.home { background: #3498db; color: white; }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #1e3c72;
+            border-right: 5px solid #3498db;
+            padding-right: 15px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .comparison-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            border-top: 5px solid;
+            transition: transform 0.3s;
+        }
+
+        .comparison-card:hover { transform: translateY(-5px); }
+        .comparison-card.procedure { border-top-color: #e67e22; }
+        .comparison-card.function { border-top-color: #2ecc71; }
+
+        .comparison-card h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .comparison-card.procedure h3 { color: #e67e22; }
+        .comparison-card.function h3 { color: #2ecc71; }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+            text-align: left;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: #f39c12;
+            color: #2c3e50;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .important-note {
+            background: #fff3cd;
+            border-right: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+
+        .debug-area {
+            background: #1e1e2f;
+            color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            font-family: monospace;
+            margin: 20px 0;
+        }
+
+        .immediate-window {
+            background: #0a0e27;
+            border: 2px solid #9b59b6;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .immediate-window h4 {
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-check { background: #2ecc71; color: white; }
+        .btn-retry { background: #f39c12; color: white; }
+        .btn-home { background: #3498db; color: white; }
+
+        .hidden { display: none; }
+
+        .question-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .option {
+            margin: 10px 0;
+            padding: 12px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover { background: #bdc3c7; transform: translateX(5px); }
+        .option.selected { background: #3498db; color: white; }
+        .option.correct { background: #2ecc71; color: white; }
+        .option.wrong { background: #e74c3c; color: white; }
+
+        .feedback {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.correct-feedback { background: #d5f4e6; color: #27ae60; border-right: 4px solid #27ae60; }
+        .feedback.wrong-feedback { background: #ffe6e6; color: #e74c3c; border-right: 4px solid #e74c3c; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 الإجراءات الفرعية (Sub) والدوال (Functions)</h1>
+            <p>فيجوال بيسك دوت نت | شرح كامل مع Immediate Window ونقاط التوقف (Breakpoints)</p>
+             <button class="nav-btn home" onclick="window.location.href='../../../../../althanaoya/it/it-dashboard.html'">🏠 لوحة تحكم</button>
+
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn home" onclick="window.location.href='it-function.html'">🏠 الرئيسية</button>
+            <button class="nav-btn lesson" onclick="showSection('lesson')">📖 الدرس</button>
+            <button class="nav-btn debug" onclick="showSection('debug')">🐞 📌 ما هي النافذة السريعة (Immediate Window)؟ </button>
+<button class="nav-btn lesson" onclick="window.location.href='function.html'">📚 الدوال الجاهزة</button> 
+ <button class="nav-btn lesson" onclick="window.location.href='parameters.html'">📚 تمرير المعاملات إلى الإجراءات الفرعية </button>  
+
+          <button class="nav-btn exercise" onclick="showSection('exercise')">✏️ التمارين</button>
+        </div>
+
+        <!-- Home Section -->
+        <div id="homeSection" class="card">
+            <h2 class="section-title">✨ الفرق الأساسي في الاستدعاء</h2>
+            
+            <div class="important-note">
+                <strong>📌 الفرق الأهم في طريقة الاستدعاء:</strong>
+                <ul style="margin-top: 10px; margin-right: 20px;">
+                    <li><span class="highlight">الإجراء الفرعي (Sub):</span> يُستدعى باستخدام <code>Call</code> أو مباشرة باسمه</li>
+                    <li><span class="highlight">الدالة (Function):</span> تُستدعى باستخدام <strong>جملة الإسناد</strong> (Assignment Statement) أو داخل تعبير</li>
+                </ul>
+            </div>
+
+            <div class="code-block">
+                ' مثال 1: استدعاء الإجراء الفرعي Sub<br>
+                Call GreetUser("أحمد")   ' باستخدام Call<br>
+                GreetUser("أحمد")        ' مباشرة بدون Call<br><br>
+                
+                ' مثال 2: استدعاء الدالة Function - باستخدام الإسناد<br>
+                Dim result As String = addMessage(45)   ' تخزين النتيجة في متغير<br>
+                Print addMessage(45)                     ' طباعة النتيجة مباشرة<br>
+                MsgBox(addMessage(45))                   ' استخدام الدالة داخل دالة أخرى
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card procedure">
+                    <h3>🔹 استدعاء الإجراء الفرعي (Sub)</h3>
+                    <div class="code-block" style="font-size: 0.9em;">
+                        Private Sub ConstructMessage(V As Integer)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;MsgBox "Value of V is = " & V<br>
+                        End Sub<br><br>
+                        ' طرق الاستدعاء:<br>
+                        Call ConstructMessage(45)<br>
+                        ConstructMessage(45)
+                    </div>
+                    <p style="margin-top: 10px;">⚠️ <strong>لا يمكن استخدام Sub في جملة الإسناد</strong> لأنه لا يعيد قيمة</p>
+                </div>
+                <div class="comparison-card function">
+                    <h3>🔹 استدعاء الدالة (Function)</h3>
+                    <div class="code-block" style="font-size: 0.9em;">
+                        Private Function addMessage(Val As Integer) As String<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;addMessage = "My Age is " & Val<br>
+                        End Function<br><br>
+                        ' طرق الاستدعاء:<br>
+                        Dim m1 As String = addMessage(45)   ' إسناد إلى متغير<br>
+                        Print addMessage(45)                ' طباعة مباشرة<br>
+                        MsgBox(addMessage(45))              ' داخل دالة أخرى
+                    </div>
+                    <p style="margin-top: 10px;">✅ <strong>يمكن استخدام Function في أي تعبير</strong> لأنها تعيد قيمة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson Section -->
+        <div id="lessonSection" class="hidden">
+            <div class="card">
+                <h2 class="section-title">📖 شرح تفصيلي مع أمثلة عملية</h2>
+                
+                <h3>🔸 المثال الكامل  :</h3>
+                <div class="code-block">
+                    ' تعريف الدالة<br>
+                    Private Function addMessage(Val As Integer) As String<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;addMessage = "My Age is " & Val<br>
+                    End Function<br><br>
+                    
+                    ' استدعاء الدالة في زر الأمر<br>
+                    Private Sub Command1_Click()<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dim m As String<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;m = addMessage(45)   ' جملة الإسناد - استدعاء الدالة<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Print m               ' طباعة النتيجة: My Age is 45<br>
+                    End Sub
+                </div>
+                
+                <div class="important-note">
+                    <strong>💡 توضيح مهم:</strong> عند كتابة <code>m = addMessage(45)</code>، يتم تنفيذ الدالة وإرجاع القيمة <code>"My Age is 45"</code> التي تُخزن في المتغير m.
+                </div>
+
+                <h3>🔸 مقارنة شاملة بين Sub و Function</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                    <tr style="background: #3498db; color: white;">
+                        <th style="padding: 12px; border: 1px solid #ddd;">المقارنة</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Sub (إجراء فرعي)</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Function (دالة)</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">طريقة الاستدعاء</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;" dir ="ltr"><dir="ltr" code>Call Name()</code> أو <code>Name()</code></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;" dir="ltr"><code>Variable = Name()</code> أو <code>Print Name()</code></td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 10px; border: 1px solid #ddd;">إرجاع قيمة</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">❌ لا يعيد قيمة</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">✅ يعيد قيمة واحدة</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">استخدام في التعبيرات</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">❌ لا يمكن</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">✅ يمكن استخدامها في العمليات</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td style="padding: 10px; border: 1px solid #ddd;">كلمة الإنهاء</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><code>End Sub</code></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><code>End Function</code></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Debug Section - Immediate Window & Breakpoints -->
+        <div id="debugSection" class="hidden">
+            <div class="card">
+                <h2 class="section-title">🐞 النافذة السريعة (Immediate Window) ونقاط التوقف (Breakpoints)</h2>
+                
+                <div class="important-note">
+                    <strong>📌 ما هي النافذة السريعة (Immediate Window)؟</strong><br>
+                    هي نافذة تستخدم لمعرفة قيم المتغيرات، تنفيذ بعض الأوامر، وتغيير قيم الخصائص أثناء تنفيذ البرنامج.
+                </div>
+
+                <h3>🔹 خطوات استخدام النافذة السريعة:</h3>
+                <div class="code-block" style="background: #1e1e2f;">
+                    1. أضف نقطة توقف (Toggle Breakpoint) من قائمة Debug أو بالضغط F9<br>
+                    2. شغل البرنامج بالضغط على زر الأمر (Command Button)<br>
+                    3. عندما يتوقف التنفيذ عند نقطة التوقف، افتح النافذة السريعة:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- من قائمة View → Immediate Window<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- أو اختصار Ctrl + G<br>
+                    4. اكتب الأمر ? متغير أو Print متغير لمعرفة قيمته<br>
+                    5. يمكنك أيضاً تغيير قيمة المتغير أثناء التنفيذ
+                </div>
+
+                <div class="immediate-window">
+                    <h4>💻 أمثلة على استخدام النافذة السريعة (Immediate Window):</h4>
+                    <div class="code-block" style="background: #0a0e27; margin-top: 10px;">
+                        ' معرفة قيمة المتغير m<br>
+                        ? m<br>
+                        Print m<br>
+                        ' النتيجة: My Age is 45<br><br>
+                        
+                        ' تنفيذ دالة مباشرة<br>
+                        ? addMessage(30)<br>
+                        ' النتيجة: My Age is 30<br><br>
+                        
+                        ' تغيير قيمة خاصية في النموذج<br>
+                        Form1.Caption = "قيد التصحيح"<br>
+                        Text1.Text = "اختبار"<br><br>
+                        
+                        ' تنفيذ إجراء فرعي<br>
+                        Call GreetUser("أحمد")
+                    </div>
+                </div>
+
+                <h3>🔹 مثال عملي كامل:</h3>
+                <div class="code-block">
+                    ' الكود الموجود في النموذج Form1<br>
+                    Private Sub Command1_Click()<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dim m As String<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;m = addMessage(45)   ' ← ضع نقطة توقف هنا (F9)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Print m<br>
+                    End Sub<br><br>
+                    
+                    Private Function addMessage(Val As Integer) As String<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;addMessage = "My Age is " & Val<br>
+                    End Function<br><br>
+                    
+                    ' عند تشغيل البرنامج وتوقف التنفيذ:<br>
+                    ' 1. افتح Immediate Window (Ctrl+G)<br>
+                    ' 2. اكتب: ? m   (ستظهر قيمة m وهي Nothing حتى الآن)<br>
+                    ' 3. اضغط F8 للتنفيذ خطوة بخطوة<br>
+                    ' 4. اكتب مرة أخرى: ? m (ستظهر "My Age is 45")
+                </div>
+
+                <div class="important-note">
+                    <strong>🎯 اختصارات مهمة في وضع التصحيح (Debug Mode):</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><kbd>F9</kbd> - إضافة/إزالة نقطة توقف (Toggle Breakpoint)</li>
+                        <li><kbd>F5</kbd> - تشغيل البرنامج / متابعة التنفيذ</li>
+                        <li><kbd>F8</kbd> - تنفيذ سطر بسطر (Step Into)</li>
+                        <li><kbd>Shift + F8</kbd> - تنفيذ بدون الدخول إلى الدوال (Step Over)</li>
+                        <li><kbd>Ctrl + G</kbd> - فتح النافذة السريعة (Immediate Window)</li>
+                        <li><kbd>Ctrl + Shift + F8</kbd> - الخروج من الدالة الحالية (Step Out)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Section -->
+        <div id="exerciseSection" class="hidden">
+            <div class="card">
+                <h2 class="section-title">✏️ تمارين تفاعلية</h2>
+                
+                <div class="question-box" id="q1">
+                    <h3>السؤال الأول: ما الطريقة الصحيحة لاستدعاء الدالة Function؟</h3>
+                    <div class="options">
+                        <div class="option" data-q="1" data-answer="b">a) Call addMessage(45)</div>
+                        <div class="option" data-q="1" data-answer="b">b) Dim result = addMessage(45)</div>
+                        <div class="option" data-q="1" data-answer="b">c) addMessage(45)</div>
+                        <div class="option" data-q="1" data-answer="b">d) Call Function addMessage(45)</div>
+                    </div>
+                </div>
+
+                <div class="question-box" id="q2">
+                    <h3>السؤال الثاني: ما الفرق الرئيسي في طريقة الاستدعاء؟</h3>
+                    <div class="options">
+                        <div class="option" data-q="2" data-answer="a">a) الدالة تستخدم جملة الإسناد، والإجراء الفرعي يستخدم Call</div>
+                        <div class="option" data-q="2" data-answer="a">b) الإجراء الفرعي أسرع من الدالة</div>
+                        <div class="option" data-q="2" data-answer="a">c) الدالة لا يمكن استدعاؤها من زر الأمر</div>
+                        <div class="option" data-q="2" data-answer="a">d) لا يوجد فرق</div>
+                    </div>
+                </div>
+
+                <div class="question-box" id="q3">
+                    <h3>السؤال الثالث: ما اختصار فتح النافذة السريعة (Immediate Window)؟</h3>
+                    <div class="options">
+                        <div class="option" data-q="3" data-answer="c">a) F5</div>
+                        <div class="option" data-q="3" data-answer="c">b) F9</div>
+                        <div class="option" data-q="3" data-answer="c">c) Ctrl + G</div>
+                        <div class="option" data-q="3" data-answer="c">d) Shift + F8</div>
+                    </div>
+                </div>
+
+                <div class="question-box" id="q4">
+                    <h3>السؤال الرابع: ماذا يظهر عند تنفيذ <code>? addMessage(20)</code> في النافذة السريعة؟</h3>
+                    <div class="code-block" style="margin: 10px 0;">Function addMessage(Val) : addMessage = "Age: " & Val : End Function</div>
+                    <div class="options">
+                        <div class="option" data-q="4" data-answer="b">a) Age: 45</div>
+                        <div class="option" data-q="4" data-answer="b">b) Age: 20</div>
+                        <div class="option" data-q="4" data-answer="b">c) 20</div>
+                        <div class="option" data-q="4" data-answer="b">d) خطأ</div>
+                    </div>
+                </div>
+
+                <div class="question-box" id="q5">
+                    <h3>السؤال الخامس: ما اختصار إضافة نقطة توقف (Breakpoint)؟</h3>
+                    <div class="options">
+                        <div class="option" data-q="5" data-answer="a">a) F9</div>
+                        <div class="option" data-q="5" data-answer="a">b) F5</div>
+                        <div class="option" data-q="5" data-answer="a">c) Ctrl + G</div>
+                        <div class="option" data-q="5" data-answer="a">d) Shift + F5</div>
+                    </div>
+                </div>
+
+                <div id="feedback" class="feedback"></div>
+                <div class="btn-group">
+                    <button class="btn btn-check" onclick="checkAnswers()">✅ تحقق من الإجابات</button>
+                    <button class="btn btn-retry" onclick="resetAnswers()">🔄 إعادة المحاولة</button>
+                    <button class="btn btn-home" onclick="showSection('home')">🏠 العودة للرئيسية</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>📚 درس تفاعلي في مادة الحاسوب - شرح الفرق بين Sub و Function مع Immediate Window</p>
+        </footer>
+    </div>
+
+    <script>
+        let selectedAnswers = {1: null, 2: null, 3: null, 4: null, 5: null};
+        const correctAnswers = {1: "b", 2: "a", 3: "c", 4: "b", 5: "a"};
+
+        function showSection(section) {
+            document.getElementById('homeSection').classList.add('hidden');
+            document.getElementById('lessonSection').classList.add('hidden');
+            document.getElementById('debugSection').classList.add('hidden');
+            document.getElementById('exerciseSection').classList.add('hidden');
+            
+            if (section === 'home') document.getElementById('homeSection').classList.remove('hidden');
+            else if (section === 'lesson') document.getElementById('lessonSection').classList.remove('hidden');
+            else if (section === 'debug') document.getElementById('debugSection').classList.remove('hidden');
+            else if (section === 'exercise') {
+                document.getElementById('exerciseSection').classList.remove('hidden');
+                resetAnswers();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const q = parseInt(this.dataset.q);
+                const answer = this.dataset.answer;
+                document.querySelectorAll(`#q${q} .option`).forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedAnswers[q] = answer;
+            });
+        });
+
+        function checkAnswers() {
+            let allAnswered = true;
+            let score = 0;
+            for (let i = 1; i <= 5; i++) {
+                if (selectedAnswers[i] === null) allAnswered = false;
+                else if (selectedAnswers[i] === correctAnswers[i]) score++;
+            }
+            
+            const feedbackDiv = document.getElementById('feedback');
+            if (!allAnswered) {
+                feedbackDiv.className = 'feedback wrong-feedback';
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.innerHTML = '⚠️ يرجى الإجابة على جميع الأسئلة قبل التحقق!';
+                return;
+            }
+            
+            let wrongQuestions = [];
+            for (let i = 1; i <= 5; i++) {
+                if (selectedAnswers[i] !== correctAnswers[i]) wrongQuestions.push(i);
+            }
+            
+            if (score === 5) {
+                feedbackDiv.className = 'feedback correct-feedback';
+                feedbackDiv.innerHTML = '🎉 ممتاز! جميع الإجابات صحيحة! 🎉';
+            } else {
+                feedbackDiv.className = 'feedback wrong-feedback';
+                feedbackDiv.innerHTML = `📊 نتيجتك: ${score}/5 صحيحة.<br>❌ الأخطاء في الأسئلة رقم: ${wrongQuestions.join(', ')}<br>💡 راجع درس الفرق في الاستدعاء والنافذة السريعة.`;
+            }
+            feedbackDiv.style.display = 'block';
+            
+            for (let i = 1; i <= 5; i++) {
+                document.querySelectorAll(`#q${i} .option`).forEach(opt => {
+                    opt.classList.remove('correct', 'wrong');
+                    if (opt.dataset.answer === correctAnswers[i]) opt.classList.add('correct');
+                    if (opt.classList.contains('selected') && opt.dataset.answer !== correctAnswers[i]) opt.classList.add('wrong');
+                });
+            }
+        }
+
+        function resetAnswers() {
+            selectedAnswers = {1: null, 2: null, 3: null, 4: null, 5: null};
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected', 'correct', 'wrong'));
+            document.getElementById('feedback').style.display = 'none';
+        }
+        
+        showSection('home');
+    </script>
+</body>
+</html>

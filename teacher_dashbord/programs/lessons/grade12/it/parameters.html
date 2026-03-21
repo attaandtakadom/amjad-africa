@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمرين تفاعلي: تمرير المعاملات في الإجراءات الفرعية - فيجوال بيسك</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header h1 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 1.6em;
+            color: #1e3c72;
+            border-right: 5px solid #3498db;
+            padding-right: 15px;
+            margin-bottom: 20px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .info-box {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .highlight {
+            background: #f39c12;
+            color: #2c3e50;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .note {
+            background: #fff3cd;
+            border-right: 5px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .demo-area {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .demo-input {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .demo-input input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            width: 150px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: #2ecc71;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #27ae60;
+        }
+        .btn-secondary {
+            background: #3498db;
+            color: white;
+        }
+        .result-box {
+            background: #1e1e2f;
+            padding: 15px;
+            border-radius: 10px;
+            color: #0f0;
+            font-family: monospace;
+            margin-top: 15px;
+        }
+        .question {
+            background: #fef9e6;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ffe0a3;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 12px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option:hover {
+            background: #bdc3c7;
+            transform: translateX(5px);
+        }
+        .option.selected {
+            background: #3498db;
+            color: white;
+        }
+        .option.correct {
+            background: #2ecc71;
+            color: white;
+        }
+        .option.wrong {
+            background: #e74c3c;
+            color: white;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+         .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .nav-btn.lesson { background: #2ecc71; color: white; }
+        .nav-btn.exercise { background: #e67e22; color: white; }
+        .nav-btn.debug { background: #9b59b6; color: white; }
+        .nav-btn.home { background: #3498db; color: white; }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📌 تمرير المعاملات إلى الإجراءات الفرعية (Sub)</h1>
+
+         <button class="nav-btn home" onclick="window.location.href='it-function.html'">🏠 الرئيسية</button>
+
+        <p>فهم تطابق العدد والنوع - إرجاع عدة قيم - مثال الكتاب ص95 (شكل 6-3)</p>
+    </div>
+
+    <!-- القسم النظري -->
+    <div class="card">
+        <h2 class="section-title">📖 كيف يتم تمرير المتغيرات إلى الإجراء الفرعي؟</h2>
+        <div class="grid-2">
+            <div class="info-box">
+                <h3>🔹 قواعد أساسية</h3>
+                <ul style="margin-right: 20px; line-height: 1.7;">
+                    <li><strong>تطابق العدد:</strong> يجب أن يكون عدد المعاملات في الاستدعاء مساوياً لعدد المعاملات في تعريف الإجراء.</li>
+                    <li><strong>تطابق النوع:</strong> يجب أن يتوافق نوع كل معامل (Integer, String, Single, ...) مع نوع المعامل المُعرّف.</li>
+                    <li><strong>إرجاع عدة قيم:</strong> يمكن للإجراء الفرعي أن يُعيد قيماً متعددة عبر المعاملات (لأن التغيير داخل الإجراء يؤثر على المتغير الأصلي).</li>
+                    <li><strong>لا يوجد ByVal / ByRef:</strong> في منهجنا، تمرير المعاملات يتم بالطريقة الافتراضية (تمرير بالعنوان).</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>🔹 مثال من الكتاب (ص95 – شكل 6-3)</h3>
+                <p>الإجراء الفرعي <code>calc</code> يستقبل قيمتين (<code>x, y</code>) ويعيد أربع نتائج عبر المعاملات <code>s1, s2, s3, s4</code>.</p>
+                <div class="code-block">
+                    Private Sub Command1_Click()<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dim v1, v2 As Integer<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dim s1, s2, s3 As Integer<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dim s4 As Single<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;v1 = Val(Text1.Text)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;v2 = Val(Text2.Text)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Call calc(v1, v2, s1, s2, s3, s4)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Print s1, s2, s3, s4<br>
+                    End Sub<br><br>
+                    Private Sub calc(x As Integer, y As Integer, _<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s1 As Integer, s2 As Integer, _<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s3 As Integer, s4 As Single)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;s1 = x + y<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;s2 = x - y<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;s3 = x * y<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;s4 = x / y<br>
+                    End Sub
+                </div>
+                <p><strong>ملاحظة:</strong> المتغيرات <code>s1, s2, s3, s4</code> تُستخدم لاستقبال النتائج، لذا يجب أن تتطابق أنواعها مع العمليات.</p>
+            </div>
+        </div>
+        <div class="note">
+            💡 <strong>تذكير:</strong> عند استدعاء الإجراء باستخدام <code>Call</code>، تُكتب المعاملات بين قوسين. يمكن الاستغناء عن <code>Call</code> وكتابة الاسم فقط مع القوسين.
+        </div>
+    </div>
+
+    <!-- محاكاة تفاعلية -->
+    <div class="card">
+        <h2 class="section-title">⚙️ جرب بنفسك (محاكاة لبرنامج الكتاب)</h2>
+        <div class="demo-area">
+            <div class="demo-input">
+                <label>الرقم الأول (v1):</label>
+                <input type="number" id="num1" value="12">
+                <label>الرقم الثاني (v2):</label>
+                <input type="number" id="num2" value="4">
+                <button class="btn btn-primary" onclick="runSimulation()">🔢 تنفيذ calc</button>
+            </div>
+            <div id="simulationResult" class="result-box">
+                ⏳ اضغط الزر لرؤية النتائج...
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9em;">✨ هذا البرنامج يحاكي الإجراء الفرعي <code>calc</code> الذي يستقبل قيمتين ويعيد الجمع والطرح والضرب والقسمة.</p>
+        </div>
+    </div>
+
+    <!-- تمارين تفاعلية -->
+    <div class="card">
+        <h2 class="section-title">✍️ اختبر فهمك (تطابق العدد والنوع)</h2>
+        
+        <!-- سؤال 1 -->
+        <div class="question" id="q1">
+            <h3>السؤال 1: تطابق العدد</h3>
+            <p>إذا كان الإجراء الفرعي مُعرّفاً كالتالي:<br>
+            <code>Private Sub process(a As Integer, b As Integer, c As Integer)</code><br>
+            أي من عبارات الاستدعاء التالية صحيحة؟</p>
+            <div class="options" data-q="1">
+                <div class="option" data-ans="a">Call process(5, 10)</div>
+                <div class="option" data-ans="b">process 5, 10, 15</div>
+                <div class="option" data-ans="c">Call process(5, 10, 15)</div>
+                <div class="option" data-ans="d">process(5, 10)</div>
+            </div>
+            <div class="feedback" id="fb1"></div>
+        </div>
+
+        <!-- سؤال 2 -->
+        <div class="question" id="q2">
+            <h3>السؤال 2: تطابق النوع</h3>
+            <p>الإجراء التالي:<br>
+            <code>Private Sub calculate(x As Integer, y As Single)</code><br>
+            أيهما يعتبر استدعاء صحيحاً (مع الأخذ بعين الاعتبار أن Val تحول النص إلى رقم)؟</p>
+            <div class="options" data-q="2">
+                <div class="option" data-ans="a">Call calculate(Text1.Text, Text2.Text)</div>
+                <div class="option" data-ans="b">Call calculate(Val(Text1.Text), Val(Text2.Text))</div>
+                <div class="option" data-ans="c">calculate(Text1.Text, Text2.Text)</div>
+                <div class="option" data-ans="d">calculate(Val(Text1.Text), Text2.Text)</div>
+            </div>
+            <div class="feedback" id="fb2"></div>
+        </div>
+
+        <!-- سؤال 3 -->
+        <div class="question" id="q3">
+            <h3>السؤال 3: إرجاع عدة قيم</h3>
+            <p>في مثال الكتاب (ص95)، كيف يتم إرجاع النتائج الأربع (الجمع، الطرح، الضرب، القسمة) إلى المتغيرات في الحدث Command1_Click؟</p>
+            <div class="options" data-q="3">
+                <div class="option" data-ans="a">باستخدام Return</div>
+                <div class="option" data-ans="b">بتمرير المتغيرات (s1,s2,s3,s4) كمعاملات للإجراء الفرعي</div>
+                <div class="option" data-ans="c">بواسطة متغير عمومي (Public)</div>
+                <div class="option" data-ans="d">بواسطة دالة Function</div>
+            </div>
+            <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- سؤال 4 -->
+        <div class="question" id="q4">
+            <h3>السؤال 4: تصحيح الخطأ</h3>
+            <p>نظراً للكود التالي:<br>
+            <code>Private Sub test(a As Integer, b As Integer, c As Integer)</code><br>
+            وأثناء الاستدعاء: <code>Call test(5, 10)</code><br>
+            ماذا سيحدث؟</p>
+            <div class="options" data-q="4">
+                <div class="option" data-ans="a">سيتم تنفيذ الإجراء بشكل صحيح</div>
+                <div class="option" data-ans="b">سيظهر خطأ لأن عدد المعاملات غير متطابق</div>
+                <div class="option" data-ans="c">سيتم إعطاء قيمة افتراضية للمعامل الثالث</div>
+                <div class="option" data-ans="d">سيتم تجاهل المعامل الثالث</div>
+            </div>
+            <div class="feedback" id="fb4"></div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button class="btn btn-secondary" onclick="checkAllAnswers()">✅ تحقق من الإجابات</button>
+            <button class="btn btn-primary" style="background: #f39c12;" onclick="resetAnswers()">🔄 إعادة المحاولة</button>
+        </div>
+        <div id="globalFeedback" style="margin-top: 15px;"></div>
+    </div>
+
+    <footer>
+        📚 درس تفاعلي - تمرير المعاملات في الإجراءات الفرعية | حسب منهج فيجوال بيسك
+    </footer>
+</div>
+
+<script>
+    // المحاكاة التفاعلية
+    function runSimulation() {
+        const v1 = parseFloat(document.getElementById('num1').value);
+        const v2 = parseFloat(document.getElementById('num2').value);
+        // حساب العمليات الأربع
+        const s1 = v1 + v2;
+        const s2 = v1 - v2;
+        const s3 = v1 * v2;
+        const s4 = v2 !== 0 ? (v1 / v2) : "لا يمكن القسمة على صفر";
+        
+        document.getElementById('simulationResult').innerHTML = `
+            <strong>نتائج الإجراء calc:</strong><br>
+            s1 (الجمع) = ${s1}<br>
+            s2 (الطرح) = ${s2}<br>
+            s3 (الضرب) = ${s3}<br>
+            s4 (القسمة) = ${s4}
+        `;
+    }
+
+    // تخزين الإجابات المختارة
+    let userAnswers = {1: null, 2: null, 3: null, 4: null};
+    const correct = {1: 'c', 2: 'b', 3: 'b', 4: 'b'};
+
+    // تفعيل اختيار الإجابات
+    document.querySelectorAll('.option').forEach(opt => {
+        opt.addEventListener('click', function() {
+            const qDiv = this.closest('.question');
+            const qId = parseInt(qDiv.id.slice(1));
+            const selectedValue = this.getAttribute('data-ans');
+            // إزالة التحديد السابق
+            qDiv.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+            this.classList.add('selected');
+            userAnswers[qId] = selectedValue;
+            // إخفاء أي رسالة سابقة لهذا السؤال
+            document.getElementById(`fb${qId}`).style.display = 'none';
+        });
+    });
+
+    function checkAllAnswers() {
+        let allCorrect = true;
+        for (let i = 1; i <= 4; i++) {
+            const fbDiv = document.getElementById(`fb${i}`);
+            if (userAnswers[i] === null) {
+                fbDiv.innerHTML = '⚠️ لم تُجب على هذا السؤال.';
+                fbDiv.className = 'feedback error';
+                fbDiv.style.display = 'block';
+                allCorrect = false;
+            } else if (userAnswers[i] === correct[i]) {
+                fbDiv.innerHTML = '✅ إجابة صحيحة!';
+                fbDiv.className = 'feedback success';
+                fbDiv.style.display = 'block';
+                // تمييز الإجابة الصحيحة
+                const correctOption = document.querySelector(`#q${i} .option[data-ans="${correct[i]}"]`);
+                if (correctOption) correctOption.classList.add('correct');
+                // إذا كانت الإجابة المختارة خاطئة، نضع عليها علامة خطأ
+                const selectedOpt = document.querySelector(`#q${i} .option.selected`);
+                if (selectedOpt && selectedOpt.getAttribute('data-ans') !== correct[i]) {
+                    selectedOpt.classList.add('wrong');
+                }
+            } else {
+                fbDiv.innerHTML = `❌ إجابة خاطئة. الإجابة الصحيحة هي: ${getAnswerText(i, correct[i])}`;
+                fbDiv.className = 'feedback error';
+                fbDiv.style.display = 'block';
+                allCorrect = false;
+                // تمييز الإجابة الصحيحة
+                const correctOption = document.querySelector(`#q${i} .option[data-ans="${correct[i]}"]`);
+                if (correctOption) correctOption.classList.add('correct');
+                const selectedOpt = document.querySelector(`#q${i} .option.selected`);
+                if (selectedOpt) selectedOpt.classList.add('wrong');
+            }
+        }
+        const globalDiv = document.getElementById('globalFeedback');
+        if (allCorrect) {
+            globalDiv.innerHTML = '<div class="feedback success" style="display:block;">🎉 ممتاز! جميع إجاباتك صحيحة. 🎉</div>';
+        } else {
+            globalDiv.innerHTML = '<div class="feedback error" style="display:block;">📘 بعض الإجابات غير صحيحة. راجع القواعد أعلاه ثم أعد المحاولة.</div>';
+        }
+    }
+
+    function getAnswerText(q, ansCode) {
+        const options = {
+            1: {c: 'Call process(5, 10, 15)'},
+            2: {b: 'Call calculate(Val(Text1.Text), Val(Text2.Text))'},
+            3: {b: 'بتمرير المتغيرات (s1,s2,s3,s4) كمعاملات للإجراء الفرعي'},
+            4: {b: 'سيظهر خطأ لأن عدد المعاملات غير متطابق'}
+        };
+        return options[q][ansCode] || '';
+    }
+
+    function resetAnswers() {
+        userAnswers = {1: null, 2: null, 3: null, 4: null};
+        for (let i = 1; i <= 4; i++) {
+            const qDiv = document.getElementById(`q${i}`);
+            qDiv.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+            const fbDiv = document.getElementById(`fb${i}`);
+            fbDiv.style.display = 'none';
+            fbDiv.innerHTML = '';
+        }
+        document.getElementById('globalFeedback').innerHTML = '';
+    }
+</script>
+</body>
+</html>

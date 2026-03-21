@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمارين شاملة: البرامج الفرعية والدوال | فيجوال بيسك</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header h1 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #95a5a6;
+            color: white;
+        }
+        .nav-btn.active {
+            background: #2ecc71;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 1.6em;
+            color: #1e3c72;
+            border-right: 5px solid #3498db;
+            padding-right: 15px;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fef9e6;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ffe0a3;
+        }
+        .question-text {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .option {
+            padding: 10px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .option:hover {
+            background: #bdc3c7;
+            transform: translateX(5px);
+        }
+        .option.selected {
+            background: #3498db;
+            color: white;
+        }
+        .option.correct {
+            background: #2ecc71;
+            color: white;
+        }
+        .option.wrong {
+            background: #e74c3c;
+            color: white;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct-feedback {
+            background: #d5f4e6;
+            color: #27ae60;
+            display: block;
+        }
+        .feedback.wrong-feedback {
+            background: #ffe6e6;
+            color: #e74c3c;
+            display: block;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .btn-check {
+            background: #2ecc71;
+            color: white;
+        }
+        .btn-retry {
+            background: #f39c12;
+            color: white;
+        }
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        .global-score {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f4fd;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            .question-text { font-size: 1em; }
+            .option { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📚 بنك الأسئلة الشامل</h1>
+        <p>البرامج الفرعية (Sub) | الدوال (Function) | الدوال الجاهزة | النافذة السريعة (Immediate Window)</p>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-btn" id="homeBtn" onclick="window.location.href='../../../../../althanaoya/it/it-dashboard.html'">🏠 الرئيسية</button>
+        <button class="nav-btn" id="exercisesBtn" onclick="showSection('exercises')">✏️ التمارين</button>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="homeSection">
+        <div class="card">
+            <h2 class="section-title">✨ مرحباً بك في برنامج التمارين الشامل</h2>
+            <p style="line-height: 1.8; font-size: 1.1em;">
+                هذا البرنامج يحتوي على أسئلة متنوعة (اختيار من متعدد وصح/خطأ) تغطي:
+            </p>
+            <ul style="margin: 15px 20px; line-height: 1.8;">
+                <li>🔹 الفرق بين الإجراء الفرعي (Sub) والدالة (Function)</li>
+                <li>🔹 طريقة استدعاء الإجراءات الفرعية والدوال</li>
+                <li>🔹 الدوال الجاهزة: الرياضية، النصية، التاريخ والوقت</li>
+                <li>🔹 النافذة السريعة (Immediate Window) وكيفية استخدامها</li>
+                <li>🔹 تمرير المعاملات وتطابق العدد والنوع</li>
+            </ul>
+            <div style="margin-top: 20px; text-align: center;">
+                <button class="btn btn-check" onclick="showSection('exercises')">🚀 ابدأ التمارين الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم التمارين -->
+    <div id="exercisesSection" class="hidden">
+        <div class="card">
+            <h2 class="section-title">✍️ تمارين شاملة (اختيار من متعدد وصح/خطأ)</h2>
+            <p>أجب عن الأسئلة التالية. لكل سؤال زر "تحقق" يظهر لك التصحيح مباشرة.</p>
+            <div id="questionsContainer"></div>
+
+            <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-retry" onclick="resetAllQuestions()">🔄 إعادة المحاولة (كل الأسئلة)</button>
+                <button class="btn btn-home" onclick="showSection('home')">🏠 العودة للرئيسية</button>
+            </div>
+            <div id="globalScore" class="global-score hidden"></div>
+        </div>
+    </div>
+
+    <footer>
+        📚 أسئلة شاملة حسب منهج فيجوال بيسك - البرامج الفرعية والدوال الجاهزة
+    </footer>
+</div>
+
+<script>
+    // تعريف الأسئلة
+    const questions = [
+        // 1. الفرق بين Sub و Function
+        { type: "mc", text: "ما الفرق الرئيسي بين الإجراء الفرعي (Sub) والدالة (Function)؟", 
+          options: ["الإجراء الفرعي لا يعيد قيمة، والدالة تعيد قيمة", "الدالة لا تعيد قيمة، والإجراء الفرعي يعيد", "كلاهما لا يعيدان قيمة", "كلاهما يعيدان قيمة"], 
+          correct: "الإجراء الفرعي لا يعيد قيمة، والدالة تعيد قيمة" },
+
+        // 2. طريقة استدعاء الدالة
+        { type: "mc", text: "أي من العبارات التالية تمثل الطريقة الصحيحة لاستدعاء دالة (Function)؟",
+          options: ["Call MyFunction(5)", "MyFunction(5)", "x = MyFunction(5)", "كل ما سبق صحيح"], 
+          correct: "x = MyFunction(5)" },
+
+        // 3. طريقة استدعاء الإجراء الفرعي
+        { type: "mc", text: "أي من العبارات التالية تستخدم لاستدعاء إجراء فرعي (Sub)؟",
+          options: ["Call MySub(10)", "MySub 10", "كلاهما صحيح", "x = MySub(10)"], 
+          correct: "كلاهما صحيح" },
+
+        // 4. Immediate Window
+        { type: "mc", text: "ما اختصار فتح النافذة السريعة (Immediate Window) في بيئة فيجوال بيسك؟",
+          options: ["F5", "F9", "Ctrl + G", "Shift + F8"], 
+          correct: "Ctrl + G" },
+
+        // 5. استخدام النافذة السريعة
+        { type: "mc", text: "في النافذة السريعة، كيف يمكنك طباعة قيمة المتغير x؟",
+          options: ["Print x", "? x", "كلاهما صحيح", "Debug.Print x"], 
+          correct: "كلاهما صحيح" },
+
+        // 6. دالة الجذر التربيعي
+        { type: "mc", text: "ما الدالة التي تُرجع الجذر التربيعي لرقم؟",
+          options: ["Abs", "Sqr", "Int", "Log"], 
+          correct: "Sqr" },
+
+        // 7. دالة الجزء الصحيح
+        { type: "tf", text: "الدالة Int(7.9) تُرجع القيمة 8.", correct: "false" },
+
+        // 8. دالة Left
+        { type: "mc", text: "ما ناتج Left(\"Visual Basic\", 6)؟",
+          options: ["Visual", "Basic", "Visu", "Visual "], 
+          correct: "Visual" },
+
+        // 9. دالة Trim
+        { type: "tf", text: "الدالة Trim(\"  Hello  \") تُرجع \"Hello\" (بدون فراغات جانبية).", correct: "true" },
+
+        // 10. دالة Year
+        { type: "mc", text: "ما ناتج Year(#20/4/2026#)؟",
+          options: ["20", "4", "2026", "2026/4/20"], 
+          correct: "2026" },
+
+        // 11. دالة Weekday
+        { type: "mc", text: "الدالة Weekday تُرجع:", 
+          options: ["رقم اليوم في الأسبوع", "اسم اليوم", "رقم الشهر", "رقم السنة"], 
+          correct: "رقم اليوم في الأسبوع" },
+
+        // 12. تمرير المعاملات
+        { type: "mc", text: "إذا كان الإجراء الفرعي معرفاً كالتالي: Private Sub Calc(a As Integer, b As Integer, c As Integer). أي استدعاء صحيح؟",
+          options: ["Call Calc(5, 10)", "Call Calc(5, 10, 15)", "Calc 5, 10", "Calc 5, 10, 15, 20"], 
+          correct: "Call Calc(5, 10, 15)" },
+
+        // 13. الدالة Val
+        { type: "tf", text: "الدالة Val(\"123abc\") تُرجع 123.", correct: "true" },
+
+        // 14. الدالة Chr
+        { type: "mc", text: "ما الحرف الناتج عن Chr(65)؟",
+          options: ["A", "a", "B", "1"], 
+          correct: "A" },
+
+        // 15. الفرق بين Now و Time
+        { type: "mc", text: "أي من العبارات التالية صحيحة عن الدالة Now؟",
+          options: ["ترجع التاريخ والوقت الحاليين", "ترجع الوقت الحالي فقط", "ترجع التاريخ الحالي فقط", "ترجع السنة الحالية فقط"], 
+          correct: "ترجع التاريخ والوقت الحاليين" }
+    ];
+
+    // لتخزين الإجابات المختارة لكل سؤال
+    let userAnswers = new Array(questions.length).fill(null);
+    let checkedStatus = new Array(questions.length).fill(false); // هل تم التحقق من السؤال؟
+
+    // عرض الأسئلة
+    function renderQuestions() {
+        const container = document.getElementById('questionsContainer');
+        container.innerHTML = '';
+        questions.forEach((q, idx) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question';
+            qDiv.id = `q_${idx}`;
+            qDiv.innerHTML = `
+                <div class="question-text">${idx+1}. ${q.text}</div>
+                <div class="options" id="opts_${idx}"></div>
+                <div class="feedback" id="fb_${idx}"></div>
+                <button class="btn btn-check" style="margin-top:5px;" onclick="checkSingleQuestion(${idx})">✅ تحقق</button>
+            `;
+            container.appendChild(qDiv);
+
+            const optsDiv = document.getElementById(`opts_${idx}`);
+            if (q.type === 'mc') {
+                q.options.forEach(opt => {
+                    const optDiv = document.createElement('div');
+                    optDiv.className = 'option';
+                    optDiv.textContent = opt;
+                    optDiv.setAttribute('data-ans', opt);
+                    optDiv.addEventListener('click', () => selectOption(idx, opt));
+                    optsDiv.appendChild(optDiv);
+                });
+            } else if (q.type === 'tf') {
+                ['صحيح', 'خطأ'].forEach(opt => {
+                    const optDiv = document.createElement('div');
+                    optDiv.className = 'option';
+                    optDiv.textContent = opt;
+                    const ansVal = (opt === 'صحيح') ? 'true' : 'false';
+                    optDiv.setAttribute('data-ans', ansVal);
+                    optDiv.addEventListener('click', () => selectOption(idx, ansVal));
+                    optsDiv.appendChild(optDiv);
+                });
+            }
+        });
+    }
+
+    // اختيار إجابة
+    function selectOption(qIdx, ans) {
+        userAnswers[qIdx] = ans;
+        // تحديث التحديد البصري
+        const optsDiv = document.getElementById(`opts_${qIdx}`);
+        Array.from(optsDiv.children).forEach(opt => {
+            opt.classList.remove('selected');
+            if (opt.getAttribute('data-ans') === ans) {
+                opt.classList.add('selected');
+            }
+        });
+        // إخفاء الفيدباك القديم
+        const fb = document.getElementById(`fb_${qIdx}`);
+        fb.style.display = 'none';
+        fb.innerHTML = '';
+        // إعادة تعيين حالة التحقق لهذا السؤال
+        checkedStatus[qIdx] = false;
+        // إخفاء الرسالة العامة إن وجدت
+        document.getElementById('globalScore').classList.add('hidden');
+    }
+
+    // التحقق من سؤال واحد
+    function checkSingleQuestion(qIdx) {
+        const ans = userAnswers[qIdx];
+        const correctAns = questions[qIdx].correct;
+        const fbDiv = document.getElementById(`fb_${qIdx}`);
+        if (ans === undefined || ans === null) {
+            fbDiv.innerHTML = '⚠️ يرجى اختيار إجابة أولاً.';
+            fbDiv.className = 'feedback wrong-feedback';
+            checkedStatus[qIdx] = false;
+            return;
+        }
+        const isCorrect = (ans === correctAns);
+        if (isCorrect) {
+            fbDiv.innerHTML = '✅ إجابة صحيحة!';
+            fbDiv.className = 'feedback correct-feedback';
+        } else {
+            const correctDisplay = (correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns));
+            fbDiv.innerHTML = `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctDisplay}`;
+            fbDiv.className = 'feedback wrong-feedback';
+        }
+        checkedStatus[qIdx] = true;
+
+        // تمييز الخيارات
+        const optsDiv = document.getElementById(`opts_${qIdx}`);
+        Array.from(optsDiv.children).forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+            if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
+            if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
+        });
+
+        // تحديث النتيجة الإجمالية
+        updateGlobalScore();
+    }
+
+    // تحديث النتيجة الإجمالية (لكل الأسئلة التي تم التحقق منها)
+    function updateGlobalScore() {
+        let answeredCount = 0;
+        let correctCount = 0;
+        for (let i = 0; i < questions.length; i++) {
+            if (checkedStatus[i] && userAnswers[i] !== null) {
+                answeredCount++;
+                if (userAnswers[i] === questions[i].correct) correctCount++;
+            }
+        }
+        const globalDiv = document.getElementById('globalScore');
+        if (answeredCount > 0) {
+            globalDiv.innerHTML = `📊 النتيجة الإجمالية (للأسئلة التي تم التحقق منها): ${correctCount} من ${answeredCount} صحيحة.`;
+            globalDiv.classList.remove('hidden');
+        } else {
+            globalDiv.classList.add('hidden');
+        }
+    }
+
+    // إعادة تعيين كل الأسئلة
+    function resetAllQuestions() {
+        userAnswers.fill(null);
+        checkedStatus.fill(false);
+        // إعادة تعيين واجهة الأسئلة
+        for (let i = 0; i < questions.length; i++) {
+            const optsDiv = document.getElementById(`opts_${i}`);
+            if (optsDiv) {
+                Array.from(optsDiv.children).forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'wrong');
+                });
+            }
+            const fb = document.getElementById(`fb_${i}`);
+            fb.style.display = 'none';
+            fb.innerHTML = '';
+        }
+        document.getElementById('globalScore').classList.add('hidden');
+    }
+
+    // التنقل بين الأقسام
+    function showSection(section) {
+        const homeDiv = document.getElementById('homeSection');
+        const exercisesDiv = document.getElementById('exercisesSection');
+        const homeBtn = document.getElementById('homeBtn');
+        const exBtn = document.getElementById('exercisesBtn');
+        if (section === 'home') {
+            homeDiv.classList.remove('hidden');
+            exercisesDiv.classList.add('hidden');
+            homeBtn.classList.add('active');
+            exBtn.classList.remove('active');
+        } else {
+            homeDiv.classList.add('hidden');
+            exercisesDiv.classList.remove('hidden');
+            homeBtn.classList.remove('active');
+            exBtn.classList.add('active');
+            // إذا لم يتم عرض الأسئلة بعد، قم بعرضها
+            if (document.getElementById('questionsContainer').innerHTML === '') {
+                renderQuestions();
+            }
+        }
+    }
+
+    // بدء التشغيل
+    showSection('home');
+</script>
+</body>
+</html>
