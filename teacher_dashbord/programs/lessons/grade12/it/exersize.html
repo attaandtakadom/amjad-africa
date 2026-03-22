@@ -201,6 +201,7 @@
     <div class="header">
         <h1>📚 بنك الأسئلة الشامل</h1>
         <p>البرامج الفرعية (Sub) | الدوال (Function) | الدوال الجاهزة | النافذة السريعة (Immediate Window)</p>
+        <p>اسئلة من امتحانات سابقة 🧾  </p>
     </div>
 
     <div class="nav-buttons">
@@ -456,7 +457,115 @@
         "Len(s)"
     ],
     correct: "LTrim(s)"
-}
+},
+{
+    type: "tf",
+text:"يتبع اسم الاجراء الفرعي نفس شروط تسمية المتغيرات",
+    correct: "true"
+},
+
+{
+    type: "tf",
+text:"لايتم استدعاء الاجراء الفرعي الا مرة واحدة بعكس اجراء الدالة",
+    correct: "false"
+},
+{
+    type: "tf",
+text:"يمكن استبدال الاجراء الفرعي Sub باجراء  الدالة Function دائما ",
+    correct: "false"
+},
+
+
+{
+    type: "tf",
+text:"لانهاء البرنامج الفرعي (Sub) قبل الوصول الي نهايتة نستخدم الامر Exit Function ",
+    correct: "false"
+},
+,
+{
+    type: "tf",
+text:" الدالة Trim دالة جاهزة تلغي وجود فرغات في مربع النص",
+    correct: "true"
+},
+{
+    type: "tf",
+text:"عند كتابة الاجراء الفرعي في الجزء  General يسمي في هذة الحالة بالبرنامج الخاص ",
+    correct: "false"
+},
+{
+    type: "tf",
+text:" تستدعي الدالة Function باستخدام جملة الاستدعاء Call",
+    correct: "false"
+},{
+type: "tf",
+text:" يمكن استدعاء البرنامج الفرعي(Sub) بكتابة اسم الاجراء مباشرة",
+    correct: "true"}
+,
+{
+type: "tf",
+text:"لا يذكر نوع البيانات في جملة الاستدعاء في الاجراء الفرعي(Sub)  ",
+    correct: "true"}
+,
+
+
+{
+type: "tf",
+text:" عند اجراء استدعاء لدالة او اجراء فرعي يجب ان يكون عدد معاملات في جملة الاعلان عن الاجراء الفرعي او الدالة هو عدد المعاملات نفسه في جملة الاستدعاء ",
+    correct: "false"}
+,
+
+
+{
+    type: "mc",
+    text: " دالة حذف الجزء الكسري من العدد هي ",
+    options: ["Int",
+    "Log",
+    "Len",
+    "Rnd",
+       ],
+    correct: "Int"
+},
+{
+    type: "mc",
+    text: " الجملة t=abs(-5) تعيين للمتغير t  القيمة ",
+    options: ["-5",
+    "5",
+    "-1",
+    "0"
+       ],
+    correct: "5"
+},{
+
+type:"mc",
+text: " (امتحان  2025) القيمة التي سيتم تخصيصها لمربع النص بعد تنفيذ جزء البرنامج التالي هي \n Number =sqr(100)\n   text1.text=Number",
+
+options:[
+"10",
+"10000",
+"1",
+"100"
+
+],
+correct:"10"
+},
+{
+
+type:"mc",
+text: " (امتحان  2025) لمحو المسافات من بداية النص نستخدم الدالة الجاهزة:-",
+ 
+options:[
+"RTrim(s)",
+"Len(s)",
+"Trim(s)",
+"LTRim(s)"
+
+],
+correct:"LTRim(s)"
+},
+
+
+
+
     ];
 // زر العودة للأعلى
 const scrollBtn = document.getElementById('scrollToTopBtn');
