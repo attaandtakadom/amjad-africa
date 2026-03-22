@@ -169,6 +169,31 @@
             .question-text { font-size: 1em; }
             .option { font-size: 0.9em; }
         }
+.question-text {
+    white-space: pre-line;
+}
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #e61755;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: none; /* يظهر فقط عند التمرير */
+}
+
+.scroll-to-top:hover {
+    background-color: #2ecc71;
+    transform: scale(1.1);
+}
     </style>
 </head>
 <body>
@@ -202,7 +227,7 @@
             </div>
         </div>
     </div>
-
+<button id="scrollToTopBtn" class="scroll-to-top" title="الرجوع للأعلى">⬆️</button>
     <!-- قسم التمارين -->
     <div id="exercisesSection" class="hidden">
         <div class="card">
@@ -293,9 +318,161 @@
         // 15. الفرق بين Now و Time
         { type: "mc", text: "أي من العبارات التالية صحيحة عن الدالة Now؟",
           options: ["ترجع التاريخ والوقت الحاليين", "ترجع الوقت الحالي فقط", "ترجع التاريخ الحالي فقط", "ترجع السنة الحالية فقط"], 
-          correct: "ترجع التاريخ والوقت الحاليين" }
-    ];
+          correct: "ترجع التاريخ والوقت الحاليين" },
+         {
+    type: "mc",
+    text: "كل ما يلي يتعلق بجملة استدعاء الإجراء الفرعي (Sub) باستثناء:",
+    options: [
+        "لا يؤثر اختلاف أسماء المعاملات فيها عن أسماء المعاملات في جملة الإعلان",
+        "لا يمكن الاستغناء فيها عن جملة Call (لا يمكن حذف Call)",
+        "لا يكتب فيها نوع المعاملات",
+        "يجب أن يكون عدد المعاملات مطابقاً لعددها في جملة الإعلان"
+    ],
+    correct: "لا يمكن الاستغناء فيها عن جملة Call (لا يمكن حذف Call)"
+} ,
+// السؤال 33: معاملات الدالة الوظيفية (Function)
+{
+    type: "mc",
+    text: "جميع معاملات الدالة الوظيفية (  امتحان 2022)(Function) في فيجوال بيسك تُعتبر:",
+    options: [
+        "مدخلات فقط (Input only)",
+        "مخرجات فقط (Output only)",
+        "مدخلات ومخرجات (Input and Output)",
+        "جميع الإجابات السابقة صحيحة"
+    ],
+    correct: "مدخلات فقط (Input only)"
+},
+{
+    type: "mc",
+    text: " (  امتحان 2022)إجراء فرعي معرف كالتالي:\nSub num(x As Integer, y As Integer, m1 As Integer, m2 As Integer)\n    If x > y Then\n        m1 = x : m2 = y\n    Else\n        m1 = y : m2 = x\n    End If\nEnd Sub\nما هي وظيفة هذا الإجراء؟",
+    options: [
+        "يضع في m1 العدد الأكبر وفي m2 العدد الأصغر",
+        "يضع في m1 العدد الأصغر وفي m2 العدد الأكبر",
+        "يقوم بجمع العددين ووضع الناتج في m1",
+        "يقوم بطرح العددين ووضع الناتج في m2"
+    ],
+    correct: "يضع في m1 العدد الأكبر وفي m2 العدد الأصغر"
+},
+{
+    type: "tf",
+    text: " (  امتحان 2025)يعتبر استدعاء الدالة (Function) بجملة الاستدعاء (Call) صحيحاً في لغة فيجوال بيسك.",
+    correct: "false"
+},
+{
+    type: "tf",
+    text: "(  امتحان 2025)يمكن أن يكون الإجراء الفرعي (Sub) دون معاملات (بدون وسائط).",
+    correct: "true"
+},
+// السؤال 1: نوع القيمة المرجعة من الدالة
+{
+    type: "mc",
+    text: " (  امتحان 2025)الدالة التالية:\nPrivate Function Max(a As Integer, b As Integer) As Integer\n    If a > b Then\n        Max = a\n    Else\n        Max = b\n    End If\nEnd Function\nما نوع البيانات التي تعيدها هذه الدالة؟",
+    options: [
+        "Integer (صحيح)",
+        "String (نصي)",
+        "Single (عشري)",
+        "Boolean (منطقي)"
+    ],
+    correct: "Integer (صحيح)"
+},
 
+// السؤال 2: عدد المعاملات في الدالة
+
+// السؤال 3: ما الذي تعيده الدالة
+{
+    type: "mc",
+    text: "     -2025  إذا كانت الدالة معرفة كالتالي:\nPrivate Function Max(a As Integer, b As Integer) As Integer\n    If a > b Then\n        Max = a\n    Else\n        Max = b\n    End If\nEnd Function\nفما قيمة المتغير x بعد تنفيذ العبارة: x = Max(3, 10)",
+    options: ["3", "7", "10", "13"],
+    correct: "10"
+},{
+    type: "mc",
+    text: "    -2025   ما ناتج تنفيذ الدالة Right(\"Microsoft_Visual_Basic\", 5)؟",
+    options: ["Visual", "Basic", "Basic_", "Micros"],
+    correct: "Basic_"
+},
+{
+    type: "mc",
+    text:  " -2025  لحساب جيب تمام الزاوية (Cosine) في فيجوال بيسك، يتم استخدام الدالة:",
+    options: [
+        "Tan(x)",
+        "Cos(x)",
+        "Log(x)",
+        "Sin(x)"
+    ],
+    correct: "Cos(x)"
+},
+
+{
+    type: "mc",
+    text: "    -2025   القيمة التي سيتم تخصيصها للمتغير C بعد تنفيذ الجملة:\nC = Day(#25/5/2025#) هي:",
+    options: [
+        "0",
+        "25",
+        "5",
+        "2025"
+    ],
+    correct: "25"
+},
+{
+    type: "mc",
+    text: "   -2025   لتحويل متغير نصي (String) إلى قيمة رقمية (Number) في فيجوال بيسك، يتم استخدام الدالة:",
+    options: [
+        "Mid(string)",
+        "Chr(string)",
+        "Str(string)",
+        "Val(string)"
+    ],
+    correct: "Val(string)"
+},
+{
+    type: "mc",
+    text: "  2025   ينتهي الإجراء الفرعي (Sub) في فيجوال بيسك بالجملة:",
+    options: [
+        "End Sub",
+        "End Function",
+        "End",
+        "End If"
+    ],
+    correct: "End Sub"
+},
+{
+    type: "mc",
+    text: "  2025  الدالة التي تستخدم لتنسيق التاريخ والوقت في فيجوال بيسك هي:",
+    options: [
+        "Year",
+        "Format",
+        "Weekday",
+        "Month"
+    ],
+    correct: "Format"
+},
+{
+    type: "mc",
+    text: " -  2025  لحذف الفراغات من بداية النص (الجهة اليسرى) في فيجوال بيسك، يتم استخدام الدالة:",
+    options: [
+        "RTrim(s)",
+        "LTrim(s)",
+        "Trim(s)",
+        "Len(s)"
+    ],
+    correct: "LTrim(s)"
+}
+    ];
+// زر العودة للأعلى
+const scrollBtn = document.getElementById('scrollToTopBtn');
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        scrollBtn.style.display = "flex";
+        scrollBtn.style.alignItems = "center";
+        scrollBtn.style.justifyContent = "center";
+    } else {
+        scrollBtn.style.display = "none";
+    }
+};
+
+scrollBtn.onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
     // لتخزين الإجابات المختارة لكل سؤال
     let userAnswers = new Array(questions.length).fill(null);
     let checkedStatus = new Array(questions.length).fill(false); // هل تم التحقق من السؤال؟
