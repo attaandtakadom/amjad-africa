@@ -51,8 +51,10 @@ async def respond():
         Update.de_json(request.get_json(force=True), ptb_application.bot)
     )
     return 'ok'
-
-if __name__ == '__main__':
+@app.route('/')
+def home():
+    return "Bot is Alive and Running!", 200
+    if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 10000))
     
     # تشغيل الـ Webhook
