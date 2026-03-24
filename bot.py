@@ -54,10 +54,12 @@ async def respond():
 @app.route('/')
 def home():
     return "Bot is Alive and Running!", 200
+# تأكد أن هذا الجزء في نهاية الملف تماماً ومكتوب بنفس هذا التنسيق
 if __name__ == '__main__':
-    # تأكد من وجود 4 مسافات قبل الأسطر التالية
+    # لاحظ الفراغ (4 مسافات) قبل كلمة PORT
     PORT = int(os.environ.get('PORT', 10000))
     
+    # لاحظ الفراغ (4 مسافات) قبل كلمة ptb_application
     ptb_application.run_webhook(
         listen="0.0.0.0",
         port=PORT,
