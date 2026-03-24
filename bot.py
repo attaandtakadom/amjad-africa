@@ -14,8 +14,9 @@ RENDER_EXTERNAL_URL = os.getenv('RENDER_EXTERNAL_URL')
 WEB_APP_URL = 'https://attaandtakadom.github.io/amjad-africa/'
 
 # 3. إعداد Flask و Application
+# ابحث عن سطر تعريف app وغيره لهذا:
 app = Flask(__name__)
-ptb_application = Application.builder().token(TOKEN).build()
+    ptb_application = Application.builder().token(TOKEN).build()
 
 # 4. وظيفة الترحيب والتحقق من القناة
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
