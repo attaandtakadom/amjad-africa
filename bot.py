@@ -14,7 +14,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # 2. جلب البيانات من المتغيرات البيئية (Environment Variables)
-TOKEN = os.getenv('BOT_TOKEN')
+TOKEN = os.getenv('8542022124:AAFS9xSRyVTs0GRVCitV1vT1lRWwDIfOa_k')
 CHANNEL_ID = os.getenv('CHANNEL_ID') 
 RENDER_EXTERNAL_URL = os.getenv('RENDER_EXTERNAL_URL') 
 WEB_APP_URL = 'https://attaandtakadom.github.io/amjad-africa/'
