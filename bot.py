@@ -4,20 +4,20 @@ from flask import Flask, request
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes
 
-# إعداد التنبيهات (Logs) لمراقبة الأخطاء في Render
+# 1. إعداد التنبيهات (Logs)
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-# جلب البيانات من Environment Variables
+# 2. جلب البيانات من Environment Variables
 TOKEN = os.getenv('BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID') 
-# الرابط الذي يوفره لك Render (مثال: https://your-app.onrender.com)
 RENDER_EXTERNAL_URL = os.getenv('RENDER_EXTERNAL_URL') 
 WEB_APP_URL = 'https://attaandtakadom.github.io/amjad-africa/'
 
-# إعداد تطبيق Flask لاستقبال طلبات تليجرام
+# 3. إعداد Flask و Application
 app = Flask(__name__)
 ptb_application = Application.builder().token(TOKEN).build()
 
+# 4. وظيفة الترحيب والتحقق من القناة
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     try:
@@ -29,13 +29,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             raise Exception("Not Member")
     except Exception:
-        # تأكد من أن الرابط صحيح لقناتك
         channel_username = CHANNEL_ID.replace('@', '')
         keyboard = [[InlineKeyboardButton("اشترك في القناة أولاً ✅", url=f"https://t.me/{channel_username}")]]
         await update.message.reply_text("⚠️ عذراً، يجب عليك الاشتراك في القناة أولاً.", reply_markup=InlineKeyboardMarkup(keyboard))
 
-# إضافة الـ Handlers
 ptb_application.add_handler(CommandHandler("start", start))
+
+# ---------------------------------------------------------
+# الجزء الذي طلبته (يُضاف في الأخير قبل التشغيل)
+# ---------------------------------------------------------
+
+@app.route('/')
+def index():
+    """هذا المسار يحل مشكلة 404 ويجعل UptimeRobot يعطي لوناً أخضر"""
+    return "Bot is Alive and Running!", 200
 
 @app.route(f'/{TOKEN}', methods=['POST'])
 async def respond():
@@ -45,15 +52,10 @@ async def respond():
     )
     return 'ok'
 
-@app.route('/')
-def index():
-    return "Bot is running..."
-
 if __name__ == '__main__':
-    # تشغيل البوت بنظام Webhook
     PORT = int(os.environ.get('PORT', 10000))
     
-    # إخبار تليجرام بمكان إرسال التحديثات
+    # تشغيل الـ Webhook
     ptb_application.run_webhook(
         listen="0.0.0.0",
         port=PORT,
