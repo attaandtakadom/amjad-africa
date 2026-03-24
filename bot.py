@@ -56,13 +56,21 @@ def home():
     return "Bot is Alive and Running!", 200
 # تأكد أن هذا الجزء في نهاية الملف تماماً ومكتوب بنفس هذا التنسيق
 if __name__ == '__main__':
-    # لاحظ الفراغ (4 مسافات) قبل كلمة PORT
-    PORT = int(os.environ.get('PORT', 10000))
+    # تشغيل تطبيق التليجرام في الخلفية
+    import asyncio
     
-    # لاحظ الفراغ (4 مسافات) قبل كلمة ptb_application
-    ptb_application.run_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        url_path=TOKEN,
-        webhook_url=f"{RENDER_EXTERNAL_URL}/{TOKEN}"
-    )
+    async def main():
+        await ptb_application.initialize()
+        await ptb_application.start()
+        await ptb_application.bot.set_webhook(url=f"{RENDER_EXTERNAL_URL}/{TOKEN}")
+        
+        # تشغيل سيرفر Flask لاستقبال طلبات UptimeRobot وتليجرام
+        PORT = int(os.environ.get('PORT', 10000))
+        app.run(host='0.0.0.0', port=PORT)
+
+    # تشغيل المنظومة
+    try:
+        import asyncio
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        pass
