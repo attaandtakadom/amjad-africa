@@ -1,57 +1,46 @@
 import os
-import logging
+import requests
 from flask import Flask, request
-from telegram import Update, Bot, InlineKeyboardButton, InlineKeyboardMarkup
 
-# إعداد التنبيهات
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-# البيانات السرية
+# جلب البيانات من Render Environment
 TOKEN = os.environ.get('BOT_TOKEN')
-RENDER_URL = os.environ.get('RENDER_EXTERNAL_URL')
+# هذا السطر سيقوم بتنظيف الرابط تلقائياً من أي مسافات أو شرطات زائدة
+RENDER_URL = os.environ.get('RENDER_EXTERNAL_URL', '').strip().rstrip('/')
 WEB_APP_URL = 'https://attaandtakadom.github.io/amjad-africa/'
 
 app = Flask(__name__)
-bot = Bot(token=TOKEN)
 
 @app.route('/')
 def home():
-    return "Bot is Running", 200
+    return "Status: OK", 200
 
 @app.route(f'/{TOKEN}', methods=['POST'])
 def respond():
-    try:
-        # استلام التحديث وتحويله لكائن تليجرام
-        update = Update.de_json(request.get_json(force=True), bot)
+    data = request.get_json(force=True)
+    print(f"--- وصلت رسالة جديدة: {data}") # سيظهر هذا في Logs رندر
+    
+    if 'message' in data:
+        chat_id = data['message']['chat']['id']
         
-        if update.message and update.message.text:
-            chat_id = update.message.chat_id
-            text = update.message.text
-            
-            if text.startswith('/start'):
-                # إنشاء الزر
-                keyboard = [[InlineKeyboardButton("فتح المنظومة 🚀", web_app={"url": WEB_APP_URL})]]
-                reply_markup = InlineKeyboardMarkup(keyboard)
-                
-                # إرسال الرد مباشرة
-                bot.send_message(
-                    chat_id=chat_id,
-                    text="✅ تم الاتصال بنجاح!\nمرحباً بك في منظومة أمجاد أفريقيا.",
-                    reply_markup=reply_markup
-                )
-                logger.info(f"Sent reply to {chat_id}")
-                
-        return 'ok', 200
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        return 'error', 500
+        # محاولة إرسال رد بسيط جداً بدون أزرار أولاً للتجربة
+        payload = {
+            'chat_id': chat_id,
+            'text': "✅ تم الاتصال! إذا وصلت هذه الرسالة فالسيرفر يعمل.",
+            'reply_markup': {
+                "inline_keyboard": [[
+                    {"text": "فتح المنظومة 🚀", "web_app": {"url": WEB_APP_URL}}
+                ]]
+            }
+        }
+        
+        r = requests.post(f"https://api.telegram.org/bot{TOKEN}/sendMessage", json=payload)
+        print(f"--- نتيجة الرد: {r.status_code} - {r.text}")
+
+    return 'ok', 200
 
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 10000))
-    # تفعيل الـ Webhook عند التشغيل
+    # تحديث الـ Webhook يدوياً عند التشغيل
     webhook_url = f"{RENDER_URL}/{TOKEN}"
-    bot.set_webhook(url=webhook_url, drop_pending_updates=True)
-    logger.info(f"Webhook set to: {webhook_url}")
-    
+    requests.get(f"https://api.telegram.org/bot{TOKEN}/setWebhook?url={webhook_url}&drop_pending_updates=True")
     app.run(host='0.0.0.0', port=PORT)
