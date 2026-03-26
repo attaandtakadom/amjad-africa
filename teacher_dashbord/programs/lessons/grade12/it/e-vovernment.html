@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>اختبار الحكومة الإلكترونية | منظومة أمجاد التعليمية</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* رأس الصفحة */
+.header {
+    text-align: center;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #fff, #f8f9fa);
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.header h1 {
+    font-family: 'Cairo', 'Segoe UI', sans-serif;
+    color: #1e3c72;
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header h1 i {
+    color: #3498db;
+}
+
+.header p {
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* بطاقات المعلومات */
+.info-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.info-card h3 {
+        font-family: 'Cairo', 'Segoe UI', sans-serif;
+
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.info-item {
+    background: rgba(255,255,255,0.15);
+    padding: 12px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+
+.info-item strong {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: #ffd966;
+}
+
+/* أزرار التنقل */
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    font-size: 0.95em;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #95a5a6;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-btn.active {
+    background: #2ecc71;
+    box-shadow: 0 0 10px rgba(46,204,113,0.5);
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+/* البطاقات العامة */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+
+        font-family: 'Cairo', 'Segoe UI', sans-serif;
+
+    font-size: 1.6em;
+    color: #1e3c72;
+    border-right: 5px solid #3498db;
+    padding-right: 15px;
+    margin-bottom: 20px;
+}
+
+/* أسئلة التصنيف */
+.classification-box {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s;
+}
+
+.classification-box.correct-bg {
+    background: #d5f4e6;
+    border-color: #2ecc71;
+}
+
+.classification-box.wrong-bg {
+    background: #ffe6e6;
+    border-color: #e74c3c;
+}
+
+.classification-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.category-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 10px 25px;
+    border: 2px solid #3498db;
+    background: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.category-btn:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.category-btn.selected-correct {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: white;
+}
+
+.category-btn.selected-wrong {
+    background: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+}
+
+.category-btn.correct-answer {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: white;
+    box-shadow: 0 0 5px rgba(46,204,113,0.5);
+}
+
+.feedback-class {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: none;
+}
+
+.feedback-class.correct {
+    background: #d5f4e6;
+    color: #27ae60;
+    display: block;
+}
+
+.feedback-class.wrong {
+    background: #ffe6e6;
+    color: #e74c3c;
+    display: block;
+}
+
+/* قسم التمارين العامة */
+.question-box {
+    background: #fef9e6;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ffe0a3;
+}
+
+.question-text {
+        font-family: 'Cairo', 'Segoe UI', sans-serif;
+
+    font-size: 1.05em;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.option {
+    margin: 8px 0;
+    padding: 10px 12px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option:hover { background: #bdc3c7; transform: translateX(-5px); }
+.option.selected { background: #3498db; color: white; }
+.option.correct { background: #2ecc71; color: white; }
+.option.wrong { background: #e74c3c; color: white; }
+
+.feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: none;
+}
+.feedback.correct { background: #d5f4e6; color: #27ae60; display: block; }
+.feedback.wrong { background: #ffe6e6; color: #e74c3c; display: block; }
+
+/* أزرار عامة */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: inherit;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+.btn-check { background: #2ecc71; color: white; }
+.btn-retry { background: #f39c12; color: white; }
+
+.hidden { display: none; }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+/* تحسينات للموبايل */
+@media (max-width: 640px) {
+    body { padding: 10px; }
+    .header h1 { font-size: 1.5em; }
+    .section-title { font-size: 1.3em; }
+    .info-grid { grid-template-columns: 1fr; }
+    .nav-btn { padding: 8px 16px; font-size: 0.85em; }
+    .category-btn { padding: 8px 16px; font-size: 0.85em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🏛️ <i> </i> الباب الثاني:  الحكومة الإلكترونية</h1>
+        <p>📚 مفاهيم شاملة | أنواع التعاملات | مراحل التطور | فوائد التحول الرقمي</p>
+    </div>
+
+    <!-- بطاقة معلومات سريعة -->
+    <div class="info-card">
+        <h3>📖 ملخص سريع للمفاهيم الأساسية</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>🏢 G2C (حكومة → مواطن)</strong>
+                استخراج شهادات الميلاد، تجديد الرخص، جوازات السفر، تسديد الفواتير
+            </div>
+            <div class="info-item">
+                <strong>💼 G2B (حكومة → قطاع أعمال)</strong>
+                مناقصات الشركات، دفع الضرائب التجارية، التراخيص
+            </div>
+            <div class="info-item">
+                <strong>🤝 G2G (حكومة → حكومة)</strong>
+                تبادل البيانات بين الوزارات (الصحة والتعليم، الداخلية والعدل)
+            </div>
+            <div class="info-item">
+                <strong>📊 مراحل التطور (بالترتيب)</strong>
+                الظهور → النشر → التفاعل → التكامل
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="window.location.href='../../../../../althanaoya/it/it-dashboard.html'">🏠 الرئيسية</button>
+        <button class="nav-btn" onclick="showSection('general')">📝 أسئلة عامة</button>
+        <button class="nav-btn" onclick="showSection('classification')">🏷️ تصنيف المعاملات</button>
+        <button class="nav-btn" onclick="showSection('stages')">📊 مراحل التطور</button>
+    </div>
+
+    <!-- قسم الأسئلة العامة -->
+    <div id="generalSection">
+        <div class="card">
+            <h2 class="section-title">📝 أسئلة متنوعة (صواب/خطأ واختيار من متعدد)</h2>
+            <div id="generalExercisesContainer"></div>
+            <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+                <button class="btn btn-check" onclick="checkGeneralExercises()">✅ تحقق من الإجابات</button>
+                <button class="btn btn-retry" onclick="resetGeneralExercises()">🔄 إعادة المحاولة</button>
+            </div>
+            <div id="generalGlobalFeedback" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- قسم تصنيف المعاملات -->
+    <div id="classificationSection" class="hidden">
+        <div class="card">
+            <h2 class="section-title">🏷️ تدريب: حدد نوع المعاملة (G2C / G2B / G2G)</h2>
+            <div id="classificationContainer"></div>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-check" onclick="checkClassification()">✅ تحقق من التصنيفات</button>
+                <button class="btn btn-retry" onclick="resetClassification()">🔄 إعادة المحاولة</button>
+            </div>
+            <div id="classificationFeedback" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- قسم مراحل التطور -->
+    <div id="stagesSection" class="hidden">
+        <div class="card">
+            <h2 class="section-title">📊 أسئلة حول مراحل تطور الحكومة الإلكترونية</h2>
+            <div id="stagesExercisesContainer"></div>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-check" onclick="checkStagesExercises()">✅ تحقق من الإجابات</button>
+                <button class="btn btn-retry" onclick="resetStagesExercises()">🔄 إعادة المحاولة</button>
+            </div>
+            <div id="stagesGlobalFeedback" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <footer>
+        🏛️    | اختبار الحكومة الإلكترونية - جميع الأسئلة مستوحاة من المنهج الرسمي
+    </footer>
+</div>
+
+<script>
+// ============= الأسئلة العامة (صواب/خطأ واختيار من متعدد) =============
+const generalExercises = [
+    { type: "tf", text: "التحول من حكومة تقليدية إلى إلكترونية يتم في بضعة أشهر فقط.", correct: "false" },
+    { type: "tf", text: "مرحلة التفاعل تتميز بتبادل البيانات والملفات في الاتجاهين (من وإلى الحكومة).", correct: "true" },
+    { type: "tf", text: "مرحلة النشر تركز على توفير نماذج قابلة للتحميل وتحديث الأخبار والتشريعات.", correct: "true" },
+    { type: "mc", text: "في أي مرحلة من مراحل الحكومة الإلكترونية تظهر جميع التشريعات المتعلقة بالتعاملات الإلكترونية؟", options: ["مرحلة النشر", "مرحلة الظهور الحكومي", "مرحلة التفاعل", "مرحلة التكامل"], correct: "مرحلة الظهور الحكومي" },
+    { type: "mc", text: "ما هي المرحلة التي تنجز فيها المعاملة بالكامل من مكان واحد دون الحاجة للتنقل بين المصالح؟", options: ["مرحلة الظهور", "مرحلة النشر", "مرحلة التفاعل", "مرحلة تكامل الخدمات"], correct: "مرحلة تكامل الخدمات" },
+    { type: "tf", text: "من فوائد الحكومة الإلكترونية: خفض التكاليف والزحام وتسهيل إنجاز الأعمال.", correct: "true" },
+    { type: "mc", text: "أي من التالي يُعد مثالاً على معاملات G2G (حكومة إلى حكومة)؟", options: ["استخراج جواز سفر", "دفع الضرائب من شركة", "تبادل بيانات التطعيمات بين وزارتي الصحة والتعليم", "تسديد فاتورة الكهرباء"], correct: "تبادل بيانات التطعيمات بين وزارتي الصحة والتعليم" },
+    { type: "mc", text: "ما هو الترتيب الصحيح لمراحل تطور الحكومة الإلكترونية؟", options: ["التكامل - التفاعل - النشر - الظهور", "الظهور - النشر - التفاعل - التكامل", "النشر - الظهور - التكامل - التفاعل", "التفاعل - التكامل - الظهور - النشر"], correct: "الظهور - النشر - التفاعل - التكامل" }
+];
+
+// ============= أسئلة تصنيف المعاملات =============
+const classificationExercises = [
+    { text: "استخراج شهادة الميلاد", correct: "G2C", categoryName: "حكومة → مواطن" },
+    { text: "تسديد فواتير الكهرباء والماء (للمواطن)", correct: "G2C", categoryName: "حكومة → مواطن" },
+    { text: "استخراج وتجديد جوازات السفر", correct: "G2C", categoryName: "حكومة → مواطن" },
+    { text: "تجديد رخصة القيادة", correct: "G2C", categoryName: "حكومة → مواطن" },
+    { text: "طلب تقديم خدمات من الشركات (مناقصات)", correct: "G2B", categoryName: "حكومة → قطاع أعمال" },
+    { text: "دفع الضرائب ورسوم التراخيص التجارية", correct: "G2B", categoryName: "حكومة → قطاع أعمال" },
+    { text: "تبادل المعلومات بين وزارة الصحة ووزارة التعليم", correct: "G2G", categoryName: "حكومة → حكومة" },
+    { text: "ربط قاعدة بيانات الداخلية مع العدل", correct: "G2G", categoryName: "حكومة → حكومة" }
+];
+
+// ============= أسئلة مراحل التطور =============
+const stagesExercises = [
+    { type: "mc", text: "ما هي المرحلة الأولى في تطور الحكومة الإلكترونية؟", options: ["مرحلة النشر", "مرحلة التكامل", "مرحلة الظهور الحكومي", "مرحلة التفاعل"], correct: "مرحلة الظهور الحكومي" },
+    { type: "tf", text: "مرحلة النشر تأتي بعد مرحلة التكامل مباشرة.", correct: "false" },
+    { type: "mc", text: "في أي مرحلة يتم توفير نماذج قابلة للتحميل وتحديث الأخبار بانتظام؟", options: ["مرحلة الظهور", "مرحلة النشر الإلكتروني", "مرحلة التفاعل", "مرحلة التكامل"], correct: "مرحلة النشر الإلكتروني" },
+    { type: "mc", text: "أي مرحلة تمثل قمة النضج في الحكومة الإلكترونية؟", options: ["مرحلة الظهور", "مرحلة النشر", "مرحلة التفاعل", "مرحلة تكامل الخدمات"], correct: "مرحلة تكامل الخدمات" },
+    { type: "tf", text: "في مرحلة التفاعل، يمكن للمواطن إرسال واستقبال البيانات والملفات عبر الموقع.", correct: "true" },
+    { type: "mc", text: "أي من التالي يميز مرحلة الظهور الحكومي؟", options: ["تبادل البيانات ثنائي الاتجاه", "إنجاز المعاملة من مكان واحد", "توفير معلومات أساسية (عناوين، ساعات عمل)", "توفير نماذج للتحميل"], correct: "توفير معلومات أساسية (عناوين، ساعات عمل)" }
+];
+
+// متغيرات لتخزين الإجابات
+let generalAnswers = {};
+let classificationAnswers = {};
+let stagesAnswers = {};
+
+// ============= عرض الأسئلة العامة =============
+function renderGeneralExercises() {
+    const container = document.getElementById('generalExercisesContainer');
+    container.innerHTML = '';
+    generalExercises.forEach((ex, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-box';
+        qDiv.id = `gen_ex_${idx}`;
+        qDiv.innerHTML = `
+            <div class="question-text">${idx+1}. ${ex.text}</div>
+            <div class="options-container" id="gen_opts_${idx}"></div>
+            <div class="feedback" id="gen_fb_${idx}"></div>
+        `;
+        container.appendChild(qDiv);
+        const optsDiv = qDiv.querySelector('.options-container');
+        if (ex.type === 'mc') {
+            ex.options.forEach(opt => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                optDiv.textContent = opt;
+                optDiv.setAttribute('data-ans', opt);
+                optDiv.addEventListener('click', () => selectGeneralOption(idx, opt));
+                optsDiv.appendChild(optDiv);
+            });
+        } else if (ex.type === 'tf') {
+            ['صحيح', 'خطأ'].forEach(opt => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                optDiv.textContent = opt;
+                const ansVal = (opt === 'صحيح') ? 'true' : 'false';
+                optDiv.setAttribute('data-ans', ansVal);
+                optDiv.addEventListener('click', () => selectGeneralOption(idx, ansVal));
+                optsDiv.appendChild(optDiv);
+            });
+        }
+    });
+}
+
+function selectGeneralOption(qIdx, ans) {
+    generalAnswers[qIdx] = ans;
+    const container = document.getElementById(`gen_opts_${qIdx}`);
+    Array.from(container.children).forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.getAttribute('data-ans') === ans) opt.classList.add('selected');
+    });
+    const fb = document.getElementById(`gen_fb_${qIdx}`);
+    fb.style.display = 'none';
+}
+
+function checkGeneralExercises() {
+    let allAnswered = true;
+    let score = 0;
+    for (let i = 0; i < generalExercises.length; i++) {
+        const ans = generalAnswers[i];
+        if (ans === undefined) {
+            allAnswered = false;
+            document.getElementById(`gen_fb_${i}`).innerHTML = '⚠️ لم يتم الإجابة على هذا السؤال.';
+            document.getElementById(`gen_fb_${i}`).className = 'feedback wrong';
+            continue;
+        }
+        const correctAns = generalExercises[i].correct;
+        const isCorrect = (ans === correctAns);
+        if (isCorrect) score++;
+        const fbDiv = document.getElementById(`gen_fb_${i}`);
+        fbDiv.innerHTML = isCorrect ? '✅ إجابة صحيحة!' : `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns)}`;
+        fbDiv.className = isCorrect ? 'feedback correct' : 'feedback wrong';
+        const container = document.getElementById(`gen_opts_${i}`);
+        Array.from(container.children).forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+            if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
+            if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
+        });
+    }
+    const globalDiv = document.getElementById('generalGlobalFeedback');
+    if (!allAnswered) {
+        globalDiv.innerHTML = '<div class="feedback wrong" style="display:block;">⚠️ يرجى الإجابة على جميع الأسئلة قبل التحقق.</div>';
+    } else {
+        globalDiv.innerHTML = `<div class="feedback correct" style="display:block;">🎉 نتيجتك في الأسئلة العامة: ${score} من ${generalExercises.length} 🎉</div>`;
+    }
+}
+
+function resetGeneralExercises() {
+    generalAnswers = {};
+    for (let i = 0; i < generalExercises.length; i++) {
+        const container = document.getElementById(`gen_opts_${i}`);
+        if (container) {
+            Array.from(container.children).forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+        }
+        const fb = document.getElementById(`gen_fb_${i}`);
+        fb.style.display = 'none';
+        fb.innerHTML = '';
+    }
+    document.getElementById('generalGlobalFeedback').innerHTML = '';
+}
+
+// ============= عرض أسئلة التصنيف (محسنة) =============
+function renderClassification() {
+    const container = document.getElementById('classificationContainer');
+    container.innerHTML = '';
+    classificationExercises.forEach((ex, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'classification-box';
+        qDiv.id = `class_box_${idx}`;
+        qDiv.innerHTML = `
+            <div class="classification-title">📌 ${idx+1}. ${ex.text}</div>
+            <div class="category-options" id="class_opts_${idx}">
+                <button class="category-btn" data-cat="G2C">🏢 G2C (حكومة → مواطن)</button>
+                <button class="category-btn" data-cat="G2B">💼 G2B (حكومة → قطاع أعمال)</button>
+                <button class="category-btn" data-cat="G2G">🤝 G2G (حكومة → حكومة)</button>
+            </div>
+            <div class="feedback-class" id="class_fb_${idx}"></div>
+        `;
+        container.appendChild(qDiv);
+        
+        // إضافة مستمعي الأحداث للأزرار
+        const btns = qDiv.querySelectorAll('.category-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => selectClassification(idx, btn.getAttribute('data-cat')));
+        });
+    });
+}
+
+function selectClassification(qIdx, cat) {
+    classificationAnswers[qIdx] = cat;
+    const container = document.getElementById(`class_opts_${qIdx}`);
+    Array.from(container.children).forEach(btn => {
+        btn.classList.remove('selected-correct', 'selected-wrong');
+        if (btn.getAttribute('data-cat') === cat) {
+            btn.classList.add('selected-correct');
+        }
+    });
+    const fb = document.getElementById(`class_fb_${qIdx}`);
+    fb.style.display = 'none';
+    fb.innerHTML = '';
+    
+    // إزالة الخلفية الملونة من الصندوق
+    const box = document.getElementById(`class_box_${qIdx}`);
+    box.classList.remove('correct-bg', 'wrong-bg');
+}
+
+function checkClassification() {
+    let score = 0;
+    for (let i = 0; i < classificationExercises.length; i++) {
+        const userAnswer = classificationAnswers[i];
+        const correctAnswer = classificationExercises[i].correct;
+        const correctName = classificationExercises[i].categoryName;
+        const fbDiv = document.getElementById(`class_fb_${i}`);
+        const box = document.getElementById(`class_box_${i}`);
+        const btnsContainer = document.getElementById(`class_opts_${i}`);
+        
+        // إزالة التصنيفات السابقة
+        Array.from(btnsContainer.children).forEach(btn => {
+            btn.classList.remove('correct-answer', 'selected-correct', 'selected-wrong');
+        });
+        
+        if (userAnswer === undefined) {
+            fbDiv.innerHTML = '⚠️ لم يتم اختيار تصنيف لهذا المثال.';
+            fbDiv.className = 'feedback-class wrong';
+            box.classList.add('wrong-bg');
+            continue;
+        }
+        
+        // عرض الإجابة الصحيحة على الزر المناسب
+        Array.from(btnsContainer.children).forEach(btn => {
+            if (btn.getAttribute('data-cat') === correctAnswer) {
+                btn.classList.add('correct-answer');
+            }
+        });
+        
+        if (userAnswer === correctAnswer) {
+            score++;
+            fbDiv.innerHTML = `✅ تصنيف صحيح! (${correctAnswer} - ${correctName})`;
+            fbDiv.className = 'feedback-class correct';
+            box.classList.add('correct-bg');
+            // تلوين الزر الذي اختاره المستخدم باللون الأخضر
+            Array.from(btnsContainer.children).forEach(btn => {
+                if (btn.getAttribute('data-cat') === userAnswer) {
+                    btn.classList.add('selected-correct');
+                }
+            });
+        } else {
+            const userCatName = userAnswer === 'G2C' ? 'حكومة → مواطن' : (userAnswer === 'G2B' ? 'حكومة → قطاع أعمال' : 'حكومة → حكومة');
+            fbDiv.innerHTML = `❌ تصنيف خاطئ. الإجابة الصحيحة: ${correctAnswer} (${correctName})، إجابتك: ${userAnswer} (${userCatName})`;
+            fbDiv.className = 'feedback-class wrong';
+            box.classList.add('wrong-bg');
+            // تلوين الزر الذي اختاره المستخدم باللون الأحمر
+            Array.from(btnsContainer.children).forEach(btn => {
+                if (btn.getAttribute('data-cat') === userAnswer) {
+                    btn.classList.add('selected-wrong');
+                }
+            });
+        }
+    }
+    const globalDiv = document.getElementById('classificationFeedback');
+    globalDiv.innerHTML = `<div class="feedback correct" style="display:block;">🎉 نتيجتك في التصنيف: ${score} من ${classificationExercises.length} 🎉</div>`;
+}
+
+function resetClassification() {
+    classificationAnswers = {};
+    for (let i = 0; i < classificationExercises.length; i++) {
+        const container = document.getElementById(`class_opts_${i}`);
+        if (container) {
+            Array.from(container.children).forEach(btn => {
+                btn.classList.remove('selected-correct', 'selected-wrong', 'correct-answer');
+            });
+        }
+        const fb = document.getElementById(`class_fb_${i}`);
+        fb.style.display = 'none';
+        fb.innerHTML = '';
+        const box = document.getElementById(`class_box_${i}`);
+        if (box) {
+            box.classList.remove('correct-bg', 'wrong-bg');
+        }
+    }
+    document.getElementById('classificationFeedback').innerHTML = '';
+}
+
+// ============= عرض أسئلة مراحل التطور =============
+function renderStagesExercises() {
+    const container = document.getElementById('stagesExercisesContainer');
+    container.innerHTML = '';
+    stagesExercises.forEach((ex, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-box';
+        qDiv.id = `stage_ex_${idx}`;
+        qDiv.innerHTML = `
+            <div class="question-text">${idx+1}. ${ex.text}</div>
+            <div class="options-container" id="stage_opts_${idx}"></div>
+            <div class="feedback" id="stage_fb_${idx}"></div>
+        `;
+        container.appendChild(qDiv);
+        const optsDiv = qDiv.querySelector('.options-container');
+        if (ex.type === 'mc') {
+            ex.options.forEach(opt => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                optDiv.textContent = opt;
+                optDiv.setAttribute('data-ans', opt);
+                optDiv.addEventListener('click', () => selectStageOption(idx, opt));
+                optsDiv.appendChild(optDiv);
+            });
+        } else if (ex.type === 'tf') {
+            ['صحيح', 'خطأ'].forEach(opt => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                optDiv.textContent = opt;
+                const ansVal = (opt === 'صحيح') ? 'true' : 'false';
+                optDiv.setAttribute('data-ans', ansVal);
+                optDiv.addEventListener('click', () => selectStageOption(idx, ansVal));
+                optsDiv.appendChild(optDiv);
+            });
+        }
+    });
+}
+
+function selectStageOption(qIdx, ans) {
+    stagesAnswers[qIdx] = ans;
+    const container = document.getElementById(`stage_opts_${qIdx}`);
+    Array.from(container.children).forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.getAttribute('data-ans') === ans) opt.classList.add('selected');
+    });
+    const fb = document.getElementById(`stage_fb_${qIdx}`);
+    fb.style.display = 'none';
+}
+
+function checkStagesExercises() {
+    let allAnswered = true;
+    let score = 0;
+    for (let i = 0; i < stagesExercises.length; i++) {
+        const ans = stagesAnswers[i];
+        if (ans === undefined) {
+            allAnswered = false;
+            document.getElementById(`stage_fb_${i}`).innerHTML = '⚠️ لم يتم الإجابة على هذا السؤال.';
+            document.getElementById(`stage_fb_${i}`).className = 'feedback wrong';
+            continue;
+        }
+        const correctAns = stagesExercises[i].correct;
+        const isCorrect = (ans === correctAns);
+        if (isCorrect) score++;
+        const fbDiv = document.getElementById(`stage_fb_${i}`);
+        fbDiv.innerHTML = isCorrect ? '✅ إجابة صحيحة!' : `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns)}`;
+        fbDiv.className = isCorrect ? 'feedback correct' : 'feedback wrong';
+        const container = document.getElementById(`stage_opts_${i}`);
+        Array.from(container.children).forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+            if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
+            if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
+        });
+    }
+    const globalDiv = document.getElementById('stagesGlobalFeedback');
+    if (!allAnswered) {
+        globalDiv.innerHTML = '<div class="feedback wrong" style="display:block;">⚠️ يرجى الإجابة على جميع الأسئلة قبل التحقق.</div>';
+    } else {
+        globalDiv.innerHTML = `<div class="feedback correct" style="display:block;">🎉 نتيجتك في أسئلة المراحل: ${score} من ${stagesExercises.length} 🎉</div>`;
+    }
+}
+
+function resetStagesExercises() {
+    stagesAnswers = {};
+    for (let i = 0; i < stagesExercises.length; i++) {
+        const container = document.getElementById(`stage_opts_${i}`);
+        if (container) {
+            Array.from(container.children).forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+        }
+        const fb = document.getElementById(`stage_fb_${i}`);
+        fb.style.display = 'none';
+        fb.innerHTML = '';
+    }
+    document.getElementById('stagesGlobalFeedback').innerHTML = '';
+}
+
+// ============= تبديل الأقسام مع تحديث التلوين =============
+function showSection(section) {
+    const generalDiv = document.getElementById('generalSection');
+    const classificationDiv = document.getElementById('classificationSection');
+    const stagesDiv = document.getElementById('stagesSection');
+    const btns = document.querySelectorAll('.nav-btn');
+    
+    // إزالة الـ active من جميع الأزرار أولاً
+    btns.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // إظهار/إخفاء الأقسام وتحديد الزر النشط
+    if (section === 'general') {
+        generalDiv.classList.remove('hidden');
+        classificationDiv.classList.add('hidden');
+        stagesDiv.classList.add('hidden');
+        if (btns[1]) btns[1].classList.add('active');
+    } else if (section === 'classification') {
+        generalDiv.classList.add('hidden');
+        classificationDiv.classList.remove('hidden');
+        stagesDiv.classList.add('hidden');
+        if (btns[2]) btns[2].classList.add('active');
+    } else if (section === 'stages') {
+        generalDiv.classList.add('hidden');
+        classificationDiv.classList.add('hidden');
+        stagesDiv.classList.remove('hidden');
+        if (btns[3]) btns[3].classList.add('active');
+    }
+}
+
+// تهيئة الصفحة
+renderGeneralExercises();
+renderClassification();
+renderStagesExercises();
+showSection('general');
+</script>
+</body>
+</html>

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم المعلم - </title>
+    <title>لوحة تحكم المعلم -    </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    
     <style>
         :root {
             --arabic-primary: #1E88E5;
@@ -46,7 +45,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
         }
 
         .logo-container {
@@ -82,7 +81,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 10px 20px;
             border-radius: 12px;
             backdrop-filter: blur(10px);
@@ -111,7 +110,7 @@
         .sidebar {
             width: 280px;
             background: white;
-            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 2px 0 15px rgba(0,0,0,0.08);
             padding: 20px 0;
         }
 
@@ -204,12 +203,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
 
         .grade-tab:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .grade-tab.active {
@@ -219,7 +218,7 @@
         }
 
         .grade-tab .tab-badge {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             padding: 3px 10px;
             border-radius: 15px;
             font-size: 12px;
@@ -240,7 +239,6 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -260,29 +258,15 @@
             padding: 20px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             border-top: 4px solid;
         }
 
-        .stat-card.grade1 {
-            border-color: var(--grade1);
-        }
-
-        .stat-card.grade2 {
-            border-color: var(--grade2);
-        }
-
-        .stat-card.grade3 {
-            border-color: var(--grade3);
-        }
-
-        .stat-card.grade4 {
-            border-color: var(--grade4);
-        }
-
-        .stat-card.grade5 {
-            border-color: var(--grade5);
-        }
+        .stat-card.grade1 { border-color: var(--grade1); }
+        .stat-card.grade2 { border-color: var(--grade2); }
+        .stat-card.grade3 { border-color: var(--grade3); }
+        .stat-card.grade4 { border-color: var(--grade4); }
+        .stat-card.grade5 { border-color: var(--grade5); }
 
         .stat-icon {
             width: 50px;
@@ -296,25 +280,11 @@
             color: white;
         }
 
-        .stat-card.grade1 .stat-icon {
-            background: var(--grade1);
-        }
-
-        .stat-card.grade2 .stat-icon {
-            background: var(--grade2);
-        }
-
-        .stat-card.grade3 .stat-icon {
-            background: var(--grade3);
-        }
-
-        .stat-card.grade4 .stat-icon {
-            background: var(--grade4);
-        }
-
-        .stat-card.grade5 .stat-icon {
-            background: var(--grade5);
-        }
+        .stat-card.grade1 .stat-icon { background: var(--grade1); }
+        .stat-card.grade2 .stat-icon { background: var(--grade2); }
+        .stat-card.grade3 .stat-icon { background: var(--grade3); }
+        .stat-card.grade4 .stat-icon { background: var(--grade4); }
+        .stat-card.grade5 .stat-icon { background: var(--grade5); }
 
         .stat-value {
             font-size: 28px;
@@ -322,25 +292,11 @@
             margin-bottom: 5px;
         }
 
-        .stat-card.grade1 .stat-value {
-            color: var(--grade1);
-        }
-
-        .stat-card.grade2 .stat-value {
-            color: var(--grade2);
-        }
-
-        .stat-card.grade3 .stat-value {
-            color: var(--grade3);
-        }
-
-        .stat-card.grade4 .stat-value {
-            color: var(--grade4);
-        }
-
-        .stat-card.grade5 .stat-value {
-            color: var(--grade5);
-        }
+        .stat-card.grade1 .stat-value { color: var(--grade1); }
+        .stat-card.grade2 .stat-value { color: var(--grade2); }
+        .stat-card.grade3 .stat-value { color: var(--grade3); }
+        .stat-card.grade4 .stat-value { color: var(--grade4); }
+        .stat-card.grade5 .stat-value { color: var(--grade5); }
 
         .stat-label {
             color: #666;
@@ -353,7 +309,7 @@
             padding: 25px;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
         .section-header {
@@ -390,29 +346,15 @@
 
         .lesson-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border-color: var(--arabic-primary);
         }
 
-        .lesson-card.grade1:hover {
-            border-color: var(--grade1);
-        }
-
-        .lesson-card.grade2:hover {
-            border-color: var(--grade2);
-        }
-
-        .lesson-card.grade3:hover {
-            border-color: var(--grade3);
-        }
-
-        .lesson-card.grade4:hover {
-            border-color: var(--grade4);
-        }
-
-        .lesson-card.grade5:hover {
-            border-color: var(--grade5);
-        }
+        .lesson-card.grade1:hover { border-color: var(--grade1); }
+        .lesson-card.grade2:hover { border-color: var(--grade2); }
+        .lesson-card.grade3:hover { border-color: var(--grade3); }
+        .lesson-card.grade4:hover { border-color: var(--grade4); }
+        .lesson-card.grade5:hover { border-color: var(--grade5); }
 
         .lesson-header {
             padding: 20px;
@@ -421,25 +363,11 @@
             overflow: hidden;
         }
 
-        .lesson-card.grade1 .lesson-header {
-            background: linear-gradient(135deg, var(--grade1), #FF5252);
-        }
-
-        .lesson-card.grade2 .lesson-header {
-            background: linear-gradient(135deg, var(--grade2), #00B4D8);
-        }
-
-        .lesson-card.grade3 .lesson-header {
-            background: linear-gradient(135deg, var(--grade3), #40916C);
-        }
-
-        .lesson-card.grade4 .lesson-header {
-            background: linear-gradient(135deg, var(--grade4), #FF8500);
-        }
-
-        .lesson-card.grade5 .lesson-header {
-            background: linear-gradient(135deg, var(--grade5), #7B2CBF);
-        }
+        .lesson-card.grade1 .lesson-header { background: linear-gradient(135deg, var(--grade1), #FF5252); }
+        .lesson-card.grade2 .lesson-header { background: linear-gradient(135deg, var(--grade2), #00B4D8); }
+        .lesson-card.grade3 .lesson-header { background: linear-gradient(135deg, var(--grade3), #40916C); }
+        .lesson-card.grade4 .lesson-header { background: linear-gradient(135deg, var(--grade4), #FF8500); }
+        .lesson-card.grade5 .lesson-header { background: linear-gradient(135deg, var(--grade5), #7B2CBF); }
 
         .lesson-icon {
             font-size: 32px;
@@ -483,20 +411,9 @@
             font-weight: 600;
         }
 
-        .status-active {
-            background: #d6f5e8;
-            color: #43A047;
-        }
-
-        .status-completed {
-            background: #e0f7ff;
-            color: #1E88E5;
-        }
-
-        .status-upcoming {
-            background: #fff4e6;
-            color: #FF9800;
-        }
+        .status-active { background: #d6f5e8; color: #43A047; }
+        .status-completed { background: #e0f7ff; color: #1E88E5; }
+        .status-upcoming { background: #fff4e6; color: #FF9800; }
 
         .lesson-actions {
             display: flex;
@@ -544,7 +461,7 @@
             background: white;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
         .programs-grid {
@@ -569,7 +486,7 @@
             background: white;
             border-color: var(--arabic-primary);
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .program-icon {
@@ -611,18 +528,15 @@
             .main-container {
                 flex-direction: column;
             }
-
             .sidebar {
                 width: 100%;
                 padding: 15px;
             }
-
             .sidebar-menu {
                 display: flex;
                 overflow-x: auto;
                 gap: 10px;
             }
-
             .menu-item {
                 white-space: nowrap;
                 margin: 0;
@@ -635,17 +549,14 @@
                 gap: 15px;
                 text-align: center;
             }
-
             .lessons-grid,
             .programs-grid,
             .grade-stats {
                 grid-template-columns: 1fr;
             }
-
             .grades-tabs {
                 flex-wrap: wrap;
             }
-
             .grade-tab {
                 flex: 1;
                 min-width: 120px;
@@ -657,19 +568,16 @@
             .content-container {
                 padding: 15px;
             }
-
             .lessons-section,
             .programs-section {
                 padding: 20px;
             }
-
             .lesson-actions {
                 flex-direction: column;
             }
         }
     </style>
 </head>
-
 <body>
     <!-- الشريط العلوي -->
     <div class="top-bar">
@@ -678,8 +586,8 @@
                 <i class="fas fa-book-open"></i>
             </div>
             <div class="school-info">
-                <h1>منصة تعليم تقنية المعلومات</h1>
-                <p>الدروس والبرامج تقنية المعلومات </p>
+                <h1>منصة تعليم تقنية المعلومات   التاسع</h1>
+                <p>الدروس والبرامج  تقنية المعلومات </p>
             </div>
         </div>
         <div class="teacher-info">
@@ -702,7 +610,7 @@
         <!-- الشريط الجانبي -->
         <div class="sidebar">
             <div class="sidebar-menu">
-                <a href="../than-dachboard.html" class="menu-item active">
+                <a href="it-third-dashboard.html" class="menu-item active">
                     <i class="fas fa-home"></i>
                     <span>الرئيسية</span>
                 </a>
@@ -711,7 +619,7 @@
                     <span>الطلاب</span>
                     <span class="badge">24</span>
                 </a>
-                <a href="../teacher_dashbord/programs/lessons/grade12/it/it-fuction.html" class="menu-item">
+                <a href="../../al-third-preparatory/it/it-dashboard.html" class="menu-item">
                     <i class="fas fa-font"></i>
                     <span>برنامج تقنية المعلومات</span>
                 </a>
@@ -748,47 +656,46 @@
         <div class="content-container">
             <div class="page-title fade-in">
                 <h1>مرحباً بك في منصة تقنية المعلومات 📚</h1>
-                <p> إدارة الدروس والبرامج التعليمية للصف الثالث الثانوي </p>
+                <p  >     إدارة الدروس والبرامج التعليمية للصف التاسع          </p>
             </div>
 
             <!-- تبويبات الصفوف -->
             <div class="grades-tabs fade-in">
-                <div class="grade-tab active" onclick="showGrade('grade4')">
+                 <div class="grade-tab active" onclick="showGrade('grade4')">
                     <i class="fas fa-4"></i>
-                    تقنية المعلومات
+                      تقنية المعلومات
                     <span class="tab-badge">9 طلاب</span>
                 </div>
                 <div class="grade-tab" onclick="showGrade('grade5')">
                     <i class="fas fa-5"></i>
-                    تقنية المعلومات
+                    -التاسع- تقنية المعلومات
                     <span class="tab-badge">8 طلاب</span>
                 </div>
             </div>
-
+        -->
             <!-- محتوى الصف الرابع -->
             <div id="grade4-content" class="grade-content active">
                 <!-- دروس الصف الرابع -->
                 <div class="lessons-section fade-in">
                     <div class="section-header">
                         <h2 class="section-title">
-                            <i class="fas fa-graduation-cap"></i> دروس تقنية المعلومات
-
+                            <i class="fas fa-graduation-cap"></i> التاسع -دروس  تقنية المعلومات                     
+ 
                         </h2>
                     </div>
                     <div class="lessons-grid">
-<!--   lesson e-gorenment -->
-<div class="lessons-grid">
 
 
-                        <div class="lesson-card grade5">
+ <div class="lesson-card grade5">
                             <div class="lesson-header">
                                 <div class="lesson-icon">
                                     <i class="fas fa-theater-masks"></i>
                                 </div>
-                                <h3 class="lesson-title"> -   الفصل الثاني: الحكومة الالكترونية .تقنية المعلومات .
-                                </h3>
-                                <div class="lesson-subject"> - 🎗️🎗️الفصل الثاني: الحكومة الالكترونية📚     
+                                <h3 class="lesson-title">  - الفصل السادس :  الذكاء الاصطناعي        .تقنية المعلومات .
+</h3>
+                                <div class="lesson-subject">   - 🎗️🎗️الفصل السادس :  الذكاء الاصطناعي 
 
+<!-- رموز تعبيرية للمغناطيس -->
 
 
                                 </div>
@@ -797,48 +704,11 @@
                                 <p class="lesson-desc"> </p>
                                 <div class="lesson-meta">
                                     <span><i class="far fa-clock"></i> 12 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span>
+                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span> 
                                 </div>
                                 <div class="lesson-status status-upcoming">قادم</div>
                                 <div class="lesson-actions">
-                                    <a href="../../teacher_dashbord/programs/lessons/grade12/it/e-vovernment.html"
-                                        class="lesson-btn primary">
-                                        <i class="fas fa-eye"></i> أبدأ
-                                    </a>
-                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
-                                        <i class="fas fa-calendar"></i> جدولة
-                                    </button>
-                                </div>
-                            </div>
-</div>
-
-<!--end lesson e-gorenment-->
-
-                        <div class="lesson-card grade5">
-                            <div class="lesson-header">
-                                <div class="lesson-icon">
-                                    <i class="fas fa-theater-masks"></i>
-                                </div>
-                                <h3 class="lesson-title"> - الفصل السادس :الاجراءات الفرعية والدوال Procedures and
-                                    Functions .تقنية المعلومات .
-                                </h3>
-                                <div class="lesson-subject"> - 🎗️🎗️الفصل السادس :الاجراءات الفرعية والدوال Procedures
-                                    and Functions📚 الإجراءات الفرعية (Sub) والدوال (Functions)
-
-
-
-                                </div>
-                            </div>
-                            <div class="lesson-content">
-                                <p class="lesson-desc"> </p>
-                                <div class="lesson-meta">
-                                    <span><i class="far fa-clock"></i> 12 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span>
-                                </div>
-                                <div class="lesson-status status-upcoming">قادم</div>
-                                <div class="lesson-actions">
-                                    <a href="../../teacher_dashbord/programs/lessons/grade12/it/it-function.html"
-                                        class="lesson-btn primary">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade9/it-artefishal.html" class="lesson-btn primary">
                                         <i class="fas fa-eye"></i> أبدأ
                                     </a>
                                     <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
@@ -847,17 +717,18 @@
                                 </div>
                             </div>
                         </div>
-
+<!--
                         <div class="lesson-card grade5">
                             <div class="lesson-header">
                                 <div class="lesson-icon">
                                     <i class="fas fa-theater-masks"></i>
                                 </div>
-                                <h3 class="lesson-title"> اسئلة من امتحانات سابقة-اسئلة الفصل السادس :الاجراءات الفرعية
-                                    والدوال اسئلةProcedures and Functions .تقنية المعلومات .
-                                </h3>
-                                <div class="lesson-subject"> اسئلة من امتحانات سابقة - 🎗️🎗️اسئلة الفصل السادس
-                                    rocedures and Functions📚 الإجراءات الفرعية (Sub) والدوال (Functions)
+                                <h3 class="lesson-title">  اسئلة من امتحانات سابقة-اسئلة الفصل  السادس :الاجراءات الفرعية والدوال اسئلةProcedures and Functions     .تقنية المعلومات .
+</h3>
+                                <div class="lesson-subject"> اسئلة من امتحانات سابقة  - 🎗️🎗️اسئلة الفصل السادس rocedures and Functions📚 الإجراءات الفرعية (Sub) والدوال (Functions)
+
+<!-- رموز تعبيرية للمغناطيس -
+
 
                                 </div>
                             </div>
@@ -865,13 +736,12 @@
                                 <p class="lesson-desc"> </p>
                                 <div class="lesson-meta">
                                     <span><i class="far fa-clock"></i> 12 ساعات</span>
-                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span>
+                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span> 
                                 </div>
                                 <div class="lesson-status status-upcoming">قادم</div>
                                 <div class="lesson-actions">
-                                    <a href="../../teacher_dashbord/programs/lessons/grade12/it/exersize.html"
-                                        class="lesson-btn primary">
-                                        <i class="fas fa-eye"></i> أبدأاسئلة
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/it/exersize.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i>  أبدأاسئلة
                                     </a>
                                     <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
                                         <i class="fas fa-calendar"></i> جدولة
@@ -887,7 +757,7 @@
 
 
 
-                        <!---
+<!---
                         <div class="lesson-card grade4">
                             <div class="lesson-header">
                                 <div class="lesson-icon">
@@ -1382,8 +1252,8 @@
             </div>
         </div>
     </div>
-    <button id="backToTop" class="top-btn" title="العودة للأعلى">↑</button>
-    <!--<style>
+<button id="backToTop" class="top-btn" title="العودة للأعلى">↑</button>
+<!--<style>
 /* تنسيق السهم وتثبيته في الزاوية */
 .top-btn {
     position: fixed;
@@ -1430,45 +1300,42 @@
     });
 </script>
 <!كود السهم-->
-    <style>
-        .top-btn {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 50px;
-            height: 50px;
-            background-color: #ff4757;
-            /* لون أحمر واضح للتجربة */
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 9999 !important;
-            /* لضمان الظهور فوق كل شيء */
-            display: none;
-            /* سيظهر عند النزول */
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+<style>
+.top-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background-color: #ff4757; /* لون أحمر واضح للتجربة */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999 !important; /* لضمان الظهور فوق كل شيء */
+    display: none; /* سيظهر عند النزول */
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+</style>
+
+<script>
+    window.onscroll = function() {
+        const btn = document.getElementById("backToTop");
+        // إذا نزل المستخدم أكثر من 100 بكسل يظهر السهم
+        if (window.pageYOffset > 100) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
         }
-    </style>
+    };
 
-    <script>
-        window.onscroll = function () {
-            const btn = document.getElementById("backToTop");
-            // إذا نزل المستخدم أكثر من 100 بكسل يظهر السهم
-            if (window.pageYOffset > 100) {
-                btn.style.display = "block";
-            } else {
-                btn.style.display = "none";
-            }
-        };
-
-        document.getElementById("backToTop").onclick = function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-    </script>
-    <!--end كود السهم-->
+    document.getElementById("backToTop").onclick = function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+</script>
+<!--end كود السهم-->
     <script>
         // تحديث الوقت
         function updateTime() {
@@ -1489,7 +1356,7 @@
             document.querySelectorAll('.grade-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-
+            
             // تلوين التبويب النشط
             const activeTab = document.querySelector(`.grade-tab[onclick="showGrade('${gradeId}')"]`);
             if (activeTab) {
@@ -1585,7 +1452,6 @@
 
 
 
-
+    
 </body>
-
 </html>
