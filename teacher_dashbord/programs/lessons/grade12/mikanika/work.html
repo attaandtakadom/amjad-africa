@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>الفيزياء - الشغل والطاقة والقدرة | المنهج الليبي</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f4f7f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, #0b2b40 0%, #1f5e6e 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: #fff;
+            border: 2px solid #1f5e6e;
+            padding: 10px 25px;
+            border-radius: 30px;
+            color: #1f5e6e;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .nav-btn.active { background: #ff8c42; color: white; border-color: #ff8c42; }
+
+        /* Content Cards */
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: none;
+        }
+        .card.active { display: block; }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: #0b2b40;
+            margin-bottom: 1.5rem;
+            border-right: 5px solid #ff8c42;
+            padding-right: 15px;
+        }
+
+        /* Diagrams & Math */
+        .diagram-container {
+            background: #f8f9fa;
+            border-radius: 1rem;
+            padding: 15px;
+            text-align: center;
+            margin: 15px 0;
+            border: 1px dashed #cbd5e0;
+        }
+        .formula-box {
+            background: #1e2f3a;
+            color: #f5d742;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        /* Questions */
+        .question-block {
+            border-bottom: 1px solid #edf2f7;
+            padding: 20px 0;
+        }
+        .solution-step {
+            background: #fffaf0;
+            padding: 10px 15px;
+            border-left: 4px solid #ff8c42;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        /* Quiz */
+        .quiz-option {
+            background: #f8f9fa;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+        .quiz-option:hover { background: #edf2f7; }
+        .quiz-option.selected { background: #bee3f8; border-color: #4299e1; }
+
+        footer { text-align: center; padding: 20px; color: #718096; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="main-header">
+        <h1>⚡ الفيزياء: الشغل والطاقة والقدرة</h1>
+        <p>الشهادة الثانوية | القسم العلمي | المنهج الليبي</p>
+    </header>
+
+    <nav class="nav-buttons">
+        <button class="nav-btn active" onclick="showSection('theory')">📖 ملخص القوانين</button>
+        <button class="nav-btn" onclick="showSection('solutions')">📝 حلول الكتاب (10 مسائل)</button>
+        <button class="nav-btn" onclick="showSection('quiz')">🧪 اختبار تفاعلي</button>
+    </nav>
+
+    <div id="theory" class="card active">
+        <div class="section-title">القوانين الأساسية</div>
+        
+        <div class="diagram-container">
+            <p><strong>1. الشغل الناتج عن قوة مائلة:</strong></p>
+            <svg width="250" height="120" viewBox="0 0 250 120">
+                <line x1="20" y1="100" x2="230" y2="100" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="60" y="60" width="50" height="40" fill="#ff8c42" rx="3"/>
+                <line x1="110" y1="80" x2="180" y2="40" stroke="#1f5e6e" stroke-width="3" marker-end="url(#arrow)"/>
+                <text x="185" y="45" font-weight="bold">F</text>
+                <text x="125" y="90" font-size="12">θ</text>
+                <path d="M 130 100 A 20 20 0 0 0 125 85" fill="none" stroke="#2c3e50"/>
+                <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f5e6e"/></marker></defs>
+            </svg>
+            <div class="formula-box">$$W = F \cdot s \cdot \cos \theta$$</div>
+        </div>
+
+        <div class="diagram-container">
+            <p><strong>2. المستوى المائل (الشغل ضد الجاذبية):</strong></p>
+            <svg width="250" height="120" viewBox="0 0 250 120">
+                <path d="M20,100 L200,100 L200,30 Z" fill="#e2e8f0" stroke="#2c3e50"/>
+                <rect x="80" y="65" width="30" height="20" fill="#3c8d9c" transform="rotate(-22, 80, 65)"/>
+                <text x="210" y="70" font-size="12">h (الارتفاع)</text>
+                <text x="40" y="95" font-size="12">θ</text>
+            </svg>
+            <div class="formula-box">$$W = mgh = mg(s \cdot \sin \theta)$$</div>
+        </div>
+    </div>
+
+    <div id="solutions" class="card">
+        <div class="section-title">حلول المسائل التدريبية</div>
+        <div id="questions-list">
+            </div>
+    </div>
+
+    <div id="quiz" class="card">
+        <div class="section-title">اختبر نفسك</div>
+        <div id="quiz-container"></div>
+        <button class="nav-btn" style="margin-top:20px; background:#2b7a3e; color:white;" onclick="checkQuiz()">تحقق من الإجابة</button>
+    </div>
+
+    <footer>تم التطوير لدعم طلاب المنهج الليبي - 2024 ©</footer>
+</div>
+
+<script>
+    const questions = [
+        {
+            q: "سيارة كتلتها 1000kg تغيرت سرعتها من 7m/s إلى 13m/s عبر مسافة 200m. أوجد قوة المحرك.",
+            sol: "نستخدم مبدأ الشغل والطاقة: $F \cdot s = \frac{1}{2}m(v^2 - u^2)$ <br> $F \cdot 200 = 0.5 \cdot 1000 \cdot (169 - 49)$ <br> $F = 300 N$"
+        },
+        {
+            q: "قوة مقدارها 100N تؤثر بزاوية 30° على جسم حركته مسافة 7m. احسب الشغل.",
+            sol: "$W = F \cdot s \cdot \cos \theta$ <br> $W = 100 \cdot 7 \cdot \cos(30) = 700 \cdot 0.866 = 606.2 J$"
+        }
+        // يمكن إضافة بقية المسائل هنا بنفس النمط
+    ];
+
+    const quizData = [
+        { t: "وحدة قياس القدرة هي:", o: ["الجول", "النيوتن", "الواط", "المتر"], c: 2 },
+        { t: "الشغل المبذول بواسطة قوة عمودية على اتجاه الحركة يساوي:", o: ["أقصى قيمة", "صفر", "قيمة سالبة"], c: 1 }
+    ];
+
+    function showSection(id) {
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.target.classList.add('active');
+        
+        if(id === 'solutions') renderSolutions();
+        if(id === 'quiz') renderQuiz();
+    }
+
+    function renderSolutions() {
+        const list = document.getElementById('questions-list');
+        list.innerHTML = questions.map((item, i) => `
+            <div class="question-block">
+                <strong>س${i+1}: ${item.q}</strong>
+                <div class="solution-step">${item.sol}</div>
+            </div>
+        `).join('');
+        MathJax.typeset(); // لتحديث المعادلات بعد الإضافة
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = quizData.map((q, i) => `
+            <div style="margin-bottom:20px">
+                <p><strong>${i+1}. ${q.t}</strong></p>
+                ${q.o.map((opt, oi) => `<div class="quiz-option" onclick="selectOpt(this, ${i}, ${oi})">${opt}</div>`).join('')}
+            </div>
+        `).join('');
+    }
+
+    let userAnswers = [];
+    function selectOpt(el, qIdx, oIdx) {
+        el.parentElement.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+        el.classList.add('selected');
+        userAnswers[qIdx] = oIdx;
+    }
+
+    function checkQuiz() {
+        let score = 0;
+        quizData.forEach((q, i) => {
+            if(userAnswers[i] === q.c) score++;
+        });
+        alert(`نتيجتك هي: ${score} من ${quizData.length}`);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>الفيزياء - الشغل والطاقة والقدرة | المنهج الليبي</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f7ff 0%, #e6f0f5 100%);
+            font-family: 'Segoe UI', 'Tahoma', 'Noto Sans Arabic', system-ui, sans-serif;
+            padding: 20px;
+            color: #1a2c3e;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, #0b2b40 0%, #1f5e6e 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .main-header h1 {
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+        }
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: white;
+            border: 2px solid #1f5e6e;
+            padding: 12px 28px;
+            border-radius: 40px;
+            color: #1f5e6e;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        .nav-btn.active {
+            background: #ff8c42;
+            color: white;
+            border-color: #ff8c42;
+            box-shadow: 0 4px 12px rgba(255,140,66,0.3);
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: #ff8c42;
+            color: white;
+            border-color: #ff8c42;
+        }
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            display: none;
+        }
+        .card.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            font-size: 1.7rem;
+            color: #0b2b40;
+            margin-bottom: 1.5rem;
+            border-right: 6px solid #ff8c42;
+            padding-right: 18px;
+        }
+        /* Diagrams & graphics */
+        .diagram-card {
+            background: #fefcf5;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            border: 1px solid #ffe0b5;
+            text-align: center;
+        }
+        .diagram-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #1f5e6e;
+        }
+        .formula-box {
+            background: #1e2f3a;
+            color: #f5d742;
+            padding: 14px;
+            border-radius: 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+        /* Question blocks for solutions */
+        .question-block {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.2rem;
+            margin-bottom: 2rem;
+            padding: 1.2rem;
+            transition: 0.1s;
+        }
+        .question-title {
+            background: #eef2fc;
+            padding: 12px 18px;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #004466;
+        }
+        .solution-step {
+            background: #f8faff;
+            padding: 12px 15px;
+            border-radius: 1rem;
+            margin: 10px 0;
+            border-right: 4px solid #ff8c42;
+        }
+        .drawing-svg {
+            background: #faf9f0;
+            padding: 12px;
+            border-radius: 1rem;
+            text-align: center;
+            margin-top: 12px;
+        }
+        /* Quiz */
+        .quiz-item {
+            background: #f9fbfd;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #dce5f0;
+        }
+        .quiz-option {
+            background: #f1f5f9;
+            padding: 10px 18px;
+            margin: 8px 0;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.1s;
+            border: 1px solid #cbd5e1;
+        }
+        .quiz-option:hover {
+            background: #e2eaf5;
+        }
+        .quiz-option.selected {
+            background: #c9e9ff;
+            border: 2px solid #ff8c42;
+        }
+        button {
+            background: #2c6e7e;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+            margin-top: 12px;
+            font-family: inherit;
+        }
+        .btn-check {
+            background: #2b7a3e;
+        }
+        .btn-reset {
+            background: #9e5e2c;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #4a627a;
+        }
+        hr {
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="main-header">
+        <h1>⚡ الشغل - الطاقة - القدرة ⚡</h1>
+        <p>الفصل الخامس | الصف الثالث الثانوي | المنهج الليبي</p>
+    </header>
+
+    <nav class="nav-buttons">
+        <button class="nav-btn active" data-section="theory">📘 الشرح النظري + الرسوم</button>
+        <button class="nav-btn" data-section="solutions">📝 حل المسائل العشرة (مع رسوم)</button>
+        <button class="nav-btn" data-section="quiz">🧪 اختبار تفاعلي (MCQ)</button>
+    </nav>
+
+    <!-- القسم النظري مع رسومات SVG تفاعلية -->
+    <div id="theorySection" class="card active">
+        <div class="section-title">🔭 القوانين الأساسية مع الرسوم التوضيحية</div>
+        
+        <div class="diagram-card">
+            <div class="diagram-title">📌 الشغل الناتج عن قوة مائلة بزاوية θ</div>
+            <svg width="300" height="140" viewBox="0 0 300 140">
+                <rect x="20" y="80" width="80" height="40" fill="#ff8c42" rx="6" />
+                <line x1="100" y1="100" x2="260" y2="50" stroke="#1f5e6e" stroke-width="3" marker-end="url(#arrow)" />
+                <text x="200" y="45" fill="#1f5e6e" font-weight="bold">F</text>
+                <path d="M 130 105 A 30 30 0 0 0 115 75" fill="none" stroke="black" stroke-dasharray="3"/>
+                <text x="115" y="98" font-size="12">θ</text>
+                <line x1="20" y1="120" x2="280" y2="120" stroke="#2c3e50" stroke-width="2" />
+                <text x="250" y="135" font-size="12">الإزاحة s</text>
+                <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1f5e6e"/></marker></defs>
+            </svg>
+            <div class="formula-box">$$W = F \cdot s \cdot \cos \theta$$</div>
+            <p>الشغل = حاصل ضرب القوة في الإزاحة في جيب تمام الزاوية بينهما.</p>
+        </div>
+
+        <div class="diagram-card">
+            <div class="diagram-title">📐 المستوى المائل (الشغل ضد الجاذبية)</div>
+            <svg width="250" height="120" viewBox="0 0 250 120">
+                <path d="M20,100 L200,100 L200,30 Z" fill="#e2e8f0" stroke="#2c3e50"/>
+                <rect x="80" y="65" width="30" height="20" fill="#3c8d9c" transform="rotate(-22, 80, 65)"/>
+                <text x="210" y="70" font-size="12">h (الارتفاع)</text>
+                <text x="40" y="95" font-size="12">θ</text>
+            </svg>
+            <div class="formula-box">$$W_{grav} = m g h = m g (s \cdot \sin \theta)$$</div>
+            <p>الشغل المبذول لرفع جسم لأعلى مستوى مائل = وزن الجسم × الارتفاع الرأسي.</p>
+        </div>
+
+        <div class="diagram-card">
+            <div class="diagram-title">⚡ نظرية الشغل - الطاقة</div>
+            <svg width="280" height="90" viewBox="0 0 280 90">
+                <rect x="20" y="30" width="60" height="40" fill="#a5d8ff" />
+                <text x="40" y="55" font-size="10">m, u</text>
+                <line x1="85" y1="50" x2="115" y2="50" stroke="black" stroke-width="2" marker-end="url(#arrow2)" />
+                <rect x="120" y="30" width="60" height="40" fill="#ffb347" />
+                <text x="140" y="55" font-size="10">m, v</text>
+                <text x="60" y="20" font-size="10">F (قوة)</text>
+                <defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="black"/></marker></defs>
+            </svg>
+            <div class="formula-box">$$W_{net} = \Delta KE = \frac{1}{2}mv^2 - \frac{1}{2}mu^2$$</div>
+        </div>
+
+        <div class="diagram-card">
+            <div class="diagram-title">💪 القدرة والسرعة</div>
+            <div class="formula-box">$$P = \frac{W}{t} = F \cdot v$$</div>
+            <p>القدرة = الشغل ÷ الزمن = القوة × السرعة المتوسطة (إذا كانت القوة ثابتة في اتجاه الحركة).</p>
+        </div>
+    </div>
+
+    <!-- قسم حلول المسائل العشرة مع رسومات تفصيلية -->
+    <div id="solutionsSection" class="card">
+        <div class="section-title">📚 حل المسائل التدريبية (10 مسائل مع رسوم)</div>
+        <div id="questionsList"></div>
+    </div>
+
+    <!-- قسم الاختبار التفاعلي -->
+    <div id="quizSection" class="card">
+        <div class="section-title">🧠 اختر الإجابة الصحيحة</div>
+        <div id="quizContainer"></div>
+        <div style="margin-top: 20px;">
+            <button id="checkQuizBtn" class="btn-check">✔️ تحقق من الإجابات</button>
+            <button id="resetQuizBtn" class="btn-reset">🔄 إعادة الاختبار</button>
+            <button id="addExamQuestionBtn" style="background:#8b5a2b;">📚 إضافة سؤال من امتحانات سابقة</button>
+        </div>
+        <div id="quizFeedback" style="margin-top: 15px; font-weight:bold;"></div>
+    </div>
+    <footer>✨ التطبيق شامل شرح نظري + حل 10 مسائل مع رسوم + اختبار تفاعلي قابل للتوسع ✨</footer>
+</div>
+
+<script>
+    // ------------------- المسائل العشرة مع حلول ورسومات SVG لكل مسألة -------------------
+    const fullQuestions = [
+        { q: "سيارة كتلتها 1000 kg تغيرت سرعتها من 7 m/s إلى 13 m/s خلال مسافة 200 m. أوجد قوة محرك السيارة.", given: "m = 1000 kg, u = 7 m/s, v = 13 m/s, s = 200 m", required: "القوة F (N)", law: "نظرية الشغل-الطاقة: F·s = ½ m v² - ½ m u²", solution: "F × 200 = 0.5×1000×(169-49) = 500×120 = 60000 → F = 300 N", draw: "🚗 رسم: سيارة ← سهم قوة F أفقية → سرعة تتزايد من 7 إلى 13 m/s" },
+        { q: "قوة مقدارها 100 N تؤثر بزاوية 30° على الأفق على جسم كتلته 15 kg فيتحرك مسافة 7 m. احسب الشغل المبذول.", given: "F=100 N, θ=30°, s=7 m", required: "الشغل W (J)", law: "W = F·s·cosθ", solution: "W = 100×7×cos30° = 700×0.866 = 606.2 J", draw: "📐 قوة مائلة بزاوية 30° تؤثر على صندوق." },
+        { q: "جسم كتلته 20 kg يتحرك بسرعة 10 m/s على سطح خشن، قوة احتكاك 40 N. أوجد المسافة حتى السكون.", given: "m=20 kg, u=10 m/s, v=0, F_f=40 N", required: "المسافة s", law: "شغل الاحتكاك = ΔKE → -F_f·s = -½ m u²", solution: "-40 s = -0.5×20×100 = -1000 → s = 25 m", draw: "🔄 جسم + سهم احتكاك عكس الحركة" },
+        { q: "صندوق يُسحب بقوة شد أفقية مسافة 15 m، والشغل المبذول 800 J. احسب متوسط قوة الشد.", given: "s=15 m, W=800 J", required: "F", law: "W = F·s", solution: "F = 800/15 ≈ 53.33 N", draw: "➡️ قوة أفقية تسحب صندوق" },
+        { q: "كرة كتلتها 1.2 kg تتحرك بسرعة 20 m/s وتتوقف بعد 30 m. أوجد شغل الاحتكاك ومتوسط قوة الاحتكاك.", given: "m=1.2 kg, u=20 m/s, v=0, s=30 m", required: "W_fric , F_fric", law: "W_fric = ΔKE = -½ m u² , F_fric = |W_fric|/s", solution: "ΔKE = -0.5×1.2×400 = -240 J, شغل الاحتكاك = -240 J، القوة = 240/30 = 8 N", draw: "⚽ كرة تتوقف بفعل الاحتكاك" },
+        { q: "قوة شد مقدارها 30 N تصنع زاوية 20° مع الأفقي وتسحب عربة مسافة 40 m. احسب الشغل المبذول.", given: "F=30 N, θ=20°, s=40 m", required: "W", law: "W = F·s·cosθ", solution: "W = 30×40×cos20° = 1200×0.9397 = 1127.64 J", draw: "🚜 عربة وقوة بزاوية 20°" },
+        { q: "دفعت دراجة كتلتها 30 kg لأعلى مستوى مائل 15° مسافة 70 m. احسب الشغل المبذول ضد الجاذبية.", given: "m=30 kg, θ=15°, s=70 m", required: "W_gravity", law: "W = mgh , h = s·sinθ", solution: "h = 70×sin15° = 18.116 m, W = 30×9.8×18.116 ≈ 5326 J", draw: "🏔️ مستوى مائل بزاوية 15° ودراجة تصعد" },
+        { q: "سيارة كتلة 600 kg تدفع على سطح أفقي من السكون حتى سرعة 4 m/s. احسب الشغل المبذول.", given: "m=600 kg, u=0, v=4 m/s", required: "الشغل W", law: "W = ΔKE = ½ m v²", solution: "W = 0.5×600×16 = 4800 J", draw: "🚘 سيارة تتسارع من السكون" },
+        { q: "صندوق 20 kg يدفع لأعلى مستوى مائل 30° مسافة 10 m، الشغل المبذول 1200 J. أوجد متوسط القوة المطبقة (بدون احتكاك).", given: "m=20 kg, θ=30°, s=10 m, W=1200 J", required: "متوسط القوة F", law: "W = F_app·s", solution: "F_app = 1200/10 = 120 N", draw: "📦 قوة دفع لأعلى المستوى" },
+        { q: "دراج ودراجة كتلة 60 kg يصعد مستوى مائل 15°، تزيد سرعته من 4 m/s إلى 10 m/s بعد قطع 50 m. احسب متوسط القوة المطبقة (مهمل الاحتكاك).", given: "m=60 kg, θ=15°, u=4 m/s, v=10 m/s, s=50 m", required: "متوسط القوة F_app", law: "W_net = ΔKE = F_net·s , F_net = F_app - mg sinθ", solution: "ΔKE = 0.5×60×(100-16)=2520 J, F_net = 2520/50=50.4 N, mg sinθ = 60×9.8×sin15°=588×0.2588=152.2 N, F_app = 50.4+152.2=202.6 N", draw: "🚵 مستوى مائل، قوة دفع لأعلى ومركبة وزن" }
+    ];
+
+    // رسم SVG بسيط لكل مسألة (رموز تعبيرية مع SVG عام)
+    function getDrawingSvg(problemText) {
+        // إرجاع SVG رمزي مع نص توضيحي
+        return `<svg width="220" height="70" viewBox="0 0 220 70" style="margin:5px auto;">
+                    <rect x="10" y="20" width="40" height="30" fill="#d9e2ef" stroke="#1f5e6e" rx="5" />
+                    <line x1="55" y1="35" x2="180" y2="35" stroke="#ff8c42" stroke-width="2" marker-end="url(#arrowS)" />
+                    <text x="65" y="20" font-size="10">F</text>
+                    <text x="140" y="55" font-size="9">حركة →</text>
+                    <defs><marker id="arrowS" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff8c42"/></marker></defs>
+                 </svg>`;
+    }
+
+    function renderFullSolutions() {
+        const container = document.getElementById('questionsList');
+        container.innerHTML = '';
+        fullQuestions.forEach((item, idx) => {
+            const block = document.createElement('div');
+            block.className = 'question-block';
+            block.innerHTML = `
+                <div class="question-title">📌 ${idx+1}. ${item.q}</div>
+                <div class="solution-step"><strong>📋 المعطيات:</strong> ${item.given}</div>
+                <div class="solution-step"><strong>🎯 المطلوب:</strong> ${item.required}</div>
+                <div class="solution-step"><strong>⚖️ القانون:</strong> ${item.law}</div>
+                <div class="solution-step"><strong>✏️ الحل خطوة بخطوة:</strong> ${item.solution}</div>
+                <div class="drawing-svg">
+                    <strong>📐 رسم توضيحي:</strong><br>
+                    ${getDrawingSvg(item.q)}
+                    <span style="font-size:0.85rem;">${item.draw}</span>
+                </div>
+            `;
+            container.appendChild(block);
+        });
+        if (window.MathJax) MathJax.typeset();
+    }
+
+    // ------------------- الاختبار التفاعلي (مصفوفة قابلة للزيادة) -------------------
+    let quizQuestions = [
+        { text: "وحدة قياس الشغل في النظام الدولي هي:", options: ["نيوتن", "جول", "واط", "نيوتن/متر"], correct: 1 },
+        { text: "إذا أثرت قوة عمودية على اتجاه الحركة، فإن الشغل يساوي:", options: ["Fs", "صفر", "½mv²", "Fcosθ"], correct: 1 },
+        { text: "نظرية الشغل - الطاقة تعبر عن:", options: ["شغل = قوة × زمن", "شغل = التغير في طاقة الحركة", "القدرة = شغل × زمن", "الطاقة = كتلة × سرعة"], correct: 1 },
+        { text: "قدرة محرك سيارة تتحرك بسرعة 20 m/s تحت تأثير قوة دفع 500 N هي:", options: ["10000 W", "25 W", "1000 W", "500 W"], correct: 0, hint: "P = F·v = 500×20 = 10000 W" },
+        { text: "جسم كتلته 2 kg تزداد سرعته من 3 m/s إلى 7 m/s، مقدار الشغل المبذول:", options: ["40 J", "20 J", "32 J", "49 J"], correct: 0, hint: "ΔKE = 0.5×2×(49-9)=40 J" },
+        { text: "إذا بذل شغل 300 J لتحريك جسم مسافة 10 m بقوة ثابتة، فإن مقدار القوة:", options: ["30 N", "3000 N", "3 N", "0.3 N"], correct: 0 },
+        { text: "العلاقة بين القدرة والقوة والسرعة اللحظية:", options: ["P = F / v", "P = F·v", "P = F·t", "P = m·a"], correct: 1 },
+        { text: "رفع جسم كتلته 5 kg رأسياً لأعلى مسافة 2 m، الشغل المبذول ضد الجاذبية (g=10):", options: ["100 J", "10 J", "50 J", "20 J"], correct: 0, hint: "W = mgh = 5×10×2=100J" }
+    ];
+
+    let selectedAnswers = new Array(quizQuestions.length).fill(null);
+
+    function renderQuizUI() {
+        const container = document.getElementById('quizContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        quizQuestions.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.className = 'quiz-item';
+            div.innerHTML = `<strong>${idx+1}. ${q.text}</strong><br>`;
+            q.options.forEach((opt, optIdx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'quiz-option';
+                optDiv.innerText = `${String.fromCharCode(65+optIdx)}- ${opt}`;
+                optDiv.dataset.qIdx = idx;
+                optDiv.dataset.optIdx = optIdx;
+                if (selectedAnswers[idx] === optIdx) optDiv.classList.add('selected');
+                optDiv.addEventListener('click', (e) => {
+                    selectedAnswers[idx] = optIdx;
+                    renderQuizUI();
+                });
+                div.appendChild(optDiv);
+            });
+            if (q.hint) {
+                const hintSpan = document.createElement('div');
+                hintSpan.style.fontSize = '0.8rem';
+                hintSpan.style.color = '#6c757d';
+                hintSpan.innerText = `💡 تلميح: ${q.hint}`;
+                div.appendChild(hintSpan);
+            }
+            container.appendChild(div);
+        });
+    }
+
+    function checkQuizAnswers() {
+        let correctCount = 0;
+        let resultHtml = '';
+        for (let i = 0; i < quizQuestions.length; i++) {
+            const user = selectedAnswers[i];
+            const correct = quizQuestions[i].correct;
+            if (user !== null && user === correct) {
+                correctCount++;
+                resultHtml += `<p style="color:green;">✅ السؤال ${i+1}: صحيح</p>`;
+            } else {
+                const correctAnsText = quizQuestions[i].options[correct];
+                resultHtml += `<p style="color:red;">❌ السؤال ${i+1}: خطأ، الإجابة الصحيحة: ${correctAnsText}</p>`;
+            }
+        }
+        resultHtml += `<hr><strong>⭐ نتيجتك: ${correctCount} من ${quizQuestions.length}</strong>`;
+        document.getElementById('quizFeedback').innerHTML = resultHtml;
+    }
+
+    function resetQuiz() {
+        selectedAnswers = new Array(quizQuestions.length).fill(null);
+        renderQuizUI();
+        document.getElementById('quizFeedback').innerHTML = '';
+    }
+
+    // إضافة سؤال من امتحانات سابقة
+    function addExamQuestion() {
+        const newExamQ = {
+            text: "من امتحانات سابقة: سيارة كتلتها 1200 kg تتحرك بسرعة 25 m/s ثم فراملت حتى توقفت بعد مسافة 50 m. احسب متوسط قوة الاحتكاك (الشغل-طاقة).",
+            options: ["7500 N", "15000 N", "3750 N", "6000 N"],
+            correct: 0,
+            hint: "ΔKE = 0.5×1200×625 = 375000 J, ثم F = W/s = 375000/50 = 7500 N"
+        };
+        quizQuestions.push(newExamQ);
+        selectedAnswers.push(null);
+        renderQuizUI();
+        document.getElementById('quizFeedback').innerHTML = "📌 تم إضافة سؤال جديد من امتحانات سابقة! حاول الإجابة عليه.";
+    }
+
+    // التنقل بين الأقسام
+    const sections = {
+        theory: document.getElementById('theorySection'),
+        solutions: document.getElementById('solutionsSection'),
+        quiz: document.getElementById('quizSection')
+    };
+    function showSection(sectionId) {
+        Object.keys(sections).forEach(key => {
+            sections[key].classList.remove('active');
+        });
+        sections[sectionId].classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            const secAttr = btn.getAttribute('data-section');
+            if (secAttr === sectionId) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        if (sectionId === 'solutions') renderFullSolutions();
+        if (sectionId === 'quiz') renderQuizUI();
+        if (window.MathJax) MathJax.typeset();
+    }
+
+    // ربط الأزرار
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sec = btn.getAttribute('data-section');
+            if (sec === 'theory') showSection('theory');
+            else if (sec === 'solutions') showSection('solutions');
+            else if (sec === 'quiz') showSection('quiz');
+        });
+    });
+    document.getElementById('checkQuizBtn')?.addEventListener('click', checkQuizAnswers);
+    document.getElementById('resetQuizBtn')?.addEventListener('click', resetQuiz);
+    document.getElementById('addExamQuestionBtn')?.addEventListener('click', addExamQuestion);
+
+    // عرض أولي
+    renderFullSolutions(); // جاهزية
+    renderQuizUI();
+</script>
+</body>
+</html>
