@@ -6,106 +6,116 @@
 <title>فيجوال بيسك - الدوال الجاهزة | تمارين تفاعلية</title>
 <style>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    min-height: 100vh;
-    padding: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  padding: 15px;
 }
 
 .container {
-    max-width: 1300px;
-    margin: 0 auto;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 /* رأس الصفحة */
 .header {
-    text-align: center;
-    padding: 20px 15px;
-    background: white;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+  padding: 20px 15px;
+  background: white;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .header h1 {
-    color: #1e3c72;
-    font-size: 1.8em;
-    margin-bottom: 10px;
-    word-break: break-word;
+  color: #1e3c72;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  word-break: break-word;
 }
 
 /* أزرار التنقل */
 .nav-buttons {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .nav-btn {
-    padding: 10px 20px;
-    font-size: 0.9em;
-    font-weight: bold;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #95a5a6;
-    color: white;
-    flex: 0 0 auto;
+  padding: 10px 20px;
+  font-size: 0.9em;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #95a5a6;
+  color: white;
+  flex: 0 0 auto;
 }
 
 .nav-btn.active {
-    background: #2ecc71;
-    box-shadow: 0 0 10px rgba(46,204,113,0.5);
+  background: #2ecc71;
+  box-shadow: 0 0 10px rgba(46,204,113,0.5);
+}
+
+/* زر العودة للرئيسية */
+.home-btn {
+  background: #f1c40f;
+  color: #2c3e50;
+}
+.home-btn:hover {
+  background: #e67e22;
+  transform: scale(1.02);
 }
 
 /* البطاقات العامة */
 .card {
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    animation: fadeIn 0.5s ease;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  animation: fadeIn 0.5s ease;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .section-title {
-    font-size: 1.6em;
-    color: #1e3c72;
-    border-right: 5px solid #3498db;
-    padding-right: 15px;
-    margin-bottom: 20px;
+  font-size: 1.6em;
+  color: #1e3c72;
+  border-right: 5px solid #3498db;
+  padding-right: 15px;
+  margin-bottom: 20px;
 }
 
 /* شبكة الدوال - متجاوبة */
 .functions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-    margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
 }
 
 .function-card {
-    background: #f8f9fa;
-    border-radius: 15px;
-    padding: 18px;
-    border-bottom: 4px solid;
-    transition: all 0.3s;
-    cursor: pointer;
-    direction: rtl;
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 18px;
+  border-bottom: 4px solid;
+  transition: all 0.3s;
+  cursor: pointer;
+  direction: rtl;
 }
 
 .function-card.math { border-bottom-color: #3498db; }
@@ -114,59 +124,58 @@ body {
 .function-card.conversion { border-bottom-color: #9b59b6; }
 
 .function-name {
-    font-size: 1.4em;
-    font-weight: bold;
-    font-family: monospace;
-    margin-bottom: 8px;
+  font-size: 1.4em;
+  font-weight: bold;
+  font-family: monospace;
+  margin-bottom: 8px;
 }
 .function-name.math { color: #3498db; }
 .function-name.string { color: #e67e22; }
 .function-name.date { color: #1abc9c; }
 .function-name.conversion { color: #9b59b6; }
 
-/* تنسيق الأكواد مع دعم RTL */
 .function-syntax {
-    background: #2d2d2d;
-    color: #f8f8f2;
-    padding: 8px;
-    border-radius: 8px;
-    font-family: monospace;
-    font-size: 0.85em;
-    direction: ltr;
-    text-align: left;
-    margin: 10px 0;
-    overflow-x: auto;
+  background: #2d2d2d;
+  color: #f8f8f2;
+  padding: 8px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.85em;
+  direction: ltr;
+  text-align: left;
+  margin: 10px 0;
+  overflow-x: auto;
 }
 
 .function-desc {
-    color: #555;
-    margin: 10px 0;
-    line-height: 1.5;
-    text-align: right;
+  color: #555;
+  margin: 10px 0;
+  line-height: 1.5;
+  text-align: right;
 }
 
 .function-example {
-    background: #ecf0f1;
-    padding: 8px;
-    border-radius: 8px;
-    font-family: monospace;
-    direction: ltr;
-    text-align: left;
-    font-size: 0.85em;
-    margin-top: 10px;
-    overflow-x: auto;
+  background: #ecf0f1;
+  padding: 8px;
+  border-radius: 8px;
+  font-family: monospace;
+  direction: ltr;
+  text-align: left;
+  font-size: 0.85em;
+  margin-top: 10px;
+  overflow-x: auto;
 }
 
 /* علامات التبويب */
 .category-tab {
-    display: inline-block;
-    padding: 6px 15px;
-    margin: 5px;
-    background: #ecf0f1;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 0.9em;
+  display: inline-block;
+  padding: 6px 15px;
+  margin: 5px;
+  background: #ecf0f1;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9em;
 }
 .category-tab.active { background: #3498db; color: white; }
 
@@ -174,24 +183,24 @@ body {
 
 /* قسم التمارين */
 .question-box {
-    background: #fef9e6;
-    padding: 18px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ffe0a3;
+  background: #fef9e6;
+  padding: 18px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ffe0a3;
 }
 .question-text {
-    font-size: 1.05em;
-    font-weight: bold;
-    margin-bottom: 12px;
+  font-size: 1.05em;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 .option {
-    margin: 8px 0;
-    padding: 10px 12px;
-    background: #ecf0f1;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
+  margin: 8px 0;
+  padding: 10px 12px;
+  background: #ecf0f1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 .option:hover { background: #bdc3c7; transform: translateX(-5px); }
 .option.selected { background: #3498db; color: white; }
@@ -199,540 +208,531 @@ body {
 .option.wrong { background: #e74c3c; color: white; }
 
 .feedback {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  display: none;
 }
 .feedback.correct { background: #d5f4e6; color: #27ae60; display: block; }
 .feedback.wrong { background: #ffe6e6; color: #e74c3c; display: block; }
 
 /* أزرار عامة */
 .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    font-size: 0.95em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    font-family: inherit;
-    margin-left: 10px;
-    margin-bottom: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: inherit;
+  margin-left: 10px;
+  margin-bottom: 5px;
 }
 .btn-check { background: #2ecc71; color: white; }
 .btn-retry { background: #f39c12; color: white; }
 
-/* قسم تجربة الدوال - محسن للموبايل */
+/* قسم تجربة الدوال - محسن للجوال */
 .demo-area {
-    background: #1e1e2f;
-    border-radius: 15px;
-    padding: 20px;
+  background: #1e1e2f;
+  border-radius: 15px;
+  padding: 20px;
 }
 .demo-controls {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-    align-items: center;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  align-items: center;
+  flex-direction: row;
 }
 #functionSelect {
-    padding: 10px;
-    border-radius: 8px;
-    background: #2d2d2d;
-    color: white;
-    font-family: monospace;
-    flex: 1;
-    min-width: 200px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #2d2d2d;
+  color: white;
+  font-family: monospace;
+  flex: 1;
+  min-width: 200px;
 }
 .inputs-group {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-    flex: 2;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 2;
 }
 .inputs-group input {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #444;
-    background: #2d2d2d;
-    color: white;
-    font-family: monospace;
-    flex: 1;
-    min-width: 120px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #2d2d2d;
+  color: white;
+  font-family: monospace;
+  flex: 1;
+  min-width: 120px;
 }
 .demo-result {
-    background: #0a0e27;
-    padding: 15px;
-    border-radius: 10px;
-    color: #0f0;
-    font-family: monospace;
-    white-space: pre-wrap;
-    word-break: break-word;
-    margin-top: 10px;
+  background: #0a0e27;
+  padding: 15px;
+  border-radius: 10px;
+  color: #0f0;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-top: 10px;
 }
 
 footer {
-    text-align: center;
-    padding: 15px;
-    color: white;
-    font-size: 0.85em;
+  text-align: center;
+  padding: 15px;
+  color: white;
+  font-size: 0.85em;
 }
 
-/* تحسينات للموبايل */
+/* تحسينات الجوال */
 @media (max-width: 640px) {
-    body { padding: 10px; }
-    .header h1 { font-size: 1.4em; }
-    .section-title { font-size: 1.4em; }
-    .functions-grid { grid-template-columns: 1fr; }
-    .nav-btn { padding: 8px 15px; font-size: 0.85em; }
-    .demo-controls { flex-direction: column; align-items: stretch; }
-    .inputs-group { flex-direction: column; }
-    .inputs-group input { width: 100%; }
-    .function-card { padding: 15px; }
-    .function-name { font-size: 1.2em; }
+  body { padding: 10px; }
+  .header h1 { font-size: 1.4em; }
+  .section-title { font-size: 1.4em; }
+  .functions-grid { grid-template-columns: 1fr; }
+  .nav-btn { padding: 8px 15px; font-size: 0.85em; }
+  .demo-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .inputs-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .inputs-group input,
+  #functionSelect {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .btn-check {
+    width: 100%;
+    text-align: center;
+  }
+  .function-card { padding: 15px; }
+  .function-name { font-size: 1.2em; }
 }
 </style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>📚 الدوال الجاهزة (Built-in Functions) في فيجوال بيسك</h1>
-        <p>دوال رياضية | دوال نصوص | دوال تاريخ ووقت | دوال تحويل</p>
+  <div class="header">
+    <h1>📚 الدوال الجاهزة (Built-in Functions) في فيجوال بيسك</h1>
+    <p>دوال رياضية | دوال نصوص | دوال تاريخ ووقت | دوال تحويل</p>
+  </div>
+
+  <div class="nav-buttons">
+            <button class="nav-btn home" onclick="window.location.href='it-function.html'">🏠 الرئيسية</button>
+
+    <button class="nav-btn" onclick="showSection('functions')">📚 جميع الدوال</button>
+    <button class="nav-btn" onclick="showSection('exercises')">✏️ تمارين تفاعلية</button>
+    <button class="nav-btn home-btn" onclick="scrollToTop()">🏠 العودة للرئيسية</button>
+  </div>
+
+  <!-- قسم الدوال -->
+  <div id="functionsSection">
+    <div class="card">
+      <h2 class="section-title">📚 جميع الدوال الجاهزة</h2>
+      <div style="margin-bottom: 20px; text-align: center;">
+        <span class="category-tab active" onclick="filterFunctions('all')">🔍 الكل</span>
+        <span class="category-tab" onclick="filterFunctions('math')">📐 رياضية</span>
+        <span class="category-tab" onclick="filterFunctions('string')">📝 نصوص</span>
+        <span class="category-tab" onclick="filterFunctions('date')">📅 تاريخ ووقت</span>
+        <span class="category-tab" onclick="filterFunctions('conversion')">🔄 تحويل</span>
+      </div>
+      <div class="functions-grid" id="functionsGrid"></div>
     </div>
 
-    <div class="nav-buttons">
-        <button class="nav-btn" onclick="showSection('functions')">📚 جميع الدوال</button>
-        <button class="nav-btn" onclick="showSection('exercises')">✏️ تمارين تفاعلية</button>
-    </div>
-
-    <!-- قسم الدوال -->
-    <div id="functionsSection">
-        <div class="card">
-            <h2 class="section-title">📚 جميع الدوال الجاهزة</h2>
-            <div style="margin-bottom: 20px; text-align: center;">
-                <span class="category-tab active" onclick="filterFunctions('all')">📌 الكل</span>
-                <span class="category-tab" onclick="filterFunctions('math')">📐 رياضية</span>
-                <span class="category-tab" onclick="filterFunctions('string')">📝 نصوص</span>
-                <span class="category-tab" onclick="filterFunctions('date')">📅 تاريخ ووقت</span>
-                <span class="category-tab" onclick="filterFunctions('conversion')">🔄 تحويل</span>
-            </div>
-            <div class="functions-grid" id="functionsGrid"></div>
+    <div class="card">
+      <h2 class="section-title">🎮 جرب الدوال بنفسك</h2>
+      <div class="demo-area">
+        <div class="demo-controls">
+          <select id="functionSelect" style="padding:10px; border-radius:8px; background:#2d2d2d; color:white; font-family:monospace;">
+            <option value="Sqr">Sqr(x) - الجذر التربيعي (رقم)</option>
+            <option value="Abs">Abs(x) - القيمة المطلقة (رقم)</option>
+            <option value="Int">Int(x) - الجزء الصحيح (رقم)</option>
+            <option value="Log">Log(x) - اللوغاريتم الطبيعي (رقم)</option>
+            <option value="Sin">Sin(x) - الجيب (رقم - راديان)</option>
+            <option value="Cos">Cos(x) - جيب التمام (رقم)</option>
+            <option value="Tan">Tan(x) - الظل (رقم)</option>
+            <option value="Trim">Trim(s) - حذف الفراغات (نص)</option>
+            <option value="LTrim">LTrim(s) - حذف فراغات اليسار (نص)</option>
+            <option value="RTrim">RTrim(s) - حذف فراغات اليمين (نص)</option>
+            <option value="Left">Left(s, n) - استخراج من اليسار (نص + رقم)</option>
+            <option value="Right">Right(s, n) - استخراج من اليمين (نص + رقم)</option>
+            <option value="Mid">Mid(s, start, len) - استخراج جزء (نص + رقمين)</option>
+            <option value="Chr">Chr(n) - حرف ASCII (رقم)</option>
+            <option value="Str">Str(n) - تحويل رقم إلى نص (رقم)</option>
+            <option value="Val">Val(s) - تحويل نص إلى رقم (نص)</option>
+            <option value="DateValue">DateValue(date_string) - استخراج التاريخ من نص</option>
+            <option value="TimeValue">TimeValue(time_string) - استخراج الوقت من نص</option>
+            <option value="Year">Year(date) - استخراج السنة (تاريخ)</option>
+            <option value="Month">Month(date) - استخراج الشهر (تاريخ)</option>
+            <option value="Day">Day(date) - استخراج اليوم (تاريخ)</option>
+            <option value="Weekday">Weekday(date) - رقم اليوم (تاريخ)</option>
+          </select>
+          <div id="demoInputs" class="inputs-group"></div>
+          <button class="btn btn-check" onclick="runDemo()">▶️ تنفيذ</button>
         </div>
-
-        <div class="card">
-            <h2 class="section-title">🎮 جرب الدوال بنفسك</h2>
-            <div class="demo-area">
-                <div class="demo-controls">
-                    <select id="functionSelect" style="padding:10px; border-radius:8px; background:#2d2d2d; color:white; font-family:monospace;">
-                        <option value="Sqr">Sqr(x) - الجذر التربيعي (رقم)</option>
-                        <option value="Abs">Abs(x) - القيمة المطلقة (رقم)</option>
-                        <option value="Int">Int(x) - الجزء الصحيح (رقم)</option>
-                        <option value="Log">Log(x) - اللوغاريتم الطبيعي (رقم)</option>
-                        <option value="Sin">Sin(x) - الجيب (رقم - راديان)</option>
-                        <option value="Cos">Cos(x) - جيب التمام (رقم)</option>
-                        <option value="Tan">Tan(x) - الظل (رقم)</option>
-                        <option value="Trim">Trim(s) - حذف الفراغات (نص)</option>
-                        <option value="LTrim">LTrim(s) - حذف فراغات اليسار (نص)</option>
-                        <option value="RTrim">RTrim(s) - حذف فراغات اليمين (نص)</option>
-                        <option value="Left">Left(s, n) - استخراج من اليسار (نص + رقم)</option>
-                        <option value="Right">Right(s, n) - استخراج من اليمين (نص + رقم)</option>
-                        <option value="Mid">Mid(s, start, len) - استخراج جزء (نص + رقمين)</option>
-                        <option value="Chr">Chr(n) - حرف ASCII (رقم)</option>
-                        <option value="Str">Str(n) - تحويل رقم إلى نص (رقم)</option>
-                        <option value="Val">Val(s) - تحويل نص إلى رقم (نص)</option>
-                        <option value="DateValue">DateValue(date_string) - استخراج التاريخ من نص (يتعامل مع وقت وتاريخ)</option>
-                        <option value="TimeValue">TimeValue(time_string) - استخراج الوقت من نص (يتعامل مع وقت وتاريخ)</option>
-                        <option value="Year">Year(date) - استخراج السنة (تاريخ)</option>
-                        <option value="Month">Month(date) - استخراج الشهر (تاريخ)</option>
-                        <option value="Day">Day(date) - استخراج اليوم (تاريخ)</option>
-                        <option value="Weekday">Weekday(date) - رقم اليوم (تاريخ)</option>
-                    </select>
-                    <div id="demoInputs" class="inputs-group"></div>
-                    <button class="btn btn-check" onclick="runDemo()">▶️ تنفيذ</button>
-                </div>
-                <div id="demoResult" class="demo-result">
-                    اختر دالة وأدخل القيم...
-                </div>
-            </div>
+        <div id="demoResult" class="demo-result">
+          اختر دالة وأدخل القيم...
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- قسم التمارين -->
-    <div id="exercisesSection" class="hidden">
-        <div class="card">
-            <h2 class="section-title">✏️ تمارين تفاعلية: دوال فيجوال بيسك</h2>
-            <p style="margin-bottom: 20px;">اختبر فهمك للدوال الجاهزة. أجب عن الأسئلة ثم اضغط "تحقق".</p>
-            <div id="exercisesContainer"></div>
-            <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
-                <button class="btn btn-check" onclick="checkExercises()">✅ تحقق من الإجابات</button>
-                <button class="btn btn-retry" onclick="resetExercises()">🔄 إعادة المحاولة</button>
-            </div>
-            <div id="exerciseGlobalFeedback" style="margin-top: 15px;"></div>
-        </div>
+  <!-- قسم التمارين -->
+  <div id="exercisesSection" class="hidden">
+    <div class="card">
+      <h2 class="section-title">✏️ تمارين تفاعلية: دوال فيجوال بيسك</h2>
+      <p style="margin-bottom: 20px;">اختبر فهمك للدوال الجاهزة. أجب عن الأسئلة ثم اضغط "تحقق".</p>
+      <div id="exercisesContainer"></div>
+      <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+        <button class="btn btn-check" onclick="checkExercises()">✅ تحقق من الإجابات</button>
+        <button class="btn btn-retry" onclick="resetExercises()">🔄 إعادة المحاولة</button>
+      </div>
+      <div id="exerciseGlobalFeedback" style="margin-top: 15px;"></div>
     </div>
+  </div>
 
-    <footer>
-        📚 برنامج تعليمي تفاعلي - فيجوال بيسك | جميع الدوال الجاهزة
-    </footer>
+  <footer>
+    📚 برنامج تعليمي تفاعلي - فيجوال بيسك | جميع الدوال الجاهزة
+  </footer>
 </div>
 
 <script>
-// دالة مساعدة لتحويل التواريخ بصيغ مختلفة
+// دوال مساعدة للتواريخ
 function parseDate(dateString) {
-    // محاولة تحويل النص إلى تاريخ
-    let date = new Date(dateString);
-    
-    // إذا كان التحويل ناجحاً وليس NaN
-    if (!isNaN(date.getTime())) {
-        return date;
+  let date = new Date(dateString);
+  if (!isNaN(date.getTime())) return date;
+  if (dateString.includes('/')) {
+    let parts = dateString.split('/');
+    if (parts.length === 3) {
+      let day = parseInt(parts[0]);
+      let month = parseInt(parts[1]) - 1;
+      let year = parseInt(parts[2]);
+      date = new Date(year, month, day);
+      if (!isNaN(date.getTime())) return date;
     }
-    
-    // محاولة معالجة الصيغ العربية (يوم/شهر/سنة)
-    if (dateString.includes('/')) {
-        let parts = dateString.split('/');
-        if (parts.length === 3) {
-            let day = parseInt(parts[0]);
-            let month = parseInt(parts[1]) - 1;
-            let year = parseInt(parts[2]);
-            date = new Date(year, month, day);
-            if (!isNaN(date.getTime())) {
-                return date;
-            }
-        }
+  }
+  if (dateString.includes('-')) {
+    let parts = dateString.split('-');
+    if (parts.length === 3) {
+      let year = parseInt(parts[0]);
+      let month = parseInt(parts[1]) - 1;
+      let day = parseInt(parts[2]);
+      date = new Date(year, month, day);
+      if (!isNaN(date.getTime())) return date;
     }
-    
-    // محاولة معالجة الصيغة (سنة-شهر-يوم)
-    if (dateString.includes('-')) {
-        let parts = dateString.split('-');
-        if (parts.length === 3) {
-            let year = parseInt(parts[0]);
-            let month = parseInt(parts[1]) - 1;
-            let day = parseInt(parts[2]);
-            date = new Date(year, month, day);
-            if (!isNaN(date.getTime())) {
-                return date;
-            }
-        }
-    }
-    
-    return null;
+  }
+  return null;
 }
 
-// دالة لاستخراج التاريخ فقط من قيمة تحتوي على وقت وتاريخ
 function getDateOnly(dateTimeString) {
-    let date = parseDate(dateTimeString);
-    if (date) {
-        // إعادة التاريخ بتنسيق (يوم/شهر/سنة)
-        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    }
-    return null;
+  let date = parseDate(dateTimeString);
+  if (date) return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+  return null;
 }
 
-// دالة لاستخراج الوقت فقط من قيمة تحتوي على وقت وتاريخ
 function getTimeOnly(dateTimeString) {
-    let date = new Date(dateTimeString);
-    if (!isNaN(date.getTime())) {
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let seconds = date.getSeconds();
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-    
-    // محاولة استخراج الوقت من النص إذا كان موجوداً
-    let timeMatch = dateTimeString.match(/(\d{1,2}):(\d{1,2}):?(\d{0,2})/);
-    if (timeMatch) {
-        let hours = parseInt(timeMatch[1]);
-        let minutes = parseInt(timeMatch[2]);
-        let seconds = timeMatch[3] ? parseInt(timeMatch[3]) : 0;
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-    
-    return null;
+  let date = new Date(dateTimeString);
+  if (!isNaN(date.getTime())) {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    return `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+  }
+  let timeMatch = dateTimeString.match(/(\d{1,2}):(\d{1,2}):?(\d{0,2})/);
+  if (timeMatch) {
+    let hours = parseInt(timeMatch[1]);
+    let minutes = parseInt(timeMatch[2]);
+    let seconds = timeMatch[3] ? parseInt(timeMatch[3]) : 0;
+    return `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+  }
+  return null;
 }
 
-// ---------- بيانات الدوال ----------
+// بيانات الدوال
 const functionsList = [
-    { name: "Sqr", category: "math", syntax: "Sqr(number)", desc: "ترجع الجذر التربيعي لرقم.", example: "Sqr(25) ' النتيجة: 5" },
-    { name: "Abs", category: "math", syntax: "Abs(number)", desc: "ترجع القيمة المطلقة لرقم.", example: "Abs(-12) ' النتيجة: 12" },
-    { name: "Int", category: "math", syntax: "Int(number)", desc: "ترجع الجزء الصحيح لرقم (بدون تقريب).", example: "Int(7.8) ' النتيجة: 7" },
-    { name: "Log", category: "math", syntax: "Log(number)", desc: "ترجع اللوغاريتم الطبيعي (الأساس e) لرقم.", example: "Log(20) ' ≈2.9957" },
-    { name: "Sin", category: "math", syntax: "Sin(angle)", desc: "ترجع جيب الزاوية (بالتقدير الدائري).", example: "Sin(1.57) ' ≈1" },
-    { name: "Cos", category: "math", syntax: "Cos(angle)", desc: "ترجع جيب تمام الزاوية.", example: "Cos(0) ' 1" },
-    { name: "Tan", category: "math", syntax: "Tan(angle)", desc: "ترجع ظل الزاوية.", example: "Tan(0.785) ' ≈1" },
-    { name: "Trim", category: "string", syntax: "Trim(string)", desc: "حذف الفراغات من بداية ونهاية النص.", example: "Trim(' Hello ') ' 'Hello'" },
-    { name: "LTrim", category: "string", syntax: "LTrim(string)", desc: "حذف الفراغات من بداية النص فقط.", example: "LTrim(' Hello ') ' 'Hello '" },
-    { name: "RTrim", category: "string", syntax: "RTrim(string)", desc: "حذف الفراغات من نهاية النص فقط.", example: "RTrim(' Hello ') ' ' Hello'" },
-    { name: "Left", category: "string", syntax: "Left(string, length)", desc: "استخراج عدد محدد من الأحرف من اليسار.", example: "Left('Hello', 2) ' 'He'" },
-    { name: "Right", category: "string", syntax: "Right(string, length)", desc: "استخراج عدد محدد من الأحرف من اليمين.", example: "Right('Hello', 2) ' 'lo'" },
-    { name: "Mid", category: "string", syntax: "Mid(string, start, length)", desc: "استخراج عدد محدد من الأحرف من منتصف النص.", example: "Mid('Hello World', 4, 5) ' 'lo Wo'" },
-    { name: "Chr", category: "string", syntax: "Chr(charcode)", desc: "ترجع الحرف المقابل لرمز ASCII.", example: "Chr(65) ' 'A'" },
-    { name: "Str", category: "conversion", syntax: "Str(number)", desc: "تحويل رقم إلى نص.", example: "Str(45) ' '45'" },
-    { name: "Val", category: "conversion", syntax: "Val(string)", desc: "تحويل نص إلى رقم.", example: "Val('123') ' 123" },
-    { name: "DateValue", category: "date", syntax: "DateValue(date_string)", desc: "استخراج التاريخ من نص (يتعامل مع وقت وتاريخ معاً).", example: "DateValue('20/4/2026 15:30:00') ' ترجع 20/4/2026" },
-    { name: "TimeValue", category: "date", syntax: "TimeValue(time_string)", desc: "استخراج الوقت من نص (يتعامل مع وقت وتاريخ معاً).", example: "TimeValue('20/4/2026 15:30:00') ' ترجع 15:30:00" },
-    { name: "Weekday", category: "date", syntax: "Weekday(date)", desc: "ترجع رقم اليوم في الأسبوع (1=الأحد، 7=السبت).", example: "Weekday(#20/4/2026#) ' ترجع رقم اليوم" },
-    { name: "Year", category: "date", syntax: "Year(date)", desc: "استخراج السنة من التاريخ.", example: "Year(#20/4/2026#) ' 2026" },
-    { name: "Month", category: "date", syntax: "Month(date)", desc: "استخراج الشهر من التاريخ (1-12).", example: "Month(#20/4/2026#) ' 4" },
-    { name: "Day", category: "date", syntax: "Day(date)", desc: "استخراج اليوم من التاريخ.", example: "Day(#20/4/2026#) ' 20" }
+  { name: "Sqr", category: "math", syntax: "Sqr(number)", desc: "ترجع الجذر التربيعي لرقم.", example: "Sqr(25) ' النتيجة: 5" },
+  { name: "Abs", category: "math", syntax: "Abs(number)", desc: "ترجع القيمة المطلقة لرقم.", example: "Abs(-12) ' النتيجة: 12" },
+  { name: "Int", category: "math", syntax: "Int(number)", desc: "ترجع الجزء الصحيح لرقم (بدون تقريب).", example: "Int(7.8) ' النتيجة: 7" },
+  { name: "Log", category: "math", syntax: "Log(number)", desc: "ترجع اللوغاريتم الطبيعي (الأساس e) لرقم.", example: "Log(20) ' ≈2.9957" },
+  { name: "Sin", category: "math", syntax: "Sin(angle)", desc: "ترجع جيب الزاوية (بالتقدير الدائري).", example: "Sin(1.57) ' ≈1" },
+  { name: "Cos", category: "math", syntax: "Cos(angle)", desc: "ترجع جيب تمام الزاوية.", example: "Cos(0) ' 1" },
+  { name: "Tan", category: "math", syntax: "Tan(angle)", desc: "ترجع ظل الزاوية.", example: "Tan(0.785) ' ≈1" },
+  { name: "Trim", category: "string", syntax: "Trim(string)", desc: "حذف الفراغات من بداية ونهاية النص.", example: "Trim(' Hello ') ' 'Hello'" },
+  { name: "LTrim", category: "string", syntax: "LTrim(string)", desc: "حذف الفراغات من بداية النص فقط.", example: "LTrim(' Hello ') ' 'Hello '" },
+  { name: "RTrim", category: "string", syntax: "RTrim(string)", desc: "حذف الفراغات من نهاية النص فقط.", example: "RTrim(' Hello ') ' ' Hello'" },
+  { name: "Left", category: "string", syntax: "Left(string, length)", desc: "استخراج عدد محدد من الأحرف من اليسار.", example: "Left('Hello', 2) ' 'He'" },
+  { name: "Right", category: "string", syntax: "Right(string, length)", desc: "استخراج عدد محدد من الأحرف من اليمين.", example: "Right('Hello', 2) ' 'lo'" },
+  { name: "Mid", category: "string", syntax: "Mid(string, start, length)", desc: "استخراج عدد محدد من الأحرف من منتصف النص.", example: "Mid('Hello World', 4, 5) ' 'lo Wo'" },
+  { name: "Chr", category: "string", syntax: "Chr(charcode)", desc: "ترجع الحرف المقابل لرمز ASCII.", example: "Chr(65) ' 'A'" },
+  { name: "Str", category: "conversion", syntax: "Str(number)", desc: "تحويل رقم إلى نص.", example: "Str(45) ' '45'" },
+  { name: "Val", category: "conversion", syntax: "Val(string)", desc: "تحويل نص إلى رقم.", example: "Val('123') ' 123" },
+  { name: "DateValue", category: "date", syntax: "DateValue(date_string)", desc: "استخراج التاريخ من نص (يتعامل مع وقت وتاريخ معاً).", example: "DateValue('20/4/2026 15:30:00') ' ترجع 20/4/2026" },
+  { name: "TimeValue", category: "date", syntax: "TimeValue(time_string)", desc: "استخراج الوقت من نص (يتعامل مع وقت وتاريخ معاً).", example: "TimeValue('20/4/2026 15:30:00') ' ترجع 15:30:00" },
+  { name: "Weekday", category: "date", syntax: "Weekday(date)", desc: "ترجع رقم اليوم في الأسبوع (1=الأحد، 7=السبت).", example: "Weekday(#20/4/2026#) ' ترجع رقم اليوم" },
+  { name: "Year", category: "date", syntax: "Year(date)", desc: "استخراج السنة من التاريخ.", example: "Year(#20/4/2026#) ' 2026" },
+  { name: "Month", category: "date", syntax: "Month(date)", desc: "استخراج الشهر من التاريخ (1-12).", example: "Month(#20/4/2026#) ' 4" },
+  { name: "Day", category: "date", syntax: "Day(date)", desc: "استخراج اليوم من التاريخ.", example: "Day(#20/4/2026#) ' 20" }
 ];
 
 let currentCategory = 'all';
 
 function renderFunctions() {
-    const grid = document.getElementById('functionsGrid');
-    const filtered = currentCategory === 'all' ? functionsList : functionsList.filter(f => f.category === currentCategory);
-    grid.innerHTML = filtered.map(func => `
-        <div class="function-card ${func.category}" onclick="selectFunction('${func.name}')">
-            <div class="function-name ${func.category}">${func.name}</div>
-            <div class="function-syntax">${func.syntax}</div>
-            <div class="function-desc">📖 ${func.desc}</div>
-            <div class="function-example">💡 مثال: ${func.example}</div>
-        </div>
-    `).join('');
+  const grid = document.getElementById('functionsGrid');
+  const filtered = currentCategory === 'all' ? functionsList : functionsList.filter(f => f.category === currentCategory);
+  grid.innerHTML = filtered.map(func => `
+    <div class="function-card ${func.category}" onclick="selectFunction('${func.name}')">
+      <div class="function-name ${func.category}">${func.name}</div>
+      <div class="function-syntax">${func.syntax}</div>
+      <div class="function-desc">📖 ${func.desc}</div>
+      <div class="function-example">💡 مثال: ${func.example}</div>
+    </div>
+  `).join('');
 }
 
 function filterFunctions(category) {
-    currentCategory = category;
-    renderFunctions();
-    document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
-    event.target.classList.add('active');
+  currentCategory = category;
+  renderFunctions();
+  document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+  event.target.classList.add('active');
 }
 
 function selectFunction(funcName) {
-    const select = document.getElementById('functionSelect');
-    for (let i = 0; i < select.options.length; i++) {
-        if (select.options[i].value === funcName) {
-            select.selectedIndex = i;
-            break;
-        }
+  const select = document.getElementById('functionSelect');
+  for (let i = 0; i < select.options.length; i++) {
+    if (select.options[i].value === funcName) {
+      select.selectedIndex = i;
+      break;
     }
-    updateDemoInputs();
+  }
+  updateDemoInputs();
 }
 
 function updateDemoInputs() {
-    const funcName = document.getElementById('functionSelect').value;
-    const container = document.getElementById('demoInputs');
-    let html = '';
-    switch(funcName) {
-        case 'Sqr': case 'Abs': case 'Int': case 'Log': case 'Sin': case 'Cos': case 'Tan': case 'Chr': case 'Str':
-            html = '<input type="number" id="demoVal1" placeholder="أدخل رقم" value="25">';
-            break;
-        case 'Trim': case 'LTrim': case 'RTrim': case 'Val':
-            html = '<input type="text" id="demoVal1" placeholder="نص به فراغات" value=" Hello " style="width:100%;">';
-            break;
-        case 'Left': case 'Right':
-            html = '<input type="text" id="demoVal1" placeholder="النص" value="Hello" style="width:100%;">' +
-                   '<input type="number" id="demoVal2" placeholder="عدد الأحرف" value="2">';
-            break;
-        case 'Mid':
-            html = '<input type="text" id="demoVal1" placeholder="النص" value="Hello World" style="width:100%;">' +
-                   '<input type="number" id="demoVal2" placeholder="بداية" value="4">' +
-                   '<input type="number" id="demoVal3" placeholder="الطول" value="5">';
-            break;
-        case 'DateValue':
-        case 'TimeValue':
-            html = '<input type="text" id="demoVal1" placeholder="أدخل نص التاريخ والوقت (مثال: 20/4/2026 15:30:00)" value="20/4/2026 15:30:00" style="width:100%;">';
-            break;
-        case 'Year': case 'Month': case 'Day': case 'Weekday':
-            html = '<input type="date" id="demoVal1" value="2026-04-20">';
-            break;
-        default:
-            html = '<input type="text" id="demoVal1" placeholder="أدخل القيمة">';
-    }
-    container.innerHTML = html;
+  const funcName = document.getElementById('functionSelect').value;
+  const container = document.getElementById('demoInputs');
+  let html = '';
+  switch(funcName) {
+    case 'Sqr': case 'Abs': case 'Int': case 'Log': case 'Sin': case 'Cos': case 'Tan': case 'Chr': case 'Str':
+      html = '<input type="number" id="demoVal1" placeholder="أدخل رقم" value="25">';
+      break;
+    case 'Trim': case 'LTrim': case 'RTrim': case 'Val':
+      html = '<input type="text" id="demoVal1" placeholder="نص به فراغات" value=" Hello " style="width:100%;">';
+      break;
+    case 'Left': case 'Right':
+      html = '<input type="text" id="demoVal1" placeholder="النص" value="Hello" style="width:100%;">' +
+             '<input type="number" id="demoVal2" placeholder="عدد الأحرف" value="2">';
+      break;
+    case 'Mid':
+      html = '<input type="text" id="demoVal1" placeholder="النص" value="Hello World" style="width:100%;">' +
+             '<input type="number" id="demoVal2" placeholder="بداية" value="4">' +
+             '<input type="number" id="demoVal3" placeholder="الطول" value="5">';
+      break;
+    case 'DateValue': case 'TimeValue':
+      html = '<input type="text" id="demoVal1" placeholder="أدخل نص التاريخ والوقت (مثال: 20/4/2026 15:30:00)" value="20/4/2026 15:30:00" style="width:100%;">';
+      break;
+    case 'Year': case 'Month': case 'Day': case 'Weekday':
+      html = '<input type="date" id="demoVal1" value="2026-04-20">';
+      break;
+    default:
+      html = '<input type="text" id="demoVal1" placeholder="أدخل القيمة">';
+  }
+  container.innerHTML = html;
 }
 
 function runDemo() {
-    const funcName = document.getElementById('functionSelect').value;
-    const val1 = document.getElementById('demoVal1')?.value;
-    const val2 = document.getElementById('demoVal2')?.value;
-    const val3 = document.getElementById('demoVal3')?.value;
-    const resultDiv = document.getElementById('demoResult');
-    let result = '';
-    try {
-        switch(funcName) {
-            case 'Sqr': result = `Sqr(${val1}) = ${Math.sqrt(parseFloat(val1))}`; break;
-            case 'Abs': result = `Abs(${val1}) = ${Math.abs(parseFloat(val1))}`; break;
-            case 'Int': result = `Int(${val1}) = ${Math.floor(parseFloat(val1))}`; break;
-            case 'Log': result = `Log(${val1}) = ${Math.log(parseFloat(val1))}`; break;
-            case 'Sin': result = `Sin(${val1}) = ${Math.sin(parseFloat(val1))}`; break;
-            case 'Cos': result = `Cos(${val1}) = ${Math.cos(parseFloat(val1))}`; break;
-            case 'Tan': result = `Tan(${val1}) = ${Math.tan(parseFloat(val1))}`; break;
-            case 'Trim': result = `Trim('${val1}') = '${val1.trim()}'`; break;
-            case 'LTrim': result = `LTrim('${val1}') = '${val1.replace(/^\s+/, '')}'`; break;
-            case 'RTrim': result = `RTrim('${val1}') = '${val1.replace(/\s+$/, '')}'`; break;
-            case 'Left': result = `Left('${val1}', ${val2}) = '${val1.substring(0, parseInt(val2))}'`; break;
-            case 'Right': result = `Right('${val1}', ${val2}) = '${val1.substring(val1.length - parseInt(val2))}'`; break;
-            case 'Mid': result = `Mid('${val1}', ${val2}, ${val3}) = '${val1.substring(parseInt(val2)-1, parseInt(val2)-1+parseInt(val3))}'`; break;
-            case 'Chr': result = `Chr(${val1}) = '${String.fromCharCode(parseInt(val1))}'`; break;
-            case 'Str': result = `Str(${val1}) = '${val1}' (نص)`; break;
-            case 'Val': result = `Val('${val1}') = ${parseFloat(val1)}`; break;
-            case 'DateValue':
-                const dateOnly = getDateOnly(val1);
-                if (dateOnly) {
-                    result = `DateValue('${val1}') = ${dateOnly}`;
-                } else {
-                    result = `DateValue('${val1}') = تاريخ غير صالح - استخدم صيغة مثل: 20/4/2026 أو 20/4/2026 15:30:00`;
-                }
-                break;
-            case 'TimeValue':
-                const timeOnly = getTimeOnly(val1);
-                if (timeOnly) {
-                    result = `TimeValue('${val1}') = ${timeOnly}`;
-                } else {
-                    result = `TimeValue('${val1}') = وقت غير صالح - استخدم صيغة مثل: 15:30:00 أو 20/4/2026 15:30:00`;
-                }
-                break;
-            case 'Year': result = `Year('${val1}') = ${new Date(val1).getFullYear()}`; break;
-            case 'Month': result = `Month('${val1}') = ${new Date(val1).getMonth()+1}`; break;
-            case 'Day': result = `Day('${val1}') = ${new Date(val1).getDate()}`; break;
-            case 'Weekday': 
-                const weekdayNum = new Date(val1).getDay() + 1;
-                const weekdayNames = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-                result = `Weekday('${val1}') = ${weekdayNum} (${weekdayNames[weekdayNum-1]})`;
-                break;
-            default: result = 'الدالة غير معروفة';
-        }
-        resultDiv.innerHTML = `✅ النتيجة: ${result}`;
-    } catch(e) {
-        resultDiv.innerHTML = `❌ خطأ: ${e.message}`;
+  const funcName = document.getElementById('functionSelect').value;
+  const val1 = document.getElementById('demoVal1')?.value;
+  const val2 = document.getElementById('demoVal2')?.value;
+  const val3 = document.getElementById('demoVal3')?.value;
+  const resultDiv = document.getElementById('demoResult');
+  let result = '';
+  try {
+    switch(funcName) {
+      case 'Sqr': result = `Sqr(${val1}) = ${Math.sqrt(parseFloat(val1))}`; break;
+      case 'Abs': result = `Abs(${val1}) = ${Math.abs(parseFloat(val1))}`; break;
+      case 'Int': result = `Int(${val1}) = ${Math.floor(parseFloat(val1))}`; break;
+      case 'Log': result = `Log(${val1}) = ${Math.log(parseFloat(val1))}`; break;
+      case 'Sin': result = `Sin(${val1}) = ${Math.sin(parseFloat(val1))}`; break;
+      case 'Cos': result = `Cos(${val1}) = ${Math.cos(parseFloat(val1))}`; break;
+      case 'Tan': result = `Tan(${val1}) = ${Math.tan(parseFloat(val1))}`; break;
+      case 'Trim': result = `Trim('${val1}') = '${val1.trim()}'`; break;
+      case 'LTrim': result = `LTrim('${val1}') = '${val1.replace(/^\s+/, '')}'`; break;
+      case 'RTrim': result = `RTrim('${val1}') = '${val1.replace(/\s+$/, '')}'`; break;
+      case 'Left': result = `Left('${val1}', ${val2}) = '${val1.substring(0, parseInt(val2))}'`; break;
+      case 'Right': result = `Right('${val1}', ${val2}) = '${val1.substring(val1.length - parseInt(val2))}'`; break;
+      case 'Mid': result = `Mid('${val1}', ${val2}, ${val3}) = '${val1.substring(parseInt(val2)-1, parseInt(val2)-1+parseInt(val3))}'`; break;
+      case 'Chr': result = `Chr(${val1}) = '${String.fromCharCode(parseInt(val1))}'`; break;
+      case 'Str': result = `Str(${val1}) = '${val1}' (نص)`; break;
+      case 'Val': result = `Val('${val1}') = ${parseFloat(val1)}`; break;
+      case 'DateValue':
+        const dateOnly = getDateOnly(val1);
+        result = dateOnly ? `DateValue('${val1}') = ${dateOnly}` : `DateValue('${val1}') = تاريخ غير صالح - استخدم صيغة مثل: 20/4/2026 أو 20/4/2026 15:30:00`;
+        break;
+      case 'TimeValue':
+        const timeOnly = getTimeOnly(val1);
+        result = timeOnly ? `TimeValue('${val1}') = ${timeOnly}` : `TimeValue('${val1}') = وقت غير صالح - استخدم صيغة مثل: 15:30:00 أو 20/4/2026 15:30:00`;
+        break;
+      case 'Year': result = `Year('${val1}') = ${new Date(val1).getFullYear()}`; break;
+      case 'Month': result = `Month('${val1}') = ${new Date(val1).getMonth()+1}`; break;
+      case 'Day': result = `Day('${val1}') = ${new Date(val1).getDate()}`; break;
+      case 'Weekday':
+        const weekdayNum = new Date(val1).getDay() + 1;
+        const weekdayNames = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+        result = `Weekday('${val1}') = ${weekdayNum} (${weekdayNames[weekdayNum-1]})`;
+        break;
+      default: result = 'الدالة غير معروفة';
     }
+    resultDiv.innerHTML = `✅ النتيجة: ${result}`;
+  } catch(e) {
+    resultDiv.innerHTML = `❌ خطأ: ${e.message}`;
+  }
 }
 
-// ---------- قسم التمارين ----------
+// التمارين
 const exercises = [
-    { type: "mc", text: "ما الدالة التي ترجع الجذر التربيعي لرقم؟", options: ["Sqr", "Abs", "Int", "Log"], correct: "Sqr" },
-    { type: "mc", text: "أي دالة ترجع الجزء الصحيح لرقم بدون تقريب؟", options: ["Fix", "Round", "Int", "CInt"], correct: "Int" },
-    { type: "tf", text: "الدالة `Abs(-5)` ترجع القيمة -5.", correct: "false" },
-    { type: "mc", text: "ما ناتج `Left(\"Visual Basic\", 6)`؟", options: ["Visual", "Basic", "Visu", "Visual "], correct: "Visual" },
-    { type: "mc", text: "أي دالة تستخدم لحذف الفراغات من بداية النص فقط؟", options: ["Trim", "LTrim", "RTrim", "Mid"], correct: "LTrim" },
-    { type: "tf", text: "الدالة `Val(\"123abc\")` ترجع 123.", correct: "true" },
-    { type: "mc", text: "ما ناتج `Year(#20/4/2026#)`؟", options: ["20", "4", "2026", "2026/4/20"], correct: "2026" },
-    { type: "mc", text: "الدالة التي ترجع رقم اليوم في الأسبوع (1=الأحد) هي:", options: ["Day", "Date", "Weekday", "Now"], correct: "Weekday" },
-    { type: "tf", text: "الدالة `Chr(65)` ترجع الحرف 'A'.", correct: "true" },
-    { type: "mc", text: "أي دالة تستخدم لتحويل نص إلى رقم؟", options: ["Str", "Val", "CStr", "Int"], correct: "Val" },
-    { type: "mc", text: "ما الدالة التي تستخرج التاريخ من قيمة تحتوي على وقت وتاريخ معاً؟", options: ["DateValue", "TimeValue", "Format", "Now"], correct: "DateValue" },
-    { type: "mc", text: "ما الدالة التي تستخرج الوقت من قيمة تحتوي على وقت وتاريخ معاً؟", options: ["DateValue", "TimeValue", "Format", "Now"], correct: "TimeValue" }
+  { type: "mc", text: "ما الدالة التي ترجع الجذر التربيعي لرقم؟", options: ["Sqr", "Abs", "Int", "Log"], correct: "Sqr" },
+  { type: "mc", text: "أي دالة ترجع الجزء الصحيح لرقم بدون تقريب؟", options: ["Fix", "Round", "Int", "CInt"], correct: "Int" },
+  { type: "tf", text: "الدالة `Abs(-5)` ترجع القيمة -5.", correct: "false" },
+  { type: "mc", text: "ما ناتج `Left(\"Visual Basic\", 6)`؟", options: ["Visual", "Basic", "Visu", "Visual "], correct: "Visual" },
+  { type: "mc", text: "أي دالة تستخدم لحذف الفراغات من بداية النص فقط؟", options: ["Trim", "LTrim", "RTrim", "Mid"], correct: "LTrim" },
+  { type: "tf", text: "الدالة `Val(\"123abc\")` ترجع 123.", correct: "true" },
+  { type: "mc", text: "ما ناتج `Year(#20/4/2026#)`؟", options: ["20", "4", "2026", "2026/4/20"], correct: "2026" },
+  { type: "mc", text: "الدالة التي ترجع رقم اليوم في الأسبوع (1=الأحد) هي:", options: ["Day", "Date", "Weekday", "Now"], correct: "Weekday" },
+  { type: "tf", text: "الدالة `Chr(65)` ترجع الحرف 'A'.", correct: "true" },
+  { type: "mc", text: "أي دالة تستخدم لتحويل نص إلى رقم؟", options: ["Str", "Val", "CStr", "Int"], correct: "Val" },
+  { type: "mc", text: "ما الدالة التي تستخرج التاريخ من قيمة تحتوي على وقت وتاريخ معاً؟", options: ["DateValue", "TimeValue", "Format", "Now"], correct: "DateValue" },
+  { type: "mc", text: "ما الدالة التي تستخرج الوقت من قيمة تحتوي على وقت وتاريخ معاً؟", options: ["DateValue", "TimeValue", "Format", "Now"], correct: "TimeValue" }
 ];
 
 let userExerciseAnswers = {};
 
 function renderExercises() {
-    const container = document.getElementById('exercisesContainer');
-    container.innerHTML = '';
-    exercises.forEach((ex, idx) => {
-        const qDiv = document.createElement('div');
-        qDiv.className = 'question-box';
-        qDiv.id = `ex_${idx}`;
-        qDiv.innerHTML = `
-            <div class="question-text">${idx+1}. ${ex.text}</div>
-            <div class="options-container" id="opts_${idx}"></div>
-            <div class="feedback" id="fb_${idx}"></div>
-        `;
-        container.appendChild(qDiv);
-        const optsDiv = qDiv.querySelector('.options-container');
-        if (ex.type === 'mc') {
-            ex.options.forEach(opt => {
-                const optDiv = document.createElement('div');
-                optDiv.className = 'option';
-                optDiv.textContent = opt;
-                optDiv.setAttribute('data-ans', opt);
-                optDiv.addEventListener('click', () => selectExerciseOption(idx, opt));
-                optsDiv.appendChild(optDiv);
-            });
-        } else if (ex.type === 'tf') {
-            ['صحيح', 'خطأ'].forEach(opt => {
-                const optDiv = document.createElement('div');
-                optDiv.className = 'option';
-                optDiv.textContent = opt;
-                const ansVal = (opt === 'صحيح') ? 'true' : 'false';
-                optDiv.setAttribute('data-ans', ansVal);
-                optDiv.addEventListener('click', () => selectExerciseOption(idx, ansVal));
-                optsDiv.appendChild(optDiv);
-            });
-        }
-    });
+  const container = document.getElementById('exercisesContainer');
+  container.innerHTML = '';
+  exercises.forEach((ex, idx) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question-box';
+    qDiv.id = `ex_${idx}`;
+    qDiv.innerHTML = `
+      <div class="question-text">${idx+1}. ${ex.text}</div>
+      <div class="options-container" id="opts_${idx}"></div>
+      <div class="feedback" id="fb_${idx}"></div>
+    `;
+    container.appendChild(qDiv);
+    const optsDiv = qDiv.querySelector('.options-container');
+    if (ex.type === 'mc') {
+      ex.options.forEach(opt => {
+        const optDiv = document.createElement('div');
+        optDiv.className = 'option';
+        optDiv.textContent = opt;
+        optDiv.setAttribute('data-ans', opt);
+        optDiv.addEventListener('click', () => selectExerciseOption(idx, opt));
+        optsDiv.appendChild(optDiv);
+      });
+    } else if (ex.type === 'tf') {
+      ['صحيح', 'خطأ'].forEach(opt => {
+        const optDiv = document.createElement('div');
+        optDiv.className = 'option';
+        optDiv.textContent = opt;
+        const ansVal = (opt === 'صحيح') ? 'true' : 'false';
+        optDiv.setAttribute('data-ans', ansVal);
+        optDiv.addEventListener('click', () => selectExerciseOption(idx, ansVal));
+        optsDiv.appendChild(optDiv);
+      });
+    }
+  });
 }
 
 function selectExerciseOption(qIdx, ans) {
-    userExerciseAnswers[qIdx] = ans;
-    const container = document.getElementById(`opts_${qIdx}`);
-    Array.from(container.children).forEach(opt => {
-        opt.classList.remove('selected');
-        if (opt.getAttribute('data-ans') === ans) opt.classList.add('selected');
-    });
-    const fb = document.getElementById(`fb_${qIdx}`);
-    fb.style.display = 'none';
+  userExerciseAnswers[qIdx] = ans;
+  const container = document.getElementById(`opts_${qIdx}`);
+  Array.from(container.children).forEach(opt => {
+    opt.classList.remove('selected');
+    if (opt.getAttribute('data-ans') === ans) opt.classList.add('selected');
+  });
+  const fb = document.getElementById(`fb_${qIdx}`);
+  fb.style.display = 'none';
 }
 
 function checkExercises() {
-    let allAnswered = true;
-    let score = 0;
-    for (let i = 0; i < exercises.length; i++) {
-        const ans = userExerciseAnswers[i];
-        if (ans === undefined) {
-            allAnswered = false;
-            document.getElementById(`fb_${i}`).innerHTML = '⚠️ لم يتم الإجابة على هذا السؤال.';
-            document.getElementById(`fb_${i}`).className = 'feedback wrong';
-            continue;
-        }
-        const correctAns = exercises[i].correct;
-        const isCorrect = (ans === correctAns);
-        if (isCorrect) score++;
-        const fbDiv = document.getElementById(`fb_${i}`);
-        fbDiv.innerHTML = isCorrect ? '✅ إجابة صحيحة!' : `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns)}`;
-        fbDiv.className = isCorrect ? 'feedback correct' : 'feedback wrong';
-        const container = document.getElementById(`opts_${i}`);
-        Array.from(container.children).forEach(opt => {
-            opt.classList.remove('correct', 'wrong');
-            if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
-            if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
-        });
+  let allAnswered = true;
+  let score = 0;
+  for (let i = 0; i < exercises.length; i++) {
+    const ans = userExerciseAnswers[i];
+    if (ans === undefined) {
+      allAnswered = false;
+      document.getElementById(`fb_${i}`).innerHTML = '⚠️ لم يتم الإجابة على هذا السؤال.';
+      document.getElementById(`fb_${i}`).className = 'feedback wrong';
+      continue;
     }
-    const globalDiv = document.getElementById('exerciseGlobalFeedback');
-    if (!allAnswered) {
-        globalDiv.innerHTML = '<div class="feedback wrong" style="display:block;">⚠️ يرجى الإجابة على جميع الأسئلة قبل التحقق.</div>';
-    } else {
-        globalDiv.innerHTML = `<div class="feedback correct" style="display:block;">🎉 نتيجتك: ${score} من ${exercises.length} 🎉</div>`;
-    }
+    const correctAns = exercises[i].correct;
+    const isCorrect = (ans === correctAns);
+    if (isCorrect) score++;
+    const fbDiv = document.getElementById(`fb_${i}`);
+    fbDiv.innerHTML = isCorrect ? '✅ إجابة صحيحة!' : `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns)}`;
+    fbDiv.className = isCorrect ? 'feedback correct' : 'feedback wrong';
+    const container = document.getElementById(`opts_${i}`);
+    Array.from(container.children).forEach(opt => {
+      opt.classList.remove('correct', 'wrong');
+      if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
+      if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
+    });
+  }
+  const globalDiv = document.getElementById('exerciseGlobalFeedback');
+  if (!allAnswered) {
+    globalDiv.innerHTML = '<div class="feedback wrong" style="display:block;">⚠️ يرجى الإجابة على جميع الأسئلة قبل التحقق.</div>';
+  } else {
+    globalDiv.innerHTML = `<div class="feedback correct" style="display:block;">🎉 نتيجتك: ${score} من ${exercises.length} 🎉</div>`;
+  }
 }
 
 function resetExercises() {
-    userExerciseAnswers = {};
-    for (let i = 0; i < exercises.length; i++) {
-        const container = document.getElementById(`opts_${i}`);
-        if (container) {
-            Array.from(container.children).forEach(opt => {
-                opt.classList.remove('selected', 'correct', 'wrong');
-            });
-        }
-        const fb = document.getElementById(`fb_${i}`);
-        fb.style.display = 'none';
-        fb.innerHTML = '';
+  userExerciseAnswers = {};
+  for (let i = 0; i < exercises.length; i++) {
+    const container = document.getElementById(`opts_${i}`);
+    if (container) {
+      Array.from(container.children).forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+      });
     }
-    document.getElementById('exerciseGlobalFeedback').innerHTML = '';
+    const fb = document.getElementById(`fb_${i}`);
+    fb.style.display = 'none';
+    fb.innerHTML = '';
+  }
+  document.getElementById('exerciseGlobalFeedback').innerHTML = '';
 }
 
 function showSection(section) {
-    const functionsDiv = document.getElementById('functionsSection');
-    const exercisesDiv = document.getElementById('exercisesSection');
-    const btns = document.querySelectorAll('.nav-btn');
-    if (section === 'functions') {
-        functionsDiv.classList.remove('hidden');
-        exercisesDiv.classList.add('hidden');
-        btns[0].classList.add('active');
-        btns[1].classList.remove('active');
-    } else {
-        functionsDiv.classList.add('hidden');
-        exercisesDiv.classList.remove('hidden');
-        btns[0].classList.remove('active');
-        btns[1].classList.add('active');
-        renderExercises();
-        resetExercises();
-    }
+  const functionsDiv = document.getElementById('functionsSection');
+  const exercisesDiv = document.getElementById('exercisesSection');
+  const btns = document.querySelectorAll('.nav-btn');
+  if (section === 'functions') {
+    functionsDiv.classList.remove('hidden');
+    exercisesDiv.classList.add('hidden');
+    btns[0].classList.add('active');
+    btns[1].classList.remove('active');
+  } else {
+    functionsDiv.classList.add('hidden');
+    exercisesDiv.classList.remove('hidden');
+    btns[0].classList.remove('active');
+    btns[1].classList.add('active');
+    renderExercises();
+    resetExercises();
+  }
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // تهيئة الصفحة
