@@ -7,247 +7,56 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(145deg, #f0f7ff 0%, #e6f0f5 100%);
-            font-family: 'Segoe UI', 'Tahoma', 'Noto Sans Arabic', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             padding: 20px;
             color: #1a2c3e;
             line-height: 1.6;
         }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1000px; margin: 0 auto; }
         .main-header {
             background: linear-gradient(135deg, #0b2b40 0%, #1f5e6e 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            color: white; padding: 2rem; border-radius: 2rem;
+            text-align: center; margin-bottom: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
-        .main-header h1 {
-            font-size: 2rem;
-            letter-spacing: -0.5px;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
+        .nav-buttons { display: flex; gap: 12px; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
         .nav-btn {
-            background: white;
-            border: 2px solid #1f5e6e;
-            padding: 12px 28px;
-            border-radius: 40px;
-            color: #1f5e6e;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
-            font-size: 1rem;
+            background: white; border: 2px solid #1f5e6e; padding: 10px 25px;
+            border-radius: 40px; color: #1f5e6e; cursor: pointer; font-weight: bold; transition: 0.2s;
         }
-        .nav-btn.active {
-            background: #ff8c42;
-            color: white;
-            border-color: #ff8c42;
-            box-shadow: 0 4px 12px rgba(255,140,66,0.3);
-        }
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            background: #ff8c42;
-            color: white;
-        }
-        .card {
-            background: white;
-            border-radius: 1.8rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            display: none;
-        }
-        .card.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .section-title {
-            font-size: 1.7rem;
-            color: #0b2b40;
-            margin-bottom: 1.5rem;
-            border-right: 6px solid #ff8c42;
-            padding-right: 18px;
-        }
-        .diagram-card {
-            background: #fefcf5;
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            border: 1px solid #ffe0b5;
-            text-align: center;
-        }
-        .formula-box {
-            background: #1e2f3a;
-            color: #f5d742;
-            padding: 14px;
-            border-radius: 1rem;
-            text-align: center;
-            font-size: 1.2rem;
-            margin: 1rem 0;
-        }
-        svg {
-            max-width: 100%;
-            height: auto;
-            margin: 10px 0;
-        }
-        .question-block {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 1.2rem;
-            margin-bottom: 2rem;
-            padding: 1.2rem;
-        }
-        .question-title {
-            background: #eef2fc;
-            padding: 12px 18px;
-            border-radius: 2rem;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: #004466;
-        }
-        .solution-step {
-            background: #f8faff;
-            padding: 12px 15px;
-            border-radius: 1rem;
-            margin: 10px 0;
-            border-right: 4px solid #ff8c42;
-        }
-        .drawing-svg {
-            background: #faf9f0;
-            padding: 12px;
-            border-radius: 1rem;
-            text-align: center;
-            margin-top: 12px;
-        }
-        /* Quiz styles */
-        .quiz-item {
-            background: #f9fbfd;
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #dce5f0;
-        }
-        .quiz-question-type {
-            display: inline-block;
-            background: #ff8c42;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            margin-bottom: 10px;
-        }
-        .quiz-option {
-            background: #f1f5f9;
-            padding: 10px 18px;
-            margin: 8px 0;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.1s;
-            border: 1px solid #cbd5e1;
-        }
-        .quiz-option:hover {
-            background: #e2eaf5;
-        }
-        .quiz-option.selected {
-            background: #c9e9ff;
-            border: 2px solid #ff8c42;
-        }
-        .tf-options {
-            display: flex;
-            gap: 15px;
-            margin: 10px 0;
-        }
-        .tf-btn {
-            flex: 1;
-            text-align: center;
-            padding: 12px;
-            background: #f1f5f9;
-            border-radius: 40px;
-            cursor: pointer;
-            border: 1px solid #cbd5e1;
-            font-weight: bold;
-        }
-        .tf-btn.selected {
-            background: #ff8c42;
-            color: white;
-            border-color: #ff8c42;
-        }
-        button {
-            background: #2c6e7e;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 2rem;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 10px;
-            margin-top: 12px;
-            font-family: inherit;
-        }
-        .btn-check {
-            background: #2b7a3e;
-        }
-        .btn-reset {
-            background: #9e5e2c;
-        }
-        .add-btn {
-            background: #8b5a2b;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.85rem;
-            color: #4a627a;
-        }
-        hr {
-            margin: 1rem 0;
-        }
-        .question-stats {
-            background: #eef2fa;
-            padding: 10px;
-            border-radius: 30px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+        .nav-btn.active { background: #ff8c42; color: white; border-color: #ff8c42; }
+        .card { background: white; border-radius: 1.5rem; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: none; }
+        .card.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .formula-box { background: #1e2f3a; color: #f5d742; padding: 15px; border-radius: 1rem; text-align: center; font-size: 1.2rem; margin: 15px 0; }
+        .quiz-item { background: #f9fbfd; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #dce5f0; }
+        .diagram-card { background: #fafafa; border: 1px dashed #ccc; padding: 15px; margin: 15px 0; border-radius: 10px; text-align: center; }
+        .quiz-option { background: #fff; padding: 12px; margin: 8px 0; border-radius: 10px; cursor: pointer; border: 1px solid #cbd5e1; transition: 0.2s; }
+        .quiz-option:hover { background: #f0f7ff; }
+        .quiz-option.selected { background: #ff8c42; color: white; border-color: #e67e22; }
+        .tf-options { display: flex; gap: 10px; margin-top: 10px; }
+        .tf-btn { flex: 1; padding: 12px; text-align: center; background: #eee; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .tf-btn.selected { background: #1f5e6e; color: white; }
+        .action-btn { background: #2c6e7e; color: white; border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
+
 <div class="container">
     <header class="main-header">
         <h1>⚡ الشغل - الطاقة - القدرة ⚡</h1>
-        <p>الفصل الخامس | الصف الثالث الثانوي | المنهج الليبي</p>
+        <p>تطوير المنظومة التعليمية | فيزياء الصف الثالث الثانوي</p>
     </header>
 
     <nav class="nav-buttons">
-       <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn">🏠 الرئيسية</button>
 
-        <button class="nav-btn active" data-section="theory">📘 الشرح النظري + الرسوم</button>
-        <button class="nav-btn" data-section="solutions">📝 حل المسائل العشرة (مع رسوم)</button>
-        <button class="nav-btn" data-section="quiz">🧪 اختبار تفاعلي (MCQ + صح/خطأ)</button>
+      <button class="nav-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn">🏠 الرئيسية</button>
+        <button class="nav-btn active" onclick="showSection('theory')">📖 الشرح</button>
+        <button class="nav-btn" onclick="showSection('quiz')">🧪 الاختبار التفاعلي</button>
     </nav>
 
-    <!-- القسم النظري -->
     <div id="theorySection" class="card active">
         <div class="diagram-container">
             <p><strong>1. الشغل الناتج عن قوة مائلة:</strong></p>
@@ -320,290 +129,216 @@
         </div>
     </div>
 
-    <!-- قسم حلول المسائل -->
-    <div id="solutionsSection" class="card">
-        <div class="section-title">📚 حل المسائل التدريبية (10 مسائل مع رسوم)</div>
-        <div id="questionsList"></div>
-    </div>
-
-    <!-- قسم الاختبار التفاعلي (يدعم MCQ و True/False) -->
     <div id="quizSection" class="card">
-        <div class="section-title">🧠 اختر الإجابة الصحيحة</div>
         <div id="quizContainer"></div>
-        <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
-            <button id="checkQuizBtn" class="btn-check">✔️ تحقق من الإجابات</button>
-            <button id="resetQuizBtn" class="btn-reset">🔄 إعادة الاختبار</button>
-        </div>
-        <div id="quizFeedback" style="margin-top: 15px; font-weight:bold;"></div>
+        <button class="action-btn" onclick="checkQuizAnswers()">✔️ تحقق من الإجابات</button>
+        <button class="action-btn" style="background:#9e5e2c;" onclick="resetQuiz()">🔄 إعادة</button>
+        <div id="quizFeedback" style="margin-top:20px;"></div>
     </div>
 </div>
 
 <script>
-    // تعريف نوع الأسئلة: type "mcq" أو "tf" (true/false)
-    let quizQuestions = [
-        { id: 0, type: "mcq", text: "وحدة قياس الشغل في النظام الدولي هي:", options: ["نيوتن", "جول", "واط", "نيوتن/متر"], correct: 1 },
-        { id: 1, type: "mcq", text: "إذا أثرت قوة عمودية على اتجاه الحركة، فإن الشغل يساوي:", options: ["Fs", "صفر", "½mv²", "Fcosθ"], correct: 1 },
-        { id: 2, type: "mcq", text: "نظرية الشغل - الطاقة تعبر عن:", options: ["شغل = قوة × زمن", "شغل = التغير في طاقة الحركة", "القدرة = شغل × زمن", "الطاقة = كتلة × سرعة"], correct: 1 },
-        { id: 3, type: "mcq", text: "قدرة محرك سيارة تتحرك بسرعة 20 m/s تحت تأثير قوة دفع 500 N هي:", options: ["10000 W", "25 W", "1000 W", "500 W"], correct: 0, hint: "P = F·v = 500×20 = 10000 W" },
-        { id: 4, type: "tf", text: "الشغل المبذول بواسطة قوة الجاذبية عندما يتحرك جسم أفقياً يساوي صفراً.", correct: 0, explanation: "صحيح، لأن القوة عمودية على الإزاحة الأفقية." }, // 0 = صح (true)
-        { id: 5, type: "tf", text: "إذا زادت سرعة جسم إلى الضعف، فإن طاقة حركته تتضاعف.", correct: 1, explanation: "خطأ، طاقة الحركة تتناسب مع مربع السرعة، فتتضاعف 4 مرات." }, // 1 = خطأ,
-        { id: 6, type: "mcq", text: " امتحان2018-2019 دور ثاني   إذا بدأت عربة من دون محرك كتلتها 300 kg انحدارها من السكون من النقطة (A) فإن حركتها عند النقطة (B) تساوي :-"                                               , options: [" 180 kj", "120 kj", "1800 kj", "60 kj"], correct: 1, hint: " نحسب طاقة الوضع واط"},
-        { id: 7, type: "mcq", text:" سؤال دور ثان 2018-2019  :تدفع سيارة كتلتها  800 kg  على سطح افقي من السكون لتتحرك بعجلة   0.5  متر /ثانية تربيع  خلال  10s  فإن الشغل المبذول يساوي ........", options: ["10 kj", "3 kj", "صفر", "5 kj"],correct:0,hint:"نحسب v =u+at ثم نطبق القانون:- الشغل= 1/2 mvتربيع -1/2muتربيع"},
-        { id: 8, type: "mcq", text: " امتحان دور ثان 2018-2019 :- اذا استخدمت رافعة لرفع حمولة قدرها (1.5 tonn) الي ارتفاع (10 m ) فإن الشغل الذي تبذله الرافعة : ", options: [" 150 kj", "1.5 kj", "150 j", " 15 kj"], correct: 0, hint: "نحول الطن الي كيلو جرام بالضرب في1000 ثم نطبق بالقانون مباشرة mgh    g=10" },
-        { id: 9, type: "mcq", text: "قذف جسم كتلته  12 kg لاعلي مستوي املس طوله 30 m يميل بزاوية 40 فإن طاقة الوضع عند اقصى نقطة على المستوي:امتحان دور ثان 2018-2019", options: ["3.6j k",  "  3.2kj", "2.3 kj", "6.3 kj"], correct: 2,hint: "عندما يُقذف الجسم لأعلى المستوي المائل، فإن أقصى نقطة يصل إليها تكون على ارتفاع  h  عن سطح الأرض. طاقة الوضع الجاذبية عند هذه النقطة تُعطى بالعلاقة:PE = m g h حيث  h  هو الارتفاع الرأسي الذي يرتفعه الجسم , h =Lsin@"},
+    const quizQuestions = [
+        {
+            id: 1,
+            type: "mcq",
+            text: "إذا بدأت عربة من دون محرك كتلتها (300kg) انحدارها من السكون من النقطة (A)، فإن طاقتها الحركية عند النقطة (B) تساوي:",
+            svgDraw: `<svg width="300" height="180" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="150" x2="260" y2="150" stroke="#ccc" stroke-width="1" stroke-dasharray="4"/>
+  
+  <path d="M 40 40 C 80 150, 100 150, 130 130 C 160 110, 180 60, 210 60 C 240 60, 260 100, 280 130" 
+        fill="none" stroke="#1f5e6e" stroke-width="3"/>
+
+  <line x1="40" y1="40" x2="40" y2="150" stroke="#555" stroke-width="1.5" stroke-dasharray="3"/>
+  
+  <line x1="110" y1="140" x2="110" y2="150" stroke="#555" stroke-width="1.5" stroke-dasharray="3"/>
+
+  <circle cx="40" cy="40" r="5" fill="#ff8c42"/> 
+  <circle cx="110" cy="140" r="5" fill="#ff8c42"/> 
+  <circle cx="210" cy="60" r="5" fill="#ff8c42"/> 
+
+  <text x="30" y="35" font-family="Arial" font-size="14" font-weight="bold">A</text>
+  <text x="105" y="130" font-family="Arial" font-size="14" font-weight="bold">B</text>
+  <text x="205" y="50" font-family="Arial" font-size="14" font-weight="bold">C</text>
+  
+  <text x="45" y="90" font-family="Arial" font-size="12" fill="blue" font-weight="bold">60 m</text>
+  <text x="115" y="148" font-family="Arial" font-size="12" fill="blue" font-weight="bold">20 m</text>
+</svg>`,
+            options: ["180 kJ", "120 kJ", "18000 kJ", "60 kJ"],
+            correct: 1,
+            hint: "حساب فرق طاقة الوضع: m*g*(h1 - h2)"
+        },
+        {
+            id: 2,
+            type: "mcq",
+            text: "وحدة قياس القدرة في النظام الدولي هي:",
+            options: ["جول", "واط", "نيوتن", "متر/ثانية"],
+            correct: 1
+        },
+        {
+            id: 3,
+            type: "tf",
+            text: "الشغل يكون سالباً عندما تكون القوة في عكس اتجاه الإزاحة.",
+            correct: 0, // 0 يعني صح
+            explanation: "صحيح، مثل شغل قوة الاحتكاك."
+        },
+
+
+
+{ id: 4, type: "mcq", text: "وحدة قياس الشغل في النظام الدولي هي:", options: ["نيوتن", "جول", "واط", "نيوتن/متر"], correct: 1 },
+        { id: 5, type: "mcq", text: "إذا أثرت قوة عمودية على اتجاه الحركة، فإن الشغل يساوي:", options: ["Fs", "صفر", "½mv²", "Fcosθ"], correct: 1 },
+        { id: 6, type: "mcq", text: "نظرية الشغل - الطاقة تعبر عن:", options: ["شغل = قوة × زمن", "شغل = التغير في طاقة الحركة", "القدرة = شغل × زمن", "الطاقة = كتلة × سرعة"], correct: 1 },
+        { id: 7, type: "mcq", text: "قدرة محرك سيارة تتحرك بسرعة 20 m/s تحت تأثير قوة دفع 500 N هي:", options: ["10000 W", "25 W", "1000 W", "500 W"], correct: 0, hint: "P = F·v = 500×20 = 10000 W" },
+        { id: 8, type: "tf", text: "الشغل المبذول بواسطة قوة الجاذبية عندما يتحرك جسم أفقياً يساوي صفراً.", correct: 0, explanation: "صحيح، لأن القوة عمودية على الإزاحة الأفقية." }, // 0 = صح (true)
+        { id: 9, type: "tf", text: "إذا زادت سرعة جسم إلى الضعف، فإن طاقة حركته تتضاعف.", correct: 1, explanation: "خطأ، طاقة الحركة تتناسب مع مربع السرعة، فتتضاعف 4 مرات." }, // 1 = خطأ,
+        { id: 10, type: "mcq", text: " امتحان2018-2019 دور ثاني   إذا بدأت عربة من دون محرك كتلتها 300 kg انحدارها من السكون من النقطة (A) فإن حركتها عند النقطة (B) تساوي :-"                                               , options: [" 180 kj", "120 kj", "1800 kj", "60 kj"], correct: 1, hint: " نحسب طاقة الوضع واط"},
+        { id: 11, type: "mcq", text:" سؤال دور ثان 2018-2019  :تدفع سيارة كتلتها  800 kg  على سطح افقي من السكون لتتحرك بعجلة   0.5  متر /ثانية تربيع  خلال  10s  فإن الشغل المبذول يساوي ........", options: ["10 kj", "3 kj", "صفر", "5 kj"],correct:0,hint:"نحسب v =u+at ثم نطبق القانون:- الشغل= 1/2 mvتربيع -1/2muتربيع"},
+        { id: 12, type: "mcq", text: " امتحان دور ثان 2018-2019 :- اذا استخدمت رافعة لرفع حمولة قدرها (1.5 tonn) الي ارتفاع (10 m ) فإن الشغل الذي تبذله الرافعة : ", options: [" 150 kj", "1.5 kj", "150 j", " 15 kj"], correct: 0, hint: "نحول الطن الي كيلو جرام بالضرب في1000 ثم نطبق بالقانون مباشرة mgh    g=10" },
+        { id: 13, type: "mcq", text: "قذف جسم كتلته  12 kg لاعلي مستوي املس طوله 30 m يميل بزاوية 40 فإن طاقة الوضع عند اقصى نقطة على المستوي:امتحان دور ثان 2018-2019", options: ["3.6j k",  "  3.2kj", "2.3 kj", "6.3 kj"], correct: 2,hint: "عندما يُقذف الجسم لأعلى المستوي المائل، فإن أقصى نقطة يصل إليها تكون على ارتفاع  h  عن سطح الأرض. طاقة الوضع الجاذبية عند هذه النقطة تُعطى بالعلاقة:PE = m g h حيث  h  هو الارتفاع الرأسي الذي يرتفعه الجسم , h =Lsin@"},
+
+        { id: 15, type: "mcq", text: "قذف جسم كتلته  12 kg لاعلي مستوي املس طوله 30 m يميل بزاوية 40 فإن طاقة الوضع عند اقصى نقطة على المستوي:امتحان دور ثان 2018-2019", options: ["3.6j k",  "  3.2kj", "2.3 kj", "6.3 kj"], correct: 2,hint: "عندما يُقذف الجسم لأعلى المستوي المائل، فإن أقصى نقطة يصل إليها تكون على ارتفاع  h  عن سطح الأرض. طاقة الوضع الجاذبية عند هذه النقطة تُعطى بالعلاقة:PE = m g h حيث  h  هو الارتفاع الرأسي الذي يرتفعه الجسم , h =Lsin@"},
+        
+
 
 
 
     ];
-    
-    let nextId = quizQuestions.length;
-    let selectedAnswers = new Array(quizQuestions.length).fill(null); // للمحافظة على الإجابات
 
-    // دالة عرض الأسئلة
-    function renderQuizUI() {
-        const container = document.getElementById('quizContainer');
-        if (!container) return;
-        container.innerHTML = '';
-        
-        quizQuestions.forEach((q, idx) => {
-            const div = document.createElement('div');
-            div.className = 'quiz-item';
-            const typeBadge = q.type === 'mcq' ? '🔘 اختيار من متعدد' : '✓✗ صح/خطأ';
-            div.innerHTML = `
-                <div>
-                    <span class="quiz-question-type">${typeBadge}</span>
-                    <strong style="font-size:1.05rem; display:block; margin:10px 0;">${idx+1}. ${q.text}</strong>
-                </div>
-            `;
-            
-            if (q.type === 'mcq') {
-                // عرض خيارات الاختيار من متعدد
-                q.options.forEach((opt, optIdx) => {
-                    const optDiv = document.createElement('div');
-                    optDiv.className = 'quiz-option';
-                    optDiv.innerText = `${String.fromCharCode(65+optIdx)}- ${opt}`;
-                    optDiv.dataset.qIdx = idx;
-                    optDiv.dataset.optIdx = optIdx;
-                    if (selectedAnswers[idx] === optIdx) optDiv.classList.add('selected');
-                    optDiv.addEventListener('click', (e) => {
-                        selectedAnswers[idx] = optIdx;
-                        renderQuizUI();
-                    });
-                    div.appendChild(optDiv);
-                });
-            } 
-            else if (q.type === 'tf') {
-                // عرض أزرار صح/خطأ
-                const tfContainer = document.createElement('div');
-                tfContainer.className = 'tf-options';
-                const trueBtn = document.createElement('div');
-                trueBtn.className = 'tf-btn';
-                trueBtn.innerText = '✅ صح (True)';
-                const falseBtn = document.createElement('div');
-                falseBtn.className = 'tf-btn';
-                falseBtn.innerText = '❌ خطأ (False)';
-                
-                if (selectedAnswers[idx] === 0) trueBtn.classList.add('selected');
-                if (selectedAnswers[idx] === 1) falseBtn.classList.add('selected');
-                
-                trueBtn.addEventListener('click', () => {
-                    selectedAnswers[idx] = 0;
-                    renderQuizUI();
-                });
-                falseBtn.addEventListener('click', () => {
-                    selectedAnswers[idx] = 1;
-                    renderQuizUI();
-                });
-                tfContainer.appendChild(trueBtn);
-                tfContainer.appendChild(falseBtn);
-                div.appendChild(tfContainer);
-            }
-            
-            if (q.hint && q.type === 'mcq') {
-                const hintSpan = document.createElement('div');
-                hintSpan.style.fontSize = '0.8rem';
-                hintSpan.style.color = '#6c757d';
-                hintSpan.style.marginTop = '8px';
-                hintSpan.innerText = `💡 تلميح: ${q.hint}`;
-                div.appendChild(hintSpan);
-            }
-            if (q.type === 'tf' && q.explanation) {
-                const expSpan = document.createElement('div');
-                expSpan.style.fontSize = '0.75rem';
-                expSpan.style.color = '#6c757d';
-                expSpan.style.marginTop = '5px';
-                expSpan.innerText = `📘 ملاحظة: ${q.explanation}`;
-                div.appendChild(expSpan);
-            }
-            container.appendChild(div);
-        });
-        
-        // عرض عدد الأسئلة الحالي
-        const statsDiv = document.querySelector('.question-stats');
-        if (!document.querySelector('.question-stats')) {
-            const newStats = document.createElement('div');
-            newStats.className = 'question-stats';
-            newStats.id = 'quizStats';
-            container.parentNode.insertBefore(newStats, container);
-        }
-        document.getElementById('quizStats') && (document.getElementById('quizStats').innerHTML = `📊 عدد الأسئلة الحالي: ${quizQuestions.length} سؤال (${quizQuestions.filter(q=>q.type==='mcq').length} اختيار متعدد، ${quizQuestions.filter(q=>q.type==='tf').length} صح/خطأ)`);
+    let selectedAnswers = new Array(quizQuestions.length).fill(null);
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(sectionId + 'Section').classList.add('active');
+        if (sectionId === 'quiz') renderQuiz();
     }
-    
-    // التحقق من الإجابات
-    function checkQuizAnswers() {
-        let correctCount = 0;
-        let resultHtml = '';
-        for (let i = 0; i < quizQuestions.length; i++) {
-            const userAns = selectedAnswers[i];
-            const q = quizQuestions[i];
-            let isCorrect = false;
-            let correctAnswerText = '';
-            
-            if (q.type === 'mcq') {
-                if (userAns !== null && userAns === q.correct) {
-                    isCorrect = true;
-                    correctCount++;
-                }
-                correctAnswerText = q.options[q.correct];
-            } 
-            else if (q.type === 'tf') {
-                // correct: 0 يعني صح (true) , 1 يعني خطأ (false)
-                if (userAns !== null && userAns === q.correct) {
-                    isCorrect = true;
-                    correctCount++;
-                }
-                correctAnswerText = (q.correct === 0) ? 'صح (True)' : 'خطأ (False)';
-            }
-            
-            if (isCorrect) {
-                resultHtml += `<p style="color:green;">✅ السؤال ${i+1}: صحيح</p>`;
-            } else {
-                resultHtml += `<p style="color:red;">❌ السؤال ${i+1}: خطأ، الإجابة الصحيحة: ${correctAnswerText}</p>`;
-            }
+
+    function renderQuiz() {
+    const container = document.getElementById('quizContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    quizQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'quiz-item';
+        div.style.cssText = "background: #fff; padding: 20px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-right: 5px solid #1f5e6e;";
+
+        // 1. نص السؤال
+        let questionHtml = `<h3 style="margin-bottom: 15px;">س${idx + 1}: ${q.text}</h3>`;
+
+        // 2. إضافة الرسمة (SVG) إذا وجدت
+        if (q.svgDraw) {
+            questionHtml += `<div class="diagram-card" style="background: #fdfdfd; border: 1px dashed #ccc; padding: 10px; margin: 10px 0; text-align: center;">${q.svgDraw}</div>`;
         }
-        resultHtml += `<hr><strong>⭐ نتيجتك: ${correctCount} من ${quizQuestions.length}</strong>`;
-        document.getElementById('quizFeedback').innerHTML = resultHtml;
+
+        div.innerHTML = questionHtml;
+
+        // 3. عرض الخيارات (MCQ أو TF)
+        if (q.type === 'mcq') {
+            q.options.forEach((opt, oIdx) => {
+                const btn = document.createElement('div');
+                btn.className = 'quiz-option' + (selectedAnswers[idx] === oIdx ? ' selected' : '');
+                btn.style.cssText = `padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.3s; ${selectedAnswers[idx] === oIdx ? 'background: #ff8c42; color: white;' : 'background: #f9f9f9;'}`;
+                btn.innerText = opt;
+                btn.onclick = () => { selectedAnswers[idx] = oIdx; renderQuiz(); };
+                div.appendChild(btn);
+            });
+        } else if (q.type === 'tf') {
+            const tfDiv = document.createElement('div');
+            tfDiv.style.display = "flex";
+            tfDiv.style.gap = "10px";
+            ['صح', 'خطأ'].forEach((label, v) => {
+                const btn = document.createElement('div');
+                btn.style.cssText = `flex: 1; padding: 12px; text-align: center; border-radius: 8px; cursor: pointer; font-weight: bold; border: 1px solid #ddd; ${selectedAnswers[idx] === v ? 'background: #1f5e6e; color: white;' : 'background: #f9f9f9;'}`;
+                btn.innerText = label;
+                btn.onclick = () => { selectedAnswers[idx] = v; renderQuiz(); };
+                tfDiv.appendChild(btn);
+            });
+            div.appendChild(tfDiv);
+        }
+
+        // 4. إضافة التلميح (الذي لم يكن يظهر)
+        if (q.hint) {
+            const hintBox = document.createElement('div');
+            hintBox.style.cssText = "background: #fff9db; color: #856404; padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem; border: 1px dotted #ffe066; display: flex; align-items: center;";
+            hintBox.innerHTML = `<span style="margin-left: 8px;">💡</span> <b>تلميح:</b> ${q.hint}`;
+            div.appendChild(hintBox);
+        }
+
+        container.appendChild(div);
+    });
+
+    // إعادة تشغيل MathJax لتنسيق المعادلات في التلميحات إن وجدت
+    if (window.MathJax) {
+        MathJax.typesetPromise();
     }
+}
+       // التحقق من الإجابات
+// التحقق من الإجابات وعرض النتيجة بشكل منسق
+    // دالة التحقق من الإجابات المحدثة والمصلحة
+function checkQuizAnswers() {
+    let correctCount = 0;
+    let resultHtml = '<div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); font-family: sans-serif;">';
     
+    for (let i = 0; i < quizQuestions.length; i++) {
+        const userAns = selectedAnswers[i];
+        const q = quizQuestions[i];
+        let isCorrect = false;
+        let correctAnswerText = '';
+        let userSelectionText = (userAns === null) ? "لم يتم الإجابة" : "";
+
+        // التحقق من الإجابة بناءً على نوع السؤال
+        if (q.type === 'mcq') {
+            isCorrect = (userAns !== null && userAns === q.correct);
+            correctAnswerText = q.options[q.correct];
+            if(userAns !== null) userSelectionText = q.options[userAns];
+        } 
+        else if (q.type === 'tf') {
+            isCorrect = (userAns !== null && userAns === q.correct);
+            correctAnswerText = (q.correct === 0) ? 'صح (True)' : 'خطأ (False)';
+            if(userAns !== null) userSelectionText = (userAns === 0) ? 'صح (True)' : 'خطأ (False)';
+        }
+        
+        if (isCorrect) correctCount++;
+
+        // بناء شكل عرض النتيجة لكل سؤال
+        resultHtml += `
+            <div style="margin-bottom: 15px; padding: 15px; border-radius: 10px; border-right: 6px solid ${isCorrect ? '#28a745' : '#dc3545'}; background: ${isCorrect ? '#f0fff4' : '#fff5f5'}; text-align: right; direction: rtl;">
+                <p style="margin: 0 0 5px 0;"><strong>السؤال ${i+1}:</strong> ${isCorrect ? '<span style="color:green;">✅ إجابة صحيحة</span>' : '<span style="color:red;">❌ إجابة خاطئة</span>'}</p>
+                <p style="margin: 5px 0; font-size: 0.95rem;">اختيارك: <b>${userSelectionText}</b></p>
+                ${!isCorrect ? `<p style="margin: 5px 0; font-size: 0.95rem; color: #555;">الإجابة الصحيحة هي: <b style="color:#28a745;">${correctAnswerText}</b></p>` : ''}
+            </div>
+        `;
+    }
+
+    // حساب النتيجة النهائية
+    const totalQuestions = quizQuestions.length;
+    const percentage = Math.round((correctCount / totalQuestions) * 100);
+    
+    resultHtml += `
+        <div style="text-align: center; margin-top: 20px; padding: 20px; background: #0b2b40; color: white; border-radius: 15px;">
+            <h2 style="margin:0; font-size: 1.5rem;">📊 النتيجة: ${correctCount} من ${totalQuestions}</h2>
+            <p style="font-size: 1.2rem; color: #ff8c42; margin: 10px 0 0 0;">النسبة المئوية: ${percentage}%</p>
+        </div>
+    </div>`;
+
+    // عرض النتيجة في الحاوية المخصصة
+    const feedbackDiv = document.getElementById('quizFeedback');
+    if (feedbackDiv) {
+        feedbackDiv.innerHTML = resultHtml;
+        feedbackDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+
+
     function resetQuiz() {
-        selectedAnswers = new Array(quizQuestions.length).fill(null);
-        renderQuizUI();
+        selectedAnswers.fill(null);
+        renderQuiz();
         document.getElementById('quizFeedback').innerHTML = '';
     }
-    
-    // إضافة سؤال صح/خطأ (true/false)
-    function addTrueFalseQuestion() {
-        const newQuestionText = prompt("أدخل نص سؤال (صح/خطأ):", "الشغل المبذول بواسطة قوة الجاذبية على جسم يسقط سقوطاً حراً يكون موجباً.");
-        if (!newQuestionText) return;
-        const isTrueCorrect = confirm("هل الإجابة الصحيحة هي 'صح'؟\nاضغط موافق إذا كانت الإجابة صح، وإلغاء إذا كانت خطأ.");
-        const correctValue = isTrueCorrect ? 0 : 1;
-        const explanation = prompt("أضف شرحاً أو تلميحاً للطالب (اختياري):", "تذكر أن الشغل = قوة × إزاحة في اتجاه القوة");
-        const newQ = {
-            id: nextId++,
-            type: "tf",
-            text: newQuestionText,
-            correct: correctValue,
-            explanation: explanation || (correctValue === 0 ? "الإجابة الصحيحة: صح" : "الإجابة الصحيحة: خطأ")
-        };
-        quizQuestions.push(newQ);
-        selectedAnswers.push(null);
-        renderQuizUI();
-        document.getElementById('quizFeedback').innerHTML = "✨ تم إضافة سؤال جديد (صح/خطأ) بنجاح!";
-    }
-    
-    // إضافة سؤال اختيار من متعدد (MCQ)
-    function addMCQQuestion() {
-        const questionText = prompt("أدخل نص السؤال (اختيار من متعدد):", "إذا تضاعفت سرعة جسم، فإن طاقة حركته تصبح...");
-        if (!questionText) return;
-        let opts = [];
-        for (let i = 0; i < 4; i++) {
-            let optVal = prompt(`أدخل الخيار ${i+1}:`, i===0 ? "مثل 4 أضعاف" : "");
-            if (optVal === null) return;
-            opts.push(optVal || `خيار ${i+1}`);
-        }
-        let correctIndex = parseInt(prompt("أدخل رقم الخيار الصحيح (0-3):", "0"));
-        if (isNaN(correctIndex) || correctIndex < 0 || correctIndex > 3) correctIndex = 0;
-        const hint = prompt("أضف تلميحاً (اختياري):", "");
-        const newQ = {
-            id: nextId++,
-            type: "mcq",
-            text: questionText,
-            options: opts,
-            correct: correctIndex,
-            hint: hint || ""
-        };
-        quizQuestions.push(newQ);
-        selectedAnswers.push(null);
-        renderQuizUI();
-        document.getElementById('quizFeedback').innerHTML = "📚 تم إضافة سؤال اختيار من متعدد بنجاح!";
-    }
-    
-    // حلول المسائل العشرة مع رسومات (نفس السابق)
-    const fullQuestions = [
-        { q: "سيارة كتلتها 1000 kg تغيرت سرعتها من 7 m/s إلى 13 m/s خلال مسافة 200 m. أوجد قوة محرك السيارة.", given: "m = 1000 kg, u = 7 m/s, v = 13 m/s, s = 200 m", required: "القوة F (N)", law: "نظرية الشغل-الطاقة: F·s = ½ m v² - ½ m u²", solution: "F × 200 = 0.5×1000×(169-49) = 500×120 = 60000 → F = 300 N", draw: "🚗 سيارة تتسارع" },
-        { q: "قوة مقدارها 100 N تؤثر بزاوية 30° على الأفق على جسم يتحرك مسافة 7 m. احسب الشغل.", given: "F=100 N, θ=30°, s=7 m", required: "الشغل W", law: "W = F·s·cosθ", solution: "W = 100×7×cos30° = 700×0.866 = 606.2 J", draw: "📐 قوة مائلة بزاوية 30°" },
-        { q: "جسم كتلته 20 kg يتحرك بسرعة 10 m/s على سطح خشن، قوة احتكاك 40 N. أوجد المسافة حتى السكون.", given: "m=20 kg, u=10 m/s, v=0, F_f=40 N", required: "المسافة s", law: "شغل الاحتكاك = ΔKE → -F_f·s = -½ m u²", solution: "-40 s = -0.5×20×100 = -1000 → s = 25 m", draw: "🔄 احتكاك يعيق الحركة" },
-        { q: "صندوق يُسحب بقوة شد أفقية مسافة 15 m، والشغل 800 J. احسب متوسط قوة الشد.", given: "s=15 m, W=800 J", required: "F", law: "W = F·s", solution: "F = 800/15 ≈ 53.33 N", draw: "➡️ قوة أفقية" },
-        { q: "كرة كتلتها 1.2 kg بسرعة 20 m/s تتوقف بعد 30 m. أوجد شغل الاحتكاك ومتوسط قوة الاحتكاك.", given: "m=1.2 kg, u=20 m/s, v=0, s=30 m", required: "W_fric , F_fric", law: "W_fric = ΔKE = -½ m u² , F_fric = |W_fric|/s", solution: "ΔKE = -0.5×1.2×400 = -240 J, شغل الاحتكاك = -240 J، القوة = 8 N", draw: "⚽ كرة تتوقف" },
-        { q: "قوة شد 30 N بزاوية 20° تسحب عربة مسافة 40 m. احسب الشغل.", given: "F=30 N, θ=20°, s=40 m", required: "W", law: "W = F·s·cosθ", solution: "W = 30×40×cos20° = 1200×0.9397 = 1127.64 J", draw: "🚜 عربة وقوة بزاوية" },
-        { q: "دراجة 30 kg لأعلى مستوى مائل 15° مسافة 70 m. الشغل ضد الجاذبية.", given: "m=30 kg, θ=15°, s=70 m", required: "W_gravity", law: "W = mgh , h = s·sinθ", solution: "h = 70×sin15° = 18.116 m, W = 30×9.8×18.116 ≈ 5326 J", draw: "🏔️ مستوى مائل" },
-        { q: "سيارة 600 kg من السكون إلى 4 m/s. احسب الشغل.", given: "m=600 kg, u=0, v=4 m/s", required: "W", law: "W = ΔKE = ½ m v²", solution: "W = 0.5×600×16 = 4800 J", draw: "🚘 تسارع" },
-        { q: "صندوق 20 kg يدفع لأعلى مستوى مائل 30° مسافة 10 m، الشغل 1200 J. أوجد متوسط القوة.", given: "m=20 kg, θ=30°, s=10 m, W=1200 J", required: "F_app", law: "W = F_app·s", solution: "F_app = 1200/10 = 120 N", draw: "📦 قوة دفع" },
-        { q: "دراج 60 kg يصعد مستوى مائل 15°، تزيد سرعته من 4 m/s إلى 10 m/s بعد 50 m. احسب متوسط القوة المطبقة.", given: "m=60 kg, θ=15°, u=4 m/s, v=10 m/s, s=50 m", required: "F_app", law: "W_net = ΔKE = F_net·s , F_net = F_app - mg sinθ", solution: "ΔKE = 2520 J, F_net=50.4 N, mg sinθ=152.2 N, F_app=202.6 N", draw: "🚵 مستوى مائل بقوة دفع" }
-    ];
-    
-    function renderFullSolutions() {
-        const container = document.getElementById('questionsList');
-        container.innerHTML = '';
-        fullQuestions.forEach((item, idx) => {
-            const block = document.createElement('div');
-            block.className = 'question-block';
-            block.innerHTML = `
-                <div class="question-title">📌 ${idx+1}. ${item.q}</div>
-                <div class="solution-step"><strong>📋 المعطيات:</strong> ${item.given}</div>
-                <div class="solution-step"><strong>🎯 المطلوب:</strong> ${item.required}</div>
-                <div class="solution-step"><strong>⚖️ القانون:</strong> ${item.law}</div>
-                <div class="solution-step"><strong>✏️ الحل:</strong> ${item.solution}</div>
-                <div class="drawing-svg"><strong>📐 رسم توضيحي:</strong><br>${item.draw} <svg width="180" height="50" viewBox="0 0 180 50"><rect x="10" y="15" width="35" height="25" fill="#ffcd94"/><line x1="50" y1="27" x2="150" y2="27" stroke="#ff8c42" stroke-width="2" marker-end="url(#arr)"/><defs><marker id="arr" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff8c42"/></marker></defs></svg></div>
-            `;
-            container.appendChild(block);
-        });
-        if (window.MathJax) MathJax.typeset();
-    }
-    
-    // التنقل بين الأقسام
-    const sections = {
-        theory: document.getElementById('theorySection'),
-        solutions: document.getElementById('solutionsSection'),
-        quiz: document.getElementById('quizSection')
-    };
-    function showSection(sectionId) {
-        Object.keys(sections).forEach(key => sections[key].classList.remove('active'));
-        sections[sectionId].classList.add('active');
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            if (btn.getAttribute('data-section') === sectionId) btn.classList.add('active');
-            else btn.classList.remove('active');
-        });
-        if (sectionId === 'solutions') renderFullSolutions();
-        if (sectionId === 'quiz') renderQuizUI();
-        if (window.MathJax) MathJax.typeset();
-    }
-    
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const sec = btn.getAttribute('data-section');
-            showSection(sec);
-        });
-    });
-    document.getElementById('checkQuizBtn')?.addEventListener('click', checkQuizAnswers);
-    document.getElementById('resetQuizBtn')?.addEventListener('click', resetQuiz);
-    document.getElementById('addTrueFalseBtn')?.addEventListener('click', addTrueFalseQuestion);
-    document.getElementById('addMCQBtn')?.addEventListener('click', addMCQQuestion);
-    
-    // تهيئة
-    renderFullSolutions();
-    renderQuizUI();
-    showSection('theory');
+
+    window.onload = renderQuiz;
 </script>
 </body>
 </html>

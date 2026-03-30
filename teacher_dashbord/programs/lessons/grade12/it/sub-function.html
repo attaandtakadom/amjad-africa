@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شرح الفروقات بين Sub و Function | فيجوال بيسك</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.header h1 {
+    color: #1e3c72;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: #95a5a6;
+    color: white;
+}
+
+.nav-btn.active {
+    background: #2ecc71;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-size: 1.6em;
+    color: #1e3c72;
+    border-right: 5px solid #3498db;
+    padding-right: 15px;
+    margin-bottom: 20px;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+}
+
+.comparison-table th, .comparison-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: right;
+}
+
+.comparison-table th {
+    background: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+.comparison-table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+.comparison-table tr:hover {
+    background: #e8f4fd;
+}
+
+.code-box {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+    direction: ltr;
+    text-align: left;
+    margin: 15px 0;
+    overflow-x: auto;
+    position: relative;
+}
+
+.code-box pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.code-title {
+    background: #e74c3c;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85em;
+}
+
+.example-card {
+    background: #fef9e6;
+    border-right: 5px solid #f39c12;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.example-card h4 {
+    color: #e67e22;
+    margin-bottom: 10px;
+}
+
+.live-demo {
+    background: #ecf0f1;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.demo-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+.demo-btn:hover {
+    background: #2ecc71;
+    transform: scale(1.05);
+}
+
+.demo-result {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-weight: bold;
+    direction: ltr;
+    text-align: center;
+}
+
+.highlight {
+    background: #f1c40f;
+    color: #2c3e50;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.warning-box {
+    background: #ffe6e6;
+    border-right: 5px solid #e74c3c;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.info-box {
+    background: #e8f4fd;
+    border-right: 5px solid #3498db;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: inherit;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.btn-check {
+    background: #2ecc71;
+    color: white;
+}
+
+.btn-retry {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-home {
+    background: #3498db;
+    color: white;
+}
+
+.global-score {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e8f4fd;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.question {
+    background: #fef9e6;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ffe0a3;
+}
+
+.question-text {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    white-space: pre-line;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.option {
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option:hover {
+    background: #bdc3c7;
+    transform: translateX(5px);
+}
+
+.option.selected {
+    background: #3498db;
+    color: white;
+}
+
+.option.correct {
+    background: #2ecc71;
+    color: white;
+}
+
+.option.wrong {
+    background: #e74c3c;
+    color: white;
+}
+
+.feedback {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: none;
+}
+
+.feedback.correct-feedback {
+    background: #d5f4e6;
+    color: #27ae60;
+    display: block;
+}
+
+.feedback.wrong-feedback {
+    background: #ffe6e6;
+    color: #e74c3c;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .comparison-table th, .comparison-table td {
+        padding: 8px;
+        font-size: 0.85em;
+    }
+    .code-box {
+        font-size: 0.8em;
+    }
+    .question-text { font-size: 1em; }
+    .option { font-size: 0.9em; }
+}
+/* أزرار التنقل السريع */
+.scroll-buttons {
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.scroll-btn {
+    width: 50px;
+    height: 50px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-btn:hover {
+    background: #2ecc71;
+    transform: scale(1.1);
+}
+
+.scroll-up {
+    background: #e74c3c;
+}
+
+.scroll-down {
+    background: #2ecc71;
+}
+
+/* إخفاء الزر عند بداية الصفحة */
+.scroll-up.hidden-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📚 الفروقات بين Sub و Function في فيجوال بيسك</h1>
+        <p>شرح مبسط مع أمثلة تفاعلية | الإجراءات الفرعية والدوال</p>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-btn" id="homeBtn" onclick="window.location.href='it-function.html'">🏠 الرئيسية</button>
+        <button class="nav-btn active" id="explainBtn" onclick="showExplainSection()">📖 الشرح</button>
+        <button class="nav-btn" id="exercisesBtn" onclick="showExercisesSection()">✏️ التمارين</button>
+    </div>
+
+    <!-- قسم الشرح -->
+    <div id="explainSection">
+        <div class="card">
+            <h2 class="section-title">📊 جدول المقارنة بين Sub و Function</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr><th>وجه المقارنة</th><th>الإجراء الفرعي (Sub)</th><th>الدالة (Function)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>🔹 الهدف</td><td>تنفيذ مهمة (طباعة، حفظ، عرض)</td><td>تنفيذ مهمة <span class="highlight">وترجع قيمة واحدة</span></td></tr>
+                    <tr><td>🔹 كلمة الإعلان</td><td><code>Sub</code> أو <code>Private Sub</code></td><td><code>Function</code> أو <code>Private Function</code></td></tr>
+                    <tr><td>🔹 إنهاء الكتلة</td><td><code>End Sub</code></td><td><code>End Function</code></td></tr>
+                    <tr><td>🔹 إرجاع قيمة</td><td>❌ لا يرجع قيمة</td><td>✅ يرجع قيمة (يُحدد نوعها)</td></tr>
+                    <tr><td>🔹 طريقة الاستدعاء</td><td><code>Call MySub(5)</code> أو <code>MySub 5</code></td><td><code>x = MyFunction(5)</code> (ضمن تعبير)</td></tr>
+                    <tr><td>🔹 مكان النتيجة</td><td>تُخرج عبر <code>ByRef</code> أو متغيرات عمومية</td><td>تُحدد عبر اسم الدالة: <code>FunctionName = value</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">💻 أمثلة عملية مع الكود</h2>
+            
+            <div class="example-card">
+                <h4>📌 مثال 1: إجراء فرعي (Sub) - لا يُرجع قيمة</h4>
+                <div class="code-box">
+                    <div class="code-title">VB.NET / VBA</div>
+                    <pre>' إجراء لحساب المجموع وطباعته فقط (لا يُرجع شيئاً)
+Private Sub PrintSum( a As Integer,  b As Integer)
+    Dim result As Integer
+    result = a + b
+    MsgBox("المجموع هو: " & result)
+End Sub
+
+' كيفية استدعائه:
+PrintSum(5, 3)   ' يظهر رسالة "المجموع هو: 8"</pre>
+                </div>
+                <div class="live-demo">
+                    <button class="demo-btn" onclick="demoSub()">▶️ جرب الإجراء الفرعي (Sub)</button>
+                    <div id="subDemoResult" class="demo-result" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h4>📌 مثال 2: دالة (Function) - تُرجع قيمة</h4>
+                <div class="code-box">
+                    <div class="code-title">VB.NET / VBA</div>
+                    <pre>' دالة تحسب المجموع وتُرجع القيمة
+Private Function CalculateSum( a As Integer,  b As Integer) As Integer
+    CalculateSum = a + b   ' تعيين القيمة العائدة
+End Function
+
+' كيفية استدعائها:
+Dim total As Integer
+total = CalculateSum(5, 3)   ' total = 8
+MsgBox("المجموع هو: " & total)</pre>
+                </div>
+                <div class="live-demo">
+                    <button class="demo-btn" onclick="demoFunction()">▶️ جرب الدالة (Function)</button>
+                    <div id="funcDemoResult" class="demo-result" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h4>📌 مثال 3: مقارنة مباشرة بينهما</h4>
+                <div class="code-box">
+                    <div class="code-title">VB.NET / VBA</div>
+                    <pre>' Sub: يُنفذ المهمة دون إرجاع
+Private Sub GreetUser( name As String)
+    MsgBox("مرحباً " & name)
+End Sub
+
+' Function: يُنفذ المهمة ويُرجع نصاً
+Private Function GetGreeting( name As String) As String
+    GetGreeting = "مرحباً " & name
+End Function
+
+' الاستخدام:
+GreetUser("أحمد")                    ' يظهر رسالة فوراً
+
+Dim msg As String
+msg = GetGreeting("أحمد")            ' يُخزن النص في المتغير
+MsgBox(msg)                          ' ثم يُعرض</pre>
+                </div>
+                <div class="live-demo">
+                    <button class="demo-btn" onclick="demoSubGreet()">👋 جرب Sub (ترحيب مباشر)</button>
+                    <button class="demo-btn" onclick="demoFunctionGreet()">📝 جرب Function (تخزين ثم عرض)</button>
+                    <div id="greetDemoResult" class="demo-result" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">⚠️ نقاط مهمة تذكرها</h2>
+            <div class="info-box">
+                <strong>✅ متى تستخدم Sub؟</strong><br>
+                عندما تريد تنفيذ أمر (طباعة، حفظ، تغيير لون، فتح نافذة) ولا تحتاج إلى قيمة ناتجة.
+            </div>
+            <div class="info-box">
+                <strong>✅ متى تستخدم Function؟</strong><br>
+                عندما تحتاج إلى حساب قيمة وإعادة استخدامها (مثل: جمع، ضرب، تنسيق نص، تحويل عملة).
+            </div>
+            <div class="warning-box">
+                <strong>⚠️ تذكير مهم:</strong><br>
+                • الدالة <span class="highlight">يجب أن تُرجع قيمة</span> واحدة عبر اسم الدالة.<br>
+                • الإجراء الفرعي <span class="highlight">لا يمكنه إرجاع قيمة</span> مباشرة.<br>
+                • تنتهي الدالة بـ <code>End Function</code> والإجراء بـ <code>End Sub</code>.
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم التمارين -->
+    <div id="exercisesSection" class="hidden">
+        <div class="card">
+            <h2 class="section-title">✏️ تمارين شاملة (اختيار من متعدد وصح/خطأ)</h2>
+            <p>أجب عن الأسئلة التالية. لكل سؤال زر "تحقق" يظهر لك التصحيح مباشرة.</p>
+            <div id="questionsContainer"></div>
+            <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-retry" onclick="resetAllQuestions()">🔄 إعادة المحاولة (كل الأسئلة)</button>
+                <button class="btn btn-home" onclick="showExplainSection()">🏠 العودة للشرح</button>
+            </div>
+            <div id="globalScore" class="global-score hidden"></div>
+        </div>
+    </div>
+
+    <footer>
+        📚 شرح مبسط للفروقات بين Sub و Function - فيجوال بيسك
+    </footer>
+</div>
+<!-- أزرار التنقل السريع -->
+<div class="scroll-buttons">
+    <button class="scroll-btn scroll-up" id="scrollUpBtn" title="انتقل للأعلى">▲</button>
+    <button class="scroll-btn scroll-down" id="scrollDownBtn" title="انتقل للأسفل">▼</button>
+</div>
+<script>
+// مصفوفة الأسئلة
+const questions = [
+    { type: "mc", text: "ما الفرق الرئيسي بين الإجراء الفرعي (Sub) والدالة (Function)؟", options: ["الإجراء الفرعي لا يعيد قيمة، والدالة تعيد قيمة", "الدالة لا تعيد قيمة، والإجراء الفرعي يعيد", "كلاهما لا يعيدان قيمة", "كلاهما يعيدان قيمة"], correct: "الإجراء الفرعي لا يعيد قيمة، والدالة تعيد قيمة" },
+    { type: "mc", text: "أي من العبارات التالية تمثل الطريقة الصحيحة لاستدعاء دالة (Function)؟", options: ["Call MyFunction(5)", "MyFunction(5)", "x = MyFunction(5)", "كل ما سبق صحيح"], correct: "x = MyFunction(5)" },
+    { type: "mc", text: "أي من العبارات التالية تستخدم لاستدعاء إجراء فرعي (Sub)؟", options: ["Call MySub(10)", "MySub 10", "كلاهما صحيح", "x = MySub(10)"], correct: "كلاهما صحيح" },
+    { type: "mc", text: "ما اختصار فتح النافذة السريعة (Immediate Window) في بيئة فيجوال بيسك؟", options: ["F5", "F9", "Ctrl + G", "Shift + F8"], correct: "Ctrl + G" },
+    { type: "mc", text: "في النافذة السريعة، كيف يمكنك طباعة قيمة المتغير x؟", options: ["Print x", "? x", "كلاهما صحيح", "Debug.Print x"], correct: "كلاهما صحيح" },
+    { type: "mc", text: "ما الدالة التي ترجع الجذر التربيعي لرقم؟", options: ["Abs", "Sqr", "Int", "Log"], correct: "Sqr" },
+    { type: "tf", text: "الدالة Int(7.9) ترجع القيمة 8.", correct: "false" },
+    { type: "mc", text: "ما ناتج Left(\"Visual Basic\", 6)؟", options: ["Visual", "Basic", "Visu", "Visual "], correct: "Visual" },
+    { type: "tf", text: "الدالة Trim(\" Hello \") ترجع \"Hello\" (بدون فراغات جانبية).", correct: "true" },
+    { type: "mc", text: "ما ناتج Year(#20/4/2026#)؟", options: ["20", "4", "2026", "2026/4/20"], correct: "2026" },
+    { type: "mc", text: "الدالة Weekday ترجع:", options: ["رقم اليوم في الأسبوع", "اسم اليوم", "رقم الشهر", "رقم السنة"], correct: "رقم اليوم في الأسبوع" },
+    { type: "mc", text: "إذا كان الإجراء الفرعي معرفاً كالتالي: Private Sub Calc(a As Integer, b As Integer, c As Integer). أي استدعاء صحيح؟", options: ["Call Calc(5, 10)", "Call Calc(5, 10, 15)", "Calc 5, 10", "Calc 5, 10, 15, 20"], correct: "Call Calc(5, 10, 15)" },
+    { type: "tf", text: "الدالة Val(\"123abc\") ترجع 123.", correct: "true" },
+    { type: "mc", text: "ما الحرف الناتج عن Chr(65)؟", options: ["A", "a", "B", "1"], correct: "A" },
+    { type: "mc", text: "أي من العبارات التالية صحيحة عن الدالة Now؟", options: ["ترجع التاريخ والوقت الحاليين", "ترجع الوقت الحالي فقط", "ترجع التاريخ الحالي فقط", "ترجع السنة الحالية فقط"], correct: "ترجع التاريخ والوقت الحاليين" },
+    { type: "mc", text: "كل ما يلي يتعلق بجملة استدعاء الإجراء الفرعي (Sub) باستثناء:", options: ["لا يؤثر اختلاف أسماء المعاملات فيها عن أسماء المعاملات في جملة الإعلان", "لا يمكن الاستغناء فيها عن جملة Call (لا يمكن حذف Call)", "لا يكتب فيها نوع المعاملات", "يجب أن يكون عدد المعاملات مطابقاً لعددها في جملة الإعلان"], correct: "لا يمكن الاستغناء فيها عن جملة Call (لا يمكن حذف Call)" },
+    { type: "mc", text: "جميع معاملات الدالة الوظيفية (Function) في فيجوال بيسك تعتبر:", options: ["مدخلات فقط (Input only)", "مخرجات فقط (Output only)", "مدخلات ومخرجات (Input and Output)", "جميع الإجابات السابقة صحيحة"], correct: "مدخلات فقط (Input only)" },
+    { type: "mc", text: "إجراء فرعي معرف كالتالي:\nSub num(x As Integer, y As Integer, m1 As Integer, m2 As Integer)\n If x > y Then\n m1 = x : m2 = y\n Else\n m1 = y : m2 = x\n End If\nEnd Sub\nما هي وظيفة هذا الإجراء؟", options: ["يضع في m1 العدد الأكبر وفي m2 العدد الأصغر", "يضع في m1 العدد الأصغر وفي m2 العدد الأكبر", "يقوم بجمع العددين ووضع الناتج في m1", "يقوم بطرح العددين ووضع الناتج في m2"], correct: "يضع في m1 العدد الأكبر وفي m2 العدد الأصغر" },
+    { type: "tf", text: "يعتبر استدعاء الدالة (Function) بجملة الاستدعاء (Call) صحيحاً في لغة فيجوال بيسك.", correct: "false" },
+    { type: "tf", text: "يمكن أن يكون الإجراء الفرعي (Sub) دون معاملات (بدون وسائط).", correct: "true" },
+    { type: "mc", text: "الدالة التالية:\nPrivate Function Max(a As Integer, b As Integer) As Integer\n If a > b Then\n Max = a\n Else\n Max = b\n End If\nEnd Function\nما نوع البيانات التي تعيده هذه الدالة؟", options: ["Integer (صحيح)", "String (نصي)", "Single (عشري)", "Boolean (منطقي)"], correct: "Integer (صحيح)" },
+    { type: "mc", text: "إذا كانت الدالة معرفة كالتالي:\nPrivate Function Max(a As Integer, b As Integer) As Integer\n If a > b Then\n Max = a\n Else\n Max = b\n End If\nEnd Function\nفما قيمة المتغير x بعد تنفيذ العبارة: x = Max(3, 10)", options: ["3", "7", "10", "13"], correct: "10" },
+    { type: "mc", text: "ما ناتج تنفيذ الدالة Right(\"Microsoft_Visual_Basic\", 5)؟", options: ["Visual", "Basic", "Basic_", "Micros"], correct: "Basic_" },
+    { type: "mc", text: "لحساب جيب تمام الزاوية (Cosine) في فيجوال بيسك، يتم استخدام الدالة:", options: ["Tan(x)", "Cos(x)", "Log(x)", "Sin(x)"], correct: "Cos(x)" },
+    { type: "mc", text: "القيمة التي سيتم تخصيصها للمتغير C بعد تنفيذ الجملة:\nC = Day(#25/5/2025#) هي:", options: ["0", "25", "5", "2025"], correct: "25" },
+    { type: "mc", text: "لتحويل متغير نصي (String) إلى قيمة رقمية (Number) في فيجوال بيسك، يتم استخدام الدالة:", options: ["Mid(string)", "Chr(string)", "Str(string)", "Val(string)"], correct: "Val(string)" },
+    { type: "mc", text: "ينتهي الإجراء الفرعي (Sub) في فيجوال بيسك بالجملة:", options: ["End Sub", "End Function", "End", "End If"], correct: "End Sub" },
+    { type: "mc", text: "الدالة التي تستخدم لتنسيق التاريخ والوقت في فيجوال بيسك هي:", options: ["Year", "Format", "Weekday", "Month"], correct: "Format" },
+    { type: "mc", text: "لحذف الفراغات من بداية النص (الجهة اليسرى) في فيجوال بيسك، يتم استخدام الدالة:", options: ["RTrim(s)", "LTrim(s)", "Trim(s)", "Len(s)"], correct: "LTrim(s)" },
+    { type: "tf", text: "يتبع اسم الاجراء الفرعي نفس شروط تسمية المتغيرات", correct: "true" },
+    { type: "tf", text: "لا يتم استدعاء الاجراء الفرعي إلا مرة واحدة بعكس اجراء الدالة", correct: "false" },
+    { type: "tf", text: "يمكن استبدال الاجراء الفرعي Sub باجراء الدالة Function دائماً", correct: "false" },
+    { type: "tf", text: "لانهاء البرنامج الفرعي (Sub) قبل الوصول الي نهايته نستخدم الامر Exit Function", correct: "false" },
+    { type: "tf", text: "الدالة Trim دالة جاهزة تلغي وجود فراغات في مربع النص", correct: "true" },
+    { type: "tf", text: "عند كتابة الاجراء الفرعي في الجزء General يسمى في هذه الحالة بالبرنامج الخاص", correct: "false" },
+    { type: "tf", text: "تستدعي الدالة Function باستخدام جملة الاستدعاء Call", correct: "false" },
+    { type: "tf", text: "يمكن استدعاء البرنامج الفرعي(Sub) بكتابة اسم الاجراء مباشرة", correct: "true" },
+    { type: "tf", text: "لا يذكر نوع البيانات في جملة الاستدعاء في الاجراء الفرعي(Sub)", correct: "true" },
+    { type: "tf", text: "عند اجراء استدعاء لدالة او اجراء فرعي يجب ان يكون عدد معاملات في جملة الاعلان عن الاجراء الفرعي او الدالة هو عدد المعاملات نفسه في جملة الاستدعاء", correct: "false" },
+    { type: "mc", text: "دالة حذف الجزء الكسري من العدد هي:", options: ["Int", "Log", "Len", "Rnd"], correct: "Int" },
+    { type: "mc", text: "الجملة t=abs(-5) تعين للمتغير t القيمة:", options: ["-5", "5", "-1", "0"], correct: "5" },
+    { type: "mc", text: "القيمة التي سيتم تخصيصها لمربع النص بعد تنفيذ جزء البرنامج التالي هي \n Number = sqr(100)\n text1.text = Number", options: ["10", "10000", "1", "100"], correct: "10" },
+    {
+    type: "mc",
+    text: "ما وظيفة الأمر Toggle Breakpoint (F9) في قائمة Debug في بيئة فيجوال بيسك؟",
+    options: [
+        "تنفيذ البرنامج خطوة بخطوة",
+        "إيقاف البرنامج مؤقتاً عند سطر محدد (وضع نقطة توقف)",
+        "فتح النافذة الفورية",
+        "إنهاء تنفيذ البرنامج"
+    ],
+    correct: "إيقاف البرنامج مؤقتاً عند سطر محدد (وضع نقطة توقف)"
+},
+    
+ {
+    type: "mc",
+    text: "ما وظيفة النافذة الفورية (Immediate Window) التي تفتح بالاختصار Ctrl+G في فيجوال بيسك؟",
+    options: [
+        "كتابة واختبار أوامر وعبارات فورية دون تشغيل البرنامج كاملاً",
+        "عرض أخطاء البرنامج فقط",
+        "حفظ ملف المشروع",
+        "تنسيق النصوص"
+    ],
+    correct: "كتابة واختبار أوامر وعبارات فورية دون تشغيل البرنامج كاملاً"
+} ,
+
+    // ... أسئلتك الحالية ...
+
+    // السؤال 46
+    {
+        type: "tf",
+        text: "امتحان دفعة 2007: عند استدعاء إجراء فرعي أو دالة يجب أن يكون عدد المعاملات في جملة الاستدعاء مطابقاً لعدد المعاملات في جملة الإعلان.",
+        correct: "false"
+    },
+
+    // السؤال 47
+    {
+        type: "tf",
+        text: "امتحان دفعة 2007: يمكن أن يكون الإجراء الفرعي (Sub) من دون معاملات.",
+        correct: "true"
+    },
+
+    // السؤال 48
+    {
+        type: "mc",
+        text: "امتحان دفعة 2007: إذا كانت الدالة معرفة كالتالي:\nPrivate Function Max(a, b As Integer) As Integer\nIf a > b Then\nMax = a\nElse\nMax = b\nEnd If\nEnd Function\nفما ناتج تنفيذ الدالة حسب جملة الاستدعاء X = Max(3, 10)؟",
+        options: ["10", "13", "7", "3"],
+        correct: "10"
+    },
+
+    // السؤال 49
+    {
+        type: "mc",
+        text: "امتحان دفعة 2007: نوع البيانات الذي تعيده الدالة السابقة (دالة Max) هو:",
+        options: ["حرفي (String)", "حقيقي (Single/Double)", "صحيح (Integer)", "منطقي (Boolean)"],
+        correct: "صحيح (Integer)"
+    },
+
+    // السؤال 50
+    {
+        type: "mc",
+        text: "امتحان دفعة 2007: أي من العبارات التالية تستخدم لإنهاء الإجراء الفرعي (Sub) في فيجوال بيسك؟",
+        options: ["End Sub", "End Function", "Fail", "End If"],
+        correct: "End Sub"
+    },
+
+
+
+
+
+
+
+
+
+    { type: "mc", text: "أي العبارات التالية صحيح فيما يتعلق بالإجراء الفرعي (Sub) في فيجوال بيسك؟ (امتحان دور اول 2023-2024) ", options: ["يعيد قيمة واحدة فقط", "جميع معاملاته مدخلات فقط", "يجب تحديد نوعه", "معنى أن يكون بدون معاملات"], correct: "معنى أن يكون بدون معاملات" }
+];
+
+// أزرار التنقل للأعلى والأسفل
+const scrollUpBtn = document.getElementById('scrollUpBtn');
+const scrollDownBtn = document.getElementById('scrollDownBtn');
+
+// زر الانتقال للأعلى
+scrollUpBtn.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// زر الانتقال للأسفل
+scrollDownBtn.addEventListener('click', function() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+    });
+});
+
+// إظهار/إخفاء زر الأعلى حسب الموقع (اختياري)
+window.addEventListener('scroll', function() {
+    if (window.scrollY === 0) {
+        scrollUpBtn.style.opacity = '0.5';
+    } else {
+        scrollUpBtn.style.opacity = '1';
+    }
+});
+
+
+
+
+
+
+
+// متغيرات التخزين
+let userAnswers = new Array(questions.length).fill(null);
+let checkedStatus = new Array(questions.length).fill(false);
+
+// عرض الأسئلة
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    for (let idx = 0; idx < questions.length; idx++) {
+        const q = questions[idx];
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question';
+        qDiv.id = `q_${idx}`;
+        qDiv.innerHTML = `
+            <div class="question-text">${idx+1}. ${q.text}</div>
+            <div class="options" id="opts_${idx}"></div>
+            <div class="feedback" id="fb_${idx}"></div>
+            <button class="btn btn-check" style="margin-top:5px;" onclick="checkSingleQuestion(${idx})">✅ تحقق</button>
+        `;
+        container.appendChild(qDiv);
+        const optsDiv = document.getElementById(`opts_${idx}`);
+        if (q.type === 'mc') {
+            q.options.forEach(opt => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                optDiv.textContent = opt;
+                optDiv.setAttribute('data-ans', opt);
+                optDiv.addEventListener('click', () => selectOption(idx, opt));
+                optsDiv.appendChild(optDiv);
+            });
+        } else if (q.type === 'tf') {
+            ['صحيح', 'خطأ'].forEach(opt => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                optDiv.textContent = opt;
+                const ansVal = (opt === 'صحيح') ? 'true' : 'false';
+                optDiv.setAttribute('data-ans', ansVal);
+                optDiv.addEventListener('click', () => selectOption(idx, ansVal));
+                optsDiv.appendChild(optDiv);
+            });
+        }
+    }
+}
+
+// اختيار إجابة
+function selectOption(qIdx, ans) {
+    userAnswers[qIdx] = ans;
+    const optsDiv = document.getElementById(`opts_${qIdx}`);
+    Array.from(optsDiv.children).forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.getAttribute('data-ans') === ans) {
+            opt.classList.add('selected');
+        }
+    });
+    const fb = document.getElementById(`fb_${qIdx}`);
+    fb.style.display = 'none';
+    fb.innerHTML = '';
+    checkedStatus[qIdx] = false;
+    document.getElementById('globalScore').classList.add('hidden');
+}
+
+// التحقق من سؤال واحد
+function checkSingleQuestion(qIdx) {
+    const ans = userAnswers[qIdx];
+    const correctAns = questions[qIdx].correct;
+    const fbDiv = document.getElementById(`fb_${qIdx}`);
+    if (ans === undefined || ans === null) {
+        fbDiv.innerHTML = '⚠️ يرجى اختيار إجابة أولاً.';
+        fbDiv.className = 'feedback wrong-feedback';
+        checkedStatus[qIdx] = false;
+        return;
+    }
+    const isCorrect = (ans === correctAns);
+    if (isCorrect) {
+        fbDiv.innerHTML = '✅ إجابة صحيحة!';
+        fbDiv.className = 'feedback correct-feedback';
+    } else {
+        const correctDisplay = (correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns));
+        fbDiv.innerHTML = `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctDisplay}`;
+        fbDiv.className = 'feedback wrong-feedback';
+    }
+    checkedStatus[qIdx] = true;
+    const optsDiv = document.getElementById(`opts_${qIdx}`);
+    Array.from(optsDiv.children).forEach(opt => {
+        opt.classList.remove('correct', 'wrong');
+        if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
+        if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
+    });
+    updateGlobalScore();
+}
+
+// تحديث النتيجة الإجمالية
+function updateGlobalScore() {
+    let answeredCount = 0;
+    let correctCount = 0;
+    for (let i = 0; i < questions.length; i++) {
+        if (checkedStatus[i] && userAnswers[i] !== null) {
+            answeredCount++;
+            if (userAnswers[i] === questions[i].correct) correctCount++;
+        }
+    }
+    const globalDiv = document.getElementById('globalScore');
+    if (answeredCount > 0) {
+        globalDiv.innerHTML = `📊 النتيجة الإجمالية (للأسئلة التي تم التحقق منها): ${correctCount} من ${answeredCount} صحيحة.`;
+        globalDiv.classList.remove('hidden');
+    } else {
+        globalDiv.classList.add('hidden');
+    }
+}
+
+// إعادة تعيين جميع الأسئلة
+function resetAllQuestions() {
+    userAnswers.fill(null);
+    checkedStatus.fill(false);
+    for (let i = 0; i < questions.length; i++) {
+        const optsDiv = document.getElementById(`opts_${i}`);
+        if (optsDiv) {
+            Array.from(optsDiv.children).forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+        }
+        const fb = document.getElementById(`fb_${i}`);
+        fb.style.display = 'none';
+        fb.innerHTML = '';
+    }
+    document.getElementById('globalScore').classList.add('hidden');
+}
+
+// عرض قسم الشرح
+function showExplainSection() {
+    document.getElementById('explainSection').classList.remove('hidden');
+    document.getElementById('exercisesSection').classList.add('hidden');
+    document.getElementById('explainBtn').classList.add('active');
+    document.getElementById('exercisesBtn').classList.remove('active');
+}
+
+// عرض قسم التمارين
+function showExercisesSection() {
+    document.getElementById('explainSection').classList.add('hidden');
+    document.getElementById('exercisesSection').classList.remove('hidden');
+    document.getElementById('explainBtn').classList.remove('active');
+    document.getElementById('exercisesBtn').classList.add('active');
+    renderQuestions();
+}
+
+// دوال التجارب
+function demoSub() {
+    const result = 5 + 3;
+    const resultDiv = document.getElementById('subDemoResult');
+    resultDiv.innerHTML = `📢 <strong>نتيجة الإجراء الفرعي (Sub):</strong><br> تم حساب المجموع = ${result}<br> (ملاحظة: Sub لا يرجع قيمة، لكنه نفذ العملية وعرضها)`;
+    resultDiv.style.display = 'block';
+    setTimeout(() => { resultDiv.style.display = 'none'; }, 5000);
+}
+
+function demoFunction() {
+    const result = 5 + 3;
+    const resultDiv = document.getElementById('funcDemoResult');
+    resultDiv.innerHTML = `📊 <strong>نتيجة الدالة (Function):</strong><br> القيمة المرجعة = ${result}<br> (يمكن تخزين هذه القيمة في متغير واستخدامها لاحقاً)`;
+    resultDiv.style.display = 'block';
+    setTimeout(() => { resultDiv.style.display = 'none'; }, 5000);
+}
+
+function demoSubGreet() {
+    const name = prompt("أدخل اسمك:", "أحمد");
+    if (name) {
+        const resultDiv = document.getElementById('greetDemoResult');
+        resultDiv.innerHTML = `👋 <strong>نتيجة الإجراء الفرعي (Sub):</strong><br> تم عرض رسالة: "مرحباً ${name}" (ظهرت في نافذة منبثقة)`;
+        resultDiv.style.display = 'block';
+        alert(`مرحباً ${name}`);
+        setTimeout(() => { resultDiv.style.display = 'none'; }, 5000);
+    }
+}
+
+function demoFunctionGreet() {
+    const name = prompt("أدخل اسمك:", "أحمد");
+    if (name) {
+        const greeting = `مرحباً ${name}`;
+        const resultDiv = document.getElementById('greetDemoResult');
+        resultDiv.innerHTML = `📝 <strong>نتيجة الدالة (Function):</strong><br> القيمة المرجعة = "${greeting}"<br> (تم تخزينها في متغير، ثم تم عرضها في نافذة منبثقة)`;
+        resultDiv.style.display = 'block';
+        alert(greeting);
+        setTimeout(() => { resultDiv.style.display = 'none'; }, 5000);
+    }
+}
+
+// تشغيل أولي
+showExplainSection();
+</script>
+</body>
+</html>
