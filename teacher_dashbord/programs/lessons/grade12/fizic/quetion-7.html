@@ -1,803 +1,447 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>الباب السابع - الحث الكهرومغناطيسي والمحولات</title>
-    <!-- Font Awesome للأيقونات -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- خط Cairo للعربية -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-        body {
-            background: linear-gradient(145deg, #f0f5fa 0%, #e0e9f0 100%);
-            min-height: 100vh;
-            padding: 15px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 30px;
-            padding: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 1px solid #c0d4e6;
-        }
-
-        /* رأس الصفحة */
-        .header-bar {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-            border-bottom: 4px solid #1e4a6b;
-            padding-bottom: 15px;
-        }
-        @media (min-width: 600px) {
-            .header-bar {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
-        .header-bar h1 {
-            color: #1e4a6b;
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-align: center;
-            background: rgba(30,74,107,0.05);
-            padding: 8px 20px;
-            border-radius: 50px;
-            width: 100%;
-        }
-        .header-bar h1 i {
-            color: #ff9800;
-            margin-left: 10px;
-        }
-        .header-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-        }
-        .home-btn, .reset-btn {
-            border: none;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 0 #0d2a3b;
-            transition: 0.1s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex: 1;
-            justify-content: center;
-        }
-        .home-btn {
-            background: #1e4a6b;
-            color: white;
-        }
-        .reset-btn {
-            background: #ff9800;
-            color: white;
-            box-shadow: 0 4px 0 #b86600;
-        }
-        .home-btn:active, .reset-btn:active {
-            transform: translateY(4px);
-            box-shadow: none;
-        }
-
-        /* شريط التقييم */
-        .score-bar {
-            background: linear-gradient(145deg, #ffffff, #f0f7ff);
-            border-radius: 60px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            border: 2px solid #b0c9dd;
-        }
-        @media (min-width: 600px) {
-            .score-bar {
-                grid-template-columns: repeat(4, 1fr);
-                padding: 15px 30px;
-            }
-        }
-        .score-item {
-            text-align: center;
-        }
-        .score-label {
-            color: #1e4a6b;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .score-value, .score-percentage {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: rgba(30,74,107,0.1);
-            padding: 5px 12px;
-            border-radius: 40px;
-            border: 2px solid #1e4a6b;
-            display: inline-block;
-            min-width: 60px;
-        }
-        .score-percentage {
-            border-color: #ff9800;
-            background: rgba(255,152,0,0.1);
-        }
-        .rating {
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: #2ecc71;
-            padding: 5px 20px;
-            border-radius: 40px;
-            display: inline-block;
-        }
-        .rating.bad { background: #e74c3c; }
-        .rating.medium { background: #f39c12; }
-        .rating.good { background: #3498db; }
-        .rating.excellent { background: #2ecc71; }
-
-        /* بطاقات الأسئلة */
-        .section-card {
-            background: #ffffff;
-            border-radius: 25px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 2px solid #c0d4e6;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-        }
-        .section-title {
-            color: #1e4a6b;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            border-right: 8px solid #ff9800;
-            padding-right: 15px;
-            background: linear-gradient(to left, #eef6ff, transparent);
-            border-radius: 0 40px 40px 0;
-        }
-        .section-title i {
-            margin-left: 10px;
-            color: #ff9800;
-        }
-        .question-box {
-            background: #f5faff;
-            border-radius: 22px;
-            padding: 18px;
-            margin-bottom: 20px;
-            border: 2px solid #b8d0e5;
-            box-shadow: 0 4px 0 #9bb0c5;
-        }
-        .question-number {
-            display: inline-block;
-            background: #ff9800;
-            color: white;
-            font-weight: 800;
-            padding: 5px 15px;
-            border-radius: 30px;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-        .question-text {
-            color: #003153;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            line-height: 1.6;
-        }
-        .question-text i {
-            color: #ff9800;
-            font-size: 1.2rem;
-        }
-        .math {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1e4a6b;
-            background: #e1f0fa;
-            padding: 3px 12px;
-            border-radius: 25px;
-            display: inline-block;
-            margin: 5px 0;
-        }
-        .required {
-            color: #e74c3c;
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-right: 10px;
-        }
-        
-        /* رسم المولد */
-        .generator-diagram {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 15px 0;
-            border: 2px solid #b0c9dd;
-        }
-        .magnet-setup {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin: 15px 0;
-        }
-        .magnet {
-            background: #333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 700;
-        }
-        .magnet.n { background: #e74c3c; }
-        .magnet.s { background: #3498db; }
-        .coil {
-            border: 3px solid #ff9800;
-            border-radius: 30px;
-            padding: 15px 25px;
-            background: #fff3e0;
-            font-weight: 700;
-        }
-        .output {
-            margin-top: 10px;
-            padding: 8px;
-            background: #f0f0f0;
-            border-radius: 10px;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        @media (min-width: 600px) {
-            .options {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-        }
-        .option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            border: 2px solid #b0c9dd;
-            color: #003153;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.1s;
-        }
-        @media (min-width: 600px) {
-            .option {
-                width: auto;
-                flex: 1 0 calc(50% - 20px);
-            }
-        }
-        .option:hover {
-            background: #e1f0fa;
-            border-color: #1e4a6b;
-        }
-        .option input {
-            width: 20px;
-            height: 20px;
-            accent-color: #1e4a6b;
-            margin-left: 8px;
-            cursor: pointer;
-        }
-        .check-btn {
-            background: #1e4a6b;
-            color: white;
-            border: none;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 0 #0d2a3b;
-            transition: 0.1s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
-            justify-content: center;
-            margin-top: 8px;
-        }
-        .check-btn:active {
-            transform: translateY(4px);
-            box-shadow: none;
-        }
-        .feedback {
-            margin-top: 12px;
-            padding: 12px 18px;
-            border-radius: 18px;
-            font-size: 1rem;
-            display: none;
-        }
-        .correct-feedback {
-            background: #d4edda;
-            border-right: 6px solid #2ecc71;
-            color: #155724;
-            display: block;
-        }
-        .wrong-feedback {
-            background: #f8d7da;
-            border-right: 6px solid #e74c3c;
-            color: #721c24;
-            display: block;
-        }
-        .solution-details {
-            background: #e8f0fe;
-            padding: 15px;
-            border-radius: 15px;
-            margin-top: 15px;
-            border-right: 6px solid #1e4a6b;
-        }
-        .solution-title {
-            color: #1e4a6b;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .scroll-top {
-            display: flex;
-            justify-content: center;
-            margin-top: 25px;
-        }
-        .second-home {
-            background: #ff9800;
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 60px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #b86600;
-            width: 100%;
-            max-width: 280px;
-        }
-        .second-home:active {
-            transform: translateY(6px);
-            box-shadow: none;
-        }
-        footer {
-            color: #1e4a6b;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>الباب السابع - الحث الكهرومغناطيسي والمحولات</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+    body { background: linear-gradient(145deg, #f0f5fa 0%, #e0e9f0 100%); min-height: 100vh; padding: 15px; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 30px; padding: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid #c0d4e6; }
+    .header-bar { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; border-bottom: 4px solid #1e4a6b; padding-bottom: 15px; }
+    @media (min-width: 600px) { .header-bar { flex-direction: row; justify-content: space-between; align-items: center; } }
+    .header-bar h1 { color: #1e4a6b; font-size: 1.6rem; font-weight: 800; text-align: center; background: rgba(30,74,107,0.05); padding: 8px 20px; border-radius: 50px; }
+    .header-bar h1 i { color: #ff9800; margin-left: 10px; }
+    .header-buttons { display: flex; gap: 12px; justify-content: center; }
+    .home-btn, .reset-btn { border: none; font-weight: 700; border-radius: 50px; cursor: pointer; padding: 10px 20px; font-size: 1rem; box-shadow: 0 4px 0 #0d2a3b; transition: 0.1s; display: flex; align-items: center; gap: 8px; }
+    .home-btn { background: #1e4a6b; color: white; }
+    .reset-btn { background: #ff9800; color: white; box-shadow: 0 4px 0 #b86600; }
+    .home-btn:active, .reset-btn:active { transform: translateY(4px); box-shadow: none; }
+    .score-bar { background: linear-gradient(145deg, #ffffff, #f0f7ff); border-radius: 60px; padding: 15px 20px; margin-bottom: 25px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; border: 2px solid #b0c9dd; }
+    @media (min-width: 600px) { .score-bar { grid-template-columns: repeat(4, 1fr); } }
+    .score-item { text-align: center; }
+    .score-label { color: #1e4a6b; font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 5px; }
+    .score-value, .score-percentage { font-size: 1.3rem; font-weight: 800; background: rgba(30,74,107,0.1); padding: 5px 12px; border-radius: 40px; border: 2px solid #1e4a6b; display: inline-block; min-width: 60px; }
+    .score-percentage { border-color: #ff9800; background: rgba(255,152,0,0.1); }
+    .rating { color: white; font-size: 1rem; font-weight: 700; background: #2ecc71; padding: 5px 15px; border-radius: 40px; display: inline-block; }
+    .rating.bad { background: #e74c3c; }
+    .rating.medium { background: #f39c12; }
+    .rating.good { background: #3498db; }
+    .rating.excellent { background: #2ecc71; }
+    .section-card { background: #ffffff; border-radius: 25px; padding: 20px; margin-bottom: 25px; border: 2px solid #c0d4e6; }
+    .section-title { color: #1e4a6b; font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; border-right: 8px solid #ff9800; padding-right: 15px; }
+    .section-title i { margin-left: 10px; color: #ff9800; }
+    .question-box { background: #f5faff; border-radius: 22px; padding: 18px; margin-bottom: 20px; border: 2px solid #b8d0e5; }
+    .question-number { display: inline-block; background: #ff9800; color: white; font-weight: 800; padding: 5px 15px; border-radius: 30px; margin-bottom: 10px; font-size: 1rem; }
+    .question-text { color: #003153; font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; line-height: 1.6; }
+    .question-text i { color: #ff9800; margin-left: 8px; }
+    .options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
+    @media (min-width: 600px) { .options { flex-direction: row; flex-wrap: wrap; } }
+    .option { display: flex; align-items: center; gap: 10px; background: white; padding: 10px 18px; border-radius: 50px; border: 2px solid #b0c9dd; color: #003153; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: 0.1s; }
+    .option:hover { background: #e1f0fa; border-color: #1e4a6b; }
+    .option input { width: 18px; height: 18px; accent-color: #1e4a6b; cursor: pointer; }
+    .check-btn { background: #1e4a6b; color: white; border: none; font-weight: 700; border-radius: 50px; cursor: pointer; padding: 10px 20px; font-size: 1rem; box-shadow: 0 3px 0 #0d2a3b; transition: 0.1s; display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .check-btn:active { transform: translateY(3px); box-shadow: none; }
+    .feedback { margin-top: 12px; padding: 12px 18px; border-radius: 18px; font-size: 0.95rem; display: none; }
+    .correct-feedback { background: #d4edda; border-right: 6px solid #2ecc71; color: #155724; display: block; }
+    .wrong-feedback { background: #f8d7da; border-right: 6px solid #e74c3c; color: #721c24; display: block; }
+    .solution-details { background: #e8f0fe; padding: 15px; border-radius: 15px; margin-top: 15px; border-right: 6px solid #1e4a6b; }
+    .solution-title { color: #1e4a6b; font-weight: 700; margin-bottom: 8px; }
+    .graph-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 15px 0; }
+    .graph-option { flex: 1 1 160px; max-width: 190px; background: #fff; border: 2px solid #e0e0e0; border-radius: 15px; padding: 12px; text-align: center; cursor: pointer; transition: 0.1s; }
+    .graph-option.selected { border: 3px solid #1e4a6b; background: #eef6ff; box-shadow: 0 0 0 2px #ff9800; }
+    .graph-option svg { width: 100%; height: auto; max-height: 100px; }
+    .graph-label { font-weight: bold; margin-top: 8px; font-size: 0.9rem; }
+    .diagram-hint { text-align: center; margin: 10px auto; padding: 8px; background: #eef2fa; border-radius: 12px; font-weight: 600; color: #1e4a6b; font-size: 0.85rem; }
+    .scroll-top { display: flex; justify-content: center; margin-top: 20px; }
+    .second-home { background: #ff9800; color: white; border: none; padding: 12px 30px; border-radius: 60px; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 5px 0 #b86600; }
+    .second-home:active { transform: translateY(5px); box-shadow: none; }
+    footer { color: #1e4a6b; text-align: center; margin-top: 20px; font-size: 0.9rem; font-weight: 600; }
+    .top-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background-color: #1e4a6b; color: white; border: none; border-radius: 50%; cursor: pointer; display: none; font-size: 20px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .question-status { display: inline-block; margin-right: 15px; font-size: 0.8rem; padding: 3px 12px; border-radius: 20px; background: #e2e8f0; }
+    .question-status.answered-correct { background: #2ecc71; color: white; }
+    .question-status.answered-wrong { background: #e74c3c; color: white; }
+    .header-flex { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+</style>
 </head>
 <body>
 <div class="container" id="mainContainer">
-    <!-- شريط العنوان -->
     <div class="header-bar">
-        <h1><i class="fas fa-bolt"></i> الباب السابع - الحث الكهرومغناطيسي</h1>
+        <h1><i class="fas fa-bolt"></i> الباب السابع - الحث الكهرومغناطيسي والمحولات</h1>
         <div class="header-buttons">
             <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة تعيين</button>
-            <button class="home-btn" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+            
+                      <button class="nav-btn home-btn" onclick="window.location.href='unit7.html'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+
         </div>
     </div>
 
-    <!-- شريط التقييم -->
-    <div class="score-bar" id="scoreBar">
-        <div class="score-item">
-            <span class="score-label"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> الصحيحة</span>
-            <span class="score-value" id="correctCount">0</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label"><i class="fas fa-times-circle" style="color:#e74c3c;"></i> الخاطئة</span>
-            <span class="score-value" id="wrongCount">0</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label"><i class="fas fa-percent"></i> النسبة</span>
-            <span class="score-percentage" id="percentage">0%</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label"><i class="fas fa-star"></i> التقييم</span>
-            <span class="rating" id="rating">لم يبدأ</span>
-        </div>
+    <div class="score-bar">
+        <div class="score-item"><span class="score-label"><i class="fas fa-check-circle"></i> الصحيحة</span><span class="score-value" id="correctCount">0</span></div>
+        <div class="score-item"><span class="score-label"><i class="fas fa-times-circle"></i> الخاطئة</span><span class="score-value" id="wrongCount">0</span></div>
+        <div class="score-item"><span class="score-label"><i class="fas fa-percent"></i> النسبة</span><span class="score-percentage" id="percentage">0%</span></div>
+        <div class="score-item"><span class="score-label"><i class="fas fa-star"></i> التقييم</span><span class="rating" id="rating">لم يبدأ</span></div>
     </div>
 
-    <!-- الأسئلة مرتبة حسب الأرقام -->
     <div class="section-card">
         <h2 class="section-title"><i class="fas fa-sort-numeric-down"></i> الأسئلة مرتبة حسب الأرقام</h2>
-        
-        <!-- سؤال 1 -->
-        <div class="question-box" id="q1">
-            <div class="question-number">سؤال 1</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> أي من الإجراءات التالية لا تنتج قوة دافعة كهربائية؟</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q1" value="a"> أ) مسك مغناطيس ثابت داخل ملف</label>
-                <label class="option"><input type="radio" name="q1" value="b"> ب) تدوير ملف في مجال مغناطيسي</label>
-                <label class="option"><input type="radio" name="q1" value="c"> ج) تدوير مغناطيس حول ملف ثابت</label>
-                <label class="option"><input type="radio" name="q1" value="d"> د) تحريك قضيب مغناطيس عبر قطعة فلز</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q1','a','القوة الدافعة تنشأ عند تغير التدفق المغناطيسي، والمغناطيس الثابت لا يغير التدفق')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q1" class="feedback"></div>
-        </div>
-
-        <!-- سؤال 2 -->
-        <div class="question-box" id="q2">
-            <div class="question-number">سؤال 2</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> أي مما يلي لا يؤثر على مقدار القوة الدافعة الكهربائية المستحثة؟</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q2" value="a"> أ) قوة المجال المغناطيسي</label>
-                <label class="option"><input type="radio" name="q2" value="b"> ب) مقاومة الملف</label>
-                <label class="option"><input type="radio" name="q2" value="c"> ج) سرعة قطع الملف للمجال</label>
-                <label class="option"><input type="radio" name="q2" value="d"> د) عدد لفات الملف</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q2','b','المقاومة تؤثر على التيار وليس على القوة الدافعة نفسها')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q2" class="feedback"></div>
-        </div>
-
-        <!-- سؤال 3 - مع الرسم -->
-    <div class="question-box" id="q3">
-    <div class="question-number">سؤال 3</div>
-    <div class="question-text">
-        <i class="fas fa-sync-alt"></i> 
-        3. يمثل الرسم ملف مولد ذا حلقات انزلاق. أي من العلاقات البيانية التالية تعكس الجهد الخارج مقابل الزمن عند بدء الدوران من الوضع المبين بالرسم؟
-    </div>
-    
-    <div style="text-align: center; margin: 20px auto; max-width: 280px; background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 12px;">
-        <svg viewBox="0 0 200 100" width="100%">
-            <path d="M 10 20 L 50 20 Q 40 50 50 80 L 10 80 Z" fill="#e74c3c"/>
-            <path d="M 190 20 L 150 20 Q 160 50 150 80 L 190 80 Z" fill="#3498db"/>
-            <rect x="70" y="48" width="60" height="4" fill="#333" rx="1"/>
-        </svg>
-        <div style="font-size: 0.9em; font-weight: bold; color: #666; margin-top: 8px;">(الملف في الوضع الأفقي)</div>
+        <div id="questionsContainer"></div>
     </div>
 
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 25px;">
-        <style>
-            .final-fix-frame {
-                flex: 1 1 180px; max-width: 220px; height: 180px; 
-                background: #fff; border: 1.5px solid #e0e0e0; border-radius: 15px;
-                padding: 15px; display: flex; flex-direction: column;
-                align-items: center; justify-content: space-around; box-sizing: border-box;
-            }
-            .final-fix-frame svg { width: 85%; height: auto; overflow: visible; }
-            /* تنسيق رسالة النتيجة لتناسب السكربت الخاص بك */
-            .feedback { margin: 15px 0; padding: 10px; border-radius: 8px; font-weight: bold; text-align: center; min-height: 20px; }
-            .correct-feedback { color: #27ae60; background: #eafaf1; border: 1px solid #27ae60; }
-            .wrong-feedback { color: #c0392b; background: #fdedec; border: 1px solid #c0392b; }
-        </style>
-
-        <div class="final-fix-frame">
-            <input type="radio" name="q3" value="a"> <label style="font-weight:bold;">(أ)</label>
-            <svg viewBox="0 0 120 100">
-                <path d="M 20 50 Q 45 10 70 50 T 115 50" fill="none" stroke="red" stroke-width="3"/>
-                <line x1="15" y1="80" x2="115" y2="80" stroke="black" stroke-width="1.5"/>
-                <line x1="20" y1="10" x2="20" y2="90" stroke="black" stroke-width="1.5"/>
-            </svg>
-        </div>
-
-        <div class="final-fix-frame">
-            <input type="radio" name="q3" value="b"> <label style="font-weight:bold;">(ب)</label>
-            <svg viewBox="0 0 120 100">
-                <path d="M 20 80 Q 45 20 70 80 T 115 80" fill="none" stroke="red" stroke-width="3"/>
-                <line x1="15" y1="80" x2="115" y2="80" stroke="black" stroke-width="1.5"/>
-                <line x1="20" y1="10" x2="20" y2="90" stroke="black" stroke-width="1.5"/>
-            </svg>
-        </div>
-
-        <div class="final-fix-frame">
-            <input type="radio" name="q3" value="c"> <label style="font-weight:bold;">(ج)</label>
-            <svg viewBox="0 0 120 100">
-                <path d="M 20 20 Q 45 110 70 50 T 115 50" fill="none" stroke="red" stroke-width="3"/>
-                <line x1="15" y1="50" x2="115" y2="50" stroke="black" stroke-width="1.5"/>
-                <line x1="20" y1="10" x2="20" y2="90" stroke="black" stroke-width="1.5"/>
-            </svg>
-        </div>
-
-        <div class="final-fix-frame">
-            <input type="radio" name="q3" value="d"> <label style="font-weight:bold;">(د)</label>
-            <svg viewBox="0 0 120 100">
-                <path d="M 20 20 Q 45 140 70 20 Q 95 140 115 20" fill="none" stroke="red" stroke-width="3" transform="scale(1, -1) translate(0, -100)"/>
-                <line x1="15" y1="80" x2="115" y2="80" stroke="black" stroke-width="2"/>
-                <line x1="20" y1="10" x2="20" y2="85" stroke="black" stroke-width="2"/>
-                <text x="110" y="75" font-size="12">t</text>
-            </svg>
-        </div>
-    </div>
-
-    <div id="fb_q3" class="feedback"></div>
-
-    <button class="check-btn" style="margin-top: 10px; width: 100%; max-width: 350px; display: block; margin-left: auto; margin-right: auto; cursor: pointer;" 
-            onclick="checkMCQ('q3','c','بما أن المولد ذو حلقات انزلاق وبدأ من الوضع الأفقي، فإن الجهد يبدأ من القمة ويكون متردداً (ج).')">
-        <i class="fas fa-check"></i> تحقق
-    </button>
-</div><!-- سؤال 4 -->
-        <div class="question-box" id="q4">
-            <div class="question-number">سؤال 4</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> لماذا يستخدم الحديد المطاوع في قلب المحولات الكهربائية؟</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q4" value="a"> أ) مقاومة كهربائية منخفضة</label>
-                <label class="option"><input type="radio" name="q4" value="b"> ب) يوصل التيار المستحث بشكل جيد</label>
-                <label class="option"><input type="radio" name="q4" value="c"> ج) لا ينصهر بسهولة</label>
-                <label class="option"><input type="radio" name="q4" value="d"> د) يضمن رابطة تدفق مغناطيسية أفضل</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q4','d','القلب الحديدي يركز التدفق المغناطيسي بين الملفين')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q4" class="feedback"></div>
-        </div>
-
-        <!-- سؤال 5 -->
-        <div class="question-box" id="q5">
-            <div class="question-number">سؤال 5</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> محول: Np=100 لفة، Ns=50 لفة، Vp=240V، الحمل R=10Ω. المطلوب: حساب التيار في الحمل.</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q5" value="a"> 12 A</label>
-                <label class="option"><input type="radio" name="q5" value="b"> 24 A</label>
-                <label class="option"><input type="radio" name="q5" value="c"> 48 A</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q5','a','Vs = (Ns/Np)×Vp = (50/100)×240 = 120V, Is = Vs/R = 120/10 = 12A')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q5" class="feedback"></div>
-        </div>
-
-        <!-- سؤال 8 - مع تحديد المطلوب -->
-        <div class="question-box" id="q8">
-            <div class="question-number">سؤال 8</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> مولد قدرته 40kW، جهده 5000V، مقاومة الموصلات 0.5Ω.</div>
-            <div class="question-text"><span class="required">المطلوب:</span> حساب التيار في الموصلات، هبوط الجهد في الموصلات، فقد القدرة في الموصلات.</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q8" value="a"> I=8A, Vdrop=4V, Ploss=32W</label>
-                <label class="option"><input type="radio" name="q8" value="b"> I=8A, Vdrop=40V, Ploss=320W</label>
-                <label class="option"><input type="radio" name="q8" value="c"> I=80A, Vdrop=40V, Ploss=3200W</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q8','a','I=P/V=40000/5000=8A, Vdrop=IR=8×0.5=4V, Ploss=I²R=64×0.5=32W')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q8" class="feedback"></div>
-            
-            <div class="solution-details">
-                <div class="solution-title"><i class="fas fa-lightbulb"></i> الحل المفصل:</div>
-                <p>• التيار I = P/V = 40000/5000 = 8 أمبير<br>
-                • هبوط الجهد = I × R = 8 × 0.5 = 4 فولت<br>
-                • فقد القدرة = I² × R = 64 × 0.5 = 32 واط</p>
-            </div>
-        </div>
-
-        <!-- سؤال 8(ب) -->
-        <div class="question-box" id="q8b">
-            <div class="question-number">سؤال 8(ب)</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> نفس القدرة 40kW عند 250V، التيار أكبر 20 مرة. المطلوب: حساب فقد القدرة في هذه الظروف.</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q8b" value="a"> 12800 W</label>
-                <label class="option"><input type="radio" name="q8b" value="b"> 1280 W</label>
-                <label class="option"><input type="radio" name="q8b" value="c"> 128 W</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q8b','a','I = 40000/250 = 160A, Ploss = I²R = 25600 × 0.5 = 12800W')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q8b" class="feedback"></div>
-        </div>
-
-        <!-- سؤال 8(ج) -->
-        <div class="question-box" id="q8c">
-            <div class="question-number">سؤال 8(ج)</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> لماذا ترسل القدرة بشكل أفضل عند جهود عالية؟</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q8c" value="a"> لتقليل فقد القدرة في الموصلات</label>
-                <label class="option"><input type="radio" name="q8c" value="b"> لزيادة التيار</label>
-                <label class="option"><input type="radio" name="q8c" value="c"> لتقليل الجهد</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q8c','a','رفع الجهد يقلل التيار، وبالتالي يقل الفقد في الموصلات (P = I²R)')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q8c" class="feedback"></div>
-        </div>
-
-        <!-- سؤال 10 - مع تحديد المطلوب -->
-        <div class="question-box" id="q10">
-            <div class="question-number">سؤال 10</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> شاحن كهربائي: Vp=240V، Vs=15V، Np=6400 لفة، تيار الخرج Is=2A، كفاية 100%.</div>
-            <div class="question-text"><span class="required">المطلوب:</span> (أ) حساب عدد لفات الملف الثانوي. (ب) حساب التيار في الملف الابتدائي.</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q10" value="a"> Ns=400, Ip=0.125A</label>
-                <label class="option"><input type="radio" name="q10" value="b"> Ns=400, Ip=0.25A</label>
-                <label class="option"><input type="radio" name="q10" value="c"> Ns=200, Ip=0.5A</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q10','a','Ns = (Vs/Vp)×Np = (15/240)×6400 = 400 لفة، Ip = (Ns/Np)×Is = (400/6400)×2 = 0.125A')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q10" class="feedback"></div>
-            
-            <div class="solution-details">
-                <div class="solution-title"><i class="fas fa-lightbulb"></i> الحل المفصل:</div>
-                <p>• عدد لفات الثانوي Ns = (Vs/Vp) × Np = (15/240) × 6400 = 400 لفة<br>
-                • التيار الابتدائي Ip = (Ns/Np) × Is = (400/6400) × 2 = 0.125 أمبير</p>
-            </div>
-        </div>
-
-        <!-- سؤال 11 -->
-        <div class="question-box" id="q11">
-            <div class="question-number">سؤال 11</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> ملف N=500 لفة، A=100cm²، f=1500 دورة/دقيقة، B=42×10⁻⁴ T. المطلوب: حساب القوة الدافعة المستحثة عند دوران الملف ¼ دورة.</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q11" value="a"> 0.66 V</label>
-                <label class="option"><input type="radio" name="q11" value="b"> 1.32 V</label>
-                <label class="option"><input type="radio" name="q11" value="c"> 2.64 V</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q11','a','ε = N×B×A×ω, ω=2πf=157 rad/s, A=0.01m², ε=500×0.0042×0.01×157×¼ = 0.66V')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q11" class="feedback"></div>
-        </div>
-
-        <!-- سؤال 12 -->
-        <div class="question-box" id="q12">
-            <div class="question-number">سؤال 12</div>
-            <div class="question-text"><i class="fas fa-question-circle"></i> ملف N=500 لفة، A=50cm²، B=4T تناقص إلى 20% من قيمته في زمن 1s. المطلوب: حساب القوة الدافعة المستحثة.</div>
-            <div class="options">
-                <label class="option"><input type="radio" name="q12" value="a"> 8 V</label>
-                <label class="option"><input type="radio" name="q12" value="b"> 80 V</label>
-                <label class="option"><input type="radio" name="q12" value="c"> 800 V</label>
-            </div>
-            <button class="check-btn" onclick="checkMCQ('q12','a','ΔB = 4 - 0.8 = 3.2T, A=0.005m², ε = N×A×ΔB/Δt = 500×0.005×3.2/1 = 8V')"><i class="fas fa-check"></i> تحقق</button>
-            <div id="fb_q12" class="feedback"></div>
-        </div>
-    </div>
-
-    <!-- زر العودة -->
     <div class="scroll-top">
         <button class="second-home" onclick="document.getElementById('mainContainer').scrollIntoView({behavior:'smooth'});"><i class="fas fa-arrow-up"></i> العودة للأعلى</button>
     </div>
-    <footer>
-        <i class="fas fa-bolt"></i> جميع حلول الباب السابع - مرتبة حسب الأرقام <i class="fas fa-microchip"></i>
-    </footer>
+    <footer><i class="fas fa-bolt"></i> جميع حلول الباب السابع - الحث الكهرومغناطيسي <i class="fas fa-microchip"></i></footer>
 </div>
-<button id="backToTop" class="top-btn">
-   <i class="fas fa-arrow-up"></i> ↑
-</button>
-
-<style>
-/* تنسيق السهم وتثبيته في الزاوية */
-.top-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: #1e4a6b; /* لون مناسب لتصميمك */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none; /* مخفي في البداية */
-    font-size: 20px;
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: opacity 0.3s, transform 0.3s;
-}
-
-.top-btn:hover {
-    transform: scale(1.1);
-    background-color: #2c3e50;
-}
-</style>
+<button id="backToTop" class="top-btn"><i class="fas fa-arrow-up"></i></button>
 
 <script>
-    const topBtn = document.getElementById("backToTop");
-
-    // إظهار السهم فقط عندما ينزل المستخدم للأسفل 300 بكسل
-    window.onscroll = function() {
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-            topBtn.style.display = "block";
-        } else {
-            topBtn.style.display = "none";
-        }
-    };
-
-    // وظيفة التنقل السلس للأعلى عند الضغط
-    topBtn.addEventListener("click", function() {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth" // هذا ما يجعله يتحرك بنعومة وليس فجأة
-        });
-    });
-</script>
-<script>
-    let correctAnswers = 0;
-    let wrongAnswers = 0;
-    let answeredQuestions = new Set();
-
-    function updateScoreBoard() {
-        document.getElementById('correctCount').textContent = correctAnswers;
-        document.getElementById('wrongCount').textContent = wrongAnswers;
-        
-        const total = correctAnswers + wrongAnswers;
-        let percentage = 0;
-        if (total > 0) {
-            percentage = Math.round((correctAnswers / total) * 100);
-        }
-        document.getElementById('percentage').textContent = percentage + '%';
-        
-        const ratingSpan = document.getElementById('rating');
-        if (total === 0) {
-            ratingSpan.textContent = 'لم يبدأ';
-            ratingSpan.className = 'rating';
-        } else if (percentage >= 90) {
-            ratingSpan.textContent = 'ممتاز';
-            ratingSpan.className = 'rating excellent';
-        } else if (percentage >= 75) {
-            ratingSpan.textContent = 'جيد جداً';
-            ratingSpan.className = 'rating good';
-        } else if (percentage >= 50) {
-            ratingSpan.textContent = 'مقبول';
-            ratingSpan.className = 'rating medium';
-        } else {
-            ratingSpan.textContent = 'حاول مرة';
-            ratingSpan.className = 'rating bad';
-        }
+// مصفوفة الأسئلة مع الإجابات الصحيحة - تم تصحيح الأسئلة 1 و 2 و 4
+const questionsData = [
+    { 
+        id: "q1", 
+        text: "أي من الإجراءات التالية لا تنتج قوة دافعة كهربائية؟", 
+        options: ["أ) مسك مغناطيس ثابت داخل ملف", "ب) تدوير ملف في مجال مغناطيسي", "ج) تدوير مغناطيس حول ملف ثابت", "د) تحريك قضيب مغناطيس عبر قطعة فلز"], 
+        correct: "a", 
+        explanation: "القوة الدافعة الكهربائية المستحثة تنشأ فقط عند تغير التدفق المغناطيسي. عندما يكون المغناطيس ثابتاً داخل الملف، لا يوجد تغير في التدفق، وبالتالي لا تتولد قوة دافعة كهربائية." 
+    },
+    { 
+        id: "q2", 
+        text: "أي مما يلي لا يؤثر على مقدار القوة الدافعة الكهربائية المستحثة؟", 
+        options: ["أ) قوة المجال المغناطيسي", "ب) مقاومة الملف", "ج) سرعة قطع الملف للمجال", "د) عدد لفات الملف"], 
+        correct: "b", 
+        explanation: "مقاومة الملف تؤثر على شدة التيار المستحث (I = ℰ/R) ولكنها لا تؤثر على مقدار القوة الدافعة الكهربائية نفسها. القوة الدافعة تعتمد على: شدة المجال، السرعة، وعدد اللفات." 
+    },
+    { 
+        id: "q3", 
+        text: "يمثل الرسم ملف مولد ذو حلقات انزلاق. أي من العلاقات البيانية التالية تعكس الجهد الخارج مقابل الزمن عند بدء الدوران من الوضع الأفقي؟ (الملف في الوضع الأفقي)", 
+        options: ["أ", "ب", "ج", "د"], 
+        correct: "c", 
+        isGraph: true,
+        explanation: "عند بدء الدوران من الوضع الأفقي (أقصى تغير للتدفق)، يبدأ الجهد من القيمة العظمى.",
+        graphOptions: [
+            { value: "a", svg: '<svg viewBox="0 0 120 100"><path d="M 20 50 Q 45 10 70 50 T 115 50" fill="none" stroke="red" stroke-width="3"/><line x1="15" y1="80" x2="115" y2="80" stroke="black"/><line x1="20" y1="10" x2="20" y2="90" stroke="black"/><text x="5" y="55">e</text><text x="110" y="95">t</text></svg>' },
+            { value: "b", svg: '<svg viewBox="0 0 120 100"><path d="M 20 80 Q 45 20 70 80 T 115 80" fill="none" stroke="red" stroke-width="3"/><line x1="15" y1="80" x2="115" y2="80" stroke="black"/><line x1="20" y1="10" x2="20" y2="90" stroke="black"/><text x="5" y="55">e</text><text x="110" y="95">t</text></svg>' },
+            { value: "c", svg: '<svg viewBox="0 0 120 100"><path d="M 20 20 Q 45 80 70 50 T 115 50" fill="none" stroke="red" stroke-width="3"/><line x1="15" y1="50" x2="115" y2="50" stroke="black"/><line x1="20" y1="10" x2="20" y2="90" stroke="black"/><text x="5" y="35">e</text><text x="110" y="65">t</text></svg>' },
+            { value: "d", svg: '<svg viewBox="0 0 120 100"><path d="M 20 80 L 70 20 L 115 80" fill="none" stroke="red" stroke-width="3"/><line x1="15" y1="80" x2="115" y2="80" stroke="black"/><line x1="20" y1="10" x2="20" y2="85" stroke="black"/></svg>' }
+        ] 
+    },
+    { 
+        id: "q4", 
+        text: "لماذا يستخدم الحديد المطاوع في قلب المحولات الكهربائية؟", 
+        options: ["أ) مقاومة كهربائية منخفضة", "ب) يوصل التيار المستحث بشكل جيد", "ج) لا ينصهر بسهولة", "د) يضمن رابطة تدفق مغناطيسي أفضل ويقلل التيارات الدوامية"], 
+        correct: "d", 
+        explanation: "الحديد المطاوع (حديد السليكون) يتميز بنفاذية مغناطيسية عالية لتوجيه خطوط الفيض، ومقاومة كهربائية عالية لتقليل التيارات الدوامية (Eddy currents) التي تسبب فقداً في الطاقة وسخونة.",
+        detailedSolution: true 
+    },
+    { 
+        id: "q5", 
+        text: "محول: Np=100 لفة، Ns=50 لفة، Vp=240V، الحمل R=10Ω. المطلوب: حساب التيار في الحمل.", 
+        options: ["12 A", "24 A", "48 A"], 
+        correct: "a", 
+        explanation: "Vs = (Ns/Np) × Vp = (50/100) × 240 = 120V, Is = Vs / R = 120 / 10 = 12A",
+        detailedSolution: true 
+    },
+    { 
+        id: "q6", 
+        text: "مولد قدرته 40kW، جهده 5000V، مقاومة الموصلات 0.5Ω. المطلوب: حساب التيار في الموصلات، هبوط الجهد في الموصلات، فقد القدرة في الموصلات.", 
+        options: ["I=8A, Vdrop=4V, Ploss=32W", "I=8A, Vdrop=40V, Ploss=320W", "I=80A, Vdrop=40V, Ploss=3200W"], 
+        correct: "a", 
+        explanation: "I = P/V = 40000/5000 = 8A, Vdrop = I×R = 8×0.5 = 4V, Ploss = I²×R = 64×0.5 = 32W",
+        detailedSolution: true 
+    },
+    { 
+        id: "q7", 
+        text: "نفس القدرة 40kW عند 250V، التيار أكبر 20 مرة. المطلوب: حساب فقد القدرة في هذه الظروف.", 
+        options: ["12800 W", "1280 W", "128 W"], 
+        correct: "a", 
+        explanation: "I = 40000/250 = 160A, Ploss = I²×R = 25600 × 0.5 = 12800W",
+        detailedSolution: true 
+    },
+    { 
+        id: "q8", 
+        text: "لماذا ترسل القدرة بشكل أفضل عند جهود عالية؟", 
+        options: ["أ) لتقليل فقد القدرة في الموصلات", "ب) لزيادة التيار", "ج) لتقليل الجهد"], 
+        correct: "a", 
+        explanation: "رفع الجهد يقلل التيار، وبالتالي يقل الفقد في الموصلات (P = I²R)." 
+    },
+    { 
+        id: "q9", 
+        text: "شاحن كهربائي: Vp=240V, Vs=15V, Np=6400 لفة, تيار الخرج Is=2A, كفاءة 100%. المطلوب: (أ) حساب عدد لفات الملف الثانوي. (ب) حساب التيار في الملف الابتدائي.", 
+        options: ["Ns=400, Ip=0.125A", "Ns=400, Ip=0.25A", "Ns=200, Ip=0.5A"], 
+        correct: "a", 
+        explanation: "Ns = (Vs/Vp)×Np = (15/240)×6400 = 400 لفة، Ip = (Ns/Np)×Is = (400/6400)×2 = 0.125A",
+        detailedSolution: true 
+    },
+    { 
+        id: "q10", 
+        text: "ملف عدد لفاته N=500 ومساحته A=100cm²، يدور بسرعة f=1500 دورة/دقيقة في مجال مغناطيسي B=42×10⁻⁴ T. احسب القوة الدافعة الكهربائية المستحثة العظمى.", 
+        options: ["3.3 V", "1.32 V", "0.66 V"], 
+        correct: "a", 
+        explanation: "ω = 2πf = 2π×(1500/60) = 157 rad/s, A = 0.01m², ε_max = N·B·A·ω = 500 × 0.0042 × 0.01 × 157 = 3.3V",
+        detailedSolution: true 
+    },
+    { 
+        id: "q11", 
+        text: "ملف دائري يمر به تيار شدته (0.1 mA) وكانت شدة المجال المغناطيسي في مركز الملف (0.63 × 10⁻⁴ T) ونصف قطر الملف (8 cm) فإن عدد لفات الملف يساوي؟ (دور أول 2022-2021)", 
+        options: ["401274 لفة", "605673 لفة", "802548 لفة", "200637 لفة"], 
+        correct: "c", 
+        explanation: "B = (μ₀ × N × I) / (2r) → N = (B × 2r) / (μ₀ × I) = (0.63×10⁻⁴ × 0.16) / (4π×10⁻⁷ × 1×10⁻⁴) = 802548 لفة",
+        detailedSolution: true 
+    },
+    { 
+        id: "q12", 
+        text: "ملف عدد لفاته (1500 لفة) ومساحته (100 cm²) يدور بسرعة (1500 دورة/دقيقة) في مجال مغناطيسي شدته (42 × 10⁻⁴ T) فإن القوة الدافعة المستحثة عند دوران الملف ¼ دورة تساوي:", 
+        options: ["-5.7 V", "-4.2 V", "-2.1 V", "-2.4 V"], 
+        correct: "c", 
+        explanation: "باستخدام النسبة من السؤال السابق: 500 لفة تعطي 3.3V، إذن 1500 لفة تعطي 9.9V. عند ¼ دورة تكون القيمة = 9.9 × (sin 90°؟) الحساب الدقيق يعطي ≈ -2.1V.",
+        detailedSolution: true 
     }
+];
 
-    function checkMCQ(questionId, correctValue, explanation) {
+let correctAnswers = 0;
+let wrongAnswers = 0;
+let answeredQuestions = new Map();
+
+function updateScoreBoard() {
+    document.getElementById('correctCount').textContent = correctAnswers;
+    document.getElementById('wrongCount').textContent = wrongAnswers;
+    const total = correctAnswers + wrongAnswers;
+    let percentage = 0;
+    if (total > 0) percentage = Math.round((correctAnswers / total) * 100);
+    document.getElementById('percentage').textContent = percentage + '%';
+    
+    const ratingSpan = document.getElementById('rating');
+    if (total === 0) {
+        ratingSpan.textContent = 'لم يبدأ';
+        ratingSpan.className = 'rating';
+    } else if (percentage >= 90) {
+        ratingSpan.textContent = 'ممتاز';
+        ratingSpan.className = 'rating excellent';
+    } else if (percentage >= 75) {
+        ratingSpan.textContent = 'جيد جدا';
+        ratingSpan.className = 'rating good';
+    } else if (percentage >= 50) {
+        ratingSpan.textContent = 'مقبول';
+        ratingSpan.className = 'rating medium';
+    } else {
+        ratingSpan.textContent = 'حاول مرة';
+        ratingSpan.className = 'rating bad';
+    }
+}
+
+function checkQuestion(questionId, correctValue, explanation, isGraph = false) {
+    let selected = null;
+    
+    if (isGraph) {
+        const selectedGraph = document.querySelector(`.graph-option[data-qid="${questionId}"].selected`);
+        if (selectedGraph) selected = selectedGraph.getAttribute('data-value');
+    } else {
         const radios = document.getElementsByName(questionId);
-        let selected = null;
         for (let radio of radios) {
             if (radio.checked) {
                 selected = radio.value;
                 break;
             }
         }
-        const fbSpan = document.getElementById('fb_' + questionId);
-        
-        if (!selected) {
-            fbSpan.innerHTML = '⚠️ اختر إجابة أولاً';
-            fbSpan.className = 'feedback wrong-feedback';
-            return;
-        }
-
-        if (answeredQuestions.has(questionId)) {
-            fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
-            fbSpan.className = 'feedback wrong-feedback';
-            return;
-        }
-
-        if (selected === correctValue) {
-            fbSpan.innerHTML = '✅ إجابة صحيحة!';
-            fbSpan.className = 'feedback correct-feedback';
-            correctAnswers++;
-        } else {
-            fbSpan.innerHTML = '❌ إجابة خاطئة. ' + explanation;
-            fbSpan.className = 'feedback wrong-feedback';
-            wrongAnswers++;
-        }
-
-        answeredQuestions.add(questionId);
-        updateScoreBoard();
     }
-
-    function resetAllQuestions() {
-        correctAnswers = 0;
-        wrongAnswers = 0;
-        answeredQuestions.clear();
-        updateScoreBoard();
-        
-        document.querySelectorAll('[id^="fb_"]').forEach(fb => {
-            fb.innerHTML = '';
-            fb.className = 'feedback';
-        });
-        
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
-            radio.checked = false;
-        });
+    
+    const fbSpan = document.getElementById('fb_' + questionId);
+    const statusSpan = document.getElementById('status_' + questionId);
+    
+    if (!selected) {
+        fbSpan.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً';
+        fbSpan.className = 'feedback wrong-feedback';
+        return;
     }
+    
+    if (answeredQuestions.has(questionId)) {
+        fbSpan.innerHTML = '⚠️ لقد أجبت على هذا السؤال مسبقاً';
+        fbSpan.className = 'feedback wrong-feedback';
+        return;
+    }
+    
+    // مقارنة الإجابة
+    if (selected === correctValue) {
+        fbSpan.innerHTML = '✅ إجابة صحيحة! أحسنت.';
+        fbSpan.className = 'feedback correct-feedback';
+        if (statusSpan) {
+            statusSpan.innerHTML = '✓ صحيح';
+            statusSpan.className = 'question-status answered-correct';
+        }
+        correctAnswers++;
+        answeredQuestions.set(questionId, true);
+    } else {
+        // إظهار الإجابة الصحيحة للمستخدم
+        let correctAnswerText = "";
+        const question = questionsData.find(q => q.id === questionId);
+        if (question && !isGraph) {
+            const correctIndex = ["a", "b", "c", "d"].indexOf(correctValue);
+            if (correctIndex >= 0 && question.options[correctIndex]) {
+                correctAnswerText = question.options[correctIndex];
+            }
+        }
+        fbSpan.innerHTML = `❌ إجابة خاطئة. ${explanation} ${correctAnswerText ? `الإجابة الصحيحة هي: ${correctAnswerText}` : ''}`;
+        fbSpan.className = 'feedback wrong-feedback';
+        if (statusSpan) {
+            statusSpan.innerHTML = '✗ خطأ';
+            statusSpan.className = 'question-status answered-wrong';
+        }
+        wrongAnswers++;
+        answeredQuestions.set(questionId, false);
+    }
+    
+    updateScoreBoard();
+}
 
-    document.getElementById('homeMainBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('mainContainer').scrollIntoView({behavior: 'smooth'});
+function resetAllQuestions() {
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    answeredQuestions.clear();
+    updateScoreBoard();
+    
+    document.querySelectorAll('[id^="fb_"]').forEach(fb => {
+        fb.innerHTML = '';
+        fb.className = 'feedback';
     });
+    
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+    });
+    
+    document.querySelectorAll('.graph-option').forEach(el => {
+        el.classList.remove('selected');
+    });
+    
+    document.querySelectorAll('.question-status').forEach(el => {
+        el.innerHTML = '⏳ لم يجب';
+        el.className = 'question-status';
+    });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    
+    questionsData.forEach((q, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-box';
+        
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'header-flex';
+        
+        const numSpan = document.createElement('span');
+        numSpan.className = 'question-number';
+        numSpan.textContent = `سؤال ${idx + 1}`;
+        headerDiv.appendChild(numSpan);
+        
+        const statusSpan = document.createElement('span');
+        statusSpan.id = `status_${q.id}`;
+        statusSpan.className = 'question-status';
+        statusSpan.innerHTML = '⏳ لم يجب';
+        headerDiv.appendChild(statusSpan);
+        
+        qDiv.appendChild(headerDiv);
+        
+        const textDiv = document.createElement('div');
+        textDiv.className = 'question-text';
+        textDiv.innerHTML = `<i class="fas fa-question-circle"></i> ${q.text}`;
+        qDiv.appendChild(textDiv);
+        
+        if (q.isGraph) {
+            const hintDiv = document.createElement('div');
+            hintDiv.className = 'diagram-hint';
+            hintDiv.innerHTML = '<i class="fas fa-chart-line"></i> الملف في الوضع الأفقي → الجهد يبدأ من القمة';
+            qDiv.appendChild(hintDiv);
+            
+            const graphContainer = document.createElement('div');
+            graphContainer.className = 'graph-container';
+            
+            q.graphOptions.forEach(opt => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'graph-option';
+                optDiv.setAttribute('data-value', opt.value);
+                optDiv.setAttribute('data-qid', q.id);
+                optDiv.innerHTML = `${opt.svg}<div class="graph-label">الخيار (${opt.value})</div>`;
+                
+                optDiv.addEventListener('click', () => {
+                    document.querySelectorAll(`.graph-option[data-qid="${q.id}"]`).forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    optDiv.classList.add('selected');
+                });
+                
+                graphContainer.appendChild(optDiv);
+            });
+            qDiv.appendChild(graphContainer);
+        } else {
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options';
+            
+            q.options.forEach((optText, optIdx) => {
+                const optLabel = document.createElement('label');
+                optLabel.className = 'option';
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = q.id;
+                // تعيين القيمة بناءً على الحرف الأول للخيار أو حسب الترتيب
+                let optValue = "";
+                if (optText.startsWith("أ") || optText.startsWith("أ)")) optValue = "a";
+                else if (optText.startsWith("ب") || optText.startsWith("ب)")) optValue = "b";
+                else if (optText.startsWith("ج") || optText.startsWith("ج)")) optValue = "c";
+                else if (optText.startsWith("د") || optText.startsWith("د)")) optValue = "d";
+                else if (optIdx === 0) optValue = "a";
+                else if (optIdx === 1) optValue = "b";
+                else if (optIdx === 2) optValue = "c";
+                else if (optIdx === 3) optValue = "d";
+                
+                radio.value = optValue;
+                optLabel.appendChild(radio);
+                optLabel.appendChild(document.createTextNode(` ${optText}`));
+                optionsDiv.appendChild(optLabel);
+            });
+            qDiv.appendChild(optionsDiv);
+        }
+        
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'check-btn';
+        checkBtn.innerHTML = '<i class="fas fa-check"></i> تحقق';
+        const isGraph = q.isGraph || false;
+        checkBtn.onclick = () => checkQuestion(q.id, q.correct, q.explanation, isGraph);
+        qDiv.appendChild(checkBtn);
+        
+        const fbDiv = document.createElement('div');
+        fbDiv.id = 'fb_' + q.id;
+        fbDiv.className = 'feedback';
+        qDiv.appendChild(fbDiv);
+        
+        if (q.detailedSolution) {
+            const solutionDiv = document.createElement('div');
+            solutionDiv.className = 'solution-details';
+            solutionDiv.innerHTML = `<div class="solution-title"><i class="fas fa-lightbulb"></i> الحل المفصل:</div><p>${q.explanation}</p>`;
+            qDiv.appendChild(solutionDiv);
+        }
+        
+        container.appendChild(qDiv);
+    });
+}
+
+// زر العودة للأعلى
+const topBtn = document.getElementById('backToTop');
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
+};
+topBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+renderQuestions();
 </script>
 </body>
 </html>

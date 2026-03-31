@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>مولدات التيار المتردد - الحث الكهرومغناطيسي | الفيزياء</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f7ff 0%, #e0e8f0 100%);
+            font-family: 'Segoe UI', 'Tahoma', 'Noto Sans Arabic', system-ui, sans-serif;
+            padding: 20px;
+            color: #1a2c3e;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        /* أزرار التنقل السريع */
+        .quick-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .quick-nav button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #1f6e4a;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .quick-nav button:hover {
+            background: #ff8c42;
+            transform: scale(1.05);
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff8c42;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .main-header {
+            background: linear-gradient(135deg, #0b4d2e 0%, #1f6e4a 100%);
+            color: white;
+            padding: 1.8rem;
+            border-radius: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .main-header h1 {
+            font-size: 1.8rem;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: white;
+            border: 2px solid #1f6e4a;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: #1f6e4a;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .nav-btn.active {
+            background: #ff8c42;
+            color: white;
+            border-color: #ff8c42;
+        }
+        .card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            display: none;
+        }
+        .card.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            font-size: 1.6rem;
+            color: #0b4d2e;
+            margin-bottom: 1.5rem;
+            border-right: 6px solid #ff8c42;
+            padding-right: 18px;
+        }
+        .generator-card {
+            background: #fefcf5;
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #c8e6d9;
+            text-align: center;
+        }
+        .generator-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1f6e4a;
+            margin-bottom: 1rem;
+        }
+        .formula-box {
+            background: #1e2f3a;
+            color: #f5d742;
+            padding: 12px;
+            border-radius: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+        }
+        canvas {
+            background: #faf9f0;
+            border-radius: 1rem;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .animation-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .animation-controls button {
+            background: #1f6e4a;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        .explanation {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 1rem;
+            margin-top: 15px;
+            text-align: right;
+        }
+        /* Quiz Styles - كل سؤال له زر تحقق خاص */
+        .quiz-item {
+            background: #f9fbfd;
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #e2e8f0;
+            position: relative;
+        }
+        .quiz-question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .quiz-question-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1f6e4a;
+            flex: 1;
+        }
+        .question-status {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #e2e8f0;
+        }
+        .question-status.correct {
+            background: #2b7a3e;
+            color: white;
+        }
+        .question-status.wrong {
+            background: #dc2626;
+            color: white;
+        }
+        .quiz-option {
+            background: #f1f5f9;
+            padding: 10px 18px;
+            margin: 8px 0;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.1s;
+            border: 1px solid #cbd5e1;
+        }
+        .quiz-option:hover { background: #e2eaf5; }
+        .quiz-option.selected {
+            background: #c9e9ff;
+            border: 2px solid #ff8c42;
+        }
+        .tf-options {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .tf-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: #f1f5f9;
+            border-radius: 40px;
+            cursor: pointer;
+            border: 1px solid #cbd5e1;
+        }
+        .tf-btn.selected {
+            background: #ff8c42;
+            color: white;
+        }
+        .check-single-btn {
+            background: #2b7a3e;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-left: 0;
+        }
+        .question-feedback {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .question-feedback.correct-feedback {
+            background: #d4edda;
+            color: #155724;
+            border-right: 4px solid #2b7a3e;
+        }
+        .question-feedback.wrong-feedback {
+            background: #f8d7da;
+            color: #721c24;
+            border-right: 4px solid #dc2626;
+        }
+        button {
+            background: #1f6e4a;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .btn-reset-all { background: #9e5e2c; }
+        .add-btn { background: #8b5a2b; }
+        .back-btn { background: #4a627a; }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #4a627a;
+        }
+        .question-stats {
+            background: #eef2fa;
+            padding: 10px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        @media (max-width: 700px) {
+            canvas { width: 100%; height: auto; }
+            .quiz-question-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+<!-- أزرار التنقل السريع -->
+<div class="quick-nav">
+    <button onclick="scrollToTop()" title="أعلى الصفحة">⬆️</button>
+    <button onclick="scrollToBottom()" title="أسفل الصفحة">⬇️</button>
+    <button onclick="window.history.back()" title="رجوع">🔙</button>
+</div>
+<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
+
+<div class="container">
+    <header class="main-header">
+        <h1>⚡ مولدات التيار المتردد (AC Generator) ⚡</h1>
+        <p>الحث الكهرومغناطيسي | دوران الملف داخل مغناطيس | دوران المغناطيس حول الملف</p>
+    </header>
+
+    <nav class="nav-buttons">
+         <button class="nav-btn home-link" onclick="window.location.href='unit7.html'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+         <button class="nav-btn active" data-section="theory">📘 الشرح النظري + الرسوم المتحركة</button>
+        <button class="nav-btn" data-section="quiz">🧪 اختبار تفاعلي (أسئلة)</button>
+        <button class="nav-btn" data-section="quiz" onclick="document.getElementById('quizSection').scrollIntoView({behavior:'smooth'})">📝 انتقل للأسئلة</button>
+    </nav>
+
+    <!-- قسم الشرح والرسوم المتحركة -->
+    <div id="theorySection" class="card active">
+        <div class="section-title">🔭 مبدأ عمل المولد الكهربائي (الحث الكهرومغناطيسي)</div>
+        
+        <div class="generator-card">
+            <div class="generator-title">📌 النوع الأول: دوران الملف داخل مجال مغناطيسي ثابت</div>
+            <canvas id="generatorCanvas1" width="400" height="280" style="width:100%; max-width:400px; height:auto;"></canvas>
+            <div class="animation-controls">
+                <button onclick="toggleAnimation(1)">⏸️ إيقاف/تشغيل</button>
+                <button onclick="resetAngle(1)">🔄 إعادة</button>
+            </div>
+            <div class="explanation">
+                <strong>شرح الفكرة:</strong> عندما يدور الملف (الملف المستطيل) داخل مجال مغناطيسي منتظم، يتغير التدفق المغناطيسي عبر الملف مما يؤدي إلى توليد قوة دافعة كهربائية مستحثة (emf) متناوبة. ينتج تيار متردد sinusoidal.
+                <div class="formula-box" style="margin-top:10px;">
+                    $$ \mathcal{E} = NBA\omega \sin(\omega t) $$
+                    حيث N عدد اللفات، B كثافة الفيض، A مساحة الملف، ω السرعة الزاوية
+                </div>
+            </div>
+        </div>
+
+        <div class="generator-card">
+            <div class="generator-title">📌 النوع الثاني: دوران المغناطيس حول الملف (مثل توربين أو دينامو الدراجة)</div>
+            <canvas id="generatorCanvas2" width="400" height="280" style="width:100%; max-width:400px; height:auto;"></canvas>
+            <div class="animation-controls">
+                <button onclick="toggleAnimation(2)">⏸️ إيقاف/تشغيل</button>
+                <button onclick="resetAngle(2)">🔄 إعادة</button>
+            </div>
+            <div class="explanation">
+                <strong>شرح الفكرة:</strong> في هذا النوع، يدور المغناطيس حول ملف ثابت. التغير المستمر في اتجاه المجال المغناطيسي بالنسبة للملف يسبب تغير التدفق، مما يولد تياراً متردداً. هذا المبدأ مستخدم في توربينات الرياح ودينامو الدراجة.
+            </div>
+        </div>
+
+        <div class="generator-card">
+            <div class="generator-title">📈 شكل التيار المتردد الناتج (AC Waveform)</div>
+            <canvas id="waveCanvas" width="500" height="150" style="width:100%; max-width:500px; height:auto;"></canvas>
+            <div class="explanation">
+                التيار المتردد يغير اتجاهه دورياً، ويتولد نتيجة دوران الملف أو المغناطيس بسرعة منتظمة.
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الأسئلة (كل سؤال له زر تحقق خاص به) -->
+    <div id="quizSection" class="card">
+        <div class="section-title">🧠 اختبار فهم مولدات التيار المتردد</div>
+        <div id="quizContainer"></div>
+        <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <button id="resetAllQuizBtn" class="btn-reset-all">🔄 إعادة جميع الأسئلة</button>
+            <button id="addQuestionBtn" class="add-btn">➕ إضافة سؤال جديد</button>
+            <button id="backToTheoryBtn" class="back-btn">📖 العودة للشرح</button>
+        </div>
+        <div id="quizGlobalFeedback" style="margin-top: 15px; text-align: center; font-weight:bold;"></div>
+    </div>
+    
+    <footer>✨ المولدات الكهربائية تعتمد على قانون فاراداي للحث الكهرومغناطيسي ✨</footer>
+</div>
+
+<script>
+    // ======================== الرسوم المتحركة ========================
+    const canvas1 = document.getElementById('generatorCanvas1');
+    const ctx1 = canvas1.getContext('2d');
+    const canvas2 = document.getElementById('generatorCanvas2');
+    const ctx2 = canvas2.getContext('2d');
+    const waveCanvas = document.getElementById('waveCanvas');
+    const waveCtx = waveCanvas.getContext('2d');
+    
+    let angle1 = 0, angle2 = 0;
+    let animating1 = true, animating2 = true;
+    
+    function drawGenerator1(angle) {
+        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+        ctx1.fillStyle = '#c0c0c0';
+        ctx1.fillRect(20, 80, 40, 120);
+        ctx1.fillStyle = '#a0a0a0';
+        ctx1.fillRect(canvas1.width-60, 80, 40, 120);
+        ctx1.fillStyle = '#4a6a8a';
+        ctx1.font = "bold 12px Arial";
+        ctx1.fillText("N", 35, 70);
+        ctx1.fillText("S", canvas1.width-45, 70);
+        
+        const centerX = canvas1.width/2, centerY = canvas1.height/2;
+        const w = 100, h = 70;
+        ctx1.save();
+        ctx1.translate(centerX, centerY);
+        ctx1.rotate(angle);
+        ctx1.strokeStyle = '#d43f1d';
+        ctx1.lineWidth = 3;
+        ctx1.strokeRect(-w/2, -h/2, w, h);
+        ctx1.beginPath();
+        ctx1.moveTo(-w/2, -h/2);
+        ctx1.lineTo(w/2, h/2);
+        ctx1.strokeStyle = '#ffaa33';
+        ctx1.setLineDash([5, 5]);
+        ctx1.stroke();
+        ctx1.setLineDash([]);
+        ctx1.restore();
+        
+        ctx1.beginPath();
+        ctx1.arc(centerX - 55, centerY, 12, 0, 2*Math.PI);
+        ctx1.arc(centerX + 55, centerY, 12, 0, 2*Math.PI);
+        ctx1.fillStyle = '#eedd99';
+        ctx1.fill();
+    }
+    
+    function drawGenerator2(angle) {
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+        const cx = canvas2.width/2, cy = canvas2.height/2;
+        ctx2.fillStyle = '#d43f1d';
+        ctx2.fillRect(cx-50, cy-35, 100, 70);
+        ctx2.fillStyle = '#f0d050';
+        ctx2.fillRect(cx-45, cy-30, 90, 60);
+        
+        const radius = 110;
+        const magnetX1 = cx + radius * Math.cos(angle);
+        const magnetY1 = cy + radius * Math.sin(angle);
+        const magnetX2 = cx + radius * Math.cos(angle + Math.PI);
+        const magnetY2 = cy + radius * Math.sin(angle + Math.PI);
+        
+        ctx2.fillStyle = '#7c8a9e';
+        ctx2.fillRect(magnetX1-15, magnetY1-20, 30, 40);
+        ctx2.fillStyle = '#9e7c6e';
+        ctx2.fillRect(magnetX2-15, magnetY2-20, 30, 40);
+        ctx2.fillStyle = 'black';
+        ctx2.fillText("N", magnetX1-5, magnetY1-10);
+        ctx2.fillText("S", magnetX2-5, magnetY2-10);
+        
+        ctx2.beginPath();
+        ctx2.arc(cx, cy, radius, 0, 2*Math.PI);
+        ctx2.setLineDash([6, 8]);
+        ctx2.strokeStyle = '#888';
+        ctx2.stroke();
+        ctx2.setLineDash([]);
+    }
+    
+    let time = 0;
+    function drawWaveform() {
+        if (!waveCtx) return;
+        waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+        waveCtx.beginPath();
+        waveCtx.strokeStyle = '#d43f1d';
+        waveCtx.lineWidth = 2;
+        const amplitude = 50;
+        const centerY = waveCanvas.height/2;
+        for (let x = 0; x <= waveCanvas.width; x+=5) {
+            let angleRad = (x / waveCanvas.width) * 4 * Math.PI + time;
+            let y = centerY + amplitude * Math.sin(angleRad);
+            if (x === 0) waveCtx.moveTo(x, y);
+            else waveCtx.lineTo(x, y);
+        }
+        waveCtx.stroke();
+        time += 0.05;
+        requestAnimationFrame(drawWaveform);
+    }
+    
+    function animate1() {
+        if (animating1) angle1 += 0.05;
+        drawGenerator1(angle1);
+        requestAnimationFrame(animate1);
+    }
+    function animate2() {
+        if (animating2) angle2 += 0.05;
+        drawGenerator2(angle2);
+        requestAnimationFrame(animate2);
+    }
+    
+    function toggleAnimation(type) {
+        if (type === 1) animating1 = !animating1;
+        else animating2 = !animating2;
+    }
+    function resetAngle(type) {
+        if (type === 1) angle1 = 0;
+        else angle2 = 0;
+    }
+    
+    animate1();
+    animate2();
+    drawWaveform();
+    
+    // ======================== قسم الأسئلة (كل سؤال له زر تحقق خاص) ========================
+    let quizQuestions = [
+        { id: 0, type: "mcq", text: "مبدأ عمل المولد الكهربائي يعتمد على:", options: ["القوة المغناطيسية", "الحث الكهرومغناطيسي", "التأثير الكهروحراري", "قانون أوم"], correct: 1, userAnswer: null, feedback: null, isCorrect: null },
+        { id: 1, type: "mcq", text: "في المولد الكهربائي، التيار الناتج يكون:", options: ["مستمر", "متردد (AC)", "نصف موجي", "غير منتظم"], correct: 1, userAnswer: null, feedback: null, isCorrect: null },
+        { id: 2, type: "mcq", text: "العامل الذي لا يؤثر على مقدار القوة الدافعة الكهربائية المتولدة في المولد:", options: ["سرعة الدوران", "شدة المجال المغناطيسي", "عدد لفات الملف", "لون الملف"], correct: 3, userAnswer: null, feedback: null, isCorrect: null },
+        { id: 3, type: "tf", text: "في مولد التيار المتردد، عندما يكون الملف عمودياً على خطوط المجال تكون القوة الدافعة الكهربائية أكبر ما يمكن.", correct: 1, explanation: "خطأ، القوة الدافعة تكون أكبر عندما يكون الملف موازياً لخطوط المجال (التغير الأكبر في التدفق).", userAnswer: null, feedback: null, isCorrect: null },
+        { id: 4, type: "tf", text: "دينامو الدراجة يعمل على مبدأ دوران المغناطيس حول ملف ثابت.", correct: 0, explanation: "صحيح، في دينامو الدراجة يدور المغناطيس حول الملف.", userAnswer: null, feedback: null, isCorrect: null },
+        { id: 5, type: "mcq", text: "قانون فاراداي للحث الكهرومغناطيسي ينص على أن القوة الدافعة المستحثة:", options: ["تتناسب مع معدل تغير التدفق", "تتناسب مع شدة التيار", "تتناسب عكسياً مع عدد اللفات", "لا تعتمد على الزمن"], correct: 0, userAnswer: null, feedback: null, isCorrect: null }
+    ];
+    let nextId = quizQuestions.length;
+    
+    // دالة التحقق من سؤال فردي
+    function checkSingleQuestion(idx) {
+        const q = quizQuestions[idx];
+        const userAns = q.userAnswer;
+        if (userAns === null || userAns === undefined) {
+            q.feedback = "⚠️ الرجاء اختيار إجابة أولاً";
+            q.isCorrect = null;
+        } else {
+            if (q.type === 'mcq') {
+                const isCorrect = (userAns === q.correct);
+                q.isCorrect = isCorrect;
+                if (isCorrect) {
+                    q.feedback = "✅ إجابة صحيحة! أحسنت.";
+                } else {
+                    q.feedback = `❌ إجابة خاطئة. الإجابة الصحيحة هي: ${q.options[q.correct]}`;
+                }
+            } else {
+                const isCorrect = (userAns === q.correct);
+                q.isCorrect = isCorrect;
+                const correctText = (q.correct === 0) ? "صح" : "خطأ";
+                if (isCorrect) {
+                    q.feedback = "✅ إجابة صحيحة! أحسنت.";
+                } else {
+                    q.feedback = `❌ إجابة خاطئة. الإجابة الصحيحة هي: ${correctText}. ${q.explanation || ''}`;
+                }
+            }
+        }
+        renderQuiz();
+    }
+    
+    function renderQuiz() {
+        const container = document.getElementById('quizContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        
+        quizQuestions.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.className = 'quiz-item';
+            const typeBadge = q.type === 'mcq' ? '🔘 اختيار من متعدد' : '✓✗ صح/خطأ';
+            const statusClass = q.isCorrect === true ? 'correct' : (q.isCorrect === false ? 'wrong' : '');
+            div.innerHTML = `
+                <div class="quiz-question-header">
+                    <div class="quiz-question-text">${idx+1}. ${q.text}</div>
+                    <div class="question-status ${statusClass}">${q.isCorrect === true ? '✓ صحيح' : (q.isCorrect === false ? '✗ خطأ' : '⏳ لم يُجب')}</div>
+                </div>
+            `;
+            
+            if (q.type === 'mcq') {
+                q.options.forEach((opt, optIdx) => {
+                    const optDiv = document.createElement('div');
+                    optDiv.className = 'quiz-option';
+                    if (q.userAnswer === optIdx) optDiv.classList.add('selected');
+                    optDiv.innerText = `${String.fromCharCode(65+optIdx)}- ${opt}`;
+                    optDiv.addEventListener('click', () => {
+                        q.userAnswer = optIdx;
+                        q.feedback = null;
+                        q.isCorrect = null;
+                        renderQuiz();
+                    });
+                    div.appendChild(optDiv);
+                });
+            } else {
+                const tfDiv = document.createElement('div');
+                tfDiv.className = 'tf-options';
+                const trueBtn = document.createElement('div');
+                trueBtn.className = 'tf-btn';
+                trueBtn.innerText = '✅ صح';
+                const falseBtn = document.createElement('div');
+                falseBtn.className = 'tf-btn';
+                falseBtn.innerText = '❌ خطأ';
+                if (q.userAnswer === 0) trueBtn.classList.add('selected');
+                if (q.userAnswer === 1) falseBtn.classList.add('selected');
+                trueBtn.onclick = () => { q.userAnswer = 0; q.feedback = null; q.isCorrect = null; renderQuiz(); };
+                falseBtn.onclick = () => { q.userAnswer = 1; q.feedback = null; q.isCorrect = null; renderQuiz(); };
+                tfDiv.appendChild(trueBtn);
+                tfDiv.appendChild(falseBtn);
+                div.appendChild(tfDiv);
+            }
+            
+            // زر التحقق الخاص بالسؤال
+            const checkBtn = document.createElement('button');
+            checkBtn.className = 'check-single-btn';
+            checkBtn.innerText = '✔️ تحقق من الإجابة';
+            checkBtn.onclick = () => checkSingleQuestion(idx);
+            div.appendChild(checkBtn);
+            
+            // عرض التغذية الراجعة لهذا السؤال
+            if (q.feedback) {
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = `question-feedback ${q.isCorrect === true ? 'correct-feedback' : (q.isCorrect === false ? 'wrong-feedback' : '')}`;
+                feedbackDiv.innerText = q.feedback;
+                div.appendChild(feedbackDiv);
+            }
+            
+            container.appendChild(div);
+        });
+        
+        // إحصائيات عامة
+        const answered = quizQuestions.filter(q => q.isCorrect !== null).length;
+        const correct = quizQuestions.filter(q => q.isCorrect === true).length;
+        const statsDiv = document.getElementById('quizStats') || (() => {
+            let s = document.createElement('div');
+            s.id = 'quizStats';
+            s.className = 'question-stats';
+            container.parentNode.insertBefore(s, container);
+            return s;
+        })();
+        statsDiv.innerHTML = `📊 الإحصائيات: تم الإجابة على ${answered} من ${quizQuestions.length} سؤال | ✅ صحيح: ${correct} | ❌ خطأ: ${answered - correct}`;
+        
+        if (answered === quizQuestions.length && answered > 0) {
+            document.getElementById('quizGlobalFeedback').innerHTML = `🎉 ${correct === quizQuestions.length ? 'ممتاز! أجبت على جميع الأسئلة بشكل صحيح 🎉' : `انتهيت من جميع الأسئلة. نتيجتك: ${correct}/${quizQuestions.length}`}`;
+        } else {
+            document.getElementById('quizGlobalFeedback').innerHTML = '';
+        }
+    }
+    
+    function resetAllQuiz() {
+        quizQuestions.forEach(q => {
+            q.userAnswer = null;
+            q.feedback = null;
+            q.isCorrect = null;
+        });
+        renderQuiz();
+        document.getElementById('quizGlobalFeedback').innerHTML = '🔄 تم إعادة ضبط جميع الأسئلة';
+    }
+    
+    function addNewQuestion() {
+        const type = confirm('إضافة سؤال:\nموافق = اختيار من متعدد\nإلغاء = صح/خطأ');
+        if (type) {
+            const text = prompt('أدخل نص السؤال (اختيار من متعدد):', 'ما هو العامل الذي يزيد من القوة الدافعة الكهربائية؟');
+            if (!text) return;
+            const opts = [];
+            for (let i=0; i<4; i++) {
+                let opt = prompt(`الخيار ${i+1}:`, i===0 ? 'سرعة الدوران' : '');
+                if (opt === null) return;
+                opts.push(opt || `خيار ${i+1}`);
+            }
+            let correctIdx = parseInt(prompt('رقم الخيار الصحيح (0-3):', '0'));
+            if (isNaN(correctIdx)) correctIdx = 0;
+            quizQuestions.push({ 
+                id: nextId++, type: "mcq", text: text, options: opts, correct: correctIdx,
+                userAnswer: null, feedback: null, isCorrect: null
+            });
+        } else {
+            const text = prompt('أدخل نص سؤال صح/خطأ:', 'المولد الكهربائي يحول الطاقة الميكانيكية إلى كهربائية.');
+            if (!text) return;
+            const isTrue = confirm('هل الإجابة "صح"؟\nموافق = صح، إلغاء = خطأ');
+            const correctVal = isTrue ? 0 : 1;
+            const explanation = prompt('أضف شرحاً (اختياري):', '');
+            quizQuestions.push({ 
+                id: nextId++, type: "tf", text: text, correct: correctVal, 
+                explanation: explanation || '', userAnswer: null, feedback: null, isCorrect: null
+            });
+        }
+        renderQuiz();
+        document.getElementById('quizGlobalFeedback').innerHTML = '✨ تم إضافة سؤال جديد بنجاح! ✨';
+    }
+    
+    // دوال التنقل
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function scrollToBottom() {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    // ربط أزرار التنقل بين الأقسام
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sec = btn.getAttribute('data-section');
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(sec === 'theory' ? 'theorySection' : 'quizSection').classList.add('active');
+            btn.classList.add('active');
+            if (sec === 'quiz') renderQuiz();
+        });
+    });
+    
+    document.getElementById('resetAllQuizBtn')?.addEventListener('click', resetAllQuiz);
+    document.getElementById('addQuestionBtn')?.addEventListener('click', addNewQuestion);
+    document.getElementById('backToTheoryBtn')?.addEventListener('click', () => {
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('theorySection').classList.add('active');
+        document.querySelector('.nav-btn[data-section="theory"]').classList.add('active');
+        scrollToTop();
+    });
+    
+    window.scrollToTop = scrollToTop;
+    window.scrollToBottom = scrollToBottom;
+    window.toggleAnimation = toggleAnimation;
+    window.resetAngle = resetAngle;
+    
+    // تهيئة أولية
+    renderQuiz();
+</script>
+</body>
+</html>

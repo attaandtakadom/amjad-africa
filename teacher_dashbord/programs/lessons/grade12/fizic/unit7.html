@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>الحث الكهرومغناطيسي - الوحدة السابعة | الفيزياء</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background: linear-gradient(145deg, #f0f5fa 0%, #e0e9f0 100%); padding: 20px; }
+        .container { max-width: 1300px; margin: 0 auto; background: white; border-radius: 30px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        h1 { color: #1e4a6b; font-size: 1.8rem; text-align: center; margin-bottom: 20px; border-bottom: 4px solid #ff9800; padding-bottom: 15px; }
+        h1 i { color: #ff9800; margin-left: 10px; }
+        h2 { color: #1e4a6b; font-size: 1.4rem; margin: 20px 0 15px 0; border-right: 6px solid #ff9800; padding-right: 15px; }
+        h3 { color: #2c6e8f; font-size: 1.2rem; margin: 15px 0 10px 0; }
+        .nav-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
+        .nav-btn { background: white; border: 2px solid #1e4a6b; padding: 10px 25px; border-radius: 40px; color: #1e4a6b; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .nav-btn.active { background: #ff9800; color: white; border-color: #ff9800; }
+        .section { display: none; animation: fadeIn 0.3s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .info-card { background: #f8faff; border-radius: 20px; padding: 20px; margin: 20px 0; border: 1px solid #c8e0f0; }
+        .experiment-card { background: #fff8f0; border-radius: 20px; padding: 20px; margin: 15px 0; border-right: 5px solid #ff9800; }
+        .formula-box { background: #1e2f3a; color: #f5d742; padding: 15px; border-radius: 15px; text-align: center; font-size: 1.2rem; margin: 15px 0; font-family: monospace; }
+        canvas { background: #faf9f0; border-radius: 15px; margin: 15px auto; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .rule-card { background: linear-gradient(135deg, #e8f0fe, #ffffff); border-radius: 20px; padding: 20px; margin: 15px 0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+        .rule-text { flex: 2; min-width: 200px; }
+        .rule-diagram { flex: 1; text-align: center; min-width: 180px; }
+        .quiz-item { background: #f9fbfd; border-radius: 18px; padding: 18px; margin-bottom: 20px; border: 2px solid #e2e8f0; }
+        .quiz-option { background: #f1f5f9; padding: 10px 18px; margin: 8px 0; border-radius: 40px; cursor: pointer; border: 1px solid #cbd5e1; transition: 0.1s; }
+        .quiz-option:hover { background: #e2eaf5; }
+        .quiz-option.selected { background: #c9e9ff; border: 2px solid #ff9800; }
+        .check-btn { background: #1e4a6b; color: white; border: none; padding: 10px 25px; border-radius: 40px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .feedback { margin-top: 12px; padding: 12px; border-radius: 15px; display: none; }
+        .correct-feedback { background: #d4edda; color: #155724; display: block; border-right: 4px solid #2ecc71; }
+        .wrong-feedback { background: #f8d7da; color: #721c24; display: block; border-right: 4px solid #e74c3c; }
+        .score-bar { background: #eef2fa; border-radius: 50px; padding: 12px 20px; display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 20px; gap: 15px; }
+        .score-item { text-align: center; }
+        .score-value { font-size: 1.5rem; font-weight: bold; color: #1e4a6b; }
+        button { background: #ff9800; border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px; }
+        .btn-reset { background: #6c757d; color: white; }
+        footer { text-align: center; margin-top: 30px; padding: 15px; color: #6c757d; border-top: 1px solid #e0e0e0; }
+        @media (max-width: 700px) { .container { padding: 15px; } .rule-card { flex-direction: column; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1><i class="fas fa-magnet"></i> الحث الكهرومغناطيسي - الوحدة السابعة</h1>
+    
+    <div class="nav-buttons">
+
+          <button class="nav-btn home-link" onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+
+          <button class="nav-btn home-link" onclick="window.location.href='lesson-generator.html'" id="homeMainBtn"><i class="fas fa-ho"></i> 🧲المولدات ونظريات فاردايا</button>
+          <button class="nav-btn home-link" onclick="window.location.href='lesson-linz.html'" id="homeMainBtn"><i class="fas fa-ho"></i>  محولات الجهد </button>
+
+        <button class="nav-btn active" data-section="theory">📖 الشرح النظري</button>
+        <button class="nav-btn" data-section="laws">⚖️ القوانين والقواعد</button>
+        <button class="nav-btn" data-section="quiz">📝 تمارين تفاعلية</button>
+
+                  <button class="nav-btn home-link  active" onclick="window.location.href='quetion-7.html'" id="homeMainBtn"><i class="fas fa-home"></i> اسئلة الباب+اسئلة وامتحانات سابقة</button>
+
+    </div>
+
+    <!-- قسم الشرح النظري -->
+    <div id="theorySection" class="section active">
+        <div class="info-card">
+            <h2><i class="fas fa-lightbulb"></i> أولاً: الحث المغناطيسي (التعريف)</h2>
+            <p><strong>الحث الكهرومغناطيسي</strong> هو ظاهرة فيزيائية تحدث عندما يتغير التدفق المغناطيسي عبر ملف أو دائرة كهربائية، مما يؤدي إلى توليد قوة دافعة كهربائية مستحثة (emf) وبالتالي تيار كهربائي مستحث.</p>
+            <div class="formula-box">التدفق المغناطيسي: Φ = B · A · cosθ</div>
+            <p>وحدة التدفق المغناطيسي هي <strong>الويبر (Wb)</strong>.</p>
+        </div>
+
+        <h2><i class="fas fa-flask"></i> ثانياً: تجارب فاراداي</h2>
+        
+        <div class="experiment-card">
+            <h3>🔬 التجربة الأولى: تجربة الحلقة الحديدية لفاراداي</h3>
+            <canvas id="faradayRingCanvas" width="400" height="200" style="max-width:100%; height:auto;"></canvas>
+            <p><strong>الوصف:</strong> استخدم فاراداي حلقة حديدية ولف عليها ملفين منفصلين. عند توصيل الملف الابتدائي ببطارية، يظهر تيار لحظي في الملف الثانوي عند غلق أو فتح الدائرة.</p>
+            <p><strong>النتيجة:</strong> التغير في التيار في الملف الابتدائي يسبب تغيراً في التدفق المغناطيسي، مما يستحث تياراً في الملف الثانوي.</p>
+        </div>
+
+        <div class="experiment-card">
+            <h3>🔬 التجربة الثانية: تجربة الملف اللولبي والمغناطيس</h3>
+            <canvas id="solenoidCanvas" width="400" height="180" style="max-width:100%; height:auto;"></canvas>
+            <p><strong>الوصف:</strong> عند تحريك قضيب مغناطيسي داخل أو خارج ملف لولبي متصل بجلفانومتر، يظهر تيار مستحث. اتجاه التيار يعتمد على اتجاه حركة المغناطيس.</p>
+            <p><strong>النتيجة:</strong> الحركة النسبية بين المغناطيس والملف تولد تياراً كهربائياً.</p>
+        </div>
+
+        <div class="info-card">
+            <h2><i class="fas fa-chart-line"></i> العوامل المؤثرة على القوة الدافعة الكهربائية المستحثة</h2>
+            <ul style="margin-right: 25px; line-height: 1.8;">
+                <li>✓ <strong>سرعة التغير في التدفق المغناطيسي</strong> (كلما زادت السرعة زادت القوة الدافعة)</li>
+                <li>✓ <strong>شدة المجال المغناطيسي (B)</strong> (كلما زادت الشدة زادت القوة الدافعة)</li>
+                <li>✓ <strong>مساحة الملف (A)</strong> (كلما زادت المساحة زاد التدفق)</li>
+                <li>✓ <strong>عدد لفات الملف (N)</strong> (كلما زاد عدد اللفات زادت القوة الدافعة)</li>
+                <li>✓ <strong>الزاوية بين الملف والمجال المغناطيسي</strong> (تأثيرها على التدفق)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- قسم القوانين والقواعد -->
+    <div id="lawsSection" class="section">
+        <div class="info-card">
+            <h2><i class="fas fa-gavel"></i> قانون فاراداي للحث الكهرومغناطيسي</h2>
+            <div class="formula-box">$$\mathcal{E} = -N \frac{\Delta \Phi}{\Delta t}$$</div>
+            <p>حيث: ℰ القوة الدافعة الكهربائية المستحثة (فولت)، N عدد اللفات، ΔΦ التغير في التدفق المغناطيسي (ويبر)، Δt الزمن (ثانية).</p>
+            <div class="formula-box">$$\mathcal{E} = -N \cdot B \cdot A \cdot \omega \cdot \sin(\omega t)$$</div>
+            <p>للملف الدوار في مجال مغناطيسي.</p>
+            <h3>📌 أمثلة:</h3>
+            <p><strong>مثال 1:</strong> ملف عدد لفاته 100 لفة، يتغير التدفق خلاله من 0.05 Wb إلى 0.02 Wb خلال 0.1 ثانية. احسب القوة الدافعة المستحثة.</p>
+            <p><strong>الحل:</strong> ℰ = -N × (ΔΦ/Δt) = -100 × ((0.02-0.05)/0.1) = -100 × (-0.03/0.1) = -100 × (-0.3) = 30 V</p>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-text">
+                <h2><i class="fas fa-arrow-left"></i> قانون لينز (Lenz's Law)</h2>
+                <p><strong>النص:</strong> "التيار المستحث يتخذ اتجاهاً بحيث يعمل مجاله المغناطيسي على مقاومة التغير الذي سببه."</p>
+                <p>الإشارة السالبة في قانون فاراداي تعبر عن قانون لينز.</p>
+                <div class="formula-box">$$\mathcal{E} = -N \frac{d\Phi}{dt}$$</div>
+            </div>
+            <div class="rule-diagram">
+                <canvas id="lenzCanvas" width="150" height="150" style="max-width:100%;"></canvas>
+                <p style="font-size:12px;">اتجاه التيار يعاكس حركة المغناطيس</p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2><i class="fas fa-balance-scale"></i> قاعدة لينز وحفظ الطاقة</h2>
+            <p>قانون لينز هو تطبيق لمبدأ <strong>حفظ الطاقة</strong>. فالشغل المبذول لتحريك المغناطيس يتحول إلى طاقة كهربائية في الملف. لو كان التيار المستحث في اتجاه يساعد الحركة، لتمت الحركة دون بذل شغل، وهذا مستحيل.</p>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-text">
+                <h2><i class="fas fa-hand-peace"></i> قاعدة فليمنج لليد اليمنى (توليد التيار)</h2>
+                <p><strong>الاستخدام:</strong> لتحديد اتجاه التيار المستحث في موصل يتحرك في مجال مغناطيسي.</p>
+                <p><strong>الطريقة:</strong> الإبهام = اتجاه الحركة (Force)، السبابة = اتجاه المجال (Field)، الوسطى = اتجاه التيار (Current).</p>
+                <p style="color:#1e4a6b; margin-top:10px;">✋ اليد اليمنى: الإبهام (حركة) ← السبابة (مجال) ← الوسطى (تيار)</p>
+            </div>
+            <div class="rule-diagram">
+                <canvas id="flemingCanvas" width="140" height="140" style="max-width:100%;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم التمارين التفاعلية -->
+    <div id="quizSection" class="section">
+        <div class="score-bar">
+            <div class="score-item"><span>✅ الصحيحة</span><div class="score-value" id="quizCorrect">0</div></div>
+            <div class="score-item"><span>❌ الخاطئة</span><div class="score-value" id="quizWrong">0</div></div>
+            <div class="score-item"><span>📊 النسبة</span><div class="score-value" id="quizPercent">0%</div></div>
+        </div>
+        <div id="quizContainer"></div>
+        <div style="text-align:center; margin-top:20px;">
+            <button id="resetQuizBtn" class="btn-reset">🔄 إعادة الاختبار</button>
+        </div>
+    </div>
+    
+    <footer><i class="fas fa-magnet"></i> الحث الكهرومغناطيسي - اكتشف مايكل فاراداي 1831 <i class="fas fa-bolt"></i></footer>
+</div>
+
+<script>
+    // ============= رسم الرسوم التوضيحية =============
+    // رسم تجربة الحلقة الحديدية
+    const ringCanvas = document.getElementById('faradayRingCanvas');
+    if (ringCanvas) {
+        const ctx = ringCanvas.getContext('2d');
+        ringCanvas.width = 400; ringCanvas.height = 180;
+        ctx.fillStyle = '#c0c0c0';
+        ctx.fillRect(100, 50, 200, 80);
+        ctx.fillStyle = '#8B4513';
+        ctx.fillRect(110, 70, 30, 40);
+        ctx.fillRect(260, 70, 30, 40);
+        ctx.fillStyle = '#ffaa33';
+        ctx.fillRect(115, 75, 20, 30);
+        ctx.fillRect(265, 75, 20, 30);
+        ctx.fillStyle = 'black';
+        ctx.fillText('ملف ابتدائي', 105, 130);
+        ctx.fillText('ملف ثانوي', 260, 130);
+        ctx.fillStyle = '#1e4a6b';
+        ctx.fillText('حلقة حديدية', 170, 45);
+    }
+    
+    // رسم الملف اللولبي
+    const solCanvas = document.getElementById('solenoidCanvas');
+    if (solCanvas) {
+        const ctx = solCanvas.getContext('2d');
+        solCanvas.width = 400; solCanvas.height = 160;
+        for(let i=0; i<12; i++) {
+            ctx.beginPath();
+            ctx.ellipse(80 + i*20, 70, 12, 25, 0, 0, 2*Math.PI);
+            ctx.stroke();
+        }
+        ctx.fillStyle = '#e74c3c';
+        ctx.fillRect(280, 45, 35, 70);
+        ctx.fillStyle = '#3498db';
+        ctx.fillRect(285, 50, 25, 60);
+        ctx.fillStyle = 'white';
+        ctx.fillText('N', 292, 85);
+        ctx.fillText('S', 292, 110);
+        ctx.fillText('مغناطيس', 280, 35);
+    }
+    
+    // رسم لينز
+    const lenzCanvas = document.getElementById('lenzCanvas');
+    if (lenzCanvas) {
+        const ctx = lenzCanvas.getContext('2d');
+        lenzCanvas.width = 140; lenzCanvas.height = 140;
+        ctx.beginPath();
+        ctx.rect(30, 30, 80, 80);
+        ctx.stroke();
+        ctx.fillStyle = '#3498db';
+        ctx.fillRect(45, 45, 50, 50);
+        ctx.fillStyle = 'white';
+        ctx.fillText('S', 65, 75);
+        ctx.fillText('↓', 70, 110);
+    }
+    
+    // رسم قاعدة فليمنج
+    const flemingCanvas = document.getElementById('flemingCanvas');
+    if (flemingCanvas) {
+        const ctx = flemingCanvas.getContext('2d');
+        flemingCanvas.width = 140; flemingCanvas.height = 140;
+        ctx.fillStyle = '#f5d742';
+        ctx.fillRect(40, 30, 60, 90);
+        ctx.fillStyle = 'black';
+        ctx.fillText('↑ الإبهام', 50, 50);
+        ctx.fillText('→ السبابة', 50, 80);
+        ctx.fillText('↙ الوسطى', 50, 110);
+    }
+
+    // ============= أسئلة التمارين =============
+    let quizQuestions = [
+        { id: 0, text: "من اكتشف ظاهرة الحث الكهرومغناطيسي؟", options: ["أمبير", "فاراداي", "أوم", "ماكسويل"], correct: 1, explanation: "مايكل فاراداي اكتشف الحث الكهرومغناطيسي عام 1831." },
+        { id: 1, text: "وحدة قياس التدفق المغناطيسي هي:", options: ["تسلا", "ويبر", "فولت", "أمبير"], correct: 1, explanation: "الويبر (Wb) هو وحدة قياس التدفق المغناطيسي." },
+        { id: 2, text: "قانون لينز ينص على أن التيار المستحث يعاكس:", options: ["المجال الأصلي", "السبب الذي أحدثه", "حركة الإلكترونات", "الجهد المطبق"], correct: 1, explanation: "التيار المستحث يعاكس التغير الذي سببه." },
+        { id: 3, text: "في قانون فاراداي، الإشارة السالبة تعبر عن:", options: ["قانون أوم", "قانون لينز", "قاعدة اليد اليمنى", "حفظ الشحنة"], correct: 1, explanation: "الإشارة السالبة تمثل قانون لينز." },
+        { id: 4, text: "ملف عدد لفاته 200 لفة، يتغير التدفق من 0.1 Wb إلى 0.04 Wb خلال 0.02 ثانية. القوة الدافعة المستحثة تساوي:", options: ["600 V", "-600 V", "300 V", "-300 V"], correct: 1, explanation: "ℰ = -200 × ((0.04-0.1)/0.02) = -200 × (-0.06/0.02) = -200 × (-3) = -600 V" },
+        { id: 5, text: "قاعدة فليمنج لليد اليمنى تستخدم لتحديد:", options: ["اتجاه القوة", "اتجاه التيار المستحث", "اتجاه المجال", "مقدار الجهد"], correct: 1, explanation: "تستخدم لتحديد اتجاه التيار المستحث في الموصل." },
+        { id: 6, text: "عند زيادة سرعة حركة المغناطيس داخل الملف، فإن القوة الدافعة:", options: ["تزداد", "تقل", "لا تتغير", "تنعدم"], correct: 0, explanation: "تزداد القوة الدافعة بزيادة سرعة التغير في التدفق." },
+        { id: 7, text: "قانون لينز يحقق مبدأ:", options: ["حفظ الكتلة", "حفظ الطاقة", "حفظ الشحنة", "العمل والطاقة"], correct: 1, explanation: "قانون لينز تطبيق لمبدأ حفظ الطاقة." }
+    ];
+    
+    let userAnswers = new Array(quizQuestions.length).fill(null);
+    let questionStatus = new Array(quizQuestions.length).fill(false);
+    let quizCorrect = 0, quizWrong = 0;
+    
+    function renderQuiz() {
+        const container = document.getElementById('quizContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        quizQuestions.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.className = 'quiz-item';
+            div.innerHTML = `<strong>${idx+1}. ${q.text}</strong><br>`;
+            q.options.forEach((opt, optIdx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'quiz-option';
+                if (userAnswers[idx] === optIdx) optDiv.classList.add('selected');
+                optDiv.innerText = opt;
+                optDiv.onclick = () => {
+                    userAnswers[idx] = optIdx;
+                    renderQuiz();
+                };
+                div.appendChild(optDiv);
+            });
+            const checkBtn = document.createElement('button');
+            checkBtn.className = 'check-btn';
+            checkBtn.innerText = '✔️ تحقق';
+            checkBtn.onclick = () => checkSingleQuestion(idx);
+            div.appendChild(checkBtn);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb_${idx}`;
+            fbDiv.className = 'feedback';
+            if (questionStatus[idx] !== false && userAnswers[idx] !== null) {
+                const isCorrect = (userAnswers[idx] === q.correct);
+                fbDiv.innerHTML = isCorrect ? '✅ إجابة صحيحة!' : `❌ خطأ. ${q.explanation}`;
+                fbDiv.className = `feedback ${isCorrect ? 'correct-feedback' : 'wrong-feedback'}`;
+            }
+            div.appendChild(fbDiv);
+            container.appendChild(div);
+        });
+        updateQuizScore();
+    }
+    
+    function checkSingleQuestion(idx) {
+        const q = quizQuestions[idx];
+        const answer = userAnswers[idx];
+        if (answer === null) {
+            alert('الرجاء اختيار إجابة أولاً');
+            return;
+        }
+        if (questionStatus[idx] === true) {
+            alert('لقد أجبت على هذا السؤال مسبقاً');
+            return;
+        }
+        const isCorrect = (answer === q.correct);
+        questionStatus[idx] = true;
+        if (isCorrect) quizCorrect++;
+        else quizWrong++;
+        renderQuiz();
+    }
+    
+    function updateQuizScore() {
+        document.getElementById('quizCorrect').textContent = quizCorrect;
+        document.getElementById('quizWrong').textContent = quizWrong;
+        const total = quizCorrect + quizWrong;
+        const percent = total > 0 ? Math.round((quizCorrect / total) * 100) : 0;
+        document.getElementById('quizPercent').textContent = percent + '%';
+    }
+    
+    function resetQuiz() {
+        userAnswers = new Array(quizQuestions.length).fill(null);
+        questionStatus = new Array(quizQuestions.length).fill(false);
+        quizCorrect = 0;
+        quizWrong = 0;
+        renderQuiz();
+    }
+    
+    // التنقل بين الأقسام
+    const sections = {
+        theory: document.getElementById('theorySection'),
+        laws: document.getElementById('lawsSection'),
+        quiz: document.getElementById('quizSection')
+    };
+    
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const section = btn.getAttribute('data-section');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            if (section === 'theory') sections.theory.classList.add('active');
+            else if (section === 'laws') sections.laws.classList.add('active');
+            else if (section === 'quiz') sections.quiz.classList.add('active');
+            if (window.MathJax) MathJax.typeset();
+        });
+    });
+    
+    document.getElementById('resetQuizBtn')?.addEventListener('click', resetQuiz);
+    renderQuiz();
+</script>
+</body>
+</html>
