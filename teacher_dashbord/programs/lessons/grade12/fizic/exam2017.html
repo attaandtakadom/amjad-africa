@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>امتحان الدور الأول - المنطقة الشرقية (2017-2018)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0eaf8 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1e4a6b;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 4px solid #ff9800;
+            padding-bottom: 15px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        .section {
+            background: #f9fbfd;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #d4e0ec;
+        }
+        .section-title {
+            background: #1e4a6b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .section-title i {
+            margin-left: 10px;
+        }
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e8f0;
+            transition: 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .question-card:hover {
+            border-color: #ff9800;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .question-text {
+            font-weight: 700;
+            color: #1e4a6b;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 12px 0;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f5f7fa;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            border: 1px solid #d0dbe8;
+            transition: 0.1s;
+        }
+        .option:hover {
+            background: #e8f0fe;
+            border-color: #1e4a6b;
+        }
+        .option input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .correct-feedback {
+            background: #d4edda;
+            color: #155724;
+            border-right: 4px solid #2ecc71;
+            display: block;
+        }
+        .wrong-feedback {
+            background: #f8d7da;
+            color: #721c24;
+            border-right: 4px solid #e74c3c;
+            display: block;
+        }
+        .check-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            transition: 0.1s;
+        }
+        .check-btn:active {
+            transform: scale(0.97);
+        }
+        .score-bar {
+            background: linear-gradient(145deg, #1e4a6b, #0f2f44);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .score-item {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+        }
+        .reset-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .matching-table {
+            overflow-x: auto;
+        }
+        .matching-row {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr 100px;
+            gap: 15px;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #e0e8f0;
+        }
+        .matching-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            font-family: inherit;
+        }
+        .match-check-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .match-feedback {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        .match-correct {
+            color: #155724;
+            background: #d4edda;
+        }
+        .match-wrong {
+            color: #721c24;
+            background: #f8d7da;
+        }
+        .btn-submit {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn-check-all {
+            background: #3498db;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 700px) {
+            .matching-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .score-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        .hint-box {
+            background: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📘 امتحان الدور الأول (2017-2018)</h1>
+    <div class="subtitle">📍 المنطقة الشرقية | أسئلة الصواب والخطأ + الاختيار من متعدد + المزاوجة</div>
+
+    <div class="score-bar">
+        <span>📊 التقييم التفاعلي</span>
+        <div class="score-item">✅ الصحيحة: <span id="correctCount">0</span></div>
+        <div class="score-item">❌ الخاطئة: <span id="wrongCount">0</span></div>
+        <div class="score-item">📈 النسبة: <span id="percentage">0%</span></div>
+        <button class="reset-btn" onclick="resetAll()">🔄 إعادة تعيين الكل</button>
+    </div>
+
+    <div id="questions-container"></div>
+
+    <div id="matching-section"></div>
+    
+    <button class="btn-submit" onclick="checkAllMatching()">📌 تصحيح جميع أسئلة المزاوجة</button>
+    <div id="matchingFeedback" style="margin-top: 15px; text-align: center; font-weight: bold;"></div>
+</div>
+
+<script>
+    // ========== البيانات ==========
+    // 1. أسئلة الصواب والخطأ
+    const tfQuestions = [
+        { id: "tf1", text: "تزداد قيمة المقاومة الحرارية بزيادة درجة الحرارة.", correct: "true", explanation: "المقاومة الحرارية (مثل الثرمستور) تزداد بزيادة درجة الحرارة في المواد الموصلة." },
+        { id: "tf2", text: "قطع التيار عن المقاومة ضمن مجموعة مقاومات متصلة على التوالي لا يؤثر على قيمة التيار المار في المقاومات الأخرى.", correct: "false", explanation: "في التوصيل على التوالي، قطع أي مقاومة يقطع الدائرة بالكامل." },
+        { id: "tf3", text: "عملية نقل طاقة لمسافات طويلة تكون اقتصادية إذا استخدمت تيارات كبيرة وفرق جهد صغير جداً.", correct: "false", explanation: "الاقتصادي هو نقلها بجهد عالي وتيار منخفض لتقليل الفقد (P=I²R)." },
+        { id: "tf4", text: "يمكن حساب المعدل الذي تتحول به الطاقة الحرارية بوحدة الجول.", correct: "false", explanation: "المعدل هو القدرة وتقاس بالوات، أما الجول فوحدة الطاقة." },
+        { id: "tf5", text: "تتكون المادة من جسيمات قابلة للانقسام تسمى الذرات.", correct: "true", explanation: "الذرات هي الوحدات الأساسية للمادة." },
+        { id: "tf6", text: "يبقى نشاط الكربون - 14 ثابتاً حتى بعد موت الشجرة.", correct: "false", explanation: "بعد الموت يتوقف امتصاص الكربون ويبدأ النشاط الإشعاعي بالتناقص." },
+        { id: "tf7", text: "يستخدم المرحل المغناطيسي البسيط للربط بين دائرتين كهربائيتين تسيطر إحداهما على الأخرى.", correct: "true", explanation: "الريليه (Relay) يستخدم للتحكم بدائرة بواسطة أخرى." },
+        { id: "tf8", text: "قواطع الدائرة الكهربائية تُستخدم لمنع حدوث حمل زائد نتيجة دائرة قصر.", correct: "true", explanation: "القواطع تحمي الدائرة من التيار الزائد." },
+        { id: "tf9", text: "كلما كانت المقاومة النوعية للمادة أقل كلما كانت المادة موصلاً أفضل للكهرباء.", correct: "true", explanation: "المقاومة النوعية المنخفضة تعني موصلية عالية." },
+        { id: "tf10", text: "عند خروج جسيمات بيتا من النواة يبقى العدد الكتلي (A) ثابت والعدد الذري (Z) يزداد بمقدار واحد.", correct: "true", explanation: "جسيم بيتا يزيد العدد الذري بمقدار 1 والكتلة ثابتة." },
+        { id: "tf11", text: "تنحرف إبرة البوصلة عند وضعها بالقرب من سلك موصل في دائرة كهربائية مفتوحة.", correct: "false", explanation: "الدائرة المفتوحة لا يمر فيها تيار، فلا ينشأ مجال مغناطيسي." },
+        { id: "tf12", text: "البوابة التي يكون فيها الخرج عالياً (1) إذا كان دخل واحد أو أكثر عالياً هي بوابة NAND.", correct: "true", explanation: "NAND تعطي 0 فقط إذا كان كل الدخل 1، وإلا فالخرج 1." },
+        { id: "tf13", text: "عند تقريب القطب الشمالي لمغناطيس من أحد طرفي ملف، يصبح هذا الطرف قطباً شمالياً.", correct: "true", explanation: "وفق قانون لينز، يتولد قطب مشابه للمغناطيس المقترب ليحدث تنافر يعاكس الحركة." },
+        { id: "tf14", text: "تتمغنط الشريحتان في المفتاح الريشي بالحث المغناطيسي مؤقتاً.", correct: "true", explanation: "المفتاح الريشي (Reed switch) يعمل بالحث المؤقت." },
+        { id: "tf15", text: "القوى بين الشحنات الكهربائية هي قوى تلامسية.", correct: "false", explanation: "القوى الكهربائية تؤثر عن بُعد عبر المجال الكهربائي." },
+        { id: "tf16", text: "لدى أشعة جاما (γ) أقوى قوة اختراق.", correct: "true", explanation: "أشعة جاما هي الأكثر اختراقاً بين الإشعاعات." },
+        { id: "tf17", text: "المجال الكهربائي المنتظم يكون متغير الشدة وثابت الاتجاه.", correct: "false", explanation: "المجال المنتظم يكون ثابت الشدة والاتجاه." },
+        { id: "tf18", text: "المحرك الكهربائي يحتوي على حلقة معدنية تتكون من جزأين تسمى عاكس التيار.", correct: "true", explanation: "عاكس التيار (Commutator) يستخدم في محرك التيار المستمر." },
+        { id: "tf19", text: "المغناطيس الدائم هو الذي ينشأ عند مرور تيار كهربائي في ملف.", correct: "false", explanation: "هذا تعريف المغناطيس الكهربائي المؤقت." },
+        { id: "tf20", text: "سخان كهربائي قدرته 2000 W تم تشغيله لمدة عشر ساعات، وعلماً بأن ثمن الكيلووات ساعة 50 درهم، فبذلك تكون تكلفة التشغيل تساوي واحد دينار.", correct: "true", explanation: "الطاقة = 2 kW × 10 h = 20 kWh، التكلفة = 20 × 50 = 1000 درهم = 1 دينار." }
+    ];
+
+    // 2. أسئلة الاختيار من متعدد
+    const mcqQuestions = [
+        { id: "mcq1", text: "يستخدم السلك الأرضي لكي:", options: ["يمنع الصدمات الكهربائية", "يزيد الجهد", "يقلل التيار", "يخزن الطاقة"], correct: "0", explanation: "السلك الأرضي يوفر مساراً آمناً للتيار في حالة التسرب." },
+        { id: "mcq2", text: "يمر تيار كهربائي شدته 210 أمبير في جهاز بدء التشغيل، فرق الجهد 12V، الطاقة خلال 10 ثوانٍ:", options: ["2.52 kJ", "25.2 kJ", "252 kJ", "2520 kJ"], correct: "1", explanation: "E = V×I×t = 12×210×10 = 25200 J = 25.2 kJ" },
+        { id: "mcq3", text: "ظاهرة تحرر الإلكترونات من الفلز نتيجة لرفع درجة حرارته هي:", options: ["الانبعاث الضوئي", "الانبعاث الأيوني الحراري", "الانبعاث الثانوي", "الانبعاث الكهربائي"], correct: "1", explanation: "الانبعاث الحراري (Thermionic emission) يحدث بالتسخين." },
+        { id: "mcq4", text: "إحدى البوابات المنطقية المشتقة من البوابات الرئيسية هي:", options: ["AND", "OR", "NOT", "NOR"], correct: "3", explanation: "NOR و NAND بوابات مشتقة." },
+        { id: "mcq5", text: "يُستخدم كضابط لسطوع الضوء في راسم الذبذبات:", options: ["الجهد الموجب", "الجهد السالب في مدفع الإلكترونات", "الجهد المتردد", "الملف اللولبي"], correct: "1", explanation: "جهد التحكم على شبكة المدفع يتحكم بكثافة الشعاع." },
+        { id: "mcq6", text: "نواة غير مستقرة: العدد الكتلي يقل بـ 8 والعدد الذري ثابت، عدد جسيمات ألفا وبيتا:", options: ["2α, 2β", "2α, 4β", "4α, 2β", "1α, 4β"], correct: "1", explanation: "2α تنقص الكتلة 8 والعدد الذري 4، ثم 4β تزيد العدد الذري 4 فيعود كما هو." },
+        { id: "mcq7", text: "أي العوامل لا يؤثر في مقدار المجال المغناطيسي لملف لولبي:", options: ["شدة التيار", "عدد اللفات", "مساحة مقطع السلك", "نوع المادة المغناطيسية للقلب"], correct: "2", explanation: "مساحة مقطع السلك تؤثر على المقاومة وليس على المجال B." },
+        { id: "mcq8", text: "محول رافع: Np=200, Ns=3000, Vp=90V, Vs = ?", options: ["450 V", "900 V", "1350 V", "1800 V"], correct: "2", explanation: "Vs = Vp × (Ns/Np) = 90 × (3000/200) = 90×15 = 1350V" },
+        { id: "mcq9", text: "قيمة المقاومة التي يمكن استخدامها في دائرة موزع الجهد مع مقاومة أخرى مقدارها (1.2 kΩ) بحيث يكون فرق الجهد عبر المقاومة (1.2 kΩ) يساوي (2.2 V) عندما يكون جهد المصدر (12 V) هي:", options: ["5.0 Ω", "2.69 Ω", "5.345 kΩ", "53.45 Ω"], correct: "2", explanation: "I = V1/R1 = 2.2/1200 = 0.001833 A، R2 = (V_total - V1)/I = (12-2.2)/0.001833 = 9.8/0.001833 = 5345 Ω = 5.345 kΩ." },
+        { id: "mcq10", text: "الجهاز الذي يستخدم لتحويل الطاقة الكهربائية إلى طاقة حركية دورانية هو:", options: ["المولد الكهربائي", "المحول الكهربائي", "المكثف", "محرك التيار المستمر"], correct: "3", explanation: "محرك التيار المستمر يحول الطاقة الكهربائية إلى طاقة حركية دورانية." },
+        { id: "mcq11", text: "عندما يكون مستوى الملف موازياً لخطوط المجال المغناطيسي فإن القوة الدافعة الكهربائية المستحثة تكون:", options: ["أعظمية", "صفراً", "نصف القيمة العظمى", "ثلث القيمة العظمى"], correct: "0", explanation: "عندما يكون الملف موازياً للمجال، يكون معدل قطع خطوط المجال أعظمي، فتكون emf أعظمية." }
+    ];
+
+    // 3. أسئلة المزاوجة مع تلميحات
+    const matchingItems = [
+        { id: 39, left: "يحقق قانون أوم", correct: "الموصل الفلزي", hint: "💡 الذي يحقق العلاقة الخطية بين الجهد والتيار هو الموصل الفلزي." },
+        { id: 40, left: "مقاومة موصل يمر فيه تيار 1 أمبير عندما يكون الجهد بين طرفيه 1 فولت", correct: "الأوم", hint: "💡 وحدة قياس المقاومة الكهربائية." },
+        { id: 41, left: "يستخدم لتحديد مقاومة حمل", correct: "قانون أوم", hint: "💡 العلاقة الرياضية V = I × R تستخدم لحساب المقاومة." },
+        { id: 42, left: "يستخدم لتنويع التيار الساري في الدائرة الكهربائية", correct: "المقاومة المتغيرة", hint: "💡 أداة يمكن تغيير مقاومتها للتحكم في التيار." },
+        { id: 43, left: "يستخدم للكشف عن وجود التيار الكهربائي", correct: "الجلفانومتر ذو الملف المتحرك", hint: "💡 جهاز حساس لقياس التيارات الصغيرة جداً." },
+        { id: 44, left: "يستخدم لتوليد الكهرباء الساكنة ذات الفولتية العالية", correct: "مولد فان دي جراف", hint: "💡 جهاز ينتج فرق جهد عالي جداً باستخدام الحث." },
+        { id: 45, left: "يستخدم للكشف عن الشحنات الكهربائية", correct: "الكشاف الكهربائي", hint: "💡 أداة بسيطة تتحرك أوراقها عند وجود شحنة." },
+        { id: 46, left: "يستخدم لدراسة الأشكال الموجية", correct: "راسم الذبذبات الكاثودي", hint: "💡 جهاز يعرض الإشارات الكهربائية على شاشة." }
+    ];
+    
+    const matchingOptions = ["الموصل الفلزي", "الأوم", "قانون أوم", "المقاومة المتغيرة", "الجلفانومتر ذو الملف المتحرك", "مولد فان دي جراف", "الكشاف الكهربائي", "راسم الذبذبات الكاثودي"];
+
+    let correctCount = 0;
+    let wrongCount = 0;
+    let answered = new Set();
+    let matchStatus = {};
+
+    function updateScore() {
+        document.getElementById('correctCount').innerText = correctCount;
+        document.getElementById('wrongCount').innerText = wrongCount;
+        let total = correctCount + wrongCount;
+        let percent = total === 0 ? 0 : Math.round((correctCount / total) * 100);
+        document.getElementById('percentage').innerText = percent + '%';
+    }
+
+    function checkAnswer(questionId, correctVal, explanation) {
+        const selectedRadio = document.querySelector(`input[name="${questionId}"]:checked`);
+        
+        if (!selectedRadio) {
+            alert('الرجاء اختيار إجابة أولاً');
+            return;
+        }
+        
+        const selectedValue = selectedRadio.value;
+        const fbDiv = document.getElementById('fb_' + questionId);
+        
+        if (answered.has(questionId)) {
+            alert('لقد أجبت على هذا السؤال مسبقاً');
+            return;
+        }
+        
+        let isCorrect = (selectedValue === correctVal);
+        
+        if (isCorrect) {
+            fbDiv.innerHTML = '✅ صحيح! ' + explanation;
+            fbDiv.className = 'feedback correct-feedback';
+            correctCount++;
+        } else {
+            fbDiv.innerHTML = '❌ خطأ. ' + explanation;
+            fbDiv.className = 'feedback wrong-feedback';
+            wrongCount++;
+        }
+        
+        answered.add(questionId);
+        updateScore();
+    }
+
+    function checkMatchingItem(id, selectedValue, correctValue, hint) {
+        const fbDiv = document.getElementById(`match_fb_${id}`);
+        if (selectedValue === correctValue) {
+            fbDiv.innerHTML = `✅ صحيح! ${hint}`;
+            fbDiv.className = 'match-feedback match-correct';
+            matchStatus[id] = true;
+        } else {
+            fbDiv.innerHTML = `❌ خطأ. الإجابة الصحيحة هي: "${correctValue}". ${hint}`;
+            fbDiv.className = 'match-feedback match-wrong';
+            matchStatus[id] = false;
+        }
+    }
+
+    function checkAllMatching() {
+        let matchCorrect = 0;
+        matchingItems.forEach((item) => {
+            const select = document.getElementById(`match_${item.id}`);
+            if (select && select.value === item.correct) {
+                matchCorrect++;
+                const fbDiv = document.getElementById(`match_fb_${item.id}`);
+                if (fbDiv) {
+                    fbDiv.innerHTML = `✅ صحيح! ${item.hint}`;
+                    fbDiv.className = 'match-feedback match-correct';
+                }
+                matchStatus[item.id] = true;
+            } else if (select && select.value !== "") {
+                const fbDiv = document.getElementById(`match_fb_${item.id}`);
+                if (fbDiv) {
+                    fbDiv.innerHTML = `❌ خطأ. الإجابة الصحيحة هي: "${item.correct}". ${item.hint}`;
+                    fbDiv.className = 'match-feedback match-wrong';
+                }
+                matchStatus[item.id] = false;
+            } else {
+                const fbDiv = document.getElementById(`match_fb_${item.id}`);
+                if (fbDiv) {
+                    fbDiv.innerHTML = `⚠️ لم تختر إجابة. التلميح: ${item.hint}`;
+                    fbDiv.className = 'match-feedback match-wrong';
+                }
+            }
+        });
+        document.getElementById('matchingFeedback').innerHTML = `📌 نتيجة المزاوجة: ${matchCorrect} من ${matchingItems.length} إجابة صحيحة.`;
+    }
+
+    function resetAll() {
+        correctCount = 0;
+        wrongCount = 0;
+        answered.clear();
+        matchStatus = {};
+        updateScore();
+        document.querySelectorAll('.feedback').forEach(fb => {
+            fb.innerHTML = '';
+            fb.className = 'feedback';
+        });
+        document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+        document.querySelectorAll('select.matching-select').forEach(select => select.value = "");
+        document.querySelectorAll('.match-feedback').forEach(fb => {
+            fb.innerHTML = '';
+            fb.className = 'match-feedback';
+        });
+        document.getElementById('matchingFeedback').innerHTML = '';
+    }
+
+    function renderMatching() {
+        const container = document.getElementById('matching-section');
+        let matchingHtml = `<div class="section"><div class="section-title"><i class="fas fa-link"></i> ثالثاً: أسئلة المزاوجة</div>`;
+        matchingHtml += `<div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>تلميح عام:</strong> قم بمطابقة كل عبارة في العمود الأيسر مع المصطلح المناسب من القائمة المنسدلة. يمكنك تصحيح كل سؤال على حدة أو تصحيح الكل دفعة واحدة.</div>`;
+        matchingHtml += `<div class="matching-table">`;
+        
+        matchingItems.forEach(item => {
+            let optionsHtml = `<select id="match_${item.id}" class="matching-select" onchange="checkMatchingItem(${item.id}, this.value, '${item.correct}', '${item.hint.replace(/'/g, "\\'")}')">`;
+            optionsHtml += `<option value="">-- اختر --</option>`;
+            matchingOptions.forEach(opt => {
+                optionsHtml += `<option value="${opt}">${opt}</option>`;
+            });
+            optionsHtml += `</select>`;
+            matchingHtml += `
+                <div class="matching-row">
+                    <span><strong>${item.id}</strong> - ${item.left}</span>
+                    <span>➜</span>
+                    ${optionsHtml}
+                    <button class="match-check-btn" onclick="checkMatchingItem(${item.id}, document.getElementById('match_${item.id}').value, '${item.correct}', '${item.hint.replace(/'/g, "\\'")}')">✔ تصحيح</button>
+                </div>
+                <div id="match_fb_${item.id}" class="match-feedback" style="margin-top: 5px; margin-bottom: 10px;"></div>
+            `;
+        });
+        
+        matchingHtml += `</div><div style="margin-top:15px; text-align:center; background:#e8f0fe; padding:10px; border-radius:10px;">
+            <span>📌 اضغط الزر الأخضر أدناه لتقييم جميع أسئلة المزاوجة دفعة واحدة</span>
+        </div></div>`;
+        container.innerHTML = matchingHtml;
+    }
+
+    function renderQuestions() {
+        const container = document.getElementById('questions-container');
+        container.innerHTML = '';
+
+        // قسم الصواب والخطأ
+        let tfHtml = `<div class="section"><div class="section-title"><i class="fas fa-check-circle"></i> أولاً: أسئلة الصواب والخطأ</div>`;
+        tfQuestions.forEach((q, idx) => {
+            tfHtml += `
+                <div class="question-card">
+                    <div class="question-text">${idx+1}. ${q.text}</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="${q.id}" value="true"> ✅ صح</label>
+                        <label class="option"><input type="radio" name="${q.id}" value="false"> ❌ خطأ</label>
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer('${q.id}', '${q.correct}', '${q.explanation.replace(/'/g, "\\'")}')">✔ تحقق</button>
+                    <div id="fb_${q.id}" class="feedback"></div>
+                </div>
+            `;
+        });
+        tfHtml += `</div>`;
+        container.innerHTML += tfHtml;
+
+        // قسم الاختيار من متعدد
+        let mcqHtml = `<div class="section"><div class="section-title"><i class="fas fa-list-ul"></i> ثانياً: أسئلة الاختيار من متعدد</div>`;
+        mcqQuestions.forEach((q, idx) => {
+            let optsHtml = `<div class="options">`;
+            q.options.forEach((opt, optIdx) => {
+                optsHtml += `<label class="option"><input type="radio" name="${q.id}" value="${optIdx}"> ${opt}</label>`;
+            });
+            optsHtml += `</div>`;
+            mcqHtml += `
+                <div class="question-card">
+                    <div class="question-text">${idx+1}. ${q.text}</div>
+                    ${optsHtml}
+                    <button class="check-btn" onclick="checkAnswer('${q.id}', '${q.correct}', '${q.explanation.replace(/'/g, "\\'")}')">✔ تحقق</button>
+                    <div id="fb_${q.id}" class="feedback"></div>
+                </div>
+            `;
+        });
+        mcqHtml += `</div>`;
+        container.innerHTML += mcqHtml;
+    }
+
+    renderQuestions();
+    renderMatching();
+</script>
+</body>
+</html>

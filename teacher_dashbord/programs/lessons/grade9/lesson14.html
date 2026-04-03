@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الذكاء الاصطناعي - الصف التاسع | الدرس الرابع عشر: مجالات الذكاء الاصطناعي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            background: #ffd966;
+            color: #1e3c2c;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn.active {
+            background: #ffd966;
+            color: #1e3c2c;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active-tab {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-right: 8px solid #2c7da0;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #0b3b4f;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ffd966;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* شرح الدرس */
+        .lesson-section {
+            margin-bottom: 30px;
+        }
+
+        .lesson-section h3 {
+            color: #1e6f5c;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            background: #eef4ff;
+            padding: 8px 15px;
+            border-radius: 30px;
+        }
+
+        .lesson-section p {
+            line-height: 1.8;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .lesson-section ul,
+        .lesson-section ol {
+            margin-right: 30px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .lesson-section li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: #ffd966;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* أسئلة الكتاب */
+        .book-question {
+            background: #f8f9fc;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .question-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1e4663;
+            margin-bottom: 12px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 18px;
+            border: 2px solid #cbd5e1;
+            font-family: monospace;
+            resize: vertical;
+            margin-top: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #2c7da0;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1f5e7a;
+            transform: scale(0.97);
+        }
+
+        .reset-single {
+            background: #e67e22;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 18px;
+            font-weight: bold;
+        }
+
+        .correct-fb {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .wrong-fb {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .neutral-fb {
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+
+        /* الأسئلة التفاعلية */
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8f9fc;
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid #dee2e6;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+        }
+
+        .true-false-btns {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+
+        .tf-btn {
+            background: #e9ecef;
+            padding: 8px 30px;
+            border-radius: 40px;
+            cursor: pointer;
+            border: 2px solid #adb5bd;
+            font-weight: bold;
+        }
+
+        .tf-btn.selected {
+            background: #2c7da0;
+            color: white;
+            border-color: #2c7da0;
+        }
+
+        .evaluation-panel {
+            background: #1e2f3a;
+            border-radius: 40px;
+            padding: 20px;
+            margin-top: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .reset-all-btn {
+            background: #dc3545;
+            padding: 12px 30px;
+            font-size: 1rem;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            text-align: center;
+            color: #ccc;
+            margin-top: 30px;
+            font-size: 0.8rem;
+        }
+
+        .code-block {
+            background: #1e2a36;
+            color: #e8e8e8;
+            padding: 15px;
+            border-radius: 16px;
+            font-family: monospace;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="header">
+        <h1>🤖 الذكاء الاصطناعي <span>الصف التاسع</span></h1>
+        <p>الدرس الرابع عشر: مجالات الذكاء الاصطناعي | شرح + أسئلة الكتاب + أسئلة تفاعلية</p>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="explain">📖 شرح الدرس</button>
+        <button class="tab-btn" data-tab="book">📝 أسئلة الكتاب</button>
+        <button class="tab-btn" data-tab="interactive">🎯 أسئلة تفاعلية (صح/خطأ + اختيار متعدد)</button>
+    </div>
+
+    <!-- تبويب شرح الدرس -->
+    <div id="explainTab" class="tab-content active-tab">
+        <div class="card">
+            <div class="card-title">📚 مجالات الذكاء الاصطناعي</div>
+            
+            <div class="lesson-section">
+                <h3>🤖 أولاً: تمثيل المعرفة</h3>
+                <p>تمثيل المعرفة من أبرز سمات الذكاء الاصطناعي، ويهدف إلى اتخاذ خيارات صائبة وإيجاد أفضل الحلول. تستند معظم أنظمة الذكاء الاصطناعي إلى جزئين رئيسيين:</p>
+                <ul>
+                    <li><span class="highlight">قاعدة معلومات</span> تحتوي على المعرفة وتُخزَّن على أجهزة الذكاء الاصطناعي.</li>
+                    <li><span class="highlight">معرفة آلية للتذكر</span> تساعد على استرجاع المعلومات.</li>
+                </ul>
+                <p>المعرفة لدى البشر نوعان: <strong>معرفة ظاهرة</strong> (من الكتب والوسائل) و<strong>معرفة ضمنية</strong> (خبرات عملية غير مدونة). والتحدي الكبير هو جعل الأنظمة الذكية تصل إلى المعرفة الضمنية.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>🧠 ثانياً: الشبكات العصبية الاصطناعية</h3>
+                <p>شبكات الخلايا العصبية قادرة على تسجيل وتخزين وتذكر واسترجاع مختلف الإشارات والمعلومات، وهي تشبه إلى حد كبير الخلايا العصبية في الدماغ البشري. يمكن تدريبها عدة مرات على نفس المجموعة لتعلم النمط المطلوب.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>🗣️ ثالثاً: معالجة اللغة الطبيعية (NLP)</h3>
+                <p>تعطي الآلات القدرة على قراءة وفهم اللغات التي يتحدثها البشر. يهدف الباحثون إلى جعل النظام قادراً على اكتساب المعرفة من تلقاء نفسه من خلال قراءة النصوص والتفاعل معها.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📚 رابعاً: نظام التعلم (Learning)</h3>
+                <p>برامج ذكية تتيح للحاسوب القدرة على التعلم من أخطائه السابقة بتخزين المواقف الخاطئة وتحليلها وتجنب الوقوع فيها مرة أخرى.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>🤖 خامساً: الروبوتات (Robotics)</h3>
+                <p>أجهزة ميكانيكية تم برمجتها لتقوم بمهام مختلفة بدقة عالية وسرعة فائقة. بعضها يشبه الإنسان (الإنسان الآلي) وبعضها يختلف شكله حسب المهمة.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>👁️ سادساً: الأنظمة المرئية (Vision Systems)</h3>
+                <p>تستخدم في مجالات متعددة، أهمها الأمن والحماية. خطوات عملها:</p>
+                <ol>
+                    <li>التقاط الصور.</li>
+                    <li>تخزينها في قاعدة بيانات.</li>
+                    <li>معالجتها والتحقق من هويتها.</li>
+                    <li>اتخاذ القرار المناسب.</li>
+                </ol>
+            </div>
+
+            <div class="lesson-section">
+                <h3>🧠 سابعاً: الأنظمة الخبيرة (Expert System)</h3>
+                <p>برامج تحاكي أداء الإنسان في مجال خبرته. تحتوي على كمية هائلة من المعلومات. من مميزاتها:</p>
+                <ul>
+                    <li>سهلة الاستخدام.</li>
+                    <li>قادرة على التعلم من البشر.</li>
+                    <li>قادرة على تعليم غير المتخصصين.</li>
+                    <li>تفسير الحلول التي توصلت إليها.</li>
+                    <li>الاستجابة للأسئلة المقدمة.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- تبويب أسئلة الكتاب -->
+    <div id="bookTab" class="tab-content">
+        <div id="bookQuestionsContainer"></div>
+        <div class="evaluation-panel" id="evalPanelBook">⭐ تقييم أسئلة الكتاب</div>
+        <button id="resetBookBtn" class="reset-all-btn">🔄 إعادة ضبط أسئلة الكتاب</button>
+    </div>
+
+    <!-- تبويب الأسئلة التفاعلية -->
+    <div id="interactiveTab" class="tab-content">
+        <div id="interactiveQuestionsContainer"></div>
+        <div class="evaluation-panel" id="evalPanelInteractive">⭐ تقييم الأسئلة التفاعلية</div>
+        <button id="resetInteractiveBtn" class="reset-all-btn">🔄 إعادة ضبط الأسئلة التفاعلية</button>
+    </div>
+
+    <footer>📌 أجب عن جميع الأسئلة، اضغط "تحقق" لكل سؤال، ثم يمكنك إعادة المحاولة. الأسئلة التفاعلية محاكاة لأسئلة الكتاب بصيغة جديدة.</footer>
+</div>
+
+<script>
+    // ===================== أسئلة الكتاب (مطابقة للصور) =====================
+    const bookQuestions = [
+        { id: 1, text: "السؤال الأول: عدد ثلاث من الأمور التي لا يمكن للذكاء الاصطناعي عملها أو اقتناءها بينما يستطيع الإنسان فعلها.", modelAnswer: "1. الوعي الذاتي 2. الإبداع العاطفي 3. الحس الأخلاقي التلقائي", keywords: ["الوعي", "الإبداع", "الأخلاقي", "عاطفي", "ذاتي"] },
+        { id: 2, text: "السؤال الثاني: عدد خطوات عمل الأنظمة المرئية.", modelAnswer: "1. التقاط الصور 2. تخزينها في قاعدة بيانات 3. معالجتها والتحقق من هويتها 4. اتخاذ القرار المناسب", keywords: ["التقاط", "تخزين", "معالجتها", "قرار", "هوية"] },
+        { id: 3, text: "السؤال الثالث: اذكر ثلاث مميزات للأنظمة الخبيرة.", modelAnswer: "1. سهلة الاستخدام 2. قادرة على التعلم من البشر 3. قادرة على تعليم غير المتخصصين", keywords: ["سهلة", "التعلم", "تعليم", "غير المتخصصين", "البشر"] },
+        { id: 4, text: "السؤال الرابع: عرف المصطلح الآتي: الروبوت.", modelAnswer: "أجهزة ميكانيكية تم برمجتها لتقوم بمهام مختلفة بدقة عالية وسرعة فائقة", keywords: ["ميكانيكية", "برمجتها", "مهام", "دقة", "سرعة"] }
+    ];
+
+    // ===================== أسئلة تفاعلية (محاكاة + جديدة) =====================
+    const interactiveQuestions = [
+        { id: 1, text: "الذكاء الاصطناعي يستطيع أن يمتلك الوعي الذاتي مثل الإنسان.", type: "tf", correct: false, explanation: "خطأ، الذكاء الاصطناعي لا يمتلك وعياً ذاتياً مثل الإنسان." },
+        { id: 2, text: "من الأمور التي لا يستطيع الذكاء الاصطناعي فعلها: الإبداع العاطفي.", type: "tf", correct: true, explanation: "صحيح، الإبداع العاطفي من الصفات البشرية التي لا تمتلكها الآلات." },
+        { id: 3, text: "ما هي الخطوة الأولى في عمل الأنظمة المرئية؟", type: "mcq", options: ["تخزين الصور", "معالجة البيانات", "التقاط الصور", "اتخاذ القرار"], correct: "التقاط الصور", explanation: "الخطوة الأولى هي التقاط الصور." },
+        { id: 4, text: "الأنظمة الخبيرة من مميزاتها أنها صعبة الاستخدام.", type: "tf", correct: false, explanation: "خطأ، الأنظمة الخبيرة سهلة الاستخدام." },
+        { id: 5, text: "الروبوتات هي أجهزة ميكانيكية تم برمجتها لأداء مهام مختلفة.", type: "tf", correct: true, explanation: "صحيح، هذا هو تعريف الروبوتات." },
+        { id: 6, text: "أي من التالي يعتبر من فروع الذكاء الاصطناعي؟", type: "mcq", options: ["معالجة اللغة الطبيعية", "قواعد البيانات", "أنظمة التشغيل", "برامج المحاسبة"], correct: "معالجة اللغة الطبيعية", explanation: "معالجة اللغة الطبيعية (NLP) هي أحد فروع الذكاء الاصطناعي." },
+        { id: 7, text: "الشبكات العصبية الاصطناعية تشبه الخلايا العصبية في دماغ الإنسان.", type: "tf", correct: true, explanation: "صحيح، الشبكات العصبية تحاكي عمل الدماغ البشري." },
+        { id: 8, text: "ما عدد خطوات عمل الأنظمة المرئية حسب الدرس؟", type: "mcq", options: ["خطوتان", "ثلاث خطوات", "أربع خطوات", "خمس خطوات"], correct: "أربع خطوات", explanation: "الأنظمة المرئية تعمل بأربع خطوات: التقاط، تخزين، معالجة، اتخاذ قرار." },
+        { id: 9, text: "الأنظمة الخبيرة قادرة على تفسير الحلول التي توصلت إليها.", type: "tf", correct: true, explanation: "صحيح، من مميزات الأنظمة الخبيرة تفسير الحلول." },
+        { id: 10, text: "أي من المجالات التالية يهتم بتعليم الحاسوب فهم اللغات البشرية؟", type: "mcq", options: ["الروبوتات", "الشبكات العصبية", "معالجة اللغة الطبيعية", "الأنظمة المرئية"], correct: "معالجة اللغة الطبيعية", explanation: "معالجة اللغة الطبيعية (NLP) تعطي الآلات القدرة على فهم اللغات البشرية." }
+    ];
+
+    // حالات الأسئلة
+    let bookState = [];
+    let interactiveState = [];
+
+    function initBookState() {
+        bookState = bookQuestions.map(() => ({ isCorrect: false, userAnswer: "", checked: false }));
+    }
+    function initInteractiveState() {
+        interactiveState = interactiveQuestions.map(() => ({ isCorrect: false, userChoice: null, checked: false }));
+    }
+
+    // تقييم الأسئلة المقالية
+    function evaluateBookAnswer(userAns, keywords) {
+        if (!userAns || userAns.trim() === "") return false;
+        let norm = userAns.trim().toLowerCase().replace(/[،,.;؟!]/g, ' ').replace(/\s+/g, ' ');
+        let matchCount = 0;
+        for (let kw of keywords) {
+            if (norm.includes(kw.toLowerCase())) matchCount++;
+        }
+        return matchCount >= Math.max(1, Math.floor(keywords.length * 0.4));
+    }
+
+    function checkBookQuestion(i) {
+        let input = document.getElementById(`bookAns-${i}`);
+        let answer = input ? input.value : "";
+        let isCor = evaluateBookAnswer(answer, bookQuestions[i].keywords);
+        bookState[i] = { isCorrect: isCor, userAnswer: answer, checked: true };
+        let fb = document.getElementById(`bookFb-${i}`);
+        if (fb) {
+            fb.innerHTML = isCor ? "✅ إجابة صحيحة! أحسنت." : `❌ خطأ. الإجابة النموذجية: ${bookQuestions[i].modelAnswer}`;
+            fb.className = `feedback ${isCor ? 'correct-fb' : 'wrong-fb'}`;
+        }
+        updateBookEval();
+    }
+
+    function resetBookSingle(i) {
+        let input = document.getElementById(`bookAns-${i}`);
+        if (input) input.value = "";
+        bookState[i] = { isCorrect: false, userAnswer: "", checked: false };
+        let fb = document.getElementById(`bookFb-${i}`);
+        if (fb) {
+            fb.innerHTML = "📝 اكتب إجابتك ثم اضغط تحقق.";
+            fb.className = "feedback neutral-fb";
+        }
+        updateBookEval();
+    }
+
+    // الأسئلة التفاعلية
+    function checkInteractive(i) {
+        let q = interactiveQuestions[i];
+        let selected = null;
+        if (q.type === "tf") {
+            let t = document.getElementById(`tfTrue-${i}`);
+            let f = document.getElementById(`tfFalse-${i}`);
+            if (t && t.classList.contains("selected")) selected = true;
+            if (f && f.classList.contains("selected")) selected = false;
+        } else {
+            let radios = document.getElementsByName(`mcq-${i}`);
+            for (let r of radios) if (r.checked) selected = r.value;
+        }
+        let isCor = (selected === q.correct);
+        interactiveState[i] = { isCorrect: isCor, userChoice: selected, checked: true };
+        let fb = document.getElementById(`interFb-${i}`);
+        if (fb) {
+            fb.innerHTML = isCor ? `✅ صحيح! ${q.explanation}` : `❌ خطأ. الإجابة الصحيحة: ${q.correct}. ${q.explanation}`;
+            fb.className = `feedback ${isCor ? 'correct-fb' : 'wrong-fb'}`;
+        }
+        updateInteractiveEval();
+    }
+
+    function resetInteractiveSingle(i) {
+        let q = interactiveQuestions[i];
+        if (q.type === "tf") {
+            let t = document.getElementById(`tfTrue-${i}`);
+            let f = document.getElementById(`tfFalse-${i}`);
+            if (t) t.classList.remove("selected");
+            if (f) f.classList.remove("selected");
+        } else {
+            let radios = document.getElementsByName(`mcq-${i}`);
+            for (let r of radios) r.checked = false;
+        }
+        interactiveState[i] = { isCorrect: false, userChoice: null, checked: false };
+        let fb = document.getElementById(`interFb-${i}`);
+        if (fb) {
+            fb.innerHTML = "🔘 اختر إجابتك ثم اضغط تحقق.";
+            fb.className = "feedback neutral-fb";
+        }
+        updateInteractiveEval();
+    }
+
+    function selectTF(i, val) {
+        let t = document.getElementById(`tfTrue-${i}`);
+        let f = document.getElementById(`tfFalse-${i}`);
+        if (val === true) {
+            t.classList.add("selected");
+            f.classList.remove("selected");
+        } else {
+            f.classList.add("selected");
+            t.classList.remove("selected");
+        }
+    }
+
+    function updateBookEval() {
+        let correct = bookState.filter(s => s.checked && s.isCorrect).length;
+        let percent = (correct / bookQuestions.length) * 100;
+        document.getElementById("evalPanelBook").innerHTML = `📘 أسئلة الكتاب: ${correct}/${bookQuestions.length} صحيح (${percent.toFixed(0)}%) ${percent >= 70 ? "🎉" : percent >= 50 ? "👍" : "📚"}`;
+    }
+
+    function updateInteractiveEval() {
+        let correct = interactiveState.filter(s => s.checked && s.isCorrect).length;
+        let percent = (correct / interactiveQuestions.length) * 100;
+        document.getElementById("evalPanelInteractive").innerHTML = `🎯 الأسئلة التفاعلية: ${correct}/${interactiveQuestions.length} صحيح (${percent.toFixed(0)}%) ${percent >= 70 ? "🎉 ممتاز!" : percent >= 50 ? "👍 جيد" : "📚 يحتاج مراجعة"}`;
+    }
+
+    // عرض أسئلة الكتاب
+    function renderBookQuestions() {
+        let html = "";
+        for (let i = 0; i < bookQuestions.length; i++) {
+            let q = bookQuestions[i];
+            let s = bookState[i];
+            html += `
+                <div class="card">
+                    <div class="question-title">${q.text}</div>
+                    <textarea id="bookAns-${i}" rows="3" placeholder="اكتب إجابتك هنا...">${(s.userAnswer || "").replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;')}</textarea>
+                    <div class="btn-group">
+                        <button onclick="checkBookQuestion(${i})">🔍 تحقق</button>
+                        <button class="reset-single" onclick="resetBookSingle(${i})">🔄 إعادة المحاولة</button>
+                    </div>
+                    <div id="bookFb-${i}" class="feedback ${s.checked ? (s.isCorrect ? 'correct-fb' : 'wrong-fb') : 'neutral-fb'}">${s.checked ? (s.isCorrect ? "✅ إجابة صحيحة!" : "❌ خطأ") : "📝 اكتب إجابتك ثم تحقق"}</div>
+                </div>
+            `;
+        }
+        document.getElementById("bookQuestionsContainer").innerHTML = html;
+    }
+
+    // عرض الأسئلة التفاعلية
+    function renderInteractiveQuestions() {
+        let html = "";
+        for (let i = 0; i < interactiveQuestions.length; i++) {
+            let q = interactiveQuestions[i];
+            let s = interactiveState[i];
+            let optionsHtml = "";
+            if (q.type === "tf") {
+                optionsHtml = `
+                    <div class="true-false-btns">
+                        <div id="tfTrue-${i}" class="tf-btn" onclick="selectTF(${i}, true)">✅ صواب</div>
+                        <div id="tfFalse-${i}" class="tf-btn" onclick="selectTF(${i}, false)">❌ خطأ</div>
+                    </div>
+                `;
+            } else {
+                optionsHtml = `<div class="options-area">` + q.options.map(opt => `
+                    <label class="option">
+                        <input type="radio" name="mcq-${i}" value="${opt}"> ${opt}
+                    </label>
+                `).join('') + `</div>`;
+            }
+            html += `
+                <div class="card">
+                    <div class="question-title">${i + 1}. ${q.text}</div>
+                    ${optionsHtml}
+                    <div class="btn-group">
+                        <button onclick="checkInteractive(${i})">✅ تحقق</button>
+                        <button class="reset-single" onclick="resetInteractiveSingle(${i})">🔄 إعادة المحاولة</button>
+                    </div>
+                    <div id="interFb-${i}" class="feedback ${s.checked ? (s.isCorrect ? 'correct-fb' : 'wrong-fb') : 'neutral-fb'}">${s.checked ? (s.isCorrect ? "✅ صحيح!" : "❌ خطأ") : "🔘 اختر إجابتك ثم تحقق"}</div>
+                </div>
+            `;
+        }
+        document.getElementById("interactiveQuestionsContainer").innerHTML = html;
+    }
+
+    function resetAllBook() {
+        initBookState();
+        renderBookQuestions();
+        updateBookEval();
+    }
+
+    function resetAllInteractive() {
+        initInteractiveState();
+        renderInteractiveQuestions();
+        updateInteractiveEval();
+    }
+
+    // التبديل بين التبويبات
+    window.checkBookQuestion = checkBookQuestion;
+    window.resetBookSingle = resetBookSingle;
+    window.checkInteractive = checkInteractive;
+    window.resetInteractiveSingle = resetInteractiveSingle;
+    window.selectTF = selectTF;
+
+    let tabBtns = document.querySelectorAll(".tab-btn");
+    let explainTab = document.getElementById("explainTab");
+    let bookTab = document.getElementById("bookTab");
+    let interactiveTab = document.getElementById("interactiveTab");
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            tabBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            if (btn.dataset.tab === "explain") {
+                explainTab.classList.add("active-tab");
+                bookTab.classList.remove("active-tab");
+                interactiveTab.classList.remove("active-tab");
+            } else if (btn.dataset.tab === "book") {
+                explainTab.classList.remove("active-tab");
+                bookTab.classList.add("active-tab");
+                interactiveTab.classList.remove("active-tab");
+            } else {
+                explainTab.classList.remove("active-tab");
+                bookTab.classList.remove("active-tab");
+                interactiveTab.classList.add("active-tab");
+            }
+        });
+    });
+
+    window.onload = () => {
+        initBookState();
+        initInteractiveState();
+        renderBookQuestions();
+        renderInteractiveQuestions();
+        updateBookEval();
+        updateInteractiveEval();
+        document.getElementById("resetBookBtn").onclick = resetAllBook;
+        document.getElementById("resetInteractiveBtn").onclick = resetAllInteractive;
+    };
+</script>
+</body>
+</html>

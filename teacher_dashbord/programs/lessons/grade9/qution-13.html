@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار تفاعلي - الدرس الثالث عشر: الذكاء الاصطناعي (الصف التاسع)</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #f0f7ff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .quiz-container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 25px;
+            transition: 0.3s;
+        }
+        h1 {
+            color: #1e3c72;
+            text-align: center;
+            border-bottom: 3px solid #4c9aff;
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 20px auto;
+            padding-bottom: 8px;
+        }
+        .title-box {
+            text-align: center;
+        }
+        .question-card {
+            background: #ffffff;
+            border-right: 8px solid #2c7da0;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 20px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0b3b4f;
+            margin-bottom: 12px;
+        }
+        .answer-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 95%;
+            padding: 12px;
+            border-radius: 18px;
+            border: 1.5px solid #cbd5e1;
+            font-size: 1rem;
+            background: #fefefe;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            border-color: #2c7da0;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44,125,160,0.2);
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #2c7da0;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        button:hover {
+            background: #1f5e7a;
+            transform: scale(0.97);
+        }
+        .check-btn {
+            background: #2c7da0;
+        }
+        .reset-btn {
+            background: #e67e22;
+        }
+        .feedback {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 18px;
+            font-weight: bold;
+        }
+        .correct-feedback {
+            background: #d4edda;
+            color: #155724;
+            border-right: 5px solid #28a745;
+        }
+        .wrong-feedback {
+            background: #f8d7da;
+            color: #721c24;
+            border-right: 5px solid #dc3545;
+        }
+        .evaluation-box {
+            background: #e2f0fa;
+            padding: 15px;
+            border-radius: 30px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .reset-all {
+            background: #1e4663;
+            display: block;
+            width: 200px;
+            margin: 15px auto 0 auto;
+        }
+        .score-highlight {
+            color: #1e6f3f;
+            font-size: 1.4rem;
+        }
+        hr {
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 15px;
+        }
+
+
+.ticker-container {
+    background-color: #2c3e50;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid #f1c40f;
+}
+
+.ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    background-color: #2c3e50;
+    border-radius: 50px;
+    direction: ltr; /* لجعل الحركة من اليمين لليسار بشكل صحيح */
+}
+
+.ticker-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: tickerAnim 25s linear infinite;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #f1c40f;
+    line-height: 2;
+}
+
+.ticker-content span {
+    margin: 0 40px;
+    color: white;
+    background: #e67e22;
+    padding: 5px 20px;
+    border-radius: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: inline-block;
+}
+
+@keyframes tickerAnim {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* تحسين المظهر عند التمرير */
+.ticker:hover .ticker-content {
+    animation-play-state: paused;
+}
+
+
+
+        
+    </style>
+</head>
+<body>
+ 
+
+
+
+<div class="quiz-container">
+
+<div class="ticker-container"><!--
+        <div class="ticker">
+          <div class="ticker-content">
+                <span>🌟 ميار</span>
+                <span>🌸 ملوكة</span>
+                <span>⚡ هيبة</span>
+                <span>📚 شروق</span>
+                <span>🎨 نورهان</span>
+                <span>🏆 ليلي</span>
+                <span>✨ سليمة</span>
+                <span>🎓 جني</span>
+                <span>⭐ هبة</span>
+                <span>💖 ابرار</span>
+                <span>🔥 اسيل</span>
+                <span>🌟 الاء</span>
+                <span>🌸 ليبيا</span>
+                <span>⚡ عدن</span>
+                <span>📚 ازدهار</span>
+                <span>🎨 روان</span>
+                <span>🏆 زهرة</span>
+                <span>✨ ترتيل</span>
+                <span>🎓 مريم</span>
+                <span>⭐ سارة</span>
+                <span>💖 حلا</span>
+                <span>🔥 لمي</span>
+                <span>🏆 عائشة</span>
+                <span>✨ ريتال</span>
+                <span>🎓 سيرين</span>
+                
+ 
+            </div>    
+        </div>-->
+        <p style="text-align: center; color: #ecf0f1; margin-top: 5px; font-size: 12px;">✨ مرحبا طلاب وطالبات الصف التاسع المتميزون ✨</p>
+    </div>
+
+
+
+
+
+
+
+    <div class="title-box">
+        <h1>🤖 حل اسئلة الباب /الدرس الثالث عشر: الذكاء الاصطناعي </h1>
+        <p>الصف التاسع - اختبر معلوماتك | تحقق فوري + إعادة المحاولة لكل سؤال</p>
+
+      <button class="check-btn" id="homeBtn" onclick="window.location.href='it-artefishal.html'">🏠 الرجوع للدرس</button>
+
+    </div>
+
+
+
+    <div id="questions-container"></div>
+
+    <div class="evaluation-box" id="evaluationBox">
+        <!-- التقييم يظهر هنا ديناميكياً -->
+    </div>
+    <button id="resetAllBtn" class="reset-all">🔄 إعادة الاختبار بالكامل</button>
+    <footer>✏️ أجب عن كل سؤال، اضغط "تحقق" لمعرفة النتيجة، ثم "إعادة المحاولة" لتغيير إجابتك.</footer>
+</div>
+
+<script>
+    // ======================= بيانات الأسئلة (مبنية على محتوى الدرس الذي استخرجته) =======================
+    const questions = [
+        {
+            id: 1,
+            text: "1. عرّف الذكاء الاصطناعي (AI)؟",
+            modelAnswer: "هو فرع من فروع علوم الحاسوب يهدف إلى بناء أنظمة وبرامج قادرة على محاكاة القدرات الذهنية البشرية وأنماط عملها، مثل التعلم، والاستنتاج، واتخاذ القرار.",
+            keywords: ["فرع", "علوم الحاسوب", "محاكاة", "القدرات الذهنية", "التعلم", "الاستنتاج", "اتخاذ القرار"],
+            type: "text"
+        },
+        {
+            id: 2,
+            text: "2. اذكر أربع سمات (مميزات) للذكاء الاصطناعي.",
+            modelAnswer: "القدرة على التعلم، حل المشكلات المعقدة، الاستجابة السريعة، التفكير المنطقي.",
+            keywords: ["التعلم", "المشكلات المعقدة", "الاستجابة السريعة", "التفكير المنطقي"],
+            type: "text"
+        },
+        {
+            id: 3,
+            text: "3. اذكر أربع لغات من لغات البرمجة المستخدمة في الذكاء الاصطناعي.",
+            modelAnswer: "strips ،  Lisp، Prolog، ILP",
+            keywords: ["strips", "lisp", "prolog", "ILP"],
+            type: "text"
+        },
+        {
+            id: 4,
+            text: "4. هل هناك حدود لمدى ذكاء الآلات؟ وضّح بإيجاز.",
+            modelAnswer: "نعم، بالرغم من تفوق الآلة في السرعة والحسابات، إلا أنها تفتقر إلى الوعي الذاتي، الإبداع العاطفي، والحس الأخلاقي التلقائي، وتعتمد على جودة البيانات التي يوفرها الإنسان.",
+            keywords: ["حدود", "تفتقر", "الوعي الذاتي", "الإبداع العاطفي", "الحس الأخلاقي", "تعتمد على البيانات"],
+            type: "text"
+        },
+        {
+            id: 5,
+            text: "5. هل هناك فرق جوهري بين الذكاء البشري والذكاء الاصطناعي؟ اذكر الفرق.",
+            modelAnswer: "نعم؛ الذكاء البشري ذكاء فطري عام يشمل العاطفة والبديهة والوعي، بينما الذكاء الاصطناعي هو ذكاء مكتسب عبر الخوارزميات ومخصص لأداء مهام محددة بناءً على البيانات فقط.",
+            keywords: ["فطري", "عام", "العاطفة", "الوعي", "مكتسب", "خوارزميات", "مهام محددة"],
+            type: "text"
+        },
+        {
+            id: 6,
+            text: "6. هل يمكن أن يكون للآلة عقل ووعي؟",
+            modelAnswer: "هذا سؤال فلسفي وتقني؛ حتى الآن لا تملك الآلات وعياً بالمعنى البشري (الإحساس بالذات)، هي فقط تنفذ عمليات معالجة متطورة، وتعتبر أدوات ذكية وليست كائنات واعية.",
+            keywords: ["لا تملك", "وعياً", "الإحساس بالذات", "أدوات ذكية", "ليست واعية"],
+            type: "text"
+        },
+        {
+            id: 7,
+            text: "7. بماذا تختلف برمجة الذكاء الاصطناعي عن لغات البرمجة العادية؟",
+            modelAnswer: "تعتمد البرمجة العادية على تعليمات ثابتة (إذا حدث X افعل Y)، بينما تعتمد برمجة الذكاء الاصطناعي على النماذج الاحتمالية والتعلم من البيانات، بحيث تستطيع الآلة استنتاج الحلول دون برمجة كل خطوة بشكل صريح.",
+            keywords: ["تعليمات ثابتة", "النماذج الاحتمالية", "التعلم من البيانات", "استنتاج الحلول"],
+            type: "text"
+        },
+        {
+            id: 8,
+            text: "8. اذكر ثلاث مشاكل للذكاء الاصطناعي (لم ترد في الدرس ولكن مذكورة في النشاط).",
+            modelAnswer: "التحيز والخوارزميات، البطالة وتقليص الوظائف، انتهاك الخصوصية.",
+            keywords: ["التحيز", "البطالة", "تقليص الوظائف", "انتهاك الخصوصية", "تحيز الخوارزميات"],
+            type: "text"
+        },
+        {
+            id: 9,
+            text: "9. لغة برمجة ذات نظام عملي حسابي مبني على أساس لا مبدأ في الحساب (حسب النشاط) هي؟",
+            modelAnswer: "لغة Lisp",
+            keywords: ["lisp"],
+            type: "text"
+        },
+        {
+            id: 10,
+            text: "10. اللغة التي تستخدم في عمل برامج معالجة اللغات الطبيعية هي؟",
+            modelAnswer: "لغة Prolog",
+            keywords: ["prolog"],
+            type: "text"
+        },
+        {
+            id: 11,
+            text: "11.لغة للتعبير عن التخطيط الالي للمشاكل هي ؟",
+            modelAnswer: "لغة strips",
+            keywords: ["strips"],
+            type: "text"
+        },
+        {
+            id: 11,
+            text: "12-لغة تستخدم لدعم برامج حل المشكلات العامة مثل القوائم.والافكار المرتبطة ببعضها البعض؟",
+            modelAnswer: "لغة lips",
+            keywords: ["lips"],
+            type: "text"
+        }
+    ];
+
+    // تخزين حالة كل سؤال: { isCorrect, userAnswer, wasChecked }
+    let questionState = [];
+
+    // تهيئة الحالة
+    function initState() {
+        questionState = questions.map(() => ({
+            isCorrect: false,
+            userAnswer: "",
+            wasChecked: false
+        }));
+    }
+
+    // دالة تقييم إجابة المستخدم (مرنة باستخدام الكلمات المفتاحية + تجاهل حالة الأحرف وعلامات الترقيم)
+    function evaluateAnswer(userAns, modelAns, keywords) {
+        if (!userAns || userAns.trim() === "") return false;
+        let normalizedUser = userAns.trim().toLowerCase().replace(/[،,.;؟!]/g, ' ').replace(/\s+/g, ' ').trim();
+        let normalizedModel = modelAns.toLowerCase().replace(/[،,.;؟!]/g, ' ').replace(/\s+/g, ' ').trim();
+
+        // استراتيجية: إذا كانت الإجابة طويلة نسبياً نستخدم فحص الكلمات المفتاحية (مرن جداً)
+        // أو مقارنة تشابه بسيطة لكن للطلاب الأفضل فحص احتواء الكلمات المفتاحية.
+        let keywordMatch = true;
+        if (keywords && keywords.length > 0) {
+            let anyMatch = false;
+            let matchedCount = 0;
+            for (let kw of keywords) {
+                if (normalizedUser.includes(kw.toLowerCase())) {
+                    matchedCount++;
+                }
+            }
+            // إذا طابق على الأقل نصف الكلمات المفتاحية أو على الأقل 1 إذا كان العدد قليل
+            let required = Math.ceil(keywords.length * 0.5);
+            if (matchedCount >= required) keywordMatch = true;
+            else keywordMatch = false;
+            
+            // حالات خاصة: بعض الأسئلة تحتاج دقة عالية مثل لغات البرمجة Lisp, Prolog .. ممكن مقارنة تحتوي
+            if (keywords.length === 1 && keywords[0] === "lisp" && normalizedUser.includes("lisp")) return true;
+            if (keywords.length === 1 && keywords[0] === "prolog" && normalizedUser.includes("prolog")) return true;
+            if (keywords.length === 4 && keywords.includes("python") && normalizedUser.includes("python")) keywordMatch = true;
+            
+            return keywordMatch;
+        } else {
+            // fallback: مقارنة بسيطة إذا تطابق نصي تقريبي
+            return normalizedUser === normalizedModel || normalizedModel.includes(normalizedUser) || normalizedUser.includes(normalizedModel);
+        }
+    }
+
+    // التحقق من سؤال معين وتحديث الحالة
+    function checkQuestion(index) {
+        const question = questions[index];
+        const userAnswerElem = document.getElementById(`answer-${index}`);
+        let userAnswer = "";
+        if (userAnswerElem) userAnswer = userAnswerElem.value;
+        
+        const isCorrect = evaluateAnswer(userAnswer, question.modelAnswer, question.keywords);
+        
+        // تحديث الحالة
+        questionState[index].isCorrect = isCorrect;
+        questionState[index].userAnswer = userAnswer;
+        questionState[index].wasChecked = true;
+        
+        // عرض التغذية الراجعة
+        const feedbackDiv = document.getElementById(`feedback-${index}`);
+        if (feedbackDiv) {
+            if (isCorrect) {
+                feedbackDiv.innerHTML = "✅ إجابة صحيحة! أحسنت.";
+                feedbackDiv.className = "feedback correct-feedback";
+            } else {
+                let expectedHint = `<strong>الإجابة النموذجية:</strong><br> ${question.modelAnswer.substring(0, 200)}${question.modelAnswer.length > 200 ? "..." : ""}`;
+                feedbackDiv.innerHTML = `❌ إجابة غير صحيحة. ${expectedHint}<br><small>✏️ حاول مرة أخرى أو اضغط 'إعادة المحاولة' لإعادة الإجابة.</small>`;
+                feedbackDiv.className = "feedback wrong-feedback";
+            }
+        }
+        
+        // تحديث زر "تحقق" إلى "تم التقييم" مؤقتاً (اختياري)
+        const checkBtn = document.getElementById(`check-btn-${index}`);
+        if (checkBtn) {
+            checkBtn.textContent = "✓ تم التحقق";
+            checkBtn.disabled = true;
+            setTimeout(() => {
+                if (checkBtn) {
+                    checkBtn.textContent = "🔍 تحقق";
+                    checkBtn.disabled = false;
+                }
+            }, 1500);
+        }
+        
+        // إعادة حساب التقييم الكلي
+        updateOverallEvaluation();
+    }
+    
+    // إعادة محاولة سؤال واحد (مسح الإجابة وتصفير حالة التحقق)
+    function resetSingleQuestion(index) {
+        // مسح حقل الإدخال
+        const inputElem = document.getElementById(`answer-${index}`);
+        if (inputElem) inputElem.value = "";
+        // إعادة تعيين الحالة
+        questionState[index].isCorrect = false;
+        questionState[index].userAnswer = "";
+        questionState[index].wasChecked = false;
+        // مسح رسالة التغذية الراجعة
+        const feedbackDiv = document.getElementById(`feedback-${index}`);
+        if (feedbackDiv) {
+            feedbackDiv.innerHTML = "📝 أعد كتابة إجابتك ثم اضغط 'تحقق'.";
+            feedbackDiv.className = "feedback";
+            feedbackDiv.style.background = "#f1f9ff";
+            feedbackDiv.style.color = "#0c5460";
+        }
+        // إعادة تمكين زر التحقق إن كان معطلاً
+        const checkBtn = document.getElementById(`check-btn-${index}`);
+        if (checkBtn) {
+            checkBtn.textContent = "🔍 تحقق";
+            checkBtn.disabled = false;
+        }
+        updateOverallEvaluation();
+    }
+    
+    // حساب التقييم الكلي (عدد صحيح / نسبة)
+    function computeScore() {
+        let totalCorrect = 0;
+        let attempted = 0;
+        for (let i = 0; i < questionState.length; i++) {
+            if (questionState[i].wasChecked && questionState[i].isCorrect) totalCorrect++;
+            if (questionState[i].wasChecked) attempted++;
+        }
+        let percentage = (totalCorrect / questions.length) * 100;
+        return { totalCorrect, totalQuestions: questions.length, percentage: percentage.toFixed(1), attempted };
+    }
+    
+    // تحديث واجهة التقييم
+    function updateOverallEvaluation() {
+        const evalBox = document.getElementById("evaluationBox");
+        const { totalCorrect, totalQuestions, percentage, attempted } = computeScore();
+        let message = "";
+        if (attempted === 0) {
+            message = "⭐ لم يتم التحقق من أي إجابة بعد. ابدأ بحل الأسئلة واضغط 'تحقق' لكل سؤال. ⭐";
+        } else {
+            message = `📊 التقييم: أجبت إجابة صحيحة على ${totalCorrect} من أصل ${totalQuestions} سؤال. <br> 🎯 النسبة المئوية: ${percentage}% `;
+            if (percentage >= 70) message += " 🎉 مستوى ممتاز!";
+            else if (percentage >= 50) message += " 👍 جيد، يمكنك المراجعة.";
+            else message += " 📚 تحتاج إلى مراجعة الدرس مرة أخرى.";
+        }
+        evalBox.innerHTML = `<span class="score-highlight">${message}</span>`;
+    }
+    
+    // إعادة الاختبار بالكامل (مسح جميع الإجابات وإعادة تعيين الحالة)
+    function resetFullExam() {
+        initState();
+        // إعادة بناء واجهة الأسئلة (لتحديث كل الحقول)
+        renderQuestions();
+        updateOverallEvaluation();
+    }
+    
+    // عرض كل الأسئلة ديناميكياً
+    function renderQuestions() {
+        const container = document.getElementById("questions-container");
+        if (!container) return;
+        let html = "";
+        for (let i = 0; i < questions.length; i++) {
+            const q = questions[i];
+            const saved = questionState[i];
+            const answerValue = saved ? saved.userAnswer : "";
+            html += `
+                <div class="question-card" id="card-${i}">
+                    <div class="question-text">${q.text}</div>
+                    <div class="answer-area">
+                        <textarea id="answer-${i}" rows="2" placeholder="اكتب إجابتك هنا...">${escapeHtml(answerValue)}</textarea>
+                        <div class="btn-group">
+                            <button id="check-btn-${i}" class="check-btn" onclick="window.checkQuestion(${i})">🔍 تحقق</button>
+                            <button class="reset-btn" onclick="window.resetSingleQuestion(${i})">🔄 إعادة المحاولة</button>
+                        </div>
+                        <div id="feedback-${i}" class="feedback">
+                            ${saved && saved.wasChecked ? (saved.isCorrect ? "✅ إجابة صحيحة! أحسنت." : "❌ إجابة غير صحيحة. اضغط إعادة المحاولة.") : "📝 اكتب إجابتك ثم اضغط 'تحقق'."}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+        // بعد التصيير، نربط الدوال مع الـ window لتعمل من onclick
+        window.checkQuestion = checkQuestion;
+        window.resetSingleQuestion = resetSingleQuestion;
+    }
+    
+    // مساعد لمنع injection
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // حدث عند تحميل الصفحة
+    window.onload = () => {
+        initState();
+        renderQuestions();
+        document.getElementById("resetAllBtn").addEventListener("click", () => {
+            resetFullExam();
+        });
+        updateOverallEvaluation();
+    };
+</script>
+</body>
+</html>

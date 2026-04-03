@@ -1,267 +1,405 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الذكاء الاصطناعي | تقنية المعلومات - الصف التاسع</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .header {
-            text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .header h1 {
-            color: #1e3c72;
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        .nav-btn {
-            padding: 12px 25px;
-            font-size: 1em;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            background: #95a5a6;
-            color: white;
-        }
-        .nav-btn.active {
-            background: #2ecc71;
-        }
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .section-title {
-            font-size: 1.6em;
-            color: #1e3c72;
-            border-right: 5px solid #3498db;
-            padding-right: 15px;
-            margin-bottom: 20px;
-        }
-        .sub-title {
-            font-size: 1.3em;
-            color: #2c3e50;
-            margin: 20px 0 10px 0;
-            padding-right: 10px;
-            border-right: 3px solid #e67e22;
-        }
-        .lesson-content {
-            line-height: 1.8;
-        }
-        .lesson-content p {
-            margin: 10px 0;
-        }
-        .lesson-content ul, .lesson-content ol {
-            margin-right: 30px;
-            margin-bottom: 15px;
-        }
-        .lesson-content li {
-            margin: 8px 0;
-        }
-        .highlight-box {
-            background: #e8f4fd;
-            padding: 15px;
-            border-radius: 15px;
-            margin: 15px 0;
-            border-right: 5px solid #3498db;
-        }
-        .question-section {
-            margin-top: 20px;
-        }
-        .question-category {
-            background: #f0f7ff;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        .question-category h3 {
-            color: #1e3c72;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        .question {
-            background: #fef9e6;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ffe0a3;
-        }
-        .question-text {
-            font-size: 1.05em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .option {
-            padding: 10px;
-            background: #ecf0f1;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .option:hover {
-            background: #bdc3c7;
-            transform: translateX(5px);
-        }
-        .option.selected {
-            background: #3498db;
-            color: white;
-        }
-        .option.correct {
-            background: #2ecc71;
-            color: white;
-        }
-        .option.wrong {
-            background: #e74c3c;
-            color: white;
-        }
-        .feedback {
-            margin-top: 10px;
-            padding: 8px;
-            border-radius: 8px;
-            font-weight: bold;
-            display: none;
-        }
-        .feedback.correct-feedback {
-            background: #d5f4e6;
-            color: #27ae60;
-            display: block;
-        }
-        .feedback.wrong-feedback {
-            background: #ffe6e6;
-            color: #e74c3c;
-            display: block;
-        }
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: inherit;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-        .btn-check {
-            background: #2ecc71;
-            color: white;
-        }
-        .btn-retry {
-            background: #f39c12;
-            color: white;
-        }
-        .btn-home {
-            background: #3498db;
-            color: white;
-        }
-        .global-score {
-            margin-top: 20px;
-            padding: 15px;
-            background: #e8f4fd;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-        .hidden {
-            display: none;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: white;
-        }
-        .scroll-btn {
-            position: fixed;
-            width: 50px;
-            height: 50px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #scrollToTopBtn {
-            bottom: 100px;
-            right: 20px;
-            display: none;
-        }
-        #scrollToBottomBtn {
-            bottom: 30px;
-            right: 20px;
-        }
-        .scroll-btn:hover {
-            background-color: #2ecc71;
-            transform: scale(1.1);
-        }
-        @media (max-width: 600px) {
-            .question-text { font-size: 0.95em; }
-            .option { font-size: 0.85em; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الذكاء الاصطناعي | تقنية المعلومات - الصف التاسع</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==================== الشريط المتحرك الجديد ==================== */
+.ticker-container {
+    background-color: #2c3e50;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid #f1c40f;
+}
+
+.ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    background-color: #2c3e50;
+    border-radius: 50px;
+    direction: ltr; /* لجعل الحركة من اليمين لليسار بشكل صحيح */
+}
+
+.ticker-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: tickerAnim 25s linear infinite;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #f1c40f;
+    line-height: 2;
+}
+
+.ticker-content span {
+    margin: 0 40px;
+    color: white;
+    background: #e67e22;
+    padding: 5px 20px;
+    border-radius: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: inline-block;
+}
+
+@keyframes tickerAnim {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* تحسين المظهر عند التمرير */
+.ticker:hover .ticker-content {
+    animation-play-state: paused;
+}
+
+/* ==================== باقي التصميم كما هو ==================== */
+.header {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.header h1 {
+    color: #1e3c72;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: #95a5a6;
+    color: white;
+}
+
+.nav-btn.active {
+    background: #2ecc71;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-size: 1.6em;
+    color: #1e3c72;
+    border-right: 5px solid #3498db;
+    padding-right: 15px;
+    margin-bottom: 20px;
+}
+
+.sub-title {
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin: 20px 0 10px 0;
+    padding-right: 10px;
+    border-right: 3px solid #e67e22;
+}
+
+.lesson-content {
+    line-height: 1.8;
+}
+
+.lesson-content p {
+    margin: 10px 0;
+}
+
+.lesson-content ul, .lesson-content ol {
+    margin-right: 30px;
+    margin-bottom: 15px;
+}
+
+.lesson-content li {
+    margin: 8px 0;
+}
+
+.highlight-box {
+    background: #e8f4fd;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 15px 0;
+    border-right: 5px solid #3498db;
+}
+
+.question-section {
+    margin-top: 20px;
+}
+
+.question-category {
+    background: #f0f7ff;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.question-category h3 {
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.question {
+    background: #fef9e6;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ffe0a3;
+}
+
+.question-text {
+    font-size: 1.05em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.option {
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option:hover {
+    background: #bdc3c7;
+    transform: translateX(5px);
+}
+
+.option.selected {
+    background: #3498db;
+    color: white;
+}
+
+.option.correct {
+    background: #2ecc71;
+    color: white;
+}
+
+.option.wrong {
+    background: #e74c3c;
+    color: white;
+}
+
+.feedback {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: none;
+}
+
+.feedback.correct-feedback {
+    background: #d5f4e6;
+    color: #27ae60;
+    display: block;
+}
+
+.feedback.wrong-feedback {
+    background: #ffe6e6;
+    color: #e74c3c;
+    display: block;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: inherit;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.btn-check {
+    background: #2ecc71;
+    color: white;
+}
+
+.btn-retry {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-home {
+    background: #3498db;
+    color: white;
+}
+
+.global-score {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e8f4fd;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.scroll-btn {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scrollToTopBtn {
+    bottom: 100px;
+    right: 20px;
+    display: none;
+}
+
+#scrollToBottomBtn {
+    bottom: 30px;
+    right: 20px;
+}
+
+.scroll-btn:hover {
+    background-color: #2ecc71;
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    .question-text { font-size: 0.95em; }
+    .option { font-size: 0.85em; }
+    .ticker-content { font-size: 1em; }
+}
+</style>
 </head>
 <body>
+
 <div class="container">
+    
+    <!-- ==================== الشريط المتحرك الجديد ==================== -->
+    <div class="ticker-container"><!--
+        <div class="ticker">
+          <div class="ticker-content">
+                <span>🌟 ميار</span>
+                <span>🌸 ملوكة</span>
+                <span>⚡ هيبة</span>
+                <span>📚 شروق</span>
+                <span>🎨 نورهان</span>
+                <span>🏆 ليلي</span>
+                <span>✨ سليمة</span>
+                <span>🎓 جني</span>
+                <span>⭐ هبة</span>
+                <span>💖 ابرار</span>
+                <span>🔥 اسيل</span>
+                <span>🌟 الاء</span>
+                <span>🌸 ليبيا</span>
+                <span>⚡ عدن</span>
+                <span>📚 ازدهار</span>
+                <span>🎨 روان</span>
+                <span>🏆 زهرة</span>
+                <span>✨ ترتيل</span>
+                <span>🎓 مريم</span>
+                <span>⭐ سارة</span>
+                <span>💖 حلا</span>
+                <span>🔥 لمي</span>
+                <span>🏆 عائشة</span>
+                <span>✨ ريتال</span>
+                <span>🎓 سيرين</span>
+                
+ 
+            </div>    
+        </div>-->
+        <p style="text-align: center; color: #ecf0f1; margin-top: 5px; font-size: 12px;">✨ مرحبا طلاب وطالبات الصف التاسع المتميزون ✨</p>
+    </div>
+
     <div class="header">
         <h1>🤖 الذكاء الاصطناعي (Artificial Intelligence)</h1>
         <p>تقنية المعلومات | الصف التاسع | الفصل الدراسي الثاني</p>
     </div>
 
     <div class="nav-buttons">
-    
-<button class="nav-btn" id="homeBtn" onclick="window.location.href='../../../../al-third-preparatory/it/it-dashboard.html'"> 🏠 الرئيسية</button>
-        <button class="nav-btn" id="homeBtn" onclick="showSection('home')">📖 الدرس</button>
-        <button class="nav-btn" id="exercisesBtn" onclick="showSection('exercises')">✏️ التمارين</button>
+
+
+      <button class="nav-btn" id="homeMainBtn" onclick="window.location.href='../../../../al-third-preparatory/it/it-dashboard.html'">🏠  الرئيسية</button>
+
+
+        <button class="nav-btn" id="homeMainBtn" onclick="showSection('home')">📖 الدرس</button>
+        <button class="nav-btn" id="exercisesBtn" onclick="showSection('exercises')">✍️ التمارين</button>
+      <button class="nav-btn" id="homeBtn" onclick="window.location.href='qution-13.html'">🏠 حل اسئلة الباب :الدرس الثالث عشر </button>
+
     </div>
 
     <!-- قسم الدرس -->
     <div id="homeSection">
         <div class="card">
-            <h2 class="section-title">📚 الدرس الثالث عشر: الذكاء الاصطناعي</h2>
-        
+            <h2 class="section-title">     📚 الدرس الثالث عشر: الذكاء الاصطناعي</h2>
             <div class="lesson-content">
                 <h3 class="sub-title">1. تعريف الذكاء الاصطناعي ونشأته</h3>
                 <p>ظهر الذكاء الاصطناعي في <strong>الخمسينيات</strong> نتيجة الثورة التي حدثت في مجال تقنية المعلومات والتحكم الآلي.</p>
@@ -269,13 +407,13 @@
                     <strong>تعريفه:</strong> هو فرع من فروع علم الحاسب الآلي (Computer Science)، ويختص بعلم هندسة صناعة الآلات التي يطلق عليها مجازاً "الآلات الذكية".<br>
                     <strong>مبدأ العمل:</strong> يبنى على أساس وصف ومحاكاة الذكاء البشري (التصرفات البشرية) في الأنظمة والأجهزة التقنية.
                 </div>
-
+                
                 <h3 class="sub-title">2. أهداف الذكاء الاصطناعي</h3>
                 <ul>
                     <li>الوصول إلى فهم عميق للذكاء الإنساني عن طريق محاكاته.</li>
-                    <li>الاستثمار الأفضل للحاسب والعمل على استغلال إمكاناته كافة.</li>
+                    <li>الاستثمار الأفضل للحاسب والعمل على استغلال إمكانياته كافة.</li>
                 </ul>
-
+                
                 <h3 class="sub-title">3. ميزات وقدرات الذكاء الاصطناعي</h3>
                 <ul>
                     <li>المرونة في الاستجابة.</li>
@@ -288,16 +426,16 @@
                     <li>ممارسة الألعاب.</li>
                     <li>استنباط العلامات المميزة بين الوضعيات المتشابهة.</li>
                 </ul>
-
+                
                 <h3 class="sub-title">4. لغات برمجة الذكاء الاصطناعي</h3>
                 <ul>
                     <li><strong>لغة برولوغ (Prolog):</strong> صممت للاستخدام في عمل برامج معالجة اللغات الطبيعية.</li>
                     <li><strong>لغة IPL:</strong> أول لغة صممت لتطبيقات الذكاء الاصطناعي.</li>
-                    <li><strong>لغة Lisp:</strong> نظام عملي حسابي، تستخدم "القوائم المترابطة" كبنية بيانات رئيسية.</li>
+                    <li><strong>لغة Lisp:</strong> نظام عملي حسابي لبرامج الحاسوب بني على اساس لامبدأ في الحساب، تستخدم "القوائم المرتبطة" كبنية بيانات رئيسية.</li>
                     <li><strong>لغة STRIPS:</strong> لغة للتعبير عن "التخطيط الآلي للمشاكل".</li>
                     <li><strong>لغات أخرى:</strong> C++، Lush، MathLab.</li>
                 </ul>
-
+                
                 <h3 class="sub-title">5. مشاكل الذكاء الاصطناعي</h3>
                 <ul>
                     <li>رفع نسبة البطالة.</li>
@@ -306,7 +444,7 @@
                     <li>تعوّد البشر على الكسل.</li>
                     <li>الاستخدام الخاطئ.</li>
                 </ul>
-
+                
                 <div class="highlight-box">
                     <strong>💡 ملاحظة:</strong> من ميزات الذكاء الاصطناعي أيضاً: العمل المتواصل (24/7)، الدقة العالية، القدرة على العمل في بيئات خطرة.
                 </div>
@@ -319,9 +457,8 @@
         <div class="card">
             <h2 class="section-title">✍️ تمارين تفاعلية: الذكاء الاصطناعي</h2>
             <p>أجب عن الأسئلة التالية. لكل سؤال زر "تحقق" يظهر لك التصحيح مباشرة.</p>
-            
             <div id="questionsContainer"></div>
-
+            
             <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                 <button class="btn btn-retry" onclick="resetAllQuestions()">🔄 إعادة المحاولة (كل الأسئلة)</button>
                 <button class="btn btn-home" onclick="showSection('home')">📖 العودة للدرس</button>
@@ -329,7 +466,7 @@
             <div id="globalScore" class="global-score hidden"></div>
         </div>
     </div>
-
+    
     <footer>
         📚 الذكاء الاصطناعي - تقنية المعلومات | الصف التاسع
     </footer>
@@ -340,245 +477,214 @@
 <button id="scrollToBottomBtn" class="scroll-btn">⬇️</button>
 
 <script>
-    // ==================== الأسئلة ====================
-    // الأسئلة مرتبة: أولاً صح/خطأ، ثم اختيار من متعدد
-    const questions = [
-        // ========== أسئلة صح/خطأ (True/False) ==========
-        { type: "tf", text: "ظهر الذكاء الاصطناعي لأول مرة في الثمانينيات من القرن الماضي.", correct: "false" },
-        { type: "tf", text: "الذكاء الاصطناعي هو فرع من فروع علم الحاسب الآلي يختص بصناعة الآلات الذكية.", correct: "true" },
-        { type: "tf", text: "لغة برولوغ (Prolog) تستخدم في برامج معالجة اللغات الطبيعية.", correct: "true" },
-        { type: "tf", text: "لغة Lisp تعتمد على القوائم المترابطة كبنية بيانات رئيسية.", correct: "true" },
-        { type: "tf", text: "من مشاكل الذكاء الاصطناعي انخفاض نسبة البطالة.", correct: "false" },
-        { type: "tf", text: "لغة STRIPS تستخدم للتعبير عن التخطيط الآلي للمشاكل.", correct: "true" },
-        
-        // ========== أسئلة اختيار من متعدد (Multiple Choice) ==========
-        { type: "mc", text: "ما هي اللغة التي صممت للاستخدام في برامج معالجة اللغات الطبيعية؟", 
-          options: ["Lisp", "Prolog", "IPL", "STRIPS"], correct: "Prolog" },
-        { type: "mc", text: "أي من التالي يعتبر من ميزات الذكاء الاصطناعي؟", 
-          options: ["رفع نسبة البطالة", "التكلفة العالية", "المرونة في الاستجابة", "فقدان البيانات"], correct: "المرونة في الاستجابة" },
-        { type: "mc", text: "ما هي اللغة التي تعتبر أول لغة صممت لتطبيقات الذكاء الاصطناعي؟", 
-          options: ["Lisp", "Prolog", "IPL", "C++"], correct: "IPL" },
-        { type: "mc", text: "لغة STRIPS تستخدم في:", 
-          options: ["معالجة اللغات الطبيعية", "التخطيط الآلي للمشاكل", "القوائم المترابطة", "الحسابات الرياضية"], correct: "التخطيط الآلي للمشاكل" },
-        { type: "mc", text: "أي من المشاكل التالية تعتبر من سلبيات الذكاء الاصطناعي؟", 
-          options: ["الدقة العالية", "العمل المتواصل", "التكلفة العالية", "المرونة في الاستجابة"], correct: "التكلفة العالية" },
-        { type: "mc", text: "ما هو المبدأ الأساسي الذي يقوم عليه الذكاء الاصطناعي؟", 
-          options: ["تطوير الألعاب", "محاكاة الذكاء البشري", "تصميم قواعد البيانات", "برمجة المواقع"], correct: "محاكاة الذكاء البشري" },
-        { type: "mc", text: "أي من اللغات التالية تعتمد على القوائم المترابطة كبنية بيانات رئيسية؟", 
-          options: ["Prolog", "IPL", "Lisp", "STRIPS"], correct: "Lisp" },
-        { type: "mc", text: "من ميزات الذكاء الاصطناعي القدرة على:", 
-          options: ["النوم لفترات طويلة", "فهم وإدراك الصور المرئية", "النسيان المتعمد", "التوقف عن العمل"], correct: "فهم وإدراك الصور المرئية" },
-        { type: "mc", text: "في أي عقد ظهر الذكاء الاصطناعي لأول مرة؟", 
-          options: ["الأربعينيات", "الخمسينيات", "السبعينيات", "التسعينيات"], correct: "الخمسينيات" },
-        { type: "mc", text: "أي مما يلي يعتبر هدفاً من أهداف الذكاء الاصطناعي؟", 
-          options: ["زيادة البطالة", "الاستثمار الأفضل للحاسب", "تعقيد البرمجة", "رفع التكاليف"], correct: "الاستثمار الأفضل للحاسب" }
-    ];
+// الأسئلة (نفس الأسئلة الموجودة في الكود الأصلي)
+const questions = [
+    { type: "tf", text: "ظهر الذكاء الاصطناعي لأول مرة في الثمانينيات من القرن الماضي.", correct: "false" },
+    { type: "tf", text: "الذكاء الاصطناعي هو فرع من فروع علم الحاسب الآلي يختص بصناعة الآلات الذكية.", correct: "true" },
+    { type: "tf", text: "لغة برولوغ (Prolog) تستخدم في برامج معالجة اللغات الطبيعية.", correct: "true" },
+    { type: "tf", text: "لغة Lisp تعتمد على القوائم المرتبطة كبنية بيانات رئيسية.", correct: "true" },
+    { type: "tf", text: "من مشاكل الذكاء الاصطناعي انخفاض نسبة البطالة.", correct: "false" },
+    { type: "tf", text: "لغة STRIPS تستخدم للتعبير عن التخطيط الآلي للمشاكل.", correct: "true" },
+    { type: "mc", text: "ما هي اللغة التي صممت للاستخدام في برامج معالجة اللغات الطبيعية؟", options: ["Lisp", "Prolog", "IPL", "STRIPS"], correct: "Prolog" },
+    { type: "mc", text: "أي من التالي يعتبر من ميزات الذكاء الاصطناعي؟", options: ["رفع نسبة البطالة", "التكلفة العالية", "المرونة في الاستجابة", "فقدان البيانات"], correct: "المرونة في الاستجابة" },
+    { type: "mc", text: "ما هي اللغة التي تعتبر أول لغة صممت لتطبيقات الذكاء الاصطناعي؟", options: ["Lisp", "Prolog", "IPL", "C++"], correct: "IPL" },
+    { type: "mc", text: "لغة STRIPS تستخدم في:", options: ["معالجة اللغات الطبيعية", "التخطيط الآلي للمشاكل", "القوائم المرتبطة", "الحسابات الرياضية"], correct: "التخطيط الآلي للمشاكل" },
+    { type: "mc", text: "أي من المشاكل التالية تعتبر من سلبيات الذكاء الاصطناعي؟", options: ["الدقة العالية", "العمل المتواصل", "التكلفة العالية", "المرونة في الاستجابة"], correct: "التكلفة العالية" },
+    { type: "mc", text: "ما هو المبدأ الأساسي الذي يقوم عليه الذكاء الاصطناعي؟", options: ["تطوير الألعاب", "محاكاة الذكاء البشري", "تصميم قواعد البيانات", "برمجة المواقع"], correct: "محاكاة الذكاء البشري" },
+    { type: "mc", text: "أي من اللغات التالية تعتمد على القوائم المرتبطة كبنية بيانات رئيسية؟", options: ["Prolog", "IPL", "Lisp", "STRIPS"], correct: "Lisp" },
+    { type: "mc", text: "من ميزات الذكاء الاصطناعي القدرة على:", options: ["النوم لفترات طويلة", "فهم وإدراك الصور المرئية", "النسيان المتعمد", "التوقف عن العمل"], correct: "فهم وإدراك الصور المرئية" },
+    { type: "mc", text: "في أي عقد ظهر الذكاء الاصطناعي لأول مرة؟", options: ["الأربعينيات", "الخمسينيات", "السبعينيات", "التسعينيات"], correct: "الخمسينيات" },
+    { type: "mc", text: "أي مما يلي يعتبر هدفاً من أهداف الذكاء الاصطناعي؟", options: ["زيادة البطالة", "الاستثمار الأفضل للحاسب", "تعقيد البرمجة", "رفع التكاليف"], correct: "الاستثمار الأفضل للحاسب" }
+];
 
-    // تخزين الإجابات
-    let userAnswers = new Array(questions.length).fill(null);
-    let checkedStatus = new Array(questions.length).fill(false);
+let userAnswers = new Array(questions.length).fill(null);
+let checkedStatus = new Array(questions.length).fill(false);
 
-    // عرض الأسئلة
-    function renderQuestions() {
-        const container = document.getElementById('questionsContainer');
-        container.innerHTML = '';
-        
-        // تقسيم الأسئلة إلى صح/خطأ واختيار متعدد
-        const tfQuestions = questions.filter((q, idx) => q.type === 'tf');
-        const mcQuestions = questions.filter((q, idx) => q.type === 'mc');
-        
-        // عرض أسئلة صح/خطأ
-        if (tfQuestions.length > 0) {
-            const tfSection = document.createElement('div');
-            tfSection.className = 'question-category';
-            tfSection.innerHTML = '<h3>📌 أ. أسئلة صح/خطأ (True/False)</h3>';
-            container.appendChild(tfSection);
-            
-            tfQuestions.forEach((q, originalIdx) => {
-                const globalIdx = questions.findIndex((item, i) => item === q);
-                addQuestionToContainer(tfSection, q, globalIdx);
-            });
-        }
-        
-        // عرض أسئلة اختيار من متعدد
-        if (mcQuestions.length > 0) {
-            const mcSection = document.createElement('div');
-            mcSection.className = 'question-category';
-            mcSection.innerHTML = '<h3>📌 ب. أسئلة اختيار من متعدد (Multiple Choice)</h3>';
-            container.appendChild(mcSection);
-            
-            mcQuestions.forEach((q, originalIdx) => {
-                const globalIdx = questions.findIndex((item, i) => item === q);
-                addQuestionToContainer(mcSection, q, globalIdx);
-            });
-        }
-    }
-    
-    function addQuestionToContainer(container, q, idx) {
-        const qDiv = document.createElement('div');
-        qDiv.className = 'question';
-        qDiv.id = `q_${idx}`;
-        qDiv.innerHTML = `
-            <div class="question-text">${idx+1}. ${q.text}</div>
-            <div class="options" id="opts_${idx}"></div>
-            <div class="feedback" id="fb_${idx}"></div>
-            <button class="btn btn-check" style="margin-top:5px;" onclick="checkSingleQuestion(${idx})">✅ تحقق</button>
-        `;
-        container.appendChild(qDiv);
-        
-        const optsDiv = document.getElementById(`opts_${idx}`);
-        if (q.type === 'mc') {
-            q.options.forEach(opt => {
-                const optDiv = document.createElement('div');
-                optDiv.className = 'option';
-                optDiv.textContent = opt;
-                optDiv.setAttribute('data-ans', opt);
-                optDiv.addEventListener('click', () => selectOption(idx, opt));
-                optsDiv.appendChild(optDiv);
-            });
-        } else if (q.type === 'tf') {
-            ['صحيح', 'خطأ'].forEach(opt => {
-                const optDiv = document.createElement('div');
-                optDiv.className = 'option';
-                optDiv.textContent = opt;
-                const ansVal = (opt === 'صحيح') ? 'true' : 'false';
-                optDiv.setAttribute('data-ans', ansVal);
-                optDiv.addEventListener('click', () => selectOption(idx, ansVal));
-                optsDiv.appendChild(optDiv);
-            });
-        }
-    }
-    
-    // اختيار إجابة
-    function selectOption(qIdx, ans) {
-        userAnswers[qIdx] = ans;
-        const optsDiv = document.getElementById(`opts_${qIdx}`);
-        Array.from(optsDiv.children).forEach(opt => {
-            opt.classList.remove('selected');
-            if (opt.getAttribute('data-ans') === ans) {
-                opt.classList.add('selected');
-            }
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    const tfQuestions = questions.filter((q, idx) => q.type === 'tf');
+    const mcQuestions = questions.filter((q, idx) => q.type === 'mc');
+
+    if (tfQuestions.length > 0) {
+        const tfSection = document.createElement('div');
+        tfSection.className = 'question-category';
+        tfSection.innerHTML = '<h3>📌 أ. أسئلة صح/خطأ (True/False)</h3>';
+        container.appendChild(tfSection);
+        tfQuestions.forEach((q, originalIdx) => {
+            const globalIdx = questions.findIndex((item, i) => item === q);
+            addQuestionToContainer(tfSection, q, globalIdx);
         });
-        const fb = document.getElementById(`fb_${qIdx}`);
-        fb.style.display = 'none';
-        fb.innerHTML = '';
+    }
+    if (mcQuestions.length > 0) {
+        const mcSection = document.createElement('div');
+        mcSection.className = 'question-category';
+        mcSection.innerHTML = '<h3>📌 ب. أسئلة اختيار من متعدد (Multiple Choice)</h3>';
+        container.appendChild(mcSection);
+        mcQuestions.forEach((q, originalIdx) => {
+            const globalIdx = questions.findIndex((item, i) => item === q);
+            addQuestionToContainer(mcSection, q, globalIdx);
+        });
+    }
+}
+
+function addQuestionToContainer(container, q, idx) {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    qDiv.id = `q_${idx}`;
+    qDiv.innerHTML = `
+        <div class="question-text">${idx+1}. ${q.text}</div>
+        <div class="options" id="opts_${idx}"></div>
+        <div class="feedback" id="fb_${idx}"></div>
+        <button class="btn btn-check" style="margin-top:5px;" onclick="checkSingleQuestion(${idx})">✅ تحقق</button>
+    `;
+    container.appendChild(qDiv);
+    const optsDiv = document.getElementById(`opts_${idx}`);
+    if (q.type === 'mc') {
+        q.options.forEach(opt => {
+            const optDiv = document.createElement('div');
+            optDiv.className = 'option';
+            optDiv.textContent = opt;
+            optDiv.setAttribute('data-ans', opt);
+            optDiv.addEventListener('click', () => selectOption(idx, opt));
+            optsDiv.appendChild(optDiv);
+        });
+    } else if (q.type === 'tf') {
+        ['صحيح', 'خطأ'].forEach(opt => {
+            const optDiv = document.createElement('div');
+            optDiv.className = 'option';
+            optDiv.textContent = opt;
+            const ansVal = (opt === 'صحيح') ? 'true' : 'false';
+            optDiv.setAttribute('data-ans', ansVal);
+            optDiv.addEventListener('click', () => selectOption(idx, ansVal));
+            optsDiv.appendChild(optDiv);
+        });
+    }
+}
+
+function selectOption(qIdx, ans) {
+    userAnswers[qIdx] = ans;
+    const optsDiv = document.getElementById(`opts_${qIdx}`);
+    Array.from(optsDiv.children).forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.getAttribute('data-ans') === ans) {
+            opt.classList.add('selected');
+        }
+    });
+    const fb = document.getElementById(`fb_${qIdx}`);
+    fb.style.display = 'none';
+    fb.innerHTML = '';
+    checkedStatus[qIdx] = false;
+    document.getElementById('globalScore').classList.add('hidden');
+}
+
+function checkSingleQuestion(qIdx) {
+    const ans = userAnswers[qIdx];
+    const correctAns = questions[qIdx].correct;
+    const fbDiv = document.getElementById(`fb_${qIdx}`);
+    if (ans === undefined || ans === null) {
+        fbDiv.innerHTML = '⚠️ يرجى اختيار إجابة أولاً.';
+        fbDiv.className = 'feedback wrong-feedback';
         checkedStatus[qIdx] = false;
-        document.getElementById('globalScore').classList.add('hidden');
+        return;
     }
-    
-    // التحقق من سؤال واحد
-    function checkSingleQuestion(qIdx) {
-        const ans = userAnswers[qIdx];
-        const correctAns = questions[qIdx].correct;
-        const fbDiv = document.getElementById(`fb_${qIdx}`);
-        if (ans === undefined || ans === null) {
-            fbDiv.innerHTML = '⚠️ يرجى اختيار إجابة أولاً.';
-            fbDiv.className = 'feedback wrong-feedback';
-            checkedStatus[qIdx] = false;
-            return;
-        }
-        const isCorrect = (ans === correctAns);
-        if (isCorrect) {
-            fbDiv.innerHTML = '✅ إجابة صحيحة!';
-            fbDiv.className = 'feedback correct-feedback';
-        } else {
-            const correctDisplay = (correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns));
-            fbDiv.innerHTML = `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctDisplay}`;
-            fbDiv.className = 'feedback wrong-feedback';
-        }
-        checkedStatus[qIdx] = true;
-        
-        const optsDiv = document.getElementById(`opts_${qIdx}`);
-        Array.from(optsDiv.children).forEach(opt => {
-            opt.classList.remove('correct', 'wrong');
-            if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
-            if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
-        });
-        updateGlobalScore();
+    const isCorrect = (ans === correctAns);
+    if (isCorrect) {
+        fbDiv.innerHTML = '✅ إجابة صحيحة!';
+        fbDiv.className = 'feedback correct-feedback';
+    } else {
+        const correctDisplay = (correctAns === 'true' ? 'صحيح' : (correctAns === 'false' ? 'خطأ' : correctAns));
+        fbDiv.innerHTML = `❌ إجابة خاطئة. الإجابة الصحيحة: ${correctDisplay}`;
+        fbDiv.className = 'feedback wrong-feedback';
     }
-    
-    // تحديث النتيجة الإجمالية
-    function updateGlobalScore() {
-        let answeredCount = 0;
-        let correctCount = 0;
-        for (let i = 0; i < questions.length; i++) {
-            if (checkedStatus[i] && userAnswers[i] !== null) {
-                answeredCount++;
-                if (userAnswers[i] === questions[i].correct) correctCount++;
-            }
-        }
-        const globalDiv = document.getElementById('globalScore');
-        if (answeredCount > 0) {
-            globalDiv.innerHTML = `📊 النتيجة الإجمالية (للأسئلة التي تم التحقق منها): ${correctCount} من ${answeredCount} صحيحة.`;
-            globalDiv.classList.remove('hidden');
-        } else {
-            globalDiv.classList.add('hidden');
+    checkedStatus[qIdx] = true;
+    const optsDiv = document.getElementById(`opts_${qIdx}`);
+    Array.from(optsDiv.children).forEach(opt => {
+        opt.classList.remove('correct', 'wrong');
+        if (opt.getAttribute('data-ans') === correctAns) opt.classList.add('correct');
+        if (opt.classList.contains('selected') && opt.getAttribute('data-ans') !== correctAns) opt.classList.add('wrong');
+    });
+    updateGlobalScore();
+}
+
+function updateGlobalScore() {
+    let answeredCount = 0;
+    let correctCount = 0;
+    for (let i = 0; i < questions.length; i++) {
+        if (checkedStatus[i] && userAnswers[i] !== null) {
+            answeredCount++;
+            if (userAnswers[i] === questions[i].correct) correctCount++;
         }
     }
-    
-    // إعادة تعيين كل الأسئلة
-    function resetAllQuestions() {
-        userAnswers.fill(null);
-        checkedStatus.fill(false);
-        for (let i = 0; i < questions.length; i++) {
-            const optsDiv = document.getElementById(`opts_${i}`);
-            if (optsDiv) {
-                Array.from(optsDiv.children).forEach(opt => {
-                    opt.classList.remove('selected', 'correct', 'wrong');
-                });
-            }
-            const fb = document.getElementById(`fb_${i}`);
+    const globalDiv = document.getElementById('globalScore');
+    if (answeredCount > 0) {
+        globalDiv.innerHTML = `📊 النتيجة الإجمالية (للأسئلة التي تم التحقق منها): ${correctCount} من ${answeredCount} صحيحة.`;
+        globalDiv.classList.remove('hidden');
+    } else {
+        globalDiv.classList.add('hidden');
+    }
+}
+
+function resetAllQuestions() {
+    userAnswers.fill(null);
+    checkedStatus.fill(false);
+    for (let i = 0; i < questions.length; i++) {
+        const optsDiv = document.getElementById(`opts_${i}`);
+        if (optsDiv) {
+            Array.from(optsDiv.children).forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+        }
+        const fb = document.getElementById(`fb_${i}`);
+        if(fb) {
             fb.style.display = 'none';
             fb.innerHTML = '';
         }
-        document.getElementById('globalScore').classList.add('hidden');
     }
-    
-    // التنقل بين الأقسام
-    function showSection(section) {
-        const homeDiv = document.getElementById('homeSection');
-        const exercisesDiv = document.getElementById('exercisesSection');
-        const homeBtn = document.getElementById('homeBtn');
-        const exBtn = document.getElementById('exercisesBtn');
-        if (section === 'home') {
-            homeDiv.classList.remove('hidden');
-            exercisesDiv.classList.add('hidden');
-            homeBtn.classList.add('active');
-            exBtn.classList.remove('active');
-        } else {
-            homeDiv.classList.add('hidden');
-            exercisesDiv.classList.remove('hidden');
-            homeBtn.classList.remove('active');
-            exBtn.classList.add('active');
-            if (document.getElementById('questionsContainer').innerHTML === '') {
-                renderQuestions();
-            }
+    document.getElementById('globalScore').classList.add('hidden');
+}
+
+function showSection(section) {
+    const homeDiv = document.getElementById('homeSection');
+    const exercisesDiv = document.getElementById('exercisesSection');
+    const homeBtn = document.getElementById('homeMainBtn');
+    const exBtn = document.getElementById('exercisesBtn');
+    if (section === 'home') {
+        homeDiv.classList.remove('hidden');
+        exercisesDiv.classList.add('hidden');
+        homeBtn.classList.add('active');
+        exBtn.classList.remove('active');
+    } else {
+        homeDiv.classList.add('hidden');
+        exercisesDiv.classList.remove('hidden');
+        homeBtn.classList.remove('active');
+        exBtn.classList.add('active');
+        if (document.getElementById('questionsContainer').innerHTML === '') {
+            renderQuestions();
         }
     }
-    
-    // أزرار التنقل
-    const topBtn = document.getElementById('scrollToTopBtn');
-    const bottomBtn = document.getElementById('scrollToBottomBtn');
-    
+}
+
+// أزرار التنقل
+const topBtn = document.getElementById('scrollToTopBtn');
+const bottomBtn = document.getElementById('scrollToBottomBtn');
+if (topBtn) {
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+if (bottomBtn) {
+    bottomBtn.onclick = () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+window.onscroll = function() {
     if (topBtn) {
-        topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    if (bottomBtn) {
-        bottomBtn.onclick = () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-    
-    window.onscroll = function() {
-        if (topBtn) {
-            if (window.scrollY > 200) {
-                topBtn.style.display = "flex";
-            } else {
-                topBtn.style.display = "none";
-            }
+        if (window.scrollY > 200) {
+            topBtn.style.display = "flex";
+        } else {
+            topBtn.style.display = "none";
         }
-    };
-    
-    // بدء التشغيل
-    showSection('home');
+    }
+};
+
+showSection('home');
 </script>
 </body>
 </html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درس الكهرومغناطيسية والتمارين التفاعلية</title>
+    <style>
+        :root { --primary: #2c3e50; --secondary: #3498db; --success: #27ae60; --error: #e74c3c; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; padding: 20px; line-height: 1.7; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h1, h2 { color: var(--secondary); border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
+        .names-list { background: var(--primary); color: white; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
+        .section { margin-bottom: 30px; padding: 20px; border-right: 5px solid var(--secondary); background: #f9f9f9; }
+        .quiz-card { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 10px; margin-top: 20px; }
+        .question-box { margin-bottom: 20px; padding: 15px; border-bottom: 1px solid #eee; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin: 10px 0; }
+        .btn-check { background: var(--secondary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .feedback { margin-top: 10px; font-weight: bold; padding: 10px; border-radius: 5px; display: none; }
+        .correct { background: #d4edda; color: #155724; display: block; }
+        .wrong { background: #f8d7da; color: #721c24; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+
+
+
+    <div class="names-list">
+اسئلة من امتحانات سابقة   <button class="nav-btn home-link" onclick="window.location.href='lins.html'" id="homeMainBtn"><i class="fas fa-home"></i> عوة</button>
+  </div>
+
+    <h1> اسئلة من امتحانات سابقة </h1>
+
+   
+    <div class="quiz-card">
+        <h2>أولاً: تمارين اختيار من متعدد</h2>
+        <div id="mcq-container"></div>
+
+        <h2>ثانياً: تمارين صح أو خطأ</h2>
+        <div id="tf-container"></div>
+        
+        <button class="btn-check" style="width: 100%; font-size: 1.2em; margin-top: 20px;" onclick="calculateTotalScore()">عرض النتيجة النهائية</button>
+        <div id="final-score" style="text-align:center; margin-top:15px; font-size:1.5em; font-weight:bold;"></div>
+    </div>
+</div>
+
+<script>
+    // مصفوفة أسئلة الاختيار من متعدد
+    const mcqData = [
+        {
+            id: "m1",
+            text: "ملف عدد لفاته 100، تغير التدفق فيه بمقدار 3x10⁻³ Wb خلال 0.1 ثانية، القوة الدافعة ε تساوي:",
+            options: ["3 V", "-3 V", "30 V", "0.3 V"],
+            correct: "1", // -3 V
+            explanation: "ε = -100 * (0.003 / 0.1) = -3 V"
+        },
+        {
+            id: "m2",
+            text: "تصل القوة الدافعة الكهربائية في المولد لقيمتها العظمى عندما يكون الملف:",
+            options: ["عمودياً على المجال", "موازياً للمجال", "بزاوية 45 درجة"],
+            correct: "1",
+            explanation: "في الوضع الموازي يكون معدل قطع خطوط الفيض أكبر ما يمكن."
+        }
+    ];
+
+    // مصفوفة أسئلة صح وخطأ
+    const tfData = [
+        {
+            id: "t1",
+            text: "تعمل فرش الكربون في المولد كوصلة كهربائية ثابتة تنزلق فوق الحلقات الدوارة.",
+            correct: "true",
+            explanation: "صحيح، الفرش ثابتة والحلقات تدور مع الملف."
+        },
+        {
+            id: "t2",
+            text: "في مولد الدراجة، يدور الملف بينما يظل المغناطيس ثابتاً.",
+            correct: "false",
+            explanation: "خطأ، في مولد الدراجة يدور المغناطيس بجانب ملف ثابت."
+        }
+    ];
+
+    // بناء الأسئلة برمجياً
+    function initQuiz() {
+        const mcqContainer = document.getElementById('mcq-container');
+        mcqData.forEach((q, i) => {
+            mcqContainer.innerHTML += `
+                <div class="question-box">
+                    <p><b>س${i+1}:</b> ${q.text}</p>
+                    <ul class="options">
+                        ${q.options.map((opt, idx) => `
+                            <li><label><input type="radio" name="${q.id}" value="${idx}"> ${opt}</label></li>
+                        `).join('')}
+                    </ul>
+                    <div id="fb_${q.id}" class="feedback"></div>
+                </div>
+            `;
+        });
+
+        const tfContainer = document.getElementById('tf-container');
+        tfData.forEach((q, i) => {
+            tfContainer.innerHTML += `
+                <div class="question-box">
+                    <p><b>س${i+1}:</b> ${q.text}</p>
+                    <label><input type="radio" name="${q.id}" value="true"> صح</label> &nbsp;
+                    <label><input type="radio" name="${q.id}" value="false"> خطأ</label>
+                    <div id="fb_${q.id}" class="feedback"></div>
+                </div>
+            `;
+        });
+    }
+
+    function calculateTotalScore() {
+        let score = 0;
+        let total = mcqData.length + tfData.length;
+
+        // فحص الاختيار من متعدد
+        mcqData.forEach(q => {
+            const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+            const fb = document.getElementById('fb_' + q.id);
+            if(selected && selected.value === q.correct) {
+                score++;
+                fb.innerHTML = "✅ إجابة صحيحة!";
+                fb.className = "feedback correct";
+            } else {
+                fb.innerHTML = "❌ خطأ. التوضيح: " + q.explanation;
+                fb.className = "feedback wrong";
+            }
+        });
+
+        // فحص صح وخطأ
+        tfData.forEach(q => {
+            const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+            const fb = document.getElementById('fb_' + q.id);
+            if(selected && selected.value === q.correct) {
+                score++;
+                fb.innerHTML = "✅ إجابة صحيحة!";
+                fb.className = "feedback correct";
+            } else {
+                fb.innerHTML = "❌ خطأ. التوضيح: " + q.explanation;
+                fb.className = "feedback wrong";
+            }
+        });
+
+        document.getElementById('final-score').innerHTML = `النتيجة النهائية: ${score} من ${total}`;
+    }
+
+    window.onload = initQuiz;
+</script>
+
+</body>
+</html>

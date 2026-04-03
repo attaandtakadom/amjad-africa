@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحان دفعة 2007 - تفاعلي | الصف الثالث الثانوي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            background: #ffd966;
+            color: #1e3c2c;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #ffd966;
+            color: #1e3c2c;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active-tab {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .question-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-right: 8px solid #2c7da0;
+        }
+
+        .question-text {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: #0b3b4f;
+            background: #eef4ff;
+            padding: 12px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* True/False buttons */
+        .true-false-btns {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+
+        .tf-btn {
+            background: #e9ecef;
+            padding: 8px 30px;
+            border-radius: 40px;
+            cursor: pointer;
+            border: 2px solid #adb5bd;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .tf-btn.selected {
+            background: #2c7da0;
+            color: white;
+            border-color: #2c7da0;
+        }
+
+        /* MCQ options */
+        .options-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8f9fc;
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid #dee2e6;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+        }
+
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* Essay */
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 18px;
+            border: 2px solid #cbd5e1;
+            font-family: monospace;
+            resize: vertical;
+            margin-top: 10px;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #2c7da0;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1f5e7a;
+            transform: scale(0.97);
+        }
+
+        .reset-single {
+            background: #e67e22;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 18px;
+            font-weight: bold;
+        }
+
+        .correct-fb {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .wrong-fb {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .neutral-fb {
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+
+        .evaluation-panel {
+            background: #1e2f3a;
+            border-radius: 40px;
+            padding: 20px;
+            margin-top: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .reset-all-btn {
+            background: #dc3545;
+            padding: 12px 30px;
+            font-size: 1rem;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            text-align: center;
+            color: #ccc;
+            margin-top: 30px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="header">
+
+
+        <h1>📚 امتحان دفعة 2007 <span>تفاعلي</span></h1>
+
+
+
+        <button class="nav-btn" onclick="window.location.href='../../../../../../althanaoya/it/it-dashboard.html'">🏠 الرئيسية</button>
+
+
+
+        <p>أسئلة الصواب والخطأ + الاختيار من متعدد + أسئلة متنوعة | تصحيح فوري وتقييم</p>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="tf">✅ أسئلة الصواب والخطأ (1-16)</button>
+        <button class="tab-btn" data-tab="mcq">🔘 أسئلة الاختيار من متعدد (17-56)</button>
+    </div>
+
+    <!-- تبويب الصواب والخطأ -->
+    <div id="tfTab" class="tab-content active-tab">
+        <div id="tfQuestionsContainer"></div>
+        <div class="evaluation-panel" id="evalPanelTF">⭐ تقييم أسئلة الصواب والخطأ</div>
+        <button id="resetTFBtn" class="reset-all-btn">🔄 إعادة ضبط أسئلة الصواب والخطأ</button>
+    </div>
+
+    <!-- تبويب الاختيار من متعدد -->
+    <div id="mcqTab" class="tab-content">
+        <div id="mcqQuestionsContainer"></div>
+        <div class="evaluation-panel" id="evalPanelMCQ">⭐ تقييم أسئلة الاختيار من متعدد</div>
+        <button id="resetMCQBtn" class="reset-all-btn">🔄 إعادة ضبط أسئلة الاختيار من متعدد</button>
+    </div>
+
+    <footer>📌 أجب عن كل سؤال، اضغط "تحقق"، ثم يمكنك إعادة المحاولة. جميع الأسئلة مأخوذة من امتحان دفعة 2007.</footer>
+</div>
+
+<script>
+    // ===================== أسئلة الصواب والخطأ (من الصور) =====================
+    const tfQuestions = [
+        { id: 1, text: "عند استدعاء إجراء فرعي أو دالة يجب أن يكون عدد المعاملات في جملة الإعلان مساوياً لعدد المعاملات في جملة الاستدعاء.", correct: true, explanation: "صحيح، يجب تطابق عدد المعاملات." },
+        { id: 2, text: "يمكن أن يكون الإجراء الفرعي من دون معاملات.", correct: true, explanation: "صحيح، الإجراءات الفرعية يمكن أن تكون بدون معاملات." },
+        { id: 3, text: "الفيروسات لا يمكن أن تصيب المكونات المادية للحاسوب (Hardware).", correct: true, explanation: "صحيح، الفيروسات تصيب البرامج وليس المكونات المادية." },
+        { id: 4, text: "لجعل صندوق النص (Text box) يستخدم لعرض النصوص دون السماح بتعديلها تجعل الخاصية (Locked) مساوية للقيمة (True).", correct: true, explanation: "صحيح، الخاصية Locked = True تمنع التعديل." },
+        { id: 5, text: "يشترط في استخدام الطريقة (Setfocus) أن تكون الأداة المطلوب التركيز عليها ظاهرة وغير فعالة.", correct: false, explanation: "خطأ، يجب أن تكون الأداة ظاهرة ومفعلة (Enabled = True)." },
+        { id: 6, text: "يمكن استدعاء الدالة بجملة الاستدعاء (Call).", correct: true, explanation: "صحيح، يمكن استخدام Call لاستدعاء الدوال." },
+        { id: 7, text: "التوظيف الإلكتروني إحدى نماذج الخدمات الإلكترونية.", correct: true, explanation: "صحيح، التوظيف الإلكتروني من خدمات الحكومة الإلكترونية." },
+        { id: 8, text: "الاحتفاظ بنسخ احتياطية من البرامج والبيانات المخزنة بالحاسوب هي إحدى طرق الوقاية من الفيروسات.", correct: true, explanation: "صحيح، النسخ الاحتياطي يحمي من فقدان البيانات." },
+        { id: 9, text: "تستخدم هذه الصيغة لإظهار النموذج Form1 عن طريق استدعاء الوظيفة (Show).", correct: true, explanation: "صحيح، الأمر Show يظهر النموذج." },
+        { id: 10, text: "الأحداث هي وظائف جاهزة ترتبط بأداة معينة من خلال اسمها.", correct: true, explanation: "صحيح، الأحداث (Events) مرتبطة بالأدوات." },
+        { id: 11, text: "تمثل كلمات العبور أحد المخاطر العالمية لأنظمة الشبكات والاتصالات.", correct: true, explanation: "صحيح، كلمات المرور الضعيفة تشكل خطراً أمنياً." },
+        { id: 12, text: "تمنح رخصة متعددة الاستخدام للمؤسسات التي سوف تستخدم أكثر من تطبيق برمجي على حساب واحد فقط.", correct: false, explanation: "خطأ، الرخصة المتعددة تسمح بعدة أجهزة وليس تطبيقات مختلفة." },
+        { id: 13, text: "القطاع الخاص هو أحد عناصر التفاعلات التي تتم ضمن تعاملات الحكومة الإلكترونية.", correct: true, explanation: "صحيح، القطاع الخاص جزء من الحكومة الإلكترونية." },
+        { id: 14, text: "لإظهار نافذة الخصائص (Properties Window) في برنامج فيجوال بيسك تضغط على المفتاح (F4) من لوحة المفاتيح.", correct: true, explanation: "صحيح، F4 تظهر نافذة الخصائص." },
+        { id: 15, text: "الحصول على المعلومات المملوكة للدولة إحدى مؤشرات الشفافية التي تميز الحكومة الديمقراطية.", correct: false, explanation: "خطأ، الشفافية تعني الوصول المصرح به وليس كل المعلومات." },
+        { id: 16, text: "تتميز مرحلة التفاعل وتبادل البيانات بتنظيم الوصول إلى مواقع الحكومة الإلكترونية عبر البوابة الإلكترونية.", correct: true, explanation: "صحيح، البوابة الإلكترونية تنظم الوصول." }
+    ];
+
+    // ===================== أسئلة الاختيار من متعدد (من الصور) =====================
+    const mcqQuestions = [
+        { id: 17, text: "أداة ...... تستخدم لاختيار البدائل من قائمة منسدلة على اختيارات محددة سلفاً.", options: ["زر الأوامر", "السرد (ComboBox)", "صندوق الاختبارات", "زر الاختبار"], correct: "السرد (ComboBox)", explanation: "ComboBox تسمح باختيار من قائمة منسدلة." },
+        { id: 18, text: "ناتج تنفيذ الدالة حسب جملة الاستدعاء (X=Max(3,10)) هو:", options: ["10", "13", "7", "3"], correct: "10", explanation: "الدالة تعيد القيمة الأكبر وهي 10." },
+        { id: 19, text: "نوع البيانات المعادلة من الدالة السابقة (Max) هي:", options: ["حرفي", "حقيقي", "صحيح", "كسري"], correct: "صحيح", explanation: "الدالة تعيد قيمة صحيحة (Integer)." },
+        { id: 20, text: "خاصية صندوق النص ScrollBars وظيفتها:", options: ["عندما تكون True فإن الصندوق يستخدم لعرض النصوص", "عرض أو إخفاء أشرطة التمرير", "إضافة نص للصندوق", "تحديد أعلى طول للنص"], correct: "عرض أو إخفاء أشرطة التمرير", explanation: "ScrollBars تتحكم بأشرطة التمرير." },
+        { id: 21, text: "...... هي متغيرات لأداة معينة تُعطى قيماً في أثناء تصميم البرنامج أو أثناء تشغيل البرنامج.", options: ["الطريقة", "الخصائص", "الأحداث", "المشكلة"], correct: "الخصائص", explanation: "الخصائص (Properties) تحدد خصائص الأداة." },
+        { id: 32, text: "وظيفة الجدار الناري (Firewall) هي:", options: ["حماية شبكة الحاسوب والتأكد من عدم وجود مخاطر أمنية", "تحويل البيانات الأصلية إلى شكل غير مفهوم", "تحديد شخصية المستخدم", "تحديد صلاحيات المستخدم"], correct: "حماية شبكة الحاسوب والتأكد من عدم وجود مخاطر أمنية", explanation: "الجدار الناري يحمي الشبكة من الاختراقات." },
+        { id: 33, text: "لتحديد جيب تمام الزاوية تستخدم الدالة الجاهزة:", options: ["Tan(x)", "Cos(x)", "Log(x)", "Sin(x)"], correct: "Cos(x)", explanation: "Cos تحسب جيب التمام." },
+        { id: 35, text: "أداة --- تستخدم لإدخال البيانات الرقمية أو الحرفية في وقت التصميم أو في وقت التشغيل.", options: ["صندوق قائمة الملفات", "صندوق النص (TextBox)", "صندوق القائمة", "صندوق المصدر"], correct: "صندوق النص (TextBox)", explanation: "TextBox تستخدم لإدخال البيانات." },
+        { id: 36, text: "برمجيات يمكن استغلالها كما هي أو تعديلها وتطويرها لتعمل بصورة مغايرة لنفسيتها الأصلية هي برمجيات:", options: ["تجريبية", "تجارية", "مجانية", "مفتوحة المصدر"], correct: "مفتوحة المصدر", explanation: "البرمجيات مفتوحة المصدر تسمح بالتعديل والتطوير." },
+        { id: 37, text: "يقصد به نشر معلومات مضللة أو كاذبة عن المؤسسات أو الشخصيات العامة:", options: ["التشهير الإلكتروني", "الاصطياد الإلكتروني", "سرقة وقت الحاسوب", "قرصنة المعلومات"], correct: "التشهير الإلكتروني", explanation: "التشهير الإلكتروني هو نشر معلومات كاذبة." },
+        { id: 39, text: "الخدمات الإلكترونية لها مزايا عديدة باستثناء:", options: ["توفر الجهد والوقت", "إمكانية إنجاز الخدمات على مدار الساعة", "رفع معدلات أمنية الحاسوب لدى مواطني الدولة", "خفض تكاليف إنجاز الخدمات"], correct: "رفع معدلات أمنية الحاسوب لدى مواطني الدولة", explanation: "الخدمات الإلكترونية لا ترفع بالضرورة الأمنية لدى المواطنين." },
+        { id: 40, text: "لتغيير حجم أداة تلقائياً مع حجم النص الموجود بداخلها تجعل الخاصية ....... مساوية للقيمة True.", options: ["WordWrap", "Alignment", "Autosize", "BackStyle"], correct: "Autosize", explanation: "Autosize = True يجعل الأداة تتغير تلقائياً." },
+        { id: 44, text: "تحديد هذه الخاصية لنوع الخط المكتوب:", options: ["Visible", "ForeColor", "BackColor", "Font"], correct: "Font", explanation: "Font تحدد نوع الخط." },
+        { id: 45, text: "لتحويل التعبير النصي إلى قيمة رقمية تستخدم الدالة:", options: ["Mid()", "Chr()", "Str()", "Val()"], correct: "Val()", explanation: "Val تحول النص إلى رقم." },
+        { id: 46, text: "ينتهي الإجراء الفرعي بالجملة:", options: ["End Sub", "End Function", "End", "End If"], correct: "End Sub", explanation: "الإجراء الفرعي ينتهي بـ End Sub." },
+        { id: 49, text: "لتنسيق التاريخ بطريقة معينة تستخدم الدالة:", options: ["Year()", "Format()", "Weekday()", "Month()"], correct: "Format()", explanation: "Format تستخدم لتنسيق التواريخ." },
+        { id: 52, text: "الخاصية التي تعطي عنواناً ظاهرياً للنموذج أو نصاً داخل الأدوات على الواجهة:", options: ["Visible", "Name", "Caption", "Enabled"], correct: "Caption", explanation: "Caption تحدد النص الظاهر." },
+        { id: 53, text: "القيمة التي سيتم تخصيصها لمرجع النص (Text1) بعد تنفيذ: Number = Sqr(100) : Text1.text = Number", options: ["10", "10000", "1", "100"], correct: "10", explanation: "Sqr(100) = 10 (الجذر التربيعي)." },
+        { id: 54, text: "الصيغة Move x1, y1 تستخدم لـ:", options: ["رسم دائرة", "مسح ما هو مطبوع على النموذج", "حركة النموذج", "إظهار النموذج"], correct: "حركة النموذج", explanation: "Move تحرك النموذج أو الأداة." },
+        { id: 55, text: "مرحلة ...... تسعى بمرحلة التواصل ذي الاتجاه الواحد، حيث يمكن للمواطنين الحصول على المعلومات دون إمكانية إرسال أي معلومة.", options: ["التفاعل وتبادل البيانات", "الظهور الحكومي", "تكامل الخدمة", "النشر الإلكتروني"], correct: "النشر الإلكتروني", explanation: "النشر الإلكتروني هو مرحلة الاتصال أحادي الاتجاه." },
+        { id: 56, text: "لمحو المسافات من بداية النص نستخدم الدالة الجاهزة:", options: ["RTrim(s)", "Len(s)", "Trim(s)", "LTrim(s)"], correct: "LTrim(s)", explanation: "LTrim تحذف المسافات من البداية." }
+    ];
+
+    // حالات الأسئلة
+    let tfState = [];
+    let mcqState = [];
+
+    function initTFState() {
+        tfState = tfQuestions.map(() => ({ isCorrect: false, userChoice: null, checked: false }));
+    }
+    function initMCQState() {
+        mcqState = mcqQuestions.map(() => ({ isCorrect: false, userChoice: null, checked: false }));
+    }
+
+    // دالة للصواب والخطأ
+    function checkTF(i) {
+        let t = document.getElementById(`tfTrue-${i}`);
+        let f = document.getElementById(`tfFalse-${i}`);
+        let selected = null;
+        if (t && t.classList.contains("selected")) selected = true;
+        if (f && f.classList.contains("selected")) selected = false;
+        
+        let isCor = (selected === tfQuestions[i].correct);
+        tfState[i] = { isCorrect: isCor, userChoice: selected, checked: true };
+        
+        let fb = document.getElementById(`tfFb-${i}`);
+        if (fb) {
+            fb.innerHTML = isCor ? `✅ صحيح! ${tfQuestions[i].explanation}` : `❌ خطأ. ${tfQuestions[i].explanation}`;
+            fb.className = `feedback ${isCor ? 'correct-fb' : 'wrong-fb'}`;
+        }
+        updateTFEval();
+    }
+
+    function resetTFSingle(i) {
+        let t = document.getElementById(`tfTrue-${i}`);
+        let f = document.getElementById(`tfFalse-${i}`);
+        if (t) t.classList.remove("selected");
+        if (f) f.classList.remove("selected");
+        tfState[i] = { isCorrect: false, userChoice: null, checked: false };
+        let fb = document.getElementById(`tfFb-${i}`);
+        if (fb) {
+            fb.innerHTML = "❓ اختر صواب أو خطأ ثم اضغط تحقق.";
+            fb.className = "feedback neutral-fb";
+        }
+        updateTFEval();
+    }
+
+    function selectTF(i, val) {
+        let t = document.getElementById(`tfTrue-${i}`);
+        let f = document.getElementById(`tfFalse-${i}`);
+        if (val === true) {
+            t.classList.add("selected");
+            f.classList.remove("selected");
+        } else {
+            f.classList.add("selected");
+            t.classList.remove("selected");
+        }
+    }
+
+    // دالة للاختيار من متعدد
+    function checkMCQ(i) {
+        let radios = document.getElementsByName(`mcq-${i}`);
+        let selected = null;
+        for (let r of radios) if (r.checked) selected = r.value;
+        
+        let isCor = (selected === mcqQuestions[i].correct);
+        mcqState[i] = { isCorrect: isCor, userChoice: selected, checked: true };
+        
+        let fb = document.getElementById(`mcqFb-${i}`);
+        if (fb) {
+            fb.innerHTML = isCor ? `✅ صحيح! ${mcqQuestions[i].explanation}` : `❌ خطأ. الإجابة الصحيحة: ${mcqQuestions[i].correct}. ${mcqQuestions[i].explanation}`;
+            fb.className = `feedback ${isCor ? 'correct-fb' : 'wrong-fb'}`;
+        }
+        updateMCQEval();
+    }
+
+    function resetMCQSingle(i) {
+        let radios = document.getElementsByName(`mcq-${i}`);
+        for (let r of radios) r.checked = false;
+        mcqState[i] = { isCorrect: false, userChoice: null, checked: false };
+        let fb = document.getElementById(`mcqFb-${i}`);
+        if (fb) {
+            fb.innerHTML = "🔘 اختر إجابة ثم اضغط تحقق.";
+            fb.className = "feedback neutral-fb";
+        }
+        updateMCQEval();
+    }
+
+    function updateTFEval() {
+        let correct = tfState.filter(s => s.checked && s.isCorrect).length;
+        let percent = (correct / tfQuestions.length) * 100;
+        document.getElementById("evalPanelTF").innerHTML = `✅ الصواب والخطأ: ${correct}/${tfQuestions.length} صحيح (${percent.toFixed(0)}%) ${percent >= 70 ? "🎉" : percent >= 50 ? "👍" : "📚"}`;
+    }
+
+    function updateMCQEval() {
+        let correct = mcqState.filter(s => s.checked && s.isCorrect).length;
+        let percent = (correct / mcqQuestions.length) * 100;
+        document.getElementById("evalPanelMCQ").innerHTML = `🔘 الاختيار من متعدد: ${correct}/${mcqQuestions.length} صحيح (${percent.toFixed(0)}%) ${percent >= 70 ? "🎉 ممتاز!" : percent >= 50 ? "👍 جيد" : "📚 يحتاج مراجعة"}`;
+    }
+
+    // عرض أسئلة الصواب والخطأ
+    function renderTFQuestions() {
+        let html = "";
+        for (let i = 0; i < tfQuestions.length; i++) {
+            let q = tfQuestions[i];
+            let s = tfState[i];
+            html += `
+                <div class="question-card">
+                    <div class="question-text">${q.id}. ${q.text}</div>
+                    <div class="true-false-btns">
+                        <div id="tfTrue-${i}" class="tf-btn" onclick="selectTF(${i}, true)">✅ صواب</div>
+                        <div id="tfFalse-${i}" class="tf-btn" onclick="selectTF(${i}, false)">❌ خطأ</div>
+                    </div>
+                    <div class="btn-group">
+                        <button onclick="checkTF(${i})">✅ تحقق</button>
+                        <button class="reset-single" onclick="resetTFSingle(${i})">🔄 إعادة المحاولة</button>
+                    </div>
+                    <div id="tfFb-${i}" class="feedback ${s.checked ? (s.isCorrect ? 'correct-fb' : 'wrong-fb') : 'neutral-fb'}">${s.checked ? (s.isCorrect ? "✅ صحيح!" : "❌ خطأ") : "❓ اختر صواب أو خطأ ثم تحقق"}</div>
+                </div>
+            `;
+        }
+        document.getElementById("tfQuestionsContainer").innerHTML = html;
+    }
+
+    // عرض أسئلة الاختيار من متعدد
+    function renderMCQQuestions() {
+        let html = "";
+        for (let i = 0; i < mcqQuestions.length; i++) {
+            let q = mcqQuestions[i];
+            let s = mcqState[i];
+            html += `
+                <div class="question-card">
+                    <div class="question-text">${q.id}. ${q.text}</div>
+                    <div class="options-area">
+                        ${q.options.map(opt => `
+                            <label class="option">
+                                <input type="radio" name="mcq-${i}" value="${opt}"> ${opt}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="btn-group">
+                        <button onclick="checkMCQ(${i})">✅ تحقق</button>
+                        <button class="reset-single" onclick="resetMCQSingle(${i})">🔄 إعادة المحاولة</button>
+                    </div>
+                    <div id="mcqFb-${i}" class="feedback ${s.checked ? (s.isCorrect ? 'correct-fb' : 'wrong-fb') : 'neutral-fb'}">${s.checked ? (s.isCorrect ? "✅ صحيح!" : "❌ خطأ") : "🔘 اختر إجابة ثم تحقق"}</div>
+                </div>
+            `;
+        }
+        document.getElementById("mcqQuestionsContainer").innerHTML = html;
+    }
+
+    function resetAllTF() {
+        initTFState();
+        renderTFQuestions();
+        updateTFEval();
+    }
+
+    function resetAllMCQ() {
+        initMCQState();
+        renderMCQQuestions();
+        updateMCQEval();
+    }
+
+    // ربط الدوال
+    window.checkTF = checkTF;
+    window.resetTFSingle = resetTFSingle;
+    window.selectTF = selectTF;
+    window.checkMCQ = checkMCQ;
+    window.resetMCQSingle = resetMCQSingle;
+
+    // التبديل بين التبويبات
+    let tabBtns = document.querySelectorAll(".tab-btn");
+    let tfTab = document.getElementById("tfTab");
+    let mcqTab = document.getElementById("mcqTab");
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            tabBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            if (btn.dataset.tab === "tf") {
+                tfTab.classList.add("active-tab");
+                mcqTab.classList.remove("active-tab");
+            } else {
+                tfTab.classList.remove("active-tab");
+                mcqTab.classList.add("active-tab");
+            }
+        });
+    });
+
+    window.onload = () => {
+        initTFState();
+        initMCQState();
+        renderTFQuestions();
+        renderMCQQuestions();
+        updateTFEval();
+        updateMCQEval();
+        document.getElementById("resetTFBtn").onclick = resetAllTF;
+        document.getElementById("resetMCQBtn").onclick = resetAllMCQ;
+    };
+</script>
+</body>
+</html>

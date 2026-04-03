@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الباب السادس - البرامج الفرعية والدوال</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); font-family: 'Segoe UI', Tahoma, Arial, sans-serif; padding: 20px; min-height: 100vh; }
+        .main-container { max-width: 1100px; margin: 0 auto; }
+        .header { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 40px; padding: 20px; text-align: center; color: white; margin-bottom: 25px; }
+        .header h1 { font-size: 1.8rem; }
+        .tabs { display: flex; gap: 10px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab-btn { background: #2c3e50; color: white; border: none; padding: 12px 35px; border-radius: 60px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        .tab-btn.active { background: #ffd966; color: #1e3c2c; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active-tab { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+        .question-card { background: white; border-radius: 28px; padding: 20px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-right: 10px solid #2c7da0; }
+        .question-text { font-size: 1.15rem; font-weight: bold; color: #0b3b4f; background: #eef4ff; padding: 12px 18px; border-radius: 24px; margin-bottom: 15px; white-space: pre-line; }
+        .code-text { direction: ltr; text-align: left; font-family: 'Courier New', monospace; background: #1e2a36; color: #e8e8e8; padding: 15px; border-radius: 16px; white-space: pre-line; }
+        .options-area { display: flex; flex-direction: column; gap: 12px; margin: 15px 0; }
+        .option { display: flex; align-items: center; gap: 12px; background: #f8f9fc; padding: 10px 15px; border-radius: 50px; border: 1px solid #dee2e6; cursor: pointer; }
+        .option:hover { background: #e9ecef; }
+        input[type="radio"] { width: 18px; height: 18px; cursor: pointer; }
+        .true-false-btns { display: flex; gap: 20px; margin: 10px 0; }
+        .tf-btn { background: #e9ecef; padding: 8px 30px; border-radius: 40px; cursor: pointer; border: 2px solid #adb5bd; font-weight: bold; }
+        .tf-btn.selected { background: #2c7da0; color: white; border-color: #2c7da0; }
+        .btn-group { display: flex; gap: 12px; margin-top: 15px; flex-wrap: wrap; }
+        button { background: #2c7da0; border: none; padding: 8px 22px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
+        .reset-single { background: #e67e22; }
+        .feedback { margin-top: 12px; padding: 10px; border-radius: 20px; font-weight: bold; }
+        .correct-fb { background: #d4edda; color: #155724; }
+        .wrong-fb { background: #f8d7da; color: #721c24; }
+        .neutral-fb { background: #e9ecef; color: #2c3e50; }
+        .evaluation-panel { background: #1e2f3a; border-radius: 40px; padding: 20px; margin-top: 30px; color: white; text-align: center; }
+        .reset-all-btn { background: #dc3545; padding: 12px 25px; font-size: 1rem; margin-top: 15px; display: block; width: fit-content; margin-left: auto; margin-right: auto; }
+        footer { text-align: center; color: #ccc; margin-top: 25px; font-size: 0.8rem; }
+        textarea { width: 100%; padding: 12px; border-radius: 20px; border: 2px solid #cbd5e1; font-family: monospace; }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="header">
+        <h1>📚 الباب السادس: البرامج الفرعية والدوال</h1>
+        <p>الصف الثالث الثانوي | وضعان: مقالي + موضوعي</p>
+    </div>
+    <div class="tabs">
+       <button class="nav-btn home" onclick="window.location.href='it-function.html'">🏠  الرئيسية</button>
+
+        <button class="tab-btn active" data-tab="essay">✍️ أسئلة مقالية</button>
+        <button class="tab-btn" data-tab="objective">🎯 أسئلة موضوعية (صح/خطأ + اختيار متعدد)</button>
+    </div>
+    <div id="essayTab" class="tab-content active-tab"><div id="essayQuestionsContainer"></div></div>
+    <div id="objectiveTab" class="tab-content"><div id="objectiveQuestionsContainer"></div></div>
+    <div class="evaluation-panel" id="evalPanelEssay">⭐ تقييم الوضع المقالي</div>
+    <div class="evaluation-panel" id="evalPanelObjective" style="display: none;">⭐ تقييم الوضع الموضوعي</div>
+    <button id="globalResetBtn" class="reset-all-btn">🔄 إعادة ضبط الكل</button>
+    <footer>📌 السؤال العاشر في الوضع المقالي يعرض كود GetMin مع إجابة كتابية (الناتج 12).</footer>
+</div>
+
+<script>
+    // =============== الأسئلة المقالية (السؤال العاشر تم تعديله لتحليل الكود) ===============
+    const essayQuestions = [
+        { id: 1, text: "لماذا يتم استخدام البرامج الفرعية؟ (اذكر ثلاثة أسباب)", modelAnswer: "توفير الوقت والجهد، سهولة التعديل، تجزئة البرنامج.", keywords: ["توفير","الوقت","الجهد","سهولة التعديل","تجزئة"] },
+        { id: 2, text: "ما الفرق بين الدالة (Function) والبرنامج الفرعي (Subroutine)؟", modelAnswer: "الدالة تعيد قيمة واحدة إلى البرنامج الأصلي، بينما البرنامج الفرعي ينفذ أوامر ولا يشترط أن يعيد قيمة.", keywords: ["دالة","تعيد قيمة","برنامج فرعي","لا يعيد"] },
+        { id: 3, text: "ما الفرق بين الدالة Now والدالة Time؟", modelAnswer: "Now تعيد التاريخ والوقت معاً، أما Time فتعيد الوقت فقط.", keywords: ["now","time","التاريخ والوقت","الوقت فقط"] },
+        { id: 4, text: "الفرق بين الدوال الجاهزة والدوال التي يكتبها المستخدم؟", modelAnswer: "الدوال الجاهزة مدمجة في اللغة، والمكتوبة من قبل المستخدم لتنفيذ مهمة خاصة.", keywords: ["جاهزة","مدمجة","المستخدم","يبنيها"] },
+        { id: 5, text: "اكتب دالة Triple في VB.Net ترجع ثلاثة أضعاف رقم.", modelAnswer: "Function Triple(n As Double) As Double : Triple = n * 3 : End Function", keywords: ["function triple","n * 3"] },
+        { id: 6, text: "اكتب دالة GetAverage تحسب معدل ثلاثة أرقام.", modelAnswer: "Function GetAverage(a,b,c) As Double : GetAverage = (a+b+c)/3 : End Function", keywords: ["function getaverage","(a+b+c)/3"] },
+        { id: 7, text: "أوامر طباعة الجذر التربيعي لـ25 والقيمة المطلقة لـ-12 وجيب 60 درجة.", modelAnswer: "Sqr(25) , Abs(-12) , Sin(60 * 3.14159/180)", keywords: ["sqr","abs","sin"] },
+        { id: 8, text: "لجملة 'تقنية المعلومات': أوامر لطباعة الطول وحذف المسافات والأحرف الثلاثة الأولى.", modelAnswer: "Len() , Trim() , Left()", keywords: ["len","trim","left"] },
+        { id: 9, text: "كيف تستخرج اليوم والشهر والسنة من تاريخ اليوم؟", modelAnswer: "Day(Now) , Month(Now) , Year(Now)", keywords: ["day(now)","month(now)","year(now)"] },
+        {   
+            id: 10, 
+            text: `بعد تحليل الكود التالي:
+
+Function GetMin(a, b)
+    If a > b Then
+        GetMin = a
+    Else
+        GetMin = b
+    End If
+End Function
+
+وفي البرنامج الرئيسي:
+x = 12
+y = 5
+z = GetMin(x, y)
+Print z
+
+ما هو الناتج النهائي؟`,
+            modelAnswer: "12",
+            keywords: ["12"],
+            isCode: true
+        }
+    ];
+
+    // =============== الأسئلة الموضوعية (نفسها) ===============
+    const objectiveQuestions = [
+        { id: 1, text: "البرامج الفرعية تساعد في توفير الوقت والجهد وتسهيل التعديل.", type: "tf", correct: true, explanation: "صحيح، لأنها تمنع تكرار الكود وتسهل الصيانة." },
+        { id: 2, text: "الدالة (Function) لا يمكن أن تعيد قيمة إلى البرنامج الأصلي.", type: "tf", correct: false, explanation: "خطأ، الدالة يجب أن تعيد قيمة واحدة." },
+        { id: 3, text: "أي من الدوال التالية تعيد التاريخ والوقت معاً؟", type: "mcq", options: ["Time", "Now", "Date", "Timer"], correct: "Now", explanation: "Now تعيد التاريخ والوقت الحاليين." },
+        { id: 4, text: "الدوال الجاهزة يكتبها المبرمج بنفسه.", type: "tf", correct: false, explanation: "خطأ، الدوال الجاهزة مدمجة في اللغة." },
+        { id: 5, text: "في VB.Net أي العبارات التالية تصح لكتابة دالة Triple؟", type: "mcq", options: ["Function Triple(n) : Triple = n * 2", "Function Triple(n) : Triple = n * 3", "Sub Triple(n) : Triple = n * 3", "Function Triple(n) : Return n+3"], correct: "Function Triple(n) : Triple = n * 3", explanation: "الدالة يجب أن تضرب الرقم في 3." },
+        { id: 6, text: "دالة GetAverage تقوم بحساب مجموع الأرقام فقط دون قسمة.", type: "tf", correct: false, explanation: "خطأ، تحسب المعدل (المجموع / 3)." },
+        { id: 7, text: "أمر حساب جيب الزاوية في VB.Net يتطلب تحويل الزاوية من درجة إلى راديان.", type: "tf", correct: true, explanation: "صحيح، الدالة Sin تستقبل الزاوية بالراديان." },
+        { id: 8, text: "أي دالة تستخدم لحذف المسافات من طرفي النص؟", type: "mcq", options: ["Len", "Left", "Trim", "Mid"], correct: "Trim", explanation: "Trim تزيل المسافات البادئة واللاحقة." },
+        { id: 9, text: "لاستخراج السنة من التاريخ نستخدم: Year(Now)", type: "tf", correct: true, explanation: "صحيح، Year(Now) ترجع السنة الحالية." },
+        {   
+            id: 10, 
+            text: `بعد تحليل الكود التالي:
+
+Function GetMin(a, b)
+    If a > b Then
+        GetMin = a
+    Else
+        GetMin = b
+    End If
+End Function
+
+x = 12 , y = 5 , z = GetMin(x, y) , Print z
+
+ما هو الناتج؟`,
+            type: "mcq", 
+            options: ["5", "12", "17", "7"], 
+            correct: "12", 
+            explanation: "بما أن a=12 و b=5 والشرط a>b صحيح، فإن الدالة ترجع قيمة a وهي 12."
+        }
+    ];
+
+    let essayState = [], objectiveState = [];
+
+    function initEssayState() { essayState = essayQuestions.map(() => ({ isCorrect: false, userAnswer: "", checked: false })); }
+    function initObjectiveState() { objectiveState = objectiveQuestions.map(() => ({ isCorrect: false, userChoice: null, checked: false })); }
+
+    function evaluateEssay(userAns, keywords) {
+        if (!userAns || userAns.trim() === "") return false;
+        let norm = userAns.trim().toLowerCase().replace(/[،,.;؟!]/g,' ').replace(/\s+/g,' ');
+        for(let kw of keywords) {
+            if(norm.includes(kw.toLowerCase())) return true;
+        }
+        return false;
+    }
+
+    function checkEssay(i) {
+        let input = document.getElementById(`essayAns-${i}`);
+        let ans = input ? input.value : "";
+        let cor = evaluateEssay(ans, essayQuestions[i].keywords);
+        essayState[i] = { isCorrect: cor, userAnswer: ans, checked: true };
+        let fb = document.getElementById(`essayFb-${i}`);
+        if(fb) { 
+            if(cor) {
+                fb.innerHTML = "✅ صحيح! الناتج هو 12.";
+                fb.className = "feedback correct-fb";
+            } else { 
+                fb.innerHTML = `❌ خطأ. الإجابة النموذجية: ${essayQuestions[i].modelAnswer}`; 
+                fb.className = "feedback wrong-fb";
+            }
+        }
+        updateEssayEval();
+    }
+    function resetEssaySingle(i) {
+        let input = document.getElementById(`essayAns-${i}`);
+        if(input) input.value = "";
+        essayState[i] = { isCorrect: false, userAnswer: "", checked: false };
+        let fb = document.getElementById(`essayFb-${i}`);
+        if(fb) { fb.innerHTML = "📝 اكتب إجابتك (الناتج الرقمي) ثم تحقق."; fb.className = "feedback neutral-fb"; }
+        updateEssayEval();
+    }
+    function checkObjective(i) {
+        let q = objectiveQuestions[i];
+        let selected = null;
+        if(q.type === "tf") {
+            let t = document.getElementById(`tfTrue-${i}`), f = document.getElementById(`tfFalse-${i}`);
+            if(t && t.classList.contains("selected")) selected = true;
+            if(f && f.classList.contains("selected")) selected = false;
+        } else {
+            let radios = document.getElementsByName(`mcq-${i}`);
+            for(let r of radios) if(r.checked) selected = r.value;
+        }
+        let cor = (selected === q.correct);
+        objectiveState[i] = { isCorrect: cor, userChoice: selected, checked: true };
+        let fb = document.getElementById(`objFb-${i}`);
+        if(fb) { fb.innerHTML = cor ? `✅ صحيح! ${q.explanation}` : `❌ خطأ. الصحيح: ${q.correct}. ${q.explanation}`; fb.className = `feedback ${cor ? 'correct-fb' : 'wrong-fb'}`; }
+        updateObjectiveEval();
+    }
+    function resetObjectiveSingle(i) {
+        let q = objectiveQuestions[i];
+        if(q.type === "tf") {
+            let t = document.getElementById(`tfTrue-${i}`), f = document.getElementById(`tfFalse-${i}`);
+            if(t) t.classList.remove("selected"); if(f) f.classList.remove("selected");
+        } else {
+            let radios = document.getElementsByName(`mcq-${i}`);
+            for(let r of radios) r.checked = false;
+        }
+        objectiveState[i] = { isCorrect: false, userChoice: null, checked: false };
+        let fb = document.getElementById(`objFb-${i}`);
+        if(fb) { fb.innerHTML = "🔘 اختر إجابتك ثم تحقق."; fb.className = "feedback neutral-fb"; }
+        updateObjectiveEval();
+    }
+    function selectTF(i, val) {
+        let t = document.getElementById(`tfTrue-${i}`), f = document.getElementById(`tfFalse-${i}`);
+        if(val === true) { t.classList.add("selected"); f.classList.remove("selected"); }
+        else { f.classList.add("selected"); t.classList.remove("selected"); }
+    }
+    function updateEssayEval() { let c = essayState.filter(s=>s.checked && s.isCorrect).length; document.getElementById("evalPanelEssay").innerHTML = `📘 المقالي: ${c}/${essayQuestions.length} صحيح (${(c/essayQuestions.length*100).toFixed(0)}%)`; }
+    function updateObjectiveEval() { let c = objectiveState.filter(s=>s.checked && s.isCorrect).length; document.getElementById("evalPanelObjective").innerHTML = `🎯 الموضوعي: ${c}/${objectiveQuestions.length} صحيح (${(c/objectiveQuestions.length*100).toFixed(0)}%)`; document.getElementById("evalPanelObjective").style.display = "block"; }
+    
+    function renderEssayTab() {
+        let html = "";
+        for(let i=0;i<essayQuestions.length;i++) {
+            let q = essayQuestions[i];
+            let s = essayState[i];
+            let textStyle = "white-space: pre-line;";
+            if(q.isCode) textStyle += " direction: ltr; text-align: left; font-family: 'Courier New', monospace; background: #1e2a36; color: #e8e8e8;";
+            html += `<div class="question-card"><div class="question-text" style="${textStyle}">${i+1}. ${q.text}</div><textarea id="essayAns-${i}" rows="3" placeholder="أكتب إجابتك هنا...">${(s.userAnswer||"").replace(/[&<>]/g,m=>m==='&'?'&amp;':m==='<'?'&lt;':'&gt;')}</textarea><div class="btn-group"><button onclick="checkEssay(${i})">🔍 تحقق</button><button class="reset-single" onclick="resetEssaySingle(${i})">🔄 إعادة</button></div><div id="essayFb-${i}" class="feedback ${s.checked?(s.isCorrect?'correct-fb':'wrong-fb'):'neutral-fb'}">${s.checked?(s.isCorrect?"✅ صحيح!":"❌ خطأ"):"📝 اكتب الناتج ثم تحقق"}</div></div>`;
+        }
+        document.getElementById("essayQuestionsContainer").innerHTML = html;
+    }
+    
+    function renderObjectiveTab() {
+        let html = "";
+        for(let i=0;i<objectiveQuestions.length;i++) {
+            let q = objectiveQuestions[i], s = objectiveState[i];
+            let opts = "";
+            if(q.type === "tf") opts = `<div class="true-false-btns"><div id="tfTrue-${i}" class="tf-btn" onclick="selectTF(${i}, true)">✅ صواب</div><div id="tfFalse-${i}" class="tf-btn" onclick="selectTF(${i}, false)">❌ خطأ</div></div>`;
+            else opts = `<div class="options-area">${q.options.map(opt=>`<label class="option"><input type="radio" name="mcq-${i}" value="${opt}"> ${opt}</label>`).join('')}</div>`;
+            html += `<div class="question-card"><div class="question-text" style="white-space: pre-line;">${i+1}. ${q.text}</div>${opts}<div class="btn-group"><button onclick="checkObjective(${i})">✅ تحقق</button><button class="reset-single" onclick="resetObjectiveSingle(${i})">🔄 إعادة</button></div><div id="objFb-${i}" class="feedback ${s.checked?(s.isCorrect?'correct-fb':'wrong-fb'):'neutral-fb'}">${s.checked?(s.isCorrect?"✅ صحيح":"❌ خطأ"):"🔘 اختر ثم تحقق"}</div></div>`;
+        }
+        document.getElementById("objectiveQuestionsContainer").innerHTML = html;
+    }
+
+    function resetAll() {
+        initEssayState(); initObjectiveState();
+        renderEssayTab(); renderObjectiveTab();
+        updateEssayEval(); updateObjectiveEval();
+    }
+
+    window.checkEssay = checkEssay; window.resetEssaySingle = resetEssaySingle;
+    window.checkObjective = checkObjective; window.resetObjectiveSingle = resetObjectiveSingle;
+    window.selectTF = selectTF;
+
+    let tabBtns = document.querySelectorAll(".tab-btn");
+    let essayTabDiv = document.getElementById("essayTab");
+    let objectiveTabDiv = document.getElementById("objectiveTab");
+    let evalEssayDiv = document.getElementById("evalPanelEssay");
+    let evalObjectiveDiv = document.getElementById("evalPanelObjective");
+    tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            tabBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            if(btn.dataset.tab === "essay") {
+                essayTabDiv.classList.add("active-tab");
+                objectiveTabDiv.classList.remove("active-tab");
+                evalEssayDiv.style.display = "block";
+                evalObjectiveDiv.style.display = "none";
+            } else {
+                objectiveTabDiv.classList.add("active-tab");
+                essayTabDiv.classList.remove("active-tab");
+                evalEssayDiv.style.display = "none";
+                evalObjectiveDiv.style.display = "block";
+            }
+        });
+    });
+
+    window.onload = () => {
+        initEssayState(); initObjectiveState();
+        renderEssayTab(); renderObjectiveTab();
+        updateEssayEval(); updateObjectiveEval();
+        document.getElementById("globalResetBtn").onclick = resetAll;
+        evalObjectiveDiv.style.display = "none";
+        evalEssayDiv.style.display = "block";
+    };
+</script>
+</body>
+</html>

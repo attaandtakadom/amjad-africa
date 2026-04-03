@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>درس الكهرومغناطيسية المطور</title>
+    <style>
+        :root { --primary: #2c3e50; --secondary: #3498db; --success: #27ae60; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); padding: 20px; line-height: 1.8; color: #333; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1, h2 { color: var(--secondary); border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
+        .names-list { background: var(--primary); color: white; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 25px; }
+        .formula-box { background: #eef2f7; border: 2px dashed var(--secondary); padding: 20px; text-align: center; font-size: 1.5em; margin: 20px 0; border-radius: 10px; direction: ltr; }
+        .example-card { background: #fff4e5; border-right: 6px solid #f39c12; padding: 25px; margin: 20px 0; border-radius: 8px; }
+        .step-by-step { background: #e8f0fe; padding: 15px; border-radius: 10px; margin-top: 15px; }
+        .quiz-section { background: #fff; border: 1px solid #ddd; padding: 25px; border-radius: 12px; margin-top: 40px; }
+        .question-box { background: #fdfdfd; padding: 15px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 20px; }
+        .btn-check { background: var(--secondary); color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.2em; font-weight: bold; transition: 0.2s; }
+        .btn-check:active { transform: scale(0.98); }
+        .feedback { margin-top: 10px; font-weight: bold; padding: 12px; border-radius: 6px; display: none; }
+        .correct { background: #d4edda; color: #155724; display: block; }
+        .wrong { background: #f8d7da; color: #721c24; display: block; }
+        .score-board { background: var(--primary); color: white; padding: 15px; border-radius: 10px; text-align: center; margin-top: 20px; font-size: 1.2em; }
+        .formula-note { background: #fff3cd; border-right: 6px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+
+
+    <div class="names-list">
+        🌟 تحية لطلابنا: اسئلة من امتحانات  🌟
+
+   <button class="nav-btn home-btn" onclick="window.location.href='lins-exersice.html'" id="homeMainBtn"><i class="fas fa-home"></i> اسئلة من امتحانات </button>
+
+   <button class="nav-btn home-btn" onclick="window.location.href='unit7.html'" id="homeMainBtn"><i class="fas fa-home"></i>  عودة  </button>
+
+
+    </div>
+
+    <h1>قانون الحث الكهرومغناطيسي والمولدات</h1>
+
+    <section>
+        <h2>1. القوة الدافعة الكهربائية المستحثة (emf)</h2>
+        <p>ينص قانون فاراداي على أن القوة الدافعة الكهربائية المستحثة في ملف تساوي سالب عدد لفاته مضروبًا في معدل تغير الفيض المغناطيسي عبره:</p>
+        <div class="formula-box">
+            <strong>emf = -N × (ΔΦ / Δt)</strong>
+        </div>
+        <div class="formula-note">
+            <strong>📌 حيث:</strong><br>
+            • <strong>emf</strong> : القوة الدافعة الكهربائية المستحثة (Volt)<br>
+            • <strong>N</strong> : عدد لفات الملف<br>
+            • <strong>ΔΦ</strong> : التغير في الفيض المغناطيسي (Wb)<br>
+            • <strong>Δt</strong> : الزمن الذي حدث فيه التغير (s)<br>
+            • <strong>الإشارة (-)</strong> : تشير إلى قانون لينز (اتجاه التيار المستحث يعاكس التغير)
+        </div>
+    </section>
+
+    <section class="example-card">
+        <h2>2. مثال تطبيقي (باستخدام القانون الأول)</h2>
+        <p><b>المسألة:</b> ملف يحتوي على <b>150 لفة</b>، يمر عبره فيض مغناطيسي يتغير بمعدل منتظم من <b>4 × 10⁻³ Wb</b> إلى <b>1 × 10⁻³ Wb</b> خلال زمن قدره <b>0.05 ثانية</b>. احسب القوة الدافعة الكهربائية المستحثة (emf).</p>
+        
+        <div class="step-by-step">
+            <p><b>✏️ الحل خطوة بخطوة باستخدام القانون: emf = -N × (ΔΦ / Δt)</b></p>
+            <ol>
+                <li><b>حساب التغير في الفيض المغناطيسي (ΔΦ):</b><br>
+                    ΔΦ = Φ₂ - Φ₁ = (1 × 10⁻³) - (4 × 10⁻³) = <strong>-3 × 10⁻³ Wb</strong>
+                </li>
+                <li><b>حساب معدل التغير في الفيض (ΔΦ / Δt):</b><br>
+                    ΔΦ / Δt = (-3 × 10⁻³) / 0.05 = <strong>-0.06 Wb/s</strong>
+                </li>
+                <li><b>التعويض في القانون:</b><br>
+                    emf = -N × (ΔΦ / Δt) = -150 × (-0.06) = <strong>+9 V</strong>
+                </li>
+            </ol>
+            <p><b>✅ إذن القوة الدافعة الكهربائية المستحثة = 9 فولت (9V)</b></p>
+            <p><i>📝 ملاحظة: الإشارة أصبحت موجبة لأن الفيض كان متناقصًا، والتيار المستحث يتجه لزيادة الفيض (عكس التغير).</i></p>
+        </div>
+        
+        <div class="formula-note" style="margin-top: 15px;">
+            <strong>💡 تذكير:</strong> إذا كان التغير في الفيض منتظمًا، نستخدم هذه الصيغة مباشرة. أما إذا كان التغير غير منتظم، نستخدم المشتقة: emf = -N × (dΦ/dt)
+        </div>
+    </section>
+
+    <section>
+        <h2>3. عمل المولدات الكهربائية</h2>
+        <p>تبلغ القوة الدافعة الكهربائية المستحثة قيمتها العظمى (E₀) عندما يكون مستوى الملف موازياً لخطوط المجال المغناطيسي (أي عندما تكون الزاوية بين الملف والمجال 90°).</p>
+        <ul>
+            <li><b>حلقات الانزلاق (Slip Rings):</b> تعمل على نقل القدرة الكهربائية من الملف الدوار إلى الدائرة الخارجية، وتستخدم في المولدات التي تنتج تيارًا مترددًا.</li>
+            <li><b>فرش الكربون (Carbon Brushes):</b> تنزلق فوق حلقات الانزلاق لتوفير اتصال كهربائي مستمر بين الأجزاء الدوارة والثابتة.</li>
+            <li><b>المولدات الحديثة:</b> في التوربينات ومولد الدراجة، يتم تدوير المغناطيس حول ملفات ثابتة لتقليل الاحتكاك وزيادة الكفاءة.</li>
+        </ul>
+    </section>
+
+    <div class="quiz-section">
+        <h2>تمارين تقييمية</h2>
+        <div id="quiz-container"></div>
+        <button class="btn-check" onclick="checkAnswers()">📝 تصحيح التمارين</button>
+        <div id="score" class="score-board" style="display: none;"></div>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            id: "q1",
+            type: "mcq",
+            text: "تكون القوة الدافعة المستحثة صفراً عندما يكون الملف:",
+            options: ["موازياً للمجال", "عمودياً على المجال", "بزاوية 45°"],
+            correct: "1",
+            exp: "عندما يكون الملف عمودياً على المجال (أي موازياً لخطوط المجال)، فإن التغير في الفيض يكون صفراً، وبالتالي تكون القوة الدافعة صفراً."
+        },
+        {
+            id: "q2",
+            type: "tf",
+            text: "في المولد البسيط، تنزلق حلقات الانزلاق فوق فرش الكربون الثابتة لنقل التيار.",
+            correct: "true",
+            exp: "صحيح، حلقات الانزلاق تدور مع الملف بينما تظل فرش الكربون ثابتة لتضمن اتصالاً كهربائياً مستمراً."
+        },
+        {
+            id: "q3",
+            type: "mcq",
+            text: "إذا كان عدد لفات ملف 200 لفة، وتغير الفيض المغناطيسي خلاله من 0.02 Wb إلى 0.01 Wb خلال 0.1 ثانية، فإن القوة الدافعة المستحثة تساوي:",
+            options: ["10 V", "20 V", "40 V"],
+            correct: "1",
+            exp: "ΔΦ = 0.01 - 0.02 = -0.01 Wb، emf = -N × (ΔΦ/Δt) = -200 × (-0.01/0.1) = -200 × (-0.1) = 20 V."
+        }
+    ];
+
+    function build() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = '';
+        questions.forEach((q, i) => {
+            let html = `<div class="question-box"><p><b>سؤال ${i+1}:</b> ${q.text}</p>`;
+            if(q.type === 'mcq') {
+                q.options.forEach((opt, idx) => {
+                    html += `<div><label><input type="radio" name="${q.id}" value="${idx}"> ${opt}</label></div>`;
+                });
+            } else {
+                html += `<div><label><input type="radio" name="${q.id}" value="true"> ✅ صح</label> &nbsp; 
+                             <label><input type="radio" name="${q.id}" value="false"> ❌ خطأ</label></div>`;
+            }
+            html += `<div id="fb_${q.id}" class="feedback"></div></div>`;
+            container.innerHTML += html;
+        });
+    }
+
+    function checkAnswers() {
+        let correctCount = 0;
+        questions.forEach(q => {
+            const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+            const fb = document.getElementById('fb_' + q.id);
+            if(selected && selected.value === q.correct) {
+                correctCount++;
+                fb.innerHTML = "✅ إجابة صحيحة! " + (q.exp ? q.exp : "");
+                fb.className = "feedback correct";
+            } else if(selected) {
+                fb.innerHTML = "❌ إجابة خاطئة. " + q.exp;
+                fb.className = "feedback wrong";
+            } else {
+                fb.innerHTML = "⚠️ لم تختر إجابة بعد.";
+                fb.className = "feedback wrong";
+            }
+        });
+        const scoreDiv = document.getElementById('score');
+        scoreDiv.style.display = 'block';
+        scoreDiv.innerHTML = `📊 النتيجة: ${correctCount} من ${questions.length} (${Math.round(correctCount/questions.length*100)}%)`;
+    }
+    
+    window.onload = build;
+</script>
+</body>
+</html>
