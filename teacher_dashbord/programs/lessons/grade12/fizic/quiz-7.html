@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>اختبار الحث الكهرومغناطيسي - 3 تبويبات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', 'Tahoma', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 20px; color: #1e2a3e; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 32px; box-shadow: 0 20px 35px rgba(0,0,0,0.2); padding: 20px 25px 35px; }
+        h1 { font-size: 1.9rem; text-align: center; color: #0b3b5f; border-bottom: 3px solid #667eea; display: inline-block; width: auto; margin: 0 auto 20px; padding-bottom: 8px; }
+        .header { text-align: center; margin-bottom: 25px; }
+        
+        /* أزرار التبويب */
+        .tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab-btn { background: #e2e8f0; border: none; padding: 12px 28px; font-size: 1rem; font-weight: bold; border-radius: 50px; cursor: pointer; transition: 0.3s; color: #334155; display: inline-flex; align-items: center; gap: 8px; }
+        .tab-btn.active { background: #667eea; color: white; box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
+        .tab-btn:hover:not(.active) { background: #cbd5e1; }
+        .tab-content { display: none; }
+        .tab-content.active-tab { display: block; }
+        
+        .section { background: #ffffff; margin-bottom: 35px; border-radius: 28px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 5px 0; }
+        .section-title { background: #eef2ff; padding: 12px 20px; font-size: 1.6rem; font-weight: bold; color: #1e40af; border-radius: 30px 30px 20px 20px; border-right: 6px solid #667eea; }
+        .question-card { background: #fefefe; border: 1px solid #e2e8f0; border-radius: 24px; padding: 18px 22px; margin-bottom: 22px; }
+        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; color: #0f172a; line-height: 1.6; }
+        .options { display: flex; flex-wrap: wrap; gap: 15px; margin: 12px 0 15px; }
+        .option { display: flex; align-items: center; gap: 8px; background: #f8fafc; padding: 6px 16px; border-radius: 40px; border: 1px solid #cbd5e1; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #eef2ff; border-color: #667eea; }
+        .option.selected { background: #dbeafe; border-color: #667eea; box-shadow: 0 0 0 2px rgba(102,126,234,0.2); }
+        input[type="radio"] { accent-color: #667eea; width: 18px; height: 18px; margin-left: 6px; cursor: pointer; }
+        .feedback { margin-top: 12px; padding: 8px 14px; border-radius: 18px; font-size: 0.9rem; display: inline-block; width: 100%; }
+        .correct-feedback { background: #dcfce7; color: #15803d; border-right: 4px solid #22c55e; }
+        .wrong-feedback { background: #fee2e2; color: #b91c1c; border-right: 4px solid #ef4444; }
+        .neutral-feedback { background: #f1f5f9; color: #334155; }
+        .input-answer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .input-answer input { padding: 8px 12px; border-radius: 28px; border: 1px solid #cbd5e1; width: 280px; font-size: 0.9rem; }
+        button { background: #667eea; color: white; border: none; padding: 8px 20px; border-radius: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #5a67d8; transform: scale(0.98); }
+        .reset-btn { background: #ef4444; margin-right: 15px; padding: 10px 25px; }
+        .reset-btn:hover { background: #dc2626; }
+        .button-group { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        .score-area { background: #e6f0ff; border-radius: 36px; padding: 15px 20px; text-align: center; margin-top: 20px; font-size: 1.3rem; font-weight: bold; color: #075985; position: sticky; bottom: 10px; }
+        .graph-option { flex-direction: column; width: 130px; text-align: center; background: #f1f5f9; }
+        .graph-svg { width: 100px; height: 70px; margin-bottom: 5px; }
+        @media (max-width: 650px) { .container { padding: 12px; } .question-card { padding: 12px; } .tab-btn { padding: 8px 16px; font-size: 0.85rem; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>⚡  التمرين السابع-الحث الكهرومغناطيسي -اسئلة الكتاب ⚡</h1>
+        <p>الصف الثالث الثانوي | 3 تبويبات: أصلي + اختيار من متعدد + صح/خطأ</p>
+        <div class="button-group">
+            <button class="reset-btn" onclick="resetAllTabs()"><i class="fas fa-redo-alt"></i> إعادة تعيين جميع الإجابات</button>
+        </div>
+    </div>
+
+    <!-- أزرار التبويب -->
+    <div class="tabs">
+          <button class="nav-btn home-btn" onclick="window.location.href='unit7.html'" id="homeMainBtn"><i class="fas fa-home"></i> الرئيسية</button>
+
+        <button class="tab-btn active" onclick="switchTab('original')"><i class="fas fa-book-open"></i>  اسئلة الكتاب</button>
+        <button class="tab-btn" onclick="switchTab('mcq')"><i class="fas fa-list-ul"></i> اختيار من متعدد</button>
+        <button class="tab-btn" onclick="switchTab('truefalse')"><i class="fas fa-check-double"></i> صح / خطأ</button>
+    </div>
+
+    <div id="originalTab" class="tab-content active-tab"></div>
+    <div id="mcqTab" class="tab-content"></div>
+    <div id="truefalseTab" class="tab-content"></div>
+
+    <div class="score-area" id="scoreBoard">📊 يتم حساب النقاط...</div>
+    <footer>✅ تحقق تلقائي لكل سؤال | التقييم حسب الإجابات الصحيحة</footer>
+</div>
+
+<script>
+    // ================== الأسئلة الأصلية (تركيبية ومسائل) ==================
+    const originalQuestions = [
+        { id: 1, type: "mcq_orig", section: "الجزء الأول - الاختيار من متعدد", text: "أي من الإجراءات التالية لا تنتج قوة دافعة كهربائية؟", options: ["أ) مسك مغناطيس ثابت داخل ملف", "ب) تدوير ملف في مجال مغناطيسي", "ج) تدوير مغناطيس حول ملف ثابت", "د) تحريك قضيب مغناطيس عبر قطعة فلز"], correct: "a", explanation: "القوة الدافعة الكهربائية المستحثة تنشأ فقط عند تغير التدفق المغناطيسي." },
+        { id: 2, type: "mcq_orig", section: "الجزء الأول - الاختيار من متعدد", text: "أي مما يلي لا يؤثر على مقدار القوة الدافعة الكهربائية المستحثة؟", options: ["أ) قوة المجال المغناطيسي", "ب) مقاومة الملف", "ج) سرعة قطع الملف للمجال", "د) عدد لفات الملف"], correct: "b", explanation: "مقاومة الملف تؤثر على شدة التيار المستحث ولكنها لا تؤثر على مقدار القوة الدافعة الكهربائية نفسها." },
+        { id: 3, type: "graph_orig", section: "الجزء الأول - الاختيار من متعدد", text: "يمثل الرسم ملف مولد ذو حلقات انزلاق. أي من العلاقات البيانية التالية تعكس الجهد الخارج مقابل الزمن عند بدء الدوران من الوضع الأفقي؟", options: ["الشكل أ", "الشكل ب", "الشكل ج", "الشكل د"], correct: "c", explanation: "عند بدء الدوران من الوضع الأفقي، يبدأ الجهد من القيمة العظمى، والشكل (ج) هو الصحيح.", graphOptions: [
+            { value: "a", label: "الشكل أ", svg: '<svg viewBox="0 0 120 80"><path d="M 10 60 Q 35 20 60 60 T 110 60" fill="none" stroke="red" stroke-width="3"/><line x1="5" y1="60" x2="115" y2="60" stroke="black"/><line x1="10" y1="10" x2="10" y2="75" stroke="black"/><text x="2" y="45">e</text><text x="105" y="75">t</text></svg>' },
+            { value: "b", label: "الشكل ب", svg: '<svg viewBox="0 0 120 80"><path d="M 10 40 Q 35 70 60 40 T 110 40" fill="none" stroke="red" stroke-width="3"/><line x1="5" y1="40" x2="115" y2="40" stroke="black"/><line x1="10" y1="10" x2="10" y2="75" stroke="black"/><text x="2" y="30">e</text><text x="105" y="55">t</text></svg>' },
+            { value: "c", label: "الشكل ج", svg: '<svg viewBox="0 0 120 80"><path d="M 10 20 Q 35 70 60 40 T 110 40" fill="none" stroke="red" stroke-width="3"/><line x1="5" y1="40" x2="115" y2="40" stroke="black"/><line x1="10" y1="10" x2="10" y2="75" stroke="black"/><text x="2" y="30">e</text><text x="105" y="55">t</text></svg>' },
+            { value: "d", label: "الشكل د", svg: '<svg viewBox="0 0 120 80"><path d="M 10 60 L 60 20 L 110 60" fill="none" stroke="red" stroke-width="3"/><line x1="5" y1="60" x2="115" y2="60" stroke="black"/><line x1="10" y1="10" x2="10" y2="75" stroke="black"/></svg>' }
+        ] },
+        { id: 4, type: "mcq_orig", section: "الجزء الأول - الاختيار من متعدد", text: "لماذا يستخدم الحديد المطاوع في قلب المحولات الكهربائية؟", options: ["أ) مقاومة كهربائية منخفضة", "ب) يوصل التيار المستحث بشكل جيد", "ج) لا ينصهر بسهولة", "د) يضمن رابطة تدفق مغناطيسي أفضل ويقلل التيارات الدوامية"], correct: "d", explanation: "الحديد المطاوع يتميز بنفاذية مغناطيسية عالية ومقاومة كهربائية عالية لتقليل التيارات الدوامية." },
+        { id: 5, type: "mcq_orig", section: "الجزء الأول - الاختيار من متعدد", text: "محول: Np=100 لفة، Ns=50 لفة، Vp=240V، الحمل R=10Ω. التيار في الحمل هو:", options: ["12 A", "24 A", "48 A", "120 A"], correct: "a", explanation: "Vs = (Ns/Np) × Vp = 120V، Is = Vs/R = 12A" },
+        { id: 6, type: "text", section: "الأسئلة التركيبية", text: "1- (أ) ماذا يُقصد بمصطلح الحث الكهرومغناطيسي؟", correctAnswer: "ظاهرة تولد قوة دافعة كهربائية في موصل نتيجة تغير التدفق المغناطيسي خلاله." },
+        { id: 7, type: "text", section: "الأسئلة التركيبية", text: "1- (ب) حدد العوامل التي تؤثر على مقدار القوة الدافعة الكهربائية المستحثة.", correctAnswer: "شدة المجال المغناطيسي، سرعة الحركة، عدد لفات الملف، مساحة الملف، والزاوية بين المجال والعمودي." },
+        { id: 8, type: "text", section: "الأسئلة التركيبية", text: "2- (أ) تقريب المغناطيس نحو الملف. ماذا يشاهد في الجلفانومتر؟", correctAnswer: "ينحرف مؤشر الجلفانومتر انحرافاً لحظياً." },
+        { id: 9, type: "text", section: "الأسئلة التركيبية", text: "2- (ب) إبعاد المغناطيس عن الملف اللولبي.", correctAnswer: "ينحرف المؤشر في الاتجاه المعاكس." },
+        { id: 10, type: "text", section: "الأسئلة التركيبية", text: "2- (ج) زيادة عدد اللفات في الملف.", correctAnswer: "يزداد مقدار انحراف الجلفانومتر بسبب زيادة القوة الدافعة المستحثة." },
+        { id: 11, type: "text", section: "الأسئلة التركيبية", text: "3- اذكر قاعدة لينز عن الحث الكهرومغناطيسي.", correctAnswer: "اتجاه التيار المستحث يكون بحيث يعاكس التغير في التدفق المغناطيسي المسبب له." },
+        { id: 12, type: "text", section: "الأسئلة التركيبية", text: "3- (ب) كيف ينطبق حفظ الطاقة على الحث الكهرو مغناطيسي؟", correctAnswer: "الشغل المبذول لتحريك المغناطيس يتحول إلى طاقة كهربائية، والتيار المستحث ينتج مجالاً مضاداً." },
+        { id: 13, type: "text", section: "الأسئلة التركيبية", text: "4- (أ) صف مولد تيار متردد بسيط باستخدام حلقات الانزلاق.", correctAnswer: "يتكون من ملف يدور بين قطبي مغناطيس، طرفا الملف متصلان بحلقتين منزلقتين معدنيتين." },
+        { id: 14, type: "text", section: "الأسئلة التركيبية", text: "4- (ب) ارسم العلاقة البيانية للجهد المتغير مع الزمن لمولد تيار متردد بسيط.", correctAnswer: "منحنى جيبي (sinusoidal) يوضح تغير الجهد مع الزمن بشكل دوري." },
+        { id: 15, type: "text", section: "الأسئلة التركيبية", text: "5- ما الغرض من القلب المصنوع من رقائق الحديد المطاوع في المحول؟", correctAnswer: "تقليل التيارات الدوامية (فوكو) وفقد الطاقة." },
+        { id: 16, type: "text", section: "الأسئلة التركيبية", text: "5- (ب) محول خافض لجهد 6V وتيار 0.4A، ومصدر 240V. احسب تيار الابتدائي.", correctAnswer: "Ip = (6*0.4)/240 = 0.01 A = 10 mA." },
+        { id: 17, type: "text", section: "الأسئلة التركيبية", text: "6- كيف تولد تياراً كهرو مغناطيسياً باستخدام قلبين حديديين وملفين؟", correctAnswer: "نركب القلبين معاً لعمل قلب مغلق، نمرر تياراً متغيراً في أحد الملفين فيستحث تيار في الملف الآخر." },
+        { id: 18, type: "text", section: "الأسئلة التركيبية", text: "7- (أ) صف تجربة الحث الكهرومغناطيسي واذكر العوامل المؤثرة.", correctAnswer: "تحريك مغناطيس داخل ملف متصل بجلفانومتر. العوامل: السرعة، شدة المغناطيس، عدد اللفات، مساحة الملف." },
+        { id: 19, type: "text", section: "الأسئلة التركيبية", text: "7- (ب) محول: Np=400، Ns=10، Vp=250V، Ip=2A. احسب Vs.", correctAnswer: "Vs = (10/400)*250 = 6.25 V" },
+        { id: 20, type: "text", section: "الأسئلة التركيبية", text: "7- (ب) احسب التيار الثانوي (كفاءة 100%).", correctAnswer: "Is = (250*2)/6.25 = 80 A" },
+        { id: 21, type: "text", section: "الأسئلة التركيبية", text: "8- (أ) قدرة 40kW، جهد 5000V، مقاومة 0.5Ω. احسب التيار.", correctAnswer: "I = 40000/5000 = 8 A" },
+        { id: 22, type: "text", section: "الأسئلة التركيبية", text: "8- (أ) احسب هبوط الجهد.", correctAnswer: "Vdrop = 8*0.5 = 4 V" },
+        { id: 23, type: "text", section: "الأسئلة التركيبية", text: "8- (أ) احسب فقد القدرة.", correctAnswer: "Ploss = 64*0.5 = 32 W، يتحول إلى حرارة." },
+        { id: 24, type: "text", section: "الأسئلة التركيبية", text: "8- (ب) نفس القدرة عند 250V، احسب فقد القدرة.", correctAnswer: "I = 40000/250 = 160 A، الفقد = (160)² * 0.5 = 12800 W = 12.8 kW." },
+        { id: 25, type: "text", section: "الأسئلة التركيبية", text: "8- (ج) لماذا تنقل القدرة بجهود عالية؟", correctAnswer: "لأن الفقد في القدرة يتناسب مع مربع التيار، فعند رفع الجهد يقل التيار ويقل الفقد." },
+        { id: 26, type: "text", section: "الأسئلة التركيبية", text: "9- (أ) اشرح تجربة الحث الكهرومغناطيسي والعوامل المؤثرة.", correctAnswer: "تجربة تحريك مغناطيس داخل ملف متصل بجلفانومتر." },
+        { id: 27, type: "text", section: "الأسئلة التركيبية", text: "9- (ب) كيف يفسر الحث الكهرومغناطيسي عمل المحول؟", correctAnswer: "التيار المتردد في الابتدائي ينتج فيضاً متغيراً في القلب، وهذا التغير يولد قوة دافعة مستحثة في الثانوي." },
+        { id: 28, type: "text", section: "الأسئلة التركيبية", text: "10- محول 240V/15V، Np=6400 لفة. احسب Ns.", correctAnswer: "Ns = (15/240)*6400 = 400 لفة." },
+        { id: 29, type: "text", section: "الأسئلة التركيبية", text: "10- (ب) احسب تيار الابتدائي إذا كان تيار الخرج 2A (كفاءة 100%).", correctAnswer: "Ip = (15*2)/240 = 0.125 A" },
+        { id: 30, type: "text", section: "الأسئلة التركيبية", text: "11- ملف: 500 لفة، مساحة 100cm²، تردد 1500 دورة/دقيقة، مجال 42×10⁻⁴ T. احسب emf عند ربع دورة.", correctAnswer: "التردد = 25 Hz، الزمن لربع دورة = 0.01 s، التغير في التدفق = 0.021 Wb، emf = 2.1 V." },
+        { id: 31, type: "text", section: "الأسئلة التركيبية", text: "12- ملف: 500 لفة، مساحة 50cm²، مجال 4T يتناقص إلى 20% خلال 1s. احسب emf.", correctAnswer: "ΔB = 3.2 T، ΔΦ = 8 Wb، emf = 8 V." }
+    ];
+
+    // ================== أسئلة اختيار من متعدد (محاكاة) ==================
+    const mcqQuestions = [
+        { id: 1, text: "الحث الكهرومغناطيسي هو ظاهرة:", options: ["توليد تيار كهربائي في موصل نتيجة وجود مجال مغناطيسي ثابت", "توليد قوة دافعة كهربائية في موصل نتيجة تغير التدفق المغناطيسي", "توليد مجال مغناطيسي نتيجة مرور تيار كهربائي", "تجاذب المغناطيس مع المواد المغناطيسية"], correct: "b", explanation: "الحث الكهرومغناطيسي هو توليد قوة دافعة كهربائية عند تغير التدفق المغناطيسي." },
+        { id: 2, text: "قاعدة لينز تستخدم لتحديد:", options: ["مقدار القوة الدافعة المستحثة", "اتجاه التيار المستحث", "مقدار التدفق المغناطيسي", "نوع المادة المغناطيسية"], correct: "b", explanation: "قاعدة لينز تحدد اتجاه التيار المستحث." },
+        { id: 3, text: "عند زيادة سرعة حركة المغناطيس داخل الملف، فإن القوة الدافعة المستحثة:", options: ["تزداد", "تقل", "لا تتغير", "تنعدم"], correct: "a", explanation: "القوة الدافعة تتناسب طردياً مع سرعة تغير التدفق." },
+        { id: 4, text: "محول كهربائي يرفع الجهد من 220V إلى 11000V، إذا كان عدد لفات الابتدائي 200 لفة، فإن عدد لفات الثانوي:", options: ["100 لفة", "400 لفة", "10000 لفة", "20000 لفة"], correct: "c", explanation: "Ns/Np = Vs/Vp → Ns = (11000/220)×200 = 10000 لفة." },
+        { id: 5, text: "أي من التالي لا يؤثر على مقدار القوة الدافعة المستحثة في ملف:", options: ["عدد لفات الملف", "شدة المجال المغناطيسي", "مقاومة الملف", "سرعة حركة الملف"], correct: "c", explanation: "مقاومة الملف تؤثر على التيار وليس على القوة الدافعة." },
+        { id: 6, text: "في المولد الكهربائي البسيط، التيار الناتج هو:", options: ["تيار مستمر", "تيار متردد", "تيار متردد ثم يحول إلى مستمر", "تيار مستمر ثم يحول إلى متردد"], correct: "b", explanation: "المولد البسيط ينتج تياراً متردداً." },
+        { id: 7, text: "عند تقريب مغناطيس من ملف متصل بجلفانومتر، ينحرف المؤشر. عند إبعاد المغناطيس، ينحرف المؤشر:", options: ["في نفس الاتجاه", "في الاتجاه المعاكس", "لا ينحرف", "ينحرف ثم يعود بسرعة"], correct: "b", explanation: "حسب قاعدة لينز، اتجاه التيار المستحث يعاكس التغير في التدفق." },
+        { id: 8, text: "التيارات الدوامية (Foucault currents) تنتج في:", options: ["قلب المحول المصنوع من الحديد", "ملفات المحول", "أسلاك النقل", "المقاومات"], correct: "a", explanation: "التيارات الدوامية تتولد في القلوب الحديدية." },
+        { id: 9, text: "وحدة قياس التدفق المغناطيسي هي:", options: ["تسلا", "ويبر", "فولت", "أمبير"], correct: "b", explanation: "وحدة التدفق المغناطيسي هي الويبر (Weber)." },
+        { id: 10, text: "العلاقة الرياضية لقاعدة فاراداي هي:", options: ["emf = -N ΔΦ/Δt", "emf = N ΔΦ/Δt", "emf = -ΔΦ/Δt", "emf = N B A"], correct: "a", explanation: "قاعدة فاراداي: emf = -N dΦ/dt" }
+    ];
+
+    // ================== أسئلة صح/خطأ (محاكاة) ==================
+    const trueFalseQuestions = [
+        { id: 1, text: "الحث الكهرومغناطيسي هو توليد قوة دافعة كهربائية نتيجة تغير التدفق المغناطيسي.", correct: true, explanation: "هذا هو التعريف الدقيق للحث الكهرومغناطيسي." },
+        { id: 2, text: "قاعدة لينز تنص على أن اتجاه التيار المستحث يعاكس التغير في التدفق المغناطيسي.", correct: true, explanation: "هذا هو النص الدقيق لقاعدة لينز." },
+        { id: 3, text: "زيادة سرعة حركة المغناطيس داخل الملف يقلل من القوة الدافعة المستحثة.", correct: false, explanation: "زيادة السرعة تزيد من معدل تغير التدفق، فتزيد القوة الدافعة." },
+        { id: 4, text: "المحول الكهربائي يعمل على التيار المستمر فقط.", correct: false, explanation: "المحول يعمل على التيار المتردد فقط، لأنه يحتاج إلى تغير التدفق." },
+        { id: 5, text: "قلب المحول يصنع من الحديد المطاوع لتقليل التيارات الدوامية.", correct: true, explanation: "الحديد المطاوع (الرقائقي) يقلل التيارات الدوامية." },
+        { id: 6, text: "في المولد الكهربائي، حلقات الانزلاق تستخدم للحصول على تيار مستمر.", correct: false, explanation: "حلقات الانزلاق تعطي تياراً متردداً، أما المبدل فيعطي تياراً مستمراً." },
+        { id: 7, text: "القوة الدافعة المستحثة تتناسب طردياً مع عدد لفات الملف.", correct: true, explanation: "emf = -N (dΦ/dt)، أي تتناسب طردياً مع عدد اللفات N." },
+        { id: 8, text: "التيارات الدوامية ظاهرة مفيدة دائماً في المحولات.", correct: false, explanation: "التيارات الدوامية تسبب فقداً في الطاقة وسخونة، وهي ضارة." },
+        { id: 9, text: "قاعدة لنز هي تطبيق لمبدأ حفظ الطاقة في الحث الكهرومغناطيسي.", correct: true, explanation: "الاتجاه المعاكس للتيار المستحث يضمن حفظ الطاقة." },
+        { id: 10, text: "وحدة قياس شدة المجال المغناطيسي هي الويبر.", correct: false, explanation: "وحدة شدة المجال المغناطيسي هي التسلا، والويبر وحدة التدفق." }
+    ];
+
+    // تخزين الإجابات
+    let originalAnswers = {};
+    let mcqAnswers = {};
+    let trueFalseAnswers = {};
+    let activeTab = 'original';
+
+    function updateScore() {
+        let total = 0, correctCount = 0;
+        if (activeTab === 'original') {
+            total = originalQuestions.length;
+            for(let q of originalQuestions) {
+                if(q.type === 'text') { if(originalAnswers[`text_q${q.id}`] && originalAnswers[`text_q${q.id}`].isCorrect) correctCount++; }
+                else { if(originalAnswers[`q${q.id}`] && originalAnswers[`q${q.id}`].isCorrect) correctCount++; }
+            }
+        } else if (activeTab === 'mcq') {
+            total = mcqQuestions.length;
+            for(let q of mcqQuestions) { if(mcqAnswers[`q${q.id}`] && mcqAnswers[`q${q.id}`].isCorrect) correctCount++; }
+        } else {
+            total = trueFalseQuestions.length;
+            for(let q of trueFalseQuestions) { if(trueFalseAnswers[`q${q.id}`] && trueFalseAnswers[`q${q.id}`].isCorrect) correctCount++; }
+        }
+        let percent = total===0?0:Math.round((correctCount/total)*100);
+        let tabName = activeTab === 'original' ? 'الأصلي' : (activeTab === 'mcq' ? 'اختيار من متعدد' : 'صح/خطأ');
+        document.getElementById('scoreBoard').innerHTML = `📊 التقييم (${tabName}): ${correctCount} / ${total} إجابة صحيحة (${percent}%) ${percent>=70?'🎉 ممتاز':(percent>=50?'👍 جيد':'📚 يحتاج مراجعة')}`;
+    }
+
+    // دوال التصحيح للتبويب الأصلي
+    window.selectOriginalOption = function(qId, val) {
+        let question = originalQuestions.find(q => q.id === qId);
+        let isCorrect = (question && question.correct === val);
+        let msg = isCorrect ? `✅ صحيح! ${question.explanation||''}` : `❌ خطأ. الإجابة الصحيحة: ${question.correct.toUpperCase()}. ${question.explanation||''}`;
+        originalAnswers[`q${qId}`] = { isCorrect, msg };
+        let fbDiv = document.getElementById(`fb-orig-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        updateScore();
+    };
+
+    window.checkOriginalText = function(qId) {
+        let inputEl = document.getElementById(`input-orig-${qId}`);
+        let userAnswer = inputEl ? inputEl.value.trim() : '';
+        let question = originalQuestions.find(q => q.id === qId);
+        if(!question) return;
+        let userNorm = userAnswer.replace(/\s+/g, ' ').trim().toLowerCase();
+        let correctNorm = question.correctAnswer.replace(/\s+/g, ' ').trim().toLowerCase();
+        let isCorrect = (userNorm === correctNorm) || (question.id === 30 && userNorm.includes('2.1')) || (question.id === 31 && userNorm.includes('8'));
+        let msg = isCorrect ? `✅ صحيح! ${question.correctAnswer}` : `❌ خطأ. الإجابة: ${question.correctAnswer}`;
+        originalAnswers[`text_q${qId}`] = { isCorrect, msg };
+        let fbDiv = document.getElementById(`fb-orig-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        updateScore();
+    };
+
+    // دوال التصحيح لتبويب الاختيار من متعدد
+    window.selectMcqOption = function(qId, val) {
+        let question = mcqQuestions.find(q => q.id === qId);
+        let isCorrect = (question && question.correct === val);
+        let msg = isCorrect ? `✅ صحيح! ${question.explanation||''}` : `❌ خطأ. الإجابة الصحيحة: ${question.correct.toUpperCase()}. ${question.explanation||''}`;
+        mcqAnswers[`q${qId}`] = { isCorrect, msg };
+        let fbDiv = document.getElementById(`fb-mcq-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        updateScore();
+    };
+
+    // دوال التصحيح لتبويب صح/خطأ
+    window.selectTrueFalse = function(qId, val) {
+        let question = trueFalseQuestions.find(q => q.id === qId);
+        let isCorrect = (question && ((val === 'true' && question.correct) || (val === 'false' && !question.correct)));
+        let correctText = question.correct ? "صحيح" : "خطأ";
+        let msg = isCorrect ? `✅ صحيح! ${question.explanation||''}` : `❌ خطأ. الإجابة الصحيحة: ${correctText}. ${question.explanation||''}`;
+        trueFalseAnswers[`q${qId}`] = { isCorrect, msg };
+        let fbDiv = document.getElementById(`fb-tf-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        updateScore();
+    };
+
+    // دوال العرض
+    function renderOriginalTab() {
+        let html = '';
+        let sectionsMap = new Map();
+        originalQuestions.forEach(q => {
+            if (!sectionsMap.has(q.section)) sectionsMap.set(q.section, []);
+            sectionsMap.get(q.section).push(q);
+        });
+        for(let [sectionName, questions] of sectionsMap.entries()) {
+            html += `<div class="section"><div class="section-title">📘 ${sectionName}</div>`;
+            for(let q of questions) {
+                if(q.type === 'mcq_orig') {
+                    html += `<div class="question-card"><div class="question-text">${q.text}</div>
+                        <div class="options" id="options-orig-${q.id}">${q.options.map((opt, idx) => { let optVal = String.fromCharCode(97+idx); return `<label class="option"><input type="radio" name="orig_${q.id}" value="${optVal}" onchange="selectOriginalOption(${q.id},'${optVal}')"><span>${opt}</span></label>`; }).join('')}</div>
+                        <div class="feedback neutral-feedback" id="fb-orig-${q.id}">🔘 اختر إجابة.</div></div>`;
+                } else if(q.type === 'graph_orig') {
+                    html += `<div class="question-card"><div class="question-text">${q.text}</div>
+                        <div class="options" id="options-orig-${q.id}">${q.graphOptions.map(opt => `<label class="option graph-option"><input type="radio" name="orig_${q.id}" value="${opt.value}" onchange="selectOriginalOption(${q.id},'${opt.value}')"><div class="graph-svg">${opt.svg}</div><span>${opt.label}</span></label>`).join('')}</div>
+                        <div class="feedback neutral-feedback" id="fb-orig-${q.id}">🔘 اختر الشكل البياني الصحيح.</div></div>`;
+                } else {
+                    html += `<div class="question-card"><div class="question-text">${q.text}</div>
+                        <div class="input-answer"><input type="text" id="input-orig-${q.id}" placeholder="اكتب إجابتك هنا..."><button onclick="checkOriginalText(${q.id})">✔ تحقق</button></div>
+                        <div class="feedback neutral-feedback" id="fb-orig-${q.id}">✍️ أدخل إجابتك ثم اضغط تحقق.</div></div>`;
+                }
+            }
+            html += `</div>`;
+        }
+        document.getElementById('originalTab').innerHTML = html;
+    }
+
+    function renderMcqTab() {
+        let html = '<div class="section"><div class="section-title">📘 أسئلة اختيار من متعدد</div>';
+        for(let q of mcqQuestions) {
+            html += `<div class="question-card"><div class="question-text">${q.text}</div>
+                <div class="options" id="options-mcq-${q.id}">${q.options.map((opt, idx) => { let optVal = String.fromCharCode(97+idx); return `<label class="option"><input type="radio" name="mcq_${q.id}" value="${optVal}" onchange="selectMcqOption(${q.id},'${optVal}')"><span>${opt}</span></label>`; }).join('')}</div>
+                <div class="feedback neutral-feedback" id="fb-mcq-${q.id}">🔘 اختر إجابة.</div></div>`;
+        }
+        html += `</div>`;
+        document.getElementById('mcqTab').innerHTML = html;
+    }
+
+    function renderTrueFalseTab() {
+        let html = '<div class="section"><div class="section-title">📘 أسئلة صح / خطأ</div>';
+        for(let q of trueFalseQuestions) {
+            html += `<div class="question-card"><div class="question-text">${q.text}</div>
+                <div class="options" id="options-tf-${q.id}">
+                    <label class="option"><input type="radio" name="tf_${q.id}" value="true" onchange="selectTrueFalse(${q.id},'true')"><span>✔️ صحيح</span></label>
+                    <label class="option"><input type="radio" name="tf_${q.id}" value="false" onchange="selectTrueFalse(${q.id},'false')"><span>❌ خطأ</span></label>
+                </div>
+                <div class="feedback neutral-feedback" id="fb-tf-${q.id}">🔘 اختر صح أو خطأ.</div></div>`;
+        }
+        html += `</div>`;
+        document.getElementById('truefalseTab').innerHTML = html;
+    }
+
+    window.switchTab = function(tab) {
+        activeTab = tab;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if(tab === 'original') {
+            document.querySelector('.tabs button:first-child').classList.add('active');
+            document.getElementById('originalTab').classList.add('active-tab');
+            document.getElementById('mcqTab').classList.remove('active-tab');
+            document.getElementById('truefalseTab').classList.remove('active-tab');
+        } else if(tab === 'mcq') {
+            document.querySelector('.tabs button:nth-child(2)').classList.add('active');
+            document.getElementById('mcqTab').classList.add('active-tab');
+            document.getElementById('originalTab').classList.remove('active-tab');
+            document.getElementById('truefalseTab').classList.remove('active-tab');
+        } else {
+            document.querySelector('.tabs button:last-child').classList.add('active');
+            document.getElementById('truefalseTab').classList.add('active-tab');
+            document.getElementById('originalTab').classList.remove('active-tab');
+            document.getElementById('mcqTab').classList.remove('active-tab');
+        }
+        updateScore();
+    };
+
+    window.resetAllTabs = function() {
+        originalAnswers = {};
+        mcqAnswers = {};
+        trueFalseAnswers = {};
+        renderOriginalTab();
+        renderMcqTab();
+        renderTrueFalseTab();
+        updateScore();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    document.addEventListener('click', function(e) {
+        let option = e.target.closest('.option');
+        if(option && !e.target.closest('input[type="radio"]')) {
+            let radio = option.querySelector('input[type="radio"]');
+            if(radio) { radio.checked = true; let changeEvent = new Event('change', { bubbles: true }); radio.dispatchEvent(changeEvent); }
+        }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        renderOriginalTab();
+        renderMcqTab();
+        renderTrueFalseTab();
+        updateScore();
+    });
+</script>
+</body>
+</html>

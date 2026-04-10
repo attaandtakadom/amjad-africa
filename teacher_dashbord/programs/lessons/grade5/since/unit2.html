@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>العلوم - الصف الخامس الابتدائي | جميع الدروس التفاعلية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', 'Tahoma', sans-serif; }
+        body { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); margin: 0; padding: 20px; color: #0f172a; }
+        .container { max-width: 1300px; margin: 0 auto; background: white; border-radius: 32px; box-shadow: 0 20px 35px rgba(0,0,0,0.15); padding: 20px 25px 35px; }
+        h1 { font-size: 2rem; text-align: center; color: #0369a1; border-bottom: 4px solid #0ea5e9; display: inline-block; width: auto; margin: 0 auto 20px; padding-bottom: 8px; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .subtitle { color: #475569; font-size: 1rem; margin-top: 8px; }
+        
+        .lessons-tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
+        .lesson-tab { background: #f1f5f9; border: none; padding: 12px 20px; font-size: 0.95rem; font-weight: bold; border-radius: 60px; cursor: pointer; transition: 0.3s; color: #1e293b; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .lesson-tab i { font-size: 1rem; }
+        .lesson-tab.active { background: #0ea5e9; color: white; box-shadow: 0 6px 14px rgba(14,165,233,0.4); }
+        .lesson-tab:hover:not(.active) { background: #e2e8f0; transform: translateY(-2px); }
+        
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active-tab { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .lesson-card { background: white; border-radius: 28px; margin-bottom: 25px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+        .lesson-header { background: #f8fafc; padding: 18px 25px; border-bottom: 3px solid #0ea5e9; }
+        .lesson-header h2 { margin: 0; color: #0369a1; font-size: 1.4rem; display: flex; align-items: center; gap: 12px; }
+        .lesson-content { padding: 20px 25px; line-height: 1.7; }
+        .info-box { background: #f0f9ff; border-right: 5px solid #0ea5e9; padding: 15px 20px; border-radius: 20px; margin: 15px 0; }
+        .info-box h3 { color: #0369a1; margin-top: 0; display: flex; align-items: center; gap: 8px; }
+        
+        /* تنسيق الصور */
+        .images-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 20px 0; }
+        .image-card { flex: 1; min-width: 200px; background: #f8fafc; border-radius: 20px; padding: 12px; text-align: center; border: 1px solid #e2e8f0; }
+        .image-card img { width: 100%; max-height: 380px; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .image-card .caption { font-size: 0.85rem; color: #475569; margin-top: 8px; font-weight: 500; }
+        .image-placeholder { background: #f1f5f9; border-radius: 20px; padding: 30px; text-align: center; border: 2px dashed #94a3b8; }
+        .image-placeholder i { font-size: 3rem; color: #64748b; margin-bottom: 8px; display: block; }
+        
+        .material-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+        .material-badge { background: #e0f2fe; padding: 5px 15px; border-radius: 40px; font-weight: bold; color: #0369a1; font-size: 0.9rem; }
+        
+        .quiz-section { background: #fefce8; border-radius: 24px; padding: 20px; margin-top: 25px; border: 1px solid #fde047; }
+        .quiz-title { font-size: 1.3rem; font-weight: bold; color: #854d0e; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .question-item { background: white; border-radius: 20px; padding: 18px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .question-text { font-weight: 600; margin-bottom: 12px; color: #1e293b; font-size: 1rem; }
+        .options { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+        .option { display: flex; align-items: center; gap: 8px; background: #f8fafc; padding: 6px 16px; border-radius: 40px; border: 1px solid #cbd5e1; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #eef2ff; border-color: #0ea5e9; }
+        .option.selected { background: #dbeafe; border-color: #0ea5e9; }
+        input[type="radio"] { accent-color: #0ea5e9; width: 18px; height: 18px; cursor: pointer; }
+        .feedback { margin-top: 12px; padding: 8px 14px; border-radius: 16px; font-size: 0.9rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #dcfce7; color: #15803d; border-right: 4px solid #22c55e; }
+        .feedback.wrong { background: #fee2e2; color: #b91c1c; border-right: 4px solid #ef4444; }
+        .check-btn { background: #0ea5e9; color: white; border: none; padding: 6px 18px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 8px; }
+        .check-btn:hover { background: #0284c7; }
+        .short-answer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+        .short-answer input { padding: 8px 15px; border-radius: 30px; border: 1px solid #cbd5e1; width: 260px; font-size: 0.9rem; }
+        .score-area { background: #e6f0ff; border-radius: 36px; padding: 15px 20px; text-align: center; margin-top: 25px; font-size: 1.2rem; font-weight: bold; color: #0369a1; position: sticky; bottom: 10px; }
+        .reset-btn { background: #ef4444; color: white; border: none; padding: 10px 25px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-right: 15px; }
+        .reset-btn:hover { background: #dc2626; }
+        .button-group { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        footer { text-align: center; margin-top: 25px; color: #64748b; font-size: 0.8rem; }
+        @media (max-width: 750px) { .container { padding: 15px; } .lesson-tab { padding: 6px 12px; font-size: 0.75rem; } .images-container { flex-direction: column; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-flask"></i> العلوم للصف الخامس الابتدائي <i class="fas fa-leaf"></i></h1>
+        <p class="subtitle">الفصل الدراسي الثاني | جميع الدروس التفاعلية مع الصور والأسئلة</p>
+        <div class="button-group">
+            <button class="reset-btn" onclick="resetAllAnswers()"><i class="fas fa-redo-alt"></i> إعادة تعيين جميع الإجابات</button>
+        </div>
+    </div>
+
+    <div class="lessons-tabs" id="tabsContainer"></div>
+    <div id="lessonsContainer"></div>
+
+    <div class="score-area" id="scoreBoard">📊 يتم حساب النقاط...</div>
+    <footer><i class="fas fa-graduation-cap"></i> تعلم واستمتع | آمنة وممتعة</footer>
+</div>
+
+<script>
+    // ================== دالة عرض الصور ==================
+    // قم بتعديل أسماء الملفات حسب الصور التي لديك في مجلد /images
+    function getImagesHTML(lessonId) {
+        // يمكنك تغيير أسماء الملفات هنا لكل درس حسب صورك الفعلية
+        const imagesMap = {
+            1: { img1: "electricity_plant.jpg", img2: "conductor_insulator.jpg", caption1: "محطة توليد الكهرباء", caption2: "الموصلات والعوازل" },
+            2: { img1: "energy_saving_bulb.jpg", img2: "save_electricity_tips.jpg", caption1: "مصابيح موفرة للطاقة", caption2: "نصائح لتوفير الكهرباء" },
+            3: { img1: "wet_hands_danger.jpg", img2: "electrical_safety.jpg", caption1: "خطر اليد المبللة", caption2: "قواعد السلامة الكهربائية" },
+            4: { img1: "magnet_poles.jpg", img2: "magnetic_materials.jpg", caption1: "أقطاب المغناطيس", caption2: "المواد المغناطيسية" },
+            5: { img1: "light_straight_line.jpg", img2: "transparent_objects.jpg", caption1: "الضوء يسير في خط مستقيم", caption2: "الأجسام الشفافة والمعتمة" },
+            6: { img1: "shadow_formation.jpg", img2: "shadow_size.jpg", caption1: "تكون الظل", caption2: "تغير حجم الظل حسب المسافة" },
+            7: { img1: "simple_machines.jpeg", img2: "pulley_ramp.jpeg", caption1: "الآلات البسيطة", caption2: "البكرات والسطح المائل" },
+            8: { img1: "froce.jpg", img2: "work.jpg", caption1: "القوة في الحياة اليومية", caption2: "الشغل والقوة" },
+            9: { img1: "soil.jpg", img2: "soil_erosion.jpg", caption1: "أنواع التربة", caption2: "انجراف التربة" },
+            10: { img1: "polar-pear.jpg", img2: ".jpg", caption1: "التكيف البنيوي", caption2: "التكيف السلوكي (الهجرة)" }
+        };
+        const images = imagesMap[lessonId] || imagesMap[1];
+        return `
+            <div class="images-container">
+                <div class="image-card">
+                    <img src="images/${images.img1}" alt="${images.caption1}" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-image\'></i><br>صورة: ${images.caption1}<br><small>ضع الصورة في مجلد /images</small></div>'">
+                    <div class="caption">${images.caption1}</div>
+                </div>
+                <div class="image-card">
+                    <img src="images/${images.img2}" alt="${images.caption2}" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-image\'></i><br>صورة: ${images.caption2}<br><small>ضع الصورة في مجلد /images</small></div>'">
+                    <div class="caption">${images.caption2}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    // ================== بيانات جميع الدروس ==================
+    const lessonsData = {
+        1: { name: "⚡ إنتاج واستخدام الكهرباء", content: `<div class="info-box"><h3><i class="fas fa-charging-station"></i> كيف تصلنا الكهرباء؟</h3><p>تُنتج الكهرباء في <strong>محطات توليد الطاقة</strong> بحرق الوقود الحفوري (النفط، الفحم، الغاز) لتسخين الماء وإنتاج بخار يدير التوربينات المتصلة بالمولد.</p></div><div class="info-box"><h3><i class="fas fa-microchip"></i> الموصلات والعوازل</h3><p><strong>الموصلات:</strong> نحاس، فضة، ألومنيوم، حديد، ذهب.<br><strong>العوازل:</strong> بلاستيك، مطاط، خشب، زجاج.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "ما الوقود المستخدم لتوليد الكهرباء؟", options: ["الماء فقط", "النفط والفحم والغاز", "الهواء", "التربة"], correct: "b", explanation: "الوقود الحفوري يُحرق لتسخين الماء." },
+                { id: "q2", type: "mcq", text: "أي مما يلي عازل للكهرباء؟", options: ["النحاس", "الحديد", "البلاستيك", "الفضة"], correct: "c", explanation: "البلاستيك لا يسمح بمرور الكهرباء." },
+                { id: "q3", type: "truefalse", text: "الماء النقي موصل جيد للكهرباء.", correct: true, explanation: "الماء النقي يوصل الكهرباء بسبب الأملاح." }
+            ] },
+        2: { name: "💡 ترشيد استهلاك الطاقة", content: `<div class="info-box"><h3><i class="fas fa-question-circle"></i> لماذا نرشد الكهرباء؟</h3><p>الوقود الحفوري غير متجدد، والترشيد يوفر المال ويحمي البيئة.</p></div><div class="info-box"><h3><i class="fas fa-lightbulb"></i> طرق الترشيد</h3><p>استخدام مصابيح موفرة، إطفاء الأنوار، فصل الأجهزة غير المستخدمة.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "أي التالي يساعد في توفير الكهرباء؟", options: ["ترك الأنوار مضاءة", "استخدام مصابيح موفرة", "فتح الثلاجة طويلاً", "تشغيل كل الأجهزة"], correct: "b", explanation: "المصابيح الموفرة تستهلك طاقة أقل." },
+                { id: "q2", type: "truefalse", text: "الوقود الحفوري مورد متجدد.", correct: false, explanation: "غير متجدد وسينفد يوماً." }
+            ] },
+        3: { name: "🛡️ السلامة مع الكهرباء", content: `<div class="info-box"><h3><i class="fas fa-exclamation-triangle"></i> قواعد السلامة</h3><ul><li>لا تلمس المفاتيح ويدك مبللة</li><li>لا تضع قوابس كثيرة في مقبس واحد</li><li>استخدم أدوات عازلة</li><li>أبلغ الكبار عن الأسلاك المكشوفة</li></ul></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "لماذا لا نلمس المفاتيح بأيد مبللة؟", options: ["لأن الماء يقطع الكهرباء", "لأن الماء موصل", "لأن الماء بارد", "لأن الماء يكسره"], correct: "b", explanation: "الماء يوصل الكهرباء إلى الجسم مسبباً صدمة." },
+                { id: "q2", type: "truefalse", text: "وضع عدة قوابس في مقبس واحد آمن.", correct: false, explanation: "يسبب سخونة وقد يحدث حريقاً." }
+            ] },
+        4: { name: "🧲 المغناطيسية", content: `<div class="info-box"><h3><i class="fas fa-magnet"></i> خصائص المغناطيس</h3><p>للمغناطيس <strong>قطبان</strong>: شمالي (N) وجنوبي (S).</p><p><strong>قوانين التجاذب والتنافر:</strong> الأقطاب المتشابهة تتنافر، والمختلفة تتجاذب.</p><p><strong>المواد المغناطيسية:</strong> الحديد، النيكل، الكوبالت.<br><strong>غير مغناطيسية:</strong> الخشب، الألومنيوم، البلاستيك.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "عند تقريب قطب شمالي لمغناطيس إلى قطب شمالي آخر، يحدث:", options: ["تجاذب", "تنافر", "لا شيء", "انجذاب شديد"], correct: "b", explanation: "الأقطاب المتشابهة تتنافر." },
+                { id: "q2", type: "mcq", text: "أي المواد التالية ينجذب إلى المغناطيس؟", options: ["الخشب", "الألومنيوم", "الحديد", "البلاستيك"], correct: "c", explanation: "الحديد مادة مغناطيسية." },
+                { id: "q3", type: "truefalse", text: "للمغناطيس قطب واحد فقط.", correct: false, explanation: "للمغناطيس قطبين شمالي وجنوبي." }
+            ] },
+        5: { name: "☀️ الضوء", content: `<div class="info-box"><h3><i class="fas fa-sun"></i> خصائص الضوء</h3><p><strong>يسير الضوء في خطوط مستقيمة.</strong></p><p><strong>الأجسام الشفافة:</strong> تسمح بمرور الضوء (الزجاج، الماء).<br><strong>الأجسام المعتمة:</strong> لا تسمح بمرور الضوء (الخشب، الحديد).<br><strong>الأجسام نصف الشفافة:</strong> تسمح بمرور جزء من الضوء (الورق الزبدة).</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "كيف يسير الضوء؟", options: ["في خطوط منحنية", "في خطوط مستقيمة", "في خطوط دائرية", "عشوائياً"], correct: "b", explanation: "الضوء يسير في خطوط مستقيمة." },
+                { id: "q2", type: "mcq", text: "أي مما يلي جسم شفاف؟", options: ["الخشب", "الحديد", "الزجاج", "الورق"], correct: "c", explanation: "الزجاج يسمح بمرور الضوء." },
+                { id: "q3", type: "truefalse", text: "الأجسام المعتمة تسمح بمرور كل الضوء.", correct: false, explanation: "الأجسام المعتمة لا تسمح بمرور الضوء." }
+            ] },
+        6: { name: "🌑 الظلال", content: `<div class="info-box"><h3><i class="fas fa-circle"></i> كيف تتكون الظلال؟</h3><p>يتكون الظل عندما <strong>يعترض جسم معتم</strong> مسار الضوء. كلما كان مصدر الضوء <strong>أصغر حجماً وأقرب</strong> إلى الجسم، كان الظل <strong>أكبر وأكثر وضوحاً</strong>.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "الظل يتكون عندما:", options: ["يسقط الضوء على جسم شفاف", "يعترض جسم معتم مسار الضوء", "يسقط الضوء على سطح عاكس", "ينكسر الضوء"], correct: "b", explanation: "الجسم المعتم يحجب الضوء." },
+                { id: "q2", type: "truefalse", text: "كلما اقترب الجسم من مصدر الضوء، صغر الظل.", correct: false, explanation: "كلما اقترب الجسم، كبر الظل." }
+            ] },
+        7: { name: "🔧 الآلات البسيطة", content: `<div class="info-box"><h3><i class="fas fa-cogs"></i> الروافع والبكرات</h3><p><strong>الروافع:</strong> مثل المقص، العتلة، الميزان. لها نقطة ارتكاز، وقوة (جهد)، وحمل.</p><p><strong>البكرات والسطح المائل:</strong> تساعد على رفع الأثقال بجهد أقل.</p><p><strong>العجلة والمحور:</strong> مثل مقبض الباب، عجلة القيادة.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "أي مما يلي يعتبر رافعة؟", options: ["المقص", "السلم", "الباب", "النافذة"], correct: "a", explanation: "المقص رافعة." },
+                { id: "q2", type: "mcq", text: "السطح المائل يساعدنا على:", options: ["رفع الأثقال بجهد أقل", "رفع الأثقال بسرعة", "تغيير اتجاه القوة فقط", "إيقاف الحركة"], correct: "a", explanation: "يقلل الجهد المطلوب للرفع." },
+                { id: "q3", type: "truefalse", text: "البكرة الثابتة تغير اتجاه القوة فقط.", correct: true, explanation: "لا تقلل الجهد ولكنها تسهل الرفع." }
+            ] },
+        8: { name: "⚙️ الشغل والقوة", content: `<div class="info-box"><h3><i class="fas fa-fist-raised"></i> ما هي القوة؟</h3><p><strong>القوة:</strong> هي دفع أو سحب يؤثر على جسم.<br>تؤثر القوة على الأجسام فتُحركها، أو تبطئها، أو تغير اتجاهها، أو تشكلها.</p><p><strong>الشغل:</strong> يحدث عندما تؤثر قوة على جسم فتنتقل لمسافة ما.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "ما تعريف القوة؟", options: ["سرعة الجسم", "دفع أو سحب", "كتلة الجسم", "حجم الجسم"], correct: "b", explanation: "القوة هي تأثير بالدفع أو السحب." },
+                { id: "q2", type: "truefalse", text: "القوة يمكن أن تغير شكل الجسم.", correct: true, explanation: "مثال: عجن الطين يغير شكله." }
+            ] },
+        9: { name: "🌱 التربة وأهميتها", content: `<div class="info-box"><h3><i class="fas fa-seedling"></i> أنواع التربة</h3><p><strong>التربة الرملية:</strong> تصرف الماء بسرعة.<br><strong>التربة الطينية:</strong> تحتفظ بالماء، خصبة.<br><strong>التربة الصفراء (الطفلية):</strong> أفضل أنواع التربة للزراعة.</p><p><strong>حماية التربة:</strong> إعادة التدوير، استخدام الأسمدة العضوية، التشجير.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "أفضل أنواع التربة للزراعة هي:", options: ["الرملية", "الطينية", "الصفراء (الطفلية)", "الصلصالية"], correct: "c", explanation: "التربة الطفلية متوازنة." },
+                { id: "q2", type: "truefalse", text: "التربة الرملية تحتفظ بالماء لفترة طويلة.", correct: false, explanation: "التربة الرملية تصرف الماء بسرعة." }
+            ] },
+        10: { name: "🐅 التكيف والبيئة", content: `<div class="info-box"><h3><i class="fas fa-paw"></i> التكيف البنيوي والسلوكي</h3><p><strong>التكيف البنيوي:</strong> تغيرات في تركيب الكائن الحي (فراء الدب القطبي).<br><strong>التكيف السلوكي:</strong> تغيرات في سلوك الكائن الحي (هجرة الطيور).</p><p><strong>التوازن البيئي:</strong> اتزان العلاقات بين الكائنات والبيئة.</p></div>`,
+            questions: [
+                { id: "q1", type: "mcq", text: "هجرة الطيور في الشتاء مثال على:", options: ["تكيف بنيوي", "تكيف سلوكي", "تكيف كيميائي", "ليس تكيفاً"], correct: "b", explanation: "الهجرة سلوك مكتسب." },
+                { id: "q2", type: "truefalse", text: "فراء الدب القطبي السميك مثال على تكيف بنيوي.", correct: true, explanation: "تركيب جسم الدب يساعده على العيش في البرد." }
+            ] }
+    };
+
+    let userAnswers = {};
+
+    function normalizeString(str) { if(!str) return ''; return str.replace(/\s+/g, ' ').trim().toLowerCase(); }
+    
+    function updateScore() {
+        let total = 0, correctCount = 0;
+        for(let lessonId in lessonsData) {
+            for(let q of lessonsData[lessonId].questions) {
+                total++;
+                let fb = userAnswers[`${lessonId}_${q.id}`];
+                if(fb && fb.isCorrect) correctCount++;
+            }
+        }
+        let percent = total===0?0:Math.round((correctCount/total)*100);
+        document.getElementById('scoreBoard').innerHTML = `📊 التقييم العام: ${correctCount} / ${total} إجابة صحيحة (${percent}%) ${percent>=70?'🎉 ممتاز!':(percent>=50?'📖 جيد':'(📚 حاول مرة أخرى')}`;
+    }
+
+    function checkMcq(lessonId, qId, selectedVal) {
+        let question = lessonsData[lessonId].questions.find(q => q.id === qId);
+        if(!question) return;
+        let isCorrect = (question.correct === selectedVal);
+        let msg = isCorrect ? `✅ صحيح! ${question.explanation || ''}` : `❌ خطأ. الإجابة الصحيحة: ${question.correct.toUpperCase()}. ${question.explanation || ''}`;
+        userAnswers[`${lessonId}_${qId}`] = { isCorrect, msg };
+        let fbDiv = document.getElementById(`fb-${lessonId}-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.classList.add('show'); fbDiv.className = `feedback show ${isCorrect?'correct':'wrong'}`; }
+        updateScore();
+    }
+
+    function checkTrueFalse(lessonId, qId, selectedVal) {
+        let question = lessonsData[lessonId].questions.find(q => q.id === qId);
+        if(!question) return;
+        let selectedBool = (selectedVal === 'true');
+        let isCorrect = (selectedBool === question.correct);
+        let correctText = question.correct ? "صحيح" : "خطأ";
+        let msg = isCorrect ? `✅ صحيح! ${question.explanation || ''}` : `❌ خطأ. الإجابة الصحيحة: ${correctText}. ${question.explanation || ''}`;
+        userAnswers[`${lessonId}_${qId}`] = { isCorrect, msg };
+        let fbDiv = document.getElementById(`fb-${lessonId}-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.classList.add('show'); fbDiv.className = `feedback show ${isCorrect?'correct':'wrong'}`; }
+        updateScore();
+    }
+
+    function renderLesson(lessonId) {
+        let lesson = lessonsData[lessonId];
+        let html = `<div class="lesson-card"><div class="lesson-header"><h2><i class="fas fa-book-open"></i> الدرس: ${lesson.name}</h2></div><div class="lesson-content">
+            ${getImagesHTML(lessonId)}
+            ${lesson.content}
+            <div class="quiz-section"><div class="quiz-title"><i class="fas fa-question-circle"></i> أسئلة تفاعلية</div>`;
+        
+        for(let q of lesson.questions) {
+            let saved = userAnswers[`${lessonId}_${q.id}`];
+            if(q.type === 'mcq') {
+                html += `<div class="question-item"><div class="question-text">${q.text}</div><div class="options" id="options-${lessonId}-${q.id}">`;
+                for(let i=0; i<q.options.length; i++) {
+                    let optVal = String.fromCharCode(97+i);
+                    html += `<label class="option"><input type="radio" name="${lessonId}_${q.id}" value="${optVal}" onchange="checkMcq(${lessonId},'${q.id}','${optVal}')"><span>${q.options[i]}</span></label>`;
+                }
+                html += `</div><div class="feedback" id="fb-${lessonId}-${q.id}">${saved ? saved.msg : ''}</div></div>`;
+            } 
+            else if(q.type === 'truefalse') {
+                html += `<div class="question-item"><div class="question-text">${q.text}</div><div class="options"><label class="option"><input type="radio" name="${lessonId}_${q.id}" value="true" onchange="checkTrueFalse(${lessonId},'${q.id}','true')"><span>✔️ صحيح</span></label><label class="option"><input type="radio" name="${lessonId}_${q.id}" value="false" onchange="checkTrueFalse(${lessonId},'${q.id}','false')"><span>❌ خطأ</span></label></div><div class="feedback" id="fb-${lessonId}-${q.id}">${saved ? saved.msg : ''}</div></div>`;
+            }
+        }
+        html += `</div></div></div>`;
+        return html;
+    }
+
+    function renderAllTabs() {
+        let tabsHtml = '';
+        let lessonsContainerHtml = '';
+        let i = 1;
+        for(let lessonId in lessonsData) {
+            let activeClass = (i === 1) ? 'active' : '';
+            tabsHtml += `<button class="lesson-tab ${activeClass}" onclick="switchLesson(${lessonId})"><i class="fas fa-${getIcon(i)}"></i> ${lessonsData[lessonId].name}</button>`;
+            let displayStyle = (i === 1) ? 'active-tab' : '';
+            lessonsContainerHtml += `<div id="lesson-${lessonId}" class="tab-content ${displayStyle}">${renderLesson(lessonId)}</div>`;
+            i++;
+        }
+        document.getElementById('tabsContainer').innerHTML = tabsHtml;
+        document.getElementById('lessonsContainer').innerHTML = lessonsContainerHtml;
+    }
+
+    function getIcon(index) {
+        const icons = ['bolt', 'lightbulb', 'shield-alt', 'magnet', 'sun', 'circle', 'cogs', 'fist-raised', 'seedling', 'paw'];
+        return icons[(index-1) % icons.length];
+    }
+
+    window.switchLesson = function(lessonId) {
+        document.querySelectorAll('.lesson-tab').forEach((btn, idx) => {
+            let id = Object.keys(lessonsData)[idx];
+            if(id == lessonId) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active-tab'));
+        document.getElementById(`lesson-${lessonId}`).classList.add('active-tab');
+    };
+
+    window.checkMcq = checkMcq;
+    window.checkTrueFalse = checkTrueFalse;
+    
+    window.resetAllAnswers = function() {
+        userAnswers = {};
+        renderAllTabs();
+        updateScore();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+        renderAllTabs();
+        updateScore();
+    });
+</script>
+</body>
+</html>

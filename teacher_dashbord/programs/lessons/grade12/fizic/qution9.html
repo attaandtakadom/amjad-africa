@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>الفيزياء النووية - الوحدة التاسعة | اختبار تفاعلي (تبويب: اختيار من متعدد + صح/خطأ)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', 'Tahoma', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 20px; color: #1e2a3e; }
+        .container { max-width: 1300px; margin: 0 auto; background: white; border-radius: 32px; box-shadow: 0 20px 35px rgba(0,0,0,0.2); padding: 20px 25px 35px; }
+        h1 { font-size: 1.9rem; text-align: center; color: #0b3b5f; border-bottom: 3px solid #667eea; display: inline-block; width: auto; margin: 0 auto 20px; padding-bottom: 8px; }
+        .header { text-align: center; margin-bottom: 25px; }
+        
+        /* Style des onglets */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #334155;
+        }
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .tab-btn:hover:not(.active) {
+            background: #cbd5e1;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active-tab {
+            display: block;
+        }
+        
+        .section { background: #ffffff; margin-bottom: 35px; border-radius: 28px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 5px 0; }
+        .section-title { background: #eef2ff; padding: 12px 20px; font-size: 1.6rem; font-weight: bold; color: #1e40af; border-radius: 30px 30px 20px 20px; border-right: 6px solid #667eea; }
+        .question-card { background: #fefefe; border: 1px solid #e2e8f0; border-radius: 24px; padding: 18px 22px; margin-bottom: 22px; }
+        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; color: #0f172a; line-height: 1.6; }
+        .options { display: flex; flex-wrap: wrap; gap: 15px; margin: 12px 0 15px; }
+        .option { display: flex; align-items: center; gap: 8px; background: #f8fafc; padding: 6px 16px; border-radius: 40px; border: 1px solid #cbd5e1; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #eef2ff; border-color: #667eea; }
+        .option.selected { background: #dbeafe; border-color: #667eea; box-shadow: 0 0 0 2px rgba(102,126,234,0.2); }
+        input[type="radio"] { accent-color: #667eea; width: 18px; height: 18px; margin-left: 6px; cursor: pointer; }
+        .feedback { margin-top: 12px; padding: 8px 14px; border-radius: 18px; font-size: 0.9rem; display: inline-block; width: 100%; }
+        .correct-feedback { background: #dcfce7; color: #15803d; border-right: 4px solid #22c55e; }
+        .wrong-feedback { background: #fee2e2; color: #b91c1c; border-right: 4px solid #ef4444; }
+        .neutral-feedback { background: #f1f5f9; color: #334155; }
+        .input-answer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .input-answer input { padding: 8px 12px; border-radius: 28px; border: 1px solid #cbd5e1; width: 280px; font-size: 0.9rem; }
+        button { background: #667eea; color: white; border: none; padding: 8px 20px; border-radius: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #5a67d8; transform: scale(1.02); }
+        .reset-btn { background: #ef4444; margin-right: 15px; padding: 10px 25px; }
+        .reset-btn:hover { background: #dc2626; transform: scale(1.02); }
+        .button-group { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        .score-area { background: #e6f0ff; border-radius: 36px; padding: 15px 20px; text-align: center; margin-top: 20px; font-size: 1.4rem; font-weight: bold; color: #075985; position: sticky; bottom: 10px; }
+        .graph-container { background: #f9fafb; padding: 15px; border-radius: 20px; margin: 15px 0; text-align: center; border: 1px dashed #94a3b8; }
+        .graph-title { font-weight: bold; margin-bottom: 10px; color: #334155; }
+        .canvas-wrapper { overflow-x: auto; }
+        .atom-diagram { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; background: #f1f5f9; border-radius: 24px; padding: 15px; margin: 10px 0; }
+        .nucleus { width: 100px; height: 100px; background: #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; }
+        .electron-shell { position: relative; width: 200px; height: 200px; border: 2px solid #667eea; border-radius: 50%; }
+        .electron { position: absolute; width: 28px; height: 28px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 12px; }
+        .badge { display: inline-block; background: #e2e8f0; padding: 2px 10px; border-radius: 20px; font-size: 0.8rem; margin: 0 5px; }
+        .nuclear-symbol { display: inline-block; text-align: center; line-height: 1.2; margin: 0 5px; vertical-align: middle; }
+        .nuclear-symbol sup { font-size: 0.75em; display: block; }
+        .nuclear-symbol sub { font-size: 0.75em; display: block; }
+        @media (max-width: 650px) { .container { padding: 12px; } .question-card { padding: 12px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>⚛️ الوحدة التاسعة: الفيزياء النووية ⚛️</h1>
+        <p>نفس الأسئلة بصيغتين: اختيار من متعدد + صح/خطأ</p>
+        <div class="button-group">
+            <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة تعيين جميع الإجابات</button>
+
+<button class="home-btn"
+                    onclick="window.location.href='qut9.html'"
+                    id="homeMainBtn"><i class="fas fa-home"></i>
+                    الرئيسية</button> 
+
+
+        </div>
+    </div>
+
+    <!-- أزرار التبويب -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('mcq')"><i class="fas fa-list-ul"></i> اختيار من متعدد</button>
+        <button class="tab-btn" onclick="switchTab('truefalse')"><i class="fas fa-check-double"></i> صح / خطأ</button>
+    </div>
+
+    <div id="mcqTab" class="tab-content active-tab"></div>
+    <div id="truefalseTab" class="tab-content"></div>
+
+    <div class="score-area" id="scoreBoard">📊 يتم حساب النقاط...</div>
+    <footer>✅ تحقق تلقائي | رسوم بيانية لتحديد عمر النصف وبنية الذرة</footer>
+</div>
+
+<script>
+    // ================== قاعدة الأسئلة الأصلية ==================
+    const originalQuestions = [
+        { id: 1, text: "جسيمات ألفا (α) هي نوى هيليوم موجبة.", type: "statement", correct: true, explanation: "جسيمات ألفا = نواة هيليوم (بروتونان + نيوترونان)، شحنتها +2." },
+        { id: 2, text: "عند اضمحلال النواة <span class='nuclear-symbol'><sup>123</sup><sub>60</sub></span>Y إلى <span class='nuclear-symbol'><sup>119</sup><sub>58</sub></span>Z ينبعث جسيم بيتا.", type: "statement", correct: false, explanation: "النقص في العدد الكتلي = 4 والعدد الذري = 2، وهذا يعود لجسيم ألفا وليس بيتا." },
+        { id: 3, text: "يمكن إيقاف أشعة جاما باستخدام طبقة من الورق.", type: "statement", correct: false, explanation: "أشعة جاما عالية النفاذية وتحتاج إلى رصاص سميك أو خرسانة، الورق يوقف ألفا فقط." },
+        { id: 4, text: "في الرسم البياني لمعدل التعداد، إذا انخفضت القيمة من 5000 إلى 2500 بعد 40 دقيقة، فإن عمر النصف هو 40 دقيقة.", type: "statement", correct: true, explanation: "عمر النصف هو الزمن اللازم لانخفاض النشاط إلى النصف." },
+        { id: 5, text: "العدد الذري لذرة تحتوي على 5 بروتونات و 6 نيوترونات هو 11.", type: "statement", correct: false, explanation: "العدد الذري = عدد البروتونات = 5، وليس 11. 11 هو العدد الكتلي." },
+        { id: 6, text: "إشعاع ألفا عبارة عن نواة هيليوم (2 بروتون + 2 نيوترون).", type: "statement", correct: true, explanation: "جسيم ألفا مطابق لنواة الهيليوم-4." },
+        { id: 7, text: "إشعاع بيتا هو عبارة عن أشعة كهرومغناطيسية عالية التردد.", type: "statement", correct: false, explanation: "إشعاع بيتا هو إلكترونات عالية السرعة، أما أشعة جاما فهي كهرومغناطيسية." },
+        { id: 8, text: "عمر النصف هو الزمن اللازم لتحلل نصف كمية نوى العينة المشعة.", type: "statement", correct: true, explanation: "تعريف عمر النصف الأساسي." },
+        { id: 9, text: "إشعاع الخلفية هو الإشعاع الطبيعي الموجود في البيئة من مصادر أرضية وكونية.", type: "statement", correct: true, explanation: "مصادر إشعاع الخلفية: التربة، الصخور، الأشعة الكونية." },
+        { id: 10, text: "في اضمحلال ألفا، يزيد العدد الذري بمقدار 1 ويبقى العدد الكتلي ثابتاً.", type: "statement", correct: false, explanation: "في اضمحلال ألفا، ينقص العدد الكتلي 4 والعدد الذري 2. أما بيتا فيزيد العدد الذري 1." },
+        { id: 11, text: "نواة الرادون 222 (عدد ذري 86) عند اضمحلالها بجسيم ألفا تنتج نظير البولونيوم 218.", type: "statement", correct: true, explanation: "Rn-222 (Z=86) → Po-218 (Z=84) + α" },
+        { id: 12, text: "النيوترون له كتلة 1836 m_e وشحنة موجبة.", type: "statement", correct: false, explanation: "النيوترون كتلته 1838 m_e وشحنته متعادلة (صفر)، والبروتون كتلته 1836 m_e وشحنته +e." }
+    ];
+
+    // تحويل الأسئلة إلى صيغة MCQ (لصيغة الاختيار من متعدد)
+    const mcqQuestions = [
+        { id: 1, text: "1. جسيمات ألفا (α) هي :", options: ["أ) بروتونات موجبة", "ب) أيونات هيدروجين", "ج) نوى هيليوم موجبة", "د) ذرات هيليوم متعادلة"], correct: "c", explanation: "جسيمات ألفا = نواة هيليوم (بروتونان + نيوترونان)، شحنتها +2." },
+        { id: 2, text: "2. تضمحل النواة المشعة <span class='nuclear-symbol'><sup>123</sup><sub>60</sub></span>Y لتعطي <span class='nuclear-symbol'><sup>119</sup><sub>58</sub></span>Z. ما نوع الإشعاع المنبعث؟", options: ["أ) جسيمات ألفا (α) فقط", "ب) جسيمات بيتا (β) فقط", "ج) أشعة جاما (γ) فقط", "د) جسيمات ألفا (α) وبيتا (β)"], correct: "a", explanation: "النقص في العدد الكتلي = 4 والعدد الذري = 2، وهذا يعود لجسيم ألفا." },
+        { id: 3, text: "3. لإيقاف أشعة جاما نستخدم:", options: ["أ) ورق", "ب) ألمنيوم", "ج) رصاص سميك"], correct: "c", explanation: "أشعة جاما عالية النفاذية وتحتاج إلى رصاص سميك." },
+        { id: 4, text: "4. إذا انخفض معدل التعداد الإشعاعي من 5000 إلى 2500 خلال 40 دقيقة، فإن عمر النصف يساوي:", options: ["10 دقائق", "20 دقيقة", "40 دقيقة", "80 دقيقة"], correct: "c", explanation: "عمر النصف هو الزمن اللازم لانخفاض النشاط إلى النصف." },
+        { id: 5, text: "5. ذرة تحتوي على 5 بروتونات و 6 نيوترونات، عددها الذري هو:", options: ["5", "6", "11", "16"], correct: "a", explanation: "العدد الذري = عدد البروتونات = 5." },
+        { id: 6, text: "6. أي من التالي يمثل اضمحلال ألفا لنواة الرادون 220؟", options: ["²²⁰Rn₈₆ → ²¹⁶Po₈₄ + α", "²²⁰Rn₈₆ → ²²⁰Fr₈₇ + β", "²²⁰Rn₈₆ → ²²⁰At₈₅ + β⁺", "²²⁰Rn₈₆ → ²¹⁶At₈₅ + α"], correct: "a", explanation: "اضمحلال ألفا ينقص العدد الكتلي 4 والعدد الذري 2." },
+        { id: 7, text: "7. عمر النصف لمادة مشعة هو:", options: ["الزمن اللازم لتحلل جميع النوى", "الزمن اللازم لتحلل نصف النوى", "الزمن اللازم لتحلل ربع النوى", "الزمن اللازم لضعف النشاط"], correct: "b", explanation: "عمر النصف = الزمن اللازم لتحلل نصف كمية نوى العينة." },
+        { id: 8, text: "8. أي الإشعاعات التالية له أعلى قدرة على الاختراق؟", options: ["ألفا (α)", "بيتا (β)", "جاما (γ)", "جميعها متساوية"], correct: "c", explanation: "أشعة جاما لها أعلى نفاذية وتحتاج إلى رصاص سميك." }
+    ];
+
+    let userAnswers = {};      // للمسائل النصية والرسوم
+    let trueFalseAnswers = {}; // لصيغة صح/خطأ
+    let mcqAnswers = {};       // لصيغة الاختيار من متعدد
+    let activeTab = 'mcq';
+
+    // دوال مساعدة
+    function normalizeString(str) { if(!str) return ''; return str.replace(/\s+/g, ' ').trim().toLowerCase(); }
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+    
+    function updateScore() {
+        let total = 0, correctCount = 0;
+        if (activeTab === 'mcq') {
+            total = mcqQuestions.length;
+            for(let q of mcqQuestions) {
+                if(mcqAnswers[`q${q.id}`] && mcqAnswers[`q${q.id}`].isCorrect) correctCount++;
+            }
+        } else {
+            total = originalQuestions.length;
+            for(let q of originalQuestions) {
+                if(trueFalseAnswers[`q${q.id}`] && trueFalseAnswers[`q${q.id}`].isCorrect) correctCount++;
+            }
+        }
+        let percent = total===0?0:Math.round((correctCount/total)*100);
+        document.getElementById('scoreBoard').innerHTML = `📊 التقييم (${activeTab === 'mcq' ? 'اختيار من متعدد' : 'صح/خطأ'}): ${correctCount} / ${total} إجابة صحيحة (${percent}%) ${percent>=70?'🎉 ممتاز':(percent>=50?'👍 جيد':'📚 يحتاج مراجعة')}`;
+    }
+
+    // دالة لصيغة الاختيار من متعدد
+    window.selectMcqOption = function(qId, val) {
+        let question = mcqQuestions.find(q=>q.id===qId);
+        let isCorrect = (question && question.correct === val);
+        let msg = isCorrect ? `✅ صحيح! ${question.explanation||''}` : `❌ خطأ. الإجابة الصحيحة: ${question.correct.toUpperCase()}. ${question.explanation||''}`;
+        mcqAnswers[`q${qId}`] = { isCorrect, msg };
+        mcqAnswers[`selected_${qId}`] = val;
+        
+        let fbDiv = document.getElementById(`fb-mcq-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        
+        let optsDiv = document.getElementById(`options-mcq-${qId}`);
+        if(optsDiv) optsDiv.querySelectorAll('.option').forEach(opt=>opt.classList.remove('selected'));
+        let selectedLabel = document.querySelector(`#options-mcq-${qId} input[value="${val}"]`)?.closest('.option');
+        if(selectedLabel) selectedLabel.classList.add('selected');
+        updateScore();
+    };
+
+    // دالة لصيغة صح/خطأ
+    window.selectTrueFalse = function(qId, val) {
+        let question = originalQuestions.find(q=>q.id===qId);
+        let isCorrect = (question && ((val === 'true' && question.correct === true) || (val === 'false' && question.correct === false)));
+        let correctText = question.correct ? "صحيح" : "خطأ";
+        let msg = isCorrect ? `✅ صحيح! ${question.explanation||''}` : `❌ خطأ. الإجابة الصحيحة: ${correctText}. ${question.explanation||''}`;
+        trueFalseAnswers[`q${qId}`] = { isCorrect, msg };
+        trueFalseAnswers[`selected_${qId}`] = val;
+        
+        let fbDiv = document.getElementById(`fb-tf-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        
+        let optsDiv = document.getElementById(`options-tf-${qId}`);
+        if(optsDiv) optsDiv.querySelectorAll('.option').forEach(opt=>opt.classList.remove('selected'));
+        let selectedLabel = document.querySelector(`#options-tf-${qId} input[value="${val}"]`)?.closest('.option');
+        if(selectedLabel) selectedLabel.classList.add('selected');
+        updateScore();
+    };
+
+    function renderMcqTab() {
+        let html = '<div class="section"><div class="section-title">📘 أسئلة اختيار من متعدد</div>';
+        for(let q of mcqQuestions) {
+            let selectedVal = mcqAnswers[`selected_${q.id}`] || '';
+            html += `<div class="question-card">
+                <div class="question-text">${q.text}</div>
+                <div class="options" id="options-mcq-${q.id}">
+                    ${q.options.map((opt, idx) => { let optVal = String.fromCharCode(97+idx); return `<label class="option ${selectedVal===optVal?'selected':''}"><input type="radio" name="mcq_${q.id}" value="${optVal}" ${selectedVal===optVal?'checked':''} onchange="selectMcqOption(${q.id},'${optVal}')"><span>${opt}</span></label>`; }).join('')}
+                </div>
+                <div class="feedback ${mcqAnswers[`q${q.id}`] ? (mcqAnswers[`q${q.id}`].isCorrect ? 'correct-feedback' : 'wrong-feedback') : 'neutral-feedback'}" id="fb-mcq-${q.id}">${mcqAnswers[`q${q.id}`] ? mcqAnswers[`q${q.id}`].msg : '🔘 اختر إجابة.'}</div>
+            </div>`;
+        }
+        html += `</div>`;
+        document.getElementById('mcqTab').innerHTML = html;
+    }
+
+    function renderTrueFalseTab() {
+        let html = '<div class="section"><div class="section-title">📘 أسئلة صح / خطأ</div>';
+        for(let q of originalQuestions) {
+            let selectedVal = trueFalseAnswers[`selected_${q.id}`] || '';
+            html += `<div class="question-card">
+                <div class="question-text">${q.text}</div>
+                <div class="options" id="options-tf-${q.id}">
+                    <label class="option ${selectedVal==='true'?'selected':''}"><input type="radio" name="tf_${q.id}" value="true" ${selectedVal==='true'?'checked':''} onchange="selectTrueFalse(${q.id},'true')"><span>✔️ صحيح</span></label>
+                    <label class="option ${selectedVal==='false'?'selected':''}"><input type="radio" name="tf_${q.id}" value="false" ${selectedVal==='false'?'checked':''} onchange="selectTrueFalse(${q.id},'false')"><span>❌ خطأ</span></label>
+                </div>
+                <div class="feedback ${trueFalseAnswers[`q${q.id}`] ? (trueFalseAnswers[`q${q.id}`].isCorrect ? 'correct-feedback' : 'wrong-feedback') : 'neutral-feedback'}" id="fb-tf-${q.id}">${trueFalseAnswers[`q${q.id}`] ? trueFalseAnswers[`q${q.id}`].msg : '🔘 اختر صح أو خطأ.'}</div>
+            </div>`;
+        }
+        html += `</div>`;
+        document.getElementById('truefalseTab').innerHTML = html;
+    }
+
+    window.switchTab = function(tab) {
+        activeTab = tab;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if(tab === 'mcq') {
+            document.querySelector('.tabs button:first-child').classList.add('active');
+            document.getElementById('mcqTab').classList.add('active-tab');
+            document.getElementById('truefalseTab').classList.remove('active-tab');
+        } else {
+            document.querySelector('.tabs button:last-child').classList.add('active');
+            document.getElementById('truefalseTab').classList.add('active-tab');
+            document.getElementById('mcqTab').classList.remove('active-tab');
+        }
+        updateScore();
+    };
+
+    window.resetAllQuestions = function() {
+        mcqAnswers = {};
+        trueFalseAnswers = {};
+        renderMcqTab();
+        renderTrueFalseTab();
+        updateScore();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Event listeners للخيارات
+    document.addEventListener('click', function(e) {
+        if(e.target.closest('.option')) {
+            let option = e.target.closest('.option');
+            let radio = option.querySelector('input[type="radio"]');
+            if(radio) {
+                radio.checked = true;
+                let parentOptions = option.parentElement;
+                if(parentOptions) {
+                    parentOptions.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                }
+                option.classList.add('selected');
+                let changeEvent = new Event('change', { bubbles: true });
+                radio.dispatchEvent(changeEvent);
+            }
+        }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        renderMcqTab();
+        renderTrueFalseTab();
+        updateScore();
+    });
+</script>
+</body>
+</html>

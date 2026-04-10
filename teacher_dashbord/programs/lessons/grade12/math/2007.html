@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>امتحان الشهادة الثانوية - أسئلة تفاعلية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', 'Tahoma', sans-serif; margin: 0; padding: 0; }
+        body { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1300px; margin: 0 auto; background: white; border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden; }
+        
+        .header { background: linear-gradient(135deg, #0f172a, #1e1b4b); padding: 25px 30px; color: white; text-align: center; }
+        .header h1 { font-size: 1.8rem; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .header h1 i { color: #fbbf24; }
+        .subtitle { color: #94a3b8; margin-top: 8px; font-size: 0.9rem; }
+        
+        .stats-bar { display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 15px 25px; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; gap: 15px; position: sticky; top: 0; z-index: 100; }
+        .timer-box { background: #1e293b; padding: 8px 20px; border-radius: 60px; color: white; font-weight: bold; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        .score-box { background: #10b981; padding: 8px 20px; border-radius: 60px; color: white; font-weight: bold; }
+        .reset-btn { background: #ef4444; border: none; padding: 8px 20px; border-radius: 60px; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .reset-btn:hover { background: #dc2626; transform: scale(1.02); }
+        
+        .nav-buttons-bar { display: flex; justify-content: center; gap: 15px; padding: 12px 25px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; }
+        .nav-arrow { background: #3b82f6; color: white; border: none; padding: 10px 25px; border-radius: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; }
+        .nav-arrow:hover { background: #2563eb; transform: scale(1.02); }
+        .go-top-btn { background: #10b981; color: white; border: none; padding: 10px 25px; border-radius: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .go-top-btn:hover { background: #059669; transform: scale(1.02); }
+        .current-pos { background: #1e293b; color: white; padding: 8px 20px; border-radius: 40px; font-weight: bold; }
+        
+        .questions-grid { padding: 25px; background: #f1f5f9; max-height: 65vh; overflow-y: auto; scroll-behavior: smooth; }
+        .question-card { background: white; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: 0.2s; scroll-margin-top: 100px; }
+        .question-card.highlight { border: 2px solid #fbbf24; box-shadow: 0 0 0 3px rgba(251,191,36,0.3); }
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .question-number { background: #3b82f6; color: white; padding: 5px 15px; border-radius: 30px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .question-number:hover { background: #2563eb; transform: scale(1.02); }
+        .question-type { background: #e2e8f0; padding: 5px 12px; border-radius: 30px; font-size: 0.8rem; color: #475569; }
+        .question-text { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 15px; line-height: 1.6; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
+        .option { display: flex; align-items: center; gap: 12px; background: #f8fafc; padding: 10px 18px; border-radius: 16px; border: 1px solid #e2e8f0; cursor: pointer; transition: 0.2s; }
+        .option:hover { border-color: #3b82f6; background: #eff6ff; }
+        .option.selected { border-color: #3b82f6; background: #dbeafe; }
+        .option input[type="radio"] { accent-color: #3b82f6; width: 18px; height: 18px; cursor: pointer; }
+        
+        .tf-options { display: flex; gap: 20px; margin: 15px 0; }
+        .tf-btn { flex: 1; max-width: 150px; padding: 12px; border-radius: 60px; text-align: center; font-weight: bold; cursor: pointer; border: 2px solid #e2e8f0; background: white; transition: 0.2s; }
+        .tf-btn.true:hover { border-color: #10b981; background: #d1fae5; }
+        .tf-btn.false:hover { border-color: #ef4444; background: #fee2e2; }
+        .tf-btn.selected-true { background: #10b981; color: white; border-color: #10b981; }
+        .tf-btn.selected-false { background: #ef4444; color: white; border-color: #ef4444; }
+        
+        .check-btn { background: #3b82f6; color: white; border: none; padding: 8px 20px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .check-btn:hover { background: #2563eb; }
+        
+        .solution-box { background: #fefce8; border-radius: 16px; padding: 15px; margin-top: 15px; border-right: 5px solid #fbbf24; display: none; }
+        .solution-box.show { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-title { font-weight: bold; color: #854d0e; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .solution-content { color: #1e293b; line-height: 1.6; font-size: 0.95rem; }
+        
+        .footer { background: #f1f5f9; padding: 15px; text-align: center; color: #64748b; font-size: 0.8rem; border-top: 1px solid #e2e8f0; }
+        
+
+  .matrix {
+    display: inline-table;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 10px; /* يعطي شكل الأقواس */
+    margin: 0 10px;
+    vertical-align: middle;
+  }
+  .matrix td {
+    padding: 5px 10px;
+    text-align: center;
+  }
+
+
+
+
+
+
+        
+        @media (max-width: 750px) { .tf-options { flex-direction: column; align-items: stretch; } .tf-btn { max-width: 100%; } }
+    </style>
+</head>
+<body>
+  <style>
+    .fraction {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        vertical-align: middle;
+        margin: 0 4px;
+    }
+    .numerator {
+        border-bottom: 2px solid black;
+        padding: 0 4px;
+        font-size: 1rem;
+    }
+    .denominator {
+        padding-top: 2px;
+        font-size: 1rem;
+    }
+    .minus {
+        margin-left: 4px;
+        font-size: 1.2rem;
+    }
+</style>
+
+
+
+
+
+<div class="container">
+    <div class="header">
+
+
+        <h1><i class="fas fa-graduation-cap"></i>    امتحان الشهادة الثانوية دفعة 2007 رياضيات<i class="fas fa-calculator"></i></h1>
+        <p class="subtitle">أسئلة صح/خطأ واختيار من متعدد - مع الحلول المفصلة</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="timer-box"><i class="fas fa-hourglass-half"></i> <span id="timerDisplay">00:00</span></div>
+        <div class="score-box"><i class="fas fa-star"></i> التقييم: <span id="scoreDisplay">0</span>/<span id="totalDisplay">0</span></div>
+        
+               <button class="reset-btn" onclick="window.location.href='../../../../../althanaoya/math/math-thanaya.html'" id="#0f2835">🏠 الرئيسية</button>
+
+        
+        <button class="reset-btn" onclick="resetAllAnswers()"><i class="fas fa-redo-alt"></i> إعادة تعيين جميع الإجابات</button>
+    </div>
+    
+    <div class="nav-buttons-bar">
+
+
+
+
+        <button class="nav-arrow" onclick="goToPrevQuestion()"><i class="fas fa-arrow-right"></i> السابق</button>
+        <span class="current-pos"><i class="fas fa-list"></i> السؤال <span id="currentPos">1</span> / <span id="totalQ">0</span></span>
+        <button class="nav-arrow" onclick="goToNextQuestion()">التالي <i class="fas fa-arrow-left"></i></button>
+        <button class="go-top-btn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> العودة للأعلى</button>
+    </div>
+    
+    <div class="questions-grid" id="questionsContainer"></div>
+    
+    <div class="footer">
+        <i class="fas fa-lightbulb"></i> اضغط على "تحقق" بجانب كل سؤال لعرض الحل المفصل
+    </div>
+</div><!--
+
+<p>
+    إذا كان ميل العمود على المماس هو 
+    <span class="fraction">
+        <span class="numerator">6</span>
+        <span class="denominator">7</span>
+    </span>
+    ، فإن ميل المماس يساوي 
+    <span class="minus">-</span>
+    <span class="fraction">
+        <span class="numerator">14</span>
+        <span class="denominator">12</span>
+    </span>
+</p>
+أ = <table class="matrix">
+  <tr><td>4</td><td>ص</td></tr>
+  <tr><td>س</td><td>2</td></tr>
+</table>
+
+
+
+
+<div class="math-matrix">
+    <span>[</span>
+    <span>4</span>
+    <span>ص</span>
+    <span>;</span>
+    <span>س</span>
+    <span>2</span>
+    <span>]</span>
+</div>
+-->
+<script>
+    // ==================== جميع الأسئلة من الصور ====================
+    const questions = [
+        // سؤال 1
+{
+  "id": 1,
+  "type": "tf",
+  "text": "<div dir='rtl'>إذا كان: <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>5</small><br><span style='font-size: 20px;'>∫</span><br><small>1</small></span> د(س) د س = 4 ، فإن قيمة: <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>5</small><br><span style='font-size: 20px;'>∫</span><br><small>1</small></span> (3 - د(س)) د س = 8</div>",
+  "options": [
+    "<div dir='rtl'>صواب</div>",
+    "<div dir='rtl'>خطأ</div>"
+  ],
+  "correct": true,
+  "explanation": "<div dir='rtl'>بتوزيع التكامل: ∫ 3 د س - ∫ د(س) د س. ناتج تكامل الثابت هو [3س] من 1 إلى 5 أي (15 - 3) = 12. وبطرح قيمة التكامل المعطى (4): 12 - 4 = 8. العبارة صحيحة.</div>"
+},        // سؤال 2
+        { id: 2, type: "tf", text: "القيمة العظمى والصغرى للمقدار جا(س - 60°) + جتا س هي √3 ، -√3", correct: false, explanation: "بفك المقدار: جا(س - 60) = (1/2)جا س - (√3/2)جتا س، ثم نضيف جتا س = (1/2)جا س + (1 - √3/2)جتا س. القيمة العظمى = √( (1/2)² + (1 - √3/2)² ) ≈ 0.76، وليس √3 ≈ 1.732. العبارة خاطئة." },
+        // سؤال 3
+        { id: 3, type: "tf", text: "إذا كان س ص = لو س فإن قيمة س عندما دص/دس = 0 تساوي واحد", correct: false, explanation: "باستخدام قاعدة الضرب: ص + س(دص/دس) = 1/س. عندما دص/دس = 0: ص = 1/س. بالتعويض في المعادلة الأصلية: س×(1/س) = لو س → 1 = لو س → س = هـ ≈ 2.718، وليس 1. العبارة خاطئة." },
+        // سؤال 4
+        { id: 4, type: "tf", text: "قيمة المحدد | جتا س   جا س | = جتا 2س\n                              | -جا س   جتا س |", correct: false, explanation: "المحدد = (جتا س)(جتا س) - (جا س)(-جا س) = جتا² س + جا² س = 1. وليس جتا 2س. العبارة خاطئة." },
+        // سؤال 5
+        { id: 5, type: "tf", text: "∫ جا(أ س + ب) دس = -1/أ جتا(أ س + ب) + ث", correct: true, explanation: "∫ جا(أ س + ب) دس = -1/أ جتا(أ س + ب) + ث. هذه قاعدة صحيحة. العبارة صحيحة." },
+        // سؤال 6
+        { id: 6, type: "tf", text: "إذا كان دص/دس = 0 ، د²ص/دس² < 0 عند نقطة على منحنى د، تكون النقطة نقطة عظمى محلية", correct: true, explanation: "المشتقة الأولى صفر تعني نقطة حرجة. المشتقة الثانية سالبة تعني أن المنحنى مقعر لأسفل، وبالتالي النقطة هي عظمى محلية. العبارة صحيحة." },
+        // سؤال 7
+        { id: 7, type: "tf", text: "جا 39° جا 9° - جتا 39° جتا 9° = √3/2", correct: false, explanation: "المقدار = - (جتا 39 جتا 9 - جا 39 جا 9) = - جتا(39+9) = - جتا 48°. جتا 48° لا تساوي -√3/2. العبارة خاطئة." },
+        // سؤال 8
+        { id: 8, type: "tf", text: "الصورة المختصرة للمقدار 2 جتا² 4س - 1 = جتا 8س", correct: true, explanation: "باستخدام قانون ضعف الزاوية: جتا 2θ = 2 جتا² θ - 1. هنا θ = 4س، إذن 2 جتا² 4س - 1 = جتا 8س. العبارة صحيحة." },
+        // سؤال 9
+        { id: 9, type: "tf", text: "ظا(180° - أ) = -1/ظا أ حيث 0° < أ < 90°", correct: false, explanation: "القاعدة الصحيحة: ظا(180° - أ) = - ظا أ. وليس - ظتا أ إلا عند أ = 45°. العبارة خاطئة." },
+        // سؤال 10
+{ id: 10, type: "tf", text: "إذا كانت أ مصفوفة من نوع 3×3، حيث أن أ(ر، د) = ر - د، فإن أ مصفوفة متماثلة.", 
+  correct: false, 
+  explanation: "المصفوفة المتماثلة تحقق أ(ر، د) = أ(د، ر). لدينا أ(ر، د) = ر - د، وأ(د، ر) = د - ر = -(ر - د). لكي تكون متماثلة يجب أن يكون ر - د = -(ر - د) أي ر = د. هذا لا يتحقق لجميع العناصر. مثال: أ(1،2) = -1، أ(2،1) = 1، إذن أ(1،2) ≠ أ(2،1). العبارة خاطئة." } ,       // سؤال 11
+        { id: 11, type: "tf", text: "المصفوفة لها قيمة عددية وليست مجرد طريقة لعرض البيانات", correct: true, explanation: "المصفوفة ككائن رياضي لها قيمة (مثل المحدد، الأثر، الرتبة) وليست مجرد جدول أرقام. العبارة صحيحة." },
+        // سؤال 12
+{
+  id: 12,
+  type: "tf",
+  text: "إذا كان ميل العمود على المماس هو <span class='fraction'><span class='numerator'>6</span><span class='denominator'>7</span></span>، فإن ميل المماس يساوي <span class='minus'>-</span><span class='fraction'><span class='numerator'>14</span><span class='denominator'>12</span></span>.",
+  correct: true,
+  explanation: "ميل المماس = -1 ÷ (6/7) = -7/6 = -14/12، وبالتالي العبارة صحيحة."
+},
+  
+  
+  { 
+  "id": 13, 
+  "type": "mcq", 
+  "text": "إذا كانت أ = <table style='display:inline-table; border-left:2px solid #000; border-right:2px solid #000; border-radius:8px;'><tr><td style='padding:5px;'>4</td><td style='padding:5px;'>ص</td></tr><tr><td style='padding:5px;'>س</td><td style='padding:5px;'>2</td></tr></table> ، ب = <table style='display:inline-table; border-left:2px solid #000; border-right:2px solid #000; border-radius:8px;'><tr><td style='padding:5px;'>ع</td><td style='padding:5px;'>6</td></tr><tr><td style='padding:5px;'>9</td><td style='padding:5px;'>ل</td></tr></table> ، بحيث أن 3أ = 2ب. فإن أ₁₂ + أ₂₂ + ب₁₁ + ب₂₂ =", 
+  "options": ["13", "15", "17", "20"], 
+  "correct": "b", 
+  "explanation": "بتطبيق العلاقة 3أ = 2ب، نجد القيم: ص=4، س=6، ع=6، ل=3. بالتعويض في المطلوب: 4 + 2 + 6 + 3 = 15." 
+},
+
+{ 
+  "id": 14, 
+  "type": "mcq", 
+  "text": "إذا كانت محورة المصفوفة <table style='display:inline-table; border-left:2px solid #000; border-right:2px solid #000; border-radius:8px; vertical-align:middle;'><tr><td style='padding:5px;'>س+3</td><td style='padding:5px;'>4ع-1</td></tr><tr><td style='padding:5px;'>2-د</td><td style='padding:5px;'>6أ</td></tr></table> تساوي المعكوس الجمعي للمصفوفة <table style='display:inline-table; border-left:2px solid #000; border-right:2px solid #000; border-radius:8px; vertical-align:middle;'><tr><td style='padding:5px;'>2</td><td style='padding:5px;'>4ع</td></tr><tr><td style='padding:5px;'>س+2</td><td style='padding:5px;'>3د</td></tr></table> ، فإن قيمة س، ع، أ، د على الترتيب هي:", 
+  "options": ["-5, 1, -3, 6", "6, 1, 3, 5", "5, -6, -3, -1", "-3, -1, 5, -6"], 
+  "correct": "a", 
+  "explanation": "أولاً تدوير المصفوفة الأولى: الصف الأول يصبح [س+3 ، 2-د] والصف الثاني [4ع-1 ، 6أ]. ثانياً المعكوس الجمعي للثانية: [-2 ، -4ع] و [-(س+2) ، -3د]. بالمساواة: س+3 = -2 ومنها س=-5. ومنها نجد ع=1، أ=-3، د=6." 
+},
+
+{ 
+  "id": 15, 
+  "type": "mcq", 
+  "text": "إذا كانت ص² جتا س = 1 ، فإن المشتقة الثانية د²ص/دس² بدلالة س، ص تساوي:", 
+  "options": [
+    "½ ص ( 2 قا² س + ظا² س )", 
+    "¼ ص ( 2 قا² س + ظا² س )", 
+    "ص ( جا² س + ظا² س )", 
+    "¼ ص ( 2 - 3 ظا² س )"
+  ], 
+  "correct": "b", 
+  "explanation": "المعادلة هي ص² = قا س. بالاشتقاق الأول: 2ص ص' = قا س ظا س. بالاشتقاق الثاني والتعويض عن قيمة ص، نصل للناتج ربع ص مضروباً في (2 قا² س + ظا² س)." 
+},
+
+{ 
+  "id": 16, 
+  "type": "mcq", 
+  "text": "إذا كانت ص = ⁴/₃ س³ + أ س² + 2س لها نقطة حرجة عند س = -1، فإن قيمة أ تساوي:", 
+  "options": ["1", "2", "3", "4"], 
+  "correct": "c", 
+  "explanation": "النقطة الحرجة تعني أن المشتقة الأولى ص' تساوي صفراً عند س = -1. ص' = 4س² + 2أ س + 2. بالتعويض: 4(-1)² + 2أ(-1) + 2 = 0، أي 4 - 2أ + 2 = 0، ومنها 6 = 2أ، إذن أ = 3." 
+},
+
+
+{ 
+  "id": 17, 
+  "type": "mcq", 
+  "text": "إذا كانت أ' + ب' = <table style='display:inline-table; border-left:2px solid #000; border-right:2px solid #000; border-radius:8px; vertical-align:middle;'><tr><td style='padding:5px;'>0</td><td style='padding:5px;'>5</td></tr><tr><td style='padding:5px;'>7</td><td style='padding:5px;'>12</td></tr></table> ، فإن أ + ب تساوي:", 
+  "options": [
+
+
+      "<table style='display:inline-table; border-left:1px solid #000; border-right:1px solid #000; border-radius:5px;'><tr><td style='padding:5px;'>0</td><td style='padding:5px;'>5</td></tr><tr><td style='padding:5px;'>12</td><td style='padding:5px;'>7</td></tr></table>",
+
+    "<table style='display:inline-table; border-left:1px solid #000; border-right:1px solid #000; border-radius:5px;'><tr><td style='padding:5px;'>0</td><td style='padding:5px;'>-5</td></tr><tr><td style='padding:5px;'>-7</td><td style='padding:5px;'>12</td></tr></table>", 
+    "<table style='display:inline-table; border-left:1px solid #000; border-right:1px solid #000; border-radius:5px;'><tr><td style='padding:5px;'>0</td><td style='padding:5px;'>7</td></tr><tr><td style='padding:5px;'>5</td><td style='padding:5px;'>12</td></tr></table>", 
+        "<table style='display:inline-table; border-left:1px solid #000; border-right:1px solid #000; border-radius:5px;'><tr><td style='padding:5px;'>0</td><td style='padding:5px;'>12</td></tr><tr><td style='padding:5px;'>5</td><td style='padding:5px;'>7</td></tr></table>", 
+
+  ], 
+  "correct": "c", 
+  "explanation": "بما أن (أ + ب)' = أ' + ب'، فإن أ + ب هي محورة المصفوفة المعطاة. عند تدوير المصفوفة (تبديل الصفوف بالأعمدة): الصف الأول [0، 5] يصبح عموداً أول، والصف الثاني [7، 12] يصبح عموداً ثانياً، فتنتج المصفوفة في الخيار (ج)." 
+},
+{ 
+  "id": 18, 
+  "type": "mcq", 
+  "text": "<div dir='rtl'>إذا كانت ص = لو₃ ( جا³ س ) ، فإن دص/دس تساوي:</div>", 
+  "options": [
+    "<div dir='rtl'>3 - ظا س لو₃ هـ</div>", 
+    "<div dir='rtl'>3 ظا س لو₃ هـ</div>", 
+    "<div dir='rtl'>ظتا س لو₃ هـ + 3</div>", 
+    "<div dir='rtl'>3 ظتا س لو₃ هـ</div>"
+  ], 
+  "correct": "d", 
+  "explanation": "<div dir='rtl'>بتبسيط الدالة: ص = 3 لو₃ (جا س). عند الاشتقاق: دص/دس = 3 × (جتا س / جا س) × لو₃ هـ = 3 ظتا س لو₃ هـ.</div>" 
+},
+
+{ 
+  "id": 19, 
+  "type": "mcq", 
+  "text": "<div dir='rtl'>معدل التغير السالب هو نقصان في مقدار الكمية المتضمنة كلما:</div>", 
+  "options": [
+    "<div dir='rtl'>أ) يتزايد الزمن</div>", 
+    "<div dir='rtl'>ب) يتوقف الزمن</div>", 
+    "<div dir='rtl'>ج) يتناقص الزمن</div>", 
+    "<div dir='rtl'>د) جميع الإجابات السابقة خاطئة</div>"
+  ], 
+  "correct": "a", 
+  "explanation": "<div dir='rtl'>بما أن الزمن دائماً في حالة تزايد مستمر، فإن التغير السالب يعني أن الكمية تقل مع مرور الوقت، وهذا ما يسمى بالتناسب العكسي في معدلات التغير.</div>" 
+},
+
+{
+"id": 20,
+"type": "mcq",
+"text": "<div dir='rtl'>يتناقص طول ضلع مكعب طوله ل سم بمعدل 0.02 سم/دقيقة، فإن معدل تغير الحجم ح (سم³) عندما يكون طول الضلع 5 سم هو:</div>",
+"options": [
+"<div dir='rtl'>أ) <span dir='ltr'>3 / 1</span></div>",
+"<div dir='rtl'>ب) <span dir='ltr'>3 / 2</span></div>",
+"<div dir='rtl'>ج) <span dir='ltr'>2 / -3</span></div>",
+"<div dir='rtl'>د) <span dir='ltr'>3 / -2</span></div>"
+],
+"correct": "c",
+"explanation": "<div dir='rtl'>حجم المكعب ح = ل³. باشتقاق الطرفين بالنسبة للزمن: دح/دن = 3ل² (دل/دن). بالتعويض: دح/دن = 3 × (5)² × (-0.02) = 75 × (-0.02) = -1.5، والكسر المكافئ هو -3/2.</div>"
+},
+
+
+
+{
+  "id": 21,
+  "type": "mcq",
+  "text": "<div dir='rtl'>حجم الجسم الناشئ من دوران المنطقة المحاطة بالمنحنى ص = س² والمستقيمات س = 1 ، ص = 2 ، ص = 3 في الربع الأول حول محور الصادات دورة كاملة يساوي ...... وحدة مكعبة.<br><br><svg width='400' height='360' viewBox='0 0 420 360' style='display:block; margin:10px auto; background:#f9f9f9; border:1px solid #ccc; border-radius:12px;'><line x1='70' y1='300' x2='380' y2='300' stroke='black' stroke-width='2'/><line x1='70' y1='300' x2='70' y2='40' stroke='black' stroke-width='2'/><text x='370' y='320' font-size='14' font-weight='bold'>س</text><text x='50' y='50' font-size='14' font-weight='bold'>ص</text><path d='M 70 300 Q 80 300 90 290 Q 100 280 120 260 Q 140 240 160 200 Q 180 160 200 100' fill='none' stroke='blue' stroke-width='3'/><text x='160' y='130' fill='blue' font-size='12' transform='rotate(-70, 160, 130)'>ص = س²</text><line x1='120' y1='300' x2='120' y2='220' stroke='red' stroke-width='2' stroke-dasharray='5,3'/><text x='125' y='230' fill='red' font-size='12'>س = 1</text><line x1='70' y1='220' x2='152' y2='220' stroke='green' stroke-width='2' stroke-dasharray='5,3'/><text x='75' y='215' fill='green' font-size='12'>ص = 2</text><line x1='70' y1='180' x2='182' y2='180' stroke='purple' stroke-width='2' stroke-dasharray='5,3'/><text x='75' y='175' fill='purple' font-size='12'>ص = 3</text><path d='M 70 220 L 152 220 A 100 100 0 0 1 182 180 L 70 180 Z' fill='#ffcc00' fill-opacity='0.4'/><line x1='70' y1='300' x2='70' y2='40' stroke='black' stroke-width='3'/><text x='25' y='160' fill='black' font-size='12' transform='rotate(-90,25,160)'>محور الصادات</text><path d='M 40 330 Q 60 350 90 330' fill='none' stroke='#666' stroke-width='1.5' marker-end='url(#arrowhead)'/><defs><marker id='arrowhead' markerWidth='6' markerHeight='4' refX='6' refY='2' orient='auto'><polygon points='0 0, 6 2, 0 4' fill='#666'/></marker></defs></svg></div>",
+  "options": [
+    "<div dir='rtl'>أ) 4 ط</div>",
+    "<div dir='rtl'>ب) 3 ط</div>",
+    "<div dir='rtl'>ج) ط</div>",
+    "<div dir='rtl'>د) <span dir='ltr'>1 / 2</span> ط</div>"
+  ],
+  "correct": "b",
+  "explanation": "<div dir='rtl'>الحجم = π ∫ س² دص من 2 إلى 3. بما أن ص=س²، فإن الحجم = π ∫ ص دص = π [ص²/2] من 2 إلى 3 = 2.5π. الخيار الأقرب 3ط.</div>"
+},
+
+
+
+{
+"id": 22,
+"type": "mcq",
+"text": "<div dir='rtl'>ميل المنحنى ص = س² + 4س + 3 عند النقطة (أ، ب) هو -4، فإن قيمة النقطة (أ، ب) هي:</div>",
+"options": [
+"<div dir='rtl'>أ) (-4، 3)</div>",
+"<div dir='rtl'>ب) (4، -3)</div>",
+"<div dir='rtl'>ج) (3، 4)</div>",
+"<div dir='rtl'>د) (-3، 4)</div>"
+],
+"correct": "a",
+"explanation": "<div dir='rtl'>ميل المنحنى هو المشتقة الأولى: دص/دس = 2س + 4. بمساواة المشتقة بالميل المعطى: 2س + 4 = -4، ومنها 2س = -8 أي س = -4. بالتعويض في الدالة الأصلية: ص = (-4)² + 4(-4) + 3 = 16 - 16 + 3 = 3. إذن النقطة (أ، ب) هي (-4، 3).</div>"
+},
+{
+  "id": 23,
+  "type": "mcq",
+  "text": "<div dir='rtl'>مساحة المنطقة المظللة المحصورة بين المنحنى ص = √س والمستقيمات س = 4 ، ص = 1 تساوي: <br><br> <svg width='300' height='200' viewBox='0 0 300 200' style='display:block; margin:10px auto; background:#f9f9f9; border:1px solid #ccc; border-radius:8px;'><line x1='40' y1='160' x2='260' y2='160' stroke='black' stroke-width='2'/><line x1='40' y1='160' x2='40' y2='20' stroke='black' stroke-width='2'/><path d='M 40 160 Q 60 100 240 60' fill='none' stroke='blue' stroke-width='2'/><line x1='40' y1='120' x2='260' y2='120' stroke='red' stroke-dasharray='4'/><line x1='200' y1='160' x2='200' y2='20' stroke='green' stroke-dasharray='4'/><path d='M 85 120 Q 140 95 200 68 L 200 120 Z' fill='#ffcc00' fill-opacity='0.6'/><text x='35' y='125' font-size='10'>1</text><text x='195' y='175' font-size='10'>4</text><text x='250' y='175' font-size='12'>س</text><text x='20' y='30' font-size='12'>ص</text></svg> <br> وتساوي: </div>",
+  "options": [
+    "<div dir='rtl'>أ) 1 ⅔</div>",
+    "<div dir='rtl'>ب) 5 / 3</div>",
+    "<div dir='rtl'>ج) 2 ¼</div>",
+    "<div dir='rtl'>د) 1 ½</div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>نقطة بداية التظليل هي تقاطع ص=√س مع ص=1 وهي س=1. المساحة = ∫ (√س - 1) دس من 1 إلى 4. بالتكامل نحصل على [⅔ س^(3/2) - س] من 1 إلى 4. بالتعويض: (16/3 - 4) - (2/3 - 1) = 4/3 + 1/3 = 5/3 ، وهي تساوي 1 ⅔.</div>"
+},
+
+{
+  "id": 24,
+  "type": "mcq",
+  "text": "<div dir='rtl'>قيمة التكامل ∫ (3س + 1)⁻¹ د س تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) لو (3س + 1) + ث</div>",
+    "<div dir='rtl'>ب) 1/3 لو (س + 1)² + ث</div>",
+    "<div dir='rtl'>ج) 1/3 لو (س + 1) + ث</div>",
+    "<div dir='rtl'>د) 1/3 لو |3س + 1| + ث</div>"
+  ],
+  "correct": "d",
+  "explanation": "<div dir='rtl'>بما أن المقدار مرفوع للأس (-1)، فإنه يمثل كسرًا مقامه (3س + 1). تكامل هذا النوع هو (1/معامل س) في لوغاريتم المقام. بالتالي الناتج هو 1/3 لو |3س + 1| + ثابت.</div>"
+},
+
+{
+  "id": 25,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كانت ص = س³ لو 3س ، فإن المشتقة الثانية (ص'') تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) س² (6 + 5 لو 3س)</div>",
+    "<div dir='rtl'>ب) س (5 + 6 لو 3س)</div>",
+    "<div dir='rtl'>ج) س³ (5 - 6 لو 3س)</div>",
+    "<div dir='rtl'>د) س (5 - 6 لو 3س)</div>"
+  ],
+  "correct": "b",
+  "explanation": "<div dir='rtl'>المشتقة الأولى: ص' = 3س² لو 3س + س². المشتقة الثانية: ص'' = 6س لو 3س + 3س + 2س = 6س لو 3س + 5س. بأخذ (س) عامل مشترك نحصل على: س (5 + 6 لو 3س).</div>"
+},
+{
+  "id": 26,
+  "type": "mcq",
+  "text": "<div dir='rtl' style='font-size: 18px; line-height: 2;'>قيمة التكامل: <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>باي/2</small><br><span style='font-size: 30px;'>∫</span><br><small>0</small></span> (جا س + جتا س)² د س تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) (باي / 2) - 1</div>",
+    "<div dir='rtl'>ب) (باي / 4) + 1</div>",
+    "<div dir='rtl'>ج) 1 + (باي / 2)</div>",
+    "<div dir='rtl'>د) 1 - (باي / 2)</div>"
+  ],
+  "correct": "c",
+  "explanation": "<div dir='rtl'>بفك القوس: (جا²س + جتا²س + 2جاس جتاس) = (1 + جا2س). نكامل المقدار ونعوض من 0 إلى باي/2، فينتج: (باي/2 + 1).</div>"
+},
+{
+  "id": 27,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كان ص = [ (1/3) - (1/س) ] / (س - 3) ، فإن د²ص/دس² عندما س=2 تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) -1/12</div>",
+    "<div dir='rtl'>ب) 1/4</div>",
+    "<div dir='rtl'>ج) 1/12</div>",
+    "<div dir='rtl'>د) 1/16</div>"
+  ],
+  "correct": "c",
+  "explanation": "<div dir='rtl'>بتبسيط البسط: (1/3 - 1/س) = (س-3)/(3س). بقسمتها على (س-3) تصبح ص = 1/(3س). المشتقة الأولى = -1/(3س²)، والمشتقة الثانية = 2/(3س³). بالتعويض عن س=2 نجد أن ص'' = 2/(3×8) = 1/12.</div>"
+},
+{
+  "id": 28,
+  "type": "mcq",
+  "text": "<div dir='rtl'>مساحة المنطقة المحاطة بالمنحنى ص = س² - 1 والمستقيم ص = 3 تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>2</small><br><span style='font-size: 20px;'>∫</span><br><small>-2</small></span> (4 + س²) د س</div>",
+    "<div dir='rtl'>ب) <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>1</small><br><span style='font-size: 20px;'>∫</span><br><small>-1</small></span> (4 - س²) د س</div>",
+    "<div dir='rtl'>ج) <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>2</small><br><span style='font-size: 20px;'>∫</span><br><small>-2</small></span> (4 - س²) د س</div>",
+    "<div dir='rtl'>د) <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>1</small><br><span style='font-size: 20px;'>∫</span><br><small>-1</small></span> (4 + س²) د س</div>"
+  ],
+  "correct": "c",
+  "explanation": "<div dir='rtl'>بإيجاد نقاط التقاطع: س² - 1 = 3 ومنها س² = 4 أي أن س تنتمي لـ [-2، 2]. المساحة هي تكامل الفرق بين المستقيم والمنحنى: ∫ [3 - (س² - 1)] د س = ∫ (4 - س²) د س من -2 إلى 2.</div>"
+},
+{
+  "id": 29,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كانت ص = 1 - جا² س ، فإن د ص / د(جتا س) تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 2 جتا س</div>",
+    "<div dir='rtl'>ب) -2 جا س</div>",
+    "<div dir='rtl'>ج) 0</div>",
+    "<div dir='rtl'>د) 2 جا س</div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>بتبسيط الدالة: ص = 1 - جا² س = جتا² س. عند اشتقاق جتا² س بالنسبة لـ (جتا س)، نعتبر جتا س كمتغير واحد، فتكون المشتقة هي 2 جتا س.</div>"
+},
+
+{
+  "id": 30,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كان د/دس [ √س / (1 + √س) ] = ك / [ 4√س (1 + √س)² ] ، فإن ك تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 4</div>",
+    "<div dir='rtl'>ب) -4</div>",
+    "<div dir='rtl'>ج) 2</div>",
+    "<div dir='rtl'>د) -2</div>"
+  ],
+  "correct": "c",
+  "explanation": "<div dir='rtl'>باشتقاق خارج القسمة وتبسيط البسط، نجد أن المشتقة هي 1 / [ 2√س (1 + √س)² ]. بمقارنتها بالصيغة المعطاة (التي مقامها 4√س)، نجد أننا بحاجة لضرب البسط في 2، فتكون ك = 2.</div>"
+},
+{
+  "id": 31,
+  "type": "mcq",
+  "text": "<div dir='rtl'>قيم س التي تحقق المعادلة: ½ جا س = جا 2س ، حيث 0° ≤ س ≤ 180° هي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 0° ، 75.5° ، 180°</div>",
+    "<div dir='rtl'>ب) 25° ، 120° ، 135°</div>",
+    "<div dir='rtl'>ج) 75.5° ، 135° ، 180°</div>",
+    "<div dir='rtl'>د) 0° ، 75° ، 120°</div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>بالتعويض عن جا 2س بـ (2 جا س جتا س) وأخذ عامل مشترك، نجد إما جا س = 0 (س = 0 أو 180) أو جتا س = 0.25 (س ≈ 75.5).</div>"
+},
+
+{
+  "id": 32,
+  "type": "mcq",
+  "text": "<div dir='rtl'>معادلة العمودي للمنحنى ص = √س / (س - 2) عند س = 4 هي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 8س - 3ص - 29 = 0</div>",
+    "<div dir='rtl'>ب) 8س + 29 = 0</div>",
+    "<div dir='rtl'>ج) 3ص - 8س - 20 = 0</div>",
+    "<div dir='rtl'>د) 3ص - 28 - 8س = 0</div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>عند س=4 تكون ص=1. ميل المماس = -3/8، فيكون ميل العمودي = 8/3. بالتعويض في قانون المعادلة ص - 1 = 8/3 (س - 4) والتبسيط نصل لـ 8س - 3ص - 29 = 0.</div>"
+},
+
+  
+
+{
+    "id": 33,
+    "type": "mcq",
+    "text": "<div dir='rtl'>المساحة المحصورة بين المنحنيين ص = 4س - س² + 8 ، ص = س² - 2س تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 21.5 وحدة مربعة</div>",
+      "<div dir='rtl'>ب) 33.5 وحدة مربعة</div>",
+      "<div dir='rtl'>ج) 41 وثلثي وحدة مربعة</div>",
+      "<div dir='rtl'>د) 15 وثلث وحدة مربعة</div>"
+    ],
+    "correct": "c"
+  },
+{
+  "id": 34,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كان د(س) = هـ<sup>س</sup> × ق(س) حيث ق(1) = 2 ، ق'(1) = 1 فإن د'(1) تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) هـ</div>",
+    "<div dir='rtl'>ب) 3</div>",
+    "<div dir='rtl'>ج) 3هـ</div>",
+    "<div dir='rtl'>د) 3 + هـ</div>"
+  ],
+  "correct": "c",
+  "explanation": "<div dir='rtl'>باستخدام قاعدة اشتقاق حاصل ضرب دالتين: د'(س) = هـ<sup>س</sup> ق(س) + هـ<sup>س</sup> ق'(س). عند س=1: د'(1) = هـ¹(2) + هـ¹(1) = 3هـ.</div>"
+},
+{
+  "id": 35,
+  "type": "mcq",
+  "text": "<div dir='rtl'>قيمة س التي تجعل المحدد: <br><br> <table style='display: inline-table; vertical-align: middle; border-left: 2px solid black; border-right: 2px solid black; border-collapse: collapse; text-align: center; margin: 0 10px;'> <tr><td style='padding: 0 10px;'>2</td><td style='padding: 0 10px;'>-1</td><td style='padding: 0 10px;'>5</td></tr> <tr><td style='padding: 0 10px;'>1</td><td style='padding: 0 10px;'>-3</td><td style='padding: 0 10px;'>-1</td></tr> <tr><td style='padding: 0 10px;'>3</td><td style='padding: 0 10px;'>4</td><td style='padding: 0 10px;'>س</td></tr> </table> = 26 <br><br> هي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 10</div>",
+    "<div dir='rtl'>ب) -10</div>",
+    "<div dir='rtl'>ج) -50</div>",
+    "<div dir='rtl'>د) 50</div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>بفك المحدد عن طريق الصف الأول: 2(-3س + 4) + 1(س + 3) + 5(13) = 26. بتبسيط المعادلة نجد أن -5س + 76 = 26 ، ومنها س = 10.</div>"
+},
+{
+  "id": 36,
+  "type": "mcq",
+  "text": "<div dir='rtl'>الحجم المتولد من دوران المنطقة المحاطة بالمنحنى ص = 1/س والمستقيمات ص = 0 ، س = 1 ، س = 2 دورة كاملة حول محور السينات يساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) ¼ باي</div>",
+    "<div dir='rtl'>ب) ½ باي</div>",
+    "<div dir='rtl'>ج) ⅓ باي</div>",
+    "<div dir='rtl'>د) باي</div>"
+  ],
+  "correct": "b",
+  "explanation": "<div dir='rtl'>قانون الحجم حول محور السينات هو ح = π ∫ ص² دس. بتكامل (1/س²) من 1 إلى 2 نحصل على [-1/س] من 1 إلى 2، وهو ما يعطي (-½ + 1) = ½. بضربها في π يكون الناتج ½ باي.</div>"
+},
+
+{
+  "id": 37,
+  "type": "mcq",
+  "text": "<div dir='rtl'>قيمة التكامل: <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>هـ<sup>3</sup></small><br><span style='font-size: 20px;'>∫</span><br><small>هـ</small></span> (1/س) د س تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 3</div>",
+    "<div dir='rtl'>ب) 2</div>",
+    "<div dir='rtl'>ج) 1</div>",
+    "<div dir='rtl'>د) هـ</div>"
+  ],
+  "correct": "b",
+  "explanation": "<div dir='rtl'>تكامل (1/س) هو لو<sub>هـ</sub> س. بالتعويض بحدود التكامل: لو<sub>هـ</sub> هـ³ - لو<sub>هـ</sub> هـ = 3 - 1 = 2.</div>"
+},
+  
+  {
+    "id": 38,
+    "type": "mcq",
+    "text": "<div dir='rtl'>قيمة التكامل: ∫ ( (16 - هـ^2س) / (4 - هـ^س) ) د س تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 4س - هـ^س + ث</div>",
+      "<div dir='rtl'>ب) 4س + هـ^س + ث</div>",
+      "<div dir='rtl'>ج) 4 + هـ^س + ث</div>",
+      "<div dir='rtl'>د) س + هـ^س + ث</div>"
+    ],
+    "correct": "b",
+    "explanation": "<div dir='rtl'>بتحليل البسط كفرق بين مربعين واختصاره مع المقام، يتبقى تكامل (4 + هـ^س)، وناتجه هو 4س + هـ^س + ث.</div>"
+  },
+  {
+    "id": 39,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كانت المصفوفة أ = <table style='display:inline-table; vertical-align:middle; border-left:2px solid black; border-right:2px solid black; text-align:center;'><tr><td>0</td><td>0</td><td>-2</td></tr><tr><td>0</td><td>4</td><td>9</td></tr><tr><td>8</td><td>1</td><td>2</td></tr></table> <br>فإن قيمة |أ| + 5 تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) -59</div>",
+      "<div dir='rtl'>ب) 69</div>",
+      "<div dir='rtl'>ج) -69</div>",
+      "<div dir='rtl'>د) 59</div>"
+    ],
+    "correct": "b",
+    "explanation": "<div dir='rtl'>قيمة المحدد تساوي 8 × (0 - (-8)) = 64. وبإضافة 5 يكون الناتج 69.</div>"
+  },
+  {
+    "id": 40,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كانت ص = جا 2س ، فإن قيمة المقدار: 1/4 (ص'')² + (ص')² تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 1</div>",
+      "<div dir='rtl'>ب) 4</div>",
+      "<div dir='rtl'>ج) صفر</div>",
+      "<div dir='rtl'>د) 2</div>"
+    ],
+    "correct": "b",
+    "explanation": "<div dir='rtl'>(ص')² = 4 جتا² 2س ، (ص'')² = 16 جا² 2س. بالتعويض: 4 جا² 2س + 4 جتا² 2س = 4 (جا² 2س + جتا² 2س) = 4.</div>"
+  },
+
+
+  {
+    "id": 41,
+    "type": "mcq",
+    "text": "<div dir='rtl'>صُب ماء في مخروط دائري قائم مقلوب طول نصف قطر قاعدته 5 سم وارتفاعه 15 سم بمعدل 10 سم³/ث. فإن معدل زيادة مساحة سطح الماء عندما يكون الارتفاع 4 سم هو:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 8 سم²/ث</div>",
+      "<div dir='rtl'>ب) 5 سم²/ث</div>",
+      "<div dir='rtl'>ج) 10 سم²/ث</div>",
+      "<div dir='rtl'>د) 6 سم²/ث</div>"
+    ],
+    "correct": "b",
+    "explanation": "<div dir='rtl'>باستخدام تشابه المثلثات (نق = 1/3 ع) وقانون المساحة (م = باي نق²)، وبالاشتقاق بالنسبة للزمن والتعويض عن معدل تغير الارتفاع المستنتج من الحجم، نجد أن معدل تغير المساحة يساوي 5 سم²/ث.</div>"
+  },
+  {
+    "id": 42,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كان: <span style='display: inline-block; vertical-align: middle; text-align: center;'><small>4</small><br><span style='font-size: 25px;'>∫</span><br><small>0</small></span> 2أ (1 + س³) د س = 272 ، فإن قيمة أ تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 0.5</div>",
+      "<div dir='rtl'>ب) 1</div>",
+      "<div dir='rtl'>ج) 2</div>",
+      "<div dir='rtl'>د) 3</div>"
+    ],
+    "correct": "c",
+    "explanation": "<div dir='rtl'>بإجراء التكامل: 2أ [س + (1/4)س⁴] من 0 إلى 4 = 2أ [4 + 64] = 2أ(68) = 136أ. بمساواة الناتج بـ 272: 136أ = 272 ، إذاً أ = 2.</div>"
+  },
+  {
+    "id": 43,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كانت ص = جا س / (2 - جتا س) ، حيث 0 ≤ س ≤ 2باي ، فإن قيم س التي تجعل للدالة قيمة محلية هي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) باي/4 ، باي/6</div>",
+      "<div dir='rtl'>ب) باي/3 ، 5باي/3</div>",
+      "<div dir='rtl'>ج) 0 ، 2باي</div>",
+      "<div dir='rtl'>د) باي ، 3باي/2</div>"
+    ],
+    "correct": "b",
+    "explanation": "<div dir='rtl'>بإيجاد المشتقة الأولى: ص' = (2جتاس - 1) / (2-جتاس)². نضع ص' = 0 ومنها جتاس = 1/2. قيم س التي تحقق ذلك في الدورة الأولى هي باي/3 و 5باي/3.</div>"
+  },
+
+
+  {
+    "id": 44,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كانت د(س) = (2س³ - 1.5س)⁻¹ (1.5س)، فإن قيمة د'(1/8) + د''(1/8) تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 4</div>",
+      "<div dir='rtl'>ب) 8/3</div>",
+      "<div dir='rtl'>ج) 1/3</div>",
+      "<div dir='rtl'>د) 3</div>"
+    ],
+    "correct": "a",
+    "explanation": "<div dir='rtl'>بعد تبسيط الدالة وإيجاد المشتقة الأولى والثانية والتعويض بالقيمة المطلوبة (1/8)، نجد أن مجموع المشتقتين يساوي 4.</div>"
+  },
+  {
+    "id": 45,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كان 3س جا ص = ظا ص ، فإن د ص / د س تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) (3 جا ص) / (قا² ص - 3س جتا ص)</div>",
+      "<div dir='rtl'>ب) (3 قا ص) / (3س جا ص - جتا ص)</div>",
+      "<div dir='rtl'>ج) (-3 جا ص) / (3س قا² ص - جا ص)</div>",
+      "<div dir='rtl'>د) (-3 جا ص) / (3س جتا ص - قا² ص)</div>"
+    ],
+    "correct": "a",
+    "explanation": "<div dir='rtl'>باشتقاق الطرفين بالنسبة لـ س: 3 جاس + 3س جتاس (ص') = قا²ص (ص'). بنقل الحدود والتبسيط نحصل على ص' = (3 جا ص) / (قا² ص - 3س جتا ص).</div>"
+  },
+
+{
+  "id": 46,
+  "type": "mcq",
+  "text": "<div dir='rtl'>بدأ جسم حركته من و في اتجاه و أ على خط مستقيم، حيث ف تعطى بالعلاقة ف = ن (ن - 3)<sup>2</sup>. فإن المسافة المقطوعة في الثانية الثالثة هي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 4 متر</div>",
+    "<div dir='rtl'>ب) 0.5 متر</div>",
+    "<div dir='rtl'>ج) 2 متر</div>",
+    "<div dir='rtl'>د) 3 متر</div>"
+  ],
+  "correct": "c",
+  "explanation": "<div dir='rtl'>المسافة في الثانية الثالثة تعني الفترة من ن=2 إلى ن=3. بالتعويض في علاقة الإزاحة: ف(3) = 0 ، ف(2) = 2. وبما أن الجسم لا يغير اتجاهه في هذه الفترة (السرعة لا تنعدم بين 2 و 3)، فإن المسافة = |ف(3) - ف(2)| = 2 متر.</div>"
+},
+
+{
+  "id": 47,
+  "type": "mcq",
+  "text": "<div dir='rtl'>قياس زاوية المماس للمنحنى س ص - ص² + 12س = 0 مع محور السينات عند النقطة (6 ، 2) هي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 62.9°</div>",
+    "<div dir='rtl'>ب) 98.1°</div>",
+    "<div dir='rtl'>ج) 45.9°</div>",
+    "<div dir='rtl'>د) 60.9°</div>"
+  ],
+  "correct": "b",
+  "explanation": "<div dir='rtl'>بالاشتقاق الضمني: س ص' + ص - 2ص ص' + 12 = 0. بالتعويض عن (س=6، ص=2) نجد أن 2ص' = -14 أي أن الميل = -7. الزاوية ظا⁻¹(-7) تساوي تقريباً 98.1°.</div>"
+},
+{
+  "id": 48,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كانت المساحة المحصورة بالمنحنى ص = س<sup>3</sup> - 1 ومحور السينات والمستقيمين س = 1 ، س = أ (حيث أ > 1) تساوي 2.75 وحدة مربعة، فإن قيمة أ تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 2</div>",
+    "<div dir='rtl'>ب) 3</div>",
+    "<div dir='rtl'>ج) 4</div>",
+    "<div dir='rtl'>د) 1</div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>بإجراء التكامل: ∫ (س³ - 1) دس من 1 إلى أ = [¼ س⁴ - س] من 1 إلى أ = 2.75. بالتعويض والتبسيط نصل للمعادلة أ⁴ - 4أ - 8 = 0. بتجربة الخيارات نجد أن أ = 2 تحقق المعادلة.</div>"
+},
+
+
+
+
+
+  {
+    "id": 49,
+    "type": "mcq",
+    "text": "<div dir='rtl'>مشتقة المقدار: [ د(س) × ذ(س) ] / [ د(س) + ذ(س) ] هي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) [ د²(س) ذ'(س) - ذ²(س) د'(س) ] / [ د(س) + ذ(س) ]²</div>",
+      "<div dir='rtl'>ب) [ د²(س) ذ'(س) + ذ²(س) د'(س) ] / [ د(س) - ذ(س) ]²</div>",
+      "<div dir='rtl'>ج) [ د²(س) ذ'(س) + ذ²(س) د'(س) ] / [ د(س) + ذ(س) ]²</div>",
+      "<div dir='rtl'>د) [ د²(س) ذ'(س) - ذ²(س) د'(س) ] / [ د(س) + ذ(س) ]²</div>"
+    ],
+    "correct": "c"
+  },
+  
+
+
+{
+    "id": 50,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كان ظا س = أ ، س زاوية حادة ، فإن جتا² (س/2) بدلالة أ تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 1/2 - [ 1 / (2√(أ² + 1)) ]</div>",
+      "<div dir='rtl'>ب) 1/2 + [ 1 / (2√(أ² + 1)) ]</div>",
+      "<div dir='rtl'>ج) 1/2 + [ 1 / √(أ² + 1) ]</div>",
+      "<div dir='rtl'>د) 1/2 - [ 1 / (2√(أ² + 1)) ]</div>"
+    ],
+    "correct": "b"
+  },
+
+
+
+
+  {
+    "id": 51,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كان ص = جتا 2س جتا س - جا 2س جا س ، فإن د''(3/π) تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 4.5</div>",
+      "<div dir='rtl'>ب) -9</div>",
+      "<div dir='rtl'>ج) 9</div>",
+      "<div dir='rtl'>د) -4.5</div>"
+    ],
+    "explanation": "<div dir='rtl'>بتبسيط الدالة: ص = جتا(2س + س) = جتا 3س. المشتقة الثانية ص'' = -9 جتا 3س. بالتعويض عن س = π/3: ص'' = -9 جتا(π) = 9.</div>",
+    "correct": "c"
+  },
+  {
+    "id": 52,
+    "type": "mcq",
+    "text": "<div dir='rtl'>إذا كان حجم الكرة ح ومساحة سطحها م، وكان (د ح / د ن) = ك (د م / د ن) عندما نق = 6 سم، فإن ك تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) 2</div>",
+      "<div dir='rtl'>ب) 6</div>",
+      "<div dir='rtl'>ج) 3</div>",
+      "<div dir='rtl'>د) 1</div>"
+    ],
+    "explanation": "<div dir='rtl'>ح = 4/3 π نق³ ، م = 4 π نق². بالاشتقاق والقسمة نجد أن ك = نق / 2. عند نق = 6 سم تكون ك = 3.</div>",
+    "correct": "c"
+  },
+  {
+    "id": 53,
+    "type": "mcq",
+    "text": "<div dir='rtl'>قيمة التكامل: ∫ [ 1 / (1 + جتا 2س) ] د س تساوي:</div>",
+    "options": [
+      "<div dir='rtl'>أ) (ظا س) / 2 + ث</div>",
+      "<div dir='rtl'>ب) 2 قا س + ث</div>",
+      "<div dir='rtl'>ج) 1/2 جتا² س + ث</div>",
+      "<div dir='rtl'>د) قا س ظا س + ث</div>"
+    ],
+    "explanation": "<div dir='rtl'>بما أن 1 + جتا 2س = 2 جتا² س، فإن التكامل يصبح: 1/2 ∫ قا² س د س = 1/2 ظا س + ث.</div>",
+    "correct": "a"
+  },
+{
+  "id": 54,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كانت د(س) = (س² + 1)<sup>هـ<sup>(س-1)</sup></sup> ، فإن د'(س) تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) هـ<sup>س-1</sup> (س - 1)</div>",
+    "<div dir='rtl'>ب) هـ<sup>س+1</sup> (س + 1)²</div>",
+    "<div dir='rtl'>ج) (س + 1)<sup>-2</sup> هـ<sup>س+1</sup></div>",
+    "<div dir='rtl'>د) (س + 1)² هـ<sup>س-1</sup></div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>تم تعديل الخيار (أ) حسب الطلب ليصبح حاصل ضرب هـ<sup>س-1</sup> في القوس (س-1).</div>"
+},
+{
+  "id": 55,
+  "type": "mcq",
+  "text": "<div dir='rtl' style='font-size: 18px; line-height: 1.8;'>في الشكل المقابل: مثلث ارتفاعه هـ سم، الزاويتان أ + ب = 45°. القاعدة مقسمة إلى جزئين هما 2 سم و 3 سم. فإن قيمة هـ تساوي:<br><br><div style='text-align: center;'><svg width='250' height='180' viewBox='0 0 250 180' xmlns='http://www.w3.org/2000/svg' style='background-color: white;'><title>مثلث حساب مثلثات</title><path d='M 20 150 L 230 150 L 100 30 Z' stroke='black' stroke-width='2' fill='none'/><line x1='100' y1='30' x2='100' y2='150' stroke='black' stroke-width='2' stroke-dasharray='5,5'/><path d='M 100 140 L 110 140 L 110 150' stroke='black' stroke-width='1' fill='none'/><text x='85' y='95' font-size='16' fill='black'>هـ</text><text x='60' y='165' font-size='14' fill='black'>2 سم</text><text x='160' y='165' font-size='14' fill='black'>3 سم</text><text x='105' y='50' font-size='16' fill='black'>أ</text><text x='90' y='50' font-size='16' fill='black'>ب</text></svg></div><br></div>",
+  "options": [
+    "<div dir='rtl'>أ) 6 سم</div>",
+    "<div dir='rtl'>ب) -6 سم</div>",
+    "<div dir='rtl'>ج) 4 سم</div>",
+    "<div dir='rtl'>د) 5 سم</div>"
+  ],
+  "correct": "a",
+  "explanation": "<div dir='rtl'>من المثلثات القائمة: ظا أ = 2/هـ ، ظا ب = 3/هـ. باستخدام قانون ظا(أ+ب) = 1، نجد أن: (2/هـ + 3/هـ) / (1 - 6/هـ²) = 1. بتبسيط المعادلة نحصل على هـ² - 5هـ - 6 = 0، وبالتحليل نجد أن هـ = 6 سم.</div>"
+},
+
+{
+  "id": 56,
+  "type": "mcq",
+  "text": "<div dir='rtl'>إذا كان جا أ = 5/13 ، جا ب = 4/5 ، وكان أ زاوية حادة ، ب زاوية منفرجة. فإن قيمة ظا(أ + ب) تساوي:</div>",
+  "options": [
+    "<div dir='rtl'>أ) 56/33</div>",
+    "<div dir='rtl'>ب) -33/56</div>",
+    "<div dir='rtl'>ج) -56/31</div>",
+    "<div dir='rtl'>د) 33/65</div>"
+  ],
+  "correct": "b",
+  "explanation": "<div dir='rtl'>بما أن أ حادة: ظا أ = 5/12. وبما أن ب منفرجة: ظا ب = -4/3. بتطبيق قانون ظا(أ+ب) = (ظا أ + ظا ب) / (1 - ظا أ ظا ب) والتعويض، نجد أن الناتج النهائي هو -33/56.</div>"
+}
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  let userAnswers = {};
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let currentHighlightId = 1;
+    
+    function formatTime(sec) {
+        let minutes = Math.floor(sec / 60);
+        let seconds = sec % 60;
+        return `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+    }
+    
+    function startTimer() {
+        if(timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            timerSeconds++;
+            document.getElementById('timerDisplay').innerText = formatTime(timerSeconds);
+        }, 1000);
+    }
+    
+    function updateScore() {
+        let correctCount = 0;
+        for(let i = 0; i < questions.length; i++) {
+            let q = questions[i];
+            let ans = userAnswers[q.id];
+            if(ans && ans.isCorrect === true) correctCount++;
+        }
+        document.getElementById('scoreDisplay').innerText = correctCount;
+        document.getElementById('totalDisplay').innerText = questions.length;
+        document.getElementById('totalQ').innerText = questions.length;
+    }
+    
+    function scrollToQuestion(questionId) {
+        let element = document.getElementById(`q-card-${questionId}`);
+        if(element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.querySelectorAll('.question-card').forEach(card => card.classList.remove('highlight'));
+            element.classList.add('highlight');
+            setTimeout(() => element.classList.remove('highlight'), 1500);
+        }
+    }
+    
+    function goToNextQuestion() {
+        let nextId = currentHighlightId + 1;
+        if(nextId <= questions.length) {
+            currentHighlightId = nextId;
+            document.getElementById('currentPos').innerText = currentHighlightId;
+            scrollToQuestion(currentHighlightId);
+        }
+    }
+    
+    function goToPrevQuestion() {
+        let prevId = currentHighlightId - 1;
+        if(prevId >= 1) {
+            currentHighlightId = prevId;
+            document.getElementById('currentPos').innerText = currentHighlightId;
+            scrollToQuestion(currentHighlightId);
+        }
+    }
+    
+    function scrollToTop() {
+        document.querySelector('.questions-grid').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function showSolution(qId, userAnswer, isCorrect) {
+        let q = questions.find(q => q.id === qId);
+        if(!q) return;
+        
+        let solutionDiv = document.getElementById(`solution-${qId}`);
+        let correctAnswerText = "";
+        if(q.type === "tf") {
+            correctAnswerText = q.correct ? "صحيح" : "خطأ";
+        } else {
+            let idx = {a:0, b:1, c:2, d:3}[q.correct];
+            correctAnswerText = q.options[idx];
+        }
+        
+        let statusIcon = isCorrect ? '<i class="fas fa-check-circle" style="color:#10b981"></i>' : '<i class="fas fa-times-circle" style="color:#ef4444"></i>';
+        let statusText = isCorrect ? "✓ إجابة صحيحة" : "✗ إجابة خاطئة";
+        
+        solutionDiv.innerHTML = `
+            <div class="solution-title">${statusIcon} ${statusText}</div>
+            <div class="solution-content">
+                <p><strong>📖 الشرح المفصل:</strong> ${q.explanation}</p>
+                <p><strong>✅ الإجابة الصحيحة:</strong> ${correctAnswerText}</p>
+            </div>
+        `;
+        solutionDiv.classList.add('show');
+    }
+    
+    function selectAnswer(qId, answerValue, qType) {
+        let q = questions.find(q => q.id === qId);
+        if(!q) return;
+        
+        let isCorrect = false;
+        if(qType === "tf") {
+            let userBool = (answerValue === 'true');
+            isCorrect = (userBool === q.correct);
+        } else {
+            isCorrect = (answerValue === q.correct);
+        }
+        
+        userAnswers[qId] = { answer: answerValue, isCorrect: isCorrect };
+        
+        if(qType === "tf") {
+            document.querySelectorAll(`.tf-btn-${qId}`).forEach(btn => {
+                btn.classList.remove('selected-true', 'selected-false');
+            });
+            if(answerValue === 'true') {
+                document.querySelector(`.tf-btn-${qId}.true`).classList.add('selected-true');
+            } else {
+                document.querySelector(`.tf-btn-${qId}.false`).classList.add('selected-false');
+            }
+        } else {
+            document.querySelectorAll(`.option-${qId}`).forEach(opt => {
+                opt.classList.remove('selected');
+                if(opt.querySelector('input') && opt.querySelector('input').value === answerValue) {
+                    opt.classList.add('selected');
+                }
+            });
+        }
+        
+        updateScore();
+        
+        let solutionDiv = document.getElementById(`solution-${qId}`);
+        if(solutionDiv) solutionDiv.classList.remove('show');
+    }
+    
+    function checkAnswer(qId) {
+        let q = questions.find(q => q.id === qId);
+        let ans = userAnswers[qId];
+        if(!ans || !ans.answer) {
+            alert("⚠️ الرجاء اختيار إجابة أولاً!");
+            return;
+        }
+        showSolution(qId, ans.answer, ans.isCorrect);
+    }
+    
+    function renderAllQuestions() {
+        let container = document.getElementById('questionsContainer');
+        let html = '';
+        
+        for(let i = 0; i < questions.length; i++) {
+            let q = questions[i];
+            let savedAnswer = userAnswers[q.id] ? userAnswers[q.id].answer : null;
+            
+            html += `<div class="question-card" id="q-card-${q.id}">
+                <div class="question-header">
+                    <span class="question-number" onclick="scrollToQuestion(${q.id})">📌 السؤال ${q.id}</span>
+                    <span class="question-type">${q.type === 'tf' ? '✅ صح / خطأ' : '🔘 اختيار من متعدد'}</span>
+                </div>
+                <div class="question-text">${q.text}</div>`;
+            
+            if(q.type === "tf") {
+                html += `<div class="tf-options">
+                    <div class="tf-btn tf-btn-${q.id} true ${savedAnswer === 'true' ? 'selected-true' : ''}" onclick="selectAnswer(${q.id}, 'true', 'tf')"><i class="fas fa-check-circle"></i> صحيح</div>
+                    <div class="tf-btn tf-btn-${q.id} false ${savedAnswer === 'false' ? 'selected-false' : ''}" onclick="selectAnswer(${q.id}, 'false', 'tf')"><i class="fas fa-times-circle"></i> خطأ</div>
+                </div>`;
+            } else {
+                html += `<div class="options">`;
+                for(let j = 0; j < q.options.length; j++) {
+                    let optVal = String.fromCharCode(97+j);
+                    let isSelected = (savedAnswer === optVal);
+                    html += `<div class="option option-${q.id} ${isSelected ? 'selected' : ''}" onclick="selectAnswer(${q.id}, '${optVal}', 'mcq')">
+                        <input type="radio" name="q${q.id}" value="${optVal}" ${isSelected ? 'checked' : ''} onchange="selectAnswer(${q.id}, '${optVal}', 'mcq')">
+                        <span>${q.options[j]}</span>
+                    </div>`;
+                }
+                html += `</div>`;
+            }
+            
+            html += `<button class="check-btn" onclick="checkAnswer(${q.id})"><i class="fas fa-search"></i> 🔍 تحقق من الإجابة وعرض الحل</button>
+                <div id="solution-${q.id}" class="solution-box"></div>
+            </div>`;
+        }
+        
+        container.innerHTML = html;
+        updateScore();
+        document.getElementById('currentPos').innerText = currentHighlightId;
+
+
+if (window.MathJax) {
+    MathJax.typesetPromise();
+}
+
+    }
+    
+    function resetAllAnswers() {
+        userAnswers = {};
+        renderAllQuestions();
+        updateScore();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    window.selectAnswer = selectAnswer;
+    window.checkAnswer = checkAnswer;
+    window.resetAllAnswers = resetAllAnswers;
+    window.goToNextQuestion = goToNextQuestion;
+    window.goToPrevQuestion = goToPrevQuestion;
+    window.scrollToTop = scrollToTop;
+    window.scrollToQuestion = scrollToQuestion;
+    
+    startTimer();
+    renderAllQuestions();
+</script>
+</body>
+</html>

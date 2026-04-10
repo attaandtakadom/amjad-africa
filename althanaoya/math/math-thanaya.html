@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم المعلم - منصة  الرياضيات</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+:root {
+--arabic-primary: #1E88E5;
+--arabic-secondary: #1565C0;
+--arabic-light: #E3F2FD;
+--grade1: #FF6B6B;
+--grade2: #48CAE4;
+--grade3: #52B788;
+--grade4: #FF9E00;
+--grade5: #9D4EDD;
+--light: #f8f9fa;
+--dark: #2d3748;
+--gradient: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%); color: var(--dark); min-height: 100vh; direction: rtl; }
+.top-bar { background: var(--gradient); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 15px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 15px; }
+.logo-container { display: flex; align-items: center; gap: 15px; }
+.logo { width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--arabic-primary); font-size: 24px; font-weight: bold; }
+.school-info h1 { font-size: 24px; margin-bottom: 5px; }
+.school-info p { font-size: 14px; opacity: 0.9; }
+.teacher-info { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 12px; backdrop-filter: blur(10px); flex-wrap: wrap; }
+.teacher-avatar { width: 45px; height: 45px; background: white; color: var(--arabic-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; }
+.main-container { display: flex; min-height: calc(100vh - 80px); }
+.sidebar { width: 280px; background: white; box-shadow: 2px 0 15px rgba(0,0,0,0.08); padding: 20px 0; }
+.sidebar-menu { padding: 20px 0; }
+.menu-item { display: flex; align-items: center; padding: 15px 25px; color: var(--dark); text-decoration: none; transition: all 0.3s; border-right: 4px solid transparent; margin: 5px 15px; border-radius: 8px; }
+.menu-item:hover { background: var(--arabic-light); color: var(--arabic-primary); border-right-color: var(--arabic-primary); }
+.menu-item.active { background: var(--arabic-primary); color: white; border-right-color: white; }
+.menu-item i { margin-left: 12px; width: 20px; text-align: center; font-size: 18px; }
+.badge { background: #ef476f; color: white; padding: 3px 8px; border-radius: 10px; font-size: 12px; margin-right: auto; }
+.content-container { flex: 1; padding: 25px; overflow-y: auto; }
+.page-title { margin-bottom: 30px; }
+.page-title h1 { color: var(--dark); font-size: 32px; margin-bottom: 10px; }
+.page-title p { color: #666; font-size: 16px; }
+.grades-tabs { display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; border-bottom: 2px solid #e9ecef; flex-wrap: wrap; }
+.grade-tab { padding: 15px 25px; border-radius: 12px; background: white; border: 2px solid transparent; cursor: pointer; transition: all 0.3s; white-space: nowrap; font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+.grade-tab:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.grade-tab.active { background: var(--arabic-primary); color: white; border-color: var(--arabic-primary); }
+.grade-tab .tab-badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 15px; font-size: 12px; }
+.grade-content { display: none; animation: fadeIn 0.5s ease-out; }
+.grade-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.lessons-section { background: white; padding: 25px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0; }
+.section-title { color: var(--dark); font-size: 20px; display: flex; align-items: center; gap: 10px; }
+.lessons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.lesson-card { background: #f8f9fa; border-radius: 12px; overflow: hidden; transition: all 0.3s; border: 2px solid transparent; position: relative; }
+.lesson-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: var(--arabic-primary); }
+.lesson-card.grade4 .lesson-header { background: linear-gradient(135deg, var(--grade4), #FF8500); }
+.lesson-card.grade5 .lesson-header { background: linear-gradient(135deg, var(--grade5), #7B2CBF); }
+.lesson-header { padding: 20px; color: white; position: relative; overflow: hidden; }
+.lesson-icon { font-size: 32px; margin-bottom: 15px; }
+.lesson-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.lesson-subject { font-size: 14px; opacity: 0.9; }
+.lesson-content { padding: 20px; }
+.lesson-desc { color: #666; font-size: 14px; margin-bottom: 15px; line-height: 1.5; }
+.lesson-meta { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 12px; color: #888; }
+.lesson-status { padding: 3px 10px; border-radius: 15px; font-size: 12px; font-weight: 600; display: inline-block; margin-bottom: 15px; }
+.status-active { background: #d6f5e8; color: #43A047; }
+.status-completed { background: #e0f7ff; color: #1E88E5; }
+.status-upcoming { background: #fff4e6; color: #FF9800; }
+.lesson-actions { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+.lesson-btn { flex: 1; padding: 10px; border-radius: 8px; text-decoration: none; text-align: center; font-weight: 600; font-size: 14px; transition: all 0.3s; cursor: pointer; border: none; font-family: 'Cairo', sans-serif; min-width: 100px; }
+.lesson-btn.primary { background: var(--arabic-primary); color: white; }
+.lesson-btn.primary:hover { background: var(--arabic-secondary); transform: translateY(-2px); }
+.lesson-btn.secondary { background: #f8f9fa; color: var(--dark); border: 1px solid #dee2e6; }
+.lesson-btn.secondary:hover { background: #e9ecef; transform: translateY(-2px); }
+.lesson-btn.exam { background: #ef476f; color: white; }
+.lesson-btn.exam:hover { background: #d90429; }
+.programs-section { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-top: 20px; }
+.programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+.program-item { background: #f8f9fa; padding: 20px; border-radius: 12px; text-align: center; transition: all 0.3s; border: 2px dashed #dee2e6; text-decoration: none; color: var(--dark); }
+.program-item:hover { background: white; border-color: var(--arabic-primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.program-icon { width: 60px; height: 60px; background: var(--arabic-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; color: var(--arabic-primary); }
+.program-title { font-weight: 600; margin-bottom: 10px; }
+.program-desc { color: #666; font-size: 14px; }
+.fade-in { animation: fadeIn 0.5s ease-out; }
+.top-btn { position: fixed; bottom: 40px; right: 40px; width: 50px; height: 50px; background-color: #ff4757; color: white; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; display: none; font-size: 24px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+@media (max-width: 1200px) { .lessons-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 992px) { .main-container { flex-direction: column; } .sidebar { width: 100%; padding: 15px; } .sidebar-menu { display: flex; overflow-x: auto; gap: 10px; } .menu-item { white-space: nowrap; margin: 0; } }
+@media (max-width: 768px) { .top-bar { flex-direction: column; text-align: center; } .lessons-grid, .programs-grid { grid-template-columns: 1fr; } .grades-tabs { flex-wrap: wrap; } .grade-tab { flex: 1; min-width: 120px; justify-content: center; } }
+@media (max-width: 480px) { .content-container { padding: 15px; } .lessons-section, .programs-section { padding: 20px; } .lesson-actions { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div class="top-bar">
+<div class="logo-container">
+<div class="logo"><i class="fas fa-book-open"></i></div>
+<div class="school-info">
+<h1>منصة تعليم  الرياضيات</h1>
+<p>الدروس والبرامج -  الرياضيات</p>
+</div>
+</div>
+<div class="teacher-info">
+<div class="teacher-avatar"><i class="fas fa-user-graduate"></i></div>
+<div><div style="font-weight: 600;">لوحة الطالب</div><div style="font-size: 13px; opacity: 0.9;"></div></div>
+<div style="margin-right: auto; margin-left: 20px;"><div id="current-time" style="font-size: 14px;"></div><div style="font-size: 12px; opacity: 0.8;">توقيت البيضاء</div></div>
+</div>
+</div>
+
+<div class="main-container">
+<div class="sidebar">
+<div class="sidebar-menu">
+<a href="../than-dachboard.html" class="menu-item active"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+<a href="#" class="menu-item"><i class="fas fa-user-graduate"></i><span>الطلاب</span><span class="badge">24</span></a>
+<a href="../teacher_dashbord/programs/lessons/grade12/math/2007.html" class="menu-item"><i class="fas fa-font"></i><span>برنامج  الرياضيات</span></a>
+<a href="#" class="menu-item"><i class="fas fa-book-reader"></i><span>برنامج الدورات</span></a>
+<a href="#" class="menu-item"><i class="fas fa-chart-line"></i><span>التقارير</span></a>
+<a href="#" class="menu-item"><i class="fas fa-tasks"></i><span>الواجبات</span><span class="badge">8</span></a>
+<a href="#" class="menu-item"><i class="fas fa-comments"></i><span>الرسائل</span><span class="badge">3</span></a>
+<a href="#" class="menu-item"><i class="fas fa-calendar-alt"></i><span>الجدول</span></a>
+<a href="#" class="menu-item"><i class="fas fa-cog"></i><span>الإعدادات</span></a>
+</div>اكتشافات
+</div>
+
+<div class="content-container">
+<div class="page-title fade-in">
+<h1>مرحباً بك في منصة  الرياضيات 📚</h1>
+<p>إدارة الدروس والبرامج التعليمية للصف الثالث الثانوي</p>
+</div>
+
+<div class="grades-tabs fade-in">
+<div class="grade-tab active" onclick="showGrade('grade4')"><i class="fas fa-laptop-code"></i> الرياضيات<span class="tab-badge">90 طلاب</span></div>
+<div class="grade-tab" onclick="showGrade('grade5')"><i class="fas fa-history"></i>امتحانات سنوات سابقة<span class="tab-badge">80 طلاب</span></div>
+</div>
+
+<!-- محتوى الصف الرابع - تقنية المعلومات -->
+<div id="grade4-content" class="grade-content active">
+<div class="lessons-section fade-in">
+<div class="section-header"><h2 class="section-title"><i class="fas fa-graduation-cap"></i> دروس  الرياضيات</h2></div>
+
+<!--
+<div class="lessons-grid">
+<div class="lesson-card grade4">
+<div class="lesson-header"><div class="lesson-icon"><i class="fas fa-landmark"></i></div><h3 class="lesson-title">الفصل الثاني: الحكومة الإلكترونية</h3><div class="lesson-subject">🎓 مفاهيم وتطبيقات الحكومة الإلكترونية</div></div>
+<div class="lesson-content"><p class="lesson-desc">دراسة مفهوم الحكومة الإلكترونية وأهميتها ومراحل تطورها والخدمات الإلكترونية</p><div class="lesson-meta"><span><i class="far fa-clock"></i> 12 ساعة</span><span><i class="fas fa-tasks"></i> 40 تمرين</span></div><div class="lesson-status status-upcoming">قادم</div><div class="lesson-actions"><a href="../../teacher_dashbord/programs/lessons/grade12/it/e-vovernment.html" class="lesson-btn primary"><i class="fas fa-eye"></i> أبدأ</a><button class="lesson-btn secondary" onclick="scheduleLesson()"><i class="fas fa-calendar"></i> جدولة</button></div></div>
+</div>
+<div class="lesson-card grade4">
+<div class="lesson-header"><div class="lesson-icon"><i class="fas fa-code"></i></div><h3 class="lesson-title">الفصل السادس: الإجراءات الفرعية والدوال</h3><div class="lesson-subject">🎓 Procedures and Functions في VB.Net</div></div>
+<div class="lesson-content"><p class="lesson-desc">تعريف الإجراءات الفرعية (Sub) والدوال (Functions)، الفرق بينهما، وكيفية استخدامها</p><div class="lesson-meta"><span><i class="far fa-clock"></i> 12 ساعة</span><span><i class="fas fa-tasks"></i> 40 تمرين</span></div><div class="lesson-status status-upcoming">قادم</div><div class="lesson-actions"><a href="../../teacher_dashbord/programs/lessons/grade12/it/it-function.html" class="lesson-btn primary"><i class="fas fa-eye"></i> أبدأ</a><button class="lesson-btn secondary" onclick="scheduleLesson()"><i class="fas fa-calendar"></i> جدولة</button></div></div>
+</div>
+<div class="lesson-card grade4">
+<div class="lesson-header"><div class="lesson-icon"><i class="fas fa-question-circle"></i></div><h3 class="lesson-title">أسئلة من امتحانات سابقة - الفصل السادس</h3><div class="lesson-subject">🎓 أسئلة الإجراءات الفرعية والدوال</div></div>
+<div class="lesson-content"><p class="lesson-desc">مجموعة من الأسئلة من امتحانات السنوات السابقة في مادة تقنية المعلومات</p><div class="lesson-meta"><span><i class="far fa-clock"></i> 12 ساعة</span><span><i class="fas fa-tasks"></i> 40 تمرين</span></div><div class="lesson-status status-upcoming">قادم</div><div class="lesson-actions"><a href="../../teacher_dashbord/programs/lessons/grade12/it/exersize.html" class="lesson-btn primary"><i class="fas fa-eye"></i> أبدأ الأسئلة</a><button class="lesson-btn secondary" onclick="scheduleLesson()"><i class="fas fa-calendar"></i> جدولة</button></div></div>
+
+
+</div>
+</div>
+
+-->
+
+
+</div>
+</div>
+
+<!-- محتوى امتحانات سنوات سابقة (تم تعديله وإضافة بطاقات متعددة) -->
+<div id="grade5-content" class="grade-content">
+<div class="lessons-section fade-in">
+<div class="section-header"><h2 class="section-title"><i class="fas fa-history"></i> ⚙️ امتحانات سنوات سابقة - نظام تفاعلي</h2></div>
+<div class="lessons-grid">
+<!-- امتحان دفعة 2007 -->
+<div class="lesson-card grade5">
+<div class="lesson-header"><div class="lesson-icon"><i class="fas fa-file-alt"></i></div>
+<h3 class="lesson-title">📄 امتحان دفعة 2007</h3>
+<div class="lesson-subject">أسئلة الصواب والخطأ + الاختيار من متعدد</div></div>
+<div class="lesson-content">
+    <p class="lesson-desc">امتحان شامل لمادة  الرياضيات -  2023- 2024  مع تصحيح تلقائي وتقييم فوري</p>
+    <div class="lesson-meta">
+        <span><i class="far fa-clock"></i> 56 سؤالاً</span>
+        <span><i class="fas fa-tasks"></i> 16 صح/خطأ + 40 اختيار من متعدد</span>
+    </div><div class="lesson-status status-active">متاح</div>
+    <div class="lesson-actions">
+        <a href="../../teacher_dashbord/programs/lessons/grade12/math/2007.html" class="lesson-btn exam" target="_blank">
+            <i class="fas fa-play"></i> بدء الامتحان</a>
+   <!----    <button class="lesson-btn secondary" onclick="copyLink('#.html')"><i class="fas fa-copy"></i> نسخ الرابط</button>-->
+    </div>
+</div>
+</div>
+<!--
+<!-- امتحان 2025 - 
+<div class="lesson-card grade5">
+<div class="lesson-header"><div class="lesson-icon"><i class="fas fa-file-signature"></i></div><h3 class="lesson-title">📄 امتحان 2025</h3><div class="lesson-subject">نماذج حديثة - أسئلة موضوعية ومقالية</div></div>
+<div class="lesson-content"><p class="lesson-desc">أسئلة وفق المواصفات الجديدة لامتحان الثانوية العامة تشمل جميع فصول المنهج</p><div class="lesson-meta"><span><i class="far fa-clock"></i> 35 سؤالاً</span><span><i class="fas fa-tasks"></i> شاملة جميع الفصول</span></div><div class="lesson-status status-upcoming">قادم</div><div class="lesson-actions"><a href="../../teacher_dashbord/programs/lessons/grade12/mekanica/exam2025.html" class="lesson-btn primary"><i class="fas fa-eye"></i> معاينة</a><button class="lesson-btn secondary" onclick="scheduleLesson()"><i class="fas fa-calendar"></i> جدولة</button></div></div>
+</div>
+<!-- بنك الأسئلة التفاعلي -
+<div class="lesson-card grade5">
+<div class="lesson-header"><div class="lesson-icon"><i class="fas fa-database"></i></div><h3 class="lesson-title">🏦 بنك الأسئلة التفاعلي</h3><div class="lesson-subject">أسئلة تفاعلية مع تصحيح فوري</div></div>
+<div class="lesson-content"><p class="lesson-desc">مجموعة كبيرة من الأسئلة التفاعلية (صح/خطأ + اختيار من متعدد) مع التصحيح التلقائي والتقييم الفوري</p><div class="lesson-meta"><span><i class="far fa-clock"></i> 50+ سؤالاً</span><span><i class="fas fa-tasks"></i> 20 صح/خطأ + 30 اختيار من متعدد</span></div><div class="lesson-status status-active">متاح</div><div class="lesson-actions"><a href="#" class="lesson-btn exam" target="_blank"><i class="fas fa-play"></i> البدء</a><button class="lesson-btn secondary" onclick="copyLink('interactive-bank.html')"><i class="fas fa-copy"></i> نسخ الرابط</button></div></div>
+</div>
+<!-- برنامج حل أسئلة الباب السادس -
+<div class="lesson-card grade5">
+<div class="lesson-header"><div class="lesson-icon"><i class="fas fa-laptop-code"></i></div><h3 class="lesson-title">💻 برنامج حل أسئلة الباب السادس</h3><div class="lesson-subject">أسئلة البرامج الفرعية والدوال - تفاعلي</div></div>
+<div class="lesson-content"><p class="lesson-desc">برنامج تفاعلي لحل جميع أسئلة الباب السادس (البرامج الفرعية والدوال) مع تصحيح فوري وتقييم</p><div class="lesson-meta"><span><i class="far fa-clock"></i> 10 أسئلة</span><span><i class="fas fa-tasks"></i> مقالية + موضوعية</span></div><div class="lesson-status status-active">متاح</div><div class="lesson-actions"><a href="#" class="lesson-btn exam" target="_blank"><i class="fas fa-play"></i> تشغيل البرنامج</a><button class="lesson-btn secondary" onclick="copyLink('chapter6-program.html')"><i class="fas fa-copy"></i> نسخ الرابط</button></div></div>
+</div>
+
+-->
+</div>
+</div>
+</div>
+
+<!-- برامج إضافية -->
+<div class="programs-section fade-in">
+<h2 class="section-title"><i class="fas fa-puzzle-piece"></i> برامج إضافية</h2>
+<div class="programs-grid">
+<a href="#" class="program-item"><div class="program-icon"><i class="fas fa-font"></i></div><h3 class="program-title">-----</h3><p class="program-desc">تعلم مع الصور والأصوات</p></a>
+<a href="#" class="program-item"><div class="program-icon"><i class="fas fa-book-reader"></i></div><h3 class="program-title">برنامج .......</h3><p class="program-desc">تنمية مهارات القراءة والفهم</p></a>
+</div>
+</div>
+</div>
+</div>
+
+<button id="backToTop" class="top-btn" title="العودة للأعلى">↑</button>
+
+<script>
+function updateTime() { const now = new Date(); document.getElementById('current-time').textContent = now.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
+setInterval(updateTime, 1000); updateTime();
+
+function showGrade(gradeId) {
+    document.querySelectorAll('.grade-tab').forEach(tab => tab.classList.remove('active'));
+    const activeTab = document.querySelector(`.grade-tab[onclick="showGrade('${gradeId}')"]`);
+    if (activeTab) activeTab.classList.add('active');
+    document.querySelectorAll('.grade-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(`${gradeId}-content`).classList.add('active');
+}
+
+function viewLessonDetails(lessonId) {
+    Swal.fire({ title: 'تفاصيل الدرس', html: `<div style="text-align: right;"><div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;"><strong>عدد الطلاب:</strong> 12 طالب</div><div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;"><strong>معدل الإنجاز:</strong> 85%</div><div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;"><strong>آخر نشاط:</strong> منذ ساعتين</div></div>`, showConfirmButton: false, showCloseButton: true, width: '500px' });
+}
+
+function scheduleLesson() {
+    Swal.fire({ title: 'جدولة درس', html: `<div style="text-align: right;"><input type="datetime-local" id="schedule-date" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #1E88E5;"><select id="schedule-class" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #1E88E5;"><option value="">اختر الفصل</option><option value="class1">الفصل أ</option><option value="class2">الفصل ب</option><option value="class3">الفصل ج</option></select></div>`, showCancelButton: true, confirmButtonText: 'جدولة', cancelButtonText: 'إلغاء' }).then((result) => { if (result.isConfirmed) { Swal.fire({ title: 'تم الجدولة!', text: 'تم جدولة الدرس بنجاح وسيتم إعلام الطلاب', icon: 'success', confirmButtonText: 'حسناً' }); } });
+}
+
+function copyLink(filename) {
+    const url = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + filename;
+    navigator.clipboard.writeText(url);
+    Swal.fire({ title: 'تم النسخ!', text: 'تم نسخ الرابط إلى الحافظة', icon: 'success', timer: 1500, showConfirmButton: false });
+}
+
+window.onscroll = function() { const btn = document.getElementById("backToTop"); btn.style.display = window.pageYOffset > 100 ? "block" : "none"; };
+document.getElementById("backToTop").onclick = function() { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.fade-in').forEach((element, index) => { setTimeout(() => { element.style.opacity = '1'; element.style.transform = 'translateY(0)'; }, index * 100); });
+    document.querySelectorAll('.lesson-card').forEach(card => { card.addEventListener('mouseenter', () => { card.style.transform = 'translateY(-5px)'; }); card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0)'; }); });
+});
+</script>
+</body>
+</html>

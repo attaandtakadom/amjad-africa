@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>الفيزياء النووية - الوحدة التاسعة | اختبار تفاعلي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', 'Tahoma', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 20px; color: #1e2a3e; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 32px; box-shadow: 0 20px 35px rgba(0,0,0,0.2); padding: 20px 25px 35px; }
+        h1 { font-size: 1.9rem; text-align: center; color: #0b3b5f; border-bottom: 3px solid #667eea; display: inline-block; width: auto; margin: 0 auto 20px; padding-bottom: 8px; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .section { background: #ffffff; margin-bottom: 35px; border-radius: 28px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 5px 0; }
+        .section-title { background: #eef2ff; padding: 12px 20px; font-size: 1.6rem; font-weight: bold; color: #1e40af; border-radius: 30px 30px 20px 20px; border-right: 6px solid #667eea; }
+        .question-card { background: #fefefe; border: 1px solid #e2e8f0; border-radius: 24px; padding: 18px 22px; margin-bottom: 22px; }
+        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; color: #0f172a; line-height: 1.6; }
+        .options { display: flex; flex-wrap: wrap; gap: 15px; margin: 12px 0 15px; }
+        .option { display: flex; align-items: center; gap: 8px; background: #f8fafc; padding: 6px 16px; border-radius: 40px; border: 1px solid #cbd5e1; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #eef2ff; border-color: #667eea; }
+        .option.selected { background: #dbeafe; border-color: #667eea; box-shadow: 0 0 0 2px rgba(102,126,234,0.2); }
+        input[type="radio"] { accent-color: #667eea; width: 18px; height: 18px; margin-left: 6px; cursor: pointer; }
+        .feedback { margin-top: 12px; padding: 8px 14px; border-radius: 18px; font-size: 0.9rem; display: inline-block; width: 100%; }
+        .correct-feedback { background: #dcfce7; color: #15803d; border-right: 4px solid #22c55e; }
+        .wrong-feedback { background: #fee2e2; color: #b91c1c; border-right: 4px solid #ef4444; }
+        .neutral-feedback { background: #f1f5f9; color: #334155; }
+        .input-answer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .input-answer input { padding: 8px 12px; border-radius: 28px; border: 1px solid #cbd5e1; width: 280px; font-size: 0.9rem; }
+        button { background: #667eea; color: white; border: none; padding: 8px 20px; border-radius: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #5a67d8; transform: scale(1.02); }
+        .reset-btn { background: #ef4444; margin-right: 15px; padding: 10px 25px; }
+        .reset-btn:hover { background: #dc2626; transform: scale(1.02); }
+        .button-group { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        .score-area { background: #e6f0ff; border-radius: 36px; padding: 15px 20px; text-align: center; margin-top: 20px; font-size: 1.4rem; font-weight: bold; color: #075985; position: sticky; bottom: 10px; }
+        .graph-container { background: #f9fafb; padding: 15px; border-radius: 20px; margin: 15px 0; text-align: center; border: 1px dashed #94a3b8; }
+        .graph-title { font-weight: bold; margin-bottom: 10px; color: #334155; }
+        .canvas-wrapper { overflow-x: auto; }
+        .atom-diagram { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; background: #f1f5f9; border-radius: 24px; padding: 15px; margin: 10px 0; }
+        .nucleus { width: 100px; height: 100px; background: #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .electron-shell { position: relative; width: 200px; height: 200px; border: 2px solid #667eea; border-radius: 50%; }
+        .electron { position: absolute; width: 28px; height: 28px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .badge { display: inline-block; background: #e2e8f0; padding: 2px 10px; border-radius: 20px; font-size: 0.8rem; margin: 0 5px; }
+        .nuclear-symbol { display: inline-block; text-align: center; line-height: 1.2; margin: 0 5px; vertical-align: middle; }
+        .nuclear-symbol sup { font-size: 0.75em; display: block; }
+        .nuclear-symbol sub { font-size: 0.75em; display: block; }
+        .check-btn { background: #667eea; display: inline-flex; align-items: center; gap: 8px; }
+        @media (max-width: 650px) { .container { padding: 12px; } .question-card { padding: 12px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>⚛️ الوحدة التاسعة: الفيزياء النووية ⚛️</h1>
+        <p>الأسئلة الموضوعية + التركيبية مع رسوم بيانية تفاعلية</p>
+        <div class="button-group">
+            <button class="reset-btn" onclick="resetAllQuestions()"><i class="fas fa-redo-alt"></i> إعادة تعيين جميع الإجابات</button>
+
+
+ <button class="home-btn"
+                    onclick="window.location.href='../../../../../althanaoya/fizic/fizic-dashbord.html'"
+                    id="homeMainBtn"><i class="fas fa-home"></i>
+                    الرئيسية</button> 
+
+
+ <button class="home-btn"
+                    onclick="window.location.href='qution9.html'"
+                    id="homeMainBtn"><i class="fas fa-home"></i>
+                    محاكاة صح خطأ -اختيار من متعدد</button> 
+        </div>
+    </div>
+    <div id="app"></div>
+    <div class="score-area" id="scoreBoard">📊 يتم حساب النقاط...</div>
+    <footer>✅ تحقق تلقائي | رسوم بيانية لتحديد عمر النصف وبنية الذرة</footer>
+</div>
+
+<script>
+    // ------------------- مصفوفة الأسئلة الكاملة -------------------
+    const questionsData = [
+        // ================== الجزء الأول - الأسئلة الجديدة (5 أسئلة معدلة) ==================
+        { id: 1, type: "mcq", section: "الجزء الأول - الاختيار من متعدد", text: "1. جسيمات ألفا (α) هي :", options: ["أ) بروتونات موجبة", "ب) أيونات هيدروجين", "ج) نوى هيليوم موجبة", "د) ذرات هيليوم متعادلة"], correct: "c", explanation: "جسيمات ألفا = نواة هيليوم (بروتونان + نيوترونان)، شحنتها +2." },
+        { id: 2, type: "mcq", section: "الجزء الأول - الاختيار من متعدد", text: "2. تضمحل النواة المشعة <span class='nuclear-symbol'><sup>123</sup><sub>60</sub></span>Y لتعطي <span class='nuclear-symbol'><sup>119</sup><sub>58</sub></span>Z. ما نوع الإشعاع المنبعث؟", options: ["أ) جسيمات ألفا (α) فقط", "ب) جسيمات بيتا (β) فقط", "ج) أشعة جاما (γ) فقط", "د) جسيمات ألفا (α) وبيتا (β)"], correct: "a", explanation: "النقص في العدد الكتلي = 4 والعدد الذري = 2، وهذا يعود لجسيم ألفا." },
+        { id: 3, type: "mcq", section: "الجزء الأول - الاختيار من متعدد", text: "3. لإيقاف أشعة جاما نستخدم:", options: ["أ) ورق", "ب) ألمنيوم", "ج) رصاص سميك"], correct: "c", explanation: "أشعة جاما عالية النفاذية وتحتاج إلى رصاص سميك أو خرسانة لإيقافها." },
+        { id: 4, type: "graph_mcq", section: "الجزء الأول - الاختيار من متعدد", text: "4. الرسم البياني يبين معدل التعداد مقابل الزمن. عمر النصف =", options: ["10 دقائق", "30 دقيقة", "40 دقيقة", "60 دقيقة"], correct: "c", explanation: "عند t=0: 5000، عند t=40: 2500 (نصف القيمة)، إذن عمر النصف = 40 دقيقة.", hasGraph: true, graphType: "half-life" },
+        { id: 5, type: "mcq_with_diagram", section: "الجزء الأول - الاختيار من متعدد", text: "5. يمثل الرسم ذرة عنصر ما (P: بروتون، n: نيوترون، e: إلكترون). العدد الذري =", options: ["5", "11", "16"], correct: "b", explanation: "العدد الذري = عدد البروتونات = 5", hasDiagram: true, diagramType: "atom" },
+        
+        // ================== الأسئلة التركيبية ==================
+        { id: 6, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "1- (أ) قد تبعث المواد المشعة إشعاع ألفا وبيتا وجاما. صف طبيعة كل نوع من تلك الإشعاعات.", correctAnswer: "ألفا: نواة هيليوم (2 بروتون + 2 نيوترون)، شحنة +2، كتلة كبيرة، تأين عالي، نفاذية منخفضة. بيتا: إلكترونات عالية السرعة (β⁻) أو بوزيترونات (β⁺)، شحنة ±1، نفاذية متوسطة. جاما: أشعة كهرومغناطيسية عالية التردد، لا شحنة ولا كتلة، نفاذية عالية جداً.", isShort: true },
+        { id: 7, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "1- (ب) أكمل الجمل التالية: (1) الانبعاث هو سمة لـ ...... (2) يحدث إشعاع ...... ولا يمكن إيقافه أو تسريعه بالوسائل الفيزيائية. (3) الزمن المستغرق لتحلل نصف النوى هو ...... لنظير معين. (4) ينبعث الإشعاع من نظير معين عند ......", correctAnswer: "1) النوى غير المستقرة. 2) جاما. 3) عمر النصف. 4) اضمحلال نواته.", isShort: true },
+        { id: 8, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "2- (أ) يقال أن للمصادر المشعة عمر النصف. فسر معنى: عمر النصف.", correctAnswer: "هو الزمن اللازم لتحلل نصف كمية نوى عينة مشعة (أو الزمن الذي تنخفض فيه النشاط الإشعاعي إلى النصف).", isShort: true },
+        { id: 9, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "2- (ب) ما المقصود بإشعاع الخلفية، وتعداد الخلفية؟", correctAnswer: "إشعاع الخلفية: الإشعاع الطبيعي الموجود في البيئة من مصادر أرضية كونية. تعداد الخلفية: عدد الجسيمات أو الفوتونات المسجلة في غياب المصدر المشع.", isShort: true },
+        { id: 10, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "2- (ج) صف استخدامين للنظائر المشعة في الصناعة أو الطب.", correctAnswer: "في الطب: تشخيص الأورام باستخدام التكنيشيوم-99، علاج السرطان بالكوبالت-60. في الصناعة: قياس سمك المواد، تعقيم الأجهزة الطبية.", isShort: true },
+        { id: 11, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "2- (د) الخطران الشائعان للإشعاع؟ صف باختصار الاحتياطات.", correctAnswer: "الخطران: التلف الخلوي والسرطان، والحروق الإشعاعية. الاحتياطات: استخدام الدروع (رصاص)، تقليل زمن التعرض، الابتعاد عن المصدر، عدم تناول الطعام في مناطق العمل.", isShort: true },
+        
+        // ================== السؤال 8: سلسلة الاضمحلال (مع الرسم) ==================
+        { id: 12, type: "decay_chain", section: "الجزء الثاني - الأسئلة التركيبية", text: "8- سلسلة الاضمحلال الإشعاعي الموضحة بالرسم:", hasDecayGraph: true },
+        
+        { id: 13, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "4- ذرة عنصر X عددها الذري Z وكتلي A. كم عدد الإلكترونات والنيوترونات؟ اكتب الرمز العام. وما التغيرات عند اضمحلال (أ) ألفا (ب) بيتا؟", correctAnswer: "عدد الإلكترونات = Z، النيوترونات = A-Z، الرمز: ᴬXz. اضمحلال ألفا: ينقص العدد الكتلي 4 والذري 2. اضمحلال بيتا: يزيد العدد الذري 1 والكتلي ثابت.", isShort: true },
+        { id: 14, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "5- اشرح العدد الذري Z والعدد الكتلي A. اكتب رمز الرادون (عدد كتلي 222 وذري 86).", correctAnswer: "العدد الذري: عدد البروتونات في النواة. العدد الكتلي: مجموع البروتونات والنيوترونات. رمز الرادون: ²²²Rn₈₆", isShort: true },
+        { id: 15, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "6- تضمحل النويدة C¹⁴ بانبعاث جسيمات بيتا. (أ) ارسم بنية ذرة واحدة من C¹⁴ موضحاً عليها البروتونات والنيوترونات والإلكترونات. (ب) صف تجربة تبين أن C¹⁴ مشعة.", correctAnswer: "الكربون-14: 6 بروتونات، 8 نيوترونات، 6 إلكترونات. تجربة: استخدام عداد جايجر ووضع عينة من مادة عضوية قديمة وتسجيل التفريغات.", hasAtomDiagram: true },
+        { id: 16, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "7- في تجربة لتحديد عمر النصف لنواة رادون 220، تم التوصل للنتائج (بعد طرح الخلفية). (أ) ارسم العلاقة البيانية وحدد عمر النصف. (ب) اكتب معادلة اضمحلال Rn-220 بجسيم ألفا.", correctAnswer: "عمر النصف المقترح = 55 ثانية. معادلة اضمحلال ألفا: ²²⁰Rn₈₆ → ²¹⁶Po₈₄ + ⁴He₂", hasGraph: true },
+        { id: 17, type: "text", section: "الجزء الثاني - الأسئلة التركيبية", text: "3- أكمل الجدول موضحاً للجسيمات الذرية: n (نيوترون) كتلته 1838 m_e وشحنته 0، والبروتون كتلته 1836 m_e وشحنته +e. أي منهما يكون نواة الذرة؟", correctAnswer: "النيوترون والبروتون معاً يكونان نواة الذرة.", isShort: true }
+    ];
+
+    let userAnswers = {};
+
+    function normalizeString(str) { if(!str) return ''; return str.replace(/\s+/g, ' ').trim().toLowerCase(); }
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+    
+    function updateScore() {
+        let total = 0, correctCount = 0;
+        for(let q of questionsData) { 
+            if(q.type !== 'decay_chain') {
+                total++;
+                if(userAnswers[`fb_q${q.id}`] && userAnswers[`fb_q${q.id}`].isCorrect) correctCount++;
+            }
+        }
+        // إضافة أسئلة السلسلة المنفصلة
+        if(userAnswers['fb_q8a'] && userAnswers['fb_q8a'].isCorrect) correctCount++;
+        if(userAnswers['fb_q8b1'] && userAnswers['fb_q8b1'].isCorrect) correctCount++;
+        if(userAnswers['fb_q8b2'] && userAnswers['fb_q8b2'].isCorrect) correctCount++;
+        total += 3;
+        
+        let percent = total===0?0:Math.round((correctCount/total)*100);
+        document.getElementById('scoreBoard').innerHTML = `📊 التقييم: ${correctCount} / ${total} إجابة صحيحة (${percent}%) ${percent>=70?'🎉 ممتاز':(percent>=50?'👍 جيد':'📚 يحتاج مراجعة')}`;
+    }
+
+    window.selectOption = function(qId, val, explanation) {
+        userAnswers[qId] = val;
+        let isCorrect = false;
+        let correctVal = '';
+        if(qId === 'q8a') correctVal = 'b';
+        else if(qId === 'q8b1') correctVal = 'a';
+        else if(qId === 'q8b2') correctVal = 'b';
+        
+        isCorrect = (val === correctVal);
+        let msg = isCorrect ? `✅ صحيح! ${explanation || ''}` : `❌ خطأ. ${explanation || ''}`;
+        userAnswers[`fb_${qId}`] = { isCorrect, msg };
+        let fbDiv = document.getElementById(`fb-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = msg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        
+        let optsDiv = document.getElementById(`options-${qId}`);
+        if(optsDiv) optsDiv.querySelectorAll('.option').forEach(opt=>opt.classList.remove('selected'));
+        let selectedLabel = document.querySelector(`#options-${qId} input[value="${val}"]`)?.closest('.option');
+        if(selectedLabel) selectedLabel.classList.add('selected');
+        updateScore();
+    };
+
+    window.checkTextAnswer = function(qId) {
+        let inputEl = document.getElementById(`input-${qId}`);
+        let userAnswer = inputEl ? inputEl.value.trim() : '';
+        userAnswers[`q${qId}_text`] = userAnswer;
+        let question = questionsData.find(q=>q.id===qId);
+        if(!question) return;
+        let isCorrect = false;
+        let correctNorm = normalizeString(question.correctAnswer);
+        let userNorm = normalizeString(userAnswer);
+        let matched = (userNorm === correctNorm) || (correctNorm.length>0 && userNorm.includes(correctNorm.substring(0,15)));
+        isCorrect = matched;
+        let feedbackMsg = matched ? `✅ إجابة صحيحة! ${question.correctAnswer}` : `❌ إجابة غير دقيقة. الإجابة المتوقعة: ${question.correctAnswer}`;
+        userAnswers[`fb_q${qId}`] = { isCorrect, msg: feedbackMsg };
+        let fbDiv = document.getElementById(`fb-${qId}`);
+        if(fbDiv) { fbDiv.innerHTML = feedbackMsg; fbDiv.className = `feedback ${isCorrect?'correct-feedback':'wrong-feedback'}`; }
+        updateScore();
+    };
+
+    // رسم سلسلة الاضمحلال (السؤال 8)
+    function renderDecayChain() {
+        return `
+        <div class="graph-container">
+            <div class="graph-title">سلسلة الاضمحلال الإشعاعي (Z vs A)</div>
+            <div class="canvas-wrapper" style="height: 320px;">
+                <svg viewBox="0 0 400 320" style="width: 100%; height: 100%;">
+                    <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#1e4a6b" /></marker></defs>
+                    <line x1="60" y1="280" x2="360" y2="280" stroke="black" stroke-width="2" />
+                    <line x1="60" y1="280" x2="60" y2="20" stroke="black" stroke-width="2" />
+                    <text x="180" y="315" font-weight="bold">العدد البروتوني (Z)</text>
+                    <text x="10" y="150" font-weight="bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">العدد الكتلي (A)</text>
+                    <text x="55" y="295" font-size="10">88</text>
+                    <text x="155" y="295" font-size="10">90</text>
+                    <text x="255" y="295" font-size="10">92</text>
+                    <text x="35" y="285" font-size="10">228</text>
+                    <text x="35" y="215" font-size="10">230</text>
+                    <text x="35" y="145" font-size="10">234</text>
+                    <text x="35" y="75" font-size="10">238</text>
+                    <!-- A (238,92) → B (234,90) -->
+                    <line x1="260" y1="75" x2="165" y2="145" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)" />
+                    <circle cx="260" cy="75" r="4" fill="black" /><text x="265" y="70" font-weight="bold">A</text>
+                    <circle cx="160" cy="145" r="4" fill="black" /><text x="150" y="140" font-weight="bold">B</text>
+                    <!-- B (234,90) → C (234,92) ? -->
+                    <line x1="160" y1="145" x2="260" y2="145" stroke="#3498db" stroke-width="2" marker-end="url(#arrow)" />
+                    <circle cx="210" cy="145" r="3" fill="gray" /><text x="210" y="140">C</text>
+                    <circle cx="260" cy="145" r="4" fill="black" /><text x="265" y="140" font-weight="bold">D</text>
+                    <!-- D (234,92) → E (230,90) -->
+                    <line x1="260" y1="145" x2="165" y2="215" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)" />
+                    <circle cx="160" cy="215" r="4" fill="black" /><text x="150" y="210" font-weight="bold">E</text>
+                </svg>
+            </div>
+            <div style="margin-top: 10px; font-size:0.85rem; color:#64748b;">
+                <span class="badge" style="background:#e74c3c20; color:#c0392b;">← α (ألفا)</span>
+                <span class="badge" style="background:#3498db20; color:#2980b9;">← β (بيتا)</span>
+            </div>
+        </div>
+        <div class="question-text">(أ) عدد نيوترونات A =</div>
+        <div class="options" id="options-q8a">
+            <label class="option"><input type="radio" name="q8a" value="a"> 92</label>
+            <label class="option"><input type="radio" name="q8a" value="b"> 146</label>
+            <label class="option"><input type="radio" name="q8a" value="c"> 238</label>
+        </div>
+        <button class="check-btn" onclick="selectOption('q8a', document.querySelector('input[name=&quot;q8a&quot;]:checked')?.value, 'A: Z=92, A=238 → النيوترونات = 238-92 = 146')"><i class="fas fa-check"></i> تحقق</button>
+        <div id="fb-q8a" class="feedback neutral-feedback">🔘 اختر إجابة.</div>
+        
+        <div class="question-text">(ب1) A → C الإشعاع:</div>
+        <div class="options" id="options-q8b1">
+            <label class="option"><input type="radio" name="q8b1" value="a"> ألفا (α)</label>
+            <label class="option"><input type="radio" name="q8b1" value="b"> بيتا (β⁻)</label>
+            <label class="option"><input type="radio" name="q8b1" value="c"> جاما (γ)</label>
+        </div>
+        <button class="check-btn" onclick="selectOption('q8b1', document.querySelector('input[name=&quot;q8b1&quot;]:checked')?.value, 'نقص 2 في Z و 4 في A = ألفا')"><i class="fas fa-check"></i> تحقق</button>
+        <div id="fb-q8b1" class="feedback neutral-feedback">🔘 اختر إجابة.</div>
+        
+        <div class="question-text">(ب2) C → D الإشعاع:</div>
+        <div class="options" id="options-q8b2">
+            <label class="option"><input type="radio" name="q8b2" value="a"> ألفا (α)</label>
+            <label class="option"><input type="radio" name="q8b2" value="b"> بيتا (β⁻)</label>
+            <label class="option"><input type="radio" name="q8b2" value="c"> جاما (γ)</label>
+        </div>
+        <button class="check-btn" onclick="selectOption('q8b2', document.querySelector('input[name=&quot;q8b2&quot;]:checked')?.value, 'زيادة 1 في Z مع ثبات A = بيتا')"><i class="fas fa-check"></i> تحقق</button>
+        <div id="fb-q8b2" class="feedback neutral-feedback">🔘 اختر إجابة.</div>
+        `;
+    }
+
+    // رسم عمر النصف
+    function renderHalfLifeGraph() {
+        return `<div class="graph-container">
+            <div class="graph-title">معدل التعداد (عد/دقيقة)</div>
+            <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet" style="width:100%; background:white; border-radius:12px;">
+                <line x1="60" y1="230" x2="450" y2="230" stroke="black" stroke-width="2"/>
+                <line x1="60" y1="230" x2="60" y2="20" stroke="black" stroke-width="2"/>
+                <text x="50" y="35" font-size="13" text-anchor="end" font-weight="bold">5000</text>
+                <text x="50" y="135" font-size="13" text-anchor="end" font-weight="bold">2500</text>
+                <text x="50" y="235" font-size="13" text-anchor="end" font-weight="bold">0</text>
+                <text x="60" y="260" font-size="13" text-anchor="middle">0</text>
+                <text x="190" y="260" font-size="13" text-anchor="middle">40</text>
+                <text x="320" y="260" font-size="13" text-anchor="middle">80</text>
+                <line x1="60" y1="130" x2="190" y2="130" stroke="#999" stroke-dasharray="6,4" stroke-width="1.5"/>
+                <line x1="190" y1="130" x2="190" y2="230" stroke="#999" stroke-dasharray="6,4" stroke-width="1.5"/>
+                <path d="M 60 25 Q 130 100 190 130 T 430 220" fill="none" stroke="#667eea" stroke-width="3"/>
+                <circle cx="60" cy="25" r="5" fill="#e74c3c"/>
+                <circle cx="190" cy="130" r="5" fill="#e74c3c"/>
+            </svg>
+            <div style="text-align: center; margin-top: 8px; font-weight: bold;">الزمن (بالدقائق)</div>
+        </div>`;
+    }
+
+    // رسم ذرة الكربون
+    function renderAtomDiagram() {
+        return `<div class="atom-diagram">
+            <div class="nucleus"><div>5p</div><div>6n</div></div>
+            <div class="electron-shell">
+                <div class="electron" style="top: 15%; left: 70%;">e</div>
+                <div class="electron" style="top: 70%; left: 15%;">e</div>
+                <div class="electron" style="top: 40%; left: 85%;">e</div>
+                <div class="electron" style="top: 80%; left: 60%;">e</div>
+                <div class="electron" style="top: 10%; left: 30%;">e</div>
+            </div>
+            <div><span class="badge">● بروتونات (p)</span> <span class="badge">● نيوترونات (n)</span> <span class="badge">● إلكترونات (e)</span></div>
+        </div>`;
+    }
+
+    function render() {
+        let app = document.getElementById('app');
+        let sectionsMap = new Map();
+        questionsData.forEach(q => { if(!sectionsMap.has(q.section)) sectionsMap.set(q.section, []); sectionsMap.get(q.section).push(q); });
+        let html = '';
+        for(let [sectionName, questions] of sectionsMap.entries()) {
+            html += `<div class="section"><div class="section-title">📘 ${sectionName}</div>`;
+            for(let q of questions) {
+                if(q.type === 'mcq') {
+                    let selectedVal = userAnswers[`q${q.id}`] || '';
+                    html += `<div class="question-card" id="qcard-${q.id}">
+                        <div class="question-text">${q.text}</div>
+                        <div class="options" id="options-${q.id}">
+                            ${q.options.map((opt, idx) => { let optVal = String.fromCharCode(97+idx); return `<label class="option ${selectedVal===optVal?'selected':''}"><input type="radio" name="q${q.id}" value="${optVal}" ${selectedVal===optVal?'checked':''} onchange="selectOption(${q.id},'${optVal}')"><span>${opt}</span></label>`; }).join('')}
+                        </div>
+                        <div class="feedback ${userAnswers[`fb_q${q.id}`] ? (userAnswers[`fb_q${q.id}`].isCorrect ? 'correct-feedback' : 'wrong-feedback') : 'neutral-feedback'}" id="fb-${q.id}">${userAnswers[`fb_q${q.id}`] ? userAnswers[`fb_q${q.id}`].msg : '🔘 اختر إجابة.'}</div>
+                    </div>`;
+                }
+                else if(q.type === 'graph_mcq') {
+                    let selectedVal = userAnswers[`q${q.id}`] || '';
+                    html += `<div class="question-card" id="qcard-${q.id}">
+                        <div class="question-text">${q.text}</div>
+                        ${renderHalfLifeGraph()}
+                        <div class="options" id="options-${q.id}">
+                            ${q.options.map((opt, idx) => { let optVal = String.fromCharCode(97+idx); return `<label class="option ${selectedVal===optVal?'selected':''}"><input type="radio" name="q${q.id}" value="${optVal}" ${selectedVal===optVal?'checked':''} onchange="selectOption(${q.id},'${optVal}')"><span>${opt}</span></label>`; }).join('')}
+                        </div>
+                        <div class="feedback ${userAnswers[`fb_q${q.id}`] ? (userAnswers[`fb_q${q.id}`].isCorrect ? 'correct-feedback' : 'wrong-feedback') : 'neutral-feedback'}" id="fb-${q.id}">${userAnswers[`fb_q${q.id}`] ? userAnswers[`fb_q${q.id}`].msg : '🔘 اختر إجابة.'}</div>
+                    </div>`;
+                }
+                else if(q.type === 'mcq_with_diagram') {
+                    let selectedVal = userAnswers[`q${q.id}`] || '';
+                    html += `<div class="question-card" id="qcard-${q.id}">
+                        <div class="question-text">${q.text}</div>
+                        ${renderAtomDiagram()}
+                        <div class="options" id="options-${q.id}">
+                            ${q.options.map((opt, idx) => { let optVal = String.fromCharCode(97+idx); return `<label class="option ${selectedVal===optVal?'selected':''}"><input type="radio" name="q${q.id}" value="${optVal}" ${selectedVal===optVal?'checked':''} onchange="selectOption(${q.id},'${optVal}')"><span>${opt}</span></label>`; }).join('')}
+                        </div>
+                        <div class="feedback ${userAnswers[`fb_q${q.id}`] ? (userAnswers[`fb_q${q.id}`].isCorrect ? 'correct-feedback' : 'wrong-feedback') : 'neutral-feedback'}" id="fb-${q.id}">${userAnswers[`fb_q${q.id}`] ? userAnswers[`fb_q${q.id}`].msg : '🔘 اختر إجابة.'}</div>
+                    </div>`;
+                }
+                else if(q.type === 'decay_chain') {
+                    html += `<div class="question-card" id="qcard-${q.id}">
+                        <div class="question-text">${q.text}</div>
+                        ${renderDecayChain()}
+                    </div>`;
+                }
+                else {
+                    let saved = userAnswers[`q${q.id}_text`] || '';
+                    html += `<div class="question-card" id="qcard-${q.id}">
+                        <div class="question-text">${q.text}</div>
+                        <div class="input-answer">
+                            <input type="text" id="input-${q.id}" placeholder="اكتب إجابتك هنا..." value="${escapeHtml(saved)}">
+                            <button onclick="checkTextAnswer(${q.id})"><i class="fas fa-check"></i> تحقق</button>
+                        </div>
+                        <div class="feedback ${userAnswers[`fb_q${q.id}`] ? (userAnswers[`fb_q${q.id}`].isCorrect ? 'correct-feedback' : 'wrong-feedback') : 'neutral-feedback'}" id="fb-${q.id}">${userAnswers[`fb_q${q.id}`] ? userAnswers[`fb_q${q.id}`].msg : '✍️ أدخل إجابتك ثم اضغط تحقق.'}</div>
+                    </div>`;
+                }
+            }
+            html += `</div>`;
+        }
+        app.innerHTML = html;
+        updateScore();
+    }
+
+    window.resetAllQuestions = function() {
+        userAnswers = {};
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('DOMContentLoaded', () => { render(); });
+</script>
+</body>
+</html>
