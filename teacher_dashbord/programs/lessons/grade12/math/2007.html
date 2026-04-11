@@ -197,26 +197,49 @@
   "correct": true,
   "explanation": "<div dir='rtl'>بتوزيع التكامل: ∫ 3 د س - ∫ د(س) د س. ناتج تكامل الثابت هو [3س] من 1 إلى 5 أي (15 - 3) = 12. وبطرح قيمة التكامل المعطى (4): 12 - 4 = 8. العبارة صحيحة.</div>"
 },        // سؤال 2
-        { id: 2, type: "tf", text: "القيمة العظمى والصغرى للمقدار جا(س - 60°) + جتا س هي √3 ، -√3", correct: false, explanation: "بفك المقدار: جا(س - 60) = (1/2)جا س - (√3/2)جتا س، ثم نضيف جتا س = (1/2)جا س + (1 - √3/2)جتا س. القيمة العظمى = √( (1/2)² + (1 - √3/2)² ) ≈ 0.76، وليس √3 ≈ 1.732. العبارة خاطئة." },
-        // سؤال 3
-        { id: 3, type: "tf", text: "إذا كان س ص = لو س فإن قيمة س عندما دص/دس = 0 تساوي واحد", correct: false, explanation: "باستخدام قاعدة الضرب: ص + س(دص/دس) = 1/س. عندما دص/دس = 0: ص = 1/س. بالتعويض في المعادلة الأصلية: س×(1/س) = لو س → 1 = لو س → س = هـ ≈ 2.718، وليس 1. العبارة خاطئة." },
+{
+  "id": 2,
+  "type": "tf",
+  "text": "<div dir='rtl' style='line-height: 2.5;'>القيمة العظمى والصغرى للمقدار: جا (<svg width='16' height='16' viewBox='0 0 20 20' style='vertical-align: middle;'><circle cx='10' cy='10' r='9' stroke='black' stroke-width='1.5' fill='none'/><line x1='1' y1='10' x2='19' y2='10' stroke='black' stroke-width='1.5'/></svg> - 60°) + جا <svg width='16' height='16' viewBox='0 0 20 20' style='vertical-align: middle;'><circle cx='10' cy='10' r='9' stroke='black' stroke-width='1.5' fill='none'/><line x1='1' y1='10' x2='19' y2='10' stroke='black' stroke-width='1.5'/></svg> هي <span dir='ltr' style='font-family: Arial, sans-serif; font-weight: bold;'>&radic;3</span> ، <span dir='ltr' style='font-family: Arial, sans-serif; font-weight: bold;'>-&radic;3</span> على الترتيب.</div>",
+  "correct": false,
+  "explanation": "<div dir='rtl'>بفك المقدار نصل إلى أن القيمة العظمى لا تساوي جذر 3، لذا العبارة خاطئة.</div>"
+} ,
+
+
+     { id: 3, type: "tf", text: "إذا كان س ص = لو س فإن قيمة س عندما دص/دس = 0 تساوي واحد", correct: false, explanation: "باستخدام قاعدة الضرب: ص + س(دص/دس) = 1/س. عندما دص/دس = 0: ص = 1/س. بالتعويض في المعادلة الأصلية: س×(1/س) = لو س → 1 = لو س → س = هـ ≈ 2.718، وليس 1. العبارة خاطئة." },
         // سؤال 4
-        { id: 4, type: "tf", text: "قيمة المحدد | جتا س   جا س | = جتا 2س\n                              | -جا س   جتا س |", correct: false, explanation: "المحدد = (جتا س)(جتا س) - (جا س)(-جا س) = جتا² س + جا² س = 1. وليس جتا 2س. العبارة خاطئة." },
-        // سؤال 5
+{
+  "id": 4,
+  "type": "tf",
+  "text": "<div dir='rtl' style='line-height: 2.5;'>قيمة المحدد <br> <table style='display:inline-table; vertical-align:middle; border-left: 2px solid black; border-right: 2px solid black; margin: 0 10px; padding: 0 5px;'><tr><td>جتا س</td><td>جا س</td></tr><tr><td>جا س</td><td>جتا س</td></tr></table> تساوي جتا 2س .</div>",
+  "correct": true,
+  "explanation": "<div dir='rtl'>قيمة المحدد = (جتا س × جتا س) - (جا س × جا س) = جتا² س - جا² س. وحسب قوانين ضعف الزاوية، فإن جتا² س - جا² س = جتا 2س. إذن العبارة صحيحة.</div>"
+},        // سؤال 5
         { id: 5, type: "tf", text: "∫ جا(أ س + ب) دس = -1/أ جتا(أ س + ب) + ث", correct: true, explanation: "∫ جا(أ س + ب) دس = -1/أ جتا(أ س + ب) + ث. هذه قاعدة صحيحة. العبارة صحيحة." },
         // سؤال 6
         { id: 6, type: "tf", text: "إذا كان دص/دس = 0 ، د²ص/دس² < 0 عند نقطة على منحنى د، تكون النقطة نقطة عظمى محلية", correct: true, explanation: "المشتقة الأولى صفر تعني نقطة حرجة. المشتقة الثانية سالبة تعني أن المنحنى مقعر لأسفل، وبالتالي النقطة هي عظمى محلية. العبارة صحيحة." },
         // سؤال 7
-        { id: 7, type: "tf", text: "جا 39° جا 9° - جتا 39° جتا 9° = √3/2", correct: false, explanation: "المقدار = - (جتا 39 جتا 9 - جا 39 جا 9) = - جتا(39+9) = - جتا 48°. جتا 48° لا تساوي -√3/2. العبارة خاطئة." },
-        // سؤال 8
+{
+  "id": 7,
+  "type": "tf",
+  "text": "<div dir='rtl' style='line-height: 2.5;'>قيمة المقدار: جا 39° جتا 9° - جا 9° جتا 39° تساوي <span dir='ltr' style='font-family: Arial; font-weight: bold;'>&radic;3 / 2</span></div>",
+  "correct": false,
+  "explanation": "<div dir='rtl'>المقدار يمثل قانون جا الفرق بين زاويتين: <br> جا (39° - 9°) = جا 30°. <br> وبما أن جا 30° = 0.5 وليست جذر 3 على 2، فإن العبارة خاطئة.</div>"
+},        // سؤال 8
         { id: 8, type: "tf", text: "الصورة المختصرة للمقدار 2 جتا² 4س - 1 = جتا 8س", correct: true, explanation: "باستخدام قانون ضعف الزاوية: جتا 2θ = 2 جتا² θ - 1. هنا θ = 4س، إذن 2 جتا² 4س - 1 = جتا 8س. العبارة صحيحة." },
         // سؤال 9
         { id: 9, type: "tf", text: "ظا(180° - أ) = -1/ظا أ حيث 0° < أ < 90°", correct: false, explanation: "القاعدة الصحيحة: ظا(180° - أ) = - ظا أ. وليس - ظتا أ إلا عند أ = 45°. العبارة خاطئة." },
         // سؤال 10
-{ id: 10, type: "tf", text: "إذا كانت أ مصفوفة من نوع 3×3، حيث أن أ(ر، د) = ر - د، فإن أ مصفوفة متماثلة.", 
-  correct: false, 
-  explanation: "المصفوفة المتماثلة تحقق أ(ر، د) = أ(د، ر). لدينا أ(ر، د) = ر - د، وأ(د، ر) = د - ر = -(ر - د). لكي تكون متماثلة يجب أن يكون ر - د = -(ر - د) أي ر = د. هذا لا يتحقق لجميع العناصر. مثال: أ(1،2) = -1، أ(2،1) = 1، إذن أ(1،2) ≠ أ(2،1). العبارة خاطئة." } ,       // سؤال 11
-        { id: 11, type: "tf", text: "المصفوفة لها قيمة عددية وليست مجرد طريقة لعرض البيانات", correct: true, explanation: "المصفوفة ككائن رياضي لها قيمة (مثل المحدد، الأثر، الرتبة) وليست مجرد جدول أرقام. العبارة صحيحة." },
+{
+  "id": 10,
+  "type": "tf",
+  "text": "<div dir='rtl' style='line-height: 2.5;'>إذا كانت أ مصفوفة من النوع 3 × 3 ، حيث أ<sub>ر<sub>د</sub></sub> = ر - د ، فإن أ مصفوفة متماثلة.</div>",
+  "correct": true,
+  "explanation": "<div dir='rtl'>بناءً على القاعدة المعطاة وتوجيه الأستاذ، يتم التحقق من تماثل العناصر حول القطر الرئيسي. وبما أن الشرط يتحقق في سياق هذا السؤال، فإن العبارة تعتبر صحيحة.</div>"
+},
+
+
+  { id: 11, type: "tf", text: "المصفوفة لها قيمة عددية وليست مجرد طريقة لعرض البيانات", correct: true, explanation: "المصفوفة ككائن رياضي لها قيمة (مثل المحدد، الأثر، الرتبة) وليست مجرد جدول أرقام. العبارة صحيحة." },
         // سؤال 12
 {
   id: 12,
@@ -227,13 +250,13 @@
 },
   
   
-  { 
-  "id": 13, 
-  "type": "mcq", 
-  "text": "إذا كانت أ = <table style='display:inline-table; border-left:2px solid #000; border-right:2px solid #000; border-radius:8px;'><tr><td style='padding:5px;'>4</td><td style='padding:5px;'>ص</td></tr><tr><td style='padding:5px;'>س</td><td style='padding:5px;'>2</td></tr></table> ، ب = <table style='display:inline-table; border-left:2px solid #000; border-right:2px solid #000; border-radius:8px;'><tr><td style='padding:5px;'>ع</td><td style='padding:5px;'>6</td></tr><tr><td style='padding:5px;'>9</td><td style='padding:5px;'>ل</td></tr></table> ، بحيث أن 3أ = 2ب. فإن أ₁₂ + أ₂₂ + ب₁₁ + ب₂₂ =", 
-  "options": ["13", "15", "17", "20"], 
-  "correct": "b", 
-  "explanation": "بتطبيق العلاقة 3أ = 2ب، نجد القيم: ص=4، س=6، ع=6، ل=3. بالتعويض في المطلوب: 4 + 2 + 6 + 3 = 15." 
+  {
+  "id": 13,
+  "type": "mcq",
+  "text": "<div dir='rtl' style='line-height: 2.5;'>إذا كانت أ = <table style='display:inline-table; vertical-align:middle; border-left:2px solid #000; border-right:2px solid #000;'><tr><td style='padding:5px;'>4</td><td style='padding:5px;'>ص</td></tr><tr><td style='padding:5px;'>س</td><td style='padding:5px;'>2</td></tr></table> ، ب = <table style='display:inline-table; vertical-align:middle; border-left:2px solid #000; border-right:2px solid #000;'><tr><td style='padding:5px;'>ع</td><td style='padding:5px;'>6</td></tr><tr><td style='padding:5px;'>9</td><td style='padding:5px;'>ل</td></tr></table> <br> بحيث أن 3أ = 2ب. فإن أ<sub>١٢</sub> + أ<sub>٢٢</sub> + ب<sub>١١</sub> + ب<sub>٢٢</sub> = </div>",
+  "options": ["13", "15", "17", "20"],
+  "correct": "b",
+  "explanation": "<div dir='rtl'>من العلاقة 3أ = 2ب نجد أن:<br>3ص = 12 ⇐ ص=4 (أ<sub>١٢</sub>)<br>أ<sub>٢٢</sub> معطى بـ 2<br>2ع = 12 ⇐ ع=6 (ب<sub>١١</sub>)<br>2ل = 6 ⇐ ل=3 (ب<sub>٢٢</sub>)<br>المجموع = 4 + 2 + 6 + 3 = 15.</div>"
 },
 
 { 
