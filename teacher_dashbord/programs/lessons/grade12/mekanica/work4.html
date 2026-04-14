@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>منصة الفيزياء التعليمية - درس الشغل</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; text-align: center; }
+        .explanation { background: #e8f4fd; padding: 15px; border-right: 5px solid #3498db; margin-bottom: 20px; }
+        .quiz-box { border: 2px solid #3498db; padding: 20px; border-radius: 10px; margin-top: 20px; }
+        canvas { display: block; margin: 20px auto; background: #fff; border: 1px solid #ddd; border-radius: 8px; }
+        .btn { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; }
+        .btn:hover { background: #219150; }
+        #solution { display: none; margin-top: 20px; padding: 15px; background: #dff0d8; border-right: 5px solid #3c763d; }
+        .math { font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #c0392b; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>مختبر الفيزياء الرقمي 🔬</h1>
+    
+    <div class="explanation">
+        <h2>ما هو الشغل (Work)؟</h2>
+        <p>في الفيزياء، يبذل الجسم <b>شغلاً</b> عندما تؤثر قوة على جسم وتحركه مسافة معينة في اتجاهها.</p>
+        <p class="math">القانون: الشغل (W) = القوة (F) × المسافة (d)</p>
+    </div>
+
+    <div class="quiz-box">
+        <h2>سؤال التحدي 💡</h2>
+        <p>شخص يدفع صندوقاً مسافة <b>30 متر</b>. فإذا كان الشغل المبذول بواسطة الشخص <b>120 جول</b>، وكان الصندوق في البداية والنهاية ساكناً، احسب متوسط قوة المقاومة.</p>
+        
+        <canvas id="physicsCanvas" width="600" height="200"></canvas>
+
+        <button class="btn" onclick="showSolution()">عرض الخطوات والحل بالتفصيل</button>
+
+        <div id="solution">
+            <h3>خطوات الحل (بالتفصيل الممل):</h3>
+            <ol>
+                <li>بما أن الصندوق بدأ من السكون وانتهى بالسكون، فإن <b>الشغل الصافي = صفر</b>.</li>
+                <li>هذا يعني أن شغل الشخص (120 جول) قد ضاع بالكامل بسبب المقاومة.</li>
+                <li>إذن: <b>شغل المقاومة = 120 جول</b>.</li>
+                <li>من قانون الشغل: <span class="math">F = W / d</span></li>
+                <li>القوة = 120 ÷ 30 = <span class="math">4 نيوتن</span>.</li>
+            </ol>
+            <p><b>النتيجة النهائية: متوسط قوة المقاومة هي 4 نيوتن.</b></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // رسم توضيحي بسيط للمسألة
+    const canvas = document.getElementById('physicsCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function drawPhysics() {
+        // رسم الأرض
+        ctx.beginPath();
+        ctx.moveTo(50, 150);
+        ctx.lineTo(550, 150);
+        ctx.stroke();
+
+        // رسم الشخص (تبسيط)
+        ctx.fillStyle = "#3498db";
+        ctx.fillRect(80, 80, 20, 70); // جسم الشخص
+        ctx.beginPath();
+        ctx.arc(90, 70, 10, 0, Math.PI * 2); // رأس الشخص
+        ctx.fill();
+
+        // رسم الصندوق
+        ctx.fillStyle = "#e67e22";
+        ctx.fillRect(100, 100, 50, 50);
+        ctx.fillStyle = "#000";
+        ctx.fillText("صندوق", 110, 130);
+
+        // رسم سهم القوة
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(150, 125);
+        ctx.lineTo(250, 125);
+        ctx.lineTo(240, 115);
+        ctx.moveTo(250, 125);
+        ctx.lineTo(240, 135);
+        ctx.stroke();
+        ctx.fillText("قوة الدفع", 180, 110);
+
+        // رسم سهم الإزاحة
+        ctx.strokeStyle = "blue";
+        ctx.beginPath();
+        ctx.moveTo(100, 170);
+        ctx.lineTo(500, 170);
+        ctx.stroke();
+        ctx.fillText("المسافة = 30 متر", 250, 185);
+    }
+
+    function showSolution() {
+        document.getElementById('solution').style.display = 'block';
+    }
+
+    drawPhysics();
+</script>
+
+</body>
+</html>

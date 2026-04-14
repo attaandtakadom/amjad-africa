@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>شرح درس الشغل - الصندوق وقوة المقاومة</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f7ff;
+            margin: 0;
+            padding: 20px;
+            color: #1a2a3a;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 20px 25px 35px 25px;
+        }
+        h1 {
+            color: #0b5e7e;
+            text-align: center;
+            font-size: 1.9rem;
+            border-bottom: 3px solid #ffb74d;
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 20px auto;
+            padding-bottom: 8px;
+        }
+        h2 {
+            background: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            color: #01579b;
+            margin: 25px 0 15px 0;
+        }
+        h3 {
+            color: #bf360c;
+            margin: 15px 0 5px 0;
+        }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            padding: 15px 20px;
+            flex: 1;
+            min-width: 260px;
+            border: 1px solid #cfe3ff;
+        }
+        .canvas-area {
+            text-align: center;
+            background: #fef9e8;
+            border-radius: 28px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        canvas {
+            background: #fff9ef;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            height: auto;
+            border: 1px solid #ffd966;
+        }
+        button {
+            background-color: #ff9800;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            padding: 8px 24px;
+            margin: 12px 8px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        button:hover {
+            background-color: #f57c00;
+            transform: scale(1.02);
+        }
+        .explain {
+            background: #e8f0fe;
+            padding: 15px;
+            border-radius: 24px;
+            margin: 20px 0;
+            line-height: 1.7;
+        }
+        .math {
+            font-family: monospace;
+            background: #263238;
+            color: #ffeaac;
+            padding: 10px 15px;
+            border-radius: 18px;
+            direction: ltr;
+            text-align: left;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+        .answer {
+            background: #c8e6c9;
+            border-right: 8px solid #2e7d32;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            margin-top: 30px;
+            color: #5f7f9e;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 15px; }
+            button { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div style="text-align: center;">
+        <h1>📦 الشغل والطاقة 🔧</h1>
+        <p style="font-size:1.1rem;">🔹 القاعدة الذهبية: <strong>الشغل = القوة × المسافة</strong> 🔹</p>
+    </div>
+
+    <!-- القسم النظري -->
+    <div class="explain">
+        <h2>📘 مفهوم الشغل في الفيزياء</h2>
+        <p><strong>الشغل</strong> يُبذل عندما تؤثر قوة على جسم <strong>وتُحركه</strong> باتجاه القوة. وحدة الشغل هي <strong>الجول (J)</strong>.<br>
+        ⚡ إذا بدأ الجسم ساكناً <strong>(سرعة ابتدائية = 0)</strong> وانتهى ساكناً <strong>(سرعة نهائية = 0)</strong> فهذا يعني أن <strong>كل الشغل المبذول</strong> قد استُنزِف بواسطة قوة مقاومة (مثل الاحتكاك).<br>
+        🧠 <strong>مبرهنة الشغل والطاقة:</strong><br>
+        <em>الشغل الكلي (الصافي) = التغير في طاقة الحركة</em><br>
+        إذا كانت السرعة النهائية = السرعة الابتدائية = 0 ← التغير في الطاقة = 0 ← الشغل الكلي = 0<br>
+        إذن: <strong style="color:#c0392b;">شغل الشخص + شغل المقاومة = 0</strong> → شغل المقاومة = - شغل الشخص</p>
+    </div>
+
+    <!-- المسألة التطبيقية -->
+    <div class="card" style="background:#fdf8ec;">
+        <h2>📝 المسألة (التمرين الجميل)</h2>
+        <p style="font-weight:bold;">"شخص يدفع صندوقاً مسافة <strong>30 متر</strong>. إذا كان الشغل المبذول بواسطة الشخص <strong>120 جول</strong>، وكان الصندوق في البداية <strong>ساكناً</strong> وفي النهاية <strong>ساكناً</strong>، احسب <strong>متوسط القوة المقاومة للحركة</strong>."</p>
+        <div class="math">
+            المعطيات:<br>
+            • المسافة d = 30 m<br>
+            • شغل الشخص W_person = +120 J (يبذل طاقة على الصندوق)<br>
+            • ΔKE = 0 (لأن v₁ = 0 و v₂ = 0)
+        </div>
+    </div>
+
+    <!-- الرسم والتفاعل -->
+    <div class="canvas-area">
+        <h3>🎨 محاكاة بصرية: دفع الصندوق ضد المقاومة</h3>
+        <canvas id="boxCanvas" width="600" height="200" style="width:100%; height:auto; max-width:600px; aspect-ratio:600/200"></canvas>
+        <div>
+            <button id="moveBtn">▶ ادفع الصندوق</button>
+            <button id="resetBtn">🔄 إعادة تعيين</button>
+        </div>
+        <p id="statusText" style="font-weight:bold; color:#0b5e7e;">🔘 اضغط "ادفع" لمشاهدة انتقال الطاقة</p>
+    </div>
+
+    <!-- الحل المفصل -->
+    <div>
+        <h2>✅ الحل بالتفصيل (خطوة بخطوة)</h2>
+        <div class="explain" style="background:#fff3e0;">
+            <p><strong>الخطوة 1:</strong> حسب مبرهنة الشغل والطاقة:<br>
+            \( W_{net} = \Delta KE = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2 = 0 \)<br>
+            إذن الشغل الكلي = صفر.</p>
+            <p><strong>الخطوة 2:</strong> الشغل الكلي = شغل الشخص + شغل المقاومة<br>
+            \( 0 = 120 + W_{resistance} \) → \( W_{resistance} = -120 \ \text{J} \)<br>
+            (الإشارة السالبة تعني أن المقاومة تعاكس الحركة).</p>
+            <p><strong>الخطوة 3:</strong> الشغل = متوسط القوة × المسافة (للقوة الثابتة أو المتوسطة)<br>
+            \( |W_{resistance}| = F_{avg} \times d \) → \( 120 = F_{avg} \times 30 \)<br>
+            \( F_{avg} = \frac{120}{30} = 4 \ \text{نيوتن} \).</p>
+            <div class="answer">
+                🟢 <strong>متوسط القوة المقاومة = 4 نيوتن</strong> 🟢
+            </div>
+            <p>📌 التفسير: الشخص بذل 120 جول، لكن الصندوق لم يكتسب أي طاقة حركية (بدأ وانتهى ساكناً). إذن الطاقة كلها "سرقتها" قوة الاحتكاك/المقاومة على طول المسافة 30 متراً، وبذلك متوسط القوة المعيقة = 4 نيوتن.</p>
+        </div>
+    </div>
+
+    <!-- مقارنة بسيطة -->
+    <div class="flex-row">
+        <div class="card">
+            <h3>⚡ مدخلات (Input)</h3>
+            <p>شغل الشخص: +120 J<br>المسافة: 30 m</p>
+        </div>
+        <div class="card">
+            <h3>🔄 مخرجات (Output)</h3>
+            <p>طاقة حركية نهائية = 0<br>الشغل المفقود = 120 J (للمقاومة)</p>
+        </div>
+        <div class="card">
+            <h3>🧮 متوسط القوة</h3>
+            <p>\( F = \frac{120}{30} = 4 \ \text{N} \)</p>
+        </div>
+    </div>
+    <footer>
+        💡 ملاحظة: الرسم يوضح الصندوق، سهم أخضر (قوة الشخص) وسهم أحمر (قوة المقاومة).<br>
+        الشغل الذي يبذله الشخص يتحول كاملاً إلى شغل ضد المقاومة، وبالتالي لا تتغير الطاقة الحركية.
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // ------------------ الرسم على canvas ------------------
+        const canvas = document.getElementById('boxCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // أبعاد حقيقية للرسم (600x200)
+        canvas.width = 600;
+        canvas.height = 200;
+        
+        let x = 60;        // الموقع الأفقي للصندوق (بكسل)
+        let moving = false;
+        let animFrame = null;
+        let targetX = 540;  // أقصى يمين (مسافة 30 متر رمزياً)
+        let startX = 60;
+        let step = 2;
+        
+        // قوة المقاومة والمستخدمة (فقط للعرض)
+        let frictionForce = 4; // نيوتن (نتيجتنا)
+        let appliedForce = 4;   // ليبقى الصندوق متحرك بسرعة ثابتة تقريباً (لكن المحاكاة توضح أن الشغل الكلي صفر)
+        // لكن في الواقع القوة المحصلة صفر لأنه يتحرك بسرعة ثابتة، لكن مشهدنا يظهر بداية ونهاية سكون.
+        // سنحاكي: عند الضغط يتحرك من السكون إلى مسافة ثم يتوقف تلقائياً بعد الوصول.
+        
+        function drawBox(currentX) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // أرضية
+            ctx.fillStyle = "#ddccaa";
+            ctx.fillRect(0, canvas.height-30, canvas.width, 30);
+            ctx.fillStyle = "#aa9977";
+            ctx.fillRect(0, canvas.height-32, canvas.width, 4);
+            
+            // رسم الصندوق
+            ctx.fillStyle = "#d68c3c";
+            ctx.shadowBlur = 4;
+            ctx.fillRect(currentX, canvas.height-70, 50, 40);
+            ctx.fillStyle = "#b45f2b";
+            ctx.fillRect(currentX+10, canvas.height-85, 30, 15);
+            ctx.fillStyle = "#f7d44a";
+            ctx.fillRect(currentX+20, canvas.height-55, 10, 10);
+            ctx.shadowBlur = 0;
+            
+            // سهم القوة (الشخص) أخضر
+            ctx.beginPath();
+            ctx.moveTo(currentX+50, canvas.height-50);
+            ctx.lineTo(currentX+90, canvas.height-50);
+            ctx.lineTo(currentX+80, canvas.height-58);
+            ctx.moveTo(currentX+90, canvas.height-50);
+            ctx.lineTo(currentX+80, canvas.height-42);
+            ctx.fillStyle = "#2e7d32";
+            ctx.fillText("قوة الشخص", currentX+55, canvas.height-60);
+            ctx.strokeStyle = "#2e7d32";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // سهم المقاومة (أحمر) عكس الاتجاه
+            ctx.beginPath();
+            ctx.moveTo(currentX-10, canvas.height-50);
+            ctx.lineTo(currentX-40, canvas.height-50);
+            ctx.lineTo(currentX-30, canvas.height-58);
+            ctx.moveTo(currentX-40, canvas.height-50);
+            ctx.lineTo(currentX-30, canvas.height-42);
+            ctx.fillStyle = "#c62828";
+            ctx.fillText("قوة المقاومة", currentX-70, canvas.height-60);
+            ctx.strokeStyle = "#c62828";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // كتابة القيم
+            ctx.font = "bold 14px 'Segoe UI'";
+            ctx.fillStyle = "#1f3a3f";
+            ctx.fillText(`متوسط المقاومة = ${frictionForce} N`, 20, 40);
+            ctx.fillText(`شغل الشخص = 120 J`, 20, 65);
+            ctx.fillText(`شغل المقاومة = -120 J`, 20, 90);
+            
+            if (currentX >= targetX-5) {
+                ctx.fillStyle = "#0b5e7e";
+                ctx.font = "bold 16px Tahoma";
+                ctx.fillText("✅ الصندوق وصل (ساكن)", currentX-20, canvas.height-95);
+            }
+        }
+        
+        function animateMovement() {
+            if (!moving) return;
+            // زيادة x باتجاه الهدف
+            let newX = x + step;
+            if (newX >= targetX) {
+                newX = targetX;
+                x = newX;
+                drawBox(x);
+                moving = false;
+                cancelAnimationFrame(animFrame);
+                document.getElementById('statusText').innerHTML = "🟢 توقف الصندوق - الطاقة كلها استنزفت بالمقاومة (السرعة النهائية = 0)";
+                return;
+            }
+            x = newX;
+            drawBox(x);
+            animFrame = requestAnimationFrame(animateMovement);
+        }
+        
+        function startMove() {
+            if (moving) return;
+            // فقط إذا لم نكن في أقصى اليمين نبدأ من البداية
+            if (x >= targetX - 2) {
+                // نعيد الضبط أولاً
+                resetPosition();
+            }
+            x = startX;
+            drawBox(x);
+            moving = true;
+            document.getElementById('statusText').innerHTML = "🏃‍♂️ يتم دفع الصندوق... الشغل المبذول 120 جول يتحول إلى شغل ضد المقاومة";
+            animateMovement();
+        }
+        
+        function resetPosition() {
+            if (moving) {
+                cancelAnimationFrame(animFrame);
+                moving = false;
+            }
+            x = startX;
+            drawBox(x);
+            document.getElementById('statusText').innerHTML = "🔁 تمت إعادة التعيين. الصندوق ساكن في البداية (طاقة حركية = 0). اضغط ادفع لتكرار التجربة.";
+        }
+        
+        // ربط الأزرار
+        document.getElementById('moveBtn').addEventListener('click', startMove);
+        document.getElementById('resetBtn').addEventListener('click', resetPosition);
+        
+        // الرسم الأولي
+        drawBox(startX);
+        
+        // إضافة تفسير إضافي عند التحميل
+        console.log("تم تحميل المحاكاة: الشغل الكلي = صفر → متوسط المقاومة = 4 نيوتن");
+    })();
+</script>
+</body>
+</html>
