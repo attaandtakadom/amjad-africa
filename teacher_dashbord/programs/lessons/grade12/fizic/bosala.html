@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>البوصلة الحقيقية ومختبر المغناطيسية - كوين دريم</title>
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #2c3e50; color: white; font-family: 'Arial', sans-serif; margin: 0; overflow: hidden; }
+        .app-container { text-align: center; position: relative; width: 100%; max-width: 500px; padding: 20px; }
+        h1 { font-size: 1.5rem; margin-bottom: 10px; color: #ecf0f1; }
+        .controls { margin-bottom: 20px; }
+        button { padding: 12px 24px; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: background 0.3s; }
+        button:hover { background: #c0392b; }
+        canvas { background: transparent; border-radius: 50%; display: block; margin: 0 auto; touch-action: none; cursor: crosshair; }
+        .info { margin-top: 15px; font-size: 0.9rem; color: #bdc3c7; }
+        .mode-status { font-weight: bold; color: #2ecc71; margin-top: 5px; }
+        .warning { color: #f1c40f; font-weight: bold; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <h1>مختبر البوصلة الحقيقية ومغناطيس الحدوة 🧭🏗️</h1>
+        
+        <div class="controls">
+            <p>فعّلي الأصوات وحساسات الحركة لتبدأ التجربة!</p>
+            <button onclick="startCompass()">تفعيل المختبر 🚀</button>
+            <div class="mode-status" id="statusText">الوضع: محاكاة (حرك الماوس/اللمس)</div>
+            <div class="warning" id="warningText">تنبيه: حساس المغناطيسية غير متاح. تأكدي من استخدام موبايل وتفعيل الأذونات.</div>
+        </div>
+
+        <canvas id="compassCanvas" width="350" height="350"></canvas>
+
+        <div class="info">
+            <p id="angleText">الزاوية المغناطيسية: 0°</p>
+            <p><b>التجربة:</b> حركي الماوس أو إصبعك لتقريب "حدوة الحصان" من الإبرة.</p>
+            <p><b>ملاحظة:</b> القطب الشمالي للإبرة (الأحمر) ينجذب دائماً لجنوب المغناطيس الأزرق.</p>
+        </div>
+    </div>
+
+<script>
+    const canvas = document.getElementById('compassCanvas');
+    const ctx = canvas.getContext('2d');
+    const angleText = document.getElementById('angleText');
+    const statusText = document.getElementById('statusText');
+    const warningText = document.getElementById('warningText');
+    
+    let currentAngle = 0; // زاوية الإبرة الحالية
+    let targetAngle = 0;  // زاوية الشمال المغناطيسي المستهدفة
+    let mouseAngle = 0;   // زاوية مغناطيس الحدوة (الماوس/اللمس)
+    let isRealMode = false; // هل تعمل البوصلة الحقيقية؟
+    let audioCtx = null;
+    let isAudioStarted = false;
+
+    // تهيئة الصوت والبدء
+    function startCompass() {
+        if (!isAudioStarted) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            isAudioStarted = true;
+            playSound(440, 'sine', 0.2); // صوت تأكيد البدء
+        }
+        enableDeviceOrientation(); // تفعيل حساسات الحركة
+    }
+
+    // دالة لتوليد الأصوات
+    function playSound(freq, type, duration, volume = 0.1) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(volume, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    }
+
+    // تفعيل حساس الاتجاه (الشمال الحقيقي)
+    function enableDeviceOrientation() {
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', function(event) {
+                if (event.alpha !== null) {
+                    // تحويل الزاوية alpha (من 0 لـ 360) لزاوية راديان
+                    targetAngle = (event.alpha * Math.PI / 180); 
+                    isRealMode = true;
+                    statusText.innerText = "الوضع: بوصلة حقيقية (تحدد الشمال الفعلي) 🌍";
+                    statusText.style.color = "#2ecc71";
+                    warningText.style.display = "none";
+                } else {
+                    isRealMode = false;
+                    statusText.innerText = "الوضع: محاكاة (حساس المغناطيسية غير متاح) 🖥️";
+                    statusText.style.color = "#f1c40f";
+                    warningText.style.display = "block";
+                }
+            }, true);
+        } else {
+            isRealMode = false;
+            warningText.style.display = "block";
+            statusText.innerText = "الوضع: محاكاة (المتصفح لا يدعم الحساسات) 🖥️";
+        }
+    }
+
+    // دالة الرسم الأساسية
+    function drawCompass() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const cx = 175, cy = 175, r = 130;
+
+        // 1. رسم إطار البوصلة (جسم ميكانيكي)
+        ctx.strokeStyle = '#34495e';
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r + 5, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // 2. رسم مغناطيس حدوة الحصان (التفاعلي)
+        drawHorseshoeMagnet(cx, cy, r);
+
+        // 3. رسم الاتجاهات (N, S, E, W)
+        ctx.fillStyle = '#2c3e50';
+        ctx.font = 'bold 24px Arial';
+        ctx.fillText('N', cx - 12, cy - r + 35);
+        ctx.fillText('S', cx - 12, cy + r - 15);
+        ctx.fillText('E', cx + r - 35, cy + 8);
+        ctx.fillText('W', cx - r + 10, cy + 8);
+
+        // 4. تحريك الإبرة بسلاسة (محاكاة القصور الذاتي Damping)
+        let diff = targetAngle - currentAngle;
+        // تصحيح فرق الزاوية لضمان أقصر دوران
+        while (diff > Math.PI) diff -= Math.PI * 2;
+        while (diff < -Math.PI) diff += Math.PI * 2;
+        
+        currentAngle += diff * 0.05; // سرعة استجابة الإبرة
+        
+        // أصوات تفاعلية عند الحركة
+        if (isAudioStarted && Math.abs(diff) > 0.02) {
+            playSound(120, 'sine', 0.03, 0.05); // صوت تكة خفيفة
+        }
+        
+        // جرس عند الشمال الدقيق
+        if (isAudioStarted && Math.abs(currentAngle % (Math.PI*2)) < 0.05) {
+            playSound(880, 'triangle', 0.1, 0.02); // صوت جرس خفيف
+        }
+
+        angleText.innerText = `الزاوية المغناطيسية: ${Math.round(currentAngle * 180 / Math.PI)}°`;
+
+        // 5. رسم الإبرة المغناطيسية (تدور حسب الشمال)
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(currentAngle);
+
+        // الطرف الشمالي (أحمر) - ينجذب لجنوب الأرض/المغناطيس
+        ctx.fillStyle = '#e74c3c'; // أحمر
+        ctx.beginPath();
+        ctx.moveTo(0, -r + 50);
+        ctx.lineTo(20, 0);
+        ctx.lineTo(-20, 0);
+        ctx.fill();
+
+        // الطرف الجنوبي (أبيض)
+        ctx.fillStyle = '#ecf0f1'; // أبيض
+        ctx.beginPath();
+        ctx.moveTo(0, r - 50);
+        ctx.lineTo(20, 0);
+        ctx.lineTo(-20, 0);
+        ctx.fill();
+
+        ctx.restore();
+
+        // مركز البوصلة (المحور)
+        ctx.fillStyle = '#7f8c8d';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 10, 0, Math.PI * 2);
+        ctx.fill();
+
+        requestAnimationFrame(drawCompass);
+    }
+
+    // دالة رسم مغناطيس حدوة الحصان
+    function drawHorseshoeMagnet(cx, cy, r) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(mouseAngle); // يدور حسب مكان الماوس/اللمس
+
+        const magnetR = r + 30; // نصف قطر الحدوة (خارج البوصلة)
+        ctx.lineWidth = 25;
+        ctx.lineCap = 'butt'; // نهاية مستقيمة للأقطاب
+
+        // القطب الشمالي (أحمر) - الجزء الأيمن من الحدوة
+        ctx.strokeStyle = '#e74c3c'; // أحمر
+        ctx.beginPath();
+        ctx.arc(0, 0, magnetR, -Math.PI/2, Math.PI/2, false); // من أعلى لأسفل (يمين)
+        ctx.stroke();
+
+        // القطب الجنوبي (أزرق) - الجزء الأيسر من الحدوة
+        ctx.strokeStyle = '#3498db'; // أزرق
+        ctx.beginPath();
+        ctx.arc(0, 0, magnetR, Math.PI/2, Math.PI * 1.5, false); // من أسفل لأعلى (يسار)
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+    // تفاعل الماوس/اللمس لتحريك مغناطيس الحدوة
+    function handleInteraction(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = clientX - rect.left - 175;
+        const y = clientY - rect.top - 175;
+        mouseAngle = Math.atan2(y, x); // تحديد زاوية مغناطيس الحدوة
+    }
+
+    canvas.addEventListener('mousemove', handleInteraction);
+    canvas.addEventListener('touchmove', function(e) {
+        e.preventDefault(); // منع التمرير عند اللمس
+        handleInteraction(e);
+    }, { passive: false });
+
+    drawCompass(); // بدء حلقة الرسم
+</script>
+</body>
+</html>
