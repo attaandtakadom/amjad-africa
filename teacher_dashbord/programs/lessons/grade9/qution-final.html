@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>اختبار تقنية المعلومات - الصف التاسع | الوحدات 1،2،3</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Tahoma', 'Roboto', system-ui, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f7ff 0%, #e9f0fa 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .quiz-container {
+            max-width: 1400px;
+            width: 100%;
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+            overflow: hidden;
+            padding: 1.5rem 2rem 2rem;
+            transition: all 0.2s;
+        }
+        h1 {
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0 0 0.25rem 0;
+            text-align: center;
+        }
+        .sub {
+            text-align: center;
+            color: #2c3e66;
+            border-bottom: 2px solid #cbdff2;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .timer-bar {
+            background: #1e2f47;
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 1.8rem;
+            color: white;
+            font-weight: bold;
+        }
+        .timer {
+            background: #00000055;
+            padding: 0.3rem 1rem;
+            border-radius: 3rem;
+            font-size: 1.5rem;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+        .score-area {
+            background: #ffd966cc;
+            color: #2d2b1f;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0 1.5rem;
+        }
+        button {
+            background: #2c5282;
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.15s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button:hover {
+            background: #1e3a5f;
+            transform: scale(0.97);
+        }
+        .reset-btn { background: #b45353; }
+        .reset-btn:hover { background: #9b2e2e; }
+        .check-btn { background: #2b6e3c; }
+        .check-btn:hover { background: #1f4f2c; }
+        .back-btn { background: #6c757d; }
+        .back-btn:hover { background: #495057; }
+
+        .section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            border: 1px solid #e2edff;
+        }
+        .section h2 {
+            border-right: 8px solid #2a5298;
+            padding-right: 1rem;
+            color: #1e3c72;
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+        .question-card {
+            background: #fefefe;
+            margin: 1rem 0;
+            padding: 1rem 1.2rem;
+            border-radius: 1.2rem;
+            border: 1px solid #dce7f5;
+            transition: 0.1s;
+        }
+        .question-text {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .q-type {
+            background: #e9ecef;
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 30px;
+            color: #2c3e50;
+        }
+        .options-area {
+            margin: 12px 0 10px 0;
+            padding-right: 1rem;
+        }
+        .tf-option, .mc-option {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 2rem;
+            margin-bottom: 8px;
+            gap: 6px;
+        }
+        .match-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin: 12px 0;
+            background: #f8fafd;
+            padding: 8px 12px;
+            border-radius: 1rem;
+        }
+        .match-left {
+            font-weight: bold;
+            min-width: 160px;
+            background: #eef3fc;
+            padding: 4px 12px;
+            border-radius: 2rem;
+        }
+        select {
+            padding: 6px 12px;
+            border-radius: 2rem;
+            border: 1px solid #bdd4e7;
+            background: white;
+            font-weight: 500;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .correct-fb { background: #c8f0d1; color: #155724; }
+        .wrong-fb { background: #ffe0db; color: #a11f0a; }
+        .final-eval {
+            background: #1e293b;
+            color: white;
+            border-radius: 2rem;
+            padding: 0.8rem;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        .glossary-box {
+            background: #eef2fa;
+            padding: 1rem;
+            border-radius: 1.2rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 700px) {
+            .quiz-container { padding: 1rem; }
+            .match-left { min-width: 140px; }
+        }
+    </style>
+</head>
+<body>
+<div class="quiz-container" id="app">
+    <h1>📘 اختبار تقنية المعلومات الشامل</h1>
+    <div class="sub">الصف التاسع | الوحدة الأولى: نظم المعلومات | الثانية: البرمجة | الثالثة: الذكاء الاصطناعي</div>
+    
+    <div class="timer-bar">
+        <span>⏱️ الوقت المتبقي: <span id="timerDisplay" class="timer">10:00</span></span>
+        <span>📊 النقاط: <span id="totalScoreSpan" class="score-area">0</span> / <span id="totalPossibleSpan"></span></span>
+    </div>
+    
+    <div class="action-buttons">
+        <button id="checkAllAnswersBtn" class="check-btn">✅ التحقق من جميع الإجابات</button>
+        <button id="resetAllBtn" class="reset-btn">🔄 إعادة تعيين جميع الأسئلة</button>
+        <button id="goBackBtn" class="back-btn">🔙 رجوع (مسح الإجابات)</button>
+    </div>
+    
+    <div id="questionsRoot"></div>
+    
+    <!-- ملخص المصطلحات التقنية للمراجعة -->
+    <div class="glossary-box">
+        <strong>📖 ملخص المصطلحات التقنية للمراجعة:</strong><br>
+        🔹 <strong>المترجم (Compiler):</strong> يحول البرنامج كاملاً للغة الآلة مرة واحدة.<br>
+        🔹 <strong>المفسر (Interpreter):</strong> يحول البرنامج سطراً بسطر أثناء التنفيذ.<br>
+        🔹 <strong>المتغيرات (Variables):</strong> أماكن في الذاكرة تتغير قيمتها أثناء عمل البرنامج.<br>
+        🔹 <strong>الثوابت (Constants):</strong> قيم ثابتة لا يمكن تغييرها.
+    </div>
+    
+    <div id="evaluationMessage" class="final-eval"></div>
+</div>
+
+<script>
+    // --------------------------------------------------------------
+    // قاعدة الأسئلة (الوحدة الأولى + الثانية + الثالثة)
+    // --------------------------------------------------------------
+    const questions = [];
+    
+    // ------------------- الوحدة الأولى: نظم المعلومات والبيانات -------------------
+    const tfUnit1 = [
+        { text: "البيانات هي ناتج معالجة المعلومات.", correct: false },
+        { text: "تهدف نظم المعلومات إلى توفير المعلومات الصحيحة في الوقت المناسب لاتخاذ القرارات.", correct: true },
+        { text: "يعتبر 'تخزين البيانات' من المراحل التي تلي مرحلة المعالجة في دورة حياة المعلومات.", correct: true },
+        { text: "أجهزة الحاسوب هي المكون الوحيد لنظم المعلومات.", correct: false }
+    ];
+    tfUnit1.forEach((q, idx) => {
+        questions.push({ id: `tf_u1_${idx}`, type: 'truefalse', text: q.text, correctAnswer: q.correct, userAnswer: null, feedback: '' });
+    });
+    
+    // اختيار من متعدد للوحدة الأولى
+    const mcUnit1 = [
+        { text: "الترتيب الصحيح لمراحل معالجة البيانات هو:", options: ["إدخال -> معالجة -> تخزين -> إخراج", "إخراج -> تخزين -> معالجة -> إدخال", "معالجة -> إدخال -> إخراج"], correct: "إدخال -> معالجة -> تخزين -> إخراج" },
+        { text: "أي مما يلي يعتبر مثالاً على 'المعلومات'؟", options: ["أرقام الفواتير الخام", "تقرير مبيعات مفصل", "سجل خام للطلاب"], correct: "تقرير مبيعات مفصل" }
+    ];
+    mcUnit1.forEach((q, idx) => {
+        questions.push({ id: `mc_u1_${idx}`, type: 'mc', text: q.text, options: q.options, correctAnswer: q.correct, userAnswer: '', feedback: '' });
+    });
+    
+    // ------------------- الوحدة الثانية + الثالثة (أسئلة سابقة) -------------------
+    const tfUnit2_3 = [
+
+// أضف هذا السؤال داخل مصفوفة tfUnit2_3
+
+{ text: "تُعبر لغة STRIPS عن الحالة الأولية للمهمة الموكلة إليها كجزء من عملية التخطيط.", correct: true },
+{ text: "تعتبر لغات البرمجة (LUSH) و (MATHLAB) من اللغات المستخدمة في تطبيقات الذكاء الاصطناعي.", correct: true },
+{ text: "تسمح لغة LISP للمبرمجين بإنشاء تراكيب جديدة أو البرمجة المتخصصة المتضمنة في اللغة.", correct: true },
+{ text: "تعتبر لغة IPL هي أول لغة برمجة استُخدمت لتطوير برامج الذكاء الاصطناعي.", correct: true },
+{ text: "تعتبر لغة فيجوال بيسك (Visual Basic) من لغات برمجة الذكاء الاصطناعي المتخصصة.", correct: false },
+        { text: "يتكون البرنامج الحاسوبي من مجموعة من الأوامر تقوم بتحديد سلوك البرنامج وآلية عمله.", correct: true },
+        { text: "لغات البرمجة الأقل مستوى تعد أكثر سهولة من اللغات عالية المستوى.", correct: false },
+        { text: "عند بدء التعلم ينصح بلغات عالية المستوى.", correct: true },
+        { text: "تقوم كل من لغة الآلة ولغة التجميع على أساس تمرير الأوامر بشكل مباشر للحاسوب.", correct: true },
+        { text: "لغة الفيجوال بيسك المرئي من لغات البرمجة منخفضة المستوى.", correct: false },
+        { text: "تمتاز لغات عالية المستوى بسهولة الاستخدام.", correct: true },
+        { text: "عند تحويل التعبير الحسابي إلى الحاسوب تتغير بعض علامات العمليات الحسابية.", correct: true },
+        { text: "لإيجاد ناتج أي تعبير حسابي يجب مراعاة تسلسل العمليات الحسابية.", correct: true },
+        { text: "من أولويات العمليات الحسابية تنفيذ الأسس قبل الضرب والقسمة.", correct: true },
+        { text: "من أولويات العمليات الحسابية تنفيذ ما في داخل القوس آخر شيء.", correct: false },
+        { text: "الذكاء الاصطناعي مبني على أساس وصف ومحاكاة الذكاء البشري في الأنظمة والأجهزة الذكية.", correct: true },
+        { text: "الذكاء الاصطناعي له القدرة على استنباط العلامات المميزة بين الوضعيات المتشابهة.", correct: true },
+        { text: "الاستخدام الخاطئ هو أحد المشاكل التي تتمثل في الذكاء الاصطناعي.", correct: true },
+        { text: "رغم مشاكل الذكاء الاصطناعي إلا أنه المستقبل شرط استخدامه بشكل صحيح.", correct: true },
+        { text: "الموازنة بين عمل البشر وعمل الآلات الهدف منها الوصول إلى أكبر قدر من الفائدة.", correct: true },
+        { text: "تتشابه لغات البرمجة تشابه كبير مع لغات برمجة الذكاء الاصطناعي.", correct: false },
+        { text: "تختلف برمجة الذكاء الاصطناعي عن باقي لغات البرمجة كونها تستخدم عبارات منطقية بدلاً من الأوامر والتعليمات.", correct: true },
+        { text: "فيجوال بيسك هي إحدى لغات برمجة الذكاء الاصطناعي.", correct: false },
+
+{ text: "أكبر تحدي يواجه الباحثين في مجال الذكاء الاصطناعي هو إيجاد أفضل أسلوب لتمثيل المعرفة.", correct: true },
+{ text: "تعتبر لغة البرمجة Prolog (برولوغ) لغة برمجة منطقية.", correct: true },
+{ text: "يعتبر ذكاء الآلة حالياً ذكاءً محدوداً بمدى البيانات والبرمجة التي يتلقاها.", correct: true },
+{ text: "الهدف من تطوير الذكاء الاصطناعي هو الوصول إلى آلات لا حدود لذكائها وقدرتها على حل المشكلات.", correct: true },
+      { text: "يوجد فرق جوهري بين الذكاء البشري والذكاء الاصطناعي من حيث الوعي والمشاعر.", correct: true },
+{ text: "يستطيع الذكاء الاصطناعي حالياً مضاهاة الذكاء البشري في الإبداع العفوي والابتكار.", correct: false },
+{ text: "الذكاء البشري يعتمد على الوعي الفطري بينما الذكاء الاصطناعي يعتمد على محاكاة الأنماط والبيانات.", correct: true },
+{ text: "يوجد فرق جوهري بين الذكاء البشري والذكاء الاصطناعي من حيث الوعي والمشاعر.", correct: true },
+{ text: "يستطيع الذكاء الاصطناعي حالياً مضاهاة الذكاء البشري في الإبداع العفوي والابتكار.", correct: false },
+{ text: "الذكاء البشري يعتمد على الوعي الفطري بينما الذكاء الاصطناعي يعتمد على محاكاة الأنماط والبيانات.", correct: true },
+{ text: "يُعد إيجاد أفضل أسلوب لتمثيل المعرفة أكبر تحدٍ يواجه الباحثين في مجال الذكاء الاصطناعي.", correct: true },
+{ text: "تشترك أنظمة الذكاء الاصطناعي مع الإنسان في المعرفة الظاهرة.", correct: true },
+
+{ text: "تشترك أنظمة الذكاء الاصطناعي مع الإنسان في المعرفة الظاهرة.", correct: true },
+{ text: "تعتبر اللغة هي وسيلة التواصل بين الحاسوب والبيانات من أوامر وتعليمات.", correct: true },
+{ text: "تكمن قوة معالجة اللغة الطبيعية في قراءة النص والتعامل معه وتحليله والترجمه الآلية.", correct: true },
+{ text: "تستطيع الألعاب الذكية استرجاع المواقف التي أخطأت بها أثناء اللعب لتتجنبها في المرة القادمة.", correct: true },
+
+{ text: "تُستخدم الأنظمة المرئية في مجال الأمن للتحقق من هوية الأشخاص الداخلين للمنشآت.", correct: true },
+
+{ text: "يحتوي النظام الخبير على كمية هائلة من المعلومات والخبرات التي يمتلكها الخبراء المختصون.", correct: true },
+
+
+
+
+
+
+    ];
+    tfUnit2_3.forEach((q, idx) => {
+        questions.push({ id: `tf_u2_${idx}`, type: 'truefalse', text: q.text, correctAnswer: q.correct, userAnswer: null, feedback: '' });
+    });
+    
+    // اختيار من متعدد (الوحدات 2 و 3)
+    const mcAdvanced = [
+        { text: "تصنف لغات البرمجة حسب المستوى إلى:", options: ["عالية المستوى فقط", "منخفضة المستوى فقط", "الإجابتان صحيحتان: عالية ومنخفضة المستوى"], correct: "الإجابتان صحيحتان: عالية ومنخفضة المستوى" },
+        { text: "لغات البرمجة منخفضة المستوى لها القدرة على:", options: ["إدارة الذاكرة", "إدارة البيانات", "الإجابتان صحيحتان: إدارة الذاكرة وإدارة البيانات"], correct: "الإجابتان صحيحتان: إدارة الذاكرة وإدارة البيانات" },
+        { text: "من لغات البرمجة منخفضة المستوى:", options: ["التجميع", "الآلة", "الإجابتان صحيحتان: التجميع والآلة"], correct: "الإجابتان صحيحتان: التجميع والآلة" },
+        { text: "التعبير الحسابي عبارة عن معادلات تتكون من:", options: ["ثابت ومتغير", "أرقام فقط", "متغيرات فقط"], correct: "ثابت ومتغير" },
+        { text: "يمكن للتعبير الحسابي أن يكون:", options: ["مركب", "معقد", "مركب أو معقد"], correct: "مركب أو معقد" },
+        { text: "أي العمليات تنفذ أولاً مستخدم أولويات تنفيذ العمليات:", options: ["ما داخل الأقواس", "الضرب", "الأسس"], correct: "ما داخل الأقواس" },
+        { text: "تتمثل مشاكل الذكاء الاصطناعي في:", options: ["البطالة فقط", "التكلفة فقط", "كل ما سبق: البطالة، التكلفة، كسل البشر، الاستخدام الخاطئ"], correct: "كل ما سبق: البطالة، التكلفة، كسل البشر، الاستخدام الخاطئ" },
+        { text: "من لغات برمجة الذكاء الاصطناعي:", options: ["Prolog فقط", "Lisp فقط", "كل ما سبق: Prolog, IPL, Lisp, STRIPS"], correct: "كل ما سبق: Prolog, IPL, Lisp, STRIPS" },
+        { text: "لغة Prolog اسمها مأخوذ من اللغة:", options: ["الإنجليزية", "الفرنسية", "الألمانية"], correct: "الفرنسية" },
+        { text: "الذكاء الاصطناعي لا يضاهي الإنسان في:", options: ["أسلوب التفكير", "الإبداع", "العاطفة", "كل ما سبق: أسلوب التفكير، الإبداع، العاطفة، المشاعر"], correct: "كل ما سبق: أسلوب التفكير، الإبداع، العاطفة، المشاعر" },
+        { text: "تستند معظم أنظمة الذكاء الاصطناعي على:", options: ["قاعدة معلومات فقط", "آلة للتدخل فقط", "الإجابتان صحيحتان: قاعدة معلومات ومعرفة وآلة للتدخل"], correct: "الإجابتان صحيحتان: قاعدة معلومات ومعرفة وآلة للتدخل" },
+
+{ 
+  text: "يهدف الذكاء الاصطناعي إلى تحقيق:", 
+  options: [
+    "الوصول إلى فهم عميق للذكاء الإنساني عن طريق محاكاته", 
+    "الاستثمار الأفضل للحاسوب", 
+    "الإجابتان صحيحتان", 
+    "كل ما سبق خاطئ"
+  ], 
+  correct: "الإجابتان صحيحتان" 
+},
+
+{ 
+  text: "للذكاء الاصطناعي ميزات وقدرات للقيام ببعض الأعمال منها:", 
+  options: [
+    "المرونة في الاستجابة", 
+    "القدرة على التخيل", 
+    "سرعة التصرف", 
+    "ممارسة الألعاب", 
+    "كل ما سبق ذكره"
+  ], 
+  correct: "كل ما سبق ذكره" 
+},
+
+{ 
+  text: "تتمثل مشاكل وتحديات الذكاء الاصطناعي في:", 
+  options: [
+    "رفع نسبة البطالة", 
+    "التكلفة العالية", 
+    "تعويد البشر على الكسل", 
+    "الاستخدام الخاطئ", 
+    "كل ما سبق ذكره"
+  ], 
+  correct: "كل ما سبق ذكره" 
+},
+
+{ 
+  text: "من لغات برمجة الذكاء الاصطناعي:", 
+  options: [
+    "Prolog", 
+    "IPL", 
+    "LISP", 
+    "STRIPS", 
+    "كل ما سبق"
+  ], 
+  correct: "كل ما سبق" 
+},
+
+{ 
+  text: "الذكاء الاصطناعي لا يضاهي الإنسان في:", 
+  options: [
+    "أسلوب التفكير", 
+    "الإبداع", 
+    "العاطفة", 
+    "المشاعر", 
+    "كل ما سبق ذكره"
+  ], 
+  correct: "كل ما سبق ذكره" 
+},
+{ 
+  text: "تستند معظم أنظمة الذكاء الاصطناعي على:", 
+  options: [
+    "قاعدة معلومات تحتوي على المعرفة وتُخزن على أجهزة الذكاء الاصطناعي", 
+    "معرفة وآلة للتدخل في الوقت المناسب", 
+    "الإجابتان صحيحتان", 
+    "غير ذلك"
+  ], 
+  correct: "الإجابتان صحيحتان" 
+},
+
+{ 
+  text: "تنوعت مجالات الذكاء الاصطناعي ومنها:", 
+  options: [
+    "تمثيل المعرفة", 
+    "نظام التعلم", 
+    "الأنظمة المرئية", 
+    "الأنظمة الخبيرة", 
+    "كل ما سبق ذكره"
+  ], 
+  correct: "كل ما سبق ذكره" 
+},
+{ 
+  text: "تُستخدم لغة IPL لدعم برامج حل المشكلات العامة مثل:", 
+  options: [
+    "معالجة القوائم", 
+    "المخططات", 
+    "التخصيص الحركي للذاكرة", 
+    "أنواع البيانات", 
+    "كل ما سبق ذكره"
+  ], 
+  correct: "كل ما سبق ذكره" 
+},
+
+{ 
+  text: "لغة برولوج (Prolog) اسمها مأخوذ من اللغة:", 
+  options: [
+    "العربية", 
+    "الإنجليزية", 
+    "الفرنسية", 
+    "الألمانية", 
+    "غير ذلك"
+  ], 
+  correct: "الفرنسية" 
+},
+
+{ 
+  text: "تقوم الأنظمة المرئية بعمل الآتي:", 
+  options: [
+    "التقاط الصور", 
+    "تخزينها في قاعدة بيانات مخصصة", 
+    "معالجتها والتحقق من هويتها", 
+    "اتخاذ القرار المناسب بالسماح بالدخول أو غيره", 
+    "كل ما سبق ذكره"
+  ], 
+  correct: "كل ما سبق ذكره" 
+},
+{ 
+  text: "المعرفة لدى الإنسان تتكون من:", 
+  options: [
+    "معرفة ظاهرة", 
+    "معرفة ضمنية", 
+    "الإجابتان صحيحتان", 
+    "غير ذلك"
+  ], 
+  correct: "الإجابتان صحيحتان" 
+},
+{ 
+  text: "من المهام التي صُممت من أجلها الروبوتات:", 
+  options: [
+    "المهام الخطرة كبديل للإنسان (مثل تفقد المتفجرات)", 
+    "المهام التي تحتاج دقة متناهية (مثل العمليات الجراحية)", 
+    "القيام بالأعمال المنزلية المختلفة", 
+    "التسلية والترفيه (مثل اللعب مع الأطفال)", 
+    "كل ما ذكر"
+  ], 
+  correct: "كل ما ذكر" 
+},
+
+{ 
+  text: "من مميزات الأنظمة الخبيرة:", 
+  options: [
+    "سهلة الاستخدام", 
+    "القدرة على التعلم من البشر", 
+    "قادرة على تعليم غير المتخصصين", 
+    "الاستجابة للأسئلة البسيطة والمعقدة", 
+    "كل ما سبق"
+  ], 
+  correct: "كل ما سبق" 
+},
+{ 
+  text: "الخلايا العصبية لها القدرة على:", 
+  options: [
+    "تسجيل وتخزين وتذكر واسترجاع مختلف الإشارات والمعلومات", 
+    "محاكاة كيفية عمل الذاكرة لأنماط الإدراك", 
+    "التدريب", 
+    "كل ما سبق"
+  ], 
+  correct: "كل ما سبق" 
+},
+{ 
+  text: "التعبير الحسابي عبارة عن معادلات تتكون من:", 
+  options: [
+    "ثابت", 
+    "متغير", 
+    "ثابت ومتغير", 
+    "كل ما سبق"
+  ], 
+  correct: "ثابت ومتغير" 
+},
+
+{ 
+  text: "يمكن للتعبير الحسابي أن يكون:", 
+  options: [
+    "مركباً", 
+    "معقداً", 
+    "مركب أو معقد", 
+    "كل ما سبق"
+  ], 
+  correct: "مركب أو معقد" 
+},
+{ text: "أي العمليات تنفذ أولاً مستخدماً أولويات تنفيذ العمليات:", options: ["الجمع والطرح", "الضرب والقسمة", "الأسس", "ما داخل الأقواس"], correct: "ما داخل الأقواس" },
+
+
+    ];
+    mcAdvanced.forEach((q, idx) => {
+        questions.push({ id: `mc_adv_${idx}`, type: 'mc', text: q.text, options: q.options, correctAnswer: q.correct, userAnswer: '', feedback: '' });
+    });
+    
+    // ---------- أسئلة المنطق (True/False) لتعزيز مهارات تتبع الكود ----------
+    const logicTF = [
+        { text: "نتيجة (5 >= 5) OR (10 < 5) هي True", correct: true },
+        { text: "نتيجة NOT (8 > 3) هي False", correct: true },
+        { text: "نتيجة (3*2 == 6) AND (4>5) هي True", correct: false },
+        { text: "في لغة البرمجة، أولوية تنفيذ العمليات الحسابية تكون للأقواس أولاً ثم الأسس ثم الضرب والقسمة ثم الجمع والطرح.", correct: true },
+
+
+
+
+
+
+        
+    ];
+    logicTF.forEach((q, idx) => {
+        questions.push({ id: `logic_${idx}`, type: 'truefalse', text: q.text, correctAnswer: q.correct, userAnswer: null, feedback: '' });
+    });
+    
+    // ------------------- سؤال التوصيل (المزاوجة) الخاص بالمصطلحات -------------------
+    const descriptions = {
+        "1": "برنامج مكتوب بلغة عالية وتم تحويله للغة الآلة (البرنامج الهدف).",
+        "3": "مجموعة متسلسلة من الأوامر لحل مسألة ما.",
+        "4": "البرنامج المكتوب بلغة عالية المستوى (البرنامج المصدر).",
+        "5": "كتابة شفرة (Code) أي مجموعة من الأوامر.",
+        "6": "جملة خبرية قيمتها إما True أو False.",
+        "7": "لغة تستخدم من قبل المبرمجين لتطوير البرمجيات (منخفضة المستوى).",
+        "8": "لغات برمجية قريبة من لغة الإنسان (عالية المستوى).",
+        "9": "يحول برنامجاً من لغة عالية إلى لغة الآلة.",
+        "10": "معادلة لحساب قيمة من ثابت أو متغير."
+    };
+    const matchItems = [
+        { term: "البرنامج الهدف", correctMatch: "1" },
+        { term: "لغة منخفضة المستوى", correctMatch: "7" },
+        { term: "البرنامج", correctMatch: "3" },
+        { term: "البرنامج المصدر", correctMatch: "4" },
+        { term: "البرمجة", correctMatch: "5" },
+        { term: "التعبير المنطقي", correctMatch: "6" },
+        { term: "لغة عالية المستوى", correctMatch: "8" },
+        { term: "المترجم", correctMatch: "9" },
+        { term: "التعبير الحسابي", correctMatch: "10" }
+    ];
+    questions.push({
+        id: 'matching',
+        type: 'matching',
+        title: "سؤال التوصيل: قم بمطابقة كل مصطلح مع الرقم والوصف المناسب",
+        matchPairs: matchItems,
+        descriptions: descriptions,
+        userMatches: {},
+        feedback: ''
+    });
+    
+    // --------------------------------------------------------------
+    // 2. إدارة الحالة والمؤقت والدرجات
+    // --------------------------------------------------------------
+    let totalSeconds = 600;
+    let timerInterval = null;
+    
+    function computeMaxScore() {
+        let max = 0;
+        questions.forEach(q => {
+            if (q.type === 'truefalse') max += 1;
+            else if (q.type === 'mc') max += 1;
+            else if (q.type === 'matching') max += q.matchPairs.length;
+        });
+        return max;
+    }
+    
+    function computeCurrentScore() {
+        let score = 0;
+        for (let q of questions) {
+            if (q.type === 'truefalse') {
+                if (q.userAnswer !== null && q.userAnswer === q.correctAnswer) score += 1;
+            } else if (q.type === 'mc') {
+                if (q.userAnswer && q.userAnswer === q.correctAnswer) score += 1;
+            } else if (q.type === 'matching') {
+                let correctCount = 0;
+                for (let pair of q.matchPairs) {
+                    if (q.userMatches[pair.term] === pair.correctMatch) correctCount++;
+                }
+                score += correctCount;
+            }
+        }
+        return score;
+    }
+    
+    function updateScoreUI() {
+        document.getElementById('totalScoreSpan').innerText = computeCurrentScore();
+    }
+    
+    function updateTimerUI() {
+        const minutes = Math.floor(totalSeconds / 60);
+        const secs = totalSeconds % 60;
+        document.getElementById('timerDisplay').innerText = `${minutes.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+        if (totalSeconds <= 0) {
+            clearInterval(timerInterval);
+            alert("⏰ انتهى الوقت! سيتم إعادة تعيين الاختبار.");
+            resetAllQuestions();
+        }
+    }
+    
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            if (totalSeconds > 0) { totalSeconds--; updateTimerUI(); }
+            else clearInterval(timerInterval);
+        }, 1000);
+    }
+    
+    function resetAllQuestions() {
+        for (let q of questions) {
+            if (q.type === 'truefalse') { q.userAnswer = null; q.feedback = ''; }
+            else if (q.type === 'mc') { q.userAnswer = ''; q.feedback = ''; }
+            else if (q.type === 'matching') {
+                q.userMatches = {};
+                q.feedback = '';
+                for (let pair of q.matchPairs) q.userMatches[pair.term] = '';
+            }
+        }
+        renderAllQuestions();
+        updateScoreUI();
+        document.getElementById('evaluationMessage').innerHTML = '🔄 تم إعادة تعيين الإجابات. أجب ثم اضغط التحقق.';
+    }
+    
+    function goBackClear() { resetAllQuestions(); }
+    
+    function checkSingleQuestion(q, qDiv) {
+        if (q.type === 'truefalse') {
+            const selected = qDiv.querySelector('input[type="radio"]:checked');
+            if (!selected) q.feedback = '❌ يرجى اختيار صواب أو خطأ';
+            else {
+                q.userAnswer = selected.value === 'true';
+                q.feedback = (q.userAnswer === q.correctAnswer) ? '✅ صحيح!' : '❌ خطأ!';
+            }
+        } 
+        else if (q.type === 'mc') {
+            const selected = qDiv.querySelector('.mc-select');
+            if (!selected?.value) q.feedback = '❌ اختر إجابة';
+            else {
+                q.userAnswer = selected.value;
+                q.feedback = (q.userAnswer === q.correctAnswer) ? '✅ صحيح!' : '❌ خاطئ!';
+            }
+        } 
+        else if (q.type === 'matching') {
+            let allSelected = true;
+            for (let pair of q.matchPairs) {
+                const sel = qDiv.querySelector(`select.match-select[data-term="${pair.term}"]`);
+                if (sel?.value) q.userMatches[pair.term] = sel.value;
+                else { allSelected = false; q.userMatches[pair.term] = ''; }
+            }
+            if (!allSelected) q.feedback = '⚠️ اختر جميع التوصيلات';
+            else {
+                let correct = 0;
+                for (let pair of q.matchPairs) if (q.userMatches[pair.term] === pair.correctMatch) correct++;
+                q.feedback = `✅ التوصيل: ${correct}/${q.matchPairs.length} صحيحة.`;
+            }
+        }
+        renderAllQuestions();
+        updateScoreUI();
+        showEvaluation();
+    }
+    
+    function checkAllQuestions() {
+        for (let q of questions) {
+            if (q.type === 'truefalse') {
+                if (q.userAnswer !== null) q.feedback = (q.userAnswer === q.correctAnswer) ? '✅ صحيح' : '❌ خطأ';
+                else q.feedback = '❌ لم تجب';
+            } else if (q.type === 'mc') {
+                if (q.userAnswer) q.feedback = (q.userAnswer === q.correctAnswer) ? '✅ صحيح' : '❌ خاطئ';
+                else q.feedback = '❌ لم تختر';
+            } else if (q.type === 'matching') {
+                let correct = 0;
+                for (let pair of q.matchPairs) if (q.userMatches[pair.term] === pair.correctMatch) correct++;
+                q.feedback = `التوصيل: ${correct}/${q.matchPairs.length} صحيحة.`;
+            }
+        }
+        renderAllQuestions();
+        updateScoreUI();
+        showEvaluation();
+    }
+    
+    function showEvaluation() {
+        const current = computeCurrentScore();
+        const max = totalPossibleScore;
+        const percent = max ? Math.round((current / max) * 100) : 0;
+        let msg = `📊 التقييم: ${current} من ${max} (${percent}%) `;
+        if (percent >= 85) msg += "⭐ ممتاز!";
+        else if (percent >= 65) msg += "👍 جيد جداً";
+        else if (percent >= 50) msg += "📘 جيد، راجع الأخطاء";
+        else msg += "📚 تحتاج مراجعة المزيد";
+        document.getElementById('evaluationMessage').innerHTML = msg;
+    }
+    
+    function renderAllQuestions() {
+        const root = document.getElementById('questionsRoot');
+        root.innerHTML = '';
+        const mainSection = document.createElement('div'); mainSection.className = 'section';
+        mainSection.innerHTML = '<h2>📚 أسئلة شاملة (نظم المعلومات + البرمجة + الذكاء الاصطناعي + المنطق)</h2>';
+        root.appendChild(mainSection);
+        
+        questions.forEach((q, idx) => {
+            const card = document.createElement('div'); card.className = 'question-card';
+            let html = `<div class="question-text"><span class="q-type">${q.type === 'truefalse' ? '✔️ صواب/خطأ' : (q.type === 'mc' ? '🔘 اختيار من متعدد' : '🔗 توصيل')}</span> <span>${q.text || q.title}</span></div>`;
+            if (q.type === 'truefalse') {
+                const trueChecked = q.userAnswer === true ? 'checked' : '';
+                const falseChecked = q.userAnswer === false ? 'checked' : '';
+                html += `<div class="options-area"><label class="tf-option"><input type="radio" name="q_${q.id}" value="true" ${trueChecked}> ✔️ صواب</label>
+                         <label class="tf-option"><input type="radio" name="q_${q.id}" value="false" ${falseChecked}> ❌ خطأ</label></div>`;
+            } else if (q.type === 'mc') {
+                let selectHtml = `<select class="mc-select"><option value="">-- اختر --</option>`;
+                q.options.forEach(opt => selectHtml += `<option value="${opt.replace(/"/g, '&quot;')}" ${q.userAnswer === opt ? 'selected' : ''}>${opt}</option>`);
+                selectHtml += `</select>`;
+                html += `<div>${selectHtml}</div>`;
+            } else if (q.type === 'matching') {
+                html += `<div><div style="background:#f3f7fe; padding:8px; border-radius:1rem; margin-bottom:12px;">📌 الأوصاف:<br>`;
+                for (const [num, desc] of Object.entries(q.descriptions)) html += `<span><strong>${num}</strong>: ${desc}</span><br>`;
+                html += `</div>`;
+                for (let pair of q.matchPairs) {
+                    const selectedVal = q.userMatches[pair.term] || '';
+                    html += `<div class="match-row"><span class="match-left">${pair.term}</span>
+                             <select class="match-select" data-term="${pair.term}"><option value="">-- رقم --`;
+                    for (let num of Object.keys(q.descriptions)) html += `<option value="${num}" ${selectedVal === num ? 'selected' : ''}>${num}</option>`;
+                    html += `</select></div>`;
+                }
+                html += `</div>`;
+            }
+            html += `<div class="feedback ${q.feedback?.includes('✅') ? 'correct-fb' : (q.feedback?.includes('❌') ? 'wrong-fb' : '')}">${q.feedback || '📝 لم يتم التحقق'}</div>
+                     <button class="check-single-btn" data-qidx="${idx}" style="margin-top:8px;">🔍 تحقق</button>`;
+            card.innerHTML = html;
+            mainSection.appendChild(card);
+        });
+        
+        document.querySelectorAll('.check-single-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = parseInt(btn.getAttribute('data-qidx'));
+                checkSingleQuestion(questions[idx], btn.closest('.question-card'));
+            });
+        });
+        updateScoreUI();
+    }
+    
+    let totalPossibleScore = 0;
+    function init() {
+        totalPossibleScore = computeMaxScore();
+        document.getElementById('totalPossibleSpan').innerText = totalPossibleScore;
+        for (let q of questions) if (q.type === 'matching' && !q.userMatches) {
+            q.userMatches = {};
+            for (let pair of q.matchPairs) q.userMatches[pair.term] = '';
+        }
+        renderAllQuestions();
+        startTimer();
+        document.getElementById('checkAllAnswersBtn').onclick = checkAllQuestions;
+        document.getElementById('resetAllBtn').onclick = resetAllQuestions;
+        document.getElementById('goBackBtn').onclick = goBackClear;
+    }
+    init();
+</script>
+</body>
+</html>
