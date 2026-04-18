@@ -252,11 +252,15 @@
 <script>
     // تعريف الأسئلة
     const questions = [
-        // 1. الفرق بين Sub و Function
-        { type: "mc", text: "ما الفرق الرئيسي بين الإجراء الفرعي (Sub) والدالة (Function)؟", 
-          options: ["الإجراء الفرعي لا يعيد قيمة، والدالة تعيد قيمة", "الدالة لا تعيد قيمة، والإجراء الفرعي يعيد", "كلاهما لا يعيدان قيمة", "كلاهما يعيدان قيمة"], 
-          correct: "الإجراء الفرعي لا يعيد قيمة، والدالة تعيد قيمة" },
 
+
+        // 1. الفرق بين Sub و Function
+        { 
+  type: "mc", 
+  text: "ما نتيجة تنفيذ البرنامج التالي:\n() Public Sub Main\n  Shw(5, 4)\nEnd Sub\n() Public Sub Shw(n1, n2)\n  MsgBox(n1 * n2)\nEnd Sub", 
+  options: ["20", "10", "15", "5"], 
+  correct: "20" 
+},
         // 2. طريقة استدعاء الدالة
         { type: "mc", text: "أي من العبارات التالية تمثل الطريقة الصحيحة لاستدعاء دالة (Function)؟",
           options: ["Call MyFunction(5)", "MyFunction(5)", "x = MyFunction(5)", "كل ما سبق صحيح"], 

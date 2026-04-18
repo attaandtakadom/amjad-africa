@@ -206,9 +206,63 @@
             .quiz-container { padding: 1rem; }
             .match-left { min-width: 140px; }
         }
+
+#topBtn {
+  position: fixed; /* يبقى ثابتاً أثناء التمرير */
+  bottom: 20px; 
+  left: 20px; /* ليناسب الواجهة العربية */
+  z-index: 99; 
+  background-color: #007bff; 
+  color: white; 
+  border: none; 
+  border-radius: 50%; 
+  width: 45px; 
+  height: 45px; 
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+#topBtn:hover { background-color: #0056b3; }
+
+.nav-arrows {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* ليناسب اتجاه الصفحة العربية */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* مسافة بين السهمين */
+  z-index: 1000;
+}
+
+.nav-arrows button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background-color: #007bff; /* لون أزرق احترافي */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.nav-arrows button:hover {
+  background-color: #0056b3;
+  transform: scale(1.1); /* تأثير بسيط عند المرور بالماوس */
+}
+
+
     </style>
 </head>
 <body>
+
+
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="topBtn" title="العودة للأعلى">↑</button>
+
+
 <div class="quiz-container" id="app">
     <h1>📘 اختبار تقنية المعلومات الشامل</h1>
     <div class="sub">الصف التاسع | الوحدة الأولى: نظم المعلومات | الثانية: البرمجة | الثالثة: الذكاء الاصطناعي</div>
@@ -237,8 +291,17 @@
     
     <div id="evaluationMessage" class="final-eval"></div>
 </div>
-
+<div class="nav-arrows">
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="للأعلى">↑</button>
+  <button onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})" title="للأسفل">↓</button>
+</div>
 <script>
+
+
+
+
+
+    
     // --------------------------------------------------------------
     // قاعدة الأسئلة (الوحدة الأولى + الثانية + الثالثة)
     // --------------------------------------------------------------
@@ -314,9 +377,7 @@
 { text: "تُستخدم الأنظمة المرئية في مجال الأمن للتحقق من هوية الأشخاص الداخلين للمنشآت.", correct: true },
 
 { text: "يحتوي النظام الخبير على كمية هائلة من المعلومات والخبرات التي يمتلكها الخبراء المختصون.", correct: true },
-
-
-
+{ text: "يصعب على الروبوت تكوين معرفة (خبرة) ضمنية:", correct: true },
 
 
 
@@ -781,6 +842,23 @@
         document.getElementById('goBackBtn').onclick = goBackClear;
     }
     init();
+
+
+window.onscroll = function() {
+  let btn = document.getElementById("topBtn");
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+}
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
