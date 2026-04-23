@@ -160,7 +160,26 @@ html {
     margin-left: 10px;
 }
 
+.nav-lessons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
+.nav-btn {
+    text-decoration: none;
+    color: #555;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.nav-btn:hover, .nav-btn.active {
+    background: #2196f3;
+    color: white !important;
+}
 
     </style>
 </head>
@@ -174,20 +193,19 @@ html {
 </div>
 
 
-<header>
-    <h1>مؤسسة أمجاد أفريقيا للتعليم الخاص</h1>
-    <p>تمارين        ( A - 5  )   - مادة الميكانيكا - الصف الثالث الثانوي  </p>
+<header class="main-header">
+    <div class="header-content">
+        <div class="brand">
+         <h1>     <span class="school-name">مدرسة أمجاد أفريقيا  </span></h>
+        </div>         <h3>     <span class="school-name" >   تمارين --A-5- الميكانيكا الصف الثالث الثانوي.</span></h3>
 
 
-<button class="btn-submit"
-                    onclick="window.location.href='../../../../../../althanaoya/fizic/fizic-dashbord'"
-                    id="homeMainBtn"><i class="fas fa-home"></i>
-                    الرئيسية</button> 
-
-
-
+        <nav class="nav-lessons">
+            <a href="index2.html" class="nav-btn active">     تمارين --B-5-</a>
+            <a href="../../../../../../althanaoya/fizic/fizic-dashbord.html" class="nav-btn">⚙️ لوحة التحكم</a>
+        </nav>
+    </div>
 </header>
-
 <div id="container"></div>
 
 <script src="problems_data.js"></script>

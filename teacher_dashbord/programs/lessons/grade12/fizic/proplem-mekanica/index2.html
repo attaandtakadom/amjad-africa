@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسة أمجاد أفريقيا - التمارين 5-B</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2196f3; }
+        .question-card { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 10px; text-align: right; }
+        .btn-toggle { background: #607d8b; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    body { font-family: 'Tajawal', sans-serif; background-color: #f0f4f8; padding: 20px; direction: rtl; }
+    .container { max-width: 900px; margin: auto; }
+    h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+    /* تنسيق إضافي لتبسيط الواجهة */
+    .question-card { transition: transform 0.3s ease; }
+    .question-card:hover { transform: translateY(-5px); }
+
+   
+   </style>
+</head>
+<body>
+<header style="background-color: #1a237e; color: white; padding: 30px 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: 'Cairo', 'Tajawal', sans-serif; border-bottom: 5px solid #ffa000;">
+    
+    <h1 style="margin: 0; font-size: 2.2em; font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+        مدرسة أمجاد أفريقيا للتعليم الخاص
+    </h1>
+
+    <div style="margin: 15px 0 25px 0;">
+        <span style="display: block; font-size: 1.8em; font-weight: 900; color: #ffca28; text-decoration: underline; letter-spacing: 1px;">
+            مادة الفيزياء - تمارين (5-B) القدرة
+        </span>
+    </div>
+    
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        
+        <button onclick="window.location.href='../../../../../../althanaoya/fizic/fizic-dashbord.html'" style="background-color: #ffffff; color: #1a237e; border: none; padding: 12px 28px; border-radius: 50px; cursor: pointer; font-weight: 800; font-size: 1.1em; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+            🏠 العودة للرئيسية
+        </button>
+        
+        <button onclick="window.location.href='index.html'" style="background-color: #4caf50; color: white; border: none; padding: 12px 28px; border-radius: 50px; cursor: pointer; font-weight: 800; font-size: 1.1em; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+            📝 تمارين 5-A
+        </button>
+
+    </div>
+</header>
+
+
+<div class="container">
+    <h1>التمارين  (5-B) - القدرة</h1>
+    <div id="questions-container">
+        </div>
+</div>
+
+<script src="problems_data1.js"></script>
+<script src="script1.js"></script>
+<button onclick="scrollToTop()" id="backToTopBtn" title="العودة للأعلى" style="
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    left: 20px; 
+    z-index: 99; 
+    border: none; 
+    outline: none; 
+    background-color: #1a237e; 
+    color: white; 
+    cursor: pointer; 
+    padding: 15px; 
+    border-radius: 50%; 
+    font-size: 20px; 
+    width: 55px; 
+    height: 55px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+">
+    ↑
+</button>
+
+<script>
+    // الحصول على الزر
+    let mybutton = document.getElementById("backToTopBtn");
+
+    // عندما يقوم الطالب بالتمرير لأسفل بمقدار 20 بكسل، يظهر الزر
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // وظيفة العودة للأعلى عند النقر
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // صعود ناعم وليس مفاجئ
+        });
+    }
+</script>
+</body>
+</html>

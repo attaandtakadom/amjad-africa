@@ -415,13 +415,88 @@ const problems = [
         </div>
     </div>
 `
-}
+},
 
 
 
 
 
 ];
+
+
+// تأكدي أن الكلمة هي questions وليس شيئاً آخر
+const questions = [ 
+    
+        
+{
+    id: "5_1",
+    text: "<span style='color: #2e7d32; font-weight: bold;'>[تمارين 5 - 5 ب]</span><br>تستخدم رافعة لرفع صندوق كتلته 2 طن إلى ارتفاع 75m خلال زمن قدره 45s. أوجد متوسط القدرة المبذولة بواسطة الرافعة:",
+    type: "crane_power_calc", 
+    options: ["33.3 kW", "30 kW", "150 kW", "3.3 kW"],
+    correctAnswer: "33.3 kW",
+    
+    givensHTML: `
+        <div style="text-align: center; background: white; padding: 10px; border-radius: 10px; margin-bottom: 15px;">
+            <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+                <line x1="10" y1="190" x2="390" y2="190" stroke="#4caf50" stroke-width="3"/>
+                <rect x="180" y="80" width="50" height="50" fill="#795548" stroke="#5d4037" stroke-width="2"/>
+                <text x="185" y="110" fill="white" font-size="10" font-weight="bold">2 Ton</text>
+                <line x1="205" y1="80" x2="205" y2="20" stroke="#333" stroke-width="2"/>
+                <line x1="205" y1="20" x2="100" y2="20" stroke="#333" stroke-width="4"/>
+                <line x1="300" y1="190" x2="300" y2="80" stroke="#2196f3" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="310" y="140" fill="#2196f3" font-weight="bold">h = 75m</text>
+                <text x="40" y="100" fill="#e91e63" font-weight="bold">t = 45s</text>
+                <defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#2196f3"/></marker></defs>
+            </svg>
+        </div>
+
+        <div style="border-right: 4px solid #4caf50; padding-right: 15px; background: #f1f8e9; margin-bottom: 15px; padding-top: 10px; padding-bottom: 10px;">
+            <strong>📋 معطيات المسألة:</strong>
+            <ul style="margin-bottom: 15px;">
+                <li>الكتلة (m) = 2 طن = 2000 kg</li>
+                <li>الارتفاع (h) = 75 m</li>
+                <li>الزمن (t) = 45 s</li>
+                <li>عجلة الجاذبية (g) = 10 m/s²</li>
+            </ul>
+            
+            <hr style="border: 0; border-top: 1px solid #c8e6c9; margin: 15px 0;">
+            
+            <strong>🔘 اختر الإجابة الصحيحة (القدرة P):</strong>
+            <div style="margin-top: 10px;">
+                <label style="display: block; margin-bottom: 8px; cursor: pointer;"><input type="radio" name="q5_1" value="33.3 kW"> 33.3 kW</label>
+                <label style="display: block; margin-bottom: 8px; cursor: pointer;"><input type="radio" name="q5_1" value="30 kW"> 30 kW</label>
+                <label style="display: block; margin-bottom: 8px; cursor: pointer;"><input type="radio" name="q5_1" value="150 kW"> 150 kW</label>
+                <label style="display: block; margin-bottom: 8px; cursor: pointer;"><input type="radio" name="q5_1" value="3.3 kW"> 3.3 kW</label>
+            </div>
+            
+            <button onclick="checkAnswerDirect('5_1', '33.3 kW')" style="background: #4caf50; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; margin-top: 10px;">تحقق من الإجابة</button>
+            <p id="feedback-5_1" style="font-weight: bold; margin-top: 10px;"></p>
+        </div>
+    `,
+    
+    solutionHTML: `
+        <div id="solution-container-5_1">
+            <button onclick="toggleSolution('5_1')" id="btn-5_1" class="btn-toggle">إظهار الحل التفصيلي</button>
+            <div id="sol-content-5_1" style="display: none; background: #fff; padding: 15px; border: 1px dashed #4caf50; border-radius: 10px; margin-top: 10px;">
+                <p><strong>1) حساب الشغل المبذول (W):</strong><br>
+                $W = m \cdot g \cdot h$<br>
+                $W = 2000 \cdot 10 \cdot 75 = 1,500,000 \text{ J}$</p>
+                
+                <p><strong>2) حساب متوسط القدرة (P):</strong><br>
+                $P = \frac{W}{t}$<br>
+                $P = \frac{1,500,000}{45} \approx 33,333.3 \text{ Watt}$</p>
+                
+                <div style="background: #e8f5e9; border-right: 5px solid #4caf50; padding: 10px; margin-top: 10px;">
+                    <strong>3) التحويل إلى كيلوات (kW):</strong><br>
+                    $33,333.3 \div 1000 = \mathbf{33.3 \text{ kW}}$
+                </div>
+            </div>
+        </div>
+    `
+}
+
+]; // تأكدي من إغلاق القوس المربع والفاصلة المنقوطة
+
 
 
 // أضيفي هذا الكود في نهاية ملف script.js
