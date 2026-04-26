@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحان الميكانيكا الشامل 2024-2025</title>
+    <style>
+        :root { --primary: #2c3e50; --accent: #f1c40f; --success: #27ae60; --error: #e74c3c; }
+        body { font-family: 'Segoe UI', Tahoma; background: #f4f7f6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: var(--primary); border-bottom: 3px solid var(--accent); padding-bottom: 10px; }
+        .section-title { background: #34495e; color: white; padding: 10px; border-radius: 5px; margin: 25px 0; font-size: 1.3em; }
+        .card { border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #fff; }
+        .options-group { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .btn-opt { padding: 8px 20px; border: 2px solid #34495e; background: white; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .btn-opt.selected { background: #34495e; color: white; }
+        .check-btn { background: var(--accent); border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+        .solution { display: none; margin-top: 15px; padding: 15px; background: #f9f9f9; border-right: 5px solid var(--success); border-radius: 5px; }
+        .correct { border: 2px solid var(--success); background: #f0fff4; }
+        .wrong { border: 2px solid var(--error); background: #fff5f5; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>امتحان الميكانيكا النهائي 2024 - 2025</h1>
+
+    <div style="direction: rtl; text-align: right; background: #fff5f5; border: 2px solid #ffcccc; padding: 20px; border-radius: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <h3 style="color: #d9534f; margin-top: 0; text-align: center;">💡 قاعدة الإشارات الذهبية للمقذوفات</h3>
+    
+    <p style="font-weight: bold; color: #333;">عندما نعتبر أن الاتجاه للأعلى هو الموجب (+):</p>
+    
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <tr style="background-color: #fce4e4;">
+            <th style="border: 1px solid #ffcccc; padding: 10px;">الحالة</th>
+            <th style="border: 1px solid #ffcccc; padding: 10px;">إشارة السرعة (u)</th>
+            <th style="border: 1px solid #ffcccc; padding: 10px;">إشارة العجلة (g)</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ffcccc; padding: 10px;"><b>قذف للأعلى ⬆️</b></td>
+            <td style="border: 1px solid #ffcccc; padding: 10px; color: green; text-align: center;">موجبة (+)</td>
+            <td style="border: 1px solid #ffcccc; padding: 10px; color: red; text-align: center;">سالبة (-)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ffcccc; padding: 10px;"><b>قذف للأسفل ⬇️</b></td>
+            <td style="border: 1px solid #ffcccc; padding: 10px; color: red; text-align: center;">سالبة (-)</td>
+            <td style="border: 1px solid #ffcccc; padding: 10px; color: red; text-align: center;">سالبة (-)</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 15px; padding: 10px; background: #fff; border-right: 5px solid #d9534f; font-size: 0.9em;">
+        <b>لماذا الجاذبية دائماً سالبة؟</b><br>
+        لأن الأرض "تسحب" دائماً للأسفل، وسهم الجاذبية لا يغير اتجاهه أبداً، سواء كان الجسم صاعداً أو هابطاً.
+    </div>
+</div>
+
+
+
+
+
+    <div class="section-title">أولاً: أسئلة الصواب والخطأ</div>
+    <div id="tf-area"></div>
+
+    <div class="section-title">ثانياً: أسئلة الاختيار من متعدد</div>
+    <div id="mcq-area"></div>
+</div>
+
+<script src="problemData4.js"></script>
+<script>
+    let userAnswers = {};
+
+    function init() {
+        renderTF();
+        renderMCQ();
+    }
+
+    function renderTF() {
+        const area = document.getElementById('tf-area');
+        trueFalseQuestions.forEach(q => {
+            area.innerHTML += `
+                <div class="card" id="card-tf-${q.id}">
+                    <p><b>س ${q.id}:</b> ${q.text}</p>
+                    <div class="options-group">
+                        <button class="btn-opt" onclick="setAns('tf', ${q.id}, 'صح')">صح</button>
+                        <button class="btn-opt" onclick="setAns('tf', ${q.id}, 'خطأ')">خطأ</button>
+                    </div>
+                    <button class="check-btn" onclick="check('tf', ${q.id})">تحقق</button>
+                    <div class="solution" id="sol-tf-${q.id}"></div>
+                </div>`;
+        });
+    }
+
+    function renderMCQ() {
+        const area = document.getElementById('mcq-area');
+        multipleChoiceQuestions.forEach(q => {
+            let optsHTML = q.options.map(opt => `<button class="btn-opt" onclick="setAns('mcq', ${q.id}, '${opt}')">${opt}</button>`).join('');
+            area.innerHTML += `
+                <div class="card" id="card-mcq-${q.id}">
+                    <p><b>س ${q.id}:</b> ${q.text}</p>
+                    <div class="options-group">${optsHTML}</div>
+                    <button class="check-btn" onclick="check('mcq', ${q.id})">تحقق</button>
+                    <div class="solution" id="sol-mcq-${q.id}"></div>
+                </div>`;
+        });
+    }
+
+    function setAns(type, id, val) {
+        userAnswers[type + id] = val;
+        const btns = document.querySelectorAll(`#card-${type}-${id} .btn-opt`);
+        btns.forEach(b => b.classList.toggle('selected', b.innerText === val));
+    }
+
+    function check(type, id) {
+        const ans = userAnswers[type + id];
+        if(!ans) return alert("اختر إجابة!");
+        
+        const list = type === 'tf' ? trueFalseQuestions : multipleChoiceQuestions;
+        const q = list.find(x => x.id === id);
+        const sol = document.getElementById(`sol-${type}-${id}`);
+        const card = document.getElementById(`card-${type}-${id}`);
+
+        sol.style.display = "block";
+        if(ans === q.ans) {
+            card.className = "card correct";
+            sol.innerHTML = `<b style="color:green">إجابة صحيحة!</b><br>${q.solutionHTML}`;
+        } else {
+            card.className = "card wrong";
+            sol.innerHTML = `<b style="color:red">إجابة خاطئة. الإجابة الصحيحة هي: ${q.ans}</b><br>${q.solutionHTML}`;
+        }
+    }
+
+    window.onload = init;
+</script>
+
+<script src="problemData4.js"></script>
+
+<script>
+    // تأكدي أن هذه الوظيفة موجودة وتُستدعى عند تحميل الصفحة
+    window.onload = function() {
+        renderTF();
+        renderMCQ();
+    };
+</script>
+
+
+
+
+</body>
+</html>

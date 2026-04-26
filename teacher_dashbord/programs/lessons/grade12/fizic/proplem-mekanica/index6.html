@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تمارين الباب السادس - 6 ب</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 3px solid #2ecc71; padding-bottom: 10px; }
+        .opt-btn { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #3498db; background: white; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; }
+        .selected { background: #3498db !important; color: white; }
+        .check-btn { width: 100%; padding: 15px; background: #27ae60; color: white; border: none; border-radius: 10px; cursor: pointer; display: none; font-size: 18px; }
+        .sol-area { margin-top: 20px; padding: 20px; background: #f9f9f9; border-right: 6px solid #27ae60; display: none; text-align: right; }
+        .nav-footer { display: flex; justify-content: space-between; margin-top: 30px; }
+        .nav-btn { padding: 10px 25px; background: #34495e; color: white; border: none; border-radius: 8px; cursor: pointer;margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <a href="index.html" class="nav-btn">🏠 الرئيسية</a>
+        <a href="index3.html" class="nav-btn">📝 تمارين 6-A</a>
+    </div>
+
+    <h1 id="title">تمارين الباب السادس</h1>
+    <hr>
+    <div id="content"></div>
+    <div id="options"></div>
+    <button id="checkBtn" class="check-btn" onclick="verify()">تحقق من الإجابة</button>
+    <div id="sol" class="sol-area"></div>
+    
+    <div class="nav-footer">
+        <button class="nav-btn" onclick="move(-1)">السابق</button>
+        <button class="nav-btn" onclick="move(1)">التالي</button>
+    </div>
+</div>
+
+<script src="problemData6.js"></script>
+
+<script>
+    let idx = 0;
+    let choice = "";
+
+    function show() {
+        if (typeof myQuestionsData === 'undefined') {
+            document.getElementById('content').innerHTML = "<p style='color:red'>خطأ: لم يتم العثور على ملف proplem-js.js</p>";
+            return;
+        }
+        const q = myQuestionsData[idx];
+        document.getElementById('title').innerText = q.title;
+        document.getElementById('content').innerHTML = q.content;
+        document.getElementById('options').innerHTML = q.options.map(o => `<button class="opt-btn" onclick="sel(this, '${o}')">${o}</button>`).join('');
+        document.getElementById('checkBtn').style.display = 'none';
+        document.getElementById('sol').style.display = 'none';
+        choice = "";
+    }
+
+    function sel(btn, v) {
+        document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        choice = v;
+        document.getElementById('checkBtn').style.display = 'block';
+    }
+
+    function verify() {
+        if(choice === myQuestionsData[idx].ans) {
+            document.getElementById('sol').innerHTML = myQuestionsData[idx].sol;
+            document.getElementById('sol').style.display = 'block';
+        } else { alert("حاول مرة أخرى!"); }
+    }
+
+    function move(s) {
+        if(idx + s >= 0 && idx + s < myQuestionsData.length) {
+            idx += s;
+            show();
+        }
+    }
+
+    window.onload = show;
+</script>
+</body>
+</html>

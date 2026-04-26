@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فيزياء - تمارين (6-A)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; }
+        header { background-color: #1a237e; color: white; padding: 30px 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border-bottom: 5px solid #ffa000; }
+        .nav-btn { background-color: #ffffff; color: #1a237e; border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .nav-btn-green { background-color: #4caf50; color: white; }
+        #questions-container { max-width: 800px; margin: 30px auto; padding: 20px; }
+        .question-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-right: 8px solid #1a237e; }
+        #backToTopBtn { display: none; position: fixed; bottom: 20px; left: 20px; background: #1a237e; color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer; font-size: 20px; width: 55px; height: 55px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 style="margin: 0; font-size: 2.2em; font-weight: 900;">مدرسة أمجاد أفريقيا للتعليم الخاص</h1>
+    <div style="margin: 15px 0;">
+        <span style="font-size: 1.8em; font-weight: 900; color: #ffca28; text-decoration: underline;">مادة الفيزياء - تمارين (6-A) حفظ الطاقة</span>
+    </div>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <a href="index.html" class="nav-btn">🏠 الرئيسية</a>
+        <a href="index6.html" class="nav-btn">📝 تمارين 6-B</a>
+    </div>
+</header>
+
+<div id="questions-container">
+    </div>
+
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" id="backToTopBtn">↑</button>
+
+<script src="problems_data3.js"></script>
+<script>
+    const container = document.getElementById('questions-container');
+    questions.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.innerHTML = q.text + q.givensHTML + q.solutionHTML;
+        container.appendChild(card);
+    });
+
+    function toggleSolution(id) {
+        const sol = document.getElementById('sol-content-' + id);
+        const btn = document.getElementById('btn-' + id);
+        if (sol.style.display === "none") {
+            sol.style.display = "block";
+            btn.innerText = "إخفاء الحل";
+        } else {
+            sol.style.display = "none";
+            btn.innerText = "إظهار الحل والخطوات";
+        }
+    }
+
+    window.onscroll = function() {
+        let btn = document.getElementById("backToTopBtn");
+        if (document.documentElement.scrollTop > 100) btn.style.display = "block";
+        else btn.style.display = "none";
+    };
+</script>
+</body>
+</html>
