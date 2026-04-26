@@ -94,10 +94,8 @@ sol: `
             <br><b>v = جذر 6.5 = 2.55 م/ث</b>
         </div>
         
-        <p style="color: #27ae60; font-weight: bold; text-align: center; margin-top: 10px;">
-            نلاحظ أن النتيجة هي نفسها، وهذا يثبت صحة تفكيرنا الفيزيائي!
-        </p>
-    </div>
+
+        </div>
 ` },
 
 {
