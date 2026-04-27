@@ -1324,35 +1324,46 @@
             <button class="check-btn" onclick="checkMCQ('q_mag_6','c','استبدال الحلقات بالعاكس يغير نوع التيار (متردد/مستمر) ولكنه لا يغير قيمة الجهد العظمى.')"><i class="fas fa-check"></i> تحقق</button>
         </div>
 
-        <!-- سؤال 7 -->
-        <!-- سؤال 7 - قوة التأثير -->
-<div class="question-box" id="q7">
-    <div class="question-number">سؤال 7</div>
-    <div class="question-text">
-        تأثير قوة مقدارها (8 × 10⁻¹⁴ N) عندما تكون صغيرة مفيد (5 × 10⁻⁵ m³) معوضاً على محال معايير متقدم حسب شدة ذلك تحليل.
-    </div>
-    
-    <div class="math-equation">
-        F = 8 × 10⁻¹⁴ N<br>
-        V = 5 × 10⁻⁵ m³
-    </div>
-    
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-        <div class="final-fix-frame">
-            <input type="radio" name="q7" value="a"> <label>1.6 × 10⁻⁹</label>
-        </div>
-        <div class="final-fix-frame">
-            <input type="radio" name="q7" value="b"> <label>1.6 × 10⁻¹⁰</label>
-        </div>
-        <div class="final-fix-frame">
-            <input type="radio" name="q7" value="c"> <label>1.6 × 10⁻⁸</label>
-        </div>
-    </div>
-    
-    <div id="fb_q7" class="feedback"></div>
-    <button class="check-btn" onclick="checkMCQ('q7','a','الكثافة = F/V = (8×10⁻¹⁴)/(5×10⁻⁵) = 1.6×10⁻⁹')"><i class="fas fa-check"></i> تحقق</button>
-</div>
+            <div class="question-number">سؤال 7</div>
 
+<div style="direction: rtl; text-align: right; line-height: 1.8;">
+    <p style="font-size: 1.1em; color: #2c3e50;">تأثر إلكترون بقوة مقدارها (8 × 10⁻¹⁴ N) عندما تحرك بسرعة مقدارها (5 × 10⁵ m/s) عمودياً على مجال مغناطيسي منتظم. احسب شدة ذلك المجال (B).</p>
+    <p style="font-size: 0.9em; color: #7f8c8d;">(علماً بأن شحنة الإلكترون q = 1.6 × 10⁻¹٩ C)</p>
+    <div style="background: #fdfefe; border: 1px solid #d1d8e0; padding: 15px; border-radius: 8px; margin-top: 10px;">
+        <b>القوة (F)</b> = 8 × 10⁻¹⁴ N<br>
+        <b>السرعة (v)</b> = 5 × 10⁵ m/s<br>
+        <b>الشحنة (q)</b> = 1.6 × 10⁻¹٩ C
+    </div>
+</div>
+`;
+
+
+
+<div style="direction: rtl; text-align: right; line-height: 1.8;">
+    <h4 style="color: #27ae60; border-bottom: 2px solid #27ae60; display: inline-block;">القانون المستخدم:</h4>
+    <p>بما أن حركة الإلكترون عمودية على المجال، نستخدم قانون قوة لورنتز:</p>
+    <p style="text-align: center; background: #f4f7f6; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 1.2em;">F = q × v × B</p>
+    
+    <h4 style="color: #2980b9; border-bottom: 2px solid #2980b9; display: inline-block;">خطوات التعويض الحسابي:</h4>
+    <p>لإيجاد شدة المجال (B)، نقسم القوة على ناتج ضرب الشحنة في السرعة:</p>
+    <p style="text-align: center; direction: ltr; background: #fff; border: 1px solid #eee; padding: 10px;">
+        B = F / (q × v) <br>
+        B = (8 × 10⁻¹⁴) / (1.6 × 10⁻¹⁹ × 5 × 10⁵)
+    </p>
+
+    <h4 style="color: #e67e22; border-bottom: 2px solid #e67e22; display: inline-block;">التبسيط النهائي:</h4>
+    <ul style="padding-right: 20px;">
+        <li>نضرب القيم في المقام أولاً: (1.6 × 5) = 8.</li>
+        <li>في الأسس عند الضرب نجمع: (-19 + 5) = -14.</li>
+        <li>تصبح المعادلة: B = (8 × 10⁻¹⁴) / (8 × 10⁻¹⁴).</li>
+        <li>النتيجة: <b>B = 1.0 Tesla</b>.</li>
+    </ul>
+    
+    <div style="background: #27ae60; color: white; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 15px;">
+        شدة المجال المغناطيسي المستنتجة هي 1.0 تسلا
+    </div>
+</div>
+`;
 <!-- سؤال 8 - القوة على سلك في مجال مغناطيسي -->
 <div class="question-box" id="q8">
     <div class="question-number">سؤال 8</div>
@@ -1392,6 +1403,20 @@
         let correctAnswers = 0;
         let wrongAnswers = 0;
         let answeredQuestions = new Set();
+
+// دالة العرض (تستدعي المتغيرات مباشرة)
+function displayQuestion7() {
+    document.getElementById('title').innerHTML = q7_title;
+    document.getElementById('content').innerHTML = q7_content;
+    document.getElementById('options').innerHTML = q7_options.map(opt => 
+        `<button class="opt-btn" onclick="checkAnswer('${opt}')">${opt}</button>`
+    ).join('');
+}
+
+
+
+
+
 
         function updateScoreBoard() {
             document.getElementById('correctCount').textContent = correctAnswers;

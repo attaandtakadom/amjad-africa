@@ -193,126 +193,143 @@ givensHTML: `
             </div>
         </div>
     `
-},{
+},// --- السؤال الرابع (الفتاة والجبل) ---
+ {
     id: "4",
-    text: "<div style='color: #2e7d32; font-size: 1.4em; font-weight: 800; line-height: 1.5; margin-bottom: 15px;'>سؤال (4) <br> تتسلق فتاة كتلتها 65kg جبلاً إلى ارتفاع قدره 3.2km. احسب طاقة وضعها عند القمة:</div>",
+    text: `<div style='color: #2e7d32; font-size: 1.4em; font-weight: 800; line-height: 1.5; margin-bottom: 15px;'>
+            سؤال (4) <br> تتسلق فتاة كتلتها 65kg جبلاً إلى ارتفاع قدره 3.2km. احسب طاقة وضعها عند القمة:
+           </div>`,
     
     givensHTML: `
-        <div style="text-align: center; background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee;">
-            <svg viewBox="0 0 500 320" width="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="shadow" x="0" y="0" width="200%" height="200%">
-                        <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#aaa"/>
-                    </filter>
-                </defs>
+    <div style="text-align: center; background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee;">
+        <svg viewBox="0 0 500 320" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="shadow" x="0" y="0" width="200%" height="200%">
+                    <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#aaa"/>
+                </filter>
+            </defs>
 
-                <path d="M50 300 L250 50 L450 300 Z" fill="#cfd8dc" stroke="#455a64" stroke-width="3" filter="url(#shadow)"/>
-                <path d="M200 112 L250 50 L300 112 Q250 130 200 112" fill="#fff" opacity="0.8"/> 
+            <path d="M50 300 L250 50 L450 300 Z" fill="#cfd8dc" stroke="#455a64" stroke-width="3" filter="url(#shadow)"/>
+            <path d="M200 112 L250 50 L300 112 Q250 130 200 112" fill="#fff" opacity="0.8"/> 
 
-                <g>
-                    <rect x="-6" y="-12" width="12" height="15" rx="3" fill="#e91e63" /> 
-                    <rect x="-2" y="-15" width="4" height="4" fill="#a0522d" />
-                    <circle cx="0" y="-20" r="5" fill="#a0522d" stroke="#5d4037" stroke-width="0.5" />
-                    <path d="M-5 -24 Q0 -30 5 -24 L5 -18 Q0 -15 -5 -18 Z" fill="#3e2723" />
-                    
-                    <animateMotion 
-                        path="M70 280 L235 70" 
-                        dur="6s" 
-                        repeatCount="indefinite" 
-                        calcMode="linear" />
-                </g>
-
-                <line x1="250" y1="50" x2="250" y2="300" stroke="#00796b" stroke-dasharray="5,5" stroke-width="2"/>
-                <text x="255" y="180" fill="#00796b" font-weight="bold" font-size="16">h = 3.2 km</text>
+            <g>
+                <rect x="-6" y="-12" width="12" height="15" rx="3" fill="#e91e63" /> 
+                <circle cx="0" y="-20" r="5" fill="#a0522d" stroke="#5d4037" stroke-width="0.5" />
+                <path d="M-5 -24 Q0 -30 5 -24 L5 -18 Q0 -15 -5 -18 Z" fill="#3e2723" />
                 
-                <g transform="translate(20, 20)">
-                    <rect x="0" y="0" width="130" height="45" fill="#f5f5f5" rx="8" stroke="#1a237e" stroke-width="2"/>
-                    <text x="65" y="28" fill="#1a237e" font-size="18" font-weight="900" text-anchor="middle">m = 65 kg</text>
-                </g>
-            </svg>
-            <p style="color: #666; font-size: 0.9em; margin-top: 10px;">(زيادة الارتفاع تعني زيادة طاقة الوضع المختزنة)</p>
-        </div>
-    `,
+                <animateMotion 
+                    path="M80 270 L240 65" 
+                    dur="5s" 
+                    repeatCount="indefinite" 
+                    calcMode="linear" />
+            </g>
+
+            <line x1="250" y1="50" x2="250" y2="300" stroke="#00796b" stroke-dasharray="5,5" stroke-width="2"/>
+            <text x="255" y="180" fill="#00796b" font-weight="bold" font-size="16">h = 3.2 km</text>
+            
+            <g transform="translate(180, 20)">
+                <rect x="0" y="0" width="140" height="40" fill="#f5f5f5" rx="8" stroke="#1a237e" stroke-width="2"/>
+                <text x="70" y="25" fill="#1a237e" font-size="16" font-weight="900" text-anchor="middle">الكتلة m = 65 kg</text>
+            </g>
+        </svg>
+        <p style="color: #666; font-size: 0.9em; margin-top: 10px;">(لاحظ صعود البنت: تزداد طاقة الوضع بزيادة الارتفاع الرأسي)</p>
+    </div>
+`,
     
     solutionHTML: `
-        <div id="solution-container-4" style="text-align: center; margin-top: 20px;">
-            <button onclick="toggleSolution('4')" id="btn-4" style="background: #4caf50; color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 1.2em;">إظهار الشرح والخطوات</button>
-            <div id="sol-content-4" style="display: none; background: #fffdf5; padding: 25px; border: 2px dashed #ffa000; border-radius: 15px; margin-top: 25px; text-align: right; line-height: 2;">
-                
-                <div style="background: #fff3e0; border-right: 6px solid #ff9800; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
-                    <h4 style="margin: 0 0 10px 0; color: #e65100;">💡 ركن التفكير:</h4>
-                    <p>1. نحول الكيلومتر لمتر: $3.2 \times 1000 = 3200 \, \text{m}$</p>
-                    <p>2. نحسب طاقة الوضع بالقانون الأساسي ($m \cdot g \cdot h$)</p>
-                    <p>3. نختصر الناتج بوحدات الكيلو والميجا.</p>
-                </div>
-
-                <p><strong>حساب طاقة الوضع (Ep):</strong></p>
-                <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; text-align: center; font-family: 'Courier New', monospace; font-size: 1.1em;">
-                    Ep = 65 × 10 × 3200 = <b>2,080,000 J</b>
-                </div>
-
-                <div style="margin-top: 20px; padding: 20px; background: #1a237e; color: white; border-radius: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                    <div style="margin-bottom: 15px; border-bottom: 1px dashed #5c6bc0; padding-bottom: 10px;">
-                        <span style="font-size: 1.1em; color: #ffca28;">الناتج النهائي بوحدات مختلفة:</span>
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <div style="font-size: 1.4em; font-weight: bold;">2,080,000 J <small>(بالجول)</small></div>
-                        <div style="font-size: 1.7em; font-weight: 900; color: #4caf50;">2,080 kJ <small>(كيلو جول)</small></div>
-                        <div style="font-size: 1.9em; font-weight: 900; color: #ffca28;">2.08 MJ <small>(ميجاجول)</small></div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 15px; font-size: 0.9em; color: #555; text-align: center;">
-                    * لاحظ أننا قسمنا على 1000 للكيلو، وعلى مليون للميجا.
-                </div>
-            </div>
+    <div id="sol-content-4" style="direction: rtl; text-align: right; background: #fffdf5; padding: 25px; border: 2px dashed #ffa000; border-radius: 15px; line-height: 2;">
+        <h4 style="color: #e65100; border-bottom: 2px solid #ff9800; display: inline-block;">الخطوات الحسابية:</h4>
+        
+        <p><b>1. تحويل الارتفاع إلى أمتار:</b></p>
+        <div style="background: #f1f8e9; padding: 5px 15px; border-radius: 5px;">
+            h = 3.2 × 1000 = <b>3200 m</b>
         </div>
-    `
+
+        <p><b>2. تطبيق قانون طاقة الوضع:</b></p>
+        <div style="background: #f1f8e9; padding: 5px 15px; border-radius: 5px; direction: ltr; text-align: center;">
+            Ep = m × g × h
+            <br>Ep = 65 × 10 × 3200
+        </div>
+
+        <p><b>3. الناتج النهائي بالجول:</b></p>
+        <div style="background: #1a237e; color: white; padding: 10px; border-radius: 8px; text-align: center; font-size: 1.2em;">
+            Ep = <b>2,080,000 J</b>
+        </div>
+
+        <p><b>4. تحويلات إضافية (للفهم):</b></p>
+        <ul style="list-style-type: square; padding-right: 20px; color: #555;">
+            <li>بالكيلو جول: 2080 kJ</li>
+            <li>بالميجا جول: 2.08 MJ</li>
+        </ul>
+    </div>
+`
 },
+
 
 {
     id: "5",
-    text: "<div style='color: #2e7d32; font-size: 1.4em; font-weight: 800; line-height: 1.5; margin-bottom: 15px;'>سؤال (5) <br> ينحدر متزلج من السكون على منحدر طوله 40m، فإذا كانت سرعته عند أسفل المنحدر 15m/s، احسب زاوية ميل المنحدر على الأفقي:</div>",
+    text: `<div style='color: #e67e22; font-size: 1.4em; font-weight: 800; line-height: 1.5; margin-bottom: 15px;'>
+            سؤال (5) <br> ينحدر متزلج من السكون على مستوى مائل طوله 40m ويصل إلى أسفل المستوى بسرعة 15m/s. احسب زاوية ميل المستوى:
+           </div>`,
     
     givensHTML: `
-        <div style="text-align: center; background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee;">
-            <svg viewBox="0 0 500 320" width="100%" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 270 L450 270 L450 120 Z" fill="#e1f5fe" stroke="#333" stroke-width="3"/>
-                
-                <path d="M90 270 A40 40 0 0 0 87 255" fill="none" stroke="red" stroke-width="3"/>
-                <text x="100" y="260" fill="red" font-weight="bold" font-size="18">θ = ?</text>
-                
-                <g>
-                    <rect x="-12" y="-2" width="24" height="4" rx="2" fill="#333" /> <rect x="-5" y="-12" width="10" height="12" rx="2" fill="#ff5722" /> <rect x="-2" y="-15" width="4" height="4" fill="#a0522d" /> <circle cx="0" y="-20" r="5" fill="#a0522d" stroke="#5d2e17" stroke-width="0.5" /> <animateMotion 
-                        path="M440 115 L60 260" 
-                        dur="4s" 
-                        repeatCount="indefinite" 
-                        calcMode="linear" />
-                </g>
+    <div style="text-align: center; background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee;">
+        <svg viewBox="0 0 500 250" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 200 L400 200 L400 50 Z" fill="#f0f0f0" stroke="#2c3e50" stroke-width="3"/>
+            
+            <g>
+                <rect x="-10" y="-5" width="20" height="10" rx="2" fill="#e67e22" />
+                <circle cx="0" y="-12" r="5" fill="#34495e" />
+                <animateMotion 
+                    path="M400 50 L50 200" 
+                    dur="4s" 
+                    repeatCount="indefinite" />
+            </g>
 
-                <text x="200" y="170" transform="rotate(-21, 200, 170)" font-weight="bold" fill="#1a237e">طول المنحدر (L) = 40m</text>
-                <text x="50" y="295" fill="#2e7d32" font-weight="bold">السرعة النهائية (v) = 15m/s</text>
-            </svg>
-            <p style="color: #666; font-size: 0.9em; margin-top: 10px;">(المطلوب إيجاد زاوية الانحدار بمعلومية السرعة والمسافة)</p>
-        </div>
-    `,
-    
-// استبدلي جزء الحل في السؤال الخامس بهذا النص الواضح
-solutionHTML: `
-    <div style="text-align: right; direction: rtl;">
-        <p><b>1) إيجاد الارتفاع الرأسي:</b></p>
-        <p>10 × h = 0.5 × (15 × 15)</p>
-        <p>10 × h = 112.5</p>
-        <p>h = 11.25 متر</p>
-        
-        <p><b>2) إيجاد الزاوية:</b></p>
-        <p>جيب الزاوية (sin) = 11.25 ÷ 40 = 0.281</p>
-        <p>باستخدام الآلة الحاسبة (Shift + sin):</p>
-        <h2 style="color: #d32f2f; text-align: center;">الزاوية ≈ 16.3 درجة</h2>
+            <text x="210" y="110" fill="#2980b9" font-weight="bold" transform="rotate(-23, 210, 110)">المسافة L = 40m</text>
+            <text x="60" y="190" fill="#c0392b" font-weight="bold">v = 15 m/s</text>
+            
+            <path d="M370 200 A30 30 0 0 0 375 180" fill="none" stroke="#e67e22" stroke-width="2"/>
+            <text x="350" y="195" fill="#e67e22" font-weight="bold">θ</text>
+        </svg>
+        <p style="color: #666; font-size: 0.9em; margin-top: 10px;">(تتحول طاقة الوضع عند القمة إلى طاقة حركة عند القاع)</p>
     </div>
-`},
+`,
+    
+    solutionHTML: `
+    <div id="solution-container-5" style="text-align: center; margin-top: 20px;">
+        <button onclick="toggleSolution('5')" id="btn-5" style="background: #e67e22; color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 1.2em;">إظهار الشرح والخطوات</button>
+        
+        <div id="sol-content-5" style="display: none; direction: rtl; text-align: right; background: #fffdf5; padding: 25px; border: 2px dashed #e67e22; border-radius: 15px; line-height: 2; margin-top: 20px;">
+            <h4 style="color: #d35400; border-bottom: 2px solid #e67e22; display: inline-block;">الخطوات الحسابية:</h4>
+            
+            <p><b>1. مساواة الطاقة عند (A) و (B):</b></p>
+            <div style="background: #fdf2e9; padding: 10px; border-radius: 5px; text-align: center; direction: ltr;">
+                P.E (Top) = K.E (Bottom) <br>
+                m . g . h = 1/2 . m . v²
+            </div>
 
+            <p><b>2. حذف الكتلة (m) والتعويض:</b></p>
+            <div style="background: #fdf2e9; padding: 10px; border-radius: 5px; text-align: center; direction: ltr;">
+                10 . h = 0.5 . (15)² <br>
+                10 . h = 112.5 <br>
+                <b>h = 11.25 m</b>
+            </div>
+
+            <p><b>3. حساب زاوية الميل (θ):</b></p>
+            <div style="background: #fdf2e9; padding: 10px; border-radius: 5px; text-align: center; direction: ltr;">
+                h = L . sin(θ) <br>
+                11.25 = 40 . sin(θ) <br>
+                sin(θ) = 11.25 / 40 = 0.281
+            </div>
+
+            <div style="background: #27ae60; color: white; padding: 10px; border-radius: 8px; text-align: center; font-size: 1.2em; margin-top: 15px;">
+                الزاوية θ = sin⁻¹(0.281) ≈ <b>16.33°</b>
+            </div>
+        </div>
+    </div>
+`
+},
 
 // تابع لمصفوفة الأسئلة في ملف problems_data3.js
 
