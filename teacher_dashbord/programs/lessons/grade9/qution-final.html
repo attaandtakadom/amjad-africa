@@ -324,7 +324,7 @@ const tfUnit1 = [
     { text: "تختلف برمجة الذكاء الاصطناعي كونها تستخدم عبارات منطقية بدلاً من الأوامر والتعليمات.", correct: true, type: 'truefalse' },
     { text: "أكبر تحدي يواجه الباحثين في مجال الذكاء الاصطناعي هو إيجاد أفضل أسلوب لتمثيل المعرفة.", correct: true, type: 'truefalse' },
     { text: "يعتبر الذكاء الاصطناعي محدوداً بمدى البيانات والبرمجة التي يتلقاها.", correct: true, type: 'truefalse' },
-    { text: "الصور والتحقق منها هي أولى مراحل النظام المرئي في الذكاء الاصطناعي.", correct: false, type: 'truefalse' },
+    { text: "  معالجة الصور والتحقق منها هي أولى مراحل النظام المرئي في الذكاء الاصطناعي.", correct: false, type: 'truefalse' },
     { text: "لغة LISP نظام عملي حسابي بني على أساس لا مبدأ في الحساب.", correct: true, type: 'truefalse' },
     { text: "لغة Prolog تعتبر لغة برمجة منطقية.", correct: true, type: 'truefalse' },
     { text: "لغة STRIPS تعبر عن الحالة الأولية للمهمة الموكل بها.", correct: true, type: 'truefalse' },
@@ -640,18 +640,16 @@ tfUnit1.forEach((q, idx) => {
     // ---------- أسئلة المنطق (True/False) لتعزيز مهارات تتبع الكود ----------
     const logicTF = [
 { 
-    text: "ناتج التعبير الحسابي بصيغة الحاسوب ((4 / 2) ^ 2) + (1 + 3) هو:", 
-    options: ["24", "18", "8", "20"], 
-    correct: "8" 
-}  ,
-{ 
     text: "نتيجة التعبير المنطقي &lrm;(5 >= 5) OR (10 < 5)&lrm; هي:", 
     options: ["True", "False"], 
     correct: "True" 
 },
       { text: "نتيجة NOT (8 > 3) هي False", correct: true },
-        { text: "نتيجة (3*2 == 6) AND (4>5) هي True", correct: false },
-        { text: "في لغة البرمجة، أولوية تنفيذ العمليات الحسابية تكون للأقواس أولاً ثم الأسس ثم الضرب والقسمة ثم الجمع والطرح.", correct: true },
+{ 
+    text: "نتيجة &lrm;(3 * 2 = 6) AND (4 > 5)&lrm; هي:", 
+    options: ["True", "False"], 
+    correct: "False" 
+},        { text: "في لغة البرمجة، أولوية تنفيذ العمليات الحسابية تكون للأقواس أولاً ثم الأسس ثم الضرب والقسمة ثم الجمع والطرح.", correct: true },
 
 
 
