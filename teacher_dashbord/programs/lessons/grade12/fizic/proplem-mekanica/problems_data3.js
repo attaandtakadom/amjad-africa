@@ -1,7 +1,7 @@
 const questions = [
     {
         id: "1",
-        text: "<div style='color: #2e7d32; font-size: 1.4em; font-weight: 800; line-height: 1.5; margin-bottom: 15px;'>سؤال (1) <br> يسقط جسم كتلته 20kg سقوطاً حراً من ارتفاع قدره 30m. أوجد الطاقة الكلية للجسم بعد أن يسقط مسافة قدرها 20m:</div>",
+        text: "<div style='color: #2e7d32; font-size: 1.4em; font-weight: 800; line-height: 1.5; margin-bottom: 15px;'>سؤال (1) <br> يسقط جسم كتلته 2kg سقوطاً حراً من ارتفاع قدره 30m. أوجد الطاقة الكلية للجسم بعد أن يسقط مسافة قدرها 20m:</div>",
         
         givensHTML: `
             <div style="text-align: center; background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee;">
@@ -16,7 +16,7 @@ const questions = [
                     <circle cx="250" cy="180" r="12" fill="#1976d2" opacity="0.6"/>
                     <text x="270" y="185" font-weight="bold">النقطة B (على ارتفاع 10m)</text>
                     
-                    <text x="350" y="40" fill="#1a237e" font-weight="bold">m = 20 kg</text>
+                    <text x="350" y="40" fill="#1a237e" font-weight="bold">m = 2 kg</text>
                 </svg>
             </div>
         `,
@@ -31,10 +31,10 @@ const questions = [
                         أي أن: الطاقة عند النقطة A = الطاقة عند النقطة B.
                     </div>
                     <p>1) عند النقطة A (أعلى ارتفاع): الجسم ساكن، إذاً طاقة الحركة = 0.</p>
-                    <p>الطاقة الكلية (A) = طاقة الوضع = m × g × h = 20 × 10 × 30 = 6000 J.</p>
+                    <p>الطاقة الكلية (A) = طاقة الوضع = m × g × h = 2 × 10 × 30 = 600 J.</p>
                     <p>2) عند النقطة B (بعد سقوط 20 متر): يكون الارتفاع المتبقي عن الأرض هو 10 أمتار.</p>
                     <p style="font-weight: bold; color: #d32f2f;">بما أن الطاقة الكلية مقدار ثابت (ما لم تؤثر قوة خارجية):</p>
-                    <p style="font-size: 1.3em; font-weight: 900; color: #1a237e; text-align: center; background: #f0f0f0; padding: 10px;">الطاقة الكلية عند B = 6000 جول</p>
+                    <p style="font-size: 1.3em; font-weight: 900; color: #1a237e; text-align: center; background: #f0f0f0; padding: 10px;">الطاقة الكلية عند B = 600 جول</p>
                 </div>
             </div>
         `

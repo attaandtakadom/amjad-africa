@@ -1,0 +1,60 @@
+{
+    id: "7",
+    text: `<div style='color: #8e44ad; font-size: 1.4em; font-weight: 800; line-height: 1.5; margin-bottom: 15px;'>
+            سؤال (7) <br> احسب القوة الدافعة الكهربية التأثيرية (E) المتولدة في ملف عدد لفاته 500 لفة إذا تغير الفيض بمعدل زمن قدره 0.02s:
+           </div>`,
+    
+    givensHTML: `
+    <div style="text-align: center; background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-around; align-items: center; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+            <div>
+                <div style="color: #8e44ad; font-weight: bold;">عدد اللفات</div>
+                <div style="font-size: 1.2em;">N = 500</div>
+            </div>
+            <div style="border-left: 2px solid #ddd; height: 40px;"></div>
+            <div>
+                <div style="color: #27ae60; font-weight: bold;">تغير الفيض ΔΦ</div>
+                <div style="font-size: 1.1em;">3 × 10⁻³ Wb</div>
+            </div>
+             <div style="border-left: 2px solid #ddd; height: 40px;"></div>
+            <div>
+                <div style="color: #c0392b; font-weight: bold;">الزمن Δt</div>
+                <div style="font-size: 1.2em;">0.02 s</div>
+            </div>
+        </div>
+        
+    </div>
+`,
+    
+    solutionHTML: `
+    <div id="solution-container-7" style="text-align: center; margin-top: 20px;">
+        <button onclick="toggleSolution('7')" id="btn-7" style="background: #8e44ad; color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 1.2em;">إظهار خطوات الحث</button>
+        
+        <div id="sol-content-7" style="display: none; direction: rtl; text-align: right; background: #f4eeff; padding: 25px; border: 2px dashed #8e44ad; border-radius: 15px; line-height: 2; margin-top: 20px;">
+            <h4 style="color: #512da8; border-bottom: 2px solid #8e44ad; display: inline-block;">الخطوات الحسابية:</h4>
+            
+            <p><b>1. حساب تغير الفيض (ΔΦ):</b></p>
+            <div style="background: #fff; padding: 10px; border-radius: 5px; text-align: center; direction: ltr;">
+                ΔΦ = Φ₂ - Φ₁ <br>
+                ΔΦ = (5 × 10⁻³) - (2 × 10⁻³) = <b>3 × 10⁻³ Wb</b>
+            </div>
+
+            <p><b>2. التعويض في قانون فراداي:</b></p>
+            <div style="background: #fff; padding: 10px; border-radius: 5px; text-align: center; direction: ltr;">
+                E = - N . (ΔΦ / Δt) <br>
+                E = - 500 . (3 × 10⁻³ / 0.02)
+            </div>
+
+            <p><b>3. الناتج النهائي:</b></p>
+            <div style="background: #fff; padding: 10px; border-radius: 5px; text-align: center; direction: ltr;">
+                E = - 500 . 0.15 <br>
+                <b>E = - 75 Volts</b>
+            </div>
+
+            <div style="background: #8e44ad; color: white; padding: 10px; border-radius: 8px; text-align: center; font-size: 1.1em; margin-top: 15px;">
+                💡 <b>إشارة السالب:</b> تعني أن القوة الدافعة تقاوم التغير في الفيض (حسب قانون لنز).
+            </div>
+        </div>
+    </div>
+`
+}

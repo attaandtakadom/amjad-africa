@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+
     <title>اختبار تقنية المعلومات - الصف التاسع | الوحدات 1،2،3</title>
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Tahoma', 'Roboto', system-ui, sans-serif;
-        }
+font-family: 'Cairo', sans-serif;        }
         body {
             background: linear-gradient(145deg, #f0f7ff 0%, #e9f0fa 100%);
             margin: 0;
@@ -310,13 +313,27 @@
     const questions = [];
     
     // ------------------- الوحدة الأولى: نظم المعلومات والبيانات -------------------
-    const tfUnit1 = [
-        { text: "البيانات هي ناتج معالجة المعلومات.", correct: false },
-        { text: "تهدف نظم المعلومات إلى توفير المعلومات الصحيحة في الوقت المناسب لاتخاذ القرارات.", correct: true },
-        { text: "يعتبر 'تخزين البيانات' من المراحل التي تلي مرحلة المعالجة في دورة حياة المعلومات.", correct: true },
-        { text: "أجهزة الحاسوب هي المكون الوحيد لنظم المعلومات.", correct: false }
-    ];
-    tfUnit1.forEach((q, idx) => {
+const tfUnit1 = [
+    { text: "البيانات هي ناتج معالجة المعلومات.", correct: false, type: 'truefalse' },
+    { text: "تهدف نظم المعلومات إلى توفير المعلومات الصحيحة في الوقت المناسب لاتخاذ القرارات.", correct: true, type: 'truefalse' },
+    { text: "يعتبر 'تخزين البيانات' من المراحل التي تلي مرحلة المعالجة في دورة حياة المعلومات.", correct: true, type: 'truefalse' },
+    { text: "أجهزة الحاسوب هي المكون الوحيد لنظم المعلومات.", correct: false, type: 'truefalse' },
+    { text: "ناتج التعبير المنطقي NOT (A >= B) حيث A=3 و B=2 هو True.", correct: false, type: 'truefalse' },
+    { text: "الموازنة بين عمل البشر وعمل الآلات الهدف منها الوصول إلى أكبر قدر من الفائدة.", correct: true, type: 'truefalse' },
+    { text: "يصعب على الروبوت تكوين خبرة ضمنياً.", correct: true, type: 'truefalse' },
+    { text: "تختلف برمجة الذكاء الاصطناعي كونها تستخدم عبارات منطقية بدلاً من الأوامر والتعليمات.", correct: true, type: 'truefalse' },
+    { text: "أكبر تحدي يواجه الباحثين في مجال الذكاء الاصطناعي هو إيجاد أفضل أسلوب لتمثيل المعرفة.", correct: true, type: 'truefalse' },
+    { text: "يعتبر الذكاء الاصطناعي محدوداً بمدى البيانات والبرمجة التي يتلقاها.", correct: true, type: 'truefalse' },
+    { text: "الصور والتحقق منها هي أولى مراحل النظام المرئي في الذكاء الاصطناعي.", correct: false, type: 'truefalse' },
+    { text: "لغة LISP نظام عملي حسابي بني على أساس لا مبدأ في الحساب.", correct: true, type: 'truefalse' },
+    { text: "لغة Prolog تعتبر لغة برمجة منطقية.", correct: true, type: 'truefalse' },
+    { text: "لغة STRIPS تعبر عن الحالة الأولية للمهمة الموكل بها.", correct: true, type: 'truefalse' },
+    { text: "لغة IPL هي أولى لغات البرمجة التي صممت لبرمجة تطبيقات الذكاء الاصطناعي.", correct: true, type: 'truefalse' },
+    { text: "الذكاء الاصطناعي هو أحد فروع الحاسب الآلي.", correct: true, type: 'truefalse' }
+]; 
+
+
+tfUnit1.forEach((q, idx) => {
         questions.push({ id: `tf_u1_${idx}`, type: 'truefalse', text: q.text, correctAnswer: q.correct, userAnswer: null, feedback: '' });
     });
     
@@ -333,7 +350,10 @@
     const tfUnit2_3 = [
 
 // أضف هذا السؤال داخل مصفوفة tfUnit2_3
-
+ { 
+        text: "الموازنة بين عمل البشر وعمل الآلات الهدف منها الوصول إلى أكبر قدر من الفائدة.", 
+        correct: true 
+    },
 { text: "تُعبر لغة STRIPS عن الحالة الأولية للمهمة الموكلة إليها كجزء من عملية التخطيط.", correct: true },
 { text: "تعتبر لغات البرمجة (LUSH) و (MATHLAB) من اللغات المستخدمة في تطبيقات الذكاء الاصطناعي.", correct: true },
 { text: "تسمح لغة LISP للمبرمجين بإنشاء تراكيب جديدة أو البرمجة المتخصصة المتضمنة في اللغة.", correct: true },
@@ -390,7 +410,31 @@
     
     // اختيار من متعدد (الوحدات 2 و 3)
     const mcAdvanced = [
-        { text: "تصنف لغات البرمجة حسب المستوى إلى:", options: ["عالية المستوى فقط", "منخفضة المستوى فقط", "الإجابتان صحيحتان: عالية ومنخفضة المستوى"], correct: "الإجابتان صحيحتان: عالية ومنخفضة المستوى" },
+       { 
+    text: "ناتج التعبير الحسابي بصيغة الحاسوب &lrm;((4 / 2) ^ 2) + (1 + 3)&lrm; هو:", 
+    options: ["24", "18", "8", "20"], 
+    correct: "8" 
+},
+
+{ 
+    text: "ناتج التعبير المنطقي &lrm;(10 < 2) OR (3 > 5)&lrm; هو:", 
+    options: ["True", "False", "10", "غير ذلك"], 
+    correct: "False" 
+},
+{ 
+    text: "تعتبر لغات البرمجة عالية المستوى (High-Level Languages):", 
+    options: ["سهلة التعلم", "صعبة التعلم", "كل ما سبق ذكره"], 
+    correct: "سهلة التعلم" 
+},
+
+{ 
+    text: "ناتج التعبير الحسابي بصيغة الحاسوب ((2 * 4) ^ 2) + (1 + 3) هو:", 
+    options: ["24", "18", "20", "68"], 
+    correct: "68" 
+},
+
+
+    { text: "تصنف لغات البرمجة حسب المستوى إلى:", options: ["عالية المستوى فقط", "منخفضة المستوى فقط", "الإجابتان صحيحتان: عالية ومنخفضة المستوى"], correct: "الإجابتان صحيحتان: عالية ومنخفضة المستوى" },
         { text: "لغات البرمجة منخفضة المستوى لها القدرة على:", options: ["إدارة الذاكرة", "إدارة البيانات", "الإجابتان صحيحتان: إدارة الذاكرة وإدارة البيانات"], correct: "الإجابتان صحيحتان: إدارة الذاكرة وإدارة البيانات" },
         { text: "من لغات البرمجة منخفضة المستوى:", options: ["التجميع", "الآلة", "الإجابتان صحيحتان: التجميع والآلة"], correct: "الإجابتان صحيحتان: التجميع والآلة" },
         { text: "التعبير الحسابي عبارة عن معادلات تتكون من:", options: ["ثابت ومتغير", "أرقام فقط", "متغيرات فقط"], correct: "ثابت ومتغير" },
@@ -582,7 +626,11 @@
   correct: "مركب أو معقد" 
 },
 { text: "أي العمليات تنفذ أولاً مستخدماً أولويات تنفيذ العمليات:", options: ["الجمع والطرح", "الضرب والقسمة", "الأسس", "ما داخل الأقواس"], correct: "ما داخل الأقواس" },
-
+{ 
+    text: "إذا علمت أن &lrm;B = 5&lrm; و &lrm;A = 1&lrm;، فإن ناتج التعبير &lrm;(B ^ 2 + 5) <= A&lrm; هو:", 
+    options: ["30", "True", "False", "15"], 
+    correct: "False" 
+}
 
     ];
     mcAdvanced.forEach((q, idx) => {
@@ -591,12 +639,19 @@
     
     // ---------- أسئلة المنطق (True/False) لتعزيز مهارات تتبع الكود ----------
     const logicTF = [
-        { text: "نتيجة (5 >= 5) OR (10 < 5) هي True", correct: true },
-        { text: "نتيجة NOT (8 > 3) هي False", correct: true },
+{ 
+    text: "ناتج التعبير الحسابي بصيغة الحاسوب ((4 / 2) ^ 2) + (1 + 3) هو:", 
+    options: ["24", "18", "8", "20"], 
+    correct: "8" 
+}  ,
+{ 
+    text: "نتيجة التعبير المنطقي &lrm;(5 >= 5) OR (10 < 5)&lrm; هي:", 
+    options: ["True", "False"], 
+    correct: "True" 
+},
+      { text: "نتيجة NOT (8 > 3) هي False", correct: true },
         { text: "نتيجة (3*2 == 6) AND (4>5) هي True", correct: false },
         { text: "في لغة البرمجة، أولوية تنفيذ العمليات الحسابية تكون للأقواس أولاً ثم الأسس ثم الضرب والقسمة ثم الجمع والطرح.", correct: true },
-
-
 
 
 
