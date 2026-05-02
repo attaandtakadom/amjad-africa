@@ -173,30 +173,69 @@ sol: `
             </div>
         </div>`
 },
-
-
 {
     id: 3,
-    title: "تمرين 3: حركة كتلة على منضدة",
+    title: "تمرين 3: حركة كتلة على منضدة (بقاء الطاقة)",
     content: `
-        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
-            <p>قطعة كتلتها (1.2kg) على منضدة أفقية ملساء تبعد 2m عن حافتها، ربطت بخيط يمر على بكرة عند الحافة بكتلة أخرى (0.7kg) متدلية. بدأ النظام حركته من السكون.</p>
-            <p style="color: #c0392b; font-weight: bold;">أوجد: (أ) المسافة التي تحركتها القطعتان عندما كانت سرعتهما 3m/s.<br>
-            (ب) سرعة القطعتين قبيل وصول الكتلة الأولى إلى الحافة.</p>
+        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
             
-            <div style="text-align: center; margin: 20px 0;">
-                <svg width="250" height="150" viewBox="0 0 250 150">
-                    <line x1="20" y1="60" x2="180" y2="60" stroke="black" stroke-width="3"/>
-                    <line x1="180" y1="60" x2="180" y2="130" stroke="black" stroke-width="3"/>
-                    <rect x="50" y="45" width="25" height="15" fill="#3498db"/>
-                    <text x="45" y="40" font-size="12" fill="#3498db" font-weight="bold">1.2kg</text>
-                    <circle cx="180" cy="60" r="6" fill="gray"/>
-                    <line x1="75" y1="52" x2="180" y2="52" stroke="black"/>
-                    <line x1="186" y1="60" x2="186" y2="100" stroke="black"/>
-                    <rect x="178" y="100" width="16" height="20" fill="#e74c3c"/>
-                    <text x="200" y="115" font-size="12" fill="#e74c3c" font-weight="bold">0.7kg</text>
-                    <line x1="75" y1="75" x2="180" y2="75" stroke="gray" stroke-dasharray="4"/>
-                    <text x="110" y="90" font-size="10" fill="gray">تبعد 2m عن الحافة</text>
+            <!-- 1. صيغة السؤال -->
+            <div style="margin-bottom: 20px; border-right: 5px solid #3498db; padding-right: 15px;">
+                <p>قطعة كتلتها (1.2kg) موضوعة على منضدة أفقية ملساء تبعد 2m عن حافتها، ربطت بخيط يمر على بكرة عند الحافة بكتلة أخرى (0.7kg) متدلية. بدأ النظام حركته من السكون.</p>
+                <p style="color: #c0392b; font-weight: bold;">أوجد: (أ) الإزاحة (h) التي تحركتها القطعتان عندما أصبحت سرعتهما 3m/s.<br>
+                (ب) سرعة القطعتين قبيل وصول الكتلة الأولى إلى الحافة.</p>
+            </div>
+
+            <!-- 2. ركن التفكير المطور (شرح المبدأ) -->
+            <div style="background-color: #fff3e0; border-right: 5px solid #ff9800; padding: 15px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: #e65100;">💡 ركن التفكير (قانون بقاء الطاقة):</h4>
+                <p>يا أبنائي، لكي نفهم الحل بعمق، نتذكر أن <b>الطاقة الكلية لا تضيع</b>، بل تتغير من شكل لآخر. القانون يقول:</p>
+                <p style="text-align: center; color: #2c3e50; background: #ffe0b2; padding: 10px; border-radius: 8px;">
+                    <b>(مجموع طاقة الحركة + الوضع) قبل = (مجموع طاقة الحركة + الوضع) بعد</b>
+                </p>
+                
+                <p><b>أولاً: قبل الحركة (عند السكون):</b></p>
+                <ul>
+                    <li>طاقة الحركة للجسمين = <b>صفر</b> (لأنهما ساكنان).</li>
+                    <li>طاقة الوضع للجسمين = <b>صفر</b> (لأننا اعتبرنا مكانهما الأصلي هو خط الصفر).</li>
+                    <li>إذن: <b>الطاقة الكلية قبل البدء = صفر.</b></li>
+                </ul>
+
+                <p><b>ثانياً: بعد الحركة (عندما تحركا مسافة h):</b></p>
+                <ul>
+                    <li><b>طاقة الحركة:</b> الجسمان اكتسبا سرعة، لذا طاقتيهما موجبة.</li>
+                    <li><b>طاقة الوضع:</b> الجسم على الطاولة طاقته <b>صفر</b> (لم يرتفع)، بينما الجسم المتدلي هبط تحت الخط الأحمر فتصبح طاقته <b>سالبة</b>.</li>
+                </ul>
+                <p style="color: #d35400; font-weight: bold;">الخلاصة: مجموع هذه الطاقات (الموجب والسالب) بعد الحركة يجب أن يساوي "صفر" لكي يتوازن مع الطاقة التي كانت موجودة قبل البدء.</p>
+            </div>
+
+            <!-- 3. الرسم التوضيحي -->
+            <div style="text-align: center; margin: 20px 0; background: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #eee; overflow-x: auto;">
+                <svg width="550" height="250" viewBox="0 0 550 250">
+                    <text x="70" y="30" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">الحالة 1: السكون</text>
+                    <rect x="20" y="90" width="140" height="10" fill="#8d6e63"/>
+                    <line x1="20" y1="82" x2="80" y2="82" stroke="red" stroke-width="2" stroke-dasharray="4"/>
+                    <line x1="155" y1="121" x2="195" y2="121" stroke="red" stroke-width="2" stroke-dasharray="4"/>
+                    <line x1="65" y1="82" x2="160" y2="82" stroke="#34495e" stroke-width="2"/>
+                    <line x1="168" y1="90" x2="168" y2="110" stroke="#34495e" stroke-width="2"/>
+                    <rect x="40" y="75" width="25" height="15" fill="#3498db"/>
+                    <circle cx="160" cy="90" r="8" fill="#7f8c8d"/>
+                    <rect x="160" y="110" width="16" height="22" fill="#e74c3c"/>
+                    <line x1="210" y1="110" x2="260" y2="110" stroke="#27ae60" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <text x="370" y="30" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">الحالة 2: بعد حركة (h)</text>
+                    <rect x="300" y="90" width="140" height="10" fill="#8d6e63"/>
+                    <line x1="385" y1="82" x2="440" y2="82" stroke="#34495e" stroke-width="2"/>
+                    <line x1="448" y1="90" x2="448" y2="170" stroke="#34495e" stroke-width="2"/>
+                    <rect x="360" y="75" width="25" height="15" fill="#3498db"/>
+                    <circle cx="440" cy="90" r="8" fill="#7f8c8d"/>
+                    <rect x="440" y="170" width="16" height="22" fill="#e74c3c"/>
+                    <line x1="465" y1="121" x2="465" y2="181" stroke="#ff9800" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <text x="470" y="155" font-size="12" fill="#e65100" font-weight="bold">h-</text>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="context-fill" />
+                        </marker>
+                    </defs>
                 </svg>
             </div>
         </div>`,
@@ -204,229 +243,272 @@ sol: `
     ans: "(أ) 1.22m ، (ب) 3.84m/s",
     sol: `
         <div style="direction: rtl; text-align: right; line-height: 1.8; font-family: Arial, sans-serif;">
-            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">حل المطلوب (أ): حساب المسافة h</h4>
-            <p style="background: #e8f5e9; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold;">
-                الطاقة قبل (0) = الطاقة بعد (طاقة وضع المتدلية + طاقة حركة الجسمين)
-            </p>
+            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71;">تطبيق قانون بقاء الطاقة بالتفصيل:</h4>
+            
+            <p><b>1. قبل الحركة (الحالة الأولى):</b></p>
+            <p style="padding-right: 20px;">E₁ = (K.E₁ + P.E₁) + (K.E₂ + P.E₂) = (0 + 0) + (0 + 0) = <b>0</b>.</p>
 
-            <h4 style="color: #2980b9;">1. قبل الحركة:</h4>
-            <p>كل شيء ساكن وفي وضع البداية، الطاقة الكلية = <b>صفر</b>.</p>
-
-            <h4 style="color: #e67e22;">2. بعد الحركة لمسافة (h) وسرعة (3m/s):</h4>
+            <p><b>2. بعد الحركة (الحالة الثانية):</b></p>
             <ul>
-                <li><b>طاقة وضع الكتلة (1.2kg):</b> ثابتة (صفر) لأنها تتحرك أفقياً ولا يتغير ارتفاعها.</li>
-                <li><b>طاقة وضع الكتلة المتدلية (0.7kg):</b> هبطت مسافة h عن مستواها.
-                    <br>P.E = -(0.7 × 10 × h) = <b>-7h</b></li>
-                <li><b>طاقة حركة الجسمين معاً (بسرعة 3m/s):</b>
-                    <br>K.E = 1/2 × (1.2 + 0.7) × (3)²
-                    <br>K.E = 1/2 × 1.9 × 9 = <b>8.55 جول</b></li>
+                <li>طاقة حركة الجسمين: <b>½(1.2 + 0.7)v² = 0.95v²</b></li>
+                <li>طاقة وضع الجسم الأول (على الطاولة): <b>0</b> (لأنه لم يغير مستواه).</li>
+                <li>طاقة وضع الجسم الثاني (المتدلي): <b>-m₂gh = -0.7 × 10 × h = -7h</b>.</li>
             </ul>
 
-            <h4 style="color: #c0392b; border-top: 2px solid #ddd; padding-top: 10px;">3. حساب المسافة h:</h4>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
-                0 = -7h + 8.55
-                <br>7h = 8.55
-                <br>h = 8.55 ÷ 7 = <b>1.22 متر</b>
+            <h4 style="color: #c0392b;">3. المساواة: (الطاقة بعد = الطاقة قبل)</h4>
+            <div style="background: #fdf2f2; padding: 15px; border-radius: 10px; border: 1px solid #ffcdd2;">
+                [0.95v²] + [0] + [-7h] = 0
+                <br><b>0.95v² - 7h = 0  ⬅️  7h = 0.95v²</b>
             </div>
 
-            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px; margin-top: 25px;">حل المطلوب (ب): سرعة الوصول للحافة (h = 2m)</h4>
-            <p>نطبق نفس القانون لكن هذه المرة h معروفة (2m) والسرعة v مجهولة:</p>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
-                0 = -(0.7 × 10 × 2) + (1/2 × 1.9 × v²)
-                <br>0 = -14 + 0.95v²
-                <br>14 = 0.95v²
-                <br>v² = 14 ÷ 0.95 ≈ 14.73
-                <br><b>v = جذر 14.73 ≈ 3.84 م/ث</b>
-            </div>
+            <p style="margin-top: 15px;"><b>(أ) الإزاحة h عندما v = 3m/s:</b> 7h = 0.95(3)² ⬅️ <b>h = 1.22 m</b>.</p>
+            <p><b>(ب) السرعة v عند وصول الحافة (h = 2m):</b> 7(2) = 0.95v² ⬅️ v² = 14.73 ⬅️ <b>v = 3.84 m/s</b>.</p>
         </div>`
-},
-
-{
+},{
     id: 4,
-    title: "تمرين 4: حركة الأجسام على سطح مائل",
+    title: "تمرين 4: حركة الأجسام على سطح مائل (بقاء الطاقة)",
     content: `
-        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
-            <p>وضع جسم كتلته (1.6kg) على سطح مائل أملس يميل بزاوية (10°) مع الأفقي، وربط بسلك يمر على بكرة عند قمة السطح بجسم آخر (0.8kg) متدلٍ رأسياً. بدأ النظام حركته من السكون.</p>
-            <p style="color: #c0392b; font-weight: bold;">أوجد: (أ) سرعتهما بعد مسافة 0.5m.<br>
-            (ب) المسافة التي تحركاها عندما أصبحت السرعة 3m/s.</p>
+        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
             
-            <div style="text-align: center; margin: 20px 0;">
-                <svg width="250" height="150" viewBox="0 0 250 150">
-                    <path d="M 30 120 L 200 120 L 200 50 Z" fill="none" stroke="black" stroke-width="2"/>
-                    <text x="50" y="115" font-size="12">10°</text>
-                    <rect x="100" y="70" width="25" height="15" transform="rotate(-22 100 85)" fill="#3498db"/>
-                    <text x="70" y="70" font-size="12" fill="#3498db" font-weight="bold">1.6kg</text>
-                    <circle cx="200" cy="50" r="6" fill="gray"/>
-                    <line x1="118" y1="78" x2="200" y2="45" stroke="black"/>
-                    <line x1="206" y1="50" x2="206" y2="100" stroke="black"/>
-                    <rect x="198" y="100" width="16" height="20" fill="#e74c3c"/>
-                    <text x="220" y="115" font-size="12" fill="#e74c3c" font-weight="bold">0.8kg</text>
+            <!-- 1. صيغة السؤال -->
+            <div style="margin-bottom: 20px; border-right: 5px solid #3498db; padding-right: 15px;">
+                <p>وضع جسم كتلته (1.6kg) على سطح مائل أملس يميل بزاوية (10°) مع الأفقي، وربط بخيط يمر على بكرة عند قمة السطح بجسم آخر (0.8kg) متدلي رأسياً. بدأ النظام حركته من السكون.</p>
+                <p style="color: #c0392b; font-weight: bold;">أوجد: (أ) سرعتهما بعد أن يقطعا مسافة (s) قدرها 0.5m.<br>
+                (ب) المسافة (s) التي تحركاها عندما أصبحت السرعة 3m/s.</p>
+            </div>
+
+            <!-- 2. ركن التفكير المطور -->
+            <div style="background-color: #fff3e0; border-right: 5px solid #ff9800; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+                <h4 style="margin-top: 0; color: #e65100;">💡 ركن التفكير (لماذا نستخدم s و h؟):</h4>
+                <p>يا أبنائي، لكي نطبق قانون طاقة الوضع (mgh) بشكل صحيح:</p>
+                <ul style="padding-right: 20px;">
+                    <li><b>المسافة (s):</b> هي طول الخيط الذي تحرك (0.5m)، وهي المسافة المائلة للجسم الأول.</li>
+                    <li><b>الارتفاع الرأسي (h):</b> هو البعد العمودي عن الأرض.</li>
+                    <li><b>للجسم المائل:</b> نلاحظ أنه يصعد بزاوية، لذا ارتفاعه الرأسي هو المقابل للزاوية ويساوي ⬅️ <span style="color: #c0392b; font-weight: bold;">h = s × sin(10°)</span>.</li>
+                    <li><b>للجسم المتدلي:</b> يتحرك رأسياً تماماً، لذا إزاحته الرأسية (h) هي نفس مسافة الخيط (s).</li>
+                </ul>
+            </div>
+
+            <!-- 3. الرسم التوضيحي المطور -->
+            <div style="text-align: center; margin: 20px 0; background: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #eee; overflow-x: auto;">
+                <svg width="550" height="250" viewBox="0 0 550 250">
+                    <!-- الحالة 1: السكون -->
+                    <text x="100" y="30" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">الحالة 1: السكون</text>
+                    <path d="M 30 150 L 180 150 L 180 80 Z" fill="none" stroke="#8d6e63" stroke-width="3"/>
+                    <!-- خطوط الإسناد (مستويات الصفر) -->
+                    <line x1="80" y1="110" x2="135" y2="110" stroke="red" stroke-width="2" stroke-dasharray="4"/>
+                    <line x1="160" y1="140" x2="200" y2="140" stroke="red" stroke-width="2" stroke-dasharray="4"/>
+                    
+                    <rect x="90" y="105" width="25" height="15" transform="rotate(-25 90 105)" fill="#3498db"/>
+                    <circle cx="180" cy="80" r="7" fill="#7f8c8d"/>
+                    <line x1="110" y1="95" x2="180" y2="75" stroke="#34495e" stroke-width="2"/>
+                    <line x1="187" y1="80" x2="187" y2="130" stroke="#34495e" stroke-width="2"/>
+                    <rect x="180" y="130" width="14" height="20" fill="#e74c3c"/>
+
+                    <!-- سهم الانتقال -->
+                    <line x1="220" y1="120" x2="270" y2="120" stroke="#27ae60" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+                    <!-- الحالة 2: بعد الحركة -->
+                    <text x="400" y="30" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">الحالة 2: بعد حركة (s)</text>
+                    <path d="M 300 150 L 450 150 L 450 80 Z" fill="none" stroke="#8d6e63" stroke-width="3"/>
+                    <rect x="390" y="92" width="25" height="15" transform="rotate(-25 390 92)" fill="#3498db"/>
+                    <circle cx="450" cy="80" r="7" fill="#7f8c8d"/>
+                    <line x1="410" y1="83" x2="450" y2="75" stroke="#34495e" stroke-width="2"/>
+                    <line x1="457" y1="80" x2="457" y2="190" stroke="#34495e" stroke-width="2"/>
+                    <rect x="450" y="190" width="14" height="20" fill="#e74c3c"/>
+                    
+                    <!-- توضيح الارتفاع h للجسم الهابط -->
+                    <line x1="430" y1="140" x2="475" y2="140" stroke="red" stroke-width="2" stroke-dasharray="4"/>
+                    <line x1="475" y1="140" x2="475" y2="200" stroke="#ff9800" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <text x="485" y="175" font-size="14" fill="#e65100" font-weight="bold">h = s</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="context-fill" />
+                        </marker>
+                    </defs>
                 </svg>
             </div>
         </div>`,
-    options: ["(أ) 1.48m/s ، (ب) 2.05m", "(أ) 2.10m/s ، (ب) 1.50m", "(أ) 1.04m/s ، (ب) 4.13m", "(أ) 0.95m/s ، (ب) 3.20m"],
-    ans: "(أ) 1.48m/s ، (ب) 2.05m",
+    options: ["(أ) 1.47m/s ، (ب) 2.07m", "(أ) 2.10m/s ، (ب) 1.50m", "(أ) 1.04m/s ، (ب) 4.13m", "(أ) 3.84m/s ، (ب) 1.22m"],
+    ans: "(أ) 1.47m/s ، (ب) 2.07m",
     sol: `
         <div style="direction: rtl; text-align: right; line-height: 1.8; font-family: Arial, sans-serif;">
-            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الحل بمنطق حفظ الطاقة (قبل وبعد):</h4>
-            <p style="background: #e8f5e9; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold;">
-                الطاقة الكلية (1) = الطاقة الكلية (2)
-            </p>
+            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71;">خطوات الحل (قانون بقاء الطاقة):</h4>
+            
+            <p><b>1. قبل الحركة (Eᵢ):</b> النظام ساكن ⬅️ <b>Eᵢ = 0</b>.</p>
 
-            <h4 style="color: #2980b9;">المحطة الأولى: حساب الارتفاع الرأسي (h)</h4>
-            <p>عندما يتحرك الجسم (1.6kg) مسافة مائلة (L)، فإن ارتفاعه الرأسي يتغير بمقدار:<br>
-            <b>الارتفاع الرأسي = L × sin(10°)</b></p>
-
-            <h4 style="color: #e67e22;">المحطة الثانية: دراسة الطاقة في الوضعية (2) لمسافة (L=0.5m)</h4>
+            <p><b>2. بعد الحركة لمسافة (s):</b> نحسب طاقة كل جسم:</p>
             <ul>
-                <li><b>طاقة وضع الجسم (1.6kg):</b> صعد مسافة مائلة 0.5m
-                    <br>P.E₁ = 1.6 × 10 × (0.5 × sin 10°) ≈ 1.6 × 10 × 0.086 = <b>+1.38 جول</b></li>
-                <li><b>طاقة وضع الجسم المتدلي (0.8kg):</b> هبط مسافة 0.5m
-                    <br>P.E₂ = -(0.8 × 10 × 0.5) = <b>-4 جول</b></li>
-                <li><b>طاقة حركة الجسمين معاً:</b>
-                    <br>K.E = 1/2 × (1.6 + 0.8) × v² = <b>1.2 v²</b></li>
+                <li>طاقة حركة المجموعة: <b>K.E = ½ (1.6 + 0.8) v² = 1.2 v²</b></li>
+                <li>طاقة وضع الجسم المائل (صعد): <b>P.E₁ = m₁ g (s sin 10°) = 1.6 × 10 × 0.1736 s = 2.77 s</b></li>
+                <li>طاقة وضع الجسم المتدلي (هبط): <b>P.E₂ = -m₂ g s = -0.8 × 10 × s = -8 s</b></li>
             </ul>
 
-            <h4 style="color: #c0392b; border-top: 2px solid #ddd; padding-top: 10px;">المحطة الثالثة: حساب المطلوب (أ) السرعة v</h4>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
-                0 = 1.38 - 4 + 1.2v²
-                <br>2.62 = 1.2v²
-                <br>v² = 2.62 ÷ 1.2 ≈ 2.18
-                <br><b>v = جذر 2.18 ≈ 1.48 م/ث</b>
+            <h4 style="color: #c0392b;">3. المعادلة (مجموع الطاقات = صفر):</h4>
+            <div style="background: #fdf2f2; padding: 15px; border-radius: 10px; border: 1px solid #ffcdd2;">
+                1.2 v² + 2.77 s - 8 s = 0
+                <br><b>1.2 v² - 5.23 s = 0</b>
             </div>
 
-            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px; margin-top: 25px;">المحطة الرابعة: حساب المطلوب (ب) المسافة L عند (v=3m/s)</h4>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
-                نستخدم نفس المعادلة مع جعل L مجهولة و v معلومة:
-                <br>0 = (1.6 × 10 × L × sin 10°) - (0.8 × 10 × L) + (1/2 × 2.4 × 3²)
-                <br>0 = 2.77L - 8L + 10.8
-                <br>5.23L = 10.8
-                <br><b>L = 10.8 ÷ 5.23 ≈ 2.05 متر</b>
-            </div>
+            <p style="margin-top: 15px;"><b>(أ) حساب السرعة v عندما s = 0.5m:</b>
+            <br>1.2 v² = 5.23 × 0.5 ⬅️ 1.2 v² = 2.615 ⬅️ v² = 2.179 ⬅️ <b>v = 1.47 m/s</b>.</p>
+
+            <p><b>(ب) حساب المسافة s عندما v = 3m/s:</b>
+            <br>5.23 s = 1.2 × (3)² ⬅️ 5.23 s = 10.8 ⬅️ <b>s = 2.07 m</b>.</p>
         </div>`
 },
-
 
 {
     id: 5,
-    title: "تمرين 5: حساب الشغل والشد في الخيط",
+    title: "تمرين 5: حساب الشغل والشد في الخيط (نظام البكرة)",
     content: `
-        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
-            <p>جسمان كتلتاهما (0.1kg) و (0.2kg) مربوطان بخيط يمر على بكرة ملساء. بدأت المجموعة حركتها رأسياً من السكون. 
-            <br>أوجد: (أ) سرعتهما بعد مسافة 0.6m. 
-            <br>(ب) الشغل المبذول على الجسم (0.1kg) بواسطة الخيط.
-            <br>(ج) مقدار الشد في الخيط.</p>
+        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
             
-            <div style="text-align: center; margin: 20px 0;">
-                <svg width="120" height="150">
-                    <circle cx="60" cy="20" r="7" fill="gray"/>
-                    <line x1="53" y1="20" x2="53" y2="90" stroke="black" stroke-width="2"/>
-                    <line x1="67" y1="20" x2="67" y2="50" stroke="black" stroke-width="2"/>
-                    <rect x="45" y="90" width="16" height="16" fill="#e74c3c"/>
-                    <text x="15" y="102" font-size="12" fill="#e74c3c" font-weight="bold">0.2kg</text>
-                    <rect x="59" y="50" width="16" height="16" fill="#3498db"/>
-                    <text x="80" y="62" font-size="12" fill="#3498db" font-weight="bold">0.1kg</text>
+            <!-- 1. صيغة السؤال -->
+            <div style="margin-bottom: 20px; border-right: 5px solid #3498db; padding-right: 15px;">
+                <p>جسمان كتلتاهما (0.1kg) و (0.2kg) مربوطان بخيط يمر على بكرة ملساء. بدأت المجموعة حركتها رأسياً من السكون.</p>
+                <p style="color: #c0392b; font-weight: bold;">أوجد: (أ) سرعتهما بعد مسافة 0.6m.<br>
+                (ب) الشغل المبذول على الجسم (0.1kg) بواسطة الخيط.<br>
+                (ج) مقدار الشد في الخيط.</p>
+            </div>
+
+            <!-- 2. ركن التفكير -->
+            <div style="background-color: #fff3e0; border-right: 5px solid #ff9800; padding: 15px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: #e65100;">💡 ركن التفكير (مبدأ الطاقة والعمل):</h4>
+                <p>يا أبنائي، في هذا النظام المتصل:</p>
+                <ul>
+                    <li><b>تغير الطاقة:</b> الجسم الأثقل يهبط (يفقد وضع) والجسم الأخف يصعد (يكتسب وضع)، وكلاهما يكتسب حركة.</li>
+                    <li><b>شغل الخيط:</b> الخيط يبذل شغلاً موجباً على الجسم الصاعد (لأنه يسحبه للأعلى) وشغلاً سالباً على الهابط.</li>
+                    <li><b>السرعة المشتركة:</b> بما أنهما متصلان بنفس الخيط، فلهما نفس السرعة دائماً.</li>
+                </ul>
+            </div>
+
+            <!-- 3. الرسم التوضيحي -->
+            <div style="text-align: center; margin: 20px 0; background: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
+                <svg width="200" height="180" viewBox="0 0 200 180">
+                    <circle cx="100" cy="30" r="12" fill="#7f8c8d"/> <!-- البكرة -->
+                    <line x1="88" y1="30" x2="88" y2="130" stroke="#34495e" stroke-width="2"/>
+                    <line x1="112" y1="30" x2="112" y2="80" stroke="#34495e" stroke-width="2"/>
+                    
+                    <!-- خطوط الإسناد -->
+                    <line x1="70" y1="130" x2="100" y2="130" stroke="red" stroke-width="2" stroke-dasharray="4"/>
+                    <line x1="100" y1="80" x2="130" y2="80" stroke="red" stroke-width="2" stroke-dasharray="4"/>
+                    
+                    <rect x="78" y="130" width="20" height="20" fill="#e74c3c"/> <!-- 0.2kg -->
+                    <text x="45" y="145" font-size="12" fill="#e74c3c" font-weight="bold">0.2kg</text>
+                    
+                    <rect x="102" y="60" width="20" height="20" fill="#3498db"/> <!-- 0.1kg -->
+                    <text x="130" y="75" font-size="12" fill="#3498db" font-weight="bold">0.1kg</text>
                 </svg>
             </div>
         </div>`,
-    options: ["(أ) 2m/s ، (ب) 0.8J ، (ج) 1.33N", "(أ) 2.10m/s ، (ب) 0.5J ، (ج) 1.2N", "(أ) 1.55m/s ، (ب) 1.2J ، (ج) 2N", "(أ) 0.85m/s ، (ب) 0.4J ، (ج) 0.9N"],
+    options: ["(أ) 2m/s ، (ب) 0.8J ، (ج) 1.33N", "(أ) 1.5m/s ، (ب) 0.5J ، (ج) 1.2N", "(أ) 2.5m/s ، (ب) 1.0J ، (ج) 1.5N", "(أ) 1.8m/s ، (ب) 0.7J ، (ج) 1.1N"],
     ans: "(أ) 2m/s ، (ب) 0.8J ، (ج) 1.33N",
     sol: `
         <div style="direction: rtl; text-align: right; line-height: 1.8; font-family: Arial, sans-serif;">
-            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">أولاً: حساب السرعة v (حفظ الطاقة قبل وبعد):</h4>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
-                0 = (P.E للكتلة 0.1) + (P.E للكتلة 0.2) + (K.E للمجموعة)
-                <br>0 = (0.1 × 10 × 0.6) - (0.2 × 10 × 0.6) + (1/2 × 0.3 × v²)
-                <br>0 = 0.6 - 1.2 + 0.15v²
-                <br>0.6 = 0.15v²  => v² = 4
-                <br><b>v = 2 م/ث</b>
-            </div>
-
-            <h4 style="color: #2980b9; margin-top: 20px;">ثانياً: الشغل المبذول على الجسم (0.1kg):</h4>
-            <p>نستخدم نظرية (الشغل والطاقة) للجسم 0.1 بمفرده:
-            <br>صافي الشغل = التغير في طاقة الحركة
-            <br>(شغل الشد + شغل الجاذبية) = ΔK.E</p>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
-                W_T + W_g = 1/2 × m × v²
-                <br>W_T - (0.1 × 10 × 0.6) = 1/2 × 0.1 × (2)²
-                <br>W_T - 0.6 = 0.2
-                <br>W_T = 0.2 + 0.6 = <b>0.8 جول</b>
-            </div>
-
-            <h4 style="color: #c0392b; margin-top: 20px;">ثالثاً: استنتاج الشد في الخيط T:</h4>
-            <p>بما أن الشغل = القوة × الإزاحة (W = T × h):</p>
-            <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border: 1px solid #f1c40f; text-align: center;">
-                0.8 = T × 0.6
-                <br>T = 0.8 ÷ 0.6 = <b>1.33 نيوتن تقريباً</b>
-            </div>
-        </div>`
-},
-{
-    id: 6,
-    title: "تمرين 6: حركة سيارة بين نقطتين (A) و (B)",
-    content: `
-        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
-            <p>سيارة كتلتها (1200kg) تمر بالنقطة (A) بسرعة (25m/s). النقطة (B) تبعد مسافة (1km) عن (A) وترتفع عنها بمقدار (60m).</p>
-            <p>خلال الرحلة، كانت قوة محرك السيارة (1600N) وقوة المقاومة (1150N). 
-            <br><b>أوجد سرعة السيارة عند مرورها بالنقطة (B).</b></p>
+            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71;">خطوات الحل التفصيلية:</h4>
             
-            <div style="text-align: center; margin: 20px 0;">
-                <svg width="250" height="150" viewBox="0 0 250 150">
-                    <path d="M 30 120 L 220 60" fill="none" stroke="black" stroke-width="3"/>
-                    <circle cx="30" cy="120" r="5" fill="#3498db"/>
-                    <text x="20" y="140" font-size="14" font-weight="bold">A</text>
-                    <circle cx="220" cy="60" r="5" fill="#e74c3c"/>
-                    <text x="225" y="55" font-size="14" font-weight="bold">B</text>
-                    <line x1="220" y1="60" x2="220" y2="120" stroke="gray" stroke-dasharray="4"/>
-                    <text x="225" y="95" font-size="12" fill="gray">60m</text>
-                    <rect x="110" y="80" width="30" height="15" transform="rotate(-18 125 87)" fill="#2ecc71"/>
-                </svg>
+            <p><b>(أ) حساب السرعة v (بقاء الطاقة):</b></p>
+            <p style="padding-right: 20px;">الطاقة قبل = 0
+            <br>الطاقة بعد: [½(m₁+m₂)v²] + [m₁gh] + [-m₂gh] = 0
+            <br>[½(0.3)v²] + [0.1×10×0.6] - [0.2×10×0.6] = 0
+            <br>0.15v² + 0.6 - 1.2 = 0 ⬅️ 0.15v² = 0.6 ⬅️ v² = 4 ⬅️ <b>v = 2 m/s</b>.</p>
+
+            <p><b>(ب) شغل الخيط على الجسم (0.1kg):</b></p>
+            <p>نستخدم نظرية (الشغل = تغير طاقة الحركة) للجسم الصغير فقط:
+            <br>W_total = ΔK.E
+            <br>W_tension + W_gravity = ½ m₁ v²
+            <br>W_T - (0.1 × 10 × 0.6) = ½ (0.1) (2)²
+            <br>W_T - 0.6 = 0.2 ⬅️ <b>W_T = 0.8 J</b>.</p>
+
+            <p><b>(ج) الشد في الخيط (T):</b></p>
+            <p>بما أن الشغل = القوة × الإزاحة (W = T × s):
+            <br>0.8 = T × 0.6 ⬅️ T = 0.8 / 0.6 ⬅️ <b>T = 1.33 N</b>.</p>
+        </div>`
+},{
+    id: 6,
+    title: "تمرين 6: حركة سيارة على منحدر (ميزان الطاقة)",
+    content: `
+        <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            
+            <!-- 1. صيغة السؤال -->
+            <div style="margin-bottom: 20px; border-right: 5px solid #3498db; padding-right: 15px;">
+                <p>تتحرك سيارة كتلتها (1200kg) بسرعة (25m/s) عند أسفل منحدر (النقطة A). صعدت السيارة المنحدر لمسافة (1000m) حتى وصلت لارتفاع رأسي (600m) عند القمة (النقطة B). إذا كانت قوة المحرك (1600N) وقوة المقاومة (1150N).</p>
+                <p style="color: #c0392b; font-weight: bold;">أوجد: سرعة السيارة عند وصولها لقمة المنحدر (النقطة B).</p>
             </div>
-            <div style="background: #f0f4f8; padding: 10px; border-radius: 8px; font-size: 15px;">
-                <b>المعطيات:</b> m=1200kg , u=25m/s , h=60m , d=1000m (1km) , F=1600N , R=1150N
+
+            <!-- 2. ركن التفكير المطور -->
+            <div style="background-color: #fff3e0; border-right: 5px solid #ff9800; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+                <h4 style="margin-top: 0; color: #e65100;">💡 ركن التفكير (منطق ميزان الطاقة):</h4>
+                <p>يا أبنائي، لكي نفهم الحل، سنتخيل الطاقة كـ "رصيد":</p>
+                <ul style="padding-right: 20px;">
+                    <li><b>رصيد البداية (عند A):</b> هو ما تملكه السيارة من حركة + الدفعة الإضافية من المحرك.</li>
+                    <li><b>رصيد النهاية (عند B):</b> هو ما تبقى للسيارة من سرعة + الارتفاع الذي وصلته + ما فُقد بسبب الاحتكاك.</li>
+                    <li><b>القاعدة الثابتة:</b> إجمالي رصيد البداية عند (A) لا بد أن يساوي إجمالي رصيد النهاية عند (B).</li>
+                </ul>
             </div>
         </div>`,
-    options: ["22.8 m/s", "28.5 m/s", "15.2 m/s", "35.0 m/s"],
-    ans: "28.5 m/s",
+    options: ["13.23 m/s", "28.50 m/s", "15.80 m/s", "10.45 m/s"],
+    ans: "13.23 m/s",
     sol: `
         <div style="direction: rtl; text-align: right; line-height: 1.8; font-family: Arial, sans-serif;">
-            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الحل باستخدام قانون الشغل والطاقة (قبل وبعد):</h4>
-            <p style="background: #e8f5e9; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold;">
-                طاقة (A) + شغل المحرك = طاقة (B) + شغل المقاومة
-            </p>
+            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71;">خطوات الحل بالتسلسل المنطقي:</h4>
 
-            <h4 style="color: #2980b9;">1. الطاقة عند النقطة (A):</h4>
-            <ul>
-                <li><b>طاقة الحركة (K.E_A):</b> 1/2 × 1200 × (25)² = <b>375,000 جول</b></li>
-                <li><b>طاقة الوضع (P.E_A):</b> صفر (نعتبرها نقطة المرجع).</li>
-            </ul>
+            <!-- المرحلة الأولى -->
+            <h4 style="color: #c0392b;">المرحلة الأولى: حساب إجمالي الطاقة عند نقطة البداية (A)</h4>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 20px;">
+                <p><b>1. حساب طاقة الحركة الابتدائية:</b> السيارة بدأت بسرعة 25m/s، فنحسب طاقتها:
+                <br>K.E_A = ½ × 1200 × (25)² = <b>375,000 J</b></p>
 
-            <h4 style="color: #e67e22;">2. الشغل المبذول خلال الطريق (من A إلى B):</h4>
-            <ul>
-                <li><b>شغل قوة المحرك (W_F):</b> القوة × المسافة = 1600 × 1000 = <b>1,600,000 جول</b></li>
-                <li><b>شغل المقاومة (W_R):</b> المقاومة × المسافة = 1150 × 1000 = <b>1,150,000 جول</b></li>
-            </ul>
+                <p><b>2. حساب الشغل المضاف (المحرك):</b> المحرك دفع السيارة لمسافة 1000m:
+                <br>شغل المحرك = القوة × المسافة = 1600 × 1000 = <b>1,600,000 J</b></p>
 
-            <h4 style="color: #2980b9;">3. الطاقة عند النقطة (B):</h4>
-            <ul>
-                <li><b>طاقة الوضع (P.E_B):</b> mgh = 1200 × 10 × 60 = <b>720,000 جول</b></li>
-                <li><b>طاقة الحركة (K.E_B):</b> 1/2 × 1200 × v² = <b>600 v²</b></li>
-            </ul>
+                <p style="border-top: 2px solid #999; padding-top: 10px; font-weight: bold;">
+                💰 إجمالي الطاقة عند البداية (A) = 375,000 + 1,600,000 = 1,975,000 J
+                </p>
+            </div>
 
-            <h4 style="color: #c0392b; border-top: 2px solid #ddd; padding-top: 10px;">4. التعويض في المعادلة الشاملة:</h4>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
-                (375,000) + (1,600,000) = (720,000 + 600 v²) + (1,150,000)
-                <br>1,975,000 = 1,870,000 + 600 v²
+            <!-- المرحلة الثانية -->
+            <h4 style="color: #c0392b;">المرحلة الثانية: حساب إجمالي الطاقة عند نقطة النهاية (B)</h4>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 20px;">
+                <p><b>1. حساب طاقة الوضع (الارتفاع):</b> السيارة صعدت لارتفاع 600m:
+                <br>P.E_B = الكتلة × الجاذبية × الارتفاع = 1200 × 10 × 60 = <b>720,000 J</b></p>
+
+                <p><b>2. حساب الشغل المفقود (المقاومة):</b> المقاومة سحبت طاقة أثناء الحركة:
+                <br>شغل المقاومة = قوة المقاومة × المسافة = 1150 × 1000 = <b>1,150,000 J</b></p>
+
+                <p><b>3. طاقة الحركة عند القمة:</b> بما أن السرعة (v) مجهولة، نكتب القانون:
+                <br>K.E_B = ½ × 1200 × v² = <b>600 v²</b></p>
+
+                <p style="border-top: 2px solid #999; padding-top: 10px; font-weight: bold;">
+                📉 إجمالي الطاقة عند النهاية (B) = 720,000 + 1,150,000 + 600 v²
+                <br>إجمالي النهاية = 1,870,000 + 600 v²
+                </p>
+            </div>
+
+            <!-- المرحلة النهائية -->
+            <h4 style="color: #c0392b;">المرحلة الثالثة: المساواة وإيجاد السرعة (v)</h4>
+            <div style="background: #fff3e0; padding: 15px; border-radius: 10px; border: 1px solid #ff9800;">
+                <p>نطبق قانون حفظ الطاقة: <b>إجمالي الطاقة عند A = إجمالي الطاقة عند B</b></p>
+                
+                <p style="text-align: center; font-size: 19px; font-weight: bold;">
+                    1,975,000 = 1,870,000 + 600 v²
+                </p>
+
+                <p><b>1. نقل الأرقام لجهة واحدة:</b> نطرح الطاقة المستهلكة من رصيد البداية:
                 <br>600 v² = 1,975,000 - 1,870,000
-                <br>600 v² = 105,000
-                <br>v² = 105,000 ÷ 600 = 175
-                <br><b>v = جذر 175 ≈ 13.22 م/ث (نلاحظ أن السيارة فقدت سرعة بسبب الارتفاع والمقاومة)</b>
-                <br><br><i>*ملاحظة: تأكد من مراجعة أرقام القوى في المسألة الأصلية إذا كانت السرعة المطلوبةأعلى.*</i>
+                <br><b>600 v² = 105,000</b></p>
+
+                <p><b>2. عملية القسمة:</b> نقسم الناتج على 600 لعزل (v²):
+                <br><b>v² = 105,000 ÷ 600</b>
+                <br><b>v² = 175</b></p>
+
+                <p><b>3. حساب السرعة النهائية:</b> نأخذ الجذر التربيعي للناتج:
+                <br>v = √175
+                <br><span style="color: #27ae60; font-weight: bold; font-size: 22px;">v = 13.23 m/s</span></p>
             </div>
         </div>`
-},
-
-
-
+}
 
 ];
