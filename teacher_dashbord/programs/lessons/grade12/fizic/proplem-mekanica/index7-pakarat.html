@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الأوتاد والبكرات الملساء</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; padding: 20px; text-align: center; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 10px; }
+        .basics { text-align: right; background: #e8f6ff; padding: 20px; border-radius: 10px; margin: 20px 0; border-right: 5px solid #3498db; }
+        .btn-start { background: #27ae60; color: white; padding: 15px 40px; border: none; border-radius: 30px; font-size: 20px; cursor: pointer; transition: 0.3s; }
+        .btn-start:hover { background: #2ecc71; transform: scale(1.05); }
+        .card { background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border: 1px solid #ffe0b2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ منظومة البكرات والأوتاد الملساء</h1>
+        <p>مرحباً بكم طلاب "أمجاد أفريقيا". هذا القسم مخصص لتبسيط حركة الأجسام المتصلة بخيوط.</p>
+        
+        <div class="basics">
+            <h3>🔑 أساسيات لا تنساها:</h3>
+            <ul>
+                <li><b>قوة الشد (T):</b> متساوية في طرفي الخيط إذا كانت البكرة ملساء.</li>
+                <li><b>الاتجاه:</b> الجسم الأثقل يسحب المجموعة باتجاهه.</li>
+                <li><b>الضغط على البكرة:</b> يعتمد على الزاوية بين الخيطين.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <p>💡 <b>معلومة:</b> الشغل المبذول بواسطة الشد في الخيط للنظام المتكامل دائماً يساوي <b>صفر</b>.</p>
+        </div>
+
+        <button class="btn-start" onclick="startLessons()">ابدأ حل المسائل التدريبية ←</button>
+    </div>
+
+    <script>
+        function startLessons() {
+            // هنا يتم الانتقال لصفحة عرض المسائل التي تسحب البيانات من problemsData7.js
+            window.location.href = "display_problems.html?lesson=7";
+        }
+    </script>
+</body>
+</html>
+<script>
+// دالة بدء الدروس عند ضغط الزر
+function startLessons() {
+    // إخفاء صفحة الترحيب وإظهار منطقة المسائل
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    
+    // البدء بعرض أول مسألة في القائمة
+    displayQuestion(0); 
+    
+    console.log("تم بدء حل المسائل لطلاب مدرسة أمجاد أفريقيا");
+}
+</script>

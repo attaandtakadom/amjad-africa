@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار الفيزياء - الكهرباء</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 25px;
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.header h1 span {
+    background: #ffd966;
+    color: #1e3c2c;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+}
+
+.header p {
+    opacity: 0.9;
+}
+
+/* إحصائيات */
+.stats-bar {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 60px;
+    padding: 15px 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.score-box {
+    background: #1e4663;
+    color: #ffd966;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.progress-box {
+    background: #e9ecef;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: bold;
+    color: #1e4663;
+}
+
+.check-all-btn {
+    background: #2c7da0;
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.check-all-btn:hover {
+    background: #1f5e7a;
+    transform: scale(0.97);
+}
+
+.reset-all-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.reset-all-btn:hover {
+    background: #b02a37;
+    transform: scale(0.97);
+}
+
+/* بطاقة السؤال */
+.question-card {
+    background: white;
+    border-radius: 24px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-right: 6px solid #ffd966;
+    transition: all 0.2s;
+}
+
+.question-card.answered-correct {
+    border-right-color: #28a745;
+    background: #f0fff4;
+}
+
+.question-card.answered-wrong {
+    border-right-color: #dc3545;
+    background: #fff5f5;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.question-number {
+    background: #1e4663;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.question-type {
+    background: #e9ecef;
+    color: #2c3e50;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1a2a6c;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* أزرار صح/خطأ */
+.tf-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.tf-btn {
+    background: #e9ecef;
+    border: 2px solid #adb5bd;
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.tf-btn:hover {
+    transform: scale(1.02);
+}
+
+.tf-btn.selected-true {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.tf-btn.selected-false {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+/* خيارات الاختيار المتعدد */
+.options-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8f9fc;
+    padding: 12px 18px;
+    border-radius: 50px;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.option:hover {
+    background: #e9ecef;
+}
+
+.option input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.option label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* أزرار التحكم */
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin: 15px 0 10px;
+    flex-wrap: wrap;
+}
+
+.btn-check {
+    background: #2c7da0;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 40px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-check:hover {
+    background: #1f5e7a;
+    transform: scale(0.97);
+}
+
+.btn-reset-question {
+    background: #e67e22;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 40px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-reset-question:hover {
+    background: #c95a0f;
+    transform: scale(0.97);
+}
+
+/* التغذية الراجعة */
+.feedback {
+    margin-top: 12px;
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.feedback-correct {
+    background: #d4edda;
+    color: #155724;
+    border-right: 4px solid #28a745;
+}
+
+.feedback-wrong {
+    background: #f8d7da;
+    color: #721c24;
+    border-right: 4px solid #dc3545;
+}
+
+.feedback-neutral {
+    background: #e9ecef;
+    color: #2c3e50;
+}
+
+/* شريط النتائج النهائية */
+final-results {
+    background: #1e2f3a;
+    border-radius: 40px;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+    color: white;
+    display: block;
+}
+
+footer {
+    text-align: center;
+    color: #ccc;
+    margin-top: 30px;
+    font-size: 0.8rem;
+    padding: 15px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>⚡ اختبار الفيزياء <span>الكهرباء</span></h1>
+        <p>أسئلة متنوعة (صح/خطأ + اختيار متعدد) | اضغط تحقق لكل سؤال لتعرف إجابتك</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="score-box" id="scoreDisplay">📊 النتيجة: 0 / 15</div>
+        <div class="progress-box" id="progressDisplay">📝 تم التحقق: 0 / 15</div>
+        <div>
+            <button class="check-all-btn" id="checkAllBtn">✅ التحقق من جميع الأسئلة</button>
+            <button class="reset-all-btn" id="resetAllBtn">🔄 إعادة ضبط الكل</button>
+        </div>
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <final-results id="finalResults">
+        ⭐ النتيجة النهائية: -- / 15
+    </final-results>
+
+    <footer>
+        📌 لكل سؤال: اختر إجابتك ثم اضغط "تحقق". ستظهر لك الإجابة الصحيحة والتصحيح الفوري.
+    </footer>
+</div>
+
+<script src="problemdata9.js"></script>
+<script>
+    // ========== تهيئة حالة الأسئلة ==========
+    let questionsState = [];
+
+    function initState() {
+        questionsState = physicsQuestions.map(() => ({
+            userAnswer: null,
+            checked: false,
+            isCorrect: false
+        }));
+    }
+
+    // ========== حساب النتيجة ==========
+    function calculateScore() {
+        let correct = questionsState.filter(s => s.checked && s.isCorrect).length;
+        return correct;
+    }
+
+    function calculateChecked() {
+        return questionsState.filter(s => s.checked).length;
+    }
+
+    function updateStats() {
+        const score = calculateScore();
+        const checked = calculateChecked();
+        const total = physicsQuestions.length;
+        document.getElementById("scoreDisplay").innerHTML = `📊 النتيجة: ${score} / ${total}`;
+        document.getElementById("progressDisplay").innerHTML = `📝 تم التحقق: ${checked} / ${total}`;
+        document.getElementById("finalResults").innerHTML = `⭐ النتيجة النهائية: ${score} / ${total} (${Math.round(score/total*100)}%)`;
+    }
+
+    // ========== حفظ الإجابة للمستخدم ==========
+    function setUserAnswer(questionId, answer) {
+        const index = physicsQuestions.findIndex(q => q.id === questionId);
+        if (index !== -1 && !questionsState[index].checked) {
+            questionsState[index].userAnswer = answer;
+            // إعادة عرض السؤال لتحديث واجهة الاختيار
+            renderSingleQuestion(index);
+        } else if (questionsState[index].checked) {
+            alert("⚠️ لقد قمت بالتحقق من هذا السؤال مسبقاً! استخدم زر 'إعادة المحاولة' إذا أردت تغيير إجابتك.");
+        }
+    }
+
+    // ========== التحقق من سؤال واحد ==========
+    function checkQuestion(questionId) {
+        const index = physicsQuestions.findIndex(q => q.id === questionId);
+        if (index === -1) return;
+        
+        const question = physicsQuestions[index];
+        const state = questionsState[index];
+        
+        if (state.userAnswer === null || state.userAnswer === undefined || state.userAnswer === "") {
+            alert("❌ الرجاء اختيار إجابة أولاً!");
+            return;
+        }
+        
+        let isCor = false;
+        if (question.type === "true-false") {
+            isCor = (state.userAnswer === question.correct);
+        } else {
+            isCor = (state.userAnswer === question.correct);
+        }
+        
+        state.isCorrect = isCor;
+        state.checked = true;
+        
+        // إعادة عرض السؤال مع التغذية الراجعة
+        renderSingleQuestion(index);
+        updateStats();
+    }
+    
+    // ========== إعادة ضبط سؤال واحد ==========
+    function resetQuestion(questionId) {
+        const index = physicsQuestions.findIndex(q => q.id === questionId);
+        if (index === -1) return;
+        
+        questionsState[index] = {
+            userAnswer: null,
+            checked: false,
+            isCorrect: false
+        };
+        
+        renderSingleQuestion(index);
+        updateStats();
+    }
+    
+    // ========== عرض سؤال واحد ==========
+    function renderSingleQuestion(index) {
+        const q = physicsQuestions[index];
+        const state = questionsState[index];
+        const container = document.getElementById(`q-container-${q.id}`);
+        if (!container) return;
+        
+        let optionsHtml = "";
+        let cardClass = "";
+        
+        if (state.checked) {
+            cardClass = state.isCorrect ? "question-card answered-correct" : "question-card answered-wrong";
+        } else {
+            cardClass = "question-card";
+        }
+        
+        // عرض خيارات حسب نوع السؤال
+        if (q.type === "true-false") {
+            const isSelectedTrue = (state.userAnswer === true);
+            const isSelectedFalse = (state.userAnswer === false);
+            optionsHtml = `
+                <div class="tf-buttons">
+                    <div class="tf-btn ${isSelectedTrue ? 'selected-true' : ''}" onclick="setUserAnswer(${q.id}, true)">✅ صواب</div>
+                    <div class="tf-btn ${isSelectedFalse ? 'selected-false' : ''}" onclick="setUserAnswer(${q.id}, false)">❌ خطأ</div>
+                </div>
+            `;
+        } else {
+            let optionsList = "";
+            for (let opt of q.options) {
+                const isChecked = (state.userAnswer === opt);
+                optionsList += `
+                    <label class="option" onclick="document.getElementById('radio-${q.id}-${opt.replace(/[^a-zA-Z0-9]/g, '')}').click()">
+                        <input type="radio" name="q${q.id}" id="radio-${q.id}-${opt.replace(/[^a-zA-Z0-9]/g, '')}" value="${opt}" ${isChecked ? 'checked' : ''} onchange="setUserAnswer(${q.id}, '${opt.replace(/'/g, "\\'")}')">
+                        <label>${opt}</label>
+                    </label>
+                `;
+            }
+            optionsHtml = `<div class="options-area">${optionsList}</div>`;
+        }
+        
+        // عرض التغذية الراجعة
+        let feedbackHtml = "";
+        if (state.checked) {
+            const fbClass = state.isCorrect ? "feedback-correct" : "feedback-wrong";
+            feedbackHtml = `
+                <div class="feedback ${fbClass}">
+                    ${state.isCorrect ? "✅ صحيح! " : "❌ خطأ. "}
+                    ${q.explanation}
+                </div>
+            `;
+        } else {
+            feedbackHtml = `<div class="feedback feedback-neutral">⚡ لم يتم التحقق بعد. اختر إجابتك ثم اضغط "تحقق".</div>`;
+        }
+        
+        container.innerHTML = `
+            <div class="${cardClass}">
+                <div class="question-header">
+                    <span class="question-number">السؤال ${q.id}</span>
+                    <span class="question-type">${q.type === "true-false" ? "✓ صح/خطأ" : "☑️ اختيار متعدد"}</span>
+                </div>
+                <div class="question-text">${q.text}</div>
+                ${optionsHtml}
+                <div class="btn-group">
+                    <button class="btn-check" onclick="checkQuestion(${q.id})">🔍 تحقق</button>
+                    <button class="btn-reset-question" onclick="resetQuestion(${q.id})">🔄 إعادة المحاولة</button>
+                </div>
+                ${feedbackHtml}
+            </div>
+        `;
+    }
+    
+    // ========== عرض جميع الأسئلة ==========
+    function renderAllQuestions() {
+        const container = document.getElementById("questionsContainer");
+        container.innerHTML = "";
+        
+        for (let i = 0; i < physicsQuestions.length; i++) {
+            const q = physicsQuestions[i];
+            const div = document.createElement("div");
+            div.id = `q-container-${q.id}`;
+            container.appendChild(div);
+            renderSingleQuestion(i);
+        }
+    }
+    
+    // ========== التحقق من جميع الأسئلة ==========
+    function checkAllQuestions() {
+        for (let i = 0; i < physicsQuestions.length; i++) {
+            const q = physicsQuestions[i];
+            const state = questionsState[i];
+            
+            if (!state.checked && state.userAnswer !== null && state.userAnswer !== undefined && state.userAnswer !== "") {
+                // التحقق من السؤال
+                let isCor = false;
+                if (q.type === "true-false") {
+                    isCor = (state.userAnswer === q.correct);
+                } else {
+                    isCor = (state.userAnswer === q.correct);
+                }
+                state.isCorrect = isCor;
+                state.checked = true;
+                renderSingleQuestion(i);
+            } else if (state.userAnswer === null || state.userAnswer === "") {
+                // تخطي الأسئلة التي لم يختر لها إجابة
+                console.log(`السؤال ${q.id} لم يتم الإجابة عليه بعد`);
+            }
+        }
+        updateStats();
+        
+        const totalChecked = calculateChecked();
+        const total = physicsQuestions.length;
+        if (totalChecked < total) {
+            alert(`⚠️ تم التحقق من ${totalChecked} سؤال فقط. ${total - totalChecked} سؤال لم تتم الإجابة عليها بعد.`);
+        } else {
+            alert(`🎉 تهانينا! لقد أنهيت جميع الأسئلة. نتيجتك: ${calculateScore()} / ${total}`);
+        }
+    }
+    
+    // ========== إعادة ضبط جميع الأسئلة ==========
+    function resetAllQuestions() {
+        if (confirm("هل أنت متأكد من إعادة ضبط جميع الأسئلة؟ سيتم مسح جميع إجاباتك.")) {
+            initState();
+            renderAllQuestions();
+            updateStats();
+        }
+    }
+    
+    // ========== ربط الأحداث ==========
+    document.getElementById("checkAllBtn").addEventListener("click", checkAllQuestions);
+    document.getElementById("resetAllBtn").addEventListener("click", resetAllQuestions);
+    
+    // ========== تشغيل البرنامج ==========
+    initState();
+    renderAllQuestions();
+    updateStats();
+    
+    // جعل الدوال عامة للاستخدام من onclick
+    window.setUserAnswer = setUserAnswer;
+    window.checkQuestion = checkQuestion;
+    window.resetQuestion = resetQuestion;
+</script>
+</body>
+</html>

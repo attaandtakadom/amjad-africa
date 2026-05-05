@@ -367,64 +367,47 @@ sol: `
             
             <!-- 1. صيغة السؤال -->
             <div style="margin-bottom: 20px; border-right: 5px solid #3498db; padding-right: 15px;">
-                <p>جسمان كتلتاهما (0.1kg) و (0.2kg) مربوطان بخيط يمر على بكرة ملساء. بدأت المجموعة حركتها رأسياً من السكون.</p>
+                <p>جسمان كتلتهما (0.1kg) و (0.2kg) مربوطان بخيط يمر على بكرة ملساء. بدأت المجموعة حركتها رأسياً من السكون.</p>
                 <p style="color: #c0392b; font-weight: bold;">أوجد: (أ) سرعتهما بعد مسافة 0.6m.<br>
                 (ب) الشغل المبذول على الجسم (0.1kg) بواسطة الخيط.<br>
                 (ج) مقدار الشد في الخيط.</p>
-            </div>
-
-            <!-- 2. ركن التفكير -->
-            <div style="background-color: #fff3e0; border-right: 5px solid #ff9800; padding: 15px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: #e65100;">💡 ركن التفكير (مبدأ الطاقة والعمل):</h4>
-                <p>يا أبنائي، في هذا النظام المتصل:</p>
-                <ul>
-                    <li><b>تغير الطاقة:</b> الجسم الأثقل يهبط (يفقد وضع) والجسم الأخف يصعد (يكتسب وضع)، وكلاهما يكتسب حركة.</li>
-                    <li><b>شغل الخيط:</b> الخيط يبذل شغلاً موجباً على الجسم الصاعد (لأنه يسحبه للأعلى) وشغلاً سالباً على الهابط.</li>
-                    <li><b>السرعة المشتركة:</b> بما أنهما متصلان بنفس الخيط، فلهما نفس السرعة دائماً.</li>
-                </ul>
-            </div>
-
-            <!-- 3. الرسم التوضيحي -->
-            <div style="text-align: center; margin: 20px 0; background: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
-                <svg width="200" height="180" viewBox="0 0 200 180">
-                    <circle cx="100" cy="30" r="12" fill="#7f8c8d"/> <!-- البكرة -->
-                    <line x1="88" y1="30" x2="88" y2="130" stroke="#34495e" stroke-width="2"/>
-                    <line x1="112" y1="30" x2="112" y2="80" stroke="#34495e" stroke-width="2"/>
-                    
-                    <!-- خطوط الإسناد -->
-                    <line x1="70" y1="130" x2="100" y2="130" stroke="red" stroke-width="2" stroke-dasharray="4"/>
-                    <line x1="100" y1="80" x2="130" y2="80" stroke="red" stroke-width="2" stroke-dasharray="4"/>
-                    
-                    <rect x="78" y="130" width="20" height="20" fill="#e74c3c"/> <!-- 0.2kg -->
-                    <text x="45" y="145" font-size="12" fill="#e74c3c" font-weight="bold">0.2kg</text>
-                    
-                    <rect x="102" y="60" width="20" height="20" fill="#3498db"/> <!-- 0.1kg -->
-                    <text x="130" y="75" font-size="12" fill="#3498db" font-weight="bold">0.1kg</text>
-                </svg>
             </div>
         </div>`,
     options: ["(أ) 2m/s ، (ب) 0.8J ، (ج) 1.33N", "(أ) 1.5m/s ، (ب) 0.5J ، (ج) 1.2N", "(أ) 2.5m/s ، (ب) 1.0J ، (ج) 1.5N", "(أ) 1.8m/s ، (ب) 0.7J ، (ج) 1.1N"],
     ans: "(أ) 2m/s ، (ب) 0.8J ، (ج) 1.33N",
     sol: `
         <div style="direction: rtl; text-align: right; line-height: 1.8; font-family: Arial, sans-serif;">
-            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71;">خطوات الحل التفصيلية:</h4>
+            <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71;">خطوات الحل المنطقية:</h4>
             
-            <p><b>(أ) حساب السرعة v (بقاء الطاقة):</b></p>
-            <p style="padding-right: 20px;">الطاقة قبل = 0
-            <br>الطاقة بعد: [½(m₁+m₂)v²] + [m₁gh] + [-m₂gh] = 0
-            <br>[½(0.3)v²] + [0.1×10×0.6] - [0.2×10×0.6] = 0
-            <br>0.15v² + 0.6 - 1.2 = 0 ⬅️ 0.15v² = 0.6 ⬅️ v² = 4 ⬅️ <b>v = 2 m/s</b>.</p>
+            <p><b>(أ) حساب السرعة v:</b>
+            <br>من قانون بقاء الطاقة للمجموعة: <b>v = 2 m/s</b></p>
 
-            <p><b>(ب) شغل الخيط على الجسم (0.1kg):</b></p>
-            <p>نستخدم نظرية (الشغل = تغير طاقة الحركة) للجسم الصغير فقط:
-            <br>W_total = ΔK.E
-            <br>W_tension + W_gravity = ½ m₁ v²
-            <br>W_T - (0.1 × 10 × 0.6) = ½ (0.1) (2)²
-            <br>W_T - 0.6 = 0.2 ⬅️ <b>W_T = 0.8 J</b>.</p>
+            <hr>
 
-            <p><b>(ج) الشد في الخيط (T):</b></p>
-            <p>بما أن الشغل = القوة × الإزاحة (W = T × s):
-            <br>0.8 = T × 0.6 ⬅️ T = 0.8 / 0.6 ⬅️ <b>T = 1.33 N</b>.</p>
+            <p style="color: #c0392b; font-weight: bold;">(ب) حساب شغل الشد (Wₜ) على الجسم الصاعد (0.1kg):</p>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 20px;">
+                1. نكتب القانون الرياضي (التغير في طاقة الحركة = شغل الشد - شغل الوزن):
+                <br><b style="font-size: 19px;">ΔK.E = Wₜ - W_g</b>
+                <br><br>
+                2. نضع "شغل الشد" في طرف مستقل قبل التعويض:
+                <br><b style="font-size: 19px; color: #2980b9;">Wₜ = ΔK.E + W_g</b>
+                <br><br>
+                3. الآن نعوض بالقيم (حيث شغل الوزن هو mgh):
+                <br><b>ΔK.E (طاقة الحركة)</b> = ½ × 0.1 × (2)² = <b>0.2 جول</b>
+                <br><b>W_g (شغل الوزن)</b> = 0.1 × 10 × 0.6 = <b>0.6 جول</b>
+                <br><br>
+                4. إذن، ناتج شغل الشد هو:
+                <br>Wₜ = 0.2 + 0.6 = <span style="color: #2980b9; font-weight: bold;">0.8 جول</span>
+            </div>
+
+            <p style="color: #c0392b; font-weight: bold;">(ج) حساب مقدار الشد في الخيط (T):</p>
+            <div style="background: #fff3e0; padding: 15px; border-radius: 10px; border: 1px solid #ff9800;">
+                بما أن الشغل يساوي (القوة × المسافة)، فإن:
+                <br><b>الشد (T) = شغل الشد ÷ المسافة</b>
+                <br>الشد = 0.8 ÷ 0.6
+                <br><br>
+                <span style="color: #27ae60; font-weight: bold; font-size: 20px;">T = 1.33 نيوتن</span>
+            </div>
         </div>`
 },{
     id: 6,
@@ -451,7 +434,72 @@ sol: `
         </div>`,
     options: ["13.23 m/s", "28.50 m/s", "15.80 m/s", "10.45 m/s"],
     ans: "13.23 m/s",
+
+
+
+
+
+
+
     sol: `
+
+
+<div style="text-align: center; background: #fff; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee; direction: ltr;">
+    <svg width="400" height="200" viewBox="0 0 400 200">
+        <!-- المنحدر -->
+        <path d="M 50 160 L 350 60 L 350 160 Z" fill="#f8f9fa" stroke="#2c3e50" stroke-width="3"/>
+        
+        <!-- خط الارتفاع الرأسي -->
+        <line x1="360" y1="60" x2="360" y2="160" stroke="#e67e22" stroke-width="2" stroke-dasharray="5,5"/>
+        <text x="365" y="115" font-size="14" fill="#e67e22" font-family="Arial">h = 60m</text>
+        
+        <!-- المسافة المقطوعة (الوتر) -->
+        <text x="180" y="90" font-size="14" fill="#2c3e50" font-family="Arial" transform="rotate(-18, 180, 90)">d = 1000m</text>
+
+        <!-- السيارة (مائلة مع المنحدر) -->
+        <g transform="translate(200, 110) rotate(-18.4)">
+            <!-- جسم السيارة -->
+            <rect x="-25" y="-12" width="50" height="18" fill="#d32f2f" rx="3"/>
+            <rect x="-10" y="-22" width="25" height="12" fill="#d32f2f" rx="2"/>
+            <!-- العجلات -->
+            <circle cx="-15" cy="10" r="6" fill="#000"/>
+            <circle cx="15" cy="10" r="6" fill="#000"/>
+            
+            <!-- سهم قوة المحرك (للأمام) -->
+            <line x1="25" y1="0" x2="65" y2="0" stroke="#27ae60" stroke-width="3" marker-end="url(#arrow-green)"/>
+            <text x="30" y="-15" font-size="12" fill="#27ae60" font-weight="bold" font-family="Arial">F (المحرك)</text>
+            
+            <!-- سهم المقاومة (للخلف) -->
+            <line x1="-25" y1="0" x2="-65" y2="0" stroke="#2980b9" stroke-width="3" marker-end="url(#arrow-blue)"/>
+            <text x="-70" y="-15" font-size="12" fill="#2980b9" font-weight="bold" font-family="Arial">R (المقاومة)</text>
+        </g>
+
+        <!-- تعريفات رؤوس الأسهم -->
+        <defs>
+            <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#27ae60" />
+            </marker>
+            <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#2980b9" />
+            </marker>
+        </defs>
+        
+        <!-- تسمية النقاط -->
+        <circle cx="50" cy="160" r="4" fill="#34495e"/>
+        <text x="30" y="175" font-size="16" font-weight="bold" fill="#34495e">A</text>
+        
+        <circle cx="350" cy="60" r="4" fill="#34495e"/>
+        <text x="355" y="50" font-size="16" font-weight="bold" fill="#34495e">B</text>
+    </svg>
+</div>
+
+
+
+
+
+
+
+
         <div style="direction: rtl; text-align: right; line-height: 1.8; font-family: Arial, sans-serif;">
             <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71;">خطوات الحل بالتسلسل المنطقي:</h4>
 

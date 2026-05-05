@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إندكس 9 - مدرسة أمجاد أفريقيا</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; padding: 20px; text-align: center; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .question-box { background: #e8f6ff; padding: 20px; border-radius: 10px; margin: 20px 0; border-right: 5px solid #3498db; text-align: right; }
+        .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #bdc3c7; border-radius: 8px; cursor: pointer; text-align: right; background: white; font-size: 17px; }
+        .option-btn:hover { background: #f7f9f9; }
+        .option-btn.selected { border-color: #3498db; background: #ebf5fb; }
+        .btn-action { background: #27ae60; color: white; padding: 12px 30px; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; margin-top: 20px; width: 100%; }
+        .explanation { display: none; margin-top: 20px; padding: 15px; border-radius: 8px; text-align: right; background: #fff3e0; border: 1px solid #ffe0b2; color: #e67e22; }
+    </style>
+</head>
+<body>
+
+
+
+
+    
+    <div class="container">
+
+
+<div class="stats-container">
+    <div>إجمالي الأسئلة: <span id="total-count">29</span></div>
+    <div>تمت إجابتها: <span id="answered-count">0</span></div>
+    <div>إجابات صحيحة: <span id="correct-count">0</span></div>
+</div>
+<!-- حاوية الأسئلة -->
+<div id="quiz-container"></div>
+
+
+        <h1>⚡ الفيزياء الكهربائية - إندكس 9</h1>
+        <div id="quiz-area">
+            <div id="question-text" class="question-box">جاري تحميل الأسئلة...</div>
+            <div id="options-area"></div>
+            <button id="check-btn" class="btn-action" style="display:none;" onclick="handleCheck()">تحقق من الإجابة</button>
+            <div id="explanation-box" class="explanation"></div>
+            <button id="next-btn" class="btn-action" style="display:none; background:#3498db;" onclick="loadNext()">السؤال التالي ←</button>
+        </div>
+    </div>
+
+    <script src="problem_data_9.js"></script>
+
+    <script>
+        let currentIndex = 0;
+        let selectedValue = null;
+
+        function displayQuestion() {
+            if (typeof electricalPhysicsQuestions === 'undefined' || electricalPhysicsQuestions.length === 0) {
+                document.getElementById('question-text').innerText = "خطأ: لم يتم العثور على مصفوفة الأسئلة.";
+                return;
+            }
+
+            const q = electricalPhysicsQuestions[currentIndex];
+            document.getElementById('question-text').innerText = q.question;
+            const optionsArea = document.getElementById('options-area');
+            optionsArea.innerHTML = '';
+            document.getElementById('explanation-box').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('check-btn').style.display = 'none';
+            selectedValue = null;
+
+            if (q.type === "multiple") {
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerText = opt;
+                    btn.onclick = () => { select(btn, idx); };
+                    optionsArea.appendChild(btn);
+                });
+            } else {
+                const choices = [ {t: "صح", v: true}, {t: "خطأ", v: false} ];
+                choices.forEach(choice => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerText = choice.t;
+                    btn.onclick = () => { select(btn, choice.v); };
+                    optionsArea.appendChild(btn);
+                });
+            }
+        }
+
+        function select(btn, val) {
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedValue = val;
+            document.getElementById('check-btn').style.display = 'block';
+        }
+
+        function handleCheck() {
+            const q = electricalPhysicsQuestions[currentIndex];
+            const expBox = document.getElementById('explanation-box');
+            expBox.style.display = 'block';
+            expBox.innerHTML = `<strong>النتيجة:</strong> ${selectedValue == q.correct ? 'أحسنت! إجابة صحيحة.' : 'إجابة خاطئة.'}<br>🔍 <strong>الإجابة الصحيحة هي:</strong> ${q.explanation}`;
+            document.getElementById('check-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function loadNext() {
+            currentIndex++;
+            if (currentIndex < electricalPhysicsQuestions.length) displayQuestion();
+            else document.getElementById('quiz-area').innerHTML = "<h3>تم الانتهاء من جميع الأسئلة بنجاح!</h3>";
+        }
+
+        window.onload = displayQuestion;
+    </script>
+</body>
+</html>
