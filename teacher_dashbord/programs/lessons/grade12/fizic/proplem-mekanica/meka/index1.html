@@ -1,53 +1,74 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>اختبار الفيزياء المطور</title>
+<meta charset="UTF-8">F
+<title>اختبار الميكانيكا - الثالث الثانوي</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);font-family:'Segoe UI',sans-serif;padding:20px;min-height:100vh;}
+
+:root { --primary: #2c3e50; --accent: #f1c40f; --success: #266df0; --error: #e74c3c; }
+        body { font-family: 'Segoe UI', Tahoma; background: #290daa; padding: 20px; }
+        
+
+.btn1-check:hover{background:linear-gradient(135deg,#e8f4f8,#d1e8f0,#09baf0);font-family:'Segoe UI',Tahoma,sans-serif;padding:20px;min-height:100vh;}
 .container{max-width:1000px;margin:0 auto;}
-.header{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:30px;padding:25px;text-align:center;color:white;margin-bottom:30px;}
-.stats-bar{background:rgba(255,255,255,0.95);border-radius:60px;padding:15px 25px;margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:10px;z-index:100;box-shadow:0 4px 15px rgba(0,0,0,0.3);flex-wrap:wrap;gap:10px;}
-.score-box,.progress-box{background:#1e4663;color:#ffd966;padding:8px 20px;border-radius:40px;font-weight:bold;}
-.question-card{background:white;border-radius:24px;padding:22px;margin-bottom:20px;border-right:6px solid #ffd966;transition:all 0.3s ease;}
-.answered-correct{border-right-color:#28a745 !important;background:#f0fff4;}
-.answered-wrong{border-right-color:#dc3545 !important;background:#fff5f5;}
-.question-text{font-size:1.2rem;font-weight:bold;color:#1a2a6c;margin-bottom:15px;}
-.question-svg{text-align:center;margin-bottom:20px;background:#fafafa;padding:10px;border-radius:16px;border:1px solid #ddd;}
+.header {
+    background: rgba(185, 214, 184, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 25px;
+    text-align: center;
+    color: #2c5f6e;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}.header h1{font-size:1.8rem;color:gold}
+.headedatar span{color:#5a9aa8;}
+
+
+
+
+.stats-bar{background:#bde2a7;border-radius:60px;padding:15px 25px;margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:10px;z-index:100;box-shadow:0 4px 15px rgba(0,0,0,0.08);flex-wrap:wrap;gap:10px;}
+.score-box,.progress-box{background:#e0f0f5;color:#2c5f6e;padding:8px 20px;border-radius:40px;font-weight:bold;}
+.question-card{background:#ffffff;border-radius:24px;padding:22px;margin-bottom:20px;border-right:6px solid #9bc4d0;transition:all 0.3s ease;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.answered-correct{border-right-color:#6bb59a !important;background:#f0faf7;}
+.answered-wrong{border-right-color:#d49c8a !important;background:#fef7f5;}
+.question-text{font-size:1.2rem;font-weight:bold;color:#2c5f6e;margin-bottom:15px;}
+.question-svg{text-align:center;margin-bottom:20px;background:#fafefe;padding:10px;border-radius:16px;border:1px solid #d4e4e8;}
 .options-area{display:flex;flex-direction:column;gap:10px;margin-bottom:15px;}
-.option{display:flex;align-items:center;gap:12px;background:#f8f9fc;padding:12px 18px;border-radius:50px;border:1px solid #dee2e6;cursor:pointer;transition:0.2s;}
-.option:hover{background:#e9ecef;}
-.option.selected { background: #d1ecf1; border-color: #bee5eb; }
+.option{display:flex;align-items:center;gap:12px;background:#f8fbfc;padding:12px 18px;border-radius:50px;border:1px solid #d9e8ed;cursor:pointer;transition:0.2s;}
+.option:hover{background:#eef4f7;}
+.option.selected { background: #d9ece8; border-color: #9bc4d0; }
 .tf-buttons{display:flex;gap:15px;margin-bottom:15px;}
-.tf-btn{background:#e9ecef;border:2px solid #adb5bd;padding:10px 30px;border-radius:40px;cursor:pointer;text-align:center;font-weight:bold;transition:0.2s;}
-.tf-btn.selected-true{background:#28a745;color:white;border-color:#28a745;}
-.tf-btn.selected-false{background:#dc3545;color:white;border-color:#dc3545;}
+.tf-btn{background:#eef4f7;border:2px solid #c0d6de;padding:10px 30px;border-radius:40px;cursor:pointer;text-align:center;font-weight:bold;transition:0.2s;color:#2c5f6e;}
+.tf-btn.selected-true{background:#6bb59a;color:white;border-color:#6bb59a;}
+.tf-btn.selected-false{background:#d49c8a;color:white;border-color:#d49c8a;}
 .btn-group{display:flex;gap:12px;margin:15px 0 10px;flex-wrap:wrap;}
-.btn-check{background:#2c7da0;padding:8px 22px;border-radius:40px;color:white;border:none;cursor:pointer;font-weight:bold;}
-.btn-reset{background:#e67e22;padding:8px 22px;border-radius:40px;color:white;border:none;cursor:pointer;font-weight:bold;}
+.btn-check{background:#7fb6c4;padding:8px 22px;border-radius:40px;color:white;border:none;cursor:pointer;font-weight:bold;transition:0.2s;}
+.btn-check:hover{background:#5a9aa8;}
+.btn-reset{background:#c4a48e;padding:8px 22px;border-radius:40px;color:white;border:none;cursor:pointer;font-weight:bold;transition:0.2s;}
+.btn-reset:hover{background:#b08a6e;}
 .feedback{margin-top:12px;padding:15px;border-radius:18px;font-weight:bold;display:none;}
-.final-results{background:#1e2f3a;border-radius:40px;padding:20px;margin-top:30px;text-align:center;color:white;font-weight:bold;}
+.final-results{background:#d4e4e8;border-radius:40px;padding:20px;margin-top:30px;text-align:center;color:#2c5f6e;font-weight:bold;}
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 svg{max-width:100%;height:auto;border-radius:12px;}
 .tab-btn {
 padding: 10px 25px;
 margin: 5px;
-border-radius: 20px;
+border-radius: 25px;
 border: none;
-background: #2c5364;
-color: white;
+background: #caddf2;
+color: #2c5f6e;
 cursor: pointer;
 font-weight: bold;
 transition: 0.3s;
 }
 .tab-btn.active {
-background: #ffd966;
-color: #1e4663;
-box-shadow: 0 0 15px rgba(255, 217, 102, 0.4);
+background: #11e6a6;
+color: white;
+box-shadow: 0 0 15px rgba(127, 182, 196, 0.4);
 }
 .loading {
-color: white;
+color: #2c5f6e;
 text-align: center;
 padding: 50px;
 font-size: 1.2rem;
@@ -68,14 +89,14 @@ font-size: 1.2rem;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #ffd966;
-    color: #1e4663;
+    background: #3bbbe2;
+    color: white;
     border: none;
     cursor: pointer;
     font-size: 24px;
     font-weight: bold;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,136 +104,109 @@ font-size: 1.2rem;
 
 .nav-btn:hover {
     transform: scale(1.1);
-    background: #ffc107;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    background: #7fb6c4;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .nav-btn:active {
     transform: scale(0.95);
 }
 
-/* مؤشر التمرير */
 .scroll-progress {
     position: fixed;
     top: 0;
     left: 0;
     width: 0%;
     height: 4px;
-    background: linear-gradient(90deg, #ffd966, #ffc107);
+    background: linear-gradient(90deg, #9bc4d0, #7fb6c4);
     z-index: 1001;
     transition: width 0.3s ease;
 }
 
-/* إظهار/إخفاء الأزرار */
 .nav-btn.hide {
     opacity: 0;
     visibility: hidden;
     transform: scale(0.8);
 }
 
-/* تنسيق رقم السؤال */
 .question-number {
     display: inline-block;
-    background: #ffd966;
-    color: #1e4663;
+    background: #d9ece8;
+    color: #282bdd;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.9rem;
     margin-left: 10px;
     font-weight: bold;
 }
-
-/* سهم العودة للأعلى في البداية */
-.to-top-btn {
-    background: #2c7da0;
-    color: white;
-}
-
-.to-bottom-btn {
-    background: #e67e22;
-    color: white;
-}
 </style>
 </head>
 <body>
 
-<!-- شريط تقدم التمرير -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<!-- أزرار التنقل -->
 <div class="nav-buttons">
-    <button class="nav-btn to-top-btn" id="goToTop" title="الذهاب للأعلى">↑</button>
-    <button class="nav-btn to-bottom-btn" id="goToBottom" title="الذهاب للأسفل">↓</button>
+    <button class="nav-btn" id="goToTop" title="الذهاب للأعلى">↑</button>
+    <button class="nav-btn" id="goToBottom" title="الذهاب للأسفل">↓</button>
 </div>
 
 <div class="container">
 <div class="header">
-<h1>⚡ اختبار الفيزياء <span>المغناطيسية والكهرباء</span></h1>
+<h1>📐 اختبار الميكانيكا <span>الثالث الثانوي</span></h1>
+<p style="font-size:0.9rem; margin-top:8px;"> الطاقة- الشغل - القدرة- قانون نيوتن الثاني   </p>
+
 </div>
 
 <div class="tabs-container" style="text-align: center; margin-bottom: 20px;">
-<button class="tab-btn active" data-part="1">الجزء الأول</button>
-<button class="tab-btn" data-part="2">الجزء الثاني</button>
-<button class="tab-btn" data-part="3">الجزء الثالث</button>
+<button class="tab-btn active">       
+     <a href="../../../../../../../althanaoya/fizic/fizic-dashbord.html" >⚙️ لوحة التحكم</a>
+</button>
+
+<button class="tab-btn active" data-part="1">📘 الجزء الأول | الطاقة- الشغل</button>
+<button class="tab-btn" data-part="2">📙 الجزء الثاني | قانون حفظ الطاقة</button>
+<button class="tab-btn" data-part="3">📗 الجزء الثالث | القدرة</button>
 </div>
 
 <div class="stats-bar">
 <div class="score-box" id="scoreDisplay">📊 النتيجة: 0</div>
 <div class="progress-box" id="progressDisplay">📌 تم التحقق: 0</div>
-<button id="checkAllBtn" style="background:#2c7da0;padding:8px 22px;border-radius:40px;color:white;border:none;font-weight:bold;cursor:pointer;">✅ التحقق من الكل</button>
-<button id="resetAllBtn" style="background:#dc3545;padding:8px 22px;border-radius:40px;color:white;border:none;font-weight:bold;cursor:pointer;">🔄 إعادة ضبط الكل</button>
+<button id="checkAllBtn" style="background:#7fb6c4;padding:8px 22px;border-radius:40px;color:white;border:none;font-weight:bold;cursor:pointer;">✅ التحقق من الكل</button>
+<button id="resetAllBtn" style="background:#c4a48e;padding:8px 22px;border-radius:40px;color:white;border:none;font-weight:bold;cursor:pointer;">🔄 إعادة ضبط الكل</button>
 </div>
 <div id="questionsContainer"><div class="loading">📚 جاري تحميل الأسئلة...</div></div>
 <div class="final-results" id="finalResults">⭐ النتيجة النهائية: --</div>
 </div>
 
 <script>
-// المتغيرات العامة
 let currentQuestions = [];
 let questionsState = [];
 let currentPart = 1;
 let isLoading = false;
 
-// دوال التنقل
 function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function scrollToBottom() {
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-    });
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
-// تحديث شريط التقدم
 function updateScrollProgress() {
     const winScroll = document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
     document.getElementById("scrollProgress").style.width = scrolled + "%";
     
-    // إظهار/إخفاء أزرار التنقل حسب الموقع
     const topBtn = document.getElementById('goToTop');
     const bottomBtn = document.getElementById('goToBottom');
     
-    if (winScroll > 200) {
-        topBtn.classList.remove('hide');
-    } else {
-        topBtn.classList.add('hide');
-    }
+    if (winScroll > 200) topBtn.classList.remove('hide');
+    else topBtn.classList.add('hide');
     
-    if (winScroll + window.innerHeight >= document.body.scrollHeight - 100) {
-        bottomBtn.classList.add('hide');
-    } else {
-        bottomBtn.classList.remove('hide');
-    }
+    if (winScroll + window.innerHeight >= document.body.scrollHeight - 100) bottomBtn.classList.add('hide');
+    else bottomBtn.classList.remove('hide');
 }
 
-// دالة لعرض الأسئلة مع أرقام
 function renderQuestions() {
     const container = document.getElementById("questionsContainer");
     if (!currentQuestions || currentQuestions.length === 0) {
@@ -259,39 +253,28 @@ function renderQuestions() {
             </div>`;
     });
     container.innerHTML = fullHtml;
-    
-    // إعادة ربط الأحداث بعد إنشاء العناصر
     bindEvents();
 }
 
-// ربط الأحداث
 function bindEvents() {
-    // أزرار الصواب/خطأ
     document.querySelectorAll('.tf-btn').forEach(btn => {
         btn.removeEventListener('click', tfHandler);
         btn.addEventListener('click', tfHandler);
     });
-    
-    // خيارات الاختيار من متعدد
     document.querySelectorAll('.option').forEach(opt => {
         opt.removeEventListener('click', optionHandler);
         opt.addEventListener('click', optionHandler);
     });
-    
-    // أزرار التحقق
     document.querySelectorAll('.btn-check').forEach(btn => {
         btn.removeEventListener('click', checkHandler);
         btn.addEventListener('click', checkHandler);
     });
-    
-    // أزرار إعادة المحاولة
     document.querySelectorAll('.btn-reset').forEach(btn => {
         btn.removeEventListener('click', resetHandler);
         btn.addEventListener('click', resetHandler);
     });
 }
 
-// معالجات الأحداث
 function tfHandler(e) {
     const btn = e.currentTarget;
     const qid = parseInt(btn.dataset.qid);
@@ -331,7 +314,6 @@ function setUserAnswer(id, answer) {
     }
     questionsState[idx].userAnswer = answer;
     
-    // تحديث المظهر
     let q = currentQuestions[idx];
     if (q.type === "true-false") {
         const trueBtn = document.querySelector(`.tf-btn[data-qid="${id}"][data-value="true"]`);
@@ -369,7 +351,7 @@ function checkQuestion(id) {
     const feedback = document.getElementById(`feedback-${id}`);
     if (feedback) {
         feedback.style.display = "block";
-        feedback.style.background = state.isCorrect ? "#d4edda" : "#f8d7da";
+        feedback.style.background = state.isCorrect ? "#e0f5ef" : "#fdeae5";
         feedback.innerHTML = (state.isCorrect ? "✅ صحيح! " : "❌ خطأ. ") + (q.explanation || "");
     }
     
@@ -412,7 +394,7 @@ function updateStats() {
     document.getElementById("scoreDisplay").innerText = `📊 النتيجة: ${score}/${total}`;
     document.getElementById("progressDisplay").innerText = `📌 تم التحقق: ${checked}/${total}`;
     let percent = total > 0 ? Math.round(score/total*100) : 0;
-    document.getElementById("finalResults").innerText = `⭐ النتيجة النهائية: ${score}/${total} (${percent}%)`;
+    document.getElementById("finalResults").innerHTML = `⭐ النتيجة النهائية: ${score}/${total} (${percent}%)<br>🎯 ${percent >= 70 ? 'ممتاز! 👍' : (percent >= 50 ? 'جيد، يمكنك التحسن 📚' : 'تحتاج إلى مراجعة 📖')}`;
 }
 
 function checkAll() {
@@ -431,31 +413,24 @@ function resetAll() {
     updateStats();
 }
 
-// تحميل الجزء المطلوب
-async function switchPart(partNum) {
+async function switchPart(partNum, btnElement) {
     if (isLoading) return;
     isLoading = true;
     currentPart = partNum;
     
     const container = document.getElementById("questionsContainer");
-    container.innerHTML = '<div class="loading">📚 جاري تحميل الأسئلة...</div>';
+    container.innerHTML = '<div class="loading">📚 جاري تحميل أسئلة الميكانيكا...</div>';
     
     try {
-        // إزالة السكريبت القديم إذا وجد
         const oldScript = document.getElementById('dynamic-questions-script');
         if (oldScript) oldScript.remove();
         
-        // إنشاء سكريبت جديد
         const script = document.createElement('script');
         script.id = 'dynamic-questions-script';
-        
-        // تحميل الملف المناسب
         script.src = `problemdata${partNum}.js?v=${Date.now()}`;
         
-        // وعد لانتظار تحميل السكريبت
         await new Promise((resolve, reject) => {
             script.onload = () => {
-                // بعد تحميل السكريبت، يجب أن يكون المتغير physicsQuestions متاحاً
                 if (typeof physicsQuestions !== 'undefined' && physicsQuestions && physicsQuestions.length > 0) {
                     currentQuestions = [...physicsQuestions];
                     questionsState = currentQuestions.map(() => ({ userAnswer: null, checked: false, isCorrect: false }));
@@ -470,12 +445,11 @@ async function switchPart(partNum) {
             document.head.appendChild(script);
         });
         
-        // التمرير للأعلى بعد تحميل الجزء الجديد
         scrollToTop();
         
     } catch (error) {
         console.error('خطأ:', error);
-        container.innerHTML = `<div class="loading" style="color:#ff6b6b;">
+        container.innerHTML = `<div class="loading" style="color:#c46a5a;">
             ❌ خطأ: ${error.message}<br>
             تأكد من وجود ملف problemdata${partNum}.js في نفس المجلد
         </div>`;
@@ -484,7 +458,6 @@ async function switchPart(partNum) {
     }
 }
 
-// إعداد أزرار التبويب
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const partNum = parseInt(btn.dataset.part);
@@ -492,47 +465,36 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
         
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        switchPart(partNum);
+        switchPart(partNum, btn);
     });
 });
 
-// إعداد أزرار التنقل
 document.getElementById("goToTop").onclick = scrollToTop;
 document.getElementById("goToBottom").onclick = scrollToBottom;
-
-// إضافة حدث التمرير لتحديث شريط التقدم
 window.addEventListener('scroll', updateScrollProgress);
 window.addEventListener('resize', updateScrollProgress);
 
-// إعداد أزرار التحقق الكلي وإعادة الضبط
 document.getElementById("checkAllBtn").onclick = checkAll;
 document.getElementById("resetAllBtn").onclick = resetAll;
 
-// بدء التطبيق بتحميل الجزء الأول
-switchPart(1);
-
-// تصحيح إذا كان المتغير physicsQuestions معرفاً بشكل مختلف
 window.physicsQuestions = window.physicsQuestions || [];
-
-// إخفاء أزرار التنقل في البداية حتى يتم التمرير
 document.getElementById('goToTop').classList.add('hide');
+
+switchPart(1);
 </script>
 
-<!-- إنشاء ملفات تجريبية للأسئلة إذا لم تكن موجودة -->
 <script>
-// هذا سكريبت احتياطي في حالة عدم وجود الملفات الخارجية
-// سيتم إنشاء أسئلة تجريبية للاختبار
 window.addEventListener('load', function() {
     setTimeout(function() {
         if (currentQuestions.length === 0 && !isLoading) {
-            console.log('لم يتم العثور على ملفات الأسئلة، يتم إنشاء أسئلة تجريبية...');
-            // إنشاء أسئلة تجريبية
+            console.log('إنشاء أسئلة تجريبية للميكانيكا...');
             currentQuestions = [
-                { id: 1, type: "mcq", text: "ما هو اتجاه المجال المغناطيسي حول سلك يمر فيه تيار كهربائي؟", options: ["موازٍ للسلك", "عمودي على السلك", "دائري حول السلك", "باتجاه التيار"], correct: "دائري حول السلك", explanation: "حسب قاعدة اليد اليمنى، المجال المغناطيسي يكون دائرياً حول السلك." },
-                { id: 2, type: "mcq", text: "وحدة قياس شدة التيار الكهربائي هي...", options: ["الفولت", "الأوم", "الأمبير", "الوات"], correct: "الأمبير", explanation: "الأمبير هو الوحدة الأساسية لشدة التيار الكهربائي." },
-                { id: 3, type: "true-false", text: "يتناسب الجهد الكهربائي طردياً مع شدة التيار في دائرة أومية.", correct: true, explanation: "حسب قانون أوم: V = I × R، فالجهد يتناسب طردياً مع التيار عندما تكون المقاومة ثابتة." },
-                { id: 4, type: "mcq", text: "أي من التالي يستخدم لقياس المقاومة الكهربائية؟", options: ["الأميتر", "الفولتميتر", "الأومميتر", "الواتميتر"], correct: "الأومميتر", explanation: "الأومميتر هو جهاز قياس المقاومة الكهربائية." },
-                { id: 5, type: "true-false", text: "المجال المغناطيسي للأرض يتجه من الشمال إلى الجنوب.", correct: false, explanation: "المجال المغناطيسي للأرض يتجه من الجنوب المغناطيسي إلى الشمال المغناطيسي." }
+                { id: 1, type: "mcq", text: "إذا تحرك جسم بسرعة ثابتة مقدارها 10 م/ث لمدة 5 ثوانٍ، فإن المسافة المقطوعة تساوي:", options: ["2 متر", "5 متر", "15 متر", "50 متر"], correct: "50 متر", explanation: "المسافة = السرعة × الزمن = 10 × 5 = 50 متر" },
+                { id: 2, type: "mcq", text: "قانون نيوتن الثاني ينص على أن:", options: ["القوة = الكتلة × التسارع", "الفعل رد فعل", "الجسم الساكن يبقى ساكناً", "العزم = القوة × الذراع"], correct: "القوة = الكتلة × التسارع", explanation: "قانون نيوتن الثاني: F = m × a" },
+                { id: 3, type: "true-false", text: "الجسم الذي يتحرك بسرعة منتظمة يكون تسارعه صفراً.", correct: true, explanation: "السرعة المنتظمة تعني عدم وجود تغير في السرعة، وبالتالي التسارع يساوي صفراً." },
+                { id: 4, type: "mcq", text: "وحدة قياس العزم في النظام الدولي هي:", options: ["نيوتن", "جول", "نيوتن.متر", "كجم.م/ث²"], correct: "نيوتن.متر", explanation: "العزم = القوة × ذراع القوة، ووحدته نيوتن.متر" },
+                { id: 5, type: "true-false", text: "مبدأ حفظ كمية التحرك ينطبق على النظام المعزول.", correct: true, explanation: "في النظام المعزول (الذي لا تؤثر عليه قوى خارجية)، تبقى كمية التحرك محفوظة." },
+                { id: 6, type: "mcq", text: "إذا كانت كتلة جسم 2 كجم وتسارعه 3 م/ث²، فإن القوة المؤثرة عليه تساوي:", options: ["1.5 نيوتن", "5 نيوتن", "6 نيوتن", "8 نيوتن"], correct: "6 نيوتن", explanation: "القوة = الكتلة × التسارع = 2 × 3 = 6 نيوتن" }
             ];
             questionsState = currentQuestions.map(() => ({ userAnswer: null, checked: false, isCorrect: false }));
             renderQuestions();
