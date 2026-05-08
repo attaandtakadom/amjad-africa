@@ -21,6 +21,7 @@ var physicsQuestions = [
         correct: true, 
         explanation: "صحيح، الجسم المتحرك على سطح أفقي يمتلك طاقة حركة، وإذا اعتبرنا السطح هو مستوى المرجع فإن طاقة وضعه تكون صفراً." 
     },
+    
     { 
         id: 76, 
         type: "true-false", 
