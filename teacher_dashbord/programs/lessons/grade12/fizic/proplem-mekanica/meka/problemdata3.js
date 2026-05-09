@@ -48,8 +48,13 @@ var physicsQuestions = [
     }
 ,
 
-{ id: 79, type: "true-false", text: "آلة قدرتها (100 W) فإن الشغل الذي تبذله في زمن 5 min = 30000 J.", correct: true, explanation: "W = P×t = 100 × 300 = 30000 J." },
-    { id: 80, type: "true-false", text: "رصاصة كتلتها (40 g) بسرعة (600 m/s) فإن طاقة حركتها = 7.2 kJ.", correct: true, explanation: "KE = ½×0.04×360000 = 7200 J = 7.2 kJ." },
+{ 
+    id: 79, 
+    type: "true-false", 
+    text: "آلة قدرتها (100 W)؛ فإن الشغل الذي تبذله في زمن قدره (5 min) يساوي 30000 J.", 
+    correct: true,         
+    explanation: "الحساب صحيح: الشغل = القدرة × الزمن. وبما أن الزمن 5 دقائق (أي 300 ثانية)، فإن الحساب يكون: 100 × 300 = 30000 جول." 
+},    { id: 80, type: "true-false", text: "رصاصة كتلتها (40 g) بسرعة (600 m/s) فإن طاقة حركتها = 7.2 kJ.", correct: true, explanation: "KE = ½×0.04×360000 = 7200 J = 7.2 kJ." },
     { id: 81, type: "true-false", text: "يسحب جذع شجرة على طريق أفقي بواسطة خيط يصنع زاوية 60° مع الأفقي بسرعة 1.5 m/s، إذا كانت القدرة = 30 W فإن الشد في الخيط = 40 N.", correct: true, explanation: "P = F v cosθ → 30 = F × 1.5 × 0.5 → F = 40 N." },
     { id: 82, type: "true-false", text: "رفع حجر كتلته 160 kg عمودياً بواسطة آلة قدرتها 2 kW بسرعة منتظمة فإن المسافة التي يتحركها في 7 s = 875 m.", correct: false, explanation: "F = mg = 1600N، v = P/F = 2000/1600 = 1.25 m/s، S = 1.25×7 = 8.75 m، وليس 875 m." },
     { id: 83, type: "true-false", text: "تدفع رافعة قدرتها 2 kW على مستوى مائل بسرعة منتظمة 4 m/s فإن زاوية ميل المستوى = 30°.", correct: false, explanation: "بالتعويض نحصل على sinθ = P/(mgv) = 2000/(?×10×4) يحتاج كتلة الجسم." },
