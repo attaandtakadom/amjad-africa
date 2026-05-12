@@ -298,20 +298,21 @@
     </div>
 </div>
 
-<div class="container" style="margin-top: 20px; border-right: 8px solid #e74c3c;">
-    <h2 style="color: #c0392b; text-align: center;">⚖️ قانون لينز (Lenz's Law)</h2>
+<div class="container" style="margin-top: 20px; border-right: 8px solid #e74c3c; direction: rtl; font-family: 'Cairo', sans-serif; box-sizing: border-box; width: 100%;">
+    <h2 style="color: #c0392b; text-align: center; font-size: 1.4rem;">⚖️ قانون لينز (Lenz's Law)</h2>
     
-    <div class="info-box" style="background: #fff5f5; border-right: 5px solid #e74c3c; padding: 15px; margin-bottom: 20px;">
+    <div class="info-box" style="background: #fff5f5; border-right: 5px solid #e74c3c; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-sizing: border-box;">
         <strong>نص القانون:</strong> "يكون اتجاه التيار المستحث بحيث يولد فيضاً مغناطيسياً <strong>يعاكس</strong> التغير في الفيض المسبب له."
         <br><br>
-        <span style="color: #2c3e50;">💡 <strong>ببساطة:</strong> الملف "بيكره" التغيير؛ لو المغناطيس قرب يحاول يبعده (تنافر)، ولو بعد يحاول يرجعه (تجاذب).</span>
+        <span style="color: #2c3e50;">💡 <strong>ببساطة:</strong> الملف "يكره" التغيير؛ لو المغناطيس قرب يحاول يبعده (تنافر)، ولو بعد يحاول يرجعه (تجاذب).</span>
     </div>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
         
-        <div class="graph-card" style="flex: 1; min-width: 400px; border: 1px solid #eee; padding: 10px; border-radius: 10px;">
-            <h4 style="color: #d35400; text-align: center;">1. حالة التقريب (زيادة الفيض)</h4>
-            <svg width="350" height="180" viewBox="0 0 350 180">
+        <!-- حالة التقريب -->
+        <div class="graph-card" style="flex: 1; min-width: 280px; max-width: 100%; border: 1px solid #eee; padding: 10px; border-radius: 10px; box-sizing: border-box; background: #fff;">
+            <h4 style="color: #d35400; text-align: center; font-size: 1rem;">1. حالة التقريب (زيادة الفيض)</h4>
+            <svg viewBox="0 0 350 180" style="width: 100%; height: auto;">
                 <g fill="none" stroke="#2980b9" stroke-width="4">
                     <path d="M 60 60 C 90 60 90 110 60 110 C 30 110 30 60 60 60" />
                     <path d="M 85 60 C 115 60 115 110 85 110 C 45 110 45 60 75 60" />
@@ -332,18 +333,17 @@
                     </marker>
                 </defs>
             </svg>
-            <div style="background: #f0f7ff; border-right: 5px solid #2980b9; padding: 12px; border-radius: 12px; margin: 15px 0; box-sizing: border-box; width: 100%; max-width: 100%;">
-    <p style="font-size: 0.95rem; text-align: center; color: #2c3e50; line-height: 1.6; margin: 0; font-family: 'Cairo', sans-serif; word-wrap: break-word;">
-        عند <strong>إبعاد</strong> القطب الشمالي <span style="color: #e74c3c; font-weight: bold;">(N)</span>، 
-        يولد الملف قطباً <strong style="color: #3498db;">جنوبياً (S)</strong> 
-        لمقاومة النقص عن طريق <strong style="color: #27ae60;">التجاذب</strong>.
-    </p>
-</div>
+            <div style="background: #f0f7ff; border-right: 5px solid #2980b9; padding: 12px; border-radius: 12px; margin-top: 10px; box-sizing: border-box;">
+                <p style="font-size: 0.9rem; text-align: center; color: #2c3e50; line-height: 1.5; margin: 0;">
+                    عند <strong>تقريب</strong> القطب الشمالي <span style="color: #e74c3c; font-weight: bold;">(N)</span>، يولد الملف قطباً <strong>شمالياً (N)</strong> لمقاومة الزيادة عن طريق <strong>التنافر</strong>.
+                </p>
+            </div>
         </div>
 
-        <div class="graph-card" style="flex: 1; min-width: 400px; border: 1px solid #eee; padding: 10px; border-radius: 10px;">
-            <h4 style="color: #2980b9; text-align: center;">2. حالة الإبعاد (نقص الفيض)</h4>
-            <svg width="350" height="180" viewBox="0 0 350 180">
+        <!-- حالة الإبعاد -->
+        <div class="graph-card" style="flex: 1; min-width: 280px; max-width: 100%; border: 1px solid #eee; padding: 10px; border-radius: 10px; box-sizing: border-box; background: #fff;">
+            <h4 style="color: #2980b9; text-align: center; font-size: 1rem;">2. حالة الإبعاد (نقص الفيض)</h4>
+            <svg viewBox="0 0 350 180" style="width: 100%; height: auto;">
                 <g fill="none" stroke="#2980b9" stroke-width="4">
                     <path d="M 60 60 C 90 60 90 110 60 110 C 30 110 30 60 60 60" />
                     <path d="M 85 60 C 115 60 115 110 85 110 C 45 110 45 60 75 60" />
@@ -364,13 +364,11 @@
                     </marker>
                 </defs>
             </svg>
-            <div style="background: #fff8f0; border-right: 4px solid #ff9800; padding: 12px; border-radius: 12px; margin: 10px 0; box-sizing: border-box; width: 100%; max-width: 100%;">
-    <p style="font-size: 0.95rem; text-align: center; color: #2c3e50; line-height: 1.6; margin: 0; font-family: 'Cairo', sans-serif; word-wrap: break-word;">
-        عند <strong>إبعاد</strong> القطب الشمالي <span style="color: #e74c3c; font-weight: bold;">(N)</span>، 
-        يولد الملف قطباً <strong style="color: #2980b9;">جنوبياً (S)</strong> 
-        لمقاومة النقص عن طريق <strong style="color: #27ae60;">التجاذب</strong>.
-    </p>
-</div>
+            <div style="background: #fff8f0; border-right: 4px solid #ff9800; padding: 12px; border-radius: 12px; margin-top: 10px; box-sizing: border-box;">
+                <p style="font-size: 0.9rem; text-align: center; color: #2c3e50; line-height: 1.5; margin: 0;">
+                    عند <strong>إبعاد</strong> القطب الشمالي <span style="color: #e74c3c; font-weight: bold;">(N)</span>، يولد الملف قطباً <strong>جنوبياً (S)</strong> لمقاومة النقص عن طريق <strong>التجاذب</strong>.
+                </p>
+            </div>
         </div>
 
     </div>
