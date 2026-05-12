@@ -360,9 +360,13 @@
                     </marker>
                 </defs>
             </svg>
-            <p style="font-size: 14px; text-align: center; color: #2c3e50;">
-                عند إبعاد القطب الشمالي (N)، يولد الملف قطباً <strong>جنوبياً (S)</strong> لمقاومة النقص عن طريق <strong>التجاذب</strong>.
-            </p>
+            <div style="background: #fff8f0; border-right: 4px solid #ff9800; padding: 15px; border-radius: 12px; margin: 10px 0; box-sizing: border-box;">
+    <p style="font-size: 1rem; text-align: center; color: #2c3e50; line-height: 1.6; margin: 0;">
+        عند **إبعاد** القطب الشمالي <span style="color: #e74c3c; font-weight: bold;">(N)</span>، 
+        يولد الملف قطباً <strong style="color: #2980b9;">جنوبياً (S)</strong> 
+        لمقاومة النقص عن طريق <strong style="color: #27ae60;">التجاذب</strong>.
+    </p>
+</div>
         </div>
 
     </div>
@@ -394,118 +398,104 @@
             </svg>
         </div>
 
-        <div style="flex: 1; min-width: 300px;">
-            <table style="width: 100%; border-collapse: collapse; font-size: 1.1em;">
+<div class="container" style="direction: rtl; font-family: 'Cairo', sans-serif;">
+    
+    <!-- قسم قاعدة اليد اليمنى لفليمنج (للمولد) -->
+    <div style="background: #f8faff; border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
+        <h3 style="color: #2980b9; text-align: center;">قاعدة اليد اليمنى لفليمنج (للمولد الكهربائي)</h3>
+        <div style="width: 100%; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; min-width: 300px;">
                 <tr style="background: #2980b9; color: white;">
-                    <th style="padding: 12px; border: 1px solid #ddd;">الإصبع</th>
-                    <th style="padding: 12px; border: 1px solid #ddd;">الاتجاه الممثل</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">الإصبع</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">الاتجاه الممثل</th>
                 </tr>
                 <tr>
-                    <td style="padding: 15px; border: 1px solid #ddd; font-weight: bold;">👍 الإبهام</td>
-                    <td style="padding: 15px; border: 1px solid #ddd; color: #e74c3c;">اتجاه <b>حركة السلك</b></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">👍 الإبهام</td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #e74c3c;">اتجاه <b>حركة السلك</b></td>
                 </tr>
                 <tr>
-                    <td style="padding: 15px; border: 1px solid #ddd; font-weight: bold;">☝️ السبابة</td>
-                    <td style="padding: 15px; border: 1px solid #ddd; color: #2ecc71;">اتجاه <b>المجال (B)</b></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">☝️ السبابة</td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #2ecc71;">اتجاه <b>المجال المغناطيسي (B)</b></td>
                 </tr>
                 <tr>
-                    <td style="padding: 15px; border: 1px solid #ddd; font-weight: bold;">🖕 الوسطى</td>
-                    <td style="padding: 15px; border: 1px solid #ddd; color: #3498db;">اتجاه <b>التيار المستحث</b></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">🖕 الوسطى</td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #3498db;">اتجاه <b>التيار المستحث</b></td>
                 </tr>
             </table>
         </div>
     </div>
-</div>
-<div class="container">
-    <h1>المقارنة العلمية: المحرك الكهربائي vs المولد الكهربائي</h1>
 
-    <div class="flex-container">
+    <h1 style="text-align: center; color: #1e4a6b; font-size: 1.5rem; margin-bottom: 20px;">المقارنة العلمية: المحرك الكهربائي vs المولد الكهربائي</h1>
+
+    <div class="flex-container" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+        
         <!-- قسم المحرك -->
-        <div class="device-card">
-            <span class="tag tag-motor">المحرك (Motor)</span>
-            <h2>تحويل الكهرباء إلى حركة</h2>
-            <div class="svg-container">
-                <svg width="200" height="150" viewBox="0 0 200 150">
-                    <!-- المجال المغناطيسي -->
+        <div class="device-card" style="flex: 1; min-width: 280px; padding: 15px; border-radius: 15px; border: 1px solid #ddd; background: #fff; text-align: center;">
+            <span style="background: #e67e22; color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.8rem;">المحرك (Motor)</span>
+            <h2 style="font-size: 1.1rem; color: #2c3e50; margin: 10px 0;">تحويل الكهرباء إلى حركة</h2>
+            <div style="margin: 15px 0;">
+                <svg width="160" height="120" viewBox="0 0 200 150">
                     <rect x="10" y="40" width="40" height="70" fill="#e74c3c" /> <text x="20" y="80" fill="white">N</text>
                     <rect x="150" y="40" width="40" height="70" fill="#3498db" /> <text x="165" y="80" fill="white">S</text>
-                    <!-- الملف -->
                     <rect x="60" y="55" width="80" height="40" fill="none" stroke="#f39c12" stroke-width="3" />
-                    <!-- المبدل (نصفي حلقة) -->
                     <path d="M 90 110 A 10 10 0 0 1 110 110" fill="none" stroke="#7f8c8d" stroke-width="3" />
                     <path d="M 90 120 A 10 10 0 0 0 110 120" fill="none" stroke="#7f8c8d" stroke-width="3" />
-                    <!-- سهم الدوران -->
-                    <path d="M 100 20 Q 130 20 130 50" fill="none" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)" />
                 </svg>
-                <p><small>لاحظ وجود <b>المبدل (نصفي الحلقة)</b> لعكس التيار</small></p>
+                <p style="font-size: 0.8rem; color: #666;">يستخدم <b>المبدل (نصفي حلقة)</b> لتوحيد اتجاه الدوران</p>
             </div>
-            <p><strong>المبدأ:</strong> عزم الازدواج المغناطيسي.</p>
-            <div class="law-box">F = L I B </div>
+            <p><strong>المبدأ:</strong> عزم الازدواج المغناطيسي</p>
+            <div style="background: #2c3e50; color: #f1c40f; padding: 8px; border-radius: 8px; font-family: monospace;">F = L I B</div>
         </div>
 
         <!-- قسم المولد -->
-        <div class="device-card">
-            <span class="tag tag-gen">المولد (Generator)</span>
-            <h2>تحويل الحركة إلى كهرباء</h2>
-            <div class="svg-container">
-                <svg width="200" height="150" viewBox="0 0 200 150">
-                    <!-- المجال المغناطيسي -->
+        <div class="device-card" style="flex: 1; min-width: 280px; padding: 15px; border-radius: 15px; border: 1px solid #ddd; background: #fff; text-align: center;">
+            <span style="background: #3498db; color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.8rem;">المولد (Generator)</span>
+            <h2 style="font-size: 1.1rem; color: #2c3e50; margin: 10px 0;">تحويل الحركة إلى كهرباء</h2>
+            <div style="margin: 15px 0;">
+                <svg width="160" height="120" viewBox="0 0 200 150">
                     <rect x="10" y="40" width="40" height="70" fill="#e74c3c" /> <text x="20" y="80" fill="white">N</text>
                     <rect x="150" y="40" width="40" height="70" fill="#3498db" /> <text x="165" y="80" fill="white">S</text>
-                    <!-- الملف -->
                     <rect x="60" y="55" width="80" height="40" fill="none" stroke="#f39c12" stroke-width="3" />
-                    <!-- حلقتان كاملتان -->
                     <circle cx="100" cy="110" r="8" fill="none" stroke="#7f8c8d" stroke-width="2" />
                     <circle cx="100" cy="125" r="8" fill="none" stroke="#7f8c8d" stroke-width="2" />
                 </svg>
-                <p><small>لاحظ وجود <b>حلقتي الانزلاق</b> لنقل التيار المتردد</small></p>
+                <p style="font-size: 0.8rem; color: #666;">يستخدم <b>حلقتي انزلاق</b> لإنتاج تيار متردد</p>
             </div>
-            <p><strong>المبدأ:</strong> الحث الكهرومغناطيسي.</p>
-            <div class="law-box">emf = -N (ΔΦ/Δt)</div>
+            <p><strong>المبدأ:</strong> الحث الكهرومغناطيسي</p>
+            <div style="background: #2c3e50; color: #f1c40f; padding: 8px; border-radius: 8px; font-family: monospace;">emf = -N (ΔΦ/Δt)</div>
         </div>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>وجه المقارنة</th>
-                <th>محرك التيار المستمر</th>
-                <th>مولد التيار المتردد</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>النظرية العلمية</td>
-                <td>القوة المغناطيسية (عزم الازدواج)</td>
-                <td>قانون فاراداي للحث</td>
-            </tr>
-            <tr>
-                <td>قاعدة تحديد الاتجاه</td>
-                <td>قاعدة اليد <b>اليسرى</b> لفليمنج</td>
-                <td>قاعدة اليد <b>اليمنى</b> لفليمنج</td>
-            </tr>
-            <tr>
-                <td>المكون المميز</td>
-                <td>مبدل (نصفي حلقة معدنية)</td>
-                <td>حلقتان معدنيتان كاملتان</td>
-            </tr>
-            <tr>
-                <td>نوع التيار</td>
-                <td>يستهلك تيار مستمر (DC)</td>
-                <td>ينتج تيار متردد (AC)</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- جدول المقارنة النهائي -->
+    <div style="width: 100%; overflow-x: auto; margin-top: 25px;">
+        <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+            <thead>
+                <tr style="background-color: #2980b9; color: white;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">وجه المقارنة</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">المحرك (DC)</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">المولد (AC)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #fff;">
+                    <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">النظرية العلمية</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">القوة المغناطيسية (عزم الازدواج)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">قانون فاراداي للحث</td>
+                </tr>
+                <tr style="background: #f9f9f9;">
+                    <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">قاعدة تحديد الاتجاه</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">قاعدة اليد <b>اليسرى</b> لفليمنج</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">قاعدة اليد <b>اليمنى</b> لفليمنج</td>
+                </tr>
+                <tr style="background: #fff;">
+                    <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">المكون المميز</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">مبدل (نصفي حلقة معدنية)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">حلقتان معدنيتان كاملتان</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
     
 <div class="container">
     <h1>تحليل أداء المولد الكهربائي (العلاقات البيانية)</h1>
@@ -526,47 +516,52 @@
 
     <div class="flex-graphs">
         <!-- الرسم البياني 1: مضاعفة عدد اللفات -->
-        <div class="graph-card">
-            <h3>أثر مضاعفة عدد اللفات (N)</h3>
-            <svg width="400" height="200" viewBox="0 0 400 200">
-                <!-- المحاور -->
-                <line x1="20" y1="100" x2="380" y2="100" stroke="black" stroke-width="2" />
-                <line x1="40" y1="20" x2="40" y2="180" stroke="black" stroke-width="2" />
-                <!-- الموجة الأصلية -->
-                <path d="M 40 100 Q 90 20 140 100 T 240 100" fill="none" stroke="#3498db" stroke-width="2" />
-                <!-- الموجة بعد مضاعفة N -->
-                <path d="M 40 100 Q 90 -40 140 100 T 240 100" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5" />
-                <text x="250" y="50" fill="#e74c3c" font-size="12">مضاعفة N ترتفع للأعلى</text>
-                <text x="350" y="120" font-size="12">الزمن (t)</text>
-            </svg>
-            <p>عند مضاعفة <span class="math">N</span>، يزداد <span class="math">Vmax</span> (ترتفع القمة) ولكن <strong>الزمن الدوري يبقى ثابتاً</strong>.</p>
-        </div>
+        <!-- الرسم البياني 1: مضاعفة عدد اللفات -->
+<div class="graph-card" style="width: 100%; min-width: 280px; background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 15px; box-sizing: border-box; margin-bottom: 20px;">
+    <h3 style="color: #2c3e50; font-size: 1.1rem; text-align: center;">أثر مضاعفة عدد اللفات (N)</h3>
+    <svg viewBox="0 0 400 200" style="width: 100%; height: auto;">
+        <!-- المحاور -->
+        <line x1="20" y1="100" x2="380" y2="100" stroke="black" stroke-width="2" />
+        <line x1="40" y1="20" x2="40" y2="180" stroke="black" stroke-width="2" />
+        
+        <!-- الموجة الأصلية -->
+        <path d="M 40 100 Q 90 20 140 100 T 240 100" fill="none" stroke="#3498db" stroke-width="2" />
+        
+        <!-- الموجة بعد مضاعفة N -->
+        <path d="M 40 100 Q 90 -40 140 100 T 240 100" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5" />
+        
+        <text x="250" y="50" fill="#e74c3c" font-size="12" font-family="Cairo">مضاعفة N تزيد القمة</text>
+        <text x="340" y="120" font-size="12" font-family="Cairo">الزمن (t)</text>
+    </svg>
+    <p style="font-size: 0.9rem; color: #34495e; text-align: center; margin-top: 10px;">
+        عند مضاعفة $N$، يزداد $V_{max}$ (ترتفع القمة) ولكن <strong>الزمن الدوري يبقى ثابتاً</strong>.
+    </p>
+</div>
 
-        <!-- الرسم البياني 2: مضاعفة التردد -->
-        <!-- استبدل قسم الرسم البياني للتردد بهذا الكود المطور -->
-<div class="graph-card">
-    <h3>أثر مضاعفة التردد (f) - "أطول وأنحف"</h3>
-    <svg width="450" height="250" viewBox="0 0 450 250">
+<!-- الرسم البياني 2: مضاعفة التردد -->
+<div class="graph-card" style="width: 100%; min-width: 280px; background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 15px; box-sizing: border-box;">
+    <h3 style="color: #2c3e50; font-size: 1.1rem; text-align: center;">أثر مضاعفة التردد (f) - "أطول وأنحف"</h3>
+    <svg viewBox="0 0 450 250" style="width: 100%; height: auto;">
         <!-- المحاور -->
         <line x1="20" y1="125" x2="430" y2="125" stroke="black" stroke-width="2" />
         <line x1="40" y1="20" x2="40" y2="230" stroke="black" stroke-width="2" />
         
-        <!-- الموجة الأصلية (دورة واحدة عريضة وقصيرة) -->
-        <!-- التردد f -->
+        <!-- الموجة الأصلية -->
         <path d="M 40 125 Q 115 25 190 125 T 340 125" fill="none" stroke="#3498db" stroke-width="2" />
-        <text x="345" y="140" fill="#3498db" font-size="12">التردد (f)</text>
+        <text x="345" y="140" fill="#3498db" font-size="12" font-family="Cairo">التردد (f)</text>
 
-        <!-- الموجة بعد المضاعفة (دورتان نحيفتان وطويلتان) -->
-        <!-- التردد 2f -->
+        <!-- الموجة بعد المضاعفة (2f) -->
         <path d="M 40 125 Q 77 -25 115 125 T 190 125 Q 227 -25 265 125 T 340 125" 
               fill="none" stroke="#e74c3c" stroke-width="3" stroke-dasharray="2,1" />
-        <text x="270" y="40" fill="#e74c3c" font-size="12" font-weight="bold">مضاعفة التردد (2f)</text>
+        <text x="270" y="40" fill="#e74c3c" font-size="12" font-weight="bold" font-family="Cairo">مضاعفة التردد (2f)</text>
 
         <!-- توضيح الزمن الدوري -->
         <line x1="40" y1="240" x2="190" y2="240" stroke="#e74c3c" stroke-width="1" />
-        <text x="80" y="235" fill="#e74c3c" font-size="10">نصف الزمن (T/2)</text>
+        <text x="80" y="235" fill="#e74c3c" font-size="10" font-family="Cairo">نصف الزمن (T/2)</text>
     </svg>
-    <p>عند مضاعفة التردد: تظهر **دورتان** في نفس زمن الدورة الواحدة السابقة، وتكون القمة **ضعف الارتفاع**.</p>
+    <p style="font-size: 0.9rem; color: #34495e; text-align: center; margin-top: 10px;">
+        عند مضاعفة التردد: تظهر <b>دورتان</b> في نفس زمن الدورة السابقة، وتكون القمة <b>ضعف الارتفاع</b>.
+    </p>
 </div>
     </div>
 
