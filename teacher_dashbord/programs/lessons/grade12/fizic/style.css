@@ -2,68 +2,6 @@
 
 /* التنسيقات العامة */
 */* 1. القفل العام لمنع أي حركة جانبية في الصفحة بالكامل */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    /* لضمان ثبات اللمس على الجوال */
-    touch-action: pan-y; 
-}
-
-/* 2. ضبط كلاس container ليكون مرناً ومحتوياً للمحتوى */
-.container {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden; /* يمنع أي محتوى داخلي من دفع الحاوية */
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding: 12px; /* مسافة داخلية متناسقة */
-}
-
-/* 3. إجبار جميع العناصر الداخلية على احترام حدود الحاوية */
-.container * {
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-/* 4. تعديل خاص لـ SVG والجداول لأنها أكثر ما يسبب الإزاحة */
-svg {
-    height: auto !important;
-    max-width: 100% !important;
-}
-
-.table-container, table {
-    width: 100% !important;
-    display: block;
-    overflow-x: auto; /* يجعل الجداول قابلة للسحب بدلاً من كسر الإطار */
-    -webkit-overflow-scrolling: touch;
-}
-/* تحسين الهيدر للجوال */
-header { 
-    background: linear-gradient(135deg, #2c3e50, #2980b9); 
-    padding: 12px; 
-    color: white; 
-    border-radius: 12px; 
-    margin-bottom: 15px; 
-}
-
-.header-flex { 
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    text-align: center; 
-    gap: 12px; 
-}
-
-header h1 { 
-    font-size: 1.2rem !important; 
-    border: none; 
-    color: #fff; 
-    margin: 0; 
-}
-
 /* أزرار التنقل - جعلها أكثر مرونة */
 .nav-buttons { 
     display: flex; 
@@ -137,4 +75,122 @@ table {
 canvas { 
     max-width: 100% !important; 
     height: auto !important; 
+}
+
+/* 1. تصفير شامل لمنع أي مسافات خارجية تسبب الإزاحة */
+html, body {
+    max-width: 100vw; /* استخدام عرض الشاشة الفعلي */
+    overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    touch-action: pan-y; /* منع الاهتزاز الجانبي عند اللمس */
+}
+
+/* 2. ضبط الحاوية المتكررة (التعامل معها كجزء من عرض الشاشة) */
+.container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding: 10px !important; /* تقليل المسافة لتوفير عرض أكبر للمحتوى */
+    box-sizing: border-box !important;
+    display: block;
+    position: relative;
+    overflow: hidden; /* أهم سطر: يمنع أي عنصر داخل الحاوية من دفعها للخارج */
+}
+
+/* 3. إصلاح مشكلة "الفراغ من اليسار" في الجوال */
+* {
+    box-sizing: border-box !important;
+}
+
+/* 4. إجبار الصور والرسوم والجداول على الانصياع للعرض المتاح */
+img, svg, canvas, video {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* 5. حل مشكلة الجداول (المسبب الرئيسي للإزاحة) */
+table {
+    display: block; /* تحويل الجدول لكتلة للسماح بالتمرير */
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap; /* منع انضغاط النصوص داخل الجدول */
+}
+
+/* 6. منع الأزرار والعناصر المرنة من التمدد الزائد */
+.nav-buttons, .flex-container, .flex-graphs {
+    display: flex;
+    flex-wrap: wrap !important; /* النزول لسطر جديد إجباري */
+    gap: 10px;
+    width: 100% !important;
+}
+
+.nav-btn, .graph-card, .device-card {
+    flex: 1 1 280px; /* لا يقل العرض عن 280px وينمو ليمرأ الفراغ */
+    max-width: 100% !important;
+}
+
+/* 7. تعديل خاص للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+    .container {
+        padding: 5px !important; /* تقليل الهوامش لأقصى حد */
+    }
+    h1 { font-size: 1.1rem !important; }
+    h2 { font-size: 1rem !important; }
+    .nav-btn { font-size: 0.7rem !important; }
+}
+/* 1. استيراد خطوط مميزة من جوجل */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@700&display=swap');
+
+/* 2. تنسيق العنوان H1 بشكل مميز */
+h1 {
+    font-family: 'Amiri', serif; /* خط أميري فخم للعناوين */
+    font-size: 2.2rem !important;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    padding: 25px 15px;
+    margin: 20px auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    border-bottom: 5px solid #f1c40f; /* خط ذهبي أسفل العنوان */
+    max-width: 90%;
+    letter-spacing: 1px;
+}
+
+/* 3. تنسيق الجداول لتكون في المنتصف دائماً */
+table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-collapse: collapse;
+    width: 90% !important; /* أو العرض الذي تفضله */
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden; /* لضمان جمال الحواف */
+}
+
+/* لضمان توسيط محتوى الجدول نفسه إذا أردت */
+th, td {
+    text-align: center !important;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+/* تحسين للجوال لضمان عدم خروج الجدول عن الشاشة */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem !important;
+        padding: 15px 10px;
+    }
+    
+    table {
+        width: 100% !important;
+        display: block;
+        overflow-x: auto; /* يسمح بالسحب الجانبي فقط داخل الجدول */
+    }
 }

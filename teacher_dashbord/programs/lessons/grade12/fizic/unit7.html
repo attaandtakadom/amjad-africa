@@ -78,75 +78,68 @@
     
     <div style="display: flex; flex-wrap: wrap; gap: 20px;">
         
-        <div class="graph-card" style="flex: 1; min-width: 400px;">
-            <h3>1. تجربة الحلقة الحديدية</h3>
-            <svg width="350" height="220" viewBox="0 0 350 220">
-                <path d="M 175 40 A 70 65 0 1 0 175 170 A 70 65 0 1 0 175 40 Z" fill="none" stroke="#535c68" stroke-width="20" />
-                
-                <g stroke="#e67e22" stroke-width="3" fill="none">
-                    <path d="M 110 70 Q 95 75 110 80 M 110 85 Q 95 90 110 95 M 110 100 Q 95 105 110 110 M 110 115 Q 95 120 110 125" />
-                    <line x1="110" y1="70" x2="60" y2="70" />
-                    <line x1="110" y1="125" x2="60" y2="125" />
-                </g>
-                <rect x="30" y="60" width="30" height="75" rx="5" fill="#2c3e50" />
-                <rect x="35" y="55" width="20" height="5" fill="#95a5a6" /> <rect x="30" y="95" width="30" height="10" fill="#e74c3c" /> <text x="25" y="155" font-size="12" font-weight="bold" fill="#2c3e50">بطارية كاملة</text>
-
-                <g stroke="#2980b9" stroke-width="3" fill="none">
-                    <path d="M 240 70 Q 255 75 240 80 M 240 85 Q 255 90 240 95 M 240 100 Q 255 105 240 110 M 240 115 Q 255 120 240 125" />
-                    <line x1="240" y1="70" x2="275" y2="70" />
-                    <line x1="240" y1="125" x2="275" y2="125" />
-                </g>
-                <circle cx="295" cy="97" r="25" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" />
-                <line x1="295" y1="97" x2="285" y2="75" stroke="#c0392b" stroke-width="3" /> <circle cx="295" cy="97" r="3" fill="#2c3e50" /> <text x="270" y="65" font-size="12" font-weight="bold">جلفانومتر</text>
-            </svg>
-        </div>
-
-        <div class="graph-card" style="flex: 1; min-width: 400px;">
-            <h3>2. تجربة الملف والمغناطيس</h3>
-            <svg width="350" height="220" viewBox="0 0 350 220">
-                <g fill="none" stroke="#e67e22" stroke-width="4">
-                    <path d="M 60 70 C 90 70 90 120 60 120 C 30 120 30 70 60 70" />
-                    <path d="M 85 70 C 115 70 115 120 85 120 C 55 120 55 70 85 70" />
-                    <path d="M 110 70 C 140 70 140 120 110 120 C 80 120 80 70 110 70" />
-                </g>
-                <path d="M 60 120 L 60 160 L 95 160" fill="none" stroke="#34495e" stroke-width="2" />
-                <path d="M 110 120 L 110 160 L 125 160" fill="none" stroke="#34495e" stroke-width="2" />
-                
-                <circle cx="125" cy="160" r="25" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" />
-                <line x1="125" y1="160" x2="135" y2="140" stroke="#c0392b" stroke-width="3" /> <circle cx="125" cy="160" r="3" fill="#2c3e50" />
-                <text x="100" y="130" font-size="12" font-weight="bold">جلفانومتر</text>
-
-                <g>
-                    <rect x="190" y="80" width="50" height="35" fill="#c0392b" />
-                    <rect x="240" y="80" width="50" height="35" fill="#2980b9" />
-                    <text x="205" y="103" fill="white" font-weight="bold">N</text>
-                    <text x="255" y="103" fill="white" font-weight="bold">S</text>
-                    <path d="M 180 97 L 145 97" fill="none" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead2)" />
-                </g>
-                <defs>
-                    <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-                        <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50" />
-                    </marker>
-                </defs>
-            </svg>
-
-
-
-
-
-
-
-            
-        </div>
-
-
-
-
-
-
-
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; direction: rtl; font-family: 'Cairo', sans-serif;">
         
+    <!-- تجربة الحلقة الحديدية -->
+    <div class="graph-card" style="flex: 1; min-width: 300px; max-width: 450px; text-align: center; border: 1px solid #eee; padding: 15px; border-radius: 15px; background: #fff;">
+        <h3 style="color: #2c3e50; margin-bottom: 15px;">1. تجربة الحلقة الحديدية</h3>
+        <svg viewBox="0 0 350 220" style="width: 100%; height: auto; max-width: 350px;">
+            <path d="M 175 40 A 70 65 0 1 0 175 170 A 70 65 0 1 0 175 40 Z" fill="none" stroke="#535c68" stroke-width="20" />
+            
+            <g stroke="#e67e22" stroke-width="3" fill="none">
+                <path d="M 110 70 Q 95 75 110 80 M 110 85 Q 95 90 110 95 M 110 100 Q 95 105 110 110 M 110 115 Q 95 120 110 125" />
+                <line x1="110" y1="70" x2="60" y2="70" />
+                <line x1="110" y1="125" x2="60" y2="125" />
+            </g>
+            <rect x="30" y="60" width="30" height="75" rx="5" fill="#2c3e50" />
+            <rect x="35" y="55" width="20" height="5" fill="#95a5a6" /> 
+            <rect x="30" y="95" width="30" height="10" fill="#e74c3c" /> 
+            <text x="50" y="155" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="middle">بطارية كاملة</text>
+
+            <g stroke="#2980b9" stroke-width="3" fill="none">
+                <path d="M 240 70 Q 255 75 240 80 M 240 85 Q 255 90 240 95 M 240 100 Q 255 105 240 110 M 240 115 Q 255 120 240 125" />
+                <line x1="240" y1="70" x2="275" y2="70" />
+                <line x1="240" y1="125" x2="275" y2="125" />
+            </g>
+            <circle cx="295" cy="97" r="25" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" />
+            <line x1="295" y1="97" x2="285" y2="75" stroke="#c0392b" stroke-width="3" /> 
+            <circle cx="295" cy="97" r="3" fill="#2c3e50" /> 
+            <text x="295" y="60" font-size="14" font-weight="bold" text-anchor="middle">جلفانومتر</text>
+        </svg>
     </div>
+
+    <!-- تجربة الملف والمغناطيس -->
+    <div class="graph-card" style="flex: 1; min-width: 300px; max-width: 450px; text-align: center; border: 1px solid #eee; padding: 15px; border-radius: 15px; background: #fff;">
+        <h3 style="color: #2c3e50; margin-bottom: 15px;">2. تجربة الملف والمغناطيس</h3>
+        <svg viewBox="0 0 350 220" style="width: 100%; height: auto; max-width: 350px;">
+            <g fill="none" stroke="#e67e22" stroke-width="4">
+                <path d="M 60 70 C 90 70 90 120 60 120 C 30 120 30 70 60 70" />
+                <path d="M 85 70 C 115 70 115 120 85 120 C 55 120 55 70 85 70" />
+                <path d="M 110 70 C 140 70 140 120 110 120 C 80 120 80 70 110 70" />
+            </g>
+            <path d="M 60 120 L 60 160 L 95 160" fill="none" stroke="#34495e" stroke-width="2" />
+            <path d="M 110 120 L 110 160 L 125 160" fill="none" stroke="#34495e" stroke-width="2" />
+            
+            <circle cx="125" cy="160" r="25" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" />
+            <line x1="125" y1="160" x2="135" y2="140" stroke="#c0392b" stroke-width="3" /> 
+            <circle cx="125" cy="160" r="3" fill="#2c3e50" />
+            <text x="125" y="130" font-size="14" font-weight="bold" text-anchor="middle">جلفانومتر</text>
+
+            <g>
+                <rect x="190" y="80" width="50" height="35" fill="#c0392b" />
+                <rect x="240" y="80" width="50" height="35" fill="#2980b9" />
+                <text x="205" y="103" fill="white" font-weight="bold">N</text>
+                <text x="255" y="103" fill="white" font-weight="bold">S</text>
+                <path d="M 180 97 L 145 97" fill="none" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead2)" />
+            </g>
+            <defs>
+                <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50" />
+                </marker>
+            </defs>
+        </svg>
+    </div>
+</div>
 </div>
 <div class="container" style="margin-top: 20px; border-right: 8px solid #f1c40f;">
     <h2 style="color: #2c3e50; text-align: center;">📖 الشرح النظري لتجارب فاراداي</h2>
@@ -221,35 +214,150 @@
 
     </div>
 </div>
+<style>
+    /* تنسيق قسم فاراداي المطور */
+    .faraday-section {
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+        max-width: 900px;
+        margin: 40px auto; /* توسيط القسم بالكامل في منتصف الصفحة */
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        text-align: center;
+        border: 1px solid #eef2f3;
+    }
+
+    .faraday-section h2 {
+        font-family: 'Amiri', serif;
+        font-size: 2.8rem;
+        color: #27ae60;
+        margin-bottom: 30px;
+    }
+
+    /* صندوق القانون الرئيسي - التركيز على emf */
+    .main-law-box {
+        background: linear-gradient(135deg, #f1f9f5 0%, #e8f5ed 100%);
+        padding: 40px;
+        border-radius: 20px;
+        margin: 25px auto;
+        display: inline-block;
+        min-width: 70%;
+        border: 3px solid #27ae60;
+        box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .law-text {
+        font-size: 3.5rem; /* حجم كبير جداً للقانون */
+        font-family: 'Times New Roman', serif;
+        font-weight: bold;
+        color: #2c3e50;
+        direction: ltr;
+        display: block;
+    }
+
+    .law-text span.emf-label {
+        color: #27ae60;
+    }
+
+    /* تنسيق كروت الشرح */
+    .explanation-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .info-card {
+        flex: 1;
+        min-width: 320px;
+        text-align: right;
+        padding: 25px;
+        border-radius: 15px;
+        background: #fff;
+        border-right: 10px solid #27ae60;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .info-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #34495e;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .symbol-detail {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        line-height: 1.8;
+    }
+
+    .symbol-name {
+        font-weight: bold;
+        color: #27ae60;
+        font-size: 1.3rem;
+    }
+
+    /* تمييز التنبيهات */
+    .alert-card {
+        border-right-color: #e67e22;
+    }
+
+    .formula-mini {
+        background: #fff3e0;
+        font-size: 1.8rem;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 15px 0;
+        font-family: 'Times New Roman', serif;
+        color: #d35400;
+        direction: ltr;
+    }
+
+    @media (max-width: 600px) {
+        .law-text { font-size: 2.2rem; }
+        .faraday-section h2 { font-size: 1.8rem; }
+    }
+</style>
 
 <div class="faraday-section">
-    <h2 style="color: #27ae60; text-decoration: none;">🏷️ قانون فاراداي للحث الكهرومغناطيسي</h2>
+    <h2>قانون فاراداي للحث الكهرومغناطيسي</h2>
     
-    <div class="main-law">
-        emf = -N <span style="color:#27ae60;">(ΔΦ / Δt)</span>
+    <div class="main-law-box">
+        <div class="law-text">
+            <span class="emf-label">emf</span> = -N <span style="font-size: 4.5rem; vertical-align: middle;">(</span> <div style="display: inline-table; vertical-align: middle; text-align: center;"><div>ΔΦ</div><div style="border-top: 3px solid #2c3e50;">Δt</div></div> <span style="font-size: 4.5rem; vertical-align: middle;">)</span>
+        </div>
     </div>
 
-    <div class="delta-explanation">
+    <div class="explanation-container">
+        <!-- كارت تفاصيل الرموز -->
         <div class="info-card">
-            <h3>ماذا تعني هذه الرموز؟</h3>
-            <ul>
-                <li><span class="highlight-text">emf:</span> القوة الدافعة الكهربائية المستحثة (تقاس بالفولت).</li>
-                <li><span class="highlight-text">N:</span> عدد لفات الملف.</li>
-                <li><span class="highlight-text">ΔΦ:</span> التغير في التدفق المغناطيسي (Φ₂ - Φ₁).</li>
-                <li><span class="highlight-text">Δt:</span> المعدل الزمني لهذا التغير.</li>
-            </ul>
+            <h3>رموز القانون الوحدات:</h3>
+            <div class="symbol-detail">
+                • <span class="symbol-name">emf:</span> القوة الدافعة الكهربائية المستحثة (Volt).<br>
+                • <span class="symbol-name">N:</span> عدد لفات الملف (بدون وحدة).<br>
+                • <span class="symbol-name">ΔΦ:</span> التغير في التدفق المغناطيسي (Wb).<br>
+                • <span class="symbol-name">Δt:</span> التغير في الزمن (Second).
+            </div>
         </div>
 
-        <div class="info-card" style="border-left-color: #e67e22;">
-            <h3>⚠️ تنبيه هام للمسائل!</h3>
-            <p>أحياناً لا يعطيك السؤال قيمة <span class="math-inline">Φ</span> مباشرة، بل يعطيك كثافة الفيض <span class="math-inline">B</span> والمساحة <span class="math-inline">A</span>.</p>
-            <p>في هذه الحالة نستخدم العلاقة:</p>
-            <div style="font-size: 24px; text-align: center; background: #fff3e0; padding: 10px; border-radius: 10px;">
-                Φ = B × A
+        <!-- كارت التنبيهات الرياضية -->
+        <div class="info-card alert-card">
+            <h3>تنبيهات حل المسائل:</h3>
+            <p>تذكر دائماً فك التدفق إذا كان مجهولاً:</p>
+            <div class="formula-mini">
+                Φ = B × A 
             </div>
-            <p>ومنها يكون التغير: <span class="math-inline">ΔΦ = ΔB × A</span> (إذا تغير المجال) أو <span class="math-inline">ΔΦ = B × ΔA</span> (إذا تغيرت المساحة).</p>
+            <p style="color: #7f8c8d; font-size: 0.9rem;">
+                * الإشارة السالبة تشير إلى <b>قانون لينز</b> (الاتجاه المعاكس).
+            </p>
         </div>
     </div>
+</div></div>
 
 <div class="container" style="margin-top: 20px; border-right: 8px solid #2ecc71;">
     <h2 style="color: #27ae60; text-align: center;">💡 مهارة الحل: حالات قانون فاراداي الخاصة</h2>
@@ -427,7 +535,7 @@
         </div>
     </div>
 
-    <h1 style="text-align: center; color: #1e4a6b; font-size: 1.5rem; margin-bottom: 20px;">المقارنة العلمية: المحرك الكهربائي vs المولد الكهربائي</h1>
+    <h1 style="text-align: center; color: #a8f023; font-size: 1.5rem; margin-bottom: 20px;">المقارنة العلمية: المحرك الكهربائي vs المولد الكهربائي</h1>
 
     <div class="flex-container" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
         
@@ -574,7 +682,6 @@
         <p>3. <strong>تحليل الزمن:</strong> الزمن الكلي للدورة هو <span class="math">T</span>، وزمن الوصول لأقصى جهد هو <span class="math">T/4</span>، وزمن نصف الدورة هو <span class="math">T/2</span>.</p>
     </div>
 
-    <h2 style="color: #e67e22;">قريباً: قسم المسائل التدريبية...</h2>
 </div>
 
 <!-- أضف هذا القسم في ملف lesson.html قبل قسم المسائل مباشرة -->
@@ -583,162 +690,391 @@
 
     
 
-<div class="container">
-    <h1>حل تمارين الكتاب المدرسي - قانون فاراداي</h1>
+<style>
+    /* قفل الأمان لمنع الاهتزاز الجانبي وتوحيد الخطوط */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-    <!-- تمرين 11 -->
-    <div class="exercise-container">
-        <div class="question-header">تمرين رقم (11) ص 132</div>
-        <p><strong>السؤال:</strong> ملف مكون من 500 لفة، مساحة كل منها 100 سم²، يدور بتردد 1500 دورة/دقيقة في مجال مغناطيسي شدته 42 × 10⁻⁴ تسلا. احسب القوة الدافعة المستحثة (emf) عند دوران الملف ربع دورة.</p>
+    .main-wrapper {
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+        background-color: #f4f7f9;
+        padding: 10px;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
 
-        <div class="step-box">
-            <h3>1️⃣ المعطيات والتحويلات (من اليسار إلى اليمين):</h3>
-            <div class="math-block">
-                N = 500 لفة <br>
-                A = 100 cm² = 100 × 10⁻⁴ = 0.01 m² <br>
-                B = 42 × 10⁻⁴ T = 0.0042 T <br>
-<div class="math-block" style="direction: ltr; text-align: left; display: flex; align-items: center; gap: 5px;">
-    <span>f = 1500</span>
-    <span style="direction: rtl;">دورة/دقيقة</span>
-    <span>= 1500 / 60 = 25 Hz</span>
-    <span style="direction: rtl;">(دورة/ثانية)</span>
-</div>            </div>
-        </div>
+    .container {
+        width: 100% !important;
+        max-width: 600px; /* مقاس مثالي للمذاكرة */
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
 
-        <div class="step-box">
-            <h3>2️⃣ حساب الزمن (Δt):</h3>
-            <div class="math-block">
-                T = 1 / f = 1 / 25 = 0.04 s <br>
-                Δt = T / 4 = 0.04 / 4 = 0.01 s
+    h1 {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        text-align: center;
+        padding: 20px 10px;
+        border-radius: 15px;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .exercise-container {
+        background: white;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 25px;
+        border: 1px solid #e1e8ed;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        overflow: hidden; /* يمنع خروج المحتوى */
+    }
+
+    .question-header {
+        background: #e74c3c;
+        color: white;
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .exercise-container p {
+        color: #34495e;
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .step-box {
+        background: #f8fbff;
+        border-right: 4px solid #3498db;
+        padding: 12px;
+        margin: 15px 0;
+        border-radius: 8px;
+    }
+
+    .step-box h3 {
+        color: #2980b9;
+        font-size: 1rem;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .math-block {
+        background: #ffffff;
+        border: 1px dashed #bdc3c7;
+        padding: 10px;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        color: #2c3e50;
+        overflow-x: auto; /* يمنع تمدد الشاشة بسبب المعادلات الطويلة */
+        white-space: nowrap;
+        margin: 10px 0;
+    }
+
+    .final-result {
+        background: #27ae60;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-top: 15px;
+    }
+
+    /* تحسين خاص للجوال */
+    @media (max-width: 480px) {
+        h1 { font-size: 1.1rem; }
+        .step-box { padding: 8px; }
+        .math-block { font-size: 0.85rem; }
+    }
+</style>
+
+<div class="main-wrapper">
+    <div class="container">
+        <h1>حل تمارين الكتاب المدرسي - قانون فاراداي</h1>
+
+        <!-- تمرين 11 -->
+        <div class="exercise-container">
+            <div class="question-header">تمرين رقم (11) ص 132</div>
+            <p><strong>السؤال:</strong> ملف مكون من 500 لفة، مساحة كل منها 100 سم²، يدور بتردد 1500 دورة/دقيقة في مجال مغناطيسي شدته 42 × 10⁻⁴ تسلا. احسب القوة الدافعة المستحثة (emf) عند دوران الملف ربع دورة.</p>
+
+            <div class="step-box">
+                <h3>1️⃣ المعطيات والتحويلات:</h3>
+                <div class="math-block">
+                    N = 500 لفة <br>
+                    A = 100 cm² = 100 × 10⁻⁴ = 0.01 m² <br>
+                    B = 42 × 10⁻⁴ T = 0.0042 T <br>
+                    f = 1500 / 60 = 25 Hz (دورة/ثانية)
+                </div>
             </div>
-        </div>
 
-        <div class="step-box">
-            <h3>3️⃣ التعويض في قانون فاراداي:</h3>
-            <p>عند دوران الملف ربع دورة: <strong>ΔΦ = B × A</strong></p>
-            <div class="math-block" style="text-align: center;">
-                emf = N × (B × A) / Δt <br>
-                emf = 500 × (0.0042 × 0.01) / 0.01 <br>
-                emf = 500 × 0.0042 <br>
-                <strong>emf = 2.1 V</strong>
+            <div class="step-box">
+                <h3>2️⃣ حساب الزمن (Δt):</h3>
+                <div class="math-block">
+                    T = 1 / f = 1 / 25 = 0.04 s <br>
+                    Δt = T / 4 = 0.04 / 4 = 0.01 s
+                </div>
             </div>
+
+            <div class="step-box">
+                <h3>3️⃣ التعويض في قانون فاراداي:</h3>
+                <p>عند دوران الملف ربع دورة: <strong>ΔΦ = B × A</strong></p>
+                <div class="math-block" style="text-align: center; border-style: solid; border-color: #3498db;">
+                    emf = N × (B × A) / Δt <br>
+                    emf = 500 × (0.0042 × 0.01) / 0.01 <br>
+                    emf = 500 × 0.0042 <br>
+                    <strong>emf = 2.1 V</strong>
+                </div>
+            </div>
+
+            <div class="final-result">الناتج النهائي: 2.1 فولت</div>
         </div>
 
-        <div class="final-result">الناتج النهائي: 2.1 فولت</div>
+        <!-- تمرين 12 -->
+        <div class="exercise-container">
+            <div class="question-header" style="background: #2980b9;">تمرين رقم (12) ص 132</div>
+            <p><strong>السؤال:</strong> ملف عدد لفاته 500 لفة، مساحة كل منها 50 سم²، وضع عمودياً في مجال مغناطيسي كثافته 4 تسلا. فإذا تناقصت كثافة الفيض إلى 20% من قيمتها الأصلية في زمن قدره 1 ثانية، احسب القوة الدافعة الكهربائية المستحثة.</p>
+
+            <div class="step-box">
+                <h3>1️⃣ المعطيات والتحويلات:</h3>
+                <div class="math-block">
+                    N = 500 لفة <br>
+                    A = 50 cm² = 50 × 10⁻⁴ = 0.005 m² <br>
+                    B₁ = 4 T <br>
+                    B₂ = 4 × 20% = 0.8 T <br>
+                    Δt = 1 s
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>2️⃣ حساب التغير في الفيض (ΔΦ):</h3>
+                <div class="math-block">
+                    Φ₁ = 4 × 0.005 = 0.02 Wb <br>
+                    Φ₂ = 0.8 × 0.005 = 0.004 Wb <br>
+                    ΔΦ = 0.004 - 0.02 = -0.016 Wb
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>3️⃣ التعويض النهائي:</h3>
+                <div class="math-block" style="text-align: center; border-style: solid; border-color: #27ae60;">
+                    emf = -N × (ΔΦ / Δt) <br>
+                    emf = -500 × (-0.016 / 1) <br>
+                    <strong>emf = 8 V</strong>
+                </div>
+            </div>
+
+            <div class="final-result" style="background: #1e3c72;">الناتج النهائي: 8 فولت</div>
+        </div>
     </div>
+</div>   
 
-    <hr>
 
-    <!-- تمرين 12 -->
-    <div class="exercise-container">
-        <div class="question-header">تمرين رقم (12) ص 132</div>
-        <p><strong>السؤال:</strong> ملف عدد لفاته 500 لفة، مساحة كل منها 50 سم²، وضع عمودياً في مجال مغناطيسي كثافته 4 تسلا. فإذا تناقصت كثافة الفيض إلى 20% من قيمتها الأصلية في زمن قدره 1 ثانية، احسب القوة الدافعة الكهربائية المستحثة.</p>
+<style>
+    /* إعدادات الخط والتثبيت الشامل */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-        <div class="step-box">
-            <h3>1️⃣ المعطيات والتحويلات (من اليسار إلى اليمين):</h3>
-            <div class="math-block">
-                N = 500 لفة <br>
-                A = 50 cm² = 50 × 10⁻⁴ = 0.005 m² <br>
-                B₁ = 4 T <br>
-                B₂ = 4 × 20% = 4 × 0.20 = 0.8 T <br>
-                Δt = 1 s
-            </div>
-        </div>
+    .app-container {
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+        background-color: #f0f4f8;
+        max-width: 100vw;
+        overflow-x: hidden;
+        padding-bottom: 50px;
+    }
 
-        <div class="step-box">
-            <h3>2️⃣ حساب الفيض (Φ = B × A):</h3>
-            <div class="math-block">
-                Φ₁ = B₁ × A = 4 × 0.005 = 0.02 Wb <br>
-                Φ₂ = B₂ × A = 0.8 × 0.005 = 0.004 Wb <br>
-                ΔΦ = Φ₂ - Φ₁ = 0.004 - 0.02 = -0.016 Wb
-            </div>
-        </div>
+    .info-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-right: 6px solid #2980b9;
+        box-sizing: border-box;
+    }
 
-        <div class="step-box">
-            <h3>3️⃣ التعويض النهائي:</h3>
-            <div class="math-block" style="text-align: center;">
-                emf = -N × (ΔΦ / Δt) <br>
-                emf = -500 × (-0.016 / 1) <br>
-                emf = 500 × 0.016 <br>
-                <strong>emf = 8 V</strong>
-            </div>
-        </div>
+    .info-card h2 {
+        color: #2c3e50;
+        font-size: 1.2rem;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-        <div class="final-result">الناتج النهائي: 8 فولت</div>
-    </div>
-</div>
+    .info-card h2 i { color: #2980b9; }
+
+    /* تنسيق القوانين والمعادلات */
+    .formula-box {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px 0;
+        text-align: center;
+        font-family: 'Times New Roman', serif;
+        overflow-x: auto;
+        direction: ltr; /* المعادلات دائماً من اليسار لليمين */
+    }
+
+    /* كروت القواعد (لينز وفليمنج) */
+    .rule-card {
+        display: flex;
+        flex-wrap: wrap;
+        background: #ffffff;
+        border-radius: 15px;
+        margin: 15px;
+        overflow: hidden;
+        border-right: 6px solid #e74c3c;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .rule-text {
+        flex: 2;
+        padding: 20px;
+        min-width: 250px;
+    }
+
+    .rule-diagram {
+        flex: 1;
+        background: #fff5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        min-width: 150px;
+    }
+
+    /* قسم الكويز (الاختبار) */
+    .score-bar {
+        display: flex;
+        justify-content: space-around;
+        background: #2c3e50;
+        color: white;
+        padding: 15px;
+        margin: 15px;
+        border-radius: 12px;
+    }
+
+    .score-item { text-align: center; }
+    .score-value { font-weight: bold; font-size: 1.2rem; color: #f1c40f; }
+
+    .btn-reset {
+        background: #e67e22;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        font-family: 'Cairo';
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    footer {
+        background: #2c3e50;
+        color: #bdc3c7;
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+        margin-top: 30px;
+    }
+
+    /* تحسينات الجوال */
+    @media (max-width: 600px) {
+        .info-card { padding: 15px; margin: 10px; }
+        .rule-card { flex-direction: column; }
+        .rule-diagram { border-top: 1px solid #eee; }
+    }
+</style>
+
+<div class="app-container">
+    
+    <!-- العوامل المؤثرة -->
     <div class="info-card">
-            <h2><i class="fas fa-chart-line"></i> العوامل المؤثرة على القوة الدافعة الكهربائية المستحثة</h2>
-            <ul style="margin-right: 25px; line-height: 1.8;">
-                <li>✓ <strong>سرعة التغير في التدفق المغناطيسي</strong> (كلما زادت السرعة زادت القوة الدافعة)</li>
-                <li>✓ <strong>شدة المجال المغناطيسي (B)</strong> (كلما زادت الشدة زادت القوة الدافعة)</li>
-                <li>✓ <strong>مساحة الملف (A)</strong> (كلما زادت المساحة زاد التدفق)</li>
-                <li>✓ <strong>عدد لفات الملف (N)</strong> (كلما زاد عدد اللفات زادت القوة الدافعة)</li>
-                <li>✓ <strong>الزاوية بين الملف والمجال المغناطيسي</strong> (تأثيرها على التدفق)</li>
-            </ul>
-        </div>
+        <h2><i class="fas fa-chart-line"></i> العوامل المؤثرة على القوة الدافعة الكهربائية المستحثة</h2>
+        <ul style="padding-right: 20px; line-height: 1.8; color: #34495e;">
+            <li>✅ <strong>سرعة التغير في التدفق:</strong> تناسب طردي مع السرعة.</li>
+            <li>✅ <strong>شدة المجال المغناطيسي (B):</strong> تزداد القوة بزيادة شدة المجال.</li>
+            <li>✅ <strong>مساحة الملف (A):</strong> زيادة المساحة تزيد من التدفق المخترق.</li>
+            <li>✅ <strong>عدد لفات الملف (N):</strong> تناسب طردي صريح.</li>
+            <li>✅ <strong>الزاوية (θ):</strong> تؤثر على القيمة الفعالة للتدفق.</li>
+        </ul>
     </div>
 
-    <!-- قسم القوانين والقواعد -->
-    <div id="lawsSection" class="section">
-        <div class="info-card">
+    <!-- قسم القوانين -->
+    <div id="lawsSection">
+        <div class="info-card" style="border-right-color: #8e44ad;">
             <h2><i class="fas fa-gavel"></i> قانون فاراداي للحث الكهرومغناطيسي</h2>
-            <div class="formula-box">$$\mathcal{E} = -N \frac{\Delta \Phi}{\Delta t}$$</div>
-            <p>حيث: ℰ القوة الدافعة الكهربائية المستحثة (فولت)، N عدد اللفات، ΔΦ التغير في التدفق المغناطيسي (ويبر)، Δt الزمن (ثانية).</p>
-            <div class="formula-box">$$\mathcal{E} = -N \cdot B \cdot A \cdot \omega \cdot \sin(\omega t)$$</div>
-            <p>للملف الدوار في مجال مغناطيسي.</p>
-            <h3>📌 أمثلة:</h3>
-            <p><strong>مثال 1:</strong> ملف عدد لفاته 100 لفة، يتغير التدفق خلاله من 0.05 Wb إلى 0.02 Wb خلال 0.1 ثانية. احسب القوة الدافعة المستحثة.</p>
-            <p><strong>الحل:</strong> ℰ = -N × (ΔΦ/Δt) = -100 × ((0.02-0.05)/0.1) = -100 × (-0.03/0.1) = -100 × (-0.3) = 30 V</p>
+            <div class="formula-box" style="font-size: 1.4rem; color: #8e44ad;">
+                $$\mathcal{E} = -N \frac{\Delta \Phi}{\Delta t}$$
+            </div>
+            <p style="font-size: 0.9rem; color: #636e72;">حيث: <b>ℰ</b> القوة الدافعة (فولت)، <b>N</b> عدد اللفات، <b>ΔΦ</b> التغير في التدفق (ويبر)، <b>Δt</b> الزمن (ثانية).</p>
+            
+            <div style="background: #f0f1f2; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <p><strong>مثال 1:</strong> ملف (100 لفة)، يتغير التدفق فيه من 0.05 Wb إلى 0.02 Wb خلال 0.1 ثانية.</p>
+                <p style="color: #27ae60; font-weight: bold;">الحل: ℰ = -100 × ((0.02-0.05)/0.1) = 30 V</p>
+            </div>
         </div>
 
+        <!-- قانون لينز -->
+        
         <div class="rule-card">
             <div class="rule-text">
                 <h2><i class="fas fa-arrow-left"></i> قانون لينز (Lenz's Law)</h2>
                 <p><strong>النص:</strong> "التيار المستحث يتخذ اتجاهاً بحيث يعمل مجاله المغناطيسي على مقاومة التغير الذي سببه."</p>
-                <p>الإشارة السالبة في قانون فاراداي تعبر عن قانون لينز.</p>
-                <div class="formula-box">$$\mathcal{E} = -N \frac{d\Phi}{dt}$$</div>
+                <p style="color: #e74c3c;">💡 الإشارة السالبة في فاراداي هي تجسيد رياضي لهذا القانون.</p>
             </div>
             <div class="rule-diagram">
-                <canvas id="lenzCanvas" width="150" height="150" style="max-width:100%;"></canvas>
-                <p style="font-size:12px;">اتجاه التيار يعاكس حركة المغناطيس</p>
+                <canvas id="lenzCanvas" width="100" height="100"></canvas>
+                <p style="font-size:11px; color: #c0392b; text-align: center;">التيار يعاكس الحركة</p>
             </div>
         </div>
 
-        <div class="info-card">
-            <h2><i class="fas fa-balance-scale"></i> قاعدة لينز وحفظ الطاقة</h2>
-            <p>قانون لينز هو تطبيق لمبدأ <strong>حفظ الطاقة</strong>. فالشغل المبذول لتحريك المغناطيس يتحول إلى طاقة كهربائية في الملف. لو كان التيار المستحث في اتجاه يساعد الحركة، لتمت الحركة دون بذل شغل، وهذا مستحيل.</p>
-        </div>
-
-        <div class="rule-card">
+        <!-- قاعدة فليمنج -->
+        <div class="rule-card" style="border-right-color: #27ae60;">
             <div class="rule-text">
-                <h2><i class="fas fa-hand-peace"></i> قاعدة فليمنج لليد اليمنى (توليد التيار)</h2>
-                <p><strong>الاستخدام:</strong> لتحديد اتجاه التيار المستحث في موصل يتحرك في مجال مغناطيسي.</p>
-                <p><strong>الطريقة:</strong> الإبهام = اتجاه الحركة (Force)، السبابة = اتجاه المجال (Field)، الوسطى = اتجاه التيار (Current).</p>
-                <p style="color:#1e4a6b; margin-top:10px;">✋ اليد اليمنى: الإبهام (حركة) ← السبابة (مجال) ← الوسطى (تيار)</p>
+                <h2><i class="fas fa-hand-peace"></i> قاعدة فليمنج لليد اليمنى</h2>
+                <p><strong>الاستخدام:</strong> تحديد اتجاه التيار المستحث في سلك مستقيم يتحرك داخل مجال.</p>
+                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                    <span style="background: #27ae60; color: white; padding: 2px 8px; border-radius: 5px;">الإبهام: حركة</span>
+                    <span style="background: #2980b9; color: white; padding: 2px 8px; border-radius: 5px;">السبابة: مجال</span>
+                    <span style="background: #f1c40f; color: #2c3e50; padding: 2px 8px; border-radius: 5px;">الوسطى: تيار</span>
+                </div>
             </div>
-            <div class="rule-diagram">
-                <canvas id="flemingCanvas" width="140" height="140" style="max-width:100%;"></canvas>
+            <div class="rule-diagram" style="background: #f1fff1;">
+                <canvas id="flemingCanvas" width="100" height="100"></canvas>
             </div>
         </div>
     </div>
 
     <!-- قسم التمارين التفاعلية -->
-    <div id="quizSection" class="section">
+    <div id="quizSection">
         <div class="score-bar">
-            <div class="score-item"><span>✅ الصحيحة</span><div class="score-value" id="quizCorrect">0</div></div>
-            <div class="score-item"><span>❌ الخاطئة</span><div class="score-value" id="quizWrong">0</div></div>
-            <div class="score-item"><span>📊 النسبة</span><div class="score-value" id="quizPercent">0%</div></div>
+            <div class="score-item"><span>✅ صح</span><div class="score-value" id="quizCorrect">0</div></div>
+            <div class="score-item"><span>❌ خطأ</span><div class="score-value" id="quizWrong">0</div></div>
+            <div class="score-item"><span>📊 نسبة</span><div class="score-value" id="quizPercent">0%</div></div>
         </div>
-        <div id="quizContainer"></div>
+        <div id="quizContainer" style="padding: 0 15px;"></div>
         <div style="text-align:center; margin-top:20px;">
             <button id="resetQuizBtn" class="btn-reset">🔄 إعادة الاختبار</button>
         </div>
     </div>
     
-    <footer><i class="fas fa-magnet"></i> الحث الكهرومغناطيسي - اكتشف مايكل فاراداي 1831 <i class="fas fa-bolt"></i></footer>
+    <footer>
+        <i class="fas fa-magnet"></i> الحث الكهرومغناطيسي - اكتشفه مايكل فاراداي 1831 <i class="fas fa-bolt"></i>
+    </footer>
 </div>
-
 
 
 <!-- إيعاز / تذييل الصفحة - مدرسة أمجاد أفريقيا -->
