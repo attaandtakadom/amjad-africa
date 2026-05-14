@@ -876,71 +876,97 @@ function toggleAnswer2() {
 }
 </script>
 
-<!-- السؤال 2 من الأسئلة التركيبية - عمر النصف والاستخدامات -->
-<div class="section-card" style="direction: rtl;">
-    <h2 class="section-title"><i class="fas fa-history"></i> سؤال 2: عمر النصف وتطبيقات النشاط الإشعاعي</h2>
+<!-- السؤال 3: جدول الجسيمات الذرية الأولية -->
+<div class="section-card" style="direction: rtl; font-family: sans-serif; border: 1px solid #d1d8e0; border-radius: 10px; padding: 20px; background-color: #fcfcfc;">
+    <h2 class="section-title" style="color: #1e4a6b; font-size: 1.4em; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+        3- أكمل الجدول التالي موضحاً الجسيمات الذرية الأولية:
+    </h2>
 
-    <div class="question-box">
-        <!-- الفقرة أ -->
-        <div class="sub-question" style="margin-bottom: 20px;">
-            <p><strong>(أ) يقال إن للمصادر المشعة عمر نصف. فسر معنى: عمر النصف.</strong></p>
-            <textarea class="form-control" rows="2" placeholder="اكتب التعريف هنا..." style="width: 100%; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+    <div class="table-container" style="margin: 20px 0; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; background-color: white; text-align: center;">
+            <thead>
+                <tr style="background-color: #1e4a6b; color: white;">
+                    <th style="padding: 15px; border: 1px solid #ddd;">الاسم</th>
+                    <th style="padding: 15px; border: 1px solid #ddd;">الكتلة</th>
+                    <th style="padding: 15px; border: 1px solid #ddd;">الشحنة</th>
+                    <th style="padding: 15px; border: 1px solid #ddd;">الرمز</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- إلكترون -->
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #ddd; font-weight: bold;">إلكترون</td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">m<sub>e</sub></td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">
+                        <input type="text" id="q3_e_charge" style="width: 70px; text-align: center; border: 1px solid #3498db; border-radius: 4px;" placeholder="؟">
+                    </td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">&beta;<sup>-</sup> , e<sup>-</sup></td>
+                </tr>
+                <!-- نيوترون -->
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #ddd; font-weight: bold;">نيوترون</td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">1838 m<sub>e</sub></td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">
+                        <input type="text" id="q3_n_charge" style="width: 70px; text-align: center; border: 1px solid #3498db; border-radius: 4px;" placeholder="؟">
+                    </td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">n</td>
+                </tr>
+                <!-- بروتون -->
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #ddd; font-weight: bold;">بروتون</td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">1836 m<sub>e</sub></td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">+e</td>
+                    <td style="padding: 15px; border: 1px solid #ddd;">
+                        <input type="text" id="q3_p_symbol" style="width: 70px; text-align: center; border: 1px solid #3498db; border-radius: 4px;" placeholder="؟">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- سؤال النواة أسفل الجدول -->
+    <div class="question-box" style="background-color: #f0f7ff; padding: 15px; border-radius: 8px; border-right: 5px solid #3498db;">
+        <p style="font-weight: bold; font-size: 1.1em; color: #2c3e50;">أي مما سبق يكون نواة الذرة؟</p>
+        <div class="options" style="display: flex; gap: 20px; margin-top: 10px;">
+            <label><input type="radio" name="q3_nucleus" value="wrong"> الإلكترونات والبروتونات</label>
+            <label><input type="radio" name="q3_nucleus" value="correct"> البروتونات والنيوترونات</label>
         </div>
+    </div>
 
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-
-        <!-- الفقرة ب -->
-        <div class="sub-question" style="margin-bottom: 20px;">
-            <p><strong>(ب) ما المقصود بإشعاع الخلفية، وتعداد الخلفية؟</strong></p>
-            <div style="display: flex; gap: 10px;">
-                <input type="text" class="form-control" placeholder="إشعاع الخلفية..." style="flex: 1; padding: 8px;">
-                <input type="text" class="form-control" placeholder="تعداد الخلفية..." style="flex: 1; padding: 8px;">
-            </div>
-        </div>
-
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-
-        <!-- الفقرة ج -->
-        <div class="sub-question" style="margin-bottom: 20px;">
-            <p><strong>(ج) صف استخدامين للنظائر المشعة في الصناعة، أو البحث العلمي، أو الطب.</strong></p>
-            <div style="background: #fdfefe; border: 1px solid #d1d8e0; padding: 10px; border-radius: 8px;">
-                <div style="margin-bottom: 8px;">1. <input type="text" style="width: 80%; border: none; border-bottom: 1px solid #3498db;"></div>
-                <div>2. <input type="text" style="width: 80%; border: none; border-bottom: 1px solid #3498db;"></div>
-            </div>
-        </div>
-
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-
-        <!-- الفقرة د -->
-        <div class="sub-question" style="margin-bottom: 20px;">
-            <p><strong>(د) ما الخطران الشائعان للإشعاع؟ صف باختصار الاحتياطات الواجب اتخاذها تجاههما.</strong></p>
-            <textarea class="form-control" rows="3" placeholder="الأخطار والاحتياطات..." style="width: 100%; border: 1px solid #ccc; border-radius: 5px;"></textarea>
-        </div>
-
-        <div style="margin-top: 20px;">
-            <button class="check-btn" onclick="toggleAnswer2()">
-                <i class="fas fa-eye"></i> عرض نموذج الإجابة العلمي
-            </button>
-        </div>
-
-        <div id="fb_q2_synthetic" class="feedback" style="display:none; background: #e3f2fd; border: 1px solid #2196f3; color: #0d47a1; margin-top: 15px;">
-            <strong>نموذج الإجابة (حسب الصورة IMG_20260514_201411.jpg):</strong><br>
-            • <strong>(أ):</strong> هو الزمن المستغرق لتحلل نصف عدد النوى المشعة في العينة.<br>
-            • <strong>(ب):</strong> الإشعاع الموجود في البيئة من حولنا من مصادر طبيعية (مثل الصخور) وصناعية.<br>
-            • <strong>(ج):</strong> الطب (علاج الأورام/التصوير)، الصناعة (قياس سماكة الورق/كشف التسريب).<br>
-            • <strong>(د):</strong> الأخطار: تلف الخلايا/الحروق الإشعاعية. الاحتياطات: استخدام الحواجز الرصاصية، زيادة المسافة، تقليل زمن التعرض.
-        </div>
+    <div style="margin-top: 20px;">
+        <button onclick="checkQ3()" style="background-color: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+            تحقق من الإجابة
+        </button>
+        <div id="q3_feedback" style="display: none; margin-top: 15px; padding: 10px; border-radius: 5px;"></div>
     </div>
 </div>
 
 <script>
-function toggleAnswer2() {
-    var fb = document.getElementById('fb_q2_synthetic');
-    fb.style.display = (fb.style.display === "none") ? "block" : "none";
+function checkQ3() {
+    const eC = document.getElementById('q3_e_charge').value.trim();
+    const nC = document.getElementById('q3_n_charge').value.trim();
+    const pS = document.getElementById('q3_p_symbol').value.trim();
+    const nucleus = document.querySelector('input[name="q3_nucleus"]:checked');
+    const fb = document.getElementById('q3_feedback');
+
+    // الإجابات النموذجية بناءً على المنهج
+    const isCorrect = (eC === "-e") && 
+                      (nC === "0" || nC === "متعادل") && 
+                      (pS.toLowerCase() === "p") && 
+                      (nucleus && nucleus.value === "correct");
+
+    fb.style.display = "block";
+    if (isCorrect) {
+        fb.style.backgroundColor = "#d4edda";
+        fb.style.color = "#155724";
+        fb.innerHTML = "أحسنت! إجاباتك صحيحة ودقيقة.";
+    } else {
+        fb.style.backgroundColor = "#f8d7da";
+        fb.style.color = "#721c24";
+        fb.innerHTML = "تأكد من شحنة الإلكترون (-e)، شحنة النيوترون (0)، ورمز البروتون (p).";
+    }
 }
 </script>
-
-
 
 
 <div class="section-card" style="direction: rtl; font-family: sans-serif;">
@@ -1532,23 +1558,30 @@ function checkRandomness() {
             updateScoreBoard();
         }
 
-        function resetAllQuestions() {
-            correctAnswers = 0;
-            wrongAnswers = 0;
-            answeredQuestions.clear();
-            updateScoreBoard();
+function resetAllQuestions() {
+    // تصفير العدادات والبيانات المخزنة
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    answeredQuestions.clear();
+    updateScoreBoard();
 
-            document.querySelectorAll('[id^="fb_"]').forEach(fb => {
-                fb.innerHTML = '';
-                fb.className = 'feedback';
-            });
+    // 1. مسح جميع صناديق الكتابة (الجداول والأسئلة المقالية)
+    document.querySelectorAll('input[type="text"], textarea').forEach(input => {
+        input.value = '';
+    });
 
-            document.querySelectorAll('input[type="radio"]').forEach(radio => {
-                radio.checked = false;
-            });
-        }
+    // 2. إلغاء تحديد خيارات الإجابة
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+    });
 
-        document.getElementById('homeMainBtn').addEventListener('click', function (e) {
+    // 3. إخفاء ومسح جميع مربعات التغذية الراجعة
+    document.querySelectorAll('[id^="fb_"], [id^="q3_feedback"], [id^="expl"]').forEach(fb => {
+        fb.innerHTML = '';
+        fb.className = 'feedback';
+        fb.style.display = 'none'; // أضفنا هذا لضمان اختفاء المربع تماماً
+    });
+}        document.getElementById('homeMainBtn').addEventListener('click', function (e) {
             e.preventDefault();
             document.getElementById('mainContainer').scrollIntoView({ behavior: 'smooth' });
         });
