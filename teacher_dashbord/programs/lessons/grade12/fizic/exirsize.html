@@ -2,83 +2,120 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>تمارين الفيزياء - مدرسة أمجاد أفريقيا</title>
+    <title>بنك أسئلة الفيزياء - مدرسة أمجاد أفريقيا</title>
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; }
-        .quiz-container { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .header { background: #2c3e50; color: white; padding: 20px; text-align: center; border-radius: 15px 15px 0 0; margin: -20px -20px 20px -20px; }
-        .question-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; margin-bottom: 20px; background: #fafafa; }
-        .question-text { font-size: 1.2em; font-weight: bold; color: #34495e; margin-bottom: 15px; }
-        .options { display: grid; gap: 10px; }
-        .option-btn { padding: 10px 20px; border: 2px solid #3498db; background: white; border-radius: 8px; cursor: pointer; transition: 0.3s; text-align: right; font-size: 1em; }
-        .option-btn:hover { background: #3498db; color: white; }
-        .check-btn { margin-top: 15px; padding: 10px 25px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .result { margin-top: 15px; padding: 10px; border-radius: 5px; display: none; font-weight: bold; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        
+        body { font-family: 'Cairo', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
+        
+        .quiz-container { max-width: 850px; margin: auto; }
+        
+        .header { 
+            background: linear-gradient(135deg, #2c3e50, #34495e); 
+            color: white; 
+            padding: 30px; 
+            text-align: center; 
+            border-radius: 20px; 
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .score-board {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .question-card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 20px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-right: 8px solid #3498db;
+            transition: 0.3s;
+        }
+
+        .question-text { font-size: 1.3em; font-weight: bold; color: #2c3e50; margin-bottom: 20px; }
+
+        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
+        .option-btn { 
+            padding: 15px; 
+            border: 2px solid #e0e0e0; 
+            background: #fff; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            text-align: center; 
+            font-size: 1.1em;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .option-btn:hover { border-color: #3498db; background: #f7faff; }
+        .option-btn.selected { background: #3498db; color: white; border-color: #3498db; }
+
+        .check-btn { 
+            margin-top: 20px; 
+            width: 100%;
+            padding: 12px; 
+            background: #27ae60; 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .result { margin-top: 20px; padding: 15px; border-radius: 12px; display: none; line-height: 1.6; }
         .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .wrong { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .selected { background: #3498db !important; color: white; }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+            border: 1px solid white;
+        }
+
+        @media (max-width: 600px) { .options { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <div class="quiz-container">
     <div class="header">
-        <h2>📝 بنك أسئلة الفيزياء الكهربائية</h2>
+        <h2>⚡ بنك أسئلة الفيزياء الكهربائية</h2>
         <p>مدرسة أمجاد أفريقيا للتعليم الخاص</p>
+        <div class="score-board">الدرجة: <span id="total-score">0</span> / <span id="max-questions">0</span></div>
+        <br>
+        <a href="unit7.html" class="back-btn">🔙 عودة للقائمة</a>
     </div>
 
-    <div id="quiz-body">
-        </div>
+    <div id="quiz-body"></div>
 </div>
 
+<!-- استدعاء ملف الأسئلة الخارجي -->
+<script src="questions.js"></script>
+
 <script>
-    // مصفوفة الأسئلة
-    const questions = [
-        {
-            id: 1,
-            type: "tf",
-            text: "لا تستخدم المحولات الكهربائية في رفع أو خفض القوة الدافعة المستمرة.",
-            options: ["صح", "خطأ"],
-            answer: "صح",
-            note: "المحول يعمل فقط على التيار المتردد لأن فكرته تعتمد على الحث المتبادل الناتج عن تغير الفيض."
-        },
-        {
-            id: 2,
-            type: "tf",
-            text: "يقل الدوران في محرك التيار المستمر عند زيادة شدة التيار الكهربائي المار فيه.",
-            options: ["صح", "خطأ"],
-            answer: "خطأ",
-            note: "زيادة التيار تزيد من عزم الدوران وبالتالي تزداد سرعة دوران المحرك."
-        },
-        {
-            id: 3,
-            type: "tf",
-            text: "في مولد التيار المتردد، إذا لم يتصل المولد بدائرة خارجية ذات حمل فإنه يسري التيار على أي حال.",
-            options: ["صح", "خطأ"],
-            answer: "خطأ",
-            note: "إذا كانت الدائرة مفتوحة، تتولد قوة دافعة (فولت) ولكن لا يسري تيار كهربائي."
-        },
-        {
-            id: 4,
-            type: "mcq",
-            text: "قاعدة تستخدم لتحديد اتجاه التيار المستحث في ملف تعرف بقاعدة:",
-            options: ["لينز", "فلمنج لليد اليسرى", "فلمنج لليد اليمنى"],
-            answer: "لينز",
-            note: "قاعدة لينز تحدد اتجاه التيار المستحث في الملفات، بينما فلمنج لليد اليمنى تستخدم للأسلاك المستقيمة."
-        },
-        {
-            id: 5,
-            type: "mcq",
-            text: "وحدة قياس (أوم × ثانية) تكافئ:",
-            options: ["الأمبير (A)", "الهنري (H)", "الويبر (Wb)", "التسلا (T)"],
-            answer: "الهنري (H)",
-            note: "من قانون الحث الذاتي، الهنري يكافئ فولت.ثانية/أمبير، وحيث أن فولت/أمبير = أوم، فإن الوحدة هي أوم.ثانية."
-        }
-    ];
-
     const quizBody = document.getElementById('quiz-body');
+    const scoreDisplay = document.getElementById('total-score');
+    document.getElementById('max-questions').innerText = questions.length;
 
-    // وظيفة عرض الأسئلة من المصفوفة
+    let userSelections = {};
+    let score = 0;
+    let answeredQuestions = new Set();
+
     function renderQuiz() {
         questions.forEach((q, index) => {
             const card = document.createElement('div');
@@ -92,16 +129,15 @@
             card.innerHTML = `
                 <div class="question-text">${index + 1}. ${q.text}</div>
                 <div class="options" id="options-${index}">${optionsHTML}</div>
-                <button class="check-btn" onclick="checkAnswer(${index})">تحقق من الإجابة</button>
+                <button class="check-btn" id="check-${index}" onclick="checkAnswer(${index})">تحقق من الإجابة</button>
                 <div id="result-${index}" class="result"></div>
             `;
             quizBody.appendChild(card);
         });
     }
 
-    let userSelections = {};
-
     function selectOption(qIndex, val, btn) {
+        if (answeredQuestions.has(qIndex)) return; // منع التغيير بعد الإجابة
         userSelections[qIndex] = val;
         const parent = document.getElementById(`options-${qIndex}`);
         Array.from(parent.children).forEach(child => child.classList.remove('selected'));
@@ -109,6 +145,8 @@
     }
 
     function checkAnswer(qIndex) {
+        if (answeredQuestions.has(qIndex)) return;
+
         const resultDiv = document.getElementById(`result-${qIndex}`);
         const selected = userSelections[qIndex];
         
@@ -117,13 +155,18 @@
             return;
         }
 
+        answeredQuestions.add(qIndex);
+        document.getElementById(`check-${qIndex}`).style.display = "none";
+        
         resultDiv.style.display = "block";
         if (selected === questions[qIndex].answer) {
+            score++;
+            scoreDisplay.innerText = score;
             resultDiv.className = "result correct";
-            resultDiv.innerHTML = "✅ إجابة صحيحة! " + questions[qIndex].note;
+            resultDiv.innerHTML = "✅ <b>إجابة صحيحة!</b> <br>" + questions[qIndex].note;
         } else {
             resultDiv.className = "result wrong";
-            resultDiv.innerHTML = "❌ إجابة خاطئة. الإجابة الصحيحة هي: " + questions[qIndex].answer + "<br><small>" + questions[qIndex].note + "</small>";
+            resultDiv.innerHTML = "❌ <b>إجابة خاطئة.</b> الإجابة الصحيحة هي: " + questions[qIndex].answer + "<br><small>" + questions[qIndex].note + "</small>";
         }
     }
 

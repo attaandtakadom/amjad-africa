@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>موسوعة الحث والمحولات الكهربائية</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri:wght@700&display=swap');
+
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        /* زر العودة */
+        .nav-header {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #2980b9;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 2px solid #2980b9;
+            font-weight: bold;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #2c3e50, #2980b9);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-right: 12px solid #2980b9;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            text-align: right;
+        }
+
+        /* تنسيق الصناديق والقوانين */
+        .formula-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .formula-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8faff;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px dashed #2980b9;
+            direction: ltr;
+            font-family: 'Times New Roman', serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* تنسيق الكسر وعلامة القسمة */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .num {
+            padding: 0 15px;
+            border-bottom: 4px solid #2c3e50; /* خط القسمة واضح جداً */
+            margin-bottom: 4px;
+        }
+
+        .den {
+            padding: 0 15px;
+        }
+
+        .explanation {
+            text-align: right;
+            background: #fffcf5;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid #ffeaa7;
+            width: 100%;
+        }
+
+        .highlight { color: #e67e22; font-weight: bold; }
+
+        @media (max-width: 600px) {
+            .formula-box { font-size: 1.6rem; padding: 15px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="nav-header">
+        <a href="javascript:history.back()" class="back-btn">🔙 عودة</a>
+    </div>
+
+    <h1>قوانين الحث الكهرومغناطيسي والمحولات</h1>
+
+    <!-- 1. قانون فاراداي -->
+    <div class="section-card">
+        <div class="section-title">1. قانون فاراداي (الحالة العامة)</div>
+        <div class="formula-box">
+            emf = -N &times; 
+            <div class="fraction">
+                <div class="num">&Delta;&Phi;</div>
+                <div class="den">&Delta;t</div>
+            </div>
+        </div>
+        <div class="explanation">
+            تستخدم هذه الصيغة عند إعطاء التغير في <span class="highlight">التدفق المغناطيسي (&Delta;&Phi;)</span> مباشرة.
+        </div>
+    </div>
+
+    <!-- 2. فاراداي في حالة تغير شدة المجال B -->
+    <div class="section-card" style="border-right-color: #e74c3c;">
+        <div class="section-title" style="color: #e74c3c;">2. فاراداي (تغير شدة المجال B)</div>
+        <div class="formula-box" style="border-color: #e74c3c;">
+            emf = -N &times; A &times; 
+            <div class="fraction">
+                <div class="num">&Delta;B</div>
+                <div class="den">&Delta;t</div>
+            </div>
+            <span>&times; cos&theta;</span>
+        </div>
+        <div class="explanation">
+            تستخدم عندما يذكر السؤال أن <span class="highlight">شدة المجال المغناطيسي (B)</span> هي التي تغيرت، مع ثبات مساحة الملف (A).
+        </div>
+    </div>
+<!-- قانون حساب الزمن الدوري من التردد -->
+    <div class="section-card" style="border-right-color: #9b59b6;">
+        <div class="section-title" style="color: #9b59b6;">5. حساب الزمن الدوري من التردد</div>
+        <div class="formula-box" style="border-color: #9b59b6;">
+            T = 
+            <div class="fraction">
+                <div class="num">1</div>
+                <div class="den">f</div>
+            </div>
+        </div>
+        <div class="explanation">
+            • <b>T:</b> الزمن الدوري (يقاس بالثانية <b>s</b>). <br>
+            • <b>f:</b> التردد (يقاس بالهرتز <b>Hz</b>). <br>
+            <span class="highlight">💡 ملاحظة:</span> الزمن الدوري هو مقلوب التردد، والعلاقة بينهما عكسية تماماً.
+        </div>
+    </div>
+    <!-- 3. المحول الكهربائي -->
+    <div class="section-card" style="border-right-color: #27ae60;">
+        <div class="section-title" style="color: #27ae60;">3. المحول الكهربائي المثالي</div>
+        <div class="formula-box" style="border-color: #27ae60;">
+            <div class="fraction"><div class="num">V<sub>s</sub></div><div class="den">V<sub>p</sub></div></div>
+            =
+            <div class="fraction"><div class="num">N<sub>s</sub></div><div class="den">N<sub>p</sub></div></div>
+            =
+            <div class="fraction"><div class="num">I<sub>p</sub></div><div class="den">I<sub>s</sub></div></div>
+        </div>
+        <div class="explanation">
+            • العلاقة بين الجهد (V) وعدد اللفات (N) <span class="highlight">طردية</span>. <br>
+            • العلاقة مع شدة التيار (I) <span class="highlight">عكسية</span>.
+        </div>
+    </div>
+
+    <!-- 4. الكفاءة والقدرة المفقودة -->
+    <div class="section-card" style="border-right-color: #f39c12;">
+        <div class="section-title" style="color: #f39c12;">4. الكفاءة والقدرة المفقودة</div>
+        <div class="formula-container">
+            <div class="formula-box" style="border-color: #f39c12; font-size: 2rem;">
+                &eta; = <div class="fraction"><div class="num">P<sub>s</sub></div><div class="den">P<sub>p</sub></div></div> &times; 100
+            </div>
+            <div class="formula-box" style="border-color: #d35400; font-size: 2rem;">
+                P<sub>loss</sub> = I<sup>2</sup> &times; R
+            </div>
+        </div>
+        <div class="explanation">
+            • <b>&eta; (إيتا):</b> كفاءة المحول. <br>
+            • <b>P<sub>loss</sub>:</b> القدرة الضائعة في الأسلاك على شكل حرارة.
+        </div>
+    </div>
+<!-- قانون القدرة الكهربائية -->
+    <div class="section-card" style="border-right-color: #34495e;">
+        <div class="section-title" style="color: #34495e;">6. قانون القدرة الكهربائية (P)</div>
+        <div class="formula-box" style="border-color: #34495e;">
+            P = V &times; I
+        </div>
+        <div class="explanation">
+            • <b>P:</b> القدرة الكهربائية وتقاس بـ <span class="highlight">الواط (Watt)</span>. <br>
+            • <b>V:</b> فرق الجهد ويقاس بـ <span class="highlight">الفولت (Volt)</span>. <br>
+            • <b>I:</b> شدة التيار وتقاس بـ <span class="highlight">الأمبير (Ampere)</span>. <br>
+            <span style="color: #7f8c8d;">💡 يستخدم هذا القانون لحساب القدرة الداخلة للمحول (P<sub>p</sub>) أو الخارجة منه (P<sub>s</sub>).</span>
+        </div>
+    </div>
+
+<!-- قسم شرح هبوط الجهد وفقد القدرة -->
+<div class="physics-explanation-container" style="direction: rtl; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f7f6;">
+    
+    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">الفرق بين هبوط الجهد وفقد القدرة</h2>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        
+        <!-- بطاقة هبوط الجهد -->
+        <div style="flex: 1; min-width: 300px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; border-top: 5px solid #3498db;">
+            <div style="padding: 20px;">
+                <h3 style="color: #3498db; margin-top: 0;">1. هبوط الجهد (Voltage Drop)</h3>
+                <p style="color: #555; line-height: 1.6;">هو مقدار النقص في الجهد الكهربائي نتيجة مقاومة الأسلاك. يقاس بوحدة <strong>الفولت (V)</strong>.</p>
+                <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; text-align: center; margin: 15px 0;">
+                    <span style="font-size: 1.4em; font-weight: bold; color: #0277bd;">V<sub>drop</sub> = I × R</span>
+                </div>
+                <ul style="color: #666; font-size: 0.9em;">
+                    <li><strong>I:</strong> التيار المار في الأسلاك.</li>
+                    <li><strong>R:</strong> مقاومة الأسلاك.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- بطاقة فقد القدرة -->
+        <div style="flex: 1; min-width: 300px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; border-top: 5px solid #e74c3c;">
+            <div style="padding: 20px;">
+                <h3 style="color: #e74c3c; margin-top: 0;">2. فقد القدرة (Power Loss)</h3>
+                <p style="color: #555; line-height: 1.6;">هو مقدار الطاقة الضائعة في الأسلاك على شكل حرارة. يقاس بوحدة <strong>الوات (W)</strong>.</p>
+                <div style="background: #fdeaea; padding: 15px; border-radius: 8px; text-align: center; margin: 15px 0;">
+                    <span style="font-size: 1.4em; font-weight: bold; color: #c62828;">P<sub>loss</sub> = I<sup>2</sup> × R</span>
+                </div>
+                <ul style="color: #666; font-size: 0.9em;">
+                    <li><strong>I<sup>2</sup>:</strong> مربع التيار (عامل مؤثر جداً).</li>
+                    <li><strong>R:</strong> مقاومة الأسلاك.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- خلاصة تعليمية -->
+    <div style="margin-top: 30px; padding: 20px; background: #fff3e0; border-right: 5px solid #ff9800; border-radius: 5px;">
+        <h4 style="margin-top: 0; color: #e65100;">💡 معلومة هامة لطلابك:</h4>
+        <p style="margin-bottom: 0; color: #5d4037;">
+            نحن نرفع الجهد (V) لتقليل التيار (I). وعندما يقل التيار، يقل "فقد القدرة" بشكل هائل لأننا نضرب التيار في نفسه (I²). هذا هو السبب في استخدام المحولات الرافعة عند محطات التوليد.
+        </p>
+    </div>
+</div>
+
+
+
+</div>
+
+</body>
+</html>
