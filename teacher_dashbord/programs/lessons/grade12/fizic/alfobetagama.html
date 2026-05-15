@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>الإشعاعات النووية - ألفا، بيتا، جاما | معادلات صحيحة</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+        padding: 0;
+        color: #1e2a3e;
+    }
+    .container { max-width: 1200px; margin: auto; padding: 15px; }
+    
+    .page-header {
+        background: linear-gradient(135deg, #1e4a6b 0%, #0e2a3e 100%);
+        color: white;
+        padding: 20px 15px;
+        text-align: center;
+        border-bottom: 4px solid #e67e22;
+        position: relative;
+    }
+    .home-btn {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #e67e22;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.3s;
+    }
+    .home-btn:hover { background: #d35400; }
+    .page-header h1 { font-size: 1.5rem; }
+    .page-header h1 i { color: #f39c12; }
+    
+    .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .tab-btn {
+        background: white;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .tab-btn.active { color: white; }
+    .tab-btn.alpha.active { background: #e74c3c; }
+    .tab-btn.beta.active { background: #3498db; }
+    .tab-btn.gamma.active { background: #27ae60; }
+    
+    .tab-content { display: none; animation: fadeIn 0.3s ease; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    
+    .card {
+        background: white;
+        border-radius: 28px;
+        box-shadow: 0 10px 25px -8px rgba(0,0,0,0.1);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* ========== سلسلة المعادلات مع تنسيق صحيح ========== */
+    .equation-chain {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        background: #2c3e50;
+        padding: 25px 20px;
+        border-radius: 30px;
+        margin: 15px 0;
+        direction: ltr;
+    }
+    .equation-box {
+        background: #1e4a6b;
+        color: white;
+        padding: 15px 22px;
+        border-radius: 20px;
+        text-align: center;
+        min-width: 200px;
+    }
+    /* تنسيق الرموز النووية بشكل صحيح */
+    .nuclear-symbol {
+        display: inline-block;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: monospace;
+    }
+    .nuclear-symbol .mass-top {
+        font-size: 1.1rem;
+        vertical-align: super;
+        display: inline-block;
+        margin-left: -5px;
+    }
+    .nuclear-symbol .atomic-bottom {
+        font-size: 0.9rem;
+        vertical-align: sub;
+        display: inline-block;
+        margin-right: -5px;
+    }
+    .nuclear-symbol .element {
+        font-size: 1.5rem;
+        display: inline-block;
+    }
+    
+    .arrow-right {
+        font-size: 2rem;
+        color: #f39c12;
+        font-weight: bold;
+    }
+    .particle-icon {
+        background: #34495e;
+        padding: 12px 20px;
+        border-radius: 50px;
+        color: white;
+        font-weight: bold;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    .info-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 15px 0;
+    }
+    .info-card {
+        flex: 1;
+        min-width: 120px;
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 12px;
+        text-align: center;
+        border-right: 4px solid;
+    }
+    .info-card .value { font-size: 1.2rem; font-weight: bold; }
+    
+    .example-box {
+        background: #e8f0fe;
+        border-radius: 20px;
+        padding: 18px;
+        margin: 15px 0;
+    }
+    .step-by-step {
+        background: #d5f5e3;
+        border-radius: 20px;
+        padding: 15px;
+        margin-top: 12px;
+        font-size: 1rem;
+    }
+    .correction-note {
+        background: #fef5e6;
+        border-right: 4px solid #e67e22;
+        padding: 15px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        font-size: 0.95rem;
+    }
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .comparison-table th, .comparison-table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        font-size: 1rem;
+    }
+    .comparison-table th {
+        background: #e67e22;
+        color: white;
+        font-size: 1.1rem;
+    }
+    .footer { text-align: center; padding: 15px; color: #7f8c8d; font-size: 0.7rem; border-top: 1px solid #ddd; margin-top: 15px; }
+    .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: #e67e22;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        z-index: 1000;
+        border: none;
+        font-size: 1.2rem;
+    }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    
+    @media (max-width: 700px) {
+        .equation-box { padding: 10px 15px; min-width: 140px; }
+        .nuclear-symbol { font-size: 1.2rem; }
+        .nuclear-symbol .mass-top { font-size: 0.9rem; }
+        .nuclear-symbol .atomic-bottom { font-size: 0.7rem; }
+        .nuclear-symbol .element { font-size: 1.2rem; }
+        .arrow-right { font-size: 1.5rem; }
+        .particle-icon { font-size: 1rem; padding: 8px 15px; }
+        .tab-btn { padding: 8px 16px; font-size: 0.8rem; }
+    }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+    <a href="unit-9.html"  class="home-btn"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+    <h1><i class="fas fa-radiation"></i> الإشعاعات النووية <i class="fas fa-atom"></i></h1>
+    <p>ألفا (α) | بيتا (β) | جاما (γ) - معادلات صحيحة ومرتبة</p>
+</header>
+
+<div class="container">
+    
+    <!-- ملاحظة تصحيح الخطأ -->
+    <div class="correction-note">
+        <i class="fas fa-check-circle" style="color:#27ae60;"></i>
+        <strong>تصحيح طريقة كتابة الرموز النووية:</strong><br>
+        ✗ خطأ: A₂X  أو  A⁻⁴₂⁻²Y<br>
+        ✓ صحيح: <span style="font-size:1.3rem;">ᴬ₂X</span>  حيث A (العدد الكتلي) في الأعلى، و Z (العدد الذري) في الأسفل<br>
+        مثال: <span style="font-size:1.3rem;">²³⁸₉₂U</span> (اليورانيوم-238)
+    </div>
+    
+    <div class="tabs">
+        <button class="tab-btn alpha active" data-tab="alpha"><i class="fas fa-dot-circle"></i> إشعاع ألفا (α)</button>
+        <button class="tab-btn beta" data-tab="beta"><i class="fas fa-bolt"></i> إشعاع بيتا (β)</button>
+        <button class="tab-btn gamma" data-tab="gamma"><i class="fas fa-waveform"></i> إشعاع جاما (γ)</button>
+    </div>
+
+    <!-- ========== ألفا ========== -->
+    <div id="alpha" class="tab-content active">
+        <div class="card">
+            <h2 style="color:#e74c3c; text-align:center; font-size:1.8rem;">إشعاع ألفا (α)</h2>
+            
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color:#e74c3c;"><h4>الرمز</h4><div class="value" style="font-size:1.3rem;">α أو ⁴₂He</div></div>
+                <div class="info-card" style="border-right-color:#e74c3c;"><h4>الشحنة</h4><div class="value">+2e</div></div>
+                <div class="info-card" style="border-right-color:#e74c3c;"><h4>الكتلة</h4><div class="value">4 وحدات كتل</div></div>
+                <div class="info-card" style="border-right-color:#e74c3c;"><h4>النفاذية</h4><div class="value">ورقة</div></div>
+            </div>
+            
+            <h4 style="text-align:center; font-size:1.2rem;">📐 معادلة اضمحلال ألفا (من اليسار إلى اليمين)</h4>
+            <div class="equation-chain">
+                <div class="equation-box">
+                    <div class="nuclear-symbol">
+                        <span class="mass-top">ᴬ</span>
+                        <span class="atomic-bottom">₂</span>
+                        <span class="element">X</span>
+                    </div>
+                    <div style="font-size:0.8rem; margin-top:5px;">(النواة الأصل)</div>
+                </div>
+                <div class="arrow-right">→</div>
+                <div class="equation-box">
+                    <div class="nuclear-symbol">
+                        <span class="mass-top">ᴬ⁻⁴</span>
+                        <span class="atomic-bottom">₂₋₂</span>
+                        <span class="element">Y</span>
+                    </div>
+                    <div style="font-size:0.8rem; margin-top:5px;">(النواة الجديدة)</div>
+                </div>
+                <div class="arrow-right">+</div>
+                <div class="particle-icon">
+                    <span style="font-size:1.4rem;">⁴₂He</span><br>
+                    <span style="font-size:0.7rem;">(جسيم ألفا)</span>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <strong style="font-size:1.1rem;">📌 مثال عملي:</strong> اضمحلال اليورانيوم-238
+                <div class="equation-chain" style="background:#2c3e50; margin-top:15px;">
+                    <div class="equation-box">
+                        <div class="nuclear-symbol">
+                            <span class="mass-top">238</span>
+                            <span class="atomic-bottom">92</span>
+                            <span class="element">U</span>
+                        </div>
+                    </div>
+                    <div class="arrow-right">→</div>
+                    <div class="equation-box">
+                        <div class="nuclear-symbol">
+                            <span class="mass-top">234</span>
+                            <span class="atomic-bottom">90</span>
+                            <span class="element">Th</span>
+                        </div>
+                    </div>
+                    <div class="arrow-right">+</div>
+                    <div class="particle-icon">
+                        <span style="font-size:1.4rem;">⁴₂He</span>
+                    </div>
+                </div>
+                <div class="step-by-step">
+                    <strong>✍️ الشرح:</strong><br>
+                    • العدد الكتلي: 238 → 234 + 4 ✓<br>
+                    • العدد الذري: 92 → 90 + 2 ✓<br>
+                    • النواة الجديدة: الثوريوم (Th)
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <strong style="font-size:1.1rem;">📌 مسألة محلولة:</strong><br>
+                عنصر الراديوم <span style="font-size:1.2rem;">²²⁶₈₈Ra</span> يتحلل بإصدار جسيم ألفا. ما العنصر الناتج؟
+                <div class="step-by-step">
+                    <strong>✍️ الحل:</strong><br>
+                    • العدد الكتلي الجديد = 226 - 4 = <strong style="font-size:1.2rem;">222</strong><br>
+                    • العدد الذري الجديد = 88 - 2 = <strong style="font-size:1.2rem;">86</strong><br>
+                    • العنصر الناتج: <strong style="font-size:1.2rem;">²²²₈₆Rn</strong> (الرادون)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== بيتا ========== -->
+    <div id="beta" class="tab-content">
+        <div class="card">
+            <h2 style="color:#3498db; text-align:center; font-size:1.8rem;">إشعاع بيتا (β)</h2>
+            
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color:#3498db;"><h4>الرمز</h4><div class="value" style="font-size:1.3rem;">β⁻</div></div>
+                <div class="info-card" style="border-right-color:#3498db;"><h4>الشحنة</h4><div class="value">-1e</div></div>
+                <div class="info-card" style="border-right-color:#3498db;"><h4>الكتلة</h4><div class="value">~1/1840 u</div></div>
+                <div class="info-card" style="border-right-color:#3498db;"><h4>النفاذية</h4><div class="value">ألومنيوم (3mm)</div></div>
+            </div>
+            
+            <h4 style="text-align:center; font-size:1.2rem;">📐 معادلة اضمحلال بيتا السالب (من اليسار إلى اليمين)</h4>
+            <div class="equation-chain">
+                <div class="equation-box">
+                    <div class="nuclear-symbol">
+                        <span class="mass-top">ᴬ</span>
+                        <span class="atomic-bottom">₂</span>
+                        <span class="element">X</span>
+                    </div>
+                    <div style="font-size:0.8rem; margin-top:5px;">(النواة الأصل)</div>
+                </div>
+                <div class="arrow-right">→</div>
+                <div class="equation-box">
+                    <div class="nuclear-symbol">
+                        <span class="mass-top">ᴬ</span>
+                        <span class="atomic-bottom">₂₊₁</span>
+                        <span class="element">Y</span>
+                    </div>
+                    <div style="font-size:0.8rem; margin-top:5px;">(النواة الجديدة)</div>
+                </div>
+                <div class="arrow-right">+</div>
+                <div class="particle-icon">β⁻</div>
+                <div class="arrow-right">+</div>
+                <div class="particle-icon" style="font-size:1rem;">ν̄</div>
+            </div>
+            
+            <div class="example-box">
+                <strong style="font-size:1.1rem;">📌 مثال عملي:</strong> اضمحلال الكربون-14
+                <div class="equation-chain" style="background:#2c3e50; margin-top:15px;">
+                    <div class="equation-box">
+                        <div class="nuclear-symbol">
+                            <span class="mass-top">14</span>
+                            <span class="atomic-bottom">6</span>
+                            <span class="element">C</span>
+                        </div>
+                    </div>
+                    <div class="arrow-right">→</div>
+                    <div class="equation-box">
+                        <div class="nuclear-symbol">
+                            <span class="mass-top">14</span>
+                            <span class="atomic-bottom">7</span>
+                            <span class="element">N</span>
+                        </div>
+                    </div>
+                    <div class="arrow-right">+</div>
+                    <div class="particle-icon">β⁻</div>
+                    <div class="arrow-right">+</div>
+                    <div class="particle-icon" style="font-size:1rem;">ν̄</div>
+                </div>
+                <div class="step-by-step">
+                    <strong>✍️ الشرح:</strong><br>
+                    • العدد الكتلي: يبقى 14 كما هو ✓<br>
+                    • العدد الذري: يزداد بمقدار 1 (6 → 7) ✓<br>
+                    • النواة الجديدة: النيتروجين (N)
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <strong style="font-size:1.1rem;">📌 مسألة محلولة:</strong><br>
+                عنصر اليود <span style="font-size:1.2rem;">¹³¹₅₃I</span> يتحلل بإصدار جسيم بيتا. ما العنصر الناتج؟
+                <div class="step-by-step">
+                    <strong>✍️ الحل:</strong><br>
+                    • العدد الكتلي الجديد = <strong style="font-size:1.2rem;">131</strong> (يبقى كما هو)<br>
+                    • العدد الذري الجديد = 53 + 1 = <strong style="font-size:1.2rem;">54</strong><br>
+                    • العنصر الناتج: <strong style="font-size:1.2rem;">¹³¹₅₄Xe</strong> (الزينون)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== جاما ========== -->
+    <div id="gamma" class="tab-content">
+        <div class="card">
+            <h2 style="color:#27ae60; text-align:center; font-size:1.8rem;">إشعاع جاما (γ)</h2>
+            
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color:#27ae60;"><h4>الرمز</h4><div class="value" style="font-size:1.3rem;">γ</div></div>
+                <div class="info-card" style="border-right-color:#27ae60;"><h4>الشحنة</h4><div class="value">0</div></div>
+                <div class="info-card" style="border-right-color:#27ae60;"><h4>الكتلة</h4><div class="value">بدون كتلة</div></div>
+                <div class="info-card" style="border-right-color:#27ae60;"><h4>النفاذية</h4><div class="value">رصاص سميك</div></div>
+            </div>
+            
+            <h4 style="text-align:center; font-size:1.2rem;">📐 معادلة انبعاث جاما (من اليسار إلى اليمين)</h4>
+            <div class="equation-chain">
+                <div class="equation-box">
+                    <div class="nuclear-symbol">
+                        <span class="mass-top">ᴬ</span>
+                        <span class="atomic-bottom">₂</span>
+                        <span class="element">X</span>
+                    </div>
+                    <span style="font-size:1.3rem;">*</span>
+                    <div style="font-size:0.8rem; margin-top:5px;">(نواة مثارة)</div>
+                </div>
+                <div class="arrow-right">→</div>
+                <div class="equation-box">
+                    <div class="nuclear-symbol">
+                        <span class="mass-top">ᴬ</span>
+                        <span class="atomic-bottom">₂</span>
+                        <span class="element">X</span>
+                    </div>
+                    <div style="font-size:0.8rem; margin-top:5px;">(نواة مستقرة)</div>
+                </div>
+                <div class="arrow-right">+</div>
+                <div class="particle-icon" style="font-size:1.5rem;">γ</div>
+            </div>
+            
+            <div class="example-box">
+                <strong style="font-size:1.1rem;">📌 مثال عملي:</strong> انبعاث جاما من الكوبالت-60
+                <div class="equation-chain" style="background:#2c3e50; margin-top:15px;">
+                    <div class="equation-box">
+                        <div class="nuclear-symbol">
+                            <span class="mass-top">60</span>
+                            <span class="atomic-bottom">27</span>
+                            <span class="element">Co</span>
+                        </div>
+                        <span style="font-size:1.3rem;">*</span>
+                    </div>
+                    <div class="arrow-right">→</div>
+                    <div class="equation-box">
+                        <div class="nuclear-symbol">
+                            <span class="mass-top">60</span>
+                            <span class="atomic-bottom">27</span>
+                            <span class="element">Co</span>
+                        </div>
+                    </div>
+                    <div class="arrow-right">+</div>
+                    <div class="particle-icon" style="font-size:1.5rem;">γ</div>
+                </div>
+                <div class="step-by-step">
+                    <strong>✍️ الشرح:</strong><br>
+                    • العدد الكتلي والذري لا يتغيران ✓<br>
+                    • النواة تفقد طاقتها الزائدة على شكل فوتون جاما<br>
+                    • غالباً ما يصاحب اضمحلال ألفا أو بيتا
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ========== السؤال الأول: اضمحلال الراديوم إلى رادون (ألفا) ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-atom" style="color:#e74c3c;"></i>
+        <h3>سؤال 1: اضمحلال الراديوم (ألفا)</h3>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        عنصر <strong style="color:#e74c3c;">الراديوم (Ra)</strong> عدده الذري 88 وعدده الكتلي 226، يتحلل بإصدار <strong style="color:#e74c3c;">جسيم ألفا (α)</strong>.
+        <br><br>
+        <strong>المطلوب:</strong> ما العنصر الناتج عن هذا الاضمحلال؟ وما عدده الذري والكتلي؟
+    </div>
+    
+    <button id="showAlphaSolutionBtn" style="background: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-eye"></i> عرض الحل
+    </button>
+    
+    <div id="alphaSolution" style="margin-top: 20px; display: none;">
+        <h4 style="color:#e74c3c; text-align:center;">📊 شرح اضمحلال ألفا (بالرسم)</h4>
+        
+        <!-- سلسلة الدوائر والأسهم -->
+        <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; background: #fff5e8; padding: 20px; border-radius: 60px; direction: ltr;">
+            
+            <!-- الدائرة الأولى: الراديوم -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 80px; height: 80px; background: radial-gradient(#f9e79f, #e74c3c); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; margin: 0 auto; color:white;">
+                    ²²⁶₈₈Ra
+                </div>
+                <div class="time-badge">الراديوم (النواة الأصل)</div>
+            </div>
+            
+            <!-- السهم -->
+            <div class="arrow-icon" style="font-size: 1.5rem; color:#e74c3c;">→ α</div>
+            
+            <!-- الدائرة الثانية: الرادون -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 80px; height: 80px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; margin: 0 auto;">
+                    ²²²₈₆Rn
+                </div>
+                <div class="time-badge">الرادون (النواة الجديدة)</div>
+            </div>
+            
+            <!-- جسيم ألفا -->
+            <div class="particle-icon" style="background: #e74c3c; padding: 8px 15px; border-radius: 40px; color:white;">
+                + ⁴₂He (α)
+            </div>
+        </div>
+        
+        <div class="step-by-step" style="background: #fdedec; padding: 15px; border-radius: 20px; margin-top: 15px;">
+            <strong>✍️ شرح الحل خطوة بخطوة:</strong><br>
+            • اضمحلال ألفا: العدد الكتلي يقل بمقدار 4، والعدد الذري يقل بمقدار 2<br>
+            • العدد الكتلي الجديد = 226 - 4 = <strong style="color:#e74c3c;">222</strong><br>
+            • العدد الذري الجديد = 88 - 2 = <strong style="color:#e74c3c;">86</strong><br>
+            • العنصر الناتج هو <strong style="color:#27ae60;">الرادون (Rn)</strong><br>
+            • معادلة الاضمحلال: <strong style="font-size:1.1rem;">²²⁶₈₈Ra → ²²²₈₆Rn + ⁴₂He</strong>
+        </div>
+    </div>
+</div>
+
+<script>
+    // زر عرض حل ألفا
+    const alphaBtn = document.getElementById('showAlphaSolutionBtn');
+    const alphaSolution = document.getElementById('alphaSolution');
+    alphaBtn.addEventListener('click', function() {
+        if (alphaSolution.style.display === 'none') {
+            alphaSolution.style.display = 'block';
+            alphaBtn.innerHTML = '<i class="fas fa-eye-slash"></i> إخفاء الحل';
+        } else {
+            alphaSolution.style.display = 'none';
+            alphaBtn.innerHTML = '<i class="fas fa-eye"></i> عرض الحل';
+        }
+    });
+</script>
+
+
+<!-- ========== السؤال الثاني: اضمحلال الكربون-14 إلى نيتروجين (بيتا) ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-bolt" style="color:#3498db;"></i>
+        <h3>سؤال 2: اضمحلال الكربون-14 (بيتا)</h3>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        عنصر <strong style="color:#3498db;">الكربون-14 (¹⁴₆C)</strong> هو نظير مشع للكربون، يتحلل بإصدار <strong style="color:#3498db;">جسيم بيتا (β⁻)</strong>.
+        <br><br>
+        <strong>المطلوب:</strong> ما العنصر الناتج عن هذا الاضمحلال؟ وما عدده الذري والكتلي؟
+    </div>
+    
+    <button id="showBetaSolutionBtn" style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-eye"></i> عرض الحل
+    </button>
+    
+    <div id="betaSolution" style="margin-top: 20px; display: none;">
+        <h4 style="color:#3498db; text-align:center;">📊 شرح اضمحلال بيتا (بالرسم)</h4>
+        
+        <!-- سلسلة الدوائر والأسهم -->
+        <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; background: #fff5e8; padding: 20px; border-radius: 60px; direction: ltr;">
+            
+            <!-- الدائرة الأولى: الكربون-14 -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 80px; height: 80px; background: radial-gradient(#a9cce3, #3498db); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; margin: 0 auto; color:white;">
+                    ¹⁴₆C
+                </div>
+                <div class="time-badge">الكربون-14 (النواة الام)</div>
+            </div>
+            
+            <!-- السهم -->
+            <div class="arrow-icon" style="font-size: 1.5rem; color:#3498db;">→ β⁻</div>
+            
+            <!-- الدائرة الثانية: النيتروجين -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 80px; height: 80px; background: radial-gradient(#7fb3d5, #2ecc71); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; margin: 0 auto;">
+                    ¹⁴₇N
+                </div>
+                <div class="time-badge">النيتروجين (النواة الجديدة)</div>
+            </div>
+            
+            <!-- جسيم بيتا -->
+            <div class="particle-icon" style="background: #3498db; padding: 8px 15px; border-radius: 40px; color:white;">
+                + β⁻ + ν̄
+            </div>
+        </div>
+        
+        <div class="step-by-step" style="background: #d6eaf8; padding: 15px; border-radius: 20px; margin-top: 15px;">
+            <strong>✍️ شرح الحل خطوة بخطوة:</strong><br>
+            • اضمحلال بيتا: العدد الكتلي يبقى كما هو، والعدد الذري يزداد بمقدار 1<br>
+            • العدد الكتلي الجديد = <strong style="color:#3498db;">14</strong> (يبقى كما هو)<br>
+            • العدد الذري الجديد = 6 + 1 = <strong style="color:#3498db;">7</strong><br>
+            • العنصر الناتج هو <strong style="color:#2ecc71;">النيتروجين (N)</strong><br>
+            • معادلة الاضمحلال: <strong style="font-size:1.1rem;">¹⁴₆C → ¹⁴₇N + β⁻ + ν̄</strong>
+        </div>
+    </div>
+</div>
+
+<script>
+    // زر عرض حل بيتا
+    const betaBtn = document.getElementById('showBetaSolutionBtn');
+    const betaSolution = document.getElementById('betaSolution');
+    betaBtn.addEventListener('click', function() {
+        if (betaSolution.style.display === 'none') {
+            betaSolution.style.display = 'block';
+            betaBtn.innerHTML = '<i class="fas fa-eye-slash"></i> إخفاء الحل';
+        } else {
+            betaSolution.style.display = 'none';
+            betaBtn.innerHTML = '<i class="fas fa-eye"></i> عرض الحل';
+        }
+    });
+</script>
+
+<!-- ========== السؤال الثالث: أكمل المعادلة (ألفا وبيتا) ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-puzzle-piece" style="color:#8e44ad;"></i>
+        <h3>سؤال 3: أكمل المعادلة النووية</h3>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        أكمل المعادلة النووية التالية:
+        <div style="text-align: center; font-size: 1.5rem; margin: 20px 0; direction: ltr;">
+            <span style="background:#2c3e50; color:white; padding: 10px 15px; border-radius: 15px; display: inline-block;">
+                ²²⁴₇₄X → ²⁰⁰₇₄Y + ? 
+            </span>
+        </div>
+        <strong>المطلوب:</strong> حدد عدد جسيمات <span style="color:#e74c3c;">ألفا (α)</span> وجسيمات <span style="color:#3498db;">بيتا (β)</span> المنبعثة.
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz" value="4a_8b"> أ) 4 ألفا و 8 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz" value="5a_10b"> ب) 5 ألفا و 10 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz" value="6a_12b"> ج) 6 ألفا و 12 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz" value="7a_14b"> د) 7 ألفا و 14 بيتا
+        </label>
+    </div>
+    
+    <button id="checkDecayBtn" style="background: #8e44ad; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-check-circle"></i> تأكيد الإجابة
+    </button>
+    
+    <div id="decayFeedback" style="margin-top: 15px; padding: 10px; border-radius: 20px; display: none;"></div>
+    
+    <!-- شرح الحل بالتفصيل -->
+    <div id="decaySolution" style="margin-top: 20px; display: none;">
+        <h4 style="color:#8e44ad; text-align:center;">📊 طريقة موازنة المعادلة (جمع وضرب)</h4>
+        
+        <div class="step-by-step" style="background: #f4ecf7; padding: 18px; border-radius: 20px;">
+            <strong>✍️ شرح الحل خطوة بخطوة:</strong><br><br>
+            
+            <strong>المعطيات:</strong><br>
+            • العنصر الأصلي X: العدد الكتلي (A) = <strong>224</strong>، العدد الذري (Z) = <strong>74</strong><br>
+            • العنصر الناتج Y: العدد الكتلي (A) = <strong>200</strong>، العدد الذري (Z) = <strong>74</strong><br>
+            • الفرق في العدد الكتلي = 224 - 200 = <strong>24</strong><br>
+            • الفرق في العدد الذري = 74 - 74 = <strong>0</strong><br><br>
+            
+            <strong>قواعد الاضمحلال:</strong><br>
+            • جسيم ألفا (α = ⁴₂He): يقلل العدد الكتلي بمقدار <strong>4</strong> ويقلل العدد الذري بمقدار <strong>2</strong><br>
+            • جسيم بيتا (β⁻): يبقي العدد الكتلي كما هو ويزيد العدد الذري بمقدار <strong>1</strong><br><br>
+            
+            <strong>نفترض:</strong><br>
+            • عدد جسيمات ألفا = <span style="color:#e74c3c;">a</span><br>
+            • عدد جسيمات بيتا = <span style="color:#3498db;">b</span><br><br>
+            
+            <strong>معادلة العدد الكتلي (A):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                224 - 4a = 200
+            </div>
+            • 4a = 224 - 200 = 24<br>
+            • a = 24 ÷ 4 = <strong style="color:#e74c3c; font-size:1.2rem;">6 جسيمات ألفا</strong><br><br>
+            
+            <strong>معادلة العدد الذري (Z):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                74 - 2a + b = 74
+            </div>
+            • -2a + b = 0<br>
+            • b = 2a<br>
+            • b = 2 × 6 = <strong style="color:#3498db; font-size:1.2rem;">12 جسيم بيتا</strong><br><br>
+            
+            <strong>المعادلة النهائية:</strong><br>
+            <div style="background: #27ae60; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                ²²⁴₇₄X → ²⁰⁰₇₄Y + 6 × (⁴₂He) + 12 × (β⁻)
+            </div>
+            
+            ✅ <strong>الإجابة الصحيحة هي: <span style="color:#8e44ad;">ج) 6 ألفا و 12 بيتا</span></strong>
+        </div>
+        
+        <!-- رسم توضيحي بالدوائر -->
+        <div style="margin-top: 15px;">
+            <h5 style="text-align:center;">📊 تمثيل التغير في العدد الكتلي والذري</h5>
+            <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; background: #fef5e6; padding: 20px; border-radius: 60px; direction: ltr;">
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#f9e79f, #8e44ad); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto; color:white;">
+                        ²²⁴₇₄X
+                    </div>
+                    <div class="time-badge">العنصر الأصلي</div>
+                </div>
+                
+                <div class="arrow-icon" style="font-size: 1.2rem; color:#8e44ad;">→ 6α + 12β</div>
+                
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto;">
+                        ²⁰⁰₇₄Y
+                    </div>
+                    <div class="time-badge">العنصر الناتج</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // التحقق من إجابة سؤال الاضمحلال
+    const decayBtn = document.getElementById('checkDecayBtn');
+    const decayFeedback = document.getElementById('decayFeedback');
+    const decaySolution = document.getElementById('decaySolution');
+    
+    decayBtn.addEventListener('click', function() {
+        const selected = document.querySelector('input[name="decayQuiz"]:checked');
+        if (!selected) {
+            decayFeedback.style.display = 'block';
+            decayFeedback.style.background = '#fef5e6';
+            decayFeedback.style.color = '#e67e22';
+            decayFeedback.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+            decaySolution.style.display = 'none';
+            return;
+        }
+        
+        if (selected.value === '6a_12b') {
+            decayFeedback.style.display = 'block';
+            decayFeedback.style.background = '#d5f5e3';
+            decayFeedback.style.color = '#27ae60';
+            decayFeedback.innerHTML = '✅ إجابة صحيحة! 6 جسيمات ألفا و 12 جسيم بيتا.';
+            decaySolution.style.display = 'block';
+        } else {
+            decayFeedback.style.display = 'block';
+            decayFeedback.style.background = '#fdedec';
+            decayFeedback.style.color = '#c0392b';
+            let feedbackMsg = '';
+            if (selected.value === '4a_8b') feedbackMsg = '❌ إجابة خاطئة. الفرق في العدد الكتلي 24 يحتاج 6 جسيمات ألفا (6×4=24).';
+            else if (selected.value === '5a_10b') feedbackMsg = '❌ إجابة خاطئة. 5 جسيمات ألفا تنقص العدد الكتلي 20 فقط، بينما النقص 24.';
+            else if (selected.value === '7a_14b') feedbackMsg = '❌ إجابة خاطئة. 7 جسيمات ألفا تنقص العدد الكتلي 28، وهذا أكثر من المطلوب.';
+            else feedbackMsg = '❌ إجابة خاطئة. حاول مرة أخرى باستخدام المعادلات.';
+            decayFeedback.innerHTML = feedbackMsg;
+            decaySolution.style.display = 'none';
+        }
+    });
+</script>
+<!-- ========== السؤال الرابع: أكمل المعادلة (ألفا فقط) ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-puzzle-piece" style="color:#e67e22;"></i>
+        <h3>سؤال 4: أكمل المعادلة النووية</h3>
+    </div>
+    
+    <!-- تذكير بدفعة 2007 -->
+    <div style="background: #fef5e6; border-right: 4px solid #e67e22; padding: 12px; border-radius: 16px; margin-bottom: 15px;">
+        <i class="fas fa-history" style="color:#e67e22;"></i>
+        <strong>تذكير:</strong> هذا السؤال كان للعام الماضي <span style="background:#e67e22; color:white; padding:2px 10px; border-radius:20px;">دفعة 2007</span>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        أكمل المعادلة النووية التالية:
+        <div style="text-align: center; font-size: 1.5rem; margin: 20px 0; direction: ltr;">
+            <span style="background:#2c3e50; color:white; padding: 10px 15px; border-radius: 15px; display: inline-block;">
+                ²²⁴₇₄X → ²²⁰₇₂Y + ? 
+            </span>
+        </div>
+        <strong>المطلوب:</strong> حدد الجسيمات المنبعثة (جسيمات ألفا وبيتا).
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz2" value="1a_0b"> أ) 1 ألفا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz2" value="2a_2b"> ب) 2 ألفا و 2 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz2" value="1a_2b"> ج) 1 ألفا و 2 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz2" value="0a_4b"> د) 4 بيتا
+        </label>
+    </div>
+    
+    <button id="checkDecayBtn2" style="background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-check-circle"></i> تأكيد الإجابة
+    </button>
+    
+    <div id="decayFeedback2" style="margin-top: 15px; padding: 10px; border-radius: 20px; display: none;"></div>
+    
+    <!-- شرح الحل بالتفصيل -->
+    <div id="decaySolution2" style="margin-top: 20px; display: none;">
+        <h4 style="color:#e67e22; text-align:center;">📊 طريقة موازنة المعادلة (جمع وطرح)</h4>
+        
+        <div class="step-by-step" style="background: #fef5e6; padding: 18px; border-radius: 20px;">
+            <strong>✍️ شرح الحل خطوة بخطوة:</strong><br><br>
+            
+            <strong>المعطيات:</strong><br>
+            • العنصر الأصلي X: العدد الكتلي (A) = <strong>224</strong>، العدد الذري (Z) = <strong>74</strong><br>
+            • العنصر الناتج Y: العدد الكتلي (A) = <strong>220</strong>، العدد الذري (Z) = <strong>72</strong><br>
+            • الفرق في العدد الكتلي = 224 - 220 = <strong>4</strong><br>
+            • الفرق في العدد الذري = 74 - 72 = <strong>2</strong><br><br>
+            
+            <strong>قواعد الاضمحلال:</strong><br>
+            • جسيم ألفا (α = ⁴₂He): يقلل العدد الكتلي بمقدار <strong>4</strong> ويقلل العدد الذري بمقدار <strong>2</strong><br>
+            • جسيم بيتا (β⁻): يبقي العدد الكتلي كما هو ويزيد العدد الذري بمقدار <strong>1</strong><br><br>
+            
+            <strong>نفترض:</strong><br>
+            • عدد جسيمات ألفا = <span style="color:#e74c3c;">a</span><br>
+            • عدد جسيمات بيتا = <span style="color:#3498db;">b</span><br><br>
+            
+            <strong>معادلة العدد الكتلي (A):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                224 - 4a = 220
+            </div>
+            • 4a = 224 - 220 = 4<br>
+            • a = 4 ÷ 4 = <strong style="color:#e74c3c; font-size:1.2rem;">1 جسيم ألفا</strong><br><br>
+            
+            <strong>معادلة العدد الذري (Z):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                74 - 2a + b = 72
+            </div>
+            • نعوض a = 1<br>
+            • 74 - 2(1) + b = 72<br>
+            • 74 - 2 + b = 72<br>
+            • 72 + b = 72<br>
+            • b = 72 - 72 = <strong style="color:#3498db; font-size:1.2rem;">0 (لا يوجد جسيمات بيتا)</strong><br><br>
+            
+            <strong>المعادلة النهائية:</strong><br>
+            <div style="background: #27ae60; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                ²²⁴₇₄X → ²²⁰₇₂Y + ⁴₂He (α)
+            </div>
+            
+            ✅ <strong>الإجابة الصحيحة هي: <span style="color:#e67e22;">أ) 1 ألفا</span></strong>
+        </div>
+        
+        <!-- رسم توضيحي بالدوائر -->
+        <div style="margin-top: 15px;">
+            <h5 style="text-align:center;">📊 تمثيل الاضمحلال بالدوائر والأسهم</h5>
+            <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; background: #fef5e6; padding: 20px; border-radius: 60px; direction: ltr;">
+                
+                <!-- الدائرة الأولى: العنصر الأصلي -->
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#f9e79f, #e67e22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto;">
+                        ²²⁴₇₄X
+                    </div>
+                    <div class="time-badge">العنصر الأصلي</div>
+                </div>
+                
+                <!-- السهم -->
+                <div class="arrow-icon" style="font-size: 1.3rem; color:#e67e22;">→ α</div>
+                
+                <!-- الدائرة الثانية: العنصر الناتج -->
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto;">
+                        ²²⁰₇₂Y
+                    </div>
+                    <div class="time-badge">العنصر الناتج</div>
+                </div>
+                
+                <!-- جسيم ألفا -->
+                <div class="particle-icon" style="background: #e74c3c; padding: 8px 15px; border-radius: 40px; color:white;">
+                    + ⁴₂He (α)
+                </div>
+            </div>
+            
+            <div class="step-by-step" style="background: #d5f5e3; padding: 12px; border-radius: 20px; margin-top: 15px; text-align:center;">
+                <strong>🔍 ملاحظة:</strong> العدد الكتلي نقص بمقدار 4 → انبعاث جسيم ألفا واحد<br>
+                العدد الذري نقص بمقدار 2 → يتوافق مع انبعاث ألفا (لا حاجة لبيتا)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // التحقق من إجابة السؤال الرابع
+    const decayBtn2 = document.getElementById('checkDecayBtn2');
+    const decayFeedback2 = document.getElementById('decayFeedback2');
+    const decaySolution2 = document.getElementById('decaySolution2');
+    
+    decayBtn2.addEventListener('click', function() {
+        const selected = document.querySelector('input[name="decayQuiz2"]:checked');
+        if (!selected) {
+            decayFeedback2.style.display = 'block';
+            decayFeedback2.style.background = '#fef5e6';
+            decayFeedback2.style.color = '#e67e22';
+            decayFeedback2.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+            decaySolution2.style.display = 'none';
+            return;
+        }
+        
+        if (selected.value === '1a_0b') {
+            decayFeedback2.style.display = 'block';
+            decayFeedback2.style.background = '#d5f5e3';
+            decayFeedback2.style.color = '#27ae60';
+            decayFeedback2.innerHTML = '✅ إجابة صحيحة! 1 جسيم ألفا (α) فقط.';
+            decaySolution2.style.display = 'block';
+        } else {
+            decayFeedback2.style.display = 'block';
+            decayFeedback2.style.background = '#fdedec';
+            decayFeedback2.style.color = '#c0392b';
+            let feedbackMsg = '';
+            if (selected.value === '2a_2b') feedbackMsg = '❌ إجابة خاطئة. 2 ألفا تنقص الكتلة 8، والمطلوب نقص 4 فقط.';
+            else if (selected.value === '1a_2b') feedbackMsg = '❌ إجابة خاطئة. 1 ألفا + 2 بيتا تزيد العدد الذري بدل أن تنقصه.';
+            else if (selected.value === '0a_4b') feedbackMsg = '❌ إجابة خاطئة. 4 بيتا لا تغير العدد الكتلي، لكن المطلوب نقص 4 في الكتلة.';
+            else feedbackMsg = '❌ إجابة خاطئة. حاول مرة أخرى باستخدام المعادلات.';
+            decayFeedback2.innerHTML = feedbackMsg;
+            decaySolution2.style.display = 'none';
+        }
+    });
+</script>
+<!-- ========== السؤال الخامس: أكمل المعادلة (بيتا) ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-bolt" style="color:#3498db;"></i>
+        <h3>سؤال 5: أكمل المعادلة النووية</h3>
+    </div>
+    
+    <!-- تذكير بدفعة 2007 -->
+    <div style="background: #fef5e6; border-right: 4px solid #e67e22; padding: 12px; border-radius: 16px; margin-bottom: 15px;">
+        <i class="fas fa-history" style="color:#e67e22;"></i>
+        <strong>تذكير:</strong> هذا السؤال كان للعام الماضي <span style="background:#e67e22; color:white; padding:2px 10px; border-radius:20px;">دفعة 2007</span>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        أكمل المعادلة النووية التالية:
+        <div style="text-align: center; font-size: 1.5rem; margin: 20px 0; direction: ltr;">
+            <span style="background:#2c3e50; color:white; padding: 10px 15px; border-radius: 15px; display: inline-block;">
+                ²⁴₁₁Na → ²⁴₁₂Mg + ? + طاقة
+            </span>
+        </div>
+        <strong>المطلوب:</strong> حدد الجسيم المنبعث في هذا الاضمحلال.
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz3" value="alpha"> أ) جسيم ألفا (α = ⁴₂He)
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz3" value="beta"> ب) جسيم بيتا (β⁻)
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz3" value="gamma"> ج) أشعة جاما (γ)
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz3" value="neutron"> د) نيوترون (¹₀n)
+        </label>
+    </div>
+    
+    <button id="checkDecayBtn3" style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-check-circle"></i> تأكيد الإجابة
+    </button>
+    
+    <div id="decayFeedback3" style="margin-top: 15px; padding: 10px; border-radius: 20px; display: none;"></div>
+    
+    <!-- شرح الحل بالتفصيل -->
+    <div id="decaySolution3" style="margin-top: 20px; display: none;">
+        <h4 style="color:#3498db; text-align:center;">📊 طريقة موازنة المعادلة</h4>
+        
+        <div class="step-by-step" style="background: #d6eaf8; padding: 18px; border-radius: 20px;">
+            <strong>✍️ شرح الحل خطوة بخطوة:</strong><br><br>
+            
+            <strong>المعطيات:</strong><br>
+            • العنصر الأصلي (صوديوم Na): العدد الكتلي (A) = <strong>24</strong>، العدد الذري (Z) = <strong>11</strong><br>
+            • العنصر الناتج (مغنسيوم Mg): العدد الكتلي (A) = <strong>24</strong>، العدد الذري (Z) = <strong>12</strong><br>
+            • الفرق في العدد الكتلي = 24 - 24 = <strong>0</strong><br>
+            • الفرق في العدد الذري = 11 - 12 = <strong>-1</strong> (أي زيادة بمقدار 1)<br><br>
+            
+            <strong>قواعد الاضمحلال:</strong><br>
+            • جسيم ألفا (α = ⁴₂He): يقلل العدد الكتلي بمقدار <strong>4</strong> ويقلل العدد الذري بمقدار <strong>2</strong><br>
+            • جسيم بيتا (β⁻): يبقي العدد الكتلي كما هو و<strong>يزيد</strong> العدد الذري بمقدار <strong>1</strong><br>
+            • أشعة جاما (γ): لا تغير العدد الكتلي ولا العدد الذري<br>
+            • نيوترون (¹₀n): يقلل العدد الكتلي بمقدار <strong>1</strong> ولا يغير العدد الذري<br><br>
+            
+            <strong>تحليل المعطيات:</strong><br>
+            • العدد الكتلي لم يتغير (24 ← 24) → إذن <span style="color:#e74c3c;">لا يمكن أن يكون ألفا أو نيوترون</span> (لأنهما يغيران الكتلة)<br>
+            • العدد الذري زاد بمقدار 1 (11 ← 12) → هذا يتوافق مع <span style="color:#3498db;">انبعاث جسيم بيتا (β⁻)</span><br>
+            • تبقى أشعة جاما (γ) محتملة ولكنها لا تغير العدد الذري<br><br>
+            
+            <strong>المعادلة النهائية:</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                ²⁴₁₁Na → ²⁴₁₂Mg + β⁻ + طاقة
+            </div>
+            
+            ✅ <strong>الإجابة الصحيحة هي: <span style="color:#3498db;">ب) جسيم بيتا (β⁻)</span></strong>
+        </div>
+        
+        <!-- رسم توضيحي بالدوائر والأسهم -->
+        <div style="margin-top: 15px;">
+            <h5 style="text-align:center;">📊 تمثيل الاضمحلال بالدوائر والأسهم</h5>
+            <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; background: #fef5e6; padding: 20px; border-radius: 60px; direction: ltr;">
+                
+                <!-- الدائرة الأولى: الصوديوم -->
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#a9cce3, #3498db); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto; color:white;">
+                        ²⁴₁₁Na
+                    </div>
+                    <div class="time-badge">الصوديوم (النواة الأصل)</div>
+                </div>
+                
+                <!-- السهم -->
+                <div class="arrow-icon" style="font-size: 1.3rem; color:#3498db;">→ β⁻</div>
+                
+                <!-- الدائرة الثانية: المغنسيوم -->
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#7fb3d5, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto;">
+                        ²⁴₁₂Mg
+                    </div>
+                    <div class="time-badge">المغنسيوم (النواة الجديدة)</div>
+                </div>
+                
+                <!-- جسيم بيتا -->
+                <div class="particle-icon" style="background: #3498db; padding: 8px 15px; border-radius: 40px; color:white;">
+                    + β⁻ + طاقة
+                </div>
+            </div>
+            
+            <div class="step-by-step" style="background: #d5f5e3; padding: 12px; border-radius: 20px; margin-top: 15px; text-align:center;">
+                <strong>🔍 ملاحظة:</strong> العدد الكتلي ثابت (24)، والعدد الذري زاد بمقدار 1<br>
+                هذا يعني تحول <strong>نيوترون → بروتون + إلكترون (β⁻) + طاقة</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // التحقق من إجابة السؤال الخامس
+    const decayBtn3 = document.getElementById('checkDecayBtn3');
+    const decayFeedback3 = document.getElementById('decayFeedback3');
+    const decaySolution3 = document.getElementById('decaySolution3');
+    
+    decayBtn3.addEventListener('click', function() {
+        const selected = document.querySelector('input[name="decayQuiz3"]:checked');
+        if (!selected) {
+            decayFeedback3.style.display = 'block';
+            decayFeedback3.style.background = '#fef5e6';
+            decayFeedback3.style.color = '#e67e22';
+            decayFeedback3.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+            decaySolution3.style.display = 'none';
+            return;
+        }
+        
+        if (selected.value === 'beta') {
+            decayFeedback3.style.display = 'block';
+            decayFeedback3.style.background = '#d5f5e3';
+            decayFeedback3.style.color = '#27ae60';
+            decayFeedback3.innerHTML = '✅ إجابة صحيحة! الجسيم المنبعث هو جسيم بيتا (β⁻) + طاقة.';
+            decaySolution3.style.display = 'block';
+        } else {
+            decayFeedback3.style.display = 'block';
+            decayFeedback3.style.background = '#fdedec';
+            decayFeedback3.style.color = '#c0392b';
+            let feedbackMsg = '';
+            if (selected.value === 'alpha') feedbackMsg = '❌ إجابة خاطئة. جسيم ألفا يقلل العدد الكتلي بمقدار 4، لكن العدد الكتلي هنا لم يتغير.';
+            else if (selected.value === 'gamma') feedbackMsg = '❌ إجابة خاطئة. أشعة جاما لا تغير العدد الذري، لكن العدد الذري هنا ازداد بمقدار 1.';
+            else if (selected.value === 'neutron') feedbackMsg = '❌ إجابة خاطئة. النيوترون يقلل العدد الكتلي بمقدار 1، لكن العدد الكتلي هنا لم يتغير.';
+            else feedbackMsg = '❌ إجابة خاطئة. حاول مرة أخرى باستخدام قواعد الاضمحلال.';
+            decayFeedback3.innerHTML = feedbackMsg;
+            decaySolution3.style.display = 'none';
+        }
+    });
+</script>
+
+    <!-- ========== جدول المقارنة ========== -->
+    <div class="card">
+        <h3 style="text-align:center; font-size:1.3rem;"><i class="fas fa-table"></i> جدول مقارنة الإشعاعات</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr><th>الخاصية</th><th style="color:#e74c3c;">ألفا (α)</th><th style="color:#3498db;">بيتا (β)</th><th style="color:#27ae60;">جاما (γ)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>الرمز</td><td style="font-size:1.2rem;">⁴₂He</td><td style="font-size:1.2rem;">β⁻</td><td style="font-size:1.2rem;">γ</td></tr>
+                <tr><td>الشحنة</td><td>+2</td><td>-1</td><td>0</td></tr>
+                <tr><td>الكتلة (u)</td><td>4</td><td>0.00055</td><td>0</td></tr>
+                <tr><td>النفاذية</td><td>ورقة</td><td>ألومنيوم</td><td>رصاص</td></tr>
+                <tr><td>السرعة (م/ث)</td><td>~2×10⁷</td><td>~2×10⁸</td><td>3×10⁸</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="footer">
+    <i class="fas fa-radiation"></i> الإشعاعات النووية - معادلات صحيحة مرتبة من اليسار إلى اليمين
+</div>
+
+<a href="#" id="backToTop" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+<script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.tab;
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            contents.forEach(c => c.classList.remove('active'));
+            document.getElementById(target).classList.add('active');
+        });
+    });
+    
+    const backBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) backBtn.classList.add('show');
+        else backBtn.classList.remove('show');
+    });
+    backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    const homeBtn = document.getElementById('homeButton');
+    homeBtn.setAttribute('href', '#'); // ضع رابط صفحتك الرئيسية هنا
+</script>
+
+</body>
+</html>
