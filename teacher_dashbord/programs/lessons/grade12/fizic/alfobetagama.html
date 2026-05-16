@@ -899,40 +899,48 @@
         </div>
         
         <!-- رسم توضيحي بالدوائر -->
-        <div style="margin-top: 15px;">
-            <h5 style="text-align:center;">📊 تمثيل الاضمحلال بالدوائر والأسهم</h5>
-            <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; background: #fef5e6; padding: 20px; border-radius: 60px; direction: ltr;">
-                
-                <!-- الدائرة الأولى: العنصر الأصلي -->
-                <div class="mass-node" style="text-align: center;">
-                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#f9e79f, #e67e22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto;">
-                        ²²⁴₇₄X
-                    </div>
-                    <div class="time-badge">العنصر الأصلي</div>
-                </div>
-                
-                <!-- السهم -->
-                <div class="arrow-icon" style="font-size: 1.3rem; color:#e67e22;">→ α</div>
-                
-                <!-- الدائرة الثانية: العنصر الناتج -->
-                <div class="mass-node" style="text-align: center;">
-                    <div class="circle-mass" style="width: 90px; height: 90px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin: 0 auto;">
-                        ²²⁰₇₂Y
-                    </div>
-                    <div class="time-badge">العنصر الناتج</div>
-                </div>
-                
-                <!-- جسيم ألفا -->
-                <div class="particle-icon" style="background: #e74c3c; padding: 8px 15px; border-radius: 40px; color:white;">
-                    + ⁴₂He (α)
-                </div>
+        <div style="margin-top: 15px; font-family: sans-serif;">
+    <h5 style="text-align: center; color: #2c3e50; font-size: 1rem; margin-bottom: 12px; font-weight: bold;">
+        📊 تمثيل الاضمحلال بالدوائر والأسهم
+    </h5>
+    
+    <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; background: #fef5e6; padding: 15px; border-radius: 20px; direction: ltr; max-width: 100%; box-sizing: border-box; margin: 0 auto;">
+        
+        <div class="mass-node" style="text-align: center; min-width: 75px;">
+            <div class="circle-mass" style="width: 68px; height: 68px; background: radial-gradient(#f9e79f, #e67e22); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; margin: 0 auto; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
+                <span style="font-size: 0.65rem; line-height: 1;"><sup>224</sup><sub>74</sub></span>
+                <span style="font-size: 0.95rem; font-weight: bold; margin-top: -2px;">X</span>
             </div>
-            
-            <div class="step-by-step" style="background: #d5f5e3; padding: 12px; border-radius: 20px; margin-top: 15px; text-align:center;">
-                <strong>🔍 ملاحظة:</strong> العدد الكتلي نقص بمقدار 4 → انبعاث جسيم ألفا واحد<br>
-                العدد الذري نقص بمقدار 2 → يتوافق مع انبعاث ألفا (لا حاجة لبيتا)
-            </div>
+            <div class="node-label" style="font-size: 0.75rem; font-weight: bold; color: #e67e22; margin-top: 5px; direction: rtl;">العنصر الأصلي</div>
         </div>
+        
+        <div class="arrow-icon" style="font-size: 1.3rem; color: #e67e22; font-weight: bold; display: flex; align-items: center; justify-content: center;">&rarr;</div>
+        
+        <div class="mass-node" style="text-align: center; min-width: 75px;">
+            <div class="circle-mass" style="width: 54px; height: 54px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; margin: 0 auto; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
+                <span style="font-size: 0.65rem; line-height: 1;"><sup>220</sup><sub>72</sub></span>
+                <span style="font-size: 0.9rem; font-weight: bold; margin-top: -2px;">Y</span>
+            </div>
+            <div class="node-label" style="font-size: 0.75rem; font-weight: bold; color: #27ae60; margin-top: 5px; direction: rtl;">العنصر الناتج</div>
+        </div>
+        
+        <div style="font-size: 1.2rem; color: #7f8c8d; font-weight: bold;">+</div>
+
+        <div class="mass-node" style="text-align: center; min-width: 60px;">
+            <div class="circle-mass" style="width: 40px; height: 40px; background: radial-gradient(#f9ebae, #e74c3c); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.7rem; margin: 0 auto; color: white; box-shadow: 0 3px 5px rgba(0,0,0,0.15);">
+                <span style="font-size: 0.55rem; line-height: 1;"><sup>4</sup><sub>2</sub></span>
+                <span style="font-size: 0.75rem; font-weight: bold; margin-top: -2px;">He</span>
+            </div>
+            <div class="node-label" style="font-size: 0.75rem; font-weight: bold; color: #e74c3c; margin-top: 5px; direction: rtl;">جسيم ألفا (&alpha;)</div>
+        </div>
+    </div>
+    
+    <div class="step-by-step" style="background: #d5f5e3; padding: 15px; border-radius: 20px; margin-top: 15px; text-align: center; direction: rtl; box-sizing: border-box; max-width: 100%;">
+        <strong style="color: #1e8449;">🔍 ملاحظة تحليلية:</strong><br>
+        العدد الكتلي نقص بمقدار <span style="color: #e67e22; font-weight: bold;">4</span> &larr; يعني انبعاث <b>جسيم ألفا واحد</b>.<br>
+        العدد الذري نقص بمقدار <span style="color: #e67e22; font-weight: bold;">2</span> &larr; يتوافق تماماً مع خصائص انبعاث ألفا (لا حاجة لجسيمات بيتا هنا).
+    </div>
+</div>
     </div>
 </div>
 
@@ -1269,37 +1277,71 @@
         </div>
         
         <!-- رسم توضيحي بالدوائر -->
-        <div style="margin-top: 15px; font-family: sans-serif;">
-    <h5 style="text-align: center; color: #2c3e50; font-size: 1rem; margin-bottom: 12px; font-weight: bold;">
-        📊 تمثيل الاضمحلال وسلسلة الانبعاثات بالدوائر والأسهم
+        <div style="margin-top: 20px; font-family: sans-serif; box-sizing: border-box; max-width: 100%;">
+    <h5 style="text-align: center; color: #2c3e50; font-size: 1.1rem; margin-bottom: 15px; font-weight: bold;">
+        📊 المخطط النووي القياسي (المتفاعلات ← النواتج)
     </h5>
     
-    <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; background: #fef5e6; padding: 15px; border-radius: 20px; direction: ltr; max-width: 100%; box-sizing: border-box; margin: 0 auto;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; background: #fdfefe; padding: 20px; border-radius: 15px; border: 1px solid #e1e8ed; max-width: 100%;">
         
-        <div class="mass-node" style="text-align: center; min-width: 80px;">
-            <div class="circle-mass" style="width: 68px; height: 68px; background: radial-gradient(#f9e79f, #e67e22); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; margin: 0 auto; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
-                <span style="font-size: 0.65rem; line-height: 1;"><sup>224</sup><sub>74</sub></span>
-                <span style="font-size: 0.95rem; font-weight: bold; margin-top: -2px;">X</span>
+        <div style="text-align: center; background: #fef5e6; padding: 15px; border-radius: 12px; border: 1px solid #fadbd8; width: 100%; max-width: 280px;">
+            <div style="font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 10px; direction: rtl;">الطرف الأيسر (المتفاعلات):</div>
+            <div class="mass-node" style="text-align: center; display: inline-block;">
+                <div class="circle-mass" style="width: 65px; height: 65px; background: radial-gradient(#f9e79f, #e67e22); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; margin: 0 auto; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
+                    <span style="font-size: 0.65rem; line-height: 1;"><sup>224</sup><sub>74</sub></span>
+                    <span style="font-size: 0.95rem; font-weight: bold; margin-top: -2px;">X</span>
+                </div>
+                <div style="font-size: 0.75rem; font-weight: bold; color: #e67e22; margin-top: 5px; direction: rtl;">العنصر الأصلي (الأم)</div>
             </div>
-            <div class="node-label" style="font-size: 0.75rem; font-weight: bold; color: #e67e22; margin-top: 5px; direction: rtl;">العنصر الأصلي</div>
         </div>
         
-        <div class="arrow-container" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 70px;">
-            <span style="font-size: 0.75rem; font-weight: bold; color: #d35400; background: #fff; padding: 2px 6px; border-radius: 10px; border: 1px solid #e67e22; margin-bottom: 2px;">&alpha; + 2&beta;<sup>-</sup></span>
-            <div class="arrow-icon" style="font-size: 1.3rem; color: #e67e22; font-weight: bold; line-height: 1;">&rarr;</div>
+        <div style="text-align: center; margin: 5px 0;">
+            <div style="font-size: 1.8rem; color: #e67e22; font-weight: bold; line-height: 1;">&darr;</div>
+            <span style="font-size: 0.75rem; background: #e67e22; color: white; padding: 2px 10px; border-radius: 10px; font-weight: bold; direction: rtl;">يتحلل إلى</span>
         </div>
         
-        <div class="mass-node" style="text-align: center; min-width: 80px;">
-            <div class="circle-mass" style="width: 52px; height: 52px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; margin: 0 auto; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
-                <span style="font-size: 0.65rem; line-height: 1;"><sup>220</sup><sub>74</sub></span>
-                <span style="font-size: 0.9rem; font-weight: bold; margin-top: -2px;">Y</span>
-            </div>
-            <div class="node-label" style="font-size: 0.75rem; font-weight: bold; color: #27ae60; margin-top: 5px; direction: rtl;">العنصر الناتج</div>
-        </div>
+        <div style="background: #e8f8f5; padding: 15px; border-radius: 12px; border: 1px solid #a3e4d7; width: 100%; max-width: 340px; text-align: center;">
+            <div style="font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 12px; direction: rtl;">الطرف الأيمن الإجمالي (النواتج والمخرجات):</div>
+            
+            <div style="display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; direction: ltr;">
+                
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 52px; height: 52px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; margin: 0 auto; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">
+                        <span style="font-size: 0.65rem; line-height: 1;"><sup>220</sup><sub>74</sub></span>
+                        <span style="font-size: 0.9rem; font-weight: bold; margin-top: -2px;">Y</span>
+                    </div>
+                    <div style="font-size: 0.7rem; font-weight: bold; color: #27ae60; margin-top: 5px; direction: rtl;">العنصر الناتج</div>
+                </div>
 
+                <div style="font-size: 1.2rem; color: #7f8c8d; font-weight: bold;">+</div>
+
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 38px; height: 38px; background: radial-gradient(#f9ebae, #c0392b); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.65rem; margin: 0 auto; color: white; box-shadow: 0 3px 5px rgba(0,0,0,0.15);">
+                        <span style="font-size: 0.5rem; line-height: 1;"><sup>4</sup><sub>2</sub></span>
+                        <span style="font-size: 0.75rem; font-weight: bold; margin-top: -2px;">He</span>
+                    </div>
+                    <div style="font-size: 0.65rem; font-weight: bold; color: #c0392b; margin-top: 5px; direction: rtl;">جسيم &alpha;</div>
+                </div>
+
+                <div style="font-size: 1.2rem; color: #7f8c8d; font-weight: bold;">+</div>
+
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 38px; height: 38px; background: radial-gradient(#d4e6f1, #2980b9); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 0.65rem; margin: 0 auto; color: white; box-shadow: 0 3px 5px rgba(0,0,0,0.15);">
+                        <span style="font-size: 0.5rem; line-height: 1;"><sup>0</sup><sub>-1</sub></span>
+                        <span style="font-size: 0.75rem; font-weight: bold; margin-top: -2px;">2&beta;<sup>-</sup></span>
+                    </div>
+                    <div style="font-size: 0.65rem; font-weight: bold; color: #2980b9; margin-top: 5px; direction: rtl;">2 بيتا</div>
+                </div>
+
+            </div>
+        </div>
+        
     </div>
-</div>    
-            <div class="step-by-step" style="background: #d5f5e3; padding: 12px; border-radius: 20px; margin-top: 15px; text-align:center;">
+</div>
+
+
+
+    <div class="step-by-step" style="background: #d5f5e3; padding: 12px; border-radius: 20px; margin-top: 15px; text-align:center;">
                 <strong>🔍 ملاحظة:</strong> العدد الكتلي نقص بمقدار 4 ← <strong>1 جسيم ألفا</strong><br>
                 العدد الذري لم يتغير ← جسيمات ألفا تنقص الذري بمقدار 2، وجسيمات بيتا تزيده بمقدار 1<br>
                 <strong>المعادلة:</strong> -2(1) + b = 0 → b = 2 <strong>جسيمات بيتا</strong>
