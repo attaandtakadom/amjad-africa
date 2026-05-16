@@ -233,7 +233,7 @@
 <body>
 
 <header class="page-header">
-    <a href="unit-9.html"  class="home-btn"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+    <a href="unit_9.html"  class="home-btn"><i class="fas fa-home"></i><span>الرئيسية</span></a>
     <h1><i class="fas fa-radiation"></i> الإشعاعات النووية <i class="fas fa-atom"></i></h1>
     <p>ألفا (α) | بيتا (β) | جاما (γ) - معادلات صحيحة ومرتبة</p>
 </header>
@@ -1098,6 +1098,326 @@
         }
     });
 </script>
+<!-- ========== السؤال السادس: أكمل المعادلة (224 → 220) ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-puzzle-piece" style="color:#e67e22;"></i>
+        <h3>سؤال 6: أكمل المعادلة النووية</h3>
+    </div>
+    
+    <!-- تذكير بدفعة 2007 -->
+    <div style="background: #fef5e6; border-right: 4px solid #e67e22; padding: 12px; border-radius: 16px; margin-bottom: 15px;">
+        <i class="fas fa-history" style="color:#e67e22;"></i>
+        <strong>تذكير:</strong> هذا السؤال كان للعام الماضي <span style="background:#e67e22; color:white; padding:2px 10px; border-radius:20px;">دفعة 2007</span>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        أكمل المعادلة النووية التالية:
+        <div style="text-align: center; font-size: 1.3rem; margin: 20px 0; direction: ltr;">
+            <span style="background:#2c3e50; color:white; padding: 10px 15px; border-radius: 15px; display: inline-block;">
+                ²²⁴₇₄X → ²²⁰₇₄Y + ? + ?
+            </span>
+        </div>
+        <strong>المطلوب:</strong> حدد الجسيمات المنبعثة (جسيمات ألفا وبيتا).
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz6" value="1a_0b"> أ) 1 ألفا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz6" value="2a_2b"> ب) 2 ألفا و 2 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz6" value="1a_2b"> ج) 1 ألفا و 2 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz6" value="0a_4b"> د) 4 بيتا
+        </label>
+    </div>
+    
+    <button id="checkDecayBtn6" style="background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-check-circle"></i> تأكيد الإجابة
+    </button>
+    
+    <div id="decayFeedback6" style="margin-top: 15px; padding: 10px; border-radius: 20px; display: none;"></div>
+    
+    <!-- شرح الحل بالتفصيل -->
+    <div id="decaySolution6" style="margin-top: 20px; display: none;">
+        <h4 style="color:#e67e22; text-align:center;">📊 طريقة موازنة المعادلة (جمع وطرح)</h4>
+        
+        <div class="step-by-step" style="background: #fef5e6; padding: 18px; border-radius: 20px;">
+            <strong>✍️ شرح الحل خطوة بخطوة:</strong><br><br>
+            
+            <strong>المعطيات:</strong><br>
+            • العنصر الأصلي X: العدد الكتلي (A) = <strong>224</strong>، العدد الذري (Z) = <strong>74</strong><br>
+            • العنصر الناتج Y: العدد الكتلي (A) = <strong>220</strong>، العدد الذري (Z) = <strong>74</strong><br>
+            • الفرق في العدد الكتلي = 224 - 220 = <strong>4</strong><br>
+            • الفرق في العدد الذري = 74 - 74 = <strong>0</strong><br><br>
+            
+            <strong>قواعد الاضمحلال:</strong><br>
+            • جسيم ألفا (α = ⁴₂He): يقلل العدد الكتلي بمقدار <strong>4</strong> ويقلل العدد الذري بمقدار <strong>2</strong><br>
+            • جسيم بيتا (β⁻): يبقي العدد الكتلي كما هو ويزيد العدد الذري بمقدار <strong>1</strong><br><br>
+            
+            <strong>نفترض:</strong><br>
+            • عدد جسيمات ألفا = <span style="color:#e74c3c;">a</span><br>
+            • عدد جسيمات بيتا = <span style="color:#3498db;">b</span><br><br>
+            
+            <strong>معادلة العدد الكتلي (A):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                224 - 4a = 220
+            </div>
+            • 4a = 224 - 220 = 4<br>
+            • a = 4 ÷ 4 = <strong style="color:#e74c3c; font-size:1.1rem;">1 جسيم ألفا</strong><br><br>
+            
+            <strong>معادلة العدد الذري (Z):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                74 - 2a + b = 74
+            </div>
+            • نعوض a = 1<br>
+            • 74 - 2(1) + b = 74<br>
+            • 74 - 2 + b = 74<br>
+            • 72 + b = 74<br>
+            • b = 74 - 72 = <strong style="color:#3498db; font-size:1.1rem;">2 جسيم بيتا</strong><br><br>
+            
+            <strong>المعادلة النهائية:</strong><br>
+            <div style="background: #27ae60; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                ²²⁴₇₄X → ²²⁰₇₄Y + ⁴₂He (α) + 2 β⁻
+            </div>
+            
+            ✅ <strong>الإجابة الصحيحة هي: <span style="color:#e67e22;">ج) 1 ألفا و 2 بيتا</span></strong>
+        </div>
+        
+        <!-- رسم توضيحي بالدوائر -->
+        <div style="margin-top: 15px;">
+            <h5 style="text-align:center;">📊 تمثيل الاضمحلال بالدوائر والأسهم</h5>
+            <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; background: #fef5e6; padding: 20px; border-radius: 60px; direction: ltr;">
+                
+                <!-- الدائرة الأولى: العنصر الأصلي -->
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 85px; height: 85px; background: radial-gradient(#f9e79f, #e67e22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; margin: 0 auto;">
+                        ²²⁴₇₄X
+                    </div>
+                    <div class="time-badge">العنصر الأصلي</div>
+                </div>
+                
+                <!-- السهم -->
+                <div class="arrow-icon" style="font-size: 1.2rem; color:#e67e22;">→ α + 2β</div>
+                
+                <!-- الدائرة الثانية: العنصر الناتج -->
+                <div class="mass-node" style="text-align: center;">
+                    <div class="circle-mass" style="width: 85px; height: 85px; background: radial-gradient(#f5cba7, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; margin: 0 auto;">
+                        ²²⁰₇₄Y
+                    </div>
+                    <div class="time-badge">العنصر الناتج</div>
+                </div>
+            </div>
+            
+            <div class="step-by-step" style="background: #d5f5e3; padding: 12px; border-radius: 20px; margin-top: 15px; text-align:center;">
+                <strong>🔍 ملاحظة:</strong> العدد الكتلي نقص بمقدار 4 ← <strong>1 جسيم ألفا</strong><br>
+                العدد الذري لم يتغير ← جسيمات ألفا تنقص الذري بمقدار 2، وجسيمات بيتا تزيده بمقدار 1<br>
+                <strong>المعادلة:</strong> -2(1) + b = 0 → b = 2 <strong>جسيمات بيتا</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // التحقق من إجابة السؤال السادس
+    const decayBtn6 = document.getElementById('checkDecayBtn6');
+    const decayFeedback6 = document.getElementById('decayFeedback6');
+    const decaySolution6 = document.getElementById('decaySolution6');
+    
+    if (decayBtn6) {
+        decayBtn6.addEventListener('click', function() {
+            const selected = document.querySelector('input[name="decayQuiz6"]:checked');
+            if (!selected) {
+                decayFeedback6.style.display = 'block';
+                decayFeedback6.style.background = '#fef5e6';
+                decayFeedback6.style.color = '#e67e22';
+                decayFeedback6.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+                decaySolution6.style.display = 'none';
+                return;
+            }
+            
+            if (selected.value === '1a_2b') {
+                decayFeedback6.style.display = 'block';
+                decayFeedback6.style.background = '#d5f5e3';
+                decayFeedback6.style.color = '#27ae60';
+                decayFeedback6.innerHTML = '✅ إجابة صحيحة! 1 جسيم ألفا و 2 جسيم بيتا.';
+                decaySolution6.style.display = 'block';
+            } else {
+                decayFeedback6.style.display = 'block';
+                decayFeedback6.style.background = '#fdedec';
+                decayFeedback6.style.color = '#c0392b';
+                let feedbackMsg = '';
+                if (selected.value === '1a_0b') feedbackMsg = '❌ إجابة خاطئة. 1 ألفا فقط ينقص الكتلة 4 لكن العدد الذري يصبح 72، بينما المطلوب 74.';
+                else if (selected.value === '2a_2b') feedbackMsg = '❌ إجابة خاطئة. 2 ألفا تنقص الكتلة 8، والمطلوب نقص 4 فقط.';
+                else if (selected.value === '0a_4b') feedbackMsg = '❌ إجابة خاطئة. 4 بيتا لا تغير الكتلة، لكن المطلوب نقص 4 في الكتلة.';
+                else feedbackMsg = '❌ إجابة خاطئة. حاول مرة أخرى باستخدام المعادلات.';
+                decayFeedback6.innerHTML = feedbackMsg;
+                decaySolution6.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+<!-- ========== السؤال الجديد: أكمل المعادلة ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-puzzle-piece" style="color:#e67e22;"></i>
+        <h3>سؤال 7: أكمل المعادلة النووية</h3>
+    </div>
+    
+    <!-- تذكير بدفعة 2007 -->
+    <div style="background: #fef5e6; border-right: 4px solid #e67e22; padding: 12px; border-radius: 16px; margin-bottom: 15px;">
+        <i class="fas fa-history" style="color:#e67e22;"></i>
+        <strong>تذكير:</strong> هذا السؤال كان للعام الماضي <span style="background:#e67e22; color:white; padding:2px 10px; border-radius:20px;">دفعة 2007</span>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        أكمل المعادلة النووية التالية:
+        <div style="text-align: center; font-size: 1.3rem; margin: 20px 0; direction: ltr;">
+            <span style="background:#2c3e50; color:white; padding: 10px 15px; border-radius: 15px; display: inline-block;">
+                ²⁰⁰₅₇X → ¹⁸⁰₅₁Y + ? + ?
+            </span>
+        </div>
+        <div style="font-size:0.8rem; color:#666; margin-top:5px;">(العدد الكتلي: 200 → 180، العدد الذري: 57 → 51)</div>
+        <strong>المطلوب:</strong> حدد عدد جسيمات ألفا (α) وبيتا (β⁻) المنبعثة.
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz7" value="4a_2b"> أ) 4 ألفا و 2 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz7" value="5a_4b"> ب) 5 ألفا و 4 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz7" value="6a_6b"> ج) 6 ألفا و 6 بيتا
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="decayQuiz7" value="3a_0b"> د) 3 ألفا
+        </label>
+    </div>
+    
+    <button id="checkDecayBtn7" style="background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-check-circle"></i> تأكيد الإجابة
+    </button>
+    
+    <div id="decayFeedback7" style="margin-top: 15px; padding: 10px; border-radius: 20px; display: none;"></div>
+    
+    <!-- شرح الحل بالتفصيل -->
+    <div id="decaySolution7" style="margin-top: 20px; display: none;">
+        <h4 style="color:#e67e22; text-align:center;">📊 طريقة موازنة المعادلة</h4>
+        
+        <div class="step-by-step" style="background: #fef5e6; padding: 18px; border-radius: 20px;">
+            <strong>✍️ شرح الحل خطوة بخطوة:</strong><br><br>
+            
+            <strong>المعطيات:</strong><br>
+            • العنصر الأصلي X: العدد الكتلي (A) = <strong>200</strong>، العدد الذري (Z) = <strong>57</strong><br>
+            • العنصر الناتج Y: العدد الكتلي (A) = <strong>180</strong>، العدد الذري (Z) = <strong>51</strong><br>
+            • الفرق في العدد الكتلي = 200 - 180 = <strong>20</strong><br>
+            • الفرق في العدد الذري = 57 - 51 = <strong>6</strong><br><br>
+            
+            <strong>قواعد الاضمحلال:</strong><br>
+            • جسيم ألفا (α = ⁴₂He): يقلل الكتلة بمقدار <strong>4</strong> والذري بمقدار <strong>2</strong><br>
+            • جسيم بيتا (β⁻): يبقي الكتلة كما هو ويزيد الذري بمقدار <strong>1</strong><br><br>
+            
+            <strong>نفترض:</strong><br>
+            • عدد جسيمات ألفا = <span style="color:#e74c3c;">a</span><br>
+            • عدد جسيمات بيتا = <span style="color:#3498db;">b</span><br><br>
+            
+            <strong>معادلة العدد الكتلي (A):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                200 - 4a = 180
+            </div>
+            • 4a = 200 - 180 = 20<br>
+            • a = 20 ÷ 4 = <strong style="color:#e74c3c; font-size:1.1rem;">5 جسيمات ألفا</strong><br><br>
+            
+            <strong>معادلة العدد الذري (Z):</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                57 - 2a + b = 51
+            </div>
+            • نعوض a = 5<br>
+            • 57 - 2(5) + b = 51<br>
+            • 57 - 10 + b = 51<br>
+            • 47 + b = 51<br>
+            • b = 51 - 47 = <strong style="color:#3498db; font-size:1.1rem;">4 جسيمات بيتا</strong><br><br>
+            
+            <strong>المعادلة النهائية:</strong><br>
+            <div style="background: #27ae60; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                ²⁰⁰₅₇X → ¹⁸⁰₅₁Y + 5 × (⁴₂He) + 4 × (β⁻)
+            </div>
+            
+            ✅ <strong>الإجابة الصحيحة هي: <span style="color:#e67e22;">ب) 5 ألفا و 4 بيتا</span></strong>
+        </div>
+        
+        <!-- رسم توضيحي -->
+        <div style="margin-top: 15px;">
+            <h5 style="text-align:center;">📊 تمثيل التغير في الأعداد</h5>
+            <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; background: #fef5e6; padding: 20px; border-radius: 60px; direction: ltr;">
+                <div class="mass-node">
+                    <div class="circle-mass" style="width: 85px; height: 85px; background: radial-gradient(#f9e79f, #e67e22); display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">
+                        ²⁰⁰₅₇X
+                    </div>
+                    <div class="time-badge">العنصر الأصلي</div>
+                </div>
+                <div class="arrow-icon">→ 5α + 4β</div>
+                <div class="mass-node">
+                    <div class="circle-mass" style="width: 85px; height: 85px; background: radial-gradient(#f5cba7, #27ae60); display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">
+                        ¹⁸⁰₅₁Y
+                    </div>
+                    <div class="time-badge">العنصر الناتج</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const decayBtn7 = document.getElementById('checkDecayBtn7');
+    const decayFeedback7 = document.getElementById('decayFeedback7');
+    const decaySolution7 = document.getElementById('decaySolution7');
+    
+    if (decayBtn7) {
+        decayBtn7.addEventListener('click', function() {
+            const selected = document.querySelector('input[name="decayQuiz7"]:checked');
+            if (!selected) {
+                decayFeedback7.style.display = 'block';
+                decayFeedback7.style.background = '#fef5e6';
+                decayFeedback7.style.color = '#e67e22';
+                decayFeedback7.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+                decaySolution7.style.display = 'none';
+                return;
+            }
+            
+            if (selected.value === '5a_4b') {
+                decayFeedback7.style.display = 'block';
+                decayFeedback7.style.background = '#d5f5e3';
+                decayFeedback7.style.color = '#27ae60';
+                decayFeedback7.innerHTML = '✅ إجابة صحيحة! 5 جسيمات ألفا و 4 جسيمات بيتا.';
+                decaySolution7.style.display = 'block';
+            } else {
+                decayFeedback7.style.display = 'block';
+                decayFeedback7.style.background = '#fdedec';
+                decayFeedback7.style.color = '#c0392b';
+                let feedbackMsg = '';
+                if (selected.value === '4a_2b') feedbackMsg = '❌ إجابة خاطئة. 4 ألفا تنقص الكتلة 16 فقط، والمطلوب نقص 20.';
+                else if (selected.value === '6a_6b') feedbackMsg = '❌ إجابة خاطئة. 6 ألفا تنقص الكتلة 24، أكثر من المطلوب.';
+                else if (selected.value === '3a_0b') feedbackMsg = '❌ إجابة خاطئة. 3 ألفا تنقص الكتلة 12 فقط.';
+                else feedbackMsg = '❌ إجابة خاطئة. حاول مرة أخرى باستخدام المعادلات.';
+                decayFeedback7.innerHTML = feedbackMsg;
+                decaySolution7.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+
+
 
     <!-- ========== جدول المقارنة ========== -->
     <div class="card">
@@ -1151,6 +1471,11 @@
     const homeBtn = document.getElementById('homeButton');
     homeBtn.setAttribute('href', '#'); // ضع رابط صفحتك الرئيسية هنا
 </script>
+
+
+
+
+
 
 </body>
 </html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>بنية الذرة والنظائر - شرح بالرسوم المتحركة</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3e 100%);
+        min-height: 100vh;
+        padding: 15px;
+    }
+    
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .atom-card {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 40px;
+        padding: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    .title {
+        text-align: center;
+        color: #f39c12;
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    /* ========== رسم الذرة مع إلكترونات متحركة ========== */
+    .atom-container {
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: 20px auto;
+    }
+    
+    .orbit {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 2px solid rgba(52,152,219,0.5);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .orbit-1 { width: 55%; height: 55%; border-color: rgba(52,152,219,0.6); }
+    .orbit-2 { width: 75%; height: 75%; border-color: rgba(46,204,113,0.5); }
+    .orbit-3 { width: 92%; height: 92%; border-color: rgba(241,196,15,0.4); }
+    
+    /* النواة */
+    .nucleus-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30%;
+        height: 30%;
+        background: radial-gradient(circle at 35% 35%, #e74c3c, #c0392b, #922b21);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        box-shadow: 0 0 25px rgba(231,76,60,0.7);
+        z-index: 10;
+        padding: 5px;
+    }
+    .nucleus-center .label { 
+        font-size: 0.65rem; 
+        background: rgba(0,0,0,0.6); 
+        padding: 2px 10px; 
+        border-radius: 20px; 
+        color: #fff;
+    }
+    .nucleus-center .mass { 
+        font-size: 0.6rem; 
+        font-weight: bold; 
+        margin: 4px 0; 
+        color: #ffd966;
+    }
+    .nucleus-center .particles { 
+        font-size: 0.5rem; 
+        display: flex; 
+        gap: 8px; 
+        margin-top: 3px; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        color: #fff;
+    }
+    .proton { color: #f9e79f; }
+    .neutron { color: #aed6f1; }
+    .nucleus-center .size { 
+        font-size: 0.45rem; 
+        margin-top: 4px; 
+        color: #ddd;
+    }
+    
+    /* الإلكترونات المتحركة */
+    .electron-dot {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: radial-gradient(circle, #3498db, #1a5276);
+        border-radius: 50%;
+        box-shadow: 0 0 12px #3498db;
+        pointer-events: none;
+    }
+    
+    .e1, .e2, .e3, .e4, .e5, .e6, .e7, .e8 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+    
+    .e1 { animation: spin1 2s linear infinite; }
+    .e2 { animation: spin1 2s linear infinite reverse; }
+    .e3 { animation: spin1 2s linear infinite; }
+    
+    @keyframes spin1 {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(28%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(28%) rotate(-360deg); }
+    }
+    
+    .e4 { animation: spin2 3s linear infinite; }
+    .e5 { animation: spin2 3s linear infinite reverse; }
+    .e6 { animation: spin2 3s linear infinite; }
+    
+    @keyframes spin2 {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(38%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(38%) rotate(-360deg); }
+    }
+    
+    .e7 { animation: spin3 4s linear infinite; }
+    .e8 { animation: spin3 4s linear infinite reverse; }
+    
+    @keyframes spin3 {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(46%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(46%) rotate(-360deg); }
+    }
+    
+    /* لوحات المعلومات */
+    .info-panel {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .info-item {
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(5px);
+        border-radius: 20px;
+        padding: 12px 15px;
+        text-align: center;
+        flex: 1;
+        min-width: 100px;
+        border: 1px solid rgba(255,255,255,0.15);
+    }
+    .info-item i { font-size: 1.3rem; color: #f39c12; margin-bottom: 5px; display: block; }
+    .info-item .value { font-size: 1rem; font-weight: bold; color: #87ceeb; margin-top: 5px; }
+    .info-item .label { font-size: 0.65rem; color: #ccc; margin-top: 3px; }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+    .info-card {
+        background: rgba(0,0,0,0.45);
+        border-radius: 20px;
+        padding: 15px;
+        transition: 0.3s;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .info-card h3 { color: #f39c12; margin-bottom: 10px; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+    .info-card .value { font-size: 1.3rem; font-weight: bold; color: #5dade2; margin: 8px 0; }
+    .info-card p { font-size: 0.8rem; line-height: 1.5; color: #ddd; }
+    
+    /* النظائر */
+    .isotopes-section {
+        background: rgba(0,0,0,0.35);
+        border-radius: 25px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    .isotopes-title { text-align: center; margin-bottom: 15px; color: #2ecc71; font-size: 1.2rem; }
+    .isotopes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin: 15px 0;
+    }
+    .isotope-card {
+        background: rgba(0,0,0,0.45);
+        border-radius: 16px;
+        padding: 12px;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .isotope-symbol { font-size: 1.2rem; font-weight: bold; font-family: monospace; color: #f39c12; }
+    .isotope-name { color: #87ceeb; margin: 5px 0; font-size: 0.75rem; }
+    .isotope-detail { font-size: 0.65rem; color: #bbb; }
+    
+    .fact-box {
+        background: rgba(0,0,0,0.5);
+        border-radius: 18px;
+        padding: 15px;
+        margin: 15px 0;
+        border-right: 3px solid #f39c12;
+        font-size: 0.8rem;
+        color: #ddd;
+    }
+    .fact-box i { color: #f39c12; }
+    .fact-box strong { color: #fff; }
+    
+    .note {
+        text-align: center;
+        font-size: 0.65rem;
+        color: #aaa;
+        margin: 15px 0;
+    }
+    
+    .footer {
+        text-align: center;
+        padding: 15px;
+        color: #888;
+        font-size: 0.65rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        margin-top: 20px;
+    }
+    
+    /* الأسئلة */
+    .question-section {
+        background: rgba(0,0,0,0.5);
+        border-radius: 25px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    .question-title {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #f39c12;
+        font-size: 1.2rem;
+    }
+    .question-box {
+        background: rgba(0,0,0,0.6);
+        border-radius: 20px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    .question-box h3 { color: #f39c12; margin-bottom: 10px; font-size: 1rem; }
+    .question-text { font-size: 0.95rem; margin-bottom: 15px; color: #fff; }
+    .options { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; }
+    .option-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        background: rgba(255,255,255,0.1);
+        padding: 8px 20px;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+    .option-label:hover { background: rgba(255,255,255,0.2); }
+    .check-btn {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .check-btn:hover { background: #2980b9; }
+    .feedback {
+        margin-top: 12px;
+        padding: 10px;
+        border-radius: 15px;
+        display: none;
+    }
+    
+    @media (max-width: 550px) {
+        .atom-card { padding: 12px; }
+        .title { font-size: 1.1rem; }
+        .info-card .value { font-size: 1rem; }
+        .info-card p { font-size: 0.7rem; }
+        .isotope-symbol { font-size: 1rem; }
+        .electron-dot { width: 7px; height: 7px; }
+        .question-text { font-size: 0.85rem; }
+        .option-label { padding: 6px 12px; font-size: 0.8rem; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="atom-card">
+        
+        <h1 class="title">
+            <i class="fas fa-atom"></i>
+            رسم توضيحي لتركيب الذرة
+            <i class="fas fa-microscope"></i>
+        </h1>
+        
+        <!-- الذرة المرسومة مع إلكترونات متحركة -->
+        <div class="atom-container">
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+            
+            <div class="nucleus-center">
+                <div class="label">🔴 النواة 🔴</div>
+                <div class="mass">كتلة النواة ≈ 99.97%</div>
+                <div class="particles">
+                    <span class="proton">⚫ بروتونات (+) ⚫</span>
+                    <span class="neutron">⚪ نيوترونات ⚪</span>
+                </div>
+                <div class="size">قطر النواة: 10⁻¹⁵ م</div>
+            </div>
+            
+            <div class="electron-dot e1"></div>
+            <div class="electron-dot e2"></div>
+            <div class="electron-dot e3"></div>
+            <div class="electron-dot e4"></div>
+            <div class="electron-dot e5"></div>
+            <div class="electron-dot e6"></div>
+            <div class="electron-dot e7"></div>
+            <div class="electron-dot e8"></div>
+        </div>
+        
+        <!-- لوحة المعلومات السريعة -->
+        <div class="info-panel">
+            <div class="info-item">
+                <i class="fas fa-plus-circle"></i>
+                <div class="value">بروتونات (+)</div>
+                <div class="label">توجد في النواة</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-circle-notch"></i>
+                <div class="value">نيوترونات (0)</div>
+                <div class="label">توجد في النواة</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-minus-circle"></i>
+                <div class="value">إلكترونات (-)</div>
+                <div class="label">تدور حول النواة</div>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-item">
+                <i class="fas fa-expand"></i>
+                <div class="value">99.999999999%</div>
+                <div class="label">نسبة الفراغ</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-weight-hanging"></i>
+                <div class="value">99.97%</div>
+                <div class="label">كتلة النواة</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-ruler"></i>
+                <div class="value">10⁻¹⁰ م</div>
+                <div class="label">قطر الذرة</div>
+            </div>
+        </div>
+        
+        <div class="note">
+            ⚠️ الإلكترونات تتحرك حول النواة في مدارات (هذا الرسم تبسيطي)
+        </div>
+        
+        <!-- معلومات تفصيلية -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-dot-circle"></i> البروتونات</h3>
+                <div class="value">+ شحنة موجبة</div>
+                <p>توجد داخل النواة، عددها يحدد <strong>العدد الذري (Z)</strong> ونوع العنصر.</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-circle-notch"></i> النيوترونات</h3>
+                <div class="value">0 شحنة متعادلة</div>
+                <p>توجد داخل النواة، تساهم في استقرار النواة وكتلتها، تختلف في النظائر.</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-minus-circle"></i> الإلكترونات</h3>
+                <div class="value">- شحنة سالبة</div>
+                <p>تدور حول النواة في مدارات، عددها = عدد البروتونات في الذرة المتعادلة.</p>
+            </div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-expand"></i> نسبة الفراغ في الذرة</h3>
+                <div class="value" style="color: #2ecc71;">99.999999999%</div>
+                <p>الذرة عبارة عن <strong>فراغ هائل</strong>! لو كبرنا النواة إلى حجم حبة الكرز، فإن الإلكترونات ستدور على بعد كيلومترات.</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-weight-hanging"></i> كتلة النواة</h3>
+                <div class="value" style="color: #f39c12;">99.97%</div>
+                <p>كتلة الذرة تتركز بالكامل تقريباً في <strong>النواة</strong>. الإلكترونات كتلتها صغيرة جداً (1/1840 من كتلة البروتون).</p>
+            </div>
+        </div>
+        
+        <!-- النظائر -->
+        <div class="isotopes-section">
+            <h2 class="isotopes-title"><i class="fas fa-clone"></i> النظائر (Isotopes)</h2>
+            
+            <div class="fact-box">
+                <i class="fas fa-lightbulb"></i>
+                <strong>تعريف النظائر:</strong> هي <strong>ذرات لنفس العنصر</strong> (عدد البروتونات ثابت) ولكن <strong>تختلف في عدد النيوترونات</strong>، وبالتالي تختلف في <strong>العدد الكتلي</strong>.
+            </div>
+            
+            <h3 style="color: #2ecc71; margin: 15px 0 10px; font-size: 1rem;">📌 أمثلة على نظائر الهيدروجين:</h3>
+            <div class="isotopes-grid">
+                <div class="isotope-card">
+                    <div class="isotope-symbol">¹H</div>
+                    <div class="isotope-name">هيدروجين-1 (بروتيوم)</div>
+                    <div class="isotope-detail">0 نيوترون | الأكثر شيوعاً</div>
+                </div>
+                <div class="isotope-card">
+                    <div class="isotope-symbol">²H</div>
+                    <div class="isotope-name">هيدروجين-2 (ديوتيريوم)</div>
+                    <div class="isotope-detail">1 نيوترون | يستخدم في المفاعلات</div>
+                </div>
+                <div class="isotope-card">
+                    <div class="isotope-symbol">³H</div>
+                    <div class="isotope-name">هيدروجين-3 (تريتيوم)</div>
+                    <div class="isotope-detail">2 نيوترون | مشع</div>
+                </div>
+            </div>
+            
+            <h3 style="color: #2ecc71; margin: 15px 0 10px; font-size: 1rem;">📌 أمثلة على نظائر الكربون:</h3>
+            <div class="isotopes-grid">
+                <div class="isotope-card">
+                    <div class="isotope-symbol">¹²C</div>
+                    <div class="isotope-name">كربون-12</div>
+                    <div class="isotope-detail">6 بروتونات + 6 نيوترونات</div>
+                </div>
+                <div class="isotope-card">
+                    <div class="isotope-symbol">¹³C</div>
+                    <div class="isotope-name">كربون-13</div>
+                    <div class="isotope-detail">6 بروتونات + 7 نيوترونات</div>
+                </div>
+                <div class="isotope-card">
+                    <div class="isotope-symbol">¹⁴C</div>
+                    <div class="isotope-name">كربون-14</div>
+                    <div class="isotope-detail">مشع | يستخدم في التأريخ</div>
+                </div>
+            </div>
+            
+            <div class="fact-box">
+                <i class="fas fa-question-circle"></i>
+                <strong>لماذا ندرس النظائر؟</strong><br>
+                • تستخدم في <strong>تأريخ الآثار</strong> (الكربون-14)<br>
+                • تستخدم في <strong>الطب النووي</strong> (اليود-131 لعلاج الغدة الدرقية)<br>
+                • تستخدم في <strong>المفاعلات النووية</strong> (اليورانيوم-235)
+            </div>
+        </div>
+        
+        <!-- ========== قسم الأسئلة التفاعلية ========== -->
+        <div class="question-section">
+            <h2 class="question-title"><i class="fas fa-question-circle"></i> أسئلة تفاعلية - اختبر فهمك</h2>
+            
+            <!-- سؤال 1 -->
+            <div class="question-box">
+                <h3>📌 السؤال الأول</h3>
+                <div class="question-text">النظائر لها خواص كيميائية متطابقة لأنها تمتلك نفس عدد الإلكترونات.</div>
+                <div class="options">
+                    <label class="option-label"><input type="radio" name="q1" value="true"> <span style="color:#2ecc71;">✅ صح</span></label>
+                    <label class="option-label"><input type="radio" name="q1" value="false"> <span style="color:#e74c3c;">❌ خطأ</span></label>
+                </div>
+                <button class="check-btn" data-question="1">تأكيد الإجابة</button>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+            
+            <!-- سؤال 2 -->
+            <div class="question-box">
+                <h3>📌 السؤال الثاني</h3>
+                <div class="question-text">عدد البروتونات في نواة الذرة هو الذي يحدد نوع العنصر الكيميائي.</div>
+                <div class="options">
+                    <label class="option-label"><input type="radio" name="q2" value="true"> <span style="color:#2ecc71;">✅ صح</span></label>
+                    <label class="option-label"><input type="radio" name="q2" value="false"> <span style="color:#e74c3c;">❌ خطأ</span></label>
+                </div>
+                <button class="check-btn" data-question="2">تأكيد الإجابة</button>
+                <div class="feedback" id="feedback2"></div>
+            </div>
+            
+            <!-- سؤال 3 -->
+            <div class="question-box">
+                <h3>📌 السؤال الثالث</h3>
+                <div class="question-text">معظم كتلة الذرة تتركز في الإلكترونات لأنها تدور حول النواة.</div>
+                <div class="options">
+                    <label class="option-label"><input type="radio" name="q3" value="true"> <span style="color:#2ecc71;">✅ صح</span></label>
+                    <label class="option-label"><input type="radio" name="q3" value="false"> <span style="color:#e74c3c;">❌ خطأ</span></label>
+                </div>
+                <button class="check-btn" data-question="3">تأكيد الإجابة</button>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+            
+            <!-- سؤال 4 -->
+            <div class="question-box">
+                <h3>📌 السؤال الرابع - اختيار من متعدد</h3>
+                <div class="question-text">ما الذي يختلف في نظائر العنصر الواحد؟</div>
+                <div class="options" style="flex-direction: column; gap: 8px;">
+                    <label class="option-label"><input type="radio" name="q4" value="protons"> أ) عدد البروتونات</label>
+                    <label class="option-label"><input type="radio" name="q4" value="electrons"> ب) عدد الإلكترونات</label>
+                    <label class="option-label"><input type="radio" name="q4" value="neutrons"> ج) عدد النيوترونات</label>
+                    <label class="option-label"><input type="radio" name="q4" value="charge"> د) الشحنة الكهربائية</label>
+                </div>
+                <button class="check-btn" data-question="4">تأكيد الإجابة</button>
+                <div class="feedback" id="feedback4"></div>
+            </div>
+            
+            <!-- سؤال 5 -->
+            <div class="question-box">
+                <h3>📌 السؤال الخامس</h3>
+                <div class="question-text">الذرة عبارة عن فراغ كبير جداً، والنواة صغيرة جداً مقارنة بحجم الذرة.</div>
+                <div class="options">
+                    <label class="option-label"><input type="radio" name="q5" value="true"> <span style="color:#2ecc71;">✅ صح</span></label>
+                    <label class="option-label"><input type="radio" name="q5" value="false"> <span style="color:#e74c3c;">❌ خطأ</span></label>
+                </div>
+                <button class="check-btn" data-question="5">تأكيد الإجابة</button>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+        </div>
+        
+        <!-- خلاصة -->
+        <div class="fact-box">
+            <h3 style="color: #f39c12; margin-bottom: 10px;"><i class="fas fa-list-check"></i> خلاصة بنية الذرة:</h3>
+            <ul style="padding-right: 20px; line-height: 1.6; font-size: 0.8rem; color: #ddd;">
+                <li>✅ <strong style="color:#fff;">النواة</strong>: تحتوي على بروتونات (+) ونيوترونات (0) → 99.97% من الكتلة</li>
+                <li>✅ <strong style="color:#fff;">الإلكترونات</strong>: تدور حول النواة → كتلتها صغيرة جداً</li>
+                <li>✅ <strong style="color:#fff;">الفراغ</strong>: الذرة عبارة عن فراغ هائل (99.999999999%)</li>
+                <li>✅ <strong style="color:#fff;">النظائر</strong>: نفس العنصر، عدد بروتونات ثابت، عدد نيوترونات مختلف</li>
+                <li>✅ <strong style="color:#fff;">العدد الذري (Z)</strong>: هو عدد البروتونات في النواة</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <i class="fas fa-atom"></i> بنية الذرة والنظائر - شرح بالرسوم التوضيحية المتحركة
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    // الأسئلة التفاعلية - الإجابات الصحيحة
+    const answers = {
+        1: "true",
+        2: "true",
+        3: "false",
+        4: "neutrons",
+        5: "true"
+    };
+    
+    const explanations = {
+        1: "✅ صحيح! النظائر لها نفس عدد الإلكترونات، وبالتالي نفس الخواص الكيميائية.",
+        2: "✅ صحيح! العدد الذري (عدد البروتونات) هو الذي يحدد نوع العنصر.",
+        3: "❌ خطأ! معظم كتلة الذرة تتركز في النواة (99.97%)، وليس في الإلكترونات.",
+        4: "✅ صحيح! نظائر العنصر الواحد تختلف في عدد النيوترونات فقط، بينما عدد البروتونات ثابت.",
+        5: "✅ صحيح! الذرة عبارة عن فراغ هائل، والنواة صغيرة جداً مقارنة بحجم الذرة."
+    };
+    
+    document.querySelectorAll('.check-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const qNum = this.dataset.question;
+            const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
+            const feedbackDiv = document.getElementById(`feedback${qNum}`);
+            
+            if (!selected) {
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.style.backgroundColor = '#f39c12';
+                feedbackDiv.style.color = '#1a1a3e';
+                feedbackDiv.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+                return;
+            }
+            
+            const isCorrect = (selected.value === answers[qNum]);
+            feedbackDiv.style.display = 'block';
+            
+            if (isCorrect) {
+                feedbackDiv.style.backgroundColor = '#2ecc71';
+                feedbackDiv.style.color = '#1a1a3e';
+                feedbackDiv.innerHTML = explanations[qNum];
+            } else {
+                feedbackDiv.style.backgroundColor = '#e74c3c';
+                feedbackDiv.style.color = 'white';
+                if (qNum == 1) feedbackDiv.innerHTML = '❌ خطأ! النظائر لها نفس الخواص الكيميائية لأن عدد الإلكترونات متساوي.';
+                else if (qNum == 2) feedbackDiv.innerHTML = '❌ خطأ! عدد البروتونات هو الذي يحدد نوع العنصر.';
+                else if (qNum == 3) feedbackDiv.innerHTML = '❌ خطأ! الكتلة تتركز في النواة (99.97%) وليس في الإلكترونات.';
+                else if (qNum == 4) feedbackDiv.innerHTML = '❌ خطأ! الإجابة الصحيحة: عدد النيوترونات.';
+                else if (qNum == 5) feedbackDiv.innerHTML = '❌ خطأ! الذرة عبارة عن فراغ كبير جداً، والنواة صغيرة جداً.';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

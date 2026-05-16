@@ -256,7 +256,7 @@
 <!-- ========== رأس الصفحة مع زر العودة إلى الرئيسية ========== -->
 <header class="page-header">
     <div class="header7-content">
-    <a href="unit-9.html" class="home-btn"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+    <a href="unit_9.html" class="home-btn"><i class="fas fa-home"></i><span>الرئيسية</span></a>
                 <div class="header-text">
 
 
@@ -268,9 +268,6 @@
 </header>
 
 <div class="container">
-<a href="unit-9.html">
-            <i class="fas fa-home">الرئيسية</i>
-            <span>الرئيسية</span>
         </a>
 
     <!-- ملاحظة توضح البدايات -->
@@ -560,6 +557,197 @@
         }
     });
 </script>
+
+
+
+<!-- ========== سؤال عمر النصف (1/32 النشاط الأصلي) مع رسم الدوائر ========== -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-hourglass-half" style="color:#e67e22;"></i>
+        <h3>سؤال 8: عمر النصف</h3>
+    </div>
+    
+    <!-- تذكير بدفعة 2007 -->
+    <div style="background: #fef5e6; border-right: 4px solid #e67e22; padding: 12px; border-radius: 16px; margin-bottom: 15px;">
+        <i class="fas fa-history" style="color:#e67e22;"></i>
+        <strong>تذكير:</strong> هذا السؤال كان للعام الماضي <span style="background:#e67e22; color:white; padding:2px 10px; border-radius:20px;">دفعة 2007</span>
+    </div>
+    
+    <div class="problem-box">
+        <strong>📌 نص المسألة:</strong><br>
+        مادة مشعة عمر النصف لها <strong>10 سنوات</strong>.
+        <br><br>
+        <strong>المطلوب:</strong> المدة التي يستغرقها نشاط العينة ليهبط إلى <strong>1/32</strong> من نشاطها الأصلي؟
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="halfLifeQuiz2" value="50"> أ) 50 سنة
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="halfLifeQuiz2" value="40"> ب) 40 سنة
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="halfLifeQuiz2" value="20"> ج) 20 سنة
+        </label>
+        <label style="display: block; margin: 8px 0; background: #f4f7fb; padding: 8px 15px; border-radius: 50px; cursor: pointer;">
+            <input type="radio" name="halfLifeQuiz2" value="10"> د) 10 سنوات
+        </label>
+    </div>
+    
+    <button id="checkHalfLifeBtn2" style="background: #e67e22; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; margin-top: 15px;">
+        <i class="fas fa-check-circle"></i> تأكيد الإجابة
+    </button>
+    
+    <div id="halfLifeFeedback2" style="margin-top: 15px; padding: 10px; border-radius: 20px; display: none;"></div>
+    
+    <!-- شرح الحل بالرسم والدوائر -->
+    <div id="halfLifeSolution2" style="margin-top: 20px; display: none;">
+        <h4 style="color:#e67e22; text-align:center;">📊 طريقة الحل بالرسم (دوائر وأسهم)</h4>
+        
+        <!-- سلسلة الدوائر من اليسار إلى اليمين -->
+        <div class="circle-chain" style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap; gap: 6px; background: #fff5e8; padding: 20px 12px; border-radius: 60px; direction: ltr; overflow-x: auto;">
+            
+            <!-- الدائرة 1: البداية -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 60px; height: 60px; background: radial-gradient(#f9e79f, #f39c12); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem;">
+                    1
+                </div>
+                <div class="time-badge">البداية</div>
+            </div>
+            
+            <!-- السهم 1 -->
+            <div class="arrow-icon" style="font-size: 14px;">T½→</div>
+            
+            <!-- الدائرة 2: بعد 10 سنوات -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 60px; height: 60px; background: radial-gradient(#f7dc6f, #e67e22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem;">
+                    1/2
+                </div>
+                <div class="time-badge">10 سنوات</div>
+            </div>
+            
+            <!-- السهم 2 -->
+            <div class="arrow-icon" style="font-size: 14px;">T½→</div>
+            
+            <!-- الدائرة 3: بعد 20 سنة -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 60px; height: 60px; background: radial-gradient(#f5cba7, #d35400); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem;">
+                    1/4
+                </div>
+                <div class="time-badge">20 سنة</div>
+            </div>
+            
+            <!-- السهم 3 -->
+            <div class="arrow-icon" style="font-size: 14px;">T½→</div>
+            
+            <!-- الدائرة 4: بعد 30 سنة -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 60px; height: 60px; background: radial-gradient(#f3c683, #b03a2e); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; color:white;">
+                    1/8
+                </div>
+                <div class="time-badge">30 سنة</div>
+            </div>
+            
+            <!-- السهم 4 -->
+            <div class="arrow-icon" style="font-size: 14px;">T½→</div>
+            
+            <!-- الدائرة 5: بعد 40 سنة -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 60px; height: 60px; background: radial-gradient(#e8b86b, #8e2e1a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; color:white;">
+                    1/16
+                </div>
+                <div class="time-badge">40 سنة</div>
+            </div>
+            
+            <!-- السهم 5 -->
+            <div class="arrow-icon" style="font-size: 14px;">T½→</div>
+            
+            <!-- الدائرة 6: بعد 50 سنة (المطلوب) -->
+            <div class="mass-node" style="text-align: center;">
+                <div class="circle-mass" style="width: 60px; height: 60px; background: radial-gradient(#e8a54e, #5c1a0a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.7rem; color:white;">
+                    1/32
+                </div>
+                <div class="time-badge">50 سنة ✅</div>
+            </div>
+        </div>
+        
+        <div class="step-by-step" style="background: #fef5e6; padding: 18px; border-radius: 20px; margin-top: 15px;">
+            <strong>✍️ شرح الحل خطوة بخطوة من الرسم:</strong><br><br>
+            
+            <strong>المعطيات:</strong><br>
+            • عمر النصف (T½) = <strong>10 سنوات</strong><br>
+            • الكسر المطلوب = <strong>1/32</strong> من النشاط الأصلي<br><br>
+            
+            <strong>من الرسم:</strong><br>
+            • نبدأ من الكسر <strong>1</strong> (النشاط الكامل)<br>
+            • كل سهم يعني مرور <strong>10 سنوات</strong> (فترة عمر نصف واحدة)<br>
+            • بعد السهم الأول: <strong>1/2</strong><br>
+            • بعد السهم الثاني: <strong>1/4</strong><br>
+            • بعد السهم الثالث: <strong>1/8</strong><br>
+            • بعد السهم الرابع: <strong>1/16</strong><br>
+            • بعد السهم الخامس: <strong>1/32</strong> ✅<br><br>
+            
+            <strong>عدد الأسهم (الفترات) = 5 فترات</strong><br><br>
+            
+            <strong>الزمن الكلي = عدد الفترات × عمر النصف</strong><br>
+            <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 15px; text-align: center; font-family: monospace; margin: 10px 0;">
+                t = 5 × 10 = <strong style="color:#f39c12; font-size:1.2rem;">50 سنة</strong>
+            </div>
+            
+            ✅ <strong>الإجابة الصحيحة هي: <span style="color:#e67e22;">أ) 50 سنة</span></strong>
+        </div>
+    </div>
+</div>
+
+<script>
+    // التحقق من إجابة سؤال عمر النصف
+    const halfLifeBtn2 = document.getElementById('checkHalfLifeBtn2');
+    const halfLifeFeedback2 = document.getElementById('halfLifeFeedback2');
+    const halfLifeSolution2 = document.getElementById('halfLifeSolution2');
+    
+    if (halfLifeBtn2) {
+        halfLifeBtn2.addEventListener('click', function() {
+            const selected = document.querySelector('input[name="halfLifeQuiz2"]:checked');
+            if (!selected) {
+                halfLifeFeedback2.style.display = 'block';
+                halfLifeFeedback2.style.background = '#fef5e6';
+                halfLifeFeedback2.style.color = '#e67e22';
+                halfLifeFeedback2.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+                halfLifeSolution2.style.display = 'none';
+                return;
+            }
+            
+            if (selected.value === '50') {
+                halfLifeFeedback2.style.display = 'block';
+                halfLifeFeedback2.style.background = '#d5f5e3';
+                halfLifeFeedback2.style.color = '#27ae60';
+                halfLifeFeedback2.innerHTML = '✅ إجابة صحيحة! 5 فترات × 10 سنوات = 50 سنة.';
+                halfLifeSolution2.style.display = 'block';
+            } else {
+                halfLifeFeedback2.style.display = 'block';
+                halfLifeFeedback2.style.background = '#fdedec';
+                halfLifeFeedback2.style.color = '#c0392b';
+                let feedbackMsg = '';
+                if (selected.value === '40') feedbackMsg = '❌ إجابة خاطئة. 40 سنة تعني 4 فترات (1/16)، بينما المطلوب 1/32.';
+                else if (selected.value === '20') feedbackMsg = '❌ إجابة خاطئة. 20 سنة تعني فترتين (1/4)، بينما المطلوب 1/32.';
+                else if (selected.value === '10') feedbackMsg = '❌ إجابة خاطئة. 10 سنوات هي فترة واحدة فقط (1/2).';
+                else feedbackMsg = '❌ إجابة خاطئة. تذكر أن كل فترة تنقص النشاط إلى النصف.';
+                halfLifeFeedback2.innerHTML = feedbackMsg;
+                halfLifeSolution2.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
     <!-- ========== ملخص البدايات ========== -->
     <div class="card">
         <div class="card-header"><h3><i class="fas fa-list-ul"></i> ملخص: أنواع البدايات</h3></div>
