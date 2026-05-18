@@ -283,10 +283,119 @@ const mcqQuestions = [
     { text: "أداة الكشف التي تعتمد على تكثف البخار حول مسار الجسيمات:", options: ["عداد جيجر", "الغرفة السحابية", "الكشاف الكهربائي", "المطياف"], correctIndex: 1, solution: "غرفة ويلسون السحابية تُظهر مسار الجسيمات المشحونة." },
     { text: "يستخدم الكوبالت-60 (Co-60) في:", options: ["تأريخ الآثار", "علاج الأورام السرطانية", "توليد الكهرباء", "كشف التسربات"], correctIndex: 1, solution: "الكوبلت-60 يستخدم في العلاج الإشعاعي للأورام." },
     { text: "يستخدم الكربون-14 (C-14) في:", options: ["علاج السرطان", "تأريخ العينات العضوية", "توليد الكهرباء", "صناعة القنابل"], correctIndex: 1, solution: "تأريخ الكربون المشع لعينات تصل إلى 50000 سنة." },
-    { text: "إذا كان عمر النصف لعنصر مشع 10 أيام، فبعد 30 يوماً تتبقى من العينة:", options: ["1/2", "1/4", "1/8", "1/16"], correctIndex: 2, solution: "30 يوم = 3 فترات عمر نصف. الكمية المتبقية = (1/2)³ = 1/8." },
-    { text: "مادة مشعة عمر نصفها 5 أيام، الزمن اللازم لتناقص نشاطها إلى 1/16 نشاطها الأصلي هو:", options: ["10 أيام", "15 يوماً", "20 يوماً", "25 يوماً"], correctIndex: 2, solution: "1/16 = (1/2)⁴ → 4 فترات × 5 أيام = 20 يوماً." },
-    { text: "جسيمات بيتا هي في الأصل:", options: ["بروتونات", "نيوترونات", "إلكترونات", "بوزيترونات"], correctIndex: 2, solution: "جسيم بيتا السالب هو إلكترون عالي الطاقة." },
-    { text: "العالم الذي اكتشف النشاط الإشعاعي هو:", options: ["رذرفورد", "بيكريل", "فاراداي", "نيوتن"], correctIndex: 1, solution: "هنري بيكريل اكتشف النشاط الإشعاعي عام 1896." },
+{ 
+    text: "إذا كان عمر النصف لعنصر مشع 10 أيام، فبعد 30 يوماً تتبقى من العينة:", 
+    options: ["1/2", "1/4", "1/8", "1/16"], 
+    correctIndex: 2, 
+    solution: `<div class="card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-family: sans-serif;">
+
+        <div class="card-header" style="display: flex; align-items: center; border-bottom: 2px solid #2980b9; padding-bottom: 8px; margin-bottom: 15px; direction: rtl;">
+            <h3 style="margin: 0; font-size: 1.2rem; color: #2c3e50;">⏳ حساب الكمية المتبقية من العينة</h3>
+        </div>
+
+        <div class="problem-box" style="background: #f8f9fa; border-right: 4px solid #2980b9; padding: 10px; border-radius: 4px; margin-bottom: 15px; direction: rtl;">
+            <strong>📌 المعطيات:</strong> عمر النصف (T½) = 10 أيام، الزمن الكلي (t) = 30 يوماً. المطلوب: حساب الكمية المتبقية.
+        </div>
+
+        <div class="circle-chain" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; direction: ltr;">
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#a9cce3; color:#1a5276; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">الأصلي</div>
+            </div>
+
+            <div class="arrow-icon" style="font-weight: bold; color: #c62828; font-size: 1.2rem;">&rarr;</div>
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#85c1e9; color:#1a5276; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1/2</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">10 أيام</div>
+            </div>
+
+            <div class="arrow-icon" style="font-weight: bold; color: #c62828; font-size: 1.2rem;">&rarr;</div>
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#5dade2; color:white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1/4</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">20 يوم</div>
+            </div>
+
+            <div class="arrow-icon" style="font-weight: bold; color: #c62828; font-size: 1.2rem;">&rarr;</div>
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#2e86c1; color:white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1/8</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">30 يوم</div>
+            </div>
+
+        </div>
+
+        <div class="step-by-step" style="border-top: 1px dashed #ccc; margin-top: 15px; padding-top: 10px; font-size: 0.9rem; line-height: 1.8; direction: rtl;">
+            <strong>✍️ خطوات الحل بالتفصيل:</strong><br>
+            • الخطوة 1: نحسب عدد الفترات (n) = الزمن الكلي ÷ عمر النصف = 30 ÷ 10 = 3 فترات.<br>
+            • الخطوة 2: نحدد تتابع التناقص خلال الفترات الثلاث: 1 &larr; 1/2 &larr; 1/4 &larr; 1/8 (مرت العينة بـ 3 فترات).<br>
+            • الخطوة 3: الكمية المتبقية بعد 3 فترات هي 1/8 من النشاط الأصلي.<br>
+            • <strong style="color: #27ae60;">الإجابة النهائية: 1/8</strong>
+        </div>
+
+    </div>`
+},{ 
+    text: "مادة مشعة عمر نصفها 5 أيام، الزمن اللازم لتناقص نشاطها إلى 1/16 نشاطها الأصلي هو:", 
+    options: ["10 أيام", "15 يوماً", "20 يوماً", "25 يوماً"], 
+    correctIndex: 2, 
+    solution: `<div class="card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-family: sans-serif;">
+
+        <div class="card-header" style="display: flex; align-items: center; border-bottom: 2px solid #2980b9; padding-bottom: 8px; margin-bottom: 15px; direction: rtl;">
+            <h3 style="margin: 0; font-size: 1.2rem; color: #2c3e50;">⏳ حساب الزمن اللازم لتناقص النشاط</h3>
+        </div>
+
+        <div class="problem-box" style="background: #f8f9fa; border-right: 4px solid #2980b9; padding: 10px; border-radius: 4px; margin-bottom: 15px; direction: rtl;">
+            <strong>📌 المعطيات:</strong> عمر النصف (T½) = 5 أيام، المطلوب: الزمن لتناقص النشاط إلى 1/16.
+        </div>
+
+        <div class="circle-chain" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; direction: ltr;">
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#a9cce3; color:#1a5276; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">الأصلي</div>
+            </div>
+
+            <div class="arrow-icon" style="font-weight: bold; color: #c62828; font-size: 1.2rem;">&rarr;</div>
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#85c1e9; color:#1a5276; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1/2</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">5 أيام</div>
+            </div>
+
+            <div class="arrow-icon" style="font-weight: bold; color: #c62828; font-size: 1.2rem;">&rarr;</div>
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#5dade2; color:white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1/4</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">10 أيام</div>
+            </div>
+
+            <div class="arrow-icon" style="font-weight: bold; color: #c62828; font-size: 1.2rem;">&rarr;</div>
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#2e86c1; color:white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1/8</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">15 يوم</div>
+            </div>
+
+            <div class="arrow-icon" style="font-weight: bold; color: #c62828; font-size: 1.2rem;">&rarr;</div>
+
+            <div class="mass-node" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="circle-mass" style="background:#1b4f72; color:white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1/16</div>
+                <div class="time-badge" style="font-size: 0.7rem; color: #7f8c8d; margin-top: 5px; font-weight: bold;">20 يوم</div>
+            </div>
+
+        </div>
+
+        <div class="step-by-step" style="border-top: 1px dashed #ccc; margin-top: 15px; padding-top: 10px; font-size: 0.9rem; line-height: 1.8; direction: rtl;">
+            <strong>✍️ خطوات الحل بالتفصيل:</strong><br>
+            • الخطوة 1: نحدد عدد الفترات للوصول إلى 1/16: 1 &larr; 1/2 &larr; 1/4 &larr; 1/8 &larr; 1/16 (مرت العينة بـ 4 فترات).<br>
+            • الخطوة 2: الزمن الكلي = عدد الفترات &times; عمر النصف = 4 &times; 5 = 20 يوماً.<br>
+            • <strong style="color: #27ae60;">الإجابة النهائية: 20 يوماً</strong>
+        </div>
+
+    </div>`
+}  ,  { text: "العالم الذي اكتشف النشاط الإشعاعي هو:", options: ["رذرفورد", "بيكريل", "فاراداي", "نيوتن"], correctIndex: 1, solution: "هنري بيكريل اكتشف النشاط الإشعاعي عام 1896." },
     { text: "تستخدم ألواح الرصاص السميكة للحماية من:", options: ["أشعة ألفا", "أشعة بيتا", "أشعة جاما", "كل ما سبق"], correctIndex: 2, solution: "أشعة جاما عالية الاختراق وتحتاج لرصاص سميك." },
     { text: "يستخدم اليورانيوم-235 في:", options: ["توليد الكهرباء في المفاعلات", "علاج السرطان", "تأريخ الآثار", "كشف التسربات"], correctIndex: 0, solution: "وقود المفاعلات النووية والقنابل الذرية." },
     { text: "في اضمحلال بيتا السالب (β⁻) يزداد العدد الذري بمقدار:", options: ["صفر", "واحد", "اثنان", "ينقص بواحد"], correctIndex: 1, solution: "يتحول نيوترون → بروتون + إلكترون، فيزداد العدد الذري بواحد." }
