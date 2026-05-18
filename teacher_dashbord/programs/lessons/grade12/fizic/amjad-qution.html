@@ -325,17 +325,23 @@ solution: "خطوات التحلل (من اليسار إلى اليمين): <br>
     options: ["جسيم بيتا (&beta;<sup>-</sup>)", "جسيم ألفا (&alpha;)", "نيوترون", "بوزيترون"], 
     correctIndex: 1, 
     solution: "نلاحظ نقص العدد الكتلي بمقدار 4 والعدد الذري بمقدار 2. <br>العنصر المفقود في المخرجات (من اليسار لليمين) هو: <br><div style='direction: ltr; font-weight: bold; color: #c0392b; margin-top: 5px;'>&rarr; <sup>4</sup><sub>2</sub>He (&alpha;)</div>" 
-},    { text: "عند استخدام قاعدة اليد اليسرى لفلمنج، فإن الإبهام يشير إلى اتجاه:", options: ["الحركة (القوة)", "التيار الكهربائي", "المجال المغناطيسي", "كل ما سبق"], correctIndex: 0, solution: "الإبهام ← الحركة، السبابة ← المجال، الوسطى ← التيار." },
+},
 { 
     text: "أكمل معادلـة الاضمحلال التالية: <br><div style='direction: ltr; font-weight: bold; margin: 10px 0;'><sup>14</sup><sub>6</sub>C &rarr; <sup>14</sup><sub>7</sub>N + ...... + طاقة</div>", 
     options: ["جسيم ألفا (&alpha;)", "جسيم بيتا السالب (&beta;<sup>-</sup>)", "بوزيترون (&beta;<sup>+</sup>)", "نيوترون"], 
     correctIndex: 1, 
-    solution: "نلاحظ أن العدد الكتلي ثابت (14) والعدد الذري ازداد بمقدار 1. <br>العنصر المفقود في المخرجات (من اليسار لليمين) هو: <br><div style='direction: ltr; font-weight: bold; color: #2980b9; margin-top: 5px;'>&rarr; <sup>0</sup><sub>-1</sub>e (&beta;<sup>-</sup>)</div>" 
-},    { text: "تزداد قوة المجال المغناطيسي عند نقطة من سلك مستقيم عندما:", options: ["تزداد شدة التيار ويزداد البعد", "تزداد شدة التيار ويقل البعد", "تقل شدة التيار ويقل البعد", "تقل شدة التيار ويزداد البعد"], correctIndex: 1, solution: "B = μI/(2πr) ، تتناسب طرداً مع I وعكساً مع r." },
+    solution: "🎉 إجابتك صحيحة! 🎉<br><b>الإجابة الصحيحة:</b> جسيم بيتا السالب (&beta;<sup>-</sup>)<br>📖 <b>خطوات الحل:</b><br>نلاحظ أن العدد الكتلي ثابت (14) والعدد الذري ازداد بمقدار 1.<br>العنصر المفقود في المخرجات (من اليسار لليمين) هو:<br><div style='direction: ltr; font-weight: bold; color: #2980b9; margin-top: 5px; font-size: 1.1rem;'>&rarr; <sup>0</sup><sub>-1</sub>e (&beta;<sup>-</sup>)</div>" 
+},
+
+{ text: "تزداد قوة المجال المغناطيسي عند نقطة من سلك مستقيم عندما:", options: ["تزداد شدة التيار ويزداد البعد", "تزداد شدة التيار ويقل البعد", "تقل شدة التيار ويقل البعد", "تقل شدة التيار ويزداد البعد"], correctIndex: 1, solution: "B = μI/(2πr) ، تتناسب طرداً مع I وعكساً مع r." },
     { text: "وحدة قياس كثافة الفيض المغناطيسي هي:", options: ["ويبر (Wb)", "ويبر/متر² (Tesla)", "ويبر/متر (Wb/m)", "متر/ويبر (m/Wb)"], correctIndex: 1, solution: "وحدة كثافة الفيض المغناطيسي هي التسلا = ويبر/متر²." },
     { text: "في المحول الكهربائي الرفعي للجهد (Step-up)، العلاقة بين عدد اللفات هي:", options: ["N_s < N_p", "N_p = N_s", "N_p < N_s", "N_s = 2 N_p"], correctIndex: 2, solution: "الجهد يزداد عندما N_p < N_s، أي عدد لفات الثانوي أكبر من الابتدائي." },
-    { text: "ملف عدد لفاته 100 لفة يتغير فيه الفيض من 0.04 Wb إلى 0.02 Wb خلال 0.01 ثانية، فإن القوة الدافعة المتوسطة هي:", options: ["200 V", "7 V", "8 V", "5 V"], correctIndex: 0, solution: "ε = N×(ΔΦ/Δt) = 100×(0.02/0.01)=100×2=200 فولت." }
-];
+{ 
+    text: "ملف عدد لفاته 100 لفة يتغير فيه الفيض من 0.04 Wb إلى 0.02 Wb خلال 0.01 ثانية، فإن القوة الدافعة المتوسطة هي:", 
+    options: ["200 V", "7 V", "8 V", "5 V"], 
+    correctIndex: 0, 
+    solution: "<b>المعطيات:</b> N = 100 لفة، &Delta;&Phi; = 0.04 - 0.02 = 0.02 Wb، &Delta;t = 0.01 s.<br><br><b>الحل الرياضي (من اليسار لليمين):</b><br>1️⃣ كتابة قانون فاراداي:<br><div style='direction: ltr; font-weight: bold; color: #2980b9; text-align: center; margin: 6px 0; font-size: 1.1rem;'>EMF = N &times; (&Delta;&Phi; / &Delta;t)</div>2️⃣ التعويض المباشر بحساب التغير في الفيض:<br><div style='direction: ltr; font-weight: bold; color: #27ae60; text-align: center; margin: 6px 0; font-size: 1.1rem;'>EMF = 100 &times; (0.02 / 0.01)</div>3️⃣ الناتج النهائي:<br><div style='direction: ltr; font-weight: bold; color: #c0392b; text-align: center; margin: 6px 0; font-size: 1.1rem;'>EMF = 100 &times; 2 = 200 V</div>" 
+},];
 
 // =====================================================
 // دوال العرض
