@@ -749,32 +749,50 @@
 
 
     <!-- ========== ملخص البدايات ========== -->
-    <div class="card">
-    <div class="card-header"><h3><i class="fas fa-list-ul"></i> ملخص: أنواع البدايات (من اليسار إلى اليمين)</h3></div>
+    <div class="card" style="font-family: sans-serif; max-width: 100%; box-sizing: border-box; padding: 10px;">
     
-    <div class="summary-box" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; direction: ltr;">
+    <div class="card-header" style="background: #2c3e50; color: white; padding: 12px; border-radius: 12px; text-align: center; margin-bottom: 15px;">
+        <h3 style="margin: 0; font-size: 1.1rem; font-weight: bold;">
+            <i class="fas fa-list-ul" style="margin-left: 8px;"></i> ملخص: أنواع البدايات في مسائل عمر النصف (من اليسار إلى اليمين)
+        </h3>
+    </div>
+    
+    <div class="summary-box" style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; direction: ltr;">
         
-        <div class="summary-item" style="background: #eafaf1; border-radius: 20px; padding: 15px; text-align: center; flex: 1; min-width: 150px;">
-            <i class="fas fa-percent" style="color:#27ae60; font-size: 1.5rem;"></i>
-            <h4 style="color:#27ae60; margin: 10px 0;">النسبة المئوية</h4>
-            <p style="font-size: 1rem; direction: ltr;">100% → 50% → 25% → 12.5%</p>
+        <div class="summary-item" style="background: #eafaf1; border-radius: 15px; padding: 12px; text-align: center; flex: 1; min-width: 140px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <i class="fas fa-percent" style="color:#27ae60; font-size: 1.3rem;"></i>
+            <h4 style="color:#27ae60; margin: 8px 0; font-size: 0.95rem; font-weight: bold; direction: rtl;">النسبة المئوية</h4>
+            <p style="font-size: 0.85rem; direction: ltr; margin: 0; font-weight: bold; color: #2c3e50;">100% &rarr; 50% &rarr; 25% &rarr; 12.5%</p>
         </div>
         
-        <div class="summary-item" style="background: #f4ecf7; border-radius: 20px; padding: 15px; text-align: center; flex: 1; min-width: 150px;">
-            <i class="fas fa-chart-pie" style="color:#8e44ad; font-size: 1.5rem;"></i>
-            <h4 style="color:#8e44ad; margin: 10px 0;">الكسر</h4>
-            <p style="font-size: 1rem; direction: ltr;">1 → 1/2 → 1/4 → 1/8</p>
+        <div class="summary-item" style="background: #f4ecf7; border-radius: 15px; padding: 12px; text-align: center; flex: 1; min-width: 140px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <i class="fas fa-chart-pie" style="color:#8e44ad; font-size: 1.3rem;"></i>
+            <h4 style="color:#8e44ad; margin: 8px 0; font-size: 0.95rem; font-weight: bold; direction: rtl;">الكسر المتبقي</h4>
+            <p style="font-size: 0.9rem; direction: ltr; margin: 0; font-weight: bold; color: #2c3e50;">1 &rarr; &frac12; &rarr; &frac14; &rarr; &frac18;</p>
         </div>
         
-        <div class="summary-item" style="background: #ebf5fb; border-radius: 20px; padding: 15px; text-align: center; flex: 1; min-width: 150px;">
-            <i class="fas fa-weight-hanging" style="color:#2980b9; font-size: 1.5rem;"></i>
-            <h4 style="color:#2980b9; margin: 10px 0;">الكتلة</h4>
-            <p style="font-size: 1rem; direction: ltr;">80g → 40g → 20g → 10g</p>
+        <div class="summary-item" style="background: #ebf5fb; border-radius: 15px; padding: 12px; text-align: center; flex: 1; min-width: 160px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #aec6cf;">
+            <div style="display: flex; justify-content: center; gap: 10px; color:#2980b9;">
+                <i class="fas fa-weight-hanging" style="font-size: 1.3rem;"></i>
+                <i class="fas fa-calculator" style="font-size: 1.3rem;"></i>
+            </div>
+            <h4 style="color:#2980b9; margin: 8px 0; font-size: 0.95rem; font-weight: bold; direction: rtl;">الكتلة أو معدل التعداد</h4>
+            
+            <div style="margin-bottom: 5px;">
+                <span style="font-size: 0.7rem; color: #7f8c8d; display: block; direction: rtl;">مثال الكتلة (g):</span>
+                <p style="font-size: 0.85rem; direction: ltr; margin: 0; font-weight: bold; color: #2c3e50;">80g &rarr; 40g &rarr; 20g &rarr; 10g</p>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px dashed #aec6cf; margin: 6px 0;">
+            
+            <div>
+                <span style="font-size: 0.7rem; color: #7f8c8d; display: block; direction: rtl;">مثال التعداد (cpm):</span>
+                <p style="font-size: 0.85rem; direction: ltr; margin: 0; font-weight: bold; color: #2c3e50;">800 &rarr; 400 &rarr; 200 &rarr; 100</p>
+            </div>
         </div>
         
     </div>
-    
-    <div class="formula-box" style="background: #2c3e50; margin-top: 15px; padding: 15px; border-radius: 25px; text-align: center; direction: ltr;">
+</div><div class="formula-box" style="background: #2c3e50; margin-top: 15px; padding: 15px; border-radius: 25px; text-align: center; direction: ltr;">
         <i class="fas fa-lightbulb" style="color:#f39c12;"></i>
         <span style="color: white;">القاعدة: كل سهم → = فترة عمر نصف = نقسم الكمية على 2</span>
     </div>

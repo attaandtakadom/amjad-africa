@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار الفيزياء الكهربائية - الثالث الثانوي | أمجد أفريقيا</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #eef2f5;
+        margin: 0;
+        padding: 20px;
+        color: #1e2a3e;
+    }
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        background: white;
+        border-radius: 28px;
+        box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+        padding: 25px;
+    }
+    h1 {
+        text-align: center;
+        color: #0b3b5f;
+        margin-top: 0;
+    }
+    .badge-group {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .badge {
+        background: #0b3b5f;
+        color: white;
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 40px;
+        font-size: 13px;
+        margin: 0 4px 10px;
+    }
+    /* أسلوب التبويبات */
+    .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 10px;
+    }
+    .tab-btn {
+        background: #e2e8f0;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 40px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+        color: #1e293b;
+    }
+    .tab-btn.active {
+        background: #0b3b5f;
+        color: white;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    .question-card {
+        background: #f9fafb;
+        border-radius: 24px;
+        padding: 20px;
+        margin: 20px 0;
+        border-right: 6px solid #00a8cc;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .question-text {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #0c4e6e;
+    }
+    .tf-options {
+        display: flex;
+        gap: 20px;
+        margin: 20px 0;
+    }
+    .tf-btn {
+        flex: 1;
+        text-align: center;
+        padding: 12px;
+        border-radius: 60px;
+        border: 1px solid #ccc;
+        background: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+    .tf-btn.selected {
+        background: #0b3b5f;
+        border-color: #0b3b5f;
+        color: white;
+    }
+    .options {
+        margin: 20px 0;
+    }
+    .option {
+        background: white;
+        border: 1px solid #cbd5e1;
+        border-radius: 60px;
+        padding: 10px 20px;
+        margin: 10px 0;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .option.selected {
+        background: #d9effa;
+        border-color: #0077b6;
+    }
+    .option input {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    .check-btn {
+        background: #2c7a4d;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 40px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: 0.2s;
+    }
+    .check-btn:hover {
+        background: #1f5e3a;
+    }
+    .feedback {
+        margin-top: 15px;
+        padding: 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        background: #f1f3f4;
+    }
+    .correct-feedback {
+        background: #ccf0d6;
+        color: #14532d;
+        border-right: 6px solid #2e7d32;
+    }
+    .wrong-feedback {
+        background: #ffe2e2;
+        color: #991b1b;
+        border-right: 6px solid #c62828;
+    }
+    .steps {
+        margin-top: 10px;
+        padding: 10px;
+        background: #fef9e3;
+        border-radius: 16px;
+        font-size: 0.9rem;
+        color: #5e3a00;
+        text-align: right;
+    }
+    footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 13px;
+        color: #5b6e8c;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>⚡ اختبار الفيزياء الكهربائية ⚡</h1>
+    <div class="badge-group">
+        <span class="badge">📘 الثالث الثانوي</span>
+        <span class="badge">🔬 فيزياء كهربائية</span>
+        <span class="badge">🌍 أمجاد أفريقيا</span>
+    </div>
+
+    <!-- التبويبات -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="tab-tf">✅ أسئلة صح / خطأ</button>
+        <button class="tab-btn" data-tab="tab-mcq">🔘 أسئلة اختيار من متعدد</button>
+
+        <button class="tab-btn" data-tab="tab-mcq">        <a href="unit_9.html" class="home-btn"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+</button>
+
+
+    </div>
+
+    <!-- محتوى تبويب صح/خطأ -->
+    <div id="tab-tf" class="tab-content active">
+        <div id="tf-questions-container"></div>
+    </div>
+
+    <!-- محتوى تبويب اختيار من متعدد -->
+    <div id="tab-mcq" class="tab-content">
+        <div id="mcq-questions-container"></div>
+    </div>
+
+    <footer>اختر إجابتك لكل سؤال ثم اضغط "تحقق"</footer>
+</div>
+
+<script>
+// =====================================================
+// مصفوفة أسئلة صح / خطأ
+// =====================================================
+const trueFalseQuestions = [
+    { text: "تستخدم قاعدة اليد اليمنى لتحديد قطبية المغناطيس الكهربائي.", correct: true, solution: "قاعدة اليد اليمنى: إذا أمسكت السلك باليد اليمنى بحيث يشير الإبهام لاتجاه التيار، فإن الأصابع تشير لاتجاه المجال المغناطيسي. تستخدم لتحديد القطبية في المغناطيس الكهربائي." },
+    { text: "للنظائر خواص كيميائية متطابقة لأن لها نفس العدد من الإلكترونات.", correct: true, solution: "الخواص الكيميائية تعتمد على عدد الإلكترونات في الغلاف الخارجي، والنظائر لها نفس عدد البروتونات والإلكترونات." },
+    { text: "تتجه خطوط المجال المغناطيسي داخل المغناطيس من القطب الشمالي إلى القطب الجنوبي.", correct: false, solution: "خطوط المجال خارج المغناطيس من شمال إلى جنوب، وداخله من جنوب إلى شمال." },
+    { text: "تعرف المواد المغناطيسية الصلبة (المطابعة) بأنها صعبة في اكتسابها وفقدها المغناطيسية.", correct: true, solution: "المواد المغناطيسية الصلبة تحتفظ بالمغناطيسية لفترة طويلة (مثل الفولاذ)." },
+    { text: "لا يمكن عملياً الحصول على مغناطيس أحادي القطب.", correct: true, solution: "خطوط المجال المغناطيسي مغلقة، ولا يوجد قطب منفرد في الطبيعة." },
+    { text: "لا يصلح التجاذب في اختبار معرفة القطبية لأن المغناطيس يجذب إليه الحديد.", correct: true, solution: "المغناطيس يجذب الحديد بغض النظر عن القطب، لذلك نستخدم التنافر لتحديد القطب." },
+    { text: "لإزالة المغناطيسية يجب جعل المغناطيسية الدقيقة تفقد اتجاهها الموحد.", correct: true, solution: "بالصدم أو التسخين أو وضع المادة في مجال متردد متناقص." },
+    { text: "في المرحل المغناطيسي (Relay) يستخدم تيار صغير للتحكم في تيار كبير في دائرة أخرى.", correct: true, solution: "المرحل يعمل كمفتاح كهربائي يتحكم فيه تيار صغير لتشغيل دائرة تيار كبير." },
+    { text: "أفضل طريقة لإزالة المغناطيسية هي وضع المادة داخل ملف يمر بتيار مستمر.", correct: false, solution: "التيار المستمر يطبل المغناطيسية، أما إزالتها فتتم بالتيار المتردد المتناقص أو التسخين." },
+    { text: "يتكون المفتاح الريشي (Reed Switch) من زوج من الشرائح من الحديد المطاوع والنيكل.", correct: true, solution: "المفتاح الريشي يتكون من شريحتين مغناطيسيتين تنغلقان بوجود مجال مغناطيسي." },
+    { text: "ينتج عن السلك الحامل للتيار مجالاً مغناطيسياً يستدل عليه بالبوصلة.", correct: true, solution: "عند مرور تيار في سلك، ينشأ مجال مغناطيسي دائري حوله تُظهره إبرة البوصلة." },
+    { text: "في الساق غير الممغنطة تتجه المغناطيسيات الدقيقة في اتجاهات عشوائية.", correct: true, solution: "في المادة غير الممغنطة، تكون الأقطاب المغناطيسية الصغيرة في اتجاهات متفرقة تلغي بعضها." },
+    { text: "وظيفة عكس التيار (المبدل) في محرك التيار المستمر هو عكس التيار كل ربع دورة.", correct: true, solution: "المبدل (Commutator) يعكس اتجاه التيار كل نصف دورة أو ربع دورة حسب تصميم المحرك." },
+    { text: "العدد الذري هو عدد البروتونات ويرمز له بالرمز Z.", correct: true, solution: "العدد الذري = عدد البروتونات في النواة، ويحدد نوع العنصر." },
+    { text: "النظائر المشعة الاصطناعية تُنتج بقصف نويدات بقذائف من النيوترونات.", correct: true, solution: "قصف النوى بالنيوترونات ينتج نظائر مشعة اصطناعية (مثل الكوبالت-60)." },
+    { text: "في اضمحلال بيتا (β-) يزداد العدد الذري بمقدار واحد ويبقى العدد الكتلي كما هو.", correct: true, solution: "يتحول نيوترون إلى بروتون + إلكترون (جسيم بيتا)، فيزداد العدد الذري بواحد." },
+    { text: "تتأثر عملية الاضمحلال الإشعاعي بالمجالات الكهربائية والمغناطيسية.", correct: false, solution: "الاضمحلال الإشعاعي ظاهرة نووية لا تتأثر بالمجالات الكهربائية أو المغناطيسية." },
+    { text: "يجب بناء جدران الحجرات النووية بقوالب من الرصاص سمكها متر واحد.", correct: true, solution: "الرصاص فعال في امتصاص الإشعاعات النووية، ويستخدم بسمك مناسب في الحجرات النووية." },
+    { text: "في غرفة سحابية الانتشار تكون مسارات أشعة ألفا ملتوية ورقيقة.", correct: false, solution: "أشعة ألفا ثقيلة وموجبة، مساراتها مستقيمة وغليظة، بينما أشعة بيتا ملتوية ورقيقة." },
+    { text: "جسيمات ألفا عبارة عن نواة هيليوم موجبة الشحنة.", correct: true, solution: "جسيم ألفا هو نواة هيليوم مكونة من 2 بروتون و2 نيوترون، شحنتها +2." },
+    { text: "تنجذب الأيونات الموجبة في أنبوب جيجر مول إلى الأنود في منتصف الأنبوب.", correct: false, solution: "الأنود (القطب الموجب) يجذب الأيونات السالبة، بينما الكاثود يجذب الأيونات الموجبة." },
+    { text: "يرتدي العاملون شارة فيلم (Film Badge) للوقاية من إشعاع جاما.", correct: false, solution: "شارة الفيلم تقيس الجرعة الإشعاعية ولا تقي منه، الوقاية تكون بالرصاص والمسافة." },
+    { text: "نقطة التعادل لا تمر فيها خطوط مجال مغناطيسي.", correct: true, solution: "نقطة التعادل في المجال المغناطيسي هي نقطة تكون فيها محصلة المجال صفراً." },
+
+// أسئلة صح/خطأ إضافية (القدرة والطاقة)
+{ text: "الكيلووات. ساعة هي الطاقة التي يستهلكها جهاز بقدرة 1000 واط في الساعة الواحدة.", correct: true, solution: "1 kWh = 1000 W × 3600 s = 3.6 × 10⁶ J" },
+{ text: "وحدة قياس استهلاك الطاقة الكهربائية في المنازل هي الواط.ساعة (Wh).", correct: false, solution: "الوحدة المستخدمة هي الكيلووات.ساعة (kWh) وليس الواط.ساعة." },
+{ text: "تقاس القدرة الكهربائية في النظام الدولي بوحدة الواط (W).", correct: true, solution: "الواط = جول/ثانية = فولت × أمبير." },
+{ text: "القدرة الكهربائية هي معدل تحول الطاقة الكهربائية إلى أشكال أخرى من الطاقة.", correct: true, solution: "P = E/t = I×V = I²×R = V²/R" },
+
+// المجال المغناطيسي
+{ text: "ينتج عن السلك الحامل للتيار مجالاً مغناطيسياً يمكن الاستدلال عليه باستخدام البوصلة.", correct: true, solution: "تجربة أورستيد أظهرت أن التيار الكهربائي يولد مجالاً مغناطيسياً." },
+{ text: "شدة المجال المغناطيسي داخل ملف لولبي تتناسب طردياً مع عدد اللفات.", correct: true, solution: "B = μ×N×I / L" },
+{ text: "شدة المجال المغناطيسي تتناسب عكسياً مع شدة التيار المار في السلك.", correct: false, solution: "شدة المجال تتناسب طردياً مع شدة التيار (B ∝ I)." },
+{ text: "المغناطيسات الدقيقة في الساق غير الممغنطة تتجه في اتجاهات عشوائية.", correct: true, solution: "وهذا يسبب تلاشي المجال المغناطيسي الكلي." },
+{ text: "التجاذب هو الاختبار الوحيد لمعرفة قطبية المغناطيس.", correct: false, solution: "التجاذب لا يصلح لأن المغناطيس يجذب الحديد، الأفضل استخدام التنافر." },
+
+// الحث الكهرومغناطيسي والمحولات والمولدات
+{ text: "ظاهرة حث قوة دافعة كهربائية في دائرة نتيجة مجال مغناطيسي متغير تعرف بالحث الكهرومغناطيسي.", correct: true, solution: "مكتشفها هو فاراداي." },
+{ text: "في المحول الرافع للجهد يكون عدد لفات الملف الابتدائي أكبر من عدد لفات الملف الثانوي.", correct: false, solution: "في المحول الرافع N_s > N_p." },
+{ text: "يستخدم المحول الكهربائي لرفع أو خفض القوة الدافعة الكهربائية المستمرة.", correct: false, solution: "المحول يعمل على التيار المتردد فقط." },
+{ text: "مولد التيار المتردد يحول الطاقة الحركية إلى طاقة كهربائية.", correct: true, solution: "يعتمد على ظاهرة الحث الكهرومغناطيسي." },
+{ text: "يكون اتجاه التيار المستحث معاكساً للتغير في التدفق المغناطيسي المنتج له حسب قانون لينز.", correct: true, solution: "قانون لينز يحدد اتجاه التيار المستحث." },
+
+
+
+];
+
+// =====================================================
+// مصفوفة أسئلة اختيار من متعدد
+// =====================================================
+const multipleChoiceQuestions = [
+
+// أسئلة اختيار من متعدد (القدرة والطاقة)
+{ text: "وحدة قياس الطاقة الكهربائية في النظام الدولي هي:", options: ["الواط (W)", "الكيلووات.ساعة (kWh)", "الجول (J)", "الفولت (V)"], correctIndex: 2, solution: "الجول هو وحدة الطاقة الأساسية في النظام الدولي." },
+{ text: "إذا كانت قدرة مصباح 100 W ويعمل لمدة 10 ساعات، فإن الطاقة المستهلكة بالكيلووات.ساعة هي:", options: ["0.1 kWh", "1 kWh", "10 kWh", "100 kWh"], correctIndex: 1, solution: "E = P×t = 0.1 kW × 10 h = 1 kWh." },
+{ text: "قانون أوم يربط بين:", options: ["الجهد والتيار فقط", "الجهد والتيار والمقاومة", "التيار والمقاومة فقط", "الجهد والمقاومة فقط"], correctIndex: 1, solution: "V = I × R" },
+
+// المجال المغناطيسي
+{ text: "شدة المجال المغناطيسي عند نقطة تبعد عن سلك مستقيم طويل يمر به تيار تتناسب:", options: ["طردياً مع البعد", "عكسياً مع البعد", "طردياً مع مربع البعد", "عكسياً مع مربع البعد"], correctIndex: 1, solution: "B = μ₀I/(2πr)، تتناسب عكسياً مع r." },
+{ text: "قاعدة اليد اليمنى تستخدم لتحديد:", options: ["اتجاه التيار فقط", "اتجاه المجال المغناطيسي", "اتجاه القوة", "قطبية المغناطيس"], correctIndex: 1, solution: "تستخدم لتحديد اتجاه خطوط المجال حول سلك يمر به تيار." },
+{ text: "وحدة قياس كثافة الفيض المغناطيسي هي:", options: ["الويبر (Wb)", "التسلا (T)", "الأوم (Ω)", "الفولت (V)"], correctIndex: 1, solution: "1 تسلا = 1 ويبر/متر²." },
+
+// الحث الكهرومغناطيسي والمحولات والمولدات
+{ text: "قانون لينز يستخدم لتحديد:", options: ["مقدار القوة الدافعة المستحثة", "اتجاه التيار المستحث", "قدرة المحول", "كفاءة المولد"], correctIndex: 1, solution: "قانون لينز يحدد اتجاه التيار المستحث بحيث يعاكس التغير." },
+{ text: "في المحول الكهربائي، إذا كان N_p = 200 لفة، N_s = 600 لفة، V_p = 100 V، فإن V_s تساوي:", options: ["100 V", "200 V", "300 V", "600 V"], correctIndex: 2, solution: "V_s/V_p = N_s/N_p → V_s = 100 × (600/200) = 300 V." },
+{ text: "مولد التيار المتردد يعتمد في عمله على:", options: ["قاعدة فلمنج لليد اليسرى", "الحث الكهرومغناطيسي", "قاعدة اليد اليمنى", "قانون أوم"], correctIndex: 1, solution: "يعتمد على ظاهرة الحث الكهرومغناطيسي التي اكتشفها فاراداي." },
+{ text: "ملف عدد لفاته 500 لفة يدور بتردد 1500 Hz في مجال مغناطيسي أقصى فيضه 2.67 × 10⁻⁶ Wb (خلال ربع دورة)، فإن القوة الدافعة الكهربائية المستحثة هي:", options: ["4 V", "6 V", "8 V", "10 V"], correctIndex: 2, solution: "المعطيات: N = 500 لفة، f = 1500 Hz، Φ_max = 2.67×10⁻⁶ Wb، الزمن = ربع دورة.\nالخطوة 1: الزمن الدوري T = 1/f = 1/1500 = 0.0006667 ثانية.\nالخطوة 2: الزمن لربع دورة Δt = T/4 = 0.0006667 ÷ 4 = 0.0001667 ثانية.\nالخطوة 3: التغير في الفيض ΔΦ = 2.67×10⁻⁶ Wb.\nالخطوة 4: قانون فاراداي ε = N × (ΔΦ/Δt).\nالخطوة 5: التعويض ε = 500 × (2.67×10⁻⁶ ÷ 0.0001667).\nالخطوة 6: 2.67×10⁻⁶ ÷ 0.0001667 = 0.01602.\nالخطوة 7: ε = 500 × 0.01602 = 8.01 V ≈ 8 V.\nالإجابة الصحيحة: 8 فولت." },    { text: "ينجذب المغناطيس إلى قطعة من:", options: ["الأبونايت", "النحاس", "النيكل", "الزنك"], correctIndex: 2, solution: "النيكل مادة مغناطيسية (مع الحديد والكوبالت). الأبونايت عازل، والنحاس والزنك ليسا مغناطيسيين." },
+    { text: "كل مما يأتي من استخدامات المغناطيس الكهربائي ما عدا:", options: ["المفتاح الريشي", "الجرس الكهربائي", "المرحل (Relay)", "الجلفانومتر"], correctIndex: 3, solution: "الجلفانومتر يعمل بمغناطيس دائم، أما المفتاح الريشي فقد يعمل بمغناطيس دائم أو كهربائي." },
+    { text: "تستخدم في صناعة المغناطيسيات الدائمة مادة:", options: ["الألمنيوم", "النحاس", "الحديد المطاوع", "الفولاذ"], correctIndex: 3, solution: "الفولاذ يحتفظ بالمغناطيسية (مادة صلبة)، أما الحديد المطاوع فيفقدها بسرعة." },
+{ 
+    text: "مادة كتلتها 1200 جرام تحللت إلى 75 جرام خلال 10 ساعات، فإن عمر النصف هو:", 
+    options: ["90 دقيقة", "150 دقيقة", "120 دقيقة", "60 دقيقة"], 
+    correctIndex: 1, 
+solution: "خطوات التحلل (من اليسار إلى اليمين): <br><div style='direction: ltr; display: inline-block; font-weight: bold; color: #2980b9;'>1200 &rarr; 600 &rarr; 300 &rarr; 150 &rarr; 75</div><br>(أي حدثت 4 فترات عمر نصف).<br>الزمن الكلي = 10 ساعات &times; 60 = 600 دقيقة.<br>عمر النصف = 600 &divide; 4 = 150 دقيقة."},    { text: "لزيادة مدى قياس الأميتر يتم توصيل ملفه:", options: ["مقاومة كبيرة على التوالي", "مقاومة صغيرة على التوازي", "مقاومة كبيرة على التوازي", "مقاومة صغيرة على التوالي"], correctIndex: 1, solution: "مقاومة صغيرة على التوازي تحول جزءاً من التيار بعيداً عن الملف، فيزيد مدى القياس." },
+    { text: "سلك طوله 10 متر يمر به تيار 4 أمبير عمودياً على مجال مغناطيسي مقداره 0.3 تسلا، فإن القوة المغناطيسية هي:", options: ["1.2 نيوتن", "12 نيوتن", "120 نيوتن", "6 نيوتن"], correctIndex: 1, solution: "F = B×I×L×sinθ = 0.3×4×10×1 = 12 نيوتن." },
+{ 
+    text: "أكمل معادلـة الاضمحلال التالية: <br><div style='direction: ltr; font-weight: bold; margin: 10px 0;'><sup>238</sup><sub>92</sub>U &rarr; <sup>234</sup><sub>90</sub>Th + ......</div>", 
+    options: ["جسيم بيتا (&beta;<sup>-</sup>)", "جسيم ألفا (&alpha;)", "نيوترون", "بوزيترون"], 
+    correctIndex: 1, 
+    solution: "نلاحظ نقص العدد الكتلي بمقدار 4 والعدد الذري بمقدار 2. <br>العنصر المفقود في المخرجات (من اليسار لليمين) هو: <br><div style='direction: ltr; font-weight: bold; color: #c0392b; margin-top: 5px;'>&rarr; <sup>4</sup><sub>2</sub>He (&alpha;)</div>" 
+},    { text: "عند استخدام قاعدة اليد اليسرى لفلمنج، فإن الإبهام يشير إلى اتجاه:", options: ["الحركة (القوة)", "التيار الكهربائي", "المجال المغناطيسي", "كل ما سبق"], correctIndex: 0, solution: "الإبهام ← الحركة، السبابة ← المجال، الوسطى ← التيار." },
+{ 
+    text: "أكمل معادلـة الاضمحلال التالية: <br><div style='direction: ltr; font-weight: bold; margin: 10px 0;'><sup>14</sup><sub>6</sub>C &rarr; <sup>14</sup><sub>7</sub>N + ...... + طاقة</div>", 
+    options: ["جسيم ألفا (&alpha;)", "جسيم بيتا السالب (&beta;<sup>-</sup>)", "بوزيترون (&beta;<sup>+</sup>)", "نيوترون"], 
+    correctIndex: 1, 
+    solution: "نلاحظ أن العدد الكتلي ثابت (14) والعدد الذري ازداد بمقدار 1. <br>العنصر المفقود في المخرجات (من اليسار لليمين) هو: <br><div style='direction: ltr; font-weight: bold; color: #2980b9; margin-top: 5px;'>&rarr; <sup>0</sup><sub>-1</sub>e (&beta;<sup>-</sup>)</div>" 
+},    { text: "تزداد قوة المجال المغناطيسي عند نقطة من سلك مستقيم عندما:", options: ["تزداد شدة التيار ويزداد البعد", "تزداد شدة التيار ويقل البعد", "تقل شدة التيار ويقل البعد", "تقل شدة التيار ويزداد البعد"], correctIndex: 1, solution: "B = μI/(2πr) ، تتناسب طرداً مع I وعكساً مع r." },
+    { text: "وحدة قياس كثافة الفيض المغناطيسي هي:", options: ["ويبر (Wb)", "ويبر/متر² (Tesla)", "ويبر/متر (Wb/m)", "متر/ويبر (m/Wb)"], correctIndex: 1, solution: "وحدة كثافة الفيض المغناطيسي هي التسلا = ويبر/متر²." },
+    { text: "في المحول الكهربائي الرفعي للجهد (Step-up)، العلاقة بين عدد اللفات هي:", options: ["N_s < N_p", "N_p = N_s", "N_p < N_s", "N_s = 2 N_p"], correctIndex: 2, solution: "الجهد يزداد عندما N_p < N_s، أي عدد لفات الثانوي أكبر من الابتدائي." },
+    { text: "ملف عدد لفاته 100 لفة يتغير فيه الفيض من 0.04 Wb إلى 0.02 Wb خلال 0.01 ثانية، فإن القوة الدافعة المتوسطة هي:", options: ["200 V", "7 V", "8 V", "5 V"], correctIndex: 0, solution: "ε = N×(ΔΦ/Δt) = 100×(0.02/0.01)=100×2=200 فولت." }
+];
+
+// =====================================================
+// دوال العرض
+// =====================================================
+
+// عرض أسئلة صح/خطأ
+function renderTrueFalse() {
+    const container = document.getElementById('tf-questions-container');
+    container.innerHTML = '';
+    trueFalseQuestions.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.setAttribute('data-qid', `tf-${idx}`);
+        card.innerHTML = `
+            <div class="question-text">❓ ${idx+1}. ${q.text}</div>
+            <div class="tf-options">
+                <div class="tf-btn" data-value="true">✅ صح</div>
+                <div class="tf-btn" data-value="false">❌ خطأ</div>
+            </div>
+            <button class="check-btn" data-type="tf" data-idx="${idx}">🔍 تحقق من إجابتي</button>
+            <div class="feedback" id="feedback-tf-${idx}"></div>
+        `;
+        container.appendChild(card);
+
+        // إضافة حدث الاختيار
+        const btns = card.querySelectorAll('.tf-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                card.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                card.setAttribute('data-selected', btn.getAttribute('data-value'));
+            });
+        });
+    });
+}
+
+// عرض أسئلة اختيار من متعدد
+function renderMultipleChoice() {
+    const container = document.getElementById('mcq-questions-container');
+    container.innerHTML = '';
+    multipleChoiceQuestions.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.setAttribute('data-qid', `mcq-${idx}`);
+        let optionsHtml = `<div class="question-text">❓ ${idx+1}. ${q.text}</div><div class="options">`;
+        q.options.forEach((opt, optIdx) => {
+            optionsHtml += `
+                <div class="option" data-opt-index="${optIdx}">
+                    <input type="radio" name="mcq-${idx}" value="${optIdx}">
+                    <label>${opt}</label>
+                </div>
+            `;
+        });
+        optionsHtml += `</div><button class="check-btn" data-type="mcq" data-idx="${idx}">🔍 تحقق من إجابتي</button>
+                        <div class="feedback" id="feedback-mcq-${idx}"></div>`;
+        card.innerHTML = optionsHtml;
+        container.appendChild(card);
+
+        // إضافة حدث الاختيار
+        card.querySelectorAll('.option').forEach(optDiv => {
+            const radio = optDiv.querySelector('input');
+            optDiv.addEventListener('click', () => {
+                radio.checked = true;
+                card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                optDiv.classList.add('selected');
+                card.setAttribute('data-selected', optDiv.getAttribute('data-opt-index'));
+            });
+            if (radio) {
+                radio.addEventListener('change', (e) => {
+                    card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                    optDiv.classList.add('selected');
+                    card.setAttribute('data-selected', e.target.value);
+                });
+            }
+        });
+    });
+}
+
+// التحقق من إجابة صح/خطأ
+function checkTFAnswer(idx) {
+    const card = document.querySelector(`.question-card[data-qid="tf-${idx}"]`);
+    const selected = card.getAttribute('data-selected');
+    const question = trueFalseQuestions[idx];
+    const feedbackDiv = document.getElementById(`feedback-tf-${idx}`);
+    
+    if (!selected) {
+        feedbackDiv.innerHTML = "⚠️ الرجاء اختيار إجابة أولاً";
+        feedbackDiv.className = "feedback wrong-feedback";
+        return;
+    }
+    
+    const userAnswer = selected === 'true';
+    const isCorrect = (userAnswer === question.correct);
+    const correctStr = question.correct ? "صح ✅" : "خطأ ❌";
+    const userStr = userAnswer ? "صح" : "خطأ";
+    
+    if (isCorrect) {
+        feedbackDiv.innerHTML = `🎉 إجابتك صحيحة! 🎉<br>الإجابة الصحيحة: ${correctStr}<div class="steps">📖 خطوات الحل:<br>${question.solution || "لا توجد خطوات تفصيلية."}</div>`;
+        feedbackDiv.className = "feedback correct-feedback";
+    } else {
+        feedbackDiv.innerHTML = `❌ إجابتك خاطئة.<br>إجابتك: ${userStr}<br>الإجابة الصحيحة: ${correctStr}<div class="steps">📖 خطوات الحل:<br>${question.solution || "لا توجد خطوات تفصيلية."}</div>`;
+        feedbackDiv.className = "feedback wrong-feedback";
+    }
+}
+
+// التحقق من إجابة اختيار من متعدد
+function checkMCQAnswer(idx) {
+    const card = document.querySelector(`.question-card[data-qid="mcq-${idx}"]`);
+    const selected = card.getAttribute('data-selected');
+    const question = multipleChoiceQuestions[idx];
+    const feedbackDiv = document.getElementById(`feedback-mcq-${idx}`);
+    
+    if (!selected) {
+        feedbackDiv.innerHTML = "⚠️ الرجاء اختيار إجابة أولاً";
+        feedbackDiv.className = "feedback wrong-feedback";
+        return;
+    }
+    
+    const userIndex = parseInt(selected);
+    const isCorrect = (userIndex === question.correctIndex);
+    const correctStr = question.options[question.correctIndex];
+    const userStr = question.options[userIndex];
+    
+    if (isCorrect) {
+        feedbackDiv.innerHTML = `🎉 إجابتك صحيحة! 🎉<br>الإجابة الصحيحة: ${correctStr}<div class="steps">📖 خطوات الحل:<br>${question.solution || "لا توجد خطوات تفصيلية."}</div>`;
+        feedbackDiv.className = "feedback correct-feedback";
+    } else {
+        feedbackDiv.innerHTML = `❌ إجابتك خاطئة.<br>إجابتك: ${userStr}<br>الإجابة الصحيحة: ${correctStr}<div class="steps">📖 خطوات الحل:<br>${question.solution || "لا توجد خطوات تفصيلية."}</div>`;
+        feedbackDiv.className = "feedback wrong-feedback";
+    }
+}
+
+// إضافة مستمعات لأزرار التحقق (بعد تحميل الصفحة)
+function attachCheckListeners() {
+    // صح/خطأ
+    document.querySelectorAll('.check-btn[data-type="tf"]').forEach(btn => {
+        btn.removeEventListener('click', window.tfHandler);
+        window.tfHandler = () => checkTFAnswer(parseInt(btn.getAttribute('data-idx')));
+        btn.addEventListener('click', window.tfHandler);
+    });
+    // اختيار متعدد
+    document.querySelectorAll('.check-btn[data-type="mcq"]').forEach(btn => {
+        btn.removeEventListener('click', window.mcqHandler);
+        window.mcqHandler = () => checkMCQAnswer(parseInt(btn.getAttribute('data-idx')));
+        btn.addEventListener('click', window.mcqHandler);
+    });
+}
+
+// التبويبات
+function setupTabs() {
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+        });
+    });
+}
+
+// تحميل الصفحة
+renderTrueFalse();
+renderMultipleChoice();
+setupTabs();
+setTimeout(attachCheckListeners, 100);
+</script>
+</body>
+</html>

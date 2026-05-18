@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الفيزياء النووية - النشاط الإشعاعي | الثالث الثانوي</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #eef2f5;
+        margin: 0;
+        padding: 20px;
+        color: #1e2a3e;
+    }
+    .container {
+        max-width: 1100px;
+        margin: auto;
+        background: white;
+        border-radius: 28px;
+        box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+        padding: 25px;
+    }
+    h1 {
+        text-align: center;
+        color: #0b3b5f;
+        margin-top: 0;
+    }
+    .badge-group {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .badge {
+        background: #0b3b5f;
+        color: white;
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 40px;
+        font-size: 13px;
+        margin: 0 4px 10px;
+    }
+    .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        background: #e2e8f0;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 40px;
+        font-size: 0.95rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+        color: #1e293b;
+    }
+    .tab-btn.active {
+        background: #0b3b5f;
+        color: white;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    .question-card {
+        background: #f9fafb;
+        border-radius: 20px;
+        padding: 18px;
+        margin: 18px 0;
+        border-right: 5px solid #00a8cc;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .question-text {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #0c4e6e;
+    }
+    .tf-options {
+        display: flex;
+        gap: 15px;
+        margin: 15px 0;
+    }
+    .tf-btn {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        border-radius: 50px;
+        border: 1px solid #ccc;
+        background: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+    .tf-btn.selected {
+        background: #0b3b5f;
+        color: white;
+        border-color: #0b3b5f;
+    }
+    .options {
+        margin: 15px 0;
+    }
+    .option {
+        background: white;
+        border: 1px solid #cbd5e1;
+        border-radius: 50px;
+        padding: 8px 18px;
+        margin: 8px 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .option.selected {
+        background: #d9effa;
+        border-color: #0077b6;
+    }
+    .option input {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    .check-btn {
+        background: #2c7a4d;
+        color: white;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 40px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 12px;
+        transition: 0.2s;
+    }
+    .check-btn:hover {
+        background: #1f5e3a;
+    }
+    .feedback {
+        margin-top: 12px;
+        padding: 10px;
+        border-radius: 16px;
+        font-weight: bold;
+        background: #f1f3f4;
+        font-size: 0.9rem;
+    }
+    .correct-feedback {
+        background: #ccf0d6;
+        color: #14532d;
+        border-right: 5px solid #2e7d32;
+    }
+    .wrong-feedback {
+        background: #ffe2e2;
+        color: #991b1b;
+        border-right: 5px solid #c62828;
+    }
+    .steps {
+        margin-top: 8px;
+        padding: 8px;
+        background: #fef9e3;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        color: #5e3a00;
+        text-align: right;
+    }
+    footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 12px;
+        color: #5b6e8c;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>⚛️ الفيزياء النووية والنشاط الإشعاعي ⚛️</h1>
+    <div class="badge-group">
+        <span class="badge">📘 الثالث الثانوي</span>
+        <span class="badge">⚛️ فيزياء نووية</span>
+        <span class="badge">☢️ النشاط الإشعاعي</span>
+    </div>
+
+    <div class="tabs">
+
+        
+        <button class="tab-btn active" data-tab="tab-tf">✅ صح / خطأ</button>
+        <button class="tab-btn" data-tab="tab-mcq">🔘 اختيار من متعدد</button>
+
+        <button class="tab-btn" data-tab="tab-mcq">        <a href="unit_9.html" class="home-btn"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+
+
+    </div>
+
+    <div id="tab-tf" class="tab-content active">
+        <div id="tf-container"></div>
+    </div>
+    <div id="tab-mcq" class="tab-content">
+        <div id="mcq-container"></div>
+    </div>
+    <footer>اختر إجابتك لكل سؤال ثم اضغط "تحقق" - خطوات الحل للأسئلة الحسابية</footer>
+</div>
+
+<script>
+// =====================================================
+// أسئلة صح / خطأ - الفيزياء النووية
+// =====================================================
+const tfQuestions = [
+    { text: "جسيمات ألفا هي نواة ذرة الهيليوم.", correct: true, solution: "جسيم ألفا يتكون من 2 بروتون و2 نيوترون، وهو نواة الهيليوم." },
+    { text: "جسيمات ألفا لها قدرة كبيرة على التأين ومساراتها مستقيمة وسميكة.", correct: true, solution: "بسبب كتلتها الكبيرة وشحنتها الموجبة، تسبب تأيناً كبيراً ومسارها مستقيم." },
+    { text: "جسيمات بيتا هي سيل من الإلكترونات ذات طاقة عالية.", correct: true, solution: "جسيم بيتا السالب هو إلكترون عالي الطاقة ينبعث من النواة." },
+    { text: "أشعة جاما موجبة الشحنة ولها قدرة عالية على الاختراق.", correct: false, solution: "أشعة جاما هي موجات كهرومغناطيسية متعادلة الشحنة وليس لها كتلة." },
+    { text: "تتأثر عملية الاضمحلال الإشعاعي بالمجالات الكهربائية والمغناطيسية.", correct: false, solution: "الاضمحلال الإشعاعي ظاهرة نووية لا تتأثر بالمجالات الخارجية." },
+    { text: "لجسيمات ألفا قدرة على الاختراق أكبر من جسيمات بيتا.", correct: false, solution: "قدرة الاختراع: ألفا < بيتا < جاما." },
+    { text: "يمكن إيقاف جسيمات ألفا بقطعة رقيقة من الورق.", correct: true, solution: "جسيمات ألفا كبيرة الحجم وثقيلة، تتوقف بسهولة." },
+    { text: "الغرفة السحابية من طرق الكشف عن النشاط الإشعاعي.", correct: true, solution: "تعتمد على تكثيف البخار حول مسارات الجسيمات المشحونة." },
+    { text: "عداد جيجر-مولر يستخدم للكشف عن الجسيمات المشحونة فقط.", correct: false, solution: "يكشف أيضاً أشعة جاما بعد تحويلها إلى إلكترونات." },
+    { text: "تحفظ المصادر المشعة في حجرات من الرصاص.", correct: true, solution: "الرصاص فعال في امتصاص الإشعاعات النووية." },
+    { text: "الانبعاثات الناتجة من اضمحلال اليورانيوم مكنت بيكريل من اكتشاف النشاط الإشعاعي.", correct: true, solution: "اكتشف بيكريل عام 1896 تأثر الأفلام الفوتوغرافية باليورانيوم." },
+    { text: "الكربون-14 يستخدم في تحديد عمر الآثار القديمة.", correct: true, solution: "تأريخ الكربون المشع يستخدم للعينات العضوية حتى 50000 سنة." },
+    { text: "التعرض المفرط للإشعاع يؤدي إلى حروق وأضرار صحية.", correct: true, solution: "الإشعاع يؤثر على الخلايا الحية وقد يسبب السرطان." },
+    { text: "نموذج رذرفورد النووي للذرة بني على تجربة تشتت جسيمات ألفا.", correct: true, solution: "استنتج وجود نواة صغيرة وكثيفة موجبة الشحنة." },
+    { text: "أشعة جاما يمكن إيقافها بطبقة رقيقة من الألومنيوم.", correct: false, solution: "أشعة جاما عالية الاختراق تحتاج لرصاص سميك لإيقافها." },
+    { text: "عدة الخلفية الإشعاعية ناتجة من الإشعاع الكوني والمصادر الطبيعية.", correct: true, solution: "توجد إشعاعات طبيعية في التربة والهواء والغذاء." },
+    { text: "النشاط الإشعاعي ظاهرة عشوائية لا يمكن التنبؤ بزمن اضمحلال نواة معينة.", correct: true, solution: "الاضمحلال الإشعاعي عملية احتمالية وليست حتمية." }
+];
+
+// =====================================================
+// أسئلة اختيار من متعدد - الفيزياء النووية
+// =====================================================
+const mcqQuestions = [
+    { text: "نواة الهيليوم (2 بروتون، 2 نيوترون) تسمى:", options: ["جسيم ألفا", "جسيم بيتا", "أشعة جاما", "بوزيترون"], correctIndex: 0, solution: "جسيم ألفا هو نواة الهيليوم (⁴He₂)." },
+    { text: "أكثر أنواع الإشعاعات قدرة على الاختراق هي:", options: ["ألفا (α)", "بيتا (β)", "جاما (γ)", "كلها متساوية"], correctIndex: 2, solution: "أشعة جاما موجات كهرومغناطيسية بتردد عالٍ جداً." },
+    { text: "أكثر أنواع الإشعاعات قدرة على التأين هي:", options: ["ألفا (α)", "بيتا (β)", "جاما (γ)", "أشعة إكس"], correctIndex: 0, solution: "بسبب كتلة جسيم ألفا الكبيرة وشحنته الموجبة." },
+    { text: "عداد جيجر-مولر يستخدم للكشف عن:", options: ["الإشعاعات فقط", "التيار الكهربائي", "المجال المغناطيسي", "درجة الحرارة"], correctIndex: 0, solution: "جهاز الكشف عن الجسيمات والإشعاعات النووية." },
+    { text: "أداة الكشف التي تعتمد على تكثف البخار حول مسار الجسيمات:", options: ["عداد جيجر", "الغرفة السحابية", "الكشاف الكهربائي", "المطياف"], correctIndex: 1, solution: "غرفة ويلسون السحابية تُظهر مسار الجسيمات المشحونة." },
+    { text: "يستخدم الكوبالت-60 (Co-60) في:", options: ["تأريخ الآثار", "علاج الأورام السرطانية", "توليد الكهرباء", "كشف التسربات"], correctIndex: 1, solution: "الكوبلت-60 يستخدم في العلاج الإشعاعي للأورام." },
+    { text: "يستخدم الكربون-14 (C-14) في:", options: ["علاج السرطان", "تأريخ العينات العضوية", "توليد الكهرباء", "صناعة القنابل"], correctIndex: 1, solution: "تأريخ الكربون المشع لعينات تصل إلى 50000 سنة." },
+    { text: "إذا كان عمر النصف لعنصر مشع 10 أيام، فبعد 30 يوماً تتبقى من العينة:", options: ["1/2", "1/4", "1/8", "1/16"], correctIndex: 2, solution: "30 يوم = 3 فترات عمر نصف. الكمية المتبقية = (1/2)³ = 1/8." },
+    { text: "مادة مشعة عمر نصفها 5 أيام، الزمن اللازم لتناقص نشاطها إلى 1/16 نشاطها الأصلي هو:", options: ["10 أيام", "15 يوماً", "20 يوماً", "25 يوماً"], correctIndex: 2, solution: "1/16 = (1/2)⁴ → 4 فترات × 5 أيام = 20 يوماً." },
+    { text: "جسيمات بيتا هي في الأصل:", options: ["بروتونات", "نيوترونات", "إلكترونات", "بوزيترونات"], correctIndex: 2, solution: "جسيم بيتا السالب هو إلكترون عالي الطاقة." },
+    { text: "العالم الذي اكتشف النشاط الإشعاعي هو:", options: ["رذرفورد", "بيكريل", "فاراداي", "نيوتن"], correctIndex: 1, solution: "هنري بيكريل اكتشف النشاط الإشعاعي عام 1896." },
+    { text: "تستخدم ألواح الرصاص السميكة للحماية من:", options: ["أشعة ألفا", "أشعة بيتا", "أشعة جاما", "كل ما سبق"], correctIndex: 2, solution: "أشعة جاما عالية الاختراق وتحتاج لرصاص سميك." },
+    { text: "يستخدم اليورانيوم-235 في:", options: ["توليد الكهرباء في المفاعلات", "علاج السرطان", "تأريخ الآثار", "كشف التسربات"], correctIndex: 0, solution: "وقود المفاعلات النووية والقنابل الذرية." },
+    { text: "في اضمحلال بيتا السالب (β⁻) يزداد العدد الذري بمقدار:", options: ["صفر", "واحد", "اثنان", "ينقص بواحد"], correctIndex: 1, solution: "يتحول نيوترون → بروتون + إلكترون، فيزداد العدد الذري بواحد." }
+];
+
+// =====================================================
+// عرض الأسئلة
+// =====================================================
+function renderTF() {
+    const container = document.getElementById('tf-container');
+    container.innerHTML = '';
+    tfQuestions.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.setAttribute('data-qid', `tf-${idx}`);
+        card.innerHTML = `
+            <div class="question-text">❓ ${idx+1}. ${q.text}</div>
+            <div class="tf-options">
+                <div class="tf-btn" data-value="true">✅ صح</div>
+                <div class="tf-btn" data-value="false">❌ خطأ</div>
+            </div>
+            <button class="check-btn" data-type="tf" data-idx="${idx}">🔍 تحقق</button>
+            <div class="feedback" id="feedback-tf-${idx}"></div>
+        `;
+        container.appendChild(card);
+        card.querySelectorAll('.tf-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                card.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                card.setAttribute('data-selected', btn.getAttribute('data-value'));
+            });
+        });
+    });
+}
+
+function renderMCQ() {
+    const container = document.getElementById('mcq-container');
+    container.innerHTML = '';
+    mcqQuestions.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.setAttribute('data-qid', `mcq-${idx}`);
+        let html = `<div class="question-text">❓ ${idx+1}. ${q.text}</div><div class="options">`;
+        q.options.forEach((opt, optIdx) => {
+            html += `<div class="option" data-opt-index="${optIdx}">
+                        <input type="radio" name="mcq-${idx}" value="${optIdx}">
+                        <label>${opt}</label>
+                    </div>`;
+        });
+        html += `</div><button class="check-btn" data-type="mcq" data-idx="${idx}">🔍 تحقق</button>
+                <div class="feedback" id="feedback-mcq-${idx}"></div>`;
+        card.innerHTML = html;
+        container.appendChild(card);
+        card.querySelectorAll('.option').forEach(optDiv => {
+            const radio = optDiv.querySelector('input');
+            optDiv.addEventListener('click', () => {
+                radio.checked = true;
+                card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                optDiv.classList.add('selected');
+                card.setAttribute('data-selected', optDiv.getAttribute('data-opt-index'));
+            });
+            if (radio) {
+                radio.addEventListener('change', (e) => {
+                    card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                    optDiv.classList.add('selected');
+                    card.setAttribute('data-selected', e.target.value);
+                });
+            }
+        });
+    });
+}
+
+function checkTF(idx) {
+    const card = document.querySelector(`.question-card[data-qid="tf-${idx}"]`);
+    const selected = card.getAttribute('data-selected');
+    const q = tfQuestions[idx];
+    const feedback = document.getElementById(`feedback-tf-${idx}`);
+    if (!selected) { feedback.innerHTML = "⚠️ اختر إجابة أولاً"; feedback.className = "feedback wrong-feedback"; return; }
+    const userCorrect = (selected === 'true') === q.correct;
+    const correctStr = q.correct ? "صح ✅" : "خطأ ❌";
+    const userStr = selected === 'true' ? "صح" : "خطأ";
+    if (userCorrect) {
+        feedback.innerHTML = `🎉 صحيح! 🎉<br>الإجابة: ${correctStr}<div class="steps">📖 ${q.solution || "لا توجد خطوات تفصيلية."}</div>`;
+        feedback.className = "feedback correct-feedback";
+    } else {
+        feedback.innerHTML = `❌ خطأ.<br>إجابتك: ${userStr}<br>الصواب: ${correctStr}<div class="steps">📖 ${q.solution || "لا توجد خطوات تفصيلية."}</div>`;
+        feedback.className = "feedback wrong-feedback";
+    }
+}
+
+function checkMCQ(idx) {
+    const card = document.querySelector(`.question-card[data-qid="mcq-${idx}"]`);
+    const selected = card.getAttribute('data-selected');
+    const q = mcqQuestions[idx];
+    const feedback = document.getElementById(`feedback-mcq-${idx}`);
+    if (!selected) { feedback.innerHTML = "⚠️ اختر إجابة أولاً"; feedback.className = "feedback wrong-feedback"; return; }
+    const userIdx = parseInt(selected);
+    const isCorrect = (userIdx === q.correctIndex);
+    if (isCorrect) {
+        feedback.innerHTML = `🎉 صحيح! 🎉<br>الإجابة: ${q.options[q.correctIndex]}<div class="steps">📖 ${q.solution}</div>`;
+        feedback.className = "feedback correct-feedback";
+    } else {
+        feedback.innerHTML = `❌ خطأ.<br>إجابتك: ${q.options[userIdx]}<br>الصواب: ${q.options[q.correctIndex]}<div class="steps">📖 ${q.solution}</div>`;
+        feedback.className = "feedback wrong-feedback";
+    }
+}
+
+function attachEvents() {
+    document.querySelectorAll('.check-btn[data-type="tf"]').forEach(btn => {
+        btn.removeEventListener('click', window.tfHandler);
+        window.tfHandler = () => checkTF(parseInt(btn.dataset.idx));
+        btn.addEventListener('click', window.tfHandler);
+    });
+    document.querySelectorAll('.check-btn[data-type="mcq"]').forEach(btn => {
+        btn.removeEventListener('click', window.mcqHandler);
+        window.mcqHandler = () => checkMCQ(parseInt(btn.dataset.idx));
+        btn.addEventListener('click', window.mcqHandler);
+    });
+}
+
+function setupTabs() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(btn.dataset.tab).classList.add('active');
+        });
+    });
+}
+
+renderTF();
+renderMCQ();
+setupTabs();
+setTimeout(attachEvents, 100);
+</script>
+</body>
+</html>
