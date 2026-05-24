@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الميكانيكا المؤتمتة - مدرسة أمجاد أفريقيا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --success: #16a34a;
+            --error: #dc2626;
+            --text-main: #334155;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: #cbd5e1; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+        .app-container {
+            width: 100%; max-width: 900px; background: var(--card-bg);
+            border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .header { background-color: var(--primary); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .school-badge { background: #ea580c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+        
+        .question-container { padding: 30px; text-align: center;}
+        .question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: rtl;}
+        .q-source-span { background: var(--accent); color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold;}
+        .question-text { font-size: 18px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; font-weight: 600; text-align: right;}
+        
+        .question-graphic-area {
+            max-width: 100%; width: 500px; margin: 0 auto 20px auto; padding: 15px;
+            border: 2px dashed #cbd5e1; border-radius: 8px; background: #ffffff;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .steps-container { padding: 20px 30px; background-color: var(--bg); }
+        .step-card {
+            background: white; border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 20px; margin-bottom: 20px; opacity: 0.4; pointer-events: none;
+            transition: all 0.3s ease; border-right: 5px solid #94a3b8;
+        }
+        .step-card.active { opacity: 1; pointer-events: auto; border-right-color: var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .step-card.completed { opacity: 1; pointer-events: none; border-right-color: var(--success); background-color: #f0fdf4; }
+        .step-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-align: right;}
+        .step-question { font-size: 15px; margin-bottom: 15px; color: var(--text-main); text-align: right;}
+
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; direction: rtl; }
+        .option-btn {
+            background: white; border: 2px solid var(--border-color); padding: 12px;
+            border-radius: 6px; cursor: pointer; text-align: right; font-size: 15px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .option-btn:hover { border-color: var(--accent); background: #eff6ff; }
+        .option-btn.correct { border-color: var(--success); background: #dcfce7; color: #166534; }
+        .option-btn.wrong { border-color: var(--error); background: #fee2e2; color: #991b1b; }
+        .feedback-box { margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; display: none; text-align: right; }
+        .feedback-box.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block; }
+        
+        .navigation-area { padding: 0 30px 30px 30px; display: flex; justify-content: space-between; background: var(--bg); }
+        .nav-btn { padding: 12px 25px; background: var(--primary); color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 6px; }
+        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; color: #94a3b8; }
+
+        .print-section { text-align: center; margin: 20px 0 50px 0; width: 100%; max-width: 900px; display: flex; gap: 15px; justify-content: center;}
+        .print-btn { background-color: var(--success); color: white; padding: 15px 35px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .bot-link-btn { background-color: var(--accent); color: white; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+        #printable-pdf-document { display: none; }
+
+        /* ==========================================================
+           تنسيق الطباعة التلقائي لكراسة المراجعة لـ مدرسة أمجاد أفريقيا
+           ========================================================== */
+        @media print {
+            body { background: white; padding: 0; }
+            .app-container, .print-section { display: none !important; }
+            #printable-pdf-document { display: block !important; direction: rtl; width: 100%; padding: 10px; }
+            
+            .pdf-school-header { text-align: center; font-size: 16px; font-weight: bold; color: #ea580c; margin-bottom: 5px; letter-spacing: 0.5px; }
+            .pdf-page-title { text-align: center; color: #0f172a; margin-bottom: 5px; font-size: 24px; font-weight: 800; border-bottom: 3px double #0f172a; padding-bottom: 10px; }
+            .pdf-student-dedication { text-align: center; font-size: 14px; color: #475569; margin-bottom: 15px; font-style: italic; }
+            .pdf-bot-url-area { text-align: center; font-size: 13px; color: #2563eb; margin-bottom: 25px; font-weight: bold; direction: ltr; }
+            
+            .pdf-question-block { page-break-inside: avoid; margin-bottom: 35px; border: 1px solid #cbd5e1; padding: 20px; border-radius: 8px; background: #ffffff; }
+            .pdf-q-title { font-size: 16px; font-weight: bold; color: #2563eb; margin-bottom: 10px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 5px; }
+            .pdf-q-text { font-size: 15px; color: #334155; line-height: 1.6; margin-bottom: 15px; text-align: justify; }
+            .pdf-graphic { display: flex; justify-content: center; margin: 15px 0; }
+            
+            .pdf-solution-box { background: #f8fafc; border-right: 4px solid #16a34a; padding: 15px; margin-top: 15px; border-radius: 0 6px 6px 0; }
+            .pdf-sol-title { font-weight: bold; color: #166534; margin-bottom: 8px; font-size: 15px; }
+            .pdf-sol-steps { font-size: 14px; color: #334155; line-height: 1.8; }
+            .pdf-sol-steps div { margin-bottom: 6px; }
+            .pdf-final-ans { font-weight: 800; color: #0f172a; margin-top: 10px; background: #e2f8e9; padding: 5px 10px; display: inline-block; border-radius: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i> منصة الميكانيكا التفاعلية المؤتمتة</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا البيضاء</span>
+        <span id="question-counter"></span>
+    </div>
+    <div class="question-container">
+        <div class="question-meta"><span class="q-source-span" id="q-source"></span></div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+    </div>
+    <div class="steps-container" id="steps-container"></div>
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">&rarr; المسألة السابقة</button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">المسألة التالية &larr;</button>
+    </div>
+</div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> طباعة كراس المسائل والحلول النموذجية (PDF)
+    </button>
+    <a href="#" target="_blank" class="bot-link-btn">
+        <i class="fa-solid fa-robot"></i> الانتقال إلى بوت المنصة الرسمي
+    </a>
+</div>
+
+<div id="printable-pdf-document">
+    <div class="pdf-school-header">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+    <div class="pdf-page-title">كراسة الحلول النموذجية والمراجعة الورقية: مسائل البكرات المتقدمة</div>
+    <div class="pdf-student-dedication">إهداء خاص إلى الطلبة المتميزين:      </div>
+    <div class="pdf-bot-url-area">رابط البوت الرسمي للمنصة: http://t.me/amjad_africa2027bot</div>
+    <div id="dynamic-pdf-questions-area"></div>
+</div>
+<script src="bakarat.js"></script>
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>منصة الميكانيكا المؤتمتة - مدرسة أمجاد أفريقيا</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+:root {
+
+--primary: #0f172a;
+
+--accent: #2563eb;
+
+--bg: #f8fafc;
+
+--card-bg: #ffffff;
+
+--success: #16a34a;
+
+--error: #dc2626;
+
+--text-main: #334155;
+
+--border-color: #e2e8f0;
+
+}
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+
+body { background-color: #cbd5e1; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+
+.app-container {
+
+width: 100%; max-width: 900px; background: var(--card-bg);
+
+border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden;
+
+margin-bottom: 20px;
+
+}
+
+
+.header { background-color: var(--primary); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+
+.school-badge { background: #ea580c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+
+.question-container { padding: 30px; text-align: center;}
+
+.question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: rtl;}
+
+.q-source-span { background: var(--accent); color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold;}
+
+.question-text { font-size: 18px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; font-weight: 600; text-align: right;}
+
+.question-graphic-area {
+
+max-width: 100%; width: 500px; margin: 0 auto 20px auto; padding: 15px;
+
+border: 2px dashed #cbd5e1; border-radius: 8px; background: #ffffff;
+
+display: flex; justify-content: center; align-items: center;
+
+}
+
+
+.steps-container { padding: 20px 30px; background-color: var(--bg); }
+
+.step-card {
+
+background: white; border: 1px solid var(--border-color); border-radius: 8px;
+
+padding: 20px; margin-bottom: 20px; opacity: 0.4; pointer-events: none;
+
+transition: all 0.3s ease; border-right: 5px solid #94a3b8;
+
+}
+
+.step-card.active { opacity: 1; pointer-events: auto; border-right-color: var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+.step-card.completed { opacity: 1; pointer-events: none; border-right-color: var(--success); background-color: #f0fdf4; }
+
+.step-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-align: right;}
+
+.step-question { font-size: 15px; margin-bottom: 15px; color: var(--text-main); text-align: right;}
+
+
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; direction: rtl; }
+
+.option-btn {
+
+background: white; border: 2px solid var(--border-color); padding: 12px;
+
+border-radius: 6px; cursor: pointer; text-align: right; font-size: 15px;
+
+display: flex; align-items: center; justify-content: space-between;
+
+}
+
+.option-btn:hover { border-color: var(--accent); background: #eff6ff; }
+
+.option-btn.correct { border-color: var(--success); background: #dcfce7; color: #166534; }
+
+.option-btn.wrong { border-color: var(--error); background: #fee2e2; color: #991b1b; }
+
+.feedback-box { margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; display: none; text-align: right; }
+
+.feedback-box.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block; }
+
+.navigation-area { padding: 0 30px 30px 30px; display: flex; justify-content: space-between; background: var(--bg); }
+
+.nav-btn { padding: 12px 25px; background: var(--primary); color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 6px; }
+
+.nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; color: #94a3b8; }
+
+
+.print-section { text-align: center; margin: 20px 0 50px 0; width: 100%; max-width: 900px; display: flex; gap: 15px; justify-content: center;}
+
+.print-btn { background-color: var(--success); color: white; padding: 15px 35px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+.bot-link-btn { background-color: var(--accent); color: white; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+
+#printable-pdf-document { display: none; }
+
+
+@media print {
+
+body { background: white; padding: 0; margin: 0; }
+
+.app-container, .print-section { display: none !important; }
+
+#printable-pdf-document { display: block !important; direction: rtl; width: 100%; padding: 5px; margin: 0; }
+
+.pdf-school-header { text-align: center; font-size: 15px; font-weight: bold; color: #ea580c; margin: 0; }
+
+.pdf-page-title { text-align: center; color: #0f172a; margin: 5px 0; font-size: 20px; font-weight: 800; border-bottom: 2px solid #0f172a; padding-bottom: 5px; }
+
+.pdf-student-dedication { text-align: center; font-size: 13px; color: #475569; margin: 5px 0; font-style: italic; }
+
+.pdf-bot-url-area { text-align: center; font-size: 12px; color: #2563eb; margin: 5px 0 15px 0; font-weight: bold; direction: ltr; }
+
+.pdf-question-block { page-break-inside: avoid; margin-bottom: 25px; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px; background: #ffffff; }
+
+.pdf-q-title { font-size: 16px; font-weight: bold; color: #2563eb; margin-bottom: 8px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 4px; }
+
+.pdf-q-text { font-size: 14px; color: #334155; line-height: 1.5; margin-bottom: 12px; text-align: justify; }
+
+.pdf-graphic { display: flex; justify-content: center; margin: 10px 0; }
+
+.pdf-solution-box { background: #f8fafc; border-right: 4px solid #16a34a; padding: 12px; margin-top: 12px; border-radius: 0 6px 6px 0; }
+
+.pdf-sol-title { font-weight: bold; color: #166534; margin-bottom: 6px; font-size: 14px; }
+
+.pdf-sol-steps { font-size: 13px; color: #334155; line-height: 1.7; }
+
+.pdf-sol-steps div { margin-bottom: 6px; }
+
+.pdf-final-ans { font-weight: 800; color: #0f172a; margin-top: 8px; background: #e2f8e9; padding: 4px 8px; display: inline-block; border-radius: 4px; }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="app-container">
+
+<div class="header">
+
+<h2><i class="fa-solid fa-desktop"></i> منصة الميكانيكا التفاعلية المؤتمتة</h2>
+
+<span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا البيضاء</span>
+
+<span id="question-counter"></span>
+
+</div>
+
+<div class="question-container">
+
+<div class="question-meta"><span class="q-source-span" id="q-source"></span></div>
+
+<div class="question-text" id="main-question-text"></div>
+
+<div class="question-graphic-area" id="graphic-container"></div>
+
+</div>
+
+<div class="steps-container" id="steps-container"></div>
+
+<div class="navigation-area">
+
+<button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">→ المسألة السابقة</button>
+
+<button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">المسألة التالية ←</button>
+
+</div>
+
+</div>
+
+
+<div class="print-section">
+
+<button class="print-btn" onclick="triggerSmartPrint()">
+
+<i class="fa-solid fa-file-pdf"></i> طباعة كراس المسائل والحلول النموذجية (PDF)
+
+</button>
+
+<a href="#" target="_blank" class="bot-link-btn">
+
+<i class="fa-solid fa-robot"></i> الانتقال إلى بوت المنصة الرسمي
+
+</a>
+
+</div>
+
+
+<div id="printable-pdf-document">
+
+<div class="pdf-school-header">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+
+<div class="pdf-page-title">كراسة الحلول النموذجية والمراجعة الورقية</div>
+
+<div class="pdf-student-dedication">إهداء خاص إلى الطلبة المتميزين</div>
+
+<div class="pdf-bot-url-area">رابط البوت الرسمي: http://t.me/amjad_africa2027bot</div>
+
+<div id="dynamic-pdf-questions-area"></div>
+
+</div>
+
+
+<script>
+
+const questionsMatrix = [
+
+{
+
+title: "المسألة الأولى: آلة أتوود الأساسية (تطبيق معادلات الحركة لنيوتن)",
+
+text: "كتلتان m₁ = 3 kg و m₂ = 5 kg متصلتان بخيط خفيف يمر فوق بكرة ملساء معلقتان رأسياً، بفرض أن عجلة الجاذبية g = 10 m/s². تحركت المجموعة من السكون، احسب عجلة الحركة المشتركة (a) وقوة الشد في الخيط (T).",
+
+svgCode: `<svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="background:#fafafa; border-radius:8px; display:block; margin:0 auto;">
+
+<line x1="160" y1="15" x2="240" y2="15" stroke="#64748b" stroke-width="6" />
+
+<line x1="200" y1="15" x2="200" y2="45" stroke="#94a3b8" stroke-width="4" />
+
+<circle cx="200" cy="60" r="18" fill="#475569" stroke="#1e293b" stroke-width="2" />
+
+<line x1="182" y1="60" x2="182" y2="140" stroke="#0f172a" stroke-width="2" />
+
+<rect x="162" y="140" width="40" height="35" fill="#ea580c" rx="4" />
+
+<text x="182" y="162" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">m₂=5kg</text>
+
+<line x1="182" y1="135" x2="182" y2="100" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrow-up)" />
+
+<text x="170" y="112" fill="#dc3545" font-size="13" font-weight="bold">T</text>
+
+<line x1="218" y1="60" x2="218" y2="100" stroke="#0f172a" stroke-width="2" />
+
+<rect x="198" y="100" width="40" height="35" fill="#1e3a8a" rx="4" />
+
+<text x="218" y="122" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">m₁=3kg</text>
+
+<line x1="218" y1="95" x2="218" y2="65" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrow-up)" />
+
+<text x="228" y="78" fill="#dc3545" font-size="13" font-weight="bold">T</text>
+
+<path d="M 145 85 L 145 115" stroke="#28a745" stroke-width="2" marker-end="url(#arrow-down)" />
+
+<text x="140" y="75" fill="#28a745" font-size="10" font-weight="bold">▼ الحركة</text>
+
+<defs>
+
+<marker id="arrow-up" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+
+<path d="M 5 0 L 0 10 L 10 10 z" fill="#dc3545"/>
+
+</marker>
+
+<marker id="arrow-down" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+
+<path d="M 0 0 L 5 10 L 10 0 z" fill="#28a745"/>
+
+</marker>
+
+</defs>
+
+</svg>`,
+
+steps: [
+
+{ 
+
+title: "المحطة 1: تحديد اتجاه الحركة ومعادلة الجسم الأول الصاعد (3kg)", 
+
+question: "الكتلة الثانية (5kg) أثقل من الأولى (3kg)، بالتالي تتحرك المجموعة في اتجاه الجسم الأثقل. ما هي معادلة نيوتن الصحيحة للجسم الأول الصاعد لأعلى؟", 
+
+options: [
+
+{text: "T - 30 = 3a", isCorrect: true}, 
+
+{text: "30 - T = 3a", isCorrect: false}
+
+], 
+
+feedback: "تحليل سليم! بما أن الجسم الأول (3kg) صاعد لأعلى، فإن قوة الشد (T) تكون في اتجاه الحركة (موجبة) والوزن (30N) يعاكس الحركة لأسفل (سالب)، فتكون المعادلة: T - 30 = 3a." 
+
+},
+
+{ 
+
+title: "المحطة 2: معادلة الجسم الثاني الهابط لأسفل (5kg) حسب قانون نيوتن الثاني", 
+
+question: "وفقًا لقانون نيوتن الثاني: القوة المحصلة في اتجاه الحركة = الكتلة × العجلة. ما هي المعادلة الصحيحة للجسم الهابط؟", 
+
+options: [
+
+{text: "50 - T = 5a", isCorrect: true}, 
+
+{text: "T - 50 = 5a", isCorrect: false}
+
+], 
+
+feedback: "أحسنت! الجسم هابط لأسفل، إذن القوة في اتجاه الحركة هي الوزن (50N) موجب، والقوة المعاكسة هي الشد (T) سالب، فيكون: 50 - T = 5a، وهذه هي الصيغة الصحيحة لقانون نيوتن الثاني." 
+
+},
+
+{ 
+
+title: "المحطة 3: حساب المطالب (العجلة والشد) آنياً عبر التعويض", 
+
+question: "بجمع المعادلتين آنياً يختفي الشد وتنتج العجلة، ثم نعوض لإيجاد الشد. ما هي القيم النهائية؟", 
+
+options: [
+
+{text: "a = 2.5 m/s² || T = 37.5 N", isCorrect: true}, 
+
+{text: "a = 4 m/s² || T = 20 N", isCorrect: false}
+
+], 
+
+feedback: "رائع جدا! بالجمع نجد أن: 20 = 8a ومنها العجلة المشتركة a = 2.5 m/s². ثم من معادلة الجسم الهابط نجد أن قوة الشد T = 37.5 N." 
+
+}
+
+],
+
+pdfSolutionSteps: [
+
+"1) تحديد اتجاه الحركة أولاً: بما أن الكتلة الثانية m₂ (5kg) أثقل من الكتلة الأولى m₁ (3kg)، فإن المجموعة تتحرك في اتجاه الجسم الأثقل؛ أي أن m₂ تتحرك لأسفل بينما m₁ تتحرك لأعلى.",
+
+"2) معادلة الجسم الأول الصاعد (3kg): T - 30 = 3a  (المعادلة 1)",
+
+"3) <span style='color: #dc2626; font-weight: bold;'>معادلة الجسم الثاني الهابط (5kg) حسب قانون نيوتن الثاني: 50 - T = 5a  (المعادلة 2)</span>",
+
+"4) بجمع المعادلتين (1) و (2): (T - 30) + (50 - T) = 3a + 5a  ← 20 = 8a  ← a = 2.5 m/s²",
+
+"5) بالتعويض في المعادلة (2): 50 - T = 5 × 2.5  ← 50 - T = 12.5  ← T = 37.5 N"
+
+],
+
+pdfFinalAnswer: "<span style='font-weight: bold;'>الإجابة النهائية:</span><br>a = 2.5 m/s²<br>T = 37.5 N"
+
+}
+
+];
+
+
+let currentQIndex = 0;
+
+
+function renderActiveQuestion(index) {
+
+const data = questionsMatrix[index];
+
+document.getElementById('q-source').innerText = data.title;
+
+document.getElementById('main-question-text').innerText = data.text;
+
+document.getElementById('question-counter').innerText = `مسألة ${index + 1} / ${questionsMatrix.length}`;
+
+document.getElementById('graphic-container').innerHTML = data.svgCode;
+
+
+document.getElementById('prev-btn').disabled = index === 0;
+
+document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
+
+
+const stepsContainer = document.getElementById('steps-container');
+
+stepsContainer.innerHTML = '';
+
+
+data.steps.forEach((step, sIdx) => {
+
+let optionsHTML = '';
+
+step.options.forEach(opt => {
+
+optionsHTML += `<button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}">
+
+<span>${opt.text}</span> <i class="fa-regular fa-circle"></i>
+
+</button>`;
+
+});
+
+
+stepsContainer.innerHTML += `
+
+<div class="step-card ${sIdx === 0 ? 'active' : ''}" id="step-card-${sIdx}">
+
+<div class="step-title"><i class="fa-solid fa-play"></i> ${step.title}</div>
+
+<div class="step-question">${step.question}</div>
+
+<div class="options-grid">${optionsHTML}</div>
+
+<div class="feedback-box" id="feedback-${sIdx}"></div>
+
+</div>`;
+
+});
+
+}
+
+
+function checkLiveAnswer(btn, sIdx, isCorrect) {
+
+const card = document.getElementById(`step-card-${sIdx}`);
+
+const fb = document.getElementById(`feedback-${sIdx}`);
+
+card.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('correct', 'wrong'); b.querySelector('i').className = 'fa-regular fa-circle'; });
+
+
+if (isCorrect) {
+
+btn.classList.add('correct');
+
+btn.querySelector('i').className = 'fa-solid fa-circle-check';
+
+fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+
+fb.className = 'feedback-box success';
+
+card.classList.add('completed'); card.classList.remove('active');
+
+
+const nextCard = document.getElementById(`step-card-${sIdx + 1}`);
+
+if (nextCard) { nextCard.classList.add('active'); nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+
+} else {
+
+btn.classList.add('wrong'); btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+
+}
+
+}
+
+
+function navigateQuestion(dir) {
+
+currentQIndex += dir;
+
+renderActiveQuestion(currentQIndex);
+
+}
+
+
+function triggerSmartPrint() {
+
+const pdfArea = document.getElementById('dynamic-pdf-questions-area');
+
+pdfArea.innerHTML = '';
+
+
+questionsMatrix.forEach((question, index) => {
+
+let stepsHTML = '';
+
+question.pdfSolutionSteps.forEach(stepStr => {
+
+stepsHTML += `<div>${stepStr}</div>`;
+
+});
+
+
+pdfArea.innerHTML += `
+
+<div class="pdf-question-block">
+
+<div class="pdf-q-title">المسألة رقم (${index + 1}): ${question.title}</div>
+
+<div class="pdf-q-text">${question.text}</div>
+
+<div class="pdf-graphic">${question.svgCode}</div>
+
+<div class="pdf-solution-box">
+
+<div class="pdf-sol-title"><i class="fa-solid fa-square-check"></i> خطوات الحل المباشر والنموذجي:</div>
+
+<div class="pdf-sol-steps">
+
+${stepsHTML}
+
+<div class="pdf-final-ans">${question.pdfFinalAnswer}</div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+window.print();
+
+}
+
+
+window.onload = () => {
+
+renderActiveQuestion(currentQIndex);
+
+};
+
+</script>
+
+</body>
+
+</html>

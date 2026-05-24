@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الميكانيكا التفاعلية - مدرسة أمجاد أفريقيا</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-md p-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">بوابة الميكانيكا الرقمية | البكرات والحركة</h1>
+            <span class="bg-blue-600/50 px-3 py-1 rounded-full text-xs" id="version-badge">إصدار التقييم المستمر</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 flex-grow w-full">
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-3 items-center justify-between">
+            <label for="question-select" class="font-bold text-slate-700 text-sm md:text-base">اختر المسألة الحركية المقررة:</label>
+            <select id="question-select" class="bg-slate-100 border border-slate-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm w-full md:w-auto md:min-w-[250px]">
+                </select>
+        </div>
+
+        <div id="quiz-container" class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hidden">
+            <div class="border-b border-slate-100 pb-4 mb-4">
+                <h2 id="q-title" class="text-lg font-bold text-indigo-900 mb-2"></h2>
+                <p id="q-text" class="text-slate-600 leading-relaxed text-sm md:text-base mb-4"></p>
+                <div id="q-svg" class="w-full max-w-md mx-auto my-3"></div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
+                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider" id="step-badge">المحطة الحالية</span>
+                <h3 id="step-title" class="font-bold text-slate-800 mt-2 mb-3"></h3>
+                <p id="step-question" class="text-slate-700 text-sm mb-4 font-medium"></p>
+                
+                <div id="options-box" class="space-y-2.5"></div>
+            </div>
+
+            <div id="feedback-box" class="hidden p-3 rounded-lg text-sm mb-4 font-bold"></div>
+
+            <div class="flex justify-between items-center">
+                <button id="prev-step-btn" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-4 py-2 rounded-lg text-sm font-medium transition hidden">المحطة السابقة</button>
+                <button id="next-step-btn" class="bg-indigo-600 text-white hover:bg-indigo-700 px-5 py-2 rounded-lg text-sm font-medium transition mr-auto hidden">المحطة التالية</button>
+            </div>
+        </div>
+
+        <div id="empty-state" class="text-center py-12 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-slate-500 font-medium">جاري تحميل مصفوفة مسائل الميكانيكا والاتزان...</p>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-3 text-xs border-t border-slate-800">
+        جميع الحقوق محفوظة لوحدة التدريس والتقويم الرقمي © 2026
+    </footer>
+
+    <script src="bakarat.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectElement = document.getElementById('question-select');
+            const quizContainer = document.getElementById('quiz-container');
+            const emptyState = document.getElementById('empty-state');
+
+            // التحقق من تحميل المصفوفة من الملف الخارجي بنجاح
+            let matrix = window.mechanicsQuestionsMatrix;
+            
+            if (!matrix || matrix.length === 0) {
+                emptyState.innerHTML = `<p class="text-red-500 font-bold">خطأ: لم يتم العثور على مصفوفة المسائل! تأكدي من وجود ملف "بكرات.js" في نفس المجلد وصحة تسمية المتغير.</p>`;
+                return;
+            }
+
+            // إخفاء حالة التحميل وإظهار لوحة التشغيل
+            emptyState.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+
+            let currentQuestion = null;
+            let currentStepIndex = 0;
+
+            // تعبئة قائمة الاختيار المنسدلة بالمسائل المتوفرة
+            matrix.forEach((q, index) => {
+                const opt = document.createElement('option');
+                opt.value = q.id;
+                opt.textContent = q.title || `المسألة رقم ${q.id}`;
+                selectElement.appendChild(opt);
+            });
+
+            // دالة عرض المسألة المحددة بمحطاتها التفاعلية
+            function loadQuestion(id) {
+                currentQuestion = matrix.find(q => q.id == id);
+                if (!currentQuestion) return;
+                
+                currentStepIndex = 0;
+                document.getElementById('q-title').textContent = currentQuestion.title;
+                document.getElementById('q-text').textContent = currentQuestion.text;
+                document.getElementById('q-svg').innerHTML = currentQuestion.svgCode || '';
+                
+                loadStep();
+            }
+
+            // دالة عرض المحطة الفرعية داخل المسألة
+            function loadStep() {
+                const step = currentQuestion.steps[currentStepIndex];
+                document.getElementById('step-title').textContent = step.title;
+                document.getElementById('step-question').textContent = step.question;
+                
+                const optionsBox = document.getElementById('options-box');
+                const feedbackBox = document.getElementById('feedback-box');
+                const nextBtn = document.getElementById('next-step-btn');
+                const prevBtn = document.getElementById('prev-step-btn');
+                
+                optionsBox.innerHTML = '';
+                feedbackBox.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+                
+                // إظهار أو إخفاء زر العودة للخلف
+                if (currentStepIndex > 0) {
+                    prevBtn.classList.remove('hidden');
+                } else {
+                    prevBtn.classList.add('hidden');
+                }
+
+                // توليد أزرار الخيارات
+                step.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-right p-3 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 transition text-sm font-medium focus:outline-none";
+                    btn.textContent = opt.text;
+                    btn.onclick = () => checkAnswer(opt, btn, step.feedback);
+                    optionsBox.appendChild(btn);
+                });
+            }
+
+            // دالة التحقق من الإجابة وعرض التغذية الراجعة الفورية للطلاب
+            function checkAnswer(option, clickedBtn, feedbackText) {
+                const feedbackBox = document.getElementById('feedback-box');
+                const nextBtn = document.getElementById('next-step-btn');
+                
+                feedbackBox.classList.remove('hidden');
+                
+                if (option.isCorrect) {
+                    feedbackBox.className = "p-3 rounded-lg text-sm mb-4 font-bold bg-green-50 text-green-700 border border-green-200";
+                    feedbackBox.textContent = feedbackText || "إجابة صحيحة، أحسنت!";
+                    clickedBtn.className = "w-full text-right p-3 rounded-lg border-2 border-green-500 bg-green-50 text-green-800 font-bold text-sm focus:outline-none";
+                    
+                    // إذا كان هناك محطات أخرى، أظهر زر التالي
+                    if (currentStepIndex < currentQuestion.steps.length - 1) {
+                        nextBtn.classList.remove('hidden');
+                    }
+                } else {
+                    feedbackBox.className = "p-3 rounded-lg text-sm mb-4 font-bold bg-red-50 text-red-700 border border-red-200";
+                    feedbackBox.textContent = "المعادلة المقترحة غير متوازنة مع اتجاه الحركة. حاول مرة أخرى للتطبيق الآني الصحيح.";
+                    clickedBtn.className = "w-full text-right p-3 rounded-lg border border-red-300 bg-red-50 text-red-600 text-sm focus:outline-none";
+                }
+            }
+
+            // مستمعي الأحداث لأزرار التنقل والقائمة المنسدلة
+            document.getElementById('next-step-btn').onclick = () => {
+                if (currentStepIndex < currentQuestion.steps.length - 1) {
+                    currentStepIndex++;
+                    loadStep();
+                }
+            };
+
+            document.getElementById('prev-step-btn').onclick = () => {
+                if (currentStepIndex > 0) {
+                    currentStepIndex--;
+                    loadStep();
+                }
+            };
+
+            selectElement.onchange = (e) => {
+                loadQuestion(e.target.value);
+            };
+
+            // تحميل المسألة الأولى تلقائياً عند فتح الصفحة لأول مرة
+            loadQuestion(selectElement.value);
+        });
+    </script>
+</body>
+</html>
