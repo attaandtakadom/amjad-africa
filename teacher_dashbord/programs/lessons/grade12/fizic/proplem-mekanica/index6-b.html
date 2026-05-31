@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    
     <title>تمارين الباب السادس - 6 ب</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; padding: 20px; }
@@ -24,8 +25,56 @@ header { background-color: #1a237e; color: white; padding: 30px 15px; text-align
         .question-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-right: 8px solid #1a237e; }
         #backToTopBtn { display: none; position: fixed; bottom: 20px; left: 20px; background: #1a237e; color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer; font-size: 20px; width: 55px; height: 55px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
     
+@media print {
+    body * { visibility: hidden; }
+    #dynamic-pdf-questions-area, #dynamic-pdf-questions-area * { visibility: visible; }
+    #dynamic-pdf-questions-area { position: absolute; left: 0; top: 0; width: 100%; }
+    .pdf-question-block { page-break-after: always; padding: 20px; }
+    .pdf-graphic svg { max-width: 300px; height: auto; }
+}
 
-
+@media print {
+    /* إخفاء الهيدر والفوتتر والهوامش الافتراضية للمتصفح */
+    @page {
+        margin: 0;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* إزالة المسافات البيضاء من العناصر الرئيسية */
+    .pdf-question-block {
+        margin-bottom: 0 !important;
+        padding: 10px 0 !important;
+        page-break-inside: avoid;
+    }
+    
+    /* إزالة المسافات العلوية والسفلية من العناصر */
+    h1, h2, h3, h4, p, div {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 2px !important;
+    }
+    
+    /* تقليل المسافات بين الأسطر */
+    .pdf-solution-box, .pdf-sol-steps {
+        line-height: 1.2 !important;
+    }
+    
+    /* إزالة الهوامش الداخلية */
+    .pdf-question-block * {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* إزالة المسافات من الحاوية الرئيسية */
+    #dynamic-pdf-questions-area {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
 
 
     </style>
@@ -60,12 +109,72 @@ header { background-color: #1a237e; color: white; padding: 30px 15px; text-align
     <div class="nav-footer">
         <button class="nav-btn" onclick="move(-1)">السابق</button>
         <button class="nav-btn" onclick="move(1)">التالي</button>
-    </div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> طباعة PDF
+    </button>
+    
 </div>
 
+
+
+    </div>
+</div>
+<div id="dynamic-pdf-questions-area" style="display: none;"></div>
+<button onclick="generatePDF()" style="background:#e74c3c; color:white; padding:15px; border:none; border-radius:10px; cursor:pointer;">طباعة جميع المسائل PDF</button>
 <script src="problemData6.js"></script>
 
 <script>
+
+function generatePDF() {
+    // إنشاء الحاوية
+    const element = document.createElement('div');
+    element.style.padding = "20mm";
+    element.style.direction = "rtl";
+    element.style.fontFamily = "Arial, sans-serif";
+    element.style.backgroundColor = "white"; // لضمان عدم الشفافية
+
+    // 1. بناء المحتوى (الغلاف والمسائل)
+    element.innerHTML = `
+        <div style="text-align:center; padding-top: 50px; min-height: 250mm;">
+            <h1 style="color: #1a237e;">مدرسة أمجاد أفريقيا للتعليم الخاص</h1>
+            <h2 style="font-size: 24px;">الميكانيكا - تمارين الكتاب (6-B)</h2>
+        </div>
+        <div style="page-break-after: always;"></div>
+    `;
+
+    myQuestionsData.forEach((q, i) => {
+        if (q.id === 0) return;
+        const page = document.createElement('div');
+        page.style.cssText = "page-break-inside: avoid; margin-bottom: 20px; padding: 10px; border: 1px solid #eee;";
+        page.innerHTML = `
+            <h2 style="color:#1a237e;">مسألة ${i}</h2>
+            <div>${q.content}</div>
+            <div style="margin:10px 0;">${q.svgCode || ''}</div>
+            <div style="background:#f9f9f9; padding:10px;">${q.sol}</div>
+            <p style="color:red; font-weight:bold;">الناتج: ${q.ans}</p>
+        `;
+        element.appendChild(page);
+    });
+
+    // 2. استخدام setTimeout لإعطاء المتصفح فرصة لبناء العناصر
+    setTimeout(() => {
+        const opt = {
+            margin: 10,
+            filename: 'تمارين_6B.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
+            const blob = pdf.output('bloburl');
+            window.open(blob, '_blank');
+        });
+    }, 1000); // تأخير لمدة ثانية واحدة لضمان اكتمال بناء الصفحة
+}
+//end pdf
     let idx = 0;
     let choice = "";
 
@@ -105,6 +214,63 @@ header { background-color: #1a237e; color: white; padding: 30px 15px; text-align
     }
 
     window.onload = show;
+
+
+function generatePDF() {
+    const element = document.createElement('div');
+    element.style.cssText = `
+        padding: 0 !important;
+        margin: 0 !important;
+        direction: rtl;
+        font-family: Arial, sans-serif;
+        background-color: white;
+    `;
+
+    // الغلاف
+    element.innerHTML = `
+        <div style="text-align:center; padding: 50px 0; page-break-after: always;">
+            <h1 style="margin: 0; padding: 0;">مدرسة أمجاد أفريقيا للتعليم الخاص</h1>
+            <h2 style="margin: 10px 0 0 0; padding: 0;">الميكانيكا - تمارين الكتاب (6-B)</h2>
+        </div>
+    `;
+
+    // إضافة المسائل بدون أي هوامش أو مسافات
+    myQuestionsData.forEach((q, i) => {
+        if (q.id === 0) return;
+        
+        const page = document.createElement('div');
+        page.style.cssText = `
+            page-break-after: always;
+            margin: 0 !important;
+            padding: 15px 0 !important;
+            border: none;
+        `;
+        
+        page.innerHTML = `
+            <h2 style="margin: 0 0 5px 0; padding: 0; color:#1a237e;">مسألة ${i}</h2>
+            <div style="margin: 0; padding: 0;">${q.content}</div>
+            <div style="margin: 5px 0; padding: 0;">${q.svgCode || ''}</div>
+            <div style="margin: 5px 0; padding: 8px; background:#f9f9f9;">${q.sol}</div>
+            <p style="margin: 0; padding: 5px 0; color:red; font-weight:bold;">الناتج: ${q.ans}</p>
+        `;
+        
+        element.appendChild(page);
+    });
+
+    // خيارات PDF مضبوطة لإزالة الهوامش
+    const opt = {
+        margin: [0, 0, 0, 0],  // إزالة الهوامش تماماً
+        filename: 'تمارين_6B.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, letterRendering: true, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }
+    };
+
+    html2pdf().set(opt).from(element).save();
+}
+
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>

@@ -2,183 +2,348 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الميكانيكا التفاعلية - مدرسة أمجاد أفريقيا</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>منصة الميكانيكا - مدرسة أمجاد أفريقيا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --success: #16a34a;
+            --error: #dc2626;
+            --text-main: #334155;
+            --border-color: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: #cbd5e1; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .app-container {
+            width: 100%; max-width: 900px; background: var(--card-bg);
+            border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .header { background-color: var(--primary); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .school-badge { background: #ea580c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+        .question-container { padding: 30px; text-align: center;}
+        .question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: rtl; flex-wrap: wrap; gap: 10px; }
+        .q-source-span { background: var(--accent); color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold;}
+        .question-text { font-size: 18px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; font-weight: 600; text-align: right;}
+        .question-graphic-area { max-width: 100%; margin: 0 auto 20px auto; padding: 15px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #ffffff; display: flex; justify-content: center; align-items: center; }
+        .steps-container { padding: 20px 30px; background-color: var(--bg); }
+        .step-card {
+            background: white; border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 20px; margin-bottom: 20px; opacity: 0.4; pointer-events: none;
+            transition: all 0.3s ease; border-right: 5px solid #94a3b8;
+        }
+        .step-card.active { opacity: 1; pointer-events: auto; border-right-color: var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .step-card.completed { opacity: 1; pointer-events: none; border-right-color: var(--success); background-color: #f0fdf4; }
+        .step-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-align: right;}
+        .step-question { font-size: 15px; margin-bottom: 15px; color: var(--text-main); text-align: right;}
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; direction: rtl; }
+        .option-btn {
+            background: white; border: 2px solid var(--border-color); padding: 12px;
+            border-radius: 6px; cursor: pointer; text-align: right; font-size: 15px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .option-btn:hover { border-color: var(--accent); background: #eff6ff; }
+        .option-btn.correct { border-color: var(--success); background: #dcfce7; color: #166534; }
+        .option-btn.wrong { border-color: var(--error); background: #fee2e2; color: #991b1b; }
+        .feedback-box { margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; display: none; text-align: right; }
+        .feedback-box.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block; }
+        .navigation-area { padding: 0 30px 30px 30px; display: flex; justify-content: space-between; background: var(--bg); }
+        .nav-btn { padding: 12px 25px; background: var(--primary); color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 6px; }
+        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; color: #94a3b8; }
+        .print-section { text-align: center; margin: 20px 0 50px 0; width: 100%; max-width: 900px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .print-btn { background-color: var(--success); color: white; padding: 15px 35px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .bot-link-btn { background-color: var(--accent); color: white; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        #printable-pdf-document { display: none; }
+
+        /* تنسيق الطباعة - تم إزالة الفراغ العلوي بالكامل */
+        @media print {
+            body { background: white; padding: 0; margin: 0; }
+            .app-container, .print-section { display: none !important; }
+            #printable-pdf-document { 
+                display: block !important; 
+                direction: rtl; 
+                width: 100%; 
+                padding: 0; 
+                margin: 0; 
+                background: white;
+            }
+            .pdf-school-header { text-align: center; font-size: 16px; font-weight: bold; color: #ea580c; margin: 0; padding-top: 0; }
+            .pdf-page-title { text-align: center; color: #0f172a; margin: 5px 0 0 0; font-size: 20px; font-weight: 800; border-bottom: 2px solid #0f172a; padding-bottom: 5px; }
+            .pdf-student-dedication { text-align: center; font-size: 13px; color: #475569; margin: 5px 0; font-style: italic; }
+            .pdf-bot-url-area { text-align: center; font-size: 12px; color: #2563eb; margin: 5px 0 10px 0; font-weight: bold; direction: ltr; }
+            .pdf-question-block { page-break-inside: avoid; margin-bottom: 15px; border: 1px solid #cbd5e1; padding: 8px; border-radius: 8px; background: #ffffff; }
+            .pdf-q-title { font-size: 15px; font-weight: bold; color: #2563eb; margin-bottom: 6px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 3px; }
+            .pdf-q-text { font-size: 13px; color: #334155; line-height: 1.4; margin-bottom: 8px; text-align: justify; }
+            .pdf-graphic { display: flex; justify-content: center; margin: 8px 0; }
+            .pdf-solution-box { background: #f8fafc; border-right: 4px solid #16a34a; padding: 8px; margin-top: 8px; border-radius: 0 6px 6px 0; }
+            .pdf-sol-title { font-weight: bold; color: #166534; margin-bottom: 4px; font-size: 13px; }
+            .pdf-sol-steps { font-size: 12px; color: #334155; line-height: 1.5; }
+            .pdf-sol-steps div { margin-bottom: 3px; }
+            .pdf-final-ans { font-weight: 800; color: #0f172a; margin-top: 6px; background: #e2f8e9; padding: 3px 6px; display: inline-block; border-radius: 4px; }
+        }
+        svg { max-width: 100%; height: auto; }
+
+#printable-pdf-document {
+    width: 100%;
+    height: 100vh; /* يضمن أخذ كامل ارتفاع الشاشة/الصفحة */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* توزيع العناصر بالتساوي بين الأعلى والأسفل */
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.pdf-school-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e3a8a;
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 10px;
+    width: 90%;
+}
+
+.pdf-page-title {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 40px 0;
+    color: #0f172a;
+}
+
+.pdf-student-dedication {
+    font-size: 24px;
+    font-style: italic;
+    color: #475569;
+    flex-grow: 1; /* يسمح لهذا العنصر بأخذ المساحة الفائضة في المنتصف */
+    display: flex;
+    align-items: center;
+}
+
+.pdf-bot-url-area {
+    font-size: 18px;
+    padding: 20px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    width: 100%;
+}
+#printable-pdf-document {
+    display: none; /* مخفي تماماً عن المتصفح */
+}
+
+/* لا نحتاج لـ vh هنا لأننا سنتحكم به عند الطباعة فقط */
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body>
 
-    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-md p-4 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">بوابة الميكانيكا الرقمية | البكرات والحركة</h1>
-            <span class="bg-blue-600/50 px-3 py-1 rounded-full text-xs" id="version-badge">إصدار التقييم المستمر</span>
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i> منصة الميكانيكا</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="question-counter"></span>
+    </div>
+    <div class="question-container">
+        <div class="question-meta"><span class="q-source-span" id="q-source"></span></div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+    </div>
+    <div class="steps-container" id="steps-container"></div>
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">← السابق</button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">التالي →</button>
+    </div>
+</div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> طباعة PDF
+    </button>
+</div>
+
+<div id="printable-pdf-document" style="text-align: center; padding: 50px; font-family: 'Arial', sans-serif; background-color: #ffffff; border: 2px solid #0d6efd; border-radius: 15px; min-height: 800px;">
+    
+    <div style="font-size: 24px; color: #1e3a8a; font-weight: bold;">
+        مدرسة أمجاد أفريقيا - ليبيا - البيضاء
+    </div>
+
+    <div style="margin: 40px 0;">
+        <h1 style="font-size: 72px; color: #1e3a8a; margin: 0; font-weight: 900;">
+            الميكانيكا
+        </h1>
+        <div style="font-size: 28px; color: #2d3748; margin-top: 10px; font-weight: bold;">
+            الصف الثالث الثانوي
         </div>
-    </header>
+    </div>
 
-    <main class="max-w-4xl mx-auto p-4 flex-grow w-full">
-        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-3 items-center justify-between">
-            <label for="question-select" class="font-bold text-slate-700 text-sm md:text-base">اختر المسألة الحركية المقررة:</label>
-            <select id="question-select" class="bg-slate-100 border border-slate-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm w-full md:w-auto md:min-w-[250px]">
-                </select>
+    <div style="margin: 60px 0;">
+        <h2 style="font-size: 32px; color: #0d6efd; margin: 0;">
+            <span style="font-size: 40px;">📘</span> كراسة الحلول النموذجية <span style="font-size: 40px;">📘</span>
+        </h2>
+        <div style="font-size: 20px; color: #4a5568; margin-top: 10px; font-weight: bold;">
+            العام الدراسي 2025 - 2026
         </div>
+    </div>
 
-        <div id="quiz-container" class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hidden">
-            <div class="border-b border-slate-100 pb-4 mb-4">
-                <h2 id="q-title" class="text-lg font-bold text-indigo-900 mb-2"></h2>
-                <p id="q-text" class="text-slate-600 leading-relaxed text-sm md:text-base mb-4"></p>
-                <div id="q-svg" class="w-full max-w-md mx-auto my-3"></div>
-            </div>
+    <div style="margin: 40px 0; border: 1px dashed #0d6efd; padding: 20px; display: inline-block; border-radius: 10px;">
+        <h3 style="color: #2d3748; margin-top: 0;">أسئلة من امتحانات سابقة</h3>
+        <h4 style="color: #e53e3e; margin: 0;">الباب الرابع: البكرات</h4>
+    </div>
 
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
-                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider" id="step-badge">المحطة الحالية</span>
-                <h3 id="step-title" class="font-bold text-slate-800 mt-2 mb-3"></h3>
-                <p id="step-question" class="text-slate-700 text-sm mb-4 font-medium"></p>
-                
-                <div id="options-box" class="space-y-2.5"></div>
-            </div>
+    <div style="margin: 50px 0; color: #4a5568;">
+        <p>إهداء إلى طلبتنا المتميزين</p>
+    </div>
+    
+    <div style="margin-top: 50px; font-size: 16px; color: #2b6cb0;">
+        رابط البوت التعليمي:<br>
+        <a href="http://t.me/amjad_africa2027bot" style="color: #0d6efd;">t.me/amjad_africa2027bot</a>
+    </div>
+</div>    <div id="dynamic-pdf-questions-area"></div>
+</div>
+<script>
+   const questionsMatrix = [
+    {
+  "title": "المسألة الأولى: نظام البكرات والأجسام المعلقة",
+  "text": "جسمان كتلتاهما m1 = 3 kg و m2 = 5 kg متصلان بخيط يمر على بكرة ملساء. احسب عجلة الحركة (a) وقوة الشد (T).",
+"svgCode": "<svg viewBox=\"0 0 100 80\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><circle cx=\"50\" cy=\"15\" r=\"8\" stroke=\"#333\" stroke-width=\"1.5\" fill=\"#ced4da\" /><circle cx=\"50\" cy=\"15\" r=\"1.5\" fill=\"#333\" /><line x1=\"42\" y1=\"15\" x2=\"42\" y2=\"50\" stroke=\"#495057\" stroke-width=\"1\" /><path d=\"M 42 45 L 42 35 M 40 37 L 42 35 L 44 37\" stroke=\"#dc3545\" stroke-width=\"1\" fill=\"none\" /><text x=\"35\" y=\"40\" fill=\"#dc3545\" font-size=\"6\" font-weight=\"bold\">T</text><line x1=\"58\" y1=\"15\" x2=\"58\" y2=\"45\" stroke=\"#495057\" stroke-width=\"1\" /><path d=\"M 58 40 L 58 30 M 56 32 L 58 30 L 60 32\" stroke=\"#dc3545\" stroke-width=\"1\" fill=\"none\" /><text x=\"65\" y=\"35\" fill=\"#dc3545\" font-size=\"6\" font-weight=\"bold\">T</text><rect x=\"35\" y=\"50\" width=\"14\" height=\"14\" rx=\"2\" fill=\"#0d6efd\" /><text x=\"42\" y=\"59\" fill=\"#fff\" font-size=\"5\" font-weight=\"bold\" text-anchor=\"middle\">m1</text><rect x=\"51\" y=\"45\" width=\"14\" height=\"18\" rx=\"2\" fill=\"#198754\" /><text x=\"58\" y=\"56\" fill=\"#fff\" font-size=\"5\" font-weight=\"bold\" text-anchor=\"middle\">m2</text></svg>",
 
-            <div id="feedback-box" class="hidden p-3 rounded-lg text-sm mb-4 font-bold"></div>
+"steps": [
+    { title: "الخطوة 1: معادلة الحركة للجسم الصاعد (m1)", question: "اختر المعادلة الصحيحة لحركة الكتلة الأولى الصاعدة m1 (علماً بأن كتلها 3kg):", feedback: "ممتاز! بالنسبة للجسم الصاعد: T - m1*g = m1*a بالتعويض تصبح T - 30 = 3a ومنها T = 30 + 3a", options: [{ text: "T = 30 + 3a", isCorrect: true }, { text: "T = 30 - 3a", isCorrect: false }, { text: "T = 3a", isCorrect: false }] },
+            { title: "الخطوة 2: معادلة الحركة للجسم الهابط (m2)", question: "اختر المعادلة الصحيحة لحركة الكتلة الثانية الهابطة m2 (علماً بأن كتلها 5kg):", feedback: "صحيح تماماً! الوزن لأسفل مطروحاً منه الشد للأعلى يساوي الكتلة في العجلة: 50 - T = 5a ومنها T = 50 - 5a", options: [{ text: "T = 50 + 5a", isCorrect: false }, { text: "T = 50 - 5a", isCorrect: true }, { text: "T = 5a - 50", isCorrect: false }] },
+            { title: "الخطوة 3: حساب العجلة المشتركة (a)", question: "بمساواة المعادلتين 30 + 3a = 50 - 5a، كم تكون قيمة العجلة a؟", feedback: "صحيح! 8a = 20 → a = 2.5 m/s²", options: [{ text: "a = 2.5 m/s²", isCorrect: true }, { text: "a = 1.5 m/s²", isCorrect: false }, { text: "a = 4 m/s²", isCorrect: false }] },
+            { title: "الخطوة 4: حساب قوة الشد T", question: "بالتعويض a = 2.5 في T = 30 + 3a، ما قيمة T؟", feedback: "T = 30 + 7.5 = 37.5 N", options: [{ text: "T = 37.5 N", isCorrect: true }, { text: "T = 35 N", isCorrect: false }, { text: "T = 40 N", isCorrect: false }] }
+        ],
+ pdfSolutionSteps: [
+    "<span style='font-size: 18px; font-weight: bold;'>📍 اتجاه الحركة:</span>",
+    "<div style='margin-right: 20px; margin-bottom: 15px;'>بما أن m₂ (5kg) أثقل من m₁ (3kg)، فإن <span style='color: #10b981; font-weight: bold;'>m₂ تهبط و m₁ تصعد</span>.</div>",
+    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 1: معادلات الحركة لكل جسم</span>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الصاعد (m₁ = 3kg):</div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - 30 = 3a</span>  <span style='color: #64748b;'>........ (1)</span></div>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الهابط (m₂ = 5kg):</div>",
+    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>50 - T = 5a</span>  <span style='color: #64748b;'>........ (2)</span></div>",
+    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 2: حل المعادلتين آنياً</span>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>نجمع (1) + (2):</div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>T - 30 + 50 - T = 3a + 5a</span></div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>20 = 8a</span></div>",
+    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 2.5 m/s²</span></div>",
+    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 3: حساب قوة الشد T</span>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px; direction: ltr; text-align: left;'>نعوض في (2): 50 - T = 5 × 2.5</div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>50 - T = 12.5</span></div>",
+    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = 37.5 N</span></div>"
+],      
 
-            <div class="flex justify-between items-center">
-                <button id="prev-step-btn" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-4 py-2 rounded-lg text-sm font-medium transition hidden">المحطة السابقة</button>
-                <button id="next-step-btn" class="bg-indigo-600 text-white hover:bg-indigo-700 px-5 py-2 rounded-lg text-sm font-medium transition mr-auto hidden">المحطة التالية</button>
-            </div>
-        </div>
+  "pdfFinalAnswer": "a = 2.5 m/s² , T = 37.5 N"
+},
+    
+    
+    {
+        title: "المسألة الثانية: استنتاج الاتزان على منضدة خشنة",
+        text: "كتلتان (m₂ ، m₁) متصلتان بخيط يمر فوق بكرة ملساء ومثبتة عند حافة منضدة. توجد الكتلة (m₁) على سطح أفقي خشن معامل احتكاكه (μ). ما مقدار الكتلة الإضافية (m) التي يجب وضعها فوق الكتلة (m₁) حتى لا يتسارع النظام؟",
+svgCode: `<svg width="420" height="220" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto 30px auto;">
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#dc3545" />
+        </marker>
+    </defs>
+    <line x1="40" y1="100" x2="300" y2="100" stroke="#64748b" stroke-width="6" />
+    <circle cx="300" cy="95" r="12" fill="#475569" />
+    
+    <line x1="150" y1="85" x2="300" y2="85" stroke="#0f172a" stroke-width="2" />
+    <line x1="312" y1="95" x2="312" y2="140" stroke="#0f172a" stroke-width="2" />
+    
+    <line x1="200" y1="85" x2="250" y2="85" stroke="#dc3545" stroke-width="3" marker-end="url(#arrow)" />
+    <text x="225" y="75" fill="#dc3545" font-size="14" font-weight="bold" text-anchor="middle">T</text>
+    
+    <line x1="312" y1="120" x2="312" y2="90" stroke="#dc3545" stroke-width="3" marker-end="url(#arrow)" />
+    <text x="325" y="105" fill="#dc3545" font-size="14" font-weight="bold" text-anchor="middle">T</text>
+    
+    <rect x="100" y="65" width="50" height="35" fill="#1e3a8a" rx="4" />
+    <text x="125" y="87" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">m1</text>
+    <rect x="110" y="40" width="30" height="25" fill="#7c3aed" rx="3" />
+    <text x="125" y="57" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">m</text>
+    <rect x="292" y="140" width="40" height="35" fill="#ea580c" rx="4" />
+    <text x="312" y="162" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">m2</text>
+</svg>`,        steps: [{ title: "المحطة 1: شرط الاتزان", question: "ما هو القانون الرياضي النهائي للكتلة الإضافية m؟", options: [{text: "m = (m₂ ÷ μ) - m₁", isCorrect: true}, {text: "m = m₂ - (m₁ ÷ μ)", isCorrect: false}], feedback: "صحيح! m = (m₂/μ) - m₁" }],
+        pdfSolutionSteps: [
+             "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة المحتمل:</span>",
+                "<div style='margin-right: 20px; margin-bottom: 15px;'>بما أن m₂ تسحب لليمين، فإن الاحتكاك f يعاكس الحركة لليسار.</div>",
+               
+            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: شرط الاتزان (a = 0)</span>",
+            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• من اتزان الكتلة المتدلية m₂:</div>",
+            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T = m₂ g</span></div>",
+            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• من اتزان الكتل على السطح الخشن:</div>",
+            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T = μ (m₁ + m) g</span></div>",
+            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• بمساواة المعادلتين:</div>",
+            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>m₂ g = μ (m₁ + m) g</span></div>",
+            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>m₂ = μ (m₁ + m)</span></div>",
+            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>m₂ = μ m₁ + μ m</span></div>",
+            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>μ m = m₂ - μ m₁</span></div>",
+            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>m = (m₂ / μ) - m₁</span></div>"
+        ],
+        pdfFinalAnswer: "m = (m₂ / μ) - m₁"
+    },
+   
+];
+    let currentQIndex = 0;
 
-        <div id="empty-state" class="text-center py-12 bg-white rounded-2xl border border-slate-200 shadow-sm">
-            <p class="text-slate-500 font-medium">جاري تحميل مصفوفة مسائل الميكانيكا والاتزان...</p>
-        </div>
-    </main>
-
-    <footer class="bg-slate-900 text-slate-400 text-center py-3 text-xs border-t border-slate-800">
-        جميع الحقوق محفوظة لوحدة التدريس والتقويم الرقمي © 2026
-    </footer>
-
-    <script src="bakarat.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const selectElement = document.getElementById('question-select');
-            const quizContainer = document.getElementById('quiz-container');
-            const emptyState = document.getElementById('empty-state');
-
-            // التحقق من تحميل المصفوفة من الملف الخارجي بنجاح
-            let matrix = window.mechanicsQuestionsMatrix;
-            
-            if (!matrix || matrix.length === 0) {
-                emptyState.innerHTML = `<p class="text-red-500 font-bold">خطأ: لم يتم العثور على مصفوفة المسائل! تأكدي من وجود ملف "بكرات.js" في نفس المجلد وصحة تسمية المتغير.</p>`;
-                return;
-            }
-
-            // إخفاء حالة التحميل وإظهار لوحة التشغيل
-            emptyState.classList.add('hidden');
-            quizContainer.classList.remove('hidden');
-
-            let currentQuestion = null;
-            let currentStepIndex = 0;
-
-            // تعبئة قائمة الاختيار المنسدلة بالمسائل المتوفرة
-            matrix.forEach((q, index) => {
-                const opt = document.createElement('option');
-                opt.value = q.id;
-                opt.textContent = q.title || `المسألة رقم ${q.id}`;
-                selectElement.appendChild(opt);
-            });
-
-            // دالة عرض المسألة المحددة بمحطاتها التفاعلية
-            function loadQuestion(id) {
-                currentQuestion = matrix.find(q => q.id == id);
-                if (!currentQuestion) return;
-                
-                currentStepIndex = 0;
-                document.getElementById('q-title').textContent = currentQuestion.title;
-                document.getElementById('q-text').textContent = currentQuestion.text;
-                document.getElementById('q-svg').innerHTML = currentQuestion.svgCode || '';
-                
-                loadStep();
-            }
-
-            // دالة عرض المحطة الفرعية داخل المسألة
-            function loadStep() {
-                const step = currentQuestion.steps[currentStepIndex];
-                document.getElementById('step-title').textContent = step.title;
-                document.getElementById('step-question').textContent = step.question;
-                
-                const optionsBox = document.getElementById('options-box');
-                const feedbackBox = document.getElementById('feedback-box');
-                const nextBtn = document.getElementById('next-step-btn');
-                const prevBtn = document.getElementById('prev-step-btn');
-                
-                optionsBox.innerHTML = '';
-                feedbackBox.classList.add('hidden');
-                nextBtn.classList.add('hidden');
-                
-                // إظهار أو إخفاء زر العودة للخلف
-                if (currentStepIndex > 0) {
-                    prevBtn.classList.remove('hidden');
-                } else {
-                    prevBtn.classList.add('hidden');
-                }
-
-                // توليد أزرار الخيارات
+    function renderActiveQuestion(index) {
+        const data = questionsMatrix[index];
+        if(!data) return;
+        document.getElementById('q-source').innerText = data.title;
+        document.getElementById('main-question-text').innerText = data.text;
+        document.getElementById('question-counter').innerHTML = `مسألة ${index+1} / ${questionsMatrix.length}`;
+        document.getElementById('graphic-container').innerHTML = data.svgCode;
+        document.getElementById('prev-btn').disabled = index === 0;
+        document.getElementById('next-btn').disabled = index === questionsMatrix.length-1;
+        const stepsContainer = document.getElementById('steps-container');
+        stepsContainer.innerHTML = '';
+        if(data.steps) {
+            data.steps.forEach((step, sIdx) => {
+                let optionsHTML = '';
                 step.options.forEach(opt => {
-                    const btn = document.createElement('button');
-                    btn.className = "w-full text-right p-3 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 transition text-sm font-medium focus:outline-none";
-                    btn.textContent = opt.text;
-                    btn.onclick = () => checkAnswer(opt, btn, step.feedback);
-                    optionsBox.appendChild(btn);
+                    optionsHTML += `<button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}"><span>${opt.text}</span> <i class="fa-regular fa-circle"></i></button>`;
                 });
-            }
+                stepsContainer.innerHTML += `<div class="step-card ${sIdx===0?'active':''}" id="step-card-${sIdx}"><div class="step-title">${step.title}</div><div class="step-question">${step.question}</div><div class="options-grid">${optionsHTML}</div><div class="feedback-box" id="feedback-${sIdx}"></div></div>`;
+            });
+        }
+    }
 
-            // دالة التحقق من الإجابة وعرض التغذية الراجعة الفورية للطلاب
-            function checkAnswer(option, clickedBtn, feedbackText) {
-                const feedbackBox = document.getElementById('feedback-box');
-                const nextBtn = document.getElementById('next-step-btn');
-                
-                feedbackBox.classList.remove('hidden');
-                
-                if (option.isCorrect) {
-                    feedbackBox.className = "p-3 rounded-lg text-sm mb-4 font-bold bg-green-50 text-green-700 border border-green-200";
-                    feedbackBox.textContent = feedbackText || "إجابة صحيحة، أحسنت!";
-                    clickedBtn.className = "w-full text-right p-3 rounded-lg border-2 border-green-500 bg-green-50 text-green-800 font-bold text-sm focus:outline-none";
-                    
-                    // إذا كان هناك محطات أخرى، أظهر زر التالي
-                    if (currentStepIndex < currentQuestion.steps.length - 1) {
-                        nextBtn.classList.remove('hidden');
-                    }
-                } else {
-                    feedbackBox.className = "p-3 rounded-lg text-sm mb-4 font-bold bg-red-50 text-red-700 border border-red-200";
-                    feedbackBox.textContent = "المعادلة المقترحة غير متوازنة مع اتجاه الحركة. حاول مرة أخرى للتطبيق الآني الصحيح.";
-                    clickedBtn.className = "w-full text-right p-3 rounded-lg border border-red-300 bg-red-50 text-red-600 text-sm focus:outline-none";
-                }
-            }
+    function checkLiveAnswer(btn, sIdx, isCorrect) {
+        const card = document.getElementById(`step-card-${sIdx}`);
+        const fb = document.getElementById(`feedback-${sIdx}`);
+        card.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('correct','wrong'); b.querySelector('i').className = 'fa-regular fa-circle'; });
+        if(isCorrect) {
+            btn.classList.add('correct');
+            btn.querySelector('i').className = 'fa-solid fa-circle-check';
+            fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+            fb.className = 'feedback-box success';
+            card.classList.add('completed'); card.classList.remove('active');
+            const nextCard = document.getElementById(`step-card-${sIdx+1}`);
+            if(nextCard) { nextCard.classList.add('active'); nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        } else {
+            btn.classList.add('wrong');
+            btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+        }
+    }
 
-            // مستمعي الأحداث لأزرار التنقل والقائمة المنسدلة
-            document.getElementById('next-step-btn').onclick = () => {
-                if (currentStepIndex < currentQuestion.steps.length - 1) {
-                    currentStepIndex++;
-                    loadStep();
-                }
-            };
+    function navigateQuestion(dir) { currentQIndex += dir; renderActiveQuestion(currentQIndex); }
 
-            document.getElementById('prev-step-btn').onclick = () => {
-                if (currentStepIndex > 0) {
-                    currentStepIndex--;
-                    loadStep();
-                }
-            };
-
-            selectElement.onchange = (e) => {
-                loadQuestion(e.target.value);
-            };
-
-            // تحميل المسألة الأولى تلقائياً عند فتح الصفحة لأول مرة
-            loadQuestion(selectElement.value);
+    function triggerSmartPrint() {
+        const pdfArea = document.getElementById('dynamic-pdf-questions-area');
+        pdfArea.innerHTML = '';
+        questionsMatrix.forEach((q, idx) => {
+            let stepsHtml = '';
+            if(q.pdfSolutionSteps) q.pdfSolutionSteps.forEach(s => { stepsHtml += `<div>${s}</div>`; });
+            pdfArea.innerHTML += `<div class="pdf-question-block"><div class="pdf-q-title">${idx+1}. ${q.title}</div><div class="pdf-q-text">${q.text}</div><div class="pdf-graphic">${q.svgCode}</div><div class="pdf-solution-box"><div class="pdf-sol-title">الحل:</div><div class="pdf-sol-steps">${stepsHtml}<div class="pdf-final-ans">${q.pdfFinalAnswer || ''}</div></div></div></div>`;
         });
-    </script>
+        window.print();
+    }
+
+    window.onload = () => { renderActiveQuestion(0); };
+</script>
 </body>
 </html>

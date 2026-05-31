@@ -165,57 +165,81 @@
     </button>
 </div>
 
-<div id="printable-pdf-document">
-    <div class="pdf-school-header">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+<div id="printable-pdf-document" style="text-align: center; padding: 50px; font-family: 'Arial', sans-serif; background-color: #ffffff; border: 2px solid #0d6efd; border-radius: 15px; min-height: 800px;">
     
-    <div class="pdf-page-title">كراسة الحلول النموذجية</div>
+    <div style="font-size: 24px; color: #1e3a8a; font-weight: bold;">
+        مدرسة أمجاد أفريقيا - ليبيا - البيضاء
+    </div>
 
-        <div class="pdf-page-title"> أسئلة من إمتحانات سابقة. الباب الرابع البكرات. </div>
+    <div style="margin: 40px 0;">
+        <h1 style="font-size: 72px; color: #1e3a8a; margin: 0; font-weight: 900;">
+            الميكانيكا
+        </h1>
+        <div style="font-size: 28px; color: #2d3748; margin-top: 10px; font-weight: bold;">
+            الصف الثالث الثانوي
+        </div>
+    </div>
 
-    
-    <div class="pdf-student-dedication">
-        <p>إهداء إلى الطلبة المتميزين</p>
+    <div style="margin: 60px 0;">
+        <h2 style="font-size: 32px; color: #0d6efd; margin: 0;">
+            <span style="font-size: 40px;">📘</span> كراسة الحلول النموذجية <span style="font-size: 40px;">📘</span>
+        </h2>
+        <div style="font-size: 20px; color: #4a5568; margin-top: 10px; font-weight: bold;">
+            العام الدراسي 2025 - 2026
+        </div>
+    </div>
+
+    <div style="margin: 40px 0; border: 1px dashed #0d6efd; padding: 20px; display: inline-block; border-radius: 10px;">
+        <h3 style="color: #2d3748; margin-top: 0;">أسئلة من امتحانات سابقة</h3>
+        <h4 style="color: #e53e3e; margin: 0;">الباب الرابع: البكرات</h4>
+    </div>
+
+    <div style="margin: 50px 0; color: #4a5568;">
+        <p>إهداء إلى طلبتنا المتميزين</p>
     </div>
     
-    <div class="pdf-bot-url-area">
-        رابط البوت: http://t.me/amjad_africa2027bot
+    <div style="margin-top: 50px; font-size: 16px; color: #2b6cb0;">
+        رابط البوت التعليمي:<br>
+        <a href="http://t.me/amjad_africa2027bot" style="color: #0d6efd;">t.me/amjad_africa2027bot</a>
     </div>
-    
-    <div id="dynamic-pdf-questions-area"></div>
+</div>    <div id="dynamic-pdf-questions-area"></div>
 </div>
 <script>
    const questionsMatrix = [
     {
-        title: "المسألة الأولى: نظام البكرات والأجسام المعلقة",
-        text: "جسمان كتلتاهما m1 = 3 kg و m2 = 5 kg متصلان بطرفي خيط خفيف يمر على بكرة ملساء. يتحرك النظام بعجلة منتظمة (a) تحت تأثير الجاذبية الأرضية حيث g = 10 m/s². احسب عجلة الحركة وقوة الشد في الخيط.",
-        svgCode: `<svg viewBox="0 0 200 160" width="80%" height="80%" style="background-color: #f8f9fa; border-radius: 8px; display: block; margin: 0 auto 30px auto;"><circle cx="100" cy="35" r="15" stroke="#333" stroke-width="2.5" fill="#ced4da" /><circle cx="100" cy="35" r="3" fill="#333" /><line x1="85" y1="35" x2="85" y2="100" stroke="#495057" stroke-width="2" /><rect x="72" y="100" width="26" height="26" rx="4" fill="#0d6efd" /><text x="85" y="117" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">m1</text><line x1="85" y1="95" x2="85" y2="70" stroke="#dc3545" stroke-width="2" /><path d="M 85 65 L 89 74 L 81 74 Z" fill="#dc3545" /><text x="70" y="80" fill="#dc3545" font-size="12" font-weight="bold">T</text><line x1="115" y1="35" x2="115" y2="90" stroke="#495057" stroke-width="2" /><rect x="102" y="90" width="26" height="36" rx="4" fill="#198754" /><text x="115" y="112" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">m2</text><line x1="115" y1="85" x2="115" y2="60" stroke="#dc3545" stroke-width="2" /><path d="M 115 55 L 119 64 L 111 64 Z" fill="#dc3545" /><text x="126" y="75" fill="#dc3545" font-size="12" font-weight="bold">T</text></svg>`,
-        steps: [
-            { title: "الخطوة 1: معادلة الحركة للجسم الصاعد (m1)", question: "اختر المعادلة الصحيحة لحركة الكتلة الأولى الصاعدة m1 (علماً بأن كتلها 3kg):", feedback: "ممتاز! بالنسبة للجسم الصاعد: T - m1*g = m1*a بالتعويض تصبح T - 30 = 3a ومنها T = 30 + 3a", options: [{ text: "T = 30 + 3a", isCorrect: true }, { text: "T = 30 - 3a", isCorrect: false }, { text: "T = 3a", isCorrect: false }] },
+  "title": "المسألة الأولى: نظام البكرات والأجسام المعلقة",
+  "text": "جسمان كتلتاهما m1 = 3 kg و m2 = 5 kg متصلان بخيط يمر على بكرة ملساء. احسب عجلة الحركة (a) وقوة الشد (T).",
+"svgCode": "<svg viewBox=\"0 0 100 80\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><circle cx=\"50\" cy=\"15\" r=\"8\" stroke=\"#333\" stroke-width=\"1.5\" fill=\"#ced4da\" /><circle cx=\"50\" cy=\"15\" r=\"1.5\" fill=\"#333\" /><line x1=\"42\" y1=\"15\" x2=\"42\" y2=\"50\" stroke=\"#495057\" stroke-width=\"1\" /><path d=\"M 42 45 L 42 35 M 40 37 L 42 35 L 44 37\" stroke=\"#dc3545\" stroke-width=\"1\" fill=\"none\" /><text x=\"35\" y=\"40\" fill=\"#dc3545\" font-size=\"6\" font-weight=\"bold\">T</text><line x1=\"58\" y1=\"15\" x2=\"58\" y2=\"45\" stroke=\"#495057\" stroke-width=\"1\" /><path d=\"M 58 40 L 58 30 M 56 32 L 58 30 L 60 32\" stroke=\"#dc3545\" stroke-width=\"1\" fill=\"none\" /><text x=\"65\" y=\"35\" fill=\"#dc3545\" font-size=\"6\" font-weight=\"bold\">T</text><rect x=\"35\" y=\"50\" width=\"14\" height=\"14\" rx=\"2\" fill=\"#0d6efd\" /><text x=\"42\" y=\"59\" fill=\"#fff\" font-size=\"5\" font-weight=\"bold\" text-anchor=\"middle\">m1</text><rect x=\"51\" y=\"45\" width=\"14\" height=\"18\" rx=\"2\" fill=\"#198754\" /><text x=\"58\" y=\"56\" fill=\"#fff\" font-size=\"5\" font-weight=\"bold\" text-anchor=\"middle\">m2</text></svg>",
+
+"steps": [
+    { title: "الخطوة 1: معادلة الحركة للجسم الصاعد (m1)", question: "اختر المعادلة الصحيحة لحركة الكتلة الأولى الصاعدة m1 (علماً بأن كتلها 3kg):", feedback: "ممتاز! بالنسبة للجسم الصاعد: T - m1*g = m1*a بالتعويض تصبح T - 30 = 3a ومنها T = 30 + 3a", options: [{ text: "T = 30 + 3a", isCorrect: true }, { text: "T = 30 - 3a", isCorrect: false }, { text: "T = 3a", isCorrect: false }] },
             { title: "الخطوة 2: معادلة الحركة للجسم الهابط (m2)", question: "اختر المعادلة الصحيحة لحركة الكتلة الثانية الهابطة m2 (علماً بأن كتلها 5kg):", feedback: "صحيح تماماً! الوزن لأسفل مطروحاً منه الشد للأعلى يساوي الكتلة في العجلة: 50 - T = 5a ومنها T = 50 - 5a", options: [{ text: "T = 50 + 5a", isCorrect: false }, { text: "T = 50 - 5a", isCorrect: true }, { text: "T = 5a - 50", isCorrect: false }] },
             { title: "الخطوة 3: حساب العجلة المشتركة (a)", question: "بمساواة المعادلتين 30 + 3a = 50 - 5a، كم تكون قيمة العجلة a؟", feedback: "صحيح! 8a = 20 → a = 2.5 m/s²", options: [{ text: "a = 2.5 m/s²", isCorrect: true }, { text: "a = 1.5 m/s²", isCorrect: false }, { text: "a = 4 m/s²", isCorrect: false }] },
             { title: "الخطوة 4: حساب قوة الشد T", question: "بالتعويض a = 2.5 في T = 30 + 3a، ما قيمة T؟", feedback: "T = 30 + 7.5 = 37.5 N", options: [{ text: "T = 37.5 N", isCorrect: true }, { text: "T = 35 N", isCorrect: false }, { text: "T = 40 N", isCorrect: false }] }
         ],
-        pdfSolutionSteps: [
-             "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'>بما أن m₂ (5kg) أثقل من m₁ (3kg)، فإن <span style='color: #10b981; font-weight: bold;'>m₂ تهبط و m₁ تصعد</span>.</div>",
-               
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلات الحركة لكل جسم</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الصاعد (m₁ = 3kg):</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - 30 = 3a</span>  <span style='color: #64748b;'>........ (1)</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الهابط (m₂ = 5kg):</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>50 - T = 5a</span>  <span style='color: #64748b;'>........ (2)</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: حل المعادلتين آنياً</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>نجمع (1) + (2):</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>T - 30 + 50 - T = 3a + 5a</span></div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>20 = 8a</span></div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 2.5 m/s²</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: حساب قوة الشد T</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>نعوض في (2): 50 - T = 5 × 2.5</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>50 - T = 12.5</span></div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = 37.5 N</span></div>"
-        ],
-        pdfFinalAnswer: "a = 2.5 m/s² , T = 37.5 N"
-    },
+ pdfSolutionSteps: [
+    "<span style='font-size: 18px; font-weight: bold;'>📍 اتجاه الحركة:</span>",
+    "<div style='margin-right: 20px; margin-bottom: 15px;'>بما أن m₂ (5kg) أثقل من m₁ (3kg)، فإن <span style='color: #10b981; font-weight: bold;'>m₂ تهبط و m₁ تصعد</span>.</div>",
+    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 1: معادلات الحركة لكل جسم</span>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الصاعد (m₁ = 3kg):</div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - 30 = 3a</span>  <span style='color: #64748b;'>........ (1)</span></div>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الهابط (m₂ = 5kg):</div>",
+    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>50 - T = 5a</span>  <span style='color: #64748b;'>........ (2)</span></div>",
+    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 2: حل المعادلتين آنياً</span>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>نجمع (1) + (2):</div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>T - 30 + 50 - T = 3a + 5a</span></div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>20 = 8a</span></div>",
+    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 2.5 m/s²</span></div>",
+    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 3: حساب قوة الشد T</span>",
+    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px; direction: ltr; text-align: left;'>نعوض في (2): 50 - T = 5 × 2.5</div>",
+    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>50 - T = 12.5</span></div>",
+    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = 37.5 N</span></div>"
+],      
+
+  "pdfFinalAnswer": "a = 2.5 m/s² , T = 37.5 N"
+},
+    
+    
     {
         title: "المسألة الثانية: استنتاج الاتزان على منضدة خشنة",
         text: "كتلتان (m₂ ، m₁) متصلتان بخيط يمر فوق بكرة ملساء ومثبتة عند حافة منضدة. توجد الكتلة (m₁) على سطح أفقي خشن معامل احتكاكه (μ). ما مقدار الكتلة الإضافية (m) التي يجب وضعها فوق الكتلة (m₁) حتى لا يتسارع النظام؟",
@@ -407,8 +431,12 @@ svgCode: `<svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.
     "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 4: حساب قوة الشد T</span>",
     "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = [m₁ m₂g sin(θ)] / (m₁ + m₂)</span></div>"
 ],
-    pdfFinalAnswer: "T = (m₁ m₂ g sinθ) / (m₁ + m₂)"
-},
+"pdfFinalAnswer": "\u202D T = (m1 * m2 * g * sinθ) / (m1 + m2)",
+
+
+    },
+
+
     {
         title: "المسألة السادسة: حساب الكتلة المجهولة (الشد معلوم)",
         text: "تحركت المنظومة في اتجاه الكتلة m، والشد T = 30 N. أوجد m. (g = 10 m/s²)",
@@ -632,8 +660,13 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
     "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'>(m₂ - m₁)g = (m₂ + m₁)a</div>",
     "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = [(m₂ - m₁)g] / (m₂ + m₁)</span></div>"
 ],
-        pdfFinalAnswer: "a = ((m₂ - m₁) g) / (m₂ + m₁)"
-    },
+
+
+
+
+
+  },
+
    
 {
     title: "المسألة الرابعة عشر: الاتزان على مستوى مائل (امتحان 2021-2022، سؤال رقم 54)",

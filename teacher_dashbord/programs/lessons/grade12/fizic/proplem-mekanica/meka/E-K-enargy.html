@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الباب السادس - طاقة الوضع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #e2e8f0; padding: 20px; font-family: 'Cairo', sans-serif; }
+        .container { max-width: 800px; margin: auto; background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: #1e3a8a; color: white; padding: 20px; text-align: center; }
+        .tabs { display: flex; }
+        .tab { flex: 1; padding: 15px; text-align: center; background: #f1f5f9; cursor: pointer; font-weight: bold; border: none; font-size: 16px; }
+        .tab.active { background: white; color: #1e3a8a; border-bottom: 3px solid #1e3a8a; }
+        .content { padding: 25px; min-height: 400px; }
+        .question-box { background: #f8fafc; border-radius: 12px; padding: 20px; border-right: 5px solid #1e3a8a; }
+        .question-text { font-size: 18px; line-height: 1.6; margin-bottom: 20px; }
+        .options { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+        .opt-btn { padding: 10px 20px; border: 2px solid #cbd5e1; background: white; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        .opt-btn.selected { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+        .calc-input { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; margin-bottom: 10px; }
+        .check-btn { background: #1e3a8a; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        .feedback { margin-top: 15px; padding: 12px; border-radius: 8px; display: none; }
+        .feedback.correct { background: #dcfce7; color: #166534; display: block; }
+        .feedback.wrong { background: #fee2e2; color: #991b1b; display: block; }
+        .solution { background: #f1f5f9; padding: 12px; margin-top: 15px; border-radius: 8px; display: none; }
+        .nav { display: flex; justify-content: space-between; margin-top: 25px; gap: 15px; }
+        .nav-btn { padding: 10px 25px; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .pdf-buttons { display: flex; gap: 15px; justify-content: center; margin: 20px; }
+        .pdf-btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .print { background: #dc2626; color: white; }
+        .download { background: #16a34a; color: white; }
+        .counter { background: #e2e8f0; padding: 5px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 15px; }
+        #pdf-area { display: none; }
+        @media print {
+            body * { display: none; }
+            #pdf-area, #pdf-area * { display: block; }
+            #pdf-area { display: block !important; padding: 20px; }
+            .pdf-page { page-break-after: always; }
+            .pdf-question { border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📚 الباب السادس: طاقة الوضع وحفظ الطاقة</h1>
+        <p>الصف الثالث الثانوي - الميكانيكا</p>
+    </div>
+    
+    <div class="tabs">
+        <button class="tab active" id="tab1" onclick="showTab('theory')">📖 أسئلة نظرية</button>
+        <button class="tab" id="tab2" onclick="showTab('calc')">🧮 مسائل حسابية</button>
+    </div>
+    
+    <div class="content" id="content">
+        <div id="counter" class="counter"></div>
+        <div id="questionBox"></div>
+        <div class="nav">
+            <button class="nav-btn" onclick="prev()">← السابق</button>
+            <button class="nav-btn" onclick="next()">التالي →</button>
+        </div>
+    </div>
+    
+    <div class="pdf-buttons">
+        <button class="pdf-btn print" onclick="printPDF()">🖨️ طباعة</button>
+        <button class="pdf-btn download" onclick="downloadPDF()">💾 تحميل PDF</button>
+    </div>
+</div>
+
+<div id="pdf-area"></div>
+
+<script>
+// ======================== جميع الأسئلة ========================
+const theoryQuestions = [
+    { text: "إذا سقط جسم من مكان مرتفع فإن طاقة وضعه عند وصوله للأرض تنعدم.", answer: "صحيح", explanation: "عند سطح الأرض h=0 → Ep=0" },
+    { text: "إذا قذف جسم لأعلى فإن طاقة وضعه عند أقصى ارتفاع أكبر ما يمكن.", answer: "صحيح", explanation: "عند أقصى ارتفاع تكون السرعة صفر وطاقة الوضع maximum" },
+    { text: "طاقة الحركة تساوي طاقة الوضع لجسم يسقط رأسياً لأسفل عند منتصف المسافة.", answer: "صحيح", explanation: "في منتصف المسافة يكون Ep = Ek" },
+    { text: "طاقة الوضع وطاقة الحركة لا تعتمدان على الكتلة.", answer: "خطأ", explanation: "كلاهما يعتمدان على الكتلة (Ep = mgh, Ek = ½mv²)" },
+    { text: "الطاقة الميكانيكية للجسم تساوي طاقة الوضع + طاقة الحركة.", answer: "صحيح", explanation: "E = Ep + Ek" },
+    { text: "في حالة الحركة الرأسية لأعلى فإن طاقة الوضع تقل وطاقة الحركة تزيد.", answer: "خطأ", explanation: "لأعلى: Ep تزيد، Ek تقل" },
+    { text: "في حالة الحركة الرأسية لأسفل فإن طاقة الحركة تزيد وطاقة الوضع تقل.", answer: "صحيح", explanation: "لأسفل: Ep تقل، Ek تزيد" },
+    { text: "القوة المحافظة يستطيع الجسم استرداد طاقته المفقودة.", answer: "صحيح", explanation: "مثل قوة الجاذبية والوزن" },
+    { text: "قوة الاحتكاك تعتبر قوة محافظة.", answer: "خطأ", explanation: "الاحتكاك قوة غير محافظة" },
+    { text: "طاقة الوضع هي الشغل الذي يبذله الجسم ضد قوة الجاذبية.", answer: "صحيح", explanation: "الشغل المبذول لرفع الجسم يخزن كطاقة وضع" },
+    { text: "عند سطح الأرض تنعدم طاقة الوضع.", answer: "صحيح", explanation: "لأن h = 0" },
+    { text: "تخزين المياه في خزانات من تطبيقات طاقة الوضع.", answer: "صحيح", explanation: "المياه المخزنة على ارتفاع لها طاقة وضع" }
+];
+
+const calculationQuestions = [
+    { text: "سقط جسم كتلته 40kg من ارتفاع 100m. احسب طاقة وضعه عندما يقطع ثلاثة أرباع المسافة.", answer: "10000 J", solution: "h = 100 - 75 = 25m → Ep = 40 × 10 × 25 = 10000 J" },
+    { text: "كرة كتلتها 50kg على منضدة ارتفاعها 30m. احسب الطاقة الكلية.", answer: "15000 J", solution: "Ep = mgh = 50 × 10 × 30 = 15000 J" },
+    { text: "كرة كتلتها 2.5kg على خيط طوله 2m، أزاحت بزاوية 60°. احسب طاقة الوضع.", answer: "25 J", solution: "h = 2(1-0.5) = 1m → Ep = 2.5 × 10 × 1 = 25 J" },
+    { text: "كرة تنزلق من ارتفاع 3m إلى ارتفاع 2.2m. أوجد سرعتها.", answer: "4 m/s", solution: "h = 0.8m → v² = 2×10×0.8 = 16 → v = 4 m/s" },
+    { text: "سقط جسم من ارتفاع، وعند سرعة 20m/s كان على ارتفاع 5m. أوجد الارتفاع.", answer: "25 m", solution: "Ek = ½×m×400 = 200m, Ep = m×10×5 = 50m → الطاقة الكلية = 250m → m×10×h = 250m → h = 25m" }
+];
+
+// ======================== المتغيرات ========================
+let currentTab = "theory";
+let theoryIndex = 0;
+let calcIndex = 0;
+let theoryAnswers = {};
+let calcAnswers = {};
+
+// ======================== دوال العرض ========================
+function showTab(tab) {
+    currentTab = tab;
+    document.getElementById("tab1").classList.toggle("active", tab === "theory");
+    document.getElementById("tab2").classList.toggle("active", tab === "calc");
+    
+    if (tab === "theory") renderTheory();
+    else renderCalc();
+}
+
+function renderTheory() {
+    const q = theoryQuestions[theoryIndex];
+    const saved = theoryAnswers[theoryIndex];
+    
+    document.getElementById("counter").innerHTML = `السؤال ${theoryIndex+1} / ${theoryQuestions.length}`;
+    
+    document.getElementById("questionBox").innerHTML = `
+        <div class="question-box">
+            <div class="question-text">${q.text}</div>
+            <div class="options">
+                <button class="opt-btn" onclick="answerTheory('صحيح')">✅ صحيح</button>
+                <button class="opt-btn" onclick="answerTheory('خطأ')">❌ خطأ</button>
+            </div>
+            <div class="feedback" id="fb"></div>
+            <div class="solution" id="sol"></div>
+        </div>
+    `;
+    
+    if (saved) {
+        const fb = document.getElementById("fb");
+        const sol = document.getElementById("sol");
+        const isCorrect = saved === q.answer;
+        fb.innerHTML = isCorrect ? `✅ ${q.explanation}` : `❌ ${q.explanation}`;
+        fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+        sol.innerHTML = `<strong>📖 الشرح:</strong> ${q.explanation}`;
+        sol.style.display = "block";
+        
+        const btns = document.querySelectorAll(".opt-btn");
+        btns.forEach(btn => {
+            if (btn.innerText === saved) btn.classList.add("selected");
+        });
+    }
+}
+
+function answerTheory(ans) {
+    const q = theoryQuestions[theoryIndex];
+    theoryAnswers[theoryIndex] = ans;
+    
+    const fb = document.getElementById("fb");
+    const sol = document.getElementById("sol");
+    const isCorrect = ans === q.answer;
+    
+    fb.innerHTML = isCorrect ? `✅ ${q.explanation}` : `❌ ${q.explanation}`;
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    sol.innerHTML = `<strong>📖 الشرح:</strong> ${q.explanation}`;
+    sol.style.display = "block";
+    
+    const btns = document.querySelectorAll(".opt-btn");
+    btns.forEach(btn => btn.classList.remove("selected"));
+    btns.forEach(btn => {
+        if (btn.innerText === ans) btn.classList.add("selected");
+    });
+}
+
+function renderCalc() {
+    const q = calculationQuestions[calcIndex];
+    const saved = calcAnswers[calcIndex];
+    
+    document.getElementById("counter").innerHTML = `المسألة ${calcIndex+1} / ${calculationQuestions.length}`;
+    
+    document.getElementById("questionBox").innerHTML = `
+        <div class="question-box">
+            <div class="question-text">${q.text}</div>
+            <input type="text" id="calcInput" class="calc-input" placeholder="أدخل إجابتك...">
+            <button class="check-btn" onclick="checkCalc()">🔍 تحقق</button>
+            <div class="feedback" id="fb"></div>
+            <div class="solution" id="sol"></div>
+        </div>
+    `;
+    
+    if (saved) {
+        document.getElementById("calcInput").value = saved;
+        const fb = document.getElementById("fb");
+        const sol = document.getElementById("sol");
+        fb.innerHTML = `✅ ${saved}`;
+        fb.className = "feedback correct";
+        sol.innerHTML = `<strong>📖 الحل:</strong> ${q.solution}`;
+        sol.style.display = "block";
+    }
+}
+
+function checkCalc() {
+    const q = calculationQuestions[calcIndex];
+    const userAnswer = document.getElementById("calcInput").value.trim();
+    const expected = q.answer.toLowerCase().replace(/\s/g, '');
+    const userNorm = userAnswer.toLowerCase().replace(/\s/g, '');
+    
+    const fb = document.getElementById("fb");
+    const sol = document.getElementById("sol");
+    
+    if (userNorm === expected || expected.includes(userNorm)) {
+        calcAnswers[calcIndex] = userAnswer;
+        fb.innerHTML = `✅ إجابة صحيحة!`;
+        fb.className = "feedback correct";
+        sol.innerHTML = `<strong>📖 الحل:</strong> ${q.solution}`;
+        sol.style.display = "block";
+    } else {
+        fb.innerHTML = `❌ خطأ. الإجابة الصحيحة: ${q.answer}`;
+        fb.className = "feedback wrong";
+        sol.innerHTML = `<strong>📖 الحل:</strong> ${q.solution}`;
+        sol.style.display = "block";
+    }
+}
+
+function next() {
+    if (currentTab === "theory") {
+        if (theoryIndex + 1 < theoryQuestions.length) {
+            theoryIndex++;
+            renderTheory();
+        }
+    } else {
+        if (calcIndex + 1 < calculationQuestions.length) {
+            calcIndex++;
+            renderCalc();
+        }
+    }
+}
+
+function prev() {
+    if (currentTab === "theory") {
+        if (theoryIndex - 1 >= 0) {
+            theoryIndex--;
+            renderTheory();
+        }
+    } else {
+        if (calcIndex - 1 >= 0) {
+            calcIndex--;
+            renderCalc();
+        }
+    }
+}
+
+// ======================== PDF ========================
+function preparePDF() {
+    const pdfArea = document.getElementById("pdf-area");
+    pdfArea.innerHTML = `
+        <div style="text-align:center; padding:50px; page-break-after:always;">
+            <h1>مدرسة أمجاد أفريقيا</h1>
+            <h2>الميكانيكا - الباب السادس</h2>
+            <h3>طاقة الوضع وحفظ الطاقة</h3>
+            <p>t.me/amjad_africa2027bot</p>
+        </div>
+        <div class="pdf-page"><h2>📖 الأسئلة النظرية</h2></div>
+    `;
+    
+    theoryQuestions.forEach((q, i) => {
+        const userAns = theoryAnswers[i];
+        pdfArea.innerHTML += `
+            <div class="pdf-question">
+                <h3>${i+1}. ${q.text}</h3>
+                <p><strong>الإجابة:</strong> ${q.answer}</p>
+                <p><strong>الشرح:</strong> ${q.explanation}</p>
+                ${userAns ? `<p><strong>إجابتك:</strong> ${userAns} ${userAns === q.answer ? "✓" : "✗"}</p>` : ''}
+            </div>
+        `;
+    });
+    
+    pdfArea.innerHTML += `<div class="pdf-page"><h2>🧮 المسائل الحسابية</h2></div>`;
+    calculationQuestions.forEach((q, i) => {
+        const userAns = calcAnswers[i];
+        pdfArea.innerHTML += `
+            <div class="pdf-question">
+                <h3>${i+1}. ${q.text}</h3>
+                <p><strong>الإجابة النموذجية:</strong> ${q.answer}</p>
+                <p><strong>الحل:</strong> ${q.solution}</p>
+                ${userAns ? `<p><strong>إجابتك:</strong> ${userAns}</p>` : ''}
+            </div>
+        `;
+    });
+}
+
+function printPDF() {
+    preparePDF();
+    window.print();
+}
+
+function downloadPDF() {
+    preparePDF();
+    const element = document.getElementById("pdf-area");
+    html2pdf().set({
+        margin: 5,
+        filename: "الباب_السادس.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+    }).from(element).save();
+}
+
+// بدء التشغيل
+renderTheory();
+</script>
+</body>
+</html>

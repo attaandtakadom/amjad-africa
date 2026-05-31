@@ -768,6 +768,188 @@
                     </div>
                     <div class="lessons-grid">
 
+
+                        <div class="lesson-card grade9" style="
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 24px;
+    padding: 0;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.02);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+">
+    <div class="lesson-header" style="
+        background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+        padding: 20px 25px;
+        color: white;
+    ">
+        <div class="lesson-icon" style="
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            padding: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+        ">
+            <i class="fas fa-laptop-code" style="font-size: 28px; color: white;"></i>
+        </div>
+
+        <h2 style="
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0 5px;
+            color: white;
+        ">
+            💻 مذكرة تقنية المعلومات الشاملة
+        </h2>
+
+        <h3 class="lesson-title" style="
+            font-size: 20px;
+            font-weight: 600;
+            margin: 5px 0;
+            color: #e0e7ff;
+        ">
+            📘 تقنية المعلومات الشامل
+        </h3>
+
+        <div class="lesson-subject" style="
+            font-size: 16px;
+            color: #bfdbfe;
+            margin-top: 8px;
+        ">
+            📚 مذكرة الأسئلة الشاملة - تقنية المعلومات الشامل
+        </div>
+    </div>
+
+    <div class="lesson-content" style="padding: 20px 25px; background: white;">
+        <p class="lesson-desc" style="
+            font-size: 16px;
+            color: #334155;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        ">
+            <span style="font-weight: 500;">📖 مذكرة الأسئلة الشاملة</span>
+            
+            <span style="
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                background: #f1f5f9;
+                padding: 5px 12px;
+                border-radius: 30px;
+                font-size: 14px;
+                color: #475569;
+            ">
+                <i class="far fa-clock"></i> 12 ساعة
+            </span>
+            
+            <span style="
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                background: #f1f5f9;
+                padding: 5px 12px;
+                border-radius: 30px;
+                font-size: 14px;
+                color: #475569;
+            ">
+                <i class="fas fa-tasks"></i> 40 تمرين
+            </span>
+        </p>
+    </div>
+
+    <div class="lesson-status status-upcoming" style="
+        display: inline-block;
+        margin: 0 25px 15px 25px;
+        padding: 6px 16px;
+        background: #fef3c7;
+        color: #d97706;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: bold;
+    ">
+        ⏳ قادم
+    </div>
+
+    <div class="lesson-actions" style="
+        padding: 15px 25px 25px 25px;
+        display: flex;
+        gap: 15px;
+        border-top: 1px solid #e2e8f0;
+        background: #fafcff;
+    ">
+        <a href="../../teacher_dashbord/programs/lessons/grade9/it/final-exersize.html" class="lesson-btn primary" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        ">
+            <i class="fas fa-eye"></i> معاينة
+        </a>
+        
+        <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade9')" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f5f9;
+            color: #334155;
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: 1px solid #cbd5e1;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        ">
+            <i class="fas fa-calendar-alt"></i> جدولة
+        </button>
+    </div>
+</div>
+
+<style>
+    .lesson-btn.primary:hover {
+        background: linear-gradient(135deg, #1e40af, #1e3a8a);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+    .lesson-btn.secondary:hover {
+        background: #e2e8f0;
+        transform: translateY(-2px);
+    }
+    .lesson-card.grade9:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 600px) {
+        .lesson-desc {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 10px;
+        }
+        .lesson-actions {
+            flex-direction: column;
+        }
+        .lesson-btn {
+            text-align: center;
+            justify-content: center;
+        }
+    }
+</style>
+
 <div class="lesson-card grade5">
                             <div class="lesson-header">
                                 <div class="lesson-icon">

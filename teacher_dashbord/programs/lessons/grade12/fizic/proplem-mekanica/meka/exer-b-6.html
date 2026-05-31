@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تمارين الباب السادس - حفظ الطاقة (6-ب)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #e2e8f0; padding: 20px; font-family: 'Cairo', 'Segoe UI', sans-serif; }
+.app-container { max-width: 850px; margin: auto; background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; }
+.header { background: #0f172a; color: white; padding: 20px; text-align: center; }
+.question-area { padding: 25px; }
+.options-area { padding: 0 25px; }
+.opt-btn { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #2563eb; background: white; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 600; transition: 0.2s; }
+.opt-btn.selected { background: #2563eb; color: white; }
+.check-btn { width: 90%; margin: 20px auto; display: block; padding: 12px; background: #16a34a; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; }
+.sol-area { padding: 20px; background: #f0fdf4; border-right: 5px solid #16a34a; display: none; margin: 15px; border-radius: 10px; }
+.nav-footer { display: flex; justify-content: space-between; padding: 20px; gap: 15px; }
+.nav-btn { padding: 10px 25px; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.print-btn, .download-btn { color: white; padding: 12px 30px; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; margin: 10px auto; display: inline-block; width: auto; }
+.print-btn { background: #dc2626; }
+.download-btn { background: #16a34a; }
+.btn-group { text-align: center; margin: 10px auto 25px auto; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+#pdf-print-area { display: none; }
+@media print {
+    body * { display: none; }
+    #pdf-print-area, #pdf-print-area * { display: block; }
+    #pdf-print-area {
+        display: block !important;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: white;
+        direction: rtl;
+    }
+    .pdf-page { page-break-after: always; padding: 15px; }
+    .pdf-two-columns { display: flex; flex-direction: column; gap: 20px; }
+    .pdf-question { border: 1px solid #cbd5e1; padding: 12px; border-radius: 10px; page-break-inside: avoid; background: white; }
+    .pdf-title { color: #2563eb; font-size: 16px; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
+    .pdf-content { font-size: 13px; line-height: 1.5; color: #334155; }
+    .pdf-graphic { text-align: center; margin: 10px 0; }
+    .pdf-solution { background: #f8fafc; padding: 10px; margin-top: 10px; border-right: 3px solid #16a34a; border-radius: 0 6px 6px 0; font-size: 12px; line-height: 1.6; }
+    .pdf-answer { color: #dc2626; font-weight: bold; margin-top: 8px; font-size: 13px; }
+    .pdf-cover { text-align: center; padding: 40px 20px; page-break-after: always; }
+    .pdf-cover h1 { color: #0f172a; font-size: 28px; margin: 20px 0; }
+    .pdf-cover h2 { font-size: 22px; margin: 15px 0; }
+    svg { max-width: 100%; height: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h1>📚 تمارين الباب السادس - حفظ الطاقة (6-ب)</h1>
+    </div>
+    <div class="question-area" id="content"></div>
+    <div class="options-area" id="options"></div>
+    <button class="check-btn" id="checkBtn" onclick="verify()">✅ تحقق من الإجابة</button>
+    <div id="sol" class="sol-area"></div>
+    <div class="nav-footer">
+        <button class="nav-btn" onclick="move(-1)">← السابق</button>
+        <button class="nav-btn" onclick="move(1)">التالي →</button>
+    </div>
+    <div class="btn-group">
+        <button class="print-btn" onclick="printPDF()">🖨️ طباعة PDF</button>
+        <button class="download-btn" onclick="downloadPDF()">💾 تحميل PDF وحفظه</button>
+    </div>
+</div>
+
+<div id="pdf-print-area"></div>
+
+<script>
+const myQuestionsData = [
+{
+id: 0,
+title: "🚀 مفاتيح النجاح في ميكانيكا الطاقة",
+content: `<div style="direction: rtl; text-align: right; background: #fffbe6; padding: 20px; border-radius: 15px; border: 2px dashed #f1c40f;"><h3 style="color: #d35400; text-align: center;">خمس قواعد لا تنساها أبداً:</h3><ul style="padding-right: 20px;"><li><b>1. الجسم الصاعد والهابط:</b> الارتفاع (h) يحسب رأسياً فقط.</li><li><b>2. طاقة الحركة:</b> نستخدم مجموع الكتل (½ × Σm × v²).</li><li><b>3. الشغل الخارجي:</b> (طاقة البداية + شغل المحرك) = (طاقة النهاية + شغل المقاومة).</li><li><b>4. شغل الخيط:</b> لا يبذل شغلاً على "النظام ككل".</li><li><b>5. المسافة بين الجسمين:</b> إذا تحرك كل جسم مسافة (h) فالمسافة بينهما = 2h.</li></ul><div style="text-align: center; margin-top: 10px;">"الفيزياء هي فن ترجمة الواقع إلى معادلات.. انطلقوا!"</div></div>`,
+options: ["جاهزون للتحدي، لنبدأ!"],
+ans: "جاهزون للتحدي، لنبدأ!",
+sol: "ممتاز! تذكروا أن كل مسألة هي لغز ممتع ينتظر الحل.",
+svgCode: ""
+},
+{
+id: 1,
+title: "تمرين 1: حركة البكرات",
+content: `<div style="direction: rtl; text-align: right;"><p>جسمان كتلتاهما (0.3kg) و (0.5kg) مربوطان بسلك يمر على بكرة ملساء. بدأا من السكون من مستوى أفقي واحد. أوجد سرعتهما بعد مسافة 1.3m.</p><div style="display: flex; justify-content: center; gap: 30px; margin: 15px 0;"><div style="text-align: center;"><small>قبل الحركة</small><br><svg width="80" height="80"><circle cx="40" cy="15" r="6" fill="gray"/><line x1="36" y1="15" x2="36" y2="55" stroke="black" stroke-width="2"/><line x1="44" y1="15" x2="44" y2="55" stroke="black" stroke-width="2"/><rect x="32" y="55" width="10" height="10" fill="#3498db"/><rect x="40" y="55" width="10" height="10" fill="#e74c3c"/></svg></div><div style="text-align: center;"><small>بعد الحركة</small><br><svg width="80" height="80"><circle cx="40" cy="15" r="6" fill="gray"/><line x1="36" y1="15" x2="36" y2="35" stroke="black" stroke-width="2"/><rect x="32" y="35" width="10" height="10" fill="#3498db"/><line x1="44" y1="15" x2="44" y2="75" stroke="black" stroke-width="2"/><rect x="40" y="75" width="10" height="10" fill="#e74c3c"/></svg></div></div></div>`,
+options: ["1.55 m/s", "2.55 m/s", "3.25 m/s", "6.50 m/s"],
+ans: "2.55 m/s",
+sol: `<div style="direction: rtl; text-align: right;"><h4 style="color: #2c3e50;">الحل باستخدام قانون حفظ الطاقة العام:</h4><p style="background: #e8f5e9; padding: 10px; border-radius: 8px; text-align: center;">(طاقة الوضع + طاقة الحركة) قبل = (طاقة الوضع + طاقة الحركة) بعد</p><h4>1. قبل الحركة (لحظة السكون):</h4><ul><li>طاقة الحركة: صفر</li><li>طاقة الوضع: صفر</li><li>إجمالي الطاقة قبل = 0</li></ul><h4>2. بعد الحركة (بعد مسافة 1.3m):</h4><ul><li>طاقة وضع الجسم الأول (0.3kg): 0.3 × 10 × 1.3 = +3.9 جول</li><li>طاقة وضع الجسم الثاني (0.5kg): -(0.5 × 10 × 1.3) = -6.5 جول</li><li>طاقة حركة الجسمين معاً: ½ × (0.3+0.5) × v² = 0.4v²</li></ul><h4>3. تطبيق المعادلة النهائية:</h4><div style="background: #f9f9f9; padding: 15px; border-radius: 10px;">0 = 3.9 - 6.5 + 0.4v²<br>0 = -2.6 + 0.4v²<br>2.6 = 0.4v²<br>v² = 2.6 ÷ 0.4 = 6.5<br><b>v = √6.5 = 2.55 m/s</b></div></div>`,
+svgCode: `<svg width="160" height="90" viewBox="0 0 160 90"><circle cx="80" cy="15" r="7" fill="#475569"/><line x1="73" y1="15" x2="73" y2="55" stroke="#0f172a" stroke-width="2"/><line x1="87" y1="15" x2="87" y2="45" stroke="#0f172a" stroke-width="2"/><rect x="66" y="55" width="14" height="14" fill="#1e3a8a" rx="2"/><text x="73" y="65" fill="white" font-size="7" text-anchor="middle">0.3</text><rect x="80" y="45" width="14" height="14" fill="#ea580c" rx="2"/><text x="87" y="55" fill="white" font-size="7" text-anchor="middle">0.5</text></svg>`
+},
+{
+id: 2,
+title: "تمرين 2: حساب المسافة بين الجسمين",
+content: `<div style="direction: rtl; text-align: right;"><p>جسمان كتلتاهما (1.2kg) و (1.4kg) مربوطان بسلك يمر على بكرة ملساء. بدأت المجموعة حركتها من السكون وهما في مستوى أفقي واحد. أوجد <b>المسافة بين الجسمين</b> عندما تصبح سرعتهما (0.5m/s).</p><div style="background: #f0f4f8; padding: 10px; border-radius: 8px;"><b>المعطيات:</b> m₁=1.2kg , m₂=1.4kg , u=0 , v=0.5m/s , g=10m/s²</div></div>`,
+options: ["0.16 m", "0.32 m", "0.08 m", "0.25 m"],
+ans: "0.32 m",
+sol: `<div style="direction: rtl; text-align: right;"><h4 style="color: #2c3e50;">الحل بمنطق حفظ الطاقة (قبل وبعد):</h4><p style="background: #e8f5e9; padding: 10px; border-radius: 8px; text-align: center;">الطاقة الكلية (1) = الطاقة الكلية (2)</p><h4>أولاً: قبل الحركة (الوضعية 1)</h4><p>بما أن الأجسام بدأت من السكون وفي مستوى واحد، نعتبر طاقة النظام كاملة = <b>صفر</b>.</p><h4>ثانياً: بعد الحركة (الوضعية 2) لمسافة (h)</h4><ul><li>طاقة وضع الجسم الخفيف (1.2kg): 1.2 × 10 × h = 12h</li><li>طاقة وضع الجسم الثقيل (1.4kg): -(1.4 × 10 × h) = -14h</li><li>طاقة حركة الجسمين معاً (بسرعة 0.5): ½ × (1.2+1.4) × (0.5)² = ½ × 2.6 × 0.25 = 0.325 جول</li></ul><h4>ثالثاً: حساب المسافة (h) والمسافة الكلية:</h4><div style="background: #f9f9f9; padding: 15px; border-radius: 10px;">معادلة الطاقة: 0 = 12h - 14h + 0.325<br>0 = -2h + 0.325<br>2h = 0.325<br>h = 0.1625 متر (هذه مسافة تحرك كل جسم)<br><br><b>المسافة بين الجسمين (المسافة الرأسية):</b><br>بما أن أحدهما صعد h والآخر هبط h، فإن المسافة بينهما هي 2h:<br>المسافة بينهما = 2 × 0.1625 = <b>0.325 متر</b> (بالتقريب 0.32 متر).</div></div>`,
+svgCode: `<svg width="160" height="90" viewBox="0 0 160 90"><circle cx="80" cy="15" r="7" fill="#475569"/><line x1="73" y1="15" x2="73" y2="50" stroke="#0f172a" stroke-width="2"/><line x1="87" y1="15" x2="87" y2="65" stroke="#0f172a" stroke-width="2"/><rect x="66" y="50" width="14" height="14" fill="#1e3a8a" rx="2"/><text x="73" y="60" fill="white" font-size="7" text-anchor="middle">1.2</text><rect x="80" y="65" width="14" height="14" fill="#ea580c" rx="2"/><text x="87" y="75" fill="white" font-size="7" text-anchor="middle">1.4</text></svg>`
+},
+{
+id: 3,
+title: "تمرين 3: حركة كتلة على منضدة (بقاء الطاقة)",
+content: `<div style="direction: rtl; text-align: right;"><p>قطعة كتلتها (1.2kg) موضوعة على منضدة أفقية ملساء تبعد 2m عن حافتها، ربطت بخيط يمر على بكرة عند الحافة بكتلة أخرى (0.7kg) متدلية. بدأ النظام حركته من السكون.</p><p style="color: #c0392b; font-weight: bold;">أوجد: (أ) الإزاحة (h) التي تحركتها القطعتان عندما أصبحت سرعتهما 3m/s.<br>(ب) سرعة القطعتين قبيل وصول الكتلة الأولى إلى الحافة.</p></div>`,
+options: ["(أ) 1.22m ، (ب) 3.84m/s", "(أ) 0.85m ، (ب) 4.22m/s", "(أ) 1.05m ، (ب) 3.20m/s", "(أ) 1.50m ، (ب) 5.10m/s"],
+ans: "(أ) 1.22m ، (ب) 3.84m/s",
+sol: `<div style="direction: rtl; text-align: right;"><h4 style="color: #2c3e50;">تطبيق قانون بقاء الطاقة بالتفصيل:</h4><p><b>1. قبل الحركة (الحالة الأولى):</b> E₁ = (K.E₁ + P.E₁) + (K.E₂ + P.E₂) = (0 + 0) + (0 + 0) = <b>0</b>.</p><p><b>2. بعد الحركة (الحالة الثانية):</b></p><ul><li>طاقة حركة الجسمين: <b>½(1.2 + 0.7)v² = 0.95v²</b></li><li>طاقة وضع الجسم الأول (على الطاولة): <b>0</b> (لأنه لم يغير مستواه).</li><li>طاقة وضع الجسم الثاني (المتدلي): <b>-m₂gh = -0.7 × 10 × h = -7h</b>.</li></ul><h4 style="color: #c0392b;">3. المساواة: (الطاقة بعد = الطاقة قبل)</h4><div style="background: #fdf2f2; padding: 15px; border-radius: 10px;">[0.95v²] + [0] + [-7h] = 0<br><b>0.95v² - 7h = 0  ⇒  7h = 0.95v²</b></div><p><b>(أ) الإزاحة h عندما v = 3m/s:</b> 7h = 0.95(3)² ⇒ <b>h = 1.22 m</b>.</p><p><b>(ب) السرعة v عند وصول الحافة (h = 2m):</b> 7(2) = 0.95v² ⇒ v² = 14.73 ⇒ <b>v = 3.84 m/s</b>.</p></div>`,
+svgCode: `<svg width="180" height="80" viewBox="0 0 180 80"><rect x="20" y="50" width="90" height="6" fill="#64748b"/><circle cx="130" cy="53" r="6" fill="#475569"/><rect x="60" y="35" width="22" height="15" fill="#1e3a8a" rx="2"/><text x="71" y="46" fill="white" font-size="7" text-anchor="middle">1.2</text><rect x="124" y="60" width="18" height="18" fill="#ea580c" rx="2"/><text x="133" y="72" fill="white" font-size="7" text-anchor="middle">0.7</text><line x1="82" y1="42" x2="130" y2="42" stroke="#0f172a" stroke-width="2"/><line x1="136" y1="53" x2="136" y2="60" stroke="#0f172a" stroke-width="2"/></svg>`
+},
+{
+id: 4,
+title: "تمرين 4: حركة الأجسام على سطح مائل (بقاء الطاقة)",
+content: `<div style="direction: rtl; text-align: right;"><p>وضع جسم كتلته (1.6kg) على سطح مائل أملس يميل بزاوية (10°) مع الأفقي، وربط بخيط يمر على بكرة عند قمة السطح بجسم آخر (0.8kg) متدلي رأسياً. بدأ النظام حركته من السكون.</p><p style="color: #c0392b; font-weight: bold;">أوجد: (أ) سرعتهما بعد أن يقطعا مسافة (s) قدرها 0.5m.<br>(ب) المسافة (s) التي تحركاها عندما أصبحت السرعة 3m/s.</p></div>`,
+options: ["(أ) 1.47m/s ، (ب) 2.07m", "(أ) 2.10m/s ، (ب) 1.50m", "(أ) 1.04m/s ، (ب) 4.13m", "(أ) 3.84m/s ، (ب) 1.22m"],
+ans: "(أ) 1.47m/s ، (ب) 2.07m",
+sol: `<div style="direction: rtl; text-align: right;"><h4 style="color: #2c3e50;">خطوات الحل (قانون بقاء الطاقة):</h4><p><b>1. قبل الحركة (Eᵢ):</b> النظام ساكن ⇒ <b>Eᵢ = 0</b>.</p><p><b>2. بعد الحركة لمسافة (s):</b> نحسب طاقة كل جسم:</p><ul><li>طاقة حركة المجموعة: <b>K.E = ½ (1.6 + 0.8) v² = 1.2 v²</b></li><li>طاقة وضع الجسم المائل (صعد): <b>P.E₁ = m₁ g (s sin 10°) = 1.6 × 10 × 0.1736 s = 2.77 s</b></li><li>طاقة وضع الجسم المتدلي (هبط): <b>P.E₂ = -m₂ g s = -0.8 × 10 × s = -8 s</b></li></ul><h4 style="color: #c0392b;">3. المعادلة (مجموع الطاقات = صفر):</h4><div style="background: #fdf2f2; padding: 15px; border-radius: 10px;">1.2 v² + 2.77 s - 8 s = 0<br><b>1.2 v² - 5.23 s = 0</b></div><p><b>(أ) حساب السرعة v عندما s = 0.5m:</b><br>1.2 v² = 5.23 × 0.5 ⇒ 1.2 v² = 2.615 ⇒ v² = 2.179 ⇒ <b>v = 1.47 m/s</b>.</p><p><b>(ب) حساب المسافة s عندما v = 3m/s:</b><br>5.23 s = 1.2 × (3)² ⇒ 5.23 s = 10.8 ⇒ <b>s = 2.07 m</b>.</p></div>`,
+svgCode: `<svg width="180" height="80" viewBox="0 0 180 80"><line x1="20" y1="65" x2="120" y2="25" stroke="#64748b" stroke-width="3"/><circle cx="120" cy="25" r="6" fill="#475569"/><rect x="70" y="42" width="22" height="15" fill="#1e3a8a" rx="2" transform="rotate(-22, 81, 49)"/><text x="81" y="53" fill="white" font-size="7" text-anchor="middle">1.6</text><rect x="114" y="45" width="18" height="18" fill="#ea580c" rx="2"/><text x="123" y="57" fill="white" font-size="7" text-anchor="middle">0.8</text><line x1="92" y1="34" x2="120" y2="18" stroke="#0f172a" stroke-width="2"/><line x1="126" y1="25" x2="126" y2="45" stroke="#0f172a" stroke-width="2"/></svg>`
+},
+{
+id: 5,
+title: "تمرين 5: حساب الشغل والشد في الخيط (نظام البكرة)",
+content: `<div style="direction: rtl; text-align: right;"><p>جسمان كتلتاهما (0.1kg) و (0.2kg) مربوطان بخيط يمر على بكرة ملساء. بدأت المجموعة حركتها رأسياً من السكون.</p><p style="color: #c0392b; font-weight: bold;">أوجد: (أ) سرعتهما بعد مسافة 0.6m.<br>(ب) الشغل المبذول على الجسم (0.1kg) بواسطة الخيط.<br>(ج) مقدار الشد في الخيط.</p></div>`,
+options: ["(أ) 2m/s ، (ب) 0.8J ، (ج) 1.33N", "(أ) 1.5m/s ، (ب) 0.5J ، (ج) 1.2N", "(أ) 2.5m/s ، (ب) 1.0J ، (ج) 1.5N", "(أ) 1.8m/s ، (ب) 0.7J ، (ج) 1.1N"],
+ans: "(أ) 2m/s ، (ب) 0.8J ، (ج) 1.33N",
+sol: `<div style="direction: rtl; text-align: right;"><h4 style="color: #2c3e50;">خطوات الحل المنطقية:</h4><p><b>(أ) حساب السرعة v:</b><br>من قانون بقاء الطاقة للمجموعة: <b>v = 2 m/s</b></p><hr><p style="color: #c0392b; font-weight: bold;">(ب) حساب شغل الشد (Wₜ) على الجسم الصاعد (0.1kg):</p><div style="background: #f9f9f9; padding: 15px; border-radius: 10px;">1. القانون الرياضي: ΔK.E = Wₜ - W_g<br>2. نضع "شغل الشد" في طرف مستقل: <b style="color: #2980b9;">Wₜ = ΔK.E + W_g</b><br>3. التعويض بالقيم:<br>ΔK.E = ½ × 0.1 × (2)² = <b>0.2 جول</b><br>W_g = 0.1 × 10 × 0.6 = <b>0.6 جول</b><br>4. إذن: Wₜ = 0.2 + 0.6 = <span style="color: #2980b9; font-weight: bold;">0.8 جول</span></div><p style="color: #c0392b; font-weight: bold;">(ج) حساب مقدار الشد في الخيط (T):</p><div style="background: #fff3e0; padding: 15px; border-radius: 10px;">بما أن الشغل يساوي (القوة × المسافة)، فإن:<br><b>الشد (T) = شغل الشد ÷ المسافة</b><br>T = 0.8 ÷ 0.6<br><span style="color: #27ae60; font-weight: bold; font-size: 20px;">T = 1.33 نيوتن</span></div></div>`,
+svgCode: `<svg width="160" height="90" viewBox="0 0 160 90"><circle cx="80" cy="15" r="7" fill="#475569"/><line x1="73" y1="15" x2="73" y2="50" stroke="#0f172a" stroke-width="2"/><line x1="87" y1="15" x2="87" y2="65" stroke="#0f172a" stroke-width="2"/><rect x="66" y="50" width="14" height="14" fill="#1e3a8a" rx="2"/><text x="73" y="60" fill="white" font-size="7" text-anchor="middle">0.1</text><rect x="80" y="65" width="14" height="14" fill="#ea580c" rx="2"/><text x="87" y="75" fill="white" font-size="7" text-anchor="middle">0.2</text></svg>`
+},
+{
+id: 6,
+title: "تمرين 6: حركة سيارة على منحدر (ميزان الطاقة)",
+content: `<div style="direction: rtl; text-align: right;"><p>تتحرك سيارة كتلتها (1200kg) بسرعة (25m/s) عند أسفل منحدر (النقطة A). صعدت السيارة المنحدر لمسافة (1000m) حتى وصلت لارتفاع رأسي (60m) عند القمة (النقطة B). إذا كانت قوة المحرك (1600N) وقوة المقاومة (1150N).</p><p style="color: #c0392b; font-weight: bold;">أوجد: سرعة السيارة عند وصولها لقمة المنحدر (النقطة B).</p></div>`,
+options: ["13.23 m/s", "28.50 m/s", "15.80 m/s", "10.45 m/s"],
+ans: "13.23 m/s",
+sol: `<div style="direction: rtl; text-align: right;"><h4 style="color: #2c3e50;">خطوات الحل بالتسلسل المنطقي:</h4><h4 style="color: #c0392b;">المرحلة الأولى: حساب إجمالي الطاقة عند نقطة البداية (A)</h4><div style="background: #f9f9f9; padding: 15px; border-radius: 10px;"><b>1. حساب طاقة الحركة الابتدائية:</b> K.E_A = ½ × 1200 × (25)² = <b>375,000 J</b><br><b>2. حساب الشغل المضاف (المحرك):</b> شغل المحرك = 1600 × 1000 = <b>1,600,000 J</b><br><b>💰 إجمالي الطاقة عند البداية (A)</b> = 375,000 + 1,600,000 = 1,975,000 J</div><h4 style="color: #c0392b;">المرحلة الثانية: حساب إجمالي الطاقة عند نقطة النهاية (B)</h4><div style="background: #f9f9f9; padding: 15px; border-radius: 10px;"><b>1. حساب طاقة الوضع (الارتفاع):</b> P.E_B = 1200 × 10 × 60 = <b>720,000 J</b><br><b>2. حساب الشغل المفقود (المقاومة):</b> شغل المقاومة = 1150 × 1000 = <b>1,150,000 J</b><br><b>3. طاقة الحركة عند القمة:</b> K.E_B = ½ × 1200 × v² = <b>600 v²</b><br><b>📉 إجمالي الطاقة عند النهاية (B)</b> = 720,000 + 1,150,000 + 600 v² = 1,870,000 + 600 v²</div><h4 style="color: #c0392b;">المرحلة الثالثة: المساواة وإيجاد السرعة (v)</h4><div style="background: #fff3e0; padding: 15px; border-radius: 10px;">قانون حفظ الطاقة: <b>إجمالي الطاقة عند A = إجمالي الطاقة عند B</b><br><p style="text-align: center; font-size: 16px; font-weight: bold;">1,975,000 = 1,870,000 + 600 v²</p><b>1. نقل الأرقام:</b> 600 v² = 1,975,000 - 1,870,000 = 105,000<br><b>2. القسمة:</b> v² = 105,000 ÷ 600 = 175<br><b>3. حساب السرعة النهائية:</b> v = √175<br><span style="color: #27ae60; font-weight: bold; font-size: 22px;">v = 13.23 m/s</span></div></div>`,
+svgCode: `<svg width="220" height="70" viewBox="0 0 220 70"><line x1="20" y1="55" x2="200" y2="20" stroke="#64748b" stroke-width="3"/><rect x="95" y="32" width="18" height="12" fill="#1e3a8a" rx="2" transform="rotate(-10, 104, 38)"/><text x="104" y="41" fill="white" font-size="6" text-anchor="middle">1200</text><text x="35" y="60" fill="#dc2626" font-size="9" font-weight="bold">A</text><text x="195" y="15" fill="#dc2626" font-size="9" font-weight="bold">B</text></svg>`
+}
+];
+
+const questions = myQuestionsData.filter(q => q.id !== 0);
+let currentIndex = 0;
+let selectedChoice = "";
+
+function displayQuestion() {
+    const q = questions[currentIndex];
+    document.getElementById('content').innerHTML = q.content + (q.svgCode ? `<div style="text-align:center; margin-top:15px;">${q.svgCode}</div>` : '');
+    document.getElementById('options').innerHTML = q.options.map(o => `<button class="opt-btn" onclick="selectOption(this, '${o}')">${o}</button>`).join('');
+    document.getElementById('checkBtn').style.display = 'none';
+    document.getElementById('sol').style.display = 'none';
+    selectedChoice = "";
+}
+
+function selectOption(btn, value) {
+    document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedChoice = value;
+    document.getElementById('checkBtn').style.display = 'block';
+}
+
+function verify() {
+    if(selectedChoice === questions[currentIndex].ans) {
+        document.getElementById('sol').innerHTML = questions[currentIndex].sol;
+        document.getElementById('sol').style.display = 'block';
+    } else { alert("❌ حاول مرة أخرى!"); }
+}
+
+function move(direction) {
+    if(currentIndex + direction >= 0 && currentIndex + direction < questions.length) {
+        currentIndex += direction;
+        displayQuestion();
+    }
+}
+
+function preparePDFContent() {
+    const pdfArea = document.getElementById('pdf-print-area');
+    pdfArea.innerHTML = '';
+    
+    // الغلاف
+    pdfArea.innerHTML += `
+        <div class="pdf-cover">
+            <div style="font-size: 24px; color: #1e3a8a; font-weight: bold;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+            <div style="margin: 40px 0;">
+                <h1 style="font-size: 72px; color: #1e3a8a; margin: 0; font-weight: 900;">الميكانيكا</h1>
+                <div style="font-size: 28px; color: #2d3748; margin-top: 10px; font-weight: bold;">الصف الثالث الثانوي</div>
+            </div>
+            <div style="margin: 60px 0;">
+                <h2 style="font-size: 32px; color: #0d6efd; margin: 0;"><span style="font-size: 40px;">📘</span> كراسة الحلول النموذجية <span style="font-size: 40px;">📘</span></h2>
+                <div style="font-size: 20px; color: #4a5568; margin-top: 10px; font-weight: bold;">العام الدراسي 2025 - 2026</div>
+            </div>
+            <h2>تمارين الباب السادس (6-ب)</h2>
+            <h3>حفظ الطاقة في أنظمة البكرات</h3>
+            <p style="margin-top: 50px;">إهداء إلى طلبتنا المتميزين</p>
+            <div style="margin-top: 50px; font-size: 16px; color: #2b6cb0;">رابط البوت التعليمي:<br>t.me/amjad_africa2027bot</div>
+        </div>
+    `;
+    
+    // تجميع الأسئلة في أزواج
+    for (let i = 0; i < questions.length; i += 2) {
+        const q1 = questions[i];
+        const q2 = questions[i + 1];
+        let pageHTML = `<div class="pdf-page"><div class="pdf-two-columns">`;
+        
+        pageHTML += `<div class="pdf-question"><div class="pdf-title">${i+1}. ${q1.title}</div><div class="pdf-content">${q1.content}</div>${q1.svgCode ? `<div class="pdf-graphic">${q1.svgCode}</div>` : ''}<div class="pdf-solution"><strong>📖 الحل النموذجي:</strong><br>${q1.sol}<div class="pdf-answer">✅ الإجابة النهائية: ${q1.ans}</div></div></div>`;
+        
+        if (q2) {
+            pageHTML += `<div class="pdf-question"><div class="pdf-title">${i+2}. ${q2.title}</div><div class="pdf-content">${q2.content}</div>${q2.svgCode ? `<div class="pdf-graphic">${q2.svgCode}</div>` : ''}<div class="pdf-solution"><strong>📖 الحل النموذجي:</strong><br>${q2.sol}<div class="pdf-answer">✅ الإجابة النهائية: ${q2.ans}</div></div></div>`;
+        }
+        
+        pageHTML += `</div></div>`;
+        pdfArea.innerHTML += pageHTML;
+    }
+}
+
+function printPDF() {
+    preparePDFContent();
+    window.print();
+}
+
+function downloadPDF() {
+    preparePDFContent();
+    const element = document.getElementById('pdf-print-area');
+    const opt = {
+        margin: [5, 5, 5, 5],
+        filename: 'تمارين_الباب_السادس_6ب.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+}
+
+window.onload = displayQuestion;
+</script>
+</body>
+</html>
