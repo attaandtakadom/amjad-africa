@@ -220,20 +220,28 @@
  pdfSolutionSteps: [
     "<span style='font-size: 18px; font-weight: bold;'>📍 اتجاه الحركة:</span>",
     "<div style='margin-right: 20px; margin-bottom: 15px;'>بما أن m₂ (5kg) أثقل من m₁ (3kg)، فإن <span style='color: #10b981; font-weight: bold;'>m₂ تهبط و m₁ تصعد</span>.</div>",
-    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 1: معادلات الحركة لكل جسم</span>",
-    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الصاعد (m₁ = 3kg):</div>",
-    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - 30 = 3a</span>  <span style='color: #64748b;'>........ (1)</span></div>",
-    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجسم الهابط (m₂ = 5kg):</div>",
-    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>50 - T = 5a</span>  <span style='color: #64748b;'>........ (2)</span></div>",
-    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 2: حل المعادلتين آنياً</span>",
-    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>نجمع (1) + (2):</div>",
-    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>T - 30 + 50 - T = 3a + 5a</span></div>",
-    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>20 = 8a</span></div>",
-    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 2.5 m/s²</span></div>",
-    "<span style='font-size: 18px; font-weight: bold;'>📍 الخطوة 3: حساب قوة الشد T</span>",
-    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px; direction: ltr; text-align: left;'>نعوض في (2): 50 - T = 5 × 2.5</div>",
-    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'><span style='font-size: 18px;'>50 - T = 12.5</span></div>",
-    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = 37.5 N</span></div>"
+    
+    "<div style='font-size: 19px; line-height: 1.8;'>",
+    "<span style='font-size: 22px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة الآنية:</span><br>",
+    "• الجسم الهابط (m2=5kg): القوة المحصلة = m2g - T = m2a <br>",
+    "&nbsp;&nbsp;50 - T = 5a  <span style='color: #64748b;'>(معادلة 1)</span><br>",
+    "• الجسم الصاعد (m1=3kg): القوة المحصلة = T - m1g = m1a <br>",
+    "&nbsp;&nbsp;T - 30 = 3a  <span style='color: #64748b;'>(معادلة 2)</span><br>",
+    "• بجمع المعادلتين (1) و (2) لحذف T:<br>",
+    "&nbsp;&nbsp;(50 - T) + (T - 30) = 5a + 3a  →  20 = 8a<br>",
+    "&nbsp;&nbsp;<span style='font-size: 24px; font-weight: bold; color: #dc2626;'>∴ a = 2.5 m/s²</span><br>",
+    "• بالتعويض في معادلة (2): T - 30 = 3(2.5) → T = 30 + 7.5 <br>",
+    "&nbsp;&nbsp;<span style='font-size: 24px; font-weight: bold; color: #dc2626;'>∴ T = 37.5 N</span><br><br>",
+
+    "<span style='font-size: 22px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة:</span><br>",
+    "تعتمد على قانون نيوتن الثاني للنظام ككل:<br>",
+    "• القانون: <span style='font-weight: bold;'>a = (Σالقوى المؤثرة) / (الكتلة الكلية)</span><br>",
+    "• Σالقوى = وزن الجسم الهابط - وزن الجسم الصاعد = 50 - 30 = 20 N<br>",
+    "• الكتلة الكلية (Σm) = m1 + m2 = 3 + 5 = 8 kg<br>",
+    "• <span style='font-size: 22px; font-weight: bold;'>a = 20 / 8 = 2.5 m/s²</span><br>",
+    "• لحساب الشد (T)، نطبق على أحد الجسمين:<br>",
+    "&nbsp;&nbsp;T = m1(g + a) = 3(10 + 2.5) = <span style='font-size: 24px; font-weight: bold; color: #dc2626;'>37.5 N</span>",
+    "</div>"
 ],      
 
   "pdfFinalAnswer": "a = 2.5 m/s² , T = 37.5 N"
@@ -268,24 +276,37 @@ svgCode: `<svg width="420" height="220" viewBox="0 0 420 220" xmlns="http://www.
     <rect x="292" y="140" width="40" height="35" fill="#ea580c" rx="4" />
     <text x="312" y="162" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">m2</text>
 </svg>`,        steps: [{ title: "المحطة 1: شرط الاتزان", question: "ما هو القانون الرياضي النهائي للكتلة الإضافية m؟", options: [{text: "m = (m₂ ÷ μ) - m₁", isCorrect: true}, {text: "m = m₂ - (m₁ ÷ μ)", isCorrect: false}], feedback: "صحيح! m = (m₂/μ) - m₁" }],
-        pdfSolutionSteps: [
-             "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة المحتمل:</span>",
+      pdfSolutionSteps: [
+         "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة المحتمل:</span>",
                 "<div style='margin-right: 20px; margin-bottom: 15px;'>بما أن m₂ تسحب لليمين، فإن الاحتكاك f يعاكس الحركة لليسار.</div>",
-               
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: شرط الاتزان (a = 0)</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• من اتزان الكتلة المتدلية m₂:</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T = m₂ g</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• من اتزان الكتل على السطح الخشن:</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T = μ (m₁ + m) g</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• بمساواة المعادلتين:</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>m₂ g = μ (m₁ + m) g</span></div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>m₂ = μ (m₁ + m)</span></div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>m₂ = μ m₁ + μ m</span></div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 18px;'>μ m = m₂ - μ m₁</span></div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>m = (m₂ / μ) - m₁</span></div>"
-        ],
+            
+    "<div style='font-size: 19px; line-height: 1.8;'>",
+    "<span style='font-size: 22px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة (الاتزان a=0):</span><br>",
+    "• الجسم المتدلي (m2): الشد للأعلى يساوي الوزن للأسفل<br>",
+    "&nbsp;&nbsp;T = m2g  <span style='color: #64748b;'>(معادلة 1)</span><br>",
+    "• الكتلة على السطح (m1+m): الشد لليمين يساوي الاحتكاك لليسار<br>",
+    "&nbsp;&nbsp;T = μ(m1 + m)g  <span style='color: #64748b;'>(معادلة 2)</span><br>",
+    "• بمساواة المعادلتين (1) و (2) لحذف الشد (T):<br>",
+    "&nbsp;&nbsp;m2g = μ(m1 + m)g  →  m2 = μ(m1 + m)<br>",
+    "&nbsp;&nbsp;m2 = μm1 + μm  →  μm = m2 - μm1<br>",
+    "&nbsp;&nbsp;<span style='font-size: 24px; font-weight: bold; color: #dc2626;'>∴ m = (m2 / μ) - m1</span><br><br>",
+
+    "<span style='font-size: 22px; font-weight: bold; color: #1e3a8a;'>2. طريقة القوة المحصلة (العجلة المباشرة):</span><br>",
+    "عند الاتزان، تكون محصلة القوى على النظام صفراً:<br>",
+    "• القوة المحركة (وزن m2) = القوة المعيقة (احتكاك m1+m)<br>",
+    "&nbsp;&nbsp;m2g = μ(m1 + m)g<br>",
+    "• بقسمة الطرفين على عجلة الجاذبية (g):<br>",
+    "&nbsp;&nbsp;m2 = μ(m1 + m)<br>",
+    "&nbsp;&nbsp;m2 / μ = m1 + m<br>",
+    "&nbsp;&nbsp;<span style='font-size: 24px; font-weight: bold; color: #dc2626;'>∴ m = (m2 / μ) - m1</span>",
+    "</div>"
+],
         pdfFinalAnswer: "m = (m₂ / μ) - m₁"
     },
+
+
+
+
     {
         title: "المسألة الثالثة: منظومة المنضدة والكتل الثلاث",
         text: "وضعت كتلة m₂ = 5 kg على منضدة أفقية ملساء، وربطت من طرفيها بخيطين يمران على بكرتين ملساوين، وتتدلى من الطرف الأيمن كتلة m₁ = 4 kg ومن الطرف الأيسر كتلة m₃ = 1 kg. احسب العجلة المشتركة (a). (g = 10 m/s²)",
@@ -294,20 +315,29 @@ svgCode: `<svg width="420" height="220" viewBox="0 0 420 220" xmlns="http://www.
             { title: "المحطة 1: القوة المحركة", question: "ما مقدار القوة الصافية المحركة للنظام؟", options: [{text: "F = 40 - 10 = 30 N", isCorrect: true}, {text: "F = 40 + 10 = 50 N", isCorrect: false}], feedback: "الكتل المعلقة تسحب باتجاهين متعاكسين." },
             { title: "المحطة 2: العجلة", question: "a = F / (m₁+m₂+m₃) = ?", options: [{text: "a = 3 m/s²", isCorrect: true}, {text: "a = 5 m/s²", isCorrect: false}], feedback: "a = 30 ÷ 10 = 3 m/s²" }
         ],
-        pdfSolutionSteps: [
-
-            "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
+       pdfSolutionSteps: [
+         "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
                 "<div style='margin-right: 20px; margin-bottom: 15px;'>وزن m₁ (40N) > وزن m₃ (10N)، لذا <span style='color: #10b981; font-weight: bold;'>m₁ تهبط، m₃ تصعد، و m₂ تتحرك يميناً</span>.</div>",
-                
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلات الحركة</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة اليمنى (4kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>40 - T₁ = 4a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة الوسطى (5kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T₁ - T₂ = 5a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة اليسرى (1kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T₂ - 10 = 1a</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: جمع المعادلات</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>40 - T₁ + T₁ - T₂ + T₂ - 10 = 4a + 5a + 1a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>30 = 10a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 3 m/s²</span></div>"
-        ],
+           
+    "<div style='font-size: 20px; line-height: 1.8; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة الآنية:</span><br>",
+    "• الكتلة الأولى (4kg): <span style='direction: ltr; display: inline-block;'>40 - T1 = 4a</span>  (معادلة 1)<br>",
+    "• الكتلة الثانية (5kg): <span style='direction: ltr; display: inline-block;'>T1 - T2 = 5a</span>  (معادلة 2)<br>",
+    "• الكتلة الثالثة (1kg): <span style='direction: ltr; display: inline-block;'>T2 - 10 = 1a</span>  (معادلة 3)<br>",
+    "• بجمع المعادلات (1+2+3):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>40 - T1 + T1 - T2 + T2 - 10 = 4a + 5a + 1a</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; direction: ltr; display: inline-block;'>30 = 10a</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = 3 m/s²</span><br><br>",
+
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• القانون: <span style='font-size: 22px; font-weight: bold; direction: ltr; display: inline-block;'>a = ΣF / Σm</span><br>",
+    "• القوة المحصلة (ΣF) = <span style='direction: ltr; display: inline-block;'>40 - 10 = 30 N</span><br>",
+    "• الكتلة الكلية (Σm) = <span style='direction: ltr; display: inline-block;'>4 + 5 + 1 = 10 kg</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>a = 30 / 10 = 3 m/s²</span><br>",
+    "• حساب الشد (T1) من الكتلة 4kg: <span style='direction: ltr; display: inline-block;'>40 - T1 = 4(3) ⇒ T1 = 28 N</span><br>",
+    "• حساب الشد (T2) من الكتلة 1kg: <span style='direction: ltr; display: inline-block;'>T2 - 10 = 1(3) ⇒ T2 = 13 N</span>",
+    "</div>"
+],
         pdfFinalAnswer: "a = 3 m/s²"
     },
     {
@@ -350,26 +380,29 @@ svgCode: `<svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.
             { title: "المحطة 3: العجلة", question: "بجمع المعادلتين: 34.64 - T = 4a و T - 13.46 = 2a", options: [{text: "a = 3.53 m/s²", isCorrect: true}, {text: "a = 2.5 m/s²", isCorrect: false}], feedback: "34.64 - 13.46 = 6a → 21.18 = 6a → a = 3.53 m/s²" },
             { title: "المحطة 4: الشد T", question: "T = 34.64 - 4a = ?", options: [{text: "T = 20.52 N", isCorrect: true}, {text: "T = 18 N", isCorrect: false}], feedback: "T = 34.64 - 14.12 = 20.52 N" }
         ],
-        pdfSolutionSteps: [
-            "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
+       pdfSolutionSteps: [
+        "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
                 "<div style='margin-right: 20px; margin-bottom: 15px;'>مركبة الوزن اليمنى (34.64N) > المقاومة اليسرى (13.46N)، لذا <span style='color: #10b981; font-weight: bold;'>الكتلة اليمنى تهبط واليسرى تصعد</span>.</div>",
-                
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلة الجسم الأيمن (4kg, 60°)</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>مركبة الوزن = 40 × sin60° = 34.64 N</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>34.64 - T = 4a</span>  <span style='color: #64748b;'>........ (1)</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: معادلة الجسم الأيسر (2kg, 30°, μ=0.2)</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>مركبة الوزن = 20 × sin30° = 10 N</div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>قوة الاحتكاك = 0.2 × 20 × cos30° = 3.46 N</div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>المقاومة الكلية = 10 + 3.46 = 13.46 N</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - 13.46 = 2a</span>  <span style='color: #64748b;'>........ (2)</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: حساب العجلة a</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>جمع (1) + (2): 34.64 - 13.46 = 6a → 21.18 = 6a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 3.53 m/s²</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 4: حساب الشد T</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>من (1): T = 34.64 - 4 × 3.53 = 34.64 - 14.12</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = 20.52 N</span></div>"
-        ],
-        pdfFinalAnswer: "T = 20.52 N"
+            
+    "<div style='font-size: 20px; line-height: 1.8; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة الآنية:</span><br>",
+    "• الجسم الأيمن (m1=4kg, 60°): <span style='direction: ltr; display: inline-block;'>40 sin 60° - T = 4a</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>34.64 - T = 4a</span>  (معادلة 1)<br>",
+    "• الجسم الأيسر (m2=2kg, 30°, μ=0.2): <span style='direction: ltr; display: inline-block;'>T - (20 sin 30° + μ 20 cos 30°) = 2a</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T - (10 + 3.46) = 2a  ⇒  T - 13.46 = 2a</span>  (معادلة 2)<br>",
+    "• بجمع المعادلتين (1) و (2) لحذف الشد (T):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>34.64 - 13.46 = 6a  ⇒  21.18 = 6a</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = 3.53 m/s²</span><br><br>",
+
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• القانون: <span style='font-size: 22px; font-weight: bold; direction: ltr; display: inline-block;'>a = ΣF / Σm</span><br>",
+    "• ΣF (القوة المحصلة) = <span style='direction: ltr; display: inline-block;'>34.64 - 13.46 = 21.18 N</span><br>",
+    "• Σm (الكتلة الكلية) = <span style='direction: ltr; display: inline-block;'>4 + 2 = 6 kg</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>a = 21.18 / 6 = 3.53 m/s²</span><br>",
+    "• حساب الشد (T) من معادلة الجسم الأيمن:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T = 34.64 - 4(3.53) = 20.52 N</span>",
+    "</div>"
+], pdfFinalAnswer: "T = 20.52 N"
     },
     {
     title: "المسألة الخامسة: سؤال امتحان الوزارة (دفعة 2007) رقم 42 (تبديل مسميات الكتل)",
@@ -445,20 +478,32 @@ svgCode: `<svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.
             { title: "الخطوة 1", question: "معادلة الكتلة 2kg الصاعدة: T - 20 = 2a → a = ?", options: [{text: "a = 5 m/s²", isCorrect: true}, {text: "a = 2 m/s²", isCorrect: false}], feedback: "30 - 20 = 2a → 10 = 2a → a = 5 m/s²" },
             { title: "الخطوة 2", question: "معادلة الكتلة m الهابطة: mg - T = ma", options: [{text: "10m - 30 = 5m → m = 6 kg", isCorrect: true}, {text: "10m - 30 = 5m → m = 3 kg", isCorrect: false}], feedback: "10m - 30 = 5m → 5m = 30 → m = 6 kg" }
         ],
-        pdfSolutionSteps: [
-              "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
+       pdfSolutionSteps: [
+         "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
                 "<div style='margin-right: 20px; margin-bottom: 15px;'>المنظومة تتحرك في اتجاه m، لذا <span style='color: #10b981; font-weight: bold;'>m تهبط و 2kg تصعد</span>.</div>",
-              
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلة الكتلة 2kg (صاعدة)</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - 20 = 2a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>30 - 20 = 2a → 10 = 2a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 5 m/s²</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: معادلة الكتلة m (هابطة)</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>mg - T = ma</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>10m - 30 = 5m</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>10m - 5m = 30</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>m = 6 kg</span></div>"
-        ],
+             
+    "<div style='font-size: 20px; line-height: 1.8; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة الآنية:</span><br>",
+    "• الجسم الصاعد (2kg): <span style='direction: ltr; display: inline-block;'>T - 20 = 2a</span>  (معادلة 1)<br>",
+    "• الجسم الهابط (m): <span style='direction: ltr; display: inline-block;'>mg - T = ma</span>  (معادلة 2)<br>",
+    "• بجمع المعادلتين (1) و (2) لحذف الشد (T):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>mg - 20 = (m + 2)a</span><br>",
+    "• بالتعويض عن a = 5 m/s² و g = 10 m/s²:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>10m - 20 = 5(m + 2)</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>10m - 20 = 5m + 10  ⇒  5m = 30</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ m = 6 kg</span><br><br>",
+
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• القانون: <span style='font-size: 22px; font-weight: bold; direction: ltr; display: inline-block;'>a = ΣF / Σm</span><br>",
+    "• القوة المحصلة (ΣF) = <span style='direction: ltr; display: inline-block;'>10m - 20</span><br>",
+    "• الكتلة الكلية (Σm) = <span style='direction: ltr; display: inline-block;'>m + 2</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>5 = (10m - 20) / (m + 2)</span><br>",
+    "• بضرب الطرفين في الوسطين:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>5(m + 2) = 10m - 20</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>5m + 10 = 10m - 20  ⇒  5m = 30</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ m = 6 kg</span>",
+    "</div>"
+],
         pdfFinalAnswer: "m = 6 kg"
     },
     {
@@ -471,17 +516,25 @@ svgCode: `<svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.
             { title: "المحطة 3", question: "بجمع المعادلات: a = ?", options: [{text: "a = 3.27 m/s²", isCorrect: true}, {text: "a = 4 m/s²", isCorrect: false}], feedback: "صحيح" }
         ],
         pdfSolutionSteps: [
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: قوى الاحتكاك</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>f₁ = 0.2 × 1 × 10 = <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>2 N</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>f₂ = 0.2 × 4 × 10 = <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>8 N</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: معادلات الحركة</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• المتدلية (4kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>40 - T₁ = 4a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الوسطى (4kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T₁ - T₂ - 8 = 4a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الجانبية (1kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T₂ - 2 = 1a</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: جمع المعادلات</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>40 - 8 - 2 = 9a → 30 = 9a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 3.33 m/s²</span> (≈ 3.27 حسب النموذج)</div>"
-        ],
+    "<div style='font-size: 20px; line-height: 1.8; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة الآنية:</span><br>",
+    "• الكتلة المتدلية (4kg): <span style='direction: ltr; display: inline-block;'>40 - T1 = 4a</span>  (معادلة 1)<br>",
+    "• الكتلة الوسطى (4kg): <span style='direction: ltr; display: inline-block;'>T1 - T2 - 8 = 4a</span>  (معادلة 2)<br>",
+    "• الكتلة الجانبية (1kg): <span style='direction: ltr; display: inline-block;'>T2 - 2 = 1a</span>  (معادلة 3)<br>",
+    "• بجمع المعادلات (1+2+3) لحذف الشد (T1, T2):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>40 - 8 - 2 = 4a + 4a + 1a</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>30 = 9a</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = 3.33 m/s²</span><br><br>",
+
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• القانون: <span style='font-size: 22px; font-weight: bold; direction: ltr; display: inline-block;'>a = (ΣF_driving - ΣF_friction) / Σm</span><br>",
+    "• القوة المحركة (وزن الكتلة المتدلية) = <span style='direction: ltr; display: inline-block;'>40 N</span><br>",
+    "• القوى المعيقة (f1 + f2) = <span style='direction: ltr; display: inline-block;'>2 + 8 = 10 N</span><br>",
+    "• الكتلة الكلية (Σm) = <span style='direction: ltr; display: inline-block;'>4 + 4 + 1 = 9 kg</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>a = (40 - 10) / 9 = 3.33 m/s²</span><br>",
+    "• حساب الشد (T1) و (T2) يعتمد على تعويض a في معادلات الجسم المنفرد.",
+    "</div>"
+],
         pdfFinalAnswer: "a ≈ 3.27 m/s²"
     },
     {
@@ -524,48 +577,78 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
             { title: "الخطوة 3", question: "بجمع المعادلتين: a = ?", options: [{text: "a = 1 m/s²", isCorrect: true}, {text: "a = 2 m/s²", isCorrect: false}], feedback: "10 = 10a → a = 1 m/s²" }
         ],
         pdfSolutionSteps: [
-             "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
+            "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
                 "<div style='margin-right: 20px; margin-bottom: 15px;'>وزن المتدلية (40N) > مجموع الاحتكاكات (10N)، لذا <span style='color: #10b981; font-weight: bold;'>المتدلية تهبط والكتل الأخرى تتحرك يميناً</span>.</div>",
-               
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلة الكتلة المعلقة (4kg)</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>40 - T = 4a</span>  <span style='color: #64748b;'>........ (1)</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: معادلة الكتلة على المائل (6kg)</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - 30 = 6a</span>  <span style='color: #64748b;'>........ (2)</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: جمع المعادلات</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>(1) + (2): 40 - T + T - 30 = 4a + 6a → 10 = 10a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 1 m/s²</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 4: حساب الشد T</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>من (2): T = 30 + 6 × 1 = 36</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = 36 N</span></div>"
-        ],
+             
+    "<div style='font-size: 20px; line-height: 1.8; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة الآنية:</span><br>",
+    "• الكتلة المعلقة (4kg): <span style='direction: ltr; display: inline-block;'>40 - T = 4a</span>  (معادلة 1)<br>",
+    "• الكتلة على المائل (6kg): <span style='direction: ltr; display: inline-block;'>T - 30 = 6a</span>  (معادلة 2)<br>",
+    "• بجمع المعادلتين (1) و (2) لحذف الشد (T):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>40 - T + T - 30 = 4a + 6a</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; direction: ltr; display: inline-block;'>10 = 10a  ⇒  a = 1 m/s²</span><br>",
+    "• حساب الشد (T) بالتعويض في (2):<br>",
+    "&nbsp;&nbsp;<span style='font-size: 24px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>T = 30 + 6(1) = 36 N</span><br><br>",
+
+    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• القانون: <span style='font-size: 22px; font-weight: bold; direction: ltr; display: inline-block;'>a = ΣF / Σm</span><br>",
+    "• القوة المحركة (وزن المعلقة) - القوة المعيقة (مركبة المائل):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>ΣF = 40 - 30 = 10 N</span><br>",
+    "• الكتلة الكلية (Σm) = <span style='direction: ltr; display: inline-block;'>4 + 6 = 10 kg</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>a = 10 / 10 = 1 m/s²</span><br>",
+    "• حساب الشد (T) باستخدام الكتلة المعلقة:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T = 40 - 4(1) = 36 N</span>",
+    "</div>"
+],
         pdfFinalAnswer: "a = 1 m/s² , T = 36 N"
     },
     {
         title: "المسألة التاسعة: معامل الاحتكاك (كتلة مركزية وبكرتين)",
         text: "كتلة 8 kg على سطح أفقي خشن، كتلتان متدليتان 3 kg و 4 kg. النظام متزن. أوجد μ.",
+     
         svgCode: `<svg width="100%" height="180" viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc; border: 1px solid #cbd5e1; border-radius: 6px;"><line x1="130" y1="100" x2="370" y2="100" stroke="#475569" stroke-width="4" /><line x1="130" y1="104" x2="370" y2="104" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,3" /><circle cx="130" cy="100" r="10" fill="#1e293b" stroke="#334155" stroke-width="1" /><circle cx="130" cy="100" r="2" fill="#ffffff" /><circle cx="370" cy="100" r="10" fill="#1e293b" stroke="#334155" stroke-width="1" /><circle cx="370" cy="100" r="2" fill="#ffffff" /><rect x="220" y="65" width="60" height="35" fill="#475569" rx="3" stroke="#334155" stroke-width="1" /><text x="250" y="87" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">8 kg</text><rect x="100" y="130" width="40" height="35" fill="#ea580c" rx="3" stroke="#c2410c" stroke-width="1" /><text x="120" y="152" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3 kg</text><rect x="360" y="130" width="40" height="42" fill="#1e3a8a" rx="3" stroke="#1d4ed8" stroke-width="1" /><text x="380" y="156" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4 kg</text><line x1="130" y1="90" x2="220" y2="90" stroke="#0f172a" stroke-width="2" /><line x1="280" y1="90" x2="370" y2="90" stroke="#0f172a" stroke-width="2" /><line x1="120" y1="100" x2="120" y2="130" stroke="#0f172a" stroke-width="2" /><line x1="380" y1="100" x2="380" y2="130" stroke="#0f172a" stroke-width="2" /><text x="175" y="82" fill="#1e293b" font-size="11" font-weight="bold" text-anchor="middle">T₂</text><text x="325" y="82" fill="#1e293b" font-size="11" font-weight="bold" text-anchor="middle">T₁</text></svg>`,
+     
         steps: [
-            { title: "الخطوة 1", question: "T₁ و T₂ من الكتل المتدلية؟", options: [{text: "T₁ = 40 N, T₂ = 30 N", isCorrect: true}, {text: "T₁ = 30 N, T₂ = 40 N", isCorrect: false}], feedback: "T₁ = 4×10 = 40 N, T₂ = 3×10 = 30 N" },
-            { title: "الخطوة 2", question: "قوة الاحتكاك f = T₁ - T₂ = ?", options: [{text: "f = 10 N", isCorrect: true}, {text: "f = 70 N", isCorrect: false}], feedback: "40 - 30 = 10 N" },
+
+
+
+{ title: "الخطوة 2", question: "قوة الاحتكاك f = T₁ - T₂ = ?", options: [{text: "f = 10 N", isCorrect: true}, {text: "f = 70 N", isCorrect: false}], feedback: "40 - 30 = 10 N" },
             { title: "الخطوة 3", question: "μ = f / (mg) = ?", options: [{text: "μ = 10 / 80 = 0.125", isCorrect: true}, {text: "μ = 10 / 40 = 0.25", isCorrect: false}], feedback: "μ = 10 / 80 = 0.125" }
         ],
+        
         pdfSolutionSteps: [
-             "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة المحتمل:</span>",
+
+         "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة المحتمل:</span>",
                 "<div style='margin-right: 20px; margin-bottom: 15px;'>T₁ (40N) > T₂ (30N)، لذا الحركة المحتملة <span style='color: #10b981; font-weight: bold;'>لليمين</span>، والاحتكاك يعاكسها.</div>",
-              
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: حساب الشد من الكتل المتدلية</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>T₁ = 4 × 10 = <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>40 N</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>T₂ = 3 × 10 = <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>30 N</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: قوة الاحتكاك</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>T₁ = T₂ + f → 40 = 30 + f</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>f = 10 N</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: معامل الاحتكاك μ</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>R = mg = 8 × 10 = 80 N</div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>μ = f / R = 10 / 80</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>μ = 0.125</span></div>"
-        ],
+            
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الاتزان الآنية:</span><br>",
+    "• الجسم المتدلي (4kg): <span style='direction: ltr; display: inline-block;'>T1 = 40 N</span><br>",
+    "• الجسم المتدلي (3kg): <span style='direction: ltr; display: inline-block;'>T2 = 30 N</span><br>",
+    "• الكتلة على السطح (8kg): <span style='direction: ltr; display: inline-block;'>T1 = T2 + f ⇒ 40 = 30 + f</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>f = 10 N</span><br>",
+    "• معامل الاحتكاك (μ): <span style='direction: ltr; display: inline-block;'>μ = f / R = 10 / 80</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ μ = 0.125</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. طريقة القوة المحصلة (الاتزان المباشر):</span><br>",
+    "• عند الاتزان، مجموع القوى على النظام يساوي صفراً:<br>",
+    "• القوة المحركة (T1) = القوى المعيقة (T2 + f)<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>40 = 30 + f ⇒ f = 10 N</span><br>",
+    "• رد الفعل (R) للكتلة 8kg:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>R = m·g = 8 × 10 = 80 N</span><br>",
+    "• حساب معامل الاحتكاك:<br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>μ = 10 / 80 = 0.125</span>",
+    "</div>"]
+,
         pdfFinalAnswer: "μ = 0.125"
     },
+
+
+,
+
+
+
+
     {
         title: "المسألة العاشرة: سطح أفقي ومستوى مائل",
         text: "بكرة ملساء، سطح أملس. عجلة المجموعة a = 4 m/s². الكتلة الأفقية = 1 kg. أوجد الكتلة m على المائل (زاوية 30°).",
@@ -574,20 +657,31 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
             { title: "الخطوة 1", question: "الشد T من الكتلة الأفقية (1kg, a=4): T = ?", options: [{text: "T = 4 N", isCorrect: true}, {text: "T = 10 N", isCorrect: false}], feedback: "T = 1 × 4 = 4 N" },
             { title: "الخطوة 2", question: "معادلة الكتلة m على المائل: mg sin30 - T = ma", options: [{text: "5m - 4 = 4m → m = 4 kg", isCorrect: true}, {text: "5m - 4 = 4m → m = 2 kg", isCorrect: false}], feedback: "5m - 4m = 4 → m = 4 kg" }
         ],
-        pdfSolutionSteps: [
-             "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'>العجلة a = 4 m/s² باتجاه <span style='color: #10b981; font-weight: bold;'>أسفل المنحدر</span>.</div>",
-               
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: حساب الشد T من الكتلة الأفقية</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T = 1 × a = 1 × 4 = 4 N</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: معادلة الكتلة m على المائل</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>mg sin30° - T = m a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>m × 10 × 0.5 - 4 = m × 4</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>5m - 4 = 4m</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>5m - 4m = 4</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>m = 4 kg</span></div>"
-        ],
-        pdfFinalAnswer: "m = 4 kg"
+       pdfSolutionSteps: [
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 اتجاه الحركة:</span><br>",
+    "• النظام يتحرك بعجلة <span style='font-weight: bold; color: #10b981;'>4 m/s²</span> باتجاه <span style='font-weight: bold;'>أسفل المنحدر</span>.<br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. تحليل القوى وحساب الشد (T):</span><br>",
+    "• الجسم الأفقي (1kg) يتحرك بعجلة 4m/s²:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T = m·a = 1 × 4 = 4 N</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. معادلة الحركة على السطح المائل (m):</span><br>",
+    "• القوة المحركة (مركبة الوزن) - الشد (T) = الكتلة (m) × العجلة (a):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>mg·sin(30°) - T = m·a</span><br>",
+    "• بالتعويض عن القيم (g=10, sin30°=0.5, T=4, a=4):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>m(10 × 0.5) - 4 = m(4)</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>5m - 4 = 4m  ⇒  5m - 4m = 4</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ m = 4 kg</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>3. التحقق (طريقة النظام ككل):</span><br>",
+    "• القوة المحركة الكلية = (m·g·sin30°) = m × 10 × 0.5 = 5m<br>",
+    "• من قانون نيوتن الثاني للنظام: (القوة المحركة = الكتلة الكلية × العجلة):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>5m = (m + 1) × 4</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>5m = 4m + 4</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ m = 4 kg</span>",
+    "</div>"
+], pdfFinalAnswer: "m = 4 kg"
     },
     {
         title: "المسألة الحادية عشرة: آلة أتوود - النسبة بين الكتلتين",
@@ -598,21 +692,29 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
             { title: "الخطوة 2", question: "بجمع المعادلتين: (M - m)g = (M + m)a → M = 3m", options: [{text: "m : M = 1 : 3", isCorrect: true}, {text: "m : M = 3 : 1", isCorrect: false}], feedback: "صحيح" }
         ],
         pdfSolutionSteps: [
-            "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'><span style='color: #10b981; font-weight: bold;'>M تهبط و m تصعد</span> (لأن M > m).</div>",
-               
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلات الحركة</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة M الهابطة: <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>Mg - T = Ma</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة m الصاعدة: <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - mg = ma</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: جمع المعادلتين</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>(M - m)g = (M + m)a</div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>بالتعويض g = 10, a = 5:</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>10(M - m) = 5(M + m)</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>2(M - m) = M + m</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>2M - 2m = M + m</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>M = 3m</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>m : M = 1 : 3</span></div>"
-        ],
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 اتجاه الحركة:</span><br>",
+    "• الكتلة <span style='font-weight: bold;'>M</span> تهبط، والكتلة <span style='font-weight: bold;'>m</span> تصعد (لأن M > m).<br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. معادلات الحركة (قانون نيوتن الثاني):</span><br>",
+    "• للكتلة الهابطة (M): <span style='direction: ltr; display: inline-block;'>Mg - T = M·a</span><br>",
+    "• للكتلة الصاعدة (m): <span style='direction: ltr; display: inline-block;'>T - mg = m·a</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. جمع المعادلتين (لإيجاد العلاقة):</span><br>",
+    "• بجمع المعادلتين نتخلص من قوة الشد (T):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>(M - m)g = (M + m)a</span><br>",
+    "• بالتعويض عن (g = 10) و (a = 5):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>10(M - m) = 5(M + m)</span><br>",
+    "• بالتبسيط (القسمة على 5):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>2(M - m) = M + m</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>2M - 2m = M + m  ⇒  M = 3m</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ m : M = 1 : 3</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>3. ملخص سريع:</span><br>",
+    "عندما تكون <span style='direction: ltr; display: inline-block;'>a = 0.5g</span>، فإن النسبة بين الكتلتين تكون ثابتة:<br>",
+    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>M = 3m</span>",
+    "</div>"
+],
         pdfFinalAnswer: "m : M = 1 : 3"
     },
     {
@@ -624,19 +726,27 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
             { title: "الخطوة 2", question: "معادلة الكتلة 1kg اليسرى؟", options: [{text: "T₂ - 10 = 1a", isCorrect: true}, {text: "10 - T₂ = 1a", isCorrect: false}], feedback: "صحيح" },
             { title: "الخطوة 3", question: "بجمع المعادلات: a = ?", options: [{text: "a = 3 m/s²", isCorrect: true}, {text: "a = 4 m/s²", isCorrect: false}], feedback: "40 - 10 = 10a → 30 = 10a → a = 3 m/s²" }
         ],
-        pdfSolutionSteps: [
-              "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'>وزن m₁ (40N) > وزن m₃ (10N)، لذا <span style='color: #10b981; font-weight: bold;'>m₁ تهبط، m₃ تصعد، m₂ تتحرك يميناً</span>.</div>",
-               
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلات الحركة</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة اليمنى (4kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>40 - T₁ = 4a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة الوسطى (5kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T₁ - T₂ = 5a</span></div>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>• الكتلة اليسرى (1kg): <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T₂ - 10 = 1a</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: جمع المعادلات</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>40 - T₁ + T₁ - T₂ + T₂ - 10 = 4a + 5a + 1a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>30 = 10a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 3 m/s²</span></div>"
-        ],
+     pdfSolutionSteps: [
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 اتجاه الحركة:</span><br>",
+    "• بما أن وزن <span style='font-weight: bold;'>m1 (40N)</span> أكبر من وزن <span style='font-weight: bold;'>m3 (10N)</span>، فإن:<br>",
+    "&nbsp;&nbsp;<span style='color: #10b981; font-weight: bold;'>m1 تهبط، m3 تصعد، و m2 تتحرك يميناً.</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• القوة المحركة الكلية (ΣF) = وزن الكتلة الهابطة - وزن الكتلة الصاعدة:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>ΣF = 40 - 10 = 30 N</span><br>",
+    "• الكتلة الكلية للنظام (Σm) = 4 + 5 + 1 = 10 kg<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>a = ΣF / Σm = 30 / 10 = 3 m/s²</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = 3 m/s²</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. طريقة معادلات نيوتن (للتحقق):</span><br>",
+    "• الكتلة m1: <span style='direction: ltr; display: inline-block;'>40 - T1 = 4a</span><br>",
+    "• الكتلة m2: <span style='direction: ltr; display: inline-block;'>T1 - T2 = 5a</span><br>",
+    "• الكتلة m3: <span style='direction: ltr; display: inline-block;'>T2 - 10 = 1a</span><br>",
+    "• بجمع المعادلات نجد أن: <span style='direction: ltr; display: inline-block;'>40 - 10 = (4+5+1)a</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>30 = 10a  ⇒  a = 3 m/s²</span>",
+    "</div>"
+],
         pdfFinalAnswer: "a = 3 m/s²"
     },
     {
@@ -648,17 +758,24 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
             { title: "الخطوة 2", question: "معادلة m₁ الصاعدة؟", options: [{text: "T - m₁g = m₁a", isCorrect: true}, {text: "m₁g - T = m₁a", isCorrect: false}], feedback: "صحيح" },
             { title: "الخطوة 3", question: "بجمع المعادلتين: a = ?", options: [{text: "a = (m₂ - m₁)g / (m₂ + m₁)", isCorrect: true}, {text: "a = (m₂ + m₁)g / (m₂ - m₁)", isCorrect: false}], feedback: "صحيح" }
         ],
-       pdfSolutionSteps: [
-                        "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'><span style='color: #10b981; font-weight: bold;'>m₂ تهبط و m₁ تصعد</span> (لأن m₂ > m₁).</div>",
+     pdfSolutionSteps: [
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 اتجاه الحركة:</span><br>",
+    "• الكتلة <span style='font-weight: bold;'>m2</span> تهبط، والكتلة <span style='font-weight: bold;'>m1</span> تصعد (بافتراض أن m2 > m1).<br><br>",
 
-    "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلات الحركة</span>",
-    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px; direction: ltr; text-align: left;'>• m₂ الهابطة: <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>m₂g - T = m₂a</span></div>",
-    "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px; direction: ltr; text-align: left;'>• m₁ الصاعدة: <span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T - m₁g = m₁a</span></div>",
-    
-    "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: جمع المعادلات</span>",
-    "<div style='margin-right: 40px; margin-bottom: 8px; direction: ltr; text-align: left;'>(m₂ - m₁)g = (m₂ + m₁)a</div>",
-    "<div style='margin-right: 40px; margin-bottom: 15px; direction: ltr; text-align: left;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = [(m₂ - m₁)g] / (m₂ + m₁)</span></div>"
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• القوة المحركة الكلية (ΣF) = وزن الكتلة الهابطة - وزن الكتلة الصاعدة:<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>ΣF = (m2 - m1)g</span><br>",
+    "• الكتلة الكلية للنظام (Σm) = m1 + m2<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>a = ΣF / Σm = [(m2 - m1)g] / (m2 + m1)</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = [(m2 - m1)g] / (m1 + m2)</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. طريقة معادلات نيوتن (للتحليل التفصيلي):</span><br>",
+    "• الكتلة m2: <span style='direction: ltr; display: inline-block;'>m2·g - T = m2·a</span><br>",
+    "• الكتلة m1: <span style='direction: ltr; display: inline-block;'>T - m1·g = m1·a</span><br>",
+    "• بجمع المعادلتين نجد أن: <span style='direction: ltr; display: inline-block;'>(m2 - m1)g = (m1 + m2)a</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = [(m2 - m1)g] / (m1 + m2)</span>",
+    "</div>"
 ],
 
 
@@ -705,23 +822,26 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
         { title: "الخطوة 2", question: "مركبة وزن الكتلة 6kg على المائل = ?", options: [{text: "30 N", isCorrect: true}, {text: "60 N", isCorrect: false}], feedback: "6×10×sin30 = 30 N" },
         { title: "الخطوة 3", question: "من اتزان الكتلة على المائل: T - W_parallel - f = 0 → f = ?", options: [{text: "f = 10 N", isCorrect: true}, {text: "f = 40 N", isCorrect: false}], feedback: "40 - 30 - f = 0 → f = 10 N" }
     ],
-    pdfSolutionSteps: [
-        "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة المحتمل:</span>",
-        "<div style='margin-right: 20px; margin-bottom: 15px;'>وزن المعلقة (40N) > مركبة وزن المائل (30N)، لذا الحركة المحتملة <span style='color: #10b981; font-weight: bold;'>لأعلى المنحدر</span>، والاحتكاك يعاكسها.</div>",
-        
-        "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: اتزان الكتلة المعلقة (4kg)</span>",
-        "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #dc2626;'>T = 4 × 10 = 40 N</span></div>",
-        
-        "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: مركبة وزن الكتلة 6kg على المائل</span>",
-        "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>W_parallel = 6 × 10 × sin30° = 30 N</span></div>",
-        
-        "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: اتزان الكتلة على المائل</span>",
-        "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>T - W_parallel - f = 0</div>",
-        "<div style='margin-right: 40px; margin-bottom: 8px;'>نعوض بقيمة T:</div>",
-        "<div style='margin-right: 40px; margin-bottom: 8px;'>40 - 30 - f = 0</div>",
-        "<div style='margin-right: 40px; margin-bottom: 8px;'>10 - f = 0</div>",
-        "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>f = 10 N</span></div>"
-    ],
+   pdfSolutionSteps: [
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 اتجاه الحركة المحتمل:</span><br>",
+    "• وزن الكتلة المعلقة (40N) > مركبة وزن الكتلة على المائل (30N).<br>",
+    "• لذا، الحركة المحتملة <span style='font-weight: bold; color: #10b981;'>لأعلى المنحدر</span>، وقوة الاحتكاك (f) تعاكسها.<br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. تحليل القوى:</span><br>",
+    "• شد الخيط (T) للكتلة المعلقة (4kg): <span style='direction: ltr; display: inline-block;'>T = m·g = 4 × 10 = 40 N</span><br>",
+    "• مركبة الوزن الموازية للمستوى (للكتلة 6kg):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>Wₚ = m·g·sin(30°) = 6 × 10 × 0.5 = 30 N</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. معادلة الاتزان على السطح المائل:</span><br>",
+    "• مجموع القوى = صفر (حالة اتزان):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T - Wₚ - f = 0</span><br>",
+    "• بالتعويض بالقيم (T=40, Wₚ=30):<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>40 - 30 - f = 0</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>10 - f = 0</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ f = 10 N</span>",
+    "</div>"
+],
     pdfFinalAnswer: "T = 40 N , f = 10 N"
 },
 
@@ -737,21 +857,28 @@ svgCode: `<svg width="100%" height="200" viewBox="0 0 500 200" xmlns="http://www
             { title: "الخطوة 3", question: "بجمع المعادلتين: 12 = 2a → a = 6 m/s²", options: [{text: "T = 0.8 × 6 = 4.8 N", isCorrect: true}, {text: "T = 1.2 × 6 = 7.2 N", isCorrect: false}], feedback: "T = 4.8 N" }
         ],
         pdfSolutionSteps: [
-             "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'>وزن المتدلية (12N) هو القوة المحركة، لذا <span style='color: #10b981; font-weight: bold;'>المتدلية تهبط والأفقية تتحرك يميناً</span>.</div>",
-               
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: معادلة الكتلة الأفقية (0.8kg)</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>T = 0.8 a</span>  <span style='color: #64748b;'>........ (1)</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: معادلة الكتلة المتدلية (1.2kg)</span>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'><span style='font-size: 20px; font-weight: bold; color: #1e3a8a;'>12 - T = 1.2 a</span>  <span style='color: #64748b;'>........ (2)</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: جمع المعادلتين</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>نعوض (1) في (2): 12 - 0.8a = 1.2a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 8px;'>12 = 2a</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>a = 6 m/s²</span></div>",
-            "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 4: حساب الشد T</span>",
-            "<div style='margin-right: 20px; margin-top: 8px; margin-bottom: 8px;'>من (1): T = 0.8 × 6</div>",
-            "<div style='margin-right: 40px; margin-bottom: 15px;'><span style='font-size: 22px; font-weight: bold; color: #dc2626;'>T = 4.8 N</span></div>"
-        ],
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 اتجاه الحركة:</span><br>",
+    "• وزن الكتلة المتدلية (12N) هو القوة المحركة، لذا:<br>",
+    "&nbsp;&nbsp;<span style='font-weight: bold; color: #10b981;'>المتدلية تهبط، والأفقية تتحرك يميناً.</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات نيوتن (الحل الآني):</span><br>",
+    "• الكتلة الأفقية (0.8kg): <span style='direction: ltr; display: inline-block;'>T = 0.8·a</span>  (معادلة 1)<br>",
+    "• الكتلة المتدلية (1.2kg): <span style='direction: ltr; display: inline-block;'>12 - T = 1.2·a</span>  (معادلة 2)<br>",
+    "• بالتعويض من (1) في (2): <span style='direction: ltr; display: inline-block;'>12 - 0.8a = 1.2a</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>12 = 2a  ⇒  a = 6 m/s²</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• قانون العجلة للنظام: <span style='direction: ltr; display: inline-block;'>a = F / Σm</span><br>",
+    "• القوة المحركة هي وزن الكتلة المتدلية فقط: <span style='direction: ltr; display: inline-block;'>F = 12 N</span><br>",
+    "• الكتلة الكلية للنظام: <span style='direction: ltr; display: inline-block;'>Σm = 0.8 + 1.2 = 2 kg</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>a = 12 / 2 = 6 m/s²</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>3. النتيجة النهائية:</span><br>",
+    "• العجلة: <span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>a = 6 m/s²</span><br>",
+    "• الشد (من معادلة 1): <span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>T = 0.8 × 6 = 4.8 N</span>",
+    "</div>"
+],
         pdfFinalAnswer: "T = 4.8 N"
     },
     {
@@ -824,23 +951,33 @@ steps: [
         }
     ],
 
-    pdfSolutionSteps: [
+   pdfSolutionSteps: [
+    "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 اتجاه الحركة:</span><br>",
+    "• القوة المحركة (10N) أكبر من مجموع الاحتكاك (4N+2N=6N)، لذا:<br>",
+    "&nbsp;&nbsp;<span style='font-weight: bold; color: #10b981;'>الكتلتان تتحركان يميناً.</span><br><br>",
 
-     "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'>F = 10N > مجموع الاحتكاكات (4+2=6N)، لذا <span style='color: #10b981; font-weight: bold;'>الكتلتان تتحركان يميناً</span>.</div>",
-               
-        "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 1: تحليل القوى للكتلة المتدلية (1kg)</span>",
-        "<div style='margin-right: 20px; margin-bottom: 8px; direction: ltr; text-align: left;'>m₂g - T = m₂a  =>  (1 × 10) - T = 1 × 2</div>",
-        "<div style='margin-right: 20px; margin-bottom: 15px; direction: ltr; text-align: left; font-weight: bold; color: #1e3a8a;'>T = 8 N</div>",
-        "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 2: تحليل القوى للكتلة الأفقية (2kg)</span>",
-        "<div style='margin-right: 20px; margin-bottom: 8px; direction: ltr; text-align: left;'>T - fₖ = m₁a  =>  8 - fₖ = 2 × 2</div>",
-        "<div style='margin-right: 20px; margin-bottom: 15px; direction: ltr; text-align: left; font-weight: bold; color: #1e3a8a;'>fₖ = 4 N</div>",
-        "<span style='font-size: 18px; font-weight: bold;'>📌 الخطوة 3: إيجاد معامل الاحتكاك (μ)</span>",
-        "<div style='margin-right: 20px; margin-bottom: 8px; direction: ltr; text-align: left;'>fₖ = μ × R  (حيث R = m₁g = 20N)</div>",
-        "<div style='margin-right: 20px; margin-bottom: 15px; direction: ltr; text-align: left; font-size: 22px; font-weight: bold; color: #dc2626;'>μ = 4 / 20 = 0.2</div>"
-    ],
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>1. طريقة العجلة المباشرة (النظام ككل):</span><br>",
+    "• قانون العجلة: <span style='direction: ltr; display: inline-block;'>a = (F - Σf) / Σm</span><br>",
+    "• القوة المحركة (10N) - الاحتكاك (6N) = 4 N<br>",
+    "• الكتلة الكلية (Σm) = 1 + 2 = 3 kg<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>a = 4 / 2 = 2 m/s²</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>2. طريقة معادلات نيوتن (لإيجاد T و μ):</span><br>",
+    "• للكتلة المتدلية (1kg): <span style='direction: ltr; display: inline-block;'>m₂g - T = m₂·a</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>(1 × 10) - T = 1 × 2  ⇒  T = 8 N</span><br>",
+    "• للكتلة الأفقية (2kg): <span style='direction: ltr; display: inline-block;'>T - fₖ = m₁·a</span><br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>8 - fₖ = 2 × 2  ⇒  fₖ = 4 N</span><br><br>",
+
+    "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>3. حساب معامل الاحتكاك (μ):</span><br>",
+    "• العلاقة: <span style='direction: ltr; display: inline-block;'>fₖ = μ·R</span> (حيث R = 2 × 10 = 20N)<br>",
+    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>4 = μ × 20</span><br>",
+    "&nbsp;&nbsp;<span style='font-size: 32px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ μ = 4 / 20 = 0.2</span>",
+    "</div>"
+],
     pdfFinalAnswer: "الخيار الصحيح هو (ب) 0.2"
 }
+   
 ];
     let currentQIndex = 0;
 

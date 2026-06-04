@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة مراجعة الحاسوب - مدرسة أمجاد أفريقيا</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; padding: 20px; line-height: 1.6; }
+        .header { text-align: center; background: #2c3e50; color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .nav-home { display: block; width: 150px; margin: 10px auto; padding: 10px; background: #27ae60; color: white; text-decoration: none; border-radius: 5px; text-align: center; }
+        .question-card { background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 10px; border-right: 5px solid #3498db; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        select, button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 5px; border: 1px solid #ddd; font-family: inherit; font-size: 1rem; }
+        button { background: #3498db; color: white; border: none; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #2980b9; }
+        .result { margin-top: 10px; font-weight: bold; }
+        .top-btn { position: fixed; bottom: 20px; left: 20px; background: #e74c3c; color: white; padding: 15px; border-radius: 50%; cursor: pointer; width: 50px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .top-btn:hover { background: #c0392b; }
+        footer { text-align: center; margin-top: 30px; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>مدرسة أمجاد أفريقيا للتعليم الخاص - البيضاء</h1>
+    <h2>مراجعة الصف التاسع (ثالث إعدادي) - حاسوب</h2>
+    <a href="../../../../../al-third-preparatory/it/it-dashboard.html" class="nav-home">الرئيسية</a>
+
+
+
+</div>
+
+<div id="quiz-container"></div>
+
+<div class="top-btn" onclick="window.scrollTo(0,0)">↑</div>
+<footer>عدد الأسئلة: 56 سؤال (صح/خطأ واختيار من متعدد)</footer>
+
+<script>
+    // --------------------------------------------------------------
+    // المصفوفة الكاملة للأسئلة (مستخرجة من ملف PDF)
+    // --------------------------------------------------------------
+    const questions = [
+        // صح/خطأ (1-28)
+        { q: "أول مرحلة من مراحل حل المسألة هي فهم المسألة وتحليلها.", a: "صح", type: "tf" },
+        { q: "الروبوت يمتلك مشاعر حقيقية ووعي ذاتي كالذي يمتلكه الإنسان.", a: "خطأ", type: "tf" },
+        { q: "لغة الآلة ولغة التجميع تعتبران من اللغات الأكثر انخفاضاً في المستوى.", a: "صح", type: "tf" },
+        { q: "يستخدم شكل المعين في خرائط التدفق للدلالة على عملية اتخاذ القرار.", a: "صح", type: "tf" },
+        { q: "الذكاء الاصطناعي يختص بمحاكاة ذكاء الإنسان وليس الهندسة الميكانيكية للآلات.", a: "صح", type: "tf" },
+        { q: "الخوارزمية هي مجموعة من الخطوات الواضحة والمتسلسلة والمنطقية.", a: "صح", type: "tf" },
+        { q: "التوثيق هو شرح للبرنامج وأهدافه وهو خطوة مهمة في حل المسألة.", a: "صح", type: "tf" },
+        { q: "لغات البرمجة عالية المستوى أقرب إلى لغة البشر من لغات الحاسوب.", a: "صح", type: "tf" },
+        { q: "الشبكات العصبية الاصطناعية مستوحاة من الخلايا العصبية في الدماغ البشري.", a: "صح", type: "tf" },
+        { q: "مخططات سير العمليات تساعد في تجنب الأخطاء وتسهيل تعديل البرنامج.", a: "صح", type: "tf" },
+        { q: "معامل AND يعطي True فقط عندما تكون جميع المدخلات True.", a: "صح", type: "tf" },
+        { q: "الحاسوب يستطيع حل أي مشكلة بشكل ذاتي دون الحاجة لبرمجة.", a: "خطأ", type: "tf" },
+        { q: "شكل متوازي الأضلاع في خرائط التدفق يرمز للإدخال والإخراج.", a: "صح", type: "tf" },
+        { q: "لغة Prolog من أشهر لغات الذكاء الاصطناعي المستخدمة في معالجة اللغات الطبيعية.", a: "صح", type: "tf" },
+        { q: "المترجم (Compiler) هو برنامج يحول البرنامج المصدري إلى البرنامج الهدف.", a: "صح", type: "tf" },
+        { q: "الخوارزمية مستقلة عن لغة البرمجة ولا تعتمد على لغة معينة.", a: "صح", type: "tf" },
+        { q: "تعتبر لغة ++C مثالاً على لغات البرمجة عالية المستوى.", a: "صح", type: "tf" },
+        { q: "التعبير المنطقي هو جملة إخبارية قيمتها النهائية إما True أو False.", a: "صح", type: "tf" },
+        { q: "الروبوتات قادرة على تنفيذ المهام المتكررة والخطرة بدقة عالية.", a: "صح", type: "tf" },
+        { q: "خرائط التدفق التتابعية لا تحتوي على عمليات اتخاذ قرار.", a: "صح", type: "tf" },
+        { q: "من سلبيات الروبوتات أنها تفتقر لقوة العقل البشري.", a: "صح", type: "tf" },
+        { q: "لغة Lisp هي اللغة الأولى التي صممت لتطبيقات الذكاء الاصطناعي.", a: "صح", type: "tf" },
+        { q: "وحدة ALU مسؤولة عن كافة العمليات الحسابية والمنطقية.", a: "صح", type: "tf" },
+        { q: "فقدان البيانات والاستخدام الخاطئ من تحديات الذكاء الاصطناعي.", a: "صح", type: "tf" },
+        { q: "تبدأ الخوارزمية بكلمة ابدأ وتنتهي بـ توقف.", a: "صح", type: "tf" },
+        { q: "لا يمكن تمثيل الخوارزمية بأشكال رسومية (خرائط تدفق).", a: "خطأ", type: "tf" },
+        { q: "التعبير الحسابي يستخدم لتمثيل العمليات الحسابية مثل الضرب والقسمة.", a: "صح", type: "tf" },
+        { q: "الذكاء الاصطناعي ظهر كمفهوم في خمسينيات القرن الماضي.", a: "صح", type: "tf" },
+
+        // اختيار من متعدد (السؤال 1 إلى 28 حسب ترتيب PDF)
+        { q: "الرمز الذي يستخدم للبداية والنهائية في خرائط التدفق هو:", a: "ج", options: ["المستطيل", "المعين", "البيضاوي"], type: "mc" },
+        { q: "اللغة التي صممت عام 1958 لتكون أساسية لأبحاث الذكاء الاصطناعي هي:", a: "أ", options: ["Lisp", "Java", "C++"], type: "mc" },
+        { q: "أي من المعاملات المنطقية يعطي True فقط إذا كانت كل المدخلات صحيحة؟", a: "ب", options: ["OR", "AND", "NOT"], type: "mc" },
+        { q: "أي مرحلة تعتبر وصف كتابي للبرنامج وأهدافه وإجراءات التشغيل؟", a: "ب", options: ["الخوارزمية", "التوثيق", "الاختبار"], type: "mc" },
+        { q: "في خرائط التدفق، الشكل الذي يشير إلى عملية معالجة هو:", a: "أ", options: ["المستطيل", "متوازي الأضلاع", "المعين"], type: "mc" },
+        { q: "من فوائد مخططات سير العمليات (Flowcharts):", a: "ج", options: ["تجنب الأخطاء", "سهولة تعديل البرنامج", "جميع ما سبق"], type: "mc" },
+        { q: "تُصنف أنواع مخططات سير العمليات إلى:", a: "ب", options: ["نوعان", "ثلاثة أنواع", "أربعة أنواع"], type: "mc" },
+        { q: "لغة البرمجة التي تستخدم للتعبير عن التخطيط الآلي للمشاكل هي:", a: "أ", options: ["STRIPS", "Lisp", "Prolog"], type: "mc" },
+        { q: "أي مما يلي يُعد من عيوب الذكاء الاصطناعي؟", a: "ب", options: ["السرعة في الأداء", "رفع نسبة البطالة", "الدقة العالية"], type: "mc" },
+        { q: "ما الذي تعنيه المسألة في علم الحاسوب؟", a: "ب", options: ["خطوات الحل", "الفجوة بين الوضع الحالي والهدف", "التمثيل الرسومي"], type: "mc" },
+        { q: "الرمز الذي يمثل اتجاه التدفق في خرائط التدفق هو:", a: "أ", options: ["السهم", "الدائرة", "المستطيل"], type: "mc" },
+        { q: "لغة برمجة منخفضة المستوى وأقرب لطريقة عمل الحاسوب هي:", a: "أ", options: ["لغة التجميع", "لغة بايثون", "لغة جافا"], type: "mc" },
+        { q: "أي من هذه العمليات تُستخدم كضرب في تعبيرات الحاسوب؟", a: "ب", options: ["x", "*", "."], type: "mc" },
+        { q: "الأنظمة الخبيرة هي برامج تهدف إلى:", a: "أ", options: ["محاكاة خبرة الإنسان", "التحكم في الروبوتات", "رسم الخرائط"], type: "mc" },
+        { q: "أي من الآتي يمثل الترتيب الصحيح لأولويات المعاملات المنطقية؟", a: "ب", options: ["NOT, AND, OR", "AND, OR, NOT", "OR, AND, NOT"], type: "mc" },
+        { q: "المهام التي تقوم بها الروبوتات بدقة فائقة تشمل:", a: "ج", options: ["المهام المتكررة", "المهام الخطرة", "جميع ما سبق"], type: "mc" },
+        { q: "أي مما يلي هو المكون المسؤول عن العمليات المنطقية والحسابية؟", a: "ب", options: ["وحدة الذاكرة", "وحدة ALU", "وحدة الإدخال"], type: "mc" },
+        { q: "البرنامج الهدف هو البرنامج المعبر عنه بـ:", a: "أ", options: ["لغة الآلة", "لغة البرمجة", "اللغة الطبيعية"], type: "mc" },
+        { q: "التعبير المنطقي هو جملة قيمتها النهائية:", a: "ب", options: ["رقمية فقط", "True أو False", "غير محددة"], type: "mc" },
+        { q: "العالم الذي اشتقت منه كلمة Algorithm هو:", a: "أ", options: ["الخوارزمي", "ابن الهيثم", "جابر بن حيان"], type: "mc" },
+        { q: "المترجم (Compiler) يقوم بتحويل البرنامج من:", a: "ب", options: ["الهدف إلى المصدري", "المصدري إلى الهدف", "من لغة الآلة للبشر"], type: "mc" },
+        { q: "تستخدم الأنظمة المرئية بشكل أساسي في مجال:", a: "أ", options: ["الأمن والحماية", "الزراعة", "الطبخ"], type: "mc" },
+        { q: "من أهم خصائص الخوارزمية الجيدة:", a: "أ", options: ["الوضوح والتحديد", "العشوائية", "التعقيد"], type: "mc" },
+        { q: "إذا كان A=9, B=7, فإن ناتج A+B هو:", a: "ب", options: ["15", "16", "17"], type: "mc" },
+        { q: "لغة Python تُعد من لغات البرمجة:", a: "أ", options: ["عالية المستوى", "منخفضة المستوى", "لغة آلة"], type: "mc" },
+        { q: "أي من التالي يعتبر من تحديات الذكاء الاصطناعي؟", a: "أ", options: ["فقدان البيانات", "سهولة الاستخدام", "السرعة"], type: "mc" },
+        { q: "تدفق خطوات خرائط التدفق يكون غالباً من:", a: "ب", options: ["الأسفل للأعلى", "الأعلى للأسفل", "من اليمين لليسار"], type: "mc" },
+        { q: "تعريف الروبوت بأنه أجهزة ميكانيكية تم برمجتها لتقوم بمهام مختلفة:", a: "أ", options: ["تعريف صحيح", "تعريف خاطئ", "غير متعلق بالذكاء الاصطناعي"], type: "mc" }
+    ];
+
+    // عرض الأسئلة في الصفحة
+    const container = document.getElementById('quiz-container');
+
+    questions.forEach((item, index) => {
+        let div = document.createElement('div');
+        div.className = 'question-card';
+        let html = `<p><strong>${index + 1}.</strong> ${item.q}</p>`;
+        
+        if (item.type === 'tf') {
+            html += `<select id="s${index}">
+                        <option value="">اختر الإجابة</option>
+                        <option value="صح">صح</option>
+                        <option value="خطأ">خطأ</option>
+                    </select>`;
+        } else {
+            html += `<select id="s${index}">
+                        <option value="">اختر الإجابة</option>`;
+            for (let i = 0; i < item.options.length; i++) {
+                let optLetter = String.fromCharCode(1575 + i); // أ، ب، ج
+                html += `<option value="${optLetter}">${optLetter}) ${item.options[i]}</option>`;
+            }
+            html += `</select>`;
+        }
+        
+        html += `<button onclick="check(${index}, '${item.a}')">تحقق من الإجابة</button>
+                 <div id="r${index}" class="result"></div>`;
+        div.innerHTML = html;
+        container.appendChild(div);
+    });
+
+    // دالة التحقق
+    function check(i, ans) {
+        const selectEl = document.getElementById('s'+i);
+        const val = selectEl.value;
+        const resDiv = document.getElementById('r'+i);
+        if (!val) {
+            resDiv.innerHTML = "⚠️ الرجاء اختيار إجابة أولاً";
+            resDiv.style.color = "orange";
+            return;
+        }
+        if (val === ans) {
+            resDiv.innerHTML = "✅ أحسنت! إجابة صحيحة";
+            resDiv.style.color = "green";
+        } else {
+            resDiv.innerHTML = "❌ إجابة خاطئة، حاول مجدداً";
+            resDiv.style.color = "red";
+        }
+    }
+</script>
+</body>
+</html>

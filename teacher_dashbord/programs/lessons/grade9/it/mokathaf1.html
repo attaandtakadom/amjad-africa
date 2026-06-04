@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار تقنية المعلومات الشامل - الصف التاسع</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Tajawal', 'Segoe UI', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; padding: 40px 20px; }
+        .container { max-width: 1300px; margin: 0 auto; }
+        .test-card { background: rgba(255,255,255,0.95); border-radius: 35px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); margin-bottom: 30px; }
+        .test-header { background: linear-gradient(135deg, #0f172a 0%, #334155 100%); padding: 35px; color: white; text-align: center; }
+        .test-icon i { font-size: 65px; margin-bottom: 15px; background: #f59e0b; padding: 20px; border-radius: 60px; color: #0f172a; }
+        .test-header h1 { font-size: 32px; margin-bottom: 10px; }
+        .test-header h2 { font-size: 20px; font-weight: 400; opacity: 0.9; }
+        .test-stats { display: flex; justify-content: center; gap: 25px; margin-top: 20px; flex-wrap: wrap; }
+        .stat { background: rgba(255,255,255,0.15); padding: 8px 20px; border-radius: 50px; font-size: 14px; }
+        .stat i { margin-left: 8px; }
+        .test-badge { display: inline-block; background: #f59e0b; color: #0f172a; padding: 8px 25px; border-radius: 50px; font-weight: bold; margin-top: 20px; }
+        
+        .quiz-sections { padding: 30px; }
+        .section-title { display: flex; align-items: center; gap: 15px; background: #f1f5f9; padding: 15px 20px; border-radius: 20px; margin-bottom: 25px; }
+        .section-title i { font-size: 28px; color: #3b82f6; background: white; padding: 12px; border-radius: 15px; }
+        .section-title h3 { font-size: 22px; color: #1e293b; margin: 0; }
+        .section-title span { background: #3b82f6; color: white; padding: 5px 12px; border-radius: 30px; font-size: 14px; margin-right: auto; }
+        
+        /* تنسيق الخرائط بأسهم واضحة */
+        .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .flow-card { background: linear-gradient(145deg, #fefce8, #fef9c3); border-radius: 24px; padding: 20px; border: 1px solid #fde047; }
+        .flow-card h4 { color: #854d0e; margin-bottom: 12px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+        .flow-card h4 i { background: #eab308; color: white; padding: 8px; border-radius: 12px; }
+        .flow-desc { background: white; padding: 15px; border-radius: 16px; font-size: 14px; font-family: monospace; margin: 15px 0; border-right: 4px solid #eab308; line-height: 1.9; }
+        .flow-desc .arrow { color: #eab308; font-size: 18px; margin: 0 5px; }
+        .flow-card input, .flow-card button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 12px; border: 1px solid #ddd; font-size: 15px; }
+        .flow-card button { background: #eab308; color: #1e293b; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
+        .flow-card button:hover { background: #ca8a04; color: white; }
+        .flow-result { margin-top: 15px; padding: 12px; background: white; border-radius: 12px; font-size: 14px; border-right: 3px solid #eab308; }
+        
+        .question-card { background: #fff; padding: 20px; margin-bottom: 15px; border-radius: 20px; border-right: 5px solid #3b82f6; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: 0.2s; }
+        .question-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        select, button { width: 100%; padding: 12px; margin-top: 12px; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; font-size: 15px; }
+        button { background: #3b82f6; color: white; border: none; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #2563eb; }
+        .result { margin-top: 12px; font-weight: bold; padding: 8px 12px; border-radius: 10px; }
+        .correct { background: #dcfce7; color: #166534; }
+        .wrong { background: #fee2e2; color: #991b1b; }
+        .top-btn { position: fixed; bottom: 25px; left: 25px; background: #ef4444; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; }
+        footer { text-align: center; margin-top: 30px; color: #94a3b8; padding: 20px; }
+        @media (max-width: 768px) { .quiz-sections { padding: 20px; } .test-header h1 { font-size: 24px; } .flow-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="test-card">
+        <div class="test-header">
+
+<div class="header">
+    <h1>مدرسة أمجاد أفريقيا للتعليم الخاص - البيضاء</h1>
+    <h2>مراجعة الصف التاسع (ثالث إعدادي) - حاسوب</h2>
+    <a href="../../../../../al-third-preparatory/it/it-dashboard.html" class="of">الرئيسية</a>
+
+
+
+</div>
+
+
+
+
+
+
+            <div class="test-icon"><i class="fas fa-laptop-code"></i></div>
+            <h1>📚 اختبار تقنية المعلومات الشامل</h1>
+            <div class="test-stats">
+                <div class="stat"><i class="fas fa-question-circle"></i> 56 سؤالاً</div>
+                <div class="stat"><i class="fas fa-microchip"></i> 28 صح/خطأ</div>
+                <div class="stat"><i class="fas fa-list-ul"></i> 28 اختيار من متعدد</div>
+                <div class="stat"><i class="fas fa-project-diagram"></i> 4 خرائط انسيابية</div>
+            </div>
+            <div class="test-badge"><i class="fas fa-star"></i>     <a href="../../../../../al-third-preparatory/it/it-dashboard.html" class="of">الرئيسية</a>
+</div>
+        </div>
+
+        <div class="quiz-sections">
+            <!-- قسم خرائط التدفق مع أسهم واضحة -->
+            <div class="section-title">
+                <i class="fas fa-project-diagram"></i>
+                <h3>🗺️ خرائط التدفق الانسيابية</h3>
+                <span>تفاعلي</span>
+            </div>
+            <div class="flow-grid">
+                <!-- الخريطة 1 -->
+                <div class="flow-card">
+                    <h4><i class="fas fa-calculator"></i> الخريطة 1: جمع الأعداد من 1 إلى N</h4>
+                    <div class="flow-desc">
+                        🟢 البداية<br>
+                        ⬇️<br>
+                        📥 أدخل N<br>
+                        ⬇️<br>
+                        🔧 i = 1, sum = 0<br>
+                        ⬇️<br>
+                        💎 هل i > N ؟<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;↩️ (لا) &nbsp;→ &nbsp; sum = sum + i &nbsp;→ &nbsp; i = i + 1 &nbsp;→ &nbsp; (عود للأعلى إلى 💎)<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;✅ (نعم) &nbsp;→ &nbsp; 📤 اطبع sum<br>
+                        ⬇️<br>
+                        🔴 النهاية
+                    </div>
+                    <input type="number" id="sumN" placeholder="أدخل N (مثال: 5)">
+                    <button onclick="runFlow1()">▶ تشغيل الخريطة</button>
+                    <div id="flowRes1" class="flow-result"></div>
+                </div>
+
+                <!-- الخريطة 2 -->
+                <div class="flow-card">
+                    <h4><i class="fas fa-sort-amount-down"></i> الخريطة 2: تحديد زوجي أو فردي</h4>
+                    <div class="flow-desc">
+                        🟢 البداية<br>
+                        ⬇️<br>
+                        📥 أدخل X<br>
+                        ⬇️<br>
+                        💎 هل X mod 2 = 0 ؟<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;✅ (نعم) &nbsp;→ &nbsp; 📤 اطبع "زوجي"<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;↩️ (لا) &nbsp;→ &nbsp; 📤 اطبع "فردي"<br>
+                        ⬇️<br>
+                        🔴 النهاية
+                    </div>
+                    <input type="number" id="evenOdd" placeholder="أدخل عدداً">
+                    <button onclick="runFlow2()">▶ تشغيل الخريطة</button>
+                    <div id="flowRes2" class="flow-result"></div>
+                </div>
+
+                <!-- الخريطة 3 -->
+                <div class="flow-card">
+                    <h4><i class="fas fa-chart-line"></i> الخريطة 3: مضاعفة العدد حتى يصل إلى 100</h4>
+                    <div class="flow-desc">
+                        🟢 البداية<br>
+                        ⬇️<br>
+                        🔧 y = 5<br>
+                        ⬇️<br>
+                        💎 هل y < 100 ؟<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;✅ (نعم) &nbsp;→ &nbsp; 🔧 y = y × 2 &nbsp;→ &nbsp; (عود للأعلى إلى 💎)<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;↩️ (لا) &nbsp;→ &nbsp; 📤 اطبع y<br>
+                        ⬇️<br>
+                        🔴 النهاية
+                    </div>
+                    <button onclick="runFlow3()">▶ تشغيل الخريطة</button>
+                    <div id="flowRes3" class="flow-result"></div>
+                </div>
+
+                <!-- الخريطة 4 -->
+                <div class="flow-card">
+                    <h4><i class="fas fa-code-branch"></i> الخريطة 4: عملية شرطية (الطرح تحت الشرط)</h4>
+                    <div class="flow-desc">
+                        🟢 البداية<br>
+                        ⬇️<br>
+                        🔧 a = 10, b = 3<br>
+                        ⬇️<br>
+                        💎 هل a > b ؟<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;✅ (نعم) &nbsp;→ &nbsp; 🔧 a = a - b<br>
+                        ⬇️<br>
+                        &nbsp;&nbsp;↩️ (لا) &nbsp;→ &nbsp; (لا تغيير)<br>
+                        ⬇️<br>
+                        📤 اطبع a<br>
+                        ⬇️<br>
+                        🔴 النهاية
+                    </div>
+                    <button onclick="runFlow4()">▶ تشغيل الخريطة</button>
+                    <div id="flowRes4" class="flow-result"></div>
+                </div>
+            </div>
+
+            <!-- قسم الأسئلة العامة -->
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h3>📝 أسئلة المراجعة الشاملة</h3>
+                <span>56 سؤالاً</span>
+            </div>
+            <div id="quiz-container"></div>
+        </div>
+    </div>
+    <footer><i class="fas fa-graduation-cap"></i> مدرسة أمجاد أفريقيا للتعليم الخاص - البيضاء | مراجعة الصف التاسع</footer>
+</div>
+<div class="top-btn" onclick="window.scrollTo(0,0)"><i class="fas fa-arrow-up"></i></div>
+
+<script>
+    // ========== دوال الخرائط الانسيابية ==========
+    function runFlow1() {
+        let N = parseInt(document.getElementById('sumN').value);
+        if (isNaN(N) || N <= 0) { 
+            document.getElementById('flowRes1').innerHTML = "⚠️ الرجاء إدخال عدد صحيح موجب أكبر من 0"; 
+            return; 
+        }
+        let sum = 0, steps = [];
+        for (let i = 1; i <= N; i++) { 
+            sum += i; 
+            steps.push(`i = ${i}  →  sum = ${sum}`); 
+        }
+        document.getElementById('flowRes1').innerHTML = `✅ <strong>نتيجة الخريطة:</strong> مجموع الأعداد من 1 إلى ${N} = ${sum}<br><span style="font-size:12px; color:#666;">📌 خطوات التنفيذ: ${steps.join('  |  ')}</span>`;
+    }
+    
+    function runFlow2() {
+        let X = parseInt(document.getElementById('evenOdd').value);
+        if (isNaN(X)) { 
+            document.getElementById('flowRes2').innerHTML = "⚠️ الرجاء إدخال عدد صحيح"; 
+            return; 
+        }
+        let result = (X % 2 === 0) ? "زوجي" : "فردي";
+        document.getElementById('flowRes2').innerHTML = `✅ <strong>نتيجة الخريطة:</strong> العدد ${X} هو عدد <strong>${result}</strong>`;
+    }
+    
+    function runFlow3() {
+        let y = 5;
+        let steps = [`y = ${y}`];
+        while (y < 100) {
+            y = y * 2;
+            steps.push(`y = ${y}`);
+        }
+        document.getElementById('flowRes3').innerHTML = `✅ <strong>نتيجة الخريطة:</strong> القيمة النهائية y = ${y}<br><span style="font-size:12px; color:#666;">📌 مسار التنفيذ: ${steps.join('  →  ')}</span>`;
+    }
+    
+    function runFlow4() {
+        let a = 10, b = 3;
+        let explanation = `a = ${a}, b = ${b}`;
+        if (a > b) {
+            a = a - b;
+            explanation += `  →  ${a} > ${b} (صحيح)  →  a = ${a} - ${b} = ${a}`;
+        } else {
+            explanation += `  →  الشرط خطأ  →  لا تغيير`;
+        }
+        document.getElementById('flowRes4').innerHTML = `✅ <strong>نتيجة الخريطة:</strong> القيمة النهائية a = ${a}<br><span style="font-size:12px; color:#666;">📌 ${explanation}</span>`;
+    }
+
+    // ========== مصفوفة الأسئلة الكاملة (56 سؤالاً) ==========
+    const questions = [
+        { q: "أول مرحلة من مراحل حل المسألة هي فهم المسألة وتحليلها؟", a: "صح", type: "tf" },
+        { q: "الروبوت يمتلك مشاعر حقيقية ووعي ذاتي كالإنسان؟", a: "خطأ", type: "tf" },
+        { q: "لغة الآلة ولغة التجميع من اللغات المنخفضة المستوى؟", a: "صح", type: "tf" },
+        { q: "شكل المعين في خرائط التدفق يدل على اتخاذ القرار؟", a: "صح", type: "tf" },
+        { q: "الذكاء الاصطناعي يهتم بمحاكاة ذكاء الإنسان؟", a: "صح", type: "tf" },
+        { q: "الخوارزمية هي مجموعة خطوات واضحة ومتسلسلة؟", a: "صح", type: "tf" },
+        { q: "التوثيق خطوة مهمة في حل المسألة؟", a: "صح", type: "tf" },
+        { q: "لغات البرمجة عالية المستوى أقرب للغة البشر؟", a: "صح", type: "tf" },
+        { q: "الشبكات العصبية مستوحاة من الدماغ البشري؟", a: "صح", type: "tf" },
+        { q: "مخططات الانسياب تساعد في تجنب الأخطاء؟", a: "صح", type: "tf" },
+        { q: "معامل AND يعطي True فقط إذا كانت جميع المدخلات True؟", a: "صح", type: "tf" },
+        { q: "الحاسوب يحل أي مشكلة دون برمجة؟", a: "خطأ", type: "tf" },
+        { q: "متوازي الأضلاع في الخرائط يرمز للإدخال والإخراج؟", a: "صح", type: "tf" },
+        { q: "Prolog من لغات الذكاء الاصطناعي؟", a: "صح", type: "tf" },
+        { q: "المترجم يحول البرنامج المصدري إلى الهدف؟", a: "صح", type: "tf" },
+        { q: "الخوارزمية مستقلة عن لغة البرمجة؟", a: "صح", type: "tf" },
+        { q: "C++ لغة برمجة عالية المستوى؟", a: "صح", type: "tf" },
+        { q: "التعبير المنطقي قيمته إما True أو False؟", a: "صح", type: "tf" },
+        { q: "الروبوتات تؤدي مهام خطرة بدقة عالية؟", a: "صح", type: "tf" },
+        { q: "خرائط التدفق التتابعية لا تحتوي على قرارات؟", a: "صح", type: "tf" },
+        { q: "من سلبيات الروبوتات أنها تفتقر لقوة العقل البشري؟", a: "صح", type: "tf" },
+        { q: "Lisp أول لغة صممت للذكاء الاصطناعي؟", a: "صح", type: "tf" },
+        { q: "وحدة ALU مسؤولة عن العمليات الحسابية والمنطقية؟", a: "صح", type: "tf" },
+        { q: "فقدان البيانات من تحديات الذكاء الاصطناعي؟", a: "صح", type: "tf" },
+        { q: "الخوارزمية تبدأ بـ 'ابدأ' وتنتهي بـ 'توقف'؟", a: "صح", type: "tf" },
+        { q: "لا يمكن تمثيل الخوارزمية رسومياً؟", a: "خطأ", type: "tf" },
+        { q: "التعبير الحسابي يستخدم للعمليات الحسابية؟", a: "صح", type: "tf" },
+        { q: "الذكاء الاصطناعي ظهر في خمسينيات القرن الماضي؟", a: "صح", type: "tf" },
+        { q: "رمز البداية والنهاية في خرائط التدفق هو:", a: "البيضاوي", options: ["المستطيل", "المعين", "البيضاوي"], type: "mc" },
+        { q: "اللغة التي صممت عام 1958 للذكاء الاصطناعي هي:", a: "Lisp", options: ["Lisp", "Java", "C++"], type: "mc" },
+        { q: "معامل AND يعطي True فقط إذا:", a: "الكل صحيح", options: ["واحد صحيح", "الكل صحيح", "الكل خطأ"], type: "mc" },
+        { q: "الوصف الكتابي للبرنامج وأهدافه يسمى:", a: "التوثيق", options: ["الخوارزمية", "التوثيق", "الاختبار"], type: "mc" },
+        { q: "شكل المعالجة في خرائط التدفق هو:", a: "المستطيل", options: ["المستطيل", "متوازي الأضلاع", "المعين"], type: "mc" },
+        { q: "من فوائد مخططات الانسياب:", a: "جميع ما سبق", options: ["تجنب الأخطاء", "سهولة التعديل", "جميع ما سبق"], type: "mc" },
+        { q: "أنواع مخططات سير العمليات:", a: "ثلاثة أنواع", options: ["نوعان", "ثلاثة أنواع", "أربعة أنواع"], type: "mc" },
+        { q: "لغة التخطيط الآلي للمشاكل هي:", a: "STRIPS", options: ["STRIPS", "Lisp", "Prolog"], type: "mc" },
+        { q: "من عيوب الذكاء الاصطناعي:", a: "رفع نسبة البطالة", options: ["السرعة", "رفع نسبة البطالة", "الدقة"], type: "mc" },
+        { q: "المسألة في علم الحاسوب تعني:", a: "الفجوة بين الوضع الحالي والهدف", options: ["خطوات الحل", "الفجوة بين الوضع الحالي والهدف", "التمثيل الرسومي"], type: "mc" },
+        { q: "رمز اتجاه التدفق في الخرائط:", a: "السهم", options: ["السهم", "الدائرة", "المستطيل"], type: "mc" },
+        { q: "لغة منخفضة المستوى وأقرب للحاسوب:", a: "لغة التجميع", options: ["لغة التجميع", "بايثون", "جافا"], type: "mc" },
+        { q: "رمز الضرب في تعبيرات الحاسوب:", a: "*", options: ["x", "*", "."], type: "mc" },
+        { q: "الأنظمة الخبيرة تهدف إلى:", a: "محاكاة خبرة الإنسان", options: ["محاكاة خبرة الإنسان", "التحكم بالروبوتات", "رسم الخرائط"], type: "mc" },
+        { q: "أولويات المعاملات المنطقية:", a: "NOT, AND, OR", options: ["NOT, AND, OR", "AND, OR, NOT", "OR, AND, NOT"], type: "mc" },
+        { q: "مهام الروبوتات تشمل:", a: "جميع ما سبق", options: ["المتكررة", "الخطرة", "جميع ما سبق"], type: "mc" },
+        { q: "المسؤول عن العمليات الحسابية والمنطقية:", a: "ALU", options: ["وحدة الذاكرة", "ALU", "وحدة الإدخال"], type: "mc" },
+        { q: "البرنامج الهدف يُكتب بـ:", a: "لغة الآلة", options: ["لغة الآلة", "لغة البرمجة", "اللغة الطبيعية"], type: "mc" },
+        { q: "التعبير المنطقي قيمته:", a: "True أو False", options: ["رقمية", "True أو False", "نصية"], type: "mc" },
+        { q: "أصل كلمة Algorithm هو العالم:", a: "الخوارزمي", options: ["الخوارزمي", "ابن الهيثم", "جابر بن حيان"], type: "mc" },
+        { q: "المترجم يحول البرنامج:", a: "من المصدري إلى الهدف", options: ["من الهدف للمصدري", "من المصدري إلى الهدف", "من الآلة للبشر"], type: "mc" },
+        { q: "الأنظمة المرئية تستخدم في:", a: "الأمن والحماية", options: ["الأمن والحماية", "الزراعة", "الطبخ"], type: "mc" },
+        { q: "من خصائص الخوارزمية الجيدة:", a: "الوضوح والتحديد", options: ["الوضوح والتحديد", "العشوائية", "التعقيد"], type: "mc" },
+{ q: "إذا كان A = 9 , B = 7 فإن ناتج A + B هو:", a: "16", options: ["15", "16", "17"], type: "mc" },        { q: "لغة Python من لغات:", a: "عالية المستوى", options: ["عالية المستوى", "منخفضة المستوى", "لغة آلة"], type: "mc" },
+        { q: "من تحديات الذكاء الاصطناعي:", a: "فقدان البيانات", options: ["فقدان البيانات", "سهولة الاستخدام", "السرعة"], type: "mc" },
+        { q: "تدفق خطوات الخريطة غالباً من:", a: "الأعلى للأسفل", options: ["الأسفل للأعلى", "الأعلى للأسفل", "اليمين لليسار"], type: "mc" },
+        { q: "تعريف الروبوت بأنه جهاز ميكانيكي مبرمج:", a: "تعريف صحيح", options: ["تعريف صحيح", "تعريف خاطئ", "غير متعلق"], type: "mc" }
+    ];
+
+    const container = document.getElementById('quiz-container');
+    questions.forEach((item, idx) => {
+        let div = document.createElement('div');
+        div.className = 'question-card';
+        let html = `<p><strong>${idx+1}.</strong> ${item.q}</p>`;
+        if (item.type === 'tf') {
+            html += `<select id="s${idx}"><option value="">-- اختر الإجابة --</option><option value="صح">✅ صح</option><option value="خطأ">❌ خطأ</option></select>`;
+        } else {
+            html += `<select id="s${idx}"><option value="">-- اختر الإجابة --</option>`;
+            for (let opt of item.options) {
+                html += `<option value="${opt}">${opt}</option>`;
+            }
+            html += `</select>`;
+        }
+        html += `<button onclick="checkAnswer(${idx})">🔍 تحقق من الإجابة</button><div id="r${idx}" class="result"></div>`;
+        div.innerHTML = html;
+        container.appendChild(div);
+    });
+
+    function checkAnswer(i) {
+        const sel = document.getElementById('s'+i);
+        const userAnswer = sel.value;
+        const correct = questions[i].a;
+        const resDiv = document.getElementById('r'+i);
+        if (!userAnswer) {
+            resDiv.innerHTML = "⚠️ الرجاء اختيار إجابة أولاً";
+            resDiv.className = "result wrong";
+            return;
+        }
+        if (userAnswer === correct) {
+            resDiv.innerHTML = "✅ أحسنت! إجابة صحيحة 🎉";
+            resDiv.className = "result correct";
+        } else {
+            resDiv.innerHTML = `❌ إجابة خاطئة. الإجابة الصحيحة هي: ${correct}`;
+            resDiv.className = "result wrong";
+        }
+    }
+</script>
+</body>
+</html>
