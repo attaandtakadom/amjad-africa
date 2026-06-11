@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pyelography Presentation</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+        .slide { display: none; height: 100vh; padding: 50px; text-align: center; }
+        .active { display: block; }
+        img { max-width: 500px; border-radius: 10px; margin-top: 20px; }
+        button { padding: 10px 20px; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="slide1" class="slide active">
+    <h1>Pyelography: A Comparative Analysis</h1>
+    <p>Prepared by: [Your Names]</p>
+    <button onclick="nextSlide()">Start Presentation</button>
+</div>
+
+<div id="slide2" class="slide">
+    <h2>Retrograde Pyelogram</h2>
+    <p>Injection against urine flow for detailed ureter imaging.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Retrograde_pyelogram.jpg/640px-Retrograde_pyelogram.jpg" alt="Retrograde">
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+</script>
+</body>
+</html>

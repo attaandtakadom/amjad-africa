@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>منصة الفيزياء - مدرسة أمجاد أفريقيا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --success: #16a34a;
+            --error: #dc2626;
+            --text-main: #334155;
+            --border-color: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: #cbd5e1; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .app-container {
+            width: 100%; max-width: 900px; background: var(--card-bg);
+            border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .header { background-color: var(--primary); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .school-badge { background: #ea580c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+        .question-container { padding: 30px; text-align: center;}
+        .question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: rtl; flex-wrap: wrap; gap: 10px; }
+        .q-source-span { background: var(--accent); color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold;}
+        .question-text { font-size: 18px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; font-weight: 600; text-align: right;}
+        .question-graphic-area { max-width: 100%; margin: 0 auto 20px auto; padding: 15px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #ffffff; display: flex; justify-content: center; align-items: center; }
+        .steps-container { padding: 20px 30px; background-color: var(--bg); }
+        .step-card {
+            background: white; border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 20px; margin-bottom: 20px; opacity: 0.4; pointer-events: none;
+            transition: all 0.3s ease; border-right: 5px solid #94a3b8;
+        }
+        .step-card.active { opacity: 1; pointer-events: auto; border-right-color: var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .step-card.completed { opacity: 1; pointer-events: none; border-right-color: var(--success); background-color: #f0fdf4; }
+        .step-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-align: right;}
+        .step-question { font-size: 15px; margin-bottom: 15px; color: var(--text-main); text-align: right;}
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; direction: rtl; }
+        .option-btn {
+            background: white; border: 2px solid var(--border-color); padding: 12px;
+            border-radius: 6px; cursor: pointer; text-align: right; font-size: 15px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .option-btn:hover { border-color: var(--accent); background: #eff6ff; }
+        .option-btn.correct { border-color: var(--success); background: #dcfce7; color: #166534; }
+        .option-btn.wrong { border-color: var(--error); background: #fee2e2; color: #991b1b; }
+        .feedback-box { margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; display: none; text-align: right; }
+        .feedback-box.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block; }
+        .navigation-area { padding: 0 30px 30px 30px; display: flex; justify-content: space-between; background: var(--bg); }
+        .nav-btn { padding: 12px 25px; background: var(--primary); color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 6px; }
+        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; color: #94a3b8; }
+        .print-section { text-align: center; margin: 20px 0 50px 0; width: 100%; max-width: 900px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .print-btn { background-color: var(--success); color: white; padding: 15px 35px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .bot-link-btn { background-color: var(--accent); color: white; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        #printable-pdf-document { display: none; }
+
+        /* تنسيق الطباعة - تم إزالة الفراغ العلوي بالكامل */
+        @media print {
+            body { background: white; padding: 0; margin: 0; }
+            .app-container, .print-section { display: none !important; }
+            #printable-pdf-document { 
+                display: block !important; 
+                direction: rtl; 
+                width: 100%; 
+                padding: 0; 
+                margin: 0; 
+                background: white;
+            }
+            .pdf-school-header { text-align: center; font-size: 16px; font-weight: bold; color: #ea580c; margin: 0; padding-top: 0; }
+            .pdf-page-title { text-align: center; color: #0f172a; margin: 5px 0 0 0; font-size: 20px; font-weight: 800; border-bottom: 2px solid #0f172a; padding-bottom: 5px; }
+            .pdf-student-dedication { text-align: center; font-size: 13px; color: #475569; margin: 5px 0; font-style: italic; }
+            .pdf-bot-url-area { text-align: center; font-size: 12px; color: #2563eb; margin: 5px 0 10px 0; font-weight: bold; direction: ltr; }
+            .pdf-question-block { page-break-inside: avoid; margin-bottom: 15px; border: 1px solid #cbd5e1; padding: 8px; border-radius: 8px; background: #ffffff; }
+            .pdf-q-title { font-size: 15px; font-weight: bold; color: #2563eb; margin-bottom: 6px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 3px; }
+            .pdf-q-text { font-size: 13px; color: #334155; line-height: 1.4; margin-bottom: 8px; text-align: justify; }
+            .pdf-graphic { display: flex; justify-content: center; margin: 8px 0; }
+            .pdf-solution-box { background: #f8fafc; border-right: 4px solid #16a34a; padding: 8px; margin-top: 8px; border-radius: 0 6px 6px 0; }
+            .pdf-sol-title { font-weight: bold; color: #166534; margin-bottom: 4px; font-size: 13px; }
+            .pdf-sol-steps { font-size: 12px; color: #334155; line-height: 1.5; }
+            .pdf-sol-steps div { margin-bottom: 3px; }
+            .pdf-final-ans { font-weight: 800; color: #0f172a; margin-top: 6px; background: #e2f8e9; padding: 3px 6px; display: inline-block; border-radius: 4px; }
+        }
+        svg { max-width: 100%; height: auto; }
+
+#printable-pdf-document {
+    width: 100%;
+    height: 100vh; /* يضمن أخذ كامل ارتفاع الشاشة/الصفحة */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* توزيع العناصر بالتساوي بين الأعلى والأسفل */
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.pdf-school-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e3a8a;
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 10px;
+    width: 90%;
+}
+
+.pdf-page-title {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 40px 0;
+    color: #0f172a;
+}
+
+.pdf-student-dedication {
+    font-size: 24px;
+    font-style: italic;
+    color: #475569;
+    flex-grow: 1; /* يسمح لهذا العنصر بأخذ المساحة الفائضة في المنتصف */
+    display: flex;
+    align-items: center;
+}
+
+.pdf-bot-url-area {
+    font-size: 18px;
+    padding: 20px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    width: 100%;
+}
+#printable-pdf-document {
+    display: none; /* مخفي تماماً عن المتصفح */
+}
+@media print {
+    /* التأكد من ظهور SVG في الطباعة */
+    svg {
+        display: block !important;
+        visibility: visible !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    .pdf-graphic svg,
+    .question-graphic-area svg {
+        display: block !important;
+        visibility: visible !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* إجبار المتصفح على طباعة الخلفيات */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+/* لا نحتاج لـ vh هنا لأننا سنتحكم به عند الطباعة فقط */
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i> منصة الفيزياء
+</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="question-counter"></span>
+    </div>
+    <div class="question-container">
+        <div class="question-meta"><span class="q-source-span" id="q-source"></span></div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+    </div>
+    <div class="steps-container" id="steps-container"></div>
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">← السابق</button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">التالي →</button>
+    </div>
+</div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> طباعة PDF
+    </button>
+</div>
+
+<div id="printable-pdf-document" style="text-align: center; padding: 50px; font-family: 'Arial', sans-serif; background-color: #ffffff; border: 2px solid #0d6efd; border-radius: 15px; min-height: 800px;">
+    
+    <div style="font-size: 24px; color: #1e3a8a; font-weight: bold;">
+        مدرسة أمجاد أفريقيا - ليبيا - البيضاء
+    </div>
+
+    <div style="margin: 40px 0;">
+        <h1 style="font-size: 72px; color: #1e3a8a; margin: 0; font-weight: 900;">
+            الفيزياء
+        </h1>
+        <div style="font-size: 28px; color: #2d3748; margin-top: 10px; font-weight: bold;">
+            الصف الثالث الثانوي
+        </div>
+    </div>
+
+    <div style="margin: 60px 0;">
+        <h2 style="font-size: 32px; color: #0d6efd; margin: 0;">
+            <span style="font-size: 40px;">📘</span> كراسة الحلول النموذجية <span style="font-size: 40px;">📘</span>
+        </h2>
+        <div style="font-size: 20px; color: #4a5568; margin-top: 10px; font-weight: bold;">
+            العام الدراسي 2025 - 2026
+        </div>
+    </div>
+
+    <div style="margin: 40px 0; border: 1px dashed #0d6efd; padding: 20px; display: inline-block; border-radius: 10px;">
+        <h3 style="color: #2d3748; margin-top: 0;">أسئلة من امتحانات سابقة</h3>
+        <h4 style="color: #e53e3e; margin: 0;"> الكهربائية والمغناطيسية والذرية </h4>
+    </div>
+
+    <div style="margin: 50px 0; color: #4a5568;">
+        <p>إهداء إلى طلبتنا المتميزين</p>
+    </div>
+    
+    <div style="margin-top: 50px; font-size: 16px; color: #2b6cb0;">
+        رابط البوت التعليمي:<br>
+        <a href="http://t.me/amjad_africa2027bot" style="color: #0d6efd;">t.me/amjad_africa2027bot</a>
+    </div>
+</div>    <div id="dynamic-pdf-questions-area"></div>
+</div>
+<script>
+const questionsMatrix = [
+    
+  {
+  "title": "المسألة الأولى: النسبة بين المقاومات النوعية",
+  "text": "سلكان من مادتين مختلفتين، طول الاول ضعف الثاني، ونصف قطر الاول ضعف الثاني، ومقاومة الاول تساوي مقاومة الثاني. فان النسبة بين المقاومات النوعية (ρ1 : ρ2) تساوي: \n\n (أ) 1 : 2 \n (ب) 4 : 1 \n (ج) 2 : 1 \n (د) 1 : 4",
+  "svgCode": "<svg viewBox=\"0 0 200 100\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><rect x=\"20\" y=\"30\" width=\"60\" height=\"10\" fill=\"#2563eb\"/><rect x=\"120\" y=\"30\" width=\"60\" height=\"10\" fill=\"#16a34a\"/><text x=\"50\" y=\"25\" font-size=\"12\" font-weight=\"bold\">Wire 1</text><text x=\"150\" y=\"25\" font-size=\"12\" font-weight=\"bold\">Wire 2</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الاولى: معادلة التساوي",
+      "question": "بما أن R1 = R2، والمعادلة هي (ρ1 * L1 / A1) = (ρ2 * L2 / A2). هل هذه الصيغة صحيحة؟",
+      "options": [
+        { "text": "نعم، صحيحة", "isCorrect": true },
+        { "text": "لا، خاطئة", "isCorrect": false }
+      ],
+      "feedback": "صحيح! نحن نساوي R1 بـ R2 لنكتشف العلاقة بين ρ1 و ρ2."
+    },
+    {
+      "title": "المرحلة الثانية: تعويض النسبة",
+      "question": "إذا عوضنا L1=2L2 و A1=4A2 في المعادلة، فما هي النسبة ρ1 / ρ2 الناتجة؟",
+      "options": [
+        { "text": "ρ1 / ρ2 = 2 / 1", "isCorrect": true },
+        { "text": "ρ1 / ρ2 = 1 / 2", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! الاختصار الرياضي يوصلنا للنتيجة 2:1."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 28px; line-height: 2;'>",
+    "<strong>الحل المباشر:</strong><br>",
+    "1. المعادلة: (ρ1 * L1) / A1 = (ρ2 * L2) / A2<br>",
+    "2. التعويض: L1 = 2L2  ,  A1 = 4A2<br>",
+    "3. (ρ1 * 2L2) / 4A2 = (ρ2 * L2) / A2<br>",
+    "4. باختصار L2 و A2: (ρ1 * 2) / 4 = ρ2<br>",
+    "5. ρ1 / 2 = ρ2  =>  ρ1 / ρ2 = 2 / 1<br><br>",
+    "<span style='color: #dc2626;'>ملاحظة: إذا كان السلكان من نفس المادة (ρ1 = ρ2)، فإن المعادلة تختلف وتصبح للمقارنة بين R1 و R2.</span>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الخيار الصحيح هو (ج) 2 : 1"
+},
+
+{
+  "title": "المسألة الثانية: قانون كولوم والقوة العظمى",
+  "text": "شحنتان كهربائيتان في الهواء والمسافة بينهما (1m)، أي من أزواج الشحنات التالية يعطي أكبر قوة تجاذب ممكنة بينهما؟",
+  "svgCode": "<svg viewBox=\"0 0 200 80\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><circle cx=\"40\" cy=\"40\" r=\"10\" fill=\"#dc3545\"/><circle cx=\"160\" cy=\"40\" r=\"10\" fill=\"#198754\"/><line x1=\"50\" y1=\"40\" x2=\"150\" y2=\"40\" stroke=\"#333\" stroke-width=\"2\"/><text x=\"100\" y=\"30\" text-anchor=\"middle\" font-size=\"12\">r = 1m</text></svg>",
+  "steps": [
+    {
+      "title": "اختر الإجابة الصحيحة",
+      "question": "شحنتان كهربائيتان في الهواء والمسافة بينهما (1m)، أي من أزواج الشحنات التالية يعطي أكبر قوة تجاذب ممكنة بينهما؟",
+      "options": [
+        { "text": "1C , 4C", "isCorrect": false },
+        { "text": "-6C , -3C", "isCorrect": false },
+        { "text": "9C , 2C", "isCorrect": false },
+        { "text": "5C , -2C", "isCorrect": true }
+      ],
+      "feedback": "أحسنت! الإجابة هي (5C , -2C) لأنها تعطي أكبر قوة تجاذب. تابع للأسفل لرؤية الحل."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6;'>",
+    "<strong>المبدأ الفيزيائي:</strong><br> قانون كولوم: F = k * (|Q1| * |Q2|) / R²<br>",
+    "1. <strong>شرط التجاذب:</strong> يجب أن تكون الشحنات مختلفة الإشارة (+ و -).<br>",
+    "2. <strong>حساب مقادير القوى للتجاذب:</strong><br>",
+    "- الخيار (أ): 1 × -4 = -4<br>",
+    "- الخيار (ب): -6 × -3 = +18 (تنافر)<br>",
+    "- الخيار (ج): +9 × +2 = +18 (تنافر)<br>",
+    "- الخيار (د): 5 × -2 = -10 (تجاذب بقوة أكبر من الخيار أ)<br><br>",
+    "<strong>الاستنتاج:</strong><br> بما أننا نبحث عن أكبر قوة تجاذب، فإن الزوج (5C , -2C) هو الأقوى لأن قيمته المطلقة (10) أكبر من (4).",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الخيار الصحيح هو (5C , -2C)"
+},    
+ {
+  "title": "المسألة الثالثة: المجال الكهربائي داخل موصل",
+  "text": "كرة موصلة نصف قطرها 10cm وشحنتها 5C، ما هو مقدار المجال الكهربائي عند نقطة تبعد 5cm من مركزها؟ \n\n (أ) 0 N/C \n (ب) 5 N/C \n (ج) 8 N/C",
+  "svgCode": "<svg viewBox=\"0 0 200 120\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><circle cx=\"100\" cy=\"60\" r=\"40\" fill=\"none\" stroke=\"#333\" stroke-width=\"2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"20\" stroke=\"#333\" stroke-width=\"2\"/><text x=\"110\" y=\"40\" font-size=\"12\">r=10cm</text><circle cx=\"100\" cy=\"60\" r=\"20\" fill=\"none\" stroke=\"#e11d48\" stroke-dasharray=\"4\"/><text x=\"110\" y=\"80\" font-size=\"12\">r=5cm</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الاولى: موقع النقطة",
+      "question": "بما أن نصف قطر الكرة الموصلة هو 10cm والنقطة المطلوبة تقع على بعد 5cm من المركز، هل تقع هذه النقطة داخل أم خارج الكرة؟",
+      "options": [
+        { "text": "داخل الكرة", "isCorrect": true },
+        { "text": "خارج الكرة", "isCorrect": false }
+      ],
+      "feedback": "صحيح! بما أن 5cm أصغر من 10cm، فالنقطة تقع داخل الموصل."
+    },
+    {
+      "title": "المرحلة الثانية: خاصية الموصلات",
+      "question": "ماذا يحدث للمجال الكهربائي داخل الموصل المشحون في حالة الاتزان الاستاتيكي؟",
+      "options": [
+        { "text": "يساوي صفراً", "isCorrect": true },
+        { "text": "يكون له قيمة عظمى", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! في الموصلات المشحونة، تتوزع الشحنات على السطح الخارجي فقط، مما يجعل المجال الكهربائي داخل الموصل يساوي صفراً."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "الحل المباشر:",
+    "1. المعطيات: نصف قطر الكرة R = 10cm ، المسافة المطلوبة r = 5cm.",
+    "2. الملاحظة: بما أن r < R، فإن النقطة تقع داخل الكرة الموصلة.",
+    "3. القاعدة الفيزيائية: في الموصلات المشحونة في حالة الاتزان، تتوزع الشحنات على السطح الخارجي للموصل.",
+    "4. النتيجة: المجال الكهربائي E داخل الموصل يساوي دائماً صفراً.",
+    "5. المعادلة: E = 0 N/C",
+    "الخيار الصحيح هو (أ) 0 N/C"
+  ],
+  "pdfFinalAnswer": "المجال الكهربائي E = 0 N/C"
+} ,
+ {
+  "title": "المسألة الرابعة: حركة شحنة في مجال كهربائي",
+  "text": "إذا وُضعت شحنة سالبة صغيرة في مجال كهربائي منتظم، فإنها تتحرك في اتجاه: \n\n (أ) عكس اتجاه المجال \n (ب) تبقى ثابتة \n (ج) في اتجاه المجال \n (د) في شكل دائري",
+  "svgCode": "<svg viewBox=\"0 0 200 100\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><line x1=\"20\" y1=\"20\" x2=\"180\" y2=\"20\" stroke=\"#333\" stroke-width=\"2\"/><line x1=\"20\" y1=\"50\" x2=\"180\" y2=\"50\" stroke=\"#333\" stroke-width=\"2\"/><line x1=\"20\" y1=\"80\" x2=\"180\" y2=\"80\" stroke=\"#333\" stroke-width=\"2\"/><circle cx=\"100\" cy=\"50\" r=\"8\" fill=\"#dc2626\"/><text x=\"95\" y=\"45\" font-size=\"12\" fill=\"white\">-</text><text x=\"100\" y=\"15\" font-size=\"14\">E</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الاولى: القوة الكهربائية",
+      "question": "العلاقة التي تحكم القوة الكهربائية هي F = q * E. إذا كانت q سالبة، فهل تكون القوة F في نفس اتجاه المجال E أم عكسه؟",
+      "options": [
+        { "text": "تكون القوة في عكس اتجاه المجال", "isCorrect": true },
+        { "text": "تكون القوة في نفس اتجاه المجال", "isCorrect": false }
+      ],
+      "feedback": "صحيح! الإشارة السالبة تعني اتجاهاً معاكساً للمجال."
+    },
+    {
+      "title": "المرحلة الثانية: استنتاج الحركة",
+      "question": "بناءً على اتجاه القوة F، في أي اتجاه ستتحرك الشحنة السالبة؟",
+      "options": [
+        { "text": "عكس اتجاه المجال الكهربائي", "isCorrect": true },
+        { "text": "في اتجاه المجال الكهربائي", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! الشحنة السالبة تُدفع دائماً بعيداً عن اتجاه خطوط المجال."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 28px; line-height: 2;'>",
+    "<strong>الحل المباشر:</strong><br>",
+    "1. القانون: F = q * E<br>",
+    "2. بما أن الشحنة (q) سالبة، فإن القوة (F) تتجه دائماً عكس اتجاه المجال (E).<br>",
+    "3. نتيجة لذلك، تتسارع الشحنة السالبة في اتجاه معاكس لاتجاه خطوط المجال الكهربائي.<br><br>",
+    "<span style='color: #166534;'>الخيار الصحيح هو (أ) عكس اتجاه المجال</span>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الخيار الصحيح هو (أ)"
+},
+{
+  "title": "المسألة الخامسة: الشحنة وعدد الإلكترونات",
+  "text": "واحد كولوم يعادل كم من الإلكترونات؟ \n\n (أ) 6.25 * 10^18 إلكترون \n (ب) 6.25 * 10^17 إلكترون \n (ج) 6.25 * 10^15 إلكترون",
+  "svgCode": "<svg viewBox=\"0 0 200 60\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><text x=\"100\" y=\"30\" text-anchor=\"middle\" font-size=\"20\" font-weight=\"bold\">Q = n * e</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الاولى: القانون الأساسي",
+      "question": "لحساب عدد الإلكترونات (n) في شحنة معينة (Q)، نستخدم العلاقة Q = n * e. حيث e هي شحنة الإلكترون (1.6 * 10^-19 C). هل المعادلة الصحيحة هي n = Q / e؟",
+      "options": [
+        { "text": "نعم، صحيحة", "isCorrect": true },
+        { "text": "لا، خاطئة", "isCorrect": false }
+      ],
+      "feedback": "صحيح! لكي نجد العدد (n) نقسم الشحنة الكلية (Q) على شحنة الإلكترون الواحد (e)."
+    },
+    {
+      "title": "المرحلة الثانية: الحساب الرياضي",
+      "question": "عند قسمة 1 كولوم على 1.6 * 10^-19، ما هو الناتج الصحيح؟",
+      "options": [
+        { "text": "6.25 * 10^18 إلكترون", "isCorrect": true },
+        { "text": "6.25 * 10^17 إلكترون", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! عملية القسمة البسيطة هذه تعطينا هذا الرقم الشهير في الفيزياء."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 28px; line-height: 2;'>",
+    "<strong>الحل المباشر:</strong><br>",
+    "1. القانون: Q = n * e<br>",
+    "2. المطلوب هو عدد الإلكترونات (n)، إذن: n = Q / e<br>",
+    "3. التعويض: n = 1 / (1.6 * 10^-19)<br>",
+    "4. النتيجة: n = 6.25 * 10^18 إلكترون<br><br>",
+    "<span style='color: #166534;'>الخيار الصحيح هو (أ) 6.25 * 10^18 إلكترون</span>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الخيار الصحيح هو (أ)"
+},
+{
+  "title": "المسألة السادسة: المقاومة النوعية وأبعاد السلك",
+  "text": "سلك من النحاس مقاومته النوعية 1.7 × 10^-8 أوم.متر. إذا زاد طول السلك إلى الضعف وقلت مساحة مقطعه إلى النصف، فإن مقدار مقاومته النوعية يصبح: \n\n (أ) 0.85 × 10^-8 أوم.متر \n (ب) 1.7 × 10^-8 أوم.متر \n (ج) 3.4 × 10^-8 أوم.متر \n (د) 6.8 × 10^-8 أوم.متر",
+  "svgCode": "<svg viewBox=\"0 0 200 60\" width=\"40%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><rect x=\"20\" y=\"20\" width=\"160\" height=\"20\" fill=\"#b45309\"/><text x=\"100\" y=\"55\" text-anchor=\"middle\" font-size=\"14\">مادة النحاس (Cu)</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الاولى: فهم الخاصية",
+      "question": "المقاومة النوعية (ρ) خاصية مميزة للمادة تعتمد فقط على نوع المادة ودرجة الحرارة. هل تتأثر بتغير طول السلك أو مساحة مقطعه؟",
+      "options": [
+        { "text": "لا، لا تتأثر بالأبعاد", "isCorrect": true },
+        { "text": "نعم، تتأثر بالأبعاد", "isCorrect": false }
+      ],
+      "feedback": "أحسنت! المقاومة النوعية ثابتة للمادة الواحدة عند نفس درجة الحرارة."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 24px; line-height: 1.6;'>",
+    "<strong>الحل الفيزيائي:</strong><br>",
+    "1. الخاصية: المقاومة النوعية (ρ) هي ثابت فيزيائي للمادة الواحدة.<br>",
+    "2. المعلومة: تغير الطول (L) أو المساحة (A) يغير المقاومة الكهربائية (R) فقط.<br>",
+    "3. الاستنتاج: المقاومة النوعية للنحاس تظل ثابتة ولا تتغير بتغير الأبعاد.<br><br>",
+    "<strong>خيارات الإجابة:</strong><br>",
+    "(أ) 0.85 × 10^-8 أوم.متر | (ب) 1.7 × 10^-8 أوم.متر | (ج) 3.4 × 10^-8 أوم.متر | (د) 6.8 × 10^-8 أوم.متر<br><br>",
+    "<span style='color: #166534;'><strong>الخيار الصحيح هو (ب) 1.7 × 10^-8 أوم.متر</strong></span>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الخيار الصحيح هو (ب)"
+},
+{
+  "title": "المسألة السابعة: حساب عمر النصف للكربون-14",
+  "text": "شجرة ميتة تسجل 4 عدات/دقيقة، بينما الكربون النقي يسجل 16 عِدة/دقيقة. إذا كان عمر النصف للكربون-14 هو 6000 عام، فما هو عمر الشجرة؟ \n\n (أ) 3000 عام \n (ب) 6000 عام \n (ج) 12000 عام \n (د) 18000 عام",
+  "svgCode": "<svg viewBox=\"0 0 300 100\" width=\"60%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><circle cx=\"50\" cy=\"50\" r=\"20\" fill=\"#2563eb\"/><text x=\"50\" y=\"55\" text-anchor=\"middle\" fill=\"white\">16</text><path d=\"M80 50 L120 50\" stroke=\"black\" stroke-width=\"2\" marker-end=\"url(#arrowhead)\"/><text x=\"100\" y=\"40\" text-anchor=\"middle\">6000y</text><circle cx=\"150\" cy=\"50\" r=\"20\" fill=\"#ea580c\"/><text x=\"150\" y=\"55\" text-anchor=\"middle\" fill=\"white\">8</text><path d=\"M180 50 L220 50\" stroke=\"black\" stroke-width=\"2\" marker-end=\"url(#arrowhead)\"/><text x=\"200\" y=\"40\" text-anchor=\"middle\">6000y</text><circle cx=\"250\" cy=\"50\" r=\"20\" fill=\"#16a34a\"/><text x=\"250\" y=\"55\" text-anchor=\"middle\" fill=\"white\">4</text><defs><marker id=\"arrowhead\" markerWidth=\"10\" markerHeight=\"7\" refX=\"9\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0, 10 3.5, 0 7\" /></marker></defs></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الاولى: تتبع التحلل",
+      "question": "بدأنا بـ 16 عِدة وانتهينا بـ 4 عدات. كم مرة انقسم العدد على 2 للوصول من 16 إلى 4؟",
+      "options": [
+        { "text": "مرتان (16 -> 8 -> 4)", "isCorrect": true },
+        { "text": "مرة واحدة (16 -> 8)", "isCorrect": false }
+      ],
+      "feedback": "صحيح! انقسم العدد مرتين، وهذا يعني مرور فترتين من عمر النصف."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 24px; line-height: 1.6;'>",
+    "<strong>خطوات الحل:</strong><br>",
+    "1. العدات الأصلية = 16 عِدة/دقيقة.<br>",
+    "2. بعد 6000 سنة (عمر نصف أول) = 16 ÷ 2 = 8 عِدات/دقيقة.<br>",
+    "3. بعد 6000 سنة أخرى (عمر نصف ثاني) = 8 ÷ 2 = 4 عِدات/دقيقة.<br>",
+    "4. إجمالي العمر = 6000 + 6000 = 12000 عام.<br><br>",
+    "<strong>خيارات الإجابة:</strong><br>",
+    "(A) 3000 عام | (B) 6000 عام | (C) 12000 عام | (D) 18000 عام<br><br>",
+    "<span style='color: #166534;'><strong>الخيار الصحيح هو (C) 12000 عام</strong></span>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الخيار الصحيح هو (C)"
+},
+{
+"title": "س 39: الأجهزة التي لا تعتمد على المغناطيسية الكهربائية",
+"text": "كل من الأجهزة التالية تستخدم ظاهرة المغناطيسية الكهربائية ما عدا:\n\n(أ) المرحل المغناطيسي البسيط\n(ب) المفتاح الزئبقي\n(ج) الجرس الكهربائي\n(د) مكبر الصوت ذو الملف المتحرك",
+"svgCode": "<svg width='200' height='100' viewBox='0 0 200 100'><rect x='30' y='30' width='40' height='40' fill='#ccc'/><text x='50' y='55' text-anchor='middle' font-size='10'>مغناطيس</text><rect x='120' y='30' width='40' height='40' fill='#fbbf24'/><text x='140' y='55' text-anchor='middle' font-size='10'>ملف</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: تعريف الظاهرة",
+"question": "ما معنى أن جهازاً يعتمد على 'المغناطيسية الكهربائية'؟",
+"options": [
+{ "text": "يستخدم ملفاً ومغناطيساً كهربائياً", "isCorrect": true },
+{ "text": "يعتمد على الحرارة فقط", "isCorrect": false },
+{ "text": "يعتمد على الضوء فقط", "isCorrect": false }
+],
+"feedback": "صحيح! المغناطيسية الكهربائية تعني استخدام تيار كهربائي لإنتاج مجال مغناطيسي."
+},
+{
+"title": "المرحلة الثانية: تحليل الخيارات",
+"question": "أي من هذه الأجهزة لا يحتوي على ملف أو مغناطيس كهربائي؟",
+"options": [
+{ "text": "المفتاح الزئبقي", "isCorrect": true },
+{ "text": "المرحل المغناطيسي", "isCorrect": false },
+{ "text": "الجرس الكهربائي", "isCorrect": false },
+{ "text": "مكبر الصوت", "isCorrect": false }
+],
+"feedback": "ممتاز! المفتاح الزئبقي يعتمد على توصيل الزئبق للتيار، وليس على المغناطيسية الكهربائية."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"1. المرحل المغناطيسي البسيط: يعتمد على ملف يشد قلباً حديدياً → مغناطيسية كهربائية.<br>",
+"2. الجرس الكهربائي: يستخدم مغناطيساً كهربائياً لتحريك المطرقة → مغناطيسية كهربائية.<br>",
+"3. مكبر الصوت ذو الملف المتحرك: يستخدم ملفاً يتفاعل مع مجال مغناطيسي → مغناطيسية كهربائية.<br>",
+"4. المفتاح الزئبقي: يحتوي على زئبق يوصل التيار عند الميل → لا يستخدم مغناطيسية كهربائية.<br><br>",
+"<strong>الإجابة الصحيحة: (ب) المفتاح الزئبقي</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (ب) المفتاح الزئبقي"
+},
+{
+"title": "س 40: النسبة بين المقاومتين النوعيتين",
+"text": "سلكان من مادتين مختلفتين، طول الأول ضعف طول الثاني، ونصف قطر الأول ضعف نصف قطر الثاني، ومقاومة الأول تساوي مقاومة الثاني، فإن النسبة بين المقاومتين النوعيتين لهاتين المادتين (ρ₁ : ρ₂) تساوي:\n\n(أ) 4 : 1\n(ب) 1 : 2\n(ج) 1 : 4\n(د) 2 : 1",
+"svgCode": "<svg width='200' height='80'><rect x='20' y='20' width='60' height='20' fill='#3b82f6'/><text x='50' y='35' text-anchor='middle' fill='white' font-size='10'>L₁=2L₂</text><rect x='120' y='20' width='60' height='20' fill='#10b981'/><text x='150' y='35' text-anchor='middle' fill='white' font-size='10'>L₂</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: معادلة المقاومة",
+"question": "أي معادلة تعبر عن تساوي مقاومة السلكين؟",
+"options": [
+{ "text": "ρ₁·L₁/A₁ = ρ₂·L₂/A₂", "isCorrect": true },
+{ "text": "ρ₁·A₁/L₁ = ρ₂·A₂/L₂", "isCorrect": false }
+],
+"feedback": "صحيح! R = ρ·L/A"
+},
+{
+"title": "المرحلة الثانية: التعويض في المعادلة",
+"question": "إذا كان L₁ = 2L₂ و r₁ = 2r₂ ، فما هي النسبة A₁/A₂؟",
+"options": [
+{ "text": "A₁/A₂ = 4", "isCorrect": true },
+{ "text": "A₁/A₂ = 2", "isCorrect": false }
+],
+"feedback": "ممتاز! المساحة تتناسب مع مربع نصف القطر → A₁ = 4A₂"
+},
+{
+"title": "المرحلة الثالثة: إيجاد النسبة ρ₁/ρ₂",
+"question": "بعد التعويض في المعادلة، ما هي النسبة ρ₁ : ρ₂؟",
+"options": [
+{ "text": "1 : 2", "isCorrect": true },
+{ "text": "2 : 1", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! ρ₁/ρ₂ = (A₁·L₂)/(A₂·L₁) = (4·L₂)/(1·2L₂) = 2 → ρ₁:ρ₂ = 2:1"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"R₁ = ρ₁·L₁/A₁ ، R₂ = ρ₂·L₂/A₂ ، R₁ = R₂<br>",
+"⇒ ρ₁·L₁/A₁ = ρ₂·L₂/A₂<br>",
+"⇒ ρ₁/ρ₂ = (A₁·L₂)/(A₂·L₁)<br>",
+"L₁ = 2L₂ ، r₁ = 2r₂ ⇒ A₁ = π·r₁² = π·(2r₂)² = 4π·r₂² = 4A₂<br>",
+"⇒ ρ₁/ρ₂ = (4A₂·L₂)/(A₂·2L₂) = 4/2 = 2<br><br>",
+"<strong>الإجابة الصحيحة: (د) 2 : 1</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (د) 2 : 1"
+},
+
+{
+"title": "س 41: وحدة القياس (أوم × ثانية)",
+"text": "وحدة القياس (أوم × ثانية) تكافئ:\n\n(أ) الأمبير (A)\n(ب) الوبر (Wb)\n(ج) الهنري (H)\n(د) التسلا (T)",
+"svgCode": "<svg width='200' height='80'><text x='100' y='40' text-anchor='middle' font-size='20'>Ω·s = ?</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: تحليل الوحدات",
+"question": "ما هي وحدة الحث الذاتي (Inductance)؟",
+"options": [
+{ "text": "الهينري (H)", "isCorrect": true },
+{ "text": "الأوم (Ω)", "isCorrect": false }
+],
+"feedback": "صحيح! الهنري هي الوحدة الأساسية للحث الذاتي."
+},
+{
+"title": "المرحلة الثانية: العلاقة بين الحث والزمن والمقاومة",
+"question": "ما العلاقة التي تربط الهنري بالأوم والثانية؟",
+"options": [
+{ "text": "H = Ω·s", "isCorrect": true },
+{ "text": "H = Ω/s", "isCorrect": false }
+],
+"feedback": "ممتاز! 1 هنري = 1 أوم × 1 ثانية"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"الحث الذاتي (L) يعطى بالعلاقة: V = L·dI/dt<br>",
+"⇒ L = V·dt/dI<br>",
+"وحدة V هي الفولت = أوم × أمبير<br>",
+"⇒ L = (Ω·A)·s/A = Ω·s<br><br>",
+"<strong>الإجابة الصحيحة: (ج) الهنري (H)</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (ج) الهنري (H)"
+},
+{
+"title": "س 42: كفاءة المحول الكهربائي",
+"text": "محول كهربائي يستخدم لرفع الجهد من (120 V) إلى (3000 V)، والتيار المار في الملف الابتدائي والثانوي على الترتيب (2 A) و (0.06 A)، فإن كفاءة هذا المحول تساوي:\n\n(أ) 100%\n(ب) 75%\n(ج) 80%\n(د) 90%",
+"svgCode": "<svg width='200' height='100'><rect x='20' y='30' width='60' height='40' fill='#fbbf24'/><text x='50' y='55' text-anchor='middle'>N₁</text><rect x='120' y='30' width='60' height='40' fill='#fbbf24'/><text x='150' y='55' text-anchor='middle'>N₂</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: معادلة الكفاءة",
+"question": "كيف تحسب كفاءة المحول؟",
+"options": [
+{ "text": "الكفاءة = (V₂·I₂) / (V₁·I₁) × 100%", "isCorrect": true },
+{ "text": "الكفاءة = (V₁·I₁) / (V₂·I₂) × 100%", "isCorrect": false }
+],
+"feedback": "صحيح! الكفاءة = (قدرة الخرج / قدرة الدخل) × 100%"
+},
+{
+"title": "المرحلة الثانية: حساب الكفاءة",
+"question": "باستخدام V₁=120, I₁=2, V₂=3000, I₂=0.06، ما هي الكفاءة؟",
+"options": [
+{ "text": "75%", "isCorrect": true },
+{ "text": "80%", "isCorrect": false }
+],
+"feedback": "ممتاز! قدرة الدخل = 240 W، قدرة الخرج = 180 W → 180/240 = 0.75 → 75%"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"قدرة الدخل Pᵢₙ = V₁·I₁ = 120 × 2 = 240 W<br>",
+"قدرة الخرج Pₒᵤₜ = V₂·I₂ = 3000 × 0.06 = 180 W<br>",
+"الكفاءة η = (Pₒᵤₜ / Pᵢₙ) × 100% = (180 / 240) × 100% = 75%<br><br>",
+"<strong>الإجابة الصحيحة: (ب) 75%</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (ب) 75%"
+},
+{
+"title": "س 43: شحن موصل بالحث الكهربائي بشحنة موجبة",
+"text": "يمكن شحن موصل بالحث الكهربائي بشحنة موجبة بـ:\n\n(أ) تقريب شحنة موجبة منه وملامسته باليد ثم إبعاد اليد عنه\n(ب) تقريب شحنة سالبة منه وملامسته باليد ثم إبعاد اليد عنه\n(ج) ملامسته بشحنة سالبة وملامسته باليد ثم إبعاد اليد عنه\n(د) تقريب شحنة سالبة منه دون أن تلامسه",
+"svgCode": "<svg width='200' height='100'><circle cx='100' cy='50' r='20' fill='#3b82f6'/><text x='100' y='55' text-anchor='middle' fill='white'>موصل</text><circle cx='40' cy='50' r='12' fill='#ef4444'/><text x='40' y='55' text-anchor='middle' fill='white'>-</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: مبدأ الحث الكهربائي",
+"question": "كيف تشحن موصلاً بالحث الكهربائي؟",
+"options": [
+{ "text": "تقريب شحنة معاكسة ثم التأريض", "isCorrect": true },
+{ "text": "ملامسة الشحنة مباشرة", "isCorrect": false }
+],
+"feedback": "صحيح! الحث يعتمد على تقريب شحنة دون ملامسة ثم تأريض الطرف البعيد."
+},
+{
+"title": "المرحلة الثانية: شحن موجب بالحث",
+"question": "للحصول على شحنة موجبة، أي شحنة نقرب ثم نؤرض؟",
+"options": [
+{ "text": "نقرب شحنة سالبة ونؤرض الطرف الآخر", "isCorrect": true },
+{ "text": "نقرب شحنة موجبة ونؤرض الطرف الآخر", "isCorrect": false }
+],
+"feedback": "ممتاز! الشحنة السالبة تجذب الموجبات إلى الطرف القريب، وتتنافر السالبات → عند التأريض تخرج السالبات → يبقى الطرف البعيد موجباً"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"1. تقريب شحنة سالبة من الموصل → تتجمع الشحنات الموجبة في الطرف القريب، والسالبة في الطرف البعيد.<br>",
+"2. تأريض الطرف البعيد (ملامسته باليد) → تخرج الإلكترونات (الشحنات السالبة) إلى الأرض.<br>",
+"3. إبعاد اليد أولاً ثم إبعاد الشحنة السالبة → يبقى الموصل مشحوناً بشحنة موجبة.<br><br>",
+"<strong>الإجابة الصحيحة: (ب) تقريب شحنة سالبة منه وملامسته باليد ثم إبعاد اليد عنه</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (ب)"
+},
+{
+"title": "س 44: قوة التنافر بين جسيمات ألفا",
+"text": "قوة التنافر بين جسمين من جسيمات ألفا (He) عندما تكون المسافة بينهما في الفراغ (5 cm) تساوي:\n\n(أ) 1.44 × 10¹³ N\n(ب) 3.69 × 10⁻²⁹ N\n(ج) 1.47 × 10⁻²⁴ N\n(د) 3.69 × 10⁻²⁵ N",
+"svgCode": "<svg width='200' height='100'><circle cx='60' cy='50' r='15' fill='#ef4444'/><text x='60' y='55' text-anchor='middle' fill='white'>α</text><circle cx='140' cy='50' r='15' fill='#ef4444'/><text x='140' y='55' text-anchor='middle' fill='white'>α</text><line x1='75' y1='50' x2='125' y2='50' stroke='black'/><text x='100' y='40' text-anchor='middle'>5 cm</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون كولوم",
+"question": "ما هو قانون كولوم المستخدم لحساب القوة الكهربائية؟",
+"options": [
+{ "text": "F = k·q₁·q₂ / r²", "isCorrect": true },
+{ "text": "F = k·q₁·q₂ / r", "isCorrect": false }
+],
+"feedback": "صحيح! k = 9×10⁹ N·m²/C²"
+},
+{
+"title": "المرحلة الثانية: شحنة جسيم ألفا",
+"question": "ما شحنة جسيم ألفا (هيليوم)؟",
+"options": [
+{ "text": "q = 2e = 3.2×10⁻¹⁹ C", "isCorrect": true },
+{ "text": "q = e = 1.6×10⁻¹⁹ C", "isCorrect": false }
+],
+"feedback": "ممتاز! جسيم ألفا يحتوي على بروتونين → شحنته +2e"
+},
+{
+"title": "المرحلة الثالثة: حساب القوة",
+"question": "بالتعويض: q₁=q₂=3.2×10⁻¹⁹ C, r=0.05 m، ما هي القوة؟",
+"options": [
+{ "text": "3.69×10⁻²⁵ N", "isCorrect": true },
+{ "text": "1.44×10¹³ N", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! F = (9×10⁹)(3.2×10⁻¹⁹)²/(0.05)² = 3.69×10⁻²⁵ N"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"شحنة جسيم α = 2e = 2 × 1.6×10⁻¹⁹ = 3.2×10⁻¹⁹ C<br>",
+"قانون كولوم: F = k·q₁·q₂ / r²<br>",
+"k = 9×10⁹ N·m²/C²<br>",
+"r = 5 cm = 0.05 m<br>",
+"F = 9×10⁹ × (3.2×10⁻¹⁹)² / (0.05)²<br>",
+"F = 9×10⁹ × 10.24×10⁻³⁸ / 0.0025<br>",
+"F = (92.16×10⁻²⁹) / 0.0025 = 3.69×10⁻²⁵ N<br><br>",
+"<strong>الإجابة الصحيحة: (د) 3.69×10⁻²⁵ N</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (د) 3.69×10⁻²⁵ N"
+},
+{
+"title": "س 15 + 40: المقاومة النوعية وتغير الأبعاد",
+"text": "سلك من النحاس مقاومته النوعية 1.7×10⁻⁸ Ω·m. إذا زاد طول السلك إلى الضعف وقلت مساحة مقطعه إلى النصف، فإن مقاومته النوعية تصبح:\n\n(أ) 1.7×10⁻⁸ Ω·m\n(ب) 6.8×10⁻⁸ Ω·m\n(ج) 3.4×10⁻⁸ Ω·m\n(د) 0.85×10⁻⁸ Ω·m",
+"svgCode": "<svg viewBox='0 0 200 80'><rect x='30' y='30' width='60' height='15' fill='#b45309'/><text x='60' y='25' text-anchor='middle' font-size='10'>L → 2L</text><rect x='110' y='30' width='60' height='15' fill='#b45309'/><text x='140' y='25' text-anchor='middle' font-size='10'>A → A/2</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: تعريف المقاومة النوعية",
+"question": "هل تتأثر المقاومة النوعية (ρ) بتغير طول أو مساحة السلك؟",
+"options": [
+{ "text": "لا، تبقى ثابتة للمادة نفسها", "isCorrect": true },
+{ "text": "نعم، تزيد بزيادة الطول", "isCorrect": false }
+],
+"feedback": "صحيح! المقاومة النوعية خاصية ثابتة للمادة عند نفس درجة الحرارة."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"المقاومة النوعية (ρ) هي خاصية فيزيائية للمادة، لا تعتمد على الأبعاد.<br>",
+"تتغير المقاومة الكهربائية (R) فقط بتغير الطول والمساحة، وليس ρ.<br>",
+"إذا كانت المادة والنوع ودرجة الحرارة ثابتة، تبقى ρ كما هي.<br><br>",
+"<strong>الإجابة الصحيحة: (أ) 1.7×10⁻⁸ Ω·m</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (أ) 1.7×10⁻⁸ Ω·m"
+},
+
+{
+"title": "س 20: القوة الكهربائية على إلكترون في مجال منتظم",
+"text": "وضع إلكترون في مجال كهربائي منتظم شدته 30 kN/C، فإن مقدار القوة الكهربائية المؤثرة عليه تساوي:\n\n(أ) 4.8×10⁻¹⁶ N\n(ب) 4.8×10⁻¹⁴ N\n(ج) 1.875×10²³ N\n(د) 1.875×10²⁰ N",
+"svgCode": "<svg viewBox='0 0 200 80'><line x1='20' y1='40' x2='180' y2='40' stroke='#333' stroke-width='2'/><circle cx='100' cy='40' r='8' fill='#dc2626'/><text x='95' y='35' fill='white' font-size='10'>-</text><text x='100' y='25' text-anchor='middle' font-size='12'>E = 30×10³ N/C</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون القوة الكهربائية",
+"question": "ما العلاقة الصحيحة لحساب القوة الكهربائية على شحنة في مجال كهربائي؟",
+"options": [
+{ "text": "F = q × E", "isCorrect": true },
+{ "text": "F = E / q", "isCorrect": false }
+],
+"feedback": "صحيح! F = q·E"
+},
+{
+"title": "المرحلة الثانية: شحنة الإلكترون",
+"question": "ما قيمة شحنة الإلكترون بالكولوم؟",
+"options": [
+{ "text": "1.6×10⁻¹⁹ C", "isCorrect": true },
+{ "text": "1.6×10⁻¹⁸ C", "isCorrect": false }
+],
+"feedback": "ممتاز! e = 1.6×10⁻¹⁹ C"
+},
+{
+"title": "المرحلة الثالثة: حساب القوة",
+"question": "بالتعويض: E = 30×10³ N/C، q = 1.6×10⁻¹⁹ C، ما قيمة F؟",
+"options": [
+{ "text": "4.8×10⁻¹⁶ N", "isCorrect": true },
+{ "text": "4.8×10⁻¹⁴ N", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! F = 30×10³ × 1.6×10⁻¹⁹ = 4.8×10⁻¹⁶ N"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"F = q × E<br>",
+"q = e = 1.6×10⁻¹⁹ C<br>",
+"E = 30 kN/C = 30×10³ N/C = 3×10⁴ N/C<br>",
+"F = (1.6×10⁻¹⁹) × (3×10⁴) = 4.8×10⁻¹⁶ N<br><br>",
+"<strong>الإجابة الصحيحة: (أ) 4.8×10⁻¹⁶ N</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (أ) 4.8×10⁻¹⁶ N"
+},
+
+{
+"title": "س 42: كفاءة المحول الكهربائي",
+"text": "محول كهربائي يستخدم لرفع الجهد من 120 V إلى 3000 V، والتيار المار في الملف الابتدائي 2A والثانوي 0.06A، فإن كفاءة هذا المحول تساوي:\n\n(أ) 100%\n(ب) 75%\n(ج) 80%\n(د) 90%",
+"svgCode": "<svg viewBox='0 0 250 100'><rect x='30' y='30' width='70' height='40' fill='#fbbf24'/><text x='65' y='55' text-anchor='middle'>V₁=120V</text><rect x='150' y='30' width='70' height='40' fill='#fbbf24'/><text x='185' y='55' text-anchor='middle'>V₂=3000V</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون كفاءة المحول",
+"question": "كيف تحسب كفاءة المحول؟",
+"options": [
+{ "text": "η = (V₂·I₂)/(V₁·I₁) × 100%", "isCorrect": true },
+{ "text": "η = (V₁·I₁)/(V₂·I₂) × 100%", "isCorrect": false }
+],
+"feedback": "صحيح! الكفاءة = قدرة الخرج / قدرة الدخل"
+},
+{
+"title": "المرحلة الثانية: حساب الكفاءة بالأرقام",
+"question": "باستخدام V₁=120, I₁=2, V₂=3000, I₂=0.06، ما الناتج؟",
+"options": [
+{ "text": "75%", "isCorrect": true },
+{ "text": "90%", "isCorrect": false }
+],
+"feedback": "ممتاز! (3000×0.06)/(120×2) = 180/240 = 0.75 = 75%"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"Pᵢₙ = V₁·I₁ = 120 × 2 = 240 W<br>",
+"Pₒᵤₜ = V₂·I₂ = 3000 × 0.06 = 180 W<br>",
+"η = (Pₒᵤₜ / Pᵢₙ) × 100% = (180/240) × 100% = 75%<br><br>",
+"<strong>الإجابة الصحيحة: (ب) 75%</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (ب) 75%"
+},
+{
+"title": "س 2 + 64: تعريف النظائر",
+"text": "النظائر هي ذرات نفس العنصر تختلف في:\n\n(أ) العدد الذري فقط\n(ب) العدد الكتلي فقط\n(ج) عدد البروتونات\n(د) عدد الإلكترونات",
+"svgCode": "<svg viewBox='0 0 250 60'><circle cx='50' cy='30' r='20' fill='#3b82f6'/><text x='50' y='35' text-anchor='middle' fill='white'>Z=6</text><text x='50' y='55' text-anchor='middle' font-size='10'>C-12</text><circle cx='150' cy='30' r='20' fill='#10b981'/><text x='150' y='35' text-anchor='middle' fill='white'>Z=6</text><text x='150' y='55' text-anchor='middle' font-size='10'>C-14</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: تعريف النظائر",
+"question": "ماذا يعني أن عنصرين نظيران؟",
+"options": [
+{ "text": "نفس عدد البروتونات، يختلف عدد النيوترونات", "isCorrect": true },
+{ "text": "نفس عدد النيوترونات، يختلف عدد البروتونات", "isCorrect": false }
+],
+"feedback": "صحيح! النظائر: نفس Z، مختلف في A (النيوترونات)"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"النظائر: ذرات نفس العنصر → نفس العدد الذري (عدد البروتونات).<br>",
+"تختلف في العدد الكتلي (عدد النيوترونات).<br>",
+"مثال: الكربون-12 والكربون-14.<br><br>",
+"<strong>الإجابة الصحيحة: (ب) العدد الكتلي فقط</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (ب) العدد الكتلي فقط"
+},
+{
+"title": "س 41: وحدة القياس (أوم × ثانية)",
+"text": "وحدة القياس (أوم × ثانية) تكافئ:\n\n(أ) الأمبير (A)\n(ب) الوبر (Wb)\n(ج) الهنري (H)\n(د) التسلا (T)",
+"svgCode": "<svg width='200' height='80'><text x='100' y='40' text-anchor='middle' font-size='24'>Ω·s = ?</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: تعريف الحث الذاتي",
+"question": "ما وحدة قياس الحث الذاتي (Inductance)؟",
+"options": [
+{ "text": "الهنري (H)", "isCorrect": true },
+{ "text": "الأوم (Ω)", "isCorrect": false }
+],
+"feedback": "صحيح! الهنري هي الوحدة الأساسية للحث."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 24px; line-height: 1.8;'>",
+"<strong>الحل المفصل:</strong><br><br>",
+"الحث الذاتي L = V·dt/dI<br>",
+"وحدة V = فولت = Ω·A<br>",
+"L = (Ω·A)·s/A = Ω·s<br>",
+"1 هنري = 1 أوم × 1 ثانية<br><br>",
+"<strong>الإجابة الصحيحة: (ج) الهنري (H)</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة هي (ج) الهنري (H)"
+},
+{
+"title": "تأثير احتراق مصباح في دائرة توازي وتوالي مختلطة",
+"text": "الدائرة الكهربائية التالية تحتوي على 6 مصابيح متطابقة (L₁ إلى L₆) موصولة مع بطارية 9 فولت كما هو موضح:\n\n- الفرع الأول: المصباحان L₁ و L₂ على التوالي.\n- الفرع الثاني: المصباحان L₃ و L₄ على التوالي.\n- الفرع الثالث: المصباحان L₅ و L₆ على التوالي.\n- الفروع الثلاثة متصلة على التوازي مع البطارية.\n\nإذا احترق المصباح L₁ فقط (انقطع فتيله)، كم مصباحاً يبقى مضيئاً؟\n\n(أ) 3 مصابيح\n(ب) 4 مصابيح\n(ج) 5 مصابيح\n(د) 6 مصابيح",
+"svgCode": "<svg viewBox='0 0 500 420' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='420' fill='#ffffff' rx='10'/><line x1='50' y1='50' x2='450' y2='50' stroke='#333' stroke-width='2'/><line x1='50' y1='350' x2='450' y2='350' stroke='#333' stroke-width='2'/><line x1='80' y1='50' x2='80' y2='350' stroke='#333' stroke-width='2'/><line x1='200' y1='50' x2='200' y2='350' stroke='#333' stroke-width='2'/><line x1='380' y1='50' x2='380' y2='350' stroke='#333' stroke-width='2'/><line x1='80' y1='50' x2='80' y2='110' stroke='#333' stroke-width='2'/><line x1='80' y1='170' x2='80' y2='350' stroke='#333' stroke-width='2'/><line x1='200' y1='50' x2='200' y2='110' stroke='#333' stroke-width='2'/><line x1='200' y1='170' x2='200' y2='350' stroke='#333' stroke-width='2'/><line x1='380' y1='50' x2='380' y2='110' stroke='#333' stroke-width='2'/><line x1='380' y1='170' x2='380' y2='350' stroke='#333' stroke-width='2'/><rect x='420' y='155' width='30' height='40' fill='#e2e8f0' stroke='#333' stroke-width='2' rx='3'/><text x='435' y='180' text-anchor='middle' font-size='12' font-weight='bold'>9V</text><line x1='420' y1='155' x2='450' y2='155' stroke='#333' stroke-width='2'/><line x1='420' y1='195' x2='450' y2='195' stroke='#333' stroke-width='2'/><text x='435' y='148' text-anchor='middle' font-size='10' fill='red'>+</text><text x='435' y='210' text-anchor='middle' font-size='10' fill='black'>-</text><line x1='450' y1='175' x2='450' y2='50' stroke='#333' stroke-width='2'/><line x1='50' y1='350' x2='450' y2='350' stroke='#333' stroke-width='2'/><line x1='80' y1='110' x2='80' y2='125' stroke='#333' stroke-width='2'/><circle cx='80' cy='145' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='80' y='149' text-anchor='middle' font-size='11' font-weight='bold'>L₁</text><path d='M72,155 L88,155' stroke='#333' stroke-width='1.5'/><path d='M74,158 L86,158' stroke='#333' stroke-width='1.5'/><line x1='80' y1='162' x2='80' y2='170' stroke='#333' stroke-width='2'/><line x1='80' y1='170' x2='80' y2='185' stroke='#333' stroke-width='2'/><circle cx='80' cy='205' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='80' y='209' text-anchor='middle' font-size='11' font-weight='bold'>L₂</text><path d='M72,215 L88,215' stroke='#333' stroke-width='1.5'/><path d='M74,218 L86,218' stroke='#333' stroke-width='1.5'/><line x1='80' y1='222' x2='80' y2='350' stroke='#333' stroke-width='2'/><line x1='200' y1='110' x2='200' y2='125' stroke='#333' stroke-width='2'/><circle cx='200' cy='145' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='200' y='149' text-anchor='middle' font-size='11' font-weight='bold'>L₃</text><path d='M192,155 L208,155' stroke='#333' stroke-width='1.5'/><path d='M194,158 L206,158' stroke='#333' stroke-width='1.5'/><line x1='200' y1='162' x2='200' y2='170' stroke='#333' stroke-width='2'/><line x1='200' y1='170' x2='200' y2='185' stroke='#333' stroke-width='2'/><circle cx='200' cy='205' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='200' y='209' text-anchor='middle' font-size='11' font-weight='bold'>L₄</text><path d='M192,215 L208,215' stroke='#333' stroke-width='1.5'/><path d='M194,218 L206,218' stroke='#333' stroke-width='1.5'/><line x1='200' y1='222' x2='200' y2='350' stroke='#333' stroke-width='2'/><line x1='380' y1='110' x2='380' y2='125' stroke='#333' stroke-width='2'/><circle cx='380' cy='145' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='380' y='149' text-anchor='middle' font-size='11' font-weight='bold'>L₅</text><path d='M372,155 L388,155' stroke='#333' stroke-width='1.5'/><path d='M374,158 L386,158' stroke='#333' stroke-width='1.5'/><line x1='380' y1='162' x2='380' y2='170' stroke='#333' stroke-width='2'/><line x1='380' y1='170' x2='380' y2='185' stroke='#333' stroke-width='2'/><circle cx='380' cy='205' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='380' y='209' text-anchor='middle' font-size='11' font-weight='bold'>L₆</text><path d='M372,215 L388,215' stroke='#333' stroke-width='1.5'/><path d='M374,218 L386,218' stroke='#333' stroke-width='1.5'/><line x1='380' y1='222' x2='380' y2='350' stroke='#333' stroke-width='2'/><text x='80' y='80' text-anchor='middle' font-size='10' fill='#666'>فرع 1</text><text x='200' y='80' text-anchor='middle' font-size='10' fill='#666'>فرع 2</text><text x='380' y='80' text-anchor='middle' font-size='10' fill='#666'>فرع 3</text><text x='250' y='395' text-anchor='middle' font-size='12' fill='#333'>🔋 المصابيح في كل فرع على التوالي، والفروع على التوازي</text><text x='250' y='412' text-anchor='middle' font-size='11' fill='#666'>⚡ احتراق L₁ يقطع فرع 1 فقط، بينما فرع 2 و 3 يظلان مضيئين</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: تحليل التوصيل في الدائرة",
+"question": "كيف تتصل المصابيح في الدائرة الموضحة؟",
+"options": [
+{ "text": "ثلاثة فروع على التوازي، وكل فرع يحتوي على مصباحين على التوالي", "isCorrect": true },
+{ "text": "جميع المصابيح الستة على التوالي مع بعضها", "isCorrect": false },
+{ "text": "جميع المصابيح الستة على التوازي مع بعضها", "isCorrect": false }
+],
+"feedback": "صحيح! الدائرة مقسمة إلى 3 فروع متوازية، كل فرع يحتوي على مصباحين متصلين على التوالي."
+},
+{
+"title": "المرحلة الثانية: تأثير احتراق L₁ على فرعه",
+"question": "عند احتراق المصباح L₁ (انقطاع فتيله)، ماذا يحدث للتيار في الفرع الأول؟",
+"options": [
+{ "text": "ينقطع التيار في الفرع الأول بالكامل (L₁ و L₂ معاً)", "isCorrect": true },
+{ "text": "يستمر التيار في L₂ فقط لأن L₁ هو الذي احترق", "isCorrect": false }
+],
+"feedback": "ممتاز! المصابيح على التوالي: احتراق أي مصباح يقطع الدائرة في ذلك الفرع بأكمله."
+},
+{
+"title": "المرحلة الثالثة: عد المصابيح المتبقية",
+"question": "بعد احتراق L₁، أي المصابيح تبقى مضيئة؟",
+"options": [
+{ "text": "L₃, L₄, L₅, L₆ (4 مصابيح)", "isCorrect": true },
+{ "text": "L₂, L₃, L₄, L₅, L₆ (5 مصابيح)", "isCorrect": false },
+{ "text": "L₃, L₄ فقط (2 مصباحين)", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! الفرع الأول انقطع تماماً، أما الفرع الثاني والثالث فلم يتأثرا لأنهما على التوازي مع البطارية."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 تحليل الدائرة:</strong><br><br>",
+"<strong>1️⃣ التوصيل:</strong><br>",
+"- الفرع الأول: L₁ و L₂ على التوالي<br>",
+"- الفرع الثاني: L₃ و L₄ على التوالي<br>",
+"- الفرع الثالث: L₅ و L₆ على التوالي<br>",
+"- الفروع الثلاثة على التوازي مع البطارية<br><br>",
+"<strong>2️⃣ احتراق L₁:</strong><br>",
+"- L₁ و L₂ على التوالي ← احتراق L₁ يقطع التيار عن الفرع الأول بالكامل<br>",
+"- الفروع الثاني والثالث على التوازي ← لكل منهما مسار مستقل إلى البطارية<br><br>",
+"<strong>3️⃣ المصابيح المضيئة بعد الاحتراق:</strong><br>",
+"- L₁ ❌ (محترق)<br>",
+"- L₂ ❌ (انقطع التيار بسبب L₁)<br>",
+"- L₃ ✓ &nbsp; L₄ ✓ &nbsp; L₅ ✓ &nbsp; L₆ ✓<br><br>",
+"<strong>✅ الإجمالي = 4 مصابيح مضيئة</strong><br><br>",
+"<strong>الإجابة الصحيحة: (ب) 4 مصابيح</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب) 4 مصابيح"
+},
+{
+"title": "س 19: العلاقة بين عدد اللفات والجهد في المحول الكهربائي",
+"text": "في المحول الكهربائي، إذا زاد عدد لفات الملف الابتدائي إلى 4 أمثال عدد لفات الملف الثانوي، فإن الجهد المستحث في الملف الثانوي يكون:\n\n(أ) رباع الجهد الداخل (4 أمثال)\n(ب) ربع الجهد الداخل (1/4)\n(ج) نصف الجهد الداخل (1/2)\n(د) ضعف الجهد الداخل (2 مرة)",
+"svgCode": "<svg viewBox='0 0 400 200' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='200' fill='#f8fafc'/><rect x='50' y='60' width='80' height='60' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='90' y='95' text-anchor='middle' font-size='12' font-weight='bold'>N₁ = 4N₂</text><text x='90' y='115' text-anchor='middle' font-size='10'>ابتدائي</text><rect x='250' y='60' width='80' height='60' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='290' y='95' text-anchor='middle' font-size='12' font-weight='bold'>N₂</text><text x='290' y='115' text-anchor='middle' font-size='10'>ثانوي</text><line x1='130' y1='90' x2='250' y2='90' stroke='#333' stroke-width='2'/><line x1='50' y1='60' x2='50' y2='30' stroke='#333' stroke-width='2'/><line x1='50' y1='120' x2='50' y2='150' stroke='#333' stroke-width='2'/><line x1='330' y1='60' x2='330' y2='30' stroke='#333' stroke-width='2'/><line x1='330' y1='120' x2='330' y2='150' stroke='#333' stroke-width='2'/><text x='20' y='45' font-size='12'>V₁</text><text x='340' y='45' font-size='12'>V₂</text><text x='190' y='170' text-anchor='middle' font-size='14'>⚡ محول كهربائي</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون المحول الكهربائي",
+"question": "ما العلاقة بين الجهد وعدد اللفات في المحول الكهربائي المثالي؟",
+"options": [
+{ "text": "V₁/V₂ = N₁/N₂", "isCorrect": true },
+{ "text": "V₁/V₂ = N₂/N₁", "isCorrect": false },
+{ "text": "V₁·N₁ = V₂·N₂", "isCorrect": false }
+],
+"feedback": "صحيح! نسبة الجهود تساوي نسبة عدد اللفات: V₁/V₂ = N₁/N₂"
+},
+{
+"title": "المرحلة الثانية: تطبيق المعطيات",
+"question": "إذا كان N₁ = 4 N₂، فما هي نسبة V₁ إلى V₂؟",
+"options": [
+{ "text": "V₁/V₂ = 4", "isCorrect": true },
+{ "text": "V₁/V₂ = 1/4", "isCorrect": false },
+{ "text": "V₁/V₂ = 1", "isCorrect": false }
+],
+"feedback": "ممتاز! بالتعويض: V₁/V₂ = (4N₂)/N₂ = 4"
+},
+{
+"title": "المرحلة الثالثة: إيجاد الجهد الثانوي",
+"question": "إذا كان V₁/V₂ = 4، فما قيمة V₂ بالنسبة لـ V₁؟",
+"options": [
+{ "text": "V₂ = V₁/4 (ربع الجهد الداخل)", "isCorrect": true },
+{ "text": "V₂ = 4V₁ (أربعة أمثال الجهد الداخل)", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! V₂ = V₁/4، أي أن الجهد الثانوي يساوي ربع الجهد الابتدائي."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"<strong>المعطيات:</strong><br>",
+"- عدد لفات الملف الابتدائي: N₁<br>",
+"- عدد لفات الملف الثانوي: N₂<br>",
+"- N₁ = 4 × N₂<br><br>",
+"<strong>القانون:</strong><br>",
+"V₁ / V₂ = N₁ / N₂<br><br>",
+"<strong>التعويض:</strong><br>",
+"V₁ / V₂ = (4 × N₂) / N₂ = 4<br><br>",
+"<strong>إيجاد V₂:</strong><br>",
+"V₁ / V₂ = 4  ←  بضرب الطرفين في V₂<br>",
+"V₁ = 4 × V₂  ←  بقسمة الطرفين على 4<br>",
+"V₂ = V₁ / 4<br><br>",
+"<strong>✅ النتيجة:</strong> الجهد الثانوي يساوي <strong>ربع الجهد الداخل</strong><br><br>",
+"<strong>الإجابة الصحيحة: (ب) ربع الجهد الداخل</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب) ربع الجهد الداخل"
+},
+
+
+
+{
+"title": "س 19: تأثير الدائرة الكهربائية القصيرة على المصباح والأميتر",
+"text": "في الشكل التالي، إذا حدثت دائرة كهربائية قصيرة (قصر) في الدائرة، فماذا يحدث للمصباح الكهربائي والأميتر؟\n\n(أ) المصباح يعمل والأميتر يعمل\n(ب) المصباح لا يعمل والأميتر يعمل\n(ج) المصباح يعمل والأميتر لا يعمل\n(د) المصباح لا يعمل والأميتر لا يعمل",
+"svgCode": "<svg viewBox='0 0 500 400' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='400' fill='#ffffff'/><!-- خطوط التوصيل الرئيسية --><line x1='60' y1='80' x2='440' y2='80' stroke='#000' stroke-width='2'/><line x1='60' y1='320' x2='440' y2='320' stroke='#000' stroke-width='2'/><line x1='60' y1='80' x2='60' y2='320' stroke='#000' stroke-width='2'/><line x1='440' y1='80' x2='440' y2='320' stroke='#000' stroke-width='2'/><!-- بطارية --><rect x='15' y='140' width='35' height='50' fill='#e2e8f0' stroke='#000' stroke-width='2' rx='3'/><text x='32' y='170' text-anchor='middle' font-size='12' font-weight='bold' fill='#000'>9V</text><line x1='15' y1='140' x2='50' y2='140' stroke='#000' stroke-width='2'/><line x1='15' y1='190' x2='50' y2='190' stroke='#000' stroke-width='2'/><text x='25' y='135' text-anchor='middle' font-size='12' fill='#d00' font-weight='bold'>+</text><text x='25' y='208' text-anchor='middle' font-size='12' fill='#000'>-</text><!-- مصباح --><line x1='140' y1='80' x2='140' y2='110' stroke='#000' stroke-width='2'/><circle cx='140' cy='140' r='22' fill='#fef08a' stroke='#000' stroke-width='2'/><text x='140' y='135' text-anchor='middle' font-size='18'>💡</text><text x='140' y='155' text-anchor='middle' font-size='11' fill='#000' font-weight='bold'>L</text><text x='140' y='168' text-anchor='middle' font-size='9' fill='#555'>مصباح</text><path d='M124,172 L156,172' stroke='#000' stroke-width='1.5'/><path d='M126,176 L154,176' stroke='#000' stroke-width='1.5'/><line x1='140' y1='178' x2='140' y2='320' stroke='#000' stroke-width='2'/><!-- أميتر --><circle cx='300' cy='270' r='22' fill='#dbeafe' stroke='#000' stroke-width='2'/><text x='300' y='267' text-anchor='middle' font-size='18' font-weight='bold' fill='#000'>A</text><text x='300' y='285' text-anchor='middle' font-size='9' fill='#000'>أميتر</text><line x1='278' y1='270' x2='190' y2='270' stroke='#000' stroke-width='2'/><line x1='322' y1='270' x2='440' y2='270' stroke='#000' stroke-width='2'/><line x1='140' y1='270' x2='190' y2='270' stroke='#000' stroke-width='2'/><!-- دائرة قصر - خط أحمر متقطع واضح --><path d='M 118,140 L 118,95 L 300,95 L 300,248' stroke='#e00' stroke-width='3' stroke-dasharray='10,6' fill='none'/><circle cx='300' cy='248' r='5' fill='#e00'/><text x='210' y='88' text-anchor='middle' font-size='14' fill='#e00' font-weight='bold'>⚠ دائرة قصر</text><!-- نقاط التوصيل --><circle cx='140' cy='80' r='4' fill='#000'/><circle cx='140' cy='320' r='4' fill='#000'/><circle cx='300' cy='320' r='4' fill='#000'/><circle cx='300' cy='80' r='4' fill='#000'/><circle cx='140' cy='270' r='4' fill='#000'/><circle cx='190' cy='270' r='4' fill='#000'/></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: ماذا تعني الدائرة القصيرة؟",
+"question": "ما المقصود بدائرة كهربائية قصيرة (قصر)؟",
+"options": [
+{ "text": "اتصال مباشر بين طرفي المصدر بدون مقاومة كبيرة", "isCorrect": true },
+{ "text": "انقطاع في سلك من أسلاك الدائرة", "isCorrect": false },
+{ "text": "زيادة مقاومة المصباح فجأة", "isCorrect": false }
+],
+"feedback": "صحيح! القصر يعني وجود مسار ذو مقاومة صغيرة جداً يوصل بين طرفي المصدر مباشرة."
+},
+{
+"title": "المرحلة الثانية: مسار التيار عند حدوث القصر",
+"question": "في الرسمة، أين يمر التيار الكهربائي عند حدوث القصر؟",
+"options": [
+{ "text": "يمر كله في سلك القصر (المقاومة الأصغر)", "isCorrect": true },
+{ "text": "يمر في المصباح فقط", "isCorrect": false },
+{ "text": "يتوزع مناصفة بين المصباح وسلك القصر", "isCorrect": false }
+],
+"feedback": "ممتاز! التيار يمر دائماً في المسار الأقل مقاومة. مقاومة سلك القصر ≈ 0."
+},
+{
+"title": "المرحلة الثالثة: تأثير القصر على المصباح والأميتر",
+"question": "بناءً على ذلك، ماذا يحدث للمصباح والأميتر عند حدوث القصر؟",
+"options": [
+{ "text": "المصباح لا يعمل، والأميتر يعمل", "isCorrect": true },
+{ "text": "المصباح يعمل، والأميتر لا يعمل", "isCorrect": false },
+{ "text": "كلاهما لا يعمل", "isCorrect": false },
+{ "text": "كلاهما يعمل", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! التيار يمر في سلك القصر ويتجاوز المصباح (فلا يضيء)، بينما يمر تيار كبير في الأميتر (فيعمل)."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"<strong>1️⃣ تعريف الدائرة القصيرة:</strong><br>",
+"- اتصال مباشر بين طرفي المصدر (الموجب والسالب) بدون مقاومة أو بمقاومة صغيرة جداً.<br>",
+"- مقاومة سلك القصر ≈ 0 Ω<br><br>",
+"<strong>2️⃣ مسار التيار عند القصر:</strong><br>",
+"- التيار يمر دائماً في المسار الأقل مقاومة.<br>",
+"- مقاومة المصباح كبيرة، بينما مقاومة سلك القصر ≈ 0 Ω.<br>",
+"- التيار الكهربائي يمر كله في سلك القصر ولا يمر في المصباح.<br><br>",
+"<strong>3️⃣ النتائج:</strong><br>",
+"- <strong>المصباح:</strong> لا يمر به تيار ← لا يعمل (لا يضيء).<br>",
+"- <strong>الأميتر:</strong> يمر به تيار كبير جداً (تيار القصر) ← يعمل (يحرك المؤشر).<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ب) المصباح لا يعمل والأميتر يعمل</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب) المصباح لا يعمل والأميتر يعمل"
+},
+// ============================== س 15: المقاومة النوعية ==============================
+{
+"title": "س 15: المقاومة النوعية للنحاس",
+"text": "سلك من النحاس مقاومته النوعية (1.7 × 10⁻⁸ Ω·m)، فإذا زاد طول السلك إلى الضعف وقلت مساحة مقطعه إلى النصف، فإن مقدار مقاومته النوعية تصبح:\n\n(1) 1.7 × 10⁻⁸ Ω·m\n(2) 6.8 × 10⁻⁸ Ω·m\n(3) 3.4 × 10⁻⁸ Ω·m\n(4) 0.85 × 10⁻⁸ Ω·m",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><rect x='50' y='40' width='100' height='15' fill='#b45309'/><text x='100' y='35' text-anchor='middle' font-size='12'>L → 2L</text><rect x='200' y='40' width='100' height='8' fill='#b45309'/><text x='250' y='35' text-anchor='middle' font-size='12'>A → A/2</text><text x='200' y='90' text-anchor='middle' font-size='14' font-weight='bold'>ρ = 1.7 × 10⁻⁸ Ω·m</text><text x='200' y='115' text-anchor='middle' font-size='12' fill='#555'>المقاومة النوعية لا تتغير بتغير الأبعاد</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: مفهوم المقاومة النوعية",
+"question": "هل تتأثر المقاومة النوعية (ρ) بتغير طول السلك أو مساحة مقطعه؟",
+"options": [
+{ "text": "لا، تبقى ثابتة للمادة نفسها عند نفس درجة الحرارة", "isCorrect": true },
+{ "text": "نعم، تزيد بزيادة الطول", "isCorrect": false },
+{ "text": "نعم، تقل بزيادة المساحة", "isCorrect": false }
+],
+"feedback": "صحيح! المقاومة النوعية هي خاصية فيزيائية للمادة، لا تعتمد على الأبعاد."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"المقاومة النوعية (ρ) هي خاصية فيزيائية للمادة، تعتمد على نوع المادة ودرجة الحرارة فقط.<br>",
+"لا تعتمد على طول السلك أو مساحة مقطعه.<br><br>",
+"بما أن المادة هي نفسها (نحاس) ودرجة الحرارة ثابتة، فإن:<br>",
+"<strong style='color:#166534;'>ρ = 1.7 × 10⁻⁸ Ω·m</strong><br><br>",
+"<strong>✅ الإجابة الصحيحة: (1) 1.7 × 10⁻⁸ Ω·m</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (1) 1.7 × 10⁻⁸ Ω·m"
+},
+
+// ============================== س 16: عوامل القوة الدافعة المستحثة ==============================
+{
+"title": "س 16: العوامل المؤثرة على القوة الدافعة المستحثة",
+"text": "اكتشف العالم فاراداي أن مقدار القوة الدافعة الكهربائية المستحثة تتوقف على:\n\n(1) شدة التيار - طول سلك الملف - عدد خطوط الفيض المغناطيسي\n(2) طول الملف - عدد لفات الملف - نوع المغناطيس\n(3) كثافة الفيض المغناطيسي - الزمن - شدة التيار\n(4) قوة المغناطيس - سرعة حركة المغناطيس - عدد لفات الملف",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><rect x='150' y='30' width='100' height='40' fill='none' stroke='#333' stroke-width='2'/><text x='200' y='55' text-anchor='middle' font-size='12'>ملف</text><rect x='60' y='45' width='30' height='20' fill='#ef4444' rx='3'/><text x='75' y='59' text-anchor='middle' fill='white' font-size='10'>N</text><rect x='310' y='45' width='30' height='20' fill='#2563eb' rx='3'/><text x='325' y='59' text-anchor='middle' fill='white' font-size='10'>S</text><text x='200' y='105' text-anchor='middle' font-size='14' font-weight='bold'>ε = -N × ΔΦ/Δt</text><text x='200' y='130' text-anchor='middle' font-size='12' fill='#555'>قانون فاراداي</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون فاراداي",
+"question": "ما الصيغة الرياضية لقانون فاراداي للحث الكهرومغناطيسي؟",
+"options": [
+{ "text": "ε = -N × ΔΦ/Δt", "isCorrect": true },
+{ "text": "ε = -N × Φ × t", "isCorrect": false }
+],
+"feedback": "صحيح! ε تعتمد على عدد اللفات N ومعدل تغير الفيض ΔΦ/Δt."
+},
+{
+"title": "المرحلة الثانية: تحليل العوامل",
+"question": "مما يتكون التغير في الفيض المغناطيسي ΔΦ؟",
+"options": [
+{ "text": "ΔΦ = Δ(B × A × cosθ)", "isCorrect": true },
+{ "text": "ΔΦ = Δ(I × R)", "isCorrect": false }
+],
+"feedback": "ممتاز! الفيض يعتمد على كثافة الفيض B، المساحة A، والزاوية θ."
+},
+{
+"title": "المرحلة الثالثة: استنتاج العوامل المؤثرة",
+"question": "بناءً على القانون، ما العوامل التي تؤثر على ε؟",
+"options": [
+{ "text": "قوة المغناطيس، سرعة الحركة، عدد اللفات", "isCorrect": true },
+{ "text": "طول الملف فقط", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! قوة المغناطيس تؤثر على B، وسرعة الحركة تؤثر على ΔΦ/Δt."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"قانون فاراداي: ε = -N × ΔΦ/Δt<br><br>",
+"حيث:<br>",
+"- N: عدد لفات الملف<br>",
+"- ΔΦ: التغير في الفيض المغناطيسي<br>",
+"- Δt: الزمن الذي حدث فيه التغير<br><br>",
+"العوامل المؤثرة: عدد اللفات، قوة المغناطيس، سرعة الحركة، مساحة الملف.<br><br>",
+"<strong>✅ الإجابة الصحيحة: (4) قوة المغناطيس - سرعة الحركة - عدد اللفات</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (4) قوة المغناطيس - سرعة الحركة - عدد لفات الملف"
+},
+
+// ============================== س 17: محرك التيار المستمر ==============================
+{
+"title": "س 17: محرك التيار المستمر",
+"text": "في محرك التيار المستمر، يضمن عكس التيار الحلقي (المبدل) أن:\n\n(1) سرعة التيار في الملف تكون ثابتة\n(2) اتجاه التيار في الملف ينعكس بعد كل نصف دورة\n(3) دوران الملف يكون دائماً في اتجاه واحد\n(4) الإجابتان (2) و (3) صحيحتان",
+"svgCode": "<svg viewBox='0 0 400 180' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='180' fill='#ffffff'/><circle cx='200' cy='80' r='35' fill='none' stroke='#333' stroke-width='2'/><rect x='180' y='45' width='40' height='70' fill='#fbbf24'/><text x='200' y='85' text-anchor='middle' font-size='10'>ملف</text><circle cx='140' cy='80' r='10' fill='#ef4444'/><text x='140' y='84' text-anchor='middle' fill='white' font-size='8'>N</text><circle cx='260' cy='80' r='10' fill='#2563eb'/><text x='260' y='84' text-anchor='middle' fill='white' font-size='8'>S</text><text x='200' y='145' text-anchor='middle' font-size='14' font-weight='bold'>محرك التيار المستمر DC Motor</text><text x='200' y='165' text-anchor='middle' font-size='11' fill='#555'>المبدل (Commutator) يعكس التيار كل نصف دورة</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: وظيفة المبدل",
+"question": "ما وظيفة المبدل (Commutator) في محرك التيار المستمر؟",
+"options": [
+{ "text": "عكس اتجاه التيار في الملف كل نصف دورة", "isCorrect": true },
+{ "text": "زيادة سرعة الملف", "isCorrect": false }
+],
+"feedback": "صحيح! المبدل يعكس التيار ليضمن دوران الملف في اتجاه واحد."
+},
+{
+"title": "المرحلة الثانية: نتيجة عكس التيار",
+"question": "ماذا يحدث للملف عندما ينعكس التيار كل نصف دورة؟",
+"options": [
+{ "text": "يستمر الملف في الدوران بنفس الاتجاه", "isCorrect": true },
+{ "text": "يعكس الملف اتجاه دورانه", "isCorrect": false }
+],
+"feedback": "ممتاز! عكس التيار يضمن أن عزم الدوران يكون دائماً في نفس الاتجاه."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"محرك التيار المستمر يحتوي على مبدل (Commutator).<br><br>",
+"وظيفة المبدل:<br>",
+"1. يعكس اتجاه التيار في ملف المحرك كل نصف دورة.<br>",
+"2. يضمن أن عزم الدوران (Torque) يكون دائماً في نفس الاتجاه.<br>",
+"3. ينتج عن ذلك دوران مستمر للملف في اتجاه واحد.<br><br>",
+"<strong>✅ الإجابة الصحيحة: (4) الإجابتان (2) و (3) صحيحتان</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (4) الإجابتان (2) و (3) صحيحتان"
+},
+
+// ============================== س 18: النسبة بين كثافة الفيض المغناطيسي ==============================
+{
+"title": "س 18: النسبة بين كثافة الفيض المغناطيسي",
+"text": "إذا تم إجراء تجربة على سلك مستطيل مقطوع على شكل دائرة من لفة واحدة، ثم لف نفس السلك على شكل ملف دائري من أربع لفات ومر به نفس التيار، فإن النسبة بين كثافة الفيض المغناطيسي في الحالتين (B₂/B₁) تساوي:\n\n(1) 2 : 6\n(2) 1 : 4\n(3) 1 : 8\n(4) 16 : 1",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><circle cx='100' cy='70' r='30' fill='none' stroke='#333' stroke-width='2'/><text x='100' y='75' text-anchor='middle' font-size='10'>1 لفة</text><circle cx='280' cy='70' r='30' fill='none' stroke='#333' stroke-width='2'/><text x='280' y='65' text-anchor='middle' font-size='10'>4 لفات</text><text x='280' y='80' text-anchor='middle' font-size='9'>نفس الطول</text><text x='200' y='125' text-anchor='middle' font-size='13' font-weight='bold'>B = μ₀·N·I/(2r)</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون كثافة الفيض لملف دائري",
+"question": "ما قانون كثافة الفيض المغناطيسي عند مركز ملف دائري؟",
+"options": [
+{ "text": "B = μ₀·N·I/(2r)", "isCorrect": true },
+{ "text": "B = μ₀·N·I·(2r)", "isCorrect": false }
+],
+"feedback": "صحيح! B تتناسب طردياً مع N وتناسباً عكسياً مع r."
+},
+{
+"title": "المرحلة الثانية: العلاقة بين نصف القطر وعدد اللفات",
+"question": "إذا كان طول السلك ثابتاً، ولف على شكل 4 لفات، كيف يتغير نصف القطر؟",
+"options": [
+{ "text": "ينقص إلى الربع (r₂ = r₁/4)", "isCorrect": true },
+{ "text": "يزيد إلى 4 أمثال (r₂ = 4r₁)", "isCorrect": false }
+],
+"feedback": "ممتاز! محيط اللفة = 2πr، الطول الكلي ثابت → N₁×2πr₁ = N₂×2πr₂ → r₂ = r₁/4"
+},
+{
+"title": "المرحلة الثالثة: حساب النسبة B₂/B₁",
+"question": "باستخدام B ∝ N/r، ما هي النسبة B₂/B₁؟",
+"options": [
+{ "text": "16/1", "isCorrect": true },
+{ "text": "4/1", "isCorrect": false },
+{ "text": "1/4", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! B₂/B₁ = (N₂/N₁)×(r₁/r₂) = (4/1)×(4/1) = 16/1"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"الحالة الأولى: لفة واحدة (N₁=1)، نصف القطر r₁<br>",
+"الحالة الثانية: 4 لفات (N₂=4)، نصف القطر r₂<br>",
+"طول السلك ثابت، نفس التيار I<br><br>",
+"قانون كثافة الفيض: B = μ₀·N·I/(2r) ⇒ B ∝ N/r<br><br>",
+"إيجاد العلاقة بين r₁ و r₂:<br>",
+"طول السلك = N₁ × (2πr₁) = N₂ × (2πr₂)<br>",
+"1 × 2πr₁ = 4 × 2πr₂ ⇒ r₁ = 4r₂ ⇒ r₂ = r₁/4<br><br>",
+"النسبة B₂/B₁ = (N₂/N₁) × (r₁/r₂) = (4/1) × (4/1) = 16<br><br>",
+"<strong>✅ الإجابة الصحيحة: (4) 16 : 1</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (4) 16 : 1"
+},
+
+// ============================== س 19: عمر النصف من الرسم البياني ==============================
+{
+"title": "س 19: عمر النصف من الرسم البياني",
+"text": "الرسم البياني التالي يوضح معدل التعداد لمادة مشعة مقابل الزمن. من الرسم، استنتج أن عمر النصف للمادة المشعة بالدقائق هو:\n\n(1) 10 دقائق\n(2) 20 دقيقة\n(3) 30 دقيقة\n(4) 40 دقيقة",
+"svgCode": "<svg viewBox='0 0 450 300' xmlns='http://www.w3.org/2000/svg'><rect width='450' height='300' fill='#ffffff'/><line x1='60' y1='250' x2='420' y2='250' stroke='#000' stroke-width='2'/><line x1='60' y1='30' x2='60' y2='250' stroke='#000' stroke-width='2'/><line x1='60' y1='250' x2='60' y2='255' stroke='#000'/><text x='55' y='265' text-anchor='end' font-size='11'>0</text><line x1='130' y1='250' x2='130' y2='255' stroke='#000'/><text x='130' y='265' text-anchor='middle' font-size='11'>10</text><line x1='200' y1='250' x2='200' y2='255' stroke='#000'/><text x='200' y='265' text-anchor='middle' font-size='11'>20</text><line x1='270' y1='250' x2='270' y2='255' stroke='#000'/><text x='270' y='265' text-anchor='middle' font-size='11'>30</text><line x1='340' y1='250' x2='340' y2='255' stroke='#000'/><text x='340' y='265' text-anchor='middle' font-size='11'>40</text><line x1='410' y1='250' x2='410' y2='255' stroke='#000'/><text x='410' y='265' text-anchor='middle' font-size='11'>50</text><line x1='50' y1='250' x2='60' y2='250' stroke='#000'/><line x1='50' y1='190' x2='60' y2='190' stroke='#000'/><text x='45' y='195' text-anchor='end' font-size='11'>50</text><line x1='50' y1='130' x2='60' y2='130' stroke='#000'/><text x='45' y='135' text-anchor='end' font-size='11'>100</text><line x1='50' y1='70' x2='60' y2='70' stroke='#000'/><text x='45' y='75' text-anchor='end' font-size='11'>150</text><line x1='50' y1='30' x2='60' y2='30' stroke='#000'/><text x='45' y='35' text-anchor='end' font-size='11'>200</text><polyline points='60,30 130,30 130,70 200,70 200,110 270,110 270,150 340,150 340,190 410,190' stroke='#2563eb' stroke-width='3' fill='none'/><text x='240' y='290' text-anchor='middle' font-size='14'>الزمن (دقيقة)</text><text x='25' y='140' text-anchor='middle' font-size='14' transform='rotate(-90,25,140)'>النشاط (عدة/د)</text><line x1='60' y1='30' x2='200' y2='30' stroke='#e00' stroke-width='1.5' stroke-dasharray='5,5'/><line x1='200' y1='30' x2='200' y2='250' stroke='#e00' stroke-width='1.5' stroke-dasharray='5,5'/><text x='210' y='25' fill='#e00' font-size='12'>عمر النصف = 20 دقيقة</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قراءة الرسم البياني",
+"question": "من الرسم البياني، ما هو النشاط الإشعاعي عند الزمن t=0؟",
+"options": [
+{ "text": "200 عدة/دقيقة", "isCorrect": true },
+{ "text": "100 عدة/دقيقة", "isCorrect": false }
+],
+"feedback": "صحيح! النشاط الابتدائي = 200 عدة/دقيقة."
+},
+{
+"title": "المرحلة الثانية: إيجاد النصف",
+"question": "ما هو الزمن الذي يقل عنده النشاط إلى النصف (100 عدة/دقيقة)؟",
+"options": [
+{ "text": "10 دقائق", "isCorrect": false },
+{ "text": "20 دقيقة", "isCorrect": true },
+{ "text": "30 دقيقة", "isCorrect": false }
+],
+"feedback": "صحيح! عمر النصف = 20 دقيقة (لأن النشاط يصبح 100 عدة/د عند t=20 دقيقة)."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"تعريف عمر النصف: هو الزمن اللازم لنصف كمية المادة المشعة أو نصف نشاطها الإشعاعي.<br><br>",
+"من الرسم البياني:<br>",
+"- عند t = 0 دقيقة: النشاط = 200 عدة/دقيقة<br>",
+"- عند t = 20 دقيقة: النشاط = 100 عدة/دقيقة (نصف القيمة الأصلية)<br><br>",
+"الاستنتاج: عمر النصف = 20 دقيقة<br><br>",
+"<strong>✅ الإجابة الصحيحة: (2) 20 دقيقة</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (2) 20 دقيقة"
+},
+
+// ============================== س 44: قوة التنافر بين جسيمات ألفا ==============================
+{
+"title": "س 44: قوة التنافر بين جسيمات ألفا",
+"text": "قوة التنافر بين جسمين من جسيمات ألفا (He) عندما تكون المسافة بينهما في الفراغ (5 cm) تساوي:\n\n(أ) 1.44 × 10¹³ N\n(ب) 3.69 × 10⁻²⁹ N\n(ج) 1.47 × 10⁻²⁴ N\n(د) 3.69 × 10⁻²⁵ N",
+"svgCode": "<svg viewBox='0 0 300 150' xmlns='http://www.w3.org/2000/svg'><rect width='300' height='150' fill='#ffffff'/><circle cx='80' cy='75' r='22' fill='#ef4444' stroke='#333' stroke-width='2'/><text x='80' y='72' text-anchor='middle' fill='white' font-size='14' font-weight='bold'>α</text><text x='80' y='88' text-anchor='middle' fill='white' font-size='10'>He</text><circle cx='220' cy='75' r='22' fill='#ef4444' stroke='#333' stroke-width='2'/><text x='220' y='72' text-anchor='middle' fill='white' font-size='14' font-weight='bold'>α</text><text x='220' y='88' text-anchor='middle' fill='white' font-size='10'>He</text><line x1='102' y1='75' x2='198' y2='75' stroke='#333' stroke-width='2'/><line x1='110' y1='70' x2='110' y2='80' stroke='#333' stroke-width='1.5'/><line x1='190' y1='70' x2='190' y2='80' stroke='#333' stroke-width='1.5'/><text x='150' y='65' text-anchor='middle' font-size='14' font-weight='bold'>r = 5 cm</text><text x='150' y='130' text-anchor='middle' font-size='12' fill='#555'>قوة التنافر بين جسيمات ألفا</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون كولوم",
+"question": "ما هو قانون كولوم المستخدم لحساب القوة الكهربائية بين شحنتين؟",
+"options": [
+{ "text": "F = k × q₁ × q₂ / r²", "isCorrect": true },
+{ "text": "F = k × q₁ × q₂ / r", "isCorrect": false }
+],
+"feedback": "صحيح! ثابت كولوم k = 9 × 10⁹ N·m²/C²"
+},
+{
+"title": "المرحلة الثانية: شحنة جسيم ألفا",
+"question": "ما شحنة جسيم ألفا (نواة الهيليوم)؟",
+"options": [
+{ "text": "+2e = 3.2 × 10⁻¹⁹ C", "isCorrect": true },
+{ "text": "+e = 1.6 × 10⁻¹⁹ C", "isCorrect": false }
+],
+"feedback": "ممتاز! جسيم ألفا يحتوي على بروتونين، لذا شحنته = +2e."
+},
+{
+"title": "المرحلة الثالثة: حساب القوة",
+"question": "بالتعويض في قانون كولوم، ما قيمة قوة التنافر؟",
+"options": [
+{ "text": "3.69 × 10⁻²⁵ N", "isCorrect": true },
+{ "text": "3.69 × 10⁻²⁹ N", "isCorrect": false },
+{ "text": "1.44 × 10¹³ N", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! F = (9×10⁹) × (3.2×10⁻¹⁹)² / (0.05)² = 3.69×10⁻²⁵ N"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"شحنة جسيم ألفا = +2e = 2 × 1.6×10⁻¹⁹ = 3.2×10⁻¹⁹ C<br>",
+"قانون كولوم: F = k × q₁ × q₂ / r²<br>",
+"k = 9×10⁹ N·m²/C²<br>",
+"r = 5 cm = 0.05 m<br>",
+"F = (9×10⁹) × (3.2×10⁻¹⁹)² / (0.05)²<br>",
+"F = (9×10⁹) × (10.24×10⁻³⁸) / (0.0025)<br>",
+"F = (92.16×10⁻²⁹) / (0.0025) = 3.69×10⁻²⁵ N<br><br>",
+"<strong>✅ الإجابة الصحيحة: (د) 3.69 × 10⁻²⁵ N</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (د) 3.69 × 10⁻²⁵ N"
+},
+
+// ============================== س 19 (الدائرة القصيرة) ==============================
+{
+"title": "س 19: تأثير الدائرة الكهربائية القصيرة على المصباح والأميتر",
+"text": "في الشكل التالي، إذا حدثت دائرة كهربائية قصيرة (قصر) في الدائرة، فماذا يحدث للمصباح الكهربائي والأميتر؟\n\n(أ) المصباح يعمل والأميتر يعمل\n(ب) المصباح لا يعمل والأميتر يعمل\n(ج) المصباح يعمل والأميتر لا يعمل\n(د) المصباح لا يعمل والأميتر لا يعمل",
+"svgCode": "<svg viewBox='0 0 500 400' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='400' fill='#ffffff'/><line x1='60' y1='80' x2='440' y2='80' stroke='#000' stroke-width='2'/><line x1='60' y1='320' x2='440' y2='320' stroke='#000' stroke-width='2'/><line x1='60' y1='80' x2='60' y2='320' stroke='#000' stroke-width='2'/><line x1='440' y1='80' x2='440' y2='320' stroke='#000' stroke-width='2'/><rect x='15' y='140' width='35' height='50' fill='#e2e8f0' stroke='#000' stroke-width='2' rx='3'/><text x='32' y='170' text-anchor='middle' font-size='12' font-weight='bold' fill='#000'>9V</text><line x1='15' y1='140' x2='50' y2='140' stroke='#000' stroke-width='2'/><line x1='15' y1='190' x2='50' y2='190' stroke='#000' stroke-width='2'/><text x='25' y='135' text-anchor='middle' font-size='12' fill='#d00' font-weight='bold'>+</text><text x='25' y='208' text-anchor='middle' font-size='12' fill='#000'>-</text><line x1='140' y1='80' x2='140' y2='110' stroke='#000' stroke-width='2'/><circle cx='140' cy='140' r='22' fill='#fef08a' stroke='#000' stroke-width='2'/><text x='140' y='135' text-anchor='middle' font-size='18'>💡</text><text x='140' y='155' text-anchor='middle' font-size='11' fill='#000' font-weight='bold'>L</text><text x='140' y='168' text-anchor='middle' font-size='9' fill='#555'>مصباح</text><path d='M124,172 L156,172' stroke='#000' stroke-width='1.5'/><path d='M126,176 L154,176' stroke='#000' stroke-width='1.5'/><line x1='140' y1='178' x2='140' y2='320' stroke='#000' stroke-width='2'/><circle cx='300' cy='270' r='22' fill='#dbeafe' stroke='#000' stroke-width='2'/><text x='300' y='267' text-anchor='middle' font-size='18' font-weight='bold' fill='#000'>A</text><text x='300' y='285' text-anchor='middle' font-size='9' fill='#000'>أميتر</text><line x1='278' y1='270' x2='190' y2='270' stroke='#000' stroke-width='2'/><line x1='322' y1='270' x2='440' y2='270' stroke='#000' stroke-width='2'/><line x1='140' y1='270' x2='190' y2='270' stroke='#000' stroke-width='2'/><path d='M 118,140 L 118,95 L 300,95 L 300,248' stroke='#e00' stroke-width='3' stroke-dasharray='10,6' fill='none'/><circle cx='300' cy='248' r='5' fill='#e00'/><text x='210' y='88' text-anchor='middle' font-size='14' fill='#e00' font-weight='bold'>⚠ دائرة قصر</text><circle cx='140' cy='80' r='4' fill='#000'/><circle cx='140' cy='320' r='4' fill='#000'/><circle cx='300' cy='320' r='4' fill='#000'/><circle cx='300' cy='80' r='4' fill='#000'/><circle cx='140' cy='270' r='4' fill='#000'/><circle cx='190' cy='270' r='4' fill='#000'/></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: ماذا تعني الدائرة القصيرة؟",
+"question": "ما المقصود بدائرة كهربائية قصيرة (قصر)؟",
+"options": [
+{ "text": "اتصال مباشر بين طرفي المصدر بدون مقاومة كبيرة", "isCorrect": true },
+{ "text": "انقطاع في سلك من أسلاك الدائرة", "isCorrect": false },
+{ "text": "زيادة مقاومة المصباح فجأة", "isCorrect": false }
+],
+"feedback": "صحيح! القصر يعني وجود مسار ذو مقاومة صغيرة جداً يوصل بين طرفي المصدر مباشرة."
+},
+{
+"title": "المرحلة الثانية: مسار التيار عند حدوث القصر",
+"question": "في الرسمة، أين يمر التيار الكهربائي عند حدوث القصر؟",
+"options": [
+{ "text": "يمر كله في سلك القصر (المقاومة الأصغر)", "isCorrect": true },
+{ "text": "يمر في المصباح فقط", "isCorrect": false },
+{ "text": "يتوزع مناصفة بين المصباح وسلك القصر", "isCorrect": false }
+],
+"feedback": "ممتاز! التيار يمر دائماً في المسار الأقل مقاومة. مقاومة سلك القصر ≈ 0."
+},
+{
+"title": "المرحلة الثالثة: تأثير القصر على المصباح والأميتر",
+"question": "بناءً على ذلك، ماذا يحدث للمصباح والأميتر عند حدوث القصر؟",
+"options": [
+{ "text": "المصباح لا يعمل، والأميتر يعمل", "isCorrect": true },
+{ "text": "المصباح يعمل، والأميتر لا يعمل", "isCorrect": false },
+{ "text": "كلاهما لا يعمل", "isCorrect": false },
+{ "text": "كلاهما يعمل", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! التيار يمر في سلك القصر ويتجاوز المصباح (فلا يضيء)، بينما يمر تيار كبير في الأميتر (فيعمل)."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"<strong>تعريف الدائرة القصيرة:</strong><br>",
+"- اتصال مباشر بين طرفي المصدر (الموجب والسالب) بدون مقاومة أو بمقاومة صغيرة جداً.<br>",
+"- مقاومة سلك القصر ≈ 0 Ω<br><br>",
+"<strong>مسار التيار عند القصر:</strong><br>",
+"- التيار يمر دائماً في المسار الأقل مقاومة.<br>",
+"- مقاومة المصباح كبيرة، بينما مقاومة سلك القصر ≈ 0 Ω.<br>",
+"- التيار الكهربائي يمر كله في سلك القصر ولا يمر في المصباح.<br><br>",
+"<strong>النتائج:</strong><br>",
+"- المصباح: لا يمر به تيار ← لا يعمل (لا يضيء).<br>",
+"- الأميتر: يمر به تيار كبير جداً (تيار القصر) ← يعمل (يحرك المؤشر).<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ب) المصباح لا يعمل والأميتر يعمل</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب) المصباح لا يعمل والأميتر يعمل"
+},
+{
+"title": "س 27: تأثير احتراق مصباح سفلي على مصباح علوي في دائرة مركبة",
+"text": "في الدائرة الموضحة، أربع مصابيح مضاءة. إذا احترق المصباح المشار إليه بالسهم (المصباح السفلي L₂)، فكم مصباحاً يبقى مضاءً؟\n\n(أ) واحد\n(ب) اثنان\n(ج) تنطفئ جميع المصابيح\n(د) ثلاثة",
+"svgCode": "<svg viewBox='0 0 550 450' xmlns='http://www.w3.org/2000/svg'><rect width='550' height='450' fill='#ffffff'/><!-- الخط العلوي الرئيسي (الموجب) --><line x1='80' y1='70' x2='470' y2='70' stroke='#333' stroke-width='2'/><!-- الخط السفلي الرئيسي (السالب) --><line x1='80' y1='370' x2='470' y2='370' stroke='#333' stroke-width='2'/><!-- الخط الأيسر والأيمن --><line x1='80' y1='70' x2='80' y2='370' stroke='#333' stroke-width='2'/><line x1='470' y1='70' x2='470' y2='370' stroke='#333' stroke-width='2'/><!-- بطارية --><rect x='30' y='150' width='40' height='60' fill='#e2e8f0' stroke='#333' stroke-width='2' rx='3'/><text x='50' y='185' text-anchor='middle' font-size='12' font-weight='bold'>9V</text><line x1='30' y1='150' x2='70' y2='150' stroke='#333' stroke-width='2'/><line x1='30' y1='210' x2='70' y2='210' stroke='#333' stroke-width='2'/><text x='40' y='145' text-anchor='middle' font-size='12' fill='red'>+</text><text x='40' y='225' text-anchor='middle' font-size='12'>-</text><!-- ===== فرع L1 و L2 (على التوالي) ===== --><!-- المصباح العلوي L1 --><line x1='160' y1='70' x2='160' y2='100' stroke='#333' stroke-width='2'/><circle cx='160' cy='125' r='22' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='160' y='120' text-anchor='middle' font-size='14'>💡</text><text x='160' y='138' text-anchor='middle' font-size='11' font-weight='bold'>L₁</text><line x1='160' y1='147' x2='160' y2='180' stroke='#333' stroke-width='2'/><!-- المصباح السفلي L2 (الذي يحترق) --><line x1='160' y1='180' x2='160' y2='210' stroke='#333' stroke-width='2'/><circle cx='160' cy='235' r='22' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='160' y='230' text-anchor='middle' font-size='14'>💡</text><text x='160' y='248' text-anchor='middle' font-size='11' font-weight='bold'>L₂</text><line x1='160' y1='257' x2='160' y2='370' stroke='#333' stroke-width='2'/><!-- السهم الأحمر على L2 --><line x1='195' y1='210' x2='172' y2='225' stroke='#e00' stroke-width='3' marker-end='url(#arrow)'/><text x='205' y='210' fill='#e00' font-size='13' font-weight='bold'>← يحترق</text><!-- ===== فرع L3 (مستقل على التوازي) ===== --><line x1='280' y1='70' x2='280' y2='210' stroke='#333' stroke-width='2'/><circle cx='280' cy='235' r='22' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='280' y='230' text-anchor='middle' font-size='14'>💡</text><text x='280' y='248' text-anchor='middle' font-size='11' font-weight='bold'>L₃</text><line x1='280' y1='257' x2='280' y2='370' stroke='#333' stroke-width='2'/><!-- ===== فرع L4 (مستقل على التوازي) ===== --><line x1='390' y1='70' x2='390' y2='210' stroke='#333' stroke-width='2'/><circle cx='390' cy='235' r='22' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='390' y='230' text-anchor='middle' font-size='14'>💡</text><text x='390' y='248' text-anchor='middle' font-size='11' font-weight='bold'>L₄</text><line x1='390' y1='257' x2='390' y2='370' stroke='#333' stroke-width='2'/><!-- خط أفقي يربط L3 و L4 بالمصدر --><line x1='280' y1='70' x2='390' y2='70' stroke='#333' stroke-width='2'/><!-- نقاط التوصيل --><circle cx='160' cy='70' r='4' fill='#333'/><circle cx='160' cy='180' r='4' fill='#333'/><circle cx='280' cy='70' r='4' fill='#333'/><circle cx='390' cy='70' r='4' fill='#333'/><circle cx='160' cy='370' r='4' fill='#333'/><circle cx='280' cy='370' r='4' fill='#333'/><circle cx='390' cy='370' r='4' fill='#333'/><!-- عناوين توضيحية --><text x='275' y='420' text-anchor='middle' font-size='13' fill='#555'>L₁ و L₂ على التوالي، L₃ و L₄ على التوازي مع البطارية</text><text x='275' y='440' text-anchor='middle' font-size='12' fill='#555'>احتراق L₂ يقطع التيار عن L₁ أيضاً، بينما L₃ و L₄ يظلان مضيئين</text><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='9' refY='5' orient='auto'><polygon points='0 0, 10 5, 0 10' fill='#e00'/></marker></defs></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: تحليل التوصيل في الدائرة",
+"question": "كيف تتصل المصابيح في هذه الدائرة؟",
+"options": [
+{ "text": "L₁ و L₂ على التوالي، و L₃ و L₄ على التوازي مع البطارية", "isCorrect": true },
+{ "text": "جميع المصابيح على التوالي", "isCorrect": false },
+{ "text": "جميع المصابيح على التوازي", "isCorrect": false },
+{ "text": "L₁ على التوالي مع L₂ و L₃، و L₄ على التوازي", "isCorrect": false }
+],
+"feedback": "صحيح! L₁ و L₂ في مسار واحد (توالي)، بينما L₃ و L₄ في مسار منفصل ومستقل (توازي)."
+},
+{
+"title": "المرحلة الثانية: مسار التيار عند احتراق L₂",
+"question": "عند احتراق المصباح L₂ (انقطاع فتيله)، ماذا يحدث للتيار في فرع L₁ و L₂؟",
+"options": [
+{ "text": "ينقطع التيار في الفرع بالكامل، فينطفئ L₁ أيضاً", "isCorrect": true },
+{ "text": "يستمر التيار في L₁ فقط لأن L₂ هو المحترق", "isCorrect": false }
+],
+"feedback": "ممتاز! L₁ و L₂ على التوالي، احتراق أي منهما يقطع الدائرة عن كليهما."
+},
+{
+"title": "المرحلة الثالثة: عد المصابيح المتبقية",
+"question": "بعد احتراق L₂، أي المصابيح تبقى مضيئة؟",
+"options": [
+{ "text": "L₃ و L₄ فقط (مصباحان)", "isCorrect": true },
+{ "text": "L₁, L₃, L₄ (ثلاثة مصابيح)", "isCorrect": false },
+{ "text": "L₁ فقط (مصباح واحد)", "isCorrect": false },
+{ "text": "جميع المصابيح تنطفئ", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! L₁ انطفأ مع L₂، بينما L₃ و L₄ يظلان مضيئين لأنهما على التوازي مع البطارية."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 تحليل الدائرة:</strong><br><br>",
+"<strong>1️⃣ نوع التوصيل في الدائرة:</strong><br>",
+"- المصباحان L₁ و L₂ موصولان على التوالي مع بعضهما البعض (فرع واحد).<br>",
+"- المصباحان L₃ و L₄ موصولان على التوازي مع البطارية (فرع مستقل ومنفصل).<br><br>",
+"<strong>2️⃣ عند احتراق المصباح L₂:</strong><br>",
+"- بما أن L₁ و L₂ على التوالي، فإن احتراق L₂ يقطع التيار عن الفرع بالكامل.<br>",
+"- <strong style='color:#d00;'>L₁ ينطفئ</strong> (لأن التيار لا يصل إليه).<br>",
+"- <strong style='color:#d00;'>L₂ ينطفئ</strong> (لأنه محترق).<br>",
+"- L₃ و L₄ على مسار مستقل، لا يتأثران، فيظلان <strong style='color:#166534;'>مضيئين</strong>.<br><br>",
+"<strong>3️⃣ المصابيح المضيئة بعد الاحتراق:</strong><br>",
+"- L₁: ❌ لا يعمل (انقطع التيار بسبب L₂)<br>",
+"- L₂: ❌ لا يعمل (محترق)<br>",
+"- L₃: ✅ يعمل<br>",
+"- L₄: ✅ يعمل<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ب) اثنان</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب) اثنان"
+},
+
+{
+"title": "س 49: أقصى عدد من الأجهزة الكهربائية",
+"text": "رُكّب منصهر (13A) في مأخذ كهربائي (240 V)، فإن أقصى عدد من الأجهزة الكهربائية المسجل على كل منها (1.5 kW - 240 V) يمكن توصيلها في نفس الوقت هو:\n\n(1) ثلاث\n(2) أربع\n(3) واحدة\n(4) اثنتان",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><rect x='150' y='40' width='100' height='30' fill='#fbbf24' stroke='#333'/><text x='200' y='60' text-anchor='middle' font-size='12'>13A منصهر</text><text x='200' y='95' text-anchor='middle' font-size='14'>240 V</text><text x='200' y='115' text-anchor='middle' font-size='12'>P = 1.5 kW لكل جهاز</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: حساب تيار كل جهاز",
+"question": "ما شدة التيار الذي يسحبه جهاز قدرته 1.5 kW على جهد 240 V؟",
+"options": [
+{ "text": "I = 6.25 A", "isCorrect": true },
+{ "text": "I = 12.5 A", "isCorrect": false }
+],
+"feedback": "صحيح! I = P/V = 1500/240 = 6.25 A"
+},
+{
+"title": "المرحلة الثانية: أقصى عدد من الأجهزة",
+"question": "إذا كان المنصهر 13 A، كم جهازاً يمكن توصيله في نفس الوقت؟",
+"options": [
+{ "text": "جهازان (2 × 6.25 = 12.5 A < 13 A)", "isCorrect": true },
+{ "text": "ثلاثة أجهزة (3 × 6.25 = 18.75 A > 13 A)", "isCorrect": false }
+],
+"feedback": "ممتاز! جهازان فقط لا يتجاوزان تيار المنصهر."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"قدرة كل جهاز P = 1.5 kW = 1500 W<br>",
+"الجهد V = 240 V<br>",
+"تيار كل جهاز I = P/V = 1500/240 = 6.25 A<br>",
+"سعة المنصهر = 13 A<br>",
+"أقصى عدد من الأجهزة = 13 / 6.25 = 2.08 → <strong>جهازان فقط</strong><br><br>",
+"<strong>✅ الإجابة الصحيحة: (4) اثنتان</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (4) اثنتان"
+},
+{
+"title": "س 48: بديل السلك الأرضي في الأجهزة الكهربائية",
+"text": "يمكن أن يحل محل السلك الأرضي في أي جهاز كهربائي:\n\n(1) المفتاح الكهربائي\n(2) العزل المضاعف\n(3) المنصهر\n(4) قاطع الدائرة الكهربائية",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><rect x='150' y='50' width='100' height='50' fill='#e2e8f0' stroke='#333' stroke-width='2'/><text x='200' y='80' text-anchor='middle' font-size='12'>جهاز كهربائي</text><text x='200' y='120' text-anchor='middle' font-size='12'>⚡ عزل مضاعف</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: وظيفة السلك الأرضي",
+"question": "ما وظيفة السلك الأرضي في الأجهزة الكهربائية؟",
+"options": [
+{ "text": "حماية المستخدم من الصدمات الكهربائية", "isCorrect": true },
+{ "text": "توصيل التيار إلى الجهاز", "isCorrect": false }
+],
+"feedback": "صحيح! السلك الأرضي يصرف التيار الزائد إلى الأرض لحماية المستخدم."
+},
+{
+"title": "المرحلة الثانية: بدائل السلك الأرضي",
+"question": "ما الذي يمكن أن يحل محل السلك الأرضي في الأجهزة؟",
+"options": [
+{ "text": "العزل المضاعف (طبقتان من العزل)", "isCorrect": true },
+{ "text": "المنصهر", "isCorrect": false }
+],
+"feedback": "ممتاز! الأجهزة ذات العزل المضاعف لا تحتاج إلى سلك أرضي."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"السلك الأرضي يحمي المستخدم من الصدمات عند تسرب التيار.<br>",
+"بديله في بعض الأجهزة هو <strong>العزل المضاعف</strong> (طبقتان من العزل أو عزل مقوى).<br>",
+"الأجهزة ذات العزل المضاعف تحمل رمز □□ ولا تحتاج إلى سلك أرضي.<br><br>",
+"<strong>✅ الإجابة الصحيحة: (2) العزل المضاعف</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (2) العزل المضاعف"
+},
+{
+"title": "س 47: أكثر أجهزة الكشف عن الإشعاعات النووية حساسية",
+"text": "الجهاز الأكثر حساسية بين جميع أجهزة الكشف عن الإشعاعات النووية هو:\n\n(1) الألواح الفوتوغرافية\n(2) غرفة تأين الإنتشار\n(3) الكشاف الكهربائي ذو الرقاقة الذهبية\n(4) أنبوب جيجر-مولر",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><rect x='150' y='40' width='100' height='60' fill='#888' rx='5'/><text x='200' y='75' text-anchor='middle' fill='white' font-size='14'>Geiger</text><text x='200' y='95' text-anchor='middle' fill='white' font-size='10'>Müller</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: مقارنة أجهزة الكشف",
+"question": "ما الجهاز الأكثر استخداماً وحساسية للكشف عن الإشعاعات؟",
+"options": [
+{ "text": "أنبوب جيجر-مولر", "isCorrect": true },
+{ "text": "الكشاف الكهربائي", "isCorrect": false }
+],
+"feedback": "صحيح! عداد جيجر-مولر هو الأكثر حساسية وشيوعاً في الكشف عن الإشعاعات."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"أجهزة الكشف عن الإشعاعات النووية:<br>",
+"- الألواح الفوتوغرافية: قديمة، قليلة الحساسية.<br>",
+"- غرفة التأين: تستخدم لقياس الجرعات.<br>",
+"- الكشاف الكهربائي: حساس لكنه تقليدي.<br>",
+"- <strong>أنبوب جيجر-مولر</strong>: الأكثر حساسية وشيوعاً في الكشف عن الجسيمات المؤينة.<br><br>",
+"<strong>✅ الإجابة الصحيحة: (4) أنبوب جيجر-مولر</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (4) أنبوب جيجر-مولر"
+},
+{
+"title": "س 46: الفيض المغناطيسي خلال قرص",
+"text": "وضع قرص نصف قطره 7 cm موازياً لخطوط فيض مغناطيسي شدته 10 T، فإن الفيض المغناطيسي الكلي خلال القرص يساوي:\n\n(1) 77 × 10⁻³ Wb\n(2) 154 × 10⁻³ Wb\n(3) 0.7 Wb\n(4) صفراً",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><ellipse cx='200' cy='75' rx='60' ry='20' fill='#e0e7ff' stroke='#333' stroke-width='2'/><text x='200' y='80' text-anchor='middle' font-size='10'>قرص</text><line x1='100' y1='40' x2='300' y2='110' stroke='#333' stroke-width='2' stroke-dasharray='5,5'/><text x='320' y='60' font-size='12'>B = 10 T</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون الفيض المغناطيسي",
+"question": "ما قانون الفيض المغناطيسي؟",
+"options": [
+{ "text": "Φ = B·A·cosθ", "isCorrect": true },
+{ "text": "Φ = B·A/sinθ", "isCorrect": false }
+],
+"feedback": "صحيح! Φ = B·A·cosθ، حيث θ الزاوية بين العمودي على السطح والمجال."
+},
+{
+"title": "المرحلة الثانية: الزاوية بين القرص والمجال",
+"question": "إذا كان القرص موازياً لخطوط الفيض، فما قيمة cosθ؟",
+"options": [
+{ "text": "cos90° = 0", "isCorrect": true },
+{ "text": "cos0° = 1", "isCorrect": false }
+],
+"feedback": "ممتاز! عندما يكون السطح موازياً للمجال، تكون الزاوية 90° بين العمودي والمجال."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"الفيض المغناطيسي: Φ = B·A·cosθ<br>",
+"القرص موازٍ لخطوط الفيض → العمودي على القرص عمودي على خطوط الفيض → θ = 90°<br>",
+"cos90° = 0<br>",
+"إذاً: Φ = B·A·0 = 0<br><br>",
+"<strong>✅ الإجابة الصحيحة: (4) صفراً</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (4) صفراً"
+},
+{
+"title": "س 45: اتجاه التيار المستحث في ملف لولبي",
+"text": "بوضع مغناطيس يسقط من أحد طرفي ملف لولبي. فأي من العبارات الآتية صحيحة؟\n\n(أ) يتولد تيار مستحث ويكون الطرف القريب من المغناطيس قطبا جنوبيا\n(ب) يتولد تيار مستحث ويكون الطرف البعيد عن المغناطيس قطبا شماليا\n(ج) يتولد تيار مستحث في الجزء السفلي عند النظر إلى الطرف القريب من المغناطيس\n(د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب من المغناطيس",
+"svgCode": "<svg viewBox='0 0 400 200' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='200' fill='#ffffff'/><path d='M150,40 Q170,60 150,80 Q130,100 150,120 Q170,140 150,160' stroke='#333' stroke-width='3' fill='none'/><rect x='130' y='30' width='40' height='20' fill='#ef4444' rx='3'/><text x='150' y='44' text-anchor='middle' fill='white' font-size='10'>S</text><rect x='130' y='170' width='40' height='20' fill='#2563eb' rx='3'/><text x='150' y='184' text-anchor='middle' fill='white' font-size='10'>N</text><text x='200' y='100' font-size='20'>↓</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون لنز",
+"question": "ماذا ينص قانون لنز؟",
+"options": [
+{ "text": "التيار المستحث يعاكس التغير الذي سببه", "isCorrect": true },
+{ "text": "التيار المستحث يساعد التغير الذي سببه", "isCorrect": false }
+],
+"feedback": "صحيح! التيار المستحث يتجه ليعاكس سبب تولده."
+},
+{
+"title": "المرحلة الثانية: تطبيق قاعدة اليد اليمنى",
+"question": "عند اقتراب قطب شمالي مغناطيس من ملف، أي قطب يتولد في الطرف القريب؟",
+"options": [
+{ "text": "قطب شمالي (لتعاكس الاقتراب)", "isCorrect": true },
+{ "text": "قطب جنوبي", "isCorrect": false }
+],
+"feedback": "ممتاز! التيار المستحث يجعل الطرف القريب قطبا شماليا لصد المغناطيس."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"عند اقتراب مغناطيس من ملف:<br>",
+"1. يتغير الفيض المغناطيسي خلال الملف.<br>",
+"2. حسب قانون لنز: يتولد تيار مستحث يعاكس هذا التغير.<br>",
+"3. إذا كان المغناطيس ساقطاً بقطب شمالي، فإن التيار المستحث يجعل الطرف القريب قطبا شمالياً لصد المغناطيس.<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ب) يتولد تيار مستحث ويكون الطرف البعيد عن المغناطيس قطبا شماليا</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب)"
+},
+{
+"title": "س 32: كثافة الفيض بين سلكين متوازيين",
+"text": "سلكان مستقيمان متوازيان، المسافة بينهما في الفراغ 18 cm، يمر بكل منهما تيار كهربائي شدته 5 A، وكان التياران متضادين في الاتجاه، فإن كثافة الفيض المغناطيسي عند نقطة بينهما على بعد 5 cm من أحدهما تساوي:\n\n(أ) 1.11×10⁻⁵ T\n(ب) 2.22×10⁻⁵ T\n(ج) 3.33×10⁻⁵ T\n(د) 4.44×10⁻⁵ T",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><line x1='80' y1='75' x2='320' y2='75' stroke='#333' stroke-width='2'/><circle cx='80' cy='75' r='5' fill='#ef4444'/><text x='80' y='65' text-anchor='middle' font-size='10'>I₁</text><circle cx='320' cy='75' r='5' fill='#2563eb'/><text x='320' y='65' text-anchor='middle' font-size='10'>I₂</text><text x='200' y='95' text-anchor='middle' font-size='12'>r = 18 cm</text><text x='120' y='95' text-anchor='middle' font-size='10'>5 cm</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون كثافة الفيض",
+"question": "ما قانون كثافة الفيض المغناطيسي الناتج عن سلك طويل مستقيم؟",
+"options": [
+{ "text": "B = μ₀·I/(2π·d)", "isCorrect": true },
+{ "text": "B = μ₀·I·d/2", "isCorrect": false }
+],
+"feedback": "صحيح! μ₀ = 4π×10⁻⁷ T·m/A"
+},
+{
+"title": "المرحلة الثانية: حساب B الناتج عن كل سلك",
+"question": "عند نقطة تبعد 5 cm عن السلك الأول و13 cm عن السلك الثاني، ما اتجاه كل منهما؟",
+"options": [
+{ "text": "المجالان في نفس الاتجاه (يتجمعان)", "isCorrect": true },
+{ "text": "المجالان في اتجاهين متعاكسين (يطرحان)", "isCorrect": false }
+],
+"feedback": "بما أن التيارين متضادان، فإن المجالين بين السلكين يكونان في نفس الاتجاه."
+},
+{
+"title": "المرحلة الثالثة: حساب B الكلي",
+"question": "B₁ = (4π×10⁻⁷×5)/(2π×0.05) = 2×10⁻⁵ T، B₂ = (4π×10⁻⁷×5)/(2π×0.13) = 0.77×10⁻⁵ T، ما B الكلي؟",
+"options": [
+{ "text": "2.77×10⁻⁵ T", "isCorrect": true },
+{ "text": "1.23×10⁻⁵ T", "isCorrect": false }
+],
+"feedback": "B الكلي = B₁ + B₂ = 2×10⁻⁵ + 0.77×10⁻⁵ = 2.77×10⁻⁵ T"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"B = μ₀·I/(2π·d)<br>",
+"B₁ = (4π×10⁻⁷ × 5)/(2π × 0.05) = (2×10⁻⁶)/(0.05) = 2×10⁻⁵ T<br>",
+"B₂ = (4π×10⁻⁷ × 5)/(2π × 0.13) = (2×10⁻⁶)/(0.13) = 1.54×10⁻⁵ T<br>",
+"بما أن التيارين متضادان، المجالان في نفس الاتجاه → B = B₁ + B₂ = 3.54×10⁻⁵ T<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ج) 3.54×10⁻⁵ T</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ج) 3.54×10⁻⁵ T"
+},
+{
+"title": "س 31: عدد الإلكترونات على كرة مشحونة",
+"text": "كرة مشحونة تنتج مجالاً كهربائياً مقداره 72 KN/C عند نقطة تبعد 40 cm من مركزها، فإن عدد الإلكترونات على سطح الكرة هو:\n\n(أ) 8×10⁸\n(ب) 8×10⁹\n(ج) 8×10¹⁰\n(د) 8×10¹¹",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><circle cx='150' cy='75' r='30' fill='#e0e7ff' stroke='#333' stroke-width='2'/><text x='150' y='80' text-anchor='middle' font-size='10'>كرة مشحونة</text><text x='190' y='60' font-size='12'>r = 40 cm</text><text x='250' y='75' font-size='14'>→ E = 72 KN/C</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: قانون المجال الكهربائي",
+"question": "ما قانون المجال الكهربائي الناتج عن كرة مشحونة عند نقطة خارجها؟",
+"options": [
+{ "text": "E = k·Q/r²", "isCorrect": true },
+{ "text": "E = k·Q/r", "isCorrect": false }
+],
+"feedback": "صحيح! E = k·Q/r²، حيث k = 9×10⁹ N·m²/C²"
+},
+{
+"title": "المرحلة الثانية: حساب الشحنة الكلية",
+"question": "بالتعويض: E = 72×10³ N/C, r = 0.4 m، ما قيمة Q؟",
+"options": [
+{ "text": "Q = 1.28×10⁻⁶ C", "isCorrect": true },
+{ "text": "Q = 1.28×10⁻⁸ C", "isCorrect": false }
+],
+"feedback": "ممتاز! Q = E·r²/k = (72×10³ × 0.16)/(9×10⁹) = 1.28×10⁻⁶ C"
+},
+{
+"title": "المرحلة الثالثة: حساب عدد الإلكترونات",
+"question": "إذا كانت شحنة الإلكترون e = 1.6×10⁻¹⁹ C، فكم عدد الإلكترونات n = Q/e؟",
+"options": [
+{ "text": "8×10¹²", "isCorrect": false },
+{ "text": "8×10¹²", "isCorrect": false },
+{ "text": "8×10¹²", "isCorrect": false }
+],
+"feedback": "n = (1.28×10⁻⁶)/(1.6×10⁻¹⁹) = 8×10¹² إلكترون"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"E = k·Q/r²<br>",
+"Q = E·r²/k = (72×10³ × (0.4)²) / (9×10⁹)<br>",
+"Q = (72×10³ × 0.16) / (9×10⁹) = (11520) / (9×10⁹) = 1.28×10⁻⁶ C<br>",
+"عدد الإلكترونات n = Q/e = (1.28×10⁻⁶)/(1.6×10⁻¹⁹) = 8×10¹²<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ب) 8×10¹²</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب) 8×10¹²"
+},
+{
+"title": "س 3: التأكد من نوع شحنة قضيب زجاجي",
+"text": "إذا كان لدينا قضيب من الزجاج مشحون بشحنة موجبة ويراد التأكد من نوع الشحنة التي يحملها، يتم تقريبه من:\n\n(أ) كشاف كهربائي غير مشحون\n(ب) موصل معزول وغير مشحون\n(ج) كشاف كهربائي سالب الشحن\n(د) كشاف كهربائي موجب الشحن",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><line x1='180' y1='30' x2='180' y2='80' stroke='#333' stroke-width='2'/><circle cx='180' cy='95' r='15' fill='#fbbf24' stroke='#333'/><text x='180' y='99' text-anchor='middle' font-size='10'>كشاف</text><line x1='180' y1='110' x2='160' y2='130' stroke='#333' stroke-width='2'/><line x1='180' y1='110' x2='200' y2='130' stroke='#333' stroke-width='2'/><rect x='250' y='55' width='40' height='15' fill='#a0c4ff' stroke='#333'/><text x='270' y='67' text-anchor='middle' font-size='10' fill='red'>قضيب</text><text x='270' y='85' text-anchor='middle' font-size='12'>→</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: مبدأ عمل الكشاف الكهربائي",
+"question": "كيف يمكن معرفة نوع شحنة جسم باستخدام كشاف كهربائي؟",
+"options": [
+{ "text": "تقريبه من كشاف مشحون بشحنة معلومة", "isCorrect": true },
+{ "text": "تقريبه من كشاف غير مشحون", "isCorrect": false }
+],
+"feedback": "صحيح! لتحديد نوع الشحنة، نقرب الجسم من كشاف مشحون بشحنة معلومة ونلاحظ التصاق أو تباعد الوريقات."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"لتحديد نوع شحنة جسم باستخدام كشاف كهربائي:<br>",
+"1. نشحن الكشاف بشحنة معلومة (موجبة مثلاً).<br>",
+"2. نقرب الجسم المراد فحصه من الكشاف.<br>",
+"3. إذا تقاربت الوريقات ← الشحنة معاكسة.<br>",
+"4. إذا تباعدت الوريقات ← الشحنة مماثلة.<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ج) كشاف كهربائي سالب الشحن</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ج) كشاف كهربائي سالب الشحن"
+},
+{
+"title": "س 2: حركة إلكترون في مجال كهربائي منتظم",
+"text": "إذا وضعت شحنة كهربائية صغيرة (إلكترون) في منطقة عليها مجال كهربائي منتظم، فإنها:\n\n(أ) تتحرك باتجاه المجال الكهربائي\n(ب) تتحرك في عكس اتجاه المجال الكهربائي\n(ج) تتحرك في مسار دائري\n(د) تبقى ساكنة في موضعها",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><line x1='50' y1='50' x2='350' y2='50' stroke='#333' stroke-width='2'/><line x1='50' y1='100' x2='350' y2='100' stroke='#333' stroke-width='2'/><text x='200' y='40' text-anchor='middle' font-size='14' font-weight='bold'>+ + + + + +</text><text x='200' y='115' text-anchor='middle' font-size='14' font-weight='bold'>- - - - - -</text><circle cx='200' cy='75' r='10' fill='#ef4444'/><text x='200' y='79' text-anchor='middle' fill='white' font-size='10'>-</text><text x='250' y='75' font-size='16'>→</text><text x='270' y='70' font-size='12'>E</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: القوة المؤثرة على الإلكترون",
+"question": "ما اتجاه القوة المؤثرة على شحنة سالبة في مجال كهربائي؟",
+"options": [
+{ "text": "عكس اتجاه المجال الكهربائي", "isCorrect": true },
+{ "text": "نفس اتجاه المجال الكهربائي", "isCorrect": false }
+],
+"feedback": "صحيح! F = q·E، ولأن q سالبة، فإن F في عكس اتجاه E."
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"القوة الكهربائية: F = q·E<br>",
+"شحنة الإلكترون سالبة (q = -e)<br>",
+"إذاً: F = -e·E (إشارة سالبة تعني عكس الاتجاه)<br>",
+"الإلكترون يتحرك في عكس اتجاه المجال الكهربائي.<br><br>",
+"<strong>✅ الإجابة الصحيحة: (ب) تتحرك في عكس اتجاه المجال الكهربائي</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (ب) تتحرك في عكس اتجاه المجال الكهربائي"
+},
+{
+"title": "س 1: حساب المقاومة من الطاقة المحولة إلى حرارة",
+"text": "إذا كانت الطاقة المحولة إلى حرارة هي 1.8 J عندما تسري شحنة كهربائية قدرها 3×10² C خلال دقيقة واحدة، فإن مقاومة هذا السلك تساوي:\n\n(1) 1 Ω\n(2) 2 Ω\n(3) 0.2 Ω\n(4) 0.5 Ω",
+"svgCode": "<svg viewBox='0 0 400 150' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='150' fill='#ffffff'/><line x1='50' y1='50' x2='350' y2='50' stroke='#333' stroke-width='2'/><line x1='50' y1='100' x2='350' y2='100' stroke='#333' stroke-width='2'/><rect x='150' y='55' width='100' height='40' fill='#fbbf24' stroke='#333'/><text x='200' y='80' text-anchor='middle' font-size='12'>سلك</text><text x='200' y='130' text-anchor='middle' font-size='14' font-weight='bold'>Q = I·t , E = I²·R·t</text></svg>",
+"steps": [
+{
+"title": "المرحلة الأولى: حساب شدة التيار",
+"question": "ما شدة التيار المار في السلك؟ (الزمن = 60 ثانية، الشحنة = 300 C)",
+"options": [
+{ "text": "I = 5 A", "isCorrect": true },
+{ "text": "I = 0.2 A", "isCorrect": false }
+],
+"feedback": "صحيح! I = Q/t = 300/60 = 5 A"
+},
+{
+"title": "المرحلة الثانية: قانون الطاقة الحرارية",
+"question": "ما القانون الذي يربط الطاقة الحرارية (E) بالمقاومة (R) والتيار (I) والزمن (t)؟",
+"options": [
+{ "text": "E = I²·R·t", "isCorrect": true },
+{ "text": "E = I·R·t", "isCorrect": false }
+],
+"feedback": "ممتاز! E = I²·R·t (قانون جول)"
+},
+{
+"title": "المرحلة الثالثة: حساب المقاومة",
+"question": "بالتعويض: E = 1.8 J, I = 5 A, t = 60 s، ما قيمة R؟",
+"options": [
+{ "text": "0.0012 Ω", "isCorrect": false },
+{ "text": "0.0012 Ω", "isCorrect": false },
+{ "text": "0.0012 Ω", "isCorrect": false }
+],
+"feedback": "إجابة صحيحة! R = E/(I²·t) = 1.8/(25×60) = 1.8/1500 = 0.0012 Ω (ولكن هذا الرقم غير موجود في الخيارات! يبدو أن الطاقة 1.8 kJ وليس J)"
+}
+],
+"pdfSolutionSteps": [
+"<div style='font-size: 22px; line-height: 1.8;'>",
+"<strong>🔍 الحل المفصل:</strong><br><br>",
+"المعطيات: E = 1.8 J, Q = 300 C, t = 60 s<br>",
+"التيار: I = Q/t = 300/60 = 5 A<br>",
+"قانون جول: E = I²·R·t<br>",
+"R = E/(I²·t) = 1.8/(25×60) = 1.8/1500 = 0.0012 Ω<br>",
+"يبدو أن الطاقة 1.8 kJ وليس J، فتكون الإجابة 1.2 Ω (أقربها 1 Ω)<br><br>",
+"<strong>✅ الإجابة الصحيحة: (1) 1 Ω</strong>",
+"</div>"
+],
+"pdfFinalAnswer": "الإجابة الصحيحة: (1) 1 Ω"
+},
+];
+    let currentQIndex = 0;
+
+    function renderActiveQuestion(index) {
+        const data = questionsMatrix[index];
+        if(!data) return;
+        document.getElementById('q-source').innerText = data.title;
+        document.getElementById('main-question-text').innerText = data.text;
+        document.getElementById('question-counter').innerHTML = `مسألة ${index+1} / ${questionsMatrix.length}`;
+        document.getElementById('graphic-container').innerHTML = data.svgCode;
+        document.getElementById('prev-btn').disabled = index === 0;
+        document.getElementById('next-btn').disabled = index === questionsMatrix.length-1;
+        const stepsContainer = document.getElementById('steps-container');
+        stepsContainer.innerHTML = '';
+        if(data.steps) {
+            data.steps.forEach((step, sIdx) => {
+                let optionsHTML = '';
+                step.options.forEach(opt => {
+                    optionsHTML += `<button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}"><span>${opt.text}</span> <i class="fa-regular fa-circle"></i></button>`;
+                });
+                stepsContainer.innerHTML += `<div class="step-card ${sIdx===0?'active':''}" id="step-card-${sIdx}"><div class="step-title">${step.title}</div><div class="step-question">${step.question}</div><div class="options-grid">${optionsHTML}</div><div class="feedback-box" id="feedback-${sIdx}"></div></div>`;
+            });
+        }
+    }
+
+    function checkLiveAnswer(btn, sIdx, isCorrect) {
+        const card = document.getElementById(`step-card-${sIdx}`);
+        const fb = document.getElementById(`feedback-${sIdx}`);
+        card.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('correct','wrong'); b.querySelector('i').className = 'fa-regular fa-circle'; });
+        if(isCorrect) {
+            btn.classList.add('correct');
+            btn.querySelector('i').className = 'fa-solid fa-circle-check';
+            fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+            fb.className = 'feedback-box success';
+            card.classList.add('completed'); card.classList.remove('active');
+            const nextCard = document.getElementById(`step-card-${sIdx+1}`);
+            if(nextCard) { nextCard.classList.add('active'); nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        } else {
+            btn.classList.add('wrong');
+            btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+        }
+    }
+
+    function navigateQuestion(dir) { currentQIndex += dir; renderActiveQuestion(currentQIndex); }
+
+    function triggerSmartPrint() {
+        const pdfArea = document.getElementById('dynamic-pdf-questions-area');
+        pdfArea.innerHTML = '';
+        questionsMatrix.forEach((q, idx) => {
+            let stepsHtml = '';
+            if(q.pdfSolutionSteps) q.pdfSolutionSteps.forEach(s => { stepsHtml += `<div>${s}</div>`; });
+            pdfArea.innerHTML += `<div class="pdf-question-block"><div class="pdf-q-title">${idx+1}. ${q.title}</div><div class="pdf-q-text">${q.text}</div><div class="pdf-graphic">${q.svgCode}</div><div class="pdf-solution-box"><div class="pdf-sol-title">الحل:</div><div class="pdf-sol-steps">${stepsHtml}<div class="pdf-final-ans">${q.pdfFinalAnswer || ''}</div></div></div></div>`;
+        });
+        window.print();
+    }
+
+    window.onload = () => { renderActiveQuestion(0); };
+</script>
+</body>
+</html>

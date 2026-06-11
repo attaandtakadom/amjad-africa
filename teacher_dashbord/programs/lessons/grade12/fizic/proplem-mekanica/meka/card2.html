@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>بطاقات الفيزياء - تصميم الأسهم</title>
+    <style>
+        :root { 
+            --bg-color: #2c3e50;
+            --card-color: #ffffff;
+            --text-color: #000;
+            --btn-color: #3498db; 
+        }
+        body { 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            height: 100vh; background: var(--bg-color); font-family: sans-serif; padding-top: 60px;
+        }
+        
+        .card-container { width: 500px; height: 320px; perspective: 1000px; cursor: pointer; margin-bottom: 40px; }
+        .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .card-container.flipped .card-inner { transform: rotateY(180deg); }
+        
+        .front, .back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; padding: 40px; border-radius: 20px; background: var(--card-color); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .front { font-size: 28px; font-weight: 800; color: var(--text-color); line-height: 1.5; text-align: center; }
+        .back { transform: rotateY(180deg); font-size: 24px; color: var(--btn-color); font-weight: bold; }
+        
+        /* الأزرار الدائرية في الأسفل */
+        .controls { position: fixed; bottom: 30px; display: flex; gap: 30px; }
+        button { 
+            width: 70px; height: 70px; border-radius: 50%; cursor: pointer; 
+            background: var(--btn-color); color: white; border: none; 
+            font-size: 30px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;
+        }
+        button:hover { background: #2980b9; transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <div class="card-container" id="card" onclick="flipCard()">
+        <div class="card-inner">
+            <div class="front" id="term">اضغط للبدء</div>
+            <div class="back" id="def"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="nextCard()">&#8594;</button> <button onclick="prevCard()">&#8592;</button> </div>
+
+    <script>
+        const data = [
+    {"term": "قانون نيوتن الثاني لحساب عجلة النظام ككل؟", "definition": "a = (sum F_driving) / (sum m_total)"},
+    {"term": "كيف نحدد اتجاه الحركة لمنظومة بكرة؟", "definition": "باتجاه القوة المحركة الأكبر (الكتلة الأثقل)"},
+    {"term": "معادلة الحركة لجسم صاعد؟", "definition": "T - mg = ma"},
+    {"term": "كيف نتخلص من قوة الشد (T) في الحل الآني؟", "definition": "بجمع المعادلتين معاً ليتم حذف T"},
+    {"term": "القوة المسؤولة عن ضغط الجسم على السطح المائل؟", "definition": "F_N = mg cos(theta)"},
+    {"term": "المركبة المسببة للانزلاق لأسفل المستوى المائل؟", "definition": "F_parallel = mg sin(theta)"},
+    {"term": "دالة لحساب المركبة العمودية (الاحتكاك)؟", "definition": "جيب التمام (cos)"},
+    {"term": "دالة لحساب المركبة الموازية (الحركة)؟", "definition": "الجيب (sin)"},
+    {"term": "كيف تحسب قوة الاحتكاك في المستوى المائل بمعلومية ميو؟", "definition": "f_k = mu * mg cos(theta)"},
+    {"term": "القانون الرياضي لقوة الاحتكاك الحركي؟", "definition": "f_k = mu * N"},
+    {"term": "شرط عدم تسارع النظام (كتلة على منضدة)؟", "definition": "T = f_k أو T = mg"},
+    {"term": "كيف نحسب الكتلة الكلية للنظام؟", "definition": "m_total = m1 + m2 + m3"},
+    {"term": "قيمة الشد في طرفي خيط يمر على بكرة ملساء؟", "definition": "متساوية (T1 = T2)"},
+    {"term": "ماذا يمثل الرمز (mu)؟", "definition": "معامل الاحتكاك (Coefficient of Friction)"},
+    {"term": "قوة الاتصال العمودية (R) على سطح أفقي؟", "definition": "R = mg"},
+    {"term": "قوة الاتصال العمودية (R) على سطح مائل؟", "definition": "R = mg cos(theta)"},
+    {"term": "حالة النظام إذا كانت العجلة (a) تساوي صفراً؟", "definition": "اتزان ديناميكي (Sum F = 0)"},
+    {"term": "سبب حركة كتلة (4kg) لأسفل مستوى مائل؟", "definition": "مركبة الوزن (mg sin theta) أكبر من القوى المعيقة"},
+    {"term": "المقاومة الكلية لجسم يصعد مستوى مائل خشن؟", "definition": "القوة المعيقة = (mg sin theta) + (f_k)"},
+    {"term": "لماذا نعتبر النظام كتلة واحدة في الكتل المترابطة؟", "definition": "لتبسيط الحسابات بإلغاء تأثير قوى الشد الداخلية"},
+    {"term": "الفرق بين الاحتكاك السكوني والحركي؟", "definition": "السكوني يمنع بدء الحركة، والحركي يعيق الحركة المستمرة"},
+    {"term": "ماذا تعني بكرة ملساء في الفيزياء؟", "definition": "لا يوجد احتكاك، الشد متساوٍ في طرفي الحبل"}
+];
+        let currentIndex = 0;
+        function flipCard() { document.getElementById('card').classList.toggle('flipped'); }
+        
+        function updateCard() {
+            document.getElementById('card').classList.remove('flipped');
+            setTimeout(() => {
+                document.getElementById('term').innerText = data[currentIndex].term;
+                document.getElementById('def').innerText = data[currentIndex].definition;
+            }, 300);
+        }
+
+        function nextCard() { currentIndex = (currentIndex + 1) % data.length; updateCard(); }
+        function prevCard() { currentIndex = (currentIndex - 1 + data.length) % data.length; updateCard(); }
+        
+        updateCard();
+    </script>
+</body>
+</html>

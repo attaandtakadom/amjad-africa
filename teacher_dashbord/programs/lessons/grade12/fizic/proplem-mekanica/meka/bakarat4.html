@@ -341,69 +341,116 @@ svgCode: `<svg width="420" height="220" viewBox="0 0 420 220" xmlns="http://www.
         pdfFinalAnswer: "a = 3 m/s²"
     },
     {
-        title: "المسألة الرابعة: كتل على مستويات مائلة",
-        text: "وضعت كتلة (4 kg) على سطح مائل أملس (زاوية 60°)، وكتلة (2 kg) على سطح خشن (μ = 0.2, زاوية 30°)، تتصل الكتلتان بخيط يمر على بكرة ملساء عند القمة. احسب قوة الشد T. (g = 10 m/s²)",
-svgCode: `<svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.w3.org/2000/svg">
+    "title": "المسألة الرابعة: كتل على مستويات مائلة - (العام الدراسي 2024-2025)",
+    "text": "وضعت كتلة (4 kg) على سطح مائل أملس (زاوية 60°)، وكتلة (2 kg) على سطح خشن (μ = 0.2, زاوية 30°)، تتصل الكتلتان بخيط يمر على بكرة ملساء عند القمة. احسب قوة الشد T. (g = 10 m/s²)",
+    "svgCode": `<svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.w3.org/2000/svg">
     <polygon points="50,150 225,50 380,150" fill="#f1f5f9" stroke="#64748b" stroke-width="4"/>
     <line x1="30" y1="150" x2="400" y2="150" stroke="#475569" stroke-width="2" stroke-dasharray="5,5"/>
     <circle cx="225" cy="50" r="10" fill="#334155"/>
-    
     <g transform="translate(120, 110) rotate(-30)">
         <rect x="0" y="-30" width="35" height="30" fill="#ea580c" rx="3"/>
         <text x="17.5" y="-10" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">2kg</text>
     </g>
-    
     <g transform="translate(280, 105) rotate(30)">
         <rect x="0" y="-30" width="35" height="30" fill="#1e3a8a" rx="3"/>
         <text x="17.5" y="-10" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4kg</text>
     </g>
-    
     <line x1="120" y1="100" x2="217" y2="45" stroke="#0f172a" stroke-width="2"/>
     <line x1="315" y1="100" x2="233" y2="45" stroke="#0f172a" stroke-width="2"/>
-    
     <line x1="160" y1="75" x2="190" y2="55" stroke="red" stroke-width="2" marker-end="url(#arrow)"/>
     <text x="175" y="65" fill="red" font-size="12" font-weight="bold">T₁</text>
     <line x1="280" y1="70" x2="250" y2="55" stroke="red" stroke-width="2" marker-end="url(#arrow)"/>
     <text x="270" y="60" fill="red" font-size="12" font-weight="bold">T₂</text>
-    
     <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
             <path d="M 0 0 L 10 5 L 0 10 z" fill="red" />
         </marker>
     </defs>
-    
     <text x="85" y="145" fill="#334155" font-size="12" font-weight="bold">30°</text>
     <text x="330" y="145" fill="#334155" font-size="12" font-weight="bold">60°</text>
-</svg>`,        steps: [
-            { title: "المحطة 1: معادلة الجسم الأيمن", question: "ما معادلة حركة الكتلة 4kg على السطح الأملس 60°؟", options: [{text: "34.64 - T = 4a", isCorrect: true}, {text: "T - 34.64 = 4a", isCorrect: false}], feedback: "مركبة الوزن = 40 × sin60 = 34.64 N" },
-            { title: "المحطة 2: معادلة الجسم الأيسر", question: "ما معادلة حركة الكتلة 2kg على السطح الخشن 30°؟", options: [{text: "T - 13.46 = 2a", isCorrect: true}, {text: "13.46 - T = 2a", isCorrect: false}], feedback: "المقاومة = 10 + 3.46 = 13.46 N" },
-            { title: "المحطة 3: العجلة", question: "بجمع المعادلتين: 34.64 - T = 4a و T - 13.46 = 2a", options: [{text: "a = 3.53 m/s²", isCorrect: true}, {text: "a = 2.5 m/s²", isCorrect: false}], feedback: "34.64 - 13.46 = 6a → 21.18 = 6a → a = 3.53 m/s²" },
-            { title: "المحطة 4: الشد T", question: "T = 34.64 - 4a = ?", options: [{text: "T = 20.52 N", isCorrect: true}, {text: "T = 18 N", isCorrect: false}], feedback: "T = 34.64 - 14.12 = 20.52 N" }
-        ],
-       pdfSolutionSteps: [
-        "<span style='font-size: 18px; font-weight: bold;'>📌 اتجاه الحركة:</span>",
-                "<div style='margin-right: 20px; margin-bottom: 15px;'>مركبة الوزن اليمنى (34.64N) > المقاومة اليسرى (13.46N)، لذا <span style='color: #10b981; font-weight: bold;'>الكتلة اليمنى تهبط واليسرى تصعد</span>.</div>",
-            
-    "<div style='font-size: 20px; line-height: 1.8; direction: rtl; text-align: right;'>",
-    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>1. طريقة معادلات الحركة الآنية:</span><br>",
-    "• الجسم الأيمن (m1=4kg, 60°): <span style='direction: ltr; display: inline-block;'>40 sin 60° - T = 4a</span><br>",
-    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>34.64 - T = 4a</span>  (معادلة 1)<br>",
-    "• الجسم الأيسر (m2=2kg, 30°, μ=0.2): <span style='direction: ltr; display: inline-block;'>T - (20 sin 30° + μ 20 cos 30°) = 2a</span><br>",
-    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T - (10 + 3.46) = 2a  ⇒  T - 13.46 = 2a</span>  (معادلة 2)<br>",
-    "• بجمع المعادلتين (1) و (2) لحذف الشد (T):<br>",
-    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>34.64 - 13.46 = 6a  ⇒  21.18 = 6a</span><br>",
-    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = 3.53 m/s²</span><br><br>",
-
-    "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>2. طريقة العجلة المباشرة (النظام ككل):</span><br>",
-    "• القانون: <span style='font-size: 22px; font-weight: bold; direction: ltr; display: inline-block;'>a = ΣF / Σm</span><br>",
-    "• ΣF (القوة المحصلة) = <span style='direction: ltr; display: inline-block;'>34.64 - 13.46 = 21.18 N</span><br>",
-    "• Σm (الكتلة الكلية) = <span style='direction: ltr; display: inline-block;'>4 + 2 = 6 kg</span><br>",
-    "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>a = 21.18 / 6 = 3.53 m/s²</span><br>",
-    "• حساب الشد (T) من معادلة الجسم الأيمن:<br>",
-    "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T = 34.64 - 4(3.53) = 20.52 N</span>",
-    "</div>"
-], pdfFinalAnswer: "T = 20.52 N"
-    },
+</svg>`,
+    "steps": [
+        {
+            "title": "المحطة 1: معادلة الجسم الأيمن",
+            "question": "ما معادلة حركة الكتلة 4kg على السطح الأملس 60°؟",
+            "options": [
+                { "text": "34.64 - T = 4a", "isCorrect": true },
+                { "text": "T - 34.64 = 4a", "isCorrect": false }
+            ],
+            "feedback": "مركبة الوزن = 40 × sin60 = 34.64 N"
+        },
+        {
+            "title": "المحطة 2: معادلة الجسم الأيسر",
+            "question": "ما معادلة حركة الكتلة 2kg على السطح الخشن 30°؟",
+            "options": [
+                { "text": "T - 13.46 = 2a", "isCorrect": true },
+                { "text": "13.46 - T = 2a", "isCorrect": false }
+            ],
+            "feedback": "المقاومة = 10 + 3.46 = 13.46 N"
+        },
+        {
+            "title": "المحطة 3: العجلة",
+            "question": "بجمع المعادلتين: 34.64 - T = 4a و T - 13.46 = 2a",
+            "options": [
+                { "text": "a = 3.53 m/s²", "isCorrect": true },
+                { "text": "a = 2.5 m/s²", "isCorrect": false }
+            ],
+            "feedback": "34.64 - 13.46 = 6a → 21.18 = 6a → a = 3.53 m/s²"
+        },
+        {
+            "title": "المحطة 4: الشد T",
+            "question": "T = 34.64 - 4a = ?",
+            "options": [
+                { "text": "T = 20.52 N", "isCorrect": true },
+                { "text": "T = 18 N", "isCorrect": false }
+            ],
+            "feedback": "T = 34.64 - 14.12 = 20.52 N"
+        }
+    ],
+    "pdfSolutionSteps": [
+        "<div style='font-size: 22px; line-height: 1.9; direction: rtl; text-align: right;'>",
+        "<span style='font-size: 28px; font-weight: bold; color: #1e3a8a;'>📌 خطوات الحل التفصيلية (العام الدراسي 2024-2025):</span><br><br>",
+        
+        "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>📍 اتجاه الحركة:</span><br>",
+        "<div style='margin-right: 20px; margin-bottom: 15px;'>مركبة الوزن اليمنى (34.64N) > المقاومة اليسرى (13.46N)، لذا <span style='color: #10b981; font-weight: bold;'>الكتلة اليمنى (4kg) تهبط واليسرى (2kg) تصعد</span>.</div>",
+        
+        "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>1️⃣ طريقة معادلات الحركة الآنية:</span><br>",
+        "• الجسم الأيمن (m1=4kg, 60°): <span style='direction: ltr; display: inline-block;'>40 sin 60° - T = 4a</span><br>",
+        "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>34.64 - T = 4a</span>  (معادلة 1)<br>",
+        "• الجسم الأيسر (m2=2kg, 30°, μ=0.2): <span style='direction: ltr; display: inline-block;'>T - (20 sin 30° + μ × 20 cos 30°) = 2a</span><br>",
+        "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T - (10 + 3.46) = 2a  ⇒  T - 13.46 = 2a</span>  (معادلة 2)<br><br>",
+        
+        "<span style='font-size: 24px; font-weight: bold; color: #b91c1c;'>⚠️ كيفية حساب قوة المقاومة (الاحتكاك) هنا:</span><br>",
+        "<span style='color: #b91c1c;'>• المقاومة الكلية للجسم الأيسر = مركبة الوزن الموازية + قوة الاحتكاك<br>",
+        "• مركبة الوزن الموازية = m₂ × g × sin30° = 2 × 10 × 0.5 = <strong>10 N</strong><br>",
+        "• القوة العمودية (R) = m₂ × g × cos30° = 2 × 10 × 0.866 = <strong>17.32 N</strong><br>",
+        "• قوة الاحتكاك (f) = μ × R = 0.2 × 17.32 = <strong>3.46 N</strong><br>",
+        "• إذن المقاومة الكلية = 10 + 3.46 = <strong>13.46 N</strong><br>",
+        "• تم حساب هذه القيمة أولاً ثم استخدامها في المعادلة (2).</span><br><br>",
+        
+        "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>2️⃣ حساب العجلة (a):</span><br>",
+        "• بجمع المعادلتين (1) و (2) لحذف الشد (T):<br>",
+        "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>34.64 - 13.46 = 6a  ⇒  21.18 = 6a</span><br>",
+        "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ a = 3.53 m/s²</span><br><br>",
+        
+        "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>3️⃣ حساب قوة الشد (T):</span><br>",
+        "• بالتعويض في معادلة الجسم الأيمن:<br>",
+        "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>T = 34.64 - 4(3.53) = 34.64 - 14.12</span><br>",
+        "&nbsp;&nbsp;<span style='font-size: 28px; font-weight: bold; color: #dc2626; direction: ltr; display: inline-block;'>∴ T = 20.52 N</span><br><br>",
+        
+        "<span style='font-size: 24px; font-weight: bold; color: #1e3a8a;'>📌 طريقة بديلة (النظام ككل):</span><br>",
+        "• القانون: <span style='direction: ltr; display: inline-block;'>a = ΣF / Σm</span><br>",
+        "• ΣF (القوة المحصلة) = 34.64 - 13.46 = 21.18 N<br>",
+        "• Σm (الكتلة الكلية) = 4 + 2 = 6 kg<br>",
+        "&nbsp;&nbsp;<span style='direction: ltr; display: inline-block;'>a = 21.18 / 6 = 3.53 m/s²</span><br>",
+        "• T = 34.64 - 4(3.53) = 20.52 N<br><br>",
+        
+        "<span style='font-size: 28px; font-weight: bold; color: #dc2626;'>✦ النتيجة النهائية للمسألة:</span><br>",
+        "• الشد في الحبل (T) = <strong>20.52 N</strong><br>",
+        "</div>"
+    ],
+    "pdfFinalAnswer": "T = 20.52 N"
+},
     {
     title: "المسألة الخامسة: سؤال امتحان الوزارة (دفعة 2007) رقم 42 (تبديل مسميات الكتل)",
     text: "في الشكل التالي: الأسطح ملساء والكتل غير مستقرة. تتصل الكتلة m2 الموضوعة على مستوى مائل بزاوية θ بخيط يمر على بكرة ملساء عند القمة ويتصل بالكتلة m1 الموضوعة على مستوى أفقي أملس. فإن مقدار الشد في الحبل (T) يساوي:",
