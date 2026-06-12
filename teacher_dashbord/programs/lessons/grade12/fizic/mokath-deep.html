@@ -133,7 +133,162 @@
     // ====================== المسائل الـ 14 مع المعادلة الثانية الصحيحة ======================
     
 const questionsMatrix = [
-    
+
+    {
+  "title": " كرتان متلامستان وحث كهربائي",
+  "text": "كرتان معدنيتان متلامستان وغير مشحونتان (L و M). قربت ساق مشحونة بشحنة سالبة من الكرة L دون أن تلامسها، ثم بعدت الكرتان قليلا عن بعضهما، ثم بعدت الساق المشحونة. نتيجة لذلك، فإن شحنة كل من L و M تصبح:",
+  "svgCode": "<svg viewBox='0 0 500 220'><rect width='500' height='220' fill='#ffffff'/><rect x='40' y='80' width='25' height='50' fill='#d00' rx='3'/><text x='52' y='75' text-anchor='middle' fill='#d00' font-size='12'>- - -</text><text x='52' y='145' text-anchor='middle' font-size='11'>ساق سالبة</text><circle cx='170' cy='105' r='28' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='170' y='110' text-anchor='middle' font-size='16' font-weight='bold'>L</text><circle cx='270' cy='105' r='28' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='270' y='110' text-anchor='middle' font-size='16' font-weight='bold'>M</text><line x1='198' y1='105' x2='242' y2='105' stroke='#333' stroke-width='2'/><text x='220' y='95' text-anchor='middle' font-size='10'>ملامستان</text><text x='170' y='70' text-anchor='middle' font-size='22' fill='#d00'>+ + +</text><text x='270' y='70' text-anchor='middle' font-size='22' fill='#d00'>- - -</text><text x='170' y='165' text-anchor='middle' font-size='13' fill='#166534'>تصبح موجبة</text><text x='270' y='165' text-anchor='middle' font-size='13' fill='#166534'>تصبح سالبة</text><text x='220' y='200' text-anchor='middle' font-size='12' fill='#475569'>بعد فصل الكرتين وإبعاد الساق</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: أثناء تقريب الساق",
+      "question": "عند تقريب ساق سالبة من الكرة L (والكرتان متلامستان)، أين تتجمع الشحنات؟",
+      "options": [
+        { "text": "شحنات موجبة في L، وشحنات سالبة في M", "isCorrect": true },
+        { "text": "شحنات سالبة في L، وشحنات موجبة في M", "isCorrect": false }
+      ],
+      "feedback": "صحيح! الساق السالبة تتنافر مع الإلكترونات، فتتجمع الإلكترونات في M، وتتجه الشحنات الموجبة إلى L."
+    },
+    {
+      "title": "المرحلة الثانية: بعد فصل الكرتين وإبعاد الساق",
+      "question": "بعد فصل الكرتين عن بعضهما ثم إبعاد الساق السالبة، ما شحنة كل كرة؟",
+      "options": [
+        { "text": "L موجبة و M سالبة", "isCorrect": true },
+        { "text": "L سالبة و M موجبة", "isCorrect": false },
+        { "text": "كلاهما موجبة", "isCorrect": false },
+        { "text": "كلاهما سالبة", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! كل كرة تحتفظ بشحنتها بعد الفصل."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "<strong>الخطوات:</strong><br>",
+    "1. تقريب ساق سالبة من L (بدون ملامسة) ← حث كهربائي.<br>",
+    "2. L و M متلامستان ← إعادة توزيع الشحنات:<br>",
+    "   - شحنات موجبة تتجمع في L.<br>",
+    "   - شحنات سالبة تتجمع في M.<br>",
+    "3. فصل الكرتين ← كل كرة تحتفظ بشحنتها.<br>",
+    "4. إبعاد الساق ← لا تغيير.<br><br>",
+    "<strong>النتيجة:</strong><br>",
+    "L ← موجبة (+)<br>",
+    "M ← سالبة (-)<br><br>",
+    "الإجابة الصحيحة: L موجبة و M سالبة",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: L موجبة و M سالبة"
+},
+{
+  "title": " تبسيط وحدات القياس",
+    "svgCode": "<svg viewBox='0 0 400 100' xmlns='http://w33ww.w3.org/2000/svg'><rect width='400' height='100' fill='#ffffff'/><text x='200' y='40' text-anchor='middle' font-size='20' fill='#0f172a'>(نيوتن × أوم) ÷ (فولت × ثانية)</text><text x='200' y='65' text-anchor='middle' font-size='16' fill='#2563eb'>= نيوتن ÷ كولوم</text><text x='200' y='85' text-anchor='middle' font-size='14' fill='#16a34a'>وحدة المجال الكهربائي</text></svg>",
+
+  "text": "تعادل وحدة القياس (نيوتن × أوم) ÷ (فولت × ثانية) أيًا من الكميات التالية؟\n\n(1) الشحنة الكهربائية\n(2) ثابت كولوم\n(3) المجال الكهربائي\n(4) القوة الكهربائية",
+  "steps": [
+    {
+      "title": "الخطوة الأولى: فك الرموز",
+      "question": "نحن نعلم أن الأوم هو (فولت ÷ أمبير) وأن الكولوم هو (أمبير × ثانية). كيف نبسط المقدار؟",
+      "options": [
+        { "text": "بالتعويض عن الأوم بـ فولت/أمبير", "isCorrect": true },
+        { "text": "بالتعويض عن النيوتن بـ جول", "isCorrect": false }
+      ],
+      "feedback": "صحيح! التخلص من الأوم والفولت هو مفتاح الحل."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 24px; line-height: 2.0; font-family: Arial, sans-serif;'>",
+    "<strong>حل مبسط للمسألة (5):</strong><br><br>",
+    "1. <strong>المقدار المطلوب تبسيطه:</strong>",
+    "<div style='text-align: center; background: #f3f4f6; padding: 10px; border-radius: 8px;'> (نيوتن × أوم) / (فولت × ثانية) </div><br>",
+    "2. <strong>نعلم أن الأوم (Ω) يساوي (فولت / أمبير):</strong>",
+    "<div style='text-align: center; background: #f3f4f6; padding: 10px; border-radius: 8px;'> (نيوتن × (فولت / أمبير)) / (فولت × ثانية) </div><br>",
+    "3. <strong>بالاختصار:</strong> نشطب 'فولت' من البسط والمقام، فيتبقى لدينا:",
+    "<div style='text-align: center; background: #f3f4f6; padding: 10px; border-radius: 8px;'> نيوتن / (أمبير × ثانية) </div><br>",
+    "4. <strong>بما أن (أمبير × ثانية) تعادل الكولوم (C):</strong>",
+    "<div style='text-align: center; font-weight: bold; color: #1e40af;'> نيوتن / كولوم = المجال الكهربائي (E) </div><br>",
+    "<span style='color: #dc2626; font-weight: bold;'>النتيجة: الإجابة هي المجال الكهربائي.</span>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة هي: (3) المجال الكهربائي"
+},
+
+
+   {
+  "title": "تحديد نوع الشحنة من اتجاه المجال الكهربائي",
+  "text": "معتمدًا على بيانات الشكل، حيث المجال الكهربائي E واتجاه السهم من A إلى B، فإن نوع كل من الشحنتين A و B هو:\n\n(أ) A سالبة، B موجبة\n(ب) A موجبة، B سالبة\n(ج) A و B موجبتان\n(د) A و B سالبتان",
+  "svgCode": "<svg viewBox='0 0 400 200' xmlns='http://w22ww.w3.org/2000/svg'><rect width='400' height='200' fill='#ffffff'/><circle cx='100' cy='100' r='25' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='100' y='105' text-anchor='middle' font-size='16' font-weight='bold'>A</text><circle cx='300' cy='100' r='25' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='300' y='105' text-anchor='middle' font-size='16' font-weight='bold'>B</text><line x1='125' y1='100' x2='275' y2='100' stroke='#d00' stroke-width='3' marker-end='url(#arrow)'/><text x='200' y='75' text-anchor='middle' font-size='16' font-weight='bold'>E</text><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='9' refY='5' orient='auto'><polygon points='0 0, 10 5, 0 10' fill='#d00'/></marker></defs></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: قاعدة اتجاه المجال الكهربائي",
+      "question": "في أي اتجاه يتجه المجال الكهربائي بالنسبة للشحنات؟",
+      "options": [
+        { "text": "يخرج من الموجبة ويدخل إلى السالبة", "isCorrect": true },
+        { "text": "يخرج من السالبة ويدخل إلى الموجبة", "isCorrect": false }
+      ],
+      "feedback": "صحيح! المجال الكهربائي يخرج من الشحنة الموجبة ويدخل إلى الشحنة السالبة."
+    },
+    {
+      "title": "المرحلة الثانية: تطبيق القاعدة على الشكل",
+      "question": "بما أن اتجاه المجال الكهربائي E من A إلى B، فما نوع كل منهما؟",
+      "options": [
+        { "text": "A موجبة، B سالبة", "isCorrect": true },
+        { "text": "A سالبة، B موجبة", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! لأن المجال يخرج من A (فهي موجبة) ويدخل إلى B (فهي سالبة)."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>🔍 الحل المفصل:</strong><br><br>",
+    "<strong>القاعدة الفيزيائية:</strong><br>",
+    "- المجال الكهربائي E يخرج من الشحنة <strong style='color:#d00;'>الموجبة</strong> ويدخل إلى الشحنة <strong style='color:#d00;'>السالبة</strong>.<br><br>",
+    "<strong>تطبيق القاعدة:</strong><br>",
+    "- في الشكل، المجال الكهربائي E يتجه من A إلى B.<br>",
+    "- إذن: A هي الشحنة <strong style='color:#166534;'>الموجبة</strong> (لأن المجال يخرج منها).<br>",
+    "- B هي الشحنة <strong style='color:#166534;'>السالبة</strong> (لأن المجال يدخل إليها).<br><br>",
+    "<strong>✅ الإجابة الصحيحة: (ب) A موجبة، B سالبة</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ب) A موجبة، B سالبة"
+},
+{
+  "title": "الشحن بالحث الكهربائي",
+  "text": "عملية يتم فيها شحن جسم من جسم آخر، ولا تنتقل الشحنات بينهما، يُسمى هذا النوع من الشحن:\n\n(أ) التوصيل\n(ب) الحث\n(ج) الدلك\n(د) اللمس",
+  "svgCode": "<svg viewBox='0 0 400 200' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='200' fill='#ffffff'/><circle cx='120' cy='100' r='30' fill='#ef4444'/><text x='120' y='105' text-anchor='middle' fill='white' font-size='16'>+</text><text x='120' y='150' text-anchor='middle' font-size='12'>جسم مشحون</text><circle cx='280' cy='100' r='25' fill='#fbbf24' stroke='#333'/><text x='280' y='105' text-anchor='middle' font-size='11'>موصل</text><line x1='150' y1='100' x2='255' y2='100' stroke='#333' stroke-width='1.5' stroke-dasharray='6,4'/><text x='200' y='80' text-anchor='middle' font-size='13'>تقريب بدون ملامسة</text><text x='200' y='180' text-anchor='middle' font-size='12' fill='#d00'>⚠ لا تنتقل الشحنات بين الجسمين</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تعريف الحث الكهربائي",
+      "question": "ما هو المبدأ الأساسي في الشحن بالحث؟",
+      "options": [
+        { "text": "تقريب جسم مشحون دون ملامسة", "isCorrect": true },
+        { "text": "دلك جسمين معًا", "isCorrect": false }
+      ],
+      "feedback": "صحيح! الحث لا يحتاج إلى تلامس، ولا تنتقل فيه الشحنات."
+    },
+    {
+      "title": "المرحلة الثانية: تمييز الحث عن غيره",
+      "question": "أي أنواع الشحن لا تنتقل فيه الشحنات بين الجسمين؟",
+      "options": [
+        { "text": "الحث", "isCorrect": true },
+        { "text": "الدلك", "isCorrect": false },
+        { "text": "اللمس", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! في الحث، تحدث إعادة توزيع للشحنات فقط، ولا تنتقل من جسم إلى آخر."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>🔍 الحل المفصل:</strong><br><br>",
+    "<strong>المعطى:</strong> عملية شحن لا تنتقل فيها الشحنات بين الجسمين.<br><br>",
+    "<strong>التحليل:</strong><br>",
+    "- الدلك: ❌ تنتقل الإلكترونات.<br>",
+    "- التوصيل/اللمس: ❌ تنتقل الشحنات.<br>",
+    "- الحث: ✅ لا تنتقل الشحنات (يُقرب الجسم المشحون دون ملامسة، وتحدث إعادة توزيع فقط).<br><br>",
+    "<strong>✅ الإجابة الصحيحة: (ب) الحث</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ب) الحث"
+},
+
   {
   "title": "المسألة الأولى: النسبة بين المقاومات النوعية",
   "text": "سلكان من مادتين مختلفتين، طول الاول ضعف الثاني، ونصف قطر الاول ضعف الثاني، ومقاومة الاول تساوي مقاومة الثاني. فان النسبة بين المقاومات النوعية (ρ1 : ρ2) تساوي: \n\n (أ) 1 : 2 \n (ب) 4 : 1 \n (ج) 2 : 1 \n (د) 1 : 4",
