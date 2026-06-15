@@ -201,7 +201,53 @@
 
 
 
-
+@media print {
+    /* منع الفواصل داخل السؤال الواحد مع السماح بالفواصل الطبيعية */
+    .pdf-question-block {
+        page-break-inside: avoid;
+        page-break-after: auto;
+        break-inside: avoid;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+    
+    /* السماح بفصل الصفحة بعد كل سؤال إذا لزم الأمر */
+    .pdf-question-block:not(:last-child) {
+        page-break-after: auto;
+    }
+    
+    /* تقليل الهوامش العلوية والسفلية */
+    .pdf-solution-box {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    /* تقليل الفراغ بين الحل والسؤال التالي */
+    .pdf-question-block + .pdf-question-block {
+        margin-top: 0;
+        page-break-before: auto;
+    }
+    
+    /* منع ترك فراغات كبيرة */
+    body, html {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* تقليل المسافات بين العناصر داخل السؤال */
+    .pdf-q-title {
+        margin-bottom: 5px;
+        padding-bottom: 2px;
+    }
+    
+    .pdf-q-text {
+        margin-bottom: 8px;
+    }
+    
+    .pdf-graphic {
+        margin: 5px 0;
+    }
+}
 /* لا نحتاج لـ vh هنا لأننا سنتحكم به عند الطباعة فقط */
     </style>
 </head>
@@ -272,87 +318,356 @@
 </div>    <div id="dynamic-pdf-questions-area"></div>
 </div>
 <script>
+  // تأكد من أن آخر عنصر في المصفوفة ليس بعده فاصلة
 const questionsMatrix = [
+
 {
-  "title": "س: فخ الدائرة القصيرة (قراءة الأميتر)",
-  "text": "في الدائرة الموضحة، لماذا تعتبر قراءة الأميتر صفراً رغم وجود جهد ومقاومة؟",
-  "svgCode": "<svg viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='250' fill='#ffffff'/><path d='M 230 220 A 10 10 0 0 0 270 220' stroke='red' stroke-width='3' fill='none'/><text x='250' y='245' text-anchor='middle' font-family='Arial' font-size='9' fill='red'>سلك قصر</text><line x1='100' y1='50' x2='400' y2='50' stroke='#333' stroke-width='2'/><line x1='100' y1='50' x2='100' y2='200' stroke='#333' stroke-width='2'/><line x1='400' y1='50' x2='400' y2='200' stroke='#333' stroke-width='2'/><line x1='100' y1='200' x2='400' y2='200' stroke='#333' stroke-width='2'/><rect x='225' y='40' width='50' height='20' fill='#fbbf24' stroke='#333'/><text x='250' y='55' text-anchor='middle' font-size='12'>5Ω</text><circle cx='320' y='50' r='15' fill='#ffffff' stroke='#333' stroke-width='2'/><text x='320' y='55' text-anchor='middle' font-size='12' font-weight='bold'>A</text><line x1='230' y1='180' x2='230' y2='220' stroke='#333' stroke-width='4'/><line x1='270' y1='190' x2='270' y2='210' stroke='#333' stroke-width='4'/><text x='215' y='175' font-size='12'>+</text><text x='280' y='225' font-size='12'>-</text><text x='320' y='205' font-family='Arial' font-size='12'>10V</text></svg>",
+  "title": "س 51 (دفعة 2007): عدد الإلكترونات على سطح كرة مشحونة",
+  "text": "كرة مشحونة تنتج مجالاً كهربائياً شدته 72 kN/C عند نقطة تبعد 40 cm عن مركزها. عدد الإلكترونات على سطح الكرة هو:\n\n(أ) 1.28 × 10⁻⁴ إلكترون\n(ب) 8 × 10¹² إلكترون\n(ج) 8 × 10¹² إلكترون\n(د) 1.28 × 10⁻⁴ إلكترون",
+  "svgCode": "<svg viewBox='0 0 400 220' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='220' fill='#ffffff'/><circle cx='150' cy='110' r='35' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='150' y='115' text-anchor='middle' font-size='12' font-weight='bold'>كرة</text><circle cx='150' cy='110' r='18' fill='none' stroke='#d00' stroke-width='1.5' stroke-dasharray='3,2'/><line x1='185' y1='110' x2='280' y2='110' stroke='#333' stroke-width='1.5'/><text x='230' y='105' text-anchor='middle' font-size='10'>r = 40 cm</text><circle cx='290' cy='110' r='4' fill='#2563eb'/><text x='298' y='106' font-size='10'>P</text><line x1='150' y1='145' x2='150' y2='185' stroke='#d00' stroke-width='2' marker-end='url(#arrow)'/><text x='158' y='175' font-size='11' fill='#d00'>E = 72 kN/C</text><defs><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#d00'/></marker></defs></svg>",
   "steps": [
     {
-      "title": "المرحلة الأولى: فهم المسار",
-      "question": "التيار يخرج من القطب الموجب، أين يذهب عند وجود سلك القصر؟",
+      "title": "المرحلة الأولى: حساب الشحنة الكلية",
+      "question": "باستخدام قانون المجال الكهربائي E = k × Q / r²، ما قيمة الشحنة Q؟",
       "options": [
-        { "text": "في سلك القصر (المسار الأقل مقاومة)", "isCorrect": true },
-        { "text": "في المقاومة 5Ω", "isCorrect": false }
+        { "text": "1.28 × 10⁻⁶ C", "isCorrect": true },
+        { "text": "1.28 × 10⁻⁴ C", "isCorrect": false }
       ],
-      "feedback": "صحيح! التيار دائماً يفضل المسار ذو المقاومة الصفرية."
+      "feedback": "صحيح! Q = (72×10³ × 0.16) ÷ (9×10⁹) = 1.28×10⁻⁶ C"
     },
     {
-      "title": "المرحلة الثانية: النتيجة",
-      "question": "كم تكون قراءة الأميتر؟",
+      "title": "المرحلة الثانية: حساب عدد الإلكترونات",
+      "question": "باستخدام العلاقة n = Q ÷ e، حيث e = 1.6×10⁻¹⁹ C، ما عدد الإلكترونات؟",
       "options": [
-        { "text": "0 A", "isCorrect": true },
-        { "text": "2 A", "isCorrect": false }
+        { "text": "8 × 10¹² إلكترون", "isCorrect": true },
+        { "text": "1.28 × 10⁻⁴ إلكترون", "isCorrect": false }
       ],
-      "feedback": "ممتاز! قراءة الأميتر صفر لأن الدائرة أصبحت مقصورة."
+      "feedback": "ممتاز! n = (1.28×10⁻⁶) ÷ (1.6×10⁻¹⁹) = 8 × 10¹² إلكترون"
     }
   ],
   "pdfSolutionSteps": [
-    "<div style='font-size: 20px; line-height: 2.0; direction: rtl;'>",
-    "<strong>الحل المفصل:</strong><br>",
-    "1. السلك الأحمر الملتف حول البطارية يمثل دائرة قصيرة (Short Circuit) بمقاومة R=0.<br>",
-    "2. التيار الكهربائي دائماً يتبع المسار الذي تكون فيه المقاومة أقل ما يمكن.<br>",
-    "3. نتيجةً لذلك، يمر كامل التيار عبر سلك القصر ولا يمر أي تيار في فرع المقاومة (5Ω) أو الأميتر (A).<br>",
-    "4. وبما أن الفرع العلوي أصبح معزولاً كهربائياً، فإن شدة التيار:<br>",
-    "<div style='display: inline-block; text-align: center; margin: 10px;'>",
-    "<div>I<sub>A</sub> = 0 A</div>",
-    "</div><br>",
-    "<strong>النتيجة النهائية: قراءة الأميتر = 0 A</strong>",
+    "<div style='font-size: 20px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل (دفعة 2007):</strong><br><br>",
+    "المعطيات:<br>",
+    "E = 72 × 10³ N/C<br>",
+    "r = 40 cm = 0.4 m<br>",
+    "k = 9 × 10⁹ N·m²/C²<br>",
+    "e = 1.6 × 10⁻¹⁹ C<br><br>",
+    "1. حساب الشحنة الكلية Q:<br>",
+    "Q = (E × r²) / k<br>",
+    "Q = (72×10³ × 0.16) / (9×10⁹)<br>",
+    "Q = 1.28 × 10⁻⁶ C<br><br>",
+    "2. حساب عدد الإلكترونات n:<br>",
+    "n = Q / e = (1.28 × 10⁻⁶) / (1.6 × 10⁻¹⁹)<br>",
+    "n = <strong>8 × 10¹² إلكترون</strong><br><br>",
+    "الإجابة الصحيحة: (ب) أو (ج) 8 × 10¹² إلكترون",
     "</div>"
   ],
-  "pdfFinalAnswer": "النتيجة النهائية: 0 A"
+  "pdfFinalAnswer": "الإجابة الصحيحة: 8 × 10¹² إلكترون"
 },
-
 {
-  "title": "س 16: قراءة الأميتر في حالة دائرة قصر",
-  "text": "في الشكل الموضح، بطارية 50 فولت موصولة بدائرة تحتوي على مقاومة 10 أوم، وموصل على التوازي معها (دائرة قصر)، وأميتر موصل على التوازي مع المقاومة. احسب قراءة الأميتر.",
-  "svgCode": "<svg viewBox='0 0 500 220' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='220' fill='#ffffff'/><!-- بطارية --><rect x='30' y='70' width='40' height='60' fill='#e2e8f0' stroke='#333' stroke-width='2' rx='3'/><text x='50' y='105' text-anchor='middle' font-size='12'>50V</text><line x1='30' y1='80' x2='70' y2='80' stroke='#333' stroke-width='2'/><line x1='30' y1='120' x2='70' y2='120' stroke='#333' stroke-width='2'/><text x='25' y='75' text-anchor='end' font-size='12'>+</text><text x='25' y='135' text-anchor='end' font-size='12'>-</text><!-- خطوط التوصيل الرئيسية --><line x1='70' y1='100' x2='120' y2='100' stroke='#333' stroke-width='2'/><line x1='70' y1='100' x2='120' y2='100' stroke='#333' stroke-width='2'/><line x1='120' y1='100' x2='400' y2='100' stroke='#333' stroke-width='2'/><line x1='70' y1='140' x2='400' y2='140' stroke='#333' stroke-width='2'/><!-- المقاومة 10 أوم --><line x1='140' y1='100' x2='140' y2='115' stroke='#333' stroke-width='2'/><rect x='125' y='115' width='30' height='25' fill='#fbbf24' stroke='#333'/><text x='140' y='132' text-anchor='middle' font-size='9'>10Ω</text><line x1='140' y1='140' x2='170' y2='140' stroke='#333' stroke-width='2'/><!-- خط الدائرة القصيرة (سلك مباشر) --><line x1='210' y1='100' x2='210' y2='140' stroke='#d00' stroke-width='3'/><text x='210' y='90' text-anchor='middle' font-size='10' fill='#d00'>قصر</text><!-- الأميتر --><circle cx='300' cy='100' r='22' fill='#dbeafe' stroke='#333' stroke-width='2'/><text x='300' y='105' text-anchor='middle' font-size='14' font-weight='bold'>A</text><line x1='278' y1='100' x2='230' y2='100' stroke='#333' stroke-width='2'/><line x1='322' y1='100' x2='370' y2='100' stroke='#333' stroke-width='2'/><circle cx='400' cy='100' r='4' fill='#333'/><circle cx='400' cy='140' r='4' fill='#333'/></svg>",
+  "title": "س 47: عدد المصابيح المضيئة بعد احتراق مصباح في دائرة مركبة",
+  "text": "في الدائرة الموضحة، أربع مصابيح مضاءة. إذا احترق المصباح المشار إليه بالسهم (المصباح الأيسر في الفرع العلوي)، كم مصباحاً يبقى مضاءً؟\n\n(أ) واحد\n(ب) تنطفئ جميع المصابيح\n(ج) ثلاثة\n(د) اثنان",
+  "imagePath": "images/mosbah.jpg",
   "steps": [
     {
-      "title": "المرحلة الأولى: تحليل مسارات التيار",
-      "question": "في الدائرة، يوجد مساران رئيسيان: الأول به مقاومة 10 أوم، والثاني به سلك مقاومته صفر (دائرة قصر). أين سيمر التيار؟",
+      "title": "المرحلة الأولى: تحليل التوصيل في الدائرة",
+      "question": "كيف تتصل المصابيح في هذه الدائرة؟",
       "options": [
-        { "text": "في مسار الدائرة القصيرة (المقاومة الأصغر)", "isCorrect": true },
-        { "text": "في مسار المقاومة 10 أوم", "isCorrect": false }
+        { "text": "مصباحان على التوالي في فرع، وفرعان آخران كل منهما مصباح واحد على التوازي", "isCorrect": true },
+        { "text": "جميع المصابيح على التوالي", "isCorrect": false },
+        { "text": "جميع المصابيح على التوازي", "isCorrect": false }
       ],
-      "feedback": "صحيح! التيار يمر دائماً في المسار الأقل مقاومة، ومقاومة السلك ≈ صفر، لذا يمر التيار كله في الدائرة القصيرة."
+      "feedback": "صحيح! المصباح العلوي والأيسر على التوالي (فرع واحد)، والمصباح الأوسط والأيمن كل في فرع مستقل على التوازي."
     },
     {
-      "title": "المرحلة الثانية: تأثير ذلك على الأميتر",
-      "question": "الأميتر موصل على التوالي مع المقاومة 10 أوم. بما أن التيار لا يمر في المقاومة، فماذا سيقرأ الأميتر؟",
+      "title": "المرحلة الثانية: تأثير احتراق المصباح الأيسر",
+      "question": "المصباحان العلوي والأيسر على التوالي. عند احتراق الأيسر، ماذا يحدث للمصباح العلوي؟",
       "options": [
-        { "text": "صفر أمبير", "isCorrect": true },
-        { "text": "5 أمبير", "isCorrect": false },
-        { "text": "0.5 أمبير", "isCorrect": false }
+        { "text": "ينطفئ أيضاً (لأن التيار انقطع عن الفرع)", "isCorrect": true },
+        { "text": "يظل مضيئاً (لأن التيار يجد مساراً آخر)", "isCorrect": false }
       ],
-      "feedback": "ممتاز! لأن فرع الأميتر والمقاومة أصبح خارج الدائرة عملياً بسبب القصر، فقراءته تساوي صفراً."
+      "feedback": "ممتاز! في التوصيل على التوالي، احتراق أي مصباح يقطع التيار عن الفرع بأكمله."
+    },
+    {
+      "title": "المرحلة الثالثة: عد المصابيح المتبقية",
+      "question": "بعد احتراق المصباح الأيسر، أي المصابيح تبقى مضيئة؟",
+      "options": [
+        { "text": "المصباح الأوسط والأيمن (مصباحان)", "isCorrect": true },
+        { "text": "المصباح العلوي فقط", "isCorrect": false },
+        { "text": "جميع المصابيح تنطفئ", "isCorrect": false }
+      ],
+      "feedback": "إجابة صحيحة! المصباحان الأوسط والأيمن في فروع مستقلة على التوازي، لذا لم يتأثرا."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 20px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "توصيل المصابيح:<br>",
+    "- الفرع الأول: مصباحان على التوالي (العلوي والأيسر).<br>",
+    "- الفرع الثاني: مصباح واحد (الأوسط) على التوازي.<br>",
+    "- الفرع الثالث: مصباح واحد (الأيمن) على التوازي.<br><br>",
+    "عند احتراق المصباح الأيسر:<br>",
+    "- ينقطع التيار عن الفرع الأول بالكامل ← ينطفئ المصباحان العلوي والأيسر.<br>",
+    "- الفرع الثاني والثالث لم يتأثرا (لأنهما على التوازي) ← يظلان مضيئين.<br><br>",
+    "<strong>المصابيح المضيئة: 2 مصباحين (الأوسط والأيمن)</strong><br><br>",
+    "الإجابة الصحيحة: (د) اثنان",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (د) اثنان"
+},
+{
+  "title": "س 54: القوة المغناطيسية المؤثرة على سلك مستقيم",
+  "text": "في الشكل التالي: سلك طوله 40 cm، وشدة التيار المار فيه 50 A، وكثافة الفيض المغناطيسي 0.4 T. مقدار واتجاه القوة المغناطيسية المؤثرة على السلك:\n\n(أ) 8N خارج الورقة\n(ب) 800N إلى اليمين\n(ج) 8N داخل الورقة\n(د) 800N إلى اليسار",
+  "imagePath": "images/54-image.jpg",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحويل الوحدات وحساب مقدار القوة",
+      "question": "باستخدام القانون F = B × I × L، حيث L = 0.4 m، I = 50 A، B = 0.4 T. ما مقدار القوة؟",
+      "options": [
+        { "text": "8 نيوتن", "isCorrect": true },
+        { "text": "800 نيوتن", "isCorrect": false },
+        { "text": "0.8 نيوتن", "isCorrect": false }
+      ],
+      "feedback": "صحيح! F = 0.4 × 50 × 0.4 = 8 نيوتن"
+    },
+    {
+      "title": "المرحلة الثانية: تحديد اتجاه القوة",
+      "question": "باستخدام قاعدة فلمنج لليد اليسرى: إذا كان المجال المغناطيسي (B) إلى اليسار، والتيار (I) إلى أعلى، فما اتجاه القوة (F)؟",
+      "options": [
+        { "text": "خارج الورقة", "isCorrect": true },
+        { "text": "داخل الورقة", "isCorrect": false },
+        { "text": "إلى اليمين", "isCorrect": false },
+        { "text": "إلى اليسار", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! الإبهام يشير إلى خارج الورقة."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 20px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "المعطيات:<br>",
+    "L = 40 cm = 0.4 m &nbsp;&nbsp; I = 50 A &nbsp;&nbsp; B = 0.4 T<br><br>",
+    "1. حساب مقدار القوة:<br>",
+    "F = B × I × L = 0.4 × 50 × 0.4 = <strong>8 نيوتن</strong><br><br>",
+    "2. تحديد الاتجاه (قاعدة فلمنج لليد اليسرى):<br>",
+    "المجال (B) ←، التيار (I) ↑ ← القوة (F) = <strong>خارج الورقة</strong><br><br>",
+    "<strong>✅ الإجابة الصحيحة: 8 نيوتن خارج الورقة (الخيار أ)</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (أ) 8N خارج الورقة"
+},
+
+
+  {
+  "title": "س 37: مغناطيس يدخل ملف لولبي (قطبه شمالي)  دفعة 2007 ",
+  "text": "يوضح الشكل مغناطيس يدخل من أحد طرفي ملف لولبي بحيث يدخل القطب الشمالي (N) أولاً. فأي من العبارات الآتية صحيحة؟\n\n(أ) يتولد تيار مستحث ويكون الطرف القريب من المغناطيس قطب جنوبي\n(ب) يتولد تيار مستحث ويكون الطرف البعيد عن المغناطيس قطب شمالي\n(ج) يتولد تيار مستحث في اتجاه عقارب الساعة عند النظر إلى الطرف القريب من المغناطيس\n(د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب من المغناطيس",
+  "imagePath": "images/37-image.jpg",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحليل الحالة الفيزيائية",
+      "question": "أي قطب من المغناطيس يدخل الملف أولاً؟ وما نوع التغير في الفيض؟",
+      "options": [
+        { "text": "القطب الشمالي (N) يدخل أولاً → الفيض يزداد", "isCorrect": true },
+        { "text": "القطب الجنوبي (S) يدخل أولاً → الفيض يقل", "isCorrect": false }
+      ],
+      "feedback": "صحيح! دخول القطب الشمالي يزيد من الفيض المغناطيسي خلال الملف."
+    },
+    {
+      "title": "المرحلة الثانية: تطبيق قانون لنز لتحديد قطبية الطرف القريب",
+      "question": "حسب قانون لنز، التيار المستحث يتجه ليعاكس سبب تولده. ليعاكس اقتراب القطب الشمالي، ماذا يجب أن تكون قطبية الطرف القريب من الملف؟",
+      "options": [
+        { "text": "قطب شمالي (N) ليتنافر مع المغناطيس", "isCorrect": true },
+        { "text": "قطب جنوبي (S) ليتجاذب مع المغناطيس", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! الأقطاب المتشابهة تتنافر، فالقطب الشمالي للطرف القريب ينشئ قوة تنافر تعاكس حركة المغناطيس."
+    },
+    {
+      "title": "المرحلة الثالثة: تحديد اتجاه التيار باستخدام قاعدة اليد اليمنى",
+      "question": "لتكوين قطب شمالي على الوجه القريب للملف، في أي اتجاه يجب أن يمر التيار (عند النظر إلى ذلك الوجه)؟",
+      "options": [
+        { "text": "عكس اتجاه عقارب الساعة", "isCorrect": true },
+        { "text": "اتجاه عقارب الساعة", "isCorrect": false }
+      ],
+      "feedback": "صحيح! قاعدة البريمة اليمنى: التيار عكس عقارب الساعة يولد قطبًا شمالياً على الوجه القريب."
+    },
+    {
+      "title": "المرحلة الرابعة: اختيار العبارة الصحيحة من الخيارات",
+      "question": "بناءً على التحليل، أي من العبارات التالية صحيحة؟",
+      "options": [
+        { "text": "(د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة", "isCorrect": true },
+        { "text": "(ج) يتولد تيار مستحث في اتجاه عقارب الساعة", "isCorrect": false },
+        { "text": "(أ) الطرف القريب قطب جنوبي", "isCorrect": false },
+        { "text": "(ب) الطرف البعيد قطب شمالي", "isCorrect": false }
+      ],
+      "feedback": "إجابة صحيحة! العبارة (د) هي الوحيدة المطابقة للتحليل الفيزيائي."
     }
   ],
   "pdfSolutionSteps": [
     "<div style='font-size: 22px; line-height: 1.8;'>",
-    "<strong>الحل المفصل (الفخ في المسألة):</strong><br><br>",
-    "1. الدائرة تحتوي على مسارين بين طرفي البطارية:<br>",
-    "   - المسار الأول: يحتوي على مقاومة 10 أوم والأميتر.<br>",
-    "   - المسار الثاني: عبارة عن سلك مباشر مقاومته صفر (دائرة قصر).<br><br>",
+    "<strong>الحل المفصل (السؤال 37):</strong><br><br>",
+    "<strong>المعطيات:</strong> مغناطيس يدخل ملف لولبي بحيث يدخل القطب <strong>الشمالي (N)</strong> أولاً.<br><br>",
+    "<strong>1. تحليل الحالة الفيزيائية:</strong><br>",
+    "- المغناطيس يتحرك باتجاه الملف ← اقتراب القطب الشمالي.<br>",
+    "- هذا الاقتراب يزيد من الفيض المغناطيسي خلال الملف (ΔΦ > 0).<br><br>",
+    "<strong>2. تطبيق قانون لنز:</strong><br>",
+    "- التيار المستحث يتجه ليعاكس سبب تولده (زيادة الفيض).<br>",
+    "- ليعاكس اقتراب القطب الشمالي، يجب أن يُنشئ الملف قطباً <strong>شمالياً (N)</strong> على وجهه القريب (لأن الأقطاب المتشابهة تتنافر).<br><br>",
+    "<strong>3. تحديد اتجاه التيار (قاعدة اليد اليمنى):</strong><br>",
+    "- لتكوين قطب شمالي على الوجه القريب، يجب أن يمر التيار في لفات الملف باتجاه <strong>عكس عقارب الساعة</strong> عند النظر إلى ذلك الوجه.<br><br>",
+    "<strong>4. تقييم الخيارات:</strong><br>",
+    "- (أ) ❌ خطأ: الطرف القريب يجب أن يكون شمالياً، وليس جنوبياً.<br>",
+    "- (ب) ❌ خطأ: الطرف البعيد سيكون جنوبياً (لأن الملف لولبي).<br>",
+    "- (ج) ❌ خطأ: التيار يجب أن يكون عكس عقارب الساعة، وليس مع عقارب الساعة.<br>",
+    "- (د) ✅ صحيح: يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب.<br><br>",
+    "<strong>✅ الإجابة الصحيحة: (د)</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب من المغناطيس"
+},
+  {
+  "title": "س دفعة 2007-35: جهد النقطتين a و b عند تحريك مغناطيس نحو ملف",
+  "text": "في الشكل التالي، ملف لولبي (S) متصل بمقاومة، ومغناطيس بقطب جنوبي يتحرك باتجاه الملف (للسفل). إذا تحرك المغناطيس باتجاه الملف، فإن جهد النقطة (a) يكون ...... جهد النقطة (b).",
+  "imagePath": "images/volt-image.jpg",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحليل التغير في التدفق",
+      "question": "عند اقتراب القطب الجنوبي (S) من الملف، ماذا يحدث للفيض المغناطيسي خلال الملف؟",
+      "options": [
+        { "text": "يزداد (ΔΦ > 0)", "isCorrect": true },
+        { "text": "يقل (ΔΦ < 0)", "isCorrect": false },
+        { "text": "لا يتغير", "isCorrect": false }
+      ],
+      "feedback": "صحيح! اقتراب المغناطيس يزيد عدد خطوط الفيض التي تخترق الملف."
+    },
+    {
+      "title": "المرحلة الثانية: تطبيق قاعدة لنز",
+      "question": "لتحديد اتجاه التيار المستحث: بما أن القطب المقترب هو جنوبي (S)، فأي قطب يجب أن ينشأ على وجه الملف العلوي ليعاكس الاقتراب؟",
+      "options": [
+        { "text": "قطب جنوبي (S) ليتنافر مع القطب المقترب", "isCorrect": true },
+        { "text": "قطب شمالي (N) ليجذب القطب المقترب", "isCorrect": false }
+      ],
+      "feedback": "صحيح! التيار المستحث ينشأ بحيث يكون وجه الملف المقابل للمغناطيس مشابهاً له في القطبية ليعاكس الحركة."
+    },
+    {
+      "title": "المرحلة الثالثة: اتجاه التيار في المقاومة",
+      "question": "باستخدام قاعدة اليد اليمنى، لتكوين قطب جنوبي في الأعلى، يكون اتجاه التيار في المقاومة من النقطة (b) إلى (a). ماذا يعني ذلك بالنسبة لفرق الجهد؟",
+      "options": [
+        { "text": "جهد (a) أقل من جهد (b)", "isCorrect": true },
+        { "text": "جهد (a) أكبر من جهد (b)", "isCorrect": false },
+        { "text": "جهد (a) يساوي جهد (b)", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! التيار يسري في المقاومة من الجهد الأعلى (b) إلى الجهد الأقل (a). إذاً جهد (a) أقل من جهد (b)."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>الحل المفصل (بتطبيق قاعدة لنز):</strong><br><br>",
+    "<strong>المعطيات:</strong> مغناطيس بقطب جنوبي (S) يتحرك للأسفل (يقترب من الملف).<br><br>",
+    "1. <strong>تغير التدفق:</strong> اقتراب القطب الجنوبي ← زيادة التدفق المغناطيسي خلال الملف (ΔΦ > 0).<br><br>",
+    "2. <strong>قاعدة لنز:</strong> التيار المستحث يتولد ليعاكس هذا التغير. ليعاكس الاقتراب، يجب أن يُنشئ الملف قطباً جنوبياً (S) في وجهه العلوي ليتنافر مع المغناطيس.<br><br>",
+    "3. <strong>اتجاه التيار (قاعدة اليد اليمنى):</strong> لتكوين قطب جنوبي في الأعلى، يكون اتجاه التيار في لفات الملف بحيث يدخل التيار إلى المقاومة من النقطة (b) ويخرج من النقطة (a).<br><br>",
+    "4. <strong>فرق الجهد:</strong> التيار في المقاومة يسري من الجهد الأعلى إلى الجهد الأقل. التيار يدخل من (b) ← جهد (b) أعلى. التيار يخرج من (a) ← جهد (a) أقل.<br><br>",
+    "<strong style='color:#166534;'>✅ الإجابة الصحيحة: جهد (a) أقل من جهد (b) (الخيار ب).</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ب) أقل من"
+},
+{
+  "title": "س: العلاقة بين التيارات في دائرة توازي",
+  "text": "في الدائرة الموضحة، مقاومة 8 أوم يمر فيها تيار I2، ومقاومة 2 أوم يمر فيها تيار I3، والمقاومتان على التوازي. التيار الكلي I1 = I2 + I3. أوجد العلاقة بين I1 و I2.",
+  "imagePath": "images/23.jpg",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: مساواة الجهد",
+      "question": "المقاومتان على التوازي، ماذا تتساوى فيهما؟",
+      "options": [
+        { "text": "فرق الجهد (الجهد) متساوٍ", "isCorrect": true },
+        { "text": "التيار متساوٍ", "isCorrect": false }
+      ],
+      "feedback": "صحيح! في التوازي، الجهد متساوٍ على جميع الفروع."
+    },
+    {
+      "title": "المرحلة الثانية: إيجاد العلاقة بين I2 و I3",
+      "question": "بما أن V = I2 × 8 = I3 × 2، فما العلاقة بين I3 و I2؟",
+      "options": [
+        { "text": "I3 = 4 I2", "isCorrect": true },
+        { "text": "I3 = 0.25 I2", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! 8 I2 = 2 I3 → I3 = (8÷2) I2 = 4 I2"
+    },
+    {
+      "title": "المرحلة الثالثة: إيجاد I1 بدلالة I2",
+      "question": "بما أن I1 = I2 + I3، و I3 = 4 I2، فما قيمة I1؟",
+      "options": [
+        { "text": "I1 = 5 I2", "isCorrect": true },
+        { "text": "I1 = 4 I2", "isCorrect": false },
+        { "text": "I1 = I2", "isCorrect": false }
+      ],
+      "feedback": "صحيح! I1 = I2 + 4 I2 = 5 I2"
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "المعطيات:<br>",
+    "R2 = 8 Ω (يمر فيها I2)<br>",
+    "R3 = 2 Ω (يمر فيها I3)<br>",
+    "المقاومتان على التوازي → الجهد متساوٍ<br><br>",
+    "1. مساواة الجهد:<br>",
+    "V = I2 × 8 = I3 × 2<br>",
+    "8 I2 = 2 I3 → I3 = 4 I2<br><br>",
+    "2. قانون كيرشوف للتيار (نقطة التفرع):<br>",
+    "I1 = I2 + I3<br>",
+    "I1 = I2 + 4 I2<br>",
+    "<strong style='color:#166534;'>I1 = 5 I2</strong><br><br>",
+    "الإجابة الصحيحة: I1 = 5 I2",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: I1 = 5 I2"
+},
+{
+  "title": "س 22: قراءة الأميتر في دائرة قصر",
+  "text": "في الشكل التالي: بطارية 10 فولت، مقاومة 50 أوم، وأميتر متصل على التوالي. إذا كانت الدائرة تحتوي على سلك قصر يوصل بين قطبي البطارية مباشرة، فإن قراءة الأميتر تكون:",
+  "imagePath": "images/22.jpg",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحليل مسارات التيار",
+      "question": "في هذه الدائرة، يوجد مساران بين قطبي البطارية: مسار به مقاومة 50 أوم، ومسار به سلك أحمر مقاومته صفر. أين يمر التيار؟",
+      "options": [
+        { "text": "في السلك الأحمر (المقاومة الأصغر)", "isCorrect": true },
+        { "text": "في المقاومة 50 أوم", "isCorrect": false }
+      ],
+      "feedback": "صحيح! التيار يمر دائماً في المسار الأقل مقاومة."
+    },
+    {
+      "title": "المرحلة الثانية: تأثير ذلك على الأميتر",
+      "question": "الأميتر موصل على التوالي مع المقاومة 50 أوم. بما أن التيار لا يمر في المقاومة، فماذا سيقرأ الأميتر؟",
+      "options": [
+        { "text": "صفر أمبير", "isCorrect": true },
+        { "text": "0.5 أمبير", "isCorrect": false },
+        { "text": "2 أمبير", "isCorrect": false },
+        { "text": "50 أمبير", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! التيار كله يمر في السلك الأحمر، ولا يمر أي تيار في فرع الأميتر، فقراءته صفر."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "1. الدائرة تحتوي على مسارين بين قطبي البطارية:<br>",
+    "   - المسار الأول: يحتوي على مقاومة 50 أوم والأميتر.<br>",
+    "   - المسار الثاني: سلك أحمر مقاومته صفر (دائرة قصر).<br><br>",
     "2. التيار الكهربائي يمر دائماً في المسار الأقل مقاومة.<br>",
-    "3. مقاومة السلك = 0 Ω (مهملة)، بينما مقاومة المسار الآخر = 10 Ω.<br>",
-    "4. بالتالي، التيار الكامل يمر في السلك، ولا يمر أي تيار في المقاومة 10 أوم أو في الأميتر.<br><br>",
-    "إذاً: قراءة الأميتر = <strong style='color:#d00;'>صفر أمبير</strong><br><br>",
+    "3. مقاومة السلك = 0 Ω، ومقاومة المسار الآخر = 50 Ω.<br>",
+    "4. بالتالي، التيار الكامل يمر في السلك، ولا يمر أي تيار في المقاومة أو الأميتر.<br><br>",
+    "قراءة الأميتر = <strong style='color:#d00;'>صفر أمبير</strong><br><br>",
     "الإجابة الصحيحة: (د) صفر",
     "</div>"
   ],
   "pdfFinalAnswer": "الإجابة الصحيحة: صفر أمبير (الخيار د)"
 },
+
 
 
 
@@ -2297,67 +2612,118 @@ const questionsMatrix = [
 "</div>"
 ],
 "pdfFinalAnswer": "الإجابة الصحيحة: (1) 1 Ω"
-},
+}
 
 
 
 ];
-    let currentQIndex = 0;
+let currentQIndex = 0;
 
-    function renderActiveQuestion(index) {
-        const data = questionsMatrix[index];
-        if(!data) return;
-        document.getElementById('q-source').innerText = data.title;
-        document.getElementById('main-question-text').innerText = data.text;
-        document.getElementById('question-counter').innerHTML = `مسألة ${index+1} / ${questionsMatrix.length}`;
-        document.getElementById('graphic-container').innerHTML = data.svgCode;
-        document.getElementById('prev-btn').disabled = index === 0;
-        document.getElementById('next-btn').disabled = index === questionsMatrix.length-1;
-        const stepsContainer = document.getElementById('steps-container');
-        stepsContainer.innerHTML = '';
-        if(data.steps) {
-            data.steps.forEach((step, sIdx) => {
-                let optionsHTML = '';
-                step.options.forEach(opt => {
-                    optionsHTML += `<button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}"><span>${opt.text}</span> <i class="fa-regular fa-circle"></i></button>`;
-                });
-                stepsContainer.innerHTML += `<div class="step-card ${sIdx===0?'active':''}" id="step-card-${sIdx}"><div class="step-title">${step.title}</div><div class="step-question">${step.question}</div><div class="options-grid">${optionsHTML}</div><div class="feedback-box" id="feedback-${sIdx}"></div></div>`;
+function navigateQuestion(direction) {
+    const newIndex = currentQIndex + direction;
+    if (newIndex >= 0 && newIndex < questionsMatrix.length) {
+        currentQIndex = newIndex;
+        renderActiveQuestion(currentQIndex);
+    }
+}
+
+function renderActiveQuestion(index) {
+    const data = questionsMatrix[index];
+    if(!data) return;
+    document.getElementById('q-source').innerText = data.title;
+    document.getElementById('main-question-text').innerText = data.text;
+    document.getElementById('question-counter').innerHTML = `مسألة ${index+1} / ${questionsMatrix.length}`;
+    
+    const graphicContainer = document.getElementById('graphic-container');
+    if (data.svgCode && data.svgCode.trim() !== "") {
+        graphicContainer.innerHTML = data.svgCode;
+    } else if (data.imagePath && data.imagePath.trim() !== "") {
+        graphicContainer.innerHTML = `<img src="${data.imagePath}" style="max-width: 480px; width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #ccc; border-radius: 8px;" alt="رسم توضيحي">`;
+    } else {
+        graphicContainer.innerHTML = '<p style="color: gray;">⚠️ لا يوجد رسم توضيحي</p>';
+    }
+    
+    document.getElementById('prev-btn').disabled = index === 0;
+    document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
+    
+    const stepsContainer = document.getElementById('steps-container');
+    stepsContainer.innerHTML = '';
+    if(data.steps) {
+        data.steps.forEach((step, sIdx) => {
+            let optionsHTML = '';
+            step.options.forEach(opt => {
+                optionsHTML += `<button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}"><span>${opt.text}</span> <i class="fa-regular fa-circle"></i></button>`;
             });
-        }
-    }
-
-    function checkLiveAnswer(btn, sIdx, isCorrect) {
-        const card = document.getElementById(`step-card-${sIdx}`);
-        const fb = document.getElementById(`feedback-${sIdx}`);
-        card.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('correct','wrong'); b.querySelector('i').className = 'fa-regular fa-circle'; });
-        if(isCorrect) {
-            btn.classList.add('correct');
-            btn.querySelector('i').className = 'fa-solid fa-circle-check';
-            fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
-            fb.className = 'feedback-box success';
-            card.classList.add('completed'); card.classList.remove('active');
-            const nextCard = document.getElementById(`step-card-${sIdx+1}`);
-            if(nextCard) { nextCard.classList.add('active'); nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-        } else {
-            btn.classList.add('wrong');
-            btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
-        }
-    }
-
-    function navigateQuestion(dir) { currentQIndex += dir; renderActiveQuestion(currentQIndex); }
-
-    function triggerSmartPrint() {
-        const pdfArea = document.getElementById('dynamic-pdf-questions-area');
-        pdfArea.innerHTML = '';
-        questionsMatrix.forEach((q, idx) => {
-            let stepsHtml = '';
-            if(q.pdfSolutionSteps) q.pdfSolutionSteps.forEach(s => { stepsHtml += `<div>${s}</div>`; });
-            pdfArea.innerHTML += `<div class="pdf-question-block"><div class="pdf-q-title">${idx+1}. ${q.title}</div><div class="pdf-q-text">${q.text}</div><div class="pdf-graphic">${q.svgCode}</div><div class="pdf-solution-box"><div class="pdf-sol-title">الحل:</div><div class="pdf-sol-steps">${stepsHtml}<div class="pdf-final-ans">${q.pdfFinalAnswer || ''}</div></div></div></div>`;
+            stepsContainer.innerHTML += `<div class="step-card ${sIdx===0?'active':''}" id="step-card-${sIdx}"><div class="step-title">${step.title}</div><div class="step-question">${step.question}</div><div class="options-grid">${optionsHTML}</div><div class="feedback-box" id="feedback-${sIdx}"></div></div>`;
         });
-        window.print();
     }
+}
 
-    window.onload = () => { renderActiveQuestion(0); };
+function checkLiveAnswer(btn, sIdx, isCorrect) {
+    const card = document.getElementById(`step-card-${sIdx}`);
+    const fb = document.getElementById(`feedback-${sIdx}`);
+    card.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('correct','wrong'); b.querySelector('i').className = 'fa-regular fa-circle'; });
+    if(isCorrect) {
+        btn.classList.add('correct');
+        btn.querySelector('i').className = 'fa-solid fa-circle-check';
+        fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+        fb.className = 'feedback-box success';
+        card.classList.add('completed');
+        card.classList.remove('active');
+        const nextCard = document.getElementById(`step-card-${sIdx+1}`);
+        if(nextCard) {
+            nextCard.classList.add('active');
+            nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    } else {
+        btn.classList.add('wrong');
+        btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+    }
+}
+
+function triggerSmartPrint() {
+    const pdfArea = document.getElementById('dynamic-pdf-questions-area');
+    pdfArea.innerHTML = '';
+    
+    questionsMatrix.forEach((q, idx) => {
+        let stepsHtml = '';
+        if(q.pdfSolutionSteps) q.pdfSolutionSteps.forEach(s => { stepsHtml += `<div>${s}</div>`; });
+        
+        let graphicHtml = '';
+        if (q.svgCode && q.svgCode.trim() !== "") {
+            graphicHtml = `<div class="pdf-graphic">${q.svgCode}</div>`;
+        } else if (q.imagePath && q.imagePath.trim() !== "") {
+            graphicHtml = `<img src="${q.imagePath}" style="max-width: 250px; width: 100%; height: auto; display: block; margin: 10px auto; border: 1px solid #ccc; border-radius: 8px;">`;
+        }
+
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'pdf-question-block';
+        questionDiv.innerHTML = `
+            <div class="pdf-q-title">${idx+1}. ${q.title}</div>
+            <div class="pdf-q-text">${q.text}</div>
+            ${graphicHtml}
+            <div class="pdf-solution-box">
+                <div class="pdf-sol-title">الحل:</div>
+                <div class="pdf-sol-steps">${stepsHtml}<div class="pdf-final-ans">${q.pdfFinalAnswer || ''}</div></div>
+            </div>
+        `;
+        
+        if (questionDiv.offsetHeight < 800) {
+            questionDiv.style.pageBreakInside = 'avoid';
+        }
+        
+        pdfArea.appendChild(questionDiv);
+    });
+    
+    setTimeout(() => {
+        window.print();
+    }, 100);
+}
+
+window.onload = () => { 
+    renderActiveQuestion(0); 
+};
+
 </script>
 </body>
 </html>
