@@ -162,94 +162,100 @@
 
     /* هذا التنسيق خاص بالطباعة فقط */
   
-    @media print {
-        /* تكبير النص الأساسي لكل المسألة */
-        .pdf-question-block {
-            font-size: 24px !important; /* حجم الخط العام */
-            line-height: 1.6 !important;
-            margin-bottom: 50px !important;
-            page-break-inside: avoid; /* منع قطع المسألة بين صفحتين */
-        }
-
-        /* تكبير العنوان */
-        .pdf-q-title {
-            font-size: 24px !important;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        /* تكبير نص السؤال */
-        .pdf-q-text {
-            font-size: 24px !important;
-            margin-bottom: 20px;
-        }
-
-        /* تكبير الحل */
-        .pdf-sol-steps {
-            font-size: 24px !important;
-        }
-    }
-
-.pdf-question-block {
-    display: block;
-    height: auto !important; /* هذا يضمن أن ارتفاع المسألة يتناسب فقط مع محتواها */
-    min-height: unset !important;
-}
-
-
-
-
-
-
-@media print {
-    /* منع الفواصل داخل السؤال الواحد مع السماح بالفواصل الطبيعية */
-    .pdf-question-block {
-        page-break-inside: avoid;
-        page-break-after: auto;
-        break-inside: avoid;
-        margin-bottom: 20px;
-        padding-bottom: 10px;
-    }
-    
-    /* السماح بفصل الصفحة بعد كل سؤال إذا لزم الأمر */
-    .pdf-question-block:not(:last-child) {
-        page-break-after: auto;
-    }
-    
-    /* تقليل الهوامش العلوية والسفلية */
-    .pdf-solution-box {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    
-    /* تقليل الفراغ بين الحل والسؤال التالي */
-    .pdf-question-block + .pdf-question-block {
-        margin-top: 0;
-        page-break-before: auto;
-    }
-    
-    /* منع ترك فراغات كبيرة */
+   @media print {
+    /* إزالة الهوامش العلوية والسفلية الزائدة */
     body, html {
         margin: 0 !important;
         padding: 0 !important;
     }
     
-    /* تقليل المسافات بين العناصر داخل السؤال */
+    /* تنسيق السؤال الواحد */
+    .pdf-question-block {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-bottom: 20px !important;
+        padding: 12px !important;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+    
+    /* عنوان السؤال */
     .pdf-q-title {
-        margin-bottom: 5px;
-        padding-bottom: 2px;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        margin-bottom: 8px !important;
+        padding-bottom: 4px !important;
+        color: #2563eb;
+        border-bottom: 1px solid #e2e8f0;
     }
     
+    /* نص السؤال */
     .pdf-q-text {
-        margin-bottom: 8px;
+        font-size: 18px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 10px !important;
+        text-align: justify;
     }
     
+    /* منطقة الرسم */
     .pdf-graphic {
-        margin: 5px 0;
+        margin: 8px 0 !important;
+        text-align: center;
     }
-}
-/* لا نحتاج لـ vh هنا لأننا سنتحكم به عند الطباعة فقط */
-    </style>
+    
+    /* صندوق الحل */
+    .pdf-solution-box {
+        margin-top: 8px !important;
+        margin-bottom: 6px !important;
+        padding: 8px !important;
+        background: #f8fafc;
+        border-right: 4px solid #16a34a;
+        border-radius: 0 8px 8px 0;
+    }
+    
+    /* عنوان الحل */
+    .pdf-sol-title {
+        font-size: 18px !important;
+        font-weight: bold !important;
+        color: #166534 !important;
+        margin-bottom: 6px !important;
+    }
+    
+    /* خطوات الحل */
+    .pdf-sol-steps {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        color: #334155;
+    }
+    
+    .pdf-sol-steps div {
+        margin-bottom: 4px !important;
+    }
+    
+    /* الإجابة النهائية */
+    .pdf-final-ans {
+        font-size: 16px !important;
+        font-weight: bold !important;
+        margin-top: 8px !important;
+        padding: 6px 10px !important;
+        background: #e2f8e9;
+        display: inline-block;
+        border-radius: 6px;
+        color: #0f172a;
+    }
+    
+    /* الصور والرسومات */
+    .pdf-graphic svg,
+    .question-graphic-area svg {
+        max-width: 280px !important;
+        height: auto !important;
+    }
+    
+    img {
+        max-width: 250px !important;
+        height: auto !important;
+    }
+}  </style>
 </head>
 <body>
 
@@ -321,9 +327,312 @@
   // تأكد من أن آخر عنصر في المصفوفة ليس بعده فاصلة
 const questionsMatrix = [
 
+  {
+  "title": "س 46:(دفعة 2007) نقطة التعادل الكهربائي لشحنتين متساويتين مختلفتين",
+  "text": "نقطة التعادل الكهربائي لشحنتين متساويتين في المقدار ومختلفتين في النوع تكون:\n\n(أ) بينهما وقريبة من الشحنة الكبرى\n(ب) بينهما وفي منتصف المسافة\n(ج) خارجهما وقريبة من الشحنة الصغرى\n(د) لا توجد نقطة تعادل كهربائي",
+  "svgCode": "<svg width='500' height='250' viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='250' fill='#ffffff'/><circle cx='120' cy='120' r='25' fill='#ef4444'/><text x='120' y='125' text-anchor='middle' fill='white' font-size='16'>+q</text><circle cx='380' cy='120' r='25' fill='#2563eb'/><text x='380' y='125' text-anchor='middle' fill='white' font-size='16'>-q</text><line x1='145' y1='120' x2='355' y2='120' stroke='#333' stroke-width='2'/><text x='250' y='160' text-anchor='middle' font-size='14' fill='#d00'>لا توجد نقطة تعادل</text><text x='250' y='185' text-anchor='middle' font-size='12'>لأن المجالين في نفس الاتجاه بين الشحنتين</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحليل المجال بين شحنتين مختلفتين",
+      "question": "شحنتان +q و -q متساويتان في المقدار. في المنطقة بينهما، ما اتجاه المجالين؟",
+      "options": [
+        { "text": "نفس الاتجاه (من +q إلى -q)", "isCorrect": true },
+        { "text": "متعاكسان", "isCorrect": false }
+      ],
+      "feedback": "صحيح! المجال من +q يكون مبتعداً، ومن -q يكون مقترباً، فبينهما المجالان في نفس الاتجاه."
+    },
+    {
+      "title": "المرحلة الثانية: إمكانية وجود نقطة تعادل",
+      "question": "بما أن المجالين في نفس الاتجاه بين الشحنتين، هل يمكن أن يتعادلا؟",
+      "options": [
+        { "text": "لا، لأنه لا يمكن أن يكون المجال الكلي صفراً", "isCorrect": true },
+        { "text": "نعم، في منتصف المسافة", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! عندما يكون المجالان في نفس الاتجاه، لا يمكن أن يتعادلا أبداً."
+    },
+    {
+      "title": "المرحلة الثالثة: خارج الشحنتين",
+      "question": "هل يمكن أن تتساوى المجالات خارج الشحنتين عندما تكون الشحنتان متساويتين؟",
+      "options": [
+        { "text": "لا، لأن المسافة مختلفة", "isCorrect": true },
+        { "text": "نعم، خارجهما", "isCorrect": false }
+      ],
+      "feedback": "صحيح! خارج الشحنتين، المجالان متعاكسان ولكن المسافة مختلفة، فلا يمكن أن يتساوى المقداران."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "<strong>المعطيات:</strong> شحنتان متساويتان في المقدار ومختلفتان في النوع (+q و -q).<br><br>",
+    "<strong>تحليل المجال الكهربائي:</strong><br>",
+    "المجال الناتج عن شحنة موجبة: مبتعد عنها.<br>",
+    "المجال الناتج عن شحنة سالبة: مقترب إليها.<br><br>",
+    "<strong>في المنطقة بين الشحنتين:</strong><br>",
+    "المجالان في <strong>نفس الاتجاه</strong> (من +q إلى -q)، لذا لا يمكن أن يتعادلا.<br><br>",
+    "<strong>خارج الشحنتين:</strong><br>",
+    "- على امتداد الخط خارج +q: المجالان متعاكسان، ولكن المسافة إلى +q أصغر → مجال +q أكبر.<br>",
+    "- على امتداد الخط خارج -q: المجالان متعاكسان، ولكن المسافة إلى -q أصغر → مجال -q أكبر.<br>",
+    "- لا يمكن أن يتساوى المقداران لأن الشحنتين متساويتان والمسافات مختلفة.<br><br>",
+    "<strong style='color:#166534;'>الاستنتاج: لا توجد نقطة تعادل كهربائي للشحنتين المتساويتين مختلفتي النوع.</strong><br><br>",
+    "الإجابة الصحيحة: (د) لا توجد نقطة تعادل كهربائي",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (د) لا توجد نقطة تعادل كهربائي"
+},
+  {
+  "title": "س 36:(دفعة 2007) مقارنة مقاومة موصلين من نفس المادة",
+  "text": "يوضح الرسم التالي العلاقة بين فرق الجهد وشدة التيار الكهربائي لموصلين (A, B) من نفس المادة وعند ثبوت درجة الحرارة. منه نستنتج أن:",
+  "svgCode": "<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='8' refY='3' orient='auto'><path d='M0,0 L0,6 L9,3 z' fill='black'/></marker></defs><line x1='120' y1='320' x2='120' y2='60' stroke='black' stroke-width='3' marker-end='url(#arrow)'/><line x1='120' y1='320' x2='500' y2='320' stroke='black' stroke-width='3' marker-end='url(#arrow)'/><line x1='120' y1='320' x2='370' y2='90' stroke='#d00' stroke-width='4'/><line x1='120' y1='320' x2='390' y2='180' stroke='#333' stroke-width='4'/><text x='385' y='95' font-family='Arial' font-size='28' fill='#d00' font-weight='bold'>A</text><text x='405' y='185' font-family='Arial' font-size='28' fill='#333'>B</text><text x='95' y='45' font-family='Arial' font-size='24'>V (V)</text><text x='510' y='330' font-family='Arial' font-size='24'>I (A)</text><circle cx='120' cy='320' r='8' fill='red' stroke='red' stroke-width='2'/></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحليل العلاقة بين V و I",
+      "question": "العلاقة بين فرق الجهد (V) وشدة التيار (I) لموصل أومي هي V = I × R. ماذا يمثل ميل الخط المستقيم؟",
+      "options": [
+        { "text": "المقاومة الكهربائية (R)", "isCorrect": true },
+        { "text": "شدة التيار (I)", "isCorrect": false },
+        { "text": "فرق الجهد (V)", "isCorrect": false }
+      ],
+      "feedback": "صحيح! في علاقة V-I، الميل = المقاومة الكهربائية (R)."
+    },
+    {
+      "title": "المرحلة الثانية: مقارنة ميل الخطين A و B",
+      "question": "من الرسم البياني، أي الخطين له ميل أكبر؟",
+      "options": [
+        { "text": "الخط A (لأنه أكثر انحداراً)", "isCorrect": true },
+        { "text": "الخط B (لأنه أقل انحداراً)", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! الميل الأكبر يعني مقاومة أكبر."
+    },
+    {
+      "title": "المرحلة الثالثة: المقارنة بين مقاومة A و B",
+      "question": "بما أن ميل A > ميل B، فما العلاقة بين مقاومة A و مقاومة B؟",
+      "options": [
+        { "text": "R_A > R_B", "isCorrect": true },
+        { "text": "R_A < R_B", "isCorrect": false },
+        { "text": "R_A = R_B", "isCorrect": false }
+      ],
+      "feedback": "صحيح! الميل الأكبر يعني مقاومة أكبر."
+    },
+    {
+      "title": "المرحلة الرابعة: المقاومة النوعية (لأن المادة واحدة)",
+      "question": "الموصلان من نفس المادة ودرجة الحرارة ثابتة. ماذا نستنتج عن المقاومة النوعية؟",
+      "options": [
+        { "text": "المقاومة النوعية متساوية (لأن المادة واحدة)", "isCorrect": true },
+        { "text": "المقاومة النوعية لـ A أقل من B", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! المقاومة النوعية تعتمد على نوع المادة فقط، وبما أن المادة واحدة فهي متساوية."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "<strong>تحليل الرسم البياني:</strong><br>",
+    "- المحور الأفقي: شدة التيار I (A)<br>",
+    "- المحور الرأسي: فرق الجهد V (V)<br>",
+    "- العلاقة: V = I × R (قانون أوم)<br>",
+    "- ميل الخط المستقيم = المقاومة الكهربائية (R)<br><br>",
+    "<strong>مقارنة الميل:</strong><br>",
+    "- الخط A: أكثر انحداراً → ميل أكبر → R_A أكبر<br>",
+    "- الخط B: أقل انحداراً → ميل أصغر → R_B أصغر<br><br>",
+    "إذاً: R_A > R_B<br><br>",
+    "<strong>المقاومة النوعية:</strong><br>",
+    "- المادة واحدة ودرجة الحرارة ثابتة → المقاومة النوعية (ρ) متساوية.<br><br>",
+    "<strong style='color:#166534;'>الاستنتاج الصحيح: المقاومة الكهربائية للموصل A أكبر من المقاومة الكهربائية للموصل B (الخيار ب).</strong><br><br>",
+    "الإجابة الصحيحة: (ب)",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ب) المقاومة الكهربائية للموصل (A) أكبر من المقاومة الكهربائية للموصل (B)"
+},
+
+  
+  
+  
+  {
+  "title": "س 56:(دفعة 2007) تحديد عمر النصف من الرسم البياني",
+  "text": "يبين الرسم البياني معدل التعداد لعينة مشعة مقابل الزمن. منه نستنتج أن عمر النصف للعينة المشعة بالدقائق هو:\n\n(أ) 10\n(ب) 30\n(ج) 60\n(د) 40",
+  "svgCode": "<svg width='600' height='400' viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg'><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='8' refY='3' orient='auto'><path d='M0,0 L0,6 L9,3 z' fill='black'/></marker></defs><line x1='80' y1='340' x2='80' y2='40' stroke='black' stroke-width='3' marker-end='url(#arrow)'/><line x1='80' y1='340' x2='560' y2='340' stroke='black' stroke-width='3' marker-end='url(#arrow)'/><line x1='80' y1='340' x2='80' y2='350' stroke='black'/><text x='75' y='360' text-anchor='end' font-size='14'>0</text><line x1='160' y1='340' x2='160' y2='350' stroke='black'/><text x='160' y='360' text-anchor='middle' font-size='14'>10</text><line x1='240' y1='340' x2='240' y2='350' stroke='black'/><text x='240' y='360' text-anchor='middle' font-size='14'>20</text><line x1='320' y1='340' x2='320' y2='350' stroke='black'/><text x='320' y='360' text-anchor='middle' font-size='14'>30</text><line x1='400' y1='340' x2='400' y2='350' stroke='black'/><text x='400' y='360' text-anchor='middle' font-size='14'>40</text><line x1='480' y1='340' x2='480' y2='350' stroke='black'/><text x='480' y='360' text-anchor='middle' font-size='14'>50</text><line x1='70' y1='340' x2='80' y2='340' stroke='black'/><line x1='70' y1='290' x2='80' y2='290' stroke='black'/><text x='65' y='295' text-anchor='end' font-size='14'>1000</text><line x1='70' y1='240' x2='80' y2='240' stroke='black'/><text x='65' y='245' text-anchor='end' font-size='14'>2000</text><line x1='70' y1='190' x2='80' y2='190' stroke='black'/><text x='65' y='195' text-anchor='end' font-size='14'>3000</text><line x1='70' y1='140' x2='80' y2='140' stroke='black'/><text x='65' y='145' text-anchor='end' font-size='14'>4000</text><line x1='70' y1='90' x2='80' y2='90' stroke='black'/><text x='65' y='95' text-anchor='end' font-size='14'>5000</text><polyline points='80,90 160,90 160,140 240,140 240,190 320,190 320,240 400,240 400,290 480,290 480,340' stroke='#2563eb' stroke-width='3' fill='none'/><line x1='80' y1='90' x2='320' y2='90' stroke='#d00' stroke-width='1.5' stroke-dasharray='6,3'/><line x1='320' y1='90' x2='320' y2='340' stroke='#d00' stroke-width='1.5' stroke-dasharray='6,3'/><text x='330' y='85' fill='#d00' font-size='14' font-weight='bold'>عمر النصف = 30 دقيقة</text><text x='300' y='390' text-anchor='middle' font-size='16'>الزمن (دقيقة)</text><text x='25' y='190' text-anchor='middle' font-size='14' transform='rotate(-90,25,190)'>معدل التعداد (نبضة/د)</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحديد النشاط الابتدائي",
+      "question": "من الرسم البياني، ما هو معدل التعداد الابتدائي عند الزمن t = 0؟",
+      "options": [
+        { "text": "5000 نبضة/دقيقة", "isCorrect": true },
+        { "text": "2500 نبضة/دقيقة", "isCorrect": false },
+        { "text": "1000 نبضة/دقيقة", "isCorrect": false }
+      ],
+      "feedback": "صحيح! النشاط الابتدائي = 5000 نبضة/دقيقة."
+    },
+    {
+      "title": "المرحلة الثانية: إيجاد نصف النشاط",
+      "question": "نصف النشاط الابتدائي = 5000 ÷ 2 = 2500 نبضة/دقيقة. عند أي زمن يصل النشاط إلى 2500؟",
+      "options": [
+        { "text": "10 دقائق", "isCorrect": false },
+        { "text": "20 دقيقة", "isCorrect": false },
+        { "text": "30 دقيقة", "isCorrect": true },
+        { "text": "40 دقيقة", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! عند t = 30 دقيقة، النشاط = 2500 نبضة/دقيقة (نصف القيمة الأصلية)."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "تعريف عمر النصف: هو الزمن اللازم لنصف كمية المادة المشعة (أو نصف النشاط الإشعاعي).<br><br>",
+    "<strong>قراءة الرسم البياني:</strong><br>",
+    "- عند t = 0 دقيقة: النشاط = 5000 نبضة/دقيقة.<br>",
+    "- نصف النشاط = 5000 ÷ 2 = 2500 نبضة/دقيقة.<br>",
+    "- عند t = 30 دقيقة: النشاط = 2500 نبضة/دقيقة.<br><br>",
+    "<strong style='color:#166534;'>إذاً عمر النصف = 30 دقيقة.</strong><br><br>",
+    "الإجابة الصحيحة: (ب) 30",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ب) 30"
+},
+
+{
+  "title": "س (دفعة 2007):26: المقاومة النوعية للنحاس",
+  "text": "سلك من النحاس مقاومته النوعية (1.7 × 10⁻⁸ Ω·m). إذا زاد طول السلك إلى الضعف وقلت مساحة مقطعه إلى النصف، فإن مقدار مقاومته النوعية تصبح:\n\n(أ) 3.4 × 10⁻⁸ Ω·m\n(ب) 6.8 × 10⁻⁸ Ω·m\n(ج) 0.85 × 10⁻⁸ Ω·m\n(د) 1.7 × 10⁻⁸ Ω·m",
+  "svgCode": "<svg width='500' height='200' viewBox='0 0 500 200' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='200' fill='#ffffff'/><rect x='80' y='70' width='80' height='20' fill='#b45309'/><text x='120' y='60' text-anchor='middle' font-size='12'>L → 2L</text><rect x='320' y='70' width='80' height='10' fill='#b45309'/><text x='360' y='60' text-anchor='middle' font-size='12'>A → A/2</text><text x='250' y='120' text-anchor='middle' font-size='14' font-weight='bold'>ρ = 1.7 × 10⁻⁸ Ω·m</text><text x='250' y='150' text-anchor='middle' font-size='12' fill='#555'>المقاومة النوعية لا تتغير بتغير الأبعاد</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تعريف المقاومة النوعية",
+      "question": "هل تتأثر المقاومة النوعية (ρ) بتغير طول السلك أو مساحة مقطعه؟",
+      "options": [
+        { "text": "لا، تبقى ثابتة للمادة نفسها", "isCorrect": true },
+        { "text": "نعم، تزيد بزيادة الطول", "isCorrect": false }
+      ],
+      "feedback": "صحيح! المقاومة النوعية خاصية ثابتة للمادة عند نفس درجة الحرارة."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 20px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "المقاومة النوعية (ρ) هي خاصية فيزيائية للمادة، تعتمد فقط على نوع المادة ودرجة الحرارة.<br>",
+    "لا تعتمد على طول السلك أو مساحة مقطعه.<br><br>",
+    "بما أن المادة هي نفسها (نحاس) ودرجة الحرارة ثابتة، فإن:<br>",
+    "<strong style='color:#166534;'>ρ = 1.7 × 10⁻⁸ Ω·m</strong><br><br>",
+    "الإجابة الصحيحة: (د) 1.7 × 10⁻⁸ Ω·m",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (د) 1.7 × 10⁻⁸ Ω·m"
+},
+{
+  "title": "س (دفعة 2007):27: النسبة بين المقاومتين النوعيتين",
+  "text": "سلكان من مادتين مختلفتين، طول الأول ضعف طول الثاني، ونصف قطر الأول ضعف نصف قطر الثاني، ومقاومة الأول تساوي مقاومة الثاني. فإن النسبة بين المقاومتين النوعيتين (ρ₁ : ρ₂) تساوي:\n\n(أ) 1 : 4\n(ب) 4 : 1\n(ج) 1 : 2\n(د) 2 : 1",
+  "svgCode": "<svg width='500' height='200' viewBox='0 0 500 200' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='200' fill='#ffffff'/><rect x='60' y='70' width='80' height='30' fill='#2563eb'/><text x='100' y='90' text-anchor='middle' fill='white' font-size='12'>سلك 1</text><rect x='340' y='70' width='80' height='30' fill='#16a34a'/><text x='380' y='90' text-anchor='middle' fill='white' font-size='12'>سلك 2</text><line x1='140' y1='85' x2='340' y2='85' stroke='#333' stroke-width='2'/><text x='240' y='65' text-anchor='middle' font-size='12'>L₁ = 2L₂</text><text x='240' y='140' text-anchor='middle' font-size='12'>r₁ = 2r₂</text><text x='240' y='170' text-anchor='middle' font-size='12'>R₁ = R₂</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: قانون المقاومة",
+      "question": "ما قانون المقاومة الكهربائية بدلالة المقاومة النوعية؟",
+      "options": [
+        { "text": "R = ρ × L ÷ A", "isCorrect": true },
+        { "text": "R = ρ × A ÷ L", "isCorrect": false }
+      ],
+      "feedback": "صحيح! R = ρ × L ÷ A"
+    },
+    {
+      "title": "المرحلة الثانية: مساواة المقاومتين",
+      "question": "بما أن R₁ = R₂، و L₁ = 2L₂، و r₁ = 2r₂ (أي A₁ = 4A₂)، فما العلاقة بين ρ₁ و ρ₂؟",
+      "options": [
+        { "text": "ρ₁ : ρ₂ = 2 : 1", "isCorrect": true },
+        { "text": "ρ₁ : ρ₂ = 1 : 2", "isCorrect": false },
+        { "text": "ρ₁ : ρ₂ = 4 : 1", "isCorrect": false }
+      ],
+      "feedback": "صحيح! ρ₁ × 2L₂ ÷ 4A₂ = ρ₂ × L₂ ÷ A₂ ← ρ₁ ÷ 2 = ρ₂ ← ρ₁ = 2ρ₂"
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 20px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "قانون المقاومة: R = ρ × L ÷ A<br><br>",
+    "المعطيات:<br>",
+    "L₁ = 2L₂<br>",
+    "r₁ = 2r₂ → A₁ = π × (2r₂)² = 4πr₂² = 4A₂<br>",
+    "R₁ = R₂<br><br>",
+    "بالتعويض في القانون:<br>",
+    "R₁ = ρ₁ × L₁ ÷ A₁ = ρ₁ × (2L₂) ÷ (4A₂)<br>",
+    "R₂ = ρ₂ × L₂ ÷ A₂<br><br>",
+    "بما أن R₁ = R₂:<br>",
+    "ρ₁ × 2L₂ ÷ 4A₂ = ρ₂ × L₂ ÷ A₂<br>",
+    "باختصار L₂ و A₂:<br>",
+    "ρ₁ × 2 ÷ 4 = ρ₂<br>",
+    "ρ₁ ÷ 2 = ρ₂<br>",
+    "<strong style='color:#166534;'>ρ₁ = 2ρ₂ → ρ₁ : ρ₂ = 2 : 1</strong><br><br>",
+    "الإجابة الصحيحة: (د) 2 : 1",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (د) 2 : 1"
+},
+
+
+  {
+  "title": "س 17 (دفعة 2007): كثافة الفيض المغناطيسي بين سلكين متوازيين",
+  "text": "سلكان مستقيمان متوازيان، المسافة بينهما في الفراغ 15 cm، يمر بكل منهما تيار كهربائي شدته 5 A، وكان التياران في اتجاهين متضادين. فإن كثافة الفيض المغناطيسي عند نقطة بينهما وعلى بعد 5 cm من أحدهما تساوي:\n\n(أ) صفراً\n(ب) 1 × 10⁻⁵ T\n(ج) 3 × 10⁻⁵ T\n(د) 2 × 10⁻⁵ T",
+  "svgCode": "<svg width='500' height='250' viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='250' fill='#ffffff'/><line x1='60' y1='120' x2='440' y2='120' stroke='#333' stroke-width='2'/><circle cx='80' cy='120' r='6' fill='#ef4444'/><text x='80' y='105' text-anchor='middle' font-size='12'>I₁=5A</text><circle cx='420' cy='120' r='6' fill='#2563eb'/><text x='420' y='105' text-anchor='middle' font-size='12'>I₂=5A</text><line x1='86' y1='120' x2='414' y2='120' stroke='#333' stroke-width='1' stroke-dasharray='4,2'/><text x='250' y='140' text-anchor='middle' font-size='12'>r = 15 cm</text><line x1='130' y1='120' x2='130' y2='150' stroke='#d00' stroke-width='2'/><circle cx='130' cy='155' r='3' fill='#d00'/><text x='130' y='170' text-anchor='middle' font-size='11' fill='#d00'>النقطة P</text><text x='130' y='105' text-anchor='middle' font-size='10'>5 cm</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحديد المسافات",
+      "question": "المسافة بين السلكين 15 cm، والنقطة تبعد 5 cm عن السلك الأول، كم تبعد عن السلك الثاني؟",
+      "options": [
+        { "text": "10 cm", "isCorrect": true },
+        { "text": "5 cm", "isCorrect": false },
+        { "text": "15 cm", "isCorrect": false }
+      ],
+      "feedback": "صحيح! r₂ = 15 - 5 = 10 cm"
+    },
+    {
+      "title": "المرحلة الثانية: حساب كثافة الفيض من كل سلك",
+      "question": "باستخدام القانون B = μ₀ × I / (2π × r)، ما قيمة B₁ و B₂؟ (μ₀ = 4π × 10⁻⁷)",
+      "options": [
+        { "text": "B₁ = 2×10⁻⁵ T, B₂ = 1×10⁻⁵ T", "isCorrect": true },
+        { "text": "B₁ = 1×10⁻⁵ T, B₂ = 2×10⁻⁵ T", "isCorrect": false }
+      ],
+      "feedback": "صحيح! B₁ = (4π×10⁻⁷×5)/(2π×0.05) = 2×10⁻⁵ T، B₂ = (4π×10⁻⁷×5)/(2π×0.1) = 1×10⁻⁵ T"
+    },
+    {
+      "title": "المرحلة الثالثة: تحديد اتجاه المجالين",
+      "question": "التياران متضادان في الاتجاه، والنقطة بين السلكين. هل المجالان في نفس الاتجاه أم متعاكسين؟",
+      "options": [
+        { "text": "نفس الاتجاه (يتجمعان)", "isCorrect": true },
+        { "text": "متعاكسان (يطرحان)", "isCorrect": false }
+      ],
+      "feedback": "صحيح! في المنطقة بين سلكين متضادين، المجالان يكونان في نفس الاتجاه."
+    },
+    {
+      "title": "المرحلة الرابعة: حساب المجال الكلي",
+      "question": "المجال الكلي B = B₁ + B₂، ما قيمته؟",
+      "options": [
+        { "text": "3 × 10⁻⁵ T", "isCorrect": true },
+        { "text": "2 × 10⁻⁵ T", "isCorrect": false },
+        { "text": "1 × 10⁻⁵ T", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! B = 2×10⁻⁵ + 1×10⁻⁵ = 3×10⁻⁵ T"
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 20px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل (السؤال 17):</strong><br><br>",
+    "المعطيات:<br>",
+    "I₁ = I₂ = 5 A<br>",
+    "التياران متضادان<br>",
+    "المسافة بين السلكين = 15 cm = 0.15 m<br>",
+    "النقطة تبعد 5 cm = 0.05 m عن السلك الأول<br>",
+    "إذاً تبعد 10 cm = 0.1 m عن السلك الثاني<br><br>",
+    "قانون كثافة الفيض: B = (μ₀ × I) / (2π × r)<br>",
+    "μ₀ = 4π × 10⁻⁷<br><br>",
+    "B₁ = (4π×10⁻⁷ × 5) / (2π × 0.05) = (2×10⁻⁶) / 0.05 = <strong>2×10⁻⁵ T</strong><br>",
+    "B₂ = (4π×10⁻⁷ × 5) / (2π × 0.1) = (2×10⁻⁶) / 0.1 = <strong>1×10⁻⁵ T</strong><br><br>",
+    "اتجاه المجالين: التياران متضادان ← المجالان في نفس الاتجاه (يتجمعان)<br>",
+    "B = B₁ + B₂ = 2×10⁻⁵ + 1×10⁻⁵ = <strong>3×10⁻⁵ T</strong><br><br>",
+    "الإجابة الصحيحة: (ج) 3 × 10⁻⁵ T",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ج) 3 × 10⁻⁵ T"
+},
+
 {
   "title": "س 51 (دفعة 2007): عدد الإلكترونات على سطح كرة مشحونة",
-  "text": "كرة مشحونة تنتج مجالاً كهربائياً شدته 72 kN/C عند نقطة تبعد 40 cm عن مركزها. عدد الإلكترونات على سطح الكرة هو:\n\n(أ) 1.28 × 10⁻⁴ إلكترون\n(ب) 8 × 10¹² إلكترون\n(ج) 8 × 10¹² إلكترون\n(د) 1.28 × 10⁻⁴ إلكترون",
+  "text": "كرة مشحونة تنتج مجالاً كهربائياً شدته 72 kN/C عند نقطة تبعد 40 cm عن مركزها. عدد الإلكترونات على سطح الكرة هو:\n\n(أ) 1.28 × 10⁴ إلكترون\n(ب) 8 × 10¹³ إلكترون\n(ج) 8 × 10¹² إلكترون\n(د) 1.28 × 10⁻⁴ إلكترون",
   "svgCode": "<svg viewBox='0 0 400 220' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='220' fill='#ffffff'/><circle cx='150' cy='110' r='35' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='150' y='115' text-anchor='middle' font-size='12' font-weight='bold'>كرة</text><circle cx='150' cy='110' r='18' fill='none' stroke='#d00' stroke-width='1.5' stroke-dasharray='3,2'/><line x1='185' y1='110' x2='280' y2='110' stroke='#333' stroke-width='1.5'/><text x='230' y='105' text-anchor='middle' font-size='10'>r = 40 cm</text><circle cx='290' cy='110' r='4' fill='#2563eb'/><text x='298' y='106' font-size='10'>P</text><line x1='150' y1='145' x2='150' y2='185' stroke='#d00' stroke-width='2' marker-end='url(#arrow)'/><text x='158' y='175' font-size='11' fill='#d00'>E = 72 kN/C</text><defs><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#d00'/></marker></defs></svg>",
   "steps": [
     {
@@ -340,6 +649,7 @@ const questionsMatrix = [
       "question": "باستخدام العلاقة n = Q ÷ e، حيث e = 1.6×10⁻¹⁹ C، ما عدد الإلكترونات؟",
       "options": [
         { "text": "8 × 10¹² إلكترون", "isCorrect": true },
+        { "text": "8 × 10¹³ إلكترون", "isCorrect": false },
         { "text": "1.28 × 10⁻⁴ إلكترون", "isCorrect": false }
       ],
       "feedback": "ممتاز! n = (1.28×10⁻⁶) ÷ (1.6×10⁻¹⁹) = 8 × 10¹² إلكترون"
@@ -347,7 +657,7 @@ const questionsMatrix = [
   ],
   "pdfSolutionSteps": [
     "<div style='font-size: 20px; line-height: 1.6; direction: rtl;'>",
-    "<strong>الحل المفصل (دفعة 2007):</strong><br><br>",
+    "<strong>الحل المفصل:</strong><br><br>",
     "المعطيات:<br>",
     "E = 72 × 10³ N/C<br>",
     "r = 40 cm = 0.4 m<br>",
@@ -360,10 +670,10 @@ const questionsMatrix = [
     "2. حساب عدد الإلكترونات n:<br>",
     "n = Q / e = (1.28 × 10⁻⁶) / (1.6 × 10⁻¹⁹)<br>",
     "n = <strong>8 × 10¹² إلكترون</strong><br><br>",
-    "الإجابة الصحيحة: (ب) أو (ج) 8 × 10¹² إلكترون",
+    "الإجابة الصحيحة: (ج) 8 × 10¹² إلكترون",
     "</div>"
   ],
-  "pdfFinalAnswer": "الإجابة الصحيحة: 8 × 10¹² إلكترون"
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ج) 8 × 10¹² إلكترون"
 },
 {
   "title": "س 47: عدد المصابيح المضيئة بعد احتراق مصباح في دائرة مركبة",
@@ -1315,7 +1625,7 @@ const questionsMatrix = [
   "pdfFinalAnswer": "الخيار الصحيح هو (ب)"
 },
 {
-  "title": " حساب عمر النصف للكربون-14",
+  "title": " حساب عمر النصف للكربون-14-دفعت 2007",
   "text": "شجرة ميتة تسجل 4 عدات/دقيقة، بينما الكربون النقي يسجل 16 عِدة/دقيقة. إذا كان عمر النصف للكربون-14 هو 6000 عام، فما هو عمر الشجرة؟ \n\n (أ) 3000 عام \n (ب) 6000 عام \n (ج) 12000 عام \n (د) 18000 عام",
   "svgCode": "<svg viewBox=\"0 0 300 100\" width=\"60%\" height=\"40%\" style=\"display: block; margin: 0 auto;\"><circle cx=\"50\" cy=\"50\" r=\"20\" fill=\"#2563eb\"/><text x=\"50\" y=\"55\" text-anchor=\"middle\" fill=\"white\">16</text><path d=\"M80 50 L120 50\" stroke=\"black\" stroke-width=\"2\" marker-end=\"url(#arrowhead)\"/><text x=\"100\" y=\"40\" text-anchor=\"middle\">6000y</text><circle cx=\"150\" cy=\"50\" r=\"20\" fill=\"#ea580c\"/><text x=\"150\" y=\"55\" text-anchor=\"middle\" fill=\"white\">8</text><path d=\"M180 50 L220 50\" stroke=\"black\" stroke-width=\"2\" marker-end=\"url(#arrowhead)\"/><text x=\"200\" y=\"40\" text-anchor=\"middle\">6000y</text><circle cx=\"250\" cy=\"50\" r=\"20\" fill=\"#16a34a\"/><text x=\"250\" y=\"55\" text-anchor=\"middle\" fill=\"white\">4</text><defs><marker id=\"arrowhead\" markerWidth=\"10\" markerHeight=\"7\" refX=\"9\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0, 10 3.5, 0 7\" /></marker></defs></svg>",
   "steps": [
