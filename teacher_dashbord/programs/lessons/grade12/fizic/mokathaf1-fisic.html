@@ -326,6 +326,241 @@
 <script>
   // تأكد من أن آخر عنصر في المصفوفة ليس بعده فاصلة
 const questionsMatrix = [
+  {
+  "title": "س 44:  (دفعة 2007) العوامل المؤثرة على القوة الدافعة المستحثة (فاراداي)",
+  "text": "اكتشف العالم (فاراداي) أن مقدار القوة الدافعة الكهربائية المستحثة تتوقف على:\n\n(أ) قوة المغناطيس - سرعة حركة المغناطيس - عدد لفات الملف\n(ب) طول الملف - عدد لفات الملف - نوع المغناطيس\n(ج) شدة التيار - طول سلك الملف - عدد خطوط الفيض المغناطيسي\n(د) كثافة الفيض المغناطيسي - الزمن - شدة التيار",
+  "svgCode": "<svg width='500' height='250' viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='250' fill='#ffffff'/><rect x='180' y='70' width='140' height='40' fill='none' stroke='#333' stroke-width='2'/><text x='250' y='95' text-anchor='middle' font-size='14'>ملف (N لفة)</text><rect x='80' y='85' width='40' height='20' fill='#ef4444' rx='3'/><text x='100' y='100' text-anchor='middle' fill='white' font-size='10'>N</text><rect x='380' y='85' width='40' height='20' fill='#2563eb' rx='3'/><text x='400' y='100' text-anchor='middle' fill='white' font-size='10'>S</text><text x='250' y='160' text-anchor='middle' font-size='14' font-weight='bold'>ε = -N × ΔΦ/Δt</text><text x='250' y='190' text-anchor='middle' font-size='12' fill='#555'>قانون فاراداي</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: قانون فاراداي",
+      "question": "ما الصيغة الرياضية لقانون فاراداي للحث الكهرومغناطيسي؟",
+      "options": [
+        { "text": "ε = -N × ΔΦ/Δt", "isCorrect": true },
+        { "text": "ε = -N × Φ × t", "isCorrect": false }
+      ],
+      "feedback": "صحيح! ε = -N × ΔΦ/Δt"
+    },
+    {
+      "title": "المرحلة الثانية: تحليل العوامل المؤثرة",
+      "question": "مما يتكون ΔΦ (التغير في الفيض المغناطيسي)؟",
+      "options": [
+        { "text": "ΔΦ = Δ(B × A × cosθ)", "isCorrect": true },
+        { "text": "ΔΦ = Δ(I × R)", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! الفيض يعتمد على كثافة الفيض (B)، المساحة (A)، والزاوية (θ)."
+    },
+    {
+      "title": "المرحلة الثالثة: استنتاج العوامل",
+      "question": "بناءً على القانون ε = -N × ΔΦ/Δt، ما العوامل التي تؤثر على ε؟",
+      "options": [
+        { "text": "قوة المغناطيس، سرعة الحركة، عدد اللفات", "isCorrect": true },
+        { "text": "طول الملف فقط", "isCorrect": false }
+      ],
+      "feedback": "صحيح! قوة المغناطيس تؤثر على B، سرعة الحركة تؤثر على ΔΦ/Δt، و N تؤثر مباشرة."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "<strong>قانون فاراداي للحث الكهرومغناطيسي:</strong><br>",
+    "ε = -N × ΔΦ/Δt<br><br>",
+    "حيث:<br>",
+    "- <strong>N</strong>: عدد لفات الملف<br>",
+    "- <strong>ΔΦ</strong>: التغير في الفيض المغناطيسي<br>",
+    "- <strong>Δt</strong>: الزمن الذي حدث فيه التغير<br><br>",
+    "<strong>العوامل المؤثرة على ε:</strong><br>",
+    "1. <strong>عدد لفات الملف (N)</strong>: كلما زاد N، زادت ε.<br>",
+    "2. <strong>قوة المغناطيس</strong>: تؤثر على كثافة الفيض المغناطيسي (B).<br>",
+    "3. <strong>سرعة حركة المغناطيس</strong>: تؤثر على معدل تغير الفيض ΔΦ/Δt.<br>",
+    "4. <strong>مساحة الملف (A)</strong>: تؤثر على قيمة الفيض Φ.<br><br>",
+    "<strong style='color:#166534;'>الإجابة الصحيحة: (أ) قوة المغناطيس - سرعة حركة المغناطيس - عدد لفات الملف</strong><br><br>",
+    "الإجابة الصحيحة: (أ)",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (أ) قوة المغناطيس - سرعة حركة المغناطيس - عدد لفات الملف"
+},
+
+{
+  "title": "س 45:(دفعة 2007)   قاعدة فلمنج لليد اليسرى",
+  "text": "أي من الأشكال التالية يعبر عن قاعدة فليمنج لليد اليسرى؟",
+  "svgCode": "<svg width='500' height='350' viewBox='0 0 500 350' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='350' fill='#ffffff'/><!-- رسم يد يسرى --><path d='M180,280 L180,120 Q180,100 200,100 L220,100 Q230,100 230,110 L230,260' stroke='#fbbf24' stroke-width='8' fill='none'/><!-- الإبهام (قوة) --><line x1='180' y1='180' x2='100' y2='140' stroke='#d00' stroke-width='4'/><polygon points='100,140 110,130 108,148' fill='#d00'/><!-- السبابة (مجال) --><line x1='200' y1='120' x2='280' y2='70' stroke='#2563eb' stroke-width='4'/><polygon points='280,70 270,62 278,80' fill='#2563eb'/><!-- الوسطى (تيار) --><line x1='220' y1='140' x2='320' y2='170' stroke='#16a34a' stroke-width='4'/><polygon points='320,170 308,172 314,162' fill='#16a34a'/><!-- التسميات --><text x='70' y='135' font-size='14' fill='#d00' font-weight='bold'>القوة (F)</text><text x='285' y='65' font-size='14' fill='#2563eb' font-weight='bold'>المجال (B)</text><text x='325' y='180' font-size='14' fill='#16a34a' font-weight='bold'>التيار (I)</text><text x='200' y='320' text-anchor='middle' font-size='16' font-weight='bold'>قاعدة فلمنج لليد اليسرى</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: قاعدة فلمنج لليد اليسرى",
+      "question": "في قاعدة فلمنج لليد اليسرى، ماذا يمثل كل إصبع؟",
+      "options": [
+        { "text": "الإبهام (القوة)، السبابة (المجال)، الوسطى (التيار)", "isCorrect": true },
+        { "text": "الإبهام (التيار)، السبابة (المجال)، الوسطى (القوة)", "isCorrect": false },
+        { "text": "الإبهام (المجال)، السبابة (التيار)، الوسطى (القوة)", "isCorrect": false }
+      ],
+      "feedback": "صحيح! الإبهام ← القوة (F)، السبابة ← المجال (B)، الوسطى ← التيار (I)."
+    },
+    {
+      "title": "المرحلة الثانية: تطبيق القاعدة",
+      "question": "إذا كان المجال المغناطيسي (B) إلى اليمين والتيار (I) إلى أسفل، فأين اتجاه القوة (F)؟",
+      "options": [
+        { "text": "خارج الورقة", "isCorrect": false },
+        { "text": "داخل الورقة", "isCorrect": true },
+        { "text": "إلى اليسار", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! باستخدام قاعدة فلمنج، القوة تكون عمودية على كل من المجال والتيار."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "<strong>قاعدة فلمنج لليد اليسرى:</strong><br>",
+    "تستخدم لتحديد اتجاه القوة المغناطيسية المؤثرة على سلك يمر به تيار في مجال مغناطيسي.<br><br>",
+    "<strong>طريقة تطبيق القاعدة:</strong><br>",
+    "- اجعل الأصابع الثلاثة (الإبهام، السبابة، الوسطى) متعامدة على بعضها البعض.<br>",
+    "- <strong style='color:#2563eb;'>السبابة</strong>: تشير إلى اتجاه <strong style='color:#2563eb;'>المجال المغناطيسي (B)</strong>.<br>",
+    "- <strong style='color:#16a34a;'>الوسطى</strong>: تشير إلى اتجاه <strong style='color:#16a34a;'>التيار الكهربائي (I)</strong>.<br>",
+    "- <strong style='color:#d00;'>الإبهام</strong>: يشير إلى اتجاه <strong style='color:#d00;'>القوة المغناطيسية (F)</strong>.<br><br>",
+    "<strong>تقييم الخيارات:</strong><br>",
+    "- (أ): الإبهام (حركة) - السبابة (تيار) - الوسطى (مجال) ❌ خطأ<br>",
+    "- (ب): الإبهام (مجال) - السبابة (حركة) - الوسطى (تيار) ❌ خطأ<br>",
+    "- (ج): الإبهام (حركة) - السبابة (مجال) - الوسطى (تيار) ✅ صحيح<br>",
+    "- (د): الإبهام (تيار) - السبابة (مجال) - الوسطى (حركة) ❌ خطأ<br><br>",
+    "<strong style='color:#166534;'>الإجابة الصحيحة: (ج)</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ج) الإبهام (الحركة)، السبابة (المجال المغناطيسي)، الوسطى (التيار)"
+}
+,
+
+{
+  "title": "س: (دفعة 2007)  قوة التنافر بين جسيمات ألفا",
+  "text": "قوة التنافر بين جسمين من جسيمات ألفا (He) عندما تكون المسافة بينهما في الفراغ (5 cm) تساوي:",
+  "svgCode": "<svg width='500' height='250' viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='250' fill='#ffffff'/><circle cx='120' cy='120' r='30' fill='#ef4444' stroke='#333' stroke-width='2'/><text x='120' y='115' text-anchor='middle' fill='white' font-size='16'>α</text><text x='120' y='135' text-anchor='middle' fill='white' font-size='10'>He</text><circle cx='380' cy='120' r='30' fill='#ef4444' stroke='#333' stroke-width='2'/><text x='380' y='115' text-anchor='middle' fill='white' font-size='16'>α</text><text x='380' y='135' text-anchor='middle' fill='white' font-size='10'>He</text><line x1='150' y1='120' x2='350' y2='120' stroke='#333' stroke-width='2'/><text x='250' y='105' text-anchor='middle' font-size='14'>r = 5 cm</text><line x1='150' y1='120' x2='350' y2='120' stroke='#d00' stroke-width='2' marker-end='url(#arrow)' marker-start='url(#arrow)'/><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='5' refY='5' orient='auto'><polygon points='0 0, 10 5, 0 10' fill='#d00'/></marker></defs><text x='250' y='170' text-anchor='middle' font-size='14' fill='#d00'>قوة تنافر</text><text x='250' y='200' text-anchor='middle' font-size='12' fill='#555'>F = k × q₁ × q₂ / r²</text></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحديد شحنة جسيم ألفا",
+      "question": "ما شحنة جسيم ألفا (نواة الهيليوم)؟",
+      "options": [
+        { "text": "+2e = 3.2 × 10⁻¹⁹ C", "isCorrect": true },
+        { "text": "+e = 1.6 × 10⁻¹⁹ C", "isCorrect": false }
+      ],
+      "feedback": "صحيح! جسيم ألفا يحتوي على بروتونين → شحنته = +2e"
+    },
+    {
+      "title": "المرحلة الثانية: قانون كولوم",
+      "question": "ما قانون كولوم لحساب القوة الكهربائية بين شحنتين؟",
+      "options": [
+        { "text": "F = k × q₁ × q₂ / r²", "isCorrect": true },
+        { "text": "F = k × q₁ × q₂ / r", "isCorrect": false }
+      ],
+      "feedback": "صحيح! k = 9 × 10⁹ N·m²/C²"
+    },
+    {
+      "title": "المرحلة الثالثة: حساب القوة",
+      "question": "بالتعويض: q₁ = q₂ = 3.2×10⁻¹⁹ C, r = 0.05 m, ما قيمة F؟",
+      "options": [
+        { "text": "3.69 × 10⁻²⁵ N", "isCorrect": true },
+        { "text": "1.47 × 10⁻²⁴ N", "isCorrect": false },
+        { "text": "3.69 × 10⁻²⁹ N", "isCorrect": false },
+        { "text": "1.44 × 10¹³ N", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! F = (9×10⁹) × (3.2×10⁻¹⁹)² / (0.05)² = 3.69 × 10⁻²⁵ N"
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "<strong>المعطيات:</strong><br>",
+    "شحنة جسيم ألفا = +2e = 2 × 1.6×10⁻¹⁹ = 3.2×10⁻¹⁹ C<br>",
+    "k = 9 × 10⁹ N·m²/C²<br>",
+    "r = 5 cm = 0.05 m = 5 × 10⁻² m<br><br>",
+    "<strong>قانون كولوم:</strong><br>",
+    "F = k × q₁ × q₂ / r²<br><br>",
+    "<strong>التعويض:</strong><br>",
+    "F = (9×10⁹) × (3.2×10⁻¹⁹)² / (5×10⁻²)²<br><br>",
+    "<strong>حساب البسط:</strong><br>",
+    "(3.2×10⁻¹⁹)² = 10.24 × 10⁻³⁸<br>",
+    "9×10⁹ × 10.24×10⁻³⁸ = 92.16 × 10⁻²⁹<br><br>",
+    "<strong>حساب المقام:</strong><br>",
+    "(5×10⁻²)² = 25 × 10⁻⁴<br><br>",
+    "<strong>القوة:</strong><br>",
+    "F = (92.16 × 10⁻²⁹) / (25 × 10⁻⁴)<br>",
+    "F = 3.6864 × 10⁻²⁵ N<br>",
+    "<strong style='color:#166534;'>F ≈ 3.69 × 10⁻²⁵ N</strong><br><br>",
+    "الإجابة الصحيحة: (د) 3.69 × 10⁻²⁵ N",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (د) 3.69 × 10⁻²⁵ N"
+},
+
+  {
+  "title":      "    (دفعة 2007) س: حساب قيمة المقاومة R عند تغيير المفتاح   ",
+  "text": "في الدائرة التالية: المقاومة الداخلية للعمود مهملة. وعند غلق الدائرة بواسطة المفتاح (K) تقل قيمة المقاومة الكلية إلى نصف قيمتها عند الفتح. فإن قيمة (R) تساوي:",
+  "svgCode": "<svg width='600' height='400' viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg'><rect width='600' height='400' fill='#ffffff'/><!-- بطارية --><rect x='20' y='160' width='30' height='50' fill='#e2e8f0' stroke='#333' stroke-width='2' rx='3'/><text x='35' y='190' text-anchor='middle' font-size='12'>V</text><line x1='20' y1='160' x2='50' y2='160' stroke='#333' stroke-width='2'/><line x1='20' y1='210' x2='50' y2='210' stroke='#333' stroke-width='2'/><text x='15' y='155' text-anchor='end' font-size='12'>+</text><text x='15' y='225' text-anchor='end' font-size='12'>-</text><!-- خطوط رئيسية --><line x1='50' y1='185' x2='100' y2='185' stroke='#333' stroke-width='2'/><line x1='50' y1='185' x2='100' y2='185' stroke='#333' stroke-width='2'/><line x1='100' y1='185' x2='500' y2='185' stroke='#333' stroke-width='2'/><line x1='100' y1='280' x2='500' y2='280' stroke='#333' stroke-width='2'/><!-- مفتاح --><line x1='100' y1='185' x2='100' y2='232' stroke='#333' stroke-width='2'/><circle cx='100' cy='232' r='6' fill='#d00'/><text x='85' y='245' font-size='12' fill='#d00'>K</text><line x1='100' y1='232' x2='130' y2='232' stroke='#333' stroke-width='2'/><line x1='130' y1='232' x2='130' y2='280' stroke='#333' stroke-width='2'/><!-- الفرع العلوي --><rect x='140' y='160' width='50' height='25' fill='#fbbf24' stroke='#333'/><text x='165' y='177' text-anchor='middle' font-size='10'>30Ω</text><rect x='220' y='160' width='50' height='25' fill='#fbbf24' stroke='#333'/><text x='245' y='177' text-anchor='middle' font-size='10'>15Ω</text><rect x='300' y='160' width='50' height='25' fill='#fbbf24' stroke='#333'/><text x='325' y='177' text-anchor='middle' font-size='10'>5Ω</text><rect x='380' y='160' width='50' height='25' fill='#fbbf24' stroke='#333'/><text x='405' y='177' text-anchor='middle' font-size='10'>R</text><line x1='190' y1='172' x2='220' y2='172' stroke='#333' stroke-width='1.5'/><line x1='270' y1='172' x2='300' y2='172' stroke='#333' stroke-width='1.5'/><line x1='350' y1='172' x2='380' y2='172' stroke='#333' stroke-width='1.5'/><!-- الفرع السفلي --><rect x='160' y='255' width='50' height='25' fill='#fbbf24' stroke='#333'/><text x='185' y='272' text-anchor='middle' font-size='10'>45Ω</text><rect x='250' y='255' width='50' height='25' fill='#fbbf24' stroke='#333'/><text x='275' y='272' text-anchor='middle' font-size='10'>5Ω</text><line x1='210' y1='267' x2='250' y2='267' stroke='#333' stroke-width='1.5'/><!-- خطوط توصيل --><line x1='500' y1='185' x2='500' y2='280' stroke='#333' stroke-width='2'/><circle cx='500' cy='185' r='4' fill='#333'/><circle cx='500' cy='280' r='4' fill='#333'/></svg>",
+  "steps": [
+    {
+      "title": "المرحلة الأولى: حساب المقاومة عند فتح المفتاح",
+      "question": "عند فتح المفتاح K، التيار يمر في الفرعين العلوي والسفلي. ما المقاومة المكافئة للفرعين المتوازيين؟",
+      "options": [
+        { "text": "25 أوم", "isCorrect": true },
+        { "text": "50 أوم", "isCorrect": false },
+        { "text": "100 أوم", "isCorrect": false }
+      ],
+      "feedback": "صحيح! المقاومة المكافئة = (50 × 50) / (50 + 50) = 25 أوم"
+    },
+    {
+      "title": "المرحلة الثانية: المقاومة الكلية عند فتح المفتاح",
+      "question": "إذا كانت المقاومة المكافئة للفرعين المتوازيين = 25 أوم، والمقاومة R على التوالي معها، فما R_open؟",
+      "options": [
+        { "text": "R_open = 25 + R", "isCorrect": true },
+        { "text": "R_open = 25 × R", "isCorrect": false }
+      ],
+      "feedback": "صحيح! R_open = R_parallel + R = 25 + R"
+    },
+    {
+      "title": "المرحلة الثالثة: المقاومة عند غلق المفتاح",
+      "question": "عند غلق المفتاح K، تصبح الدائرة مختصرة، والمقاومة المكافئة للجزء الموصل = 9 أوم. ما R_closed؟",
+      "options": [
+        { "text": "R_closed = 9 + R", "isCorrect": true },
+        { "text": "R_closed = 9 × R", "isCorrect": false }
+      ],
+      "feedback": "صحيح! R_closed = 9 + R"
+    },
+    {
+      "title": "المرحلة الرابعة: تطبيق شرط المسألة وحل المعادلة",
+      "question": "المسألة تقول: R_closed = ½ × R_open. ما قيمة R؟",
+      "options": [
+        { "text": "7 أوم", "isCorrect": true },
+        { "text": "5 أوم", "isCorrect": false },
+        { "text": "10 أوم", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! 25 + R = 2(9 + R) → 25 + R = 18 + 2R → 25 - 18 = 2R - R → R = 7 أوم"
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 18px; line-height: 1.6; direction: rtl;'>",
+    "<strong>الحل المفصل:</strong><br><br>",
+    "<strong>المعطيات:</strong><br>",
+    "المقاومة الداخلية للعمود مهملة.<br>",
+    "عند غلق المفتاح (K)، تقل المقاومة الكلية إلى نصف قيمتها عند الفتح.<br><br>",
+    "<strong>1. حساب المقاومة عند فتح المفتاح (R_open):</strong><br>",
+    "عند فتح المفتاح، التيار يمر في فرعين متوازيين:<br>",
+    "- الفرع العلوي: 30 + 15 + 5 = 50 Ω<br>",
+    "- الفرع السفلي: 45 + 5 = 50 Ω<br>",
+    "المقاومة المكافئة للفرعين المتوازيين:<br>",
+    "R_parallel = (50 × 50) / (50 + 50) = 2500 / 100 = 25 Ω<br>",
+    "إذاً: R_open = 25 + R<br><br>",
+    "<strong>2. حساب المقاومة عند غلق المفتاح (R_closed):</strong><br>",
+    "بعد غلق المفتاح وتبسيط الدائرة، المقاومة المكافئة للجزء الموصل = 9 Ω<br>",
+    "إذاً: R_closed = 9 + R<br><br>",
+    "<strong>3. تطبيق شرط المسألة:</strong><br>",
+    "R_closed = ½ × R_open<br>",
+    "9 + R = ½ × (25 + R)<br>",
+    "2 × (9 + R) = 25 + R<br>",
+    "18 + 2R = 25 + R<br>",
+    "2R - R = 25 - 18<br>",
+    "<strong style='color:#166534;'>R = 7 Ω</strong><br><br>",
+    "الإجابة الصحيحة: 7 Ω",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: 7 Ω"
+},
 
   {
   "title": "س 46:(دفعة 2007) نقطة التعادل الكهربائي لشحنتين متساويتين مختلفتين",
@@ -1074,12 +1309,10 @@ const questionsMatrix = [
   ],
   "pdfFinalAnswer": "الإجابة الصحيحة: 9.6 × 10⁻⁶ ويبر"
 },
-
 {
   "title": "س: حساب قيمة مقاومة R في دائرة توالي وتوازي",
   "text": "في الدائرة الموضحة بالشكل، مقاومة 20 أوم موصولة على التوالي مع أربع مقاومات متساوية القيمة (R) موصولة على التوازي. إذا كان فرق الجهد 12 فولت والتيار الكلي 0.4 أمبير، فما قيمة R؟",
-  "svgCode": 
-  "<svg viewBox='0 0 550 250' xmlns='http://www.w3.org/2000/svg'><rect width='550' height='250' fill='#ffffff'/><line x1='60' y1='120' x2='100' y2='120' stroke='#333' stroke-width='2'/><rect x='100' y='100' width='50' height='40' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='125' y='125' text-anchor='middle' font-size='12'>20 Ω</text><line x1='150' y1='120' x2='180' y2='120' stroke='#333' stroke-width='2'/><line x1='180' y1='120' x2='180' y2='60' stroke='#333' stroke-width='2'/><line x1='180' y1='120' x2='180' y2='180' stroke='#333' stroke-width='2'/><line x1='180' y1='60' x2='400' y2='60' stroke='#333' stroke-width='2'/><line x1='180' y1='180' x2='400' y2='180' stroke='#333' stroke-width='2'/><line x1='400' y1='60' x2='400' y2='120' stroke='#333' stroke-width='2'/><line x1='400' y1='180' x2='400' y2='120' stroke='#333' stroke-width='2'/><line x1='400' y1='120' x2='450' y2='120' stroke='#333' stroke-width='2'/><rect x='230' y='35' width='35' height='30' fill='#fbbf24' stroke='#333'/><text x='247' y='55' text-anchor='middle' font-size='10'>R</text><rect x='310' y='35' width='35' height='30' fill='#fbbf24' stroke='#333'/><text x='327' y='55' text-anchor='middle' font-size='10'>R</text><rect x='230' y='155' width='35' height='30' fill='#fbbf24' stroke='#333'/><text x='247' y='175' text-anchor='middle' font-size='10'>R</text><rect x='310' y='155' width='35' height='30' fill='#fbbf24' stroke='#333'/><text x='327' y='175' text-anchor='middle' font-size='10'>R</text><text x='290' y='145' text-anchor='middle' font-size='12'>4 مقاومات على التوازي</text><circle cx='30' cy='120' r='5' fill='#333'/><text x='15' y='110' text-anchor='end' font-size='12'>+</text><text x='15' y='130' text-anchor='end' font-size='12'>-</text><text x='15' y='120' text-anchor='end' font-size='12'>12V</text><circle cx='520' cy='120' r='5' fill='#333'/><text x='540' y='115' text-anchor='start' font-size='12'>I=0.4A</text></svg>",
+  "svgCode": "<svg viewBox='0 0 600 260' xmlns='http://www.w3.org/2000/svg'><rect width='600' height='260' fill='#ffffff'/><circle cx='40' cy='130' r='5' fill='#333'/><text x='20' y='120' font-size='14' text-anchor='end'>+</text><text x='20' y='145' font-size='14' text-anchor='end'>−</text><text x='15' y='135' font-size='14' text-anchor='end'>12V</text><line x1='45' y1='130' x2='90' y2='130' stroke='#333' stroke-width='2'/><rect x='90' y='110' width='60' height='40' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='120' y='135' text-anchor='middle' font-size='14'>20 Ω</text><line x1='150' y1='130' x2='190' y2='130' stroke='#333' stroke-width='2'/><line x1='190' y1='50' x2='190' y2='210' stroke='#333' stroke-width='2'/><line x1='430' y1='50' x2='430' y2='210' stroke='#333' stroke-width='2'/><line x1='190' y1='70' x2='250' y2='70' stroke='#333' stroke-width='2'/><rect x='250' y='55' width='50' height='30' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='275' y='75' text-anchor='middle' font-size='12'>R</text><line x1='300' y1='70' x2='430' y2='70' stroke='#333' stroke-width='2'/><line x1='190' y1='110' x2='250' y2='110' stroke='#333' stroke-width='2'/><rect x='250' y='95' width='50' height='30' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='275' y='115' text-anchor='middle' font-size='12'>R</text><line x1='300' y1='110' x2='430' y2='110' stroke='#333' stroke-width='2'/><line x1='190' y1='150' x2='250' y2='150' stroke='#333' stroke-width='2'/><rect x='250' y='135' width='50' height='30' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='275' y='155' text-anchor='middle' font-size='12'>R</text><line x1='300' y1='150' x2='430' y2='150' stroke='#333' stroke-width='2'/><line x1='190' y1='190' x2='250' y2='190' stroke='#333' stroke-width='2'/><rect x='250' y='175' width='50' height='30' fill='#fbbf24' stroke='#333' stroke-width='2'/><text x='275' y='195' text-anchor='middle' font-size='12'>R</text><line x1='300' y1='190' x2='430' y2='190' stroke='#333' stroke-width='2'/><line x1='430' y1='130' x2='520' y2='130' stroke='#333' stroke-width='2'/><circle cx='520' cy='130' r='5' fill='#333'/><text x='540' y='125' font-size='14'>I = 0.4 A</text><text x='310' y='235' text-anchor='middle' font-size='14' fill='#1e40af'>أربع مقاومات متساوية موصولة على التوازي</text></svg>",
   "steps": [
     {
       "title": "المرحلة الأولى: حساب المقاومة الكلية للدائرة",
@@ -1119,38 +1352,34 @@ const questionsMatrix = [
     }
   ],
   "pdfSolutionSteps": [
-  "<div style='font-size: 12px; line-height: 1.6; font-family: Arial, sans-serif; direction: rtl;'>",
-  "  <h style='color: #1e40af;'>الحل المفصل (خطوة بخطوة):</h>",
-  
-  "  <div style='background: #f8fafc; padding: 15px; border-radius: 10px; border-right: 5px solid #2563eb; margin-bottom: 15px;'>",
-  "    <strong>المعطيات:</strong> الجهد (V) = 12V ، التيار (I) = 0.4A ، مقاومة التوالي = 20Ω",
-  "  </div>",
-
-  "  <div style='margin-bottom: 15px;'>",
-  "    <strong>1. حساب المقاومة الكلية (R_total):</strong><br>",
-  "    R_total = V ÷ I = 12 ÷ 0.4 = <strong>30 Ω</strong>",
-  "  </div>",
-
-  "  <div style='margin-bottom: 15px;'>",
-  "    <strong>2. حساب المقاومة المكافئة للمجموعة المتوازية (R_parallel):</strong><br>",
-  "    R_total = R_series + R_parallel<br>",
-  "    30 = 20 + R_parallel  &nbsp; &nbsp; &rightarrow; &nbsp; &nbsp; <strong>R_parallel = 10 Ω</strong>",
-  "  </div>",
-
-  "  <div style='margin-bottom: 15px;'>",
-  "    <strong>3. حساب قيمة المقاومة الواحدة (R):</strong><br>",
-  "    بما أن الأربع مقاومات متساوية على التوازي: R_parallel = R ÷ 4<br>",
-  "    إذن: 10 = R ÷ 4 &nbsp; &nbsp; &rightarrow; &nbsp; &nbsp; R = 10 × 4<br>",
-  "    <strong>R = 40 Ω</strong>",
-  "  </div>",
-
-  "  <div style='background: #eff6ff; padding: 15px; border-radius: 10px; border: 1px solid #bfdbfe;color:#ffffff'>",
-  "    <strong>النتيجة النهائية:</strong><br>",
-  "    المقاومة المكافئة للمجموعة المتوازية = <strong>10 Ω</strong><br>",
-  "    قيمة المقاومة الواحدة R = <strong>40 Ω</strong>",
-  "  </div>",
-  "</div>"
-],
+    "<div style='font-size: 12px; line-height: 1.6; font-family: Arial, sans-serif; direction: rtl;'>",
+    "  <h style='color: #1e40af;'>الحل المفصل (خطوة بخطوة):</h>",
+    "  <div style='background: #f8fafc; padding: 15px; border-radius: 10px; border-right: 5px solid #2563eb; margin-bottom: 15px;'>",
+    "    <strong>المعطيات:</strong> الجهد (V) = 12V ، التيار (I) = 0.4A ، مقاومة التوالي = 20Ω",
+    "  </div>",
+    "  <div style='margin-bottom: 15px;'>",
+    "    <strong>1. حساب المقاومة الكلية (R_total):</strong><br>",
+    "    R_total = V ÷ I = 12 ÷ 0.4 = <strong>30 Ω</strong>",
+    "  </div>",
+    "  <div style='margin-bottom: 15px;'>",
+    "    <strong>2. حساب المقاومة المكافئة للمجموعة المتوازية (R_parallel):</strong><br>",
+    "    R_total = R_series + R_parallel<br>",
+    "    30 = 20 + R_parallel  &nbsp; &nbsp; &rightarrow; &nbsp; &nbsp; <strong>R_parallel = 10 Ω</strong>",
+    "  </div>",
+    "  <div style='margin-bottom: 15px;'>",
+    "    <strong>3. حساب قيمة المقاومة الواحدة (R):</strong><br>",
+    "    بما أن الأربع مقاومات متساوية على التوازي: R_parallel = R ÷ 4<br>",
+    "    إذن: 10 = R ÷ 4 &nbsp; &nbsp; &rightarrow; &nbsp; &nbsp; R = 10 × 4<br>",
+    "    <strong>R = 40 Ω</strong>",
+    "  </div>",
+    "  <div style='background: #eff6ff; padding: 15px; border-radius: 10px; border: 1px solid #bfdbfe;color:#ffffff'>",
+    "    <strong>النتيجة النهائية:</strong><br>",
+    "    المقاومة المكافئة للمجموعة المتوازية = <strong>10 Ω</strong><br>",
+    "    قيمة المقاومة الواحدة R = <strong>40 Ω</strong>",
+    "  </div>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: R = 40 Ω"
 },{
   "title": "سؤال وزارة: دلك الزجاج بالحرير",
   "text": "عند دلك ساق من الزجاج بقطعة حرير، فإن:",
