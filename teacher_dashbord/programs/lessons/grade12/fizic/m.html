@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style1.css">
+    <!-- إضافة KaTeX لعرض الصيغ الرياضية -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
 <body>
 
@@ -50,7 +52,14 @@
 <div id="printable-pdf-document"></div>
 <div id="dynamic-pdf-questions-area"></div>
 
-<script src="array-questions.js"></script>
+<script>
+    // منع التخزين المؤقت
+    document.write('<script src="array-questions.js?v=' + Date.now() + '"><\/script>');
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
 
 <script>
     let currentQIndex = 0;
@@ -142,130 +151,140 @@
 
     // ===== دالة الطباعة =====
     function triggerSmartPrint() {
-        const printableDoc = document.getElementById('printable-pdf-document');
-        const questionsArea = document.getElementById('dynamic-pdf-questions-area');
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const questionsArea = document.getElementById('dynamic-pdf-questions-area');
 
-        printableDoc.innerHTML = '';
-        questionsArea.innerHTML = '';
+    printableDoc.innerHTML = '';
+    questionsArea.innerHTML = '';
 
-        // ===== الغلاف =====
-        const coverPage = document.createElement('div');
-        coverPage.className = 'pdf-cover-page';
-        coverPage.innerHTML = `
-            <div class="school-name">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
-            <div class="main-title">الفيزياء</div>
-            <div class="sub-title">الصف الثالث الثانوي</div>
-            <div class="cover-frame">
-                <h3>📘 كراسة الحلول النموذجية 📘</h3>
-                <h4>أسئلة من امتحانات سابقة</h4>
-                <div class="cover-subjects">الكهربائية والمغناطيسية والذرية</div>
-                <div class="year">العام الدراسي 2025 - 2026</div>
-            </div>
-            <div class="dedication">✨ إهداء إلى طلبتنا المتميزين ✨</div>
-            <div class="bot-link">
-                رابط البوت التعليمي:<br>
-                <a href="http://t.me/amjad_africa2027bot">t.me/amjad_africa2027bot</a>
-            </div>
-        `;
-        printableDoc.appendChild(coverPage);
+    // ===== الغلاف =====
+    const coverPage = document.createElement('div');
+    coverPage.className = 'pdf-cover-page';
+    coverPage.innerHTML = `
+        <div class="school-name">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+        <div class="main-title">الفيزياء</div>
+        <div class="sub-title">الصف الثالث الثانوي</div>
+        <div class="cover-frame">
+            <h3>📘 كراسة الحلول النموذجية 📘</h3>
+            <h4>أسئلة من امتحانات سابقة</h4>
+            <div class="cover-subjects">الكهربائية والمغناطيسية والذرية</div>
+            <div class="year">العام الدراسي 2025 - 2026</div>
+        </div>
+        <div class="dedication">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+        <div class="bot-link">
+            رابط البوت التعليمي:<br>
+            <a href="http://t.me/amjad_africa2027bot">t.me/amjad_africa2027bot</a>
+        </div>
+    `;
+    printableDoc.appendChild(coverPage);
 
-        // ============================================================
-        // صفحة واحدة متصلة - مع تكبير الرسومات
-        // ============================================================
-        const mainPage = document.createElement('div');
-        mainPage.className = 'print-page-box';
-        mainPage.style.cssText = `
-            page-break-after: auto;
-            break-after: auto;
-            min-height: auto;
-            height: auto;
-            padding: 4mm 6mm 5mm 6mm;
-        `;
+    // ===== الصفحة الرئيسية =====
+    const mainPage = document.createElement('div');
+    mainPage.className = 'print-page-box';
+    mainPage.style.cssText = `
+        page-break-after: auto;
+        break-after: auto;
+        min-height: auto;
+        height: auto;
+        padding: 4mm 6mm 5mm 6mm;
+    `;
 
-        const pairContainer = document.createElement('div');
-        pairContainer.className = 'pdf-questions-pair-container';
-        pairContainer.style.cssText = `
+    const pairContainer = document.createElement('div');
+    pairContainer.className = 'pdf-questions-pair-container';
+    pairContainer.style.cssText = `
+        display: block;
+        width: 100%;
+    `;
+
+    questionsMatrix.forEach((q, index) => {
+        const questionNumber = index + 1;
+        let fontSize = 16;
+        const textLength = (q.text || '').length;
+        if (textLength < 50) fontSize = 18;
+        if (textLength > 100) fontSize = 15;
+        if (textLength > 150) fontSize = 14;
+        if (textLength > 200) fontSize = 13;
+
+        // ===== تعديل: بناء stepsHtml بشكل صحيح =====
+        let stepsHtml = '';
+        if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
+            q.pdfSolutionSteps.forEach(s => {
+                if (s && s.trim()) {
+                    // إزالة أي وسوم HTML موجودة واستخدام النص العادي
+                    const cleanText = s.replace(/<[^>]*>/g, ''); // إزالة وسوم HTML
+                    stepsHtml += `<div style="padding: 2px 0; font-size: ${fontSize}px; line-height: 1.5;">${cleanText}</div>`;
+                }
+            });
+        }
+
+        // ===== عرض SVG بشكل أفضل =====
+        let graphicHtml = '';
+        if (q.svgCode && q.svgCode.trim() !== "") {
+            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0; padding: 4px;">${q.svgCode}</div>`;
+        } else if (q.imagePath && q.imagePath.trim() !== "") {
+            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0;"><img src="${q.imagePath}" alt="رسم توضيحي" style="max-width: 100%;"></div>`;
+        }
+
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'pdf-question-block';
+        questionDiv.style.cssText = `
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin-bottom: 8px !important;
+            padding-bottom: 6px !important;
+            border-bottom: 1px dashed #cbd5e1;
             display: block;
             width: 100%;
         `;
 
-        questionsMatrix.forEach((q, index) => {
-            const questionNumber = index + 1;
-            
-            let fontSize = 16;
-            const textLength = (q.text || '').length;
-            if (textLength < 50) fontSize = 18;
-            if (textLength > 100) fontSize = 15;
-            if (textLength > 150) fontSize = 14;
-            if (textLength > 200) fontSize = 13;
-
-            let stepsHtml = '';
-            if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
-                q.pdfSolutionSteps.forEach(s => {
-                    if (s && s.trim()) {
-                        stepsHtml += `<div>${s}</div>`;
-                    }
-                });
-            }
-
-            let graphicHtml = '';
-            if (q.svgCode && q.svgCode.trim() !== "") {
-                // تكبير SVG مباشرة
-                let svgCode = q.svgCode;
-                // زيادة حجم viewBox إذا كان صغيراً
-                if (svgCode.includes('viewBox')) {
-                    // نترك SVG كما هو ولكن CSS سيكبره
-                }
-                graphicHtml = `<div class="pdf-graphic">${svgCode}</div>`;
-            } else if (q.imagePath && q.imagePath.trim() !== "") {
-                graphicHtml = `<div class="pdf-graphic"><img src="${q.imagePath}" alt="رسم توضيحي"></div>`;
-            }
-
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'pdf-question-block';
-            questionDiv.style.cssText = `
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                margin-bottom: 8px !important;
-                padding-bottom: 6px !important;
-                border-bottom: 1px dashed #cbd5e1;
-                display: block;
-                width: 100%;
-            `;
-            
-            questionDiv.innerHTML = `
-                <div class="pdf-q-title" style="font-size: ${fontSize + 3}px; font-weight: bold; color: #1a365d; margin-bottom: 3px;">${questionNumber}. ${q.title || ''}</div>
-                <div class="pdf-q-text" style="font-size: ${fontSize + 1}px; line-height: 1.6; color: #2d3748; margin-bottom: 3px;">${q.text || ''}</div>
-                ${graphicHtml}
-                <div class="pdf-solution-box" style="margin-top: 3px; padding-top: 3px; border-top: 1px dashed #edf2f7;">
-                    <div class="pdf-sol-steps" style="font-size: ${fontSize}px; line-height: 1.5; padding-right: 6px; color: #2d3748;">${stepsHtml || 'لا يوجد حل متاح'}</div>
-                    ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize + 1}px; font-weight: bold; margin-top: 3px; color: #065f46; padding: 2px 6px; background-color: #f0fdf4; border-radius: 4px; display: inline-block;">${q.pdfFinalAnswer}</div>` : ''}
-                </div>
-            `;
-            pairContainer.appendChild(questionDiv);
-        });
-
-        mainPage.appendChild(pairContainer);
-
-        const pageFooter = document.createElement('div');
-        pageFooter.className = 'page-footer-number';
-        pageFooter.innerHTML = `
-            <div style="text-align: center; font-size: 11px; color: #666; border-top: 1px solid #ddd; padding-top: 5px; margin-top: 6px;">
-                ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        questionDiv.innerHTML = `
+            <div class="pdf-q-title" style="font-size: ${fontSize + 3}px; font-weight: bold; color: #1a365d; margin-bottom: 3px;">${questionNumber}. ${q.title || ''}</div>
+            <div class="pdf-q-text" style="font-size: ${fontSize + 1}px; line-height: 1.6; color: #2d3748; margin-bottom: 3px;">${q.text || ''}</div>
+            ${graphicHtml}
+            <div class="pdf-solution-box" style="margin-top: 3px; padding-top: 3px; border-top: 1px dashed #edf2f7;">
+                <div class="pdf-sol-steps" style="padding-right: 6px; color: #2d3748;">${stepsHtml || 'لا يوجد حل متاح'}</div>
+                ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize + 1}px; font-weight: bold; margin-top: 3px; color: #065f46; padding: 2px 6px; background-color: #f0fdf4; border-radius: 4px; display: inline-block;">${q.pdfFinalAnswer}</div>` : ''}
             </div>
         `;
-        mainPage.appendChild(pageFooter);
 
-        questionsArea.appendChild(mainPage);
+        pairContainer.appendChild(questionDiv);
+    });
 
-        setTimeout(() => {
-            window.print();
-        }, 500);
-    }
+    mainPage.appendChild(pairContainer);
 
+    const pageFooter = document.createElement('div');
+    pageFooter.className = 'page-footer-number';
+    pageFooter.innerHTML = `
+        <div style="text-align: center; font-size: 11px; color: #666; border-top: 1px solid #ddd; padding-top: 5px; margin-top: 6px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </div>
+    `;
+    mainPage.appendChild(pageFooter);
+
+    questionsArea.appendChild(mainPage);
+
+    setTimeout(() => {
+        window.print();
+    }, 500);
+}
     window.onload = () => {
         renderActiveQuestion(0);
     };
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof renderMathInElement === 'function') {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ]
+            });
+        }
+    });
+
+
+
 </script>
 
 </body>

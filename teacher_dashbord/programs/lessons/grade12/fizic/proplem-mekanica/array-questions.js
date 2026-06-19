@@ -1,4 +1,37 @@
 const questionsMatrix = [
+{
+            "title": "س 3 (2007): وحدة قياس كثافة الفيض المغناطيسي",
+           "text":    " وحدة قياس كثافة الفيض المغناطيسي هي التسلا (T)، وهي تكافئ (N/(A·m.",
+            
+            
+            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><text x='200' y='50' text-anchor='middle' font-size='16'>B = F/(I·L)</text><text x='200' y='80' text-anchor='middle' font-size='14'>1 T = 1 N/(A·m)</text></svg>",
+            "steps": [
+                {
+                    "title": "تحديد صحة العبارة",
+                    "question": "هل وحدة كثافة الفيض المغناطيسي هي التسلا (T) والتي تكافئ N/(A·m)؟",
+                    "options": [
+                        { "text": "صحيح", "isCorrect": true },
+                        { "text": "خطأ", "isCorrect": false }
+                    ],
+                    "feedback": "صحيح! التسلا = نيوتن / (أمبير × متر)."
+                }
+            ],
+"pdfSolutionSteps": [
+                "<div dir=\"rtl\">وحدة كثافة الفيض المغناطيسي هي <strong>التسلا (T)</strong>.</div>",
+                "<div dir=\"rtl\">T = 1 N / A·m 1</div>",
+                "<div dir=\"rtl\">B = F / I·L</div>"
+            ],            
+            
+            "pdfFinalAnswer": "الإجابة: صحيح"
+        
+        
+        
+          },
+        
+
+
+
+
         {
             "title": "س 1 (2007): قاعدة قبضة اليد اليمنى لتحديد قطبية المغناطيس",
             "text": "عند استخدام قاعدة قبضة اليد اليمنى لتحديد قطبية العينة الفولاذية (الملف الحلزوني)، يكون طرف القطب الممغنط الذي يشير إليه إصبع الإبهام قطبيًا جنوبيًا.",
@@ -38,28 +71,6 @@ const questionsMatrix = [
             "pdfSolutionSteps": [
                 "<div>البرق هو تفريغ كهربائي يحدث عند تراكم الشحنات في السحب.</div>",
                 "<div>يحدث بين السحب نفسها أو بين السحب والأرض.</div>"
-            ],
-            "pdfFinalAnswer": "الإجابة: صحيح"
-        },
-        {
-            "title": "س 3 (2007): وحدة قياس كثافة الفيض المغناطيسي",
-            "text": "وحدة قياس كثافة الفيض المغناطيسي هي التسلا (T)، وهي تكافئ N/(A·m).",
-            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><text x='200' y='50' text-anchor='middle' font-size='16'>B = F/(I·L)</text><text x='200' y='80' text-anchor='middle' font-size='14'>1 T = 1 N/(A·m)</text></svg>",
-            "steps": [
-                {
-                    "title": "تحديد صحة العبارة",
-                    "question": "هل وحدة كثافة الفيض المغناطيسي هي التسلا (T) والتي تكافئ N/(A·m)؟",
-                    "options": [
-                        { "text": "صحيح", "isCorrect": true },
-                        { "text": "خطأ", "isCorrect": false }
-                    ],
-                    "feedback": "صحيح! التسلا = نيوتن / (أمبير × متر)."
-                }
-            ],
-            "pdfSolutionSteps": [
-                "<div>وحدة كثافة الفيض المغناطيسي هي <strong>التسلا (T)</strong>.</div>",
-                "<div>1 T = 1 N/(A·m)</div>",
-                "<div>من العلاقة: B = F / (I · L)</div>"
             ],
             "pdfFinalAnswer": "الإجابة: صحيح"
         },

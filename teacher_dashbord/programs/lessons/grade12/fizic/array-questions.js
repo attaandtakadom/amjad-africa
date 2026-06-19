@@ -1,4 +1,74 @@
 const questionsMatrix = [
+{
+    "title": "س 3 (2007): وحدة قياس كثافة الفيض المغناطيسي",
+    "text": "وحدة قياس كثافة الفيض المغناطيسي هي التسلا (T)، وهي تكافئ N/(A·m).",
+"svgCode": `<svg width='500' height='220' viewBox='0 0 500 220' xmlns='http://www.w3.org/2000/svg'>
+    <rect width='500' height='220' fill='#ffffff' rx='12' stroke='#e2e8f0' stroke-width='1'/>
+    
+    <!-- الملف -->
+    <rect x='60' y='30' width='100' height='80' fill='#eff6ff' stroke='#2563eb' stroke-width='2' rx='6'/>
+    <!-- لفات الملف -->
+    <line x1='70' y1='40' x2='70' y2='100' stroke='#3b82f6' stroke-width='1.5'/>
+    <line x1='85' y1='40' x2='85' y2='100' stroke='#3b82f6' stroke-width='1.5'/>
+    <line x1='100' y1='40' x2='100' y2='100' stroke='#3b82f6' stroke-width='1.5'/>
+    <line x1='115' y1='40' x2='115' y2='100' stroke='#3b82f6' stroke-width='1.5'/>
+    <line x1='130' y1='40' x2='130' y2='100' stroke='#3b82f6' stroke-width='1.5'/>
+    <line x1='145' y1='40' x2='145' y2='100' stroke='#3b82f6' stroke-width='1.5'/>
+    <text x='110' y='125' text-anchor='middle' font-size='12' fill='#1e40af' font-weight='bold'>ملف حلزوني</text>
+    
+    <!-- خط المجال المغناطيسي -->
+    <line x1='170' y1='70' x2='280' y2='70' stroke='#7c3aed' stroke-width='3' stroke-dasharray='8,5'/>
+    <text x='225' y='60' text-anchor='middle' font-size='14' fill='#6d28d9' font-weight='bold'>المجال المغناطيسي B</text>
+    
+    <!-- سهم القوة -->
+    <line x1='225' y1='90' x2='225' y2='170' stroke='#16a34a' stroke-width='3' marker-end='url(#arrowGreen)'/>
+    <text x='240' y='135' text-anchor='start' font-size='14' fill='#15803d' font-weight='bold'>القوة F</text>
+    
+    <!-- سهم التيار -->
+    <line x1='80' y1='130' x2='80' y2='180' stroke='#dc2626' stroke-width='2.5' marker-end='url(#arrowRed)'/>
+    <text x='95' y='160' text-anchor='start' font-size='13' fill='#b91c1c'>التيار I</text>
+    
+    <!-- الصيغة -->
+    <rect x='300' y='30' width='180' height='130' fill='#f8fafc' stroke='#cbd5e1' stroke-width='1.5' rx='8'/>
+    <text x='390' y='55' text-anchor='middle' font-size='13' fill='#475569' font-weight='bold'>قانون كثافة الفيض</text>
+    <line x1='320' y1='65' x2='460' y2='65' stroke='#cbd5e1' stroke-width='1'/>
+    <text x='390' y='88' text-anchor='middle' font-size='18' font-weight='bold' fill='#0f172a'>B = F / (I·L)</text>
+    <text x='390' y='112' text-anchor='middle' font-size='14' fill='#334155'>1 T = 1 N/(A·m)</text>
+    <text x='390' y='135' text-anchor='middle' font-size='12' fill='#64748b'>حيث: T = تسلا</text>
+    
+    <!-- تعريف الأسهم -->
+    <defs>
+        <marker id='arrowGreen' markerWidth='10' markerHeight='7' refX='10' refY='3.5' orient='auto'>
+            <polygon points='0 0, 10 3.5, 0 7' fill='#16a34a'/>
+        </marker>
+        <marker id='arrowRed' markerWidth='10' markerHeight='7' refX='10' refY='3.5' orient='auto'>
+            <polygon points='0 0, 10 3.5, 0 7' fill='#dc2626'/>
+        </marker>
+    </defs>
+</svg>`,
+"steps": [
+        {
+            "title": "تحديد صحة العبارة",
+            "question": "هل وحدة كثافة الفيض المغناطيسي هي التسلا (T) والتي تكافئ N/(A·m)؟",
+            "options": [
+                { "text": "صحيح", "isCorrect": true },
+                { "text": "خطأ", "isCorrect": false }
+            ],
+            "feedback": "صحيح! التسلا = نيوتن / (أمبير × متر)."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "T = 1 N / A·m",
+        "B = F / I·L"
+    ],
+    "pdfFinalAnswer": "الإجابة: صحيح"
+},// مثال صحيح:
+
+
+
+
+
+
         {
             "title": "س 1 (2007): قاعدة قبضة اليد اليمنى لتحديد قطبية المغناطيس",
             "text": "عند استخدام قاعدة قبضة اليد اليمنى لتحديد قطبية العينة الفولاذية (الملف الحلزوني)، يكون طرف القطب الممغنط الذي يشير إليه إصبع الإبهام قطبيًا جنوبيًا.",
@@ -41,29 +111,7 @@ const questionsMatrix = [
             ],
             "pdfFinalAnswer": "الإجابة: صحيح"
         },
-        {
-            "title": "س 3 (2007): وحدة قياس كثافة الفيض المغناطيسي",
-            "text": "وحدة قياس كثافة الفيض المغناطيسي هي التسلا (T)، وهي تكافئ N/(A·m).",
-            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><text x='200' y='50' text-anchor='middle' font-size='16'>B = F/(I·L)</text><text x='200' y='80' text-anchor='middle' font-size='14'>1 T = 1 N/(A·m)</text></svg>",
-            "steps": [
                 {
-                    "title": "تحديد صحة العبارة",
-                    "question": "هل وحدة كثافة الفيض المغناطيسي هي التسلا (T) والتي تكافئ N/(A·m)؟",
-                    "options": [
-                        { "text": "صحيح", "isCorrect": true },
-                        { "text": "خطأ", "isCorrect": false }
-                    ],
-                    "feedback": "صحيح! التسلا = نيوتن / (أمبير × متر)."
-                }
-            ],
-            "pdfSolutionSteps": [
-                "<div>وحدة كثافة الفيض المغناطيسي هي <strong>التسلا (T)</strong>.</div>",
-                "<div>1 T = 1 N/(A·m)</div>",
-                "<div>من العلاقة: B = F / (I · L)</div>"
-            ],
-            "pdfFinalAnswer": "الإجابة: صحيح"
-        },
-        {
             "title": "س 4 (2007): القوة الكهربائية كمية متجهة",
             "text": "القوة الكهربائية كمية متجهة وتعمل على الخط الواصل بين الشحنتين، ويكون اتجاهها للخارج في حالة الشحنات المختلفة (موجبة وسالبة).",
             "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><circle cx='120' cy='75' r='15' fill='#ef4444'/><text x='120' y='80' text-anchor='middle' fill='white' font-size='12'>+</text><circle cx='280' cy='75' r='15' fill='#2563eb'/><text x='280' y='80' text-anchor='middle' fill='white' font-size='12'>-</text><line x1='135' y1='75' x2='265' y2='75' stroke='#333' stroke-width='2' marker-end='url(#arrow)'/><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='9' refY='5' orient='auto'><polygon points='0 0, 10 5, 0 10' fill='#333'/></marker></defs></svg>",
