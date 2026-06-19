@@ -1,611 +1,117 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>منصة الفيزياء - مدرسة أمجاد أفريقيا</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0f172a;
-            --accent: #2563eb;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --success: #16a34a;
-            --error: #dc2626;
-            --text-main: #334155;
-            --border-color: #e2e8f0;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        body { background-color: #cbd5e1; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .app-container {
-            width: 100%; max-width: 900px; background: var(--card-bg);
-            border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden;
-            margin-bottom: 20px;
-        }
-        .header { background-color: var(--primary); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .school-badge { background: #ea580c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; }
-        .question-container { padding: 30px; text-align: center;}
-        .question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: rtl; flex-wrap: wrap; gap: 10px; }
-        .q-source-span { background: var(--accent); color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold;}
-        .question-text { font-size: 18px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; font-weight: 600; text-align: right;}
-        .question-graphic-area { max-width: 100%; margin: 0 auto 20px auto; padding: 15px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #ffffff; display: flex; justify-content: center; align-items: center; }
-        .steps-container { padding: 20px 30px; background-color: var(--bg); }
-        .step-card {
-            background: white; border: 1px solid var(--border-color); border-radius: 8px;
-            padding: 20px; margin-bottom: 20px; opacity: 0.4; pointer-events: none;
-            transition: all 0.3s ease; border-right: 5px solid #94a3b8;
-        }
-        .step-card.active { opacity: 1; pointer-events: auto; border-right-color: var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .step-card.completed { opacity: 1; pointer-events: none; border-right-color: var(--success); background-color: #f0fdf4; }
-        .step-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-align: right;}
-        .step-question { font-size: 15px; margin-bottom: 15px; color: var(--text-main); text-align: right;}
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; direction: rtl; }
-        .option-btn {
-            background: white; border: 2px solid var(--border-color); padding: 12px;
-            border-radius: 6px; cursor: pointer; text-align: right; font-size: 15px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .option-btn:hover { border-color: var(--accent); background: #eff6ff; }
-        .option-btn.correct { border-color: var(--success); background: #dcfce7; color: #166534; }
-        .option-btn.wrong { border-color: var(--error); background: #fee2e2; color: #991b1b; }
-        .feedback-box { margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; display: none; text-align: right; }
-        .feedback-box.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block; }
-        .navigation-area { padding: 0 30px 30px 30px; display: flex; justify-content: space-between; background: var(--bg); }
-        .nav-btn { padding: 12px 25px; background: var(--primary); color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 6px; }
-        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; color: #94a3b8; }
-        .print-section { text-align: center; margin: 20px 0 50px 0; width: 100%; max-width: 900px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .print-btn { background-color: var(--success); color: white; padding: 15px 35px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-        .bot-link-btn { background-color: var(--accent); color: white; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-        #printable-pdf-document { display: none; }
-
-        /* تنسيق الطباعة - تم إزالة الفراغ العلوي بالكامل */
-        @media print {
-            body { background: white; padding: 0; margin: 0; }
-            .app-container, .print-section { display: none !important; }
-            #printable-pdf-document { 
-                display: block !important; 
-                direction: rtl; 
-                width: 100%; 
-                padding: 0; 
-                margin: 0; 
-                background: white;
-            }
-            .pdf-school-header { text-align: center; font-size: 16px; font-weight: bold; color: #ea580c; margin: 0; padding-top: 0; }
-            .pdf-page-title { text-align: center; color: #0f172a; margin: 5px 0 0 0; font-size: 20px; font-weight: 800; border-bottom: 2px solid #0f172a; padding-bottom: 5px; }
-            .pdf-student-dedication { text-align: center; font-size: 13px; color: #475569; margin: 5px 0; font-style: italic; }
-            .pdf-bot-url-area { text-align: center; font-size: 12px; color: #2563eb; margin: 5px 0 10px 0; font-weight: bold; direction: ltr; }
-            .pdf-question-block { page-break-inside: avoid; margin-bottom: 15px; border: 1px solid #cbd5e1; padding: 8px; border-radius: 8px; background: #ffffff; }
-            .pdf-q-title { font-size: 15px; font-weight: bold; color: #2563eb; margin-bottom: 6px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 3px; }
-            .pdf-q-text { font-size: 13px; color: #334155; line-height: 1.4; margin-bottom: 8px; text-align: justify; }
-            .pdf-graphic { display: flex; justify-content: center; margin: 8px 0; }
-            .pdf-solution-box { background: #f8fafc; border-right: 4px solid #16a34a; padding: 8px; margin-top: 8px; border-radius: 0 6px 6px 0; }
-            .pdf-sol-title { font-weight: bold; color: #166534; margin-bottom: 4px; font-size: 13px; }
-            .pdf-sol-steps { font-size: 12px; color: #334155; line-height: 1.5; }
-            .pdf-sol-steps div { margin-bottom: 3px; }
-            .pdf-final-ans { font-weight: 800; color: #0f172a; margin-top: 6px; background: #e2f8e9; padding: 3px 6px; display: inline-block; border-radius: 4px; }
-        }
-        svg { max-width: 100%; height: auto; }
-
-#printable-pdf-document {
-    width: 100%;
-    height: 100vh; /* يضمن أخذ كامل ارتفاع الشاشة/الصفحة */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* توزيع العناصر بالتساوي بين الأعلى والأسفل */
-    align-items: center;
-    padding: 40px 20px;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.pdf-school-header {
-    font-size: 28px;
-    font-weight: bold;
-    color: #1e3a8a;
-    border-bottom: 2px solid #1e3a8a;
-    padding-bottom: 10px;
-    width: 90%;
-}
-
-.pdf-page-title {
-    font-size: 48px;
-    font-weight: 800;
-    margin: 40px 0;
-    color: #0f172a;
-}
-
-.pdf-student-dedication {
-    font-size: 24px;
-    font-style: italic;
-    color: #475569;
-    flex-grow: 1; /* يسمح لهذا العنصر بأخذ المساحة الفائضة في المنتصف */
-    display: flex;
-    align-items: center;
-}
-
-.pdf-bot-url-area {
-    font-size: 18px;
-    padding: 20px;
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-    width: 100%;
-}
-#printable-pdf-document {
-    display: none; /* مخفي تماماً عن المتصفح */
-}
-@media print {
-    /* التأكد من ظهور SVG في الطباعة */
-    svg {
-        display: block !important;
-        visibility: visible !important;
-        max-width: 100% !important;
-        height: auto !important;
-    }
-    
-    .pdf-graphic svg,
-    .question-graphic-area svg {
-        display: block !important;
-        visibility: visible !important;
-        width: 100% !important;
-        max-width: 300px !important;
-        margin: 0 auto !important;
-    }
-    
-    /* إجبار المتصفح على طباعة الخلفيات */
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-}
-
-    /* هذا التنسيق خاص بالطباعة فقط */
-  
-    @media print {
-        /* تكبير النص الأساسي لكل المسألة */
-        .pdf-question-block {
-            font-size: 24px !important; /* حجم الخط العام */
-            line-height: 1.6 !important;
-            margin-bottom: 50px !important;
-            page-break-inside: avoid; /* منع قطع المسألة بين صفحتين */
-        }
-
-        /* تكبير العنوان */
-        .pdf-q-title {
-            font-size: 24px !important;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        /* تكبير نص السؤال */
-        .pdf-q-text {
-            font-size: 24px !important;
-            margin-bottom: 20px;
-        }
-
-        /* تكبير الحل */
-        .pdf-sol-steps {
-            font-size: 24px !important;
-        }
-    }
-
-.pdf-question-block {
-    display: block;
-    height: auto !important; /* هذا يضمن أن ارتفاع المسألة يتناسب فقط مع محتواها */
-    min-height: unset !important;
-}
-
-
-
-
-
-
-@media print {
-    /* منع الفواصل داخل السؤال الواحد مع السماح بالفواصل الطبيعية */
-    .pdf-question-block {
-        page-break-inside: avoid;
-        page-break-after: auto;
-        break-inside: avoid;
-        margin-bottom: 20px;
-        padding-bottom: 10px;
-    }
-    
-    /* السماح بفصل الصفحة بعد كل سؤال إذا لزم الأمر */
-    .pdf-question-block:not(:last-child) {
-        page-break-after: auto;
-    }
-    
-    /* تقليل الهوامش العلوية والسفلية */
-    .pdf-solution-box {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    
-    /* تقليل الفراغ بين الحل والسؤال التالي */
-    .pdf-question-block + .pdf-question-block {
-        margin-top: 0;
-        page-break-before: auto;
-    }
-    
-    /* منع ترك فراغات كبيرة */
-    body, html {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    /* تقليل المسافات بين العناصر داخل السؤال */
-    .pdf-q-title {
-        margin-bottom: 5px;
-        padding-bottom: 2px;
-    }
-    
-    .pdf-q-text {
-        margin-bottom: 8px;
-    }
-    
-    .pdf-graphic {
-        margin: 5px 0;
-    }
-}
-
-@media print {
-    /* عنوان السؤال */
-    .pdf-q-title {
-        font-size: 18px !important;
-        font-weight: bold !important;
-        margin-bottom: 8px !important;
-        padding-bottom: 4px !important;
-    }
-    
-    /* نص السؤال */
-    .pdf-q-text {
-        font-size: 17px !important;
-        line-height: 1.5 !important;
-        margin-bottom: 10px !important;
-    }
-    
-    /* عنوان الحل */
-    .pdf-sol-title {
-        font-size: 17px !important;
-        font-weight: bold !important;
-        margin-bottom: 6px !important;
-    }
-    
-    /* خطوات الحل (كبرناها كثيرًا) */
-    .pdf-sol-steps {
-        font-size: 16px !important;
-        line-height: 1.5 !important;
-    }
-    
-    .pdf-sol-steps div {
-        margin-bottom: 4px !important;
-    }
-    
-    /* الإجابة النهائية (كبرناها كثيرًا) */
-    .pdf-final-ans {
-        font-size: 16px !important;
-        font-weight: bold !important;
-        margin-top: 8px !important;
-        padding: 5px 10px !important;
-    }
-    
-    /* المسافات بين الأسئلة */
-    .pdf-question-block {
-        margin-bottom: 15px !important;
-        padding: 10px !important;
-    }
-    
-    /* صندوق الحل */
-    .pdf-solution-box {
-        padding: 10px !important;
-        margin-top: 8px !important;
-    }
-}
-
-@media print {
-    /* العلامة المائية في كل صفحة */
-    body {
-        position: relative;
-    }
-    
-    body::after {
-        content: "مدرسة أمجاد أفريقيا - ليبيا - البيضاء";
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        font-size: 28px;
-        font-weight: bold;
-        color: rgba(180, 180, 180, 0.2);
-        white-space: nowrap;
-        pointer-events: none;
-        z-index: 9999;
-    }
-    
-    /* النص التحذيري */
-    body::before {
-        content: "⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡";
-        position: fixed;
-        bottom: 5px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-size: 9px;
-        color: rgba(100, 100, 100, 0.4);
-        pointer-events: none;
-        z-index: 9999;
-    }
-}
-
-@media print {
-    /* إزالة فاصل الصفحة قبل الأسئلة */
-    #dynamic-pdf-questions-area {
-        page-break-before: auto !important;
-        break-before: auto !important;
-    }
-    
-    /* السماح بتقسيم الأسئلة على الصفحات حسب المساحة */
-    .pdf-question-block {
-        page-break-inside: avoid !important;  /* يمنع تقسيم السؤال الواحد */
-        page-break-after: auto !important;
-        break-inside: avoid !important;
-    }
-    
-    /* السماح بفاصل صفحة طبيعي بين الأسئلة الطويلة */
-    .pdf-question-block:not(:last-child) {
-        page-break-after: auto !important;
-    }
-}
-
-@media print {
-    /* إزالة الفاصل الإجباري قبل الأسئلة */
-    #dynamic-pdf-questions-area {
-        page-break-before: auto !important;
-        break-before: auto !important;
-    }
-    
-    /* السماح بتدفق الأسئلة بشكل طبيعي */
-    .pdf-question-block {
-        page-break-inside: avoid !important;
-        page-break-after: auto !important;
-        break-inside: avoid !important;
-    }
-}
-/* لا نحتاج لـ vh هنا لأننا سنتحكم به عند الطباعة فقط */
-    </style>
-</head>
-<body>
-
-<div class="app-container">
-    <div class="header">
-        <h2><i class="fa-solid fa-desktop"></i> منصة الفيزياء
-</h2>
-        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
-        <span id="question-counter"></span>
-    </div>
-    <div class="question-container">
-        <div class="question-meta"><span class="q-source-span" id="q-source"></span></div>
-        <div class="question-text" id="main-question-text"></div>
-        <div class="question-graphic-area" id="graphic-container"></div>
-    </div>
-    <div class="steps-container" id="steps-container"></div>
-    <div class="navigation-area">
-        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">← السابق</button>
-        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">التالي →</button>
-    </div>
-</div>
-
-<div class="print-section">
-    <button class="print-btn" onclick="triggerSmartPrint()">
-        <i class="fa-solid fa-file-pdf"></i> طباعة PDF
-    </button>
-</div>
-
-<div id="printable-pdf-document" style="text-align: center; padding: 50px; font-family: 'Arial', sans-serif; background-color: #ffffff; border: 2px solid #0d6efd; border-radius: 15px; min-height: 800px;">
-    
-    <div style="font-size: 24px; color: #1e3a8a; font-weight: bold;">
-        مدرسة أمجاد أفريقيا - ليبيا - البيضاء
-    </div>
-
-    <div style="margin: 40px 0;">
-        <h1 style="font-size: 72px; color: #1e3a8a; margin: 0; font-weight: 900;">
-            الفيزياء
-        </h1>
-        <div style="font-size: 28px; color: #2d3748; margin-top: 10px; font-weight: bold;">
-            الصف الثالث الثانوي
-        </div>
-    </div>
-
-    <div style="margin: 60px 0;">
-        <h2 style="font-size: 32px; color: #0d6efd; margin: 0;">
-            <span style="font-size: 40px;">📘</span> كراسة الحلول النموذجية <span style="font-size: 40px;">📘</span>
-        </h2>
-        <div style="font-size: 20px; color: #4a5568; margin-top: 10px; font-weight: bold;">
-            العام الدراسي 2025 - 2026
-        </div>
-    </div>
-
-    <div style="margin: 40px 0; border: 1px dashed #0d6efd; padding: 20px; display: inline-block; border-radius: 10px;">
-        <h3 style="color: #2d3748; margin-top: 0;">أسئلة من امتحانات سابقة</h3>
-        <h4 style="color: #e53e3e; margin: 0;"> الكهربائية والمغناطيسية والذرية </h4>
-    </div>
-
-    <div style="margin: 50px 0; color: #4a5568;">
-        <p>إهداء إلى طلبتنا المتميزين</p>
-    </div>
-    
-    <div style="margin-top: 50px; font-size: 16px; color: #2b6cb0;">
-        رابط البوت التعليمي:<br>
-        <a href="http://t.me/amjad_africa2027bot" style="color: #0d6efd;">t.me/amjad_africa2027bot</a>
-    </div>
-</div>    <div id="dynamic-pdf-questions-area"></div>
-</div>
-<script>
-  // تأكد من أن آخر عنصر في المصفوفة ليس بعده فاصلة
 const questionsMatrix = [
+        {
+            "title": "س 1 (2007): قاعدة قبضة اليد اليمنى لتحديد قطبية المغناطيس",
+            "text": "عند استخدام قاعدة قبضة اليد اليمنى لتحديد قطبية العينة الفولاذية (الملف الحلزوني)، يكون طرف القطب الممغنط الذي يشير إليه إصبع الإبهام قطبيًا جنوبيًا.",
+            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><circle cx='200' cy='75' r='8' fill='#333'/><text x='200' y='55' text-anchor='middle' font-size='12'>I</text><circle cx='200' cy='75' r='50' fill='none' stroke='#2563eb' stroke-width='2' stroke-dasharray='6,3'/><text x='200' y='130' text-anchor='middle' font-size='12'>الإبهام → القطب الشمالي (N)</text></svg>",
+            "steps": [
+                {
+                    "title": "تحديد صحة العبارة",
+                    "question": "في قاعدة قبضة اليد اليمنى للملفات، هل يشير الإبهام إلى القطب الجنوبي؟",
+                    "options": [
+                        { "text": "خطأ (الإبهام يشير إلى القطب الشمالي N)", "isCorrect": true },
+                        { "text": "صحيح", "isCorrect": false }
+                    ],
+                    "feedback": "خطأ! عند استخدام قاعدة قبضة اليد اليمنى، يشير الإبهام دائمًا إلى اتجاه القطب الشمالي (N)."
+                }
+            ],
+            "pdfSolutionSteps": [
+                "<div>القاعدة: الإبهام يشير إلى اتجاه القطب <strong>الشمالي (N)</strong>.</div>",
+                "<div>القطب الجنوبي يكون في الاتجاه المعاكس.</div>"
+            ],
+            "pdfFinalAnswer": "الإجابة: خطأ"
+        },
+        {
+            "title": "س 2 (2007): البرق كتفريغ كهربائي",
+            "text": "البرق هو التفريغ الكهربائي الذي يحدث عندما تفرغ السحب شحنتها المتراكمة.",
+            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><path d='M180,20 L150,80 L190,80 L160,140 L220,60 L180,60 L210,20 Z' fill='#fbbf24' stroke='#333'/><text x='200' y='130' text-anchor='middle' font-size='12'>تفريغ كهربائي بين السحب والأرض</text></svg>",
+            "steps": [
+                {
+                    "title": "تحديد صحة العبارة",
+                    "question": "هل البرق عبارة عن تفريغ كهربائي يحدث عندما تفرغ السحب شحنتها المتراكمة؟",
+                    "options": [
+                        { "text": "صحيح", "isCorrect": true },
+                        { "text": "خطأ", "isCorrect": false }
+                    ],
+                    "feedback": "صحيح! البرق هو تفريغ كهربائي هائل يحدث بين السحب أو بين السحب والأرض."
+                }
+            ],
+            "pdfSolutionSteps": [
+                "<div>البرق هو تفريغ كهربائي يحدث عند تراكم الشحنات في السحب.</div>",
+                "<div>يحدث بين السحب نفسها أو بين السحب والأرض.</div>"
+            ],
+            "pdfFinalAnswer": "الإجابة: صحيح"
+        },
+        {
+            "title": "س 3 (2007): وحدة قياس كثافة الفيض المغناطيسي",
+            "text": "وحدة قياس كثافة الفيض المغناطيسي هي التسلا (T)، وهي تكافئ N/(A·m).",
+            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><text x='200' y='50' text-anchor='middle' font-size='16'>B = F/(I·L)</text><text x='200' y='80' text-anchor='middle' font-size='14'>1 T = 1 N/(A·m)</text></svg>",
+            "steps": [
+                {
+                    "title": "تحديد صحة العبارة",
+                    "question": "هل وحدة كثافة الفيض المغناطيسي هي التسلا (T) والتي تكافئ N/(A·m)؟",
+                    "options": [
+                        { "text": "صحيح", "isCorrect": true },
+                        { "text": "خطأ", "isCorrect": false }
+                    ],
+                    "feedback": "صحيح! التسلا = نيوتن / (أمبير × متر)."
+                }
+            ],
+            "pdfSolutionSteps": [
+                "<div>وحدة كثافة الفيض المغناطيسي هي <strong>التسلا (T)</strong>.</div>",
+                "<div>1 T = 1 N/(A·m)</div>",
+                "<div>من العلاقة: B = F / (I · L)</div>"
+            ],
+            "pdfFinalAnswer": "الإجابة: صحيح"
+        },
+        {
+            "title": "س 4 (2007): القوة الكهربائية كمية متجهة",
+            "text": "القوة الكهربائية كمية متجهة وتعمل على الخط الواصل بين الشحنتين، ويكون اتجاهها للخارج في حالة الشحنات المختلفة (موجبة وسالبة).",
+            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><circle cx='120' cy='75' r='15' fill='#ef4444'/><text x='120' y='80' text-anchor='middle' fill='white' font-size='12'>+</text><circle cx='280' cy='75' r='15' fill='#2563eb'/><text x='280' y='80' text-anchor='middle' fill='white' font-size='12'>-</text><line x1='135' y1='75' x2='265' y2='75' stroke='#333' stroke-width='2' marker-end='url(#arrow)'/><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='9' refY='5' orient='auto'><polygon points='0 0, 10 5, 0 10' fill='#333'/></marker></defs></svg>",
+            "steps": [
+                {
+                    "title": "تحديد صحة العبارة",
+                    "question": "هل اتجاه القوة الكهربائية بين شحنتين مختلفتين (+ و -) يكون للخارج؟",
+                    "options": [
+                        { "text": "خطأ (الاتجاه للداخل في حالة الشحنات المختلفة)", "isCorrect": true },
+                        { "text": "صحيح", "isCorrect": false }
+                    ],
+                    "feedback": "خطأ! الشحنات المختلفة تتجاذب، فاتجاه القوة يكون للداخل وليس للخارج."
+                }
+            ],
+            "pdfSolutionSteps": [
+                "<div>- الشحنات <strong>المختلفة</strong> (+ و -): تتجاذب ← اتجاه القوة للداخل.</div>",
+                "<div>- الشحنات <strong>المتشابهة</strong> (+ و + أو - و -): تتنافر ← اتجاه القوة للخارج.</div>"
+            ],
+            "pdfFinalAnswer": "الإجابة: خطأ"
+        },
+        {
+            "title": "س 5 (2007): القوة الدافعة الكهربائية وفرق الجهد",
+            "text": "القوة الدافعة الكهربائية لعمود كهربائي أقل من فرق الجهد بين طرفي الدائرة الخارجية عند غلق الدائرة.",
+            "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><rect x='30' y='40' width='40' height='60' fill='#e2e8f0' stroke='#333'/><text x='50' y='75' text-anchor='middle' font-size='12'>ε</text><text x='200' y='75' text-anchor='middle' font-size='14'>ε = V + Ir</text><text x='200' y='110' text-anchor='middle' font-size='12'>ε > V (عند غلق الدائرة)</text></svg>",
+            "steps": [
+                {
+                    "title": "تحديد صحة العبارة",
+                    "question": "عند غلق الدائرة، هل القوة الدافعة الكهربائية (ε) أقل من فرق الجهد الخارجي (V)؟",
+                    "options": [
+                        { "text": "خطأ (ε = V + Ir، أي ε > V)", "isCorrect": true },
+                        { "text": "صحيح", "isCorrect": false }
+                    ],
+                    "feedback": "خطأ! ε = V + Ir، أي أن القوة الدافعة الكهربائية تكون دائمًا أكبر من فرق الجهد الخارجي."
+                }
+            ],
+            "pdfSolutionSteps": [
+                "<div>العلاقة: ε = V + Ir</div>",
+                "<div>- ε: القوة الدافعة الكهربائية</div>",
+                "<div>- V: فرق الجهد بين طرفي الدائرة الخارجية</div>",
+                "<div>- I: شدة التيار الكلي</div>",
+                "<div>- r: المقاومة الداخلية للعمود</div>",
+                "<div>بما أن Ir > 0، فإن ε > V دائمًا.</div>"
+            ],
+            "pdfFinalAnswer": "الإجابة: خطأ"
+        },
 
 
-  
-  {
-    "title": "س 1 (2007): قاعدة قبضة اليد اليمنى لتحديد قطبية المغناطيس",
-    "text": "عند استخدام قاعدة قبضة اليد اليمنى لتحديد قطبية العينة الفولاذية (الملف الحلزوني)، يكون طرف القطب الممغنط الذي يشير إليه إصبع الإبهام قطبياً جنوبياً.",
-    "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><circle cx='200' cy='75' r='8' fill='#333'/><text x='200' y='55' text-anchor='middle' font-size='12'>I</text><circle cx='200' cy='75' r='50' fill='none' stroke='#2563eb' stroke-width='2' stroke-dasharray='6,3'/><text x='200' y='130' text-anchor='middle' font-size='12'>الإبهام ← القطب الشمالي (N)</text></svg>",
-    "steps": [
-      {
-        "title": "تحديد صحة العبارة",
-        "question": "في قاعدة قبضة اليد اليمنى للملفات، هل يشير الإبهام إلى القطب الجنوبي أم الشمالي؟",
-        "options": [
-          { "text": "خطأ (الإبهام يشير إلى القطب الشمالي N)", "isCorrect": true },
-          { "text": "صحيح", "isCorrect": false }
-        ],
-        "feedback": "خطأ! عند تحديد قطبية ملف، تشير الأصابع المقبوضة إلى اتجاه التيار، بينما يشير إصبع الإبهام دائماً إلى اتجاه القطب الشمالي (N)."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "<div style='font-size: 18px; line-height: 1.8; direction: rtl;'>",
-      "<strong>الحل:</strong><br><br>",
-      "قاعدة قبضة اليد اليمنى للملفات:<br>",
-      "- الأصابع المقبوضة تشير إلى اتجاه التيار في اللفات.<br>",
-      "- الإبهام يشير إلى اتجاه القطب <strong>الشمالي (N)</strong> وليس الجنوبي.<br><br>",
-      "<strong>الإجابة: خطأ</strong>",
-      "</div>"
-    ],
-    "pdfFinalAnswer": "الإجابة: خطأ"
-  },
-  {
-    "title": "س 2 (2007): البرق كتفريغ كهربائي",
-    "text": "البرق هو التفريغ الكهربائي الذي يحدث عندما تفرغ الكهرباء المتراكمة في السحب شحنتها.",
-    "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><path d='M180,20 L150,80 L190,80 L160,140 L220,60 L180,60 L210,20 Z' fill='#fbbf24' stroke='#333'/><text x='200' y='130' text-anchor='middle' font-size='12'>تفريغ كهربائي بين السحب والأرض</text></svg>",
-    "steps": [
-      {
-        "title": "تحديد صحة العبارة",
-        "question": "هل البرق عبارة عن تفريغ كهربائي يحدث عندما تفرغ السحب شحنتها المتراكمة؟",
-        "options": [
-          { "text": "صحيح", "isCorrect": true },
-          { "text": "خطأ", "isCorrect": false }
-        ],
-        "feedback": "صحيح! البرق هو تفريغ كهربائي هائل يحدث بين السحب أو بين السحب والأرض نتيجة تراكم الشحنات."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "<div style='font-size: 18px; line-height: 1.8; direction: rtl;'>",
-      "<strong>الحل:</strong><br><br>",
-      "البرق هو تفريغ كهربائي يحدث عندما تتراكم الشحنات في السحب وتفرغ فجأة.<br><br>",
-      "يحدث بين السحب نفسها أو بين السحب والأرض.<br><br>",
-      "<strong>الإجابة: صحيح</strong>",
-      "</div>"
-    ],
-    "pdfFinalAnswer": "الإجابة: صحيح"
-  },
-  {
-    "title": "س 3 (2007): وحدة قياس كثافة الفيض المغناطيسي",
-    "text": "وحدة قياس كثافة الفيض المغناطيسي هي التسلا (T)، وهي تكافئ N/(A·m).",
-    "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><text x='200' y='50' text-anchor='middle' font-size='16'>B = F/(I·L)</text><text x='200' y='80' text-anchor='middle' font-size='14'>1 T = 1 N/(A·m)</text><text x='200' y='110' text-anchor='middle' font-size='12'>وحدة التسلا (T)</text></svg>",
-    "steps": [
-      {
-        "title": "تحديد صحة العبارة",
-        "question": "هل وحدة كثافة الفيض المغناطيسي هي التسلا (T) والتي تكافئ N/(A·m)؟",
-        "options": [
-          { "text": "صحيح", "isCorrect": true },
-          { "text": "خطأ", "isCorrect": false }
-        ],
-        "feedback": "صحيح! التسلا = نيوتن / (أمبير × متر) طبقاً للقانون الفوقي."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "<div style='font-size: 18px; line-height: 1.8; direction: rtl;'>",
-      "<strong>الحل:</strong><br><br>",
-      "وحدة كثافة الفيض المغناطيسي هي <strong>التسلا (T)</strong>.<br><br>",
-      "1 T = 1 N/(A·m)<br><br>",
-      "من العلاقة: B = F / (I · L)<br><br>",
-      "<strong>الإجابة: صحيح</strong>",
-      "</div>"
-    ],
-    "pdfFinalAnswer": "الإجابة: صحيح"
-  },
-  {
-    "title": "س 4 (2007): القوة الكهربائية كمية متجهة",
-    "text": "القوة الكهربائية كمية متجهة وتعمل على الخط الواصل بين الشحنتين، ويكون اتجاهها للخارج في حالة الشحنات المختلفة (موجبة وسالببة).",
-    "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><circle cx='120' cy='75' r='15' fill='#ef4444'/><text x='120' y='80' text-anchor='middle' fill='white' font-size='12'>+</text><circle cx='280' cy='75' r='15' fill='#2563eb'/><text x='280' y='80' text-anchor='middle' fill='white' font-size='12'>-</text><line x1='135' y1='75' x2='265' y2='75' stroke='#333' stroke-width='2' marker-end='url(#arrow)'/><defs><marker id='arrow' markerWidth='10' markerHeight='10' refX='9' refY='5' orient='auto'><polygon points='0 0, 10 5, 0 10' fill='#333'/></marker></defs></svg>",
-    "steps": [
-      {
-        "title": "تحديد صحة العبارة",
-        "question": "القوة الكهربائية بين شحنتين مختلفتين (+ و -) تكون تجاذبية (للداخل) وليس للخارج. هل العبارة المذكورة في الأعلى صحيحة؟",
-        "options": [
-          { "text": "خطأ (اتجاه القوة للداخل في حالة الشحنات المختلفة)", "isCorrect": true },
-          { "text": "صحيح", "isCorrect": false }
-        ],
-        "feedback": "خطأ! الشحنات المختلفة تتجاذب، فاتجاه القوة الكهربائية المتبادلة بينهما يكون للداخل وليس للخارج."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "<div style='font-size: 18px; line-height: 1.8; direction: rtl;'>",
-      "<strong>الحل:</strong><br><br>",
-      "- الشحنات <strong>المختلفة</strong> (+ و -): تتجاذب ← اتجاه القوة للداخل.<br>",
-      "- الشحنات <strong>المتشابهة</strong> (+ و + أو - و -): تتنافر ← اتجاه القوة للخارج.<br><br>",
-      "العبارة قالت أن اتجاه القوة للخارج في حالة الشحنات المختلفة، وهذا <strong>خطأ</strong>.<br><br>",
-      "<strong>الإجابة: خطأ</strong>",
-      "</div>"
-    ],
-    "pdfFinalAnswer": "الإجابة: خطأ"
-  },
-  {
-    "title": "س 5 (2007): القوة الدافعة الكهربائية وفرق الجهد",
-    "text": "القوة الدافعة الكهربائية لعمود كهربائي أقل من فرق الجهد بين طرفي الدائرة الخارجية عند غلق الدائرة.",
-    "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><rect x='30' y='40' width='40' height='60' fill='#e2e8f0' stroke='#333'/><text x='50' y='75' text-anchor='middle' font-size='12'>ε</text><text x='200' y='75' text-anchor='middle' font-size='14'>ε = V + Ir</text><text x='200' y='110' text-anchor='middle' font-size='12'>ε > V (عند غلق الدائرة)</text></svg>",
-    "steps": [
-      {
-        "title": "تحديد صحة العبارة",
-        "question": "عند غلق الدائرة، هل القوة الدافعة الكهربائية (ε) أقل من فرق الجهد الخارجي (V)؟",
-        "options": [
-          { "text": "خطأ (ε = V + Ir، أي ε > V)", "isCorrect": true },
-          { "text": "صحيح", "isCorrect": false }
-        ],
-        "feedback": "خطأ! ε = V + Ir، أي أن القوة الدافعة الكهربائية تكون دائماً أكبر من فرق الجهد الخارجي بسبب الهبوط في الجهد عبر المقاومة الداخلية للعمود."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "<div style='font-size: 18px; line-height: 1.8; direction: rtl;'>",
-      "<strong>الحل:</strong><br><br>",
-      "العلاقة: ε = V + Ir<br>",
-      "- ε: القوة الدافعة الكهربائية<br>",
-      "- V: فرق الجهد بين طرفي الدائرة الخارجية<br>",
-      "- I: شدة التيار الكلي<br>",
-      "- r: المقاومة الداخلية للعمود<br><br>",
-      "بما أن مقدار الهبوط في الجهد Ir > 0، فإن ε > V دائماً (القوة الدافعة أكبر من فرق الجهد الخارجي).<br><br>",
-      "<strong>الإجابة: خطأ</strong>",
-      "</div>"
-    ],
-    "pdfFinalAnswer": "الإجابة: خطأ"
-  },
-  {
-    "title": "س 6 (2007): مقاومة السلك عند تشكيله",
-    "text": "عند تشكيل سلك على هيئة متوازي مستطيلات تختلف مقاومة أضلاعه، بينما عند تشكيل نفس السلك على هيئة مكعب تتساوى مقاومة أضلاعه.",
-    "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><rect x='60' y='50' width='80' height='80' fill='none' stroke='#333' stroke-width='2'/><text x='100' y='100' text-anchor='middle' font-size='10'>مكعب</text><text x='100' y='140' text-anchor='middle' font-size='10'>أبعاد متساوية</text><rect x='240' y='50' width='120' height='40' fill='none' stroke='#333' stroke-width='2'/><text x='300' y='75' text-anchor='middle' font-size='10'>متوازي مستطيلات</text><text x='300' y='140' text-anchor='middle' font-size='10'>أبعاد مختلفة</text></svg>",
-    "steps": [
-      {
-        "title": "تحديد صحة العبارة",
-        "question": "هل تتساوى المقاومة بين الأوجه المتقابلة للمكعب بينما تختلف لمتوازي المستطيلات لنفس المادة؟",
-        "options": [
-          { "text": "صحيح", "isCorrect": true },
-          { "text": "خطأ", "isCorrect": false }
-        ],
-        "feedback": "صحيح! لأن مقاومة الموصل تعتمد على الطول ومساحة المقطع، وفي المكعب تتساوى الأبعاد لجميع الأوجه المتقابلة."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "<div style='font-size: 18px; line-height: 1.8; direction: rtl;'>",
-      "<strong>الحل:</strong><br><br>",
-      "مقاومة الموصل: R = ρ · L / A<br><br>",
-      "- في <strong>المكعب</strong>: الأبعاد بين الأوجه المتقابلة متساوية (الطول ومساحة المقطع ثابتة) ← المقاومة متساوية.<br>",
-      "- في <strong>متوازي المستطيلات</strong>: تختلف الأبعاد (الطول والمساحة) حسب اتجاه مرور التيار ← المقاومة مختلفة.<br><br>",
-      "<strong>الإجابة: صحيح</strong>",
-      "</div>"
-    ],
-    "pdfFinalAnswer": "الإجابة: صحيح"
-  },
-  {
+{
     "title": "س 7 (2007): قوة التجاذب بين سلكين متوازيين",
     "text": "تحدث قوة تجاذب بين سلكين متوازيين يحملان تيارات متضادة الاتجاه (مختلفة الاتجاه).",
     "svgCode": "<svg width='400' height='150' viewBox='0 0 400 150'><rect width='400' height='150' fill='#ffffff'/><line x1='100' y1='50' x2='300' y2='50' stroke='#333' stroke-width='2'/><circle cx='80' cy='50' r='5' fill='#d00'/><text x='70' y='40' text-anchor='end' font-size='10'>I₁</text><line x1='100' y1='100' x2='300' y2='100' stroke='#333' stroke-width='2'/><circle cx='80' cy='100' r='5' fill='#2563eb'/><text x='70' y='110' text-anchor='end' font-size='10'>I₂</text><text x='200' y='75' text-anchor='middle' font-size='12'>تياران متضادان ← تنافر</text><text x='200' y='135' text-anchor='middle' font-size='12'>تياران متوافقان ← تجاذب</text></svg>",
@@ -3087,7 +2593,6 @@ const questionsMatrix = [
   "pdfFinalAnswer": "الإجابة الصحيحة هي: (3) المجال الكهربائي"
 },
 
-
    {
   "title": "تحديد نوع الشحنة من اتجاه المجال الكهربائي: امتحانات وزارة: ",
   "text": "معتمدًا على بيانات الشكل، حيث المجال الكهربائي E واتجاه السهم من A إلى B، فإن نوع كل من الشحنتين A و B هو:\n\n(أ) A سالبة، B موجبة\n(ب) A موجبة، B سالبة\n(ج) A و B موجبتان\n(د) A و B سالبتان",
@@ -4448,6 +3953,7 @@ const questionsMatrix = [
 ],
 "pdfFinalAnswer": "الإجابة الصحيحة: (4) صفراً"
 },
+
 {
 "title": "س 45: اتجاه التيار المستحث في ملف لولبي",
 "text": "بوضع مغناطيس يسقط من أحد طرفي ملف لولبي. فأي من العبارات الآتية صحيحة؟\n\n(أ) يتولد تيار مستحث ويكون الطرف القريب من المغناطيس قطبا جنوبيا\n(ب) يتولد تيار مستحث ويكون الطرف البعيد عن المغناطيس قطبا شماليا\n(ج) يتولد تيار مستحث في الجزء السفلي عند النظر إلى الطرف القريب من المغناطيس\n(د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب من المغناطيس",
@@ -4679,115 +4185,4 @@ const questionsMatrix = [
 }
 
 
-
-];
-let currentQIndex = 0;
-
-function navigateQuestion(direction) {
-    const newIndex = currentQIndex + direction;
-    if (newIndex >= 0 && newIndex < questionsMatrix.length) {
-        currentQIndex = newIndex;
-        renderActiveQuestion(currentQIndex);
-    }
-}
-
-function renderActiveQuestion(index) {
-    const data = questionsMatrix[index];
-    if(!data) return;
-    document.getElementById('q-source').innerText = data.title;
-    document.getElementById('main-question-text').innerText = data.text;
-    document.getElementById('question-counter').innerHTML = `مسألة ${index+1} / ${questionsMatrix.length}`;
-    
-    const graphicContainer = document.getElementById('graphic-container');
-    if (data.svgCode && data.svgCode.trim() !== "") {
-        graphicContainer.innerHTML = data.svgCode;
-    } else if (data.imagePath && data.imagePath.trim() !== "") {
-        graphicContainer.innerHTML = `<img src="${data.imagePath}" style="max-width: 480px; width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #ccc; border-radius: 8px;" alt="رسم توضيحي">`;
-    } else {
-        graphicContainer.innerHTML = '<p style="color: gray;">⚠️ لا يوجد رسم توضيحي</p>';
-    }
-    
-    document.getElementById('prev-btn').disabled = index === 0;
-    document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
-    
-    const stepsContainer = document.getElementById('steps-container');
-    stepsContainer.innerHTML = '';
-    if(data.steps) {
-        data.steps.forEach((step, sIdx) => {
-            let optionsHTML = '';
-            step.options.forEach(opt => {
-                optionsHTML += `<button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}"><span>${opt.text}</span> <i class="fa-regular fa-circle"></i></button>`;
-            });
-            stepsContainer.innerHTML += `<div class="step-card ${sIdx===0?'active':''}" id="step-card-${sIdx}"><div class="step-title">${step.title}</div><div class="step-question">${step.question}</div><div class="options-grid">${optionsHTML}</div><div class="feedback-box" id="feedback-${sIdx}"></div></div>`;
-        });
-    }
-}
-
-function checkLiveAnswer(btn, sIdx, isCorrect) {
-    const card = document.getElementById(`step-card-${sIdx}`);
-    const fb = document.getElementById(`feedback-${sIdx}`);
-    card.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('correct','wrong'); b.querySelector('i').className = 'fa-regular fa-circle'; });
-    if(isCorrect) {
-        btn.classList.add('correct');
-        btn.querySelector('i').className = 'fa-solid fa-circle-check';
-        fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
-        fb.className = 'feedback-box success';
-        card.classList.add('completed');
-        card.classList.remove('active');
-        const nextCard = document.getElementById(`step-card-${sIdx+1}`);
-        if(nextCard) {
-            nextCard.classList.add('active');
-            nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    } else {
-        btn.classList.add('wrong');
-        btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
-    }
-}
-
-function triggerSmartPrint() {
-    const pdfArea = document.getElementById('dynamic-pdf-questions-area');
-    pdfArea.innerHTML = '';
-    
-    questionsMatrix.forEach((q, idx) => {
-        let stepsHtml = '';
-        if(q.pdfSolutionSteps) q.pdfSolutionSteps.forEach(s => { stepsHtml += `<div>${s}</div>`; });
-        
-        let graphicHtml = '';
-        if (q.svgCode && q.svgCode.trim() !== "") {
-            graphicHtml = `<div class="pdf-graphic">${q.svgCode}</div>`;
-        } else if (q.imagePath && q.imagePath.trim() !== "") {
-            graphicHtml = `<img src="${q.imagePath}" style="max-width: 250px; width: 100%; height: auto; display: block; margin: 10px auto; border: 1px solid #ccc; border-radius: 8px;">`;
-        }
-
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'pdf-question-block';
-        questionDiv.innerHTML = `
-            <div class="pdf-q-title">${idx+1}. ${q.title}</div>
-            <div class="pdf-q-text">${q.text}</div>
-            ${graphicHtml}
-            <div class="pdf-solution-box">
-                <div class="pdf-sol-title">الحل:</div>
-                <div class="pdf-sol-steps">${stepsHtml}<div class="pdf-final-ans">${q.pdfFinalAnswer || ''}</div></div>
-            </div>
-        `;
-        
-        if (questionDiv.offsetHeight < 800) {
-            questionDiv.style.pageBreakInside = 'avoid';
-        }
-        
-        pdfArea.appendChild(questionDiv);
-    });
-    
-    setTimeout(() => {
-        window.print();
-    }, 100);
-}
-
-window.onload = () => { 
-    renderActiveQuestion(0); 
-};
-
-</script>
-</body>
-</html>
+    ];

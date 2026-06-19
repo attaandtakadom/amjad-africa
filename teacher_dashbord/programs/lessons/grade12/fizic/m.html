@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>منصة الفيزياء - مدرسة أمجاد أفريقيا</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i> منصة الفيزياء</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="question-counter"></span>
+    </div>
+
+    <div class="question-container">
+        <div class="question-meta">
+            <span class="q-source-span" id="q-source"></span>
+        </div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+    </div>
+
+    <div class="steps-container" id="steps-container"></div>
+
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> طباعة PDF
+    </button>
+    <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+        <i class="fa-brands fa-telegram"></i> البوت التعليمي
+    </a>
+</div>
+
+<div id="printable-pdf-document"></div>
+<div id="dynamic-pdf-questions-area"></div>
+
+<script src="array-questions.js"></script>
+
+<script>
+    let currentQIndex = 0;
+
+    console.log("عدد الأسئلة في المصفوفة: " + questionsMatrix.length);
+
+    function navigateQuestion(direction) {
+        const newIndex = currentQIndex + direction;
+        if (newIndex >= 0 && newIndex < questionsMatrix.length) {
+            currentQIndex = newIndex;
+            renderActiveQuestion(currentQIndex);
+        }
+    }
+
+    function renderActiveQuestion(index) {
+        const data = questionsMatrix[index];
+        if (!data) return;
+
+        document.getElementById('q-source').innerText = data.title;
+        document.getElementById('main-question-text').innerText = data.text;
+        document.getElementById('question-counter').innerHTML = `مسألة ${index + 1} / ${questionsMatrix.length}`;
+
+        const graphicContainer = document.getElementById('graphic-container');
+        if (data.svgCode && data.svgCode.trim() !== "") {
+            graphicContainer.innerHTML = data.svgCode;
+        } else if (data.imagePath && data.imagePath.trim() !== "") {
+            graphicContainer.innerHTML = `<img src="${data.imagePath}" alt="رسم توضيحي">`;
+        } else {
+            graphicContainer.innerHTML = '<p class="no-graphic">⚠️ لا يوجد رسم توضيحي</p>';
+        }
+
+        document.getElementById('prev-btn').disabled = index === 0;
+        document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
+
+        const stepsContainer = document.getElementById('steps-container');
+        stepsContainer.innerHTML = '';
+
+        if (data.steps) {
+            data.steps.forEach((step, sIdx) => {
+                let optionsHTML = '';
+                step.options.forEach(opt => {
+                    optionsHTML += `
+                        <button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}">
+                            <span>${opt.text}</span>
+                            <i class="fa-regular fa-circle"></i>
+                        </button>
+                    `;
+                });
+
+                stepsContainer.innerHTML += `
+                    <div class="step-card ${sIdx === 0 ? 'active' : ''}" id="step-card-${sIdx}">
+                        <div class="step-title">${step.title}</div>
+                        <div class="step-question">${step.question}</div>
+                        <div class="options-grid">${optionsHTML}</div>
+                        <div class="feedback-box" id="feedback-${sIdx}"></div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    function checkLiveAnswer(btn, sIdx, isCorrect) {
+        const card = document.getElementById(`step-card-${sIdx}`);
+        const fb = document.getElementById(`feedback-${sIdx}`);
+
+        card.querySelectorAll('.option-btn').forEach(b => {
+            b.classList.remove('correct', 'wrong');
+            b.querySelector('i').className = 'fa-regular fa-circle';
+        });
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            btn.querySelector('i').className = 'fa-solid fa-circle-check';
+            fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+            fb.className = 'feedback-box success';
+            card.classList.add('completed');
+            card.classList.remove('active');
+
+            const nextCard = document.getElementById(`step-card-${sIdx + 1}`);
+            if (nextCard) {
+                nextCard.classList.add('active');
+                nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+            btn.classList.add('wrong');
+            btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+        }
+    }
+
+    // ===== دالة الطباعة =====
+    function triggerSmartPrint() {
+        const printableDoc = document.getElementById('printable-pdf-document');
+        const questionsArea = document.getElementById('dynamic-pdf-questions-area');
+
+        printableDoc.innerHTML = '';
+        questionsArea.innerHTML = '';
+
+        // ===== الغلاف =====
+        const coverPage = document.createElement('div');
+        coverPage.className = 'pdf-cover-page';
+        coverPage.innerHTML = `
+            <div class="school-name">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+            <div class="main-title">الفيزياء</div>
+            <div class="sub-title">الصف الثالث الثانوي</div>
+            <div class="cover-frame">
+                <h3>📘 كراسة الحلول النموذجية 📘</h3>
+                <h4>أسئلة من امتحانات سابقة</h4>
+                <div class="cover-subjects">الكهربائية والمغناطيسية والذرية</div>
+                <div class="year">العام الدراسي 2025 - 2026</div>
+            </div>
+            <div class="dedication">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+            <div class="bot-link">
+                رابط البوت التعليمي:<br>
+                <a href="http://t.me/amjad_africa2027bot">t.me/amjad_africa2027bot</a>
+            </div>
+        `;
+        printableDoc.appendChild(coverPage);
+
+        // ============================================================
+        // صفحة واحدة متصلة - مع تكبير الرسومات
+        // ============================================================
+        const mainPage = document.createElement('div');
+        mainPage.className = 'print-page-box';
+        mainPage.style.cssText = `
+            page-break-after: auto;
+            break-after: auto;
+            min-height: auto;
+            height: auto;
+            padding: 4mm 6mm 5mm 6mm;
+        `;
+
+        const pairContainer = document.createElement('div');
+        pairContainer.className = 'pdf-questions-pair-container';
+        pairContainer.style.cssText = `
+            display: block;
+            width: 100%;
+        `;
+
+        questionsMatrix.forEach((q, index) => {
+            const questionNumber = index + 1;
+            
+            let fontSize = 16;
+            const textLength = (q.text || '').length;
+            if (textLength < 50) fontSize = 18;
+            if (textLength > 100) fontSize = 15;
+            if (textLength > 150) fontSize = 14;
+            if (textLength > 200) fontSize = 13;
+
+            let stepsHtml = '';
+            if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
+                q.pdfSolutionSteps.forEach(s => {
+                    if (s && s.trim()) {
+                        stepsHtml += `<div>${s}</div>`;
+                    }
+                });
+            }
+
+            let graphicHtml = '';
+            if (q.svgCode && q.svgCode.trim() !== "") {
+                // تكبير SVG مباشرة
+                let svgCode = q.svgCode;
+                // زيادة حجم viewBox إذا كان صغيراً
+                if (svgCode.includes('viewBox')) {
+                    // نترك SVG كما هو ولكن CSS سيكبره
+                }
+                graphicHtml = `<div class="pdf-graphic">${svgCode}</div>`;
+            } else if (q.imagePath && q.imagePath.trim() !== "") {
+                graphicHtml = `<div class="pdf-graphic"><img src="${q.imagePath}" alt="رسم توضيحي"></div>`;
+            }
+
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'pdf-question-block';
+            questionDiv.style.cssText = `
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                margin-bottom: 8px !important;
+                padding-bottom: 6px !important;
+                border-bottom: 1px dashed #cbd5e1;
+                display: block;
+                width: 100%;
+            `;
+            
+            questionDiv.innerHTML = `
+                <div class="pdf-q-title" style="font-size: ${fontSize + 3}px; font-weight: bold; color: #1a365d; margin-bottom: 3px;">${questionNumber}. ${q.title || ''}</div>
+                <div class="pdf-q-text" style="font-size: ${fontSize + 1}px; line-height: 1.6; color: #2d3748; margin-bottom: 3px;">${q.text || ''}</div>
+                ${graphicHtml}
+                <div class="pdf-solution-box" style="margin-top: 3px; padding-top: 3px; border-top: 1px dashed #edf2f7;">
+                    <div class="pdf-sol-steps" style="font-size: ${fontSize}px; line-height: 1.5; padding-right: 6px; color: #2d3748;">${stepsHtml || 'لا يوجد حل متاح'}</div>
+                    ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize + 1}px; font-weight: bold; margin-top: 3px; color: #065f46; padding: 2px 6px; background-color: #f0fdf4; border-radius: 4px; display: inline-block;">${q.pdfFinalAnswer}</div>` : ''}
+                </div>
+            `;
+            pairContainer.appendChild(questionDiv);
+        });
+
+        mainPage.appendChild(pairContainer);
+
+        const pageFooter = document.createElement('div');
+        pageFooter.className = 'page-footer-number';
+        pageFooter.innerHTML = `
+            <div style="text-align: center; font-size: 11px; color: #666; border-top: 1px solid #ddd; padding-top: 5px; margin-top: 6px;">
+                ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+            </div>
+        `;
+        mainPage.appendChild(pageFooter);
+
+        questionsArea.appendChild(mainPage);
+
+        setTimeout(() => {
+            window.print();
+        }, 500);
+    }
+
+    window.onload = () => {
+        renderActiveQuestion(0);
+    };
+</script>
+
+</body>
+</html>
