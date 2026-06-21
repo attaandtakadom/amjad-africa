@@ -675,3 +675,185 @@ body {
         width: 95%;
     }
 }
+/* منع فواصل الصفحات بين الأسئلة */
+@media print {
+    .pdf-question-block {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+    
+    .print-page-box {
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+    
+    .pdf-questions-pair-container {
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+    
+    /* إزالة أي فواصل من الغلاف */
+    .pdf-cover-page {
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+/* ===== ضبط حجم الأسئلة للتحكم في ظهورها ===== */
+
+/* تقليل حجم الخطوط والمسافات للأسئلة الكبيرة */
+.pdf-question-block {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 3px !important;
+    padding-bottom: 3px !important;
+    border-bottom: 1px dashed #cbd5e1;
+    display: block;
+    width: 100%;
+    page-break-after: auto !important;
+    break-after: auto !important;
+    /* منع انكماش السؤال الواحد على صفحة كاملة */
+    max-height: none !important;
+    min-height: auto !important;
+}
+
+/* تصغير حجم النصوص */
+.pdf-q-title {
+    font-weight: bold;
+    color: #38bdf8 !important;
+    margin-bottom: 1px !important;
+    text-align: right;
+    font-size: 15px !important; /* تم التصغير من 18px */
+}
+
+.pdf-q-text {
+    color: #2d3748;
+    line-height: 1.4 !important; /* تم التصغير من 1.6 */
+    margin-bottom: 1px !important;
+    text-align: right;
+    font-size: 14px !important; /* تم التصغير من 16px */
+}
+
+.pdf-solution-box {
+    margin-top: 1px !important;
+    padding-top: 2px !important;
+    border-top: 1px dashed #edf2f7;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    text-align: right;
+}
+
+.pdf-sol-steps {
+    color: #2d3748;
+    line-height: 1.2 !important; /* تم التصغير من 1.5 */
+    padding-right: 4px;
+    font-size: 12px !important; /* تم التصغير من 14px */
+}
+
+.pdf-sol-steps div {
+    margin-bottom: 0px !important;
+    padding: 0px !important;
+}
+
+.pdf-final-ans {
+    font-weight: bold;
+    margin-top: 1px !important;
+    color: #065f46;
+    padding: 1px 4px !important;
+    background-color: #f0fdf4;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 13px !important; /* تم التصغير من 14px */
+}
+
+/* تصغير حجم الرسومات */
+.pdf-graphic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1px 0 !important;
+    width: 100%;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+.pdf-graphic svg {
+    display: block !important;
+    margin: 0 auto !important;
+    max-width: 80% !important; /* تم التصغير من 90% */
+    max-height: 150px !important; /* تم التصغير من 220px */
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+}
+
+.pdf-graphic img {
+    display: block !important;
+    margin: 0 auto !important;
+    max-width: 80% !important;
+    max-height: 150px !important;
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+}
+
+/* تقليل هوامش الصفحة */
+.print-page-box {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 !important;
+    padding: 2mm 3mm 3mm 3mm !important; /* تم التصغير */
+    background: #ffffff;
+    display: block;
+    position: relative;
+    page-break-after: auto;
+    break-after: auto;
+    height: auto !important;
+    min-height: auto !important;
+}
+
+/* تقليل هوامش الصفحة الرئيسية */
+@page {
+    size: A4;
+    margin: 3mm 4mm 6mm 4mm !important; /* تم التصغير */
+}
+
+/* التذييل */
+.page-footer-number {
+    text-align: center;
+    font-family: 'Cairo', sans-serif;
+    font-size: 10px !important;
+    color: #666;
+    border-top: 1px solid #ddd;
+    padding-top: 3px !important;
+    margin-top: 2px !important;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+
+
+
+}
+/* ===== إظهار SVG في الطباعة ===== */
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+@media print {
+    svg {
+        display: block !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    .pdf-graphic {
+        display: block !important;
+        page-break-inside: avoid !important;
+    }
+}
