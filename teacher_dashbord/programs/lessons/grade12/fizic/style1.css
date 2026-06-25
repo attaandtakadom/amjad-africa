@@ -857,3 +857,515 @@ svg {
         page-break-inside: avoid !important;
     }
 }
+/* ===== زيادة حجم الخطوط في الطباعة ===== */
+@media print {
+    .pdf-q-title {
+        font-size: 20px !important; /* تمت الزيادة من 18px */
+    }
+    
+    .pdf-q-text {
+        font-size: 18px !important; /* تمت الزيادة من 16px */
+        line-height: 1.8 !important;
+    }
+    
+    .pdf-sol-steps {
+        font-size: 16px !important; /* تمت الزيادة من 14px */
+        line-height: 1.6 !important;
+    }
+    
+    .pdf-sol-steps div {
+        font-size: 16px !important;
+        padding: 3px 0 !important;
+    }
+    
+    .pdf-final-ans {
+        font-size: 17px !important;
+        padding: 4px 10px !important;
+    }
+    
+    .pdf-graphic svg {
+        max-width: 90% !important;
+        max-height: 250px !important;
+    }
+}
+/* ============================================================
+   أنماط صفحات الملخص - حجم كبير وواضح
+   ============================================================ */
+
+/* صفحة الملخص - حجم خط كبير */
+.pdf-summary-page {
+    font-size: 18px !important;
+    line-height: 1.8 !important;
+}
+
+.pdf-summary-page h1 {
+    font-size: 34px !important;
+}
+
+.pdf-summary-page h2 {
+    font-size: 22px !important;
+}
+
+.pdf-summary-page table {
+    font-size: 17px !important;
+}
+
+.pdf-summary-page table th {
+    font-size: 17px !important;
+    padding: 8px 12px !important;
+}
+
+.pdf-summary-page table td {
+    font-size: 16px !important;
+    padding: 7px 12px !important;
+}
+
+.pdf-summary-page .summary-note {
+    font-size: 15px !important;
+}
+
+/* صفحة المفاتيح الذهبية - حجم خط كبير */
+.pdf-golden-page {
+    font-size: 18px !important;
+    line-height: 1.8 !important;
+}
+
+.pdf-golden-page h1 {
+    font-size: 34px !important;
+}
+
+.pdf-golden-page h2 {
+    font-size: 20px !important;
+}
+
+.pdf-golden-page table {
+    font-size: 16px !important;
+}
+
+.pdf-golden-page table th {
+    font-size: 16px !important;
+    padding: 8px 12px !important;
+}
+
+.pdf-golden-page table td {
+    font-size: 15px !important;
+    padding: 7px 12px !important;
+}
+
+.pdf-golden-page .golden-box {
+    font-size: 16px !important;
+}
+
+/* ============================================================
+   أنماط الطباعة - زيادة حجم الملخص
+   ============================================================ */
+
+@media print {
+    .pdf-summary-page {
+        font-size: 18px !important;
+        line-height: 1.8 !important;
+        padding: 12mm 10mm !important;
+    }
+
+    .pdf-summary-page h1 {
+        font-size: 34px !important;
+    }
+
+    .pdf-summary-page h2 {
+        font-size: 22px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .pdf-summary-page table {
+        font-size: 17px !important;
+        width: 100% !important;
+    }
+
+    .pdf-summary-page table th {
+        font-size: 17px !important;
+        padding: 8px 12px !important;
+        background-color: #e2e8f0 !important;
+    }
+
+    .pdf-summary-page table td {
+        font-size: 16px !important;
+        padding: 7px 12px !important;
+    }
+
+    .pdf-summary-page .summary-note {
+        font-size: 15px !important;
+    }
+
+    .pdf-golden-page {
+        font-size: 18px !important;
+        line-height: 1.8 !important;
+        padding: 12mm 10mm !important;
+    }
+
+    .pdf-golden-page h1 {
+        font-size: 34px !important;
+    }
+
+    .pdf-golden-page h2 {
+        font-size: 20px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .pdf-golden-page table {
+        font-size: 16px !important;
+        width: 100% !important;
+    }
+
+    .pdf-golden-page table th {
+        font-size: 16px !important;
+        padding: 8px 12px !important;
+        background-color: #fecaca !important;
+    }
+
+    .pdf-golden-page table td {
+        font-size: 15px !important;
+        padding: 7px 12px !important;
+    }
+
+    .pdf-golden-page .golden-box {
+        font-size: 16px !important;
+    }
+
+    /* التأكد من عرض الجداول بشكل صحيح */
+    .pdf-summary-page table,
+    .pdf-golden-page table {
+        border-collapse: collapse !important;
+        border: 1px solid #cbd5e1 !important;
+    }
+
+    .pdf-summary-page table th,
+    .pdf-summary-page table td,
+    .pdf-golden-page table th,
+    .pdf-golden-page table td {
+        border: 1px solid #cbd5e1 !important;
+    }
+}
+/* ============================================================
+   ضبط الفراغات بين الصفحات - حل نهائي
+   ============================================================ */
+
+@media print {
+    /* ===== ضبط هوامش الصفحة ===== */
+    @page {
+        size: A4;
+        margin: 6mm 8mm 10mm 8mm !important;
+    }
+
+    /* ===== منع أي فواصل صفحات غير مرغوب فيها ===== */
+    .print-page-box {
+        padding: 2mm 4mm 3mm 4mm !important;
+        margin: 0 !important;
+        page-break-after: auto !important;
+        break-after: auto !important;
+        page-break-before: auto !important;
+        break-before: auto !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+    }
+
+    /* ===== السماح للأسئلة بالانضمام معاً ===== */
+    .pdf-question-block {
+        margin-bottom: 2px !important;
+        padding-bottom: 2px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-after: auto !important;
+        break-after: auto !important;
+        border-bottom: 1px dashed #e2e8f0 !important;
+    }
+
+    .pdf-question-block:last-child {
+        border-bottom: none !important;
+    }
+
+    /* ===== تقليل المسافات داخل السؤال ===== */
+    .pdf-q-title {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        font-size: 16px !important;
+    }
+
+    .pdf-q-text {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        font-size: 15px !important;
+        line-height: 1.4 !important;
+    }
+
+    .pdf-solution-box {
+        margin-top: 0px !important;
+        padding-top: 1px !important;
+    }
+
+    .pdf-sol-steps {
+        font-size: 13px !important;
+        line-height: 1.3 !important;
+    }
+
+    .pdf-sol-steps div {
+        padding: 0px !important;
+        margin: 0px !important;
+        line-height: 1.3 !important;
+    }
+
+    .pdf-final-ans {
+        margin-top: 1px !important;
+        padding: 1px 4px !important;
+        font-size: 14px !important;
+    }
+
+    /* ===== الرسومات ===== */
+    .pdf-graphic {
+        margin: 0px 0 !important;
+        padding: 1px !important;
+    }
+
+    .pdf-graphic svg {
+        max-width: 80% !important;
+        max-height: 150px !important;
+    }
+
+    /* ===== تذييل الصفحة ===== */
+    .page-footer-number {
+        margin-top: 2px !important;
+        padding-top: 2px !important;
+        font-size: 10px !important;
+        border-top: 1px solid #ddd !important;
+    }
+
+    /* ===== منع العناصر الفارغة ===== */
+    .print-page-box:empty {
+        display: none !important;
+    }
+
+    /* ===== صفحات الملخص - تقليل الفراغات ===== */
+    .pdf-summary-page,
+    .pdf-golden-page,
+    .pdf-units-page {
+        padding: 6mm 8mm 4mm 8mm !important;
+        margin: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+
+    .pdf-summary-page > div,
+    .pdf-golden-page > div,
+    .pdf-units-page > div {
+        margin-bottom: 4px !important;
+    }
+
+    .pdf-summary-page h1,
+    .pdf-golden-page h1,
+    .pdf-units-page h1 {
+        margin: 0 0 4px 0 !important;
+        font-size: 26px !important;
+    }
+
+    .pdf-summary-page h2,
+    .pdf-golden-page h2,
+    .pdf-units-page h2 {
+        margin: 0 0 3px 0 !important;
+        font-size: 16px !important;
+    }
+
+    .pdf-summary-page table,
+    .pdf-golden-page table,
+    .pdf-units-page table {
+        margin: 0 !important;
+    }
+
+    .pdf-summary-page table td,
+    .pdf-golden-page table td,
+    .pdf-units-page table td {
+        padding: 2px 4px !important;
+        font-size: 12px !important;
+    }
+
+    .pdf-summary-page table th,
+    .pdf-golden-page table th,
+    .pdf-units-page table th {
+        padding: 2px 4px !important;
+        font-size: 12px !important;
+    }
+
+    /* ===== الغلاف ===== */
+    .pdf-cover-page {
+        padding: 10mm 10mm !important;
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+}
+
+/* ============================================================
+   إعدادات أساسية للشاشة
+   ============================================================ */
+
+/* تثبيت عرض الأسئلة */
+.pdf-question-block {
+    margin-bottom: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+.pdf-graphic {
+    margin: 2px 0 !important;
+}
+/* ============================================================
+   حل مشكلة الفراغات الكبيرة في نهاية صفحات القوانين
+   ============================================================ */
+
+@media print {
+    /* ===== ضبط هوامش صفحات القوانين ===== */
+    .pdf-laws-page {
+        padding: 4mm 8mm 3mm 8mm !important;
+        margin: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+    }
+
+    /* ===== تقليل المسافات بين العناصر ===== */
+    .pdf-laws-page > div {
+        margin-bottom: 4px !important;
+        padding: 6px 10px !important;
+    }
+
+    .pdf-laws-page h1 {
+        font-size: 22px !important;
+        margin: 0 0 4px 0 !important;
+        padding: 0 !important;
+    }
+
+    .pdf-laws-page h2 {
+        font-size: 14px !important;
+        margin: 0 0 3px 0 !important;
+        padding: 0 !important;
+    }
+
+    .pdf-laws-page .law-box {
+        padding: 4px 8px !important;
+        margin: 2px 0 !important;
+        font-size: 15px !important;
+    }
+
+    .pdf-laws-page table {
+        margin: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .pdf-laws-page table td,
+    .pdf-laws-page table th {
+        padding: 2px 4px !important;
+        font-size: 12px !important;
+    }
+
+    /* ===== تقليل المسافة قبل التذييل ===== */
+    .pdf-laws-page .page-footer {
+        margin-top: 3px !important;
+        padding-top: 3px !important;
+        font-size: 10px !important;
+    }
+
+    /* ===== إزالة أي فراغات إضافية ===== */
+    .pdf-laws-page:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+
+    .pdf-laws-page .empty-space {
+        display: none !important;
+    }
+
+    /* ===== ضغط المحتوى في الصفحة ===== */
+    .pdf-laws-page {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    .pdf-laws-page .content-wrapper {
+        flex: 1 !important;
+        height: auto !important;
+    }
+}
+
+/* ============================================================
+   تحسينات للشاشة (غير الطباعة)
+   ============================================================ */
+.pdf-laws-page {
+    padding: 4mm 8mm 3mm 8mm !important;
+}
+
+.pdf-laws-page > div {
+    margin-bottom: 4px !important;
+    padding: 6px 10px !important;
+}
+
+.pdf-laws-page h1 {
+    font-size: 22px !important;
+    margin: 0 0 4px 0 !important;
+}
+
+.pdf-laws-page h2 {
+    font-size: 14px !important;
+    margin: 0 0 3px 0 !important;
+}
+
+.pdf-laws-page .law-box {
+    padding: 4px 8px !important;
+    margin: 2px 0 !important;
+    font-size: 15px !important;
+}
+/* ============================================================
+   منع انقسام الجداول في صفحات القوانين
+   ============================================================ */
+
+@media print {
+    /* منع انقسام أي عنصر في صفحات القوانين */
+    .pdf-laws-page > div {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* منع انقسام الجداول */
+    .pdf-laws-page table,
+    .pdf-laws-page .grid-container {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* تصغير حجم الجداول لتتناسب مع الصفحة */
+    .pdf-laws-page table td,
+    .pdf-laws-page table th {
+        font-size: 10px !important;
+        padding: 2px 4px !important;
+    }
+
+    .pdf-laws-page .grid-container {
+        display: grid !important;
+        gap: 2px !important;
+    }
+
+    /* تقليل هوامش الصفحة */
+    .pdf-laws-page {
+        padding: 3mm 5mm 3mm 5mm !important;
+    }
+
+    /* تقليل حجم الخطوط */
+    .pdf-laws-page h1 {
+        font-size: 18px !important;
+    }
+    .pdf-laws-page h2 {
+        font-size: 12px !important;
+    }
+    .pdf-laws-page p {
+        font-size: 10px !important;
+    }
+}

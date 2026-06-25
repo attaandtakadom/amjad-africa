@@ -5,13 +5,190 @@ const questionsMatrix = [
 // ============================================================
 
 // س 1
+// ============================================================
+// الأسئلة من س 1 إلى س 16 (مع تلميحات بدلاً من الرسومات)
+// ============================================================
+
+// ============================================================
+// س 1 - عدد الإلكترونات المارة في موصل
+// ============================================================
+{
+  "title": "س 18 (2022-2023): حساب التيار في مقاومة",
+  "text": "من الشكل التالي، إذا كان فرق الجهد بين النقطتين (A, B) يساوي 60 V، فإن شدة التيار المار في المقاومة (6Ω) تساوي:",
+  "options": [
+    { "text": "أ) 1/2 أمبير", "isCorrect": false },
+    { "text": "ب) 1/3 أمبير", "isCorrect": true },
+    { "text": "ج) 4 أمبير", "isCorrect": false },
+    { "text": "د) 3 أمبير", "isCorrect": false }
+  ],
+  "correctAnswerIndex": 1,
+  "svgCode": `<svg width='800' height='250' viewBox='0 0 800 250' xmlns='http://www.w3.org/2000/svg'>
+  <style>
+    .wire { stroke:#000; stroke-width:3; fill:none; }
+    .res { fill:white; stroke:#000; stroke-width:2; }
+    .txt { font-size:24px; font-family:Arial; }
+  </style>
+  <!-- A -->
+  <circle cx='60' cy='100' r='4' fill='black'/>
+  <text x='45' y='90' class='txt'>A</text>
+  <!-- سلك رئيسي -->
+  <line x1='60' y1='100' x2='120' y2='100' class='wire'/>
+  <!-- فرع التوازي -->
+  <line x1='120' y1='100' x2='120' y2='50' class='wire'/>
+  <line x1='120' y1='100' x2='120' y2='150' class='wire'/>
+  <!-- 3Ω -->
+  <rect x='160' y='35' width='80' height='30' class='res'/>
+  <text x='185' y='28' class='txt'>3Ω</text>
+  <!-- 6Ω -->
+  <rect x='160' y='135' width='80' height='30' class='res'/>
+  <text x='185' y='190' class='txt'>6Ω</text>
+  <!-- توصيل التوازي -->
+  <line x1='120' y1='50' x2='160' y2='50' class='wire'/>
+  <line x1='240' y1='50' x2='280' y2='50' class='wire'/>
+  <line x1='120' y1='150' x2='160' y2='150' class='wire'/>
+  <line x1='240' y1='150' x2='280' y2='150' class='wire'/>
+  <line x1='280' y1='50' x2='280' y2='150' class='wire'/>
+  <!-- توصيل بعد التوازي -->
+  <line x1='280' y1='100' x2='280' y2='50' class='wire'/>
+  <line x1='280' y1='100' x2='360' y2='100' class='wire'/>
+  <!-- 18Ω -->
+  <rect x='360' y='85' width='90' height='30' class='res'/>
+  <text x='385' y='78' class='txt'>18Ω</text>
+  <line x1='450' y1='100' x2='520' y2='100' class='wire'/>
+  <!-- نقطة نزول الفرع السفلي -->
+  <line x1='520' y1='100' x2='520' y2='170' class='wire'/>
+  <!-- 8Ω -->
+  <rect x='520' y='85' width='90' height='30' class='res'/>
+  <text x='550' y='78' class='txt'>8Ω</text>
+  <line x1='610' y1='100' x2='700' y2='100' class='wire'/>
+  <!-- B -->
+  <circle cx='700' cy='100' r='4' fill='black'/>
+  <text x='710' y='90' class='txt'>B</text>
+  <!-- الفرع السفلي -->
+  <line x1='120' y1='100' x2='120' y2='170' class='wire'/>
+  <line x1='120' y1='170' x2='250' y2='170' class='wire'/>
+  <!-- 5Ω -->
+  <rect x='250' y='155' width='90' height='30' class='res'/>
+  <text x='280' y='210' class='txt'>5Ω</text>
+  <line x1='340' y1='170' x2='520' y2='170' class='wire'/>
+</svg>`,
+  "steps": [
+    {
+      "title": "الخطوة 1: حساب مكافئة التوازي (3Ω و 6Ω)",
+      "question": "ما هي المقاومة المكافئة للمقاومتين 3Ω و 6Ω عند توصيلهما على التوازي؟",
+      "options": [
+        { "text": "أ) 9Ω", "isCorrect": false },
+        { "text": "ب) 2Ω", "isCorrect": true },
+        { "text": "ج) 18Ω", "isCorrect": false },
+        { "text": "د) 0.5Ω", "isCorrect": false }
+      ],
+      "feedback": "✅ صحيح! Rₚ = (3×6)/(3+6) = 18/9 = 2Ω"
+    },
+    {
+      "title": "الخطوة 2: حساب مقاومة الفرع العلوي",
+      "question": "الفرع العلوي يتكون من مكافئة التوازي (2Ω) على التوالي مع 18Ω. ما هي مقاومة الفرع العلوي الكلية؟",
+      "options": [
+        { "text": "أ) 20Ω", "isCorrect": true },
+        { "text": "ب) 36Ω", "isCorrect": false },
+        { "text": "ج) 9Ω", "isCorrect": false },
+        { "text": "د) 16Ω", "isCorrect": false }
+      ],
+      "feedback": "✅ صحيح! R_upper = 2 + 18 = 20Ω"
+    },
+    {
+      "title": "الخطوة 3: حساب المقاومة المكافئة الكلية",
+      "question": "المقاومة المكافئة للفرعين (العلوي 20Ω والسفلي 5Ω) على التوازي، ثم على التوالي مع 8Ω، فما هي المقاومة الكلية؟",
+      "options": [
+        { "text": "أ) 12Ω", "isCorrect": true },
+        { "text": "ب) 33Ω", "isCorrect": false },
+        { "text": "ج) 4Ω", "isCorrect": false },
+        { "text": "د) 8Ω", "isCorrect": false }
+      ],
+      "feedback": "✅ صحيح! R_parallel = (20×5)/(20+5) = 4Ω، ثم R_eq = 4 + 8 = 12Ω"
+    },
+    {
+      "title": "الخطوة 4: حساب التيار الكلي",
+      "question": "باستخدام قانون أوم، ما هو التيار الكلي المار في الدائرة إذا كان V = 60V و R_eq = 12Ω؟",
+      "options": [
+        { "text": "أ) 5A", "isCorrect": true },
+        { "text": "ب) 0.2A", "isCorrect": false },
+        { "text": "ج) 3A", "isCorrect": false },
+        { "text": "د) 10A", "isCorrect": false }
+      ],
+      "feedback": "✅ صحيح! I = V/R = 60/12 = 5A"
+    },
+    {
+      "title": "الخطوة 5: حساب التيار في المقاومة 6Ω",
+      "question": "ما هو التيار المار في المقاومة 6Ω؟",
+      "options": [
+        { "text": "أ) 1/2 A", "isCorrect": false },
+        { "text": "ب) 1/3 A", "isCorrect": true },
+        { "text": "ج) 4 A", "isCorrect": false },
+        { "text": "د) 3 A", "isCorrect": false }
+      ],
+      "feedback": "✅ صحيح! I₆Ω = 2/6 = 1/3 A"
+    }
+  ],
+  "pdfSolutionSteps": [
+    "═══════════════════════════════════════",
+    "🔹 السؤال: حساب التيار في المقاومة 6Ω",
+    "═══════════════════════════════════════",
+    "",
+    "المعطيات:",
+    "• V_AB = 60 V",
+    "• المقاومات: 3Ω، 6Ω (توازي)، 18Ω، 5Ω، 8Ω",
+    "",
+    "❶ مكافئة التوازي (3Ω و 6Ω):",
+    "   Rₚ = (3×6)/(3+6) = 18/9 = 2Ω",
+    "",
+    "❷ مقاومة الفرع العلوي:",
+    "   R_upper = 2 + 18 = 20Ω",
+    "",
+    "❸ المقاومة المكافئة للتوازي الرئيسي:",
+    "   R_parallel = (20×5)/(20+5) = 100/25 = 4Ω",
+    "",
+    "❹ المقاومة الكلية:",
+    "   R_eq = 4 + 8 = 12Ω",
+    "",
+    "❺ التيار الكلي:",
+    "   I_total = V/R_eq = 60/12 = 5A",
+    "",
+    "❻ جهد التوازي الرئيسي:",
+    "   V_parallel = I_total × R_parallel = 5 × 4 = 20V",
+    "",
+    "❼ تيار الفرع العلوي:",
+    "   I_upper = V_parallel / R_upper = 20/20 = 1A",
+    "",
+    "❽ جهد التوازي الصغير:",
+    "   V_small = I_upper × Rₚ = 1 × 2 = 2V",
+    "",
+    "❾ تيار المقاومة 6Ω:",
+    "   I₆Ω = V_small / 6 = 2/6 = 1/3 A",
+    "",
+    "═══════════════════════════════════════",
+    "✅ الإجابة النهائية: 1/3 أمبير (الخيار ب)",
+    "═══════════════════════════════════════"
+  ],
+  "pdfFinalAnswer": "الإجابة: ب) 1/3 أمبير ✅"
+},
 {
     "title": "س 1 (2022-2023): عدد الإلكترونات المارة في موصل",
     "text": "عدد الإلكترونات التي تعبر مقطع موصل في زمن قدره (0.03 μs) عندما تكون شدة التيار الكهربائي المارة فيه (2 mA) تساوي (375×10⁶) إلكترون. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>القانون:</strong> n = (I × t) / e
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            I = 2×10⁻³ A, t = 0.03×10⁻⁶ s, e = 1.6×10⁻¹⁹ C
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            n = (2×10⁻³ × 0.03×10⁻⁶) / (1.6×10⁻¹⁹) = 3.75×10⁸ = 375×10⁶ ✅
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": true },
-        { "text": "خطأ", "isCorrect": false }
+        { "text": "أ) صح", "isCorrect": true },
+        { "text": "ب) خطأ", "isCorrect": false }
     ],
     "correctAnswerIndex": 0,
     "steps": [
@@ -19,46 +196,53 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": true },
-                { "text": "خطأ", "isCorrect": false }
+                { "text": "أ) صح", "isCorrect": true },
+                { "text": "ب) خطأ", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! العبارة صحيحة."
-        },
-        {
-            "title": "طريقة الحل",
-            "question": "كيف نحسب عدد الإلكترونات؟",
-            "options": [
-                { "text": "n = (I × t) / e", "isCorrect": true },
-                { "text": "n = (I × e) / t", "isCorrect": false },
-                { "text": "n = (t × e) / I", "isCorrect": false }
-            ],
-            "feedback": "صحيح! n = (I × t) / e = (2×10⁻³ × 0.03×10⁻⁶) / (1.6×10⁻¹⁹) = 375×10⁶"
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح  ✅",
         "ب) خطأ",
         "",
-        "الحل:",
-        "المعطيات: I = 2 mA = 2×10⁻³ A, t = 0.03 μs = 0.03×10⁻⁶ s, e = 1.6×10⁻¹⁹ C",
-        "القانون: n = (I × t) / e",
-        "التعويض: n = (2×10⁻³ × 0.03×10⁻⁶) / (1.6×10⁻¹⁹)",
-        "الناتج: n = 3.75×10⁸ = 375×10⁶ إلكترون",
-        "══════════════ الخلاصة ══════════════",
-        "✅ العبارة صحيحة (الإجابة: صح)"
+        "══════════════ الحل ══════════════",
+        "I = 2 mA = 2×10⁻³ A",
+        "t = 0.03 μs = 0.03×10⁻⁶ s",
+        "e = 1.6×10⁻¹⁹ C",
+        "n = (I × t) / e = (2×10⁻³ × 0.03×10⁻⁶) / (1.6×10⁻¹⁹)",
+        "n = 3.75×10⁸ = 375×10⁶ إلكترون",
+        "",
+        "الإجابة: أ) صح ✅"
     ],
-    "pdfFinalAnswer": "الإجابة: صح ✅"
+    "pdfFinalAnswer": "الإجابة: أ) صح ✅"
 },
 
-// س 2
+// ============================================================
+// س 2 - توصيل موصل مشحون بالأرض
+// ============================================================
 {
     "title": "س 2 (2022-2023): توصيل موصل مشحون بالأرض",
     "text": "عند توصيل موصل مشحون بشحنة موجبة بالأرض تنتقل الشحنات الموجبة من الموصل إلى الأرض. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>المبدأ:</strong> الشحنات الموجبة لا تنتقل في الموصلات
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الذي ينتقل:</strong> الإلكترونات (الشحنات السالبة)
+        </div>
+        <div style="font-size: 13px; color: #16a34a; margin-top: 6px; background: #f0fdf4; padding: 6px 10px; border-radius: 4px;">
+            الإلكترونات تنتقل من الأرض ← إلى الموصل
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: ب) خطأ
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": false },
-        { "text": "خطأ", "isCorrect": true }
+        { "text": "أ) صح", "isCorrect": false },
+        { "text": "ب) خطأ", "isCorrect": true }
     ],
     "correctAnswerIndex": 1,
     "steps": [
@@ -66,46 +250,48 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": false },
-                { "text": "خطأ", "isCorrect": true }
+                { "text": "أ) صح", "isCorrect": false },
+                { "text": "ب) خطأ", "isCorrect": true }
             ],
             "feedback": "✅ صحيح! العبارة خاطئة."
-        },
-        {
-            "title": "التفسير الفيزيائي",
-            "question": "ماذا يحدث عند توصيل موصل موجب بالأرض؟",
-            "options": [
-                { "text": "تنتقل الإلكترونات من الأرض إلى الموصل", "isCorrect": true },
-                { "text": "تنتقل الشحنات الموجبة من الموصل إلى الأرض", "isCorrect": false }
-            ],
-            "feedback": "صحيح! الإلكترونات هي التي تنتقل من الأرض إلى الموصل الموجب."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح",
         "ب) خطأ  ✅",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• الموصلات تتحرك فيها الشحنات السالبة (الإلكترونات) وليس الموجبة.",
+        "══════════════ التوضيح ══════════════",
+        "• الموصلات تتحرك فيها الإلكترونات (سالبة) وليس الموجبة.",
         "• عندما يكون الموصل موجباً، يجذب الإلكترونات من الأرض.",
-        "• تنتقل الإلكترونات من الأرض إلى الموصل حتى تتعادل الشحنة.",
-        "• الشحنات الموجبة (البروتونات) لا تنتقل في الموصلات.",
-        "══════════════ الخلاصة ══════════════",
-        "❌ العبارة خاطئة (الإجابة: خطأ)"
+        "• تنتقل الإلكترونات من الأرض إلى الموصل.",
+        "",
+        "الإجابة: ب) خطأ ❌"
     ],
-    "pdfFinalAnswer": "الإجابة: خطأ ❌"
+    "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
 },
 
-// س 3
+// ============================================================
+// س 3 - توصيل مقاومتين على التوازي
+// ============================================================
 {
     "title": "س 3 (2022-2023): توصيل مقاومتين على التوازي",
     "text": "إذا وصلت مقاومتان في دائرة كهربائية وكانت قيمة التيار في فرع المقاومة الأولى ضعف قيمته في فرع المقاومة الثانية، فإن جهد المقاومة الثانية يساوي جهد المقاومة الأولى. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>خاصية التوازي:</strong> الجهد متساوٍ على جميع الفروع
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            V₁ = V₂ (بغض النظر عن قيمة التيار)
+        </div>
+        <div style="font-size: 13px; color: #16a34a; margin-top: 6px; background: #f0fdf4; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: أ) صح ✅
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": true },
-        { "text": "خطأ", "isCorrect": false }
+        { "text": "أ) صح", "isCorrect": true },
+        { "text": "ب) خطأ", "isCorrect": false }
     ],
     "correctAnswerIndex": 0,
     "steps": [
@@ -113,45 +299,45 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": true },
-                { "text": "خطأ", "isCorrect": false }
+                { "text": "أ) صح", "isCorrect": true },
+                { "text": "ب) خطأ", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! العبارة صحيحة."
-        },
-        {
-            "title": "التفسير الفيزيائي",
-            "question": "ما هي خاصية التوصيل على التوازي؟",
-            "options": [
-                { "text": "الجهد متساوٍ على جميع الفروع", "isCorrect": true },
-                { "text": "التيار متساوٍ على جميع الفروع", "isCorrect": false }
-            ],
-            "feedback": "صحيح! في التوازي، الجهد ثابت ومتساوي على جميع الفروع."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح  ✅",
         "ب) خطأ",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• التيار توزع على فرعين → يعني أن المقاومتين متصلتان على التوازي.",
-        "• من خصائص التوصيل على التوازي: فرق الجهد ثابت ومتساوي عبر جميع الفروع.",
+        "══════════════ التوضيح ══════════════",
+        "• التيار توزع على فرعين → مقاومتان على التوازي.",
+        "• في التوازي، الجهد ثابت ومتساوي على جميع الفروع.",
         "• V₁ = V₂ بغض النظر عن قيم التيار.",
-        "══════════════ الخلاصة ══════════════",
-        "✅ العبارة صحيحة (الإجابة: صح)"
+        "",
+        "الإجابة: أ) صح ✅"
     ],
-    "pdfFinalAnswer": "الإجابة: صح ✅"
+    "pdfFinalAnswer": "الإجابة: أ) صح ✅"
 },
 
-// س 4
+// ============================================================
+// س 4 - فتيل المصباح الكهربائي
+// ============================================================
 {
     "title": "س 4 (2022-2023): فتيل المصباح الكهربائي",
     "text": "يصنع سلك الفتيل في المصباح الكهربائي من التنجستين لمقاومته العالية ودرجة انصهاره المنخفضة. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>خاصية التنجستين:</strong> مقاومة عالية + درجة انصهار عالية
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: ب) خطأ (درجة الانصهار عالية وليست منخفضة)
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": false },
-        { "text": "خطأ", "isCorrect": true }
+        { "text": "أ) صح", "isCorrect": false },
+        { "text": "ب) خطأ", "isCorrect": true }
     ],
     "correctAnswerIndex": 1,
     "steps": [
@@ -159,45 +345,48 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": false },
-                { "text": "خطأ", "isCorrect": true }
+                { "text": "أ) صح", "isCorrect": false },
+                { "text": "ب) خطأ", "isCorrect": true }
             ],
             "feedback": "✅ صحيح! العبارة خاطئة."
-        },
-        {
-            "title": "خصائص التنجستين",
-            "question": "ما هي خاصية التنجستين التي تمنع انصهار الفتيل؟",
-            "options": [
-                { "text": "درجة انصهار عالية جداً", "isCorrect": true },
-                { "text": "درجة انصهار منخفضة", "isCorrect": false }
-            ],
-            "feedback": "صحيح! التنجستين يتميز بدرجة انصهار عالية جداً (أكثر من 3400°C)."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح",
         "ب) خطأ  ✅",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• التنجستين يتميز بمقاومة كهربائية عالية (ينتج حرارة وتوهج كبير).",
-        "• التنجستين يتميز بدرجة انصهار عالية جداً (تتجاوز 3400°C).",
-        "• هذه الخاصية تمنع الفتيل من الانصهار عند ارتفاع حرارته الشديدة.",
-        "══════════════ الخلاصة ══════════════",
-        "❌ العبارة خاطئة (الإجابة: خطأ)"
+        "══════════════ التوضيح ══════════════",
+        "• التنجستين مقاومة عالية (ينتج حرارة وتوهج).",
+        "• التنجستين درجة انصهار عالية جداً (تتجاوز 3400°C).",
+        "• يمنع الفتيل من الانصهار عند التوهج.",
+        "",
+        "الإجابة: ب) خطأ ❌"
     ],
-    "pdfFinalAnswer": "الإجابة: خطأ ❌"
+    "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
 },
 
-// س 5
+// ============================================================
+// س 5 - المقاومة الضوئية (LDR)
+// ============================================================
 {
     "title": "س 5 (2022-2023): المقاومة الضوئية (LDR)",
     "text": "تزداد قيمة المقاومة المعتمدة على الضوء (LDR) مع زيادة كمية الضوء المشع عليها. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>سلوك LDR:</strong> علاقة عكسية مع الضوء
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            زيادة الضوء ← تقل المقاومة
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: ب) خطأ (العلاقة عكسية)
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": false },
-        { "text": "خطأ", "isCorrect": true }
+        { "text": "أ) صح", "isCorrect": false },
+        { "text": "ب) خطأ", "isCorrect": true }
     ],
     "correctAnswerIndex": 1,
     "steps": [
@@ -205,45 +394,48 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": false },
-                { "text": "خطأ", "isCorrect": true }
+                { "text": "أ) صح", "isCorrect": false },
+                { "text": "ب) خطأ", "isCorrect": true }
             ],
             "feedback": "✅ صحيح! العبارة خاطئة."
-        },
-        {
-            "title": "سلوك المقاومة الضوئية",
-            "question": "كيف تتغير مقاومة LDR عند زيادة شدة الضوء؟",
-            "options": [
-                { "text": "تقل المقاومة (علاقة عكسية)", "isCorrect": true },
-                { "text": "تزداد المقاومة (علاقة طردية)", "isCorrect": false }
-            ],
-            "feedback": "صحيح! المقاومة الضوئية تعمل عكسياً؛ تقل مقاومتها عند زيادة الضوء."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح",
         "ب) خطأ  ✅",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• المقاومة الضوئية (LDR) تعمل بشكل عكسي (علاقة عكسية).",
-        "• عند زيادة شدة الضوء: تقل قيمة المقاومة (تزداد الموصيلية).",
-        "• في الظلام: تزداد قيمة المقاومة (تقل الموصيلية).",
-        "══════════════ الخلاصة ══════════════",
-        "❌ العبارة خاطئة (الإجابة: خطأ)"
+        "══════════════ التوضيح ══════════════",
+        "• LDR تعمل عكسياً (علاقة عكسية).",
+        "• زيادة الضوء ← تقل المقاومة (تزداد الموصيلية).",
+        "• في الظلام ← تزداد المقاومة.",
+        "",
+        "الإجابة: ب) خطأ ❌"
     ],
-    "pdfFinalAnswer": "الإجابة: خطأ ❌"
+    "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
 },
 
-// س 6
+// ============================================================
+// س 6 - مقاومة الجلد الرطب
+// ============================================================
 {
     "title": "س 6 (2022-2023): مقاومة الجلد الرطب",
     "text": "تكون مقاومة الجلد الرطب حوالي (100 kΩ) ويفسر ذلك عمل الجلد في هذه الحالة كطبقة عازلة لمرور التيار الكهربائي للجسم. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الجلد الجاف:</strong> ≈ 100 kΩ (عازل)
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الجلد الرطب:</strong> ≈ 1 kΩ (موصل)
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: ب) خطأ (الرطب موصل وليس عازلاً)
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": false },
-        { "text": "خطأ", "isCorrect": true }
+        { "text": "أ) صح", "isCorrect": false },
+        { "text": "ب) خطأ", "isCorrect": true }
     ],
     "correctAnswerIndex": 1,
     "steps": [
@@ -251,45 +443,48 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": false },
-                { "text": "خطأ", "isCorrect": true }
+                { "text": "أ) صح", "isCorrect": false },
+                { "text": "ب) خطأ", "isCorrect": true }
             ],
             "feedback": "✅ صحيح! العبارة خاطئة."
-        },
-        {
-            "title": "مقاومة الجلد",
-            "question": "ما هي قيمة مقاومة الجلد الرطب؟",
-            "options": [
-                { "text": "حوالي 1 kΩ (منخفضة)", "isCorrect": true },
-                { "text": "حوالي 100 kΩ (عالية)", "isCorrect": false }
-            ],
-            "feedback": "صحيح! الجلد الرطب مقاومته منخفضة (حوالي 1 kΩ) وليس عازلاً."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح",
         "ب) خطأ  ✅",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• مقاومة الجلد الجاف: عالية جداً (تصل إلى 100 kΩ) → يعمل كعازل.",
-        "• مقاومة الجلد الرطب: منخفضة (تصل إلى حوالي 1 kΩ) → يعمل كموصل.",
-        "• الجلد الرطب يزيد من خطورة الصعق الكهربائي.",
-        "══════════════ الخلاصة ══════════════",
-        "❌ العبارة خاطئة (الإجابة: خطأ)"
+        "══════════════ التوضيح ══════════════",
+        "• الجلد الجاف: عالي (≈100 kΩ) ← عازل.",
+        "• الجلد الرطب: منخفض (≈1 kΩ) ← موصل.",
+        "• الجلد الرطب يزيد خطورة الصعق.",
+        "",
+        "الإجابة: ب) خطأ ❌"
     ],
-    "pdfFinalAnswer": "الإجابة: خطأ ❌"
+    "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
 },
 
-// س 7
+// ============================================================
+// س 7 - الكابلات السميكة وتقليل الفقد
+// ============================================================
 {
     "title": "س 7 (2022-2023): الكابلات السميكة وتقليل الفقد",
     "text": "تستخدم الكابلات السميكة لتقليل القدرة الكهربائية المفقودة في المحولات الكهربائية. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>القانون:</strong> R = ρL/A
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            زيادة السمك ← زيادة A ← تقل R ← يقل الفقد (P = I²R)
+        </div>
+        <div style="font-size: 13px; color: #16a34a; margin-top: 6px; background: #f0fdf4; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: أ) صح ✅
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": true },
-        { "text": "خطأ", "isCorrect": false }
+        { "text": "أ) صح", "isCorrect": true },
+        { "text": "ب) خطأ", "isCorrect": false }
     ],
     "correctAnswerIndex": 0,
     "steps": [
@@ -297,45 +492,47 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": true },
-                { "text": "خطأ", "isCorrect": false }
+                { "text": "أ) صح", "isCorrect": true },
+                { "text": "ب) خطأ", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! العبارة صحيحة."
-        },
-        {
-            "title": "تأثير السمك على المقاومة",
-            "question": "كيف تؤثر زيادة سمك السلك على مقاومته؟",
-            "options": [
-                { "text": "تقل المقاومة (R = ρL/A)", "isCorrect": true },
-                { "text": "تزداد المقاومة", "isCorrect": false }
-            ],
-            "feedback": "صحيح! زيادة المساحة (A) تقلل المقاومة، وبالتالي يقل الفقد الحراري (P = I²R)."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح  ✅",
         "ب) خطأ",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• قانون المقاومة: R = ρL/A (المقاومة تتناسب عكسياً مع مساحة المقطع).",
-        "• زيادة السمك → زيادة مساحة المقطع → تقل المقاومة (R).",
-        "• القدرة المفقودة: P = I²R (تقل بقلَّة المقاومة).",
-        "══════════════ الخلاصة ══════════════",
-        "✅ العبارة صحيحة (الإجابة: صح)"
+        "══════════════ التوضيح ══════════════",
+        "• R = ρL/A (المقاومة تتناسب عكسياً مع مساحة المقطع).",
+        "• زيادة السمك → تقل R → يقل الفقد (P = I²R).",
+        "",
+        "الإجابة: أ) صح ✅"
     ],
-    "pdfFinalAnswer": "الإجابة: صح ✅"
+    "pdfFinalAnswer": "الإجابة: أ) صح ✅"
 },
 
-// س 8
+// ============================================================
+// س 8 - الاضمحلال الإشعاعي
+// ============================================================
 {
     "title": "س 8 (2022-2023): الاضمحلال الإشعاعي",
     "text": "تتأثر عملية الاضمحلال الإشعاعي بدرجة الحرارة والتفاعلات الكيميائية. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الاضمحلال الإشعاعي:</strong> ظاهرة نووية تلقائية
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>لا يتأثر</strong> بالحرارة أو التفاعلات الكيميائية
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: ب) خطأ
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": false },
-        { "text": "خطأ", "isCorrect": true }
+        { "text": "أ) صح", "isCorrect": false },
+        { "text": "ب) خطأ", "isCorrect": true }
     ],
     "correctAnswerIndex": 1,
     "steps": [
@@ -343,46 +540,48 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": false },
-                { "text": "خطأ", "isCorrect": true }
+                { "text": "أ) صح", "isCorrect": false },
+                { "text": "ب) خطأ", "isCorrect": true }
             ],
             "feedback": "✅ صحيح! العبارة خاطئة."
-        },
-        {
-            "title": "خصائص الاضمحلال الإشعاعي",
-            "question": "هل يتأثر الاضمحلال الإشعاعي بالعوامل الخارجية؟",
-            "options": [
-                { "text": "لا، هو ظاهرة نووية تلقائية", "isCorrect": true },
-                { "text": "نعم، يتأثر بالحرارة والضغط", "isCorrect": false }
-            ],
-            "feedback": "صحيح! الاضمحلال الإشعاعي ظاهرة نووية تلقائية لا تتأثر بالعوامل الخارجية."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح",
         "ب) خطأ  ✅",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• الاضمحلال الإشعاعي هو ظاهرة نووية تلقائية.",
-        "• يعتمد بالكامل على استقرار النواة الذرية.",
-        "• لا يتأثر أبداً بالعوامل الفيزيائية الخارجية (حرارة، ضغط).",
-        "• لا يتأثر بالعوامل الكيميائية (التفاعلات، الروابط).",
-        "══════════════ الخلاصة ══════════════",
-        "❌ العبارة خاطئة (الإجابة: خطأ)"
+        "══════════════ التوضيح ══════════════",
+        "• الاضمحلال الإشعاعي ظاهرة نووية تلقائية.",
+        "• لا يتأثر بالحرارة أو الضغط أو التفاعلات الكيميائية.",
+        "• يعتمد على استقرار النواة فقط.",
+        "",
+        "الإجابة: ب) خطأ ❌"
     ],
-    "pdfFinalAnswer": "الإجابة: خطأ ❌"
+    "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
 },
 
-// س 9
+// ============================================================
+// س 9 - قطبية الملف اللولبي
+// ============================================================
 {
     "title": "س 9 (2022-2023): قطبية الملف اللولبي",
     "text": "يكون طرف الملف اللولبي قطباً شمالياً إذا كان التيار يسري في اتجاه عكس عقارب الساعة. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>قاعدة عقارب الساعة:</strong>
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            عكس عقارب الساعة ← قطب شمالي (N)
+        </div>
+        <div style="font-size: 13px; color: #16a34a; margin-top: 6px; background: #f0fdf4; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: أ) صح ✅
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": true },
-        { "text": "خطأ", "isCorrect": false }
+        { "text": "أ) صح", "isCorrect": true },
+        { "text": "ب) خطأ", "isCorrect": false }
     ],
     "correctAnswerIndex": 0,
     "steps": [
@@ -390,45 +589,47 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": true },
-                { "text": "خطأ", "isCorrect": false }
+                { "text": "أ) صح", "isCorrect": true },
+                { "text": "ب) خطأ", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! العبارة صحيحة."
-        },
-        {
-            "title": "قاعدة عقارب الساعة",
-            "question": "إذا كان التيار عكس عقارب الساعة، ما هو القطب المتكون؟",
-            "options": [
-                { "text": "قطب شمالي (N)", "isCorrect": true },
-                { "text": "قطب جنوبي (S)", "isCorrect": false }
-            ],
-            "feedback": "صحيح! عكس عقارب الساعة ← قطب شمالي (N)."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح  ✅",
         "ب) خطأ",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• قاعدة عقارب الساعة للملفات:",
-        "  - إذا نظرنا للملف ورأينا التيار يتحرك عكس عقارب الساعة → قطب شمالي (N).",
-        "  - إذا كان التيار مع عقارب الساعة → قطب جنوبي (S).",
-        "══════════════ الخلاصة ══════════════",
-        "✅ العبارة صحيحة (الإجابة: صح)"
+        "══════════════ التوضيح ══════════════",
+        "• عكس عقارب الساعة ← قطب شمالي (N).",
+        "• مع عقارب الساعة ← قطب جنوبي (S).",
+        "",
+        "الإجابة: أ) صح ✅"
     ],
-    "pdfFinalAnswer": "الإجابة: صح ✅"
+    "pdfFinalAnswer": "الإجابة: أ) صح ✅"
 },
 
-// س 10
+// ============================================================
+// س 10 - الترسيب الكهروستاتيكي
+// ============================================================
 {
     "title": "س 10 (2022-2023): الترسيب الكهروستاتيكي",
     "text": "تستخدم تقنية الترسيب الكهروستاتيكي في مصانع الفولاذ والأسمنت والمواد الكيميائية. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الاستخدامات:</strong> مصانع الفولاذ، الأسمنت، المواد الكيميائية
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الهدف:</strong> حماية البيئة من الغبار والملوثات
+        </div>
+        <div style="font-size: 13px; color: #16a34a; margin-top: 6px; background: #f0fdf4; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: أ) صح ✅
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": true },
-        { "text": "خطأ", "isCorrect": false }
+        { "text": "أ) صح", "isCorrect": true },
+        { "text": "ب) خطأ", "isCorrect": false }
     ],
     "correctAnswerIndex": 0,
     "steps": [
@@ -436,46 +637,48 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": true },
-                { "text": "خطأ", "isCorrect": false }
+                { "text": "أ) صح", "isCorrect": true },
+                { "text": "ب) خطأ", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! العبارة صحيحة."
-        },
-        {
-            "title": "استخدامات الترسيب الكهروستاتيكي",
-            "question": "في أي من هذه المجالات يستخدم الترسيب الكهروستاتيكي؟",
-            "options": [
-                { "text": "جميعها (الفولاذ، الاسمنت، المواد الكيميائية)", "isCorrect": true },
-                { "text": "فقط في صناعة الفولاذ", "isCorrect": false }
-            ],
-            "feedback": "صحيح! يستخدم في مصانع الفولاذ، الاسمنت، المواد الكيميائية."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح  ✅",
         "ب) خطأ",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• المرسبات الكهروستاتيكية تستخدم في العديد من الصناعات.",
-        "• تعمل على جذب واحتجاز جزيئات الرماد والغبار السامة من المداخن.",
-        "• تستخدم في: مصانع الفولاذ، الأسمنت، المواد الكيميائية، محطات توليد الكهرباء.",
-        "• الهدف: حماية البيئة وتقليل التلوث.",
-        "══════════════ الخلاصة ══════════════",
-        "✅ العبارة صحيحة (الإجابة: صح)"
+        "══════════════ التوضيح ══════════════",
+        "• المرسبات الكهروستاتيكية تستخدم في المصانع.",
+        "• تجمع جزيئات الغبار والرماد من المداخن.",
+        "• تستخدم في: الفولاذ، الأسمنت، المواد الكيميائية.",
+        "",
+        "الإجابة: أ) صح ✅"
     ],
-    "pdfFinalAnswer": "الإجابة: صح ✅"
+    "pdfFinalAnswer": "الإجابة: أ) صح ✅"
 },
 
-// س 11
+// ============================================================
+// س 11 - المنطق الرقمي
+// ============================================================
 {
     "title": "س 11 (2022-2023): المنطق الرقمي",
     "text": "يتضمن الدخل والخرج في المنطق الرقمي مستويين فقط من الجهد الكهربائي. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>النظام الثنائي:</strong> مستويين فقط
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            High (1) و Low (0)
+        </div>
+        <div style="font-size: 13px; color: #16a34a; margin-top: 6px; background: #f0fdf4; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: أ) صح ✅
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": true },
-        { "text": "خطأ", "isCorrect": false }
+        { "text": "أ) صح", "isCorrect": true },
+        { "text": "ب) خطأ", "isCorrect": false }
     ],
     "correctAnswerIndex": 0,
     "steps": [
@@ -483,46 +686,47 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": true },
-                { "text": "خطأ", "isCorrect": false }
+                { "text": "أ) صح", "isCorrect": true },
+                { "text": "ب) خطأ", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! العبارة صحيحة."
-        },
-        {
-            "title": "خصائص المنطق الرقمي",
-            "question": "كم عدد مستويات الجهد في الدوائر الرقمية؟",
-            "options": [
-                { "text": "مستويين (High و Low)", "isCorrect": true },
-                { "text": "ثلاثة مستويات", "isCorrect": false }
-            ],
-            "feedback": "صحيح! الدوائر الرقمية تعتمد على النظام الثنائي (مستويين فقط)."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح  ✅",
         "ب) خطأ",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• الدوائر الرقمية تعتمد على النظام الثنائي (Binary System).",
-        "• تتعامل مع مستويين فقط من الجهد:",
-        "  - مستوى مرتفع (High / 1) يمثل القيمة المنطقية 1.",
-        "  - مستوى منخفض (Low / 0) يمثل القيمة المنطقية 0.",
-        "══════════════ الخلاصة ══════════════",
-        "✅ العبارة صحيحة (الإجابة: صح)"
+        "══════════════ التوضيح ══════════════",
+        "• الدوائر الرقمية تعتمد على النظام الثنائي.",
+        "• مستويين فقط: High (1) و Low (0).",
+        "",
+        "الإجابة: أ) صح ✅"
     ],
-    "pdfFinalAnswer": "الإجابة: صح ✅"
+    "pdfFinalAnswer": "الإجابة: أ) صح ✅"
 },
 
-// س 12
+// ============================================================
+// س 12 - حساب الفيض المغناطيسي
+// ============================================================
 {
     "title": "س 12 (2022-2023): حساب الفيض المغناطيسي",
     "text": "مقدار الفيض الناتج من مجال مغناطيسي شدته (2 T) ويكون عمودياً على ملف مساحته (0.4 m²) يساوي (0.2 Wb). هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>القانون:</strong> Φ = B × A
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            Φ = 2 × 0.4 = 0.8 Wb (وليس 0.2 Wb)
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: ب) خطأ
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": false },
-        { "text": "خطأ", "isCorrect": true }
+        { "text": "أ) صح", "isCorrect": false },
+        { "text": "ب) خطأ", "isCorrect": true }
     ],
     "correctAnswerIndex": 1,
     "steps": [
@@ -530,46 +734,47 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": false },
-                { "text": "خطأ", "isCorrect": true }
+                { "text": "أ) صح", "isCorrect": false },
+                { "text": "ب) خطأ", "isCorrect": true }
             ],
             "feedback": "✅ صحيح! العبارة خاطئة."
-        },
-        {
-            "title": "قانون الفيض المغناطيسي",
-            "question": "ما هو قانون حساب الفيض المغناطيسي العمودي؟",
-            "options": [
-                { "text": "Φ = B × A", "isCorrect": true },
-                { "text": "Φ = B / A", "isCorrect": false }
-            ],
-            "feedback": "صحيح! Φ = B × A = 2 × 0.4 = 0.8 Wb وليس 0.2 Wb."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح",
         "ب) خطأ  ✅",
         "",
-        "الحل:",
-        "المعطيات: B = 2 T, A = 0.4 m²",
-        "القانون: Φ = B × A (عندما يكون المجال عمودياً على الملف)",
-        "التعويض: Φ = 2 × 0.4 = 0.8 Wb",
-        "المقارنة: المطلوب في السؤال هو 0.2 Wb",
+        "══════════════ الحل ══════════════",
+        "Φ = B × A = 2 × 0.4 = 0.8 Wb",
         "0.8 Wb ≠ 0.2 Wb",
-        "══════════════ الخلاصة ══════════════",
-        "❌ العبارة خاطئة (الإجابة: خطأ)"
+        "",
+        "الإجابة: ب) خطأ ❌"
     ],
-    "pdfFinalAnswer": "الإجابة: خطأ ❌"
+    "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
 },
 
-// س 13
+// ============================================================
+// س 13 - تعداد الخلفية في أنبوب جيجر
+// ============================================================
 {
     "title": "س 13 (2022-2023): تعداد الخلفية في أنبوب جيجر",
     "text": "إشعاع خلفي قد ينتج عن تلوث إشعاعي للكاشف في أنبوب جيجر-مولر أو ما يحيط به يعرف بتعداد الخلفية. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>تعداد الخلفية:</strong> قراءات في غياب المصدر المشع
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الأسباب:</strong> أشعة كونية، تلوث الكاشف، صخور طبيعية
+        </div>
+        <div style="font-size: 13px; color: #16a34a; margin-top: 6px; background: #f0fdf4; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: أ) صح ✅
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": true },
-        { "text": "خطأ", "isCorrect": false }
+        { "text": "أ) صح", "isCorrect": true },
+        { "text": "ب) خطأ", "isCorrect": false }
     ],
     "correctAnswerIndex": 0,
     "steps": [
@@ -577,47 +782,47 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": true },
-                { "text": "خطأ", "isCorrect": false }
+                { "text": "أ) صح", "isCorrect": true },
+                { "text": "ب) خطأ", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! العبارة صحيحة."
-        },
-        {
-            "title": "تعريف تعداد الخلفية",
-            "question": "ما هو تعداد الخلفية في أنبوب جيجر-مولر؟",
-            "options": [
-                { "text": "قراءات إشعاعية في غياب المصدر المشع", "isCorrect": true },
-                { "text": "قراءات المصدر المشع نفسه", "isCorrect": false }
-            ],
-            "feedback": "صحيح! هو القراءات المسجلة في غياب المصدر المشع."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح  ✅",
         "ب) خطأ",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• تعداد الخلفية (Background Count): القراءات المسجلة في غياب المصدر المشع.",
-        "• الأسباب:",
-        "  - الأشعة الكونية.",
-        "  - الصخور الطبيعية المحيطة.",
-        "  - تلوث إشعاعي طفيف في الكاشف أو البيئة المحيطة.",
-        "══════════════ الخلاصة ══════════════",
-        "✅ العبارة صحيحة (الإجابة: صح)"
+        "══════════════ التوضيح ══════════════",
+        "• تعداد الخلفية: القراءات في غياب المصدر المشع.",
+        "• الأسباب: أشعة كونية، صخور طبيعية، تلوث الكاشف.",
+        "",
+        "الإجابة: أ) صح ✅"
     ],
-    "pdfFinalAnswer": "الإجابة: صح ✅"
+    "pdfFinalAnswer": "الإجابة: أ) صح ✅"
 },
 
-// س 14
+// ============================================================
+// س 14 - اتجاه المجال الكهربائي
+// ============================================================
 {
     "title": "س 14 (2022-2023): اتجاه المجال الكهربائي",
     "text": "اتجاه المجال الكهربائي هو اتجاه القوة المؤثرة على شحنة سالبة صغيرة موضوعة فيه. هل هذه العبارة صحيحة أم خاطئة؟",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>تعريف المجال:</strong> اتجاه القوة على شحنة موجبة
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            (وليس سالبة)
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: ب) خطأ
+        </div>
+    </div>`,
     "options": [
-        { "text": "صح", "isCorrect": false },
-        { "text": "خطأ", "isCorrect": true }
+        { "text": "أ) صح", "isCorrect": false },
+        { "text": "ب) خطأ", "isCorrect": true }
     ],
     "correctAnswerIndex": 1,
     "steps": [
@@ -625,44 +830,48 @@ const questionsMatrix = [
             "title": "اختر الإجابة الصحيحة",
             "question": "هل العبارة صحيحة أم خاطئة؟",
             "options": [
-                { "text": "صح", "isCorrect": false },
-                { "text": "خطأ", "isCorrect": true }
+                { "text": "أ) صح", "isCorrect": false },
+                { "text": "ب) خطأ", "isCorrect": true }
             ],
             "feedback": "✅ صحيح! العبارة خاطئة."
-        },
-        {
-            "title": "تعريف اتجاه المجال الكهربائي",
-            "question": "بأي نوع من الشحنات يُعرّف اتجاه المجال الكهربائي؟",
-            "options": [
-                { "text": "شحنة موجبة", "isCorrect": true },
-                { "text": "شحنة سالبة", "isCorrect": false }
-            ],
-            "feedback": "صحيح! يُعرّف اتجاه المجال باتجاه القوة على شحنة موجبة."
         }
     ],
     "pdfSolutionSteps": [
-        "الخيارات:",
+        "══════════════ الخيارات ══════════════",
         "أ) صح",
         "ب) خطأ  ✅",
         "",
-        "الحل:",
-        "التحليل الفيزيائي:",
-        "• يُعرّف اتجاه المجال الكهربائي عند نقطة بأنه:",
-        "  اتجاه القوة المؤثرة على شحنة اختبار موجبة صغيرة موضوعة عند تلك النقطة.",
-        "• بالنسبة للشحنة السالبة: القوة تكون في عكس اتجاه المجال.",
-        "══════════════ الخلاصة ══════════════",
-        "❌ العبارة خاطئة (الإجابة: خطأ)"
+        "══════════════ التوضيح ══════════════",
+        "• يُعرّف اتجاه المجال باستخدام شحنة موجبة.",
+        "• اتجاه القوة على شحنة موجبة = اتجاه المجال.",
+        "• الشحنة السالبة: القوة في عكس اتجاه المجال.",
+        "",
+        "الإجابة: ب) خطأ ❌"
     ],
-    "pdfFinalAnswer": "الإجابة: خطأ ❌"
-}
-,
-    // س 15 (اختيار من متعدد)
-   
-        // س 15 (اختيار من متعدد)
-// س 15 (مع الخيارات)
+    "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
+},
+
+// ============================================================
+// س 15 - حساب البعد عن شحنة نقطية (اختيار من متعدد)
+// ============================================================
 {
     "title": "س 15 (2022-2023): حساب البعد عن شحنة نقطية",
     "text": "بعد النقطة التي يؤثر بها مجال كهربائي شدته (9 × 10⁴ N/C) عن شحنة موجبة مقدارها (4 μC) يساوي:",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>القانون:</strong> E = k·Q / r²
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>المطلوب:</strong> r = √(k·Q / E)
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            r = √(9×10⁹ × 4×10⁻⁶ / 9×10⁴) = √0.4 = 0.63 m
+        </div>
+        <div style="font-size: 12px; color: #475569; margin-top: 4px;">
+            <strong>ملاحظة:</strong> 4 μC = 4 × 10⁻⁶ C
+        </div>
+    </div>`,
     "options": [
         { "text": "أ) 0.20 m", "isCorrect": false },
         { "text": "ب) 0.63 m", "isCorrect": true },
@@ -670,22 +879,6 @@ const questionsMatrix = [
         { "text": "د) 0.4 m", "isCorrect": false }
     ],
     "correctAnswerIndex": 1,
-    "svgCode": `<svg width='450' height='200' viewBox='0 0 450 200' xmlns='http://www.w3.org/2000/svg'>
-        <rect width='450' height='200' fill='#f8fafc' rx='10' stroke='#cbd5e1' stroke-width='1.5'/>
-        <text x='225' y='25' text-anchor='middle' font-size='14' fill='#1e293b' font-weight='bold'>حساب البعد عن شحنة نقطية</text>
-        <circle cx='120' cy='80' r='25' fill='#fee2e2' stroke='#dc2626' stroke-width='2'/>
-        <text x='120' y='78' text-anchor='middle' font-size='12' fill='#991b1b' font-weight='bold'>+Q</text>
-        <text x='120' y='95' text-anchor='middle' font-size='10' fill='#991b1b'>4 μC</text>
-        <line x1='155' y1='80' x2='280' y2='80' stroke='#dc2626' stroke-width='2' stroke-dasharray='6,4'/>
-        <text x='218' y='68' text-anchor='middle' font-size='12' fill='#dc2626'>r = ?</text>
-        <text x='218' y='100' text-anchor='middle' font-size='11' fill='#475569'>E = 9×10⁴ N/C</text>
-        <circle cx='340' cy='80' r='6' fill='#3b82f6'/>
-        <text x='340' y='105' text-anchor='middle' font-size='10' fill='#3b82f6'>النقطة</text>
-        <rect x='30' y='130' width='390' height='55' fill='#f1f5f9' stroke='#cbd5e1' stroke-width='1' rx='6'/>
-        <text x='225' y='148' text-anchor='middle' font-size='12' fill='#475569'>E = kQ/r² → r = √(kQ/E)</text>
-        <text x='225' y='168' text-anchor='middle' font-size='13' fill='#16a34a' font-weight='bold'>r = √(9×10⁹ × 4×10⁻⁶ / 9×10⁴) = 0.63 m ✅</text>
-        <text x='225' y='192' text-anchor='middle' font-size='12' fill='#1e293b'>الإجابة: ب) 0.63 m</text>
-    </svg>`,
     "steps": [
         {
             "title": "اختر الإجابة الصحيحة",
@@ -697,37 +890,6 @@ const questionsMatrix = [
                 { "text": "د) 0.4 m", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! الإجابة هي ب) 0.63 m"
-        },
-        {
-            "title": "تحليل المعطيات",
-            "question": "ما هي المعطيات في المسألة؟",
-            "options": [
-                { "text": "E = 9×10⁴ N/C, Q = 4×10⁻⁶ C, k = 9×10⁹", "isCorrect": true },
-                { "text": "E = 9×10³ N/C, Q = 4×10⁻³ C", "isCorrect": false },
-                { "text": "E = 9×10⁵ N/C, Q = 4×10⁻⁹ C", "isCorrect": false }
-            ],
-            "feedback": "صحيح! E = 9×10⁴ N/C, Q = 4 μC = 4×10⁻⁶ C, k = 9×10⁹ N·m²/C²"
-        },
-        {
-            "title": "قانون المجال الكهربائي",
-            "question": "ما هو القانون المستخدم لحساب شدة المجال الكهربائي عند نقطة؟",
-            "options": [
-                { "text": "E = kQ / r²", "isCorrect": true },
-                { "text": "E = kQ / r", "isCorrect": false },
-                { "text": "E = kQ × r²", "isCorrect": false }
-            ],
-            "feedback": "صحيح! E = kQ / r² هو قانون المجال الكهربائي الناشئ عن شحنة نقطية."
-        },
-        {
-            "title": "حساب البعد",
-            "question": "بعد التعويض في القانون، ما هي قيمة r؟",
-            "options": [
-                { "text": "0.63 m", "isCorrect": true },
-                { "text": "0.20 m", "isCorrect": false },
-                { "text": "0.1 m", "isCorrect": false },
-                { "text": "0.4 m", "isCorrect": false }
-            ],
-            "feedback": "صحيح! r = √(kQ/E) = √(9×10⁹ × 4×10⁻⁶ / 9×10⁴) = √0.4 = 0.632 m ≈ 0.63 m"
         }
     ],
     "pdfSolutionSteps": [
@@ -738,33 +900,35 @@ const questionsMatrix = [
         "د) 0.4 m",
         "",
         "══════════════ الحل ══════════════",
-        "المعطيات:",
         "E = 9 × 10⁴ N/C",
-        "Q = 4 μC = 4 × 10⁻⁶ C",
+        "Q = 4 × 10⁻⁶ C",
         "k = 9 × 10⁹ N·m²/C²",
-        "",
-        "القانون: E = kQ / r²",
-        "",
-        "ترتيب القانون لحساب r²:",
-        "r² = kQ / E",
-        "",
-        "التعويض:",
-        "r² = (9×10⁹ × 4×10⁻⁶) / (9×10⁴)",
-        "r² = (36×10³) / (9×10⁴) = 4×10⁻¹ = 0.4",
-        "",
-        "أخذ الجذر التربيعي:",
+        "r = √(kQ/E) = √(9×10⁹ × 4×10⁻⁶ / 9×10⁴)",
         "r = √0.4 = 0.632 m ≈ 0.63 m",
         "",
         "الإجابة: ب) 0.63 m ✅"
     ],
     "pdfFinalAnswer": "الإجابة: ب) 0.63 m ✅"
 },
-    // س 16 (اختيار من متعدد)
-   // س 16
+
+// ============================================================
+// س 16 - التحكم في دائرة كهربائية (اختيار من متعدد)
+// ============================================================
 {
     "title": "س 16 (2022-2023): التحكم في دائرة كهربائية",
     "text": "للسيطرة على دائرة كهربائية باستخدام دائرة أخرى دون اتصال كهربائي مباشر بينهما نستخدم:",
-    "svgCode": "",
+    "svgCode": `<div style="background: #f1f5f9; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #3b82f6;">
+        <div style="font-size: 14px; color: #1e293b; font-weight: bold; margin-bottom: 6px;">💡 تلميح الحل</div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الفكرة:</strong> جهاز يعتمد على التأثير المغناطيسي
+        </div>
+        <div style="font-size: 13px; color: #475569; line-height: 1.8;">
+            <strong>الوظيفة:</strong> يفصل بين دائرتين كهربائيتين (عزل كهربائي)
+        </div>
+        <div style="font-size: 13px; color: #dc2626; margin-top: 6px; background: #fef2f2; padding: 6px 10px; border-radius: 4px;">
+            الإجابة: أ) المرحل المغناطيسي البسيط (Relay)
+        </div>
+    </div>`,
     "options": [
         { "text": "أ) المرحل المغناطيسي البسيط", "isCorrect": true },
         { "text": "ب) مغناطيساً دائماً", "isCorrect": false },
@@ -783,16 +947,6 @@ const questionsMatrix = [
                 { "text": "د) المفتاح الريشي", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! المرحل المغناطيسي يوفر عزلاً كهربائياً بين الدائرتين."
-        },
-        {
-            "title": "مبدأ عمل المرحل",
-            "question": "على أي مبدأ يعتمد عمل المرحل؟",
-            "options": [
-                { "text": "التأثير المغناطيسي", "isCorrect": true },
-                { "text": "التأثير الكهروحراري", "isCorrect": false },
-                { "text": "التأثير الكهروضوئي", "isCorrect": false }
-            ],
-            "feedback": "صحيح! يعتمد المرحل على التأثير المغناطيسي لفتح أو غلق دائرة أخرى."
         }
     ],
     "pdfSolutionSteps": [
@@ -806,21 +960,13 @@ const questionsMatrix = [
         "• المرحل (Relay) يعتمد على التأثير المغناطيسي.",
         "• دائرة التحكم (تيار منخفض) تمرر تياراً في ملف يُنتج مجالاً مغناطيسياً.",
         "• المجال يجذب رافعة ميكانيكية تغلق أو تفتح دائرة التشغيل (تيار عالٍ).",
-        "• يوفر عزلاً كهربائياً تاماً بين الدائرتين مما يزيد الأمان.",
+        "• يوفر عزلاً كهربائياً تاماً بين الدائرتين.",
         "",
         "الإجابة: أ) المرحل المغناطيسي البسيط ✅"
     ],
     "pdfFinalAnswer": "الإجابة: أ) المرحل المغناطيسي البسيط ✅"
-},
-
-    // س 25 (اختيار من متعدد)
-
-
-
-// ============================================================
-// جميع الأسئلة من 17 إلى 56 (2022-2023)
-// ============================================================
-
+}
+,
 // س 17
 {
     "title": "س 17 (2022-2023): السلكان المتوازيان",
@@ -2909,7 +3055,63 @@ const questionsMatrix = [
     ],
     "pdfFinalAnswer": "الإجابة: ج) المصابيح موصلة على التوازي ✅"
 },
+// س 52
+{
+    "title": "س 52 (2022-2023): صنع المغناطيسات الكهربائية",
+    "text": "الفلز الذي يستخدم بشكل شائع في صنع المغناطيسات الكهربائية:",
+    "options": [
+        { "text": "أ) الرصاص", "isCorrect": false },
+        { "text": "ب) الحديد المطاوع", "isCorrect": true },
+        { "text": "ج) الألمونيوم", "isCorrect": false },
+        { "text": "د) القصدير", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 1,
+    "pdfSolutionSteps": [
+        "══════════════ الخيارات ══════════════",
+        "أ) الرصاص",
+        "ب) الحديد المطاوع  ✅ (الإجابة الصحيحة)",
+        "ج) الألمونيوم",
+        "د) القصدير",
+        "",
+        "══════════════ التوضيح ══════════════",
+        "• الحديد المطاوع مادة مغناطيسية 'لينة'.",
+        "• يتميز بنفاذية مغناطيسية عالية.",
+        "• يتمغنط بسرعة عند مرور التيار ويفقد المغنطة بسرعة عند قطع التيار.",
+        "• مثالي للمغناطيسات الكهربائية المؤقتة.",
+        "",
+        "الإجابة: ب) الحديد المطاوع ✅"
+    ],
+    "pdfFinalAnswer": "الإجابة: ب) الحديد المطاوع ✅"
+},
 
+// س 53
+{
+    "title": "س 53 (2022-2023): دلك الزجاج بالحرير",
+    "text": "عند دلك ساق من الزجاج بقطعة من الحرير:",
+    "options": [
+        { "text": "أ) الشحنة الموجبة تنتقل من الحرير إلى الساق", "isCorrect": false },
+        { "text": "ب) الإلكترونات تنتقل من الساق إلى الحرير", "isCorrect": true },
+        { "text": "ج) الإلكترونات تنتقل من الحرير إلى الساق", "isCorrect": false },
+        { "text": "د) تتولد حرارة فقط دون انتقال أي شحنات كهربائية بينهما", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 1,
+    "pdfSolutionSteps": [
+        "══════════════ الخيارات ══════════════",
+        "أ) الشحنة الموجبة تنتقل من الحرير إلى الساق",
+        "ب) الإلكترونات تنتقل من الساق إلى الحرير  ✅ (الإجابة الصحيحة)",
+        "ج) الإلكترونات تنتقل من الحرير إلى الساق",
+        "د) تتولد حرارة فقط دون انتقال أي شحنات كهربائية بينهما",
+        "",
+        "══════════════ التوضيح ══════════════",
+        "• عند دلك الزجاج بالحرير، تنتقل الإلكترونات من الزجاج إلى الحرير.",
+        "• الزجاج: يفقد إلكترونات ← يصبح مشحوناً موجباً.",
+        "• الحرير: يكتسب إلكترونات ← يصبح مشحوناً سالباً.",
+        "• السبب: الحرير يمتلك ألفة إلكترونية أعلى من الزجاج.",
+        "",
+        "الإجابة: ب) الإلكترونات تنتقل من الساق إلى الحرير ✅"
+    ],
+    "pdfFinalAnswer": "الإجابة: ب) الإلكترونات تنتقل من الساق إلى الحرير ✅"
+},
 // س 54
 {
     "title": "س 54 (2022-2023): قراءة الأميتر والفولتميتر",
@@ -3096,28 +3298,11 @@ const questionsMatrix = [
 },
 
 // س 56
+// س 56 (بدون رسمة)
 {
     "title": "س 56 (2022-2023): مقاومات متساوية على التوازي",
     "text": "إذا وصلت ثلاث مقاومات متساوية على التوازي فإن قيمة كل مقاومة تساوي:",
-    "svgCode": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
-        <rect width="100%" height="100%" fill="#ffffff" />
-        <g stroke="#000000" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="200" y1="50" x2="200" y2="200" />
-            <line x1="400" y1="50" x2="400" y2="200" />
-            <line x1="200" y1="50" x2="400" y2="50" />
-            <line x1="200" y1="200" x2="400" y2="200" />
-            <rect x="250" y="70" width="40" height="40" fill="#ffffff" />
-            <text x="270" y="96" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">R</text>
-            <rect x="350" y="70" width="40" height="40" fill="#ffffff" />
-            <text x="370" y="96" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">R</text>
-            <rect x="300" y="130" width="40" height="40" fill="#ffffff" />
-            <text x="320" y="156" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">R</text>
-        </g>
-        <g font-family="Arial, sans-serif" font-size="18" fill="#000000" font-weight="bold">
-            <text x="300" y="40" text-anchor="middle">ثلاث مقاومات متساوية على التوازي</text>
-            <text x="300" y="250" text-anchor="middle" font-size="16" fill="#475569">R_total = R/3  →  R = 3 × R_total</text>
-        </g>
-    </svg>`,
+    "svgCode": "",
     "options": [
         { "text": "أ) ثلاثة أمثال المقاومة الكلية", "isCorrect": true },
         { "text": "ب) ثلث المقاومة الكلية", "isCorrect": false },
@@ -3136,6 +3321,26 @@ const questionsMatrix = [
                 { "text": "د) نصف المقاومة الكلية", "isCorrect": false }
             ],
             "feedback": "✅ صحيح! R = 3 × R_total"
+        },
+        {
+            "title": "قانون التوازي",
+            "question": "ما هو قانون المقاومة المكافئة للمقاومات المتساوية على التوازي؟",
+            "options": [
+                { "text": "R_total = R/n", "isCorrect": true },
+                { "text": "R_total = n × R", "isCorrect": false },
+                { "text": "R_total = R + n", "isCorrect": false }
+            ],
+            "feedback": "صحيح! R_total = R/n، حيث n هو عدد المقاومات."
+        },
+        {
+            "title": "حساب قيمة كل مقاومة",
+            "question": "إذا كان n = 3، فما هي قيمة R بدلالة R_total؟",
+            "options": [
+                { "text": "R = 3 × R_total", "isCorrect": true },
+                { "text": "R = R_total/3", "isCorrect": false },
+                { "text": "R = R_total + 3", "isCorrect": false }
+            ],
+            "feedback": "صحيح! R_total = R/3 → R = 3 × R_total"
         }
     ],
     "pdfSolutionSteps": [
@@ -3146,14 +3351,19 @@ const questionsMatrix = [
         "د) نصف المقاومة الكلية",
         "",
         "══════════════ الحل ══════════════",
-        "• عند توصيل (n) من المقاومات المتساوية على التوازي: R_total = R/n",
-        "• لدينا n = 3: R_total = R/3",
-        "• لإيجاد قيمة المقاومة الواحدة: R = 3 × R_total",
+        "• عند توصيل (n) من المقاومات المتساوية (قيمة كل منها R) على التوازي:",
+        "  R_total = R/n",
+        "",
+        "• لدينا n = 3:",
+        "  R_total = R/3",
+        "",
+        "• لإيجاد قيمة المقاومة الواحدة (R):",
+        "  R = 3 × R_total",
         "",
         "الإجابة: أ) ثلاثة أمثال المقاومة الكلية ✅"
     ],
-    "pdfFinalAnswer":       "       🏁 انتهت الأسئلة       🏁     الإجابة: أ) ثلاثة أمثال المقاومة الكلية ✅"
-},
+    "pdfFinalAnswer": "الإجابة: أ) ثلاثة أمثال المقاومة الكلية ✅"
+}
 
 // ============================================================
 // 🏁 انتهت الأسئلة من س 47 إلى س 56 🏁
