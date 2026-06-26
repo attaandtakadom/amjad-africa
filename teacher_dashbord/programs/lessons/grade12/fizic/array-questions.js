@@ -3320,60 +3320,67 @@ const questionsMatrix = [
 "pdfFinalAnswer": "الإجابة الصحيحة هي (ج) الهنري (H)"
 },
 {
-"title": "تأثير احتراق مصباح في دائرة توازي وتوالي مختلطة",
-"text": "الدائرة الكهربائية التالية تحتوي على 6 مصابيح متطابقة (L₁ إلى L₆) موصولة مع بطارية 9 فولت كما هو موضح:\n\n- الفرع الأول: المصباحان L₁ و L₂ على التوالي.\n- الفرع الثاني: المصباحان L₃ و L₄ على التوالي.\n- الفرع الثالث: المصباحان L₅ و L₆ على التوالي.\n- الفروع الثلاثة متصلة على التوازي مع البطارية.\n\nإذا احترق المصباح L₁ فقط (انقطع فتيله)، كم مصباحاً يبقى مضيئاً؟\n\n(أ) 3 مصابيح\n(ب) 4 مصابيح\n(ج) 5 مصابيح\n(د) 6 مصابيح",
-"svgCode": "<svg viewBox='0 0 500 420' xmlns='http://www.w3.org/2000/svg'><rect width='500' height='420' fill='#ffffff' rx='10'/><line x1='50' y1='50' x2='450' y2='50' stroke='#333' stroke-width='2'/><line x1='50' y1='350' x2='450' y2='350' stroke='#333' stroke-width='2'/><line x1='80' y1='50' x2='80' y2='350' stroke='#333' stroke-width='2'/><line x1='200' y1='50' x2='200' y2='350' stroke='#333' stroke-width='2'/><line x1='380' y1='50' x2='380' y2='350' stroke='#333' stroke-width='2'/><line x1='80' y1='50' x2='80' y2='110' stroke='#333' stroke-width='2'/><line x1='80' y1='170' x2='80' y2='350' stroke='#333' stroke-width='2'/><line x1='200' y1='50' x2='200' y2='110' stroke='#333' stroke-width='2'/><line x1='200' y1='170' x2='200' y2='350' stroke='#333' stroke-width='2'/><line x1='380' y1='50' x2='380' y2='110' stroke='#333' stroke-width='2'/><line x1='380' y1='170' x2='380' y2='350' stroke='#333' stroke-width='2'/><rect x='420' y='155' width='30' height='40' fill='#e2e8f0' stroke='#333' stroke-width='2' rx='3'/><text x='435' y='180' text-anchor='middle' font-size='12' font-weight='bold'>9V</text><line x1='420' y1='155' x2='450' y2='155' stroke='#333' stroke-width='2'/><line x1='420' y1='195' x2='450' y2='195' stroke='#333' stroke-width='2'/><text x='435' y='148' text-anchor='middle' font-size='10' fill='red'>+</text><text x='435' y='210' text-anchor='middle' font-size='10' fill='black'>-</text><line x1='450' y1='175' x2='450' y2='50' stroke='#333' stroke-width='2'/><line x1='50' y1='350' x2='450' y2='350' stroke='#333' stroke-width='2'/><line x1='80' y1='110' x2='80' y2='125' stroke='#333' stroke-width='2'/><circle cx='80' cy='145' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='80' y='149' text-anchor='middle' font-size='11' font-weight='bold'>L₁</text><path d='M72,155 L88,155' stroke='#333' stroke-width='1.5'/><path d='M74,158 L86,158' stroke='#333' stroke-width='1.5'/><line x1='80' y1='162' x2='80' y2='170' stroke='#333' stroke-width='2'/><line x1='80' y1='170' x2='80' y2='185' stroke='#333' stroke-width='2'/><circle cx='80' cy='205' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='80' y='209' text-anchor='middle' font-size='11' font-weight='bold'>L₂</text><path d='M72,215 L88,215' stroke='#333' stroke-width='1.5'/><path d='M74,218 L86,218' stroke='#333' stroke-width='1.5'/><line x1='80' y1='222' x2='80' y2='350' stroke='#333' stroke-width='2'/><line x1='200' y1='110' x2='200' y2='125' stroke='#333' stroke-width='2'/><circle cx='200' cy='145' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='200' y='149' text-anchor='middle' font-size='11' font-weight='bold'>L₃</text><path d='M192,155 L208,155' stroke='#333' stroke-width='1.5'/><path d='M194,158 L206,158' stroke='#333' stroke-width='1.5'/><line x1='200' y1='162' x2='200' y2='170' stroke='#333' stroke-width='2'/><line x1='200' y1='170' x2='200' y2='185' stroke='#333' stroke-width='2'/><circle cx='200' cy='205' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='200' y='209' text-anchor='middle' font-size='11' font-weight='bold'>L₄</text><path d='M192,215 L208,215' stroke='#333' stroke-width='1.5'/><path d='M194,218 L206,218' stroke='#333' stroke-width='1.5'/><line x1='200' y1='222' x2='200' y2='350' stroke='#333' stroke-width='2'/><line x1='380' y1='110' x2='380' y2='125' stroke='#333' stroke-width='2'/><circle cx='380' cy='145' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='380' y='149' text-anchor='middle' font-size='11' font-weight='bold'>L₅</text><path d='M372,155 L388,155' stroke='#333' stroke-width='1.5'/><path d='M374,158 L386,158' stroke='#333' stroke-width='1.5'/><line x1='380' y1='162' x2='380' y2='170' stroke='#333' stroke-width='2'/><line x1='380' y1='170' x2='380' y2='185' stroke='#333' stroke-width='2'/><circle cx='380' cy='205' r='16' fill='#fef08a' stroke='#333' stroke-width='2'/><text x='380' y='209' text-anchor='middle' font-size='11' font-weight='bold'>L₆</text><path d='M372,215 L388,215' stroke='#333' stroke-width='1.5'/><path d='M374,218 L386,218' stroke='#333' stroke-width='1.5'/><line x1='380' y1='222' x2='380' y2='350' stroke='#333' stroke-width='2'/><text x='80' y='80' text-anchor='middle' font-size='10' fill='#666'>فرع 1</text><text x='200' y='80' text-anchor='middle' font-size='10' fill='#666'>فرع 2</text><text x='380' y='80' text-anchor='middle' font-size='10' fill='#666'>فرع 3</text><text x='250' y='395' text-anchor='middle' font-size='12' fill='#333'>🔋 المصابيح في كل فرع على التوالي، والفروع على التوازي</text><text x='250' y='412' text-anchor='middle' font-size='11' fill='#666'>⚡ احتراق L₁ يقطع فرع 1 فقط، بينما فرع 2 و 3 يظلان مضيئين</text></svg>",
-"steps": [
-{
-"title": "المرحلة الأولى: تحليل التوصيل في الدائرة",
-"question": "كيف تتصل المصابيح في الدائرة الموضحة؟",
-"options": [
-{ "text": "ثلاثة فروع على التوازي، وكل فرع يحتوي على مصباحين على التوالي", "isCorrect": true },
-{ "text": "جميع المصابيح الستة على التوالي مع بعضها", "isCorrect": false },
-{ "text": "جميع المصابيح الستة على التوازي مع بعضها", "isCorrect": false }
-],
-"feedback": "صحيح! الدائرة مقسمة إلى 3 فروع متوازية، كل فرع يحتوي على مصباحين متصلين على التوالي."
-},
-{
-"title": "المرحلة الثانية: تأثير احتراق L₁ على فرعه",
-"question": "عند احتراق المصباح L₁ (انقطاع فتيله)، ماذا يحدث للتيار في الفرع الأول؟",
-"options": [
-{ "text": "ينقطع التيار في الفرع الأول بالكامل (L₁ و L₂ معاً)", "isCorrect": true },
-{ "text": "يستمر التيار في L₂ فقط لأن L₁ هو الذي احترق", "isCorrect": false }
-],
-"feedback": "ممتاز! المصابيح على التوالي: احتراق أي مصباح يقطع الدائرة في ذلك الفرع بأكمله."
-},
-{
-"title": "المرحلة الثالثة: عد المصابيح المتبقية",
-"question": "بعد احتراق L₁، أي المصابيح تبقى مضيئة؟",
-"options": [
-{ "text": "L₃, L₄, L₅, L₆ (4 مصابيح)", "isCorrect": true },
-{ "text": "L₂, L₃, L₄, L₅, L₆ (5 مصابيح)", "isCorrect": false },
-{ "text": "L₃, L₄ فقط (2 مصباحين)", "isCorrect": false }
-],
-"feedback": "إجابة صحيحة! الفرع الأول انقطع تماماً، أما الفرع الثاني والثالث فلم يتأثرا لأنهما على التوازي مع البطارية."
-}
-],
-"pdfSolutionSteps": [
-"<div style='font-size: 22px; line-height: 1.8;'>",
-"<strong>🔍 تحليل الدائرة:</strong><br><br>",
-"<strong>1️⃣ التوصيل:</strong><br>",
-"- الفرع الأول: L₁ و L₂ على التوالي<br>",
-"- الفرع الثاني: L₃ و L₄ على التوالي<br>",
-"- الفرع الثالث: L₅ و L₆ على التوالي<br>",
-"- الفروع الثلاثة على التوازي مع البطارية<br><br>",
-"<strong>2️⃣ احتراق L₁:</strong><br>",
-"- L₁ و L₂ على التوالي ← احتراق L₁ يقطع التيار عن الفرع الأول بالكامل<br>",
-"- الفروع الثاني والثالث على التوازي ← لكل منهما مسار مستقل إلى البطارية<br><br>",
-"<strong>3️⃣ المصابيح المضيئة بعد الاحتراق:</strong><br>",
-"- L₁ ❌ (محترق)<br>",
-"- L₂ ❌ (انقطع التيار بسبب L₁)<br>",
-"- L₃ ✓ &nbsp; L₄ ✓ &nbsp; L₅ ✓ &nbsp; L₆ ✓<br><br>",
-"<strong>✅ الإجمالي = 4 مصابيح مضيئة</strong><br><br>",
-"<strong>الإجابة الصحيحة: (ب) 4 مصابيح</strong>",
-"</div>"
-],
-"pdfFinalAnswer": "الإجابة الصحيحة: (ب) 4 مصابيح"
+  "title": "تأثير احتراق مصباح في دائرة توازي وتوالي مختلطة",
+  "text": "الدائرة الكهربائية التالية تحتوي على 6 مصابيح متطابقة (L₁ إلى L₆) موصولة مع بطارية 9 فولت كما هو موضح:\n\n- الفرع الأول: المصباحان L₁ و L₂ على التوالي.\n- الفرع الثاني: المصباحان L₃ و L₄ على التوالي.\n- الفرع الثالث: المصباحان L₅ و L₆ على التوالي.\n- الفروع الثلاثة متصلة على التوازي مع البطارية.\n\nإذا احترق المصباح L₁ فقط (انقطع فتيله)، كم مصباحاً يبقى مضيئاً؟\n\n(أ) 3 مصابيح\n(ب) 4 مصابيح\n(ج) 5 مصابيح\n(د) 6 مصابيح",
+  "svgCode": "<svg viewBox='0 0 700 420' xmlns='http://www.w3.org/2000/svg'>\n<style>\n.wire{stroke:#222;stroke-width:3;fill:none}\n.lamp{fill:#fff7a8;stroke:#222;stroke-width:2}\n.text{font-family:Arial;font-size:18px;font-weight:bold}\n.off{fill:#ddd}\n</style>\n<!-- السلك العلوي -->\n<line x1='80' y1='60' x2='620' y2='60' class='wire'/>\n<!-- السلك السفلي -->\n<line x1='80' y1='340' x2='620' y2='340' class='wire'/>\n<!-- البطارية -->\n<line x1='620' y1='120' x2='620' y2='280' class='wire'/>\n<line x1='600' y1='160' x2='640' y2='160' stroke='black' stroke-width='4'/>\n<line x1='607' y1='210' x2='633' y2='210' stroke='black' stroke-width='2'/>\n<text x='650' y='165' class='text'>+</text>\n<text x='650' y='220' class='text'>−</text>\n<text x='645' y='195' class='text'>9V</text>\n<!-- الفرع الأول -->\n<line x1='150' y1='60' x2='150' y2='120' class='wire'/>\n<circle cx='150' cy='150' r='20' class='lamp off'/>\n<line x1='138' y1='138' x2='162' y2='162' stroke='black' stroke-width='3'/>\n<line x1='162' y1='138' x2='138' y2='162' stroke='black' stroke-width='3'/>\n<text x='110' y='155' class='text' fill='red'>L₁ ✖</text>\n<line x1='150' y1='170' x2='150' y2='185' class='wire'/>\n<circle cx='150' cy='195' r='5' fill='white' stroke='black'/>\n<circle cx='150' cy='215' r='5' fill='white' stroke='black'/>\n<circle cx='150' cy='260' r='20' class='lamp off'/>\n<line x1='138' y1='248' x2='162' y2='272' stroke='black' stroke-width='3'/>\n<line x1='162' y1='248' x2='138' y2='272' stroke='black' stroke-width='3'/>\n<text x='110' y='265' class='text'>L₂</text>\n<line x1='150' y1='280' x2='150' y2='340' class='wire'/>\n<!-- الفرع الثاني -->\n<line x1='350' y1='60' x2='350' y2='120' class='wire'/>\n<circle cx='350' cy='150' r='20' class='lamp'/>\n<line x1='338' y1='138' x2='362' y2='162' stroke='black' stroke-width='3'/>\n<line x1='362' y1='138' x2='338' y2='162' stroke='black' stroke-width='3'/>\n<text x='310' y='155' class='text'>L₃</text>\n<line x1='350' y1='170' x2='350' y2='240' class='wire'/>\n<circle cx='350' cy='260' r='20' class='lamp'/>\n<line x1='338' y1='248' x2='362' y2='272' stroke='black' stroke-width='3'/>\n<line x1='362' y1='248' x2='338' y2='272' stroke='black' stroke-width='3'/>\n<text x='310' y='265' class='text'>L₄</text>\n<line x1='350' y1='280' x2='350' y2='340' class='wire'/>\n<!-- الفرع الثالث -->\n<line x1='520' y1='60' x2='520' y2='120' class='wire'/>\n<circle cx='520' cy='150' r='20' class='lamp'/>\n<line x1='508' y1='138' x2='532' y2='162' stroke='black' stroke-width='3'/>\n<line x1='532' y1='138' x2='508' y2='162' stroke='black' stroke-width='3'/>\n<text x='480' y='155' class='text'>L₅</text>\n<line x1='520' y1='170' x2='520' y2='240' class='wire'/>\n<circle cx='520' cy='260' r='20' class='lamp'/>\n<line x1='508' y1='248' x2='532' y2='272' stroke='black' stroke-width='3'/>\n<line x1='532' y1='248' x2='508' y2='272' stroke='black' stroke-width='3'/>\n<text x='480' y='265' class='text'>L₆</text>\n<line x1='520' y1='280' x2='520' y2='340' class='wire'/>\n<!-- توضيح -->\n<text x='350' y='390' text-anchor='middle' font-size='22' font-family='Arial' fill='green'>يبقى مضيئاً: L₃ ، L₄ ، L₅ ، L₆  → 4 مصابيح</text>\n</svg>",
+  "options": [
+    { "text": "أ) 3 مصابيح", "isCorrect": false },
+    { "text": "ب) 4 مصابيح", "isCorrect": true },
+    { "text": "ج) 5 مصابيح", "isCorrect": false },
+    { "text": "د) 6 مصابيح", "isCorrect": false }
+  ],
+  "correctAnswerIndex": 1,
+  "steps": [
+    {
+      "title": "المرحلة الأولى: تحليل التوصيل في الدائرة",
+      "question": "كيف تتصل المصابيح في الدائرة الموضحة؟",
+      "options": [
+        { "text": "ثلاثة فروع على التوازي، وكل فرع يحتوي على مصباحين على التوالي", "isCorrect": true },
+        { "text": "جميع المصابيح الستة على التوالي مع بعضها", "isCorrect": false },
+        { "text": "جميع المصابيح الستة على التوازي مع بعضها", "isCorrect": false }
+      ],
+      "feedback": "صحيح! الدائرة مقسمة إلى 3 فروع متوازية، كل فرع يحتوي على مصباحين متصلين على التوالي."
+    },
+    {
+      "title": "المرحلة الثانية: تأثير احتراق L₁ على فرعه",
+      "question": "عند احتراق المصباح L₁ (انقطاع فتيله)، ماذا يحدث للتيار في الفرع الأول؟",
+      "options": [
+        { "text": "ينقطع التيار في الفرع الأول بالكامل (L₁ و L₂ معاً)", "isCorrect": true },
+        { "text": "يستمر التيار في L₂ فقط لأن L₁ هو الذي احترق", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! المصابيح على التوالي: احتراق أي مصباح يقطع الدائرة في ذلك الفرع بأكمله."
+    },
+    {
+      "title": "المرحلة الثالثة: عد المصابيح المتبقية",
+      "question": "بعد احتراق L₁، أي المصابيح تبقى مضيئة؟",
+      "options": [
+        { "text": "L₃, L₄, L₅, L₆ (4 مصابيح)", "isCorrect": true },
+        { "text": "L₂, L₃, L₄, L₅, L₆ (5 مصابيح)", "isCorrect": false },
+        { "text": "L₃, L₄ فقط (2 مصباحين)", "isCorrect": false }
+      ],
+      "feedback": "إجابة صحيحة! الفرع الأول انقطع تماماً، أما الفرع الثاني والثالث فلم يتأثرا لأنهما على التوازي مع البطارية."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>🔍 تحليل الدائرة:</strong><br><br>",
+    "<strong>1️⃣ التوصيل:</strong><br>",
+    "- الفرع الأول: L₁ و L₂ على التوالي<br>",
+    "- الفرع الثاني: L₃ و L₄ على التوالي<br>",
+    "- الفرع الثالث: L₅ و L₆ على التوالي<br>",
+    "- الفروع الثلاثة على التوازي مع البطارية<br><br>",
+    "<strong>2️⃣ احتراق L₁:</strong><br>",
+    "- L₁ و L₂ على التوالي ← احتراق L₁ يقطع التيار عن الفرع الأول بالكامل<br>",
+    "- الفروع الثاني والثالث على التوازي ← لكل منهما مسار مستقل إلى البطارية<br><br>",
+    "<strong>3️⃣ المصابيح المضيئة بعد الاحتراق:</strong><br>",
+    "- L₁ ❌ (محترق)<br>",
+    "- L₂ ❌ (انقطع التيار بسبب L₁)<br>",
+    "- L₃ ✓ &nbsp; L₄ ✓ &nbsp; L₅ ✓ &nbsp; L₆ ✓<br><br>",
+    "<strong>✅ الإجمالي = 4 مصابيح مضيئة</strong><br><br>",
+    "<strong>الإجابة الصحيحة: (ب) 4 مصابيح</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (ب) 4 مصابيح"
 },
 {
 "title": " العلاقة بين عدد اللفات والجهد في المحول الكهربائي",
@@ -4003,40 +4010,66 @@ const questionsMatrix = [
 },
 
 {
-"title": "س 45: اتجاه التيار المستحث في ملف لولبي",
-"text": "بوضع مغناطيس يسقط من أحد طرفي ملف لولبي. فأي من العبارات الآتية صحيحة؟\n\n(أ) يتولد تيار مستحث ويكون الطرف القريب من المغناطيس قطبا جنوبيا\n(ب) يتولد تيار مستحث ويكون الطرف البعيد عن المغناطيس قطبا شماليا\n(ج) يتولد تيار مستحث في الجزء السفلي عند النظر إلى الطرف القريب من المغناطيس\n(د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب من المغناطيس",
-"svgCode": "<svg viewBox='0 0 400 200' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='200' fill='#ffffff'/><path d='M150,40 Q170,60 150,80 Q130,100 150,120 Q170,140 150,160' stroke='#333' stroke-width='3' fill='none'/><rect x='130' y='30' width='40' height='20' fill='#ef4444' rx='3'/><text x='150' y='44' text-anchor='middle' fill='white' font-size='10'>S</text><rect x='130' y='170' width='40' height='20' fill='#2563eb' rx='3'/><text x='150' y='184' text-anchor='middle' fill='white' font-size='10'>N</text><text x='200' y='100' font-size='20'>↓</text></svg>",
-"steps": [
-{
-"title": "المرحلة الأولى: قانون لنز",
-"question": "ماذا ينص قانون لنز؟",
-"options": [
-{ "text": "التيار المستحث يعاكس التغير الذي سببه", "isCorrect": true },
-{ "text": "التيار المستحث يساعد التغير الذي سببه", "isCorrect": false }
-],
-"feedback": "صحيح! التيار المستحث يتجه ليعاكس سبب تولده."
-},
-{
-"title": "المرحلة الثانية: تطبيق قاعدة اليد اليمنى",
-"question": "عند اقتراب قطب شمالي مغناطيس من ملف، أي قطب يتولد في الطرف القريب؟",
-"options": [
-{ "text": "قطب شمالي (لتعاكس الاقتراب)", "isCorrect": true },
-{ "text": "قطب جنوبي", "isCorrect": false }
-],
-"feedback": "ممتاز! التيار المستحث يجعل الطرف القريب قطبا شماليا لصد المغناطيس."
-}
-],
-"pdfSolutionSteps": [
-"<div style='font-size: 22px; line-height: 1.8;'>",
-"<strong>🔍 الحل المفصل:</strong><br><br>",
-"عند اقتراب مغناطيس من ملف:<br>",
-"1. يتغير الفيض المغناطيسي خلال الملف.<br>",
-"2. حسب قانون لنز: يتولد تيار مستحث يعاكس هذا التغير.<br>",
-"3. إذا كان المغناطيس ساقطاً بقطب شمالي، فإن التيار المستحث يجعل الطرف القريب قطبا شمالياً لصد المغناطيس.<br><br>",
-"<strong>✅ الإجابة الصحيحة: (ب) يتولد تيار مستحث ويكون الطرف البعيد عن المغناطيس قطبا شماليا</strong>",
-"</div>"
-],
-"pdfFinalAnswer": "الإجابة الصحيحة: (ب)"
+  "title": "س 45: اتجاه التيار المستحث في ملف لولبي",
+  "text": "بوضع مغناطيس يسقط من أحد طرفي ملف لولبي بحيث يدخل القطب الشمالي (N) أولاً. فأي من العبارات الآتية صحيحة؟\n\n(أ) يتولد تيار مستحث ويكون الطرف القريب من المغناطيس قطبا جنوبيا\n(ب) يتولد تيار مستحث ويكون الطرف البعيد عن المغناطيس قطبا شماليا\n(ج) يتولد تيار مستحث في اتجاه عقارب الساعة عند النظر إلى الطرف القريب\n(د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب",
+  "svgCode": "<svg viewBox='0 0 400 220' xmlns='http://www.w3.org/2000/svg'><rect width='400' height='220' fill='#ffffff'/><!-- ملف لولبي محسن --><path d='M150 40 C170 40 170 60 150 60 C130 60 130 80 150 80 C170 80 170 100 150 100 C130 100 130 120 150 120 C170 120 170 140 150 140 C130 140 130 160 150 160' stroke='#333' stroke-width='4' fill='none' stroke-linecap='round'/><rect x='130' y='30' width='40' height='20' fill='#ef4444' rx='3'/><text x='150' y='44' text-anchor='middle' fill='white' font-size='12' font-weight='bold'>N</text><rect x='130' y='170' width='40' height='20' fill='#2563eb' rx='3'/><text x='150' y='184' text-anchor='middle' fill='white' font-size='12' font-weight='bold'>S</text><text x='200' y='100' font-size='24' fill='#1e293b'>↓</text><text x='200' y='210' text-anchor='middle' font-size='14' fill='#555'>مغناطيس يسقط بقطب شمالي (N)</text></svg>",
+  "options": [
+    { "text": "أ) يتولد تيار مستحث ويكون الطرف القريب قطبا جنوبيا", "isCorrect": false },
+    { "text": "ب) يتولد تيار مستحث ويكون الطرف البعيد قطبا شماليا", "isCorrect": false },
+    { "text": "ج) يتولد تيار مستحث في اتجاه عقارب الساعة", "isCorrect": false },
+    { "text": "د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة", "isCorrect": true }
+  ],
+  "correctAnswerIndex": 3,
+  "steps": [
+    {
+      "title": "المرحلة الأولى: قانون لنز",
+      "question": "عند اقتراب قطب شمالي (N) من الملف، ماذا يحدث للفيض المغناطيسي خلال الملف؟",
+      "options": [
+        { "text": "يزداد الفيض المغناطيسي (ΔΦ > 0)", "isCorrect": true },
+        { "text": "يقل الفيض المغناطيسي (ΔΦ < 0)", "isCorrect": false },
+        { "text": "لا يتغير الفيض المغناطيسي", "isCorrect": false }
+      ],
+      "feedback": "صحيح! اقتراب القطب الشمالي يزيد من عدد خطوط الفيض التي تخترق الملف."
+    },
+    {
+      "title": "المرحلة الثانية: تطبيق قانون لنز",
+      "question": "حسب قانون لنز، ماذا يجب أن يكون قطبية الطرف القريب من الملف ليعاكس الاقتراب؟",
+      "options": [
+        { "text": "قطب شمالي (N) ليتنافر مع المغناطيس", "isCorrect": true },
+        { "text": "قطب جنوبي (S) ليتجاذب مع المغناطيس", "isCorrect": false }
+      ],
+      "feedback": "ممتاز! الأقطاب المتشابهة تتنافر، فالقطب الشمالي للطرف القريب ينشئ قوة تنافر تعاكس حركة المغناطيس."
+    },
+    {
+      "title": "المرحلة الثالثة: تحديد اتجاه التيار",
+      "question": "لتكوين قطب شمالي على الطرف القريب، في أي اتجاه يجب أن يمر التيار؟",
+      "options": [
+        { "text": "عكس اتجاه عقارب الساعة", "isCorrect": true },
+        { "text": "اتجاه عقارب الساعة", "isCorrect": false }
+      ],
+      "feedback": "صحيح! قاعدة اليد اليمنى: التيار عكس عقارب الساعة يولد قطباً شمالياً."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "<div style='font-size: 22px; line-height: 1.8;'>",
+    "<strong>🔍 الحل المفصل:</strong><br><br>",
+    "<strong>المعطيات:</strong> مغناطيس يسقط بقطب شمالي (N) نحو الملف.<br><br>",
+    "<strong>1. تحليل التغير في الفيض:</strong><br>",
+    "اقتراب القطب الشمالي ← زيادة الفيض المغناطيسي خلال الملف (ΔΦ > 0).<br><br>",
+    "<strong>2. تطبيق قانون لنز:</strong><br>",
+    "التيار المستحث يتجه ليعاكس سبب تولده (زيادة الفيض).<br>",
+    "لتعاكس اقتراب القطب الشمالي، يجب أن يُنشئ الملف قطباً <strong>شمالياً (N)</strong> على وجهه القريب (لأن الأقطاب المتشابهة تتنافر).<br><br>",
+    "<strong>3. تحديد اتجاه التيار (قاعدة اليد اليمنى):</strong><br>",
+    "لتكوين قطب شمالي على الوجه القريب، يجب أن يمر التيار في لفات الملف باتجاه <strong>عكس عقارب الساعة</strong> عند النظر إلى ذلك الوجه.<br><br>",
+    "<strong>4. تقييم الخيارات:</strong><br>",
+    "- (أ) ❌ خطأ: الطرف القريب يجب أن يكون شمالياً، وليس جنوبياً.<br>",
+    "- (ب) ❌ خطأ: الطرف البعيد سيكون جنوبياً (لأن الملف له قطبين متعاكسين).<br>",
+    "- (ج) ❌ خطأ: التيار يجب أن يكون عكس عقارب الساعة، وليس مع عقارب الساعة.<br>",
+    "- (د) ✅ صحيح: يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب.<br><br>",
+    "<strong>✅ الإجابة الصحيحة: (د)</strong>",
+    "</div>"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: (د) يتولد تيار مستحث في عكس اتجاه عقارب الساعة عند النظر إلى الطرف القريب"
 },
 {
 "title": " كثافة الفيض بين سلكين متوازيين",
