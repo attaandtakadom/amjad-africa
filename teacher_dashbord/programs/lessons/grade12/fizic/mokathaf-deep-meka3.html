@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+<title>مكثف الميكانيكا - مدرسة أمجاد أفريقيا</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+:root {
+
+--primary: #0f172a;
+
+--accent: #2563eb;
+
+--bg: #f8fafc;
+
+--card-bg: #ffffff;
+
+--success: #16a34a;
+
+--error: #dc2626;
+
+--text-main: #334155;
+
+--border-color: #e2e8f0;
+
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+
+body { background-color: #cbd5e1; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+.app-container {
+
+width: 100%; max-width: 900px; background: var(--card-bg);
+
+border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden;
+
+margin-bottom: 20px;
+
+}
+
+.header { background-color: var(--primary); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+
+.school-badge { background: #ea580c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+
+.question-container { padding: 30px; text-align: center;}
+
+.question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: rtl; flex-wrap: wrap; gap: 10px; }
+
+.q-source-span { background: var(--accent); color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold;}
+
+.question-text { font-size: 18px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; font-weight: 600; text-align: right;}
+
+.question-graphic-area { max-width: 100%; margin: 0 auto 20px auto; padding: 15px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #ffffff; display: flex; justify-content: center; align-items: center; }
+
+/* زر عرض الاجابة */
+
+.show-answer-btn {
+
+background: #8b5cf6;
+
+color: white;
+
+border: none;
+
+padding: 8px 20px;
+
+border-radius: 20px;
+
+font-size: 14px;
+
+font-weight: bold;
+
+cursor: pointer;
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 8px;
+
+transition: 0.2s;
+
+margin-top: 10px;
+
+}
+
+.show-answer-btn:hover {
+
+background: #7c3aed;
+
+transform: scale(1.02);
+
+}
+
+/* لوحة الاجابة */
+
+.answer-panel {
+
+background: #f1f5f9;
+
+border-right: 4px solid #8b5cf6;
+
+padding: 16px 20px;
+
+margin-top: 12px;
+
+border-radius: 6px;
+
+font-size: 14px;
+
+line-height: 1.8;
+
+color: #1e293b;
+
+display: none;
+
+text-align: right;
+
+white-space: pre-wrap;
+
+}
+
+.answer-panel.open {
+
+display: block;
+
+}
+
+.steps-container { padding: 20px 30px; background-color: var(--bg); }
+
+.step-card {
+
+background: white; border: 1px solid var(--border-color); border-radius: 8px;
+
+padding: 20px; margin-bottom: 20px; opacity: 0.4; pointer-events: none;
+
+transition: all 0.3s ease; border-right: 5px solid #94a3b8;
+
+}
+
+.step-card.active { opacity: 1; pointer-events: auto; border-right-color: var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+.step-card.completed { opacity: 1; pointer-events: none; border-right-color: var(--success); background-color: #f0fdf4; }
+
+.step-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-align: right;}
+
+.step-question { font-size: 15px; margin-bottom: 15px; color: var(--text-main); text-align: right;}
+
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; direction: rtl; }
+
+.option-btn {
+
+background: white; border: 2px solid var(--border-color); padding: 12px;
+
+border-radius: 6px; cursor: pointer; text-align: right; font-size: 15px;
+
+display: flex; align-items: center; justify-content: space-between;
+
+}
+
+.option-btn:hover { border-color: var(--accent); background: #eff6ff; }
+
+.option-btn.correct { border-color: var(--success); background: #dcfce7; color: #166534; }
+
+.option-btn.wrong { border-color: var(--error); background: #fee2e2; color: #991b1b; }
+
+.feedback-box { margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; display: none; text-align: right; }
+
+.feedback-box.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block; }
+
+.navigation-area { padding: 0 30px 30px 30px; display: flex; justify-content: space-between; background: var(--bg); }
+
+.nav-btn { padding: 12px 25px; background: var(--primary); color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 6px; }
+
+.nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; color: #94a3b8; }
+
+.print-section { text-align: center; margin: 20px 0 50px 0; width: 100%; max-width: 900px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+.print-btn { background-color: var(--success); color: white; padding: 15px 35px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+.bot-link-btn { background-color: var(--accent); color: white; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+#printable-pdf-document { display: none; }
+
+
+@media print {
+
+body, html {
+
+margin: 0 !important;
+
+padding: 0 !important;
+
+}
+
+.pdf-question-block {
+
+page-break-inside: avoid !important;
+
+break-inside: avoid !important;
+
+margin-bottom: 25px !important;
+
+padding: 15px !important;
+
+border: 1px solid #ccc;
+
+border-radius: 8px;
+
+}
+
+.pdf-q-title {
+
+font-size: 28px !important;
+
+font-weight: bold !important;
+
+margin-bottom: 12px !important;
+
+padding-bottom: 6px !important;
+
+color: #2563eb;
+
+border-bottom: 2px solid #e2e8f0;
+
+}
+
+.pdf-q-text {
+
+font-size: 24px !important;
+
+line-height: 1.7 !important;
+
+margin-bottom: 15px !important;
+
+text-align: justify;
+
+}
+
+.pdf-graphic {
+
+margin: 12px 0 !important;
+
+text-align: center;
+
+}
+
+.pdf-solution-box {
+
+margin-top: 12px !important;
+
+margin-bottom: 10px !important;
+
+padding: 12px !important;
+
+background: #f8fafc;
+
+border-right: 5px solid #16a34a;
+
+border-radius: 0 8px 8px 0;
+
+}
+
+.pdf-sol-title {
+
+font-size: 24px !important;
+
+font-weight: bold !important;
+
+color: #166534 !important;
+
+margin-bottom: 10px !important;
+
+}
+
+.pdf-sol-steps {
+
+font-size: 22px !important;
+
+line-height: 1.7 !important;
+
+color: #334155;
+
+}
+
+.pdf-sol-steps div {
+
+margin-bottom: 6px !important;
+
+}
+
+.pdf-final-ans {
+
+font-size: 22px !important;
+
+font-weight: bold !important;
+
+margin-top: 12px !important;
+
+padding: 8px 12px !important;
+
+background: #e2f8e9;
+
+display: inline-block;
+
+border-radius: 8px;
+
+color: #0f172a;
+
+}
+
+.pdf-graphic svg,
+
+.question-graphic-area svg {
+
+max-width: 320px !important;
+
+height: auto !important;
+
+}
+
+img {
+
+max-width: 280px !important;
+
+height: auto !important;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="app-container">
+
+<div class="header">
+
+<h2><i class="fa-solid fa-desktop"></i> مكثف الميكانيكا</h2>
+
+<span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+
+<span id="question-counter"></span>
+
+<a href="../../../../../althanaoya/fizic/mikanika-dashbord.html" class="nav-btn">⚙️ لوحة التحكم</a>
+
+</div>
+
+<div class="question-container">
+
+<div class="question-meta"><span class="q-source-span" id="q-source"></span></div>
+
+<div class="question-text" id="main-question-text"></div>
+
+<div class="question-graphic-area" id="graphic-container"></div>
+
+<!-- زر عرض الاجابة -->
+
+<div style="text-align: left; margin-top: 5px;">
+
+<button class="show-answer-btn" onclick="toggleAnswer()">
+
+<i class="fa-regular fa-eye"></i> <span id="answer-toggle-label">عرض الاجابة</span>
+
+</button>
+
+</div>
+
+<!-- لوحة عرض الاجابة (خطوات الحل النموذجية) -->
+
+<div class="answer-panel" id="answer-panel"></div>
+
+</div>
+
+<div class="steps-container" id="steps-container"></div>
+
+<div class="navigation-area">
+
+<button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">← السابق</button>
+
+<button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">التالي →</button>
+
+</div>
+
+</div>
+
+
+<div class="print-section">
+
+<button class="print-btn" onclick="triggerSmartPrint()">
+
+<i class="fa-solid fa-file-pdf"></i> طباعة PDF
+
+</button>
+
+</div>
+
+
+<div id="printable-pdf-document">
+
+<div class="pdf-school-header">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+
+<div class="pdf-page-title">كراسة الحلول النموذجية</div>
+
+<div class="pdf-student-dedication">إهداء إلى الطلبة المتميزين</div>
+
+<div class="pdf-bot-url-area">رابط البوت: http://t.me/amjad_africa2027bot</div>
+
+<div id="dynamic-pdf-questions-area"></div>
+
+</div>
+
+<script src="mokathaf-meka-arry.js"></script>
+
+
+<script>
+
+// ====================================================================
+
+// المتغيرات والدوال الرئيسية
+
+// ====================================================================
+
+let currentQIndex = 0;
+let answerPanelOpen = false;
+
+function navigateQuestion(direction) {
+
+const newIndex = currentQIndex + direction;
+
+if (newIndex >= 0 && newIndex < questionsMatrix.length) {
+
+currentQIndex = newIndex;
+
+renderActiveQuestion(currentQIndex);
+
+// إغلاق لوحة الاجابة عند تغيير السؤال
+
+answerPanelOpen = false;
+
+document.getElementById('answer-panel').classList.remove('open');
+
+document.getElementById('answer-toggle-label').textContent = 'عرض الاجابة';
+
+}
+
+}
+
+function renderActiveQuestion(index) {
+
+const data = questionsMatrix[index];
+
+if(!data) return;
+
+document.getElementById('q-source').innerText = data.title;
+
+document.getElementById('main-question-text').innerText = data.text;
+
+document.getElementById('question-counter').innerHTML = `مسألة ${index+1} / ${questionsMatrix.length}`;
+
+const graphicContainer = document.getElementById('graphic-container');
+
+if (data.svgCode && data.svgCode.trim() !== "") {
+
+graphicContainer.innerHTML = data.svgCode;
+
+} else if (data.imagePath && data.imagePath.trim() !== "") {
+
+graphicContainer.innerHTML = `<img src="${data.imagePath}" style="max-width: 480px; width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #ccc; border-radius: 8px;" alt="رسم توضيحي">`;
+
+} else {
+
+graphicContainer.innerHTML = '<p style="color: gray;">⚠️ لا يوجد رسم توضيحي</p>';
+
+}
+
+document.getElementById('prev-btn').disabled = index === 0;
+
+document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
+
+const stepsContainer = document.getElementById('steps-container');
+
+stepsContainer.innerHTML = '';
+
+if(data.steps) {
+
+data.steps.forEach((step, sIdx) => {
+
+let optionsHTML = '';
+
+step.options.forEach(opt => {
+
+optionsHTML += `<button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}"><span>${opt.text}</span> <i class="fa-regular fa-circle"></i></button>`;
+
+});
+
+stepsContainer.innerHTML += `<div class="step-card ${sIdx===0?'active':''}" id="step-card-${sIdx}"><div class="step-title">${step.title}</div><div class="step-question">${step.question}</div><div class="options-grid">${optionsHTML}</div><div class="feedback-box" id="feedback-${sIdx}"></div></div>`;
+
+});
+
+}
+
+// تعبئة لوحة الاجابة (خطوات الحل النموذجية من pdfSolutionSteps)
+
+const answerPanel = document.getElementById('answer-panel');
+
+if (data.pdfSolutionSteps && data.pdfSolutionSteps.length > 0) {
+
+let stepsHTML = data.pdfSolutionSteps.map(line => {
+
+// معالجة النص لعرضه بشكل جميل
+
+let displayLine = line;
+
+// إذا كان السطر يحتوي على "✅" أو "❌" نضيف له لون
+
+if (displayLine.includes('✅')) {
+
+displayLine = `<span style="color: #16a34a; font-weight: bold;">${displayLine}</span>`;
+
+} else if (displayLine.includes('❌')) {
+
+displayLine = `<span style="color: #dc2626; font-weight: bold;">${displayLine}</span>`;
+
+}
+
+// إذا كان السطر يحتوي على "═══" نجعله خط فاصل
+
+if (displayLine.includes('═══')) {
+
+return `<div style="border-bottom: 2px solid #94a3b8; margin: 8px 0; text-align: center; color: #64748b; font-size: 13px;">${displayLine.replace(/═/g, '')}</div>`;
+
+}
+
+// إذا كان السطر يبدأ بـ "•" نجعله نقطة
+
+if (displayLine.startsWith('•')) {
+
+return `<div style="padding-right: 20px; position: relative;">${displayLine}</div>`;
+
+}
+
+// إذا كان السطر يبدأ برقم مع نقطة مثل "❶" نجعله مميز
+
+if (/^[❶-❿]/.test(displayLine)) {
+
+return `<div style="font-weight: 600; color: #1e293b;">${displayLine}</div>`;
+
+}
+
+return `<div>${displayLine}</div>`;
+
+}).join('');
+
+answerPanel.innerHTML = stepsHTML;
+
+} else {
+
+answerPanel.innerHTML = '<div style="color: #64748b;">لا توجد خطوات حل مفصلة لهذه المسألة.</div>';
+
+}
+
+}
+
+function checkLiveAnswer(btn, sIdx, isCorrect) {
+
+const card = document.getElementById(`step-card-${sIdx}`);
+
+const fb = document.getElementById(`feedback-${sIdx}`);
+
+card.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('correct','wrong'); b.querySelector('i').className = 'fa-regular fa-circle'; });
+
+if(isCorrect) {
+
+btn.classList.add('correct');
+
+btn.querySelector('i').className = 'fa-solid fa-circle-check';
+
+fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+
+fb.className = 'feedback-box success';
+
+card.classList.add('completed');
+
+card.classList.remove('active');
+
+const nextCard = document.getElementById(`step-card-${sIdx+1}`);
+
+if(nextCard) {
+
+nextCard.classList.add('active');
+
+nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+}
+
+} else {
+
+btn.classList.add('wrong');
+
+btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+
+}
+
+}
+
+// دالة تبديل عرض الاجابة
+
+function toggleAnswer() {
+
+const panel = document.getElementById('answer-panel');
+
+const label = document.getElementById('answer-toggle-label');
+
+answerPanelOpen = !answerPanelOpen;
+
+if (answerPanelOpen) {
+
+panel.classList.add('open');
+
+label.textContent = 'إخفاء الاجابة';
+
+} else {
+
+panel.classList.remove('open');
+
+label.textContent = 'عرض الاجابة';
+
+}
+
+}
+
+function triggerSmartPrint() {
+
+if (window.Telegram && window.Telegram.WebApp) {
+
+const webApp = window.Telegram.WebApp;
+
+const pdfUrl = "https://www.dropbox.com/scl/fi/zxje1dizjg514rc2213o1/.pdf?rlkey=8i5a545d5gu5a9y93bl1zh35n&st=gyouq2wz&dl=0";
+
+webApp.openLink(pdfUrl);
+
+} else {
+
+window.open("https://www.dropbox.com/scl/fi/zxje1dizjg514rc2213o1/.pdf?rlkey=8i5a545d5gu5a9y93bl1zh35n&st=gyouq2wz&dl=0", '_blank');
+
+}
+
+}
+
+window.onload = () => { renderActiveQuestion(0); };
+
+</script>
+
+</body>
+
+</html>
