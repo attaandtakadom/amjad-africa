@@ -1,4 +1,394 @@
 const questionsMatrix = [
+
+{
+    "title": "س 165: حساب شدة التيار الكلي في الدوائر المركبة",
+    "text": "في الشكل المقابل بفرض المقاومة الداخلية للعمود مهملة تكون قيمة التيار الكلى المار في الدائرة:",
+    "options": [
+        { "text": "أ) 4.8 A", "isCorrect": true },
+        { "text": "ب) 3.7 A", "isCorrect": false },
+        { "text": "ج) 2.5 A", "isCorrect": false },
+        { "text": "د) 1.3 A", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 0,
+    "svgCode": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%" style="background:#ffffff; direction:ltr;">
+  <style>
+    .wire { stroke: #1e293b; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .resistor { fill: #ffffff; stroke: #1e293b; stroke-width: 1.5; }
+    .label { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: bold; fill: #1e293b; text-anchor: middle; }
+    .res-text { font-size: 15px; }
+    .node-text { font-size: 16px; }
+    .battery-text { font-size: 16px; }
+    .battery-plate { stroke: #1e293b; stroke-linecap: round; }
+  </style>
+
+  <line x1="80" y1="70" x2="120" y2="70" class="wire" />
+  <line x1="190" y1="70" x2="240" y2="70" class="wire" />
+  <line x1="360" y1="70" x2="410" y2="70" class="wire" />
+  <line x1="480" y1="70" x2="520" y2="70" class="wire" />
+
+  <path d="M 240 70 L 240 35 L 265 35 M 240 70 L 240 105 L 265 105" class="wire" />
+  <path d="M 335 35 L 360 35 L 360 70 M 335 105 L 360 105 L 360 70" class="wire" />
+
+  <rect x="120" y="55" width="70" height="30" class="resistor" />
+  <text x="155" y="75" class="label res-text">1Ω</text>
+
+  <rect x="265" y="20" width="70" height="30" class="resistor" />
+  <text x="300" y="40" class="label res-text">1Ω</text>
+
+  <rect x="265" y="90" width="70" height="30" class="resistor" />
+  <text x="300" y="110" class="label res-text">1Ω</text>
+
+  <rect x="410" y="55" width="70" height="30" class="resistor" />
+  <text x="445" y="75" class="label res-text">1Ω</text>
+
+  <line x1="80" y1="170" x2="120" y2="170" class="wire" />
+  <line x1="190" y1="170" x2="240" y2="170" class="wire" />
+  <line x1="360" y1="170" x2="410" y2="170" class="wire" />
+  <line x1="480" y1="170" x2="520" y2="170" class="wire" />
+
+  <path d="M 240 170 L 240 135 L 265 135 M 240 170 L 240 205 L 265 205" class="wire" />
+  <path d="M 335 135 L 360 135 L 360 170 M 335 205 L 360 205 L 360 170" class="wire" />
+
+  <rect x="120" y="155" width="70" height="30" class="resistor" />
+  <text x="155" y="175" class="label res-text">1Ω</text>
+
+  <rect x="265" y="120" width="70" height="30" class="resistor" />
+  <text x="300" y="140" class="label res-text">1Ω</text>
+
+  <rect x="265" y="190" width="70" height="30" class="resistor" />
+  <text x="300" y="210" class="label res-text">1Ω</text>
+
+  <rect x="410" y="155" width="70" height="30" class="resistor" />
+  <text x="445" y="175" class="label res-text">1Ω</text>
+
+  <line x1="80" y1="70" x2="80" y2="250" class="wire" />
+  <line x1="520" y1="70" x2="520" y2="250" class="wire" />
+
+  <line x1="80" y1="250" x2="285" y2="250" class="wire" />
+  <line x1="315" y1="250" x2="520" y2="250" class="wire" />
+
+  <line x1="285" y1="235" x2="285" y2="265" class="battery-plate" stroke-width="3" />
+  <line x1="295" y1="242" x2="295" y2="258" class="battery-plate" stroke-width="1.5" />
+  <line x1="305" y1="235" x2="305" y2="265" class="battery-plate" stroke-width="3" />
+  <line x1="315" y1="242" x2="315" y2="258" class="battery-plate" stroke-width="1.5" />
+  <text x="300" y="223" class="label battery-text">6V</text>
+
+  <text x="65" y="75" class="label node-text">A</text>
+  <text x="535" y="75" class="label node-text">B</text>
+  <text x="65" y="175" class="label node-text">C</text>
+  <text x="535" y="175" class="label node-text">D</text>
+</svg>`,
+    "steps": [
+        {
+            "title": "حساب مقاومة أحد الفرعين الرئيسيّين",
+            "question": "ما هي قيمة المقاومة المكافئة للفرع العلوي وحده (R_AB)؟",
+            "options": [
+                { "text": "2.5 Ω", "isCorrect": true },
+                { "text": "3 Ω", "isCorrect": false },
+                { "text": "1.5 Ω", "isCorrect": false }
+            ],
+            "feedback": "✅ ممتاز! الفرع يتكون من ثلاث أجزاء توالي: 1 + (1 || 1) + 1 = 1 + 0.5 + 1 = 2.5 Ω."
+        },
+        {
+            "title": "حساب المقاومة المكافئة الكلية للدائرة",
+            "question": "بما أن الفرعين العلوي والسفلي متماثلان ومتصلان معاً على التوازي، ما المقاومة المكافئة الكلية للدائرة؟",
+            "options": [
+                { "text": "1.25 Ω", "isCorrect": true },
+                { "text": "5 Ω", "isCorrect": false },
+                { "text": "2.5 Ω", "isCorrect": false }
+            ],
+            "feedback": "✅ أحسنتِ! عند توازي فرعين متماثلين نقسم أحدهما على عددهما: R_eq = 2.5 / 2 = 1.25 Ω."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "• نحسب أولاً مقاومة الفرع العلوي (AB) المتصل على التوالي:",
+        "  R_AB = 1 + (1 || 1) + 1 = 1 + 0.5 + 1 = 2.5 Ω",
+        "• نحسب مقاومة الفرع السفلي (CD) المماثل له تماماً:",
+        "  R_CD = 1 + (1 || 1) + 1 = 1 + 0.5 + 1 = 2.5 Ω",
+        "• نوجد المقاومة المكافئة الكلية للدائرة نتيجة توازي الفرعين (AB) و (CD):",
+        "  R_eq = 2.5 / 2 = 1.25 Ω",
+        "• بتطبيق قانون أوم لحساب شدة التيار الكلي المار بالدائرة:",
+        "  I = V / R_eq = 6 / 1.25 = 4.8 A",
+        "الإجابة الصحيحة: أ) 4.8 A ✅"
+    ],
+    "pdfFinalAnswer": "الإجابة الصحيحة: أ) 4.8 A ✅"
+},
+
+
+    
+{
+    "title": "أدوات السلامة الكهربائية - المنصهر",
+    "text": "قام طالب بعمل الدائرة الكهربائية الموضحة بالشكل فلاحظ أن المنصهر قد تلف وتوقف التيار الكهربائي، فيكون سبب حدوث ذلك أن:",
+    "options": [
+        { "text": "أ) معدل التيار الكهربائي المار في المنصهر كان كبيراً جداً.", "isCorrect": true },
+        { "text": "ب) التيار الكهربائي كان كبيراً جداً.", "isCorrect": false },
+        { "text": "جـ) المصباح كان تالفاً.", "isCorrect": false },
+        { "text": "د) الجهد الكهربائي كان صغيراً جداً.", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 0,
+    "svgCode": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" width="100%" height="240" style="background:#ffffff; direction:ltr;">
+  <!-- مصدر تيار متردد (AC Source) على اليسار -->
+  <circle cx="60" cy="120" r="20" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <!-- رمز الموجة الجيبية داخل المصدر -->
+  <path d="M 50 120 Q 55 110 60 120 T 70 120" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="30" y="125" font-family="Arial, sans-serif" font-size="14px" font-weight="bold" fill="#1e293b" text-anchor="end">S</text>
+
+  <!-- الأسلاك الصاعدة من المصدر للمنصهر -->
+  <line x1="60" y1="100" x2="60" y2="50" stroke="#1e293b" stroke-width="2"/>
+  <line x1="60" y1="50" x2="110" y2="50" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- === رمز المنصهر (Fuse) === -->
+  <rect x="110" y="40" width="80" height="20" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <line x1="110" y1="50" x2="190" y2="50" stroke="#475569" stroke-width="1.5"/> <!-- السلك الداخلي للمنصهر -->
+  <text x="150" y="30" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#1e293b" text-anchor="middle">منصهر</text>
+
+  <!-- سلك واصل بين المنصهر والمفتاح -->
+  <line x1="190" y1="50" x2="230" y2="50" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- === رمز المفتاح الكهربائي === -->
+  <circle cx="230" cy="50" r="2" fill="#1e293b"/>
+  <line x1="230" y1="50" x2="255" y2="35" stroke="#1e293b" stroke-width="2"/> <!-- ذراع المفتاح المائل -->
+  <circle cx="260" cy="50" r="2" fill="#1e293b"/>
+
+  <!-- سلك واصل من المفتاح إلى المصباح -->
+  <line x1="260" y1="50" x2="420" y2="50" stroke="#1e293b" stroke-width="2"/>
+  <line x1="420" y1="50" x2="420" y2="100" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- === رمز المصباح (Lamp) === -->
+  <circle cx="420" cy="120" r="20" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <!-- علامة X داخل المصباح -->
+  <line x1="406" y1="106" x2="434" y2="134" stroke="#1e293b" stroke-width="2"/>
+  <line x1="434" y1="106" x2="406" y2="134" stroke="#1e293b" stroke-width="2"/>
+  <text x="455" y="125" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#1e293b" text-anchor="start">مصباح</text>
+
+  <!-- إغلاق الدائرة الكهربائية من الأسفل -->
+  <line x1="420" y1="140" x2="420" y2="190" stroke="#1e293b" stroke-width="2"/>
+  <line x1="420" y1="190" x2="60" y2="190" stroke="#1e293b" stroke-width="2"/>
+  <line x1="60" y1="190" x2="60" y2="140" stroke="#1e293b" stroke-width="2"/>
+</svg>`,
+    "steps": [
+        {
+            "title": "فهم وظيفة المنصهر",
+            "question": "ما هو التأثير الفيزيائي الذي يعتمد عليه عمل المنصهر الكهربائي لحماية الدوائر؟",
+            "options": [
+                { "text": "التأثير الحراري للتيار الكهربائي.", "isCorrect": true },
+                { "text": "التأثير المغناطيسي للتيار الكهربائي.", "isCorrect": false },
+                { "text": "التأثير الكيميائي للتيار الكهربائي.", "isCorrect": false }
+            ],
+            "feedback": "✅ ممتاز! يعتمد المنصهر على التأثير الحراري؛ حيث ينصهر سلكه الرفيع عند تولد حرارة عالية ناتجة عن تيار زائد."
+        },
+        {
+            "title": "تحليل سبب التلف",
+            "question": "ماذا يحدث لشدة التيار في الدائرة لكي يتلف المنصهر ويفتح الدائرة تلقائياً؟",
+            "options": [
+                { "text": "تزداد شدة التيار المار فيه عن الحد المقنن والمسموح به.", "isCorrect": true },
+                { "text": "تقل شدة التيار الكهربائي حتى تنعدم.", "isCorrect": false }
+            ],
+            "feedback": "✅ أحسنتِ! الزيادة الكبيرة جداً في التيار المار بالمنصهر هي السبب المباشر لتلفه لحماية باقي الأجهزة."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "• يوصل المنصهر في الدائرة الكهربائية على التوالي ليعمل كأداة حماية أساسية.",
+        "• عند مرور تيار كهربائي تتجاوز شدته القيمة المحددة للمنصهر (بسبب حمل زائد أو قصر في الدائرة)، يسخن السلك الداخلي وينصهر فوراً.",
+        "• يؤدي انصهار السلك إلى فتح الدائرة وانقطاع التيار تماماً، مما يحمي المصباح وباقي المكونات من التلف.",
+        "• بالتالي، السبب المباشر لتلف المنصهر هو أن معدل التيار الكهربائي المار فيه كان كبيراً جداً.",
+        "الإجابة الصحيحة: أ) معدل التيار الكهربائي المار في المنصهر كان كبيراً جداً. ✅"
+    ],
+    "pdfFinalAnswer": "الإجابة الصحيحة: أ) معدل التيار الكهربائي المار في المنصهر كان كبيراً جداً. ✅"
+},
+
+{
+    "title": "سؤال المقاومة المكافئة ودائرة القصر",
+    "text": "يمثل الشكل جزءاً من دائرة كهربية تحتوي على مجموعة من المقاومات المتماثلة، فإن المقاومة المكافئة بين النقطتين A ، B تساوي:",
+    "options": [
+        { "text": "أ) 6R / 5", "isCorrect": false },
+        { "text": "ب) 5R / 4", "isCorrect": false },
+        { "text": "ج) 3R / 2", "isCorrect": false },
+        { "text": "د) R", "isCorrect": true }
+    ],
+    "correctAnswerIndex": 3,
+    "svgCode": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 220" width="100%" height="220" style="background:#ffffff; direction:ltr;">
+  <!-- النقطة A والمخرج الرئيسي -->
+  <circle cx="40" cy="50" r="4" fill="#1e293b"/>
+  <text x="40" y="40" font-family="Arial, sans-serif" font-size="14px" font-weight="bold" fill="#1e293b" text-anchor="middle">A</text>
+  <line x1="40" y1="50" x2="70" y2="50" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- تفرع التيار للأسفل -->
+  <line x1="70" y1="50" x2="70" y2="100" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- === الفرع العلوي === -->
+  <!-- المقاومة الأولى R -->
+  <path d="M 70 50 L 100 50 L 105 40 L 115 60 L 125 40 L 135 60 L 145 40 L 155 60 L 160 50 L 190 50" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="130" y="30" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#1e293b" text-anchor="middle">R</text>
+
+  <!-- سلك القصر المستقيم والتفرع العلوي -->
+  <line x1="190" y1="50" x2="190" y2="15" stroke="#1e293b" stroke-width="2"/>
+  <line x1="190" y1="15" x2="210" y2="15" stroke="#1e293b" stroke-width="2"/>
+  <line x1="190" y1="50" x2="310" y2="50" stroke="#000000" stroke-width="2.5"/> <!-- سلك القصر المستقيم العلوي -->
+  
+  <!-- المقاومة العليا المتأثرة بالقصر -->
+  <path d="M 210 15 L 220 15 L 225 5 L 235 25 L 245 5 L 255 25 L 265 5 L 275 25 L 280 15 L 290 15" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="250" y="0" font-family="Arial, sans-serif" font-size="12px" font-weight="bold" fill="#1e293b" text-anchor="middle">R (قصر)</text>
+
+  <line x1="290" y1="15" x2="310" y2="15" stroke="#1e293b" stroke-width="2"/>
+  <line x1="310" y1="15" x2="310" y2="50" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- المقاومة الأخيرة في الفرع العلوي R -->
+  <path d="M 310 50 L 340 50 L 345 40 L 355 60 L 365 40 L 375 60 L 385 40 L 395 60 L 400 50 L 440 50" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="370" y="30" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#1e293b" text-anchor="middle">R</text>
+
+
+  <!-- === الفرع السفلي === -->
+  <!-- المقاومة الرأسية لأسفل R -->
+  <path d="M 70 100 L 70 110 L 60 115 L 80 125 L 60 135 L 80 145 L 60 155 L 80 165 L 70 170 L 70 180" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="50" y="140" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#1e293b" text-anchor="end">R</text>
+  <line x1="70" y1="180" x2="150" y2="180" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- إطار توازي السفلي -->
+  <line x1="150" y1="180" x2="150" y2="150" stroke="#1e293b" stroke-width="2"/>
+  <line x1="150" y1="150" x2="170" y2="150" stroke="#1e293b" stroke-width="2"/>
+  <line x1="150" y1="180" x2="170" y2="180" stroke="#1e293b" stroke-width="2"/>
+  <line x1="150" y1="180" x2="150" y2="210" stroke="#1e293b" stroke-width="2"/>
+  <line x1="150" y1="210" x2="170" y2="210" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- المقاومات السفلية المتأثرة بالقصر -->
+  <path d="M 170 150 L 180 150 L 185 140 L 195 160 L 205 140 L 215 160 L 225 140 L 235 160 L 240 150 L 250 150" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="210" y="135" font-family="Arial, sans-serif" font-size="12px" font-weight="bold" fill="#1e293b" text-anchor="middle">R (قصر)</text>
+
+  <path d="M 170 210 L 180 210 L 185 200 L 195 220 L 205 200 L 215 220 L 225 200 L 235 220 L 240 210 L 250 210" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="210" y="198" font-family="Arial, sans-serif" font-size="12px" font-weight="bold" fill="#1e293b" text-anchor="middle">R (قصر)</text>
+
+  <line x1="250" y1="150" x2="250" y2="180" stroke="#1e293b" stroke-width="2"/>
+  <line x1="250" y1="210" x2="250" y2="180" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- السلك المائل (دائرة القصر) -->
+  <line x1="150" y1="210" x2="250" y2="150" stroke="#000000" stroke-width="2.5"/>
+
+  <!-- المخرج بعد التوازي السفلي -->
+  <line x1="250" y1="180" x2="280" y2="180" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- المقاومة الأخيرة في الفرع السفلي R -->
+  <path d="M 280 180 L 310 180 L 315 170 L 325 190 L 335 170 L 345 190 L 355 170 L 365 190 L 370 180 L 440 180" fill="none" stroke="#1e293b" stroke-width="2"/>
+  <text x="340" y="160" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#1e293b" text-anchor="middle">R</text>
+
+  <!-- التقاء الفرعين عند B -->
+  <line x1="440" y1="50" x2="440" y2="180" stroke="#1e293b" stroke-width="2"/>
+  <line x1="440" y1="110" x2="480" y2="110" stroke="#1e293b" stroke-width="2"/>
+  <circle cx="480" cy="110" r="4" fill="#1e293b"/>
+  <text x="480" y="100" font-family="Arial, sans-serif" font-size="14px" font-weight="bold" fill="#1e293b" text-anchor="middle">B</text>
+</svg>`,
+    "steps": [
+        {
+            "title": "فحص الفرع العلوي ودائرة القصر",
+            "question": "لماذا تُلغى المقاومة الوسطى في الفرع العلوي؟",
+            "options": [
+                { "text": "لأنها متصلة على التوازي مع سلك مستقيم عديم المقاومة.", "isCorrect": true },
+                { "text": "لأن التيار لا يمر في الفرع العلوي أصلاً.", "isCorrect": false }
+            ],
+            "feedback": "✅ ممتاز! وجود سلك مستقيم موازي للمقاومة يجعل التيار بالكامل يمر عبر السلك وتُلغى المقاومة."
+        },
+        {
+            "title": "فحص الفرع السفلي",
+            "question": "ما تأثير السلك المائل على مجموعتي التوازي السفلي؟",
+            "options": [
+                { "text": "يلغي المقاومتين تماماً وتصبح مقاومة المنطقة صفر بسبب دائرة القصر.", "isCorrect": true },
+                { "text": "يجعل المقاومات تتصل على التوالي.", "isCorrect": false }
+            ],
+            "feedback": "✅ أحسنتِ! السلك المائل يمثل ماس كهربائي (قصر) يربط البداية بالنهاية مباشرة ليلغي المقاومات المتصلة معه."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "• في الفرع العلوي: السلك المستقيم يختصر المقاومة الوسطى (تساوي 0)، فيتبقى مقاومتان فقط:",
+        "  R_upper = R + 0 + R = 2R",
+        "• في الفرع السفلي: السلك المائل يعمل كقصر يلغي مجموعة التوازي الوسطى تماماً، فيتبقى مقاومة البداية والنهاية:",
+        "  R_lower = R + 0 + R = 2R",
+        "• المقاومة المكافئة الكلية لفرعين متماثلين على التوازي:",
+        "  R_eq = 2R / 2 = R",
+        "الإجابة الصحيحة: د) R ✅"
+    ],
+    "pdfFinalAnswer": "الإجابة الصحيحة: د) R ✅"
+},
+{
+    "title": "س 19: حساب المقاومة المجهولة R",
+    "text": "في الدائرة الكهربائية الموضحة بالشكل، وبفرض أن المقاومة الداخلية للعمود مهملة، فإن قيمة المقاومة (R) تساوي:",
+    "options": [
+        { "text": "أ) 4 Ω", "isCorrect": true },
+        { "text": "ب) 6 Ω", "isCorrect": false },
+        { "text": "ج) 2 Ω", "isCorrect": false },
+        { "text": "د) 8 Ω", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 0,
+    "svgCode": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" width="100%" height="240" style="background:#ffffff; direction:ltr;">
+  <line x1="60" y1="120" x2="100" y2="120" stroke="#1e293b" stroke-width="2"/>
+  <line x1="100" y1="105" x2="100" y2="135" stroke="#dc2626" stroke-width="3"/>
+  <line x1="106" y1="112" x2="106" y2="128" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="106" y1="120" x2="150" y2="120" stroke="#1e293b" stroke-width="2"/>
+  <text x="50" y="125" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#1e293b" text-anchor="end">E = 10V</text>
+
+  <polygon points="140,120 132,115 132,125" fill="#1e293b"/>
+  <text x="135" y="100" font-family="Arial, sans-serif" font-size="12px" font-weight="bold" fill="#1e293b" text-anchor="middle">I = 1.25A</text>
+
+  <line x1="150" y1="120" x2="180" y2="120" stroke="#1e293b" stroke-width="2"/>
+  <line x1="180" y1="70" x2="180" y2="170" stroke="#1e293b" stroke-width="2"/>
+
+  <path d="M 180 70 L 200 70 L 205 60 L 215 80 L 225 60 L 235 80 L 245 60 L 255 80 L 260 70 L 280 70" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="230" y="50" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#2563eb" text-anchor="middle">3Ω</text>
+
+  <path d="M 180 170 L 200 170 L 205 160 L 215 180 L 225 160 L 235 180 L 245 160 L 255 180 L 260 170 L 280 170" fill="none" stroke="#059669" stroke-width="2"/>
+  <text x="230" y="195" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#059669" text-anchor="middle">6Ω</text>
+
+  <line x1="280" y1="70" x2="280" y2="120" stroke="#1e293b" stroke-width="2"/>
+  <line x1="280" y1="170" x2="280" y2="120" stroke="#1e293b" stroke-width="2"/>
+  <line x1="280" y1="120" x2="330" y2="120" stroke="#1e293b" stroke-width="2"/>
+
+  <path d="M 330 120 L 330 130 L 340 135 L 320 145 L 340 155 L 320 165 L 340 175 L 320 185 L 330 190 L 330 210" fill="none" stroke="#ea580c" stroke-width="2"/>
+  <text x="360" y="165" font-family="Arial, sans-serif" font-size="14px" font-weight="bold" fill="#ea580c" text-anchor="start">R</text>
+
+  <line x1="330" y1="210" x2="330" y2="210" stroke="#1e293b" stroke-width="2"/>
+
+  <path d="M 330 210 L 310 210 L 305 200 L 295 220 L 285 200 L 275 220 L 265 200 L 255 220 L 250 210 L 60 210" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="290" y="190" font-family="Arial, sans-serif" font-size="13px" font-weight="bold" fill="#475569" text-anchor="middle">2Ω</text>
+
+  <line x1="60" y1="210" x2="60" y2="120" stroke="#1e293b" stroke-width="2"/>
+</svg>`,
+    "steps": [
+        {
+            "title": "حساب المقاومة الكلية",
+            "question": "ما هي قيمة المقاومة المكافئة الكلية للدائرة (R_eq)؟",
+            "options": [
+                { "text": "8 Ω", "isCorrect": true },
+                { "text": "10 Ω", "isCorrect": false },
+                { "text": "5 Ω", "isCorrect": false }
+            ],
+            "feedback": "✅ ممتاز! R_eq = E / I = 10 / 1.25 = 8 Ω."
+        },
+        {
+            "title": "تصفية التوازي",
+            "question": "ما هي المقاومة المكافئة للمقاومتين المتصلتين على التوازي (3Ω و 6Ω) Wills؟",
+            "options": [
+                { "text": "2 Ω", "isCorrect": true },
+                { "text": "9 Ω", "isCorrect": false },
+                { "text": "1.5 Ω", "isCorrect": false }
+            ],
+            "feedback": "✅ صحيح! R_p = (3 × 6) / (3 + 6) = 2 Ω."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "• من قانون أوم العام، نحسب المقاومة المكافئة الكلية للدائرة:",
+        "  R_eq = E / I = 10 / 1.25 = 8 Ω",
+        "• نحسب مكافئ المقاومتين على التوازي (3Ω و 6Ω):",
+        "  R_p = (3 × 6) / (3 + 6) = 18 / 9 = 2 Ω",
+        "• بما أن المقاومات المتبقية متصلة على التوالي، فإن:",
+        "  R_eq = R_p + R + 2",
+        "  8 = 2 + R + 2",
+        "  8 = 4 + R",
+        "  R = 8 - 4 = 4 Ω",
+        "الإجابة الصحيحة: أ) 4 Ω ✅"
+    ],
+    "pdfFinalAnswer": "الإجابة الصحيحة: أ) 4 Ω ✅"
+},
+
+    
   {
   "title": "س 18 (2022-2023): حساب التيار في مقاومة",
   "text": "من الشكل التالي، إذا كان فرق الجهد بين النقطتين (A, B) يساوي 60 V، فإن شدة التيار المار في المقاومة (6Ω) تساوي:",
