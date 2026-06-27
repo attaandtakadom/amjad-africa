@@ -93,15 +93,8 @@ const questionsMatrix = [
 // ============================== س 19 (الدائرة القصيرة) ==============================
 {
   "title": "تأثير الدائرة الكهربائية القصيرة على المصباح والأميتر",
-  "text": "في الشكل التالي، إذا حدثت دائرة كهربائية قصيرة (قصر) في الدائرة، فماذا يحدث للمصباح الكهربائي والأميتر؟",
-  "options": [
-    { "text": "أ) المصباح يعمل والأميتر يعمل", "isCorrect": false },
-    { "text": "ب) المصباح لا يعمل والأميتر يعمل", "isCorrect": true },
-    { "text": "ج) المصباح يعمل والأميتر لا يعمل", "isCorrect": false },
-    { "text": "د) المصباح لا يعمل والأميتر لا يعمل", "isCorrect": false }
-  ],
-  "correctAnswerIndex": 1,
-  "svgCode": "<svg viewBox='0 0 560 380' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><style>.wire { stroke: #1e293b; stroke-width: 2.5; fill: none; stroke-linecap: round; } .short-wire { stroke: #ef4444; stroke-width: 3; fill: none; stroke-linecap: round; } .comp-circle { fill: #ffffff; stroke: #1e293b; stroke-width: 2.5; } .junction-short { fill: #ef4444; } .label { font-family: system-ui, -apple-system, sans-serif; font-weight: bold; fill: #1e293b; text-anchor: middle; } .text-main { font-size: 14px; } .text-alert { font-size: 14px; fill: #ef4444; }</style><rect width='560' height='380' fill='#ffffff'/><line x1='100' y1='80' x2='230' y2='80' class='wire'/><line x1='270' y1='80' x2='400' y2='80' class='wire'/><line x1='400' y1='80' x2='400' y2='150' class='wire'/><line x1='400' y1='210' x2='400' y2='280' class='wire'/><line x1='100' y1='280' x2='235' y2='280' class='wire'/><line x1='265' y1='280' x2='400' y2='280' class='wire'/><line x1='100' y1='80' x2='100' y2='280' class='wire'/><circle cx='250' cy='80' r='20' class='comp-circle'/><text x='250' y='85' class='label text-main'>A</text><text x='250' y='45' class='label text-main'>أميتر</text><!-- المصباح --><circle cx='400' cy='180' r='20' fill='white' stroke='#1e293b' stroke-width='2.5'/><line x1='386' y1='166' x2='414' y2='194' stroke='#1e293b' stroke-width='2.5'/><line x1='386' y1='194' x2='414' y2='166' stroke='#1e293b' stroke-width='2.5'/><!-- سلك القصر الصحيح بين طرفي المصباح --><line x1='400' y1='160' x2='500' y2='160' class='short-wire'/><line x1='500' y1='160' x2='500' y2='200' class='short-wire'/><line x1='500' y1='200' x2='400' y2='200' class='short-wire'/><circle cx='400' cy='160' r='4' fill='#ef4444'/><circle cx='400' cy='200' r='4' fill='#ef4444'/><text x='520' y='185' class='label text-alert' text-anchor='start'>دائرة قصر ⚠️</text><!-- البطارية --><line x1='235' y1='265' x2='235' y2='295' stroke='#1e293b' stroke-width='3' stroke-linecap='round'/><line x1='245' y1='272' x2='245' y2='288' stroke='#1e293b' stroke-width='1.5' stroke-linecap='round'/><line x1='255' y1='265' x2='255' y2='295' stroke='#1e293b' stroke-width='3' stroke-linecap='round'/><line x1='265' y1='272' x2='265' y2='288' stroke='#1e293b' stroke-width='1.5' stroke-linecap='round'/><text x='220' y='285' class='label text-main'>+</text><text x='280' y='285' class='label text-main'>-</text><text x='250' y='320' class='label text-main'>9V</text></svg>",
+  "text": "في الشكل التالي، إذا حدثت دائرة كهربائية قصيرة (قصر) في الدائرة، فماذا يحدث للمصباح الكهربائي والأميتر؟\n\n(أ) المصباح يعمل والأميتر يعمل\n(ب) المصباح لا يعمل والأميتر يعمل\n(ج) المصباح يعمل والأميتر لا يعمل\n(د) المصباح لا يعمل والأميتر لا يعمل",
+  "svgCode": "<svg viewBox='0 0 560 380' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><style>.wire { stroke: #1e293b; stroke-width: 2.5; fill: none; stroke-linecap: round; } .short-wire { stroke: #ef4444; stroke-width: 3; fill: none; stroke-linecap: round; } .comp-circle { fill: #ffffff; stroke: #1e293b; stroke-width: 2.5; } .label { font-family: system-ui, -apple-system, sans-serif; font-weight: bold; fill: #1e293b; text-anchor: middle; } .text-main { font-size: 14px; } .text-alert { font-size: 14px; fill: #ef4444; }</style><rect width='560' height='380' fill='#ffffff'/><line x1='100' y1='80' x2='230' y2='80' class='wire'/><line x1='270' y1='80' x2='400' y2='80' class='wire'/><line x1='400' y1='80' x2='400' y2='150' class='wire'/><line x1='400' y1='210' x2='400' y2='280' class='wire'/><line x1='100' y1='280' x2='235' y2='280' class='wire'/><line x1='265' y1='280' x2='400' y2='280' class='wire'/><line x1='100' y1='80' x2='100' y2='280' class='wire'/><circle cx='250' cy='80' r='20' class='comp-circle'/><text x='250' y='85' class='label text-main'>A</text><text x='250' y='45' class='label text-main'>أميتر</text><circle cx='400' cy='180' r='20' fill='white' stroke='#1e293b' stroke-width='2.5'/><line x1='386' y1='166' x2='414' y2='194' stroke='#1e293b' stroke-width='2.5'/><line x1='386' y1='194' x2='414' y2='166' stroke='#1e293b' stroke-width='2.5'/><line x1='400' y1='160' x2='500' y2='160' class='short-wire'/><line x1='500' y1='160' x2='500' y2='200' class='short-wire'/><line x1='500' y1='200' x2='400' y2='200' class='short-wire'/><circle cx='400' cy='160' r='4' fill='#ef4444'/><circle cx='400' cy='200' r='4' fill='#ef4444'/><text x='520' y='185' class='label text-alert' text-anchor='start'>دائرة قصر ⚠️</text><line x1='235' y1='265' x2='235' y2='295' stroke='#1e293b' stroke-width='3' stroke-linecap='round'/><line x1='245' y1='272' x2='245' y2='288' stroke='#1e293b' stroke-width='1.5' stroke-linecap='round'/><line x1='255' y1='265' x2='255' y2='295' stroke='#1e293b' stroke-width='3' stroke-linecap='round'/><line x1='265' y1='272' x2='265' y2='288' stroke='#1e293b' stroke-width='1.5' stroke-linecap='round'/><text x='220' y='285' class='label text-main'>+</text><text x='280' y='285' class='label text-main'>-</text><text x='250' y='320' class='label text-main'>9V</text></svg>",
   "steps": [
     {
       "title": "المرحلة الأولى: ماذا تعني الدائرة القصيرة؟",
@@ -109,16 +102,16 @@ const questionsMatrix = [
       "options": [
         { "text": "توصيل سلك مهمل المقاومة على التوازي مع هذا العنصر ليختصر التيار مساره عبره", "isCorrect": true },
         { "text": "حدوث قطع كامل في الأسلاك الموصلة للعنصر الكهربائي", "isCorrect": false },
-        { "text": "زيادة المقاومة الداخلية للعنصر فجأة لتمنع مرور التيار", "isCorrect": false }
+        { "text": "زيادة المقاومة الداخلية للعنصر فجأة لمنع مرور التيار", "isCorrect": false }
       ],
-      "feedback": "أحسنتِ! الدائرة القصيرة تعني توفير مسار بديل عديم المقاومة تقريباً يتصل على التوازي مع المكون الكهربائي فيلغيه."
+      "feedback": "أحسنت! الدائرة القصيرة تعني توفير مسار بديل عديم المقاومة تقريباً يتصل على التوازي مع المكون الكهربائي فيلغيه."
     },
     {
       "title": "المرحلة الثانية: مسار التيار الكهربائي في الدائرة",
       "question": "عند خروج التيار من القطب الموجب ووصوله إلى تفرع سلك القصر قبل المصباح، أي المسارين يسلك؟",
       "options": [
         { "text": "يمر بالكامل في سلك القصر (المسار الأحمر) ويتخطى المصباح تماماً", "isCorrect": true },
-        { "text": "يمر بالكامل عبر المصباح الكهربائي نظراً لأنه يمثل المسار الرئيسي المعتاد", "isCorrect": false },
+        { "text": "يمر بالكامل عبر المصباح الكهربائي باعتباره المسار الرئيسي المعتاد", "isCorrect": false },
         { "text": "ينقسم التيار الكهربائي بالتساوي بين المصباح وسلك القصر", "isCorrect": false }
       ],
       "feedback": "ممتاز! التيار الكهربائي يختار دائماً المسار الأسهل ذو المقاومة الأقل. وبما أن مقاومة سلك القصر تؤول إلى الصفر، فإن التيار يمر عبره بالكامل بنسبة 100%."
@@ -131,7 +124,7 @@ const questionsMatrix = [
         { "text": "المصباح يضيء ويعمل بكفاءة، بينما يتوقف الأميتر عن القراءة تماماً", "isCorrect": false },
         { "text": "يتوقف كلاهما عن العمل وينقطع التيار عن كافة أجزاء الدائرة", "isCorrect": false }
       ],
-      "feedback": "رائع وصحيح تماماً! المصباح لا يعمل (ينطفئ) بسبب انعدام التيار المار فيه نتيجة إلغائه بسلك القصر، بينما الأميتر يقع في الخط الرئيسي المتصل بالمصدر فيمر به تيار الدائرة العالي جداً ويستمر بالعمل."
+      "feedback": "رائع وصحيح تماماً! المصباح لا يعمل (ينطفئ) بسبب انعدام التيار المار فيه نتيجة إلغائه بسلك القصر، بينما الأميتر يقع في الخط الرئيسي للمصدر فيمر به تيار الدائرة العالي جداً ويستمر بالعمل."
     }
   ],
   "pdfSolutionSteps": [
