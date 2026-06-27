@@ -422,9 +422,14 @@ height: auto !important;
 
 <div class="print-section">
 
-<button class="print-btn" onclick="triggerSmartPrint()">
 
-<i class="fa-solid fa-file-pdf"></i> طباعة PDF
+<!-- زر العرض العادي الحالي (للطباعة الورقية) -->
+<button  class="print-btn"   onclick="triggerSmartPrint()">  <i class="fa-solid fa-file-pdf"></i>      📄 عرض نسخة الطباعة الورقية</button>
+
+<!-- زر العرض الجديد المخصص للنقال (الخط الكبير) -->
+<button    class="print-btn"     onclick="triggerMobilePrintView()"> <i class="fa-solid fa-file-pdf"></i>   📱 قراءة الملف على النقال (خط كبير)</button>
+
+
 
 </button>
 
@@ -687,7 +692,19 @@ window.open("https://www.dropbox.com/scl/fi/6wfxohykhaa4i3rczodud/.pdf?rlkey=318
 }
 
 }
+function triggerMobilePrintView() {
+    // تأكدي من استبدال هذا الرابط برابط ملف النقال (الخط الكبير) بعد رفعه على دروب بوكس
+    const mobilePdfUrl = "https://www.dropbox.com/scl/fi/0gt14v47aobcimv21q0r5/.pdf?rlkey=xez1us4b5k0ok2s2dmkuvxvcy&st=useimwga&dl=0";
 
+    // التحقق مما إذا كان الطالب يفتح البرنامج من داخل تطبيق تيليجرام (Telegram WebApp)
+    if (window.Telegram && window.Telegram.WebApp) {
+        const webApp = window.Telegram.WebApp;
+        webApp.openLink(mobilePdfUrl);
+    } else {
+        // إذا كان يفتحه من متصفح عادي خارجي
+        window.open(mobilePdfUrl, '_blank');
+    }
+}
 window.onload = () => { renderActiveQuestion(0); };
 
 </script>
