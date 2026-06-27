@@ -166,32 +166,94 @@ function addPhysicsLawsPages() {
         direction: rtl;
     `;
     page1.innerHTML = `
-        <div style="text-align: center; margin-bottom: 12px; border-bottom: 3px solid #2563eb; padding-bottom: 8px;">
-            <h1 style="font-size: 26px; color: #1a365d; font-weight: 800; margin: 0;">📖 ملخص قوانين الفيزياء</h1>
-            <p style="font-size: 14px; color: #475569; margin: 4px 0 0 0;">الباب الأول: الكهرباء الساكنة</p>
+       <div style="background: #f8fafc; padding: 10px; border-radius: 8px; font-family: system-ui, -apple-system, sans-serif;">
+    
+    <!-- العنوان الرئيسي للملخص -->
+    <div style="text-align: center; margin-bottom: 12px; border-bottom: 3px solid #2563eb; padding-bottom: 8px; direction: rtl;">
+        <h1 style="font-size: 26px; color: #1a365d; font-weight: 800; margin: 0;">📚 ملخص قوانين الفيزياء</h1>
+        <p style="font-size: 14px; color: #475569; margin: 4px 0 0 0;">الباب الأول: الكهرباء الساكنة</p>
+    </div>
+
+    <!-- 1. عدد الإلكترونات -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #dc2626; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">① عدد الإلكترونات</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #dc2626; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>n</span>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 8px 2px 8px;">Q</span>
+                <span style="padding: 2px 8px 0 8px;">e</span>
+            </div>
         </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #dc2626;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">① عدد الإلكترونات</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #dc2626; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">n = Q / e</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">حيث e = 1.6 × 10⁻¹⁹ C</div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center; direction: ltr;">
+            حيث شحنة الإلكترون: <b>e = 1.6 × 10⁻¹⁹ C</b>
         </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">② قانون كولوم</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #2563eb; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">F = k × Q₁ × Q₂ / R²</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">k = 9 × 10⁹ N·m²/C²</div>
+    </div>
+
+    <!-- 2. قانون كولوم -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">② قانون كولوم</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #2563eb; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>F</span>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 8px 2px 8px;">k × Q₁ × Q₂</span>
+                <span style="padding: 2px 8px 0 8px;">R²</span>
+            </div>
         </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #16a34a;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">③ شدة المجال الكهربائي</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #16a34a; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">E = F / q₀  أو  E = k × Q / R²</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">الوحدة: N/C  أو  V/m</div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center; direction: ltr;">
+            ثابت كولوم: <b>k = 9 × 10⁹ N·m²/C²</b>
         </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #8b5cf6;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">④ الجهد الكهربائي</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #8b5cf6; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">V = W / Q  أو  V = k × Q / R</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">الوحدة: فولت (V)</div>
+    </div>
+
+    <!-- 3. شدة المجال الكهربائي -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #16a34a; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">③ شدة المجال الكهربائي (E)</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #16a34a; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 14px; direction: ltr;">
+            <span>E =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 4px 2px 4px;">F</span>
+                <span style="padding: 2px 4px 0 4px;">q₀</span>
+            </div>
+            <span style="color: #cbd5e1; font-weight: normal;">|</span>
+            <span>E =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 4px 2px 4px;">k × Q</span>
+                <span style="padding: 2px 4px 0 4px;">R²</span>
+            </div>
         </div>
-        <div style="text-align: center; font-size: 11px; color: #94a3b8; margin-top: 8px; border-top: 1px solid #e2e8f0; padding-top: 4px;">⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡</div>
-    `;
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">
+            الوحدة: <b>N/C</b> أو <b>V/m</b>
+        </div>
+    </div>
+
+    <!-- 4. الجهد الكهربائي -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #8b5cf6; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">④ الجهد الكهربائي (V)</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #8b5cf6; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 14px; direction: ltr;">
+            <span>V =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 4px 2px 4px;">W</span>
+                <span style="padding: 2px 4px 0 4px;">Q</span>
+            </div>
+            <span style="color: #cbd5e1; font-weight: normal;">|</span>
+            <span>V =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 4px 2px 4px;">k × Q</span>
+                <span style="padding: 2px 4px 0 4px;">R</span>
+            </div>
+        </div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">
+            الوحدة: <b>فولت (V)</b>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة لحماية الحقوق -->
+    <div style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 10px; border-top: 1px solid #e2e8f0; padding-top: 6px; direction: rtl; font-weight: bold;">
+        ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+    </div>
+
+</div>`;
     printableDoc.appendChild(page1);
 
     // ===== صفحة القوانين الثانية: التيار والمقاومة =====
@@ -206,109 +268,119 @@ function addPhysicsLawsPages() {
         direction: rtl;
     `;
     page2.innerHTML = `
-
-    <div style="text-align: center; margin-bottom: 8px; border-bottom: 3px solid #2563eb; padding-bottom: 6px;">
+<div style="background: #f8fafc; padding: 10px; border-radius: 8px; font-family: system-ui, -apple-system, sans-serif;">
+    
+    <div style="text-align: center; margin-bottom: 12px; border-bottom: 3px solid #2563eb; padding-bottom: 6px; direction: rtl;">
         <h1 style="font-size: 22px; color: #1a365d; font-weight: 800; margin: 0;">📚 ملخص قوانين الفيزياء</h1>
         <p style="font-size: 13px; color: #475569; margin: 2px 0 0 0;">الوحدة الأولى والثانية: التيار والمقاومات والجهد الكهربائي</p>
     </div>
         
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #f59e0b;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑤ شدة التيار الكهربائي</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #f59e0b; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">I = Q / t  =  n × e / t</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">الوحدة: أمبير (A)</div>
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #f59e0b; direction: rtl;">
+        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">④ شدة التيار الكهربائي (I)</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #f59e0b; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>I</span>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 6px 2px 6px;">Q</span>
+                <span style="padding: 2px 6px 0 6px;">t</span>
+            </div>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 6px 2px 6px;">n × e</span>
+                <span style="padding: 2px 6px 0 6px;">t</span>
+            </div>
         </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #dc2626;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑥ قانون أوم</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #dc2626; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">V = I × R  أو  I = V / R  أو  R = V / I</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">ينطبق عند ثبوت درجة الحرارة</div>
-        </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑦ المقاومة النوعية</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #2563eb; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">ρ = R × A / L</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">الوحدة: Ω·m</div>
-        </div>
-
-    
-
-    <div style="background: #f1f5f9; border-radius: 6px; padding: 6px 10px; margin-bottom: 5px; border-right: 4px solid #f59e0b;">
-        <h2 style="font-size: 13px; color: #1e293b; font-weight: 700; margin: 0 0 3px 0;">④ شدة التيار الكهربائي (I)</h2>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #f59e0b; display: flex; justify-content: center; align-items: center;">
-            <span style="font-size: 16px; font-weight: bold; color: #1e293b; margin-left: 8px;">I = </span>
-            <table style="display: inline-table; border-collapse: collapse; text-align: center; vertical-align: middle; font-size: 15px; font-weight: bold; color: #1e293b; direction: ltr;">
-                <tr><td style="border-bottom: 2px solid #1e293b; padding: 0 4px;">Q</td></tr>
-                <tr><td style="padding: 0 4px;">t</td></tr>
-            </table>
-            <span style="font-size: 16px; font-weight: bold; color: #1e293b; margin: 0 8px;">= </span>
-            <table style="display: inline-table; border-collapse: collapse; text-align: center; vertical-align: middle; font-size: 15px; font-weight: bold; color: #1e293b; direction: ltr;">
-                <tr><td style="border-bottom: 2px solid #1e293b; padding: 0 4px;">n × e</td></tr>
-                <tr><td style="padding: 0 4px;">t</td></tr>
-            </table>
-        </div>
-        <div style="font-size: 11px; color: #475569; margin-top: 2px; text-align: center;">الوحدة: <b>أمبير (A)</b> | حيث n: عدد الإلكترونات، e: شحنة الإلكترون الثابتة</div>
+        <div style="font-size: 12px; color: #475569; margin-top: 6px; text-align: center;">الوحدة: <b>أمبير (A)</b> | حيث n: عدد الإلكترونات، e: شحنة الإلكترون الثابتة</div>
     </div>
 
-    <div style="background: #f1f5f9; border-radius: 6px; padding: 6px 10px; margin-bottom: 5px; border-right: 4px solid #dc2626;">
-        <h2 style="font-size: 13px; color: #1e293b; font-weight: 700; margin: 0 0 3px 0;">⑤ قانون أوم والمقاومة</h2>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #dc2626; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; direction: ltr;">
-            V = I × R &nbsp;&nbsp;|&nbsp;&nbsp; I = V / R &nbsp;&nbsp;|&nbsp;&nbsp; R = V / I
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #dc2626; direction: rtl;">
+        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑤ قانون أوم والمقاومة</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #dc2626; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 14px; direction: ltr;">
+            <span>V = I × R</span>
+            <span style="color: #cbd5e1; font-weight: normal;">|</span>
+            <span>I =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 4px 2px 4px;">V</span>
+                <span style="padding: 2px 4px 0 4px;">R</span>
+            </div>
+            <span style="color: #cbd5e1; font-weight: normal;">|</span>
+            <span>R =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 4px 2px 4px;">V</span>
+                <span style="padding: 2px 4px 0 4px;">I</span>
+            </div>
         </div>
-        <div style="font-size: 11px; color: #475569; margin-top: 2px; text-align: center;">ينطبق عند <b>ثبوت درجة الحرارة</b> | الوحدة للمقاومة: <b>أوم (Ω)</b></div>
+        <div style="font-size: 12px; color: #475569; margin-top: 6px; text-align: center;">ينطبق عند <b>ثبوت درجة الحرارة</b> | الوحدة للمقاومة: <b>أوم (Ω)</b></div>
     </div>
 
-    <div style="background: #f1f5f9; border-radius: 6px; padding: 6px 10px; margin-bottom: 5px; border-right: 4px solid #2563eb;">
-        <h2 style="font-size: 13px; color: #1e293b; font-weight: 700; margin: 0 0 3px 0;">⑥ المقاومة النوعية والعوامل المؤثرة (ρ)</h2>
-        <div style="font-size: 11px; color: #475569; margin-top: 2px; text-align: center;">الوحدة: <b>Ω·m</b> | حيث A: مساحة المقطع (πr²)، L: طول السلك بالمتر</div>
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb; direction: rtl;">
+        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑥ المقاومة النوعية (ρ) والعوامل المؤثرة</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #2563eb; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>ρ</span>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 6px 2px 6px;">R × A</span>
+                <span style="padding: 2px 6px 0 6px;">L</span>
+            </div>
+        </div>
+        <div style="font-size: 12px; color: #475569; margin-top: 6px; text-align: center;">الوحدة: <b>Ω·m</b> | حيث A: مساحة المقطع (πr²)، L: طول السلك بالمتر</div>
     </div>
 
-    <div style="background: #fffbeb; border-radius: 6px; padding: 8px 12px; margin-bottom: 5px; border: 2px solid #10b981;">
-        <h2 style="font-size: 13px; color: #065f46; font-weight: 700; margin: 0 0 4px 0;">⑦ حساب الجهد الكهربائي (V) -  </h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+    <div style="background: #fffbeb; border-radius: 8px; padding: 10px 14px; margin-bottom: 6px; border: 2px solid #10b981; direction: rtl;">
+        <h2 style="font-size: 14px; color: #065f46; font-weight: 700; margin: 0 0 6px 0;">⑦ حساب الجهد الكهربائي (V)</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
             
-            <div style="background: #ffffff; border-radius: 4px; padding: 6px 8px; border: 1px solid #10b981;">
-                <div style="font-size: 12px; font-weight: bold; color: #1e293b; text-align: center; margin-bottom: 4px;">أ) بدلالة الشغل المبذول</div>
-                <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 4px;">
-                    <span style="font-size: 15px; font-weight: bold; color: #1e293b; margin-left: 4px;">V = </span>
-                    <table style="display: inline-table; border-collapse: collapse; text-align: center; vertical-align: middle; font-size: 14px; font-weight: bold; color: #1e293b; direction: ltr;">
-                        <tr><td style="border-bottom: 2px solid #1e293b; padding: 0 4px;">W</td></tr>
-                        <tr><td style="padding: 0 4px;">Q</td></tr>
-                    </table>
+            <div style="background: #ffffff; border-radius: 6px; padding: 8px; border: 1px solid #10b981;">
+                <div style="font-size: 12px; font-weight: bold; color: #1e293b; text-align: center; margin-bottom: 6px;">أ) بدلالة الشغل المبذول</div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 6px; direction: ltr; font-size: 17px; font-weight: bold; color: #1e293b; margin-bottom: 6px;">
+                    <span>V</span>
+                    <span>=</span>
+                    <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1;">
+                        <span style="border-bottom: 2px solid #1e293b; padding: 0 6px 1px 6px;">W</span>
+                        <span style="padding: 1px 6px 0 6px;">Q</span>
+                    </div>
                 </div>
-                <div style="font-size: 11px; color: #475569; line-height: 1.3;">
-                    • <b>W :</b> الشغل المبذول بالجول (J).<br>
-                    • <b>Q :</b> الشحنة المنقولة بالكولوم (C).
+                <div style="font-size: 11px; color: #475569; line-height: 1.4;">
+                    • <b>W :</b> الشغل بالجول (J).<br>
+                    • <b>Q :</b> الشحنة بالكولوم (C).
                 </div>
             </div>
 
-            <div style="background: #ffffff; border-radius: 4px; padding: 6px 8px; border: 1px solid #10b981;">
-                <div style="font-size: 12px; font-weight: bold; color: #1e293b; text-align: center; margin-bottom: 4px;">ب) لشحنة نقطية معزولة</div>
-                <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 4px;">
-                    <span style="font-size: 15px; font-weight: bold; color: #1e293b; margin-left: 4px;">V = </span>
-                    <table style="display: inline-table; border-collapse: collapse; text-align: center; vertical-align: middle; font-size: 14px; font-weight: bold; color: #1e293b; direction: ltr;">
-                        <tr><td style="border-bottom: 2px solid #1e293b; padding: 0 4px;">k × Q</td></tr>
-                        <tr><td style="padding: 0 4px;">R</td></tr>
-                    </table>
+            <div style="background: #ffffff; border-radius: 6px; padding: 8px; border: 1px solid #10b981;">
+                <div style="font-size: 12px; font-weight: bold; color: #1e293b; text-align: center; margin-bottom: 6px;">ب) لشحنة نقطية معزولة</div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 6px; direction: ltr; font-size: 17px; font-weight: bold; color: #1e293b; margin-bottom: 6px;">
+                    <span>V</span>
+                    <span>=</span>
+                    <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1;">
+                        <span style="border-bottom: 2px solid #1e293b; padding: 0 6px 1px 6px;">k × Q</span>
+                        <span style="padding: 1px 6px 0 6px;">R</span>
+                    </div>
                 </div>
-                <div style="font-size: 11px; color: #475569; line-height: 1.3;">
+                <div style="font-size: 11px; color: #475569; line-height: 1.4;">
                     • <b>Q :</b> الشحنة المسببة للمجال (C).<br>
-                    • <b>R :</b> مسافة النقطة عن الشحنة (m).
+                    • <b>R :</b> مسافة النقطة (m).
                 </div>
             </div>
 
         </div>
 
-        <div style="background: #ffffff; border-radius: 4px; padding: 5px 10px; border: 1px solid #10b981; margin-top: 5px; font-size: 11px; color: #1e293b; line-height: 1.4;">
-            💡 <b>تفكيك ثابت كولوم (k):</b> يُعبر عن الخصائص الكهربائية للهواء أو الفراغ، وحيث أن:
-            <div style="display: flex; justify-content: center; align-items: center; margin: 3px 0; direction: ltr;">
-                <span style="font-weight: bold; margin-right: 4px;">k = </span>
-                <table style="display: inline-table; border-collapse: collapse; text-align: center; vertical-align: middle; font-weight: bold; direction: ltr;">
-                    <tr><td style="border-bottom: 2px solid #1e293b; padding: 0 4px;">1</td></tr>
-                    <tr><td style="padding: 0 4px;">4π × ε₀</td></tr>
-                </table>
-                <span style="font-weight: bold; margin-left: 8px;"> ≈ 9 × 10⁹ N·m²/C²</span>
+        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #10b981; margin-top: 6px; font-size: 11px; color: #1e293b; line-height: 1.4;">
+            💡 <b>تفكيك ثابت كولوم (k):</b> يعبر عن الخصائص الكهربائية للهواء أو الفراغ، وحيث أن:
+            <div style="display: flex; justify-content: center; align-items: center; gap: 6px; margin: 4px 0; direction: ltr; font-size: 15px; font-weight: bold;">
+                <span>k</span>
+                <span>=</span>
+                <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                    <span style="border-bottom: 2px solid #1e293b; padding: 0 4px;">1</span>
+                    <span style="padding: 1px 4px 0 4px;">4π × ε₀</span>
+                </div>
+                <span style="color: #475569; font-size: 14px; font-weight: bold; margin-left: 4px;">≈ 9 × 10⁹ N·m²/C²</span>
             </div>
             <span style="color: #065f46;">(حيث <b>ε₀</b> هي سماحية الفراغ الكهربائية الثابتة).</span>
         </div>
     </div>
+
+</div>
 
 
 
@@ -333,42 +405,176 @@ page3.style.cssText = `
     direction: rtl;
 `;
 page3.innerHTML = `
-    <div style="text-align: center; margin-bottom: 8px; border-bottom: 3px solid #2563eb; padding-bottom: 6px;">
-        <h1 style="font-size: 22px; color: #1a365d; font-weight: 800; margin: 0;">📖 ملخص قوانين الفيزياء</h1>
+   <div style="background: #f8fafc; padding: 10px; border-radius: 8px; font-family: system-ui, -apple-system, sans-serif;">
+    
+    <!-- العنوان الرئيسي للملخص -->
+    <div style="text-align: center; margin-bottom: 12px; border-bottom: 3px solid #2563eb; padding-bottom: 6px; direction: rtl;">
+        <h1 style="font-size: 20px; color: #1a365d; font-weight: 800; margin: 0;">📚 ملخص قوانين الفيزياء</h1>
         <p style="font-size: 13px; color: #475569; margin: 2px 0 0 0;">توصيل المقاومات - التوالي والتوازي</p>
     </div>
 
     <!-- 8. توصيل التوالي -->
-    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border-right: 4px solid #dc2626;">
-        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑧ توصيل المقاومات على التوالي</h2>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #dc2626; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b;">I = I₁ = I₂ = I₃</div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #dc2626; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 3px;">V = V₁ + V₂ + V₃</div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #dc2626; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 3px;">R = R₁ + R₂ + R₃</div>
-        <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">حالة خاصة: R = R × n (مقاومات متساوية)</div>
+    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; border-right: 4px solid #dc2626; direction: rtl;">
+        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑦ توصيل المقاومات على التوالي</h2>
+        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #dc2626; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; direction: ltr;">I = I₁ = I₂ = I₃</div>
+        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #dc2626; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 4px; direction: ltr;">V = V₁ + V₂ + V₃</div>
+        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #dc2626; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 4px; direction: ltr;">R = R₁ + R₂ + R₃</div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; direction: ltr; font-weight: bold;">
+            <span style="direction: rtl; font-size: 12px; color: #475569; font-weight: normal;">حالة خاصة (مقاومات متساوية):</span>
+            <span>R = R × n</span>
+        </div>
     </div>
 
     <!-- 9. توصيل التوازي -->
-    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border-right: 4px solid #2563eb;">
-        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑨ توصيل المقاومات على التوازي</h2>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #2563eb; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b;">V = V₁ = V₂ = V₃</div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #2563eb; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 3px;">I = I₁ + I₂ + I₃</div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #2563eb; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 3px;">1/R = 1/R₁ + 1/R₂ + 1/R₃</div>
-        <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">حالة خاصة: R = R/n (مقاومات متساوية)</div>
+    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; border-right: 4px solid #2563eb; direction: rtl;">
+        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑧ توصيل المقاومات على التوازي</h2>
+        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #2563eb; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; direction: ltr;">V = V₁ = V₂ = V₃</div>
+        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #2563eb; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 4px; direction: ltr;">I = I₁ + I₂ + I₃</div>
+        
+        <!-- قانون مقلوب المقاومة المكافئة كسر -->
+        <div style="background: #ffffff; border-radius: 4px; padding: 8px 10px; border: 1px solid #2563eb; font-size: 15px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px; direction: ltr;">
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px;">1</span>
+                <span style="padding: 1px 4px 0 4px;">R</span>
+            </div>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px;">1</span>
+                <span style="padding: 1px 4px 0 4px;">R₁</span>
+            </div>
+            <span>+</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px;">1</span>
+                <span style="padding: 1px 4px 0 4px;">R₂</span>
+            </div>
+            <span>+</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px;">1</span>
+                <span style="padding: 1px 4px 0 4px;">R₃</span>
+            </div>
+        </div>
+
+        <!-- حالة خاصة توازي كسر -->
+        <div style="margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 6px; direction: ltr; font-weight: bold; font-size: 15px; color: #1e293b;">
+            <span style="direction: rtl; font-size: 12px; color: #475569; font-weight: normal;">حالة خاصة (مقاومات متساوية):</span>
+            <span>R =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 1.5px solid #1e293b; padding: 0 6px;">R</span>
+                <span style="padding: 1px 6px 0 6px;">n</span>
+            </div>
+        </div>
     </div>
 
     <!-- 10. مقاومتان فقط على التوازي -->
-    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border-right: 4px solid #16a34a;">
-        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑩ مقاومتان فقط على التوازي</h2>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 2px solid #16a34a; text-align: center; font-size: 16px; font-weight: bold; color: #1e293b;">R<sub>t</sub> = (R₁ × R₂) / (R₁ + R₂)</div>
-        <div style="font-size: 12px; color: #475569; margin-top: 3px; text-align: center;">حاصل ضرب المقاومتين مقسوم على حاصل جمعهما</div>
+    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; border-right: 4px solid #16a34a; direction: rtl;">
+        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑨ مقاومتان فقط على التوازي</h2>
+        <div style="background: #ffffff; border-radius: 4px; padding: 8px 10px; border: 2px solid #16a34a; font-size: 16px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>R<sub>t</sub></span>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.2; vertical-align: middle;">
+                <span style="border-bottom: 1.5px solid #1e293b; padding: 0 8px 2px 8px;">R₁ × R₂</span>
+                <span style="padding: 2px 8px 0 8px;">R₁ + R₂</span>
+            </div>
+        </div>
+        <div style="font-size: 12px; color: #475569; margin-top: 6px; text-align: center;">حاصل ضرب المقاومتين مقسوماً على حاصل جمعهما</div>
     </div>
 
     <!-- 11. التيار الكلي في التوازي -->
-    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border-right: 4px solid #f59e0b;">
-        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑪ التيار الكلي في دائرة التوازي</h2>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #f59e0b; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b;">I<sub>t</sub> = I₁ + I₂ + I₃</div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #f59e0b; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; margin-top: 3px;">I<sub>t</sub> = V<sub>t</sub> / R<sub>t</sub></div>
+    <div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border-right: 4px solid #f59e0b; direction: rtl;">
+        <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑩ التيار الكلي في دائرة التوازي</h2>
+        <div style="background: #ffffff; border-radius: 4px; padding: 6px 10px; border: 1px solid #f59e0b; text-align: center; font-size: 15px; font-weight: bold; color: #1e293b; direction: ltr;">I<sub>t</sub> = I₁ + I₂ + I₃</div>
+        
+        <!-- قانون أوم للتيار الكلي كسر -->
+        <div style="background: #ffffff; border-radius: 4px; padding: 8px 10px; border: 1px solid #f59e0b; font-size: 16px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px; direction: ltr;">
+            <span>I<sub>t</sub></span>
+            <span>=</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.2; vertical-align: middle;">
+                <span style="border-bottom: 1.5px solid #1e293b; padding: 0 8px 2px 8px;">V<sub>t</sub></span>
+                <span style="padding: 2px 8px 0 8px;">R<sub>t</sub></span>
+            </div>
+        </div>
     </div>
+
+</div>
+
+<div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border-right: 4px solid #2563eb; direction: rtl;">
+    <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑨ مجزئ الجهد (التوصيل على التوالي)</h2>
+    
+    <div style="background: #ffffff; border-radius: 4px; padding: 8px 10px; border: 1px solid #2563eb; font-size: 16px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+        <span>V₁</span>
+        <span>=</span>
+        <span>V_total</span>
+        <span>×</span>
+        <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2;">
+            <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px 2px 4px;">R₁</span>
+            <span style="padding: 2px 4px 0 4px;">R_total</span>
+        </div>
+    </div>
+    
+    <div style="background: #ffffff; border-radius: 4px; padding: 8px 10px; border: 1px solid #2563eb; font-size: 16px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 5px; direction: ltr;">
+        <span>V₂</span>
+        <span>=</span>
+        <span>V_total</span>
+        <span>×</span>
+        <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2;">
+            <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px 2px 4px;">R₂</span>
+            <span style="padding: 2px 4px 0 4px;">R_total</span>
+        </div>
+    </div>
+    
+    <div style="font-size: 12px; color: #475569; margin-top: 6px; text-align: center;">
+        حيث: R_total = R₁ + R₂ (الجهد يتجزأ طردياً مع المقاومة)
+    </div>
+</div>
+
+<div style="background: #f1f5f9; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border-right: 4px solid #2563eb; direction: rtl;">
+    <h2 style="font-size: 14px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑩ مجزئ التيار (التوصيل على التوازي)</h2>
+    
+    <div style="background: #ffffff; border-radius: 4px; padding: 8px 10px; border: 1px solid #2563eb; font-size: 16px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+        <span>I₁</span>
+        <span>=</span>
+        <span>I_total</span>
+        <span>×</span>
+        <div style="display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2;">
+            <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px 2px 4px;">R₂</span>
+            <span style="padding: 2px 4px 0 4px;">R₁ + R₂</span>
+        </div>
+    </div>
+    
+    <div style="background: #ffffff; border-radius: 4px; padding: 8px 10px; border: 1px solid #2563eb; font-size: 16px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 5px; direction: ltr;">
+        <span>I₂</span>
+        <span>=</span>
+        <span>I_total</span>
+        <span>×</span>
+        <div style="display: inline-flex; flex-style: column; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2;">
+            <span style="border-bottom: 1.5px solid #1e293b; padding: 0 4px 2px 4px;">R₁</span>
+            <span style="padding: 2px 4px 0 4px;">R₁ + R₂</span>
+        </div>
+    </div>
+    
+    <div style="font-size: 12px; color: #475569; margin-top: 6px; text-align: center;">
+        ملاحظة: لحساب تيار فرع نضرب التيار الكلي في مقاومة الفرع الآخر المقابل
+    </div>
+</div>
+
+<div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑨ قانون مجزئ التيار (مقاومتين على التوازي)</h2>
+        
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #2563eb; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>I₁</span>
+            <span>=</span>
+            <span>I<sub>t</sub> ×</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 8px 2px 8px;">R₂</span>
+                <span style="padding: 2px 8px 0 8px;">R₁ + R₂</span>
+            </div>
+        </div>
+
+        <div style="background: #eff6ff; border-radius: 6px; padding: 8px 12px; border: 1px dashed #2563eb; margin-top: 8px; font-size: 12px; color: #1e293b; line-height: 1.5;">
+            💡 <b>ملاحظة هامة للطلاب:</b> عند حساب تيار فرع معين (مثل <span style="direction: ltr; display: inline-block; font-weight: bold;">I₁</span>)، فإننا نضرب التيار الكلي في مقاومة الفرع <b>الآخر المقابل له</b> (<span style="direction: ltr; display: inline-block; font-weight: bold;">R₂</span>) وليس في نفس مقاومته؛ وذلك بسبب العلاقة العكسية بين التيار والمقاومة عند ثبوت الجهد.
+        </div>
+    </div>
+    
 
     <!-- 12. تأثير زيادة عدد المقاومات -->
     <div style="background: #fef3c7; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; border: 2px solid #f59e0b;">
@@ -505,49 +711,120 @@ page4.style.cssText = `
 
 
     page5.innerHTML = `
-        <div style="text-align: center; margin-bottom: 12px; border-bottom: 3px solid #2563eb; padding-bottom: 8px;">
-            <h1 style="font-size: 26px; color: #1a365d; font-weight: 800; margin: 0;">📖 ملخص قوانين الفيزياء</h1>
-            <p style="font-size: 14px; color: #475569; margin: 4px 0 0 0;">القدرة - الطاقة - المغناطيسية - الحث الكهرومغناطيسي</p>
-        </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #dc2626;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑩ القدرة الكهربائية</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #dc2626; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">P = V × I = I² × R = V² / R</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">الوحدة: وات (W)</div>
-        </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑪ الطاقة الكهربائية</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #2563eb; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">E = P × t = V × I × t</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">الوحدة: جول (J) أو كيلووات.ساعة (kWh)</div>
-        </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #16a34a;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑫ القوة المغناطيسية على سلك</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #16a34a; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">F = B × I × L</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">B: تسلا، I: أمبير، L: متر</div>
-        </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #8b5cf6;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑬ القوة المغناطيسية على شحنة متحركة</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #8b5cf6; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">F = B × Q × v</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">Q: كولوم، v: م/ث</div>
-        </div>
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #f59e0b;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑭ قانون فاراداي</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #f59e0b; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">E = -N × ΔΦ / Δt</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">E: فولت، N: عدد اللفات، Φ: ويبر</div>
-        </div>
-    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #16a34a;">
-        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑰ التردد والزمن الدوري</h2>
-        <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #16a34a; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">f = 1 / T</div>
-        <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">f: هرتز، T: ثانية (زمن الدورة الكاملة)</div>
+        <div style="background: #f8fafc; padding: 10px; border-radius: 8px; font-family: system-ui, -apple-system, sans-serif;">
+    
+    <!-- العنوان الرئيسي للملخص -->
+    <div style="text-align: center; margin-bottom: 12px; border-bottom: 3px solid #2563eb; padding-bottom: 8px; direction: rtl;">
+        <h1 style="font-size: 26px; color: #1a365d; font-weight: 800; margin: 0;">📚 ملخص قوانين الفيزياء</h1>
+        <p style="font-size: 14px; color: #475569; margin: 4px 0 0 0;">القدرة - الطاقة - المغناطيسية - الحث الكهرومغناطيسي والمحولات</p>
     </div>
 
-
-        <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb;">
-            <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 4px 0;">⑮ قانون المحول</h2>
-            <div style="background: #ffffff; border-radius: 6px; padding: 8px 12px; border: 2px solid #2563eb; text-align: center; font-size: 18px; font-weight: bold; color: #1e293b;">Vp/Vs = Np/Ns = Is/Ip</div>
-            <div style="font-size: 12px; color: #475569; margin-top: 4px; text-align: center;">p: ابتدائي، s: ثانوي</div>
+    <!-- 1. القدرة الكهربائية -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #dc2626; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">① القدرة الكهربائية (P)</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #dc2626; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 10px; direction: ltr;">
+            <span>P = V × I</span>
+            <span style="color: #cbd5e1; font-weight: normal;">|</span>
+            <span>P = I² × R</span>
+            <span style="color: #cbd5e1; font-weight: normal;">|</span>
+            <span>P =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 4px 2px 4px;">V²</span>
+                <span style="padding: 2px 4px 0 4px;">R</span>
+            </div>
         </div>
-        <div style="text-align: center; font-size: 11px; color: #94a3b8; margin-top: 8px; border-top: 1px solid #e2e8f0; padding-top: 4px;">⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡</div>
-    `;
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">الوحدة: <b>وات (W)</b></div>
+    </div>
+
+    <!-- 2. الطاقة الكهربائية -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">② الطاقة الكهربائية (E)</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #2563eb; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 10px; direction: ltr;">
+            <span>E = P × t = V × I × t</span>
+        </div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">الوحدة: <b>جول (J)</b> أو <b>كيلووات.ساعة (kWh)</b></div>
+    </div>
+
+    <!-- 3. القوة المغناطيسية على سلك -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #16a34a; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">③ القوة المغناطيسية على سلك</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #16a34a; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; direction: ltr;">
+            <span>F = B × I × L</span>
+        </div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">حيث <b>B:</b> تسلا (T) | <b>I:</b> أمبير (A) | <b>L:</b> طول السلك بالمتر (m)</div>
+    </div>
+
+    <!-- 4. القوة المغناطيسية على شحنة متحركة -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #8b5cf6; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">④ القوة المغناطيسية على شحنة متحركة</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #8b5cf6; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; direction: ltr;">
+            <span>F = B × Q × v</span>
+        </div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">حيث <b>Q:</b> الشحنة بالكولوم (C) | <b>v:</b> السرعة بالمتر/ثانية (m/s)</div>
+    </div>
+
+    <!-- 5. قانون فاراداي للحث الكهرومغناطيسي -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #f59e0b; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑤ قانون فاراداي (القوة الدافعة الكهربائية المستحثة)</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #f59e0b; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>E = −N ×</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 6px 2px 6px;">ΔΦ</span>
+                <span style="padding: 2px 6px 0 6px;">Δt</span>
+            </div>
+        </div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">حيث <b>E:</b> فولت (V) | <b>N:</b> عدد اللفات | <b>Φ:</b> الفيض المغناطيسي بالويبر (Wb)</div>
+    </div>
+
+    <!-- 6. التردد والزمن الدوري -->
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #16a34a; direction: rtl;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑥ التردد والزمن الدوري</h2>
+        <div style="background: #ffffff; border-radius: 6px; padding: 10px 12px; border: 2px solid #16a34a; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 8px; direction: ltr;">
+            <span>f =</span>
+            <div style="display: inline-flex; flex-direction: column; text-align: center; line-height: 1.1; vertical-align: middle;">
+                <span style="border-bottom: 2px solid #1e293b; padding: 0 8px 2px 8px;">1</span>
+                <span style="padding: 2px 8px 0 8px;">T</span>
+            </div>
+        </div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">حيث <b>f:</b> التردد بالهرتز (Hz) | <b>T:</b> الزمن الدوري بالثانية (s)</div>
+    </div>
+
+    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; border-right: 5px solid #2563eb; direction: rtl; page-break-inside: avoid; break-inside: avoid;">
+        <h2 style="font-size: 15px; color: #1e293b; font-weight: 700; margin: 0 0 6px 0;">⑦ قانون المحول الكهربائي المثالي</h2>
+        
+        <div style="background: #ffffff; border-radius: 6px; padding: 12px 14px; border: 2px solid #2563eb; font-size: 18px; font-weight: bold; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 12px; direction: ltr;">
+            
+            <div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 35px; line-height: 1.2;">
+                <span style="padding-bottom: 2px;">Vₚ</span>
+                <hr style="width: 100%; border: none; border-top: 2px solid #1e293b; margin: 2px 0; padding: 0;">
+                <span style="padding-top: 2px;">Vₛ</span>
+            </div>
+            
+            <span style="font-size: 19px; color: #1e293b; display: inline-block; vertical-align: middle;">=</span>
+            
+            <div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 35px; line-height: 1.2;">
+                <span style="padding-bottom: 2px;">Nₚ</span>
+                <hr style="width: 100%; border: none; border-top: 2px solid #1e293b; margin: 2px 0; padding: 0;">
+                <span style="padding-top: 2px;">Nₛ</span>
+            </div>
+            
+            <span style="font-size: 19px; color: #1e293b; display: inline-block; vertical-align: middle;">=</span>
+            
+            <div style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 35px; line-height: 1.2;">
+                <span style="padding-bottom: 2px;">Iₛ</span>
+                <hr style="width: 100%; border: none; border-top: 2px solid #1e293b; margin: 2px 0; padding: 0;">
+                <span style="padding-top: 2px;">Iₚ</span>
+            </div>
+
+        </div>
+        <div style="font-size: 13px; color: #475569; margin-top: 6px; text-align: center;">حيث <b>p:</b> ملف ابتدائي (Primary) | <b>s:</b> ملف ثانوي (Secondary)</div>
+    </div>
+    <!-- تذييل الصفحة لحماية الحقوق -->
+    <div style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 10px; border-top: 1px solid #e2e8f0; padding-top: 6px; direction: rtl; font-weight: bold;">
+        ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+    </div>
+
+</div> `;
     printableDoc.appendChild(page5);
 
     // ===== صفحة القوانين الخامسة: النشاط الإشعاعي =====
