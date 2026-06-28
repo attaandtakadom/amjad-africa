@@ -1067,6 +1067,13 @@ addQuestionsStartPage();
     });
 
 function triggerMobilePrint() {
+
+// داخل الدالة التي تجهز طباعة النقال، تأكدي من إدراج هذا السطر في الـ head:
+const headContent = `
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>كتيب الفيزياء - مدرسة أمجاد أفريقيا</title>
+`;
+
     const printableDoc = document.getElementById('printable-pdf-document');
     const questionsArea = document.getElementById('dynamic-pdf-questions-area');
 

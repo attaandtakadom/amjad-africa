@@ -745,4 +745,52 @@ body {
         visibility: visible !important;
         stroke-width: 2px !important; /* تسميك الخطوط لتظهر بوضوح */
     }
+}@media print {
+    /* إجبار المتصفح على اعتبار العرض متناسباً مع النقال */
+    html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-text-size-adjust: 100% !important; /* منع المتصفح من تصغير الخط تلقائياً */
+    }
+
+    /* تكبير العناوين (س1، س2...) بشكل ضخم جداً */
+    .pdf-q-title {
+        font-size: 28pt !important; /* تم رفعها إلى 28pt لتكون واضحة جداً */
+        font-weight: bold !important;
+        color: #1a365d !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* تكبير نص السؤال نفسه */
+    .pdf-q-text {
+        font-size: 24pt !important; /* حجم كبير جداً وسهل القراءة على النقال */
+        line-height: 1.7 !important;
+        color: #0f172a !important;
+    }
+
+    /* تكبير خطوات الحل الرياضي والمعادلات */
+    .pdf-sol-steps {
+        font-size: 22pt !important;
+        line-height: 1.7 !important;
+        color: #1e293b !important;
+    }
+    
+    .pdf-sol-steps div {
+        margin-bottom: 8px !important;
+    }
+
+    /* تكبير صندوق الناتج النهائي */
+    .pdf-final-ans {
+        font-size: 23pt !important;
+        padding: 10px 20px !important;
+        display: inline-block !important;
+    }
+
+    /* صناديق ملخصات القوانين */
+    .law-box, .golden-box {
+        font-size: 22pt !important;
+        line-height: 1.6 !important;
+        padding: 15px !important;
+    }
 }
