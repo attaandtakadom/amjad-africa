@@ -689,3 +689,60 @@ body {
     page-break-inside: auto !important;
     break-inside: auto !important;
 }
+@media print {
+    /* فرض إظهار حاوية الرسومات بالكامل ومنع انقسامها */
+    .pdf-graphic {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 20px 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* تحرير الـ SVG والـ الصور لتتمدد وتظهر بوضوح مع الخط الكبير */
+    .pdf-graphic svg, 
+    .pdf-graphic img {
+        display: block !important;
+        visibility: visible !important;
+        margin: 0 auto !important;
+        width: auto !important; /* السماح للعنصر بأخذ حجمه الطبيعي */
+        max-width: 95% !important; /* الاستفادة من عرض الصفحة المتاح */
+        height: auto !important;
+        max-height: 280px !important; /* زيادة الارتفاع الأقصى المسموح به لتظهر الرسمة مريحة للعين */
+    }
+}@media print {
+    /* 1. إظهار الحاوية */
+    .pdf-graphic, .question-graphic-area {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        min-height: 150px !important; /* ضمان وجود مساحة للرسمة */
+        margin: 20px auto !important;
+        text-align: center !important;
+    }
+
+    /* 2. إظهار الرسمة نفسها */
+    .pdf-graphic svg, 
+    .pdf-graphic img,
+    svg {
+        display: block !important;
+        visibility: visible !important;
+        width: 90% !important; /* تكبير الرسمة لتناسب النقال */
+        max-width: 500px !important;
+        height: auto !important;
+        max-height: none !important; /* إلغاء أي تقييد للطول */
+        margin: 0 auto !important;
+    }
+
+    /* 3. ضمان ظهور الخطوط والألوان داخل الرسمة */
+    svg * {
+        visibility: visible !important;
+        stroke-width: 2px !important; /* تسميك الخطوط لتظهر بوضوح */
+    }
+}

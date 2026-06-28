@@ -1202,13 +1202,19 @@ function triggerMobilePrint() {
     pageFooter.innerHTML = `⚡ هذه المذكرة خاصة بطلبة مدرسة أمجاد أفريقيا - مخصصة للقراءة على النقال ⚡`;
     mainPage.appendChild(pageFooter);
 
+// ... نهاية الدالة ...
     questionsArea.appendChild(mainPage);
 
+    // تأخير بسيط لضمان تحميل الرسومات في الذاكرة قبل الطباعة
     setTimeout(() => {
-        window.print();
-    }, 600);
+        // التأكد من تفعيل خيار طباعة الخلفية برمجياً في بعض المتصفحات
+        try {
+            document.execCommand('print', false, null);
+        } catch (e) {
+            window.print();
+        }
+    }, 1200); // زيادة التأخير إلى 1.2 ثانية لضمان ظهور الـ SVG
 }
-
 </script>
 
 </body>
