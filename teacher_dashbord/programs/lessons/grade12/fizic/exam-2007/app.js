@@ -72,7 +72,7 @@ function updateLiveScore() {
     let currentScore = 0;
     for (let index in userAnswers) {
         if (userAnswers[index] === examQuestions[index].correctAnswer) {
-            currentScore++;
+           currentScore= currentScore+1.5;
         }
     }
     document.getElementById("score-live").innerText = `الدرجة الحالية: ${currentScore}`;
