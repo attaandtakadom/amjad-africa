@@ -432,64 +432,32 @@ const examQuestions = [
         svg: ""
     },
     {
-        question: "س 2: سلك من النحاس طوله 0.5m يمر به تيار كهربائي شدته 20mA موضوع بين قطبي مجال مغناطيسي منتظم كثافة فيضه 5T، فإن مقدار واتجاه القوة المغناطيسية المؤثرة يساوي:",
-        options: [
-            "أ) 0.05N داخل الورقة",
-            "ب) 50N لأعلى الورقة",
-            "ج) 0.05N خارج الورقة",
-            "د) 50N لأسفل الورقة"
-        ],
-        correctAnswer: 0,
-        svg: `<svg width="220" height="140" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
-                <rect x="20" y="20" width="40" height="90" fill="#f1f5f9" stroke="#334155" stroke-width="2" rx="4"/>
-                <text x="35" y="70" font-family="Arial" font-size="16" font-weight="bold" fill="#334155">S</text>
-                <rect x="160" y="20" width="40" height="90" fill="#f1f5f9" stroke="#334155" stroke-width="2" rx="4"/>
-                <text x="175" y="70" font-family="Arial" font-size="16" font-weight="bold" fill="#334155">N</text>
-                <line x1="90" y1="10" x2="90" y2="120" stroke="#000" stroke-width="3"/>
-                <rect x="82" y="30" width="16" height="70" fill="none" stroke="#22c55e" stroke-width="2"/>
-                <text x="75" y="135" font-family="Arial" font-size="11" font-weight="bold" fill="#000">سلك النحاس</text>
-                <g stroke="#2563eb" stroke-width="1.5">
-                    <line x1="160" y1="40" x2="65" y2="40"/>
-                    <polygon points="65,40 73,36 73,44" fill="#2563eb"/>
-                    <line x1="160" y1="65" x2="65" y2="65"/>
-                    <polygon points="65,65 73,61 73,69" fill="#2563eb"/>
-                    <line x1="160" y1="90" x2="65" y2="90"/>
-                    <polygon points="65,90 73,86 73,94" fill="#2563eb"/>
-                </g>
-              </svg>`
-    },
-    {
-        question: "س 3: لقياس فرق الجهد عبر المقاومة (S) يجب توصيل الفولتمتر عند:",
-        options: [
-            "أ) Q فقط",
-            "ب) P فقط",
-            "ج) P أو W",
-            "د) P أو Q"
-        ],
-        correctAnswer: 3,
-        svg: `<svg width="240" height="180" viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
-                <rect x="40" y="20" width="140" height="130" fill="none" stroke="#000" stroke-width="2"/>
-                <circle cx="110" cy="20" r="6" fill="#000"/>
-                <line x1="100" y1="12" x2="120" y2="12" stroke="#000" stroke-width="2"/>
-                <line x1="105" y1="7" x2="115" y2="7" stroke="#000" stroke-width="1"/>
-                <circle cx="110" cy="50" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="104" y="54" font-family="Arial" font-size="12" font-weight="bold">W</text>
-                <line x1="40" y1="50" x2="96" y2="50" stroke="#000" stroke-width="2"/>
-                <line x1="124" y1="50" x2="180" y2="50" stroke="#000" stroke-width="2"/>
-                <circle cx="110" cy="90" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="105" y="94" font-family="Arial" font-size="12" font-weight="bold">Q</text>
-                <line x1="40" y1="90" x2="96" y2="90" stroke="#000" stroke-width="2"/>
-                <line x1="124" y1="90" x2="180" y2="90" stroke="#000" stroke-width="2"/>
-                <rect x="90" y="120" width="40" height="16" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="107" y="132" font-family="Arial" font-size="12" font-weight="bold">S</text>
-                <line x1="40" y1="160" x2="96" y2="160" stroke="#000" stroke-width="2"/>
-                <line x1="124" y1="160" x2="180" y2="160" stroke="#000" stroke-width="2"/>
-                <line x1="40" y1="150" x2="40" y2="160" stroke="#000" stroke-width="2"/>
-                <line x1="180" y1="150" x2="180" y2="160" stroke="#000" stroke-width="2"/>
-                <circle cx="110" cy="160" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="105" y="164" font-family="Arial" font-size="12" font-weight="bold">P</text>
-              </svg>`
-    },
+    question: "س 34: من الشكل التالي، لقياس فرق الجهد عبر المقاومة (S) يجب توصيل الفولتمتر عند:",
+    options: ["أ) Q فقط", "ب) P فقط", "ج) W أو P", "د) P أو Q"],
+    correctAnswer: 3,
+    svg: `<svg width="240" height="180" viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="20" width="140" height="130" fill="none" stroke="#000" stroke-width="2"/>
+        <circle cx="110" cy="20" r="6" fill="#000"/>
+        <line x1="100" y1="12" x2="120" y2="12" stroke="#000" stroke-width="2"/>
+        <line x1="105" y1="7" x2="115" y2="7" stroke="#000" stroke-width="1"/>
+        <circle cx="110" cy="50" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
+        <text x="104" y="54" font-family="Arial" font-size="12" font-weight="bold">W</text>
+        <line x1="40" y1="50" x2="96" y2="50" stroke="#000" stroke-width="2"/>
+        <line x1="124" y1="50" x2="180" y2="50" stroke="#000" stroke-width="2"/>
+        <circle cx="110" cy="90" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
+        <text x="105" y="94" font-family="Arial" font-size="12" font-weight="bold">Q</text>
+        <line x1="40" y1="90" x2="96" y2="90" stroke="#000" stroke-width="2"/>
+        <line x1="124" y1="90" x2="180" y2="90" stroke="#000" stroke-width="2"/>
+        <rect x="90" y="120" width="40" height="16" fill="#fff" stroke="#000" stroke-width="2"/>
+        <text x="107" y="132" font-family="Arial" font-size="12" font-weight="bold">S</text>
+        <line x1="40" y1="160" x2="96" y2="160" stroke="#000" stroke-width="2"/>
+        <line x1="124" y1="160" x2="180" y2="160" stroke="#000" stroke-width="2"/>
+        <line x1="40" y1="150" x2="40" y2="160" stroke="#000" stroke-width="2"/>
+        <line x1="180" y1="150" x2="180" y2="160" stroke="#000" stroke-width="2"/>
+        <circle cx="110" cy="160" r="14" fill="#fff" stroke="#000" stroke-width="2"/>
+        <text x="105" y="164" font-family="Arial" font-size="12" font-weight="bold">P</text>
+    </svg>`
+},
     {
         question: "س 4: يستخدم الحديد المطاوع في قلب المحول الكهربائي لأنه:",
         options: [
@@ -567,38 +535,94 @@ const examQuestions = [
         correctAnswer: 0,
         svg: ""
     },
-    {
-        question: "س 11: في الدائرة الكهربائية الموضحة بالرسم، إذا علمت أن القدرة التي تستهلكها المقاومتان (R , R) الواقعتان بين النقطتين A, B لا تتأثر بفتح المفتاح (K) أو غلقه، فإن قيمة المقاومة (R) تساوي:",
-        options: [
-            "أ) 6Ω",
-            "ب) 1Ω",
-            "ج) 2Ω",
-            "د) 3Ω"
-        ],
-        correctAnswer: 2,
-        svg: `<svg width="260" height="130" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
-                <rect x="30" y="20" width="200" height="90" fill="none" stroke="#000" stroke-width="2"/>
-                <line x1="30" y1="65" x2="110" y2="65" stroke="#000" stroke-width="2"/>
-                <line x1="150" y1="65" x2="230" y2="65" stroke="#000" stroke-width="2"/>
-                <rect x="70" y="35" width="15" height="60" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="50" y="70" font-family="Arial" font-size="12" font-weight="bold">R</text>
-                <rect x="110" y="35" width="15" height="60" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="135" y="70" font-family="Arial" font-size="12" font-weight="bold">R</text>
-                <circle cx="92" cy="20" r="3" fill="#000"/>
-                <circle cx="128" cy="20" r="3" fill="#000"/>
-                <text x="90" y="14" font-family="Arial" font-size="12" font-weight="bold">A</text>
-                <text x="125" y="14" font-family="Arial" font-size="12" font-weight="bold">B</text>
-                <rect x="160" y="12" width="30" height="16" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="168" y="25" font-family="Arial" font-size="12">1Ω</text>
-                <line x1="45" y1="20" x2="55" y2="10" stroke="#000" stroke-width="2"/>
-                <circle cx="45" cy="20" r="2" fill="#000"/>
-                <text x="48" y="8" font-family="Arial" font-size="12" font-weight="bold">K</text>
-                <line x1="100" y1="110" x2="120" y2="110" stroke="#000" stroke-width="3"/>
-                <line x1="105" y1="115" x2="115" y2="115" stroke="#000" stroke-width="1"/>
-                <text x="125" y="115" font-family="Arial" font-size="12" font-weight="bold">E</text>
-              </svg>`
-    },
-    {
+{
+    question: "س 44: في الدائرة الكهربائية الموضحة بالرسم، إذا علمت أن القدرة التي تستهلكها المقاومتان (R و ⅓R) والواقعتان بين النقطتين A, B لا تتأثر بفتح المفتاح (K) أو غلقه، فإن قيمة المقاومة (R) تساوي:",
+    options: ["أ) 6 Ω", "ب) 1 Ω", "ج) 2 Ω", "د) 3 Ω"],
+    correctAnswer: 2,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%">
+        <rect width="100%" height="100%" fill="#ffffff" />
+        <g stroke="#000000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 150,100 L 220,100" />
+            <path d="M 280,100 L 450,100 L 450,165" />
+            <path d="M 150,260 L 450,260 L 450,195" />
+            <path d="M 150,100 L 150,140" />
+            <path d="M 150,220 L 150,260" />
+            <path d="M 290,100 L 290,140" />
+            <path d="M 290,220 L 290,260" />
+            <circle cx="220" cy="100" r="4" fill="#000000" />
+            <circle cx="280" cy="100" r="4" fill="#000000" />
+            <line x1="220" y1="100" x2="270" y2="75" />
+            <line x1="430" y1="165" x2="470" y2="165" />
+            <line x1="440" y1="175" x2="460" y2="175" stroke-width="5" />
+            <line x1="430" y1="185" x2="470" y2="185" />
+            <line x1="440" y1="195" x2="460" y2="195" stroke-width="5" />
+            <rect x="340" y="85" width="50" height="30" fill="#ffffff" />
+            <rect x="275" y="140" width="30" height="80" fill="#ffffff" />
+            <rect x="135" y="140" width="30" height="80" fill="#ffffff" />
+        </g>
+        <g fill="#000000">
+            <circle cx="315" cy="100" r="6" />
+            <circle cx="315" cy="260" r="6" />
+        </g>
+        <g font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">
+            <text x="240" y="60">K</text>
+            <text x="90" y="185">⅓ R</text>
+            <text x="245" y="185">R</text>
+            <text x="310" y="85">A</text>
+            <text x="350" y="70">1 Ω</text>
+            <text x="485" y="185">E</text>
+            <text x="310" y="295">B</text>
+        </g>
+    </svg>`
+},
+{
+    question: "س 35: في الشكل الموضح، قضيب مشحون بشحنة سالبة يقترب من الطرف P لقضيب فلزي معزول. فإن العبارة الصحيحة لوصف حركة الشحنات هي:",
+    options: [
+        "أ) تنتقل الإلكترونات في القضيب الفلزي من الطرف P للطرف Q",
+        "ب) تنتقل الشحنات الموجبة في القضيب المشحون من P إلى الطرف Q",
+        "ج) تنتقل الشحنات الموجبة في القضيب الفلزي من الطرف Q إلى الطرف P",
+        "د) تقفز الإلكترونات من القضيب المشحون إلى القضيب الفلزي عبر الفجوة"
+    ],
+    correctAnswer: 0,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" width="100%" height="100%">
+        <rect width="100%" height="100%" fill="#ffffff" />
+        <g transform="translate(20, 15)">
+            <g transform="translate(220, 20) rotate(-25)">
+                <rect x="0" y="0" width="120" height="22" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,3" />
+                <text x="60" y="-9" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">قضيب مشحون</text>
+                <g font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">
+                    <text x="15" y="16">-</text>
+                    <text x="35" y="16">-</text>
+                    <text x="55" y="16">-</text>
+                    <text x="75" y="16">-</text>
+                    <text x="95" y="16">-</text>
+                </g>
+            </g>
+            <g transform="translate(60, 100)">
+                <rect x="0" y="0" width="160" height="28" rx="5" fill="#f5f5f5" stroke="#000000" stroke-width="1.5" />
+                <path d="M 152 0 A 8 14 0 0 1 152 28" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="2,2" />
+                <path d="M 160 0 A 8 14 0 0 1 160 28" fill="none" stroke="#000000" stroke-width="1.5" />
+                <text x="80" y="44" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">قضيب فلزي</text>
+                <text x="-14" y="19" font-family="Georgia, serif" font-size="16" font-style="italic" font-weight="bold" fill="#000000" text-anchor="middle">Q</text>
+                <text x="174" y="19" font-family="Georgia, serif" font-size="16" font-style="italic" font-weight="bold" fill="#000000" text-anchor="middle">P</text>
+            </g>
+            <line x1="210" y1="95" x2="235" y2="70" stroke="#999999" stroke-width="1" stroke-dasharray="3,3" />
+        </g>
+    </svg>`
+},
+
+{
+    question: "س 36: الأشكال التالية تمثل خطوط المجال الكهربائي الصحيحة ما عدا:",
+    options: [
+        "أ) شحنة موجبة منفردة (تخرج منها خطوط المجال عمودياً إلى الخارج)",
+        "ب) شحنتان (سالبة وموجبة)، تظهر فيها الخطوط وهي تخرج من الشحنة السالبة وتدخل إلى الموجبة",
+        "ج) شحنتان (سالبة وموجبة)، تظهر فيها الخطوط وهي تخرج من الشحنة الموجبة وتدخل إلى السالبة",
+        "د) شحنة سالبة منفردة (تدخل إليها خطوط المجال عمودياً من الخارج)"
+    ],
+    correctAnswer: 1,
+    svg: `<svg width="400" height="700" viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="white"/><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="black"/></marker><marker id="arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="red"/></marker></defs><g transform="translate(200, 100)"><circle cx="0" cy="0" r="15" fill="none" stroke="black" stroke-width="2"/><text x="0" y="5" font-size="20" font-family="Arial" text-anchor="middle">+</text><line x1="0" y1="-15" x2="0" y2="-65" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="10.6" y1="-10.6" x2="45.9" y2="-45.9" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="15" y1="0" x2="65" y2="0" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="10.6" y1="10.6" x2="45.9" y2="45.9" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="0" y1="15" x2="0" y2="65" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="-10.6" y1="10.6" x2="-45.9" y2="45.9" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="-15" y1="0" x2="-65" y2="0" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="-10.6" y1="-10.6" x2="-45.9" y2="-45.9" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><text x="80" y="5" font-size="16" font-family="Arial" text-anchor="start">أ)</text></g><g transform="translate(130, 270)"><circle cx="0" cy="0" r="15" fill="none" stroke="black" stroke-width="2"/><text x="0" y="5" font-size="20" font-family="Arial" text-anchor="middle">-</text></g><g transform="translate(270, 270)"><circle cx="0" cy="0" r="15" fill="none" stroke="black" stroke-width="2"/><text x="0" y="5" font-size="20" font-family="Arial" text-anchor="middle">+</text></g><rect x="100" y="240" width="200" height="80" fill="none" stroke="red" stroke-width="3" rx="10"/><g transform="translate(200, 270)"><path d="M -55 0 L 55 0" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M -55 -10 Q 0 -40 55 -10" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M -55 10 Q 0 40 55 10" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M -45 -22 Q -20 -60 35 -27" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M -45 22 Q -20 60 35 27" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M -85 0 L -120 0" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M 85 0 L 120 0" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M -80 -20 L -110 -35" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M 80 -20 L 110 -35" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M -80 20 L -110 35" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><path d="M 80 20 L 110 35" stroke="red" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/><text x="140" y="5" font-size="16" font-family="Arial" text-anchor="start">ب)</text></g><g transform="translate(130, 440)"><circle cx="0" cy="0" r="15" fill="none" stroke="black" stroke-width="2"/><text x="0" y="5" font-size="20" font-family="Arial" text-anchor="middle">-</text></g><g transform="translate(270, 440)"><circle cx="0" cy="0" r="15" fill="none" stroke="black" stroke-width="2"/><text x="0" y="5" font-size="20" font-family="Arial" text-anchor="middle">+</text></g><g transform="translate(200, 440)"><path d="M 55 0 L -55 0" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M 55 -10 Q 0 -40 -55 -10" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M 55 10 Q 0 40 -55 10" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M 35 -27 Q 20 -60 -45 -22" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M 35 27 Q 20 60 -45 22" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M -120 0 L -85 0" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M 120 0 L 85 0" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M -110 -35 L -80 -20" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M 110 -35 L 80 -20" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M -110 35 L -80 20" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M 110 35 L 80 20" stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="140" y="5" font-size="16" font-family="Arial" text-anchor="start">ج)</text></g><g transform="translate(200, 610)"><circle cx="0" cy="0" r="15" fill="none" stroke="black" stroke-width="2"/><text x="0" y="5" font-size="20" font-family="Arial" text-anchor="middle">-</text><line x1="0" y1="-65" x2="0" y2="-15" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="45.9" y1="-45.9" x2="10.6" y2="-10.6" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="65" y1="0" x2="15" y2="0" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="45.9" y1="45.9" x2="10.6" y2="10.6" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="0" y1="65" x2="0" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="-45.9" y1="45.9" x2="-10.6" y2="10.6" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="-65" y1="0" x2="-15" y2="0" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><line x1="-45.9" y1="-45.9" x2="-10.6" y2="-10.6" stroke="black" stroke-width="2" marker-end="url(#arrow)"/><text x="80" y="5" font-size="16" font-family="Arial" text-anchor="start">د)</text></g></svg>`
+},
+{
         question: "س 12: تمثيلاً لخطوط المجال المغناطيسي لسلكين متوازيين يحملان تياراً كهربائياً، فإن كثافة الفيض المغناطيسي عند النقطة (A) التي تقع في منتصف المسافة بينهما تساوي:",
         options: [
             "أ) B = 2 × 10^-7 I (1/r1 - 1/r2) تجاذب",
@@ -672,34 +696,56 @@ const examQuestions = [
         svg: ""
     },
     {
-        question: "س 16: في الشكل التالي، إذا كانت المقاومة الداخلية للمصدر مهملة، يكون للتيار الكهربائي أقل قيمة عند غلق المفتاح:",
-        options: [
-            "أ) K1",
-            "ب) K2",
-            "ج) K3",
-            "د) K4"
-        ],
-        correctAnswer: 1,
-        svg: `<svg width="240" height="180" viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
-                <rect x="40" y="30" width="160" height="120" fill="none" stroke="#000" stroke-width="2"/>
-                <line x1="45" y1="30" x2="55" y2="20" stroke="#000" stroke-width="2"/>
-                <text x="42" y="15" font-family="Arial" font-size="11">K1</text>
-                <rect x="100" y="20" width="40" height="20" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="115" y="34" font-family="Arial" font-size="12">R</text>
-                <line x1="40" y1="90" x2="200" y2="90" stroke="#000" stroke-width="2"/>
-                <line x1="75" y1="90" x2="85" y2="80" stroke="#000" stroke-width="2"/>
-                <text x="72" y="75" font-family="Arial" font-size="11">K2</text>
-                <line x1="120" y1="30" x2="120" y2="150" stroke="#000" stroke-width="2"/>
-                <line x1="120" y1="65" x2="130" y2="55" stroke="#000" stroke-width="2"/>
-                <text x="135" y="60" font-family="Arial" font-size="11">K3</text>
-                <rect x="155" y="105" width="20" height="40" fill="#fff" stroke="#000" stroke-width="2"/>
-                <text x="162" y="130" font-family="Arial" font-size="12">R</text>
-                <line x1="100" y1="150" x2="110" y2="140" stroke="#000" stroke-width="2"/>
-                <text x="98" y="135" font-family="Arial" font-size="11">K4</text>
-                <line x1="110" y1="165" x2="130" y2="165" stroke="#000" stroke-width="3"/>
-                <line x1="115" y1="170" x2="125" y2="170" stroke="#000" stroke-width="1"/>
-              </svg>`
-    },
+    question: "س 19: في الشكل التالي، إذا كانت المقاومة الداخلية للمصدر مهملة، يكون للتيار الكهربائي أقل قيمة عند غلق المفتاح:",
+    options: ["أ) K₁", "ب) K₂", "ج) K₃", "د) K₄"],
+    correctAnswer: 1,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+        <rect width="100%" height="100%" fill="#ffffff" />
+        <g font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000">
+            <text x="210" y="45">K₁</text>
+            <text x="145" y="225">K₂</text>
+            <text x="325" y="195">K₃</text>
+            <text x="325" y="315">K₄</text>
+            <text x="295" y="105">R</text>
+            <text x="415" y="255">R</text>
+        </g>
+        <g stroke="#000000" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 180 60 L 100 60 L 100 440 L 220 440" />
+            <path d="M 280 60 L 400 60 L 400 170" />
+            <path d="M 180 120 L 230 120" />
+            <path d="M 230 120 L 240 120 L 244 110 L 252 130 L 260 110 L 268 130 L 276 110 L 284 130 L 288 120 L 350 120" />
+            <path d="M 350 120 L 350 190" /> 
+            <path d="M 180 120 L 180 210" />
+            <path d="M 180 270 L 180 440" />
+            <path d="M 180 190 L 290 190" />
+            <path d="M 350 190 L 400 190" />
+            <path d="M 180 320 L 290 320" />
+            <path d="M 350 320 L 400 320" />
+            <path d="M 240 190 L 240 320" />
+            <path d="M 400 170 L 400 210" />
+            <path d="M 400 320 L 400 440 L 280 440" />
+            <path d="M 400 210 L 400 220 L 390 224 L 410 232 L 390 240 L 410 248 L 390 256 L 410 264 L 400 268 L 400 290" />
+            <g transform="translate(220, 425)">
+                <line x1="10" y1="0" x2="10" y2="30" stroke-width="4" />
+                <line x1="20" y1="7" x2="20" y2="23" stroke-width="7" />
+                <line x1="30" y1="0" x2="30" y2="30" stroke-width="4" />
+                <line x1="40" y1="7" x2="40" y2="23" stroke-width="7" />
+            </g>
+            <circle cx="180" cy="60" r="3" fill="#000000" />
+            <circle cx="230" cy="60" r="3" fill="#000000" />
+            <line x1="180" y1="60" x2="225" y2="45" stroke-width="3" />
+            <circle cx="180" cy="210" r="3" fill="#000000" />
+            <circle cx="180" cy="270" r="3" fill="#000000" />
+            <line x1="180" y1="270" x2="165" y2="225" stroke-width="3" />
+            <circle cx="290" cy="190" r="3" fill="#000000" />
+            <circle cx="350" cy="190" r="3" fill="#000000" />
+            <line x1="290" y1="190" x2="345" y2="175" stroke-width="3" />
+            <circle cx="290" cy="320" r="3" fill="#000000" />
+            <circle cx="350" cy="320" r="3" fill="#000000" />
+            <line x1="290" y1="320" x2="345" y2="305" stroke-width="3" />
+        </g>
+    </svg>`
+},
     {
         question: "س 17: تم توصيل شكل كروي مشحون كهربائياً بشحنة 0.4mC بالأرض عن طريق سلك، فإذا كان الوقت المستغرق لتفريغ شحنة الشكل الكروي هي 0.2Sec فإن متوسط التيار الساري خلال السلك واتجاهه التقليدي هو:",
         options: [

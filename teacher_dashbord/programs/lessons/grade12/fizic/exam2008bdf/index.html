@@ -259,7 +259,6 @@
             font-size: 26px;
         }
 
-        /* ===== أنماط الطباعة ===== */
         @media print {
             body {
                 background: white !important;
@@ -278,6 +277,8 @@
                 page-break-after: always;
                 break-after: page;
                 display: block !important;
+                position: relative !important;
+                overflow: hidden !important;
             }
             .pdf-page:last-child {
                 page-break-after: auto;
@@ -286,13 +287,34 @@
             .no-print {
                 display: none !important;
             }
+            .watermark-text {
+                display: block !important;
+                position: absolute !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-30deg) !important;
+                font-size: 55px !important;
+                font-weight: bold !important;
+                color: rgba(0, 0, 0, 0.05) !important;
+                white-space: pre-line !important;
+                text-align: center !important;
+                line-height: 1.8 !important;
+                letter-spacing: 6px !important;
+                pointer-events: none !important;
+                z-index: 0 !important;
+                width: 100% !important;
+                font-family: 'Cairo', sans-serif !important;
+            }
+            .pdf-content {
+                position: relative !important;
+                z-index: 1 !important;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <!-- الواجهة التفاعلية - تظهر فقط في المتصفح -->
     <div class="header no-print">
         <h2><i class="fa-solid fa-desktop"></i> منصة الفيزياء</h2>
         <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
@@ -339,15 +361,18 @@
     </div>
 </div>
 
-<!-- ===== منطقة PDF (تظهر فقط عند الطباعة) ===== -->
 <div id="printable-pdf-document" style="display:none;"></div>
 <script src="array-2008.js"></script>
 <script>
 // ============================================================
-// مصفوفة الأسئلة (examQuestions)
-// ============================================================
+// مصفوفة الأسئلة - تم تحميلها من المصفوفة التي أرسلتها
 
 console.log("✅ تم تحميل المصفوفة! عدد الأسئلة: " + examQuestions.length);
+
+// عرض بيانات الأسئلة في الكونسول للتحقق
+examQuestions.forEach((q, i) => {
+    console.log(`السؤال ${i+1}: correctAnswer = ${q.correctAnswer}, الإجابة = ${q.options[q.correctAnswer]}`);
+});
 
 // ============================================================
 // متغيرات التحكم
@@ -395,10 +420,10 @@ function renderActiveQuestion(index) {
         
         if (answeredQuestions[index] !== undefined) {
             if (answeredQuestions[index] === idx) {
-                btn.classList.add(answeredQuestions[index] === data.correct ? 'correct' : 'wrong');
-                btn.querySelector('i').className = answeredQuestions[index] === data.correct ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark';
+                btn.classList.add(answeredQuestions[index] === data.correctAnswer ? 'correct' : 'wrong');
+                btn.querySelector('i').className = answeredQuestions[index] === data.correctAnswer ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark';
             }
-            if (idx === data.correct && answeredQuestions[index] !== undefined) {
+            if (idx === data.correctAnswer && answeredQuestions[index] !== undefined) {
                 btn.style.borderColor = '#22c55e';
                 btn.style.background = '#dcfce7';
             }
@@ -412,11 +437,11 @@ function renderActiveQuestion(index) {
 
     const feedbackBox = document.getElementById('feedback-box');
     if (answeredQuestions[index] !== undefined) {
-        const isCorrect = answeredQuestions[index] === data.correct;
+        const isCorrect = answeredQuestions[index] === data.correctAnswer;
         feedbackBox.className = `feedback-box ${isCorrect ? 'success' : 'error'}`;
         feedbackBox.innerHTML = isCorrect ? 
             '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة! درجة السؤال: 1.5' : 
-            `<i class="fa-solid fa-xmark"></i> ❌ الإجابة الصحيحة هي: ${data.options[data.correct]}`;
+            `<i class="fa-solid fa-xmark"></i> ❌ الإجابة الصحيحة هي: ${data.options[data.correctAnswer]}`;
         feedbackBox.style.display = 'block';
     } else {
         feedbackBox.style.display = 'none';
@@ -441,69 +466,76 @@ function generatePDF() {
 
     const totalScore = examQuestions.length * 1.5;
     const passingScore = Math.floor(examQuestions.length * 0.7) * 1.5;
+    const watermarkText = `مدرسة أمجاد أفريقيا\nليبيا البيضاء`;
 
     let htmlContent = '';
 
-    // ===== صفحة الغلاف (الصفحة الأولى) =====
+    // ===== صفحة الغلاف =====
     htmlContent += `
-        <div class="pdf-page" style="padding: 20mm 10mm; text-align: center; font-family: 'Cairo', sans-serif; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div style="position:relative; width:100%;">
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:60px;font-weight:bold;color:rgba(0,0,0,0.04);white-space:pre-line;text-align:center;line-height:1.8;letter-spacing:8px;pointer-events:none;z-index:0;width:100%;">
-                    مدرسة أمجاد أفريقيا
-                    ليبيا البيضاء
+        <div class="pdf-page" style="padding: 20mm 10mm; text-align: center; font-family: 'Cairo', sans-serif; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden;">
+            <div class="watermark-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 55px; font-weight: bold; color: rgba(0, 0, 0, 0.05); white-space: pre-line; text-align: center; line-height: 1.8; letter-spacing: 6px; pointer-events: none; z-index: 0; width: 100%; font-family: 'Cairo', sans-serif;">
+                ${watermarkText}
+            </div>
+            <div style="position:relative; z-index:1; width:100%;">
+                <div style="font-size:22px;color:#1a365d;margin-bottom:15px;font-weight:bold;border-bottom:2px solid #1a365d;padding-bottom:10px;display:inline-block;">
+                    🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء
                 </div>
-                <div style="position:relative;z-index:1;">
-                    <div style="font-size:22px;color:#1a365d;margin-bottom:15px;font-weight:bold;border-bottom:2px solid #1a365d;padding-bottom:10px;display:inline-block;">
-                        🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء
+                <div style="font-size:42px;font-weight:800;color:#0f172a;margin:20px 0 10px;">📘 الفيزياء الكهربائية</div>
+                <div style="font-size:32px;font-weight:700;color:#1a365d;margin-bottom:10px;">كراسة الحلول النموذجية</div>
+                <div style="font-size:24px;font-weight:600;color:#334155;margin-bottom:20px;">دفعة 2008 - الصف الثالث الثانوي</div>
+                <div style="border:3px solid #1a365d;border-radius:16px;padding:25px 35px;margin:15px auto;background:rgba(255,255,255,0.95);max-width:80%;">
+                    <h3 style="font-size:28px;color:#1e293b;margin:0 0 5px 0;">📚 كراسة الحلول النموذجية</h3>
+                    <h4 style="font-size:20px;color:#475569;margin:8px 0;">امتحان الفيزياء الكهربائية</h4>
+                    <div style="font-size:16px;color:#64748b;margin:5px 0;">دفعة 2008</div>
+                    <div style="font-size:18px;font-weight:700;color:#0f172a;margin-top:10px;background:#dbeafe;padding:6px 18px;border-radius:8px;display:inline-block;">
+                        العام الدراسي 2025 - 2026
                     </div>
-                    <div style="font-size:42px;font-weight:800;color:#0f172a;margin:20px 0 10px;">📘 الفيزياء الكهربائية</div>
-                    <div style="font-size:32px;font-weight:700;color:#1a365d;margin-bottom:10px;">كراسة الحلول النموذجية</div>
-                    <div style="font-size:24px;font-weight:600;color:#334155;margin-bottom:20px;">دفعة 2008 - الصف الثالث الثانوي</div>
-                    <div style="border:3px solid #1a365d;border-radius:16px;padding:25px 35px;margin:15px auto;background:rgba(255,255,255,0.9);max-width:80%;">
-                        <h3 style="font-size:28px;color:#1e293b;margin:0 0 5px 0;">📚 كراسة الحلول النموذجية</h3>
-                        <h4 style="font-size:20px;color:#475569;margin:8px 0;">امتحان الفيزياء الكهربائية</h4>
-                        <div style="font-size:16px;color:#64748b;margin:5px 0;">دفعة 2008</div>
-                        <div style="font-size:18px;font-weight:700;color:#0f172a;margin-top:10px;background:#dbeafe;padding:6px 18px;border-radius:8px;display:inline-block;">
-                            العام الدراسي 2025 - 2026
-                        </div>
-                        <div style="font-size:15px;color:#059669;margin-top:10px;font-weight:bold;">
-                            📊 عدد الأسئلة: ${examQuestions.length} سؤال
-                        </div>
-                        <div style="font-size:15px;color:#2563eb;margin-top:5px;font-weight:bold;">
-                            ⭐ كل سؤال: 1.5 درجة | المجموع الكلي: ${totalScore.toFixed(1)} درجة
-                        </div>
-                        <div style="font-size:14px;color:#d97706;margin-top:5px;font-weight:bold;">
-                            🎯 درجة النجاح (70%): ${passingScore.toFixed(1)} درجة
-                        </div>
+                    <div style="font-size:15px;color:#059669;margin-top:10px;font-weight:bold;">
+                        📊 عدد الأسئلة: ${examQuestions.length} سؤال
                     </div>
-                    <div style="font-size:20px;color:#059669;margin:12px 0;font-weight:bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
-                    <div style="font-size:14px;color:#475569;margin-top:8px;">
-                        <span style="font-weight:bold;">رابط البوت التعليمي:</span><br>
-                        <span style="color:#2563eb;font-size:15px;">t.me/amjad_africa2027bot</span>
+                    <div style="font-size:15px;color:#2563eb;margin-top:5px;font-weight:bold;">
+                        ⭐ كل سؤال: 1.5 درجة | المجموع الكلي: ${totalScore.toFixed(1)} درجة
                     </div>
-                    <div style="font-size:11px;color:#94a3b8;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:8px;">
-                        © 2026 جميع الحقوق محفوظة - مدرسة أمجاد أفريقيا
+                    <div style="font-size:14px;color:#d97706;margin-top:5px;font-weight:bold;">
+                        🎯 درجة النجاح (50%): ${passingScore.toFixed(1)} درجة
                     </div>
+                </div>
+                <div style="font-size:20px;color:#059669;margin:12px 0;font-weight:bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+                <div style="font-size:14px;color:#475569;margin-top:8px;">
+                    <span style="font-weight:bold;">رابط البوت التعليمي:</span><br>
+                    <span style="color:#2563eb;font-size:15px;">t.me/amjad_africa2027bot</span>
+                </div>
+                <div style="font-size:11px;color:#94a3b8;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:8px;">
+                    © 2026 جميع الحقوق محفوظة - مدرسة أمجاد أفريقيا
                 </div>
             </div>
         </div>
     `;
 
-    // ===== صفحة الأسئلة (الصفحة الثانية) =====
+    // ===== صفحة الأسئلة =====
     htmlContent += `
-        <div class="pdf-page" style="padding: 8mm 6mm 5mm 6mm; font-family: 'Cairo', sans-serif; background: white; direction: rtl; min-height: 100vh;">
-            <div style="text-align:center;border-bottom:2px solid #1a365d;padding-bottom:8px;margin-bottom:12px;">
-                <div style="font-size:16px;color:#1a365d;font-weight:bold;">مدرسة أمجاد أفريقيا - ليبيا البيضاء</div>
-                <div style="font-size:13px;color:#475569;">📘 كراسة الحلول النموذجية - امتحان الفيزياء الكهربائية (دفعة 2008)</div>
-                <div style="font-size:12px;color:#059669;margin-top:3px;">
-                    📊 عدد الأسئلة: ${examQuestions.length} | ⭐ كل سؤال: 1.5 درجة | 🏆 المجموع: ${totalScore.toFixed(1)} درجة
-                </div>
+        <div class="pdf-page" style="padding: 8mm 6mm 5mm 6mm; font-family: 'Cairo', sans-serif; background: white; direction: rtl; min-height: 100vh; position: relative; overflow: hidden;">
+            <div class="watermark-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 50px; font-weight: bold; color: rgba(0, 0, 0, 0.05); white-space: pre-line; text-align: center; line-height: 1.8; letter-spacing: 6px; pointer-events: none; z-index: 0; width: 100%; font-family: 'Cairo', sans-serif;">
+                ${watermarkText}
             </div>
+            <div style="position:relative; z-index:1;">
+                <div style="text-align:center;border-bottom:2px solid #1a365d;padding-bottom:8px;margin-bottom:12px;">
+                    <div style="font-size:16px;color:#1a365d;font-weight:bold;">مدرسة أمجاد أفريقيا - ليبيا البيضاء</div>
+                    <div style="font-size:13px;color:#475569;">📘 كراسة الحلول النموذجية - امتحان الفيزياء الكهربائية (دفعة 2008)</div>
+                    <div style="font-size:12px;color:#059669;margin-top:3px;">
+                        📊 عدد الأسئلة: ${examQuestions.length} | ⭐ كل سؤال: 1.5 درجة | 🏆 المجموع: ${totalScore.toFixed(1)} درجة
+                    </div>
+                </div>
     `;
 
     // عرض جميع الأسئلة
     examQuestions.forEach((q, index) => {
-        const correctText = q.options[q.correct] || "لم يتم تحديد";
+        // استخدام correctAnswer بدلاً من correct
+        const correctIndex = q.correctAnswer;
+        let correctText = "لم يتم تحديد";
+        if (q.options && q.options[correctIndex] !== undefined) {
+            correctText = q.options[correctIndex];
+        }
         
         let svgHTML = "";
         if (q.svg && q.svg.trim() !== "") {
@@ -511,20 +543,22 @@ function generatePDF() {
         }
 
         let optionsHTML = q.options.map((opt, i) => {
-            const isCorrect = i === q.correct;
-            return `<span style="display:inline-block;margin:2px 4px;padding:2px 10px;background:${isCorrect ? '#dcfce7' : '#f1f5f9'};border-radius:4px;font-size:13px;${isCorrect ? 'font-weight:bold;color:#065f46;border:1px solid #86efac;' : ''}">${opt}</span>`;
+            const isCorrect = i === correctIndex;
+            return `<span style="display:inline-block;margin:2px 4px;padding:2px 10px;background:${isCorrect ? '#dcfce7' : '#f1f5f9'};border-radius:4px;font-size:13px;${isCorrect ? 'font-weight:bold;color:#065f46;border:2px solid #22c55e;' : ''}">${opt}</span>`;
         }).join(' ');
 
         htmlContent += `
-            <div style="margin-bottom:12px;padding:10px 12px;border-right:4px solid #28a745;background:#fafffa;border-radius:6px;page-break-inside:avoid;break-inside:avoid;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+            <div style="margin-bottom:12px;padding:10px 12px;border-right:4px solid #28a745;background:rgba(255,255,255,0.95);border-radius:6px;page-break-inside:avoid;break-inside:avoid;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
                     <div style="font-weight:bold;font-size:14px;color:#1a365d;line-height:1.5;">س ${index + 1}: ${q.question}</div>
                     <div style="background:#dbeafe;padding:1px 10px;border-radius:10px;font-size:12px;font-weight:bold;color:#1a365d;white-space:nowrap;">⭐ 1.5</div>
                 </div>
                 ${svgHTML}
-                <div style="margin:3px 0;font-size:12px;color:#475569;"><span style="font-weight:bold;">الخيارات:</span> ${optionsHTML}</div>
+                <div style="margin:3px 0;font-size:12px;color:#475569;">
+                    <span style="font-weight:bold;">الخيارات:</span> ${optionsHTML}
+                </div>
                 <div style="margin-top:4px;padding:4px 8px;background:#dcfce7;border-radius:4px;border-right:3px solid #22c55e;">
-                    <span style="color:#065f46;font-weight:bold;">✅ الإجابة النموذجية:</span> 
+                    <span style="color:#065f46;font-weight:bold;">✅ الإجابة النموذجية الصحيحة:</span> 
                     <span style="color:#065f46;font-weight:bold;font-size:14px;">${correctText}</span>
                 </div>
             </div>
@@ -533,7 +567,7 @@ function generatePDF() {
 
     // ملخص الدرجات
     htmlContent += `
-        <div style="margin-top:20px;padding:15px;background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border-radius:10px;border:3px solid #22c55e;text-align:center;">
+        <div style="margin-top:20px;padding:15px;background:rgba(240,253,244,0.95);border-radius:10px;border:3px solid #22c55e;text-align:center;">
             <h2 style="color:#065f46;font-size:20px;margin:0 0 8px 0;">📊 ملخص الدرجات</h2>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0;">
                 <div style="background:white;padding:8px;border-radius:6px;border:1px solid #86efac;">
@@ -563,15 +597,13 @@ function generatePDF() {
         </div>
     `;
 
-    htmlContent += '</div>'; // إغلاق صفحة الأسئلة
+    htmlContent += '</div>';
 
     printableDoc.innerHTML = htmlContent;
     printableDoc.style.display = 'block';
 
-    // ===== تشغيل الطباعة =====
     setTimeout(function() {
         window.print();
-        // إعادة إخفاء المحتوى بعد الطباعة
         setTimeout(function() {
             printableDoc.style.display = 'none';
         }, 1000);
