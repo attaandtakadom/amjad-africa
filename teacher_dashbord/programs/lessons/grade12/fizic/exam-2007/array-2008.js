@@ -129,18 +129,8 @@ const examQuestions = [
         svg: ""
     }
 
+    
     ,
-    {
-        question: "س 15: أي مما يلي لا يؤثر على مقدار القوة الدافعة الكهربية المستحثة في الحث الكهرومغناطيسي:",
-        options: [
-            "أ) قوة المجال المغناطيسي المرتبط بالملف",
-            "ب) مقاومة الملف الذي يقطع المجال المغناطيسي",
-            "ج) عدد اللفات في الملف",
-            "د) السرعة التي يقطع بها الملف المجال المغناطيسي"
-        ],
-        correctAnswer: 1,
-        svg: ""
-    },
     {
         question: "س 16: ............ هو الاسم الذي يطلق على الجزيئات المكونة للنواة:",
         options: [
@@ -174,67 +164,8 @@ const examQuestions = [
         correctAnswer: 3,
         svg: ""
     },
-    {
-        question: "س 19: ثلاثة مصابيح متماثلة وصلت مرة على التوالي ومرة أخرى على التوازي مع نفس المصدر فإن النسبة بين القدرة الكهربائية المستنفذة في المصابيح في الحالتين:",
-        options: [
-            "أ) 6 : 3",
-            "ب) 9 : 3",
-            "ج) 1 : 9",
-            "د) 1 : 3"
-        ],
-        correctAnswer: 2,
-        svg: ""
-    },
-    {
-        question: "س 20: يوضح الرسم سلسلة اضمحلال إشعاعي تضمحل النواة A في مراحل متتالية إلى أن تصل النواة E فإن عدد الإشعاعات النووية المنبعثة خلال هذه المراحل:",
-        options: [
-            "أ) 2 ألفا ، 1 بيتا",
-            "ب) 3 ألفا ، 4 بيتا",
-            "ج) 2 ألفا ، 2 بيتا",
-            "د) 1 ألفا ، 2 بيتا"
-        ],
-        correctAnswer: 1,
-        svg: `<svg width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- المحاور الرئيسية -->
-                <line x1="40" y1="20" x2="40" y2="160" stroke="#000" stroke-width="1.5"/>
-                <line x1="40" y1="160" x2="220" y2="160" stroke="#000" stroke-width="1.5"/>
-                <text x="10" y="15" font-family="Arial" font-size="9" font-weight="bold">العدد النووي</text>
-                <text x="160" y="175" font-family="Arial" font-size="9" font-weight="bold">العدد البروتوني</text>
-                
-                <!-- شبكة الترقيم والخطوط الإرشادية -->
-                <g stroke="#bbb" stroke-width="0.5" font-family="Arial" font-size="8" fill="#333">
-                    <text x="20" y="33">240</text><line x1="35" y1="30" x2="40" y2="30"/>
-                    <text x="20" y="53">238</text><line x1="35" y1="50" x2="40" y2="50"/>
-                    <text x="20" y="73">236</text><line x1="35" y1="70" x2="40" y2="70"/>
-                    <text x="20" y="93">234</text><line x1="35" y1="90" x2="40" y2="90"/>
-                    <text x="20" y="113">232</text><line x1="35" y1="110" x2="40" y2="110"/>
-                    <text x="20" y="133">230</text><line x1="35" y1="130" x2="40" y2="130"/>
-                    <text x="20" y="153">226</text><line x1="35" y1="150" x2="40" y2="150"/>
-                    
-                    <text x="35" y="170">86</text>
-                    <text x="75" y="170">88</text>
-                    <text x="115" y="170">90</text>
-                    <text x="155" y="170">91</text>
-                    <text x="195" y="170">92</text>
-                </g>
-                
-                <!-- مسار الاضمحلال النووي الموضح بالرسم اليدوي -->
-                <path d="M 195,50 L 115,90 L 155,90 L 195,90 L 115,150" fill="none" stroke="#2563eb" stroke-width="2"/>
-                
-                <!-- تسمية الأنوية المشعة -->
-                <circle cx="195" cy="50" r="3.5" fill="#dc3545"/><text x="202" y="48" font-family="Arial" font-weight="bold" font-size="10">A</text>
-                <circle cx="115" cy="90" r="3" fill="#000"/><text x="105" y="86" font-family="Arial" font-size="10">B</text>
-                <circle cx="155" cy="90" r="3" fill="#000"/><text x="150" y="83" font-family="Arial" font-size="10">C</text>
-                <circle cx="195" cy="90" r="3" fill="#000"/><text x="202" y="94" font-family="Arial" font-size="10">D</text>
-                <circle cx="115" cy="150" r="3.5" fill="#22c55e"/><text x="105" y="160" font-family="Arial" font-weight="bold" font-size="10">E</text>
-                
-                <!-- أسهم التوجيه الإضافية المرسومة باليد للبيان -->
-                <path d="M 170,62 L 160,65" stroke="#dc3545" stroke-width="1.5" fill="none"/>
-                <text x="162" y="58" font-family="Arial" font-size="8" fill="#dc3545">α</text>
-                <text x="130" y="105" font-family="Arial" font-size="8" fill="#2563eb">" β β</text>
-                <text x="145" y="125" font-family="Arial" font-size="9" fill="#7c3aed">2α + 2β</text>
-              </svg>`
-    },
+   
+   
     {
         question: "س 21: تتصل محطة لتوليد الكهرباء بمصنع يبعد عنها مسافة 2.5km بسلكين فإذا كان فرق الجهد بين طرفي السلكين عند المحطة 240V وبين الطرفين عند المصنع 220V وكان المصنع يستخدم تيار شدته 80A فإن نصف قطر السلك المستخدم إذا علمت أن المقاومة النوعية لمادة السلك 1.57 × 10^-8 Ω.m يساوي:",
         options: [
