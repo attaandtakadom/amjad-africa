@@ -159,102 +159,47 @@ function finishExam() {
 // =============================================
 // دالة توليد PDF المصححة (مع معالجة الأخطاء)
 // =============================================
+// =============================================
+// إعادة الدالة الأصلية كما كانت (بدون ضغط لضمان ظهور كافة الأسئلة)
+// =============================================
 function generatePDF() {
     const btn = document.getElementById('pdfDownloadBtn');
     const originalText = btn.innerText;
     
-    // تعطيل الزر وإظهار رسالة انتظار
     btn.disabled = true;
-    btn.innerText = '⏳ جاري تحضير PDF...';
-
-    // التحقق من وجود html2canvas
-    if (typeof html2canvas === 'undefined') {
-        alert('❌ خطأ: مكتبة html2canvas غير محملة. يرجى تحديث الصفحة.');
-        btn.disabled = false;
-        btn.innerText = originalText;
-        return;
-    }
+    btn.innerText = '⏳ جاري توليد ملف PDF...';
 
     const element = document.getElementById('review-container');
     
-    // التحقق من وجود عناصر لعرضها
     if (!element || element.innerHTML.trim() === '') {
-        alert('❌ لا توجد إجابات لعرضها. قم بحل الامتحان أولاً.');
+        alert('❌ لا توجد إجابات لعرضها.');
         btn.disabled = false;
         btn.innerText = originalText;
         return;
     }
 
-    // محاولة توليد PDF
-    html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#ffffff',
-        logging: false,
-        width: element.scrollWidth,
-        height: element.scrollHeight,
-        onclone: function(doc) {
-            // التأكد من عرض SVG بشكل صحيح
-            const svgs = doc.querySelectorAll('svg');
-            svgs.forEach(svg => {
-                svg.style.display = 'block';
-                svg.style.maxWidth = '100%';
-                svg.style.height = 'auto';
-            });
-        }
-    }).then((canvas) => {
-        try {
-            const imgData = canvas.toDataURL('image/png');
-            
-            // التحقق من وجود jsPDF
-            if (typeof window.jspdf === 'undefined') {
-                throw new Error('مكتبة jsPDF غير محملة');
-            }
-            
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            
-            const imgWidth = pdfWidth - 20;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            
-            // إضافة الصورة إلى PDF
-            let heightLeft = imgHeight;
-            let position = 10;
-            
-            pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-            heightLeft -= (pdfHeight - 20);
-            
-            // إضافة صفحات إضافية إذا كانت المحتويات طويلة
-            let pageCount = 1;
-            while (heightLeft > 0) {
-                position = -(pageCount * (pdfHeight - 20)) + 10;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-                heightLeft -= (pdfHeight - 20);
-                pageCount++;
-            }
-            
-            pdf.save('الاجابات_النموذجية_فيزياء_2008.pdf');
-            
-            // إعادة الزر لحالته الطبيعية
-            btn.disabled = false;
-            btn.innerText = '✅ تم التحميل!';
-            setTimeout(() => {
-                btn.innerText = originalText;
-            }, 3000);
-            
-        } catch (error) {
-            console.error('خطأ في إنشاء PDF:', error);
-            alert('❌ حدث خطأ أثناء إنشاء PDF: ' + error.message);
-            btn.disabled = false;
-            btn.innerText = originalText;
-        }
+    // إعدادات التقاط الشاشة الأصلية (عالية الدقة وبدون ضغط)
+    const opt = {
+        margin: [10, 10, 10, 10],
+        filename: 'الاجابات_النموذجية_فيزياء_2008.pdf',
+        image: { type: 'png' }, // العودة لصيغة PNG الأصلية
+        html2canvas: { 
+            scale: 2, // الدقة العالية الأصلية
+            useCORS: true,
+            logging: false,
+            letterRendering: true
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // التنفيذ باستخدام آلية التصوير الكاملة والمباشرة
+    html2pdf().set(opt).from(element).save().then(() => {
+        btn.disabled = false;
+        btn.innerText = '✅ تم التحميل!';
+        setTimeout(() => { btn.innerText = originalText; }, 3000);
     }).catch((error) => {
-        console.error('خطأ في html2canvas:', error);
-        alert('❌ حدث خطأ أثناء تحويل المحتوى: ' + error.message + '\nيرجى المحاولة مرة أخرى.');
+        console.error('خطأ أثناء توليد PDF:', error);
+        alert('❌ حدث خطأ أثناء إنشاء الملف.');
         btn.disabled = false;
         btn.innerText = originalText;
     });
@@ -346,13 +291,16 @@ function closePreview() {
 // دالة تحميل PDF مع علامة مائية
 // =============================================
 
+// =============================================
+// دالة تحميل PDF المضمونة والمضغوطة (حل مشكلة الصفحات الفارغة)
+// =============================================
 function downloadFromPreview() {
     const downloadBtn = document.getElementById('downloadFromPreviewBtn');
     const loadingIndicator = document.getElementById('previewLoading');
     
     // تعطيل الزر وإظهار مؤشر التحميل
     downloadBtn.disabled = true;
-    downloadBtn.innerText = '⏳ جاري التحضير...';
+    downloadBtn.innerText = '⏳ جاري ضغط وتوليد الملف...';
     loadingIndicator.style.display = 'block';
 
     const previewContent = document.getElementById('preview-content');
@@ -365,148 +313,67 @@ function downloadFromPreview() {
         return;
     }
 
-    // إنشاء عنصر مؤقت
-    const tempContainer = document.createElement('div');
-    tempContainer.style.cssText = `
-        position: absolute;
-        left: -9999px;
-        top: 0;
-        width: 800px;
-        background: white;
-        padding: 30px;
-        direction: rtl;
-    `;
-    tempContainer.innerHTML = previewContent.innerHTML;
-    
-    // إضافة الأنماط
-    const style = document.createElement('style');
-    style.textContent = `
-        .svg-container { text-align: center; margin: 10px 0; padding: 10px; background: white; border-radius: 8px; }
-        .svg-container svg { max-width: 100%; height: auto; }
-        .review-card { margin-bottom: 20px; padding: 15px; border-right: 5px solid #007bff; background: #f8f9fa; border-radius: 5px; }
-        .review-question { font-weight: bold; font-size: 16px; color: #1a365d; margin-bottom: 8px; }
-        .review-answer { margin: 5px 0; padding: 8px 12px; background: #d4edda; border-radius: 5px; border-right: 3px solid #28a745; }
-        .review-answer strong { color: #28a745; }
-        .review-answer span { color: #155724; font-weight: bold; }
-        .options-hint { margin-top: 5px; font-size: 12px; color: #888; }
-        
-        /* تنسيق العلامة المائية في الصفحة */
-        .watermark-container {
-            position: relative;
-            overflow: hidden;
-        }
-        .watermark-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 80px;
-            font-weight: bold;
-            color: #cccccc;
-            opacity: 0.15;
-            white-space: nowrap;
-            pointer-events: none;
-            z-index: 1000;
-            font-family: 'Arial', sans-serif;
-            letter-spacing: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-    `;
-    tempContainer.appendChild(style);
-    
-    // إضافة العلامة المائية
+    // 1. قراءة متغيرات العلامة المائية من الواجهة
     const watermarkText = document.getElementById('watermarkText')?.value || 'أفريقيا - نموذج إجابة';
     const watermarkColor = document.getElementById('watermarkColor')?.value || '#cccccc';
-    const watermarkOpacity = parseFloat(document.getElementById('watermarkOpacity')?.value || '0.15');
+    const watermarkOpacity = parseFloat(document.getElementById('watermarkOpacity')?.value || '0.12');
     
-    // إضافة العلامة المائية في الخلفية
-    const watermarkDiv = document.createElement('div');
-    watermarkDiv.className = 'watermark-container';
-    watermarkDiv.style.position = 'relative';
-    watermarkDiv.style.overflow = 'hidden';
-    
-    // نقل المحتوى إلى داخل الحاوية مع العلامة المائية
-    while (tempContainer.firstChild) {
-        watermarkDiv.appendChild(tempContainer.firstChild);
-    }
-    
-    // إضافة العلامة المائية
+    // 2. إنشاء عنصر العلامة المائية وحقنه مباشرة في الحاوية الحقيقية المشاهدة
     const watermarkSpan = document.createElement('div');
-    watermarkSpan.className = 'watermark-text';
+    watermarkSpan.id = 'dynamic-pdf-watermark';
     watermarkSpan.textContent = watermarkText;
-    watermarkSpan.style.color = watermarkColor;
-    watermarkSpan.style.opacity = watermarkOpacity;
-    watermarkSpan.style.fontSize = '70px';
-    
-    // وضع العلامة المائية في الخلفية
-    watermarkDiv.style.position = 'relative';
-    watermarkDiv.appendChild(watermarkSpan);
-    
-    // إعادة الحاوية إلى tempContainer
-    tempContainer.appendChild(watermarkDiv);
-    
-    document.body.appendChild(tempContainer);
+    watermarkSpan.style.cssText = `
+        position: fixed;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-30deg);
+        font-size: 65px;
+        font-weight: bold;
+        color: ${watermarkColor};
+        opacity: ${watermarkOpacity};
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 9999;
+        font-family: 'Arial', sans-serif;
+        letter-spacing: 5px;
+    `;
+    previewContent.style.position = 'relative';
+    previewContent.appendChild(watermarkSpan);
 
-    // استخدام html2canvas
-    html2canvas(tempContainer, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#ffffff',
-        logging: false,
-        width: tempContainer.scrollWidth,
-        height: tempContainer.scrollHeight
-    }).then((canvas) => {
-        document.body.removeChild(tempContainer);
-        
-        try {
-            const imgData = canvas.toDataURL('image/png');
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            
-            const imgWidth = pdfWidth - 20;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            
-            let heightLeft = imgHeight;
-            let position = 10;
-            
-            // إضافة الصفحة الأولى مع العلامة المائية
-            pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-            heightLeft -= (pdfHeight - 20);
-            
-            let pageCount = 1;
-            while (heightLeft > 0) {
-                position = -(pageCount * (pdfHeight - 20)) + 10;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-                heightLeft -= (pdfHeight - 20);
-                pageCount++;
-            }
-            
-            pdf.save('الاجابات_النموذجية_فيزياء_2008.pdf');
-            
-            downloadBtn.disabled = false;
-            downloadBtn.innerText = '✅ تم التحميل!';
-            loadingIndicator.style.display = 'none';
-            setTimeout(() => {
-                downloadBtn.innerText = '📥 تحميل PDF';
-            }, 3000);
-            
-        } catch (error) {
-            console.error('خطأ في إنشاء PDF:', error);
-            alert('❌ حدث خطأ أثناء إنشاء PDF: ' + error.message);
-            downloadBtn.disabled = false;
+    // 3. إعدادات التصدير الذكية المباشرة من العنصر النشط
+    const opt = {
+        margin:       [12, 12, 12, 12],
+        filename:     'الاجابات_النموذجية_فيزياء_2008.pdf',
+        image:        { type: 'jpeg', quality: 0.6 }, 
+        html2canvas:  { 
+            scale: 1.5, // درجة وضوح ممتازة للنصوص والرموز
+            useCORS: true,
+            logging: false,
+            letterRendering: true
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    // 4. استدعاء المحرك للتصدير من العنصر المرئي مباشرة لضمان عدم ظهور صفحات فارغة
+    html2pdf().set(opt).from(previewContent).save().then(() => {
+        // إزالة العلامة المائية بعد الانتهاء حتى لا تتكرر في العرض الثابت
+        const wm = document.getElementById('dynamic-pdf-watermark');
+        if (wm) wm.remove();
+
+        downloadBtn.disabled = false;
+        downloadBtn.innerText = '✅ تم التحميل!';
+        loadingIndicator.style.display = 'none';
+        setTimeout(() => {
             downloadBtn.innerText = '📥 تحميل PDF';
-            loadingIndicator.style.display = 'none';
-        }
+        }, 3000);
     }).catch((error) => {
-        console.error('خطأ في html2canvas:', error);
-        if (tempContainer.parentNode) {
-            document.body.removeChild(tempContainer);
-        }
-        alert('❌ حدث خطأ أثناء تحويل المحتوى. يرجى المحاولة مرة أخرى.');
+        console.error('خطأ أثناء توليد الـ PDF:', error);
+        // تنظيف العلامة المائية في حالة حدوث خطأ أيضاً
+        const wm = document.getElementById('dynamic-pdf-watermark');
+        if (wm) wm.remove();
+        
+        alert('❌ حدث خطأ أثناء إنشاء الملف، يرجى المحاولة مرة أخرى.');
         downloadBtn.disabled = false;
         downloadBtn.innerText = '📥 تحميل PDF';
         loadingIndicator.style.display = 'none';
@@ -520,4 +387,96 @@ function backToExam() {
         showQuestion(currentQuestionIndex);
     }
 }
+// =========================================================
+// دالة توليد كتاب الإجابات النموذجية الفوري الكامل للمنصة
+// =========================================================
+// =========================================================
+// دالة توليد كتاب الإجابات النموذجية الفوري من مصفوفة examQuestions
+// =========================================================
+function generateModelAnswersPDF() {
+    const btn = document.getElementById('pdfDirectBtn');
+    if (!btn) return;
 
+    // 1. التحقق من وجود مصفوفة الامتحان المحددة لديكِ
+    if (typeof examQuestions === 'undefined' || examQuestions.length === 0) {
+        alert('❌ خطأ: لم يتم العثور على مصفوفة examQuestions في ملف array-2008.js');
+        return;
+    }
+
+    const originalText = btn.innerText;
+    btn.disabled = true;
+    btn.innerText = '⏳ جاري إنشاء وتجميع كتاب الإجابات النموذجية...';
+
+    // 2. بناء حاوية التصوير المؤقتة خلف الكواليس
+    const tempWorker = document.createElement('div');
+    tempWorker.style.position = 'absolute';
+    tempWorker.style.left = '-9999px';
+    tempWorker.style.width = '750px'; 
+    tempWorker.style.direction = 'rtl';
+    tempWorker.style.fontFamily = "'Segoe UI', Tahoma, sans-serif";
+    
+    // الهيدر الرئيسي الاحترافي لملف الـ PDF
+    let htmlContent = `
+        <div style="text-align: center; margin-bottom: 30px; border-bottom: 3px double #007bff; padding-bottom: 20px;">
+            <h1 style="color: #007bff; margin: 0 0 10px 0; font-size: 26px;">منصة أمجد أفريقيا التعليمية</h1>
+            <h2 style="color: #333; margin: 0; font-size: 20px;">كتاب الإجابات النموذجية - امتحان الفيزياء لدفعة 2008</h2>
+        </div>
+    `;
+
+    // 3. قراءة البيانات وحقنها من مصفوفة examQuestions مباشرة
+    examQuestions.forEach((q, index) => {
+        // جلب نص الخيار الصحيح بناءً على رقم المؤشر المسجل في الخصائص
+        let correctOptionText = "لم يتم تحديد الإجابة النموذجية";
+        if (q.options && q.options[q.correct] !== undefined) {
+            correctOptionText = q.options[q.correct];
+        }
+
+        htmlContent += `
+            <div style="margin-bottom: 25px; padding: 15px; border-right: 5px solid #28a745; background: #f0fff4; border-radius: 6px; page-break-inside: avoid; break-inside: avoid;">
+                <div style="font-weight: bold; font-size: 18px; color: #1a365d; margin-bottom: 10px; line-height: 1.6;">
+                    س ${index + 1}: ${q.question}
+                </div>
+                
+                <!-- حقن رسم الـ SVG الفيزيائي في حال تواجده بالسؤال -->
+                ${q.svg ? `<div class="svg-container" style="text-align: center; margin: 15px 0;">${q.svg}</div>` : ''}
+                
+                <div style="margin-top: 10px; font-size: 16px;">
+                    <span style="color: #28a745; font-weight: bold;">✔️ الإجابة النموذجية:</span> 
+                    <span style="color: #333;">${correctOptionText}</span>
+                </div>
+            </div>
+        `;
+    });
+
+    tempWorker.innerHTML = htmlContent;
+    document.body.appendChild(tempWorker);
+
+    // 4. إعدادات مكتبة html2pdf لتوليد ملف عالي الدقة بدون فراغات صفحات
+    const opt = {
+        margin:       [15, 15, 15, 15],
+        filename:     'كتاب_الاجابات_النموذجية_فيزياء_2008.pdf',
+        image:        { type: 'png' }, // استخدام PNG للحفاظ على جودة خطوط ورسومات الفيزياء
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true,
+            logging: false,
+            letterRendering: true
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    // 5. بدء توليد وحفظ الملف مباشرة
+    html2pdf().set(opt).from(tempWorker).save().then(() => {
+        tempWorker.remove(); // تدمير الحاوية بعد التنزيل لتنظيف الذاكرة
+        btn.disabled = false;
+        btn.innerText = '✅ تم تحميل ملف المنصة!';
+        setTimeout(() => { btn.innerText = originalText; }, 3000);
+    }).catch((error) => {
+        console.error('خطأ أثناء توليد كتاب الإجابات:', error);
+        tempWorker.remove();
+        alert('❌ حدث خطأ أثناء إعداد ملف الـ PDF.');
+        btn.disabled = false;
+        btn.innerText = originalText;
+    });
+}

@@ -1,310 +1,16 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة أمجد أفريقيا - حل امتحان الفيزياء 2008</title>
-    
-    <!-- مكتبات PDF - تأكد من تحميلها بشكل صحيح -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
-    <style>
-        /* نفس الأنماط السابقة مع إضافة تحسينات */
-        :root {
-            --primary-color: #007bff;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-size: 24px;
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 15px;
-        }
-
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-            font-weight: bold;
-            background: var(--bg-color);
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
-
-        .question-card {
-            margin-bottom: 25px;
-            padding: 20px;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            background-color: #fff;
-        }
-
-        .question-text {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .options-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .option-label:hover {
-            background-color: #f1f3f5;
-            border-color: #adb5bd;
-        }
-
-        .option-label input {
-            margin-left: 10px;
-            transform: scale(1.2);
-        }
-
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        button {
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #next-btn, #submit-btn {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        #next-btn:hover, #submit-btn:hover {
-            background-color: #0056b3;
-            transform: scale(1.02);
-        }
-
-        #prev-btn {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        #prev-btn:hover {
-            background-color: #5a6268;
-        }
-
-        #prev-btn:disabled {
-            background-color: #e9ecef;
-            color: #adb5bd;
-            cursor: not-allowed;
-        }
-
-        #result-screen {
-            text-align: center;
-            padding: 4px;
-        }
-
-        .success-message {
-            color: var(--success-color);
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .score-display {
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-
-        .hide {
-            display: none !important;
-        }
-
-        /* تنسيق SVG */
-        .svg-container {
-            text-align: center;
-            margin: 15px 0;
-            padding: 10px;
-            background: #fff;
-            border-radius: 8px;
-        }
-
-        .svg-container svg {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* تنسيق المراجعة */
-        .review-card {
-            margin-bottom: 25px;
-            padding: 15px;
-            border-right: 5px solid;
-            background: #fdfdfd;
-            page-break-inside: avoid;
-            break-inside: avoid;
-            direction: rtl;
-            text-align: right;
-            border-radius: 5px;
-        }
-
-        .review-card.correct {
-            border-right-color: #28a745;
-            background: #f0fff4;
-        }
-
-        .review-card.wrong {
-            border-right-color: #dc3545;
-            background: #fff5f5;
-        }
-
-        .review-question {
-            font-weight: bold;
-            font-size: 18px;
-            color: #1a365d;
-            margin-bottom: 10px;
-        }
-
-        .review-answer {
-            margin: 5px 0;
-            font-size: 16px;
-        }
-
-        .review-correct-answer {
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        .review-user-answer {
-            color: #dc3545;
-        }
-
-        .review-user-answer.correct {
-            color: #28a745;
-        }
-
-        /* زر PDF المحسن */
-        .pdf-btn {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 14px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .pdf-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-        }
-
-        .pdf-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        @media print {
-            body { background-color: #fff; padding: 0; }
-            .container { box-shadow: none; max-width: 100%; padding: 0; }
-            .no-print { display: none !important; }
-            .svg-container { page-break-inside: avoid; }
-            .review-card { page-break-inside: avoid; }
-        }
-    </style>
-</head>
 <body>
 
     <div class="container">
         <h1>حل امتحان الفيزياء لدفعة 2008</h1>
-<!-- داخل container، بعد h1 -->
-<!-- زر واحد فقط للمعاينة والتحميل -->
-<div class="no-print" style="text-align: center; margin-bottom: 20px;">
-    <button onclick="openPreview()" style="background: linear-gradient(135deg, #17a2b8, #138496); color: white; padding: 14px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3); transition: all 0.3s ease;">
-        👁️ معاينة وتحميل الإجابات النموذجية
-    </button>
-</div>
-</div>
-</div>
-<!-- نافذة المعاينة المنبثقة -->
-<div id="previewModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; overflow-y: auto; padding: 20px;">
-    <div style="max-width: 800px; margin: 20px auto; background: white; border-radius: 12px; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-        
-        <!-- رأس النافذة -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #e9ecef; padding-bottom: 15px;">
-            <h2 style="color: #007bff; margin: 0;">📄 معاينة الإجابات النموذجية</h2>
-            <button onclick="closePreview()" style="background: #dc3545; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 24px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: all 0.3s ease;">
-                ✕
-            </button>
-        </div>
-        
-        <p style="text-align: center; color: #666; margin-bottom: 20px;">📌 راجع الإجابات ثم اضغط "تحميل PDF" لتنزيل الملف</p>
-        
-        <!-- محتوى المعاينة -->
-        <div id="preview-content" style="max-height: 60vh; overflow-y: auto; padding: 10px; border: 1px solid #e9ecef; border-radius: 8px; background: #fafafa;">
-            <!-- سيتم تعبئته بواسطة JavaScript -->
-        </div>
-        
-        <!-- أزرار المعاينة -->
-        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 2px solid #e9ecef; flex-wrap: wrap;">
-            <button onclick="closePreview()" style="background: #6c757d; color: white; padding: 12px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">
-                ✖ إغلاق
-            </button>
-            <button onclick="downloadFromPreview()" id="downloadFromPreviewBtn" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 12px 35px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); transition: all 0.3s ease;">
-                📥 تحميل PDF
-            </button>
-        </div>
-        
-        <!-- مؤشر التحميل -->
-        <div id="previewLoading" style="display: none; text-align: center; margin-top: 10px;">
-            <span style="color: #28a745;">⏳ جاري تحضير PDF...</span>
-        </div>
-    </div>
-</div>
 
+        <!-- زر التحميل الفوري والمباشر للإجابة النموذجية في بداية البرنامج -->
+        <div class="no-print" style="text-align: center; margin-bottom: 25px; padding: 15px; background: #eecf; border-radius: 8px;">
+            <button class="pdf-btn" onclick="generateModelAnswersPDF()" id="pdfDirectBtn">
+                📥 تحميل كتاب الإجابات النموذجية (PDF) للمنصة
+            </button>
+        </div>
 
-        <!-- شاشة الامتحان -->
+        <!-- شاشة الامتحان التفاعلي -->
         <div id="quiz-screen">
             <div class="quiz-info">
                 <span id="progress-text">السؤال 1 من --</span>
@@ -312,7 +18,7 @@
             </div>
 
             <div id="question-container">
-                <!-- سيتم توليد السؤال هنا -->
+                <!-- يتم توليد الأسئلة التفاعلية هنا -->
             </div>
 
             <div class="navigation-buttons">
@@ -321,27 +27,19 @@
                 <button id="submit-btn" class="hide" onclick="finishExam()">إنهاء الامتحان ورصد الدرجة</button>
             </div>
         </div>
-                <button class="pdf-btn" onclick="generatePDF()" id="pdfDownloadBtn">
-                    📥 تحميل PDF بالإجابات النموذجية
-                </button>
 
-        <!-- شاشة النتيجة -->
+        <!-- شاشة النتيجة النهائية (تظهر بعد حل الامتحان تفاعلياً) -->
         <div id="result-screen" class="hide">
             <div id="print-area">
                 <div id="congrats-msg" class="success-message hide">🎉 مبروك أنت ناجح! 🎉</div>
                 <div id="fail-msg" style="color: var(--danger-color); font-size: 24px; font-weight: bold;" class="hide">حظاً أوفر في المرة القادمة!</div>
                 <p class="score-display">لقد حصلت على درجة: <span id="final-score">0</span> من <span id="total-questions">0</span></p>
                 
-                <!-- تقرير الإجابات النموذجية -->
                 <div id="review-container" style="margin-top: 30px; text-align: right;"></div>
             </div>
 
-            <!-- أزرار التحكم -->
-            <div class="no-print" style="margin-top: 20px;">
-                <button class="pdf-btn" onclick="generatePDF()" id="pdfDownloadBtn">
-                    📥 تحميل PDF بالإجابات النموذجية
-                </button>
-                <button onclick="location.reload()" style="background-color: var(--primary-color); color: white; margin-right: 10px;">
+            <div class="no-print" style="margin-top: 20px; text-align: center;">
+                <button onclick="location.reload()" style="background-color: var(--primary-color); color: white;">
                     🔄 إعادة المحاولة
                 </button>
             </div>
@@ -353,4 +51,3 @@
     <script src="app.js"></script>
 
 </body>
-</html>

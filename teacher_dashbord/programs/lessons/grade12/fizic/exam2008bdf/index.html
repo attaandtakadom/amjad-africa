@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>منصة الفيزياء - مدرسة أمجاد أفريقيا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+            direction: rtl;
+        }
+        .app-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            color: #1a365d;
+            font-size: 20px;
+        }
+        .school-badge {
+            background: #1a365d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        #question-counter {
+            font-weight: bold;
+            color: #2b6cb0;
+            font-size: 16px;
+        }
+        .question-container {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 4px solid #2b6cb0;
+            margin-bottom: 20px;
+            min-height: 200px;
+        }
+        .question-meta {
+            margin-bottom: 10px;
+        }
+        .q-source-span {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+        }
+        .question-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a365d;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .question-graphic-area {
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        .question-graphic-area svg {
+            max-width: 100%;
+        }
+        .no-graphic {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .option-btn:hover {
+            border-color: #2b6cb0;
+            background: #f0f7ff;
+        }
+        .option-btn.correct {
+            border-color: #22c55e;
+            background: #dcfce7;
+        }
+        .option-btn.wrong {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+        .option-btn i {
+            font-size: 20px;
+        }
+        .feedback-box {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .feedback-box.success {
+            background: #dcfce7;
+            color: #065f46;
+            border-right: 4px solid #22c55e;
+        }
+        .feedback-box.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-right: 4px solid #ef4444;
+        }
+        .navigation-area {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        #prev-btn {
+            background: #e2e8f0;
+            color: #333;
+        }
+        #prev-btn:hover:not(:disabled) {
+            background: #cbd5e0;
+        }
+        #next-btn {
+            background: #2b6cb0;
+            color: white;
+        }
+        #next-btn:hover:not(:disabled) {
+            background: #1a365d;
+        }
+        .print-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .print-btn {
+            padding: 14px 35px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+        .print-btn:hover:not(:disabled) {
+            background: #c82333;
+            transform: scale(1.02);
+        }
+        .print-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .bot-link-btn {
+            padding: 14px 35px;
+            background: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bot-link-btn:hover {
+            background: #006699;
+            transform: scale(1.02);
+        }
+        .hide {
+            display: none !important;
+        }
+        #result-screen {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 28px;
+            margin: 15px 0;
+        }
+        #fail-msg {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 28px;
+            margin: 15px 0;
+        }
+        .score-display {
+            font-size: 22px;
+            text-align: center;
+            margin: 20px 0;
+            color: #1a365d;
+        }
+        .score-display span {
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        /* ===== أنماط الطباعة ===== */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .app-container {
+                display: none !important;
+            }
+            #printable-pdf-document {
+                display: block !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .pdf-page {
+                page-break-after: always;
+                break-after: page;
+                display: block !important;
+            }
+            .pdf-page:last-child {
+                page-break-after: auto;
+                break-after: auto;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- الواجهة التفاعلية - تظهر فقط في المتصفح -->
+    <div class="header no-print">
+        <h2><i class="fa-solid fa-desktop"></i> منصة الفيزياء</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="question-counter"></span>
+    </div>
+
+    <div class="question-container no-print" id="question-container">
+        <div class="question-meta">
+            <span class="q-source-span" id="q-source"></span>
+        </div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+        <div class="options-container" id="options-container"></div>
+        <div class="feedback-box" id="feedback-box"></div>
+    </div>
+
+    <div class="navigation-area no-print">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="print-section no-print">
+        <button class="print-btn" onclick="generatePDF()">
+            <i class="fa-solid fa-file-pdf"></i> طباعة PDF
+        </button>
+        <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+            <i class="fa-brands fa-telegram"></i> البوت التعليمي
+        </a>
+    </div>
+
+    <div id="result-screen" class="hide no-print">
+        <div id="congrats-msg" class="success-message hide">🎉 مبروك أنت ناجح! 🎉</div>
+        <div id="fail-msg" class="hide">😢 حظاً أوفر في المرة القادمة!</div>
+        <p class="score-display">لقد حصلت على درجة: <span id="final-score">0</span> من <span id="total-questions">0</span></p>
+        <div style="text-align:center;margin-top:15px;">
+            <button onclick="location.reload()" style="padding:12px 30px;background:#1a365d;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:'Cairo',sans-serif;">
+                🔄 إعادة المحاولة
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== منطقة PDF (تظهر فقط عند الطباعة) ===== -->
+<div id="printable-pdf-document" style="display:none;"></div>
+<script src="array-2008.js"></script>
+<script>
+// ============================================================
+// مصفوفة الأسئلة (examQuestions)
+// ============================================================
+
+console.log("✅ تم تحميل المصفوفة! عدد الأسئلة: " + examQuestions.length);
+
+// ============================================================
+// متغيرات التحكم
+// ============================================================
+let currentQIndex = 0;
+let userAnswers = {};
+let answeredQuestions = {};
+
+// ============================================================
+// دوال العرض والتنقل
+// ============================================================
+function navigateQuestion(direction) {
+    const newIndex = currentQIndex + direction;
+    if (newIndex >= 0 && newIndex < examQuestions.length) {
+        currentQIndex = newIndex;
+        renderActiveQuestion(currentQIndex);
+    }
+}
+
+function renderActiveQuestion(index) {
+    const data = examQuestions[index];
+    if (!data) return;
+
+    document.getElementById('q-source').innerText = `السؤال ${index + 1}`;
+    document.getElementById('main-question-text').innerText = data.question;
+    document.getElementById('question-counter').innerHTML = `مسألة ${index + 1} / ${examQuestions.length}`;
+
+    const graphicContainer = document.getElementById('graphic-container');
+    if (data.svg && data.svg.trim() !== "") {
+        graphicContainer.innerHTML = data.svg;
+        graphicContainer.style.display = 'block';
+    } else {
+        graphicContainer.innerHTML = '<p class="no-graphic">⚠️ لا يوجد رسم توضيحي</p>';
+        graphicContainer.style.display = 'block';
+    }
+
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    
+    data.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span>${opt}</span><i class="fa-regular fa-circle"></i>`;
+        btn.onclick = function() { checkAnswer(index, idx); };
+        
+        if (answeredQuestions[index] !== undefined) {
+            if (answeredQuestions[index] === idx) {
+                btn.classList.add(answeredQuestions[index] === data.correct ? 'correct' : 'wrong');
+                btn.querySelector('i').className = answeredQuestions[index] === data.correct ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark';
+            }
+            if (idx === data.correct && answeredQuestions[index] !== undefined) {
+                btn.style.borderColor = '#22c55e';
+                btn.style.background = '#dcfce7';
+            }
+        }
+        
+        optionsContainer.appendChild(btn);
+    });
+
+    document.getElementById('prev-btn').disabled = index === 0;
+    document.getElementById('next-btn').disabled = index === examQuestions.length - 1;
+
+    const feedbackBox = document.getElementById('feedback-box');
+    if (answeredQuestions[index] !== undefined) {
+        const isCorrect = answeredQuestions[index] === data.correct;
+        feedbackBox.className = `feedback-box ${isCorrect ? 'success' : 'error'}`;
+        feedbackBox.innerHTML = isCorrect ? 
+            '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة! درجة السؤال: 1.5' : 
+            `<i class="fa-solid fa-xmark"></i> ❌ الإجابة الصحيحة هي: ${data.options[data.correct]}`;
+        feedbackBox.style.display = 'block';
+    } else {
+        feedbackBox.style.display = 'none';
+    }
+}
+
+function checkAnswer(index, selectedIdx) {
+    const data = examQuestions[index];
+    if (answeredQuestions[index] !== undefined) return;
+
+    answeredQuestions[index] = selectedIdx;
+    userAnswers[index] = selectedIdx;
+    renderActiveQuestion(index);
+}
+
+// ============================================================
+// دالة توليد PDF
+// ============================================================
+function generatePDF() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    printableDoc.innerHTML = '';
+
+    const totalScore = examQuestions.length * 1.5;
+    const passingScore = Math.floor(examQuestions.length * 0.7) * 1.5;
+
+    let htmlContent = '';
+
+    // ===== صفحة الغلاف (الصفحة الأولى) =====
+    htmlContent += `
+        <div class="pdf-page" style="padding: 20mm 10mm; text-align: center; font-family: 'Cairo', sans-serif; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="position:relative; width:100%;">
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:60px;font-weight:bold;color:rgba(0,0,0,0.04);white-space:pre-line;text-align:center;line-height:1.8;letter-spacing:8px;pointer-events:none;z-index:0;width:100%;">
+                    مدرسة أمجاد أفريقيا
+                    ليبيا البيضاء
+                </div>
+                <div style="position:relative;z-index:1;">
+                    <div style="font-size:22px;color:#1a365d;margin-bottom:15px;font-weight:bold;border-bottom:2px solid #1a365d;padding-bottom:10px;display:inline-block;">
+                        🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء
+                    </div>
+                    <div style="font-size:42px;font-weight:800;color:#0f172a;margin:20px 0 10px;">📘 الفيزياء الكهربائية</div>
+                    <div style="font-size:32px;font-weight:700;color:#1a365d;margin-bottom:10px;">كراسة الحلول النموذجية</div>
+                    <div style="font-size:24px;font-weight:600;color:#334155;margin-bottom:20px;">دفعة 2008 - الصف الثالث الثانوي</div>
+                    <div style="border:3px solid #1a365d;border-radius:16px;padding:25px 35px;margin:15px auto;background:rgba(255,255,255,0.9);max-width:80%;">
+                        <h3 style="font-size:28px;color:#1e293b;margin:0 0 5px 0;">📚 كراسة الحلول النموذجية</h3>
+                        <h4 style="font-size:20px;color:#475569;margin:8px 0;">امتحان الفيزياء الكهربائية</h4>
+                        <div style="font-size:16px;color:#64748b;margin:5px 0;">دفعة 2008</div>
+                        <div style="font-size:18px;font-weight:700;color:#0f172a;margin-top:10px;background:#dbeafe;padding:6px 18px;border-radius:8px;display:inline-block;">
+                            العام الدراسي 2025 - 2026
+                        </div>
+                        <div style="font-size:15px;color:#059669;margin-top:10px;font-weight:bold;">
+                            📊 عدد الأسئلة: ${examQuestions.length} سؤال
+                        </div>
+                        <div style="font-size:15px;color:#2563eb;margin-top:5px;font-weight:bold;">
+                            ⭐ كل سؤال: 1.5 درجة | المجموع الكلي: ${totalScore.toFixed(1)} درجة
+                        </div>
+                        <div style="font-size:14px;color:#d97706;margin-top:5px;font-weight:bold;">
+                            🎯 درجة النجاح (70%): ${passingScore.toFixed(1)} درجة
+                        </div>
+                    </div>
+                    <div style="font-size:20px;color:#059669;margin:12px 0;font-weight:bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+                    <div style="font-size:14px;color:#475569;margin-top:8px;">
+                        <span style="font-weight:bold;">رابط البوت التعليمي:</span><br>
+                        <span style="color:#2563eb;font-size:15px;">t.me/amjad_africa2027bot</span>
+                    </div>
+                    <div style="font-size:11px;color:#94a3b8;margin-top:12px;border-top:1px solid #e2e8f0;padding-top:8px;">
+                        © 2026 جميع الحقوق محفوظة - مدرسة أمجاد أفريقيا
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // ===== صفحة الأسئلة (الصفحة الثانية) =====
+    htmlContent += `
+        <div class="pdf-page" style="padding: 8mm 6mm 5mm 6mm; font-family: 'Cairo', sans-serif; background: white; direction: rtl; min-height: 100vh;">
+            <div style="text-align:center;border-bottom:2px solid #1a365d;padding-bottom:8px;margin-bottom:12px;">
+                <div style="font-size:16px;color:#1a365d;font-weight:bold;">مدرسة أمجاد أفريقيا - ليبيا البيضاء</div>
+                <div style="font-size:13px;color:#475569;">📘 كراسة الحلول النموذجية - امتحان الفيزياء الكهربائية (دفعة 2008)</div>
+                <div style="font-size:12px;color:#059669;margin-top:3px;">
+                    📊 عدد الأسئلة: ${examQuestions.length} | ⭐ كل سؤال: 1.5 درجة | 🏆 المجموع: ${totalScore.toFixed(1)} درجة
+                </div>
+            </div>
+    `;
+
+    // عرض جميع الأسئلة
+    examQuestions.forEach((q, index) => {
+        const correctText = q.options[q.correct] || "لم يتم تحديد";
+        
+        let svgHTML = "";
+        if (q.svg && q.svg.trim() !== "") {
+            svgHTML = `<div style="text-align:center;margin:5px 0;padding:5px;background:#f8fafc;border-radius:6px;">${q.svg}</div>`;
+        }
+
+        let optionsHTML = q.options.map((opt, i) => {
+            const isCorrect = i === q.correct;
+            return `<span style="display:inline-block;margin:2px 4px;padding:2px 10px;background:${isCorrect ? '#dcfce7' : '#f1f5f9'};border-radius:4px;font-size:13px;${isCorrect ? 'font-weight:bold;color:#065f46;border:1px solid #86efac;' : ''}">${opt}</span>`;
+        }).join(' ');
+
+        htmlContent += `
+            <div style="margin-bottom:12px;padding:10px 12px;border-right:4px solid #28a745;background:#fafffa;border-radius:6px;page-break-inside:avoid;break-inside:avoid;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+                    <div style="font-weight:bold;font-size:14px;color:#1a365d;line-height:1.5;">س ${index + 1}: ${q.question}</div>
+                    <div style="background:#dbeafe;padding:1px 10px;border-radius:10px;font-size:12px;font-weight:bold;color:#1a365d;white-space:nowrap;">⭐ 1.5</div>
+                </div>
+                ${svgHTML}
+                <div style="margin:3px 0;font-size:12px;color:#475569;"><span style="font-weight:bold;">الخيارات:</span> ${optionsHTML}</div>
+                <div style="margin-top:4px;padding:4px 8px;background:#dcfce7;border-radius:4px;border-right:3px solid #22c55e;">
+                    <span style="color:#065f46;font-weight:bold;">✅ الإجابة النموذجية:</span> 
+                    <span style="color:#065f46;font-weight:bold;font-size:14px;">${correctText}</span>
+                </div>
+            </div>
+        `;
+    });
+
+    // ملخص الدرجات
+    htmlContent += `
+        <div style="margin-top:20px;padding:15px;background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border-radius:10px;border:3px solid #22c55e;text-align:center;">
+            <h2 style="color:#065f46;font-size:20px;margin:0 0 8px 0;">📊 ملخص الدرجات</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0;">
+                <div style="background:white;padding:8px;border-radius:6px;border:1px solid #86efac;">
+                    <div style="font-size:11px;color:#475569;">📝 عدد الأسئلة</div>
+                    <div style="font-size:22px;font-weight:bold;color:#1a365d;">${examQuestions.length}</div>
+                </div>
+                <div style="background:white;padding:8px;border-radius:6px;border:1px solid #86efac;">
+                    <div style="font-size:11px;color:#475569;">⭐ درجة كل سؤال</div>
+                    <div style="font-size:22px;font-weight:bold;color:#2563eb;">1.5</div>
+                </div>
+                <div style="background:white;padding:8px;border-radius:6px;border:1px solid #86efac;">
+                    <div style="font-size:11px;color:#475569;">🏆 المجموع الكلي</div>
+                    <div style="font-size:22px;font-weight:bold;color:#059669;">${totalScore.toFixed(1)}</div>
+                </div>
+                <div style="background:white;padding:8px;border-radius:6px;border:1px solid #f59e0b;">
+                    <div style="font-size:11px;color:#475569;">✅ النجاح (70%)</div>
+                    <div style="font-size:22px;font-weight:bold;color:#d97706;">${passingScore.toFixed(1)}</div>
+                </div>
+            </div>
+            <div style="margin-top:6px;padding:8px;background:white;border-radius:6px;border:1px solid #86efac;font-size:13px;color:#475569;">
+                📌 كل سؤال بـ <b style="color:#2563eb;">1.5 درجة</b> | 🎯 النجاح: <b style="color:#d97706;">${passingScore.toFixed(1)}</b> من ${totalScore.toFixed(1)}
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:15px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:10px;color:#94a3b8;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+            <br>© 2026 مدرسة أمجاد أفريقيا - ليبيا البيضاء
+        </div>
+    `;
+
+    htmlContent += '</div>'; // إغلاق صفحة الأسئلة
+
+    printableDoc.innerHTML = htmlContent;
+    printableDoc.style.display = 'block';
+
+    // ===== تشغيل الطباعة =====
+    setTimeout(function() {
+        window.print();
+        // إعادة إخفاء المحتوى بعد الطباعة
+        setTimeout(function() {
+            printableDoc.style.display = 'none';
+        }, 1000);
+    }, 500);
+}
+
+// ============================================================
+// تهيئة الصفحة
+// ============================================================
+window.onload = function() {
+    renderActiveQuestion(0);
+};
+</script>
+
+</body>
+</html>
