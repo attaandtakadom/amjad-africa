@@ -258,41 +258,12 @@
 
     <div class="container">
         <h1>حل امتحان الفيزياء لدفعة 2008</h1>
-
-            <!-- أزرار التحكم -->
-           <!-- زر التحميل من Dropbox -->
-<div class="no-print" style="text-align: center; margin: 20px 0;">
-    <a href="https://www.dropbox.com/scl/fi/82he4zlbq2hyo4mdq6pjj/_-_-_2008.pdf?rlkey=4b54slg7xd3zxhhdj3ajidt7u&st=cush4zrs&dl=0" 
-       target="_blank" 
-       style="display: inline-block; 
-              background: linear-gradient(135deg, #0061ff, #007bff); 
-              color: white; 
-              padding: 15px 40px; 
-              border-radius: 10px; 
-              text-decoration: none; 
-              font-size: 20px; 
-              font-weight: bold; 
-              box-shadow: 0 4px 15px rgba(0, 97, 255, 0.4); 
-              transition: all 0.3s ease;">
-        📥 تحميل الإجابات النموذجية من Dropbox
-    </a>
-    <p style="color: #666; font-size: 14px; margin-top: 10px;">
-        🔗 سيتم توجيهك إلى Dropbox لتحميل الملف
-    </p>
-</div>     <button onclick="location.reload()" style="background-color: var(--primary-color); color: white; margin-right: 10px;">
-                    🔄 إعادة المحاولة
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-
-
 <!-- داخل container، بعد h1 -->
 <!-- زر واحد فقط للمعاينة والتحميل -->
 <div class="no-print" style="text-align: center; margin-bottom: 20px;">
-    
+    <button onclick="openPreview()" style="background: linear-gradient(135deg, #17a2b8, #138496); color: white; padding: 14px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3); transition: all 0.3s ease;">
+        👁️ معاينة وتحميل الإجابات النموذجية
+    </button>
 </div>
 </div>
 </div>
@@ -350,6 +321,9 @@
                 <button id="submit-btn" class="hide" onclick="finishExam()">إنهاء الامتحان ورصد الدرجة</button>
             </div>
         </div>
+                <button class="pdf-btn" onclick="generatePDF()" id="pdfDownloadBtn">
+                    📥 تحميل PDF بالإجابات النموذجية
+                </button>
 
         <!-- شاشة النتيجة -->
         <div id="result-screen" class="hide">
@@ -361,6 +335,18 @@
                 <!-- تقرير الإجابات النموذجية -->
                 <div id="review-container" style="margin-top: 30px; text-align: right;"></div>
             </div>
+
+            <!-- أزرار التحكم -->
+            <div class="no-print" style="margin-top: 20px;">
+                <button class="pdf-btn" onclick="generatePDF()" id="pdfDownloadBtn">
+                    📥 تحميل PDF بالإجابات النموذجية
+                </button>
+                <button onclick="location.reload()" style="background-color: var(--primary-color); color: white; margin-right: 10px;">
+                    🔄 إعادة المحاولة
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- استدعاء ملفات JavaScript -->
     <script src="array-2008.js"></script>

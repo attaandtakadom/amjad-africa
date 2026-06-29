@@ -342,6 +342,10 @@ function closePreview() {
 }
 
 // دالة تحميل PDF من داخل المعاينة (بدون تحميل مباشر من الخارج)
+// =============================================
+// دالة تحميل PDF مع علامة مائية
+// =============================================
+
 function downloadFromPreview() {
     const downloadBtn = document.getElementById('downloadFromPreviewBtn');
     const loadingIndicator = document.getElementById('previewLoading');
@@ -351,7 +355,6 @@ function downloadFromPreview() {
     downloadBtn.innerText = '⏳ جاري التحضير...';
     loadingIndicator.style.display = 'block';
 
-    // الحصول على محتوى المعاينة
     const previewContent = document.getElementById('preview-content');
     
     if (!previewContent || previewContent.innerHTML.trim() === '') {
@@ -362,7 +365,7 @@ function downloadFromPreview() {
         return;
     }
 
-    // إنشاء عنصر مؤقت لعمل html2canvas عليه
+    // إنشاء عنصر مؤقت
     const tempContainer = document.createElement('div');
     tempContainer.style.cssText = `
         position: absolute;
@@ -370,12 +373,12 @@ function downloadFromPreview() {
         top: 0;
         width: 800px;
         background: white;
-        padding: 20px;
+        padding: 30px;
         direction: rtl;
     `;
     tempContainer.innerHTML = previewContent.innerHTML;
     
-    // إضافة الأنماط اللازمة
+    // إضافة الأنماط
     const style = document.createElement('style');
     style.textContent = `
         .svg-container { text-align: center; margin: 10px 0; padding: 10px; background: white; border-radius: 8px; }
@@ -386,12 +389,65 @@ function downloadFromPreview() {
         .review-answer strong { color: #28a745; }
         .review-answer span { color: #155724; font-weight: bold; }
         .options-hint { margin-top: 5px; font-size: 12px; color: #888; }
+        
+        /* تنسيق العلامة المائية في الصفحة */
+        .watermark-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .watermark-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 80px;
+            font-weight: bold;
+            color: #cccccc;
+            opacity: 0.15;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1000;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
     `;
     tempContainer.appendChild(style);
     
+    // إضافة العلامة المائية
+    const watermarkText = document.getElementById('watermarkText')?.value || 'أفريقيا - نموذج إجابة';
+    const watermarkColor = document.getElementById('watermarkColor')?.value || '#cccccc';
+    const watermarkOpacity = parseFloat(document.getElementById('watermarkOpacity')?.value || '0.15');
+    
+    // إضافة العلامة المائية في الخلفية
+    const watermarkDiv = document.createElement('div');
+    watermarkDiv.className = 'watermark-container';
+    watermarkDiv.style.position = 'relative';
+    watermarkDiv.style.overflow = 'hidden';
+    
+    // نقل المحتوى إلى داخل الحاوية مع العلامة المائية
+    while (tempContainer.firstChild) {
+        watermarkDiv.appendChild(tempContainer.firstChild);
+    }
+    
+    // إضافة العلامة المائية
+    const watermarkSpan = document.createElement('div');
+    watermarkSpan.className = 'watermark-text';
+    watermarkSpan.textContent = watermarkText;
+    watermarkSpan.style.color = watermarkColor;
+    watermarkSpan.style.opacity = watermarkOpacity;
+    watermarkSpan.style.fontSize = '70px';
+    
+    // وضع العلامة المائية في الخلفية
+    watermarkDiv.style.position = 'relative';
+    watermarkDiv.appendChild(watermarkSpan);
+    
+    // إعادة الحاوية إلى tempContainer
+    tempContainer.appendChild(watermarkDiv);
+    
     document.body.appendChild(tempContainer);
 
-    // استخدام html2canvas لتحويل المحتوى إلى صورة
+    // استخدام html2canvas
     html2canvas(tempContainer, {
         scale: 2,
         useCORS: true,
@@ -401,7 +457,6 @@ function downloadFromPreview() {
         width: tempContainer.scrollWidth,
         height: tempContainer.scrollHeight
     }).then((canvas) => {
-        // إزالة العنصر المؤقت
         document.body.removeChild(tempContainer);
         
         try {
@@ -417,6 +472,7 @@ function downloadFromPreview() {
             let heightLeft = imgHeight;
             let position = 10;
             
+            // إضافة الصفحة الأولى مع العلامة المائية
             pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
             heightLeft -= (pdfHeight - 20);
             
@@ -431,7 +487,6 @@ function downloadFromPreview() {
             
             pdf.save('الاجابات_النموذجية_فيزياء_2008.pdf');
             
-            // إعادة الزر لحالته الطبيعية
             downloadBtn.disabled = false;
             downloadBtn.innerText = '✅ تم التحميل!';
             loadingIndicator.style.display = 'none';
@@ -448,14 +503,15 @@ function downloadFromPreview() {
         }
     }).catch((error) => {
         console.error('خطأ في html2canvas:', error);
-        document.body.removeChild(tempContainer);
+        if (tempContainer.parentNode) {
+            document.body.removeChild(tempContainer);
+        }
         alert('❌ حدث خطأ أثناء تحويل المحتوى. يرجى المحاولة مرة أخرى.');
         downloadBtn.disabled = false;
         downloadBtn.innerText = '📥 تحميل PDF';
         loadingIndicator.style.display = 'none';
     });
 }
-
 // دالة العودة للامتحان (تظل موجودة)
 function backToExam() {
     document.getElementById("result-screen").classList.add("hide");
