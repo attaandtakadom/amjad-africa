@@ -310,6 +310,81 @@
                 z-index: 1 !important;
             }
         }
+@media print {
+    @page {
+        size: A4;
+        /* الحل: تحديد هوامش الصفحة بالميليمتر بدلاً من 0 */
+        margin: 10mm 15mm 15mm 15mm; /* أعلى، يمين، أسفل، يسار */
+    }
+
+    body {
+        background: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .app-container {
+        display: none !important;
+    }
+
+    #printable-pdf-document {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .pdf-page {
+        page-break-after: always;
+        break-after: page;
+        display: block !important;
+        /* إزالة width و min-height الثابتة لأن @page تتحكم بحجم الصفحة */
+        width: 100% !important;
+        min-height: auto !important; 
+        height: auto !important;
+        overflow: visible !important;
+        box-sizing: border-box;
+        /* إضافة padding داخلي للمحتوى حتى لا يلتصق بالهامش الجديد */
+        padding: 5mm 0 !important; 
+        position: relative !important;
+    }
+
+    .pdf-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .watermark-text {
+        display: block !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) rotate(-30deg) !important;
+        font-size: 45px !important;
+        font-weight: bold !important;
+        color: rgba(0, 0, 0, 0.06) !important;
+        white-space: pre-line !important;
+        text-align: center !important;
+        line-height: 1.8 !important;
+        letter-spacing: 6px !important;
+        pointer-events: none !important;
+        z-index: 0 !important;
+        width: 100% !important;
+        font-family: 'Cairo', sans-serif !important;
+    }
+
+    .pdf-content {
+        position: relative !important;
+        z-index: 1 !important;
+        /* تجنب أي محاذاة علوية قاسية */
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+}
+        
     </style>
 </head>
 <body>
