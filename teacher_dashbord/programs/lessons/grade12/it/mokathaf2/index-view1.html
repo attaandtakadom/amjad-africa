@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>كتاب المراجعة - تقنية المعلومات - مدرسة أمجاد أفريقيا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --success: #16a34a;
+            --error: #dc2626;
+            --text-main: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+            background-color: #cbd5e1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .school-badge {
+            background: #ea580c;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        #page-counter {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .questions-container {
+            padding: 20px 30px;
+            min-height: 400px;
+        }
+
+        .question-item {
+            background: #ffffff;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border-right: 5px solid #2563eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .question-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .question-item .q-number {
+            font-weight: 700;
+            color: #1a365d;
+            font-size: 17px;
+            margin-bottom: 8px;
+            font-family: 'Cairo', sans-serif;
+            display: block;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        .question-item .q-text {
+            font-size: 17px;
+            color: #0f172a;
+            line-height: 1.9;
+            margin-bottom: 12px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            text-align: right;
+            direction: rtl;
+            font-weight: 500;
+        }
+
+        .question-item .q-text.code-block {
+            font-family: 'Courier New', 'Consolas', monospace;
+            direction: ltr;
+            text-align: left;
+            font-size: 15px;
+            background: #1e293b;
+            color: #e2e8f0;
+            border-color: #334155;
+            font-weight: 400;
+            line-height: 1.7;
+            padding: 14px 18px;
+            white-space: pre-wrap;
+        }
+
+        .question-item .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .question-item .q-options .opt-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            width: 100%;
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .question-item .q-options .opt-btn:hover {
+            border-color: #2b6cb0;
+            background: #f0f7ff;
+            transform: translateX(-3px);
+        }
+
+        .question-item .q-options .opt-btn.correct {
+            border-color: #22c55e;
+            background: #dcfce7;
+            color: #065f46;
+        }
+
+        .question-item .q-options .opt-btn.wrong {
+            border-color: #ef4444;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .question-item .q-options .opt-btn i {
+            margin-right: auto;
+            font-size: 20px;
+        }
+
+        .feedback-box {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .feedback-box.success {
+            background: #dcfce7;
+            color: #065f46;
+            border-right: 4px solid #22c55e;
+        }
+
+        .feedback-box.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-right: 4px solid #ef4444;
+        }
+
+        .feedback-box .correct-answer {
+            display: block;
+            margin-top: 4px;
+            font-weight: 700;
+            color: #065f46;
+            font-size: 16px;
+        }
+
+        .navigation-area {
+            padding: 0 30px 30px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+        }
+
+        .nav-btn {
+            padding: 10px 28px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            color: #94a3b8;
+        }
+
+        #page-indicator {
+            font-weight: 700;
+            color: #1a365d;
+            font-size: 17px;
+            min-width: 130px;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .print-section {
+            text-align: center;
+            margin: 20px 0 50px 0;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .print-btn {
+            background-color: var(--success);
+            color: white;
+            padding: 15px 35px;
+            font-size: 17px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .print-btn:hover {
+            background-color: #15803d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .bot-link-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 25px;
+            font-size: 17px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .bot-link-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        /* ===== أنماط الطباعة ===== */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .app-container {
+                display: none !important;
+            }
+            .print-section {
+                display: none !important;
+            }
+            .navigation-area {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header h2 {
+                font-size: 16px;
+            }
+            .question-item .q-text {
+                font-size: 15px;
+            }
+            .nav-btn, .print-btn, .bot-link-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .app-container {
+                padding: 15px;
+            }
+            #page-indicator {
+                font-size: 14px;
+                min-width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header no-print">
+        <h2><i class="fa-solid fa-laptop-code"></i> كتاب مراجعة تقنية المعلومات</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="page-counter"></span>
+    </div>
+
+    <div class="questions-container no-print" id="questions-container">
+        <!-- سيتم عرض الأسئلة هنا -->
+    </div>
+
+    <div class="navigation-area no-print">
+        <button class="nav-btn" id="prev-btn" onclick="prevPage()">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <span id="page-indicator">الصفحة 1 من 1</span>
+        <button class="nav-btn" id="next-btn" onclick="nextPage()">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="print-section no-print">
+        <!-- ✅ زر PDF يفتح رابط Dropbox -->
+        <button class="print-btn" onclick="openPDF()">
+            <i class="fa-solid fa-file-pdf"></i> -تحميل PDF-الجزء الاول
+        </button>
+        <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+            <i class="fa-brands fa-telegram"></i> البوت التعليمي
+        </a>
+    </div>
+</div>
+<script src="array1-it.js"></script>
+<script>
+// ============================================================
+// رابط PDF على Dropbox - غيّر هذا الرابط إلى رابط ملفك
+// ============================================================
+const PDF_URL = "https://www.dropbox.com/scl/fi/hv6ete970d39vm0ijb2z8/.pdf?rlkey=anqvvw2yjhdizsa6i7s2376rl&st=wfv2hif9&dl=0";
+
+// ============================================================
+// دالة فتح PDF
+// ============================================================
+function openPDF() {
+    // فتح الرابط في نافذة جديدة
+    window.open(PDF_URL, '_blank');
+}
+
+// ============================================================
+// مصفوفة الأسئلة
+// ============================================================
+
+// ============================================================
+// متغيرات التحكم
+// ============================================================
+let currentPage = 0;
+const QUESTIONS_PER_PAGE = 10;
+let userAnswers = {};
+let answeredQuestions = {};
+
+// ============================================================
+// حساب عدد الصفحات
+// ============================================================
+function getTotalPages() {
+    return Math.ceil(examQuestions.length / QUESTIONS_PER_PAGE);
+}
+
+// ============================================================
+// تهيئة البرنامج
+// ============================================================
+function initExam() {
+    if (typeof examQuestions === "undefined" || examQuestions.length === 0) {
+        document.getElementById("questions-container").innerHTML = 
+        "<p style='color:red; text-align:center; padding:20px;'>❌ خطأ: لم يتم العثور على أسئلة!</p>";
+        return;
+    }
+    console.log("✅ تم العثور على " + examQuestions.length + " سؤال");
+    renderPage(0);
+}
+
+// ============================================================
+// عرض صفحة الأسئلة
+// ============================================================
+function renderPage(page) {
+    const container = document.getElementById('questions-container');
+    const totalPages = getTotalPages();
+    currentPage = page;
+
+    const start = page * QUESTIONS_PER_PAGE;
+    const end = Math.min(start + QUESTIONS_PER_PAGE, examQuestions.length);
+    const pageQuestions = examQuestions.slice(start, end);
+
+    document.getElementById('page-counter').innerHTML = `صفحة ${page + 1} / ${totalPages}`;
+    document.getElementById('page-indicator').textContent = `الصفحة ${page + 1} من ${totalPages}`;
+
+    document.getElementById('prev-btn').disabled = page === 0;
+    document.getElementById('next-btn').disabled = page === totalPages - 1;
+
+    let html = '';
+    pageQuestions.forEach((q, idx) => {
+        const globalIndex = start + idx;
+        const questionNum = globalIndex + 1;
+
+        let optionsHTML = '';
+        q.options.forEach((opt, optIdx) => {
+            let btnClass = 'opt-btn';
+            let icon = '<i class="fa-regular fa-circle"></i>';
+            
+            if (answeredQuestions[globalIndex] !== undefined) {
+                if (answeredQuestions[globalIndex] === optIdx) {
+                    btnClass += answeredQuestions[globalIndex] === q.correctAnswer ? ' correct' : ' wrong';
+                    icon = answeredQuestions[globalIndex] === q.correctAnswer ? 
+                        '<i class="fa-solid fa-circle-check"></i>' : 
+                        '<i class="fa-solid fa-circle-xmark"></i>';
+                }
+                if (optIdx === q.correctAnswer && answeredQuestions[globalIndex] !== undefined) {
+                    btnClass += ' correct';
+                }
+            }
+
+            optionsHTML += `
+                <button class="${btnClass}" onclick="checkAnswer(${globalIndex}, ${optIdx})">
+                    <span>${opt}</span>
+                    ${icon}
+                </button>
+            `;
+        });
+
+        let feedbackHTML = '';
+        if (answeredQuestions[globalIndex] !== undefined) {
+            const isCorrect = answeredQuestions[globalIndex] === q.correctAnswer;
+            const correctText = q.options[q.correctAnswer];
+            feedbackHTML = `
+                <div class="feedback-box ${isCorrect ? 'success' : 'error'}">
+                    ${isCorrect ? 
+                        '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
+                        `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
+                    }
+                </div>
+            `;
+        }
+
+        let questionDisplay = q.question;
+        let codeClass = '';
+        if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
+            codeClass = 'code-block';
+        }
+
+        html += `
+            <div class="question-item">
+                <div class="q-number">س ${questionNum}:</div>
+                <div class="q-text ${codeClass}">${questionDisplay}</div>
+                <div class="q-options">${optionsHTML}</div>
+                ${feedbackHTML}
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ============================================================
+// التحقق من الإجابة
+// ============================================================
+function checkAnswer(index, selectedIdx) {
+    const data = examQuestions[index];
+    if (answeredQuestions[index] !== undefined) return;
+
+    answeredQuestions[index] = selectedIdx;
+    userAnswers[index] = selectedIdx;
+    renderPage(currentPage);
+}
+
+// ============================================================
+// التنقل بين الصفحات
+// ============================================================
+function nextPage() {
+    if (currentPage < getTotalPages() - 1) {
+        renderPage(currentPage + 1);
+    }
+}
+
+function prevPage() {
+    if (currentPage > 0) {
+        renderPage(currentPage - 1);
+    }
+}
+
+// ============================================================
+// بدء التشغيل
+// ============================================================
+window.onload = function() {
+    initExam();
+};
+</script>
+
+</body>
+</html>

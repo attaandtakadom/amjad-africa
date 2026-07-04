@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>كتاب المراجعة - تقنية المعلومات -الجزء الاول- مدرسة أمجاد أفريقيا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --success: #16a34a;
+            --error: #dc2626;
+            --text-main: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+            background-color: #cbd5e1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .school-badge {
+            background: #ea580c;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        #page-counter {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .questions-container {
+            padding: 20px 30px;
+            min-height: 400px;
+        }
+
+        .question-item {
+            background: #ffffff;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border-right: 5px solid #2563eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .question-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .question-item .q-number {
+            font-weight: 700;
+            color: #1a365d;
+            font-size: 17px;
+            margin-bottom: 8px;
+            font-family: 'Cairo', sans-serif;
+            display: block;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        .question-item .q-text {
+            font-size: 17px;
+            color: #0f172a;
+            line-height: 1.9;
+            margin-bottom: 12px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            text-align: right;
+            direction: rtl;
+            font-weight: 500;
+        }
+
+        /* تنسيق الكود البرمجي */
+        .question-item .q-text.code-block {
+            font-family: 'Courier New', 'Consolas', monospace;
+            direction: ltr;
+            text-align: left;
+            font-size: 15px;
+            background: #1e293b;
+            color: #e2e8f0;
+            border-color: #334155;
+            font-weight: 400;
+            line-height: 1.7;
+            padding: 14px 18px;
+            direction: ltr;
+            text-align: left;
+            white-space: pre-wrap;
+            direction: ltr;
+        }
+
+        .question-item .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .question-item .q-options .opt-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            width: 100%;
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .question-item .q-options .opt-btn:hover {
+            border-color: #2b6cb0;
+            background: #f0f7ff;
+            transform: translateX(-3px);
+        }
+
+        .question-item .q-options .opt-btn.correct {
+            border-color: #22c55e;
+            background: #dcfce7;
+            color: #065f46;
+        }
+
+        .question-item .q-options .opt-btn.wrong {
+            border-color: #ef4444;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .question-item .q-options .opt-btn i {
+            margin-right: auto;
+            font-size: 20px;
+        }
+
+        .feedback-box {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .feedback-box.success {
+            background: #dcfce7;
+            color: #065f46;
+            border-right: 4px solid #22c55e;
+        }
+
+        .feedback-box.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-right: 4px solid #ef4444;
+        }
+
+        .feedback-box .correct-answer {
+            display: block;
+            margin-top: 4px;
+            font-weight: 700;
+            color: #065f46;
+            font-size: 16px;
+        }
+
+        .navigation-area {
+            padding: 0 30px 30px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+        }
+
+        .nav-btn {
+            padding: 10px 28px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            color: #94a3b8;
+        }
+
+        #page-indicator {
+            font-weight: 700;
+            color: #1a365d;
+            font-size: 17px;
+            min-width: 130px;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .print-section {
+            text-align: center;
+            margin: 20px 0 50px 0;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .print-btn {
+            background-color: var(--success);
+            color: white;
+            padding: 15px 35px;
+            font-size: 17px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .print-btn:hover {
+            background-color: #15803d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .bot-link-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 25px;
+            font-size: 17px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .bot-link-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        /* ============================================================
+           أنماط الطباعة
+           ============================================================ */
+        @media print {
+            @page {
+                size: A4;
+                margin: 8mm 6mm 8mm 6mm !important;
+            }
+
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100%;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .app-container,
+            .print-section,
+            .navigation-area {
+                display: none !important;
+            }
+
+            #printable-pdf-document {
+                display: block !important;
+                direction: rtl;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                background: white;
+            }
+
+            .watermark-text {
+                display: block !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) rotate(-30deg) !important;
+                font-size: 70px !important;
+                font-weight: bold !important;
+                color: rgba(15, 23, 42, 0.025) !important;
+                white-space: pre-line !important;
+                text-align: center !important;
+                line-height: 1.8 !important;
+                letter-spacing: 6px !important;
+                pointer-events: none !important;
+                z-index: 9999 !important;
+                width: 100% !important;
+                font-family: 'Cairo', sans-serif !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .pdf-page {
+                position: relative !important;
+                overflow: hidden !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: auto !important;
+                box-sizing: border-box;
+                padding: 6mm 4mm !important;
+                margin: 0 !important;
+                background: white !important;
+            }
+
+            .pdf-page:last-child {
+                page-break-after: auto !important;
+                break-after: auto !important;
+            }
+
+            .pdf-cover-page {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                min-height: 100vh !important;
+                text-align: center !important;
+                padding: 15mm 8mm !important;
+                background: white !important;
+                border-bottom: none !important;
+            }
+
+            .pdf-cover-page .school-name {
+                font-size: 22pt;
+                font-weight: bold;
+                color: #1a365d;
+                border-bottom: 4px solid #1a365d;
+                padding-bottom: 10px;
+                width: 85%;
+                font-family: 'Cairo', sans-serif;
+            }
+
+            .pdf-cover-page .main-title {
+                font-size: 40pt;
+                font-weight: 900;
+                color: #0f172a;
+                margin: 20px 0 8px 0;
+                font-family: 'Cairo', sans-serif;
+            }
+
+            .pdf-cover-page .sub-title {
+                font-size: 24pt;
+                color: #334155;
+                font-weight: bold;
+                font-family: 'Cairo', sans-serif;
+            }
+
+            .pdf-cover-page .cover-frame {
+                border: 3px solid #1a365d;
+                border-radius: 12px;
+                padding: 20px 25px;
+                margin: 15px 0;
+                width: 90%;
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            }
+
+            .pdf-cover-page .cover-frame h3 { font-size: 26pt; color: #1e293b; font-family: 'Cairo', sans-serif; }
+            .pdf-cover-page .cover-frame h4 { font-size: 20pt; color: #475569; margin: 8px 0; font-family: 'Cairo', sans-serif; }
+            .pdf-cover-page .cover-frame .cover-subjects { font-size: 16pt; color: #64748b; font-weight: bold; font-family: 'Cairo', sans-serif; }
+            .pdf-cover-page .cover-frame .year {
+                font-size: 18pt;
+                color: #0f172a;
+                font-weight: bold;
+                margin-top: 8px;
+                border-top: 2px dashed #cbd5e1;
+                padding-top: 8px;
+                font-family: 'Cairo', sans-serif;
+            }
+
+            .pdf-cover-page .dedication { font-size: 18pt; font-weight: bold; color: #059669; margin: 12px 0; font-family: 'Cairo', sans-serif; }
+            .pdf-cover-page .bot-link {
+                font-size: 14pt;
+                color: #475569;
+                border-top: 2px solid #e2e8f0;
+                padding-top: 12px;
+                width: 85%;
+                font-family: 'Cairo', sans-serif;
+            }
+
+            .pdf-question-block {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                margin-bottom: 8px !important;
+                padding: 8px 12px !important;
+                border-right: 4px solid #2563eb !important;
+                background: #fafcff !important;
+                border-radius: 6px !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+                width: 100% !important;
+            }
+
+            .pdf-q-title {
+                font-weight: bold !important;
+                color: #1a365d !important;
+                margin-bottom: 3px !important;
+                text-align: right;
+                font-size: 14pt !important;
+                line-height: 1.4 !important;
+                font-family: 'Cairo', sans-serif !important;
+            }
+
+            .pdf-q-text {
+                color: #0f172a;
+                line-height: 1.6 !important;
+                margin-bottom: 4px !important;
+                text-align: right;
+                font-size: 13pt !important;
+                font-family: 'Cairo', sans-serif !important;
+                padding: 8px 12px;
+                background: #f8fafc;
+                border-radius: 6px;
+                border: 1px solid #e2e8f0;
+            }
+
+            .pdf-q-text code {
+                font-family: 'Courier New', monospace !important;
+                direction: ltr !important;
+                text-align: left !important;
+                font-size: 11pt !important;
+                background: #1e293b !important;
+                color: #e2e8f0 !important;
+                padding: 10px 14px;
+                border-radius: 6px;
+                display: block;
+                white-space: pre-wrap;
+                line-height: 1.7;
+            }
+
+            .pdf-options {
+                margin: 3px 0 !important;
+                font-size: 12pt !important;
+                color: #475569 !important;
+                line-height: 1.6 !important;
+                font-family: 'Cairo', sans-serif !important;
+            }
+
+            .pdf-options span {
+                display: inline-block !important;
+                margin: 1px 4px !important;
+                padding: 2px 10px !important;
+                border-radius: 4px !important;
+                font-size: 12pt !important;
+                font-family: 'Cairo', sans-serif !important;
+            }
+
+            .pdf-correct-answer {
+                margin-top: 4px !important;
+                padding: 4px 12px !important;
+                background: #dcfce7 !important;
+                border-radius: 4px !important;
+                border-right: 3px solid #22c55e !important;
+                font-size: 12pt !important;
+                color: #065f46 !important;
+                font-weight: bold !important;
+                font-family: 'Cairo', sans-serif !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .content-wrapper {
+                position: relative !important;
+                z-index: 1 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            html, body {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-text-size-adjust: 100% !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== واجهة التطبيق ===== -->
+<div class="app-container">
+    <div class="header no-print">
+        <h2><i class="fa-solid fa-laptop-code"></i> كتاب مراجعة تقنية المعلومات-الجزء الاول</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="page-counter"></span>
+    </div>
+
+    <div class="questions-container no-print" id="questions-container">
+        <!-- سيتم عرض 10 أسئلة هنا -->
+    </div>
+
+    <div class="navigation-area no-print">
+        <button class="nav-btn" id="prev-btn" onclick="prevPage()">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <span id="page-indicator">الصفحة 1 من 1</span>
+        <button class="nav-btn" id="next-btn" onclick="nextPage()">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="print-section no-print">
+        <button class="print-btn" onclick="generatePDF()">
+            <i class="fa-solid fa-file-pdf"></i> -الجزء الاول-تحميل PDF
+        </button>
+        <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+            <i class="fa-brands fa-telegram"></i> البوت التعليمي
+        </a>
+    </div>
+</div>
+
+<!-- ===== وثيقة PDF ===== -->
+<div id="printable-pdf-document" style="display:none;"></div>
+<script src="array1-it.js" ></script>
+<script>
+// ============================================================
+// مصفوفة الأسئلة - تقنية المعلومات
+// ============================================================
+
+// ============================================================
+// متغيرات التحكم - عرض 10 أسئلة في كل صفحة
+// ============================================================
+let currentPage = 0;
+const QUESTIONS_PER_PAGE = 10;
+let userAnswers = {};
+let answeredQuestions = {};
+
+// ============================================================
+// حساب عدد الصفحات
+// ============================================================
+function getTotalPages() {
+    return Math.ceil(examQuestions.length / QUESTIONS_PER_PAGE);
+}
+
+// ============================================================
+// تهيئة البرنامج
+// ============================================================
+function initExam() {
+    if (typeof examQuestions === "undefined" || examQuestions.length === 0) {
+        document.getElementById("questions-container").innerHTML = 
+        "<p style='color:red; text-align:center; padding:20px;'>❌ خطأ: لم يتم العثور على أسئلة!</p>";
+        return;
+    }
+    console.log("✅ تم العثور على " + examQuestions.length + " سؤال");
+    renderPage(0);
+}
+
+// ============================================================
+// عرض صفحة الأسئلة (10 أسئلة في كل صفحة)
+// ============================================================
+function renderPage(page) {
+    const container = document.getElementById('questions-container');
+    const totalPages = getTotalPages();
+    currentPage = page;
+
+    const start = page * QUESTIONS_PER_PAGE;
+    const end = Math.min(start + QUESTIONS_PER_PAGE, examQuestions.length);
+    const pageQuestions = examQuestions.slice(start, end);
+
+    document.getElementById('page-counter').innerHTML = `صفحة ${page + 1} / ${totalPages}`;
+    document.getElementById('page-indicator').textContent = `الصفحة ${page + 1} من ${totalPages}`;
+
+    document.getElementById('prev-btn').disabled = page === 0;
+    document.getElementById('next-btn').disabled = page === totalPages - 1;
+
+    let html = '';
+    pageQuestions.forEach((q, idx) => {
+        const globalIndex = start + idx;
+        const questionNum = globalIndex + 1;
+
+        let optionsHTML = '';
+        q.options.forEach((opt, optIdx) => {
+            let btnClass = 'opt-btn';
+            let icon = '<i class="fa-regular fa-circle"></i>';
+            
+            if (answeredQuestions[globalIndex] !== undefined) {
+                if (answeredQuestions[globalIndex] === optIdx) {
+                    btnClass += answeredQuestions[globalIndex] === q.correctAnswer ? ' correct' : ' wrong';
+                    icon = answeredQuestions[globalIndex] === q.correctAnswer ? 
+                        '<i class="fa-solid fa-circle-check"></i>' : 
+                        '<i class="fa-solid fa-circle-xmark"></i>';
+                }
+                if (optIdx === q.correctAnswer && answeredQuestions[globalIndex] !== undefined) {
+                    btnClass += ' correct';
+                }
+            }
+
+            optionsHTML += `
+                <button class="${btnClass}" onclick="checkAnswer(${globalIndex}, ${optIdx})">
+                    <span>${opt}</span>
+                    ${icon}
+                </button>
+            `;
+        });
+
+        let feedbackHTML = '';
+        if (answeredQuestions[globalIndex] !== undefined) {
+            const isCorrect = answeredQuestions[globalIndex] === q.correctAnswer;
+            const correctText = q.options[q.correctAnswer];
+            feedbackHTML = `
+                <div class="feedback-box ${isCorrect ? 'success' : 'error'}">
+                    ${isCorrect ? 
+                        '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
+                        `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
+                    }
+                </div>
+            `;
+        }
+
+        // التحقق إذا كان السؤال يحتوي على كود برمجي
+        let questionDisplay = q.question;
+        let codeClass = '';
+        let isCode = false;
+        
+        if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
+            isCode = true;
+            // عرض الكود بشكل منظم مع الاحتفاظ بالأسطر الجديدة
+            questionDisplay = q.question;
+            codeClass = 'code-block';
+        }
+
+        html += `
+            <div class="question-item">
+                <div class="q-number">س ${questionNum}:</div>
+                <div class="q-text ${codeClass}">${questionDisplay}</div>
+                <div class="q-options">${optionsHTML}</div>
+                ${feedbackHTML}
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ============================================================
+// التحقق من الإجابة
+// ============================================================
+function checkAnswer(index, selectedIdx) {
+    const data = examQuestions[index];
+    if (answeredQuestions[index] !== undefined) return;
+
+    answeredQuestions[index] = selectedIdx;
+    userAnswers[index] = selectedIdx;
+    renderPage(currentPage);
+}
+
+// ============================================================
+// التنقل بين الصفحات
+// ============================================================
+function nextPage() {
+    if (currentPage < getTotalPages() - 1) {
+        renderPage(currentPage + 1);
+    }
+}
+
+function prevPage() {
+    if (currentPage > 0) {
+        renderPage(currentPage - 1);
+    }
+}
+
+// ============================================================
+// دالة توليد PDF
+// ============================================================
+function generatePDF() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    printableDoc.innerHTML = '';
+
+    const watermarkText = `مدرسة أمجاد أفريقيا\nليبيا البيضاء`;
+    let htmlContent = '';
+
+    // ===== 1. صفحة الغلاف (منفصلة وتأخذ صفحة كاملة) =====
+    htmlContent += `
+        <div class="pdf-page pdf-cover-page" style="page-break-after: always; break-after: page; min-height: 100vh; padding: 15mm 8mm !important; position: relative; box-sizing: border-box;">
+            <div class="watermark-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 60px; font-weight: bold; color: rgba(0, 0, 0, 0.06); white-space: pre-line; text-align: center; line-height: 1.8; letter-spacing: 8px; pointer-events: none; z-index: 0; width: 100%; font-family: 'Cairo', sans-serif;">
+                ${watermarkText}
+            </div>
+            <div class="content-wrapper" style="position:relative; z-index:1; width:100%;">
+                <div class="school-name">🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء</div>
+                <div class="main-title">💻 تقنية المعلومات</div>
+                <div class="sub-title">كتاب المراجعة النهائية - الجزء الأول</div>
+                <div style="font-size:20pt;color:#334155;margin-bottom:15px;font-family:'Cairo', sans-serif;">الصف الثالث الثانوي</div>
+                <div class="cover-frame">
+                    <h3>📚 كتاب المراجعة النهائية - الجزء الأول</h3>
+                    <h4>مادة تقنية المعلومات</h4>
+                    <div class="cover-subjects">أسئلة شاملة للمراجعة</div>
+                    <div class="year">العام الدراسي 2025 - 2026</div>
+                    <div style="font-size:15pt;color:#2563eb;margin-top:8px;font-weight:bold;font-family:'Cairo', sans-serif;">
+                        📊 عدد الأسئلة: ${examQuestions.length} سؤال
+                    </div>
+                </div>
+                <div class="dedication">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+                <div style="font-size:14pt;color:#475569;margin-top:6px;font-family:'Cairo', sans-serif;">
+                    <span style="font-weight:bold;">رابط البوت التعليمي:</span><br>
+                    <span style="color:#2563eb;font-size:15pt;">t.me/amjad_africa2027bot</span>
+                </div>
+                <div class="bot-link" style="font-size:14pt;color:#475569;border-top:2px solid #e2e8f0;padding-top:12px;width:85%;font-family:'Cairo', sans-serif;">
+                    © 2026 جميع الحقوق محفوظة - مدرسة أمجاد أفريقيا
+                </div>
+            </div>
+        </div>
+    `;
+
+    // ===== 2. حاوية الأسئلة المتسلسلة (تتوزع ديناميكياً بدون كسر إجباري) =====
+    htmlContent += `
+        <div class="pdf-questions-container" style="position: relative; background: white; padding: 6mm 6mm !important; font-family: 'Cairo', sans-serif; direction: rtl;">
+            
+            <div class="watermark-text" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 70px; font-weight: bold; color: rgba(0, 0, 0, 0.04); white-space: pre-line; text-align: center; line-height: 2; letter-spacing: 6px; pointer-events: none; z-index: 0; width: 100%;">
+                ${watermarkText}
+            </div>
+
+            <div style="position:relative; z-index:1;">
+                <div style="text-align:center; border-bottom:1.5px solid #1a365d; padding-bottom:5px; margin-bottom:15px;">
+                    <div style="font-size:12px; color:#1a365d; font-weight:bold;">مدرسة أمجاد أفريقيا - ليبيا البيضاء</div>
+                    <div style="font-size:11px; color:#475569;">📘 كتاب المراجعة النهائية الشاملة - تقنية المعلومات (الجزء الأول)</div>
+                </div>
+    `;
+
+    // معالجة وحقن الأسئلة دفعة واحدة دون تقسيمها إلى مصفوفات فرعية
+    examQuestions.forEach((q, idx) => {
+        const questionNum = idx + 1;
+        const correctText = q.options[q.correctAnswer] || "لم يتم تحديد";
+
+        let optionsHTML = q.options.map((opt, i) => {
+            const isCorrect = i === q.correctAnswer;
+            return `<span style="display:inline-block; margin:2px 4px; padding:2px 10px; background:${isCorrect ? '#dcfce7' : '#f1f5f9'}; border-radius:4px; font-size:12pt; ${isCorrect ? 'font-weight:bold; color:#065f46; border:2px solid #22c55e;' : ''}">${opt}</span>`;
+        }).join(' ');
+
+        let questionDisplay = q.question;
+        if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
+            questionDisplay = `<code style="font-family:'Courier New',monospace; font-size:10pt; direction:ltr; text-align:left; background:#1e293b; color:#e2e8f0; padding:6px 10px; border-radius:4px; display:block; white-space:pre-wrap; line-height:1.4; margin:4px 0;">${q.question}</code>`;
+        }
+
+        // استخدام خصائص إحباط الانقسام لضمان تماسك كتلة السؤال كاملة
+        htmlContent += `
+            <div class="pdf-question-block" style="margin-bottom:12px !important; padding:6px 10px !important; border-right:4px solid #2563eb !important; background:#fafcff !important; border-radius:4px !important; box-shadow:0 1px 2px rgba(0,0,0,0.02) !important; width:100% !important; page-break-inside: avoid !important; break-inside: avoid !important;">
+                <div class="pdf-q-title" style="font-weight:bold !important; color:#1a365d !important; margin-bottom:3px !important; text-align:right; font-size:11pt !important;">
+                    س ${questionNum}:
+                </div>
+                <div class="pdf-q-text" style="color:#0f172a; line-height:1.4 !important; margin-bottom:4px !important; text-align:right; font-size:10.5pt !important;">
+                    ${questionDisplay}
+                </div>
+                <div class="pdf-options" style="margin:4px 0 !important; font-size:10pt !important; color:#475569 !important;">
+                    <span style="font-weight:bold;">الخيارات:</span> ${optionsHTML}
+                </div>
+                <div class="pdf-correct-answer" style="margin-top:4px !important; padding:3px 8px !important; background:#dcfce7 !important; border-radius:3px !important; border-right:3px solid #22c55e !important; font-size:9.5pt !important; color:#065f46 !important; font-weight:bold !important;">
+                    ✅ الإجابة النموذجية الصحيحة: ${correctText}
+                </div>
+            </div>
+        `;
+    });
+
+    // إغلاق الحاوية وإضافة التذييل النهائي للمستند
+    htmlContent += `
+                <div style="text-align:center; margin-top:20px; padding-top:8px; border-top:1px solid #e2e8f0; font-size:10px; color:#94a3b8; page-break-inside: avoid; break-inside: avoid;">
+                    ⚡ هذه المذكرة خاصة بمدرسة أمجاد أفريقيا - لا يجوز نسخها أو إعادة توزيعها تجارياً ⚡
+                </div>
+            </div>
+        </div>
+    `;
+
+    printableDoc.innerHTML = htmlContent;
+    printableDoc.style.display = 'block';
+
+    setTimeout(function() {
+        window.print();
+        setTimeout(function() {
+            printableDoc.style.display = 'none';
+        }, 1000);
+    }, 500);
+}// ============================================================
+// بدء التشغيل
+// ============================================================
+window.onload = function() {
+    initExam();
+};
+</script>
+
+</body>
+</html>
