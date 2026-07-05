@@ -81,7 +81,7 @@ function initExam() {
 // ============================================================
 // عرض صفحة الأسئلة (10 أسئلة في كل صفحة)
 // ============================================================
-function renderPage(page, shouldScroll = false) {
+function renderPage(page) {
     const container = document.getElementById('questions-container');
     const totalPages = getTotalPages();
     currentPage = page;
@@ -126,31 +126,16 @@ function renderPage(page, shouldScroll = false) {
             `;
         });
 
-        // بناء حقل الإفادة والتعليل العلمي عند حل السؤال
         let feedbackHTML = '';
         if (answeredQuestions[globalIndex] !== undefined) {
             const isCorrect = answeredQuestions[globalIndex] === q.correctAnswer;
             const correctText = q.options[q.correctAnswer];
-            
-            // 💡 التحقق وحقن صندوق التعليل العلمي إذا كان متوفراً في بيانات السؤال
-            let correctionBoxHTML = '';
-            if (q.correction && q.correction.trim() !== "") {
-                correctionBoxHTML = `
-                    <div class="interactive-correction" style="margin-top: 8px; padding: 6px 10px; background: rgba(255,255,255,0.6); border-right: 3px solid ${isCorrect ? '#16a34a' : '#ef4444'}; color: ${isCorrect ? '#14532d' : '#7f1d1d'}; font-size: 14px; border-radius: 4px; font-weight: normal;">
-                        💡 <b>التوضيح العلمي:</b> ${q.correction}
-                    </div>
-                `;
-            }
-
             feedbackHTML = `
-                <div class="feedback-box ${isCorrect ? 'success' : 'error'}" style="display: block;">
-                    <div>
-                        ${isCorrect ? 
-                            '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
-                            `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
-                        }
-                    </div>
-                    ${correctionBoxHTML}
+                <div class="feedback-box ${isCorrect ? 'success' : 'error'}">
+                    ${isCorrect ? 
+                        '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
+                        `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
+                    }
                 </div>
             `;
         }
@@ -158,7 +143,12 @@ function renderPage(page, shouldScroll = false) {
         // التحقق إذا كان السؤال يحتوي على كود برمجي
         let questionDisplay = q.question;
         let codeClass = '';
+        let isCode = false;
+        
         if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
+            isCode = true;
+            // عرض الكود بشكل منظم مع الاحتفاظ بالأسطر الجديدة
+            questionDisplay = q.question;
             codeClass = 'code-block';
         }
 
@@ -173,12 +163,9 @@ function renderPage(page, shouldScroll = false) {
     });
 
     container.innerHTML = html;
-    
-    // الحل الذكي: لا يتم نقل المؤشر لأعلى إلا إذا قمنا بتمرير true صراحة (عند تغيير الصفحة فقط)
-    if (shouldScroll) {
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
 // ============================================================
 // التحقق من الإجابة
 // ============================================================
@@ -216,7 +203,7 @@ function generatePDF() {
     const watermarkText = `مدرسة أمجاد أفريقيا\nليبيا البيضاء`;
     let htmlContent = '';
 
-    // ===== 1. صفحة الغلاف (منفصلة وتأخذ صفحة كاملة) =====
+    // ===== 1. صفحة الغلاف =====
     htmlContent += `
         <div class="pdf-page pdf-cover-page" style="page-break-after: always; break-after: page; min-height: 100vh; padding: 15mm 8mm !important; position: relative; box-sizing: border-box;">
             <div class="watermark-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 60px; font-weight: bold; color: rgba(0, 0, 0, 0.06); white-space: pre-line; text-align: center; line-height: 1.8; letter-spacing: 8px; pointer-events: none; z-index: 0; width: 100%; font-family: 'Cairo', sans-serif;">
@@ -248,7 +235,7 @@ function generatePDF() {
         </div>
     `;
 
-    // ===== 2. حاوية الأسئلة المتسلسلة (تتوزع ديناميكياً بدون كسر إجباري) =====
+    // ===== 2. حاوية الأسئلة المتسلسلة =====
     htmlContent += `
         <div class="pdf-questions-container" style="position: relative; background: white; padding: 6mm 6mm !important; font-family: 'Cairo', sans-serif; direction: rtl;">
             
@@ -263,7 +250,7 @@ function generatePDF() {
                 </div>
     `;
 
-    // معالجة وحقن الأسئلة دفعة واحدة دون تقسيمها إلى مصفوفات فرعية
+    // معالجة وحقن الأسئلة مباشرة
     examQuestions.forEach((q, idx) => {
         const questionNum = idx + 1;
         const correctText = q.options[q.correctAnswer] || "لم يتم تحديد";
@@ -278,17 +265,16 @@ function generatePDF() {
             questionDisplay = `<code style="font-family:'Courier New',monospace; font-size:10pt; direction:ltr; text-align:left; background:#1e293b; color:#e2e8f0; padding:6px 10px; border-radius:4px; display:block; white-space:pre-wrap; line-height:1.4; margin:4px 0;">${q.question}</code>`;
         }
 
-        // ✅ إضافة تعليل الإجابة تلقائياً إذا كان متوفراً في البيانات لكل سؤال
+        // ✅ هنا التعديل: طباعة التعليل مباشرة لكل سؤال يحتوي على حقل correction دون النظر لرد فعل الطالب
         let pdfCorrectionHTML = '';
         if (q.correction && q.correction.trim() !== "") {
             pdfCorrectionHTML = `
-                <div style="margin-top:5px !important; padding:4px 8px !important; background:#f0fdf4 !important; border-radius:3px !important; border-right:3px solid #16a34a !important; font-size:10pt !important; color:#14532d !important; line-height:1.4 !important;">
+                <div style="margin-top:5px !important; padding:4px 8px !important; background:#f0fdf4 !important; border-radius:3px !important; border-right:3px solid #16a34a !important; font-size:10pt !important; color:#14532d !important;">
                     💡 <b>توضيح وتعليل الإجابة:</b> ${q.correction}
                 </div>
             `;
         }
 
-        // استخدام خصائص إحباط الانقسام لضمان تماسك كتلة السؤال كاملة
         htmlContent += `
             <div class="pdf-question-block" style="margin-bottom:12px !important; padding:6px 10px !important; border-right:4px solid #2563eb !important; background:#fafcff !important; border-radius:4px !important; box-shadow:0 1px 2px rgba(0,0,0,0.02) !important; width:100% !important; page-break-inside: avoid !important; break-inside: avoid !important;">
                 <div class="pdf-q-title" style="font-weight:bold !important; color:#1a365d !important; margin-bottom:3px !important; text-align:right; font-size:11pt !important;">
@@ -308,7 +294,6 @@ function generatePDF() {
         `;
     });
 
-    // إغلاق الحاوية وإضافة التذييل النهائي للمستند
     htmlContent += `
                 <div style="text-align:center; margin-top:20px; padding-top:8px; border-top:1px solid #e2e8f0; font-size:10px; color:#94a3b8; page-break-inside: avoid; break-inside: avoid;">
                     ⚡ هذه المذكرة خاصة بمدرسة أمجاد أفريقيا - لا يجوز نسخها أو إعادة توزيعها تجارياً ⚡

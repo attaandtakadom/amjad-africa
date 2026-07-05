@@ -618,7 +618,7 @@
 <!-- ===== وثيقة PDF ===== -->
 <div id="printable-pdf-document" style="display:none;"></div>
 
-<script src="array2-it.js"></script>
+<script src="array2-it-new.js"></script>
 <script>
 // ============================================================
 // مصفوفة الأسئلة - تقنية المعلومات
@@ -655,7 +655,7 @@ function initExam() {
 // ============================================================
 // عرض صفحة الأسئلة (10 أسئلة في كل صفحة)
 // ============================================================
-function renderPage(page) {
+function renderPage(page, shouldScroll = false) {
     const container = document.getElementById('questions-container');
     const totalPages = getTotalPages();
     currentPage = page;
@@ -700,16 +700,31 @@ function renderPage(page) {
             `;
         });
 
+        // بناء حقل الإفادة والتعليل العلمي عند حل السؤال
         let feedbackHTML = '';
         if (answeredQuestions[globalIndex] !== undefined) {
             const isCorrect = answeredQuestions[globalIndex] === q.correctAnswer;
             const correctText = q.options[q.correctAnswer];
+            
+            // 💡 التحقق وحقن صندوق التعليل العلمي إذا كان متوفراً في بيانات السؤال
+            let correctionBoxHTML = '';
+            if (q.correction && q.correction.trim() !== "") {
+                correctionBoxHTML = `
+                    <div class="interactive-correction" style="margin-top: 8px; padding: 6px 10px; background: rgba(255,255,255,0.6); border-right: 3px solid ${isCorrect ? '#16a34a' : '#ef4444'}; color: ${isCorrect ? '#14532d' : '#7f1d1d'}; font-size: 14px; border-radius: 4px; font-weight: normal;">
+                        💡 <b>التوضيح العلمي:</b> ${q.correction}
+                    </div>
+                `;
+            }
+
             feedbackHTML = `
-                <div class="feedback-box ${isCorrect ? 'success' : 'error'}">
-                    ${isCorrect ? 
-                        '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
-                        `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
-                    }
+                <div class="feedback-box ${isCorrect ? 'success' : 'error'}" style="display: block;">
+                    <div>
+                        ${isCorrect ? 
+                            '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
+                            `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
+                        }
+                    </div>
+                    ${correctionBoxHTML}
                 </div>
             `;
         }
@@ -732,10 +747,12 @@ function renderPage(page) {
     });
 
     container.innerHTML = html;
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ============================================================
+    
+    // الحل الذكي: لا يتم نقل المؤشر لأعلى إلا إذا قمنا بتمرير true صراحة (عند تغيير الصفحة فقط)
+    if (shouldScroll) {
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}// ============================================================
 // التحقق من الإجابة
 // ============================================================
 function checkAnswer(index, selectedIdx) {
@@ -804,7 +821,7 @@ function generatePDF() {
     </div>
     `;
 
-    // ===== 2. حاوية الأسئلة المتسلسلة (تتدفق تلقائياً وبشكل مرن) =====
+    // ===== 2. حاوية الأسئلة المتسلسلة (تتتدفق تلقائياً وبشكل مرن) =====
     htmlContent += `
     <div class="pdf-questions-container" style="position: relative; background: white; padding: 5mm 6mm !important; font-family: 'Cairo', sans-serif; direction: rtl;">
         
@@ -819,7 +836,7 @@ function generatePDF() {
             </div>
     `;
 
-    // بناء الأسئلة واحداً تلو الآخر دون أي تقطيع للـ div
+    // بناء الأسئلة واحداً تلو الآخر دون أي تقطيع
     examQuestions.forEach((q, idx) => {
         const questionNum = idx + 1;
         const correctText = q.options[q.correctAnswer] || "لم يتم تحديد";
@@ -832,6 +849,16 @@ function generatePDF() {
         let questionDisplay = q.question;
         if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
             questionDisplay = `<code style="font-family:'Courier New',monospace;font-size:9.5pt;direction:ltr;text-align:left;background:#1e293b;color:#e2e8f0;padding:6px 10px;border-radius:4px;display:block;white-space:pre-wrap;line-height:1.4;margin:4px 0;">${q.question}</code>`;
+        }
+
+        // حقن التوضيح العلمي لكل سؤال يحتوي على حقل التبرير
+        let pdfCorrectionHTML = '';
+        if (q.correction && q.correction.trim() !== "") {
+            pdfCorrectionHTML = `
+            <div style="margin-top:4px !important;padding:4px 8px !important;background:#f0fdf4 !important;border-radius:3px !important;border-right:3px solid #16a34a !important;font-size:9.5pt !important;color:#14532d !important;line-height:1.4 !important;">
+                💡 <b>توضيح وتعليل الإجابة:</b> ${q.correction}
+            </div>
+            `;
         }
 
         htmlContent += `
@@ -848,6 +875,7 @@ function generatePDF() {
             <div style="margin-top:4px !important;padding:3px 8px !important;background:#dcfce7 !important;border-radius:3px !important;border-right:3px solid #22c55e !important;font-size:9.5pt !important;color:#065f46 !important;font-weight:bold !important;">
                 ✅ الإجابة النموذجية الصحيحة: ${correctText}
             </div>
+            ${pdfCorrectionHTML}
         </div>
         `;
     });

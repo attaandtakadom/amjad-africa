@@ -400,7 +400,7 @@
 // ============================================================
 // رابط PDF على Dropbox - غيّر هذا الرابط إلى رابط ملفك
 // ============================================================
-const PDF_URL = "https://www.dropbox.com/scl/fi/tttwmlws7cv02l7cz4ehu/.pdf?rlkey=8r6jztqu2pvlqq1bb91rdkgs2&st=vuofulyj&dl=0";
+const PDF_URL = "https://www.dropbox.com/scl/fi/3djx87k3u4qvhszs8z4j7/.pdf?rlkey=toc661u05804dgbzdd0mqafj7&st=df93pkw9&dl=0";
 
 // ============================================================
 // دالة فتح PDF
@@ -445,7 +445,7 @@ function initExam() {
 // ============================================================
 // عرض صفحة الأسئلة
 // ============================================================
-function renderPage(page) {
+function renderPage(page, shouldScroll = false) {
     const container = document.getElementById('questions-container');
     const totalPages = getTotalPages();
     currentPage = page;
@@ -490,20 +490,36 @@ function renderPage(page) {
             `;
         });
 
+        // بناء حقل الإفادة والتعليل العلمي عند حل السؤال
         let feedbackHTML = '';
         if (answeredQuestions[globalIndex] !== undefined) {
             const isCorrect = answeredQuestions[globalIndex] === q.correctAnswer;
             const correctText = q.options[q.correctAnswer];
+            
+            // 💡 التحقق وحقن صندوق التعليل العلمي إذا كان متوفراً في بيانات السؤال
+            let correctionBoxHTML = '';
+            if (q.correction && q.correction.trim() !== "") {
+                correctionBoxHTML = `
+                    <div class="interactive-correction" style="margin-top: 8px; padding: 6px 10px; background: rgba(255,255,255,0.6); border-right: 3px solid ${isCorrect ? '#16a34a' : '#ef4444'}; color: ${isCorrect ? '#14532d' : '#7f1d1d'}; font-size: 14px; border-radius: 4px; font-weight: normal;">
+                        💡 <b>التوضيح العلمي:</b> ${q.correction}
+                    </div>
+                `;
+            }
+
             feedbackHTML = `
-                <div class="feedback-box ${isCorrect ? 'success' : 'error'}">
-                    ${isCorrect ? 
-                        '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
-                        `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
-                    }
+                <div class="feedback-box ${isCorrect ? 'success' : 'error'}" style="display: block;">
+                    <div>
+                        ${isCorrect ? 
+                            '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة' : 
+                            `<i class="fa-solid fa-xmark"></i> ❌ إجابة خاطئة - الإجابة الصحيحة هي: <span class="correct-answer">${correctText}</span>`
+                        }
+                    </div>
+                    ${correctionBoxHTML}
                 </div>
             `;
         }
 
+        // التحقق إذا كان السؤال يحتوي على كود برمجي
         let questionDisplay = q.question;
         let codeClass = '';
         if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
@@ -521,9 +537,12 @@ function renderPage(page) {
     });
 
     container.innerHTML = html;
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    // الحل الذكي: لا يتم نقل المؤشر لأعلى إلا إذا قمنا بتمرير true صراحة (عند تغيير الصفحة فقط)
+    if (shouldScroll) {
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
-
 // ============================================================
 // التحقق من الإجابة
 // ============================================================
