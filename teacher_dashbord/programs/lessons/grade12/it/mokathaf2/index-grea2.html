@@ -921,33 +921,36 @@ function generateMobilePDF() {
     const watermarkText = `مدرسة أمجاد أفريقيا\nليبيا البيضاء`;
     let htmlContent = '';
 
-    // صفحة غلاف مخصصة للهاتف
+    // ===== صفحة الغلاف الضخمة المخصصة للهاتف =====
     htmlContent += `
-        <div class="pdf-page pdf-cover-page" style="page-break-after: always; break-after: page; min-height: 100vh; padding: 20mm 10mm !important; position: relative; box-sizing: border-box; text-align: center;">
-            <div class="watermark-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 55px; font-weight: bold; color: rgba(0, 0, 0, 0.05); white-space: pre-line; pointer-events: none; z-index: 0; width: 100%; font-family: 'Cairo', sans-serif;">
+        <div class="pdf-page pdf-cover-page" style="page-break-after: always; break-after: page; min-height: 100vh; padding: 30mm 15mm !important; position: relative; box-sizing: border-box; text-align: center; direction: rtl;">
+            <div class="watermark-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 90px; font-weight: bold; color: rgba(0, 0, 0, 0.04); white-space: pre-line; pointer-events: none; z-index: 0; width: 100%; font-family: 'Cairo', sans-serif;">
                 ${watermarkText}
             </div>
             <div class="content-wrapper" style="position:relative; z-index:1; width:100%;">
-                <div style="font-size:16pt; color:#1e3a8a; font-weight:bold; margin-bottom:10px;">🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء</div>
-                <div style="font-size:26pt; color:#1e293b; font-weight:900; margin-bottom:5px;">💻 تقنية المعلومات</div>
-                <div style="font-size:18pt; color:#2563eb; font-weight:bold; margin-bottom:20px;">📱 كتاب المراجعة الذكي للهواتف</div>
-                <div style="font-size:16pt; color:#475569; margin-bottom:30px;">الصف الثالث الثانوي</div>
-                <div style="border:3px dashed #2563eb; padding:25px 15px; border-radius:12px; background:#f8fafc; margin-bottom:30px;">
-                    <h3 style="font-size:18pt; color:#1e293b; margin:0 0 10px 0;">📚 كتاب المراجعة النهائية الكامل</h3>
-                    <div style="font-size:14pt; color:#475569; margin-bottom:10px;">مصمم خصيصاً للقراءة المريحة على الشاشات</div>
-                    <div style="font-size:14pt; color:#2563eb; font-weight:bold;">📊 إجمالي الأسئلة: ${examQuestions.length} سؤال وبها تبرير الإجابة</div>
+                <div style="font-size:28pt; color:#1e3a8a; font-weight:bold; margin-bottom:25px;">🏫 مدرسة أمجاد أفريقيا</div>
+                <div style="font-size:42pt; color:#1e293b; font-weight:900; margin-bottom:15px; line-height: 1.3;">💻 تقنية المعلومات</div>
+                <div style="font-size:30pt; color:#2563eb; font-weight:bold; margin-bottom:40px;">📱 كتاب المراجعة الذكي للهواتف</div>
+                <div style="font-size:26pt; color:#475569; margin-bottom:60px;">الصف الثالث الثانوي</div>
+                
+                <div style="border: 5px dashed #2563eb; padding: 40px 20px; border-radius: 20px; background: #f8fafc; margin-bottom:50px;">
+                    <h3 style="font-size:32pt; color:#1e293b; margin:0 0 20px 0;">📚 كتاب المراجعة النهائية</h3>
+                    <div style="font-size:22pt; color:#475569; margin-bottom:15px;">نسخة القراءة السريعة والمريحة للموبايل</div>
+                    <div style="font-size:24pt; color:#2563eb; font-weight:bold;">📊 إجمالي الأسئلة: ${examQuestions.length} سؤال</div>
                 </div>
-                <div style="font-size:15pt; color:#059669; font-weight:bold; margin-top:20px;">✨ بالتوفيق والتميز لطلبتنا الأعزاء ✨</div>
+                
+                <div style="font-size:26pt; color:#059669; font-weight:bold; margin-top:40px;">✨ بالتوفيق والتميز لطلبتنا الأعزاء ✨</div>
             </div>
         </div>
     `;
 
+    // ===== حاوية الأسئلة الضخمة للموبايل =====
     htmlContent += `
-        <div class="pdf-questions-container" style="position: relative; background: white; padding: 8mm 6mm !important; font-family: 'Cairo', sans-serif; direction: rtl;">
+        <div class="pdf-questions-container" style="position: relative; background: white; padding: 15mm 10mm !important; font-family: 'Cairo', sans-serif; direction: rtl;">
             <div style="position:relative; z-index:1;">
-                <div style="text-align:center; border-bottom:2px solid #2563eb; padding-bottom:8px; margin-bottom:20px;">
-                    <div style="font-size:14px; color:#1e3a8a; font-weight:bold;">📱 نسخة الدراسة الرقمية عبر الموبايل</div>
-                    <div style="font-size:12px; color:#64748b; margin-top:2px;">لا داعي لتقريب الشاشة - الخطوط مهيأة للقراءة المباشرة</div>
+                <div style="text-align:center; border-bottom:4px solid #2563eb; padding-bottom:20px; margin-bottom:40px;">
+                    <div style="font-size:24px; color:#1e3a8a; font-weight:bold;">📱 نسخة الدراسة الرقمية الضخمة</div>
+                    <div style="font-size:18px; color:#64748b; margin-top:8px;">مُهيأة ومُكبرة بمقدار 3 أضعاف لتناسب شاشة الهاتف تماماً</div>
                 </div>
     `;
 
@@ -955,37 +958,38 @@ function generateMobilePDF() {
         const questionNum = idx + 1;
         const correctText = q.options[q.correctAnswer] || "لم يتم تحديد";
 
-        // التعديل للهاتف: جعل الخيارات عريضة وتحت بعضها (block) لسهولة التصفح والقراءة بالعين
+        // خيارات عريضة جداً بخط ضخم (24pt)
         let optionsHTML = q.options.map((opt, i) => {
             const isCorrect = i === q.correctAnswer;
             return `
-                <div style="display:block; margin:6px 0; padding:10px 14px; background:${isCorrect ? '#dcfce7' : '#f8fafc'}; border-radius:6px; font-size:13pt; border: 1.5px solid ${isCorrect ? '#22c55e' : '#e2e8f0'}; ${isCorrect ? 'font-weight:bold; color:#065f46;' : 'color:#475569;'}">
+                <div style="display:block; margin:15px 0; padding:20px 24px; background:${isCorrect ? '#dcfce7' : '#f8fafc'}; border-radius:12px; font-size:24pt; border: 3px solid ${isCorrect ? '#22c55e' : '#e2e8f0'}; ${isCorrect ? 'font-weight:bold; color:#065f46;' : 'color:#475569;'}">
                     ${isCorrect ? '🔹 ' : '▫️ '} ${opt}
                 </div>`;
         }).join('');
 
         let questionDisplay = q.question;
+        // تكبير الخط داخل الأكواد البرمجية لتصبح واضحة
         if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
-            questionDisplay = `<code style="font-family:'Courier New',monospace; font-size:11pt; direction:ltr; text-align:left; background:#1e293b; color:#e2e8f0; padding:12px; border-radius:6px; display:block; white-space:pre-wrap; line-height:1.5; margin:6px 0;">${q.question}</code>`;
+            questionDisplay = `<code style="font-family:'Courier New',monospace; font-size:20pt; direction:ltr; text-align:left; background:#1e293b; color:#e2e8f0; padding:20px; border-radius:12px; display:block; white-space:pre-wrap; line-height:1.6; margin:15px 0;">${q.question}</code>`;
         }
 
         let pdfCorrectionHTML = '';
         if (q.correction && q.correction.trim() !== "") {
-            // خط كبير وواضح للتعليل على الشاشة
+            // تكبير خط التعليل العلمي والتوضيح
             pdfCorrectionHTML = `
-                <div style="margin-top:10px !important; padding:10px 14px !important; background:#f0fdf4 !important; border-radius:6px !important; border-right:4px solid #16a34a !important; font-size:12.5pt !important; color:#14532d !important; line-height:1.5 !important;">
+                <div style="margin-top:20px !important; padding:20px 24px !important; background:#f0fdf4 !important; border-radius:12px !important; border-right:8px solid #16a34a !important; font-size:22pt !important; color:#14532d !important; line-height:1.6 !important;">
                     💡 <b>توضيح وتعليل الإجابة:</b> ${q.correction}
                 </div>
             `;
         }
 
-        // كتل كبيرة ومتباعدة ومريحة جداً للموبايل
+        // كتل الأسئلة متباعدة وضخمة جداً (خط السؤال 26pt وخط الخيارات 24pt)
         htmlContent += `
-            <div class="pdf-question-block" style="margin-bottom:24px !important; padding:15px 15px !important; border-right:5px solid #2563eb !important; background:#fafcff !important; border-radius:8px !important; box-shadow:0 2px 4px rgba(0,0,0,0.03) !important; width:100% !important; page-break-inside: avoid !important; break-inside: avoid !important;">
-                <div style="font-weight:bold !important; color:#1a365d !important; margin-bottom:6px !important; text-align:right; font-size:14pt !important;">س ${questionNum}:</div>
-                <div style="color:#0f172a; line-height:1.5 !important; margin-bottom:10px !important; text-align:right; font-size:13pt !important; font-weight: 500;">${questionDisplay}</div>
-                <div style="margin:8px 0 !important;">${optionsHTML}</div>
-                <div style="margin-top:8px !important; padding:8px 12px !important; background:#dcfce7 !important; border-radius:4px !important; border-right:4px solid #22c55e !important; font-size:12pt !important; color:#065f46 !important; font-weight:bold !important;">✅ الإجابة النموذجية الصحيحة: ${correctText}</div>
+            <div class="pdf-question-block" style="margin-bottom:50px !important; padding:30px 25px !important; border-right:10px solid #2563eb !important; background:#fafcff !important; border-radius:16px !important; box-shadow:0 4px 10px rgba(0,0,0,0.04) !important; width:100% !important; page-break-inside: avoid !important; break-inside: avoid !important;">
+                <div style="font-weight:bold !important; color:#1a365d !important; margin-bottom:15px !important; text-align:right; font-size:28pt !important;">س ${questionNum}:</div>
+                <div style="color:#0f172a; line-height:1.6 !important; margin-bottom:20px !important; text-align:right; font-size:26pt !important; font-weight: 500;">${questionDisplay}</div>
+                <div style="margin:15px 0 !important;">${optionsHTML}</div>
+                <div style="margin-top:20px !important; padding:15px 24px !important; background:#dcfce7 !important; border-radius:10px !important; border-right:8px solid #22c55e !important; font-size:23pt !important; color:#065f46 !important; font-weight:bold !important;">✅ الإجابة النموذجية الصحيحة: ${correctText}</div>
                 ${pdfCorrectionHTML}
             </div>
         `;
@@ -995,11 +999,11 @@ function generateMobilePDF() {
     printableDoc.innerHTML = htmlContent;
     printableDoc.style.display = 'block';
 
-    setTimeout(function() { window.print(); setTimeout(function() { printableDoc.style.display = 'none'; }, 1000); }, 500);
+    setTimeout(function() { 
+        window.print(); 
+        setTimeout(function() { printableDoc.style.display = 'none'; }, 1000); 
+    }, 500);
 }
-
-
-
 
 
 // ============================================================
