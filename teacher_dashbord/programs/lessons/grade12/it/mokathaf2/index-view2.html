@@ -390,6 +390,15 @@
         <button class="print-btn" onclick="openPDF()">
             <i class="fa-solid fa-file-pdf"></i> -تحميل PDF- الجزء الثاني
         </button>
+    <button onclick="generateMobilePDF()" style="padding: 12px 24px; background-color: #2563eb; color: white; border: none; border-radius: 6px; font-family: 'Cairo', sans-serif; font-size: 11pt; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+        📱 تحميل نسخة القراءة على الهاتف
+    </button>
+
+
+
+
+
+
         <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
             <i class="fa-brands fa-telegram"></i> البوت التعليمي
         </a>
@@ -401,13 +410,19 @@
 // رابط PDF على Dropbox - غيّر هذا الرابط إلى رابط ملفك
 // ============================================================
 const PDF_URL = "https://www.dropbox.com/scl/fi/3djx87k3u4qvhszs8z4j7/.pdf?rlkey=toc661u05804dgbzdd0mqafj7&st=df93pkw9&dl=0";
-
+const PDF_URL1="https://www.dropbox.com/scl/fi/v9x88mc8lm9x2wgec9p2s/.pdf?rlkey=716jgkocze2xpvxo4btcnfgzg&st=0quf6z4e&dl=0";
 // ============================================================
 // دالة فتح PDF
 // ============================================================
 function openPDF() {
     // فتح الرابط في نافذة جديدة
     window.open(PDF_URL, '_blank');
+}
+function generateMobilePDF(){
+
+    window.open(PDF_URL1, '_blank');
+
+
 }
 
 // ============================================================
