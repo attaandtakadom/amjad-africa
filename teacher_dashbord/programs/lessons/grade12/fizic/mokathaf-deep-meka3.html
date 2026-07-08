@@ -408,6 +408,7 @@ height: auto !important;
 <i class="fa-solid fa-file-pdf"></i> طباعة PDF
 
 </button>
+<button    class="print-btn"     onclick="triggerMobilePrintView()"> <i class="fa-solid fa-file-pdf"></i>   📱 قراءة الملف على النقال (خط كبير)</button>
 
 </div>
 
@@ -645,6 +646,35 @@ label.textContent = 'عرض الاجابة';
 }
 
 }
+
+function triggerMobilePrintView() {
+
+if (window.Telegram && window.Telegram.WebApp) {
+
+const webApp = window.Telegram.WebApp;
+
+const pdfUrl = "https://www.dropbox.com/scl/fi/d1uns8j7u39u58x205jpo/.pdf?rlkey=xtu6andg8mpp51cp1nhxbbvg1&st=d7ioehye&dl=0";
+
+webApp.openLink(pdfUrl);
+
+} else {
+
+window.open("https://www.dropbox.com/scl/fi/d1uns8j7u39u58x205jpo/.pdf?rlkey=xtu6andg8mpp51cp1nhxbbvg1&st=d7ioehye&dl=0", '_blank');
+
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function triggerSmartPrint() {
 

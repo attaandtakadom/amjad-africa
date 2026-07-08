@@ -1,4 +1,65 @@
 const questionsMatrix = [
+
+{
+  "title": "س: اتزان كرة مشحونة داخل مجال كهربائي منتظم",
+  "text": "صفيحتان معدنيتان مشحونتان مقدار المجال الكهربائي بينهما (200 N/C) علقت كرة كتلتها (2 g) وشحنتها موجبة فاتزنت عندما أصبحت قوة الشد في الخيط تساوي (28 × 10⁻³ N)، فإن مقدار الشحنة الكهربائية التي تحملها الكرة تساوي:",
+  "options": [
+    { "text": "أ) 40 μC", "isCorrect": true },
+    { "text": "ب) 4 μC", "isCorrect": false },
+    { "text": "ج) 2.4 μC", "isCorrect": false },
+    { "text": "د) 10 μC", "isCorrect": false }
+  ],
+  "correctAnswerIndex": 0,
+  "svgCode": "<svg viewBox='0 0 500 380' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><style>.plate-pos { fill: #fee2e2; stroke: #ef4444; stroke-width: 2; } .plate-neg { fill: #e0f2fe; stroke: #0ea5e9; stroke-width: 2; } .wire-string { stroke: #475569; stroke-width: 2; } .vector-arrow { stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; } .arrow-t { stroke: #10b981; fill: #10b981; } .arrow-w { stroke: #1e293b; fill: #1e293b; } .arrow-fe { stroke: #dc2626; fill: #dc2626; } .sphere { fill: #f59e0b; stroke: #d97706; stroke-width: 2; } .label { font-family: system-ui, -apple-system, sans-serif; font-weight: bold; fill: #1e293b; text-anchor: middle; } .text-green { fill: #10b981; font-size: 13px; } .text-red { fill: #dc2626; font-size: 13px; } .text-black { fill: #1e293b; font-size: 13px; }</style><rect width='500' height='380' fill='#ffffff'/><g transform='translate(50, 20)'><rect x='40' y='40' width='320' height='20' rx='4' class='plate-neg'/><text x='200' y='55' class='label' font-size='12' fill='#0369a1'>صفيحة سالبة (-)</text><rect x='40' y='260' width='320' height='20' rx='4' class='plate-pos'/><text x='200' y='275' class='label' font-size='12' fill='#b91c1c'>صفيحة موجبة (+)</text><line x1='200' y1='60' x2='200' y2='150' class='wire-string'/><circle cx='200' cy='150' r='16' class='sphere'/><text x='200' y='154' class='label' font-size='12' fill='#ffffff'>+q</text><line x1='180' y1='130' x2='180' y2='75' class='vector-arrow arrow-t'/><polygon points='180,70 175,82 185,82' class='arrow-t'/><text x='130' y='105' class='label text-green'>الشد T لأعلى</text><text x='130' y='122' class='label text-green'>28 × 10⁻³ N</text><line x1='200' y1='166' x2='200' y2='220' class='vector-arrow arrow-w'/><polygon points='200,225 195,213 205,213' class='arrow-w'/><text x='270' y='195' class='label text-black'>الوزن W لأسفل</text><text x='270' y='212' class='label text-black'>20 × 10⁻³ N</text><line x1='220' y1='150' x2='220' y2='205' class='vector-arrow arrow-fe'/><polygon points='220,210 215,198 225,198' class='arrow-fe'/><text x='290' y='145' class='label text-red'>القوة الكهربائية Fe لأسفل</text><text x='290' y='162' class='label text-red'>8 × 10⁻³ N</text><text x='200' y='320' class='label' font-size='14' fill='#1e293b'>المجال الكهربائي E = 200 N/C (لأسفل)</text><text x='200' y='345' class='label' font-size='14' fill='#2563eb'>عند الاتزان: T = W + Fe ومنها q = 40 μC</text></g></svg>",
+  "steps": [
+    {
+      "title": "الخطوة 1: حساب قوة الوزن وتحليل كفتي القوى",
+      "question": "عند حساب الوزن W = m × g وجدنا أنه يساوي 20 × 10⁻³ N، بينما قوة الشد لأعلى المعطاة هي 28 × 10⁻³ N. لكي تتزن الكرة ميكانيكياً، في أي اتجاه يجب أن تؤثر القوة الكهربائية (Fe)؟",
+      "options": [
+        { "text": "إلى أسفل (مع اتجاه الوزن) لتساعده في موازنة قوة الشد الكبيرة التي تسحب لأعلى.", "isCorrect": true },
+        { "text": "إلى أعلى (مع اتجاه الشد) لأن الشحنة موجبة والمجال لأسفل.", "isCorrect": false }
+      ],
+      "feedback": "✅ ممتاز جداً! بما أن قوة الشد لأعلى (28) أكبر من الوزن لأسفل (20)، فإن الكرة بحاجة لقوة إضافية تشدها لأسفل بمقدار 8 × 10⁻³ N لتتعادل الكفتان ويحدث الاتزان الكامل."
+    },
+    {
+      "title": "الخطوة 2: حساب مقدار الشحنة وتحويلها",
+      "question": "بناءً على أن القوة الكهربائية Fe = 8 × 10⁻³ N وشدة المجال E = 200 N/C، كم يبلغ مقدار الشحنة الكهربائية بوحدة الميكروكولوم (μC)؟",
+      "options": [
+        { "text": "40 μC، بعد قسمة القوة على المجال ثم الضرب في 10⁶ للتحويل من كولوم إلى ميكروكولوم.", "isCorrect": true },
+        { "text": "4 μC، نتيجة القسمة المباشرة دون مراعاة تحويل ميكرو.", "isCorrect": false }
+      ],
+      "feedback": "✅ إجابة رائعة وصحيحة! ناتج القسمة يعطي 4 × 10⁻⁵ C، وعند ضربها في 10⁶ تتحول إلى 40 μC تماماً."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "شرح مسألة اتزان الكرة المشحونة داخل المجال الكهربائي بالتفصيل المطور:",
+    "• أولاً: تحويل الوحدات وحساب الوزن (W):",
+    "  - يتم تحويل الكتلة من جرام إلى كيلوجرام: m = 2 g = 2 × 10⁻³ kg.",
+    "  - نحسب الوزن لأسفل: W = m × g = (2 × 10⁻³ kg) × 10 = 20 × 10⁻³ N.",
+    " ",
+    "• ثانياً: تحليل الاتزان وتحديد اتجاه القوة الكهربائية (Fe):",
+    "  - الكرة متزنة تحت تأثير ثلاث قوى: الشد لأعلى (T)، والوزن لأسفل (W)، والقوة الكهربائية (Fe).",
+    "  - نلاحظ أن الشد لأعلى (28 × 10⁻³ N) أكبر من الوزن لأسفل (20 × 10⁻³ N).",
+    "  - لكي يحدث اتزان، يجب أن تؤثر القوة الكهربائية لأسفل مضافةً إلى الوزن لتساوي قوة الشد.",
+    "  - معادلة الاتزان: T = W + Fe  =>  28 × 10⁻³ = 20 × 10⁻³ + Fe.",
+    "  - ومنها: Fe = 8 × 10⁻³ N (واتجاهها لأسفل).",
+    " ",
+    "• ثالثاً: حساب مقدار الشحنة (q):",
+    "  - من القانون: Fe = q × E  =>  q = Fe / E.",
+    "  - q = (8 × 10⁻³ N) / 200 N/C = 4 × 10⁻⁵ C.",
+    "  - للتحويل إلى ميكروكولوم (μC): q = 4 × 10⁻⁵ × 10⁶ = 40 μC.",
+    "--------------------------------------------------",
+    "💡 [قاعدة فيزيائية ذهبية للطلاب]:",
+    "في مسائل الاتزان الخيطي، قارن دائماً القوى الأساسية المعلومة (الشد والوزن)، فالقوة المجهولة (الكهربائية) ستكون دائماً في صف الطرف الأضعف لتصنع التعادل والاتزان.",
+    "--------------------------------------------------",
+    "الإجابة الصحيحة: أ) 40 μC ✅"
+  ],
+  "pdfFinalAnswer": "الإجابة الصحيحة: أ) 40 μC"
+},
+
+
+
+
 {
   "title": "س 7: دائرة القصر وقراءة الأميتر (امتحانات 2022-2023)",
   "text": "في الشكل التالي، إذا كانت قيمة المقاومة تساوي 5 Ω وقيمة القوة الدافعة الكهربائية تساوي 10 V، فإن قراءة الأميتر تساوي:",

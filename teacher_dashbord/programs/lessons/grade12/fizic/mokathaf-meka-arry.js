@@ -1,7 +1,564 @@
+
+
 const questionsMatrix = [
+    
+  {
+    "title": "س14: حساب الشغل المبذول لرفع جسم على مستوى مائل",
+    "text": "إذا دُفعت دراجة كتلتها (40 kg) على مستوى مائل إلى أعلى بزاوية (30°) مع الأفقي، فإن الشغل المبذول لدفع الدراجة مسافة (50 m) يساوي:",
+    "options": [
+      { "text": "أ) 10 kJ", "isCorrect": true },
+      { "text": "ب) 9 kJ", "isCorrect": false },
+      { "text": "ج) 8 kJ", "isCorrect": false },
+      { "text": "د) 7 kJ", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 0,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 180' width='100%' style='max-width: 360px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='30' y1='150' x2='370' y2='150' stroke='#334155' stroke-width='3'/>\n            <line x1='50' y1='150' x2='350' y2='40' stroke='#334155' stroke-width='3'/>\n            \n            \n            <path d='M 90 150 A 40 40 0 0 0 85 133' fill='none' stroke='#dc2626' stroke-width='2'/>\n            <text x='98' y='143' font-family='system-ui, sans-serif' font-size='12' fill='#dc2626' font-weight='bold'>30°</text>\n            \n            \n            <g transform='translate(200,95) rotate(-20)'>\n                <rect x='-20' y='-15' width='40' height='26' rx='3' fill='#0284c7' stroke='#0369a1' stroke-width='1.5'/>\n                <text x='0' y='2' font-family='system-ui, sans-serif' font-size='10' fill='#ffffff' font-weight='bold' text-anchor='middle'>40 kg</text>\n                \n                \n                <line x1='25' y1='0' x2='55' y2='0' stroke='#16a34a' stroke-width='2'/>\n                <polygon points='55,0 47,-4 47,4' fill='#16a34a'/>\n                <text x='35' y='-10' font-family='system-ui, sans-serif' font-size='9' fill='#16a34a' font-weight='bold'>F = 200 N</text>\n                \n                \n                <line x1='-20' y1='5' x2='-50' y2='5' stroke='#dc2626' stroke-width='1.5'/>\n                <polygon points='-50,5 -44,1 -44,9' fill='#dc2626'/>\n                <text x='-52' y='-4' font-family='system-ui, sans-serif' font-size='9' fill='#dc2626'>mg sin(30°)</text>\n            </g>\n            \n            \n            <text x='240' y='50' font-family='system-ui, sans-serif' font-size='11' fill='#2563eb' font-weight='bold'>المسافة s = 50 m</text>\n        </svg>\n    </div>\n    <div style='background: #eff6ff; border-right: 4px solid #1d4ed8; padding: 10px; font-size: 13px; color: #1e3a8a;'>\n        <strong>💡 التحليل الفيزيائي للشغل:</strong> الشغل المبذول يساوي طاقة الوضع المكتسبة أو حاصل ضرب القوة المحركة في المسافة المقطوعة:<br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>W = F · s = (mg sin 30°) · s = (40 × 10 × 0.5) × 50 = 200 × 50 = 10,000 J = 10 kJ</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "أ) 10 kJ"
+  }
+,
+  {
+    "title": "س11: حساب المسافة الرأسية بمعلومية القدرة والزمن",
+    "text": "إذا رُفع صندوق كتلته (160 kg) عمودياً إلى أعلى بسرعة منتظمة بواسطة آلة قدرتها (2 kW)، فإن المسافة التي يتحركها الصندوق في زمن قدره (6 s) تساوي:",
+    "options": [
+      { "text": "أ) 6.5 m", "isCorrect": false },
+      { "text": "ب) 7.5 m", "isCorrect": true },
+      { "text": "ج) 8.5 m", "isCorrect": false },
+      { "text": "د) 9.5 m", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 1,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 200' width='100%' style='max-width: 320px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <circle cx='200' cy='30' r='15' fill='#475569'/>\n            <text x='230' y='35' font-family='system-ui, sans-serif' font-size='11' fill='#475569' font-weight='bold'>الآلة: P = 2 kW</text>\n            \n            \n            <line x1='200' y1='45' x2='200' y2='120' stroke='#3b82f6' stroke-width='2'/>\n            <rect x='175' y='120' width='50' height='40' rx='4' fill='#ea580c' stroke='#c2410c' stroke-width='1.5'/>\n            <text x='200' y='144' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>160 kg</text>\n            \n            \n            <line x1='150' y1='140' x2='150' y2='100' stroke='#16a34a' stroke-width='2'/>\n            <polygon points='150,95 146,105 154,105' fill='#16a34a'/>\n            <text x='135' y='120' font-family='system-ui, sans-serif' font-size='10' fill='#16a34a' font-weight='bold'>v منتظمة</text>\n            \n            \n            <line x1='90' y1='30' x2='90' y2='160' stroke='#94a3b8' stroke-width='1' stroke-dasharray='4,4'/>\n            <text x='80' y='100' font-family='system-ui, sans-serif' font-size='11' fill='#64748b'>الزمن: t = 6 s</text>\n        </svg>\n    </div>\n    <div style='background: #eff6ff; border-right: 4px solid #1d4ed8; padding: 10px; font-size: 13px; color: #1e3a8a;'>\n        <strong>💡 طريقة الحل المباشرة:</strong> القدرة الميكانيكية الشغل/الزمن، وبالتالي:<br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>P = (m · g · s) / t ➔ 2000 = (1600 × s) / 6 ➔ s = 12000 / 1600 = 7.5 m</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "ب) 7.5 m"
+  },
+  {
+    "title": "س12: حساب العجلة الخطية الناتجة عن قوة مائلة",
+    "text": "يدفع طفل عربة صغيرة كتلتها (3.5 kg) على أرضية أفقية بقوة مقدارها (6 N) تصنع زاوية (35°) مع الأفقي. بإهمال قوى المقاومة، فإن عجلة حركة العربة تساوي تقريباً:",
+    "options": [
+      { "text": "أ) 1.4 m/s²", "isCorrect": true },
+      { "text": "ب) 1.6 m/s²", "isCorrect": false },
+      { "text": "ج) 1.5 m/s²", "isCorrect": false },
+      { "text": "د) 1.3 m/s²", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 0,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 130' width='100%' style='max-width: 360px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='20' y1='100' x2='380' y2='100' stroke='#334155' stroke-width='3'/>\n            \n            \n            <g transform='translate(120, 50)'>\n                <rect x='0' y='10' width='80' height='40' rx='3' fill='#0284c7' stroke='#0369a1' stroke-width='1.5'/>\n                <circle cx='20' cy='50' r='8' fill='#1e293b'/>\n                <circle cx='60' cy='50' r='8' fill='#1e293b'/>\n                <text x='40' y='35' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>3.5 kg</text>\n            </g>\n            \n            \n            <line x1='70' y1='30' x2='120' y2='65' stroke='#dc2626' stroke-width='2'/>\n            <polygon points='120,65 110,58 114,64' fill='#dc2626'/>\n            <line x1='120' y1='65' x2='170' y2='65' stroke='#94a3b8' stroke-dasharray='3,3'/>\n            <text x='40' y='25' font-family='system-ui, sans-serif' font-size='10' fill='#dc2626' font-weight='bold'>F = 6 N</text>\n            <text x='135' y='60' font-family='system-ui, sans-serif' font-size='10' fill='#dc2626'>35°</text>\n        </svg>\n    </div>\n    <div style='background: #fdf4ff; border-right: 4px solid #c084fc; padding: 10px; font-size: 13px; color: #581c87;'>\n        <strong>💡 التحليل الأفقي للقوة:</strong> المركبة الأفقية المحركة هي فقط المركبة المجاورة للزاوية:<br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>F_x = F · cos(35°) = 6 × 0.819 = 4.92 N ➔ a = 4.92 / 3.5 = 1.4 m/s²</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "أ) 1.4 m/s²"
+  },
+  {
+    "title": "س13: حساب قوة الاحتكاك للجسم المستقر على مستوى مائل",
+    "text": "يستقر صندوق كتلته (30 kg) على سطح يميل بزاوية قدرها (18°) مع الأفق، ويمنع الاحتكاك الصندوق من الانزلاق لأسفل. فإن مقدار قوة الاحتكاك المانعة للحركة تساوي:",
+    "options": [
+      { "text": "أ) 29.7 N", "isCorrect": false },
+      { "text": "ب) 92.7 N", "isCorrect": true },
+      { "text": "ج) 19.7 N", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 1,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 180' width='100%' style='max-width: 360px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='30' y1='150' x2='370' y2='150' stroke='#334155' stroke-width='3'/>\n            <line x1='50' y1='150' x2='350' y2='50' stroke='#334155' stroke-width='3'/>\n            <text x='95' y='142' font-family='system-ui, sans-serif' font-size='11' fill='#dc2626' font-weight='bold'>18°</text>\n            \n            \n            <g transform='translate(200,100) rotate(-18.4)'>\n                <rect x='-25' y='-15' width='50' height='30' rx='2' fill='#f59e0b' stroke='#d97706' stroke-width='1.5'/>\n                <text x='0' y='4' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>30 kg</text>\n                \n                \n                <line x1='-25' y1='10' x2='-60' y2='10' stroke='#dc2626' stroke-width='1.5'/>\n                <polygon points='-60,10 -54,6 -54,14' fill='#dc2626'/>\n                <text x='-65' y='0' font-family='system-ui, sans-serif' font-size='9' fill='#dc2626'>mg sin(18°)</text>\n                \n                \n                <line x1='25' y1='10' x2='60' y2='10' stroke='#16a34a' stroke-width='1.5'/>\n                <polygon points='60,10 54,6 54,14' fill='#16a34a'/>\n                <text x='45' y='0' font-family='system-ui, sans-serif' font-size='9' fill='#16a34a' font-weight='bold'>f (الاحتكاك)</text>\n            </g>\n        </svg>\n    </div>\n    <div style='background: #f0fdf4; border-right: 4px solid #16a34a; padding: 10px; font-size: 13px; color: #14532d;'>\n        <strong>💡 شرط الاتزان السكوني:</strong> بما أن الصندوق مستقر تماماً ولا ينزلق، فإن قوة الاحتكاك تعادل وتساوي مركبة الوزن الموازية للمستوى تماماً:<br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>f = mg · sin(18°) = 30 × 10 × sin(18°) = 300 × 0.309 = 92.7 N</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "ب) 92.7 N"
+  }
+,
+
+  {
+    "title": "س20: حساب قوة الشد في كابل المجرور",
+    "text": "شاحنة كبيرة تجر شاحنة صغيرة كتلتها (400 kg) بواسطة كابل وتتحرك المجموعة بعجلة قدرها (0.2 m/s²). فإن الشد في الكابل يساوي:",
+    "options": [
+      { "text": "أ) 60 N", "isCorrect": false },
+      { "text": "ب) 70 N", "isCorrect": false },
+      { "text": "ج) 80 N", "isCorrect": true },
+      { "text": "د) 90 N", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 2,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 130' width='100%' style='max-width: 360px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='10' y1='100' x2='390' y2='100' stroke='#334155' stroke-width='3'/>\n            \n            \n            <g transform='translate(220, 35)'>\n                <rect x='0' y='15' width='80' height='50' rx='4' fill='#1e3a8a' stroke='#172554' stroke-width='1.5'/>\n                <rect x='50' y='5' width='30' height='20' rx='2' fill='#1e3a8a'/>\n                <circle cx='20' cy='65' r='9' fill='#0f172a'/>\n                <circle cx='65' cy='65' r='9' fill='#0f172a'/>\n                <text x='40' y='45' font-family='system-ui, sans-serif' font-size='10' fill='#ffffff' text-anchor='middle'>الشاحنة الكبيرة</text>\n            </g>\n            \n            \n            <line x1='150' y1='70' x2='220' y2='70' stroke='#0284c7' stroke-width='2.5'/>\n            \n            <polygon points='180,70 172,66 172,74' fill='#0284c7'/>\n            <text x='185' y='60' font-family='system-ui, sans-serif' font-size='11' fill='#0284c7' font-weight='bold'>T</text>\n            \n            \n            <g transform='translate(50, 45)'>\n                <rect x='0' y='10' width='100' height='40' rx='3' fill='#0284c7' stroke='#0369a1' stroke-width='1.5'/>\n                <circle cx='25' cy='50' r='8' fill='#0f172a'/>\n                <circle cx='75' cy='50' r='8' fill='#0f172a'/>\n                <text x='50' y='35' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>400 kg</text>\n            </g>\n            \n            \n            <line x1='90' y1='25' x2='130' y2='25' stroke='#16a34a' stroke-width='2'/>\n            <polygon points='135,25 127,21 127,29' fill='#16a34a'/>\n            <text x='112' y='17' font-family='system-ui, sans-serif' font-size='10' fill='#16a34a' font-weight='bold'>a = 0.2 m/s²</text>\n        </svg>\n    </div>\n    <div style='background: #f0fdf4; border-right: 4px solid #16a34a; padding: 10px; font-size: 13px; color: #14532d;'>\n        <strong>💡 التوضيح الفيزيائي:</strong> القوة المسببة لحركة الكتلة المجرورة أفقياً هي قوة الشد فقط <span style='direction:ltr; display:inline-block;'>(T)</span>، ونحسبها مباشرة بضرب الكتلة في العجلة الخطية: <span style='direction:ltr; display:inline-block; font-weight:bold;'>400 × 0.2 = 80 N</span>.\n    </div>\n</div>",
+    "pdfFinalAnswer": "ج) 80 N"
+  }
+,
+  {
+    "title": "س18: حساب الزمن المستغرق في السقوط الحر",
+    "text": "يقف طفل في شرفة منزل ترتفع (9.8 m) فوق سطح الأرض، أسقط الطفل حجراً نحو الأرض. بإهمال مقاومة الهواء، فإن الزمن المستغرق لوصول الحجر إلى الأرض يساوي:",
+    "options": [
+      { "text": "أ) 1.4 s", "isCorrect": true },
+      { "text": "ب) 2.5 s", "isCorrect": false },
+      { "text": "ج) 3.4 s", "isCorrect": false },
+      { "text": "د) 4.2 s", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 0,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 200' width='100%' style='max-width: 320px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <rect x='300' y='40' width='80' height='135' fill='#e2e8f0' stroke='#cbd5e1' stroke-width='1.5'/>\n            <rect x='280' y='40' width='20' height='30' fill='#94a3b8' opacity='0.7'/>\n            \n            \n            <circle cx='265' cy='45' r='5' fill='#475569'/>\n            <text x='250' y='35' font-family='system-ui, sans-serif' font-size='10' fill='#64748b' font-weight='bold'>u = 0 (سقوط)</text>\n            \n            \n            <line x1='265' y1='55' x2='265' y2='165' stroke='#94a3b8' stroke-width='1.5' stroke-dasharray='4,4'/>\n            <line x1='265' y1='90' x2='265' y2='120' stroke='#dc2626' stroke-width='2'/>\n            <polygon points='265,126 261,116 269,116' fill='#dc2626'/>\n            <text x='245' y='110' font-family='system-ui, sans-serif' font-size='10' fill='#dc2626' font-weight='bold'>g = 10 m/s²</text>\n            \n            \n            <line x1='20' y1='175' x2='380' y2='175' stroke='#334155' stroke-width='3'/>\n            \n            \n            <line x1='40' y1='45' x2='40' y2='175' stroke='#2563eb' stroke-width='1.5'/>\n            <polygon points='40,45 36,53 44,53' fill='#2563eb'/>\n            <polygon points='40,175 36,167 44,167' fill='#2563eb'/>\n            <text x='52' y='115' font-family='system-ui, sans-serif' font-size='12' fill='#2563eb' font-weight='bold'>الارتفاع s = 9.8 m</text>\n        </svg>\n    </div>\n    <div style='background: #fdf4ff; border-right: 4px solid #c084fc; padding: 10px; font-size: 13px; color: #581c87;'>\n        <strong>💡 طريقة التعويض المباشر:</strong><br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>s = ½gt² ➔ 9.8 = 5t² ➔ t² = 1.96 ➔ t = 1.4 s</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "أ) 1.4 s"
+  },
+  {
+    "title": "س19: حساب العجلة عند القذف لأعلى مستوى مائل خشن",
+    "text": "وضع جسم كتلته (0.5 kg) عند نقطة البداية لمسار يميل بزاوية (30°) مع الأفقي، فقُذف إلى أعلى المسار بسرعة (12 m/s). إذا كان مقدار قوة الاحتكاك ضد الحركة يساوي (2 N)، فإن العجلة التي يتحرك بها الجسم تساوي:",
+    "options": [
+      { "text": "أ) 8 m/s²", "isCorrect": false },
+      { "text": "ب) 9 m/s²", "isCorrect": true },
+      { "text": "ج) 4 m/s²", "isCorrect": false },
+      { "text": "د) 3 m/s²", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 1,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 200' width='100%' style='max-width: 360px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='30' y1='160' x2='370' y2='160' stroke='#334155' stroke-width='3'/>\n            \n            <line x1='50' y1='160' x2='340' y2='40' stroke='#334155' stroke-width='3'/>\n            \n            <path d='M 90 160 A 40 40 0 0 0 85 143' fill='none' stroke='#dc2626' stroke-width='2'/>\n            <text x='98' y='153' font-family='system-ui, sans-serif' font-size='12' fill='#dc2626' font-weight='bold'>30°</text>\n            \n            \n            <g transform='translate(180,106) rotate(-22.5)'>\n                <rect x='-20' y='-15' width='40' height='26' rx='2' fill='#3b82f6' stroke='#1d4ed8' stroke-width='1.5'/>\n                <text x='0' y='2' font-family='system-ui, sans-serif' font-size='10' fill='#ffffff' font-weight='bold' text-anchor='middle'>0.5 kg</text>\n                \n                \n                <line x1='0' y1='-22' x2='30' y2='-22' stroke='#16a34a' stroke-width='2'/>\n                <polygon points='35,-22 27,-26 27,-18' fill='#16a34a'/>\n                <text x='15' y='-30' font-family='system-ui, sans-serif' font-size='9' fill='#16a34a' font-weight='bold'>الحركة ↗</text>\n                \n                \n                <line x1='-20' y1='5' x2='-45' y2='5' stroke='#f97316' stroke-width='1.5'/>\n                <polygon points='-45,5 -39,1 -39,9' fill='#f97316'/>\n                <text x='-42' y='-4' font-family='system-ui, sans-serif' font-size='9' fill='#f97316'>f = 2 N</text>\n                \n                \n                <line x1='-20' y1='15' x2='-50' y2='15' stroke='#dc2626' stroke-width='1.5'/>\n                <polygon points='-50,15 -44,11 -44,19' fill='#dc2626'/>\n                <text x='-55' y='32' font-family='system-ui, sans-serif' font-size='9' fill='#dc2626'>mg sin(30°)</text>\n            </g>\n        </svg>\n    </div>\n    <div style='background: #f0fdf4; border-right: 4px solid #16a34a; padding: 10px; font-size: 13px; color: #14532d;'>\n        <strong>💡 قاعدة إشارات الحركة:</strong> بما أن القذف لأعلى، فإن مركبة الوزن <span style='direction:ltr; display:inline-block;'>(0.5 × 10 × sin 30° = 2.5 N)</span> وقوة الاحتكاك <span style='direction:ltr; display:inline-block;'>(2 N)</span> يعملان معاً لأسفل ضد الحركة، فتكون القوة الكلية المعيقة <span style='direction:ltr; display:inline-block; font-weight:bold;'>4.5 N</span>، ومنها العجلة التقصيرية: <span style='direction:ltr; display:inline-block; font-weight:bold;'>4.5 / 0.5 = 9 m/s²</span>.\n    </div>\n</div>",
+    "pdfFinalAnswer": "ب) 9 m/s²"
+  }
+,
+  {
+    "title": "س15: حساب القوة الدافعة للمحرك عند السرعة الثابتة",
+    "text": "سيارة كتلتها (1200 kg) تجر عربة نقل كتلتها (800 kg) على طريق مستقيم بسرعة ثابتة. إذا كانت مقاومة الهواء المؤثرة على السيارة والعربة هي (100 N) و (400 N) على الترتيب، فإن القوة الدافعة لمحرك السيارة تساوي:",
+    "options": [
+      { "text": "أ) 430 N", "isCorrect": false },
+      { "text": "ب) 500 N", "isCorrect": true },
+      { "text": "ج) 650 N", "isCorrect": false },
+      { "text": "د) 730 N", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 1,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 140' width='100%' style='max-width: 380px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='20' y1='110' x2='380' y2='110' stroke='#334155' stroke-width='3'/>\n            \n            \n            <g transform='translate(200, 50)'>\n                <rect x='0' y='15' width='70' height='35' rx='5' fill='#2563eb' stroke='#1d4ed8' stroke-width='1.5'/>\n                <rect x='45' y='5' width='20' height='15' rx='3' fill='#2563eb'/>\n                <circle cx='15' cy='50' r='8' fill='#1e293b'/>\n                <circle cx='55' cy='50' r='8' fill='#1e293b'/>\n                <text x='35' y='38' font-family='system-ui, sans-serif' font-size='10' fill='#ffffff' font-weight='bold' text-anchor='middle'>1200 kg</text>\n                \n                <line x1='75' y1='30' x2='105' y2='30' stroke='#16a34a' stroke-width='2'/>\n                <polygon points='110,30 102,26 102,34' fill='#16a34a'/>\n                <text x='92' y='22' font-family='system-ui, sans-serif' font-size='10' fill='#16a34a' font-weight='bold'>F</text>\n                \n                <line x1='0' y1='25' x2='-25' y2='25' stroke='#dc2626' stroke-width='1.5'/>\n                <polygon points='-25,25 -19,21 -19,29' fill='#dc2626'/>\n                <text x='-25' y='16' font-family='system-ui, sans-serif' font-size='9' fill='#dc2626'>100 N</text>\n            </g>\n\n            \n            <line x1='165' y1='80' x2='200' y2='80' stroke='#475569' stroke-width='2' stroke-dasharray='3,1'/>\n\n            \n            <g transform='translate(80, 50)'>\n                <rect x='0' y='10' width='85' height='40' rx='3' fill='#4b5563' stroke='#374151' stroke-width='1.5'/>\n                <circle cx='20' cy='50' r='8' fill='#1e293b'/>\n                <circle cx='65' cy='50' r='8' fill='#1e293b'/>\n                <text x='42' y='35' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>800 kg</text>\n                \n                <line x1='0' y1='25' x2='-30' y2='25' stroke='#dc2626' stroke-width='1.5'/>\n                <polygon points='-30,25 -24,21 -24,29' fill='#dc2626'/>\n                <text x='-32' y='16' font-family='system-ui, sans-serif' font-size='9' fill='#dc2626'>400 N</text>\n            </g>\n        </svg>\n    </div>\n    <div style='background: #f0fdf4; border-right: 4px solid #16a34a; padding: 10px; font-size: 13px; color: #14532d;'>\n        <strong>💡 التوضيح الفيزيائي:</strong> التحرك بسرعة ثابتة يعني أن العجلة صفرية <span style='direction:ltr; display:inline-block;'>(a = 0)</span>، وبالتالي تكون القوة الأمامية الدافعة مساوية تماماً لمجموع قوى المقاومة الخلفية المذكورة: <span style='direction:ltr; display:inline-block; font-weight:bold;'>100 + 400 = 500 N</span>.\n    </div>\n</div>",
+    "pdfFinalAnswer": "ب) 500 N"
+  },
+  {
+    "title": "س16: حساب قوة الشد في خيط المنظومة الكتلية",
+    "text": "ربط جسمان كتلتهما (2 kg) و (6 kg) بخيط خفيف يمر فوق وتد أملس وثابت. تركت المجموعة تتحرك من السكون فتسارعت بعجلة قدرها (5 m/s²). فإن قوة الشد (T) في الخيط تساوي:",
+    "options": [
+      { "text": "أ) 60 N", "isCorrect": false },
+      { "text": "ب) 40 N", "isCorrect": false },
+      { "text": "ج) 30 N", "isCorrect": true },
+      { "text": "د) 20 N", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 2,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 220' width='100%' style='max-width: 320px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='160' y1='20' x2='240' y2='20' stroke='#475569' stroke-width='4'/>\n            <line x1='200' y1='20' x2='200' y2='50' stroke='#64748b' stroke-width='2'/>\n            \n            <circle cx='200' cy='60' r='20' fill='#475569' stroke='#1e293b' stroke-width='1.5'/>\n            <circle cx='200' cy='60' r='4' fill='#ffffff'/>\n            \n            \n            <line x1='180' y1='60' x2='180' y2='120' stroke='#2563eb' stroke-width='2'/>\n            <rect x='160' y='120' width='40' height='40' rx='3' fill='#ea580c' stroke='#c2410c' stroke-width='1.5'/>\n            <text x='180' y='144' font-family='system-ui, sans-serif' font-size='12' fill='#ffffff' font-weight='bold' text-anchor='middle'>6 kg</text>\n            \n            <path d='M 180 115 L 180 95' stroke='#16a34a' stroke-width='1.5' marker-end='url(#arrow)'/>\n            <text x='192' y='105' font-family='system-ui, sans-serif' font-size='11' fill='#16a34a'>T</text>\n            <line x1='145' y1='125' x2='145' y2='150' stroke='#dc2626' stroke-width='2'/>\n            <polygon points='145,155 141,145 149,145' fill='#dc2626'/>\n            \n            \n            <line x1='220' y1='60' x2='220' y2='140' stroke='#2563eb' stroke-width='2'/>\n            <rect x='205' y='140' width='30' height='30' rx='3' fill='#3b82f6' stroke='#1d4ed8' stroke-width='1.5'/>\n            <text x='220' y='158' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>2 kg</text>\n            <text x='232' y='125' font-family='system-ui, sans-serif' font-size='11' fill='#16a34a'>T</text>\n            <line x1='250' y1='155' x2='250' y2='130' stroke='#16a34a' stroke-width='2'/>\n            <polygon points='250,125 246,135 254,135' fill='#16a34a'/>\n        </svg>\n    </div>\n    <div style='background: #eff6ff; border-right: 4px solid #1d4ed8; padding: 10px; font-size: 13px; color: #1e3a8a;'>\n        <strong>💡 معادلة الحركة للكتلة الصاعدة (2kg):</strong><br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>T - m₁g = m₁a ➔ T - 20 = 2(5) ➔ T = 10 + 20 = 30 N</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "ج) 30 N"
+  },
+  {
+    "title": "س17: حساب الارتفاع الرأسي في السقوط الحر",
+    "text": "سقطت قطة من على غصن شجرة عالية ووصلت إلى سطح الأرض بعد مرور زمن قدره ثلاث ثوانٍ (3 s). بإهمال مقاومة الهواء، فإن ارتفاع غصن الشجرة عن الأرض يساوي:",
+    "options": [
+      { "text": "أ) 15 m", "isCorrect": false },
+      { "text": "ب) 25 m", "isCorrect": false },
+      { "text": "ج) 35 m", "isCorrect": false },
+      { "text": "د) 45 m", "isCorrect": true }
+    ],
+    "correctAnswerIndex": 3,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 200' width='100%' style='max-width: 320px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <rect x='40' y='30' width='140' height='12' rx='2' fill='#a16207'/>\n            <path d='M70,30 Q60,15 80,15 Q100,15 90,30' fill='#15803d'/>\n            \n            \n            <circle cx='140' cy='36' r='7' fill='#f59e0b'/>\n            <text x='160' y='32' font-family='system-ui, sans-serif' font-size='10' fill='#475569' font-weight='bold'>u = 0 (سقوط)</text>\n            \n            \n            <line x1='140' y1='45' x2='140' y2='165' stroke='#94a3b8' stroke-width='1.5' stroke-dasharray='4,4'/>\n            <line x1='140' y1='100' x2='140' y2='130' stroke='#dc2626' stroke-width='2'/>\n            <polygon points='140,136 136,126 144,126' fill='#dc2626'/>\n            <text x='152' y='120' font-family='system-ui, sans-serif' font-size='10' fill='#dc2626' font-weight='bold'>g = 10 m/s²</text>\n            \n            \n            <line x1='20' y1='175' x2='380' y2='175' stroke='#16a34a' stroke-width='3'/>\n            \n            \n            <line x1='50' y1='36' x2='50' y2='175' stroke='#2563eb' stroke-width='1.5'/>\n            <polygon points='50,36 46,44 54,44' fill='#2563eb'/>\n            <polygon points='50,175 46,167 54,167' fill='#2563eb'/>\n            <text x='62' y='110' font-family='system-ui, sans-serif' font-size='12' fill='#2563eb' font-weight='bold'>الارتفاع (s)</text>\n            <text x='260' y='95' font-family='system-ui, sans-serif' font-size='11' fill='#475569'>الزمن الكلي المستغرق: t = 3 s</text>\n        </svg>\n    </div>\n    <div style='background: #fef2f2; border-right: 4px solid #ef4444; padding: 10px; font-size: 13px; color: #991b1b;'>\n        <strong>💡 قانون حساب مسافة السقوط:</strong><br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>s = ½ · g · t² ➔ s = 0.5 × 10 × (3)² = 5 × 9 = 45 m</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "د) 45 m"
+  }
+,
+  {
+    "title": "س28: وحدة قياس الشغل الميكانيكي",
+    "text": "يُقاس الشغل الميكانيكي في علم الفيزياء بوحدة:",
+    "options": [
+      { "text": "أ) الجول (J)", "isCorrect": false },
+      { "text": "ب) الوات (W)", "isCorrect": false },
+      { "text": "ج) نيوتن · متر (N·m)", "isCorrect": false },
+      { "text": "د) الإجابتان (أ) و (ج) صحيحتان", "isCorrect": true }
+    ],
+    "correctAnswerIndex": 3,
+    "pdfFinalAnswer": "د) الإجابتان (أ) و (ج) صحيحتان (حيث الجول يكافئ نيوتن في المتر)"
+  },
+  {
+    "title": "س29: الحالات الفيزيائية التي لا تنعدم فيها القيمة",
+    "text": "أيّ من القيم الفيزيائية التالية قيمتها الرياضية لا تساوي صفراً؟",
+    "options": [
+      { "text": "أ) الشغل المبذول بواسطة قوة عمودية على اتجاه الحركة", "isCorrect": false },
+      { "text": "ب) الشغل المبذول من الجاذبية على قمر صناعي في مدار دائري", "isCorrect": false },
+      { "text": "ج) سرعة الجسم المقذوف رأسياً لأعلى عند وصوله إلى أقصى ارتفاع", "isCorrect": false },
+      { "text": "د) سرعة الجسم الساقط سقوطاً حراً لحظة وصوله إلى سطح الأرض", "isCorrect": true }
+    ],
+    "correctAnswerIndex": 3,
+    "pdfFinalAnswer": "د) سرعة الجسم لحظة وصوله للأرض (تكون السرعة عند قيمتها القصوى)"
+  },
+  {
+    "title": "س30: المفهوم الفيزيائي الشامل للسقوط الحر",
+    "text": "عندما يُقال إن جسماً يسقط سقوطاً حراً تحت تأثير عجلة الجاذبية الأرضية (g = 10 m/s²) بإهمال مقاومة الهواء، فما هي العبارة الصحيحة؟",
+    "options": [
+      { "text": "أ) سرعة سقوط الجسم تزداد بانتظام كل ثانية بمقدار 10 m/s", "isCorrect": false },
+      { "text": "ب) سرعة سقوط الجسم تتغير زمنياً بمعدل ثابت قدره 10 m/s²", "isCorrect": false },
+      { "text": "ج) النسبة الثابتة بين وزن هذا الجسم وكتلته تساوي الرقم 10", "isCorrect": false },
+      { "text": "د) جميع الإجابات الفيزيائية السابقة صحيحة", "isCorrect": true }
+    ],
+    "correctAnswerIndex": 3,
+    "pdfFinalAnswer": "د) جميع الإجابات السابقة صحيحة (تحليل متكامل لخصائص العجلة والوزن)"
+  }
+,
+  {
+    "title": "س23: مقدار واتجاه قوة الاحتكاك على مستوى مائل",
+    "text": "تستقر كتلة مقدارها (2 kg) على مستوى يميل على الأفقي بزاوية (50°). أثرت قوة أفقية مقدارها (30 N) على الكتلة كما هو موضح بالشكل. فإن مقدار واتجاه قوة الاحتكاك المؤثرة على الكتلة تساوي:",
+    "options": [
+      { "text": "أ) 34.6 N إلى أعلى", "isCorrect": false },
+      { "text": "ب) 34.6 N إلى أسفل", "isCorrect": false },
+      { "text": "ج) 3.69 N إلى أسفل", "isCorrect": true }
+    ],
+    "correctAnswerIndex": 2,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 240' width='100%' style='max-width: 360px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='30' y1='200' x2='370' y2='200' stroke='#334155' stroke-width='3'/>\n            \n            <line x1='50' y1='200' x2='320' y2='40' stroke='#334155' stroke-width='3'/>\n            <line x1='320' y1='40' x2='320' y2='200' stroke='#94a3b8' stroke-dasharray='4,4'/>\n            \n            <path d='M 90 200 A 40 40 0 0 0 76 185' fill='none' stroke='#dc2626' stroke-width='2'/>\n            <text x='95' y='190' font-family='system-ui, sans-serif' font-size='12' fill='#dc2626' font-weight='bold'>50°</text>\n            \n            <g transform='translate(185,120) rotate(-30.6)'>\n                <rect x='-25' y='-15' width='50' height='30' rx='2' fill='#f59e0b' stroke='#d97706' stroke-width='1.5'/>\n                <text x='0' y='4' font-family='system-ui, sans-serif' font-size='12' fill='#ffffff' font-weight='bold' text-anchor='middle'>2 kg</text>\n            </g>\n            \n            <line x1='75' y1='120' x2='155' y2='120' stroke='#2563eb' stroke-width='2.5'/>\n            <polygon points='160,120 150,116 150,124' fill='#2563eb'/>\n            <text x='85' y='110' font-family='system-ui, sans-serif' font-size='12' fill='#2563eb' font-weight='bold'>F = 30 N (أفقية)</text>\n            \n            <line x1='165' y1='132' x2='125' y2='155' stroke='#64748b' stroke-width='1.5' stroke-dasharray='3,3'/>\n            <text x='90' y='170' font-family='system-ui, sans-serif' font-size='10' fill='#64748b'>mg sin(50°)</text>\n        </svg>\n    </div>\n    <div style='background: #f0fdf4; border-right: 4px solid #16a34a; padding: 10px; font-size: 13px; color: #14532d;'>\n        <strong>💡 فكرة الاتزان:</strong> مركبة القوة الأفقية صعوداً للأعلى <span style='direction:ltr; display:inline-block;'>(30 · cos 50° = 19.28 N)</span> أكبر من مركبة الوزن هبوطاً للأسفل <span style='direction:ltr; display:inline-block;'>(20 · sin 50° = 15.32 N)</span>، لذا يظهر الاحتكاك للأسفل مسانداً للوزن لمنع الحركة وعمل اتزان سكوني.\n    </div>\n</div>",
+    "pdfFinalAnswer": "ج) 3.69 N إلى أسفل"
+  },
+  {
+    "title": "س27: حساب عجلة الحركة لمنظومة البكرات",
+    "text": "في الشكل الموضح، يمر خيط خفيف حول وتد (بكرة) أملس ثابت متصل بكتلتين (3 kg) و (2 kg)، فإن عجلة حركة المجموعة تساوي:",
+    "options": [
+      { "text": "أ) 20 m/s²", "isCorrect": false },
+      { "text": "ب) 10 m/s²", "isCorrect": false },
+      { "text": "ج) 2 m/s²", "isCorrect": true }
+    ],
+    "correctAnswerIndex": 2,
+    "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 220' width='100%' style='max-width: 320px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='160' y1='20' x2='240' y2='20' stroke='#475569' stroke-width='4'/>\n            <line x1='200' y1='20' x2='200' y2='50' stroke='#64748b' stroke-width='2'/>\n            \n            <circle cx='200' cy='60' r='20' fill='#475569' stroke='#1e293b' stroke-width='1.5'/>\n            <circle cx='200' cy='60' r='4' fill='#ffffff'/>\n            \n            <line x1='180' y1='60' x2='180' y2='110' stroke='#1e40af' stroke-width='2'/>\n            <rect x='162' y='110' width='36' height='36' rx='3' fill='#ea580c' stroke='#c2410c' stroke-width='1.5'/>\n            <text x='180' y='132' font-family='system-ui, sans-serif' font-size='12' fill='#ffffff' font-weight='bold' text-anchor='middle'>3 kg</text>\n            \n            <line x1='145' y1='115' x2='145' y2='140' stroke='#dc2626' stroke-width='2'/>\n            <polygon points='145,145 141,135 149,135' fill='#dc2626'/>\n            <text x='135' y='132' font-family='system-ui, sans-serif' font-size='11' fill='#dc2626' font-weight='bold'>a</text>\n            \n            <line x1='220' y1='60' x2='220' y2='130' stroke='#1e40af' stroke-width='2'/>\n            <rect x='204' y='130' width='32' height='32' rx='3' fill='#3b82f6' stroke='#1d4ed8' stroke-width='1.5'/>\n            <text x='220' y='150' font-family='system-ui, sans-serif' font-size='12' fill='#ffffff' font-weight='bold' text-anchor='middle'>2 kg</text>\n            \n            <line x1='255' y1='150' x2='255' y2='125' stroke='#16a34a' stroke-width='2'/>\n            <polygon points='255,120 251,130 259,130' fill='#16a34a'/>\n            <text x='265' y='140' font-family='system-ui, sans-serif' font-size='11' fill='#16a34a' font-weight='bold'>a</text>\n        </svg>\n    </div>\n    <div style='background: #eff6ff; border-right: 4px solid #1d4ed8; padding: 10px; font-size: 13px; color: #1e3a8a;'>\n        <strong>💡 قانون آلة أتوود المباشر:</strong> العجلة تساوى طرح الكتل مقسوماً على مجموعها ومضروباً في عجلة الجاذبية:<br>\n        <span style='direction:ltr; display:inline-block; font-weight:bold; margin-top:4px;'>a = [(3 - 2) / (3 + 2)] × 10 = (1 / 5) × 10 = 2 m/s²</span>\n    </div>\n</div>",
+    "pdfFinalAnswer": "ج) 2 m/s²"
+  }
+,
+
+
+{
+  "title": "س: (ميكانيكا - حركية الكتل): حساب قوة الاحتكاك على مستوى مائل باستخدام العجلة",
+  "text": "في المنظومة الموضحة بالشكل، إذا كانت قوة الشد في الخيط تساوي (15 N)، فإن قوة الاحتكاك (f) المؤثرة على الكتلة (6 kg) المستقرة فوق المستوى المائل بزاوية (30°) تساوي (بفرض g = 10 m/s²):",
+  "options": [
+    { "text": "أ) 41.5 N", "isCorrect": false },
+    { "text": "ب) 24.5 N", "isCorrect": false },
+    { "text": "ج) 15 N", "isCorrect": true },
+    { "text": "د) 5 N", "isCorrect": false }
+  ],
+  "correctAnswerIndex": 2,
+  "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    \n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 220' width='100%' style='max-width: 350px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            <line x1='40' y1='180' x2='360' y2='180' stroke='#334155' stroke-width='3'/>\n            <line x1='60' y1='180' x2='280' y2='50' stroke='#334155' stroke-width='3'/>\n            <line x1='280' y1='50' x2='280' y2='180' stroke='#94a3b8' stroke-dasharray='4,4'/>\n            <path d='M 90 180 A 30 30 0 0 0 85 165' fill='none' stroke='#dc2626' stroke-width='2'/>\n            <text x='100' y='172' font-family='system-ui, sans-serif' font-size='12' fill='#dc2626' font-weight='bold'>30°</text>\n            <circle cx='285' cy='45' r='10' fill='#64748b' stroke='#334155' stroke-width='1.5'/>\n            <g transform='translate(160,120) rotate(-30)'>\n                <rect x='-25' y='-20' width='50' height='40' rx='3' fill='#f59e0b' stroke='#d97706' stroke-width='1.5'/>\n                <text x='0' y='5' font-family='system-ui, sans-serif' font-size='12' fill='#ffffff' font-weight='bold' text-anchor='middle'>6 kg</text>\n            </g>\n            <line x1='180' y1='110' x2='280' y2='52' stroke='#1e40af' stroke-width='2'/>\n            <line x1='295' y1='45' x2='295' y2='110' stroke='#1e40af' stroke-width='2'/>\n            <rect x='280' y='110' width='30' height='30' rx='2' fill='#3b82f6' stroke='#1d4ed8' stroke-width='1.5'/>\n            <text x='295' y='129' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>1 kg</text>\n            <text x='215' y='75' font-family='system-ui, sans-serif' font-size='11' fill='#1e40af' font-weight='bold'>T = 15 N</text>\n        </svg>\n    </div>\n\n    \n    <div style='background: #fff7ed; border-right: 4px solid #ea580c; border-radius: 6px; padding: 12px 16px; font-size: 14px; line-height: 1.6; text-align: right;'>\n        <div style='color: #c2410c; font-weight: bold; font-size: 15px; margin-bottom: 6px;'>\n            <span>📌 التلميح الرياضي والشرح الفكري</span>\n        </div>\n        <ul style='margin: 0; padding-right: 20px; color: #4338ca; list-style-type: square;'>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>حساب عجلة الحركة (a):</strong> من الكتلة المعلقة رأساً (1 kg) والصاعدة لأعلى بقوة شد 15 N، نطبق قانون نيوتن الثاني: <span style='direction: ltr; display: inline-block; font-weight: bold;'>T - m2*g = m2*a</span>، بالتعويض: <span style='direction: ltr; display: inline-block;'>15 - 10 = 1*a</span> إذن العجلة <span style='color: #0284c7; font-weight: bold; direction: ltr; display: inline-block;'>a = 5 m/s²</span>.</li>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>معادلة حركة الكتلة المائلة (6 kg):</strong> الصندوق يتحرك لأسفل المستوى بفعل مركبة الوزن، وتعاكسه قوة الشد وقوة الاحتكاك: <span style='direction: ltr; display: inline-block; font-weight: bold;'>m1*g*sin(30°) - T - f = m1*a</span>.</li>\n            <li><strong style='color: #1e293b;'>إيجاد قوة الاحتكاك:</strong> بالتعويض العددي المباشر: <span style='direction: ltr; display: inline-block;'>30 - 15 - f = 6 × 5</span>، مما يعطي <span style='direction: ltr; display: inline-block;'>15 - f = 30</span>، ومنها نجد أن القيمة العددية لقوة الاحتكاك تساوي <span style='color: #059669; font-weight: bold;'>15 N</span> (واتجاهها الفعلي لأعلى المستوى ليوازن الحركة).</li>\n        </ul>\n    </div>\n</div>",
+  "steps": [
+    {
+      "title": "حساب عجلة النظام",
+      "question": "باستخدام معادلة الحركة للكتلة المعلقة (1 kg) والتي تصعد لأعلى بقوة شد 15 N، ما هي قيمة العجلة المشتركة للمنظومة؟",
+      "options": [
+        { "text": "أ) 5 m/s²", "isCorrect": true },
+        { "text": "ب) 2 m/s²", "isCorrect": false }
+      ],
+      "feedback": "✅ حساب ممتاط ودقيق! بتطبيق القانون T - m2*g = m2*a نجد أن 15 - 10 = 1*a، ومنها العجلة تساوي 5 m/s²."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "══════════════ الخيارات ══════════════",
+    "أ) 41.5 N",
+    "ب) 24.5 N",
+    "ج) 15 N  ✅ (الإجابة الصحيحة المعلمة في المذكرة)",
+    "د) 5 N",
+    "",
+    "══════════════ 📑 الشرح والقوانين العامة لـ PDF ══════════════",
+    "📢 يتم حل هذه المسألة ديناميكياً من خلال دراسة حركية الكتل المتصلة لحساب العجلة أولاً:",
+    "",
+    "• خطوة 1: دراسة حركة الكتلة المعلقة رأساً (m2 = 1 kg) المتجهة لأعلى:",
+    "  ΣFy = m2 × a",
+    "  T - m2·g = m2·a",
+    "  15 - (1 × 10) = 1 × a   =>   a = 5 m/s²",
+    "",
+    "• خطوة 2: صياغة معادلة الحركة للكتلة (m1 = 6 kg) المتحركة لأسفل المستوى المائل:",
+    "  مركبة الوزن لأسفل السطح المائل: W_parallel = m1 × g × sin(30°) = 6 × 10 × 0.5 = 30 N",
+    "  قوى الحركة لأسفل تعاكسها قوى المقاومة لأعلى (الشد والاحتكاك):",
+    "  ΣF_parallel = m1 × a",
+    "  m1·g·sin(30°) - T - f = m1·a",
+    "",
+    "• خطوة 3: التعويض العددي لاستخراج قوة الاحتكاك (f):",
+    "  30 - 15 - f = 6 × 5",
+    "  15 - f = 30",
+    "  -f = 30 - 15   =>   -f = 15   =>   f = -15 N",
+    "  (الإشارة السالبة تعني في الفيزياء أن القوة تؤثر عكس الاتجاه المفترض، أي متجهة لأعلى السطح المائل بمقدار عددي ثابت قدره 15 N).",
+    "",
+    "الإجابة النهائية المعتمدة: ج) 15 N"
+  ],
+  "pdfFinalAnswer": "من الكتلة المعلقة: a = 5 m/s² | وبالتعويض في معادلة الكتلة المائلة: قوة الاحتكاك تساوي ج) 15 N"
+},
+{
+  "title": "س: اتزان كرة معلقة بقوة أفقية (الامتحان النهائي للشهادة الثانوية - ليبيا 2021-2022)",
+  "text": "إذا عُلِّقت كرة معدنية وزنها (500 N) في نقطة بواسطة سلسلة، ثم سُحِبت الكرة أفقياً بقوة (F) فاتزنت عندما صنعت السلسلة زاوية مقدارها (20°) مع الرأسي، فإن الشد في السلسلة (T) يساوي تقريباً:",
+  "options": [
+    { "text": "أ) 532 N", "isCorrect": true },
+    { "text": "ب) 671 N", "isCorrect": false },
+    { "text": "ج) 927 N", "isCorrect": false },
+    { "text": "د) 171 N", "isCorrect": false }
+  ],
+  "correctAnswerIndex": 0,
+  "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    \n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 260' width='100%' style='max-width: 340px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='100' y1='25' x2='250' y2='25' stroke='#334155' stroke-width='4' stroke-linecap='round'/>\n            <circle cx='150' cy='25' r='3' fill='#334155'/>\n            \n            \n            <line x1='150' y1='25' x2='150' y2='220' stroke='#94a3b8' stroke-dasharray='4,4' stroke-width='1.5'/>\n            \n            \n            <line x1='150' y1='25' x2='235' y2='145' stroke='#1e40af' stroke-width='2.5'/>\n            \n            \n            <circle cx='235' cy='145' r='14' fill='#f59e0b' stroke='#d97706' stroke-width='2'/>\n            \n            \n            <line x1='249' y1='145' x2='310' y2='145' stroke='#059669' stroke-width='2' stroke-linecap='round'/>\n            <polygon points='315,145 305,141 305,149' fill='#059669'/>\n            <text x='290' y='135' font-family='system-ui, sans-serif' font-size='12' fill='#059669' font-weight='bold'>القوة F</text>\n            \n            \n            <line x1='235' y1='159' x2='235' y2='220' stroke='#1e293b' stroke-width='2' stroke-linecap='round'/>\n            <polygon points='235,225 231,215 239,215' fill='#1e293b'/>\n            <text x='235' y='242' font-family='system-ui, sans-serif' font-size='12' fill='#1e293b' font-weight='bold' text-anchor='middle'>الوزن W = 500 N</text>\n            \n            \n            <path d='M 150 75 A 50 50 0 0 1 182 61' fill='none' stroke='#dc2626' stroke-width='2'/>\n            <text x='176' y='52' font-family='system-ui, sans-serif' font-size='12' fill='#dc2626' font-weight='bold'>20°</text>\n            \n            \n            <polygon points='185,75 193,82 181,85' fill='#1e40af'/>\n            <text x='202' y='80' font-family='system-ui, sans-serif' font-size='12' fill='#1e40af' font-weight='bold'>الشد T</text>\n            \n            \n            <line x1='235' y1='90' x2='235' y2='145' stroke='#cbd5e1' stroke-dasharray='3,3'/>\n        </svg>\n    </div>\n\n    \n    <div style='background: #fff7ed; border-right: 4px solid #ea580c; border-radius: 6px; padding: 12px 16px; font-size: 14px; line-height: 1.6; text-align: right;'>\n        <div style='color: #c2410c; font-weight: bold; font-size: 15px; margin-bottom: 6px;'>\n            <span>📌 التلميح الرياضي والشرح الفكري</span>\n        </div>\n        <ul style='margin: 0; padding-right: 20px; color: #4338ca; list-style-type: square;'>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>تحليل قوة الشد رأساً:</strong> عند تحليل قوة الشد <span style='color: #1e40af; font-weight: bold;'>T</span> المائلة بزاوية <span style='color: #dc2626; font-weight: bold;'>20°</span> مع الرأسي، تكون المركبة الرأسية المسؤولة عن موازنة الوزن لأسفل هي: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #0284c7;'>T cos(20°)</span>.</li>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>معادلة الاتزان الرأسي:</strong> لكي تستقر الكرة ولا تتحرك لأعلى أو لأسفل، يجب أن تتساوى المركبة الرأسية مع الوزن: <span style='direction: ltr; display: inline-block; font-weight: bold;'>T cos(20°) = W</span>، أي أن: <span style='direction: ltr; display: inline-block; color: #475569;'>T cos(20°) = 500</span>.</li>\n            <li><strong style='color: #1e293b;'>حساب قيمة الشد:</strong> بقسمة الوزن على جيب تمام الزاوية: <span style='direction: ltr; display: inline-block;'>T = 500 / cos(20°)</span>. وبما أن <span style='direction: ltr; display: inline-block;'>cos(20°) ≈ 0.9397</span>، فإن: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #059669;'>T = 500 / 0.9397 ≈ 532.1 N</span>.</li>\n        </ul>\n    </div>\n</div>",
+  "steps": [
+    {
+      "title": "تحليل قوى الاتزان الرأسي",
+      "question": "ما هي المركبة الرياضية لقوة الشد (T) التي تعادل قوة وزن الكرة (500 N) لأسفل؟",
+      "options": [
+        { "text": "أ) T cos(20°)", "isCorrect": true },
+        { "text": "ب) T sin(20°)", "isCorrect": false }
+      ],
+      "feedback": "✅ إجابة صحيحة تماماً! بما أن الزاوية معطاة مع المحور الرأسي، فإن المركبة الرأسية المجاورة للزاوية تأخذ جيب التمام (cos)، وهي التي توازن الوزن مباشرة."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "══════════════ الخيارات ══════════════",
+    "أ) 532 N  ✅ (الإجابة الصحيحة)",
+    "ب) 671 N",
+    "ج) 927 N",
+    "د) 171 N",
+    "",
+    "══════════════ 📑 الشرح والقوانين العامة لـ PDF ══════════════",
+    "📢 عند اتزان الجسيم تحت تأثير قوى متلاقية في نقطة، نطبق شروط الاتزان (مجموع القوى يساوي صفراً):",
+    "",
+    "• خطوة 1: تحليل قوة الشد (T) إلى مركبتين متعامدتين:",
+    "  - المركبة الأفقية: T sin(20°)  (تتزن مع القوة الأفقية الساحبة F)",
+    "  - المركبة الرأسية: T cos(20°)  (تتزن مع قوة الوزن لأسفل W)",
+    "",
+    "• خطوة 2: صياغة معادلة الاتزان الرأسي وعزل المجهول:",
+    "  ΣFy = 0  =>  T cos(20°) - W = 0",
+    "  T cos(20°) = W",
+    "  T cos(20°) = 500 N",
+    "",
+    "• خطوة 3: التعويض العددي المباشر واستخراج الناتج:",
+    "  T = 500 / cos(20°)",
+    "  علماً بأن: cos(20°) ≈ 0.9397",
+    "  T = 500 / 0.9397 = 532.08 N  (بالتقريب لأقرب رقم صحيح نجدها 532 N)",
+    "",
+    "الإجابة النهائية المعتمدة: أ) 532 N"
+  ],
+  "pdfFinalAnswer": "معادلة الاتزان الرأسي: T cos(20°) = 500 | الشد الناتج: أ) 532 N"
+},
 
 
 
+
+    {
+  "title": "س: (ميكانيكا - الحركة الرأسية): القوة العمودية المؤثرة على الصندوق السفلي (الامتحان النهائي 2021-2022)",
+  "text": "صندوق كتلته (30 kg) موجود في شاحنة تسير على طريق أفقي بعجلة ثابتة، ووضع فوق هذا الصندوق صندوق آخر كتله (نصف وزن الصندوق الأول)، فإن القوة الرأسية المؤثرة بواسطة أرضية الشاحنة على الصندوق السفلي تساوي (بفرض g = 10 m/s²):",
+  "options": [
+    { "text": "أ) 450 N إلى أعلى", "isCorrect": true },
+    { "text": "ب) 150 N إلى أسفل", "isCorrect": false },
+    { "text": "ج) 300 N إلى الأعلى", "isCorrect": false },
+    { "text": "د) 450 N إلى الأسفل", "isCorrect": false }
+  ],
+  "correctAnswerIndex": 0,
+  "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    \n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 240' width='100%' style='max-width: 340px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='50' y1='190' x2='350' y2='190' stroke='#334155' stroke-width='4' stroke-linecap='round'/>\n            \n            <line x1='280' y1='40' x2='340' y2='40' stroke='#059669' stroke-width='2' stroke-dasharray='4,2'/>\n            <polygon points='345,40 335,36 335,44' fill='#059669'/>\n            <text x='310' y='30' font-family='system-ui, sans-serif' font-size='12' fill='#059669' font-weight='bold' text-anchor='middle'>العجلة (a) أفقية</text>\n            \n            \n            <rect x='130' y='120' width='140' height='70' rx='4' fill='#f59e0b' stroke='#d97706' stroke-width='2'/>\n            <text x='200' y='160' font-family='system-ui, sans-serif' font-size='14' fill='#ffffff' font-weight='bold' text-anchor='middle'>الصندوق السفلي (30 kg)</text>\n            \n            \n            <rect x='160' y='60' width='80' height='60' rx='4' fill='#3b82f6' stroke='#1d4ed8' stroke-width='2'/>\n            <text x='200' y='95' font-family='system-ui, sans-serif' font-size='13' fill='#ffffff' font-weight='bold' text-anchor='middle'>العلوي (15 kg)</text>\n\n            \n            <line x1='200' y1='190' x2='200' y2='22' stroke='#dc2626' stroke-width='2.5' stroke-linecap='round'/>\n            <polygon points='200,15 195,27 205,27' fill='#dc2626'/>\n            <text x='215' y='30' font-family='system-ui, sans-serif' font-size='13' fill='#dc2626' font-weight='bold'>قوة السيارة R (لأعلى)</text>\n            \n            \n            <line x1='145' y1='155' x2='145' y2='220' stroke='#1e293b' stroke-width='2' stroke-linecap='round'/>\n            <polygon points='145,225 141,215 149,215' fill='#1e293b'/>\n            <text x='145' y='238' font-family='system-ui, sans-serif' font-size='11' fill='#1e293b' font-weight='bold' text-anchor='middle'>الوزن الكلي = 450 N</text>\n        </svg>\n    </div>\n\n    \n    <div style='background: #fff7ed; border-right: 4px solid #ea580c; border-radius: 6px; padding: 12px 16px; font-size: 14px; line-height: 1.6; text-align: right;'>\n        <div style='color: #c2410c; font-weight: bold; font-size: 15px; margin-bottom: 6px;'>\n            <span>📌 التلميح الرياضي والشرح الفكري</span>\n        </div>\n        <ul style='margin: 0; padding-right: 20px; color: #4338ca; list-style-type: square;'>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>تفكيك لغز الكتلة الثانية:</strong> الصندوق السفلي كتلته <span style='color: #ea580c; font-weight: bold;'>30 kg</span> (أي وزنه <span style='direction: ltr; display: inline-block;'>300 N</span>). الصندوق العلوي وزنه يساوي \"نصف وزن السفلي\"، مما يعني أن وزنه <span style='color: #3b82f6; font-weight: bold;'>150 N</span>.</li>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>طبيعة الحركة والاتزان الرأسي:</strong> السيارة تتحرك بعجلة على طريق <strong style='color: #059669;'>أفقي</strong>، مما يعني أنه لا توجد حركة أو عجلة في الاتجاه <strong style='color: #dc2626;'>الرأسي</strong>. وبالتالي، فإن القوى المؤثرة لأعلى توازن تماماً القوى المؤثرة لأسفل.</li>\n            <li><strong style='color: #1e293b;'>حساب القوة العمودية:</strong> القوة التي تؤثر بها السيارة على الصندوق السفلي هي قوة اتصال عمودية (<span style='color: #dc2626; font-weight: bold;'>R</span>) متجهة <strong style='color: #1e293b;'>إلى أعلى</strong> لموازنة الأوزان المستقرة عليها: <span style='direction: ltr; display: inline-block; font-weight: bold;'>R = W1 + W2 = 300 + 150 = 450 N</span>.</li>\n        </ul>\n    </div>\n</div>",
+  "steps": [
+    {
+      "title": "فهم طبيعة القوى الرأسية",
+      "question": "بما أن السيارة تتحرك بعجلة أفقية فقط، ماذا نستنتج عن محصلة القوى الرأسية المؤثرة على المنظومة؟",
+      "options": [
+        { "text": "أ) محصلة القوى الرأسية تساوي صفراً (اتزان رأسي)", "isCorrect": true },
+        { "text": "ب) محصلة القوى الرأسية تساوي الكتلة في العجلة الأفقية", "isCorrect": false }
+      ],
+      "feedback": "✅ ممتاز وصحيح تماماً! العجلة الأفقية لا تؤثر مطلقاً على الاتزان الرأسي، لذا تظل القوة العمودية الصاعدة مساوية تماماً للوزن الكلي الهابط لأسفل."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "══════════════ الخيارات ══════════════",
+    "أ) 450 N إلى أعلى  ✅ (الإجابة الصحيحة)",
+    "ب) 150 N إلى أسفل",
+    "ج) 300 N إلى الأعلى",
+    "د) 450 N إلى الأسفل",
+    "",
+    "══════════════ 📑 الشرح والقوانين العامة لـ PDF ══════════════",
+    "📢 مفتاح الحل يكمن في الفصل بين الحركة الأفقية والاتزان الرأسي للكتل:",
+    "",
+    "• خطوة 1: حساب الأوزان الفعلية لكل صندوق:",
+    "  - وزن الصندوق السفلي (W1):",
+    "    W1 = m1 × g = 30 × 10 = 300 N",
+    "  - وزن الصندوق العلوي (W2): نصت المسألة على أنه يساوي نصف وزن الصندوق الأول:",
+    "    W2 = 0.5 × W1 = 0.5 × 300 = 150 N",
+    "",
+    "• خطوة 2: حساب الوزن الكلي الضاغط على أرضية السيارة لأسفل:",
+    "  W_total = W1 + W2 = 300 + 150 = 450 N",
+    "",
+    "• خطوة 3: تطبيق شرط الاتزان في الاتجاه الرأسي:",
+    "  بما أن الشاحنة تسير على طريق أفقي، فلا توجد أي حركة رأسيّة للأعلى أو الأسفل (العجلة الرأسية = 0):",
+    "  محصلة القوى الرأسية = 0",
+    "  R - W_total = 0  =>  R = W_total",
+    "  R = 450 N",
+    "",
+    "• خطوة 4: تحديد اتجاه القوة التلامسية (العمودية):",
+    "  تؤثر أرضية السيارة بقوة دفع (رد فعل عمودي) تقاوم الأوزان، ويكون اتجاهها دائماً عمودياً على السطح ونابعاً منه، أي: إلى الأعلى.",
+    "",
+    "الإجابة النهائية المعتمدة: أ) 450 N إلى أعلى"
+  ],
+  "pdfFinalAnswer": "معادلة الاتزان الرأسي: R = W1 + W2 = 300 + 150 = 450 N | الاتجاه: أ) 450 N إلى أعلى"
+}
+    ,
+   {
+  "title": "س 54: (ميكانيكا - الحركة بعجلة): زاوية انحراف سلك داخل حافلة متسارعة (الامتحان النهائي 2021-2022)",
+  "text": "قرر طالب أن يقيس الزاوية التي يصنعها سلك عُلِّق في حافلة ورُبِطت في نهايته كيس كتلته (1.5 kg)؛ عندما تكون الحافلة تتحرك بعجلة (3.5 m/s²)، فإن الزاوية التي يصنعها السلك مع **الأفقي** هي (بفرض g = 10 m/s²):",
+  "options": [
+    { "text": "أ) 29.1°", "isCorrect": false },
+    { "text": "ب) 43.5°", "isCorrect": false },
+    { "text": "ج) 19.3°", "isCorrect": false },
+    { "text": "د) 70.7°", "isCorrect": true }
+  ],
+  "correctAnswerIndex": 3,
+  "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    \n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 260' width='100%' style='max-width: 340px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='50' y1='30' x2='350' y2='30' stroke='#334155' stroke-width='4' stroke-linecap='round'/>\n            <circle cx='160' y='30' r='3' fill='#334155'/>\n            \n            \n            <line x1='160' y1='30' x2='160' y2='220' stroke='#cbd5e1' stroke-dasharray='4,4' stroke-width='1.5'/>\n            \n            \n            <line x1='160' y1='30' x2='250' y2='150' stroke='#1e40af' stroke-width='2.5'/>\n            \n            \n            <circle cx='250' cy='150' r='14' fill='#f59e0b' stroke='#d97706' stroke-width='2'/>\n            <text x='250' y='154' font-family='system-ui, sans-serif' font-size='11' fill='#ffffff' font-weight='bold' text-anchor='middle'>m</text>\n            \n            \n            <line x1='60' y1='50' x2='120' y2='50' stroke='#059669' stroke-width='2' stroke-linecap='round'/>\n            <polygon points='125,50 115,46 115,54' fill='#059669'/>\n            <text x='90' y='42' font-family='system-ui, sans-serif' font-size='11' fill='#059669' font-weight='bold' text-anchor='middle'>العجلة a للأمام</text>\n            \n            \n            <line x1='250' y1='164' x2='250' y2='225' stroke='#1e293b' stroke-width='2' stroke-linecap='round'/>\n            <polygon points='250,230 246,220 254,220' fill='#1e293b'/>\n            <text x='250' y='245' font-family='system-ui, sans-serif' font-size='12' fill='#1e293b' font-weight='bold' text-anchor='middle'>الوزن mg</text>\n            \n            \n            <path d='M 160 80 A 50 50 0 0 1 195 67' fill='none' stroke='#94a3b8' stroke-dasharray='2,2' stroke-width='1.5'/>\n            <text x='175' y='60' font-family='system-ui, sans-serif' font-size='12' fill='#94a3b8'>الزاوية الرأسية</text>\n            \n            \n            <line x1='200' y1='150' x2='290' y2='150' stroke='#dc2626' stroke-dasharray='4,2' stroke-width='1.5'/>\n            <path d='M 220 110 A 40 40 0 0 1 250 150' fill='none' stroke='#dc2626' stroke-width='2'/>\n            <text x='234' y='134' font-family='system-ui, sans-serif' font-size='14' fill='#dc2626' font-weight='bold'>α</text>\n            <text x='280' y='142' font-family='system-ui, sans-serif' font-size='11' fill='#dc2626'>الأفقي</text>\n        </svg>\n    </div>\n\n    \n    <div style='background: #fff7ed; border-right: 4px solid #ea580c; border-radius: 6px; padding: 12px 16px; font-size: 14px; line-height: 1.6; text-align: right;'>\n        <div style='color: #c2410c; font-weight: bold; font-size: 15px; margin-bottom: 6px;'>\n            <span>📌 التلميح الرياضي والشرح الفكري</span>\n        </div>\n        <ul style='margin: 0; padding-right: 20px; color: #4338ca; list-style-type: square;'>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>قانون زاوية الانحراف الرأسية:</strong> عند انحراف سلك معلق داخل مركبة تتحرك بعجلة أفقية، يكون ظل الزاوية مع الرأسي مساوياً لنسبة العجلة الأفقية إلى عجلة الجاذبية: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #0284c7;'>tan(θ) = a / g</span>.</li>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>حساب الزاوية مع الرأسي:</strong> بالتعويض المباشر: <span style='direction: ltr; display: inline-block;'>tan(θ) = 3.5 / 10 = 0.35</span>، ومنها نجد بالآلة الحاسبة أن الزاوية الرأسية هي: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #475569;'>θ ≈ 19.3°</span> (وهذا هو الخيار الفخ جـ).</li>\n            <li><strong style='color: #1e293b;'>الوصول للمطلوب (مع الأفقي):</strong> السلك يصنع زاوية قائمة (90°) بين المحورين الأفقي والرأسي، إذن الزاوية المتممة مع الأفقي هي: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #dc2626;'>90° - 19.3° = 70.7°</span>.</li>\n        </ul>\n    </div>\n</div>",
+  "steps": [
+    {
+      "title": "الانتباه للمطلوب في السؤال",
+      "question": "ما هي العلاقة الهندسية التي تربط بين زاوية السلك مع الرأسي وزاويته مع الأفقي؟",
+      "options": [
+        { "text": "أ) الزاويتان متتامتان ومجموعهما يساوي 90°", "isCorrect": true },
+        { "text": "ب) الزاويتان متساويتان بالتبادل", "isCorrect": false }
+      ],
+      "feedback": "✅ إجابة ذكية وممتازة! المحور الرأسي والأفقي متعامدان تماماً، لذا فإن الزاوية مع الأفقي هي دائماً متممة الزاوية الرأسية (90° - θ)."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "══════════════ الخيارات ══════════════",
+    "أ) 29.1°",
+    "ب) 43.5°",
+    "ج) 19.3°  ⚠️ (فخ: الزاوية مع الرأسي)",
+    "د) 70.7°  ✅ (الإجابة الصحيحة المعتمدة للمتممة الأفقية)",
+    "",
+    "══════════════ 📑 الشرح والقوانين العامة لـ PDF ══════════════",
+    "📢 عند حركة الحافلة بعجلة أفقية للأمام (a)، ينحرف الكيس المعلق بزاوية إلى الخلف نتيجة القصور الذاتي.",
+    "",
+    "• خطوة 1: تحليل القوى المؤثرة على الكتلة (m) داخل الحافلة:",
+    "  - قوة الشد في السلك (T) مائلة بزاوية θ مع الرأسي.",
+    "  - المركبة الرأسية للشد: T cos θ = m·g  (توازن الوزن لأسفل)",
+    "  - المركبة الأفقية للشد: T sin θ = m·a  (تسبب العجلة الأفقية للأمام)",
+    "",
+    "• خطوة 2: إيجاد زاوية الانحراف مع الرأسي (θ):",
+    "  بقسمة المعادلة الأفقية على المعادلة الرأسية:",
+    "  (T sin θ) / (T cos θ) = (m·a) / (m·g)",
+    "  tan θ = a / g",
+    "  نعوض بالمعطيات: a = 3.5 m/s²  ,  g = 10 m/s²",
+    "  tan θ = 3.5 / 10 = 0.35",
+    "  θ = tan⁻¹(0.35) ≈ 19.29° ≈ 19.3°",
+    "",
+    "• خطوة 3: حساب الزاوية المطلوبة مع الأفقي (α):",
+    "  المطلوب في نص السؤال هو الزاوية التي يصنعها السلك مع الأفقي وليس العمودي الرأسي.",
+    "  بما أن الزاوية بين الأفقي والرأسي هي 90°:",
+    "  α = 90° - θ",
+    "  α = 90° - 19.3° = 70.7°",
+    "",
+    "الإجابة النهائية المعتمدة: د) 70.7°"
+  ],
+  "pdfFinalAnswer": "الزاوية الرأسية: tan θ = 3.5/10 => θ = 19.3° | الزاوية مع الأفقي المتممة: د) 70.7°"
+}, 
+{
+    "title": "س 3 (ميكانيكا - استنتاج رياضي): سرعة كرة البندول عند موضع الاتزان",
+    "text": "كرة صغيرة كتلتها (m) معلقة بواسطة خيط طوله (L). أزيحت الكرة جانباً حتى صنع الخيط مع العمودي زاوية مقدارها (60°)، ثم أُطلقت من السكون. تكون سرعة الكرة (v) عندما يكون الخيط عمودياً (عند أسفل نقطة) مساوية للعلاقة التالية:",
+    "svgCode": `<div style="background: #ffffff; border-radius: 12px; padding: 15px; text-align: center; border: 2px solid #f97316; direction: rtl;">
+        <svg viewBox="0 0 400 280" width="100%" style="max-width: 350px; background: #fafafa; border-radius: 8px; margin-bottom: 10px;">
+            <line x1="100" y1="20" x2="300" y2="20" stroke="#334155" stroke-width="4"/>
+            <line x1="200" y1="20" x2="200" y2="250" stroke="#cbd5e1" stroke-dasharray="5,5" stroke-width="2"/>
+            
+            <line x1="200" y1="20" x2="290" y2="150" stroke="#1e3a8a" stroke-width="3"/>
+            <circle cx="290" cy="150" r="14" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+            
+            <line x1="200" y1="20" x2="200" y2="230" stroke="#64748b" stroke-width="2"/>
+            <circle cx="200" cy="230" r="14" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+            
+            <path d="M 290 150 A 170 170 0 0 1 200 230" fill="none" stroke="#94a3b8" stroke-dasharray="4,4" stroke-width="2"/>
+            
+            <path d="M 200 70 A 50 50 0 0 1 225 57" fill="none" stroke="#059669" stroke-width="2"/>
+            <text x="215" y="50" font-family="Cairo" font-size="14" fill="#059669" font-weight="bold">θ = 60°</text>
+            
+            <line x1="200" y1="150" x2="320" y2="150" stroke="#94a3b8" stroke-dasharray="2,2"/>
+            <line x1="200" y1="230" x2="320" y2="230" stroke="#94a3b8" stroke-dasharray="2,2"/>
+            <line x1="310" y1="150" x2="310" y2="230" stroke="#dc2626" stroke-width="2"/>
+            <polygon points="310,150 306,157 314,157" fill="#dc2626"/>
+            <polygon points="310,230 306,223 314,223" fill="#dc2626"/>
+            <text x="320" y="195" font-family="Cairo" font-size="16" fill="#dc2626" font-weight="bold">h</text>
+            
+            <text x="255" y="85" font-family="Cairo" font-size="14" fill="#1e3a8a" font-weight="bold">L</text>
+            <text x="160" y="140" font-family="Cairo" font-size="13" fill="#475569">L cos θ</text>
+        </svg>
+
+        <div style="margin-top: 10px; border-top: 2px dashed #f97316; padding-top: 10px; font-size: 15px; text-align: right; line-height: 1.6;">
+            <strong style="color: #ea580c; font-size: 17px;">📌 التلميح الرياضي والشرح الفكري:</strong><br>
+            • <b>القانون العام والأساسي (لكل الحالات):</b> السرعة دائماً تُحسب من العلاقة العريضة: <span style="direction: ltr; display: inline-block; font-weight: bold; color: #dc2626;">v = √[2gh]</span><br>
+            • <b>كيف نحسب الارتفاع (h)؟</b> من المثلث الموضح بالرسم: <span style="direction: ltr; display: inline-block;">h = L - L cos θ = L(1 - cos θ)</span><br>
+            • <b>في حالة زاوية 60°:</b> بما أن <span style="direction: ltr; display: inline-block;">cos 60° = 0.5</span>، إذن الارتفاع <span style="direction: ltr; display: inline-block; color: #059669; font-weight: bold;">h = 0.5 L</span> (نصف طول الخيط)، وعند التعويض به في القانون العام يختصر مباشرة إلى: <span style="direction: ltr; display: inline-block; font-weight: bold; color: #1e3a8a;">v = √[gL]</span>.
+        </div>
+    </div>`,
+    "options": [
+        { "text": "أ) v = √[2gL]", "isCorrect": false },
+        { "text": "ب) v = √[gL]", "isCorrect": true },
+        { "text": "ج) v = gL", "isCorrect": false },
+        { "text": "د) v = 0.5gL", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 1,
+    "steps": [
+        {
+            "title": "قانون حفظ الطاقة الميكانيكية",
+            "question": "ما هي العلاقة الرياضية النهائية لسرعة كرة البندول عند مرورها بالمركز؟",
+            "options": [
+                { "text": "أ) v = √[2gL]", "isCorrect": false },
+                { "text": "ب) v = √[gL]", "isCorrect": true }
+            ],
+            "feedback": "✅ إجابة صحيحة وممتازة! نظراً لأن زاوية الإزاحة 60° فإن الارتفاع h يساوي نصف طول الخيط، مما يختصر الصيغة العامة v = √[2gh] إلى v = √[gL]."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "══════════════ الخيارات ══════════════",
+        "أ) v = √[2gL]",
+        "ب) v = √[gL]  ✅ (الإجابة الصحيحة)",
+        "ج) v = gL",
+        "د) v = 0.5gL",
+        "",
+        "══════════════ 📑 الشرح والقوانين العامة لـ PDF ══════════════",
+        "📢 القاعدة الثابتة لسرعة البندول الميكانيكي في جـمـيـع الـحـالات والـزوايا هي:",
+        "   👉   v = √[2gh]   👈  (قانون حفظ الطاقة العام)",
+        "",
+        "حيث (h) يمثل الارتفاع العمودي الذي تحركته الكرة لأعلى.",
+        "",
+        "══════════════ 📐 الاستنتاج الهندسي الرياضي (θ = 60°) ══════════════",
+        "• خطوة 1: حساب الارتفاع الرأسي (h) بدلالة هندسة الشكل وطول الخيط (L):",
+        "  القانون الهندسي للارتفاع: h = L(1 - cos θ)",
+        "  نعوض بالزاوية الخاصة المعطاة θ = 60° (علماً بأن cos 60° = 0.5):",
+        "  h = L(1 - 0.5)  =>  h = 0.5 L  (الارتفاع الفعلي يساوي نصف طول الخيط تماماً)",
+        "",
+        "• خطوة 2: التعويض في القانون العام المكتوب أعلاه لتعميم النتيجة:",
+        "  نعوض بقيمة h المستنتجة (0.5L) داخل الجذر الأساسي للسرعة:",
+        "  v = √[2 * g * (0.5L)]",
+        "  بضرب الرقم 2 في نصف (0.5) يختزلان معاً ويتبقّى 1، فتصبح الصيغة المخصصة لهذه الحالة:",
+        "  v = √[gL]",
+        "",
+        "الإجابة النهائية المعتمدة: ب) v = √[gL]"
+    ],
+    "pdfFinalAnswer": "القانون العام الشامل: v = √[2gh] | الإجابة لهذه الحالة: ب) v = √[gL]"
+},
+{
+  "title": "س: (ميكانيكا - اتزان المنظومات): اتزان الأثقال المتناظرة بدلالة الزاوية",
+  "text": "يوضح الشكل جهازاً به كتلة (m) مربوطة بخيطين طويلين يمران على مسمارين (A, B) أملسين ومتماثلين وعلى نفس المستوى، ويحمل كل طرف منهما كتلة (M). إذا كان النظام في حالة اتزان وكانت الكتلة (m) عند عمق (d) تحت نقطة المنتصف بين المسمارين (C)، فإن العلاقة التي تربط الكتلة الصغيرة (m) بالكتل الكبيرة (M) والزاوية (θ) هي:",
+  "options": [
+    { "text": "أ) m = M cos θ", "isCorrect": false },
+    { "text": "ب) m = 2 M cos θ", "isCorrect": true },
+    { "text": "ج) m = 2 M sin θ", "isCorrect": false },
+    { "text": "د) m = M / (2 cos θ)", "isCorrect": false }
+  ],
+  "correctAnswerIndex": 1,
+  "svgCode": "<div style='background: #ffffff; border-radius: 14px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); direction: rtl;'>\n    \n    <div style='text-align: center; margin-bottom: 15px;'>\n        <svg viewBox='0 0 400 280' width='100%' style='max-width: 350px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9;'>\n            \n            <line x1='80' y1='40' x2='320' y2='40' stroke='#94a3b8' stroke-dasharray='4,4' stroke-width='1.5'/>\n            <circle cx='200' cy='40' r='3' fill='#475569'/>\n            <text x='200' y='32' font-family='system-ui, sans-serif' font-size='12' fill='#64748b' text-anchor='middle'>C</text>\n            \n            \n            <circle cx='90' cy='40' r='6' fill='#334155'/>\n            <text x='90' y='30' font-family='system-ui, sans-serif' font-size='12' fill='#334155' font-weight='bold' text-anchor='middle'>A</text>\n            <circle cx='310' cy='40' r='6' fill='#334155'/>\n            <text x='310' y='30' font-family='system-ui, sans-serif' font-size='12' fill='#334155' font-weight='bold' text-anchor='middle'>B</text>\n            \n            \n            <line x1='200' y1='40' x2='200' y2='150' stroke='#94a3b8' stroke-dasharray='4,3' stroke-width='1.5'/>\n            <text x='188' y='95' font-family='system-ui, sans-serif' font-size='12' fill='#64748b'>d</text>\n            \n            \n            \n            <line x1='90' y1='40' x2='90' y2='150' stroke='#475569' stroke-width='2.5'/>\n            <line x1='90' y1='40' x2='200' y2='150' stroke='#1e40af' stroke-width='2.5'/>\n            \n            <line x1='310' y1='40' x2='310' y2='150' stroke='#475569' stroke-width='2.5'/>\n            <line x1='310' y1='40' x2='200' y2='150' stroke='#1e40af' stroke-width='2.5'/>\n            \n            <line x1='200' y1='150' x2='200' y2='180' stroke='#1e293b' stroke-width='2.5'/>\n            \n            \n            \n            <rect x='75' y='150' width='30' height='40' rx='3' fill='#cbd5e1' stroke='#475569' stroke-width='1.5'/>\n            <text x='90' y='174' font-family='system-ui, sans-serif' font-size='12' fill='#1e293b' font-weight='bold' text-anchor='middle'>M</text>\n            <line x1='90' y1='190' x2='90' y2='220' stroke='#475569' stroke-width='1.5' stroke-linecap='round'/>\n            <polygon points='90,225 86,215 94,215' fill='#475569'/>\n            <text x='90' y='240' font-family='system-ui, sans-serif' font-size='11' fill='#475569' text-anchor='middle'>Mg</text>\n            \n            \n            <rect x='295' y='150' width='30' height='40' rx='3' fill='#cbd5e1' stroke='#475569' stroke-width='1.5'/>\n            <text x='310' y='174' font-family='system-ui, sans-serif' font-size='12' fill='#1e293b' font-weight='bold' text-anchor='middle'>M</text>\n            <line x1='310' y1='190' x2='310' y2='220' stroke='#475569' stroke-width='1.5' stroke-linecap='round'/>\n            <polygon points='310,225 306,215 314,215' fill='#475569'/>\n            <text x='310' y='240' font-family='system-ui, sans-serif' font-size='11' fill='#475569' text-anchor='middle'>Mg</text>\n            \n            \n            <path d='M 200 180 C 185 180, 185 220, 200 225 C 215 220, 215 180, 200 180 Z' fill='#f59e0b' stroke='#d97706' stroke-width='1.5'/>\n            <text x='200' y='208' font-family='system-ui, sans-serif' font-size='12' fill='#ffffff' font-weight='bold' text-anchor='middle'>m</text>\n            <line x1='200' y1='225' x2='200' y2='250' stroke='#dc2626' stroke-width='1.5' stroke-linecap='round'/>\n            <polygon points='200,255 196,245 204,245' fill='#dc2626'/>\n            <text x='200' y='270' font-family='system-ui, sans-serif' font-size='11' fill='#dc2626' font-weight='bold' text-anchor='middle'>mg</text>\n            \n            \n            <path d='M 200 75 A 35 35 0 0 0 178 68' fill='none' stroke='#059669' stroke-width='1.5'/>\n            <text x='170' y='62' font-family='system-ui, sans-serif' font-size='11' fill='#059669' font-weight='bold'>θ</text>\n            <path d='M 200 75 A 35 35 0 0 1 222 68' fill='none' stroke='#059669' stroke-width='1.5'/>\n            <text x='228' y='62' font-family='system-ui, sans-serif' font-size='11' fill='#059669' font-weight='bold'>θ</text>\n            \n            \n            <polygon points='145,95 152,103 141,105' fill='#1e40af'/>\n            <text x='132' y='115' font-family='system-ui, sans-serif' font-size='11' fill='#1e40af' font-weight='bold'>T</text>\n            <polygon points='255,95 248,103 259,105' fill='#1e40af'/>\n            <text x='268' y='115' font-family='system-ui, sans-serif' font-size='11' fill='#1e40af' font-weight='bold'>T</text>\n        </svg>\n    </div>\n\n    \n    <div style='background: #fff7ed; border-right: 4px solid #ea580c; border-radius: 6px; padding: 12px 16px; font-size: 14px; line-height: 1.6; text-align: right;'>\n        <div style='color: #c2410c; font-weight: bold; font-size: 15px; margin-bottom: 6px;'>\n            <span>📌 التلميح الرياضي والشرح الفكري</span>\n        </div>\n        <ul style='margin: 0; padding-right: 20px; color: #4338ca; list-style-type: square;'>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>تحديد قوة الشد في الحبل الخارجي:</strong> من اتزان الكتل الجانبية المعلقة رأسياً بشكل مباشر، نجد أن قوة الشد في الخيط تساوي الوزن المعلق تماماً: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #0284c7;'>T = M·g</span>.</li>\n            <li style='margin-bottom: 4px;'><strong style='color: #1e293b;'>تحليل المركبات الرأسية عند العقدة:</strong> تؤثر قوتان شد (T) مائلتان بزاوية (θ) مع الرأسي، المركبات الرأسية الصاعدة منهما معاً توازن وزن الكتلة الوسطى لأسفل: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #dc2626;'>2T cos θ - m·g = 0</span>.</li>\n            <li><strong style='color: #1e293b;'>التعويض والاستنتاج:</strong> عند التعويض عن <span style='direction: ltr; display: inline-block;'>T = M·g</span> في المعادلة، نجد أن: <span style='direction: ltr; display: inline-block;'>2M·g cos θ = m·g</span>، وبالقسمة على عجلة الجاذبية (g) من الطرفين تظهر العلاقة الذهبية للمنظومة: <span style='direction: ltr; display: inline-block; font-weight: bold; color: #1e40af;'>m = 2 M cos θ</span>.</li>\n        </ul>\n    </div>\n</div>",
+  "steps": [
+    {
+      "title": "معادلة الاتزان الرأسي للكتلة الوسطى",
+      "question": "ما هي معادلة الاتزان التي تحكم المركبات الرأسية لقوى الشد عند نقطة التقاء الكتلة m؟",
+      "options": [
+        { "text": "أ) T - M g = 0", "isCorrect": false },
+        { "text": "ب) 2T cos θ - m g = 0", "isCorrect": true }
+      ],
+      "feedback": "✅ ممتاز جداً! بما أن هناك حبلين يميلان بنفس الزاوية θ على المحور الرأسي، فإن المركبة الرأسية لكل منهما هي T cos θ وتعملان معاً لأعلى لموازنة الوزن mg المؤثر لأسفل."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "══════════════ الخيارات ══════════════",
+    "أ) m = M cos θ",
+    "ب) m = 2 M cos θ  ✅ (الإجابة الصحيحة)",
+    "ج) m = 2 M sin θ",
+    "د) m = M / (2 cos θ)",
+    "",
+    "══════════════ 📑 الشرح والقوانين العامة لـ PDF ══════════════",
+    "📢 عند دراسة اتزان المجموعات المتناظرة، يتم تحليل القوى المؤثرة على كل جزء مستقل:",
+    "",
+    "• خطوة 1: اتزان الكتل الجانبية (M):",
+    "  كل كتلة (M) معلقة حرة في نهاية الخيط الرأسي، مما يعني أن قوة الشد (T) في الخيط تساوي وزن هذه الكتلة تماماً:",
+    "  F(↑) = T - M·g = 0  =>  T = M·g",
+    "",
+    "• خطوة 2: اتزان الكتلة المركزية السفلية (m):",
+    "  عند نقطة التقاء الخيوط تحت العمق d، تؤثر قوتا شد مائلتان (T) لأعلى يميناً ويساراً.",
+    "  بتحليل الشد إلى مركبتين (أفقية ورأسية):",
+    "  - المركبات الأفقية (T sin θ) متساوية وموجبة/سالبة وتلغي بعضها تماماً.",
+    "  - المركبات الرأسية (T cos θ) تعملان معاً إلى أعلى في نفس الاتجاه.",
+    "  معادلة الحركة الرأسية عند الاتزان:",
+    "  ΣFy = 2T cos θ - m·g = 0",
+    "",
+    "• خطوة 3: التعويض الرياضي لاستنتاج العلاقة المطلوبة:",
+    "  نعوض عن قيمة الشد (T = M·g) المستنتجة من الخطوة الأولى داخل معادلة الاتزان الثانية:",
+    "  2 (M·g) cos θ - m·g = 0",
+    "  2 M·g cos θ = m·g",
+    "  بقسمة طرفي المعادلة على عجلة الجاذبية الأرضية (g)، نجد أن:",
+    "  m = 2 M cos θ",
+    "",
+    "الإجابة النهائية المعتمدة: ب) m = 2 M cos θ"
+  ],
+  "pdfFinalAnswer": "من اتزان قوى الشد المائلة: 2T cos θ = mg وبما أن T = Mg إذن العلاقة: ب) m = 2 M cos θ"
+}
+
+,
 {
     "title": "س 1 (ميكانيكا - صح/خطأ): عجلة المقذوف الرأسي",
     "text": "يكون للجسم المقذوف رأسياً لأعلى عجلة تسارع تختلف في قيمتها عن عجلة السقوط الحر.",

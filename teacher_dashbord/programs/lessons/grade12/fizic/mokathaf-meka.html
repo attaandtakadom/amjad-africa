@@ -44,6 +44,26 @@
     <button class="print-btn" onclick="triggerSmartPrint()">
         <i class="fa-solid fa-file-pdf"></i> طباعة PDF
     </button>
+<button onclick="triggerMobileSmartPrint()" style="
+    background-color: #ff9800; 
+    color: white; 
+    font-family: 'Cairo', sans-serif; 
+    font-size: 18px; 
+    font-weight: bold; 
+    padding: 12px 24px; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px;
+    margin: 10px;
+    transition: background 0.3s;">
+    📱 طباعة نسخة النقال (خط كبير جداً)
+</button>
+
+
     <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
         <i class="fa-brands fa-telegram"></i> البوت التعليمي
     </a>
@@ -277,150 +297,159 @@ function addSummaryPage() {
     
     summaryPage.innerHTML = `
         <div style="text-align: center; margin-bottom: 20px; border-bottom: 3px solid #1a365d; padding-bottom: 10px;">
-            <h1 style="font-size: 28px; color: #1a365d; font-weight: 800;">📚 ملخص قوانين الميكانيكا</h1>
-            <p style="font-size: 16px; color: #475569;">لطلاب الشهادة الثانوية - مراجعة سريعة للحفظ</p>
+            <h1 style="font-size: 26px; color: #1a365d; font-weight: 800;">📚 ملخص قوانين الميكانيكا الشامل</h1>
+            <p style="font-size: 15px; color: #475569;">لطلاب الشهادة الثانوية - مراجعة سريعة وتركيز فكري للحفظ</p>
         </div>
 
-        <!-- 1. معادلات الحركة -->
-        <div style="margin-bottom: 18px;">
-            <h2 style="font-size: 18px; color: #1a365d; font-weight: 700; border-right: 4px solid #2563eb; padding-right: 10px; margin-bottom: 8px;">① معادلات الحركة بعجلة منتظمة (a)</h2>
+        <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 16px; color: #1a365d; font-weight: 700; border-right: 4px solid #2563eb; padding-right: 10px; margin-bottom: 6px;">① معادلات الحركة بعجلة منتظمة (a)</h2>
             <div style="background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
                     <tr style="background: #e2e8f0;">
                         <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">القانون</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الصيغة</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">يُستخدم عندما</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الصيغة الرياضية</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">يُستخدم عندما يكون</th>
                     </tr>
                     <tr>
                         <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">الأولى</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">v = u + at</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">غياب المسافة (s)</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">v = u + at</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">المسافة (s) غائبة</td>
                     </tr>
                     <tr style="background: #f1f5f9;">
                         <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">الثانية</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">s = ut + ½at²</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">غياب السرعة النهائية (v)</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">s = ut + ½at²</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">السرعة النهائية (v) غائبة</td>
                     </tr>
                     <tr>
                         <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">الثالثة</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">v² = u² + 2as</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">غياب الزمن (t)</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">v² = u² + 2as</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">الزمن (t) غائب</td>
                     </tr>
                 </table>
-                <div style="font-size: 12px; color: #64748b; margin-top: 5px; text-align: center;">
-                    ملاحظة: في السقوط الحر نستبدل a بـ g (عجلة الجاذبية = 10 m/s²)
+                <div style="font-size: 11px; color: #64748b; margin-top: 5px; text-align: center;">
+                    💡 تنبيه: في السقوط الحر الرأسي نستبدل العجلة <span style="direction:ltr; display:inline-block;">(a)</span> بعجلة الجاذبية <span style="direction:ltr; display:inline-block;">(g = 10 m/s²)</span>
                 </div>
             </div>
         </div>
 
-        <!-- 2. قوانين نيوتن -->
-        <div style="margin-bottom: 18px;">
-            <h2 style="font-size: 18px; color: #1a365d; font-weight: 700; border-right: 4px solid #dc2626; padding-right: 10px; margin-bottom: 8px;">② قوانين نيوتن للحركة والقوى</h2>
+        <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 16px; color: #1a365d; font-weight: 700; border-right: 4px solid #f59e0b; padding-right: 10px; margin-bottom: 6px;">② تحليل القوى على السطوح المستوية والمائلة</h2>
             <div style="background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <tr style="background: #e2e8f0;">
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الحالة الميكانيكية</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">مركبة الوزن المؤثرة</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">القوة العمودية (R)</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">على سطح أفقي تماماً</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; color: #64748b;">لا توجد مركبة مائلة</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">R = m · g</td>
+                    </tr>
+                    <tr style="background: #fff7ed;">
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; color: #c2410c;">على سطح مائل بزاوية (θ)</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: bold; color: #b45309;">W_parallel = m·g·sin θ</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">R = m·g·cos θ</td>
+                    </tr>
+                </table>
+                <div style="font-size: 11px; color: #b45309; margin-top: 5px; text-align: center; font-weight: bold;">
+                    ⚠️ تنبيه ذكي للطلاب: مركبة الوزن لأسفل المستوى المائل هي دائماً (m·g·sin θ) وتذكر أن الكتلة m بمفردها ليست قوة!
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 16px; color: #1a365d; font-weight: 700; border-right: 4px solid #dc2626; padding-right: 10px; margin-bottom: 6px;">③ قوانين نيوتن للحركة والمنظومات الكتلية</h2>
+            <div style="background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <tr style="background: #e2e8f0;">
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">المفهوم العلمي</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">القانون الرياضي</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الشرط الفيزيائي للاستخدام</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">قانون نيوتن الأول</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">ΣF = 0</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">الجسم ساكن أو يتحرك بسرعة منتظمة (a = 0)</td>
+                    </tr>
+                    <tr style="background: #f1f5f9;">
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">قانون نيوتن الثاني</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">F_net = m · a</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">وجود قوة محصلة مسببة لعجلة حركية ثابتة</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">حركة آلة أتوود (البكرات)</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">a = [(m₂ - m₁) / (m₂ + m₁)] · g</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">بفرض الكتل المعلقة رأساً بحيث (m₂ > m₁)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 16px; color: #1a365d; font-weight: 700; border-right: 4px solid #16a34a; padding-right: 10px; margin-bottom: 6px;">④ الشغل والقدرة وحفظ الطاقة الميكانيكية</h2>
+            <div style="background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
                     <tr style="background: #e2e8f0;">
                         <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">المفهوم</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">القانون</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">ملاحظات</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">القانون الرياضي</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الوحدة الفيزيائية</th>
                     </tr>
                     <tr>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">نيوتن الأول</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">ΣF = 0</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">ساكن أو سرعة منتظمة (a = 0)</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">الشغل الأفقي وبزاوية</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">W = F · s · cos θ</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">جول (J)</td>
                     </tr>
                     <tr style="background: #f1f5f9;">
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">نيوتن الثاني</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">F = m × a</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">القوة المسببة للحركة</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">طاقة الحركة والوضع</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">Ek = ½mv²  ||  Ep = mgh</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">جول (J)</td>
                     </tr>
-                    <tr>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">الوزن (W)</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">W = m × g</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">اتجاهه نحو مركز الأرض</td>
-                    </tr>
-                    <tr style="background: #f1f5f9;">
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">آلة أتوود</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">a = (m₂-m₁)/(m₂+m₁) × g</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">m₂ > m₁ (الأثقل لأسفل)</td>
+                    <tr style="background: #ecfdf5;">
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; color: #065f46;">حركة البندول البسيط</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: bold; color: #065f46;">v = √(2·g·h)</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; color: #065f46;">متر/ثانية (m/s)</td>
                     </tr>
                 </table>
-            </div>
-        </div>
-
-        <!-- 3. الشغل والطاقة -->
-        <div style="margin-bottom: 18px;">
-            <h2 style="font-size: 18px; color: #1a365d; font-weight: 700; border-right: 4px solid #16a34a; padding-right: 10px; margin-bottom: 8px;">③ الشغل والطاقة (Work & Energy)</h2>
-            <div style="background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                    <tr style="background: #e2e8f0;">
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">المفهوم</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">القانون</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الوحدة</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">شغل (أفقي)</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">W = F × s</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">جول (J)</td>
-                    </tr>
-                    <tr style="background: #f1f5f9;">
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">شغل بزاوية</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">W = F·s·cosθ</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">جول (J)</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">طاقة الحركة (Ek)</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">Ek = ½ × m × v²</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">جول (J)</td>
-                    </tr>
-                    <tr style="background: #f1f5f9;">
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">طاقة الوضع (Ep)</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">Ep = m × g × h</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">جول (J)</td>
-                    </tr>
-                </table>
-                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 8px; margin-top: 8px; text-align: center; font-size: 14px;">
-                    <strong>نظرية الشغل والطاقة:</strong> W = ΔEk = ½ × m × (v² − u²)
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 6px; margin-top: 6px; text-align: center; font-size: 12px; color: #166534;">
+                    🎯 <strong>قاعدة حساب الارتفاع الرأسي في البندول:</strong> <span style="direction: ltr; display: inline-block; font-weight: bold;">h = L(1 - cos θ)</span> حيث <span style="direction: ltr; display: inline-block;">L</span> هو طول الخيط، و <span style="direction: ltr; display: inline-block;">θ</span> هي زاوية الانحراف مع الرأسي.
                 </div>
             </div>
         </div>
 
-        <!-- 4. القدرة -->
-        <div style="margin-bottom: 18px;">
-            <h2 style="font-size: 18px; color: #1a365d; font-weight: 700; border-right: 4px solid #8b5cf6; padding-right: 10px; margin-bottom: 8px;">④ القدرة (Power)</h2>
+        <div style="margin-bottom: 10px;">
+            <h2 style="font-size: 16px; color: #1a365d; font-weight: 700; border-right: 4px solid #8b5cf6; padding-right: 10px; margin-bottom: 6px;">⑤ القدرة الميكانيكية (Power)</h2>
             <div style="background: #f8fafc; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
                     <tr style="background: #e2e8f0;">
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">القانون</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الصيغة</th>
-                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الملاحظات</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">النوع</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الصيغة الرياضية</th>
+                        <th style="padding: 6px 10px; border: 1px solid #cbd5e1; text-align: center;">الاستخدام</th>
                     </tr>
                     <tr>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">القدرة بدلالة الشغل</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">P = W / t</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">معدل بذل الشغل</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">بدلالة الشغل والزمن</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">P = W / t</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">معدل بذل الشغل في زمن معين</td>
                     </tr>
                     <tr style="background: #f1f5f9;">
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">القدرة بدلالة السرعة</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr;">P = F × v</td>
-                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">للآلات المتحركة</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold;">بدلالة القوة والسرعة</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600;">P = F · v</td>
+                        <td style="padding: 5px 10px; border: 1px solid #cbd5e1; text-align: center;">خاص بالآلات والمركبات المتحركة بانتظام</td>
                     </tr>
                 </table>
-                <div style="font-size: 12px; color: #64748b; margin-top: 5px; text-align: center;">
-                    تحويل الوحدات: 1 kW = 1000 W
+                <div style="font-size: 11px; color: #64748b; margin-top: 5px; text-align: center;">
+                    ⚡ تحويل الوحدات الهامة: <span style="direction: ltr; display: inline-block; font-weight: bold;">1 kW = 1000 W</span> || الشغل المبذول يعادل التغير في طاقة الحركة: <span style="direction: ltr; display: inline-block;">W = ΔEk</span>
                 </div>
             </div>
         </div>
 
-        
-        <div style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 8px;">
-            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        <div style="text-align: center; font-size: 11px; color: #94a3b8; margin-top: 12px; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+            ⚡ مادة مخصصة للمراجعة النهائية لطلاب مدرسة أمجاد أفريقيا - يمنع النسخ أو التجارة ⚡
         </div>
     `;
     
     printableDoc.appendChild(summaryPage);
-}
-
-// ============================================================
+}// ============================================================
 // ورقة تحويلات الوحدات الميكانيكية (معدلة مع شرح الأسس والآلة الحاسبة)
 // ============================================================
 
@@ -849,6 +878,175 @@ addQuestionsStartPage();
         window.print();
     }, 500);
 }
+
+
+function triggerMobileSmartPrint() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const questionsArea = document.getElementById('dynamic-pdf-questions-area');
+
+    // تفريغ الحاويات تماماً
+    printableDoc.innerHTML = '';
+    questionsArea.innerHTML = '';
+
+    // ===== 1. الغلاف (مكتوب بخطوط واضحة وثابتة للكرومبوك والنقال) =====
+    const coverPage = document.createElement('div');
+    coverPage.style.cssText = `
+        page-break-before: always;
+        page-break-after: always;
+        break-after: page;
+        padding: 20px;
+        text-align: center;
+        font-family: 'Cairo', sans-serif;
+        direction: rtl;
+    `;
+    coverPage.innerHTML = `
+        <div style="font-size: 26px; color: #1a365d; margin-bottom: 30px; font-weight: bold;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+        <div style="font-size: 48px; font-weight: 900; color: #0f172a; margin-bottom: 10px;">مكثف الميكانيكا</div>
+        <div style="font-size: 32px; font-weight: 700; color: #334155; margin-bottom: 30px;">الصف الثالث الثانوي</div>
+        <div style="border: 4px solid #1a365d; border-radius: 16px; padding: 30px 15px; margin: 20px 0; background: #f8fafc;">
+            <h3 style="font-size: 34px; color: #1e293b; margin: 0 0 15px 0;">📖 كراسة الحلول النموذجية 📖</h3>
+            <h4 style="font-size: 26px; color: #475569; margin: 10px 0;">أسئلة من امتحانات سابقة</h4>
+            <div style="font-size: 24px; color: #64748b;">الميكانيكا</div>
+            <div style="font-size: 28px; font-weight: 700; color: #0f172a; margin-top: 20px;">العام الدراسي 2025 - 2026</div>
+        </div>
+        <div style="font-size: 28px; color: #059669; margin: 30px 0; font-weight: bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+        <div style="font-size: 20px; color: #475569; line-height: 1.6;">
+            رابط البوت التعليمي:<br>
+            <a href="http://t.me/amjad_africa2027bot" style="color: #2563eb; text-decoration: none; font-weight: bold;">t.me/amjad_africa2027bot</a>
+        </div>
+    `;
+    printableDoc.appendChild(coverPage);
+    
+    // ===== 2. استدعاء صفحات القوانين والملخصات من دوالك =====
+    if (typeof addSummaryPage === 'function') addSummaryPage();
+    if (typeof addGoldenKeysPage === 'function') addGoldenKeysPage();
+    if (typeof addUnitsConversionPage === 'function') addUnitsConversionPage();
+    if (typeof addQuestionsStartPage === 'function') addQuestionsStartPage();
+
+    // ===== 3. تنظيف وتكبير كود القوانين برمجياً بنسبة 200% لتخطي الستايلات الثابتة =====
+    // نبحث عن كل العناصر داخل حاوية القوانين التي تم توليدها
+    const allElements = printableDoc.querySelectorAll('div, table, tr, td, th, span, p, h1, h2, h3, h4, strong');
+    allElements.forEach(el => {
+        // نتأكد أننا لا نغير الغلاف الأساسي
+        if (el !== coverPage && !coverPage.contains(el)) {
+            
+            // تكبير نصوص الجداول والفقرات الصغيرة (التي كانت 13px و 15px) لتصبح 22px
+            if (el.tagName === 'TD' || el.tagName === 'TH' || el.tagName === 'P' || el.tagName === 'SPAN' || el.tagName === 'DIV' || el.tagName === 'STRONG') {
+                el.style.setProperty('font-size', '22px', 'important');
+                el.style.setProperty('line-height', '1.7', 'important');
+            }
+            
+            // تكبير العناوين الرئيسية للأقسام (التي كانت 16px) لتصبح 26px
+            if (el.tagName === 'H2') {
+                el.style.setProperty('font-size', '26px', 'important');
+                el.style.setProperty('margin-bottom', '10px', 'important');
+            }
+            
+            // تكبير عنوان الصفحة الرئيسي (الذي كان 28px) ليصبح 36px
+            if (el.tagName === 'H1') {
+                el.style.setProperty('font-size', '36px', 'important');
+            }
+
+            // زيادة المسافات داخل الخلايا لتكون واضحة ومريحة للضغط والقراءة
+            if (el.tagName === 'TD' || el.tagName === 'TH') {
+                el.style.setProperty('padding', '10px 12px', 'important');
+            }
+        }
+    });
+
+    // وضع فاصل صفحات حاسم لمنع تداخل القوانين مع الأسئلة
+    const forceBreak = document.createElement('div');
+    forceBreak.style.cssText = "page-break-after: always; break-after: page; clear: both; height: 1px;";
+    printableDoc.appendChild(forceBreak);
+
+    // ===== 4. الحاوية الرئيسية للأسئلة (تنسيق مريح 200%) =====
+    const mainPage = document.createElement('div');
+    mainPage.style.cssText = `
+        display: block;
+        width: 100%;
+        direction: rtl;
+        padding: 10px;
+    `;
+
+    questionsMatrix.forEach((q, index) => {
+        const questionNumber = index + 1;
+        
+        let fontSize = 22; // حجم خط متناسق ومكبر 200% للأسئلة
+        const textLength = (q.text || '').length;
+        if (textLength < 50) fontSize = 24;
+        if (textLength > 150) fontSize = 20;
+
+        // ===== خطوات الحل =====
+        let stepsHtml = '';
+        if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
+            q.pdfSolutionSteps.forEach(s => {
+                if (s && s.trim()) {
+                    stepsHtml += `<div style="padding: 6px 0; font-size: ${fontSize}px; line-height: 1.6; text-align: right;">${s}</div>`;
+                }
+            });
+        }
+
+        // ===== الرسومات والصور =====
+        let graphicHtml = '';
+        if (q.svgCode && q.svgCode.trim() !== "") {
+            let largeSvg = q.svgCode.replace(/width="[^"]*"/, 'width="100%"').replace(/height="[^"]*"/, 'style="max-height:320px;"');
+            graphicHtml = `<div style="text-align: center; margin: 15px 0;">${largeSvg}</div>`;
+        } else if (q.imagePath && q.imagePath.trim() !== "") {
+            graphicHtml = `<div style="text-align: center; margin: 15px 0;"><img src="${q.imagePath}" style="max-width: 90%; height: auto; border-radius: 8px;"></div>`;
+        }
+
+        const questionDiv = document.createElement('div');
+        questionDiv.style.cssText = `
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin-bottom: 35px !important;
+            padding-bottom: 20px !important;
+            border-bottom: 2px dashed #cbd5e1;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        `;
+
+        questionDiv.innerHTML = `
+            <div style="font-size: ${fontSize + 4}px; font-weight: bold; color: #1a365d; margin-bottom: 8px; text-align: right;">${questionNumber}. ${q.title || ''}</div>
+            <div style="font-size: ${fontSize + 1}px; line-height: 1.6; color: #2d3748; margin-bottom: 12px; text-align: right;">${q.text || ''}</div>
+            ${graphicHtml}
+            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #edf2f7;">
+                <div style="padding-right: 10px; color: #2d3748; text-align: right;">${stepsHtml || 'لا يوجد حل متاح'}</div>
+                ${q.pdfFinalAnswer ? `<div style="font-size: ${fontSize + 2}px; font-weight: bold; margin-top: 10px; color: #065f46; padding: 6px 12px; background-color: #f0fdf4; border-radius: 6px; display: inline-block; border: 1.5px solid #bbf7d0; direction: rtl;">الإجابة النهائية: ${q.pdfFinalAnswer}</div>` : ''}
+            </div>
+        `;
+
+        mainPage.appendChild(questionDiv);
+    });
+
+    // تذييل المذكرة
+    const pageFooter = document.createElement('div');
+    pageFooter.style.cssText = `
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+        border-top: 2px solid #ddd;
+        padding-top: 15px;
+        margin-top: 25px;
+        font-weight: bold;
+    `;
+    pageFooter.innerHTML = `⚡ مكثف الميكانيكا - نسخة النقال المحدثة (تكبير 200%) ⚡`;
+    mainPage.appendChild(pageFooter);
+
+    questionsArea.appendChild(mainPage);
+
+    // تشغيل نافذة الحفظ والطباعة فوراً
+    setTimeout(() => {
+        window.print();
+    }, 500);
+}
+
+
+
+
+
+
     window.onload = () => {
         renderActiveQuestion(0);
     };
