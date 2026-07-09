@@ -1,0 +1,566 @@
+/* ============================================================
+   style1.css - الأنماط الرئيسية (نسخة مخصصة للخطوط الضخمة على النقال)
+   ============================================================ */
+
+:root {
+    --primary: #0f172a;
+    --accent: #2563eb;
+    --sky-blue: #38bdf8; /* لون أزرق السماء */
+    --sky-blue-dark: #0ea5e9; /* أزرق سماء غامق قليلاً */
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --success: #16a34a;
+    --error: #dc2626;
+    --text-main: #334155;
+    --border-color: #e2e8f0;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #cbd5e1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.header {
+    background-color: var(--primary);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.header h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.school-badge {
+    background: #ea580c;
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#question-counter {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.question-container {
+    padding: 30px;
+    text-align: center;
+}
+
+.question-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    direction: rtl;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.q-source-span {
+    background: var(--accent);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.question-text {
+    font-size: 19px;
+    line-height: 1.8;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.question-graphic-area {
+    max-width: 100%;
+    margin: 0 auto 20px auto;
+    padding: 15px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+}
+
+.question-graphic-area svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.no-graphic {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.steps-container {
+    padding: 20px 30px;
+    background-color: var(--bg);
+}
+
+.step-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    border-right: 5px solid #94a3b8;
+}
+
+.step-card.active {
+    opacity: 1;
+    pointer-events: auto;
+    border-right-color: var(--sky-blue);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.step-card.completed {
+    opacity: 1;
+    pointer-events: none;
+    border-right-color: var(--success);
+    background-color: #f0fdf4;
+}
+
+.step-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.step-question {
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: var(--text-main);
+    text-align: right;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    direction: rtl;
+}
+
+.option-btn {
+    background: white;
+    border: 2px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: right;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    border-color: var(--sky-blue);
+    background: #f0f9ff;
+}
+
+.option-btn.correct {
+    border-color: var(--success);
+    background: #dcfce7;
+    color: #166534;
+}
+
+.option-btn.wrong {
+    border-color: var(--error);
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.option-btn i {
+    font-size: 18px;
+}
+
+.feedback-box {
+    margin-top: 15px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    display: none;
+    text-align: right;
+}
+
+.feedback-box.success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    display: block;
+}
+
+.navigation-area {
+    padding: 0 30px 30px 30px;
+    display: flex;
+    justify-content: space-between;
+    background: var(--bg);
+}
+
+.nav-btn {
+    padding: 12px 28px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #1e293b;
+    transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    color: #94a3b8;
+}
+
+.nav-btn i {
+    font-size: 14px;
+}
+
+.print-section {
+    text-align: center;
+    margin: 20px 0 50px 0;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.print-btn {
+    background-color: var(--success);
+    color: white;
+    padding: 15px 35px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.print-btn:hover {
+    background-color: #15803d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bot-link-btn {
+    background-color: var(--accent);
+    color: white;
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.bot-link-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+#printable-pdf-document {
+    display: none;
+}
+
+#dynamic-pdf-questions-area {
+    display: none;
+}
+
+
+
+
+
+
+/* ============================================================
+   أنماط الطباعة الذكية
+   ============================================================ */
+@media print {
+    @page {
+        size: A4;
+        margin: 6mm 8mm 10mm 8mm !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100%;
+        position: relative;
+    }
+
+    .app-container,
+    .print-section {
+        display: none !important;
+    }
+
+    #printable-pdf-document {
+        display: block !important;
+        direction: rtl;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: white;
+    }
+
+    #dynamic-pdf-questions-area {
+        display: block !important;
+    }
+
+    /* العلامة المائية */
+    body::before {
+        content: "مدرسة أمجاد أفريقيا - ليبيا - البيضاء";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-40deg);
+        font-size: 48px;
+        font-weight: bold;
+        color: rgba(148, 163, 184, 0.08) !important;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 9999;
+        display: block !important;
+        letter-spacing: 4px;
+    }
+
+    /* الغلاف */
+    .pdf-cover-page {
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        box-sizing: border-box;
+        text-align: center;
+        background: white;
+        padding: 10mm 10mm !important;
+    }
+
+    /* حاوية المذكرة الأساسية */
+.print-page-box {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 !important;
+    padding: 4mm 6mm 5mm 6mm !important;
+    background: #ffffff;
+    display: block;
+    position: relative;
+    
+    /* 💡 التعديل هنا: السماح للمتصفح بالاستمرار دون قفز إجباري */
+    page-break-after: auto !important;
+    break-after: auto !important;
+    height: auto !important;
+    min-height: auto !important;
+}
+
+.pdf-questions-pair-container {
+    width: 100%;
+    display: block;
+    page-break-after: auto !important;
+    break-after: auto !important;
+}
+   
+    /* كرت السؤال الكامل مع حماية الانقسام */
+    .pdf-question-block {
+        page-break-inside: avoid !important;
+        break-inside: auto !important;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        /* ملاحظة: تركنا التحكم في الحجوم والهوامش السفلى للجافا سكريبت حتى لا يتم تجميدها */
+    }
+
+    /* 💡 تم حذف قيم الـ font-size الثابتة بـ !important من هنا للسماح للجافا سكريبت بالتحكم وتكبير الخطوط بحرية */
+/* 1. تكبير نص السؤال الرئيسي */
+.pdf-q-text {
+    font-size: 26px !important;    /* يمكنكِ زيادته إلى 28px أو 30px حسب الرغبة */
+    line-height: 1.8 !important;   /* تباعد الأسطر لضمان عدم تداخل الكلام الكبير */
+    font-weight: 600 !important;
+}
+
+/* 2. تكبير عنوان السؤال (مثلاً: 1. السؤال الأول) */
+.pdf-q-title {
+    font-size: 28px !important;    /* دائماً أكبر من نص السؤال بقليل */
+    font-weight: 900 !important;
+}
+
+/* 3. تكبير نصوص خطوات الحل والاستنتاج الرياضي */
+.pdf-sol-steps div {
+    font-size: 24px !important;    /* تكبير خط خطوات الحل */
+    line-height: 1.7 !important;
+    font-weight: bold !important;
+}
+
+/* 4. تكبير خط الإجابة النهائية (الصندوق الأخضر) */
+.pdf-final-ans {
+    font-size: 28px !important;    /* لكي تبرز الإجابة النهائية بشكل ضخم وواضح */
+    padding: 15px 25px !important; /* زيادة المساحة الداخلية للصندوق ليتناسب مع الخط الكبير */
+}
+    /* الرسوم البيانية والهندسية */
+/* ===== الرسومات (داخل @media print في ملف style1.css) ===== */
+.pdf-graphic {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 10px 0 !important; /* تقليل المسافة حول الرسمة */
+    width: 100% !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+/* 💡 التعديل السحري هنا: قمنا بتصغير الحد الأقصى للعرض والارتفاع */
+.pdf-graphic svg,
+.pdf-graphic img {
+    display: block !important;
+    margin: 0 auto !important;
+    max-width: 55% !important;   /* تم تصغير العرض من 100% إلى 55% */
+    max-height: 140px !important; /* تم تحديد أقصى ارتفاع بـ 140 بكسل بدلاً من تركها مفتوحة */
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+}
+    .page-footer-number {
+        text-align: center;
+        width: 100%;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .print-page-box:empty {
+        display: none !important;
+    }
+
+    /* صفحات الملخص والقوانين */
+    .pdf-summary-page,
+    .pdf-golden-page,
+    .pdf-units-page,
+    .pdf-laws-page {
+        padding: 6mm 8mm 4mm 8mm !important;
+        margin: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    .pdf-laws-page > div {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .pdf-laws-page table,
+    .pdf-laws-page .grid-container,
+    .pdf-summary-page table,
+    .pdf-golden-page table {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        border-collapse: collapse !important;
+        border: 1px solid #cbd5e1 !important;
+        width: 100% !important;
+    }
+
+    .pdf-summary-page table th, .pdf-summary-page table td,
+    .pdf-golden-page table th, .pdf-golden-page table td,
+    .pdf-laws-page table th, .pdf-laws-page table td {
+        border: 1px solid #cbd5e1 !important;
+        padding: 4px 6px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* التوافق مع الشاشات المتصفحة العادية */
+@media (max-width: 600px) {
+    body { padding: 10px; }
+    .header { padding: 15px 20px; }
+    .header h2 { font-size: 18px; }
+    .question-container { padding: 20px; }
+    .question-text { font-size: 17px; }
+    .navigation-area { flex-direction: column; gap: 10px; }
+    .nav-btn, .print-btn, .bot-link-btn { width: 100%; justify-content: center; }
+}
+
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
