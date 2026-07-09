@@ -880,6 +880,9 @@ addQuestionsStartPage();
 }
 
 
+
+
+
 function triggerMobileSmartPrint() {
     const printableDoc = document.getElementById('printable-pdf-document');
     const questionsArea = document.getElementById('dynamic-pdf-questions-area');
@@ -916,133 +919,121 @@ function triggerMobileSmartPrint() {
         </div>
     `;
     printableDoc.appendChild(coverPage);
-    
-    // ===== 2. استدعاء صفحات القوانين والملخصات من دوالك =====
-    if (typeof addSummaryPage === 'function') addSummaryPage();
-    if (typeof addGoldenKeysPage === 'function') addGoldenKeysPage();
-    if (typeof addUnitsConversionPage === 'function') addUnitsConversionPage();
+
+    if (typeof addPhysicsLawsPages === 'function') addPhysicsLawsPages();
     if (typeof addQuestionsStartPage === 'function') addQuestionsStartPage();
 
-    // ===== 3. تنظيف وتكبير كود القوانين برمجياً بنسبة 200% لتخطي الستايلات الثابتة =====
-    // نبحث عن كل العناصر داخل حاوية القوانين التي تم توليدها
-    const allElements = printableDoc.querySelectorAll('div, table, tr, td, th, span, p, h1, h2, h3, h4, strong');
-    allElements.forEach(el => {
-        // نتأكد أننا لا نغير الغلاف الأساسي
-        if (el !== coverPage && !coverPage.contains(el)) {
-            
-            // تكبير نصوص الجداول والفقرات الصغيرة (التي كانت 13px و 15px) لتصبح 22px
-            if (el.tagName === 'TD' || el.tagName === 'TH' || el.tagName === 'P' || el.tagName === 'SPAN' || el.tagName === 'DIV' || el.tagName === 'STRONG') {
-                el.style.setProperty('font-size', '22px', 'important');
-                el.style.setProperty('line-height', '1.7', 'important');
-            }
-            
-            // تكبير العناوين الرئيسية للأقسام (التي كانت 16px) لتصبح 26px
-            if (el.tagName === 'H2') {
-                el.style.setProperty('font-size', '26px', 'important');
-                el.style.setProperty('margin-bottom', '10px', 'important');
-            }
-            
-            // تكبير عنوان الصفحة الرئيسي (الذي كان 28px) ليصبح 36px
-            if (el.tagName === 'H1') {
-                el.style.setProperty('font-size', '36px', 'important');
-            }
-
-            // زيادة المسافات داخل الخلايا لتكون واضحة ومريحة للضغط والقراءة
-            if (el.tagName === 'TD' || el.tagName === 'TH') {
-                el.style.setProperty('padding', '10px 12px', 'important');
-            }
-        }
-    });
-
-    // وضع فاصل صفحات حاسم لمنع تداخل القوانين مع الأسئلة
-    const forceBreak = document.createElement('div');
-    forceBreak.style.cssText = "page-break-after: always; break-after: page; clear: both; height: 1px;";
-    printableDoc.appendChild(forceBreak);
-
-    // ===== 4. الحاوية الرئيسية للأسئلة (تنسيق مريح 200%) =====
+    // ===== 2. بناء حاوية الأسئلة بأبعاد مريحة للنقال =====
     const mainPage = document.createElement('div');
+    mainPage.className = 'print-page-box';
     mainPage.style.cssText = `
+        page-break-after: auto;
+        break-after: auto;
+        min-height: auto;
+        height: auto;
+        padding: 8mm 12mm 8mm 12mm; 
+    `;
+
+    const pairContainer = document.createElement('div');
+    pairContainer.className = 'pdf-questions-pair-container';
+    pairContainer.style.cssText = `
         display: block;
         width: 100%;
-        direction: rtl;
-        padding: 10px;
     `;
 
     questionsMatrix.forEach((q, index) => {
         const questionNumber = index + 1;
         
-        let fontSize = 22; // حجم خط متناسق ومكبر 200% للأسئلة
+        // 🚀 تم تكبير الخط الأساسي للنقال هنا بمقدار مرة ونصف إلى ضعفين ليصبح ضخماً وواضحاً جداً 🚀
+        let fontSize = 28; 
         const textLength = (q.text || '').length;
-        if (textLength < 50) fontSize = 24;
-        if (textLength > 150) fontSize = 20;
+        if (textLength < 80) fontSize = 32;   // خط ضخم للمسائل القصيرة
+        if (textLength > 150) fontSize = 26;  // خط كبير جداً للمسائل الطويلة
 
-        // ===== خطوات الحل =====
+        // معالجة نص السؤال لاستبدال السطور الجديدة (\n) بوسوم <br> لكي تظهر الخيارات المدمجة منسقة تحت بعضها بوضوح
+        const formattedText = (q.text || '').replace(/\n/g, '<br>');
+
+        // ===== خطوات الحل النموذجية (stepsHtml) بخط كبير =====
         let stepsHtml = '';
         if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
             q.pdfSolutionSteps.forEach(s => {
                 if (s && s.trim()) {
-                    stepsHtml += `<div style="padding: 6px 0; font-size: ${fontSize}px; line-height: 1.6; text-align: right;">${s}</div>`;
+                    stepsHtml += `<div style="padding: 6px 0; font-size: ${fontSize - 2}px; line-height: 1.7; color: #1e293b;">${s}</div>`;
                 }
             });
         }
 
-        // ===== الرسومات والصور =====
+        // ===== تكبير رسمة الـ SVG ونصوصها الهندسية لتتناسب مع خط الجوال =====
         let graphicHtml = '';
         if (q.svgCode && q.svgCode.trim() !== "") {
-            let largeSvg = q.svgCode.replace(/width="[^"]*"/, 'width="100%"').replace(/height="[^"]*"/, 'style="max-height:320px;"');
-            graphicHtml = `<div style="text-align: center; margin: 15px 0;">${largeSvg}</div>`;
+            // حقن ستايل إضافي لتكبير نصوص المقاومات والمفتاح K داخل الـ SVG تلقائياً
+            let upgradedSvg = q.svgCode.replace(/<style>/g, "<style>text, .label, .res-text, .equiv-text { font-size: 22px !important; font-weight: bold !important; } ");
+            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 15px 0; padding: 10px; width: 100%; height: auto; max-width: 100%; overflow: visible;">${upgradedSvg}</div>`;
         } else if (q.imagePath && q.imagePath.trim() !== "") {
-            graphicHtml = `<div style="text-align: center; margin: 15px 0;"><img src="${q.imagePath}" style="max-width: 90%; height: auto; border-radius: 8px;"></div>`;
+            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 15px 0;"><img src="${q.imagePath}" alt="رسم توضيحى" style="max-width: 100%; height: auto;"></div>`;
         }
 
+        // ===== كرت المسألة الكامل مع حماية الانقسام =====
         const questionDiv = document.createElement('div');
+        questionDiv.className = 'pdf-question-block';
         questionDiv.style.cssText = `
             page-break-inside: avoid !important;
             break-inside: avoid !important;
-            margin-bottom: 35px !important;
-            padding-bottom: 20px !important;
-            border-bottom: 2px dashed #cbd5e1;
+            margin-bottom: 40px !important; /* زيادة المسافة بين المسائل */
+            padding-bottom: 25px !important;
+            border-bottom: 3px dashed #cbd5e1;
             display: block;
             width: 100%;
             box-sizing: border-box;
         `;
 
         questionDiv.innerHTML = `
-            <div style="font-size: ${fontSize + 4}px; font-weight: bold; color: #1a365d; margin-bottom: 8px; text-align: right;">${questionNumber}. ${q.title || ''}</div>
-            <div style="font-size: ${fontSize + 1}px; line-height: 1.6; color: #2d3748; margin-bottom: 12px; text-align: right;">${q.text || ''}</div>
+            <div class="pdf-q-title" style="font-size: ${fontSize + 6}px; font-weight: bold; color: #1a365d; margin-bottom: 12px; direction: rtl; text-align: right;">${questionNumber}. ${q.title || ''}</div>
+            <div class="pdf-q-text" style="font-size: ${fontSize}px; line-height: 1.8; color: #0f172a; margin-bottom: 12px; direction: rtl; text-align: right;">${formattedText}</div>
+            
             ${graphicHtml}
-            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #edf2f7;">
-                <div style="padding-right: 10px; color: #2d3748; text-align: right;">${stepsHtml || 'لا يوجد حل متاح'}</div>
-                ${q.pdfFinalAnswer ? `<div style="font-size: ${fontSize + 2}px; font-weight: bold; margin-top: 10px; color: #065f46; padding: 6px 12px; background-color: #f0fdf4; border-radius: 6px; display: inline-block; border: 1.5px solid #bbf7d0; direction: rtl;">الإجابة النهائية: ${q.pdfFinalAnswer}</div>` : ''}
+            
+            <div class="pdf-solution-box" style="margin-top: 20px; padding-top: 15px; border-top: 2px dashed #cbd5e1; direction: rtl; text-align: right;">
+                <div style="font-weight: bold; color: #1a365d; margin-bottom: 10px; font-size: ${fontSize + 2}px;">🛠️ خطوات الاستنتاج الرياضي:</div>
+                <div class="pdf-sol-steps" style="padding-right: 10px;">${stepsHtml || 'لا يوجد حل متاح حالياً'}</div>
+                ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize + 2}px; font-weight: bold; margin-top: 15px; color: #065f46; padding: 10px 20px; background-color: #f0fdf4; border: 2px solid #22c55e; border-radius: 8px; display: inline-block; direction: rtl;">${q.pdfFinalAnswer}</div>` : ''}
             </div>
         `;
 
-        mainPage.appendChild(questionDiv);
+        pairContainer.appendChild(questionDiv);
     });
 
-    // تذييل المذكرة
+    mainPage.appendChild(pairContainer);
+
+    // ===== 3. تذييل الصفحة المخصص للنقال =====
     const pageFooter = document.createElement('div');
+    pageFooter.className = 'page-footer-number';
     pageFooter.style.cssText = `
         text-align: center;
         font-size: 16px;
-        color: #666;
-        border-top: 2px solid #ddd;
-        padding-top: 15px;
-        margin-top: 25px;
         font-weight: bold;
+        color: #475569;
+        border-top: 3px solid #cbd5e1;
+        padding-top: 12px;
+        margin-top: 30px;
+        direction: rtl;
     `;
-    pageFooter.innerHTML = `⚡ مكثف الميكانيكا - نسخة النقال المحدثة (تكبير 200%) ⚡`;
+    pageFooter.innerHTML = `⚡ هذه المذكرة خاصة بطلبة مدرسة أمجاد أفريقيا - مخصصة للقراءة على النقال ⚡`;
     mainPage.appendChild(pageFooter);
 
+// ... نهاية الدالة ...
     questionsArea.appendChild(mainPage);
 
-    // تشغيل نافذة الحفظ والطباعة فوراً
+    // تأخير بسيط لضمان تحميل الرسومات في الذاكرة قبل الطباعة
     setTimeout(() => {
-        window.print();
-    }, 500);
+        // التأكد من تفعيل خيار طباعة الخلفية برمجياً في بعض المتصفحات
+        try {
+            document.execCommand('print', false, null);
+        } catch (e) {
+            window.print();
+        }
+    }, 1200); // زيادة التأخير إلى 1.2 ثانية لضمان ظهور الـ SVG
 }
-
-
 
 
 
