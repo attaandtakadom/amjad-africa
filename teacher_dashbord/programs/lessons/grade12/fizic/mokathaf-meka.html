@@ -44,6 +44,11 @@
     <button class="print-btn" onclick="triggerSmartPrint()">
         <i class="fa-solid fa-file-pdf"></i> طباعة PDF
     </button>
+
+
+
+
+    
 <button onclick="triggerMobileSmartPrint()" style="
     background-color: #ff9800; 
     color: white; 
@@ -908,11 +913,14 @@ function triggerMobileSmartPrint() {
         <div style="font-size: 28px; font-weight: 700; color: #334155; margin-bottom: 25px;">الصف الثالث الثانوي</div>
         <div style="border: 3px solid #1a365d; border-radius: 12px; padding: 25px 15px; margin: 20px 0; background: #f8fafc;">
             <h3 style="font-size: 30px; color: #1e293b; margin: 0 0 12px 0;">📚 كراسة الحلول النموذجية 📚</h3>
+                    <div style="font-size:22pt; color:#475569; margin-bottom:15px;">نسخة القراءة السريعة والمريحة للموبايل</div>
+
+
             <h4 style="font-size: 24px; color: #475569; margin: 10px 0;">أسئلة من امتحانات سابقة</h4>
             <div style="font-size: 22px; color: #64748b;">الميكانيكا</div>
             <div style="font-size: 24px; font-weight: 700; color: #0f172a; margin-top: 15px;">العام الدراسي 2025 - 2026</div>
         </div>
-        <div style="font-size: 24px; color: #059669; margin: 25px 0; font-weight: bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+                <div style="font-size:26pt; color:#059669; font-weight:bold; margin-top:40px;">✨ بالتوفيق والتميز لطلبتنا الأعزاء ✨</div>
         <div style="font-size: 18px; color: #475569; line-height: 1.6;">
             رابط البوت التعليمي:<br>
             <a href="http://t.me/amjad_africa2027bot" style="color: #2563eb; text-decoration: none; font-weight: bold;">t.me/amjad_africa2027bot</a>
@@ -1043,6 +1051,112 @@ function triggerMobileSmartPrint() {
         }
     }, 1200); 
 }
+
+function generateMobilePDF() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    printableDoc.innerHTML = '';
+
+    const watermarkText = `مدرسة أمجاد أفريقيا\nليبيا البيضاء`;
+    let htmlContent = '';
+
+    // ===== صفحة الغلاف الضخمة المخصصة للهاتف =====
+    htmlContent += `
+        <div class="pdf-page pdf-cover-page" style="page-break-after: always; break-after: page; min-height: 100vh; padding: 30mm 15mm !important; position: relative; box-sizing: border-box; text-align: center; direction: rtl;">
+            <div class="watermark-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 90px; font-weight: bold; color: rgba(0, 0, 0, 0.04); white-space: pre-line; pointer-events: none; z-index: 0; width: 100%; font-family: 'Cairo', sans-serif;">
+                ${watermarkText}
+            </div>
+            <div class="content-wrapper" style="position:relative; z-index:1; width:100%;">
+                <div style="font-size:28pt; color:#1e3a8a; font-weight:bold; margin-bottom:25px;">🏫 مدرسة أمجاد أفريقيا</div>
+                <div style="font-size:42pt; color:#1e293b; font-weight:900; margin-bottom:15px; line-height: 1.3;">💻 تقنية المعلومات</div>
+                <div style="font-size:30pt; color:#2563eb; font-weight:bold; margin-bottom:40px;">📱 كتاب المراجعة الذكي للهواتف</div>
+                <div style="font-size:26pt; color:#475569; margin-bottom:60px;">الصف الثالث الثانوي</div>
+                
+                <div style="border: 5px dashed #2563eb; padding: 40px 20px; border-radius: 20px; background: #f8fafc; margin-bottom:50px;">
+                    <h3 style="font-size:32pt; color:#1e293b; margin:0 0 20px 0;">📚 كتاب المراجعة النهائية</h3>
+                    <div style="font-size:22pt; color:#475569; margin-bottom:15px;">نسخة القراءة السريعة والمريحة للموبايل</div>
+                    <div style="font-size:24pt; color:#2563eb; font-weight:bold;">📊 إجمالي الأسئلة: ${examQuestions.length} سؤال</div>
+                </div>
+                
+                <div style="font-size:26pt; color:#059669; font-weight:bold; margin-top:40px;">✨ بالتوفيق والتميز لطلبتنا الأعزاء ✨</div>
+            </div>
+        </div>
+    `;
+
+    // ===== حاوية الأسئلة الضخمة للموبايل =====
+    htmlContent += `
+        <div class="pdf-questions-container" style="position: relative; background: white; padding: 15mm 10mm !important; font-family: 'Cairo', sans-serif; direction: rtl;">
+            <div style="position:relative; z-index:1;">
+                <div style="text-align:center; border-bottom:4px solid #2563eb; padding-bottom:20px; margin-bottom:40px;">
+                    <div style="font-size:24px; color:#1e3a8a; font-weight:bold;">📱 نسخة الدراسة الرقمية الضخمة</div>
+                    <div style="font-size:18px; color:#64748b; margin-top:8px;">مُهيأة ومُكبرة بمقدار 3 أضعاف لتناسب شاشة الهاتف تماماً</div>
+                </div>
+    `;
+
+    examQuestions.forEach((q, idx) => {
+        const questionNum = idx + 1;
+        const correctText = q.options[q.correctAnswer] || "لم يتم تحديد";
+
+        // خيارات عريضة جداً بخط ضخم (24pt)
+        let optionsHTML = q.options.map((opt, i) => {
+            const isCorrect = i === q.correctAnswer;
+            return `
+                <div style="display:block; margin:15px 0; padding:20px 24px; background:${isCorrect ? '#dcfce7' : '#f8fafc'}; border-radius:12px; font-size:24pt; border: 3px solid ${isCorrect ? '#22c55e' : '#e2e8f0'}; ${isCorrect ? 'font-weight:bold; color:#065f46;' : 'color:#475569;'}">
+                    ${isCorrect ? '🔹 ' : '▫️ '} ${opt}
+                </div>`;
+        }).join('');
+
+        let questionDisplay = q.question;
+        // تكبير الخط داخل الأكواد البرمجية لتصبح واضحة
+        if (q.question.includes('Private Sub') || q.question.includes('Dim') || q.question.includes('For I')) {
+            questionDisplay = `<code style="font-family:'Courier New',monospace; font-size:20pt; direction:ltr; text-align:left; background:#1e293b; color:#e2e8f0; padding:20px; border-radius:12px; display:block; white-space:pre-wrap; line-height:1.6; margin:15px 0;">${q.question}</code>`;
+        }
+
+        let pdfCorrectionHTML = '';
+        if (q.correction && q.correction.trim() !== "") {
+            // تكبير خط التعليل العلمي والتوضيح
+            pdfCorrectionHTML = `
+                <div style="margin-top:20px !important; padding:20px 24px !important; background:#f0fdf4 !important; border-radius:12px !important; border-right:8px solid #16a34a !important; font-size:22pt !important; color:#14532d !important; line-height:1.6 !important;">
+                    💡 <b>توضيح وتعليل الإجابة:</b> ${q.correction}
+                </div>
+            `;
+        }
+
+        // كتل الأسئلة متباعدة وضخمة جداً (خط السؤال 26pt وخط الخيارات 24pt)
+        htmlContent += `
+            <div class="pdf-question-block" style="margin-bottom:50px !important; padding:30px 25px !important; border-right:10px solid #2563eb !important; background:#fafcff !important; border-radius:16px !important; box-shadow:0 4px 10px rgba(0,0,0,0.04) !important; width:100% !important; page-break-inside: avoid !important; break-inside: avoid !important;">
+                <div style="font-weight:bold !important; color:#1a365d !important; margin-bottom:15px !important; text-align:right; font-size:28pt !important;">س ${questionNum}:</div>
+                <div style="color:#0f172a; line-height:1.6 !important; margin-bottom:20px !important; text-align:right; font-size:26pt !important; font-weight: 500;">${questionDisplay}</div>
+                <div style="margin:15px 0 !important;">${optionsHTML}</div>
+                <div style="margin-top:20px !important; padding:15px 24px !important; background:#dcfce7 !important; border-radius:10px !important; border-right:8px solid #22c55e !important; font-size:23pt !important; color:#065f46 !important; font-weight:bold !important;">✅ الإجابة النموذجية الصحيحة: ${correctText}</div>
+                ${pdfCorrectionHTML}
+            </div>
+        `;
+    });
+
+    htmlContent += `</div></div>`;
+    printableDoc.innerHTML = htmlContent;
+    printableDoc.style.display = 'block';
+
+    setTimeout(function() { 
+        window.print(); 
+        setTimeout(function() { printableDoc.style.display = 'none'; }, 1000); 
+    }, 500);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     window.onload = () => {
         renderActiveQuestion(0);
     };

@@ -446,31 +446,42 @@ body {
 
     /* 💡 تم حذف قيم الـ font-size الثابتة بـ !important من هنا للسماح للجافا سكريبت بالتحكم وتكبير الخطوط بحرية */
 /* 1. تكبير نص السؤال الرئيسي */
+/* ===== تكبير الخطوط بمقدار مرة ونصف إضافية للنقال ===== */
+
+/* 1. نص السؤال الرئيسي (تم رفعه إلى 32 بكسل) */
 .pdf-q-text {
-    font-size: 26px !important;    /* يمكنكِ زيادته إلى 28px أو 30px حسب الرغبة */
-    line-height: 1.8 !important;   /* تباعد الأسطر لضمان عدم تداخل الكلام الكبير */
+    font-size: 32px !important;    
+    line-height: 1.8 !important;   /* تباعد الأسطر ممتاز لمنع تداخل الحروف الضخمة */
     font-weight: 600 !important;
 }
 
-/* 2. تكبير عنوان السؤال (مثلاً: 1. السؤال الأول) */
+/* 2. عنوان رقم السؤال (تم رفعه إلى 36 بكسل) */
 .pdf-q-title {
-    font-size: 28px !important;    /* دائماً أكبر من نص السؤال بقليل */
+    font-size: 36px !important;    
     font-weight: 900 !important;
+    margin-bottom: 20px !important;
 }
 
-/* 3. تكبير نصوص خطوات الحل والاستنتاج الرياضي */
+/* 3. خطوات الاستنتاج والحل الرياضي (تم رفعها إلى 30 بكسل عريض) */
 .pdf-sol-steps div {
-    font-size: 24px !important;    /* تكبير خط خطوات الحل */
-    line-height: 1.7 !important;
+    font-size: 30px !important;    
+    line-height: 1.8 !important;
     font-weight: bold !important;
 }
 
-/* 4. تكبير خط الإجابة النهائية (الصندوق الأخضر) */
-.pdf-final-ans {
-    font-size: 28px !important;    /* لكي تبرز الإجابة النهائية بشكل ضخم وواضح */
-    padding: 15px 25px !important; /* زيادة المساحة الداخلية للصندوق ليتناسب مع الخط الكبير */
+/* 4. عنوان "خطوات الاستنتاج الرياضي" الفرعي */
+.pdf-solution-box div:first-child {
+    font-size: 26px !important;
+    margin-bottom: 25px !important;
 }
-    /* الرسوم البيانية والهندسية */
+
+/* 5. صندوق الإجابة النهائية الأخضر (تم رفعه إلى 38 بكسل عملاق) */
+.pdf-final-ans {
+    font-size: 38px !important;    
+    font-weight: 900 !important;
+    padding: 20px 35px !important; /* زيادة الحواشي ليتسع الصندوق للخط الضخم */
+    border-radius: 14px !important;
+}   /* الرسوم البيانية والهندسية */
 /* ===== الرسومات (داخل @media print في ملف style1.css) ===== */
 .pdf-graphic {
     display: flex !important;
@@ -483,15 +494,25 @@ body {
 }
 
 /* 💡 التعديل السحري هنا: قمنا بتصغير الحد الأقصى للعرض والارتفاع */
+/* ===== مضاعفة حجم الرسومات داخل ملف الـ CSS لتبدو ضخمة وواضحة ===== */
+.pdf-graphic {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 25px 0 !important; /* زيادة المسافة الرأسية حول الرسمة لتبرز */
+    width: 100% !important;
+}
+
 .pdf-graphic svg,
 .pdf-graphic img {
     display: block !important;
     margin: 0 auto !important;
-    max-width: 55% !important;   /* تم تصغير العرض من 100% إلى 55% */
-    max-height: 140px !important; /* تم تحديد أقصى ارتفاع بـ 140 بكسل بدلاً من تركها مفتوحة */
+    
+    /* 🚀 التعديل السحري: رفعنا العرض إلى 95% لملء الشاشة، والارتفاع إلى 280px */
+    max-width: 95% !important;   
+    max-height: 280px !important; 
     width: auto !important;
     height: auto !important;
-    border: none !important;
 }
     .page-footer-number {
         text-align: center;
@@ -563,4 +584,53 @@ svg {
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+/* ===== تكبير خانة التذكير الفيزيائي والقوانين بمقدار مرة ونصف ===== */
+
+/* 1. العنوان الرئيسي لصفحة التذكير الفيزيائي أو القوانين */
+/* 🚀 المحدد الشامل لتكبير التلميحات في جميع الأسئلة 🚀 */
+/* ===== توسيط حاوية الرسمة والتلميح بالكامل في منتصف الصفحة ===== */
+.pdf-graphic {
+    display: flex !important;
+    flex-direction: column !important; /* ترتيب الرسمة ثم التلميح تحتها رأساً بطلة */
+    justify-content: center !important; /* التوسيط عمودياً */
+    align-items: center !important;    /* التوسيط أفقياً في المنتصف تماماً */
+    
+    margin: 25px auto !important;     /* كلمة auto تضمن توزيع الفراغات بالتساوي يميناً ويساراً */
+    width: 100% !important;
+    max-width: 95% !important;        /* الحفاظ على أبعاد النقال */
+    box-sizing: border-box !important;
+}
+
+/* جلب الحاوية البيضاء الداخلية التي تحمل الحدود إلى المنتصف */
+.pdf-graphic > div {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 🚀 إجبار نص التلميح الداخلي على التكبير الكامل 🚀 */
+.pdf-graphic div, 
+.pdf-graphic span,
+.pdf-graphic strong {
+    font-size: 26px !important;         /* تكبير الخط العربي بشكل عام إلى 26 بكسل */
+    line-height: 1.8 !important;        /* تباعد أسطر مريح جداً ومنع التداخل */
+}
+
+/* 🚀 استهداف صندوق التلميح الملون وتوسيع أبعاده 🚀 */
+.pdf-graphic div[style*="border-right"], 
+.pdf-graphic div[style*="background"] {
+    font-size: 26px !important;
+    padding: 16px 20px !important;      /* إعطاء مساحة تصمیمیة مريحة داخل الصندوق */
+}
+
+/* 🚀 تكبير المعادلات الرياضية الإنجليزية لتصبح عملاقة 🚀 */
+.pdf-graphic span[style*="direction:ltr"], 
+.pdf-graphic div[style*="background"] span {
+    font-size: 28px !important;         /* جعل خط المعادلات والرموز 28 بكسل */
+    font-weight: 900 !important;        /* خط عريض جداً وبارز للمذاكرة */
+    display: inline-block !important;
+    margin-top: 10px !important;
 }
