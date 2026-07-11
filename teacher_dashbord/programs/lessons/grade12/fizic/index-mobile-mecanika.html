@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>مكثف الميكانيكا - نسخة الموبايل</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <style>
+        /* ============================================================
+           الأنماط الأساسية - نسخة الموبايل (خطوط كبيرة جداً)
+           ============================================================ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #e2e8f0;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* ===== الهيدر ===== */
+        .header {
+            background-color: #0f172a;
+            color: white;
+            padding: 24px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header h2 {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .school-badge {
+            background: #ea580c;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #question-counter {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 18px;
+            border-radius: 24px;
+            font-size: 17px;
+        }
+
+        /* ===== حاوية السؤال ===== */
+        .question-container {
+            padding: 28px;
+            text-align: right;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .q-source-span {
+            background: #2563eb;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 26px;
+            line-height: 2;
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-weight: 600;
+            white-space: pre-wrap;
+        }
+
+        /* ===== خيارات الإجابة ===== */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 16px 0 20px 0;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+
+        .option-btn.correct {
+            background: #dcfce7;
+            border-color: #22c55e;
+            color: #065f46;
+        }
+
+        .option-btn.wrong {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .option-btn i {
+            font-size: 26px;
+            margin-right: 10px;
+        }
+
+        /* ===== التلميح ===== */
+        .hint-box {
+            background: #fffbeb;
+            border-right: 5px solid #f59e0b;
+            padding: 16px 22px;
+            border-radius: 10px;
+            margin: 14px 0 18px 0;
+            font-size: 22px;
+            color: #78350f;
+            line-height: 1.9;
+        }
+
+        .hint-box i {
+            color: #f59e0b;
+            margin-left: 10px;
+        }
+
+        /* ===== الرسوم ===== */
+        .question-graphic-area {
+            margin: 14px 0 18px 0;
+            padding: 12px;
+            background: #fafcff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .question-graphic-area svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .no-graphic {
+            color: #94a3b8;
+            font-size: 18px;
+            padding: 16px;
+        }
+
+        /* ===== خطوات الحل ===== */
+        .steps-container {
+            margin-top: 20px;
+        }
+
+        .step-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px 24px;
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .step-card.active {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 16px rgba(59,130,246,0.15);
+        }
+
+        .step-card.completed {
+            border-color: #22c55e;
+            background: #fafcff;
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-title::before {
+            content: "📌";
+            font-size: 22px;
+        }
+
+        .step-question {
+            font-size: 20px;
+            color: #334155;
+            margin-bottom: 14px;
+            line-height: 1.7;
+        }
+
+        .feedback-box {
+            margin-top: 14px;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            display: none;
+            line-height: 1.7;
+        }
+
+        .feedback-box.success {
+            display: block;
+            background: #dcfce7;
+            border-right: 4px solid #22c55e;
+            color: #065f46;
+        }
+
+        .feedback-box i {
+            margin-left: 10px;
+        }
+
+        /* ===== أزرار التنقل ===== */
+        .navigation-area {
+            padding: 0 28px 28px 28px;
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 16px 36px;
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #1e293b;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            color: #94a3b8;
+        }
+
+        .nav-btn i {
+            font-size: 20px;
+        }
+
+        /* ===== أزرار الطباعة ===== */
+        .print-section {
+            text-align: center;
+            margin: 20px 0 40px 0;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .print-btn {
+            background-color: #16a34a;
+            color: white;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .print-btn:hover {
+            background-color: #15803d;
+            transform: translateY(-2px);
+        }
+
+        .bot-link-btn {
+            background-color: #2563eb;
+            color: white;
+            padding: 18px 32px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transition: all 0.2s ease;
+        }
+
+        .bot-link-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* ===== الطباعة ===== */
+        #printable-pdf-document {
+            display: none;
+        }
+        #dynamic-pdf-questions-area {
+            display: none;
+        }
+
+        /* ===== استجابة للشاشات الصغيرة ===== */
+        @media (max-width: 640px) {
+            body { padding: 8px; }
+            .header { padding: 16px 20px; }
+            .header h2 { font-size: 20px; }
+            .question-container { padding: 18px; }
+            .question-text { font-size: 22px; }
+            .option-btn { font-size: 18px; padding: 14px 18px; }
+            .nav-btn { padding: 14px 24px; font-size: 17px; }
+            .hint-box { font-size: 18px; padding: 14px 18px; }
+            .step-title { font-size: 19px; }
+            .step-question { font-size: 17px; }
+            .feedback-box { font-size: 17px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i>مكثف الميكانيكا</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="question-counter"></span>
+    </div>
+
+    <div class="question-container">
+        <div class="question-meta">
+            <span class="q-source-span" id="q-source"></span>
+        </div>
+        <div class="question-text" id="main-question-text"></div>
+        <div id="options-container"></div>
+        <div id="hint-container"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+        <div class="steps-container" id="steps-container"></div>
+    </div>
+
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerMobileSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> 📱 طباعة الموبايل
+    </button>
+    <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+        <i class="fa-brands fa-telegram"></i> البوت التعليمي
+    </a>
+</div>
+
+<div id="printable-pdf-document"></div>
+<div id="dynamic-pdf-questions-area"></div>
+
+<script src="mokathaf-meka-arry.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+// ============================================================
+// المتغيرات العامة - نسخة الموبايل
+// ============================================================
+let currentQIndex = 0;
+
+console.log("✅ عدد الأسئلة في المصفوفة: " + (questionsMatrix ? questionsMatrix.length : 0));
+
+// ============================================================
+// دالة عرض السؤال
+// ============================================================
+function renderActiveQuestion(index) {
+    const data = questionsMatrix[index];
+    if (!data) {
+        console.warn("⚠️ السؤال غير موجود!");
+        return;
+    }
+
+    document.getElementById('q-source').innerText = data.title || `س ${data.id || index + 1}`;
+    document.getElementById('question-counter').innerHTML = `مسألة ${index + 1} / ${questionsMatrix.length}`;
+
+    const questionText = document.getElementById('main-question-text');
+    questionText.innerText = data.text || 'لا يوجد نص للسؤال';
+
+    // ===== خيارات الإجابة =====
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    let optionsList = [];
+    if (data.steps && data.steps.length > 0 && data.steps[0].options) {
+        optionsList = data.steps[0].options;
+    } else if (data.options && data.options.length > 0) {
+        optionsList = data.options;
+    }
+
+    if (optionsList.length > 0) {
+        const grid = document.createElement('div');
+        grid.className = 'options-grid';
+
+        optionsList.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `
+                <span>${opt.text}</span>
+                <i class="fa-regular fa-circle"></i>
+            `;
+            const isCorrect = opt.isCorrect || (idx === data.correctAnswerIndex);
+            const feedback = (data.steps && data.steps[0]) ? data.steps[0].feedback : '✅ إجابة صحيحة!';
+            btn.setAttribute('data-feedback', feedback);
+            btn.setAttribute('data-correct', isCorrect ? 'true' : 'false');
+
+            btn.addEventListener('click', function(e) {
+                handleOptionClick(this, index);
+            });
+
+            grid.appendChild(btn);
+        });
+
+        optionsContainer.appendChild(grid);
+    }
+
+    // ===== التلميح =====
+    const hintContainer = document.getElementById('hint-container');
+    hintContainer.innerHTML = '';
+    if (data.hint && data.hint.trim() !== '') {
+        hintContainer.innerHTML = `
+            <div class="hint-box">
+                <i class="fa-solid fa-lightbulb"></i>
+                <strong>تلميح:</strong> ${data.hint}
+            </div>
+        `;
+    }
+
+    // ===== الرسم =====
+    const graphicContainer = document.getElementById('graphic-container');
+    graphicContainer.innerHTML = '';
+    
+    if (data.svgCode && data.svgCode.trim() !== '') {
+        graphicContainer.innerHTML = `
+            <div style="margin: 10px 0; padding: 8px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                ${data.svgCode}
+            </div>
+        `;
+    } else if (data.imagePath && data.imagePath.trim() !== '') {
+        graphicContainer.innerHTML = `
+            <div style="text-align: center; padding: 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <img src="${data.imagePath}" alt="رسم توضيحي" style="max-width: 100%; height: auto; max-height: 300px;">
+            </div>
+        `;
+    } else {
+        graphicContainer.innerHTML = '<p class="no-graphic">⚠️ لا يوجد رسم توضيحي</p>';
+    }
+
+    // ===== خطوات الحل =====
+    const stepsContainer = document.getElementById('steps-container');
+    stepsContainer.innerHTML = '';
+
+    if (data.steps && data.steps.length > 0) {
+        const startIdx = (data.steps[0].options && data.steps[0].options.length > 0) ? 1 : 0;
+
+        for (let sIdx = startIdx; sIdx < data.steps.length; sIdx++) {
+            const step = data.steps[sIdx];
+            const card = document.createElement('div');
+            card.className = `step-card ${sIdx === startIdx ? 'active' : ''}`;
+            card.id = `step-card-${sIdx}`;
+
+            let optionsHTML = '';
+            if (step.options && step.options.length > 0) {
+                const grid = document.createElement('div');
+                grid.className = 'options-grid';
+                step.options.forEach((opt, optIdx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerHTML = `
+                        <span>${opt.text}</span>
+                        <i class="fa-regular fa-circle"></i>
+                    `;
+                    btn.setAttribute('data-feedback', step.feedback || '✅ إجابة صحيحة!');
+                    btn.setAttribute('data-correct', opt.isCorrect ? 'true' : 'false');
+                    btn.setAttribute('data-step', sIdx);
+
+                    btn.addEventListener('click', function(e) {
+                        handleStepOptionClick(this, sIdx);
+                    });
+
+                    grid.appendChild(btn);
+                });
+                optionsHTML = grid.outerHTML;
+            }
+
+            card.innerHTML = `
+                <div class="step-title">${step.title || `الخطوة ${sIdx}`}</div>
+                ${step.question ? `<div class="step-question">${step.question}</div>` : ''}
+                ${optionsHTML}
+                <div class="feedback-box" id="feedback-${sIdx}"></div>
+            `;
+
+            stepsContainer.appendChild(card);
+        }
+    }
+
+    document.getElementById('prev-btn').disabled = index === 0;
+    document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
+
+    if (typeof renderMathInElement === 'function') {
+        setTimeout(() => {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ]
+            });
+        }, 100);
+    }
+}
+
+// ============================================================
+// دوال التعامل مع الخيارات
+// ============================================================
+function handleOptionClick(btn, questionIndex) {
+    const isCorrect = btn.getAttribute('data-correct') === 'true';
+    const feedback = btn.getAttribute('data-feedback');
+
+    const parentGrid = btn.closest('.options-grid');
+    if (parentGrid) {
+        parentGrid.querySelectorAll('.option-btn').forEach(b => {
+            b.style.pointerEvents = 'none';
+            b.classList.remove('correct', 'wrong');
+            b.querySelector('i').className = 'fa-regular fa-circle';
+        });
+    }
+
+    if (isCorrect) {
+        btn.classList.add('correct');
+        btn.querySelector('i').className = 'fa-solid fa-circle-check';
+    } else {
+        btn.classList.add('wrong');
+        btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+        if (parentGrid) {
+            parentGrid.querySelectorAll('.option-btn').forEach(b => {
+                if (b.getAttribute('data-correct') === 'true') {
+                    b.classList.add('correct');
+                    b.querySelector('i').className = 'fa-solid fa-circle-check';
+                }
+            });
+        }
+    }
+}
+
+function handleStepOptionClick(btn, stepIdx) {
+    const isCorrect = btn.getAttribute('data-correct') === 'true';
+    const feedback = btn.getAttribute('data-feedback');
+    const card = document.getElementById(`step-card-${stepIdx}`);
+    const fb = document.getElementById(`feedback-${stepIdx}`);
+
+    if (!card || !fb) return;
+
+    card.querySelectorAll('.option-btn').forEach(b => {
+        b.style.pointerEvents = 'none';
+        b.classList.remove('correct', 'wrong');
+        b.querySelector('i').className = 'fa-regular fa-circle';
+    });
+
+    if (isCorrect) {
+        btn.classList.add('correct');
+        btn.querySelector('i').className = 'fa-solid fa-circle-check';
+        fb.innerHTML = `<i class="fa-solid fa-check"></i> ${feedback}`;
+        fb.className = 'feedback-box success';
+        fb.style.display = 'block';
+        card.classList.add('completed');
+        card.classList.remove('active');
+
+        const nextCard = document.getElementById(`step-card-${stepIdx + 1}`);
+        if (nextCard) {
+            nextCard.classList.add('active');
+            nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    } else {
+        btn.classList.add('wrong');
+        btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+        fb.innerHTML = `❌ إجابة خاطئة. حاول مرة أخرى.`;
+        fb.className = 'feedback-box';
+        fb.style.display = 'block';
+        fb.style.background = '#fee2e2';
+        fb.style.borderRight = '4px solid #ef4444';
+        fb.style.color = '#991b1b';
+        fb.style.padding = '12px 16px';
+        fb.style.borderRadius = '8px';
+        fb.style.marginTop = '12px';
+    }
+}
+
+// ============================================================
+// دالة التنقل
+// ============================================================
+function navigateQuestion(direction) {
+    const newIndex = currentQIndex + direction;
+    if (newIndex >= 0 && newIndex < questionsMatrix.length) {
+        currentQIndex = newIndex;
+        renderActiveQuestion(currentQIndex);
+        document.querySelector('.question-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// ============================================================
+// ===== دوال الطباعة للموبايل (خطوط كبيرة جداً) =====
+// ============================================================
+
+// ===== صفحة الغلاف =====
+function addCoverPage() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const coverPage = document.createElement('div');
+    coverPage.className = 'pdf-cover-page';
+    coverPage.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 20mm 10mm;
+        text-align: center;
+        font-family: 'Cairo', sans-serif;
+        direction: rtl;
+    `;
+    coverPage.innerHTML = `
+        <div style="font-size: 38px; color: #1a365d; margin-bottom: 25px; font-weight: bold;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+        <div style="font-size: 58px; font-weight: 900; color: #0f172a; margin-bottom: 15px;">مكثف الميكانيكا</div>
+        <div style="font-size: 42px; font-weight: 700; color: #334155; margin-bottom: 25px;">الصف الثالث الثانوي</div>
+        <div style="border: 4px solid #1a365d; border-radius: 16px; padding: 35px 25px; margin: 25px 0; background: #f8fafc;">
+            <h3 style="font-size: 46px; color: #1e293b; margin: 0 0 15px 0;">📚 كراسة الحلول النموذجية 📚</h3>
+            <div style="font-size: 38px; color: #475569; margin-bottom: 15px;">نسخة القراءة السريعة والمريحة للموبايل</div>
+            <h4 style="font-size: 32px; color: #475569; margin: 10px 0;">أسئلة من امتحانات سابقة</h4>
+            <div style="font-size: 28px; color: #64748b;">الميكانيكا</div>
+            <div style="font-size: 34px; font-weight: 700; color: #0f172a; margin-top: 18px;">العام الدراسي 2025 - 2026</div>
+        </div>
+        <div style="font-size: 40px; color: #059669; font-weight: bold; margin-top: 45px;">✨ بالتوفيق والتميز لطلبتنا الأعزاء ✨</div>
+        <div style="font-size: 22px; color: #475569; line-height: 1.8;">
+            رابط البوت التعليمي:<br>
+            <a href="http://t.me/amjad_africa2027bot" style="color: #2563eb; text-decoration: none; font-weight: bold;">t.me/amjad_africa2027bot</a>
+        </div>
+    `;
+    printableDoc.appendChild(coverPage);
+}
+
+// ===== صفحة ملخص القوانين (مكبرة) =====
+function addSummaryPage() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const summaryPage = document.createElement('div');
+    summaryPage.className = 'pdf-summary-page';
+    summaryPage.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 8mm 12mm 6mm 12mm;
+        font-family: 'Cairo', sans-serif;
+        background: #ffffff;
+        direction: rtl;
+    `;
+    summaryPage.innerHTML = `
+        <div style="text-align: center; margin-bottom: 20px; border-bottom: 4px solid #1a365d; padding-bottom: 15px;">
+            <h1 style="font-size: 44px; color: #1a365d; font-weight: 900;">📚 ملخص قوانين الميكانيكا الشامل</h1>
+            <p style="font-size: 30px; color: #475569;">لطلاب الشهادة الثانوية - مراجعة سريعة</p>
+        </div>
+        <div style="margin-bottom: 18px;">
+            <h2 style="font-size: 34px; color: #1a365d; font-weight: 700; border-right: 4px solid #2563eb; padding-right: 14px; margin-bottom: 12px;">① معادلات الحركة</h2>
+            <div style="background: #f8fafc; border-radius: 12px; padding: 16px; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 26px;">
+                    <tr style="background: #e2e8f0;">
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">القانون</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">الصيغة</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">يُستخدم عندما</th>
+                    </tr>
+                    <tr><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 24px;">الأولى</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 24px;">v = u + at</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">s غائبة</td></tr>
+                    <tr style="background: #f1f5f9;"><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 24px;">الثانية</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 24px;">s = ut + ½at²</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">v غائبة</td></tr>
+                    <tr><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 24px;">الثالثة</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 24px;">v² = u² + 2as</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">t غائبة</td></tr>
+                </table>
+                <div style="font-size: 22px; color: #64748b; margin-top: 10px; text-align: center;">
+                    💡 في السقوط الحر نستبدل a بـ g = 10 m/s²
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 18px;">
+            <h2 style="font-size: 34px; color: #1a365d; font-weight: 700; border-right: 4px solid #f59e0b; padding-right: 14px; margin-bottom: 12px;">② تحليل القوى على المائل</h2>
+            <div style="background: #f8fafc; border-radius: 12px; padding: 16px; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 26px;">
+                    <tr style="background: #e2e8f0;">
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">الحالة</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">مركبة الوزن</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">القوة العمودية R</th>
+                    </tr>
+                    <tr><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 24px;">سطح أفقي</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">لا توجد</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 24px;">R = mg</td></tr>
+                    <tr style="background: #fff7ed;"><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 24px;">سطح مائل (θ)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: bold; font-size: 24px;">mg·sinθ</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 24px;">R = mg·cosθ</td></tr>
+                </table>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 20px; color: #94a3b8; margin-top: 16px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </div>
+    `;
+    printableDoc.appendChild(summaryPage);
+}
+
+// ===== صفحة المفاتيح الذهبية =====
+function addGoldenKeysPage() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const goldenPage = document.createElement('div');
+    goldenPage.className = 'pdf-golden-page';
+    goldenPage.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 8mm 12mm 6mm 12mm;
+        font-family: 'Cairo', sans-serif;
+        background: #ffffff;
+        direction: rtl;
+    `;
+    goldenPage.innerHTML = `
+        <div style="text-align: center; margin-bottom: 18px; border-bottom: 4px solid #f59e0b; padding-bottom: 12px;">
+            <h1 style="font-size: 46px; color: #92400e; font-weight: 900; margin: 0;">🔑 المفاتيح الذهبية والسرية</h1>
+            <p style="font-size: 30px; color: #475569; margin: 8px 0 0 0;">لحل مسائل الميكانيكا بسهولة</p>
+        </div>
+        <div style="margin-bottom: 14px; background: #fffbeb; border-radius: 12px; padding: 18px 22px; border: 1px solid #fde68a;">
+            <h2 style="font-size: 34px; color: #92400e; font-weight: 700; margin: 0 0 12px 0;">① مفاتيح السطوح المائلة</h2>
+            <div style="font-size: 26px; color: #78350f; line-height: 2.2;">
+                <div style="background: #ffffff; border-radius: 8px; padding: 14px 18px; margin-bottom: 8px; border: 1px solid #fde68a;">
+                    <strong style="font-size: 28px;">تحليل الوزن:</strong>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; font-size: 26px;">
+                        <div>• العمودي: <strong>W<sub>y</sub> = mg·cosθ</strong></div>
+                        <div>• الموازي: <strong>W<sub>x</sub> = mg·sinθ</strong></div>
+                    </div>
+                </div>
+                <div style="background: #fef3c7; border-radius: 8px; padding: 16px 20px; border-right: 5px solid #f59e0b; font-size: 28px;">
+                    <strong>💡 القاعدة الذهبية:</strong> a = g·sin(θ)
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 20px; color: #94a3b8; margin-top: 14px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </div>
+    `;
+    printableDoc.appendChild(goldenPage);
+}
+
+// ===== صفحة تحويلات الوحدات =====
+function addUnitsConversionPage() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const unitsPage = document.createElement('div');
+    unitsPage.className = 'pdf-units-page';
+    unitsPage.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 8mm 12mm 6mm 12mm;
+        font-family: 'Cairo', sans-serif;
+        background: #ffffff;
+        direction: rtl;
+    `;
+    unitsPage.innerHTML = `
+        <div style="text-align: center; margin-bottom: 18px; border-bottom: 4px solid #7c3aed; padding-bottom: 12px;">
+            <h1 style="font-size: 46px; color: #5b21b6; font-weight: 900; margin: 0;">📐 تحويلات الوحدات الميكانيكية</h1>
+            <p style="font-size: 30px; color: #475569; margin: 8px 0 0 0;">التحويلات الأساسية</p>
+        </div>
+        <div style="margin-bottom: 14px; background: #f5f3ff; border-radius: 12px; padding: 16px 20px; border: 1px solid #ddd6fe;">
+            <h2 style="font-size: 34px; color: #5b21b6; font-weight: 700; margin: 0 0 12px 0;">① تحويلات الكتلة</h2>
+            <div style="font-size: 26px; color: #1e293b;">
+                <table style="width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 8px; overflow: hidden; border: 1px solid #ddd6fe;">
+                    <tr style="background: #ede9fe;">
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">من</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">إلى</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">المعامل</th>
+                    </tr>
+                    <tr><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">طن</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">كجم</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-size: 24px;">× 1000</td></tr>
+                    <tr style="background: #f5f3ff;"><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">كجم</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 24px;">جم</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-size: 24px;">× 1000</td></tr>
+                </table>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 20px; color: #94a3b8; margin-top: 14px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </div>
+    `;
+    printableDoc.appendChild(unitsPage);
+}
+
+// ===== صفحة بداية الأسئلة =====
+function addQuestionsStartPage() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const startPage = document.createElement('div');
+    startPage.className = 'pdf-questions-start-page';
+    startPage.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 20mm 10mm;
+        text-align: center;
+        font-family: 'Cairo', sans-serif;
+        background: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    `;
+    startPage.innerHTML = `
+        <div style="font-size: 90px; margin-bottom: 30px;">📝</div>
+        <h1 style="font-size: 54px; color: #1a365d; font-weight: 900; margin-bottom: 25px;">أسئلة المراجعة النهائية</h1>
+        <div style="width: 60%; height: 4px; background: #2563eb; margin: 20px auto; border-radius: 4px;"></div>
+        <p style="font-size: 34px; color: #475569; line-height: 2.2; max-width: 80%;">
+            مجموعة من الأسئلة المتنوعة<br>
+            مع الحلول النموذجية خطوة بخطوة
+        </p>
+        <p style="font-size: 24px; color: #94a3b8; margin-top: 30px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </p>
+    `;
+    printableDoc.appendChild(startPage);
+}
+
+// ============================================================
+// ===== دالة الطباعة للموبايل (مكبرة جداً) =====
+// ============================================================
+// ============================================================
+// ===== دالة الطباعة للموبايل (نسخة PDF كاملة) =====
+// ============================================================
+function triggerMobileSmartPrint() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const questionsArea = document.getElementById('dynamic-pdf-questions-area');
+
+    // ✅ تفريغ الحاويات تماماً
+    printableDoc.innerHTML = '';
+    questionsArea.innerHTML = '';
+    
+    // ✅ جعل حاوية PDF مرئية للطباعة
+    printableDoc.style.display = 'block';
+    printableDoc.style.background = '#ffffff';
+    printableDoc.style.padding = '10px';
+    printableDoc.style.direction = 'rtl';
+    printableDoc.style.fontFamily = 'Cairo, sans-serif';
+
+    // ============================================================
+    // بناء محتوى PDF كامل (بدون الاعتماد على أي CSS خارجي)
+    // ============================================================
+
+    // ===== 1. الغلاف =====
+    const coverDiv = document.createElement('div');
+    coverDiv.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 30px 20px;
+        text-align: center;
+        font-family: 'Cairo', sans-serif;
+        direction: rtl;
+        background: #ffffff;
+    `;
+    coverDiv.innerHTML = `
+        <div style="font-size: 42px; color: #1a365d; margin-bottom: 25px; font-weight: bold;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+        <div style="font-size: 60px; font-weight: 900; color: #0f172a; margin-bottom: 15px;">مكثف الميكانيكا</div>
+        <div style="font-size: 44px; font-weight: 700; color: #334155; margin-bottom: 30px;">الصف الثالث الثانوي</div>
+        <div style="border: 4px solid #1a365d; border-radius: 16px; padding: 40px 30px; margin: 30px 0; background: #f8fafc;">
+            <h3 style="font-size: 48px; color: #1e293b; margin: 0 0 15px 0;">📚 كراسة الحلول النموذجية 📚</h3>
+            <div style="font-size: 40px; color: #475569; margin-bottom: 15px;">نسخة القراءة السريعة والمريحة للموبايل</div>
+            <div style="font-size: 34px; color: #64748b;">الميكانيكا</div>
+            <div style="font-size: 36px; font-weight: 700; color: #0f172a; margin-top: 18px;">العام الدراسي 2025 - 2026</div>
+        </div>
+        <div style="font-size: 42px; color: #059669; font-weight: bold; margin-top: 45px;">✨ بالتوفيق والتميز لطلبتنا الأعزاء ✨</div>
+        <div style="font-size: 24px; color: #475569; margin-top: 20px;">
+            رابط البوت التعليمي:<br>
+            <span style="color: #2563eb; font-weight: bold;">t.me/amjad_africa2027bot</span>
+        </div>
+    `;
+    printableDoc.appendChild(coverDiv);
+
+    // ===== 2. صفحة ملخص القوانين (مكبرة) =====
+    const summaryDiv = document.createElement('div');
+    summaryDiv.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 20px 25px;
+        font-family: 'Cairo', sans-serif;
+        background: #ffffff;
+        direction: rtl;
+    `;
+    summaryDiv.innerHTML = `
+        <div style="text-align: center; margin-bottom: 25px; border-bottom: 4px solid #1a365d; padding-bottom: 15px;">
+            <h1 style="font-size: 46px; color: #1a365d; font-weight: 900;">📚 ملخص قوانين الميكانيكا الشامل</h1>
+            <p style="font-size: 30px; color: #475569;">لطلاب الشهادة الثانوية - مراجعة سريعة</p>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <h2 style="font-size: 36px; color: #1a365d; font-weight: 700; border-right: 5px solid #2563eb; padding-right: 15px; margin-bottom: 12px;">① معادلات الحركة بعجلة منتظمة (a)</h2>
+            <div style="background: #f8fafc; border-radius: 12px; padding: 18px; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 28px;">
+                    <tr style="background: #e2e8f0;">
+                        <th style="padding: 14px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 28px;">القانون</th>
+                        <th style="padding: 14px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 28px;">الصيغة الرياضية</th>
+                        <th style="padding: 14px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 28px;">يُستخدم عندما يكون</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 26px;">الأولى</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 26px;">v = u + at</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">المسافة (s) غائبة</td>
+                    </tr>
+                    <tr style="background: #f1f5f9;">
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 26px;">الثانية</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 26px;">s = ut + ½at²</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">السرعة النهائية (v) غائبة</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 26px;">الثالثة</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 26px;">v² = u² + 2as</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">الزمن (t) غائب</td>
+                    </tr>
+                </table>
+                <div style="font-size: 22px; color: #64748b; margin-top: 10px; text-align: center;">
+                    💡 تنبيه: في السقوط الحر الرأسي نستبدل العجلة (a) بعجلة الجاذبية (g = 10 m/s²)
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <h2 style="font-size: 36px; color: #1a365d; font-weight: 700; border-right: 5px solid #f59e0b; padding-right: 15px; margin-bottom: 12px;">② تحليل القوى على السطوح المستوية والمائلة</h2>
+            <div style="background: #f8fafc; border-radius: 12px; padding: 18px; border: 1px solid #e2e8f0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 28px;">
+                    <tr style="background: #e2e8f0;">
+                        <th style="padding: 14px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 28px;">الحالة الميكانيكية</th>
+                        <th style="padding: 14px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 28px;">مركبة الوزن المؤثرة</th>
+                        <th style="padding: 14px 18px; border: 1px solid #cbd5e1; text-align: center; font-size: 28px;">القوة العمودية (R)</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; font-size: 26px;">على سطح أفقي تماماً</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; color: #64748b; font-size: 26px;">لا توجد مركبة مائلة</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 26px;">R = m·g</td>
+                    </tr>
+                    <tr style="background: #fff7ed;">
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; font-weight: bold; color: #c2410c; font-size: 26px;">على سطح مائل بزاوية (θ)</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: bold; color: #b45309; font-size: 26px;">W_parallel = m·g·sin θ</td>
+                        <td style="padding: 10px 18px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-weight: 600; font-size: 26px;">R = m·g·cos θ</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 20px; color: #94a3b8; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </div>
+    `;
+    printableDoc.appendChild(summaryDiv);
+
+    // ===== 3. صفحة المفاتيح الذهبية =====
+    const goldenDiv = document.createElement('div');
+    goldenDiv.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 20px 25px;
+        font-family: 'Cairo', sans-serif;
+        background: #ffffff;
+        direction: rtl;
+    `;
+    goldenDiv.innerHTML = `
+        <div style="text-align: center; margin-bottom: 20px; border-bottom: 4px solid #f59e0b; padding-bottom: 12px;">
+            <h1 style="font-size: 48px; color: #92400e; font-weight: 900; margin: 0;">🔑 المفاتيح الذهبية والسرية</h1>
+            <p style="font-size: 30px; color: #475569; margin: 8px 0 0 0;">لحل مسائل الميكانيكا بسهولة - نصائح الامتحانات</p>
+        </div>
+        <div style="margin-bottom: 16px; background: #fffbeb; border-radius: 12px; padding: 18px 22px; border: 1px solid #fde68a;">
+            <h2 style="font-size: 36px; color: #92400e; font-weight: 700; margin: 0 0 12px 0;">① مفاتيح السطوح المائلة</h2>
+            <div style="font-size: 28px; color: #78350f; line-height: 2.2;">
+                <div style="background: #ffffff; border-radius: 8px; padding: 14px 18px; margin-bottom: 8px; border: 1px solid #fde68a;">
+                    <strong style="font-size: 30px;">تحليل الوزن على سطح مائل (زاوية θ):</strong>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; font-size: 28px;">
+                        <div>• العمودي على السطح: <strong>W<sub>y</sub> = mg·cosθ</strong></div>
+                        <div>• الموازي للسطح: <strong>W<sub>x</sub> = mg·sinθ</strong></div>
+                    </div>
+                </div>
+                <div style="background: #fef3c7; border-radius: 8px; padding: 16px 20px; border-right: 5px solid #f59e0b; font-size: 30px;">
+                    <strong>💡 القاعدة الذهبية:</strong> a = g·sin(θ) للحركة على سطح مائل أملس
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 16px; background: #f0fdf4; border-radius: 12px; padding: 18px 22px; border: 1px solid #bbf7d0;">
+            <h2 style="font-size: 36px; color: #166534; font-weight: 700; margin: 0 0 12px 0;">② مفاتيح قوى الاحتكاك (f)</h2>
+            <div style="font-size: 28px; color: #14532d; line-height: 2.2;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="background: #ffffff; border-radius: 8px; padding: 12px 16px; border: 1px solid #bbf7d0;">
+                        <strong>على وشك الحركة:</strong><br>
+                        f<sub>s</sub> = μ × R
+                    </div>
+                    <div style="background: #ffffff; border-radius: 8px; padding: 12px 16px; border: 1px solid #bbf7d0;">
+                        <strong>جسم يتحرك بالفعل:</strong><br>
+                        ΣF − f<sub>k</sub> = m × a
+                    </div>
+                </div>
+                <div style="background: #dcfce7; border-radius: 8px; padding: 12px 16px; margin-top: 10px; border-right: 4px solid #16a34a;">
+                    🔑 <strong>اتجاه الاحتكاك:</strong><br>
+                    • "أقل قوة تمنعه من الانزلاق" → الاحتكاك لأعلى المستوى ⬆<br>
+                    • "أقل قوة تحركه لأعلى" → الاحتكاك لأسفل المستوى ⬇
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 20px; color: #94a3b8; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </div>
+    `;
+    printableDoc.appendChild(goldenDiv);
+
+    // ===== 4. صفحة تحويلات الوحدات =====
+    const unitsDiv = document.createElement('div');
+    unitsDiv.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 20px 25px;
+        font-family: 'Cairo', sans-serif;
+        background: #ffffff;
+        direction: rtl;
+    `;
+    unitsDiv.innerHTML = `
+        <div style="text-align: center; margin-bottom: 20px; border-bottom: 4px solid #7c3aed; padding-bottom: 12px;">
+            <h1 style="font-size: 48px; color: #5b21b6; font-weight: 900; margin: 0;">📐 تحويلات الوحدات الميكانيكية</h1>
+            <p style="font-size: 30px; color: #475569; margin: 8px 0 0 0;">التحويلات الأساسية التي تحتاجها في الامتحانات</p>
+        </div>
+        <div style="margin-bottom: 16px; background: #f5f3ff; border-radius: 12px; padding: 16px 20px; border: 1px solid #ddd6fe;">
+            <h2 style="font-size: 36px; color: #5b21b6; font-weight: 700; margin: 0 0 12px 0;">① تحويلات الكتلة (m)</h2>
+            <div style="font-size: 28px; color: #1e293b;">
+                <table style="width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 8px; overflow: hidden; border: 1px solid #ddd6fe;">
+                    <tr style="background: #ede9fe;">
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">من</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">إلى</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">المعامل</th>
+                    </tr>
+                    <tr><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">طن (ton)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">كيلوجرام (kg)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-size: 26px;">× 1000</td></tr>
+                    <tr style="background: #f5f3ff;"><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">كيلوجرام (kg)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">جرام (g)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-size: 26px;">× 1000</td></tr>
+                    <tr><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">جرام (g)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">كيلوجرام (kg)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-size: 26px;">÷ 1000</td></tr>
+                </table>
+            </div>
+        </div>
+        <div style="margin-bottom: 16px; background: #ecfdf5; border-radius: 12px; padding: 16px 20px; border: 1px solid #a7f3d0;">
+            <h2 style="font-size: 36px; color: #065f46; font-weight: 700; margin: 0 0 12px 0;">② تحويلات المسافة والإزاحة (s)</h2>
+            <div style="font-size: 28px; color: #1e293b;">
+                <table style="width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 8px; overflow: hidden; border: 1px solid #a7f3d0;">
+                    <tr style="background: #d1fae5;">
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">من</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">إلى</th>
+                        <th style="padding: 12px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">المعامل</th>
+                    </tr>
+                    <tr><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">كيلومتر (km)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">متر (m)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-size: 26px;">× 1000</td></tr>
+                    <tr style="background: #ecfdf5;"><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">متر (m)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; font-size: 26px;">سنتيمتر (cm)</td><td style="padding: 10px 16px; border: 1px solid #cbd5e1; text-align: center; direction: ltr; font-size: 26px;">× 100</td></tr>
+                </table>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 20px; color: #94a3b8; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </div>
+    `;
+    printableDoc.appendChild(unitsDiv);
+
+    // ===== 5. صفحة بداية الأسئلة =====
+    const startDiv = document.createElement('div');
+    startDiv.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 50px 20px;
+        text-align: center;
+        font-family: 'Cairo', sans-serif;
+        background: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    `;
+    startDiv.innerHTML = `
+        <div style="font-size: 100px; margin-bottom: 30px;">📝</div>
+        <h1 style="font-size: 58px; color: #1a365d; font-weight: 900; margin-bottom: 25px;">أسئلة المراجعة النهائية</h1>
+        <div style="width: 60%; height: 4px; background: #2563eb; margin: 20px auto; border-radius: 4px;"></div>
+        <p style="font-size: 38px; color: #475569; line-height: 2.2; max-width: 80%;">
+            مجموعة من الأسئلة المتنوعة<br>
+            مع الحلول النموذجية خطوة بخطوة
+        </p>
+        <p style="font-size: 26px; color: #94a3b8; margin-top: 30px;">
+            ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+        </p>
+    `;
+    printableDoc.appendChild(startDiv);
+
+    // ============================================================
+    // ===== الأسئلة (جميع العناصر مكبرة جداً) =====
+    // ============================================================
+    questionsMatrix.forEach((q, index) => {
+        const questionNumber = index + 1;
+        
+        // 🔥 حجم الخط الأساسي (كبير جداً)
+        let fontSize = 34;
+        const textLength = (q.text || '').length;
+        if (textLength < 80) fontSize = 38;
+        if (textLength > 150) fontSize = 30;
+        if (textLength > 200) fontSize = 28;
+
+        const formattedText = (q.text || '').replace(/\n/g, '<br>');
+
+        // ===== الخيارات =====
+        let optionsHtml = '';
+        let optionsList = [];
+        if (q.steps && q.steps.length > 0 && q.steps[0].options) {
+            optionsList = q.steps[0].options;
+        } else if (q.options && q.options.length > 0) {
+            optionsList = q.options;
+        }
+
+        if (optionsList.length > 0) {
+            optionsHtml = `<div style="margin: 18px 0;">`;
+            optionsList.forEach((opt, idx) => {
+                const isCorrect = opt.isCorrect || (idx === q.correctAnswerIndex);
+                optionsHtml += `
+                    <div style="padding: 16px 22px; font-size: ${fontSize - 2}px; margin: 12px 0; background: ${isCorrect ? '#dcfce7' : '#f8fafc'}; border-radius: 12px; border-right: 5px solid ${isCorrect ? '#22c55e' : '#cbd5e1'}; font-weight: 500;">
+                        ${opt.text} ${isCorrect ? ' ✅' : ''}
+                    </div>
+                `;
+            });
+            optionsHtml += `</div>`;
+        }
+
+        // ===== التلميح =====
+        let hintHtml = '';
+        if (q.hint && q.hint.trim() !== '') {
+            hintHtml = `
+                <div style="background: #fffbeb; border-right: 5px solid #f59e0b; padding: 20px 24px; margin: 18px 0; font-size: ${fontSize - 2}px; color: #78350f; border-radius: 12px; line-height: 1.9;">
+                    💡 <strong>تلميح:</strong> ${q.hint}
+                </div>
+            `;
+        }
+
+        // ===== الرسوم =====
+        let graphicHtml = '';
+        if (q.svgCode && q.svgCode.trim() !== '') {
+            let upgradedSvg = q.svgCode.replace(/<style>/g, "<style>text, .label, .res-text, .equiv-text { font-size: 26px !important; font-weight: bold !important; } ");
+            graphicHtml = `
+                <div style="text-align: center; margin: 25px 0; padding: 18px; background: #fafcff; border-radius: 12px; border: 1px solid #e2e8f0;">
+                    ${upgradedSvg}
+                </div>
+            `;
+        } else if (q.imagePath && q.imagePath.trim() !== '') {
+            graphicHtml = `
+                <div style="text-align: center; margin: 25px 0; padding: 18px; background: #fafcff; border-radius: 12px; border: 1px solid #e2e8f0;">
+                    <img src="${q.imagePath}" alt="رسم توضيحي" style="max-width: 90%; height: auto; max-height: 380px;">
+                </div>
+            `;
+        }
+
+        // ===== خطوات الحل =====
+        let stepsHtml = '';
+        if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
+            q.pdfSolutionSteps.forEach(s => {
+                if (s && s.trim()) {
+                    stepsHtml += `<div style="padding: 10px 0; font-size: ${fontSize - 1}px; line-height: 2; color: #0f172a; font-weight: bold;">${s}</div>`;
+                }
+            });
+        } else if (q.steps && q.steps.length > 0) {
+            q.steps.forEach(step => {
+                if (step.title) {
+                    stepsHtml += `<div style="font-weight: bold; font-size: ${fontSize}px; margin-top: 10px; color: #1a365d;">${step.title}</div>`;
+                }
+                if (step.question) {
+                    stepsHtml += `<div style="font-size: ${fontSize - 1}px; padding-right: 12px; color: #334155; line-height: 1.9;">${step.question}</div>`;
+                }
+                if (step.feedback) {
+                    stepsHtml += `<div style="background: #dcfce7; padding: 10px 16px; border-radius: 10px; font-size: ${fontSize - 1}px; margin: 8px 0; color: #065f46; border-right: 4px solid #22c55e;">✅ ${step.feedback}</div>`;
+                }
+            });
+        }
+
+        // ===== كرت السؤال =====
+        const questionDiv = document.createElement('div');
+        questionDiv.style.cssText = `
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin-bottom: 40px !important;
+            padding-bottom: 30px !important;
+            border-bottom: 2px dashed #cbd5e1;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            direction: rtl;
+            font-family: 'Cairo', sans-serif;
+        `;
+
+        questionDiv.innerHTML = `
+            <!-- 🔥 عنوان السؤال (كبير جداً) -->
+            <div style="font-size: ${fontSize + 12}px; font-weight: 900; color: #1a365d; margin-bottom: 18px; direction: rtl; text-align: right;">
+                ${questionNumber}. ${q.title || ''}
+            </div>
+            
+            <!-- 🔥 نص السؤال (كبير جداً) -->
+            <div style="font-size: ${fontSize + 6}px; line-height: 2.4; color: #1e293b; margin-bottom: 18px; direction: rtl; text-align: right; font-weight: 600;">
+                ${formattedText}
+            </div>
+            
+            ${optionsHtml}
+            ${hintHtml}
+            ${graphicHtml}
+            
+            <!-- خطوات الحل -->
+            <div style="margin-top: 24px; padding-top: 18px; border-top: 2px dashed #cbd5e1; direction: rtl; text-align: right;">
+                <div style="font-weight: bold; color: #475569; margin-bottom: 16px; font-size: 26px; border-right: 5px solid #1a365d; padding-right: 14px;">
+                    🛠️ خطوات الاستنتاج الرياضي:
+                </div>
+                <div style="padding-right: 12px;">${stepsHtml || 'لا يوجد حل متاح حالياً'}</div>
+                
+                <!-- 🔥 الإجابة النهائية (كبيرة جداً) -->
+                ${q.pdfFinalAnswer ? `<div style="font-size: ${fontSize + 10}px; font-weight: 900; margin-top: 22px; color: #065f46; padding: 18px 32px; background-color: #f0fdf4; border: 3px solid #22c55e; border-radius: 14px; display: inline-block; direction: rtl; box-shadow: 0 4px 16px rgba(34,197,94,0.25);">${q.pdfFinalAnswer}</div>` : ''}
+            </div>
+        `;
+
+        printableDoc.appendChild(questionDiv);
+    });
+
+    // ===== تذييل الصفحة =====
+    const footer = document.createElement('div');
+    footer.style.cssText = `
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: #475569;
+        border-top: 2px solid #cbd5e1;
+        padding-top: 18px;
+        margin-top: 30px;
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+    `;
+    footer.innerHTML = `⚡ هذه المذكرة خاصة بطلبة مدرسة أمجاد أفريقيا - مخصصة للقراءة على النقال ⚡`;
+    printableDoc.appendChild(footer);
+
+    // ============================================================
+    // ✅ تنفيذ الطباعة مباشرة
+    // ============================================================
+    setTimeout(function() {
+        try {
+            // محاولة الطباعة بالطريقة العادية
+            window.print();
+        } catch (e) {
+            console.error("خطأ في الطباعة:", e);
+            alert("حدث خطأ في الطباعة، حاول مرة أخرى أو استخدم زر الطباعة في المتصفح (Ctrl+P)");
+        }
+    }, 800);
+}
+// ============================================================
+// تهيئة الصفحة
+// ============================================================
+window.onload = () => {
+    if (questionsMatrix && questionsMatrix.length > 0) {
+        renderActiveQuestion(0);
+    } else {
+        console.error("❌ مصفوفة الأسئلة غير موجودة!");
+        document.getElementById('main-question-text').innerText = "⚠️ لم يتم تحميل الأسئلة.";
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof renderMathInElement === 'function') {
+        setTimeout(() => {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ]
+            });
+        }, 300);
+    }
+});
+
+console.log("✅ تم تحميل نسخة الموبايل بنجاح!");
+</script>
+
+</body>
+</html>

@@ -1,12 +1,12 @@
 /* ============================================================
-   style1.css - الأنماط الرئيسية (نسخة مخصصة للخطوط الضخمة على النقال)
+   style3.css - الأنماط الرئيسية (نسخة مخصصة للخطوط الضخمة على النقال)
    ============================================================ */
 
 :root {
     --primary: #0f172a;
     --accent: #2563eb;
-    --sky-blue: #38bdf8; /* لون أزرق السماء */
-    --sky-blue-dark: #0ea5e9; /* أزرق سماء غامق قليلاً */
+    --sky-blue: #38bdf8;
+    --sky-blue-dark: #0ea5e9;
     --bg: #f8fafc;
     --card-bg: #ffffff;
     --success: #16a34a;
@@ -338,13 +338,8 @@ body {
     display: none;
 }
 
-
-
-
-
-
 /* ============================================================
-   أنماط الطباعة الذكية
+   أنماط الطباعة الذكية وهندسة الرسوم المتوازنة للموبايل
    ============================================================ */
 @media print {
     @page {
@@ -387,7 +382,7 @@ body {
         transform: translate(-50%, -50%) rotate(-40deg);
         font-size: 48px;
         font-weight: bold;
-        color: rgba(148, 163, 184, 0.08) !important;
+        color: rgba(148, 163, 184, 0.06) !important;
         white-space: nowrap;
         pointer-events: none;
         z-index: 9999;
@@ -411,248 +406,50 @@ body {
     }
 
     /* حاوية المذكرة الأساسية */
-.print-page-box {
-    box-sizing: border-box;
-    width: 100%;
-    margin: 0 !important;
-    padding: 4mm 6mm 5mm 6mm !important;
-    background: #ffffff;
-    display: block;
-    position: relative;
-    
-    /* 💡 التعديل هنا: السماح للمتصفح بالاستمرار دون قفز إجباري */
-    page-break-after: auto !important;
-    break-after: auto !important;
-    height: auto !important;
-    min-height: auto !important;
-}
+    .print-page-box {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0 !important;
+        padding: 4mm 6mm 5mm 6mm !important;
+        background: #ffffff;
+        display: block;
+        position: relative;
+        page-break-after: auto !important;
+        break-after: auto !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
 
-.pdf-questions-pair-container {
-    width: 100%;
-    display: block;
-    page-break-after: auto !important;
-    break-after: auto !important;
-}
-   
-    /* كرت السؤال الكامل مع حماية الانقسام */
+    .pdf-questions-pair-container {
+        width: 100%;
+        display: block;
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+
     .pdf-question-block {
         page-break-inside: avoid !important;
-        break-inside: auto !important;
+        break-inside: avoid !important;
         display: block;
         width: 100%;
         box-sizing: border-box;
-        /* ملاحظة: تركنا التحكم في الحجوم والهوامش السفلى للجافا سكريبت حتى لا يتم تجميدها */
     }
 
-    /* 💡 تم حذف قيم الـ font-size الثابتة بـ !important من هنا للسماح للجافا سكريبت بالتحكم وتكبير الخطوط بحرية */
-/* 1. تكبير نص السؤال الرئيسي */
-/* ===== تكبير الخطوط بمقدار مرة ونصف إضافية للنقال ===== */
-
-/* 1. نص السؤال الرئيسي (تم رفعه إلى 32 بكسل) */
-.pdf-q-text {
-    font-size: 32px !important;    
-    line-height: 1.8 !important;   /* تباعد الأسطر ممتاز لمنع تداخل الحروف الضخمة */
-    font-weight: 600 !important;
-}
-
-/* 2. عنوان رقم السؤال (تم رفعه إلى 36 بكسل) */
-.pdf-q-title {
-    font-size: 36px !important;    
-    font-weight: 900 !important;
-    margin-bottom: 20px !important;
-}
-
-/* 3. خطوات الاستنتاج والحل الرياضي (تم رفعها إلى 30 بكسل عريض) */
-.pdf-sol-steps div {
-    font-size: 30px !important;    
-    line-height: 1.8 !important;
-    font-weight: bold !important;
-}
-
-/* 4. عنوان "خطوات الاستنتاج الرياضي" الفرعي */
-.pdf-solution-box div:first-child {
-    font-size: 26px !important;
-    margin-bottom: 25px !important;
-}
-
-/* 5. صندوق الإجابة النهائية الأخضر (تم رفعه إلى 38 بكسل عملاق) */
-.pdf-final-ans {
-    font-size: 38px !important;    
-    font-weight: 900 !important;
-    padding: 20px 35px !important; /* زيادة الحواشي ليتسع الصندوق للخط الضخم */
-    border-radius: 14px !important;
-}   /* الرسوم البيانية والهندسية */
-/* ===== الرسومات (داخل @media print في ملف style1.css) ===== */
-.pdf-graphic {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 10px 0 !important; /* تقليل المسافة حول الرسمة */
-    width: 100% !important;
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-}
-
-/* 💡 التعديل السحري هنا: قمنا بتصغير الحد الأقصى للعرض والارتفاع */
-/* ===== مضاعفة حجم الرسومات داخل ملف الـ CSS لتبدو ضخمة وواضحة ===== */
-.pdf-graphic {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 25px 0 !important; /* زيادة المسافة الرأسية حول الرسمة لتبرز */
-    width: 100% !important;
-}
-
-.pdf-graphic svg,
-.pdf-graphic img {
-    display: block !important;
-    margin: 0 auto !important;
-    
-    /* 🚀 التعديل السحري: رفعنا العرض إلى 95% لملء الشاشة، والارتفاع إلى 280px */
-    max-width: 95% !important;   
-    max-height: 280px !important; 
-    width: auto !important;
-    height: auto !important;
-}
-    .page-footer-number {
-        text-align: center;
-        width: 100%;
-        page-break-inside: avoid;
-        break-inside: avoid;
-    }
-
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .print-page-box:empty {
-        display: none !important;
-    }
-
-    /* صفحات الملخص والقوانين */
-    .pdf-summary-page,
-    .pdf-golden-page,
-    .pdf-units-page,
-    .pdf-laws-page {
-        padding: 6mm 8mm 4mm 8mm !important;
-        margin: 0 !important;
-        page-break-after: always !important;
-        break-after: page !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-    }
-
-    .pdf-laws-page > div {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-    .pdf-laws-page table,
-    .pdf-laws-page .grid-container,
-    .pdf-summary-page table,
-    .pdf-golden-page table {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        border-collapse: collapse !important;
-        border: 1px solid #cbd5e1 !important;
-        width: 100% !important;
-    }
-
-    .pdf-summary-page table th, .pdf-summary-page table td,
-    .pdf-golden-page table th, .pdf-golden-page table td,
-    .pdf-laws-page table th, .pdf-laws-page table td {
-        border: 1px solid #cbd5e1 !important;
-        padding: 4px 6px !important;
-        font-size: 14px !important;
-    }
-}
-
-/* التوافق مع الشاشات المتصفحة العادية */
-@media (max-width: 600px) {
-    body { padding: 10px; }
-    .header { padding: 15px 20px; }
-    .header h2 { font-size: 18px; }
-    .question-container { padding: 20px; }
-    .question-text { font-size: 17px; }
-    .navigation-area { flex-direction: column; gap: 10px; }
-    .nav-btn, .print-btn, .bot-link-btn { width: 100%; justify-content: center; }
-}
-
-svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
-/* ===== تكبير خانة التذكير الفيزيائي والقوانين بمقدار مرة ونصف ===== */
-
-/* 1. العنوان الرئيسي لصفحة التذكير الفيزيائي أو القوانين */
-/* 🚀 المحدد الشامل لتكبير التلميحات في جميع الأسئلة 🚀 */
-/* ===== توسيط حاوية الرسمة والتلميح بالكامل في منتصف الصفحة ===== */
-.pdf-graphic {
-    display: flex !important;
-    flex-direction: column !important; /* ترتيب الرسمة ثم التلميح تحتها رأساً بطلة */
-    justify-content: center !important; /* التوسيط عمودياً */
-    align-items: center !important;    /* التوسيط أفقياً في المنتصف تماماً */
-    
-    margin: 25px auto !important;     /* كلمة auto تضمن توزيع الفراغات بالتساوي يميناً ويساراً */
-    width: 100% !important;
-    max-width: 95% !important;        /* الحفاظ على أبعاد النقال */
-    box-sizing: border-box !important;
-}
-
-/* جلب الحاوية البيضاء الداخلية التي تحمل الحدود إلى المنتصف */
-.pdf-graphic > div {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-/* 🚀 إجبار نص التلميح الداخلي على التكبير الكامل 🚀 */
-.pdf-graphic div, 
-.pdf-graphic span,
-.pdf-graphic strong {
-    font-size: 26px !important;         /* تكبير الخط العربي بشكل عام إلى 26 بكسل */
-    line-height: 1.8 !important;        /* تباعد أسطر مريح جداً ومنع التداخل */
-}
-
-/* 🚀 استهداف صندوق التلميح الملون وتوسيع أبعاده 🚀 */
-.pdf-graphic div[style*="border-right"], 
-.pdf-graphic div[style*="background"] {
-    font-size: 26px !important;
-    padding: 16px 20px !important;      /* إعطاء مساحة تصمیمیة مريحة داخل الصندوق */
-}
-
-/* 🚀 تكبير المعادلات الرياضية الإنجليزية لتصبح عملاقة 🚀 */
-.pdf-graphic span[style*="direction:ltr"], 
-.pdf-graphic div[style*="background"] span {
-    font-size: 28px !important;         /* جعل خط المعادلات والرموز 28 بكسل */
-    font-weight: 900 !important;        /* خط عريض جداً وبارز للمذاكرة */
-    display: inline-block !important;
-    margin-top: 10px !important;
-}
-
-@media print {
-    /* ... الكود الآخر ... */
-
-    /* 🔥 تكبير جميع العناصر في الطباعة 🔥 */
+    /* ===== تكبير النصوص في الطباعة ===== */
     .pdf-q-text {
-        font-size: 42px !important;      /* ← كان 32px */
+        font-size: 42px !important;
         line-height: 2.2 !important;
         font-weight: 700 !important;
     }
 
     .pdf-q-title {
-        font-size: 48px !important;      /* ← كان 36px */
+        font-size: 48px !important;
         font-weight: 900 !important;
         margin-bottom: 18px !important;
     }
 
     .pdf-sol-steps div {
-        font-size: 36px !important;      /* ← كان 30px */
+        font-size: 36px !important;
         line-height: 1.9 !important;
         font-weight: bold !important;
     }
@@ -663,13 +460,13 @@ svg {
     }
 
     .pdf-final-ans {
-        font-size: 44px !important;      /* ← كان 38px */
+        font-size: 44px !important;
         font-weight: 900 !important;
         padding: 18px 30px !important;
         border-radius: 14px !important;
     }
 
-    /* 🔥 تكبير الخيارات والتلميحات 🔥 */
+    /* تكبير الخيارات والتلميحات */
     .pdf-question-block .options-grid div,
     .pdf-question-block .option-btn,
     .pdf-question-block [style*="background: #f8fafc"],
@@ -687,18 +484,66 @@ svg {
         line-height: 1.8 !important;
     }
 
-    /* 🔥 تكبير الرسومات 🔥 */
-    .pdf-graphic svg,
-    .pdf-graphic img {
-        max-width: 90% !important;
-        max-height: 300px !important;
+    /* ===== 🔥 تكبير متوازن للرسوم والـ SVG ومنع الانكماش والحشر 🔥 ===== */
+    .pdf-graphic-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 35px auto !important; 
+        padding: 20px !important;
+        background: #fafcff !important;
+        box-sizing: border-box !important;
+        page-break-inside: avoid !important;
     }
 
-    /* 🔥 تكبير صفحات القوانين 🔥 */
+    .pdf-graphic-block {
+        width: 100% !important;
+        max-width: 800px !important; /* السماح بعرض أكبر للهياكل البصرية */
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* إجبار الـ SVG والصور الميكانيكية على التمدد الكامل */
+    .pdf-graphic-block svg,
+    .pdf-graphic-block img {
+        width: 100% !important; 
+        height: auto !important;
+        max-height: 600px !important; /* ارتفاع مريح لإبراز تفاصيل الكتل والبكرات */
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    /* تكبير نصوص المتجهات والرموز المضمنة في الرسم هندسياً لتناسب الأجسام البصرية */
+    .pdf-graphic-block svg text, 
+    .pdf-graphic-block svg tspan {
+        font-size: 24px !important; /* حجم متوازن وجريء يمنع تداخل الحروف */
+        font-weight: 900 !important;
+        fill: #000000 !important;
+    }
+
+    /* معالجة التوضيحات الملحقة بالرسوم */
+    .pdf-graphic-container > div:not(.pdf-graphic-block) {
+        width: 100% !important;
+        font-size: 22px !important;
+        line-height: 1.8 !important;
+        padding: 12px 16px !important;
+        direction: rtl !important;
+        text-align: center !important;
+    }
+
+    /* ===== تكبير صفحات ملخص القوانين والتحويلات ===== */
     .pdf-summary-page,
     .pdf-golden-page,
     .pdf-units-page {
         font-size: 28px !important;
+        padding: 6mm 8mm 4mm 8mm !important;
+        margin: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
     }
 
     .pdf-summary-page h1,
@@ -717,6 +562,11 @@ svg {
     .pdf-golden-page table,
     .pdf-units-page table {
         font-size: 26px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        border-collapse: collapse !important;
+        border: 1px solid #cbd5e1 !important;
+        width: 100% !important;
     }
 
     .pdf-summary-page td,
@@ -727,5 +577,57 @@ svg {
     .pdf-units-page th {
         font-size: 24px !important;
         padding: 8px 12px !important;
+        border: 1px solid #cbd5e1 !important;
     }
+
+    .page-footer-number {
+        text-align: center;
+        width: 100%;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .print-page-box:empty {
+        display: none !important;
+    }
+}
+
+/* التوافق مع الشاشات المتصفحة العادية */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .header {
+        padding: 15px 20px;
+    }
+    .header h2 {
+        font-size: 18px;
+    }
+    .question-container {
+        padding: 20px;
+    }
+    .question-text {
+        font-size: 17px;
+    }
+    .navigation-area {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nav-btn,
+    .print-btn,
+    .bot-link-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }

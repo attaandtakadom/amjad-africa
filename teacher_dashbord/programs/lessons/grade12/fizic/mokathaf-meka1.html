@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>مكثف الميكانيكا الذكي - مدرسة أمجاد أفريقيا</title>
+    
+    <link href="https://fonts.googleapis.com/css2=family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        .app-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .school-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .question-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .question-title {
+            font-size: 15px;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+        .nav-btn, .print-btn, .bot-link-btn {
+            font-family: 'Cairo', sans-serif;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .nav-btn { background: #2563eb; color: white; }
+        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+        .navigation-area { display: flex; justify-content: space-between; margin-top: 20px; }
+        .print-section { text-align: center; margin-top: 35px; }
+        .print-btn { background: #16a34a; color: white; margin: 5px; }
+        .bot-link-btn { background: #0088cc; color: white; margin: 5px; }
+        
+        /* إعدادات الطباعة لـ PDF لمنع التقطع */
+        @media print {
+            body { background: white; padding: 0; }
+            .app-container, .navigation-area, .print-section { display: none !important; }
+            #printable-pdf-document { display: block !important; }
+            .pdf-question-block {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+        }
+        #printable-pdf-document { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i> منظومة امتحانات ميكانيكا الميكانيكا</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <div id="question-counter" style="margin-top: 10px; font-weight: bold; color: #475569;"></div>
+    </div>
+
+    <div class="question-container">
+        <div class="question-title" id="main-question-title"></div>
+        <div class="question-text" id="main-question-text"></div>
+        <div id="main-options-preview" style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
+        <div id="graphic-container" style="margin-top: 20px;"></div>
+    </div>
+
+    <div id="steps-container"></div>
+
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> طباعة PDF الشاملة (منع التقطع)
+    </button>
+    <button class="print-btn" onclick="triggerMobileSmartPrint()" style="background-color: #ff9800;">
+        📱 طباعة نسخة النقال (خط كبير)
+    </button>
+    <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+        <i class="fa-brands fa-telegram"></i> البوت التعليمي
+    </a>
+</div>
+
+<div id="printable-pdf-document"></div>
+
+<script src="mokathaf-meka-arry.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+// ============================================================
+// دالة ذكية لإصلاح نصوص التشفير التالفة (Mojibake) تلقائياً
+// ============================================================
+function fixEncoding(text) {
+    if (!text) return "";
+    try {
+        // تحويل النص التالف إلى نظام بكسل بايت وإعادة صياغته بـ UTF-8 نقي
+        let bytes = new Uint8Array([...text].map(c => c.charCodeAt(0)));
+        return new TextDecoder('utf-8').decode(bytes);
+    } catch (e) {
+        return text; // في حال كان النص سليماً أساساً
+    }
+}
+
+// في حال عدم توفر الملف الخارجي، نضع كود المصفوفة الخاص بك كاحتياطي تلقائي
+if (typeof questions === 'undefined') {
+    var questions = [
+        {
+            "title": "س 7 (ميكانيكا): القضبان والخيوط",
+            "text": "الفرق بين القضبان والخيوط والحبال والكابلات هو أن القضبان يمكنها أن تبذل قوة اتجاهها إلى الخارج عند طرفيها.\n\nأ) صح\nب) خطأ",
+            "options": [],
+            "correctAnswerIndex": 1,
+            "svgCode": "<div style=\"background: #f1f5f9; border-radius: 8px; padding: 10px; text-align: center; border: 2px solid #3b82f6; font-size: 14px;\">💡 القضيب: يتحمل شد (للداخل) وضغط (للخارج) ← الخيط يتحمل شد فقط (للداخل)</div>",
+            "pdfSolutionSteps": [
+                "══════════════ الخيارات ══════════════",
+                "أ) صح",
+                "ب) خطأ  ✅ (الإجابة الصحيحة)",
+                "",
+                "══════════════ التلميح ══════════════",
+                "💡 الخيوط والكوابل المرنة أو غير المرنة لا يمكنها أبداً دفع الأجسام (لا تتحمل الضغط)، بل تجرها فقط (قوة شد موجهة للداخل).",
+                "📌 القضيب الجاسئ (Rod) يمتاز بأنه فريد بقدرته على بذل قوة شد (للداخل) أو قوة دفع/ضغط (للخارج) تبعاً لطبيعة القوى المؤثرة عليه من الأطراف، ولذلك الصياغة المطلقة تحتاج لتدقيق وتعتبر خاطئة دراسياً.",
+                "",
+                "الإجابة: ب) خطأ ❌"
+            ],
+            "pdfFinalAnswer": "الإجابة: ب) خطأ ❌"
+        }
+    ];
+}
+
+let currentQuestionIndex = 0;
+
+// ============================================================
+// معالجة السؤال وفصل الخيارات التكست مسبقاً بالتساوي
+// ============================================================
+function parseQuestionAndOptions(qObj) {
+    let rawText = fixEncoding(qObj.text || "");
+    let lines = rawText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    let questionText = "";
+    let extractedOptions = [];
+
+    lines.forEach(line => {
+        if (line.startsWith('أ)') || line.startsWith('ب)') || line.startsWith('ج)') || line.startsWith('د)') ||
+            line.startsWith('أ-') || line.startsWith('ب-') || line.startsWith('ج-') || line.startsWith('د-')) {
+            extractedOptions.push(line);
+        } else {
+            if (questionText !== "") questionText += "<br>";
+            questionText += line;
+        }
+    });
+
+    // إذا كانت مصفوفة الخيارات الأصلية فارغة، نعتمد على المستخرجة من التكست
+    let finalOptions = (qObj.options && qObj.options.length > 0) ? qObj.options.map(o => fixEncoding(o)) : extractedOptions;
+
+    return {
+        title: fixEncoding(qObj.title),
+        question: questionText,
+        options: finalOptions,
+        svg: qObj.svgCode ? fixEncoding(qObj.svgCode) : "",
+        steps: qObj.pdfSolutionSteps ? qObj.pdfSolutionSteps.map(s => fixEncoding(s)) : []
+    };
+}
+
+// ============================================================
+// عرض السؤال في الواجهة التفاعلية للمنظومة
+// ============================================================
+function loadQuestion(index) {
+    if (!questions || questions.length === 0) return;
+    currentQuestionIndex = index;
+
+    const data = parseQuestionAndOptions(questions[index]);
+    
+    document.getElementById('question-counter').innerText = `سؤال ${index + 1} من ${questions.length}`;
+    document.getElementById('main-question-title').innerText = data.title;
+    document.getElementById('main-question-text').innerHTML = data.question;
+
+    // عرض الخيارات في الشبكة التفاعلية
+    const optionsPreview = document.getElementById('main-options-preview');
+    optionsPreview.innerHTML = "";
+    if (data.options.length > 0) {
+        data.options.forEach(opt => {
+            let optDiv = document.createElement('div');
+            optDiv.style.cssText = "background: #f1f5f9; padding: 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: 600;";
+            optDiv.innerHTML = opt;
+            optionsPreview.appendChild(optDiv);
+        });
+    }
+
+    // عرض الـ SVG أو الرسم المرفق
+    document.getElementById('graphic-container').innerHTML = data.svg;
+
+    // عرض خطوات الحل والملخص أسفل العنصر
+    const stepsContainer = document.getElementById('steps-container');
+    stepsContainer.innerHTML = "";
+    if (data.steps.length > 0) {
+        let block = document.createElement('div');
+        block.style.cssText = "background: #f8fafc; border-right: 4px solid #16a34a; padding: 15px; border-radius: 6px; white-space: pre-line; line-height: 1.6;";
+        block.innerHTML = `<strong>📋 تفاصيل ورقة الإجابة والخطوات:</strong>\n` + data.steps.join('\n');
+        stepsContainer.appendChild(block);
+    }
+
+    // تفعيل وتحديث أزرار التصفح
+    document.getElementById('prev-btn').disabled = (index === 0);
+    document.getElementById('next-btn').disabled = (index === questions.length - 1);
+
+    if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body);
+    }
+}
+
+function navigateQuestion(direction) {
+    let newIndex = currentQuestionIndex + direction;
+    if (newIndex >= 0 && newIndex < questions.length) {
+        loadQuestion(newIndex);
+    }
+}
+
+// ============================================================
+// بناء هيكل طباعة الـ PDF المدمج ومنع التقطع نهائياً
+// ============================================================
+function buildPrintableDocument(isMobileMode = false) {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    printableDoc.innerHTML = ""; // تصفية الحاوية
+
+    questions.forEach((q, index) => {
+        let data = parseQuestionAndOptions(q);
+
+        // إنشاء الحاوية الموحدة للسؤال الفردي
+        let qBlock = document.createElement('div');
+        qBlock.className = 'pdf-question-block';
+        
+        // منع كسر الصفحة داخل السؤال الواحد نهائياً عبر المتصفح
+        qBlock.style.cssText = `
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            direction: rtl;
+            font-size: ${isMobileMode ? '19px' : '15px'};
+            line-height: 1.7;
+        `;
+
+        // 1. ترويسة السؤال مع العنوان الرئيسي للمصفوفة
+        let htmlContent = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 2px solid #2563eb; padding-bottom: 5px;">
+                <span style="font-weight: 800; color: #1e3a8a;">${data.title || `السؤال الجوابي (${index + 1})`}</span>
+                <span style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px;">مكثف الميكانيكا</span>
+            </div>
+            <div style="font-weight: 700; color: #1e293b; margin-bottom: 15px;">${data.question}</div>
+        `;
+
+        // 2. دمج وطباعة الخيارات مباشرة تحت التكست
+        if (data.options.length > 0) {
+            htmlContent += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">`;
+            data.options.forEach(opt => {
+                htmlContent += `<div style="background: #f8fafc; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 6px; font-weight: 600;">${opt}</div>`;
+            });
+            htmlContent += `</div>`;
+        }
+
+        // 3. دمج كود الرسمة والـ SVG التوضيحي المرفق
+        if (data.svg) {
+            htmlContent += `<div style="margin: 15px 0; text-align: center;">${data.svg}</div>`;
+        }
+
+        // 4. دمج وحفظ خطوات الحل الكاملة والتلميحات بشكل متصل ومتناسق
+        if (data.steps.length > 0) {
+            htmlContent += `
+                <div style="background: #f0fdf4; border-right: 4px solid #16a34a; padding: 12px 15px; border-radius: 4px; white-space: pre-line; font-size: ${isMobileMode ? '17px' : '13.5px'}; color: #14532d;">
+                    ${data.steps.join('\n')}
+                </div>
+            `;
+        }
+
+        qBlock.innerHTML = htmlContent;
+        printableDoc.appendChild(qBlock);
+    });
+
+    // تصحيح الرندرة لرموز المصفوفات إن وجدت بالخطوات
+    if (typeof renderMathInElement === "function") {
+        renderMathInElement(printableDoc);
+    }
+}
+
+function triggerSmartPrint() {
+    buildPrintableDocument(false);
+    setTimeout(() => { window.print(); }, 600);
+}
+
+function triggerMobileSmartPrint() {
+    buildPrintableDocument(true);
+    setTimeout(() => { window.print(); }, 600);
+}
+
+// التشغيل التلقائي للمنظومة
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => { loadQuestion(0); }, 400);
+});
+</script>
+</body>
+</html>

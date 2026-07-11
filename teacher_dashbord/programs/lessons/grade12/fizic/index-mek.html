@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك المراجعة النهائية المستقر - ميكانيكا</title>
+    
+    <script src="mokathaf-meka-array.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --accent-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --card-border: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            padding: 15px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* لوحة تحكم الهاتف الذكي */
+        .control-panel {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-print {
+            background-image: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 320px;
+            margin-top: 10px;
+        }
+
+        /* ورقة الامتحان */
+        .print-container {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .header-box {
+            text-align: center;
+            border-bottom: 4px double var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+        }
+
+        .header-box h2 {
+            font-size: 22px;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .question-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 22px;
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            text-align: right;
+        }
+
+        .q-title {
+            font-size: 15px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 4px;
+        }
+
+        .q-text {
+            font-size: 16px;
+            font-weight: 600;
+            white-space: pre-line;
+            margin-bottom: 15px;
+        }
+
+        /* حاوية الصناديق النصية والرسومات */
+        .svg-wrapper {
+            margin: 15px 0;
+            width: 100%;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        /* الصندوق التوضيحي المضمن داخل المحرك */
+        .hint-box-fallback {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid #3b82f6;
+            font-size: 14px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        /* صندوق خطوات الحل النصي التتابعي */
+        .solution-box {
+            background-color: #f8fafc;
+            border-right: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: pre-line;
+            color: #334155;
+        }
+
+        /* 🖨️ نمط الطباعة وتصدير الـ PDF عبر الهاتف */
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm 12mm 15mm 12mm;
+            }
+            body {
+                background: white !important;
+                color: #000000 !important;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .control-panel {
+                display: none !important;
+            }
+            .print-container {
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
+            .question-card {
+                border: 1px solid #94a3b8 !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="control-panel">
+            <h2>📱 محرك طباعة النقال الفولاذي (ميكانيكا)</h2>
+            <p>حالة المصفوفة الخارجية: <strong><span id="q-status">جاري الفحص...</span></strong></p>
+            <button class="btn-print" onclick="window.print()">توليد وطباعة ملف PDF 📄✨</button>
+        </div>
+
+        <div id="exam-sheet" class="print-container">
+            
+            <div class="header-box">
+                <h2>أسئلة المراجعة الشاملة لمادة الميكانيكا</h2>
+                <p>مدرسة أمجاد أفريقيا العلمية | مرحلة الشهادة الثانوية</p>
+                <small>العام الدراسي: 2025 - 2026 م</small>
+            </div>
+
+            <div id="questions-loader"></div>
+
+        </div>
+    </div>
+
+    <script>
+        // دالة فائقة الأمان لفك التواء نصوص اللغة العربية دون التسبب في إيقاف تشغيل الكود
+        function safeDecodeArabic(str) {
+            if (!str) return '';
+            try {
+                // محاولة فك ترميز الأحرف المشوهة الشائعة في ملفات الجافاسكربت
+                return decodeURIComponent(escape(str));
+            } catch (e) {
+                // إذا فشل أو كان النص يحتوي على صيغة تمنع الفك، يتم إرجاع النص كما هو دون إيقاف المحرك
+                return str;
+            }
+        }
+
+        // دالة ذكية لتنظيف واستخراج النصوص الفعالة من داخل وسوم div النصية الموجودة في المصفوفة
+        function extractCleanContent(htmlString) {
+            if (!htmlString) return '';
+            
+            // إذا كان يحتوي على صندوق HTML، نقوم باستخلاص النص وتنسيقه داخلياً
+            if (htmlString.includes('<div') || htmlString.includes('</div')) {
+                // نقوم بإنشاء عنصر وهمي مؤقت لتنظيف النص
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = htmlString;
+                return tempDiv.innerText || tempDiv.textContent || htmlString;
+            }
+            return htmlString;
+        }
+
+        function buildExamSheet() {
+            const loader = document.getElementById('questions-loader');
+            const statusEl = document.getElementById('q-status');
+            
+            // 1. التحقق من وجود المصفوفة بأمان
+            if (typeof questionsMatrix === 'undefined' || !Array.isArray(questionsMatrix)) {
+                statusEl.innerText = "لم يتم العثور على الملف الخارجي!";
+                statusEl.style.color = "red";
+                loader.innerHTML = `<div style="color:red; text-align:center; padding:20px; font-weight:bold;">⚠️ تنبيه: الملف الخارجي 'index-array-great-pdf-mekanika.js' غير موجود في نفس المجلد أو يحتوي على خطأ في صياغة الأقواس والفاصلة!</div>`;
+                return;
+            }
+
+            statusEl.innerText = `تم تحميل (${questionsMatrix.length}) سؤالاً بنجاح`;
+            statusEl.style.color = "green";
+            loader.innerHTML = ""; 
+
+            // 2. الدوران وحقن الأسئلة بشكل معزول لحماية المحرك
+            questionsMatrix.forEach((q, index) => {
+                try {
+                    const card = document.createElement('div');
+                    card.className = 'question-card';
+
+                    // تطبيق فك التشفير الآمن خطوة بخطوة
+                    const rawTitle = q.title || `سؤال ${index + 1}`;
+                    const rawText = q.text || '';
+                    const rawSvgCode = q.svgCode || '';
+                    
+                    const cleanTitle = safeDecodeArabic(rawTitle);
+                    const cleanText = safeDecodeArabic(rawText);
+                    
+                    // استخراج نص التلميح الصافي المضمن داخل حقل svgCode
+                    const rawHintText = extractCleanContent(rawSvgCode);
+                    const cleanHintText = safeDecodeArabic(rawHintText);
+
+                    // تجميع خطوات الحل التتابعية
+                    let stepsText = '';
+                    if (q.pdfSolutionSteps && Array.isArray(q.pdfSolutionSteps)) {
+                        stepsText = q.pdfSolutionSteps.map(safeDecodeArabic).join('\n');
+                    }
+
+                    // بناء الهيكل المرن المستقر للطباعة والـ PDF
+                    card.innerHTML = `
+                        <div class="q-title">${cleanTitle}</div>
+                        <div class="q-text">${cleanText}</div>
+                        
+                        ${cleanHintText ? `
+                        <div class="svg-wrapper">
+                            <div class="hint-box-fallback">
+                                ${cleanHintText}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${stepsText ? `
+                        <div class="solution-box">
+                            <strong>🛠️ السير الجبري التتابعي للحل:</strong>\n${stepsText}
+                        </div>
+                        ` : ''}
+                    `;
+                    
+                    loader.appendChild(card);
+                } catch (err) {
+                    console.error("خطأ في معالجة السؤال رقم: " + index, err);
+                }
+            });
+        }
+
+        // تشغيل البناء الديناميكي فور اكتمال تحميل الصفحة على الهاتف
+        window.onload = buildExamSheet;
+    </script>
+</body>
+</html>
