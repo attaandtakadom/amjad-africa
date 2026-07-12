@@ -1,0 +1,382 @@
+/* ============================================================
+   style-a4.css - الأنماط المخصصة للطباعة الورقية الفعلية القياسية (A4)
+   ============================================================ */
+
+:root {
+    --primary: #0f172a;
+    --accent: #2563eb;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --success: #16a34a;
+    --border-color: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #cbd5e1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* الأنماط العامة للمنصة في العرض العادي */
+.app-container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* إخفاء حاويات المعاينة أثناء العرض العادي */
+#printable-pdf-document,
+#dynamic-pdf-questions-area {
+    display: none;
+}
+
+/* ============================================================
+   محرك الطباعة الفعلي المخصص للورق القياسي A4 والتوفير
+   ============================================================ */
+@media print {
+    @page {
+        size: A4;
+        margin: 15mm 12mm 15mm 12mm !important; /* هوامش متزنة للطباعة الميكانيكية */
+    }
+
+    body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100%;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* إخفاء عناصر واجهة التطبيق التفاعلية */
+    .app-container,
+    .print-section,
+    .navigation-area,
+    .header {
+        display: none !important;
+    }
+
+    #printable-pdf-document,
+    #dynamic-pdf-questions-area {
+        display: block !important;
+        direction: rtl;
+        width: 100%;
+        background: white;
+    }
+
+    /* علامة مائية ورقية خفيفة جداً وثابتة */
+    body::before {
+        content: "مدرسة أمجاد أفريقيا - للتعليم الخاص";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        font-size: 40pt;
+        font-weight: bold;
+        color: rgba(148, 163, 184, 0.03) !important;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 9999;
+    }
+
+    /* ===== غلاف المذكرة الورقي القياسي ===== */
+    .pdf-cover-page {
+        page-break-after: always;
+        break-after: page;
+        height: 95vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .pdf-cover-page .school-name {
+        font-size: 20pt;
+        font-weight: bold;
+        color: #1a365d;
+        border-bottom: 2px solid #1a365d;
+        padding-bottom: 5px;
+        width: 75%;
+    }
+
+    .pdf-cover-page .main-title {
+        font-size: 34pt;
+        font-weight: 900;
+        color: #0f172a;
+        margin: 30px 0 10px 0;
+    }
+
+    .pdf-cover-page .sub-title {
+        font-size: 20pt;
+        color: #334155;
+        font-weight: bold;
+    }
+
+    .pdf-cover-page .cover-frame {
+        border: 2px solid #1a365d;
+        border-radius: 8px;
+        padding: 25px;
+        margin: 25px 0;
+        width: 80%;
+        background: #f8fafc !important;
+    }
+
+    .pdf-cover-page .cover-frame h3 { font-size: 22pt; color: #1e293b; }
+    .pdf-cover-page .cover-frame h4 { font-size: 16pt; color: #475569; margin: 8px 0; }
+    .pdf-cover-page .cover-frame .year {
+        font-size: 15pt;
+        color: #0f172a;
+        font-weight: bold;
+        margin-top: 10px;
+        border-top: 1.5px dashed #cbd5e1;
+        padding-top: 8px;
+    }
+
+    .pdf-cover-page .dedication { font-size: 16pt; font-weight: bold; color: #059669; margin: 15px 0; }
+
+    /* ===== حاويات صفحات الطباعة الورقية ===== */
+    .print-page-box {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 5mm 0 !important;
+        background: #ffffff !important;
+        display: block !important;
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+
+    /* كتلة المسألة: حماية السطر الرياضي والمنع الكامل للانقسامات المشوهة */
+    .pdf-question-block {
+        page-break-inside: avoid !important; /* يمنع انقسام المسألة الواحدة بين صفحتين */
+        break-inside: avoid !important;
+        margin-bottom: 22px !important;
+        padding-bottom: 15px !important;
+        border-bottom: 1.5px dashed #cbd5e1 !important;
+        display: block;
+        width: 100%;
+    }
+
+    /* خطوط الأسئلة المطبعية المتزنة والموفرة للورق */
+    .pdf-q-title {
+        font-size: 15pt !important;
+        font-weight: bold !important;
+        color: #1a365d !important;
+        margin-bottom: 6px !important;
+        text-align: right;
+    }
+
+    .pdf-q-text {
+        font-size: 13pt !important;
+        line-height: 1.6 !important;
+        color: #0f172a !important;
+        text-align: right;
+    }
+
+    /* صناديق خطوات الاستنتاج والحل الجبري */
+    .pdf-solution-box {
+        margin-top: 10px !important;
+        padding-top: 8px !important;
+        border-top: 1px dashed #e2e8f0 !important;
+        text-align: right;
+    }
+
+    .pdf-sol-steps {
+        font-size: 11.5pt !important;
+        line-height: 1.6 !important;
+        color: #334155 !important;
+    }
+
+    .pdf-sol-steps div {
+        margin-bottom: 4px !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* إبراز صياغة الناتج النهائي الورقي */
+    .pdf-final-ans {
+        font-size: 12pt !important;
+        font-weight: bold !important;
+        padding: 5px 12px !important;
+        margin-top: 8px !important;
+        background-color: #f0fdf4 !important;
+        border: 1px solid #22c55e !important;
+        border-radius: 4px;
+        display: inline-block;
+    }
+
+    /* ===== تكييف الرسومات الهندسية والـ SVG للورق ===== */
+    .pdf-graphic {
+        display: block !important;
+        text-align: center !important;
+        margin: 12px auto !important;
+        width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pdf-graphic svg, 
+    .pdf-graphic img {
+        display: block !important;
+        margin: 0 auto !important;
+        max-width: 60% !important; /* حجم متزن ومناسب للورقة الفردية */
+        max-height: 160px !important;
+        height: auto !important;
+    }
+
+    svg * {
+        stroke-width: 1.5px !important; /* سمك خطوط هندسية مناسب لأحبار الطابعات */
+    }
+
+    /* تذييل الصفحات المطبوعة */
+    .page-footer-number {
+        text-align: center;
+        font-size: 10pt !important;
+        color: #64748b;
+        border-top: 1.5px solid #cbd5e1 !important;
+        padding-top: 6px !important;
+        margin-top: 20px !important;
+        width: 100%;
+    }
+
+    /* ============================================================
+       📊 تنسيقات صفحات القوانين والملخصات المخصصة للطباعة الورقية
+       ============================================================ */
+    .pdf-summary-page,
+    .pdf-laws-page,
+    .pdf-golden-page,
+    .pdf-units-page {
+        padding: 5mm 0 !important;
+        margin-bottom: 25px !important;
+        page-break-after: always !important; /* كل قسم يبدأ في صفحة ورقية جديدة */
+        break-after: page !important;
+    }
+
+    /* العناوين لصفحات القوانين */
+    .pdf-summary-page h1, .pdf-laws-page h1, .pdf-golden-page h1, .pdf-units-page h1 {
+        font-size: 22pt !important;
+        font-weight: bold !important;
+        color: #1a365d !important;
+        margin-bottom: 12px !important;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 5px;
+    }
+
+    .pdf-summary-page h2, .pdf-laws-page h2, .pdf-golden-page h2, .pdf-units-page h2 {
+        font-size: 16pt !important;
+        color: #0f172a !important;
+        margin: 14px 0 8px 0 !important;
+    }
+
+    /* صناديق القوانين الورقية الحصيفة */
+    .law-box, .golden-box,
+    .pdf-laws-page .law-box,
+    .pdf-golden-page .golden-box {
+        font-size: 13pt !important;
+        line-height: 1.6 !important;
+        padding: 10px 14px !important;
+        margin: 8px 0 !important;
+        background-color: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        border-right: 5px solid #2563eb !important;
+        border-radius: 4px;
+        page-break-inside: avoid !important;
+    }
+
+    /* جداول الرموز والكميات الموفرة للحبر والورق */
+    .pdf-summary-page table,
+    .pdf-laws-page table,
+    .pdf-golden-page table,
+    .pdf-units-page table {
+        width: 100% !important;
+        margin: 12px 0 !important;
+        font-size: 11pt !important;
+        border-collapse: collapse !important;
+        border: 1px solid #cbd5e1 !important;
+    }
+
+    .pdf-summary-page table tr,
+    .pdf-laws-page table tr,
+    .pdf-golden-page table tr,
+    .pdf-units-page table tr {
+        page-break-inside: avoid !important;
+    }
+
+    .pdf-summary-page table td, .pdf-summary-page table th,
+    .pdf-laws-page table td, .pdf-laws-page table th,
+    .pdf-golden-page table td, .pdf-golden-page table th,
+    .pdf-units-page table td, .pdf-units-page table th {
+        padding: 8px 10px !important;
+        border: 1px solid #cbd5e1 !important;
+        text-align: center;
+        line-height: 1.5 !important;
+    }
+
+    .pdf-summary-page table th, .pdf-laws-page table th { background-color: #f1f5f9 !important; }
+    .pdf-golden-page table th { background-color: #fee2e2 !important; }
+    .pdf-units-page table th { background-color: #eff6ff !important; }
+}
+
+
+
+@media print {
+    @page {
+        size: A4;
+        /* هوامش الصفحة الورقية الافتراضية للطابعة */
+        margin: 20mm 15mm 20mm 15mm !important; 
+    }
+
+    body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        direction: rtl !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* الحاوية الرئيسية التي تحوي كل المذكرة أو الأسئلة */
+    #printable-pdf-document,
+    #dynamic-pdf-questions-area {
+        display: block !important;
+        direction: rtl !important;
+        
+        /* السر هنا: نجعل عرض المحتوى أقل من عرض الورقة الكامل لضمان وجود الهوامش */
+        width: 190mm !important; 
+        max-width: 190mm !important;
+        
+        /* توسيط الحاوية تماماً في منتصف الصفحة الورقية */
+        margin-left: auto !important;
+        margin-right: auto !important;
+        
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        background: #ffffff !important;
+    }
+
+    /* تأمين كتل الأسئلة والمفاتيح الذهبية لتقرأ العرض الجديد بدقة */
+    .pdf-question-block,
+    .pdf-summary-page,
+    .pdf-laws-page,
+    .pdf-golden-page,
+    .pdf-units-page {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
