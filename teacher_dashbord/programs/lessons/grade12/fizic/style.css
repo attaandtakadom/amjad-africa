@@ -979,28 +979,56 @@ body {
 /* ============================================================
    🔥 تكبير صناديق التلميحات النصية المخصصة للموبايل (داخل خانة svgCode)
    ============================================================ */
+/* ============================================================
+   🔥 المحرك المطور لتكبير جميع الأسئلة والحلول بلا استثناء للنقال
+   ============================================================ */
 @media print, screen and (max-width: 768px) {
 
-    /* استهداف حاوية الجرافيك عندما تحتوي على صندوق التلميح ذو الخلفية الرمادية والحدود الزرقاء */
-    .pdf-graphic div[style*="background: #f1f5f9"] {
-        padding: 16px 20px !important; /* زيادة المساحة الداخلية لراحة العين */
-        border-width: 3px !important;  /* زيادة سمك الإطار */
-        border-radius: 12px !important;
-        margin: 15px auto !important;
+    /* استهداف جميع كروت الأسئلة بشكل صارم */
+    .pdf-questions-pair-container .pdf-question-block {
+        display: block !important;
         width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        
-        /* تضخيم الخطوط لتبديل الـ 13px الافتراضية */
-        font-size: 26px !important; 
-        line-height: 1.8 !important;
-        color: #0f172a !important;
-        text-align: right !important; /* محاذاة النص لليمين بدلاً من التوسط لسهولة القراءة المتتابعة */
     }
 
-    /* تكبير الأيقونات أو الرموز الرياضية إن وجدت داخل هذا التلميح */
-    .pdf-graphic div[style*="background: #f1f5f9"] strong {
+    /* تكبير عناوين كل المسائل */
+    .pdf-question-block div.pdf-q-title {
+        font-size: 34px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 16px !important;
+        color: #1a365d !important;
+    }
+
+    /* تكبير نصوص كل الأسئلة والخلفيات التابعة لها */
+    .pdf-question-block div.pdf-q-text {
         font-size: 28px !important;
-        font-weight: bold !important;
+        line-height: 1.8 !important;
+        color: #0f172a !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* كسر قيد الـ Inline Style عن خطوات الحل في كل الأسئلة */
+    .pdf-question-block .pdf-sol-steps div,
+    .pdf-questions-pair-container .pdf-question-block .pdf-solution-box .pdf-sol-steps div {
+        font-size: 26px !important; /* حجم موحد وضخم لخطوات كل المسائل */
+        line-height: 1.8 !important;
+        padding: 8px 0 !important;
+        color: #1e293b !important;
+    }
+
+    /* تكبير عنوان خطوات الاستنتاج لجميع الأسئلة */
+    .pdf-question-block .pdf-solution-box div[style*="font-weight: bold"] {
+        font-size: 30px !important;
+        color: #1a365d !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* تضخيم صناديق النواتج النهائية لجميع الأسئلة */
+    .pdf-question-block .pdf-final-ans,
+    .pdf-question-block .pdf-solution-box div.pdf-final-ans {
+        font-size: 28px !important;
+        padding: 12px 24px !important;
+        margin-top: 20px !important;
+        border-width: 3px !important;
+        display: inline-block !important;
     }
 }
