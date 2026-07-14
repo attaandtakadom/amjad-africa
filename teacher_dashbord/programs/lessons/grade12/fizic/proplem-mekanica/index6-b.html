@@ -76,6 +76,45 @@ header { background-color: #1a237e; color: white; padding: 30px 15px; text-align
     }
 }
 
+@media print {
+    /* 1. إخفاء واجهة الموقع بالكامل */
+    body * {
+        visibility: hidden;
+    }
+    
+    /* 2. إظهار حاوية الأسئلة فقط */
+    #dynamic-pdf-questions-area, 
+    #dynamic-pdf-questions-area * {
+        visibility: visible;
+        display: block !important;
+    }
+
+    /* 3. إحكام الحاوية وإلغاء أي هوامش عشوائية */
+    #dynamic-pdf-questions-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 4. إجبار المتصفح على كسر الصفحات بشكل صحيح */
+    .pdf-question-page-wrapper {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+
+    /* 5. التحكم بالرسومات التوضيحية */
+    .pdf-graphic svg {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
+
+
 
     </style>
 </head>
@@ -111,10 +150,9 @@ header { background-color: #1a237e; color: white; padding: 30px 15px; text-align
         <button class="nav-btn" onclick="move(1)">التالي</button>
 
 <div class="print-section">
-    <button class="print-btn" onclick="triggerSmartPrint()">
-        <i class="fa-solid fa-file-pdf"></i> طباعة PDF
-    </button>
-    
+<button class="nav-btn nav-btn-green" onclick="triggerMobilePrintView()">   
+    📥 تحميل كتيب التمارين (PDF)
+</button>    
 </div>
 
 
@@ -217,57 +255,141 @@ function generatePDF() {
 
 
 function generatePDF() {
-    const element = document.createElement('div');
-    element.style.cssText = `
-        padding: 0 !important;
-        margin: 0 !important;
+    // 1. استهداف حاوية الطباعة المخصصة وتنظيفها تماماً
+    const printableDoc = document.getElementById('dynamic-pdf-questions-area');
+
+    if (!printableDoc) {
+        alert("خطأ: لم يتم العثور على الحاوية 'dynamic-pdf-questions-area' في كود HTML!");
+        return;
+    }
+
+    // تنظيف الحاوية لمنع تكرار البيانات
+    printableDoc.innerHTML = '';
+
+    // ===== 2. بناء غلاف منسق ومستقل كلياً بالنقال =====
+    const coverPage = document.createElement('div');
+    coverPage.className = 'pdf-cover-page';
+    coverPage.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        padding: 20mm 10mm;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
         direction: rtl;
-        font-family: Arial, sans-serif;
-        background-color: white;
+        box-sizing: border-box;
     `;
-
-    // الغلاف
-    element.innerHTML = `
-        <div style="text-align:center; padding: 50px 0; page-break-after: always;">
-            <h1 style="margin: 0; padding: 0;">مدرسة أمجاد أفريقيا للتعليم الخاص</h1>
-            <h2 style="margin: 10px 0 0 0; padding: 0;">الميكانيكا - تمارين الكتاب (6-B)</h2>
+    coverPage.innerHTML = `
+        <div class="school-name" style="font-size: 38px; color: #1a237e; margin-bottom: 25px; font-weight: bold;">مدرسة أمجاد أفريقيا للتعليم الخاص</div>
+        <div class="main-title" style="font-size: 64px; font-weight: 800; color: #0f172a; margin-bottom: 20px;">ميكانيكا الشهادة الثانوية</div>
+        <div class="sub-title" style="font-size: 42px; font-weight: 600; color: #334155; margin-bottom: 30px;">تمارين الباب السادس - (6-B) حفظ الطاقة</div>
+        <div class="cover-frame" style="border: 4px solid #1a237e; border-radius: 15px; padding: 30px; margin: 30px 0; background: #f8fafc;">
+            <h3 style="font-size: 48px; color: #1e293b; margin: 0; font-weight: bold;">📝 كراسة الحلول النموذجية 📝</h3>
+            <div style="font-size: 32px; color: #ddae11; font-weight: bold; margin-top: 10px;">حلول تمارين الكتاب المدرسي بالتفصيل</div>
+            <div style="font-size: 36px; font-weight: 700; color: #0f172a; margin-top: 20px;">العام الدراسي 2025 - 2026</div>
         </div>
+        <div style="font-size: 38px; color: #4caf50; margin: 25px 0; font-weight: bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
     `;
+    printableDoc.appendChild(coverPage);
 
-    // إضافة المسائل بدون أي هوامش أو مسافات
-    myQuestionsData.forEach((q, i) => {
-        if (q.id === 0) return;
-        
-        const page = document.createElement('div');
-        page.style.cssText = `
-            page-break-after: always;
-            margin: 0 !important;
-            padding: 15px 0 !important;
-            border: none;
+    // ===== 3. بناء الأسئلة: كل سؤال في صفحة مستقلة تماماً ومملوءة بوضوح =====
+    myQuestionsData.forEach((q, index) => {
+        if (q.id === 0 || !q.content) return;
+
+        // حجم خط كبير ومناسب لشاشة النقال
+        let fontSize = 34;
+        const textLength = q.content.length;
+        if (textLength < 80) fontSize = 40;
+        if (textLength > 150) fontSize = 30;
+
+        // تجهيز وعزل كارت السؤال بصفحة منفردة
+        const questionPage = document.createElement('div');
+        questionPage.className = 'pdf-question-page-wrapper';
+        questionPage.style.cssText = `
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            page-break-after: always !important;
+            break-after: page !important;
+            padding: 12mm 6mm; 
+            box-sizing: border-box;
+            direction: rtl;
+            display: block;
+            width: 100%;
         `;
-        
-        page.innerHTML = `
-            <h2 style="margin: 0 0 5px 0; padding: 0; color:#1a237e;">مسألة ${i}</h2>
-            <div style="margin: 0; padding: 0;">${q.content}</div>
-            <div style="margin: 5px 0; padding: 0;">${q.svgCode || ''}</div>
-            <div style="margin: 5px 0; padding: 8px; background:#f9f9f9;">${q.sol}</div>
-            <p style="margin: 0; padding: 5px 0; color:red; font-weight:bold;">الناتج: ${q.ans}</p>
+
+        questionPage.innerHTML = `
+            <div class="pdf-q-title" style="font-size: ${fontSize + 6}px; font-weight: bold; color: #1a237e; margin-bottom: 15px; text-align: right; border-bottom: 3px solid #1a237e; padding-bottom: 8px;">مسألة رقم ${index}</div>
+            <div class="pdf-q-text" style="font-size: ${fontSize}px; line-height: 1.6; color: #0f172a; margin-bottom: 20px; text-align: right; font-weight: 500;">
+                ${q.content}
+            </div>
+            
+            ${q.svgCode ? `
+            <div class="pdf-graphic" style="text-align: center; margin: 20px 0; max-width: 100%;">
+                ${q.svgCode}
+            </div>` : ''}
+            
+            <div class="pdf-solution-box" style="margin-top: 25px; padding: 15px; background: #f9f9f9; border-right: 6px solid #4caf50; border-radius: 8px; text-align: right;">
+                <div style="font-weight: bold; color: #1a237e; margin-bottom: 10px; font-size: ${fontSize + 2}px;">🛠️ الشرح والحل التفصيلي:</div>
+                <div class="pdf-sol-steps" style="font-size: ${fontSize - 2}px; line-height: 1.7; color: #1e293b; margin-bottom: 15px;">
+                    ${q.sol}
+                </div>
+                <div class="pdf-final-ans" style="font-size: ${fontSize + 2}px; font-weight: bold; color: #2e7d32; padding: 10px 25px; background-color: #e8f5e9; border: 2.5px solid #4caf50; border-radius: 10px; display: inline-block;">
+                    🎯 الناتج النهائي: ${q.ans}
+                </div>
+            </div>
         `;
-        
-        element.appendChild(page);
+
+        printableDoc.appendChild(questionPage);
     });
 
-    // خيارات PDF مضبوطة لإزالة الهوامش
-    const opt = {
-        margin: [0, 0, 0, 0],  // إزالة الهوامش تماماً
-        filename: 'تمارين_6B.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, letterRendering: true, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }
-    };
+    // ===== 4. صفحة خاتمة مخصصة مستقلة =====
+    const footerPage = document.createElement('div');
+    footerPage.style.cssText = `
+        padding: 20mm 10mm;
+        text-align: center;
+        direction: rtl;
+        width: 100%;
+        box-sizing: border-box;
+    `;
+    footerPage.innerHTML = `
+        <div style="font-size: 32px; font-weight: bold; color: #1a237e; margin-bottom: 20px;">تم بحمد الله وتوفيقه</div>
+        <div style="font-size: 24px; color: #475569; line-height: 1.8;">
+            هذه المراجعة وحلول التمارين تم تنسيقها وإعدادها لتناسب أجهزة النقال وتسهيل القراءة والمراجعة لطلبتنا الأعزاء بمدرسة أمجاد أفريقيا.
+        </div>
+        <div style="font-size: 28px; font-weight: bold; color: #4caf50; margin-top: 40px;">نتمنى لجميع الطلبة التوفيق والتميز الباهر ⚡</div>
+    `;
+    printableDoc.appendChild(footerPage);
 
-    html2pdf().set(opt).from(element).save();
+    // مهلة للرندرة الكاملة ثم استدعاء أمر الطباعة المباشر
+    setTimeout(() => {
+        try {
+            window.print();
+        } catch (e) {
+            console.error("فشل استدعاء نافذة الطباعة: ", e);
+        }
+    }, 1200);
+
+
 }
+
+function triggerMobilePrintView() {
+    // تأكدي من استبدال هذا الرابط برابط ملف النقال (الخط الكبير) بعد رفعه على دروب بوكس
+    const mobilePdfUrl = "https://www.dropbox.com/scl/fi/kk23bkyfefjj6zigfv8nx/6.pdf?rlkey=5fgw2kuuhnar15r1hk58lfevy&st=28pz949i&dl=0";
+
+    // التحقق مما إذا كان الطالب يفتح البرنامج من داخل تطبيق تيليجرام (Telegram WebApp)
+    if (window.Telegram && window.Telegram.WebApp) {
+        const webApp = window.Telegram.WebApp;
+        webApp.openLink(mobilePdfUrl);
+    } else {
+        // إذا كان يفتحه من متصفح عادي خارجي
+        window.open(mobilePdfUrl, '_blank');
+    }
+}
+
+
+
+
+
+
 
 </script>
 
