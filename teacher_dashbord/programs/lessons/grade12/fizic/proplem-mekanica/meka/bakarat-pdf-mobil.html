@@ -279,11 +279,11 @@
 
 function triggerMobilePrint() {
 
-// داخل الدالة التي تجهز طباعة النقال، تأكدي من إدراج هذا السطر في الـ head:
-const headContent = `
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>كتيب ميكانيكا - مدرسة أمجاد أفريقيا</title>
-`;
+    // داخل الدالة التي تجهز طباعة النقال، تأكدي من إدراج هذا السطر في الـ head:
+    const headContent = `
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>كتيب ميكانيكا - مدرسة أمجاد أفريقيا</title>
+    `;
 
     const printableDoc = document.getElementById('printable-pdf-document');
     const questionsArea = document.getElementById('dynamic-pdf-questions-area');
@@ -291,7 +291,7 @@ const headContent = `
     printableDoc.innerHTML = '';
     questionsArea.innerHTML = '';
 
-    // ===== 1. بناء الغلاف المخصص للنقال (بخطوط أكبر وأوضح) =====
+    // ===== 1. بناء الغلاف المخصص للنقال (بخطوط مضاعفة لتكون واضحة جداً) =====
     const coverPage = document.createElement('div');
     coverPage.className = 'pdf-cover-page';
     coverPage.style.cssText = `
@@ -302,17 +302,17 @@ const headContent = `
         font-family: 'Cairo', sans-serif;
     `;
     coverPage.innerHTML = `
-        <div class="school-name" style="font-size: 28px; color: #1a365d; margin-bottom: 30px;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
-        <div class="main-title" style="font-size: 52px; font-weight: 800; color: #0f172a; margin-bottom: 20px;">   البكرات-ميكانيكا   </div>
-        <div class="sub-title" style="font-size: 38px; font-weight: 600; color: #334155; margin-bottom: 30px;">الصف الثالث الثانوي</div>
+        <div class="school-name" style="font-size: 56px; color: #1a365d; margin-bottom: 30px;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+        <div class="main-title" style="font-size: 104px; font-weight: 800; color: #0f172a; margin-bottom: 20px;">   البكرات-ميكانيكا   </div>
+        <div class="sub-title" style="font-size: 76px; font-weight: 600; color: #334155; margin-bottom: 30px;">الصف الثالث الثانوي</div>
         <div class="cover-frame" style="border: 5px solid #1a365d; border-radius: 20px; padding: 40px; margin: 30px 0; background: #f8fafc;">
-            <h3 style="font-size: 42px; color: #1e293b; margin: 0;">📘 كراسة الحلول النموذجية 📘</h3>
-            <h4 style="font-size: 32px; color: #475569; margin: 20px 0;">- أسئلة من امتحانات سابقة - دفعة 2007</h4>
-            <div style="font-size: 28px; color: #64748b;"> مكثف ميكانيكا </div>
-            <div style="font-size: 32px; font-weight: 700; color: #0f172a; margin-top: 25px;">العام الدراسي 2025 - 2026</div>
+            <h3 style="font-size: 84px; color: #1e293b; margin: 0;">📔 كراسة الحلول النموذجية 📔</h3>
+            <h4 style="font-size: 64px; color: #475569; margin: 20px 0;">- أسئلة من امتحانات سابقة - دفعة 2007</h4>
+            <div style="font-size: 56px; color: #64748b;"> مكثف ميكانيكا </div>
+            <div style="font-size: 64px; font-weight: 700; color: #0f172a; margin-top: 25px;">العام الدراسي 2025 - 2026</div>
         </div>
-        <div style="font-size: 30px; color: #059669; margin: 25px 0; font-weight: bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
-        <div style="font-size: 22px; color: #475569; line-height: 1.6;">
+        <div style="font-size: 60px; color: #059669; margin: 25px 0; font-weight: bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+        <div style="font-size: 44px; color: #475569; line-height: 1.6;">
             رابط البوت التعليمي المعتمد:<br>
             <a href="http://t.me/amjad_africa2027bot" style="color: #2563eb; text-decoration: none; font-weight: bold;">t.me/amjad_africa2027bot</a>
         </div>
@@ -343,33 +343,33 @@ const headContent = `
     questionsMatrix.forEach((q, index) => {
         const questionNumber = index + 1;
         
-        // 🚀 تم تكبير الخط الأساسي للنقال هنا بمقدار مرة ونصف إلى ضعفين ليصبح ضخماً وواضحاً جداً 🚀
-        let fontSize = 28; 
+        // 🚀 تم مضاعفة حجم الخط الأساسي هنا ليصبح ضخماً وواضحاً جداً على شاشة الجوال 🚀
+        let fontSize = 56; // كان 28 سابقاً
         const textLength = (q.text || '').length;
-        if (textLength < 80) fontSize = 32;   // خط ضخم للمسائل القصيرة
-        if (textLength > 150) fontSize = 26;  // خط كبير جداً للمسائل الطويلة
+        if (textLength < 80) fontSize = 64;   // خط ضخم جداً للمسائل القصيرة (كان 32)
+        if (textLength > 150) fontSize = 52;  // خط كبير للمسائل الطويلة (كان 26)
 
         // معالجة نص السؤال لاستبدال السطور الجديدة (\n) بوسوم <br> لكي تظهر الخيارات المدمجة منسقة تحت بعضها بوضوح
         const formattedText = (q.text || '').replace(/\n/g, '<br>');
 
-        // ===== خطوات الحل النموذجية (stepsHtml) بخط كبير =====
+        // ===== خطوات الحل النموذجية (stepsHtml) بخط مضاعف =====
         let stepsHtml = '';
         if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
             q.pdfSolutionSteps.forEach(s => {
                 if (s && s.trim()) {
-                    stepsHtml += `<div style="padding: 6px 0; font-size: ${fontSize - 2}px; line-height: 1.7; color: #1e293b;">${s}</div>`;
+                    stepsHtml += `<div style="padding: 6px 0; font-size: ${fontSize - 4}px; line-height: 1.7; color: #1e293b;">${s}</div>`;
                 }
             });
         }
 
-        // ===== تكبير رسمة الـ SVG ونصوصها الهندسية لتتناسب مع خط الجوال =====
+        // ===== تكبير رسمة الـ SVG ونصوصها الهندسية لتتناسب مع خط الجوال المضاعف =====
         let graphicHtml = '';
         if (q.svgCode && q.svgCode.trim() !== "") {
-            // حقن ستايل إضافي لتكبير نصوص المقاومات والمفتاح K داخل الـ SVG تلقائياً
-            let upgradedSvg = q.svgCode.replace(/<style>/g, "<style>text, .label, .res-text, .equiv-text { font-size: 22px !important; font-weight: bold !important; } ");
+            // حقن ستايل إضافي لتكبير نصوص المقاومات والمفتاح K داخل الـ SVG تلقائياً (إلى 44px بدلاً من 22px)
+            let upgradedSvg = q.svgCode.replace(/<style>/g, "<style>text, .label, .res-text, .equiv-text { font-size: 44px !important; font-weight: bold !important; } ");
             graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 15px 0; padding: 10px; width: 100%; height: auto; max-width: 100%; overflow: visible;">${upgradedSvg}</div>`;
         } else if (q.imagePath && q.imagePath.trim() !== "") {
-            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 15px 0;"><img src="${q.imagePath}" alt="رسم توضيحى" style="max-width: 100%; height: auto;"></div>`;
+            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 15px 0;"><img src="${q.imagePath}" alt="رسم توضيحي" style="max-width: 100%; height: auto;"></div>`;
         }
 
         // ===== كرت المسألة الكامل مع حماية الانقسام =====
@@ -387,15 +387,15 @@ const headContent = `
         `;
 
         questionDiv.innerHTML = `
-            <div class="pdf-q-title" style="font-size: ${fontSize + 6}px; font-weight: bold; color: #1a365d; margin-bottom: 12px; direction: rtl; text-align: right;">${questionNumber}. ${q.title || ''}</div>
+            <div class="pdf-q-title" style="font-size: ${fontSize + 12}px; font-weight: bold; color: #1a365d; margin-bottom: 12px; direction: rtl; text-align: right;">${questionNumber}. ${q.title || ''}</div>
             <div class="pdf-q-text" style="font-size: ${fontSize}px; line-height: 1.8; color: #0f172a; margin-bottom: 12px; direction: rtl; text-align: right;">${formattedText}</div>
             
             ${graphicHtml}
             
             <div class="pdf-solution-box" style="margin-top: 20px; padding-top: 15px; border-top: 2px dashed #cbd5e1; direction: rtl; text-align: right;">
-                <div style="font-weight: bold; color: #1a365d; margin-bottom: 10px; font-size: ${fontSize + 2}px;">🛠️ خطوات الاستنتاج الرياضي:</div>
+                <div style="font-weight: bold; color: #1a365d; margin-bottom: 10px; font-size: ${fontSize + 4}px;">🛠️ خطوات الاستنتاج الرياضي:</div>
                 <div class="pdf-sol-steps" style="padding-right: 10px;">${stepsHtml || 'لا يوجد حل متاح حالياً'}</div>
-                ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize + 2}px; font-weight: bold; margin-top: 15px; color: #065f46; padding: 10px 20px; background-color: #f0fdf4; border: 2px solid #22c55e; border-radius: 8px; display: inline-block; direction: rtl;">${q.pdfFinalAnswer}</div>` : ''}
+                ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize + 4}px; font-weight: bold; margin-top: 15px; color: #065f46; padding: 10px 20px; background-color: #f0fdf4; border: 2px solid #22c55e; border-radius: 8px; display: inline-block; direction: rtl;">${q.pdfFinalAnswer}</div>` : ''}
             </div>
         `;
 
@@ -409,7 +409,7 @@ const headContent = `
     pageFooter.className = 'page-footer-number';
     pageFooter.style.cssText = `
         text-align: center;
-        font-size: 16px;
+        font-size: 32px; /* تم مضاعفته من 16px */
         font-weight: bold;
         color: #475569;
         border-top: 3px solid #cbd5e1;
@@ -420,7 +420,7 @@ const headContent = `
     pageFooter.innerHTML = `⚡ هذه المذكرة خاصة بطلبة مدرسة أمجاد أفريقيا - مخصصة للقراءة على النقال ⚡`;
     mainPage.appendChild(pageFooter);
 
-// ... نهاية الدالة ...
+    // ... نهاية الدالة ...
     questionsArea.appendChild(mainPage);
 
     // تأخير بسيط لضمان تحميل الرسومات في الذاكرة قبل الطباعة
@@ -433,8 +433,6 @@ const headContent = `
         }
     }, 1200); // زيادة التأخير إلى 1.2 ثانية لضمان ظهور الـ SVG
 }
-
-
 
 
 
