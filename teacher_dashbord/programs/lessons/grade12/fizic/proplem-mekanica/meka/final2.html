@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة المراجعة التفاعلية لمادة الميكانيكا - مدرسة أمجاد أفريقيا</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #2b6cb0;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --bg-body: #f7fafc;
+            --text-main: #2d3748;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .school-header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .school-header h1 { margin: 5px 0; color: var(--primary); font-size: 1.8rem; }
+        .school-header p { margin: 2px 0; color: #718096; font-size: 1rem; }
+        
+        /* شريط أدوات التحكم الإضافية */
+        .tools-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .btn-tool {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn-pdf {
+            background-color: #e53e3e;
+            color: white;
+        }
+        .btn-pdf:hover { background-color: #c53030; }
+        .btn-dropbox {
+            background-color: #0061ff;
+            color: white;
+        }
+        .btn-dropbox:hover { background-color: #004bbf; }
+
+        .question-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            page-break-inside: avoid; /* لمنع انقسام السؤال بين صفحات الـ PDF */
+        }
+        .question-title {
+            font-size: 0.95rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        @media (min-width: 600px) {
+            .options-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .btn-opt {
+            background: #edf2f7;
+            border: 1px solid #cbd5e0;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: right;
+            font-size: 1.05rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .btn-opt:hover { background: #e2e8f0; }
+        .correct { background-color: var(--success) !important; color: white; border-color: var(--success); }
+        .incorrect { background-color: var(--danger) !important; color: white; border-color: var(--danger); }
+        
+        .hint-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: #ebf8ff;
+            border-right: 4px solid var(--accent);
+            border-radius: 6px;
+            display: none;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-action {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover { background-color: var(--accent); }
+        .btn-action:disabled { background-color: #cbd5e0; cursor: not-allowed; }
+        
+        .page-indicator {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+        .math {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* تنسيقات خاصة عند طباعة أو توليد PDF للهواتف */
+        @media print {
+            .tools-bar, .navigation, .school-header p {
+                display: none !important;
+            }
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .question-text {
+                font-size: 1.5rem !important;
+            }
+            .btn-opt {
+                font-size: 1.3rem !important;
+            }
+            .hint-box {
+                font-size: 1.2rem !important;
+                display: block !important; /* إظهار الإجابات تلقائياً في ملف الـ PDF */
+            }
+        }
+
+
+/* التنسيقات العادية لعناصر الطباعة على الشاشة (تكون مخفية أثناء التصفح العادي) */
+#printable-pdf-document, #dynamic-pdf-questions-area {
+    display: none;
+}
+
+/* ⚡ تنسيقات الطباعة الحاسمة لمنع الصفحات الفارغة ⚡ */
+@media print {
+    /* 1. إخفاء واجهة الموقع بالكامل وأزرار التحكم والأقسام غير المطلوبة */
+    body * {
+        visibility: hidden;
+    }
+    
+    /* 2. إظهار حاوية الطباعة فقط وجعلها مرئية بالكامل */
+    #printable-pdf-document, 
+    #printable-pdf-document *, 
+    #dynamic-pdf-questions-area, 
+    #dynamic-pdf-questions-area * {
+        visibility: visible;
+        display: block !important;
+    }
+
+    /* 3. وضع حاوية الطباعة في أعلى الصفحة تماماً وإلغاء أي هوامش تسبب فراغات */
+    #printable-pdf-document {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        display: block !important;
+    }
+
+    #dynamic-pdf-questions-area {
+        display: block !important;
+        width: 100%;
+    }
+
+    /* 4. منع انقسام بطاقة السؤال الواحد بين الصفحات */
+    .pdf-question-block {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    .pdf-cover-page {
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="school-header">
+            <h1>منصة المراجعة التفاعلية لمادة الميكانيكا</h1>
+            <p>مدرسة أمجاد أفريقيا الخاصة - البيضاء | الشهادة الثانوية العامة بليبيا</p>
+        </div>
+
+        <div class="tools-bar">
+            <button class="btn-tool btn-pdf" onclick="triggerMobilePrint()">
+                <span>📄</span> توليد PDF كبير الحجم للهاتف
+            </button>
+            <button class="btn-tool btn-dropbox" onclick="downloadFromDropbox()">
+                <span>📥</span> تحميل قاعدة الأسئلة من Dropbox
+            </button>
+        </div>
+        
+        <div id="quiz-container"></div>
+        
+        <div class="navigation">
+            <button class="btn-action" id="prev-btn" onclick="prevPage()">السابق</button>
+            <span class="page-indicator" id="page-info">صفحة 1 من 1</span>
+            <button class="btn-action" id="next-btn" onclick="nextPage()">التالي</button>
+        </div>
+    </div>
+    <div id="pdf-rendering-temp" style="display: none;"></div>
+    <div id="printable-pdf-document"></div>
+<div id="dynamic-pdf-questions-area"></div>
+<script src="questions.js"></script>
+    <script>
+        // مصفوفة الأسئلة مدمجة مباشرة لمنع حدوث مشاكل في الترميز
+
+        const QUESTIONS_PER_PAGE = 12;
+        let currentPage = 0;
+
+        function initQuiz() {
+            showPage(0);
+        }
+
+        function showPage(pageIndex) {
+            currentPage = pageIndex;
+            const start = pageIndex * QUESTIONS_PER_PAGE;
+            const end = start + QUESTIONS_PER_PAGE;
+            const pageQuestions = questions.slice(start, end);
+            
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            pageQuestions.forEach((q, idx) => {
+                const actualIndex = start + idx;
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                
+                let formattedQuestion = q.question
+                    .replace(/m\/s\^2/g, '<span class="math">m/s²</span>')
+                    .replace(/m\/s²/g, '<span class="math">m/s²</span>')
+                    .replace(/m\/s/g, '<span class="math">m/s</span>')
+                    .replace(/kg/g, '<span class="math">kg</span>')
+                    .replace(/km/g, '<span class="math">km</span>')
+                    .replace(/hr/g, '<span class="math">hr</span>')
+                    .replace(/ N/g, '<span class="math"> N</span>')
+                    .replace(/mg/g, '<span class="math">mg</span>')
+                    .replace(/ F/g, ' <span class="math">F</span> ');
+
+                let optionsHtml = '';
+                if(q.type === 'choice') {
+                    q.options.forEach((opt, oIdx) => {
+                        optionsHtml += `<button class="btn-opt" onclick="checkAnswer(this, ${actualIndex}, ${oIdx})">${opt}</button>`;
+                    });
+                } else if(q.type === 'tf') {
+                    optionsHtml += `
+                        <button class="btn-opt" onclick="checkAnswer(this, ${actualIndex}, true)">صواب</button>
+                        <button class="btn-opt" onclick="checkAnswer(this, ${actualIndex}, false)">خطأ</button>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="question-title">السؤال رقم ${actualIndex + 1}</div>
+                    <div class="question-text">${formattedQuestion}</div>
+                    <div class="options-grid">${optionsHtml}</div>
+                    <div class="hint-box" id="hint-${actualIndex}">
+                        💡 <b>الإجابة الصحيحة:</b> 
+                        <span style="color: var(--success); font-weight: bold;">
+                            ${q.type === 'tf' ? (q.correct ? 'صواب' : 'خطأ') : q.options[q.correct]}
+                        </span>
+                        <br><br>
+                        📌 <b>الشرح والتوضيح:</b> ${q.hint}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            document.getElementById('page-info').innerText = `صفحة ${currentPage + 1} من ${Math.ceil(questions.length / QUESTIONS_PER_PAGE)}`;
+            document.getElementById('prev-btn').disabled = currentPage === 0;
+            document.getElementById('next-btn').disabled = end >= questions.length;
+        }
+
+        function checkAnswer(btn, qIdx, selected) {
+            const q = questions[qIdx];
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('.btn-opt');
+            const hintBox = document.getElementById(`hint-${qIdx}`);
+            
+            buttons.forEach(b => b.disabled = true);
+
+            let isCorrect = false;
+            if (q.type === 'choice') {
+                isCorrect = (selected === q.correct);
+            } else if (q.type === 'tf') {
+                isCorrect = (selected === q.correct);
+            }
+
+            if(isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                if(q.type === 'choice') {
+                    buttons[q.correct].classList.add('correct');
+                } else {
+                    buttons.forEach(b => {
+                        if((q.correct && b.innerText === 'صواب') || (!q.correct && b.innerText === 'خطأ')) {
+                            b.classList.add('correct');
+                        }
+                    });
+                }
+            }
+            hintBox.style.display = 'block';
+        }
+
+        function nextPage() {
+            if ((currentPage + 1) * QUESTIONS_PER_PAGE < questions.length) {
+                showPage(currentPage + 1);
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                showPage(currentPage - 1);
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
+
+        // دالة توليد PDF كبير الحجم وملائم تماماً للهاتف
+// دالة توليد PDF متكامل للهاتف يدعم المصفوفات الضخمة (حتى 200 سؤال وأكثر) دون صفحات فارغة
+// دالة توليد وتوليد معاينة الـ PDF للهواتف لـ 200 سؤال
+function triggerMobilePrint() {
+    // 1. استهداف حاوية الطباعة الموحدة وتنظيفها تماماً
+    const printableDoc = document.getElementById('printable-pdf-document');
+    const questionsArea = document.getElementById('dynamic-pdf-questions-area');
+
+    if (!printableDoc) {
+        alert("خطأ: لم يتم العثور على حاوية الطباعة 'printable-pdf-document' في كود HTML!");
+        return;
+    }
+
+    // تنظيف الحاويات تماماً لمنع التكرار والترحيل الهيكلي
+    printableDoc.innerHTML = '';
+    if (questionsArea) {
+        questionsArea.innerHTML = ''; 
+    }
+
+    // ===== 2. بناء الغلاف في حاوية مستقلة تماماً ومنع تأثيرها على الأسئلة التالية =====
+    const coverContainer = document.createElement('div');
+    coverContainer.style.cssText = `
+        page-break-after: always;
+        break-after: page;
+        width: 100%;
+        box-sizing: border-box;
+    `;
+
+    const coverPage = document.createElement('div');
+    coverPage.className = 'pdf-cover-page';
+    coverPage.style.cssText = `
+        padding: 20mm 10mm;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        direction: rtl;
+        box-sizing: border-box;
+    `;
+    coverPage.innerHTML = `
+        <div class="school-name" style="font-size: 38px; color: #1a365d; margin-bottom: 25px; font-weight: bold;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+        <div class="main-title" style="font-size: 64px; font-weight: 800; color: #0f172a; margin-bottom: 20px;">مكثف الميكانيكا الشامل</div>
+        <div class="sub-title" style="font-size: 42px; font-weight: 600; color: #334155; margin-bottom: 30px;">الشهادة الثانوية العامة</div>
+        <div class="cover-frame" style="border: 4px solid #1a365d; border-radius: 15px; padding: 30px; margin: 30px 0; background: #f8fafc;">
+            <h3 style="font-size: 48px; color: #1e293b; margin: 0; font-weight: bold;">📝 كراسة الحلول النموذجية 📝</h3>
+            <h4 style="font-size: 36px; color: #475569; margin: 15px 0;"> :مراجعة</h4>
+            <div style="font-size: 32px; color: #2b6cb0; font-weight: bold;">مراجعة تفاعلية شاملة لأهم المسائل الامتحانية</div>
+            <div style="font-size: 36px; font-weight: 700; color: #0f172a; margin-top: 20px;">العام الدراسي 2025 - 2026</div>
+        </div>
+        <div style="font-size: 38px; color: #38a169; margin: 25px 0; font-weight: bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+        <div style="font-size: 26px; color: #475569; line-height: 1.6;">
+            رابط البوت التعليمي المعتمد للمدرسة:<br>
+            <a href="http://t.me/amjad_africa2027bot" style="color: #2b6cb0; text-decoration: none; font-weight: bold;">t.me/amjad_africa2027bot</a>
+        </div>
+    `;
+    coverContainer.appendChild(coverPage);
+    printableDoc.appendChild(coverContainer);
+
+    // ===== 3. بناء حاوية الأسئلة (تبدأ نظيفة تماماً من صفحة جديدة) =====
+    const mainPage = document.createElement('div');
+    mainPage.style.cssText = `
+        display: block;
+        width: 100%;
+        direction: rtl;
+    `;
+
+    // بناء الأسئلة بالتكرار
+    questions.forEach((q, index) => {
+        const questionNumber = index + 1;
+        
+        // ضبط دقيق لحجم الخط ليناسب الصفحة بالكامل دون أي فائض يسبب الانقسام
+        let fontSize = 36; 
+        const textLength = (q.question || '').length;
+        if (textLength < 80) fontSize = 42;   
+        if (textLength > 150) fontSize = 32;  
+
+        const formattedText = (q.question || '')
+            .replace(/\n/g, '<br>')
+            .replace(/m\/s\^2/g, '<span class="math">m/s²</span>')
+            .replace(/m\/s²/g, '<span class="math">m/s²</span>')
+            .replace(/m\/s/g, '<span class="math">m/s</span>')
+            .replace(/kg/g, '<span class="math">kg</span>')
+            .replace(/ N/g, '<span class="math"> N</span>')
+            .replace(/mg/g, '<span class="math">mg</span>');
+
+        // خيارات الإجابة
+        let optionsHtml = '';
+        if (q.type === 'choice') {
+            q.options.forEach((opt, oIdx) => {
+                const isCorrect = (oIdx === q.correct);
+                optionsHtml += `
+                    <div style="font-size: ${fontSize - 2}px; padding: 12px 18px; background: ${isCorrect ? '#f0fdf4' : '#f8fafc'}; border: 2.5px solid ${isCorrect ? '#22c55e' : '#cbd5e1'}; border-radius: 10px; margin-top: 10px; font-weight: ${isCorrect ? 'bold' : 'normal'}; text-align: right;">
+                        ${isCorrect ? '✓ ' : '◦ '} ${opt}
+                    </div>`;
+            });
+        } else if (q.type === 'tf') {
+            optionsHtml += `
+                <div style="font-size: ${fontSize - 2}px; padding: 12px 18px; background: ${q.correct ? '#f0fdf4' : '#f8fafc'}; border: 2.5px solid ${q.correct ? '#22c55e' : '#cbd5e1'}; border-radius: 10px; margin-top: 10px; font-weight: ${q.correct ? 'bold' : 'normal'}; text-align: right;">
+                    ${q.correct ? '✓ صواب (صحيحة)' : '◦ صواب'}
+                </div>
+                <div style="font-size: ${fontSize - 2}px; padding: 12px 18px; background: ${!q.correct ? '#f0fdf4' : '#f8fafc'}; border: 2.5px solid ${!q.correct ? '#22c55e' : '#cbd5e1'}; border-radius: 10px; margin-top: 10px; font-weight: ${!q.correct ? 'bold' : 'normal'}; text-align: right;">
+                    ${!q.correct ? '✓ خطأ (خاطئة)' : '◦ خطأ'}
+                </div>`;
+        }
+
+        // الشرح والتوضيح
+        const stepsHtml = q.hint ? `<div style="padding: 8px 0; font-size: ${fontSize - 2}px; line-height: 1.6; color: #1e293b; text-align: right;">${q.hint}</div>` : '';
+
+        // إنشاء حاوية مستقلة ومحكمة كلياً تمنع الانقسام وتضمن تموضع السؤال بصفحة مخصصة له
+        const questionPage = document.createElement('div');
+        questionPage.className = 'pdf-question-page-wrapper';
+        questionPage.style.cssText = `
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            page-break-after: always !important;
+            break-after: page !important;
+            padding: 10mm 5mm; 
+            box-sizing: border-box;
+            direction: rtl;
+            display: block;
+            width: 100%;
+        `;
+
+        const finalAnsText = q.type === 'tf' ? (q.correct ? 'صواب' : 'خطأ') : q.options[q.correct];
+
+        questionPage.innerHTML = `
+            <div class="pdf-q-title" style="font-size: ${fontSize + 6}px; font-weight: bold; color: #1a365d; margin-bottom: 12px; text-align: right; border-bottom: 3px solid #1a365d; padding-bottom: 5px;">السؤال رقم ${questionNumber}</div>
+            <div class="pdf-q-text" style="font-size: ${fontSize}px; line-height: 1.6; color: #0f172a; margin-bottom: 15px; text-align: right; font-weight: 500;">${formattedText}</div>
+            
+            <div class="pdf-options-container" style="margin-bottom: 20px;">
+                ${optionsHtml}
+            </div>
+            
+            <div class="pdf-solution-box" style="margin-top: 25px; padding-top: 15px; border-top: 3px dashed #cbd5e1; text-align: right;">
+                <div style="font-weight: bold; color: #1a365d; margin-bottom: 8px; font-size: ${fontSize + 2}px;">🛠️ الشرح والتوجيه الرياضي:</div>
+                <div class="pdf-sol-steps" style="padding-right: 15px; border-right: 5px solid #2b6cb0; margin-bottom: 15px;">${stepsHtml}</div>
+                <div class="pdf-final-ans" style="font-size: ${fontSize + 2}px; font-weight: bold; color: #065f46; padding: 10px 25px; background-color: #f0fdf4; border: 2.5px solid #22c55e; border-radius: 10px; display: inline-block;">
+                    🎯 الإجابة الصحيحة: ${finalAnsText}
+                </div>
+            </div>
+        `;
+
+        mainPage.appendChild(questionPage);
+    });
+
+    printableDoc.appendChild(mainPage);
+
+    // الخاتمة في صفحة مستقلة أخيرة
+    const footerPage = document.createElement('div');
+    footerPage.style.cssText = `
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        padding: 20mm 10mm;
+        text-align: center;
+        direction: rtl;
+        width: 100%;
+        box-sizing: border-box;
+    `;
+    footerPage.innerHTML = `
+        <div style="font-size: 32px; font-weight: bold; color: #1a365d; margin-bottom: 20px;">تم بحمد الله وتوفيقه</div>
+        <div style="font-size: 24px; color: #475569; line-height: 1.8;">
+            هذه المراجعة التفاعلية الشاملة (200 سؤال) تم إعدادها وتنسيقها خصيصاً لطلاب مدرسة أمجاد أفريقيا بمدينة البيضاء لتسهيل قراءتها ومراجعتها بالهاتف المحمول.
+        </div>
+        <div style="font-size: 28px; font-weight: bold; color: #059669; margin-top: 40px;">نتمنى لجميع طلبتنا التوفيق والنجاح الباهر ⚡</div>
+    `;
+    printableDoc.appendChild(footerPage);
+
+    // مهلة للرندرة والتأكد من استقرار الأبعاد قبل الطباعة المباشرة
+    setTimeout(() => {
+        try {
+            window.print();
+        } catch (e) {
+            console.error("فشل استدعاء نافذة الطباعة: ", e);
+        }
+    }, 1200);
+}
+       function downloadFromDropbox() {
+            // يمكنك استبدال هذا الرابط برابط ملف JSON المرفوع على Dropbox الخاص بك
+            const dropboxLink = "https://www.dropbox.com/scl/fi/om0890hpjxrwb11rsvlea/.pdf?rlkey=4qq8o94uagfnpm8aadik88tkx&st=t2fhaox3&dl=0";
+            
+            // فتح نافذة التحميل المباشر للطلاب
+            window.open(dropboxLink, '_blank');
+        }
+
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>

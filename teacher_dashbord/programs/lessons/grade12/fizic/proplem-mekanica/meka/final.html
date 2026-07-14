@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة المراجعة التفاعلية لمادة الميكانيكا - مدرسة أمجد أفريقيا</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #2b6cb0;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --bg-body: #f7fafc;
+            --text-main: #2d3748;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .school-header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .school-header h1 { margin: 5px 0; color: var(--primary); font-size: 1.8rem; }
+        .school-header p { margin: 2px 0; color: #718096; font-size: 1rem; }
+        
+        .question-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .question-title {
+            font-size: 0.95rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        @media (min-width: 600px) {
+            .options-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .btn-opt {
+            background: #edf2f7;
+            border: 1px solid #cbd5e0;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: right;
+            font-size: 1.05rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .btn-opt:hover { background: #e2e8f0; }
+        .correct { background-color: var(--success) !important; color: white; border-color: var(--success); }
+        .incorrect { background-color: var(--danger) !important; color: white; border-color: var(--danger); }
+        
+        .hint-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: #ebf8ff;
+            border-right: 4px solid var(--accent);
+            border-radius: 6px;
+            display: none;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .btn-action {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover { background-color: var(--accent); }
+        .btn-action:disabled { background-color: #cbd5e0; cursor: not-allowed; }
+        
+        .page-indicator {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+        .math {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="school-header">
+            <h1>منصة المراجعة التفاعلية لمادة الميكانيكا</h1>
+            <p>مدرسةامجادأفريقياالخاصة - البيضاء | الشهادة الثانوية العامة بليبيا</p>
+        </div>
+        
+        <div id="quiz-container"></div>
+        
+        <div class="navigation">
+            <button class="btn-action" id="prev-btn" onclick="prevPage()">السابق</button>
+            <span class="page-indicator" id="page-info">صفحة 1 من 1</span>
+            <button class="btn-action" id="next-btn" onclick="nextPage()">التالي</button>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script>
+        const QUESTIONS_PER_PAGE = 12;
+        let currentPage = 0;
+
+        function initQuiz() {
+            showPage(0);
+        }
+
+        function showPage(pageIndex) {
+            currentPage = pageIndex;
+            const start = pageIndex * QUESTIONS_PER_PAGE;
+            const end = start + QUESTIONS_PER_PAGE;
+            const pageQuestions = questions.slice(start, end);
+            
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            pageQuestions.forEach((q, idx) => {
+                const actualIndex = start + idx;
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                
+                // تنسيق الرموز الرياضية لتظهر بشكل مرتب
+                let formattedQuestion = q.question
+                    .replace(/m\/s\^2/g, '<span class="math">m/s²</span>')
+                    .replace(/m\/s²/g, '<span class="math">m/s²</span>')
+                    .replace(/m\/s/g, '<span class="math">m/s</span>')
+                    .replace(/kg/g, '<span class="math">kg</span>')
+                    .replace(/km/g, '<span class="math">km</span>')
+                    .replace(/hr/g, '<span class="math">hr</span>')
+                    .replace(/ N/g, '<span class="math"> N</span>')
+                    .replace(/mg/g, '<span class="math">mg</span>')
+                    .replace(/ F/g, ' <span class="math">F</span> ');
+
+                let optionsHtml = '';
+                if(q.type === 'choice') {
+                    q.options.forEach((opt, oIdx) => {
+                        optionsHtml += `<button class="btn-opt" onclick="checkAnswer(this, ${actualIndex}, ${oIdx})">${opt}</button>`;
+                    });
+                } else if(q.type === 'tf') {
+                    optionsHtml += `
+                        <button class="btn-opt" onclick="checkAnswer(this, ${actualIndex}, true)">صح</button>
+                        <button class="btn-opt" onclick="checkAnswer(this, ${actualIndex}, false)">خطأ</button>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="question-title">السؤال رقم ${actualIndex + 1}</div>
+                    <div class="question-text">${formattedQuestion}</div>
+                    <div class="options-grid">${optionsHtml}</div>
+                    <div class="hint-box" id="hint-${actualIndex}">
+                        💡 <b>الإجابة الصحيحة:</b> 
+                        <span style="color: var(--success); font-weight: bold;">
+                            ${q.type === 'tf' ? (q.correct ? 'صح' : 'خطأ') : q.options[q.correct]}
+                        </span>
+                        <br><br>
+                        📌 <b>الشرح والتوضيح:</b> ${q.hint}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            document.getElementById('page-info').innerText = `صفحة ${currentPage + 1} من ${Math.ceil(questions.length / QUESTIONS_PER_PAGE)}`;
+            document.getElementById('prev-btn').disabled = currentPage === 0;
+            document.getElementById('next-btn').disabled = end >= questions.length;
+        }
+
+        function checkAnswer(btn, qIdx, selected) {
+            const q = questions[qIdx];
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('.btn-opt');
+            const hintBox = document.getElementById(`hint-${qIdx}`);
+            
+            buttons.forEach(b => b.disabled = true); // تعطيل بقية الخيارات بعد الإجابة
+
+            let isCorrect = false;
+            if (q.type === 'choice') {
+                isCorrect = (selected === q.correct);
+            } else if (q.type === 'tf') {
+                isCorrect = (selected === q.correct);
+            }
+
+            if(isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+                // تلوين الإجابة الصحيحة بالأخضر للتوضيح
+                if(q.type === 'choice') {
+                    buttons[q.correct].classList.add('correct');
+                } else {
+                    buttons.forEach(b => {
+                        if((q.correct && b.innerText === 'صح') || (!q.correct && b.innerText === 'خطأ')) {
+                            b.classList.add('correct');
+                        }
+                    });
+                }
+            }
+            hintBox.style.display = 'block';
+        }
+
+        function nextPage() {
+            if ((currentPage + 1) * QUESTIONS_PER_PAGE < questions.length) {
+                showPage(currentPage + 1);
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                showPage(currentPage - 1);
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
+
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
