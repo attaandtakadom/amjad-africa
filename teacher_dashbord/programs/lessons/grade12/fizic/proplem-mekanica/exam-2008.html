@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حلول امتحان الميكانيكا 2025-2026 - مدرسة أمجاد أفريقيا</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Arial', serif;
+            background: #f5f0eb;
+            direction: rtl;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px double #8B0000;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #8B0000;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .header h2 {
+            font-size: 20px;
+            color: #2c3e50;
+            font-weight: normal;
+        }
+        .header .year {
+            color: #555;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0 30px;
+        }
+
+        .controls button {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #8B0000;
+            color: #fff;
+            font-family: inherit;
+        }
+
+        .controls button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+        }
+
+        .controls button.green {
+            background: #1e7e34;
+        }
+        .controls button.green:hover {
+            box-shadow: 0 4px 15px rgba(30, 126, 52, 0.4);
+        }
+        .controls button.blue {
+            background: #0a5c7e;
+        }
+        .controls button.blue:hover {
+            box-shadow: 0 4px 15px rgba(10, 92, 126, 0.4);
+        }
+        .controls button.gold {
+            background: #b8860b;
+        }
+        .controls button.gold:hover {
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
+        }
+        .controls button.purple {
+            background: #6a1b9a;
+        }
+        .controls button.purple:hover {
+            box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4);
+        }
+
+        .question-counter {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .question-card {
+            background: #faf8f5;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-card .q-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: #8B0000;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .question-card .q-text {
+            font-size: 19px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            white-space: pre-wrap;
+        }
+
+        .question-card .q-image {
+            background: #eef2f5;
+            border: 1px dashed #999;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin: 10px 0 15px;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .question-card .q-image svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .solution-container {
+            background: #f0f4f8;
+            padding: 18px 22px;
+            border-radius: 8px;
+            border-right: 5px solid #1e7e34;
+            margin-top: 12px;
+        }
+
+        .solution-container .hint {
+            font-weight: bold;
+            color: #0a5c7e;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .step-box {
+            background: #fff;
+            border: 1px solid #dde4ec;
+            border-radius: 8px;
+            padding: 15px 18px;
+            margin: 10px 0;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-box .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .step-box .step-question {
+            font-size: 16px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .step-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 8px 0;
+        }
+
+        .step-options button {
+            padding: 8px 18px;
+            font-size: 15px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .step-options button:hover {
+            border-color: #8B0000;
+            background: #f8f0f0;
+        }
+
+        .step-options button.correct {
+            border-color: #1e7e34;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .step-options button.wrong {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .step-options button.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .step-feedback {
+            margin-top: 10px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 15px;
+            background: #e8f0fe;
+            border-right: 4px solid #0a5c7e;
+            color: #1a3a5c;
+            display: none;
+        }
+
+        .step-feedback.show {
+            display: block;
+        }
+
+        .step-feedback .fb-correct {
+            color: #1e7e34;
+            font-weight: bold;
+        }
+        .step-feedback .fb-wrong {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .solution-container .final-answer {
+            font-weight: bold;
+            color: #8B0000;
+            font-size: 19px;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 2px solid #ccc;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .difficulty.easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        .difficulty.medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .difficulty.hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .navigation button {
+            padding: 10px 25px;
+            font-size: 16px;
+            border: 1px solid #8B0000;
+            border-radius: 6px;
+            background: #fff;
+            color: #8B0000;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .navigation button:hover {
+            background: #8B0000;
+            color: #fff;
+        }
+
+        .navigation .page-info {
+            font-size: 17px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .question-card .q-text {
+                font-size: 17px;
+            }
+            .controls button {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+            .navigation {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .navigation button {
+                width: 100%;
+            }
+            .step-options button {
+                width: 100%;
+            }
+        }
+
+        @media print {
+            .controls,
+            .navigation {
+                display: none !important;
+            }
+            .container {
+                box-shadow: none;
+                padding: 10px;
+            }
+            .question-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .step-options button {
+                border: 1px solid #999 !important;
+                background: #f5f5f5 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="appContainer">
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🏫 مدرسة أمجاد أفريقيا</h1>
+            <h2>ليبيا - البيضاء</h2>
+            <h2 style="color:#8B0000; margin-top:5px;">حل الأسئلة النموذجية لمادة الميكانيكا</h2>
+            <div class="year">📅 العام الدراسي 2025 - 2026</div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="controls">
+            <button onclick="generatePaperPDF()" style="background:#8B0000;">📄 PDF للطباعة (A4)</button>
+            <button onclick="generateMobilePDF()" class="blue">📱 PDF للشاشات (مكبر)</button>
+            <button onclick="showAllQuestions()" class="gold">📋 عرض جميع الأسئلة</button>
+            <button onclick="showEvaluation()" class="purple">📊 تقييم الامتحان</button>
+            <button onclick="resetAllSteps()" class="green">🔄 إعادة تعيين الخطوات</button>
+        </div>
+
+        <!-- COUNTER -->
+        <div class="question-counter" id="counterDisplay">
+            السؤال <span id="currentQnum">1</span> من <span id="totalQnum">0</span>
+        </div>
+
+        <!-- DISPLAY -->
+        <div id="questionDisplay"></div>
+
+        <!-- NAVIGATION -->
+        <div class="navigation">
+            <button onclick="prevQuestion()">⬅ السابق</button>
+            <span class="page-info" id="navInfo">الصفحة 1 من 0</span>
+            <button onclick="nextQuestion()">التالي ➡</button>
+        </div>
+
+        <div class="footer">
+            تم الإعداد بواسطة معلم الميكانيكا - مدرسة أمجاد أفريقيا
+            <br>© 2026 جميع الحقوق محفوظة
+        </div>
+    </div>
+
+    <!-- تحميل مصفوفة الأسئلة -->
+    <script src="questions.js">
+    </script>
+
+    <script>
+        // ================================================================
+        // 1. تجهيز البيانات
+        // ================================================================
+        const questions = [];
+
+        // استخدام المصفوفة المستوردة من questions.js
+        const matrix = (typeof questionsMatrix !== 'undefined') ? questionsMatrix : [];
+
+        matrix.forEach(function(q, idx) {
+            var numMatch = q.title.match(/س\s*(\d+)/);
+            var number = numMatch ? parseInt(numMatch[1]) : (idx + 1);
+
+            var stepStates = [];
+            if (q.steps) {
+                for (var si = 0; si < q.steps.length; si++) {
+                    stepStates.push({
+                        answered: false,
+                        isCorrect: false,
+                        selectedIndex: -1
+                    });
+                }
+            }
+
+            questions.push({
+                number: number,
+                title: q.title,
+                text: q.text,
+                options: q.options || [],
+                correctAnswerIndex: q.correctAnswerIndex,
+                svgCode: q.svgCode || '',
+                steps: q.steps || [],
+                pdfSolutionSteps: q.pdfSolutionSteps || ['لا توجد خطوات حل مسجلة.'],
+                pdfFinalAnswer: q.pdfFinalAnswer || 'الإجابة النموذجية.',
+                difficulty: q.difficulty || 'متوسط',
+                stepStates: stepStates
+            });
+        });
+
+        // ترتيب حسب الرقم
+        questions.sort(function(a, b) {
+            return a.number - b.number;
+        });
+
+        // ================================================================
+        // 2. متغيرات التحكم
+        // ================================================================
+        var currentIndex = 0;
+        var totalQuestions = questions.length;
+
+        // ================================================================
+        // 3. دوال العرض
+        // ================================================================
+
+        function renderQuestion(index) {
+            var q = questions[index];
+            if (!q) return;
+
+            var display = document.getElementById('questionDisplay');
+            var diffClass = q.difficulty === 'سهل' ? 'easy' : q.difficulty === 'متوسط' ? 'medium' : 'hard';
+
+            var svgHtml = q.svgCode ? '<div class="q-image">' + q.svgCode + '</div>' :
+                '<div class="q-image">📐 (لا توجد رسمة مرفقة لهذا السؤال)</div>';
+
+            var stepsHtml = '';
+            if (q.steps && q.steps.length > 0) {
+                stepsHtml = '<div class="solution-container"><div class="hint">📝 خطوات الحل التفاعلية</div>';
+
+                for (var si = 0; si < q.steps.length; si++) {
+                    var step = q.steps[si];
+                    var state = q.stepStates[si];
+
+                    var optionsHtml = '';
+                    for (var oi = 0; oi < step.options.length; oi++) {
+                        var opt = step.options[oi];
+                        var btnClass = '';
+                        var disabled = '';
+                        if (state.answered) {
+                            disabled = 'disabled';
+                            if (opt.isCorrect) btnClass = 'correct';
+                            else if (state.selectedIndex === oi && !opt.isCorrect) btnClass = 'wrong';
+                        }
+                        optionsHtml += '<button class="' + btnClass + ' ' + disabled +
+                            '" onclick="answerStep(' + index + ',' + si + ',' + oi + ')" ' + disabled + '>' +
+                            opt.text + '</button>';
+                    }
+
+                    var feedbackClass = state.answered ? 'show' : '';
+                    var feedbackText = '';
+                    if (state.answered) {
+                        if (state.isCorrect) {
+                            feedbackText = '<span class="fb-correct">✅ ' + (step.feedback || 'إجابة صحيحة!') +
+                                '</span>';
+                        } else {
+                            feedbackText = '<span class="fb-wrong">❌ إجابة خاطئة. حاول مرة أخرى.</span>';
+                        }
+                    }
+
+                    stepsHtml += '<div class="step-box">' +
+                        '<div class="step-title">📌 ' + step.title + '</div>' +
+                        '<div class="step-question">' + step.question + '</div>' +
+                        '<div class="step-options">' + optionsHtml + '</div>' +
+                        '<div class="step-feedback ' + feedbackClass + '">' + feedbackText + '</div>' +
+                        '</div>';
+                }
+                stepsHtml += '<div class="final-answer">✅ ' + q.pdfFinalAnswer + '</div></div>';
+            } else {
+                var stepsText = q.pdfSolutionSteps.join('\n');
+                stepsHtml = '<div class="solution-container">' +
+                    '<div class="hint">📝 خطوات الحل</div>' +
+                    '<div style="font-size:17px; line-height:2; white-space:pre-wrap;">' + stepsText + '</div>' +
+                    '<div class="final-answer">✅ ' + q.pdfFinalAnswer + '</div>' +
+                    '</div>';
+            }
+
+            display.innerHTML = '<div class="question-card">' +
+                '<div class="q-number">📌 ' + q.title + '</div>' +
+                '<div class="q-text">' + q.text.replace(/\n/g, '<br>') + '</div>' +
+                svgHtml +
+                stepsHtml +
+                '<span class="difficulty ' + diffClass + '">📊 المستوى: ' + q.difficulty + '</span>' +
+                '</div>';
+
+            document.getElementById('currentQnum').textContent = q.number;
+            document.getElementById('totalQnum').textContent = totalQuestions;
+            document.getElementById('navInfo').textContent = 'السؤال ' + (index + 1) + ' من ' + totalQuestions;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function answerStep(qIndex, stepIndex, optionIndex) {
+            var q = questions[qIndex];
+            var step = q.steps[stepIndex];
+            var state = q.stepStates[stepIndex];
+
+            if (state.answered) return;
+
+            var isCorrect = step.options[optionIndex].isCorrect;
+            state.answered = true;
+            state.isCorrect = isCorrect;
+            state.selectedIndex = optionIndex;
+
+            renderQuestion(qIndex);
+        }
+
+        function resetAllSteps() {
+            for (var i = 0; i < questions.length; i++) {
+                var q = questions[i];
+                for (var si = 0; si < q.steps.length; si++) {
+                    q.stepStates[si] = {
+                        answered: false,
+                        isCorrect: false,
+                        selectedIndex: -1
+                    };
+                }
+            }
+            renderQuestion(currentIndex);
+        }
+
+        function nextQuestion() {
+            if (currentIndex < totalQuestions - 1) {
+                currentIndex++;
+                renderQuestion(currentIndex);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion(currentIndex);
+            }
+        }
+
+        function showAllQuestions() {
+            var html = '';
+            for (var i = 0; i < questions.length; i++) {
+                var q = questions[i];
+                var diffClass = q.difficulty === 'سهل' ? 'easy' : q.difficulty === 'متوسط' ? 'medium' : 'hard';
+                var svgHtml = q.svgCode ? q.svgCode : '📐 (بدون رسم)';
+                var stepsText = q.pdfSolutionSteps.join('\n');
+
+                html += '<div class="question-card" style="margin-bottom:30px; page-break-inside:avoid;">' +
+                    '<div class="q-number">📌 ' + q.title + '</div>' +
+                    '<div class="q-text">' + q.text.replace(/\n/g, '<br>') + '</div>' +
+                    '<div class="q-image">' + svgHtml + '</div>' +
+                    '<div class="solution-container">' +
+                    '<div class="hint">📝 خطوات الحل</div>' +
+                    '<div style="font-size:17px; line-height:2; white-space:pre-wrap;">' + stepsText + '</div>' +
+                    '<div class="final-answer">✅ ' + q.pdfFinalAnswer + '</div>' +
+                    '</div>' +
+                    '<span class="difficulty ' + diffClass + '">📊 المستوى: ' + q.difficulty + '</span>' +
+                    '</div>';
+            }
+            document.getElementById('questionDisplay').innerHTML = html;
+            document.getElementById('counterDisplay').innerHTML = '📋 عرض جميع الأسئلة (' + totalQuestions + ' سؤال)';
+            document.getElementById('navInfo').textContent = 'عرض الكل';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================================================================
+        // 4. تقييم الامتحان
+        // ================================================================
+        function showEvaluation() {
+            var easy = 0,
+                medium = 0,
+                hard = 0;
+            for (var i = 0; i < questions.length; i++) {
+                var q = questions[i];
+                if (q.difficulty === 'سهل') easy++;
+                else if (q.difficulty === 'متوسط') medium++;
+                else if (q.difficulty === 'صعب') hard++;
+            }
+
+            var total = questions.length;
+            var level = (hard > total * 0.2) ? 'صعب' : (medium > total * 0.5) ? 'متوسط' : 'سهل';
+
+            var msg = '';
+            if (level === 'سهل') msg = '✅ امتحان مناسب للجميع، يركز على المفاهيم الأساسية.';
+            else if (level === 'متوسط') msg = '⚖️ امتحان متوازن، يحتاج إلى فهم جيد للمفاهيم والقوانين.';
+            else msg = '⚠️ امتحان صعب، يتطلب تفكيراً عميقاً وتحليلاً دقيقاً للمسائل.';
+
+            var html = '<div class="question-card" style="background:#f8f4e8; border:2px solid #8B0000;">' +
+                '<div class="q-number" style="font-size:26px;">📊 تقييم الامتحان</div>' +
+                '<div style="font-size:20px; line-height:2; padding:10px 0;">' +
+                '<p>📌 عدد الأسئلة الكلي: <strong>' + total + '</strong></p>' +
+                '<p>🟢 الأسئلة السهلة: <strong>' + easy + '</strong></p>' +
+                '<p>🟡 الأسئلة المتوسطة: <strong>' + medium + '</strong></p>' +
+                '<p>🔴 الأسئلة الصعبة: <strong>' + hard + '</strong></p>' +
+                '<hr style="margin:15px 0;">' +
+                '<p style="font-size:24px; font-weight:bold; color:#8B0000;">' +
+                '📈 المستوى العام للامتحان: <strong>' + level + '</strong></p>' +
+                '<p style="font-size:18px; color:#555; margin-top:10px;">' + msg + '</p>' +
+                '</div></div>';
+
+            document.getElementById('questionDisplay').innerHTML = html;
+            document.getElementById('counterDisplay').innerHTML = '📊 تقييم الامتحان';
+            document.getElementById('navInfo').textContent = 'تقييم';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================================================================
+        // 5. دوال PDF
+        // ================================================================
+
+        function getPaperPDFContent() {
+            var content = '<div style="font-family:\'Times New Roman\',serif; padding:20px; direction:rtl;">' +
+                '<div style="text-align:center; padding:60px 20px; page-break-after:always; min-height:100vh; display:flex; flex-direction:column; justify-content:center;">' +
+                '<div style="font-size:18px; color:#888; margin-bottom:30px;">🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء</div>' +
+                '<div style="font-size:14px; color:#aaa; margin-bottom:10px;">📅 العام الدراسي 2025 - 2026</div>' +
+                '<h1 style="font-size:42px; color:#8B0000; margin:30px 0; border-bottom:3px double #8B0000; padding-bottom:20px; display:inline-block;">' +
+                'حل الأسئلة النموذجية</h1>' +
+                '<h2 style="font-size:32px; color:#2c3e50; margin:10px 0;">لمادة الميكانيكا</h2>' +
+                '<div style="margin-top:60px; font-size:20px; color:#555;">' +
+                '<p>📖 إعداد: معلم الميكانيكا</p>' +
+                '<p style="margin-top:5px;">📚 الصف الثالث الثانوي</p>' +
+                '</div>' +
+                '<div style="margin-top:80px; font-size:16px; color:#999; border-top:1px solid #ddd; padding-top:20px;">' +
+                'تم إعداد هذا الملف خصيصاً لطلاب مدرسة أمجاد أفريقيا</div></div>';
+
+            content += '<div style="padding:10px 0;">';
+
+            for (var i = 0; i < questions.length; i++) {
+                var q = questions[i];
+                var svgHtml = q.svgCode ? q.svgCode : '<div style="color:#999;">📐 (لا توجد رسمة)</div>';
+                var stepsText = q.pdfSolutionSteps.join('\n');
+
+                content += '<div style="margin-bottom:40px; page-break-inside:avoid; border-bottom:1px dashed #ccc; padding-bottom:20px;">' +
+                    '<h3 style="color:#8B0000; font-size:22px; margin-bottom:10px;">📌 ' + q.title + '</h3>' +
+                    '<div style="font-size:18px; line-height:1.8; white-space:pre-wrap;">' + q.text + '</div>' +
+                    '<div style="text-align:center; margin:10px 0;">' + svgHtml + '</div>' +
+                    '<div style="background:#f5f5f0; padding:15px 20px; border-right:4px solid #1e7e34; margin-top:10px; border-radius:5px;">' +
+                    '<div style="font-size:17px; line-height:2; white-space:pre-wrap;">' + stepsText + '</div>' +
+                    '<div style="font-weight:bold; color:#8B0000; font-size:19px; margin-top:10px; border-top:1px solid #ddd; padding-top:10px;">✅ ' +
+                    q.pdfFinalAnswer + '</div></div>' +
+                    '<div style="margin-top:8px; font-size:14px; color:#777;">📊 المستوى: ' + q.difficulty + '</div></div>';
+            }
+
+            content += '</div></div>';
+            return content;
+        }
+
+        function generatePaperPDF() {
+            var content = getPaperPDFContent();
+            var style = '<style>' +
+                '@page { size: A4; margin: 15mm; }' +
+                'body { font-family: \'Times New Roman\', serif; direction: rtl; background: #fff; padding: 10px; position: relative; }' +
+                'body::before { content: "🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء"; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 60px; color: rgba(139, 0, 0, 0.08); font-weight: bold; white-space: nowrap; pointer-events: none; z-index: 0; width: 100%; text-align: center; letter-spacing: 5px; }' +
+                'div, h1, h2, h3, p { position: relative; z-index: 1; }' +
+                '@media print { body::before { content: "🏫 مدرسة أمجاد أفريقيا - ليبيا البيضاء"; } }' +
+                '</style>';
+
+            var fullHtml = '<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><title>حلول الميكانيكا - طباعة</title>' +
+                style + '</head><body>' + content + '</body></html>';
+
+            var win = window.open('', '_blank', 'width=1100,height=800');
+            win.document.write(fullHtml);
+            win.document.close();
+            win.focus();
+
+            win.onload = function() {
+                win.print();
+            };
+        }
+
+        function generateMobilePDF() {
+            var content = '<div style="font-family:\'Arial\',sans-serif; direction:rtl; padding:15px; max-width:600px; margin:0 auto; background:#faf8f5;">' +
+                '<div style="text-align:center; padding:30px 10px; border-bottom:3px double #8B0000; margin-bottom:30px;">' +
+                '<h1 style="font-size:28px; color:#8B0000;">🏫 مدرسة أمجاد أفريقيا</h1>' +
+                '<h2 style="font-size:20px; color:#2c3e50;">حلول الميكانيكا - 2025/2026</h2>' +
+                '<p style="font-size:16px; color:#888;">📱 عرض مكبر للشاشات</p></div>';
+
+            for (var i = 0; i < questions.length; i++) {
+                var q = questions[i];
+                var svgHtml = q.svgCode ? q.svgCode : '<div style="color:#999;">📐 (بدون رسم)</div>';
+                var stepsText = q.pdfSolutionSteps.join('\n');
+
+                content += '<div style="background:#fff; border:1px solid #ddd; border-radius:12px; padding:20px; margin-bottom:30px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">' +
+                    '<h3 style="font-size:26px; color:#8B0000; border-bottom:2px solid #8B0000; padding-bottom:10px;">📌 ' +
+                    q.title + '</h3>' +
+                    '<div style="font-size:22px; line-height:2; white-space:pre-wrap; margin:15px 0;">' + q.text +
+                    '</div>' +
+                    '<div style="text-align:center; margin:10px 0;">' + svgHtml + '</div>' +
+                    '<div style="background:#f0f4f8; padding:18px; border-right:5px solid #1e7e34; border-radius:8px; margin-top:15px;">' +
+                    '<div style="font-size:20px; line-height:2.2; white-space:pre-wrap;">' + stepsText + '</div>' +
+                    '<div style="font-weight:bold; color:#8B0000; font-size:24px; margin-top:15px; border-top:1px solid #ddd; padding-top:15px;">✅ ' +
+                    q.pdfFinalAnswer + '</div></div>' +
+                    '<div style="margin-top:12px; font-size:18px; color:#777;">📊 المستوى: ' + q.difficulty + '</div></div>';
+            }
+
+            content += '<div style="text-align:center; padding:20px; color:#888; border-top:1px solid #ddd; margin-top:20px; font-size:16px;">' +
+                'تم الإعداد لطلاب مدرسة أمجاد أفريقيا - ليبيا البيضاء</div></div>';
+
+            var style = '<style>body { margin:0; padding:0; background:#e8e4e0; font-family:\'Arial\',sans-serif; direction:rtl; } @media print { body { background:#fff; } }</style>';
+
+            var fullHtml = '<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>حلول الميكانيكا - موبايل</title>' +
+                style + '</head><body>' + content + '</body></html>';
+
+            var win = window.open('', '_blank', 'width=600,height=800');
+            win.document.write(fullHtml);
+            win.document.close();
+            win.focus();
+
+            win.onload = function() {
+                var opt = {
+                    margin: 8,
+                    filename: 'حلول_الميكانيكا_موبايل.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+                html2pdf().set(opt).from(win.document.body).save();
+            };
+        }
+
+        // ================================================================
+        // 6. تهيئة الصفحة
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            if (questions.length > 0) {
+                renderQuestion(0);
+            } else {
+                document.getElementById('questionDisplay').innerHTML =
+                    '<div class="question-card" style="text-align:center; padding:40px;">' +
+                    '<h3 style="color:#8B0000;">⚠️ لم يتم تحميل الأسئلة</h3>' +
+                    '<p style="font-size:18px; margin-top:10px;">تأكد من وجود ملف <strong>questions.js</strong> في نفس المجلد.</p>' +
+                    '</div>';
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    nextQuestion();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    prevQuestion();
+                }
+            });
+        });
+
+        // ================================================================
+        // 7. ربط الدوال للنطاق العام
+        // ================================================================
+        window.generatePaperPDF = generatePaperPDF;
+        window.generateMobilePDF = generateMobilePDF;
+        window.showAllQuestions = showAllQuestions;
+        window.showEvaluation = showEvaluation;
+        window.resetAllSteps = resetAllSteps;
+        window.nextQuestion = nextQuestion;
+        window.prevQuestion = prevQuestion;
+        window.answerStep = answerStep;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كراسة حلول ميكانيكا الشهادة الثانوية - مدرسة أمجاد أفريقيا</title>
+    <style>
+        /* التنسيق الأساسي للموقع على الشاشة العادية */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a237e;
+            text-align: center;
+        }
+        .btn-print {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto;
+            padding: 15px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .btn-print:hover {
+            background-color: #43a047;
+        }
+
+        /* ======================================================= */
+        /* 1. التنسيق على الشاشة العادية (إخفاء حاوية الـ PDF تماماً) */
+        /* ======================================================= */
+        #dynamic-pdf-questions-area {
+            display: none !important; /* يمنع ظهور الكراسة كلقطة شاشة معلقة أثناء التصفح */
+        }
+
+        /* ======================================================= */
+        /* 2. تنسيقات الطباعة الفائقة المخصصة للنقال والـ PDF      */
+        /* ======================================================= */
+        @media print {
+            /* إجبار الهواتف على طباعة الألوان الكاملة والداكنة دون توفير للحبر */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* إخفاء عناصر واجهة المستخدم والتحكم بالكامل */
+            body * {
+                visibility: hidden !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            
+            /* إظهار منطقة طباعة الكراسة فقط وتمديدها */
+            #dynamic-pdf-questions-area, 
+            #dynamic-pdf-questions-area * {
+                visibility: visible !important;
+                display: block !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            @page {
+                margin: 5mm !important; /* استغلال مساحة الصفحة بالكامل */
+            }
+
+            #dynamic-pdf-questions-area {
+                display: block !important;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /* كسر الصفحات بشكل حاد لكل مسألة */
+            .pdf-question-page-wrapper {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                min-height: 95vh !important;
+                padding: 8mm 4mm !important;
+            }
+
+            /* --------------------------------------------------- */
+            /* تكبير نصوص وعناوين الأسئلة والحلول بشكل حاد وواضح    */
+            /* --------------------------------------------------- */
+            .pdf-q-text, 
+            .pdf-q-text *, 
+            .pdf-q-text p, 
+            .pdf-q-text span, 
+            .pdf-q-text div {
+                font-size: 44px !important; 
+                font-weight: bold !important;
+                line-height: 1.7 !important;
+            }
+
+            /* تكبير العناوين الفرعية للرسمة والفقرات التوضيحية */
+            .pdf-q-text small,
+            .pdf-q-text span[style*="font-size"] {
+                font-size: 34px !important; 
+                font-weight: 900 !important;
+                color: #1a237e !important;
+                display: block !important;
+                margin-bottom: 12px !important;
+                text-align: center !important;
+            }
+
+            /* --------------------------------------------------- */
+            /* التكبير الجذري للرسومات الهندسية (SVG) وحل مشكلة البهتان */
+            /* --------------------------------------------------- */
+            .pdf-q-text div[style*="display: flex"],
+            .pdf-q-text div[style*="display:flex"] {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-around !important;
+                align-items: stretch !important;
+                width: 100% !important;
+                margin: 35px auto !important;
+                overflow: visible !important;
+            }
+
+            .pdf-q-text div[style*="display: flex"] > div {
+                width: 48% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+
+            /* أبعاد إطار الرسمة الكبير */
+            .pdf-q-text svg,
+            .pdf-graphic svg {
+                width: 100% !important;
+                height: 280px !important;
+                min-height: 240px !important;
+                display: block !important;
+                margin: 15px auto !important;
+                overflow: visible !important;
+            }
+
+            /* جعل الحبال سوداء داكنة جداً وعريضة */
+            .pdf-q-text svg line,
+            .pdf-graphic svg line {
+                stroke: #000000 !important; 
+                stroke-width: 6px !important;  
+                opacity: 1 !important;         
+            }
+
+            /* جعل الكتل واضحة ومكبرة ومصبوبة بالأسود */
+            .pdf-q-text svg rect,
+            .pdf-graphic svg rect {
+                fill: #000000 !important;   
+                stroke: #000000 !important;
+                stroke-width: 2px !important;
+                transform: scale(1.7) !important; 
+                transform-origin: center !important;
+                opacity: 1 !important;
+            }
+
+            /* إبراز البكرة وتكبير قطرها */
+            .pdf-q-text svg circle,
+            .pdf-graphic svg circle {
+                stroke: #000000 !important; 
+                stroke-width: 4px !important;
+                fill: #cccccc !important;   
+                r: 13px !important;         
+                opacity: 1 !important;
+            }
+
+            /* تكبير النصوص المكتوبة برمجياً بداخل الرسمة بدقة فائقة */
+            .pdf-q-text svg text,
+            .pdf-graphic svg text {
+                font-size: 18px !important; 
+                font-weight: 900 !important;
+                fill: #000000 !important;   
+            }
+
+            /* --------------------------------------------------- */
+            /* تنسيق وتكبير كتل الشرح والناتج النهائي              */
+            /* --------------------------------------------------- */
+            .pdf-sol-steps,
+            .pdf-sol-steps *,
+            .pdf-sol-steps p,
+            .pdf-sol-steps span,
+            .pdf-sol-steps div,
+            .pdf-sol-steps li,
+            .pdf-sol-steps h4 {
+                font-size: 40px !important;
+                line-height: 1.8 !important;
+            }
+
+            .pdf-final-ans {
+                font-size: 42px !important;
+                font-weight: bold !important;
+                padding: 15px 35px !important;
+                background-color: #e8f5e9 !important;
+                border: 3px solid #4caf50 !important;
+                border-radius: 12px !important;
+                display: inline-block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>كراسة ميكانيكا الشهادة الثانوية</h1>
+        <p style="text-align: center; font-size: 18px; color: #475569;">مدرسة أمجاد أفريقيا للتعليم الخاص - العام الدراسي 2025 - 2026</p>
+        <button class="btn-print" onclick="generatePDF()">🖨️ تحميل الكراسة (PDF)</button>
+    </div>
+
+    <div id="dynamic-pdf-questions-area"></div>
+
+    <script>
+        // مصفوفة البيانات الرسمية المستخرجة من مستند الباب السادس لفيزياء الميكانيكا
+        const myQuestionsData = [
+            { id: 0 }, // عنصر فارغ للحفاظ على تماشي الترقيم مع الـ id
+            {
+                id: 1,
+                title: "تمرين 1: حركة البكرات",
+                content: `
+                    <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
+                        <p>جسمان كتلتاهما (0.3kg) و (0.5kg) مربوطان بسلك يمر على بكرة ملساء. بدآ من السكون من مستوى أفقي واحد. أوجد سرعتهما بعد مسافة 1.3m.</p>
+                        <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                            <div style="text-align: center;">
+                                <small>قبل الحركة</small><br>
+                                <svg width="100" height="100"><circle cx="50" cy="20" r="7" fill="gray"/><line x1="45" y1="20" x2="45" y2="70" stroke="black" stroke-width="2"/><line x1="55" y1="20" x2="55" y2="70" stroke="black" stroke-width="2"/><rect x="40" y="70" width="12" height="12" fill="#3498db"/><rect x="50" y="70" width="12" height="12" fill="#e74c3c"/></svg>
+                            </div>
+                            <div style="text-align: center;">
+                                <small>بعد الحركة</small><br>
+                                <svg width="100" height="100"><circle cx="50" cy="20" r="7" fill="gray"/><line x1="45" y1="20" x2="45" y2="45" stroke="black" stroke-width="2"/><rect x="40" y="45" width="12" height="12" fill="#3498db"/><line x1="55" y1="20" x2="55" y2="95" stroke="black" stroke-width="2"/><rect x="50" y="95" width="12" height="12" fill="#e74c3c"/></svg>
+                            </div>
+                        </div>
+                    </div>`,
+                ans: "2.55 m/s",
+                sol: `
+                    <div style="direction: rtl; text-align: right; line-height: 1.8;">
+                        <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الحل باستخدام قانون حفظ الطاقة العام:</h4>
+                        <p style="background: #e8f5e9; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold;">
+                            (طاقة الوضع + طاقة الحركة) قبل الحركة = (طاقة الوضع + طاقة الحركة) بعد الحركة
+                        </p>
+                        <h4 style="color: #2980b9;">1. قبل الحركة (لحظة السكون):</h4>
+                        <ul>
+                            <li><b>طاقة الحركة:</b> صفر (لأن البداية من السكون).</li>
+                            <li><b>طاقة الوضع:</b> نعتبر المستوى الأفقي الابتدائي صفراً، إذن طاقة الوضع = صفر.</li>
+                            <li><b>إجمالي الطاقة قبل الحركة = صفر</b></li>
+                        </ul>
+                        <h4 style="color: #e67e22;">2. بعد الحركة (بعد قطع مسافة 1.3m):</h4>
+                        <ul>
+                            <li><b>طاقة وضع الجسم الأول (0.3kg):</b> ارتفع بمقدار 1.3m <br> + (0.3 × 10 × 1.3) = <b>+3.9 جول</b></li>
+                            <li><b>طاقة وضع الجسم الثاني (0.5kg):</b> انخفض بمقدار 1.3m <br> - (0.5 × 10 × 1.3) = <b>-6.5 جول</b></li>
+                            <li><b>طاقة حركة الجسمين معاً:</b> <br> 1/2 × (0.3 + 0.5) × v² = <b>0.4v²</b></li>
+                        </ul>
+                        <h4 style="color: #c0392b; border-top: 2px solid #ddd; padding-top: 10px;">3. تطبيق قانون حفظ الطاقة:</h4>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
+                            إجمالي الطاقة قبل (0) = إجمالي الطاقة بعد (3.9 - 6.5 + 0.4v²)<br>
+                            0 = -2.6 + 0.4v² <br>
+                            2.6 = 0.4v² <br>
+                            v² = 2.6 ÷ 0.4 = 6.5 <br>
+                            <b>v = √6.5 = 2.55 m/s</b>
+                        </div>
+                    </div>`
+            },
+            {
+                id: 2,
+                title: "تمرين 2: حركة بكرات وحساب مسافة رأسية",
+                content: `
+                    <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
+                        <p>جسمان كتلتاهما (1.2kg) و (1.4kg) مربوطان بسلك يمر على بكرة ملساء. بدأت المجموعة حركتها من السكون وهما في مستوى أفقي واحد. أوجد المسافة بين الجسمين عندما تصبح سرعتهما (0.5m/s).</p>
+                        <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                            <div style="text-align: center;">
+                                <small>الوضعية (1): السكون</small><br>
+                                <svg width="100" height="100"><circle cx="50" cy="20" r="7" fill="gray"/><line x1="45" y1="20" x2="45" y2="70" stroke="black" stroke-width="2"/><line x1="55" y1="20" x2="55" y2="70" stroke="black" stroke-width="2"/><rect x="40" y="70" width="12" height="12" fill="#3498db"/><rect x="50" y="70" width="12" height="12" fill="#e74c3c"/></svg>
+                            </div>
+                            <div style="text-align: center;">
+                                <small>الوضعية (2): الحركة (v = 0.5)</small><br>
+                                <svg width="100" height="100"><circle cx="50" cy="20" r="7" fill="gray"/><line x1="45" y1="20" x2="45" y2="50" stroke="black" stroke-width="2"/><rect x="40" y="50" width="12" height="12" fill="#3498db"/><line x1="55" y1="20" x2="55" y2="90" stroke="black" stroke-width="2"/><rect x="50" y="90" width="12" height="12" fill="#e74c3c"/></svg>
+                            </div>
+                        </div>
+                    </div>`,
+                ans: "0.32 m",
+                sol: `
+                    <div style="direction: rtl; text-align: right; line-height: 1.8;">
+                        <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الشرح والحل التفصيلي:</h4>
+                        <p><b>المعطيات:</b> m₁ = 1.2kg, m₂ = 1.4kg, u = 0, v = 0.5m/s</p>
+                        <h4 style="color: #2980b9;">أولاً: قبل الحركة (الوضعية 1)</h4>
+                        <p>بما أن الحركة بدأت من السكون وفي مستوى أفقي واحد، نعتبر إجمالي طاقة النظام الابتدائي = <b>صفر</b>.</p>
+                        <h4 style="color: #e67e22;">ثانياً: بعد قطع كل جسم لمسافة h (الوضعية 2)</h4>
+                        <ul>
+                            <li><b>طاقة وضع الجسم الخفيف (1.2kg) صعد مسافة h:</b> P.E₁ = m₁gh = 1.2 × 10 × h = <b>12h جول</b></li>
+                            <li><b>طاقة وضع الجسم الثقيل (1.4kg) هبط مسافة h:</b> P.E₂ = -m₂gh = -(1.4 × 10 × h) = <b>-14h جول</b></li>
+                            <li><b>طاقة حركة الجسمين معاً بسرعة v = 0.5m/s:</b> <br> K.E = 1/2 × (1.2 + 1.4) × (0.5)² = 1/2 × 2.6 × 0.25 = <b>0.325 جول</b></li>
+                        </ul>
+                        <h4 style="color: #c0392b;">ثالثاً: حساب المسافة الرأسية بينهما</h4>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
+                            معادلة حفظ الطاقة: <br>
+                            12h - 14h + 0.325 = 0 <br>
+                            -2h = -0.325 <br>
+                            h = 0.1625 m (مسافة تحرك كل جسم بمفرده)<br>
+                            <b>المسافة الرأسية الكلية بين الجسمين = 2h = 2 × 0.1625 = 0.325 m (تقريباً 0.32 m)</b>
+                        </div>
+                    </div>`
+            },
+            {
+                id: 3,
+                title: "تمرين 3: حركة كتلة على طاولة ملساء متصلة بكتلة متدلية",
+                content: `
+                    <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
+                        <p>وضعت قطعة كتلتها (1.2kg) على منضدة أفقية ملساء، على بعد 2m من حافتها، وربطت بخيط يمر على بكرة عند الحافة متدلياً منها كتلة أخرى (0.7kg). بدأ النظام حركته من السكون. أوجد: <br>
+                        أ) الإزاحة h التي تتحركها القطعتان عندما تصبح سرعتهما 3m/s.<br>
+                        ب) سرعة القطعتين قبل وصول الأولى إلى الحافة مباشرة (أي عند h = 2m).</p>
+                    </div>`,
+                ans: "أ) 1.22 m , ب) 3.84 m/s",
+                sol: `
+                    <div style="direction: rtl; text-align: right; line-height: 1.8;">
+                        <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الشرح والحل بالتفصيل:</h4>
+                        <h4 style="color: #2980b9;">1. قبل الحركة (لحظة السكون):</h4>
+                        <p>النظام بأكمله ساكن وفي مستوى مرجعي مبدئي، إذن <b>إجمالي الطاقة الابتدائية = صفر</b>.</p>
+                        <h4 style="color: #e67e22;">2. بعد الحركة لمسافة h:</h4>
+                        <ul>
+                            <li><b>طاقة حركة الجسمين معاً:</b> K.E = 1/2 × (1.2 + 0.7) × v² = <b>0.95v²</b></li>
+                            <li><b>طاقة وضع الجسم الأول (1.2kg) على الطاولة الملساء:</b> <b>صفر</b> (لأنه يتحرك أفقياً ولا يتغير ارتفاعه الرأسي).</li>
+                            <li><b>طاقة وضع الجسم المتدلي (0.7kg) هبط مسافة h لأسفل:</b> P.E = -m₂gh = -0.7 × 10 × h = <b>-7h جول</b></li>
+                        </ul>
+                        <h4 style="color: #c0392b;">3. تطبيق معادلة الطاقة:</h4>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
+                            0.95v² - 7h = 0  ⬅️  7h = 0.95v² <br><br>
+                            <b>الطلب (أ): حساب h عندما v = 3m/s:</b><br>
+                            7h = 0.95 × (3)²  ⬅  7h = 8.55  ⬅  <b>h = 1.22 m</b><br><br>
+                            <b>الطلب (ب): حساب v عندما تصل الأولى للحافة (h = 2m):</b><br>
+                            7 × 2 = 0.95v²  ⬅  14 = 0.95v²  ⬅  v² = 14.737  ⬅  <b>v = √14.737 = 3.84 m/s</b>
+                        </div>
+                    </div>`
+            },
+            {
+                id: 4,
+                title: "تمرين 4: كتلة على سطح مائل متصلة بكتلة متدلية رأسياً",
+                content: `
+                    <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
+                        <p>وضع جسم كتلته (1.6kg) على سطح مائل أملس يميل بزاوية (10°) مع الأفقي، وربط بخيط يمر على بكرة عند قمة السطح متدلياً منه جسم آخر (0.8kg) رأسياً. بدأ النظام حركته من السكون. أوجد: <br>
+                        أ) سرعتهما بعد أن يقطع مسافة قدرها 0.5m.<br>
+                        ب) المسافة s التي يقطعانها عندما تصبح سرعتهما 3m/s.</p>
+                    </div>`,
+                ans: "أ) 1.47 m/s , ب) 2.07 m",
+                sol: `
+                    <div style="direction: rtl; text-align: right; line-height: 1.8;">
+                        <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الشرح والحل التفصيلي:</h4>
+                        <p><b>تحليل الارتفاعات الرأسية بالنسبة للمسافة s التي يتحركها الخيط:</b></p>
+                        <ul>
+                            <li><b>الجسم المتدلي (0.8kg) يهبط لأسفل رأسياً:</b> إزاحته الرأسية h₂ = s، وطاقة وضعه = <b>-m₂gs = -8s</b>.</li>
+                            <li><b>الجسم الصاعد على المستوى المائل (1.6kg) بزاوية 10°:</b> يرتفع رأساً بمقدار h₁ = s sin(10°)، وطاقة وضعه = <b>+m₁g(s sin 10°) = 1.6 × 10 × s × 0.1736 = 2.77s</b>.</li>
+                        </ul>
+                        <h4 style="color: #2980b9;">1. تطبيق قانون حفظ الطاقة العام:</h4>
+                        <p>قبل الحركة: <b>E_initial = صفر</b>.</p>
+                        <p>بعد الحركة لمسافة s:<br>
+                        طاقة الحركة الكلية: K.E = 1/2 × (1.6 + 0.8) × v² = <b>1.2v²</b><br>
+                        معادلة حفظ الطاقة الكلية: <br>
+                        1.2v² + 2.77s - 8s = 0  ⬅  <b>1.2v² - 5.23s = 0</b></p>
+                        <h4 style="color: #c0392b;">2. التعويض بالقيم لحل المطلوبات:</h4>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
+                            <b>الطلب (أ): حساب السرعة v عند s = 0.5m:</b><br>
+                            1.2v² = 5.23 × 0.5  ⬅  1.2v² = 2.615  ⬅  v² = 2.179  ⬅  <b>v = √2.179 = 1.47 m/s</b><br><br>
+                            <b>الطلب (ب): حساب s عندما تصبح السرعة v = 3m/s:</b><br>
+                            5.23s = 1.2 × (3)²  ⬅  5.23s = 10.8  ⬅  <b>s = 10.8 ÷ 5.23 = 2.07 m</b>
+                        </div>
+                    </div>`
+            },
+            {
+                id: 5,
+                title: "تمرين 5: حركة عمودية وحساب الشغل المبذول وقوة الشد",
+                content: `
+                    <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
+                        <p>جسمان كتلتاهما (0.1kg) و (0.2kg) مربوطان بخيط يمر على بكرة ملساء. بدأت المجموعة حركتها رأسياً من السكون. أوجد: <br>
+                        أ) سرعتهما بعد قطع مسافة 0.6m.<br>
+                        ب) الشغل المبذول على الجسم (0.1kg) بواسطة الخيط.<br>
+                        ج) مقدار الشد في الخيط.</p>
+                    </div>`,
+                ans: "أ) 2 m/s , ب) 0.8 J , ج) 1.33 N",
+                sol: `
+                    <div style="direction: rtl; text-align: right; line-height: 1.8;">
+                        <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الشرح والحل التفصيلي:</h4>
+                        <h4 style="color: #2980b9;">الطلب (أ): حساب السرعة v بعد s = 0.6m:</h4>
+                        <p>بتطبيق قانون حفظ الطاقة للكتلتين (0.2kg تهبط و 0.1kg تصعد):<br>
+                        K.E = P.E_lost - P.E_gained <br>
+                        1/2 × (0.1 + 0.2) × v² = (0.2 × 10 × 0.6) - (0.1 × 10 × 0.6)<br>
+                        0.15v² = 1.2 - 0.6  ⬅  0.15v² = 0.6  ⬅  v² = 4  ⬅  <b>v = 2 m/s</b></p>
+                        
+                        <h4 style="color: #e67e22;">الطلب (ب): الشغل المبذول على الكتلة (0.1kg) الصاعدة بواسطة الخيط:</h4>
+                        <p>باستخدام نظرية الشغل والطاقة للكتلة الصاعدة بشكل منفرد:<br>
+                        ΔK.E = W_net  ⬅  ΔK.E = W_tension - W_gravity <br>
+                        W_tension = ΔK.E + W_gravity <br>
+                        W_gravity = m₁gs = 0.1 × 10 × 0.6 = <b>0.6 جول</b><br>
+                        ΔK.E = 1/2 × m₁ × v² = 1/2 × 0.1 × (2)² = <b>0.2 جول</b><br>
+                        <b>W_tension = 0.2 + 0.6 = 0.8 جول</b></p>
+                        
+                        <h4 style="color: #c0392b;">الطلب (ج): حساب قوة الشد في الخيط T:</h4>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
+                            الشغل المبذول بواسطة قوة الشد = الشد × المسافة <br>
+                            W_tension = T × s <br>
+                            0.8 = T × 0.6  ⬅  T = 0.8 ÷ 0.6  ⬅  <b>T = 1.33 N</b>
+                        </div>
+                    </div>`
+            },
+            {
+                id: 6,
+                title: "تمرين 6: حركة سيارة صاعدة مندر رال وتأثير قوة المحرك والمقاومة",
+                content: `
+                    <div style="direction: rtl; text-align: right; font-size: 18px; line-height: 1.6;">
+                        <p>تتحرك سيارة كتلتها (1200kg) بسرعة (25m/s) عند أسفل المنحدر (النقطة A). صعدت السيارة المنحدر لمسافة (1000m) لتصل إلى القمة (النقطة B) على ارتفاع رأسي (60m). فإذا كانت قوة محرك السيارة (1600N) وقوة المقاومة للحركة (1150N). أوجد سرعة السيارة عند وصولها للقمة (النقطة B).</p>
+                    </div>`,
+                ans: "13.23 m/s",
+                sol: `
+                    <div style="direction: rtl; text-align: right; line-height: 1.8;">
+                        <h4 style="color: #2c3e50; border-bottom: 2px solid #2ecc71; padding-bottom: 5px;">الشرح والحل التفصيلي:</h4>
+                        <p>لحساب طاقة الحركة والوضع نستخدم قانون حفظ الطاقة مع تضمين شغل القوى الخارجية الباذلة للطاقة (المحرك) والقوى المقاومة المبددة للطاقة (الاحتكاك):</p>
+                        
+                        <h4 style="color: #2980b9;">أولاً: إجمالي الطاقة الكلية الابتدائية عند أسفل المنحدر (A):</h4>
+                        <ul>
+                            <li><b>طاقة الحركة الابتدائية:</b> K.E_A = 1/2 × m × u² = 1/2 × 1200 × (25)² = <b>375,000 جول</b></li>
+                            <li><b>الشغل المكتسب من المحرك (F):</b> W_engine = F × s = 1600 × 1000 = <b>1,600,000 جول</b></li>
+                            <li><b>إجمالي رصيد الطاقة المغذي للنظام عند البداية = 375,000 + 1,600,000 = 1,975,000 جول</b></li>
+                        </ul>
+                        
+                        <h4 style="color: #e67e22;">ثانياً: إجمالي الطاقة والمقاومة المفقودة عند القمة (B):</h4>
+                        <ul>
+                            <li><b>طاقة وضع الجاذبية المكتسبة عند الارتفاع الرأسي (60m):</b> P.E_B = m × g × h = 1200 × 10 × 60 = <b>720,000 جول</b></li>
+                            <li><b>الشغل المبدد بسبب قوة المقاومة (R):</b> W_resistance = R × s = 1150 × 1000 = <b>1,150,000 جول</b></li>
+                            <li><b>طاقة الحركة عند القمة:</b> K.E_B = 1/2 × 1200 × v² = <b>600v²</b></li>
+                        </ul>
+                        
+                        <h4 style="color: #c0392b;">ثالثاً: تطبيق معادلة الطاقة الإجمالية وحساب السرعة v:</h4>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ccc;">
+                            إجمالي الطاقة عند البداية (A) = إجمالي الطاقة عند النهاية (B) + الشغل المفقود <br>
+                            1,975,000 = 720,000 + 1,150,000 + 600v² <br>
+                            1,975,000 = 1,870,000 + 600v² <br>
+                            105,000 = 600v² <br>
+                            v² = 105,000 ÷ 600 = 175 <br>
+                            <b>v = √175 = 13.23 m/s</b>
+                        </div>
+                    </div>`
+            }
+        ];
+
+        // دالة إنشاء وطباعة الـ PDF النموذجية المتوافقة مع أجهزة الطلاب
+        function generatePDF() {
+            const printableDoc = document.getElementById('dynamic-pdf-questions-area');
+
+            if (!printableDoc) {
+                alert("خطأ: لم يتم العثور على الحاوية المخصصة للطباعة!");
+                return;
+            }
+
+            // تصفير المحتوى
+            printableDoc.innerHTML = '';
+
+            // إظهار الحاوية مؤقتاً بالخلفية ليرند المتصفح الأبعاد والـ SVG
+            printableDoc.style.setProperty('display', 'block', 'important');
+
+            // ===== 1. بناء صفحة غلاف كراسة التمارين النموذجية =====
+            const coverPage = document.createElement('div');
+            coverPage.className = 'pdf-cover-page';
+            coverPage.style.cssText = `
+                page-break-after: always;
+                break-after: page;
+                padding: 20mm 10mm;
+                text-align: center;
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                direction: rtl;
+                box-sizing: border-box;
+            `;
+            coverPage.innerHTML = `
+                <div class="school-name" style="font-size: 38px; color: #1a237e; margin-bottom: 25px; font-weight: bold;">مدرسة أمجاد أفريقيا للتعليم الخاص</div>
+                <div class="main-title" style="font-size: 64px; font-weight: 800; color: #0f172a; margin-bottom: 20px;">ميكانيكا الشهادة الثانوية</div>
+                <div class="sub-title" style="font-size: 42px; font-weight: 600; color: #334155; margin-bottom: 30px;">تمارين الباب السادس - (6-B) حفظ الطاقة</div>
+                <div class="cover-frame" style="border: 4px solid #1a237e; border-radius: 15px; padding: 30px; margin: 30px 0; background: #f8fafc;">
+                    <h3 style="font-size: 48px; color: #1e293b; margin: 0; font-weight: bold;">📝 كراسة الحلول النموذجية 📝</h3>
+                    <div style="font-size: 32px; color: #ddae11; font-weight: bold; margin-top: 10px;">حلول تمارين الكتاب المدرسي بالتفصيل</div>
+                    <div style="font-size: 36px; font-weight: 700; color: #0f172a; margin-top: 20px;">العام الدراسي 2025 - 2026</div>
+                </div>
+                <div style="font-size: 38px; color: #4caf50; margin: 25px 0; font-weight: bold;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+            `;
+            printableDoc.appendChild(coverPage);
+
+            // ===== 2. إضافة وتكبير كافة المسائل وتنسيقها عمودياً تلقائياً =====
+            myQuestionsData.forEach((q, index) => {
+                if (q.id === 0 || !q.content) return;
+
+                const questionPage = document.createElement('div');
+                questionPage.className = 'pdf-question-page-wrapper';
+                questionPage.style.cssText = `
+                    page-break-inside: avoid !important;
+                    break-inside: avoid !important;
+                    page-break-after: always !important;
+                    break-after: page !important;
+                    padding: 8mm 4mm; 
+                    box-sizing: border-box;
+                    direction: rtl;
+                    display: block;
+                    width: 100%;
+                `;
+
+                questionPage.innerHTML = `
+                    <div class="pdf-q-title" style="font-size: 54px; font-weight: bold; color: #1a237e; margin-bottom: 15px; text-align: right; border-bottom: 4px solid #1a237e; padding-bottom: 10px;">مسألة رقم ${index}</div>
+                    <div class="pdf-q-text">
+                        ${q.content}
+                    </div>
+                    
+                    <div class="pdf-solution-box" style="margin-top: 35px; padding: 20px; background: #f9f9f9; border-right: 8px solid #4caf50; border-radius: 12px; text-align: right;">
+                        <div style="font-weight: bold; color: #1a237e; margin-bottom: 12px; font-size: 48px;">🛠️ الشرح والحل التفصيلي:</div>
+                        <div class="pdf-sol-steps">
+                            ${q.sol}
+                        </div>
+                        <div class="pdf-final-ans" style="margin-top:20px;">
+                            🎯 الناتج النهائي: ${q.ans}
+                        </div>
+                    </div>
+                `;
+
+                printableDoc.appendChild(questionPage);
+            });
+
+            // ===== 3. إضافة صفحة الخاتمة والمراجعة =====
+            const footerPage = document.createElement('div');
+            footerPage.style.cssText = `
+                page-break-before: always;
+                break-before: page;
+                padding: 20mm 10mm;
+                text-align: center;
+                direction: rtl;
+                width: 100%;
+                box-sizing: border-box;
+            `;
+            footerPage.innerHTML = `
+                <div style="font-size: 40px; font-weight: bold; color: #1a237e; margin-bottom: 25px;">تم بحمد الله وتوفيقه</div>
+                <div style="font-size: 28px; color: #475569; line-height: 1.8;">
+                    هذه المراجعة وحلول التمارين تم تنسيقها وإعدادها لتناسب أجهزة النقال وتسهيل القراءة والمراجعة لطلبتنا الأعزاء بمدرسة أمجاد أفريقيا.
+                </div>
+                <div style="font-size: 34px; font-weight: bold; color: #4caf50; margin-top: 50px;">نتمنى لجميع الطلبة التوفيق والتميز الباهر ⚡</div>
+            `;
+            printableDoc.appendChild(footerPage);
+
+            // ===== 4. إطلاق أمر طباعة وحفظ الـ PDF مع الإخفاء التلقائي بعد الانتهاء =====
+            setTimeout(() => {
+                try {
+                    window.print();
+                } catch (e) {
+                    console.error("فشل في تشغيل واجهة الطباعة:", e);
+                } finally {
+                    // حل مشكلة لقطة الشاشة: نخفي الحاوية تماماً بمجرد انتهاء الطباعة لإعادة الواجهة الطبيعية
+                    printableDoc.style.setProperty('display', 'none', 'important');
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

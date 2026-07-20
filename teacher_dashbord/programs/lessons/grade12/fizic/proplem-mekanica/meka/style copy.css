@@ -1,0 +1,1034 @@
+/* ============================================================
+   style1.css - الأنماط الرئيسية والمخصصة للنقال (نسخة مطورة ومصححة)
+   ============================================================ */
+
+:root {
+    --primary: #0f172a;
+    --accent: #2563eb;
+    --sky-blue: #38bdf8;
+    --sky-blue-dark: #0ea5e9;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --success: #16a34a;
+    --error: #dc2626;
+    --text-main: #334155;
+    --border-color: #e2e8f0;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #cbd5e1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.header {
+    background-color: var(--primary);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.header h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.school-badge {
+    background: #ea580c;
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#question-counter {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.question-container {
+    padding: 30px;
+    text-align: center;
+}
+
+.question-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    direction: rtl;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.q-source-span {
+    background: var(--accent);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.question-text {
+    font-size: 19px;
+    line-height: 1.8;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.question-graphic-area {
+    max-width: 100%;
+    margin: 0 auto 20px auto;
+    padding: 15px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+}
+
+.question-graphic-area svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.no-graphic {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.steps-container {
+    padding: 20px 30px;
+    background-color: var(--bg);
+}
+
+.step-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    border-right: 5px solid #94a3b8;
+}
+
+.step-card.active {
+    opacity: 1;
+    pointer-events: auto;
+    border-right-color: var(--sky-blue);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.step-card.completed {
+    opacity: 1;
+    pointer-events: none;
+    border-right-color: var(--success);
+    background-color: #f0fdf4;
+}
+
+.step-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.step-question {
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: var(--text-main);
+    text-align: right;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    direction: rtl;
+}
+
+.option-btn {
+    background: white;
+    border: 2px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: right;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    border-color: var(--sky-blue);
+    background: #f0f9ff;
+}
+
+.option-btn.correct {
+    border-color: var(--success);
+    background: #dcfce7;
+    color: #166534;
+}
+
+.option-btn.wrong {
+    border-color: var(--error);
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.option-btn i {
+    font-size: 18px;
+}
+
+.feedback-box {
+    margin-top: 15px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    display: none;
+    text-align: right;
+}
+
+.feedback-box.success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    display: block;
+}
+
+.navigation-area {
+    padding: 0 30px 30px 30px;
+    display: flex;
+    justify-content: space-between;
+    background: var(--bg);
+}
+
+.nav-btn {
+    padding: 12px 28px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #1e293b;
+    transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    color: #94a3b8;
+}
+
+.nav-btn i {
+    font-size: 14px;
+}
+
+.print-section {
+    text-align: center;
+    margin: 20px 0 50px 0;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.print-btn {
+    background-color: var(--success);
+    color: white;
+    padding: 15px 35px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.print-btn:hover {
+    background-color: #15803d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bot-link-btn {
+    background-color: var(--accent);
+    color: white;
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.bot-link-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+#printable-pdf-document {
+    display: none;
+}
+
+#dynamic-pdf-questions-area {
+    display: none;
+}
+
+/* ============================================================
+   محرك الطباعة الذهبي والعرض الرقمي - مدرسة أمجاد أفريقيا
+   ============================================================ */
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm 12mm 12mm 12mm !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100%;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .app-container,
+    .print-section,
+    .navigation-area {
+        display: none !important;
+    }
+
+    #printable-pdf-document {
+        display: block !important;
+        direction: rtl;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: white;
+    }
+
+    #dynamic-pdf-questions-area {
+        display: block !important;
+    }
+
+    body::before {
+        content: "مدرسة أمجاد أفريقيا - ليبيا - البيضاء";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-40deg);
+        font-size: 38px;
+        font-weight: bold;
+        color: rgba(148, 163, 184, 0.05) !important;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 9999;
+    }
+
+    .pdf-cover-page {
+        page-break-after: always;
+        break-after: page;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .pdf-cover-page .school-name {
+        font-size: 28px;
+        font-weight: bold;
+        color: #1a365d;
+        border-bottom: 3px solid #1a365d;
+        padding-bottom: 8px;
+        width: 80%;
+    }
+
+    .pdf-cover-page .main-title {
+        font-size: 48px;
+        font-weight: 900;
+        color: #0f172a;
+        margin: 25px 0 10px 0;
+    }
+
+    .pdf-cover-page .sub-title {
+        font-size: 32px;
+        color: #334155;
+        font-weight: bold;
+    }
+
+    .pdf-cover-page .cover-frame {
+        border: 3px solid #1a365d;
+        border-radius: 12px;
+        padding: 20px 30px;
+        margin: 20px 0;
+        width: 85%;
+        background: #f8fafc;
+    }
+
+    .pdf-cover-page .cover-frame h3 { font-size: 36px; color: #1e293b; }
+    .pdf-cover-page .cover-frame h4 { font-size: 26px; color: #475569; margin: 10px 0; }
+    .pdf-cover-page .cover-frame .cover-subjects { font-size: 22px; color: #64748b; font-weight: bold; }
+    .pdf-cover-page .cover-frame .year {
+        font-size: 24px;
+        color: #0f172a;
+        font-weight: bold;
+        margin-top: 10px;
+        border-top: 2px dashed #cbd5e1;
+        padding-top: 8px;
+    }
+
+    .pdf-cover-page .dedication { font-size: 26px; font-weight: bold; color: #059669; margin: 15px 0; }
+    .pdf-cover-page .bot-link {
+        font-size: 20px;
+        color: #475569;
+        border-top: 2px solid #e2e8f0;
+        padding-top: 15px;
+        width: 80%;
+    }
+
+    .print-page-box {
+        box-sizing: border-box;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        margin: 0 0 20px 0 !important;
+        padding: 10mm 5mm 10mm 5mm !important;
+        background: #ffffff !important;
+        display: block !important;
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+
+    .pdf-questions-pair-container {
+        width: 100%;
+        display: block;
+    }
+
+    .pdf-question-block {
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+        margin-bottom: 30px !important;
+        padding-bottom: 20px !important;
+        border-bottom: 2px dashed #cbd5e1 !important;
+        display: block;
+        width: 100%;
+    }
+
+    .pdf-question-block:last-child {
+        border-bottom: none !important;
+    }
+
+    .pdf-solution-box {
+        margin-top: 15px !important;
+        padding-top: 12px !important;
+        border-top: 1px dashed #cbd5e1 !important;
+        text-align: right;
+        page-break-inside: auto !important;
+    }
+
+    .page-footer-number {
+        text-align: center;
+        font-size: 16px !important;
+        color: #475569;
+        border-top: 2px solid #cbd5e1 !important;
+        padding-top: 8px !important;
+        margin-top: 25px !important;
+        width: 100%;
+    }
+
+    /* ============================================================
+       🔥 تعديل وتكبير خطوط صفحات القوانين والملخصات (ضعف الحجم)
+       ============================================================ */
+    .pdf-summary-page,
+    .pdf-golden-page,
+    .pdf-units-page,
+    .pdf-laws-page {
+        padding: 12mm 8mm !important;
+        margin: 0 0 30px 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: block !important;
+    }
+
+    /* العناوين الرئيسية لصفحات القوانين */
+    .pdf-summary-page h1, .pdf-laws-page h1, .pdf-golden-page h1, .pdf-units-page h1 {
+        margin-bottom: 20px !important;
+        font-size: 38px !important;  /* تم تكبيره بالكامل للنقال */
+        font-weight: 800 !important;
+        color: #1a365d !important;
+        text-align: right;
+    }
+
+    /* العناوين الفرعية داخل صفحات القوانين */
+    .pdf-summary-page h2, .pdf-laws-page h2, .pdf-golden-page h2, .pdf-units-page h2 {
+        margin: 20px 0 12px 0 !important;
+        font-size: 34px !important;  /* تم تكبيره بالكامل للنقال */
+        color: #0f172a !important;
+        text-align: right;
+    }
+
+    /* صناديق القوانين والصناديق الذهبية الاستنتاجية */
+    .pdf-laws-page .law-box,
+    .pdf-golden-page .golden-box,
+    .law-box, .golden-box {
+        padding: 18px 22px !important;
+        margin: 15px 0 !important;
+        font-size: 32px !important;  /* تم تكبير الخط هنا إلى الضعف تماماً */
+        line-height: 1.8 !important;
+        border-radius: 8px;
+        background-color: #f8fafc !important;
+        border-right: 6px solid #2563eb !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* جداول الكميات، الوحدات، والرموز بالكامل */
+    .pdf-summary-page table,
+    .pdf-golden-page table,
+    .pdf-units-page table,
+    .pdf-laws-page table {
+        width: 100% !important;
+        margin: 20px 0 !important;
+        font-size: 30px !important;  /* تضخيم خطوط نصوص الخلايا والجداول للنقال */
+        border-collapse: collapse !important;
+        border: 2px solid #cbd5e1 !important;
+    }
+
+    .pdf-summary-page table tr,
+    .pdf-golden-page table tr,
+    .pdf-laws-page table tr,
+    .pdf-units-page table tr {
+        page-break-inside: avoid !important;
+    }
+
+    .pdf-summary-page table td, .pdf-summary-page table th,
+    .pdf-golden-page table td, .pdf-golden-page table th,
+    .pdf-laws-page table td, .pdf-laws-page table th,
+    .pdf-units-page table td, .pdf-units-page table th {
+        padding: 14px 16px !important; /* توسيع حشوة الجدول لتناسب الخط الكبير */
+        border: 1px solid #cbd5e1 !important;
+        line-height: 1.6 !important;
+    }
+
+    .pdf-summary-page table th, .pdf-laws-page table th { background-color: #e2e8f0 !important; }
+    .pdf-golden-page table th { background-color: #fecaca !important; }
+    .pdf-units-page table th { background-color: #dbeafe !important; }
+}
+
+@media print {
+    html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-text-size-adjust: 100% !important;
+    }
+
+    /* خطوط الأسئلة والمعادلات الاستنتاجية للحل المطور */
+    .pdf-q-title {
+        font-size: 28px !important;
+        font-weight: bold !important;
+        line-height: 1.4 !important;
+        color: #1a365d !important;
+        margin-bottom: 12px !important;
+        page-break-after: avoid !important;
+    }
+
+    .pdf-q-text {
+        font-size: 24px !important;
+        line-height: 1.7 !important;
+        color: #0f172a !important;
+    }
+
+    .pdf-sol-steps {
+        font-size: 28px !important; 
+        line-height: 1.7 !important;
+        color: #1e293b !important;
+    }
+
+    .pdf-sol-steps div {
+        margin-bottom: 8px !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pdf-final-ans {
+        font-size: 29px !important;
+        font-weight: bold !important;
+        padding: 10px 20px !important;
+        background-color: #f0fdf4 !important;
+        border: 2px solid #22c55e !important;
+        border-radius: 8px;
+        display: inline-block;
+        page-break-inside: avoid !important;
+    }
+}
+
+@media print {
+    .pdf-graphic, .question-graphic-area {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        min-height: 150px !important;
+        margin: 20px auto !important;
+        text-align: center !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .pdf-graphic svg, 
+    .pdf-graphic img,
+    svg {
+        display: block !important;
+        visibility: visible !important;
+        width: 90% !important;
+        max-width: 500px !important;
+        height: auto !important;
+        max-height: none !important;
+        margin: 0 auto !important;
+    }
+
+    svg * {
+        visibility: visible !important;
+        stroke-width: 2px !important;
+    }
+}
+/* ============================================================
+   🔥 إضافات خاصة لتكبير صناديق الأسس، الآلة الحاسبة والقاعدة الذهبية للنقال
+   ============================================================ */
+@media print, screen and (max-width: 768px) {
+    /* 1. تكبير الخطوط والتباعد داخل الحاوية الصفراء (فهم الأس للعشرة) */
+    div[style*="background: #fefce8"] {
+        padding: 16px 20px !important;
+        border-width: 3px !important;
+        margin-bottom: 25px !important;
+    }
+    div[style*="background: #fefce8"] h2 {
+        font-size: 32px !important; /* تكبير العنوان للنقال */
+        margin-bottom: 12px !important;
+    }
+    div[style*="background: #fefce8"] div[style*="font-size: 13px"] {
+        font-size: 24px !important; /* تكبير النصوص العامة داخل الصندوق */
+        line-height: 1.8 !important;
+    }
+    div[style*="background: #fefce8"] div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important; /* تحويل لعمود واحد لراحة العين على الشاشة */
+        gap: 15px !important;
+        margin-bottom: 15px !important;
+    }
+    div[style*="background: #fefce8"] div[style*="background: #ffffff"] {
+        padding: 14px 18px !important;
+        border-width: 2px !important;
+        font-size: 24px !important;
+    }
+    div[style*="background: #fefce8"] div[style*="background: #fef3c7"] {
+        padding: 14px 18px !important;
+        border-right-width: 8px !important;
+        font-size: 24px !important;
+    }
+
+    /* 2. تكبير خطوط صندوق نصائح الآلة الحاسبة (Casio) */
+    div[style*="background: #f0f9ff"] {
+        padding: 16px 20px !important;
+        border-width: 3px !important;
+        margin-bottom: 25px !important;
+    }
+    div[style*="background: #f0f9ff"] h2 {
+        font-size: 32px !important;
+        margin-bottom: 12px !important;
+    }
+    div[style*="background: #f0f9ff"] div[style*="font-size: 13px"] {
+        font-size: 24px !important;
+        line-height: 1.8 !important;
+    }
+    div[style*="background: #f0f9ff"] div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important; /* عمود واحد لمنع تداخل الكلام */
+        gap: 15px !important;
+    }
+    div[style*="background: #f0f9ff"] div[style*="background: #ffffff"] {
+        padding: 14px 18px !important;
+        border-width: 2px !important;
+        font-size: 24px !important;
+    }
+    div[style*="background: #f0f9ff"] div[style*="background: #dbeafe"] {
+        padding: 12px 16px !important;
+        font-size: 22px !important;
+        margin-top: 15px !important;
+        border-right-width: 8px !important;
+    }
+
+    /* 3. تكبير خطوط حاوية القاعدة الذهبية للإشارات الأسية */
+    div[style*="background: #fef3c7"][style*="border: 2px solid #f59e0b"] {
+        padding: 16px 20px !important;
+        border-width: 3px !important;
+        margin-bottom: 25px !important;
+    }
+    div[style*="background: #fef3c7"][style*="border: 2px solid #f59e0b"] h2 {
+        font-size: 32px !important;
+        margin-bottom: 12px !important;
+    }
+    div[style*="background: #fef3c7"][style*="border: 2px solid #f59e0b"] div[style*="font-size: 14px"] {
+        font-size: 24px !important;
+        line-height: 1.8 !important;
+    }
+    div[style*="background: #fef3c7"][style*="border: 2px solid #f59e0b"] div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important; /* تحويل لعمود واحد ليتناسب مع النقال */
+        gap: 15px !important;
+        margin-top: 10px !important;
+    }
+    div[style*="background: #fef3c7"][style*="border: 2px solid #f59e0b"] div[style*="background: #ffffff"] {
+        padding: 14px 18px !important;
+        border-width: 2px !important;
+        font-size: 24px !important;
+    }
+    div[style*="background: #fef3c7"][style*="border: 2px solid #f59e0b"] div[style*="background: #ffffff"] span {
+        font-size: 30px !important; /* تكبير علامة الضرب والقسمة التوضيحية */
+    }
+    div[style*="background: #fef3c7"][style*="border: 2px solid #f59e0b"] div[style*="color: #475569"] {
+        font-size: 20px !important;
+        padding: 10px !important;
+        margin-top: 10px !important;
+    }
+}
+/* ============================================================
+   🔥 إضافات تكبير صفحة المفاتيح الذهبية والسرية للميكانيكا للنقال
+   ============================================================ */
+@media print, screen and (max-width: 768px) {
+    /* 1. الحاوية الرئيسية والعنوان العلوي */
+    div[style*="border-bottom: 3px solid #f59e0b"] {
+        margin-bottom: 25px !important;
+        padding-bottom: 15px !important;
+        border-bottom-width: 4px !important;
+    }
+    div[style*="border-bottom: 3px solid #f59e0b"] h1 {
+        font-size: 36px !important; /* تكبير العنوان الرئيسي */
+        line-height: 1.4 !important;
+    }
+    div[style*="border-bottom: 3px solid #f59e0b"] p {
+        font-size: 22px !important; /* تكبير الوصف الفرعي */
+        margin-top: 8px !important;
+    }
+
+    /* 2. الهيكل العام لبطاقات الأقسام (السطوح المائلة، الاحتكاك، المقذوفات، الشغل) */
+    div[style*="background: #fffbeb"], 
+    div[style*="background: #f0fdf4"], 
+    div[style*="background: #eff6ff"], 
+    div[style*="background: #faf5ff"] {
+        padding: 16px 20px !important;
+        border-width: 2px !important;
+        margin-bottom: 25px !important;
+        border-radius: 12px !important;
+    }
+
+    /* تكبير عناوين الأقسام الرئيسية (حجم H2) */
+    div[style*="background: #fffbeb"] h2, 
+    div[style*="background: #f0fdf4"] h2, 
+    div[style*="background: #eff6ff"] h2, 
+    div[style*="background: #faf5ff"] h2 {
+        font-size: 30px !important;
+        margin-bottom: 12px !important;
+        font-weight: bold !important;
+    }
+
+    /* تكبير النصوص الحاضنة داخل الأقسام */
+    div[style*="font-size: 14px"] {
+        font-size: 24px !important;
+        line-height: 1.8 !important;
+    }
+
+    /* تحويل شبكات العرض (Grid) إلى عمود واحد لمنع التداخل وصغر الخط على النقال */
+    div[style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        margin-top: 10px !important;
+    }
+
+    /* 3. الصناديق الداخلية البيضاء في جميع الأقسام */
+    div[style*="background: #ffffff"] {
+        padding: 14px 18px !important;
+        font-size: 24px !important;
+        border-width: 2px !important;
+        border-radius: 8px !important;
+        line-height: 1.7 !important;
+    }
+    
+    div[style*="background: #ffffff"] strong {
+        font-size: 25px !important;
+    }
+
+    /* 4. تخصيصات قسم السطوح المائلة (القاعدة الذهبية لعجلة السطح الأملس) */
+    div[style*="background: #fffbeb"][style*="border: 2px solid #f59e0b"] {
+        padding: 18px 22px !important;
+        border-width: 3px !important;
+        border-radius: 10px !important;
+    }
+    div[style*="background: #fffbeb"][style*="border: 2px solid #f59e0b"] h3 {
+        font-size: 28px !important;
+        margin-bottom: 10px !important;
+    }
+    div[style*="background: #fffbeb"][style*="border: 2px solid #f59e0b"] p {
+        font-size: 24px !important;
+        line-height: 1.7 !important;
+    }
+    /* صندوق معادلة العجلة الضخم a = g . sin(θ) */
+    div[style*="background: #ffffff"][style*="border: 1.5px solid #f59e0b"] {
+        font-size: 36px !important; /* تكبير كتلوي متزن للمعادلة الأساسية */
+        padding: 16px 20px !important;
+        margin-bottom: 15px !important;
+        border-width: 3px !important;
+    }
+    /* صندوق الإثبات الرياضي والاشتقاق */
+    div[style*="background: #f8fafc"] {
+        padding: 14px 16px !important;
+        font-size: 22px !important;
+        line-height: 1.7 !important;
+        border-right-width: 6px !important;
+        margin-bottom: 12px !important;
+    }
+    div[style*="display: flex"][style*="justify-content: center"] {
+        font-size: 28px !important;
+        margin: 10px 0 !important;
+    }
+
+    /* 5. صناديق الملاحظات الجانبية الملونة (الاحتكاك، الشغل والطاقة) */
+    /* صندوق اتجاه الاحتكاك الأخضر وصندوق حفظ الطاقة البنفسجي */
+    div[style*="border-right: 4px solid #16a34a"],
+    div[style*="background: #f3e8ff"] {
+        padding: 14px 18px !important;
+        font-size: 24px !important;
+        line-height: 1.7 !important;
+        border-right-width: 8px !important;
+        margin-top: 15px !important;
+        border-radius: 8px !important;
+    }
+    
+    div[style*="border-right: 4px solid #16a34a"] strong,
+    div[style*="background: #f3e8ff"] strong {
+        font-size: 26px !important;
+    }
+}
+/* ============================================================
+   🔥 محرك تكبير التلميحات، القواعد الذهبية وأفكار الحل داخل كروت الأسئلة للموبايل
+   ============================================================ */
+@media print, screen and (max-width: 768px) {
+
+    /* 1. تكبير حاوية الفكرة أو القاعدة الذهبية (الخلفية البيج والأصفر) */
+    .pdf-sol-steps div[style*="background: #fffbeb"],
+    .pdf-sol-steps div[style*="background: #fef3c7"],
+    .pdf-sol-steps div[style*="background: #fefce8"] {
+        padding: 18px 22px !important;
+        border-width: 3px !important;
+        border-radius: 12px !important;
+        margin: 15px 0 !important;
+    }
+
+    /* تكبير عناوين التلميحات (مثل: القاعدة الذهبية، اتجاه الاحتكاك) */
+    .pdf-sol-steps div[style*="background: #fffbeb"] h3,
+    .pdf-sol-steps div[style*="background: #fef3c7"] h2,
+    .pdf-sol-steps div[style*="background: #fefce8"] h2 {
+        font-size: 28px !important; /* يتناسب مع حجم خط السؤال الكبير */
+        font-weight: 800 !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* تكبير النصوص والشرح داخل التلميح */
+    .pdf-sol-steps div[style*="background: #fffbeb"] p,
+    .pdf-sol-steps div[style*="background: #fef3c7"] div,
+    .pdf-sol-steps div[style*="background: #fefce8"] div {
+        font-size: 24px !important;
+        line-height: 1.8 !important;
+    }
+
+    /* 2. تكبير معادلات الحل الصريحة البارزة (مثل: a = g . sin θ) */
+    .pdf-sol-steps div[style*="background: #ffffff"][style*="text-align: center"] {
+        font-size: 34px !important; /* إبراز رياضي ضخم واضح */
+        padding: 14px 18px !important;
+        margin: 15px 0 !important;
+        border-width: 2.5px !important;
+        border-radius: 10px !important;
+    }
+
+    /* 3. تكبير كتل الإثبات أو الملاحظة الجانبية الصغيرة (الخلفية الرمادية الفاتحة) */
+    .pdf-sol-steps div[style*="background: #f8fafc"] {
+        padding: 14px 18px !important;
+        font-size: 22px !important; /* أصغر قليلاً لتوضيح الهيكل التابع */
+        line-height: 1.7 !important;
+        border-right-width: 6px !important; /* زيادة سمك شريط التنبيه الجانبي */
+        margin-top: 12px !important;
+    }
+    
+    /* تكبير نصوص فليكس الداعم للاشتقاقات الرياضية */
+    .pdf-sol-steps div[style*="display: flex"] {
+        font-size: 26px !important;
+        margin: 8px 0 !important;
+    }
+
+    /* 4. تكبير كتل التحذيرات وخلاصة الامتحان (التي تظهر أسفل التلميحات) */
+    .pdf-sol-steps p[style*="color: #b45309"],
+    .pdf-sol-steps div[style*="border-right: 4px solid #16a34a"],
+    .pdf-sol-steps div[style*="background: #f3e8ff"] {
+        font-size: 22px !important;
+        line-height: 1.7 !important;
+        margin-top: 12px !important;
+        padding: 10px 14px !important;
+    }
+    
+    .pdf-sol-steps p[style*="color: #b45309"] b,
+    .pdf-sol-steps div[style*="border-right: 4px solid #16a34a"] strong {
+        font-size: 24px !important;
+        font-weight: bold !important;
+    }
+}
+/* ============================================================
+   🔥 تكبير صناديق التلميحات النصية المخصصة للموبايل (داخل خانة svgCode)
+   ============================================================ */
+@media print, screen and (max-width: 768px) {
+
+    /* استهداف حاوية الجرافيك عندما تحتوي على صندوق التلميح ذو الخلفية الرمادية والحدود الزرقاء */
+    .pdf-graphic div[style*="background: #f1f5f9"] {
+        padding: 16px 20px !important; /* زيادة المساحة الداخلية لراحة العين */
+        border-width: 3px !important;  /* زيادة سمك الإطار */
+        border-radius: 12px !important;
+        margin: 15px auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        
+        /* تضخيم الخطوط لتبديل الـ 13px الافتراضية */
+        font-size: 26px !important; 
+        line-height: 1.8 !important;
+        color: #0f172a !important;
+        text-align: right !important; /* محاذاة النص لليمين بدلاً من التوسط لسهولة القراءة المتتابعة */
+    }
+
+    /* تكبير الأيقونات أو الرموز الرياضية إن وجدت داخل هذا التلميح */
+    .pdf-graphic div[style*="background: #f1f5f9"] strong {
+        font-size: 28px !important;
+        font-weight: bold !important;
+    }
+}
+
+
+/* ============================================================
+   🔥 تكبير صناديق التلميحات النصية المخصصة للموبايل (داخل خانة svgCode)
+   ============================================================ */
+/* ============================================================
+   🔥 المحرك المطور لتكبير جميع الأسئلة والحلول بلا استثناء للنقال
+   ============================================================ */
+@media print, screen and (max-width: 768px) {
+
+    /* استهداف جميع كروت الأسئلة بشكل صارم */
+    .pdf-questions-pair-container .pdf-question-block {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* تكبير عناوين كل المسائل */
+    .pdf-question-block div.pdf-q-title {
+        font-size: 34px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 16px !important;
+        color: #1a365d !important;
+    }
+
+    /* تكبير نصوص كل الأسئلة والخلفيات التابعة لها */
+    .pdf-question-block div.pdf-q-text {
+        font-size: 28px !important;
+        line-height: 1.8 !important;
+        color: #0f172a !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* كسر قيد الـ Inline Style عن خطوات الحل في كل الأسئلة */
+    .pdf-question-block .pdf-sol-steps div,
+    .pdf-questions-pair-container .pdf-question-block .pdf-solution-box .pdf-sol-steps div {
+        font-size: 26px !important; /* حجم موحد وضخم لخطوات كل المسائل */
+        line-height: 1.8 !important;
+        padding: 8px 0 !important;
+        color: #1e293b !important;
+    }
+
+    /* تكبير عنوان خطوات الاستنتاج لجميع الأسئلة */
+    .pdf-question-block .pdf-solution-box div[style*="font-weight: bold"] {
+        font-size: 30px !important;
+        color: #1a365d !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* تضخيم صناديق النواتج النهائية لجميع الأسئلة */
+    .pdf-question-block .pdf-final-ans,
+    .pdf-question-block .pdf-solution-box div.pdf-final-ans {
+        font-size: 28px !important;
+        padding: 12px 24px !important;
+        margin-top: 20px !important;
+        border-width: 3px !important;
+        display: inline-block !important;
+    }
+}

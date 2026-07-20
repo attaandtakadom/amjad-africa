@@ -23,100 +23,186 @@ header { background-color: #1a237e; color: white; padding: 30px 15px; text-align
         .nav-btn-green { background-color: #4caf50; color: white; }
         #questions-container { max-width: 800px; margin: 30px auto; padding: 20px; }
         .question-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-right: 8px solid #1a237e; }
-        #backToTopBtn { display: none; position: fixed; bottom: 20px; left: 20px; background: #1a237e; color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer; font-size: 20px; width: 55px; height: 55px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        #backToTopBtn { display: none; position: fixed; bottom: 20px; left: 20px; background: #1a237e; color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer; font-size: 40px; width: 55px; height: 55px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
     
-@media print {
-    body * { visibility: hidden; }
-    #dynamic-pdf-questions-area, #dynamic-pdf-questions-area * { visibility: visible; }
-    #dynamic-pdf-questions-area { position: absolute; left: 0; top: 0; width: 100%; }
-    .pdf-question-block { page-break-after: always; padding: 20px; }
-    .pdf-graphic svg { max-width: 300px; height: auto; }
+/* ======================================================= */
+/* 1. التنسيق على الشاشة العادية (إخفاء حاوية الـ PDF تماماً) */
+/* ======================================================= */
+#dynamic-pdf-questions-area {
+    display: none !important; /* يمنع ظهور الكراسة كلقطة شاشة معلقة أثناء التصفح */
 }
 
+/* ======================================================= */
+/* 2. تنسيقات الطباعة الفائقة المخصصة للنقال والـ PDF      */
+/* ======================================================= */
 @media print {
-    /* إخفاء الهيدر والفوتتر والهوامش الافتراضية للمتصفح */
-    @page {
-        margin: 0;
+    /* إجبار الهواتف على طباعة الألوان الكاملة والداكنة دون توفير للحبر */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    
-    /* إزالة المسافات البيضاء من العناصر الرئيسية */
-    .pdf-question-block {
-        margin-bottom: 0 !important;
-        padding: 10px 0 !important;
-        page-break-inside: avoid;
-    }
-    
-    /* إزالة المسافات العلوية والسفلية من العناصر */
-    h1, h2, h3, h4, p, div {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-        padding-top: 0 !important;
-        padding-bottom: 2px !important;
-    }
-    
-    /* تقليل المسافات بين الأسطر */
-    .pdf-solution-box, .pdf-sol-steps {
-        line-height: 1.2 !important;
-    }
-    
-    /* إزالة الهوامش الداخلية */
-    .pdf-question-block * {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-    }
-    
-    /* إزالة المسافات من الحاوية الرئيسية */
-    #dynamic-pdf-questions-area {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-}
 
-@media print {
-    /* 1. إخفاء واجهة الموقع بالكامل */
+    /* إخفاء عناصر واجهة المستخدم والتحكم بالكامل */
     body * {
-        visibility: hidden;
+        visibility: hidden !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
     }
     
-    /* 2. إظهار حاوية الأسئلة فقط */
+    /* إظهار منطقة طباعة الكراسة فقط وتمديدها */
     #dynamic-pdf-questions-area, 
     #dynamic-pdf-questions-area * {
-        visibility: visible;
+        visibility: visible !important;
         display: block !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 
-    /* 3. إحكام الحاوية وإلغاء أي هوامش عشوائية */
+    @page {
+        margin: 5mm !important; /* استغلال مساحة الصفحة بالكامل */
+    }
+
     #dynamic-pdf-questions-area {
-        position: absolute;
-        left: 0;
-        top: 0;
+        display: block !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
         width: 100% !important;
         padding: 0 !important;
         margin: 0 !important;
     }
 
-    /* 4. إجبار المتصفح على كسر الصفحات بشكل صحيح */
+    /* كسر الصفحات بشكل حاد لكل مسألة */
     .pdf-question-page-wrapper {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
         page-break-after: always !important;
         break-after: page !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        min-height: 95vh !important;
+        padding: 8mm 4mm !important;
     }
 
-    /* 5. التحكم بالرسومات التوضيحية */
+    /* --------------------------------------------------- */
+    /* تكبير نصوص وعناوين الأسئلة والحلول بشكل حاد وواضح    */
+    /* --------------------------------------------------- */
+    .pdf-q-text, 
+    .pdf-q-text *, 
+    .pdf-q-text p, 
+    .pdf-q-text span, 
+    .pdf-q-text div {
+        font-size: 46px !important; 
+        font-weight: bold !important;
+        line-height: 1.7 !important;
+    }
+
+    /* تكبير العناوين الفرعية (مثل: قبل الحركة / بعد الحركة) */
+    .pdf-q-text small,
+    .pdf-q-text span[style*="font-size"] {
+        font-size: 36px !important; 
+        font-weight: 900 !important;
+        color: #1a237e !important;
+        display: block !important;
+        margin-bottom: 12px !important;
+        text-align: center !important;
+    }
+
+    /* --------------------------------------------------- */
+    /* التكبير الجذري للرسومات الهندسية (SVG) وحل مشكلة البهتان */
+    /* --------------------------------------------------- */
+    .pdf-q-text div[style*="display: flex"],
+    .pdf-q-text div[style*="display:flex"] {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        margin: 35px auto !important;
+        overflow: visible !important;
+    }
+
+    .pdf-q-text div[style*="display: flex"] > div {
+        width: 48% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* أبعاد إطار الرسمة الكبير */
+    .pdf-q-text svg,
     .pdf-graphic svg {
-        max-width: 100% !important;
-        height: auto !important;
+        width: 100% !important;
+        height: 280px !important;
+        min-height: 240px !important;
+        display: block !important;
+        margin: 15px auto !important;
+        overflow: visible !important;
     }
-}
 
+    /* جعل الحبال سوداء داكنة جداً وعريضة */
+    .pdf-q-text svg line,
+    .pdf-graphic svg line {
+        stroke: #000000 !important; 
+        stroke-width: 6px !important;  
+        opacity: 1 !important;         
+    }
 
+    /* جعل الكتل واضحة ومكبرة ومصبوبة بالأسود */
+    .pdf-q-text svg rect,
+    .pdf-graphic svg rect {
+        fill: #000000 !important;   
+        stroke: #000000 !important;
+        stroke-width: 2px !important;
+        transform: scale(1.7) !important; 
+        transform-origin: center !important;
+        opacity: 1 !important;
+    }
 
-    </style>
+    /* إبراز البكرة وتكبير قطرها */
+    .pdf-q-text svg circle,
+    .pdf-graphic svg circle {
+        stroke: #000000 !important; 
+        stroke-width: 4px !important;
+        fill: #cccccc !important;   
+        r: 13px !important;         
+        opacity: 1 !important;
+    }
+
+    /* تكبير النصوص المكتوبة برمجياً بداخل الرسمة بدقة فائقة */
+    .pdf-q-text svg text,
+    .pdf-graphic svg text {
+        font-size: 18px !important; 
+        font-weight: 900 !important;
+        fill: #000000 !important;   
+    }
+
+    /* --------------------------------------------------- */
+    /* تنسيق وتكبير كتل الشرح والناتج النهائي              */
+    /* --------------------------------------------------- */
+    .pdf-sol-steps,
+    .pdf-sol-steps *,
+    .pdf-sol-steps p,
+    .pdf-sol-steps span,
+    .pdf-sol-steps div,
+    .pdf-sol-steps li,
+    .pdf-sol-steps h4 {
+        font-size: 42px !important;
+        line-height: 1.8 !important;
+    }
+
+    .pdf-final-ans {
+        font-size: 44px !important;
+        font-weight: bold !important;
+        padding: 15px 35px !important;
+        background-color: #e8f5e9 !important;
+        border: 3px solid #4caf50 !important;
+        border-radius: 12px !important;
+        display: inline-block !important;
+    }
+}    </style>
 </head>
 <body>
 
@@ -255,18 +341,20 @@ function generatePDF() {
 
 
 function generatePDF() {
-    // 1. استهداف حاوية الطباعة المخصصة وتنظيفها تماماً
     const printableDoc = document.getElementById('dynamic-pdf-questions-area');
 
     if (!printableDoc) {
-        alert("خطأ: لم يتم العثور على الحاوية 'dynamic-pdf-questions-area' في كود HTML!");
+        alert("خطأ: لم يتم العثور على الحاوية 'dynamic-pdf-questions-area'!");
         return;
     }
 
-    // تنظيف الحاوية لمنع تكرار البيانات
+    // تنظيف الحاوية لمنع تكرار البيانات القديمة
     printableDoc.innerHTML = '';
 
-    // ===== 2. بناء غلاف منسق ومستقل كلياً بالنقال =====
+    // إظهار الحاوية مؤقتاً في الخلفية لإتاحة رندرة المتصفح لها
+    printableDoc.style.setProperty('display', 'block', 'important');
+
+    // ===== 1. بناء صفحة الغلاف المتوافقة =====
     const coverPage = document.createElement('div');
     coverPage.className = 'pdf-cover-page';
     coverPage.style.cssText = `
@@ -291,17 +379,10 @@ function generatePDF() {
     `;
     printableDoc.appendChild(coverPage);
 
-    // ===== 3. بناء الأسئلة: كل سؤال في صفحة مستقلة تماماً ومملوءة بوضوح =====
+    // ===== 2. بناء صفحات الأسئلة والحلول بالتتابع =====
     myQuestionsData.forEach((q, index) => {
         if (q.id === 0 || !q.content) return;
 
-        // حجم خط كبير ومناسب لشاشة النقال
-        let fontSize = 34;
-        const textLength = q.content.length;
-        if (textLength < 80) fontSize = 40;
-        if (textLength > 150) fontSize = 30;
-
-        // تجهيز وعزل كارت السؤال بصفحة منفردة
         const questionPage = document.createElement('div');
         questionPage.className = 'pdf-question-page-wrapper';
         questionPage.style.cssText = `
@@ -309,7 +390,7 @@ function generatePDF() {
             break-inside: avoid !important;
             page-break-after: always !important;
             break-after: page !important;
-            padding: 12mm 6mm; 
+            padding: 8mm 4mm; 
             box-sizing: border-box;
             direction: rtl;
             display: block;
@@ -317,22 +398,17 @@ function generatePDF() {
         `;
 
         questionPage.innerHTML = `
-            <div class="pdf-q-title" style="font-size: ${fontSize + 6}px; font-weight: bold; color: #1a237e; margin-bottom: 15px; text-align: right; border-bottom: 3px solid #1a237e; padding-bottom: 8px;">مسألة رقم ${index}</div>
-            <div class="pdf-q-text" style="font-size: ${fontSize}px; line-height: 1.6; color: #0f172a; margin-bottom: 20px; text-align: right; font-weight: 500;">
+            <div class="pdf-q-title" style="font-size: 54px; font-weight: bold; color: #1a237e; margin-bottom: 15px; text-align: right; border-bottom: 4px solid #1a237e; padding-bottom: 10px;">مسألة رقم ${index}</div>
+            <div class="pdf-q-text">
                 ${q.content}
             </div>
             
-            ${q.svgCode ? `
-            <div class="pdf-graphic" style="text-align: center; margin: 20px 0; max-width: 100%;">
-                ${q.svgCode}
-            </div>` : ''}
-            
-            <div class="pdf-solution-box" style="margin-top: 25px; padding: 15px; background: #f9f9f9; border-right: 6px solid #4caf50; border-radius: 8px; text-align: right;">
-                <div style="font-weight: bold; color: #1a237e; margin-bottom: 10px; font-size: ${fontSize + 2}px;">🛠️ الشرح والحل التفصيلي:</div>
-                <div class="pdf-sol-steps" style="font-size: ${fontSize - 2}px; line-height: 1.7; color: #1e293b; margin-bottom: 15px;">
+            <div class="pdf-solution-box" style="margin-top: 35px; padding: 20px; background: #f9f9f9; border-right: 8px solid #4caf50; border-radius: 12px; text-align: right;">
+                <div style="font-weight: bold; color: #1a237e; margin-bottom: 12px; font-size: 48px;">🛠️ الشرح والحل التفصيلي:</div>
+                <div class="pdf-sol-steps">
                     ${q.sol}
                 </div>
-                <div class="pdf-final-ans" style="font-size: ${fontSize + 2}px; font-weight: bold; color: #2e7d32; padding: 10px 25px; background-color: #e8f5e9; border: 2.5px solid #4caf50; border-radius: 10px; display: inline-block;">
+                <div class="pdf-final-ans">
                     🎯 الناتج النهائي: ${q.ans}
                 </div>
             </div>
@@ -341,9 +417,11 @@ function generatePDF() {
         printableDoc.appendChild(questionPage);
     });
 
-    // ===== 4. صفحة خاتمة مخصصة مستقلة =====
+    // ===== 3. بناء صفحة الخاتمة المخصصة =====
     const footerPage = document.createElement('div');
     footerPage.style.cssText = `
+        page-break-before: always;
+        break-before: page;
         padding: 20mm 10mm;
         text-align: center;
         direction: rtl;
@@ -351,25 +429,29 @@ function generatePDF() {
         box-sizing: border-box;
     `;
     footerPage.innerHTML = `
-        <div style="font-size: 32px; font-weight: bold; color: #1a237e; margin-bottom: 20px;">تم بحمد الله وتوفيقه</div>
-        <div style="font-size: 24px; color: #475569; line-height: 1.8;">
+        <div style="font-size: 40px; font-weight: bold; color: #1a237e; margin-bottom: 25px;">تم بحمد الله وتوفيقه</div>
+        <div style="font-size: 28px; color: #475569; line-height: 1.8;">
             هذه المراجعة وحلول التمارين تم تنسيقها وإعدادها لتناسب أجهزة النقال وتسهيل القراءة والمراجعة لطلبتنا الأعزاء بمدرسة أمجاد أفريقيا.
         </div>
-        <div style="font-size: 28px; font-weight: bold; color: #4caf50; margin-top: 40px;">نتمنى لجميع الطلبة التوفيق والتميز الباهر ⚡</div>
+        <div style="font-size: 34px; font-weight: bold; color: #4caf50; margin-top: 50px;">نتمنى لجميع الطلبة التوفيق والتميز الباهر ⚡</div>
     `;
     printableDoc.appendChild(footerPage);
 
-    // مهلة للرندرة الكاملة ثم استدعاء أمر الطباعة المباشر
+    // ===== 4. إطلاق أمر الطباعة الآمن =====
     setTimeout(() => {
         try {
             window.print();
         } catch (e) {
             console.error("فشل استدعاء نافذة الطباعة: ", e);
+        } finally {
+            // المعالجة الفورية: إخفاء كراسة الـ PDF لإنقاصها ومنع تجميد شاشة النقال
+            printableDoc.style.setProperty('display', 'none', 'important');
         }
     }, 1200);
-
-
 }
+    //function dropbox تأكدي من استبدال هذا الرابط برابط ملف النقال (الخط الكبير) بعد رفعه على دروب بوكس
+
+
 
 function triggerMobilePrintView() {
     // تأكدي من استبدال هذا الرابط برابط ملف النقال (الخط الكبير) بعد رفعه على دروب بوكس

@@ -1,0 +1,268 @@
+/* ============================================================
+   style1.css - الأنماط الرئيسية والطباعة الذكية
+   تم تحديثها مع ضبط السطر الأخير في هامش كل صفحة
+   ============================================================ */
+
+:root {
+  --primary: #0f172a;
+  --accent: #2563eb;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --success: #16a34a;
+  --error: #dc2626;
+  --text-main: #334155;
+  --border-color: #e2e8f0;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+}
+
+body {
+  background-color: #cbd5e1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.header {
+  background-color: var(--primary);
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header h2 { font-size: 22px; font-weight: 700; }
+.school-badge { background: #ea580c; color: white; padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+#question-counter { background: rgba(255, 255, 255, 0.15); padding: 4px 14px; border-radius: 20px; font-size: 14px; }
+
+.question-container { padding: 30px; text-align: center; }
+.question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; direction: rtl; flex-wrap: wrap; gap: 10px; }
+.q-source-span { background: var(--accent); color: white; padding: 4px 14px; border-radius: 4px; font-size: 14px; font-weight: bold; }
+
+.question-text { font-size: 19px; line-height: 1.8; color: var(--text-main); margin-bottom: 20px; font-weight: 600; text-align: right; }
+.question-graphic-area { max-width: 100%; margin: 0 auto 20px auto; padding: 15px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 120px; }
+.question-graphic-area svg { max-width: 100%; height: auto; }
+.no-graphic { color: #94a3b8; font-size: 14px; }
+
+.steps-container { padding: 20px 30px; background-color: var(--bg); }
+.step-card { background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 20px; opacity: 0.4; pointer-events: none; transition: all 0.3s ease; border-right: 5px solid #94a3b8; }
+.step-card.active { opacity: 1; pointer-events: auto; border-right-color: var(--accent); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+.step-card.completed { opacity: 1; pointer-events: none; border-right-color: var(--success); background-color: #f0fdf4; }
+
+.step-title { font-size: 17px; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-align: right; }
+.step-question { font-size: 15px; margin-bottom: 15px; color: var(--text-main); text-align: right; }
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; direction: rtl; }
+
+.option-btn { background: white; border: 2px solid var(--border-color); padding: 12px 16px; border-radius: 6px; cursor: pointer; text-align: right; font-size: 15px; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; }
+.option-btn:hover { border-color: var(--accent); background: #eff6ff; }
+.option-btn.correct { border-color: var(--success); background: #dcfce7; color: #166534; }
+.option-btn.wrong { border-color: var(--error); background: #fee2e2; color: #991b1b; }
+.option-btn i { font-size: 18px; }
+
+.feedback-box { margin-top: 15px; padding: 12px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; display: none; text-align: right; }
+.feedback-box.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block; }
+
+.navigation-area { padding: 0 30px 30px 30px; display: flex; justify-content: space-between; background: var(--bg); }
+.nav-btn { padding: 12px 28px; background: var(--primary); color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 8px; }
+.nav-btn:hover:not(:disabled) { background: #1e293b; transform: translateY(-1px); }
+.nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; color: #94a3b8; }
+
+.print-section { text-align: center; margin: 20px 0 50px 0; width: 100%; max-width: 900px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+.print-btn { background-color: var(--success); color: white; padding: 15px 35px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); display: flex; align-items: center; gap: 10px; }
+.print-btn:hover { background-color: #15803d; transform: translateY(-2px); }
+.bot-link-btn { background-color: var(--accent); color: white; padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); }
+
+#printable-pdf-document, #dynamic-pdf-questions-area { display: none; }
+
+/* ============================================================
+   إعدادات الطباعة المتقدمة والنهائية
+   ============================================================ */
+
+/* ============================================================
+   إعدادات الطباعة المتقدمة والنهائية - حل جذري لانقسام الأسطر والرسوم
+   ============================================================ */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 2cm 1.5cm 2.5cm 1.5cm;
+  }
+
+  body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    color: #000000;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* إخفاء عناصر واجهة الشاشة */
+  .app-container, .print-section, .navigation-area {
+    display: none !important;
+  }
+
+  /* إظهار كتل الطباعة بصيغة تمنع القص */
+  #printable-pdf-document, 
+  #dynamic-pdf-questions-area {
+    display: block !important;
+    width: 100% !important;
+    direction: rtl;
+    overflow: visible !important;
+  }
+
+  /* علامة مائية خلفية ذكية */
+  body::before {
+    content: "مدرسة أمجاد أفريقيا - ليبيا - البيضاء";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-40deg);
+    font-size: 44px;
+    font-weight: bold;
+    color: rgba(148, 163, 184, 0.05) !important;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* صفحة الغلاف ومنع قصه داخليًا */
+  .pdf-cover-page {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    height: 100%;
+    min-height: 240mm;
+    display: block !important;
+  }
+  
+  .pdf-cover-page .school-name { font-size: 24px; font-weight: bold; color: #ea580c; border-bottom: 3px solid #ea580c; padding-bottom: 10px; width: 80%; margin-bottom: 30px; }
+  .pdf-cover-page .main-title { font-size: 54px; font-weight: 900; color: #0f172a; margin-bottom: 10px; }
+  .pdf-cover-page .sub-title { font-size: 24px; color: #2d3748; font-weight: bold; margin-bottom: 30px; }
+  .pdf-cover-page .cover-frame { border: 3px solid #0f172a; border-radius: 15px; padding: 25px 40px; width: 85%; background: #f8fafc; margin-bottom: 40px; }
+  .pdf-cover-page .cover-frame h3 { font-size: 20px; color: #1a365d; }
+  .pdf-cover-page .cover-frame h4 { font-size: 17px; color: #e53e3e; margin-top: 5px; }
+  .pdf-cover-page .cover-frame .cover-subjects { font-size: 15px; color: #e53e3e; margin: 5px 0; font-weight: bold; }
+  .pdf-cover-page .cover-frame .year { font-size: 15px; color: #4a5568; margin-top: 10px; border-top: 1px dashed #cbd5e1; padding-top: 10px; }
+  .pdf-cover-page .dedication { font-size: 18px; font-style: italic; color: #475569; margin-bottom: 40px; }
+  .pdf-cover-page .bot-link { font-size: 14px; color: #2563eb; border-top: 1px solid #e2e8f0; padding-top: 15px; width: 80%; }
+
+  /* الحل الجذري لمنع قص وحماية الأسئلة، الأسطر، والخيارات */
+  .pdf-question-block,
+  .question-block,
+  .answer-block {
+    display: table !important; /* يحبر المتصفح على معاملة الكتلة كوحدة هندسية كاملة لا تقبل التجزئة */
+    width: 100% !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: auto !important;
+    break-after: auto !important;
+    overflow: visible !important;
+    margin-bottom: 25px !important;
+    padding-bottom: 15px !important;
+    border-bottom: 1px dashed #cbd5e1 !important;
+  }
+
+  /* منع انقسام السطور داخل السؤال والفقرات */
+  .pdf-q-text, 
+  .question-text, 
+  p, 
+  span, 
+  .option-btn,
+  .pdf-sol-steps div {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    overflow: visible !important;
+    display: block !important;
+    orphans: 4 !important;
+    widows: 4 !important;
+  }
+
+  /* منع انقسام الرسومات والـ SVG نهائيًا وسحبها كاملة عند نقص المساحة */
+  .pdf-graphic,
+  .question-graphic-area,
+  .question-graphic-area fill,
+  svg {
+    display: block !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    max-width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 10px auto !important;
+  }
+
+  .pdf-question-block.force-page-break {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .pdf-question-block:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .pdf-q-title { margin-bottom: 5px !important; font-weight: bold; }
+  .pdf-q-text { margin-bottom: 8px !important; line-height: 1.6 !important; }
+  .pdf-solution-box { margin-top: 8px !important; padding-top: 8px !important; }
+
+  /* إعدادات التذييل وتأمين ظهور النصوص قبله */
+  .page-footer {
+    position: running(footer);
+    text-align: center;
+    font-size: 10px;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 5px;
+  }
+
+  .footer-content {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    color: #94a3b8;
+    background: #ffffff;
+    padding: 5px 0;
+    border-top: 1px solid #e2e8f0;
+    z-index: 9999;
+  }
+
+  .pdf-continuous-wrapper {
+    padding-bottom: 50px; /* مساحة حماية تمنع تكدس الكتل فوق التذييل */
+    display: block !important;
+    overflow: visible !important;
+  }
+}
+
+.pdf-continuous-wrapper {
+  width: 100%;
+  display: block;
+}
