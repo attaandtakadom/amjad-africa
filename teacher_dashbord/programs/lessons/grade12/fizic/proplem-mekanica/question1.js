@@ -518,48 +518,6 @@ const questionsMatrix = [
   },
 
     // ===========================================================
-  {
-    "title": "السؤال 14 – قوة التفاعل بين كتلتين على مستوى أملس (معدل)",
-    "text": "كتلتان 4 Kg و 1 Kg على مستوى أملس يميل بزاوية 37°، تؤثر قوة 20 N لأعلى وقوة 10 N لأسفل، فإن مقدار قوة التفاعل بين الكتلتين يساوي:",
-    "options": [
-      {"text": "12 N", "isCorrect": true},
-      {"text": "28 N", "isCorrect": false},
-      {"text": "20 N", "isCorrect": false},
-      {"text": "16 N", "isCorrect": false}
-    ],
-    "correctAnswerIndex": 0,
-    "svgCode": "<div style=\"background: #f1f5f9; border-radius: 8px; padding: 10px; text-align: center; border: 2px solid #3b82f6; font-size: 13px;\">🧮 بتطبيق قانون نيوتن الثاني على المنظومة ثم على إحدى الكتلتين، نحصل على قوة التفاعل = 12 N.</div>",
-    "steps": [
-      {
-        "title": "اختر الإجابة الصحيحة",
-        "question": "ما مقدار قوة التفاعل بين الكتلتين؟",
-        "options": [
-          {"text": "12 N", "isCorrect": true},
-          {"text": "28 N", "isCorrect": false},
-          {"text": "20 N", "isCorrect": false},
-          {"text": "16 N", "isCorrect": false}
-        ],
-        "feedback": "✅ صحيح! قوة التفاعل بين الكتلتين تساوي 12 N حسب نموذج الامتحان."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "═══════════════════════════════════════",
-      "الخيارات:",
-      "أ) 12 N ✅ (الإجابة الصحيحة حسب نموذج الامتحان)",
-      "ب) 28 N",
-      "ج) 20 N",
-      "د) 16 N",
-      "",
-      "═══════════════════════════════════════",
-      "التوضيح الفيزيائي:",
-      "📌 القوة المحصلة لأسفل = 40 N ← العجلة = 8 m/s²",
-      "📌 بتحليل الكتلة 1 Kg: Fc = 12 N",
-      "",
-      "الإجابة: 12 N"
-    ],
-    "pdfFinalAnswer": "الإجابة: أ) 12 N ✅",
-    "difficulty": "متوسط"
-  },
 {
     "title": "س 14 (ميكانيكا): حفظ الطاقة على المنحنيات",
     "text": "من الشكل التالي:\nيوضح عربة تبدأ من دون محرك كتلتها 250 Kg انحدارها من السكون من النقطة A، فإن سرعتها عند النقطة C مع إهمال كل المقاومات تساوي:\n\nأ) 24.5 m/s\nب) صفراً\nج) 28.2 m/s\nد) 40 m/s",
@@ -1907,50 +1865,55 @@ const questionsMatrix = [
     "pdfFinalAnswer": "الإجابة: د) 5.4 KJ ✅",
     "difficulty": "متوسط"
   },
-  {
-    "title": "السؤال 43 – قوة التفاعل بين الكتلتين",
-    "text": "كتلتان 4 Kg و 1 Kg على مستوى مائل أملس بزاوية 37°، تؤثر عليهما قوى كما هو موضح بالشكل، فإن مقدار قوة التفاعل بين الكتلتين يساوي:",
-    "options": [
-      {"text": "12 N", "isCorrect": false},
-      {"text": "28 N", "isCorrect": false},
-      {"text": "20 N", "isCorrect": false},
-      {"text": "16 N", "isCorrect": true}
-    ],
-    "correctAnswerIndex": 3,
-    "svgCode": "<div style=\"background: #f1f5f9; border-radius: 8px; padding: 10px; text-align: center; border: 2px solid #3b82f6; font-size: 13px;\">🧮 بتطبيق قانون نيوتن الثاني على المنظومة ثم على إحدى الكتلتين، نحصل على قوة التفاعل = 16 N.</div>",
-    "steps": [
-      {
-        "title": "اختر الإجابة الصحيحة",
-        "question": "ما مقدار قوة التفاعل بين الكتلتين؟",
-        "options": [
-          {"text": "12 N", "isCorrect": false},
-          {"text": "28 N", "isCorrect": false},
-          {"text": "20 N", "isCorrect": false},
-          {"text": "16 N", "isCorrect": true}
-        ],
-        "feedback": "✅ صحيح! قوة التفاعل بين الكتلتين تساوي 16 N."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "═══════════════════════════════════════",
-      "الخيارات:",
-      "أ) 12 N",
-      "ب) 28 N",
-      "ج) 20 N",
-      "د) 16 N ✅ (الإجابة الصحيحة)",
-      "",
-      "═══════════════════════════════════════",
-      "التوضيح الفيزيائي:",
-      "📌 بتطبيق قانون نيوتن الثاني على المنظومة ككل لإيجاد العجلة.",
-      "📌 ثم تحليل إحدى الكتلتين لإيجاد قوة التفاعل.",
-      "📌 القوة الناتجة = 16 N.",
-      "",
-      "الإجابة: 16 N"
-    ],
-    "pdfFinalAnswer": "الإجابة: د) 16 N ✅",
-    "difficulty": "متوسط"
-  },
-  {
+{
+  "title": "السؤال 14 – قوة التفاعل بين كتلتين على مستوى أملس",
+  "text": "في الشكل التالي: إذا كان السطح أملس، فإن مقدار قوة التفاعل بين الكتلتين يساوي:",
+  "options": [
+    {"text": "12 N", "isCorrect": true},
+    {"text": "28 N", "isCorrect": false},
+    {"text": "20 N", "isCorrect": false},
+    {"text": "16 N", "isCorrect": false}
+  ],
+  "correctAnswerIndex": 0,
+  "svgCode": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 320\" width=\"100%\" height=\"100%\"><defs><marker id=\"arrow-red\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#ef4444\" /></marker><marker id=\"arrow-green\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#10b981\" /></marker></defs><rect width=\"500\" height=\"320\" fill=\"#f8fafc\" rx=\"12\" /><g transform=\"translate(50, 20)\"><polygon points=\"0,220 320,220 320,50\" fill=\"#e2e8f0\" stroke=\"#94a3b8\" stroke-width=\"2\" /><line x1=\"0\" y1=\"220\" x2=\"320\" y2=\"50\" stroke=\"#64748b\" stroke-width=\"3\" /><path d=\"M 55,220 A 55 55 0 0 0 46,195\" fill=\"none\" stroke=\"#f59e0b\" stroke-width=\"2\" /><text x=\"65\" y=\"210\" font-family=\"sans-serif\" font-size=\"14\" font-weight=\"bold\" fill=\"#d97706\">37°</text><g transform=\"rotate(-28, 0, 220)\"><rect x=\"80\" y=\"172\" width=\"65\" height=\"48\" fill=\"#3b82f6\" rx=\"2\" stroke=\"#1d4ed8\" stroke-width=\"2\" /><text x=\"112\" y=\"202\" font-family=\"sans-serif\" font-size=\"15\" font-weight=\"bold\" fill=\"#ffffff\" text-anchor=\"middle\">4 kg</text><rect x=\"145\" y=\"180\" width=\"40\" height=\"40\" fill=\"#60a5fa\" rx=\"2\" stroke=\"#1d4ed8\" stroke-width=\"2\" /><text x=\"165\" y=\"205\" font-family=\"sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#ffffff\" text-anchor=\"middle\">1 kg</text><line x1=\"20\" y1=\"196\" x2=\"75\" y2=\"196\" stroke=\"#ef4444\" stroke-width=\"3\" marker-end=\"url(#arrow-red)\" /><text x=\"10\" y=\"190\" font-family=\"sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#ef4444\">20 N</text><line x1=\"235\" y1=\"200\" x2=\"188\" y2=\"200\" stroke=\"#ef4444\" stroke-width=\"3\" marker-end=\"url(#arrow-red)\" /><text x=\"245\" y=\"205\" font-family=\"sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#ef4444\">10 N</text><line x1=\"145\" y1=\"172\" x2=\"120\" y2=\"172\" stroke=\"#10b981\" stroke-width=\"2.5\" marker-end=\"url(#arrow-green)\" /><text x=\"132\" y=\"162\" font-family=\"sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#059669\" text-anchor=\"middle\">Fc = 12 N</text></g></g></svg>",
+  "steps": [
+    {
+      "title": "اختر الإجابة الصحيحة",
+      "question": "ما مقدار قوة التفاعل بين الكتلتين؟",
+      "options": [
+        {"text": "12 N", "isCorrect": true},
+        {"text": "28 N", "isCorrect": false},
+        {"text": "20 N", "isCorrect": false},
+        {"text": "16 N", "isCorrect": false}
+      ],
+      "feedback": "✅ ممتاز! قوة التفاعل بين الكتلتين تساوي 12 N."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "=======================================",
+    "الخيارات:",
+    "أ) 12 N ✅ (الإجابة الصحيحة)",
+    "ب) 28 N",
+    "ج) 20 N",
+    "د) 16 N",
+    "",
+    "=======================================",
+    "التوضيح الفيزيائي:",
+    "📌 مركبة الوزن الكلية لأسفل = 5 × 10 × sin 37° = 30 N",
+    "📌 القوى المؤثرة لأسفل المنظومة = 10 + 30 = 40 N",
+    "📌 القوى المؤثرة لأعلى المنظومة = 20 N",
+    "📌 القوة المحصلة لأسفل = 40 - 20 = 20 N",
+    "📌 عجلة المنظومة لأسفل = 20 ÷ 5 = 4 m/s²",
+    "📌 بتطبيق القانون على الكتلة 1 kg:",
+    "📌 القوى لأسفل المؤثرة عليها = 10 + 6 = 16 N",
+    "📌 16 - قوة التفاعل = 1 × 4",
+    "📌 قوة التفاعل = 12 N",
+    "",
+    "الإجابة: 12 N"
+  ],
+  "pdfFinalAnswer": "الإجابة: أ) 12 N ✅",
+  "difficulty": "متوسط"
+},  {
     "title": "السؤال 44 – الفرق بين ارتفاعي كرتين ساقطتين",
     "text": "ألقيت كرتان نحو الأرض من ارتفاعين مختلفين، وكان إلقاء الكرة الثانية بعد ثانيتين من إلقاء الكرة الأولى، لكن الكرتين وصلتا الأرض في نفس اللحظة وبعد 5 sec من إلقاء الكرة الأولى، فإن الفرق بين الارتفاعين هو:",
     "options": [
