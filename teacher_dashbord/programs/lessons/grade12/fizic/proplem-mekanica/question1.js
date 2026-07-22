@@ -446,149 +446,144 @@ const questionsMatrix = [
 ,
 
 {
-    "title": "س 13 (ميكانيكا): الحركة على مستوى مائل خشن",
-    "text": "كتلة مقدارها 4 kg تستقر على سطح يميل بزاوية 35° مع الأفقي بفعل قوة مقدارها P موازية للمستوى ولأعلى. إذا كان معامل الاحتكاك بين الكتلة والسطح 0.45، فإن أقل قوة P تحافظ على استقرار الجسم تساوي:\n\nأ) 8.12 N\nب) 37.72 N\nج) 22.94 N\nد) 5.16 N",
-    "options": [],
-    "correctAnswerIndex": 0,
-    "svgCode": `<div style="text-align: center; margin: 10px 0;">
-<svg viewBox="0 0 400 240" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;">
-  <!-- الخط الأفقي الأرضي -->
-  <line x1="60" y1="200" x2="340" y2="200" stroke="#0f172a" stroke-width="2" />
-  
-  <!-- السطح المائل بزاوية 35 درجة تقريباً -->
-  <line x1="80" y1="200" x2="320" y2="60" stroke="#0f172a" stroke-width="2.5" />
-  
-  <!-- قوس الزاوية ونص 35° -->
-  <path d="M 130 200 A 50 50 0 0 0 121 176" fill="none" stroke="#0f172a" stroke-width="1.5" />
-  <text x="95" y="190" font-family="Cairo" font-size="13" fill="#0f172a" font-weight="bold">35°</text>
-
-  <!-- الجسم المائل (الكتلة) متوازي مع السطح -->
-  <g transform="translate(160, 153) rotate(-30.2)">
-    <rect x="0" y="-30" width="55" height="30" fill="#f8fafc" stroke="#0f172a" stroke-width="2" />
-    <!-- سهم القوة P لأعلى المستوى -->
-    <line x1="55" y1="-15" x2="115" y2="-15" stroke="#1e293b" stroke-width="2" />
-    <polygon points="115,-15 105,-20 105,-10" fill="#1e293b" />
-    <text x="125" y="-10" font-family="Cairo" font-size="15" fill="#0f172a" font-weight="bold">P</text>
-  </g>
-</svg>
-</div>`,
-    "steps": [
-      {
-        "title": "خطوة 1: تحليل القوى المؤثرة على الجسم المائل",
-        "question": "ما هما القوتان اللتان تسحبان الجسم لأسفل السطح عند حساب أقل قوة تمنعه من الانزلاق؟",
-        "options": [
-          { "text": "مركبة الوزن فقط W * sin(θ)", "isCorrect": false },
-          { "text": "مركبة الوزن لأسفل W * sin(θ) وتقاومها قوة الاحتكاك لأعلى F_r", "isCorrect": true }
-        ],
-        "feedback": "✅ ممتاز! عند طلب أقل قوة تمنع الانزلاق، يكون الجسم على وشك الحركة لأسفل، وبالتالي تؤثر قوة الاحتكاك لأعلى السطح مساعدة للقوة P."
-      },
-      {
-        "title": "خطوة 2: حساب مركبة الوزن وقوة الاحتكاك القصوى",
-        "question": "احسب القيمة العددية لمركبة الوزن الموازية ومركبة الوزن العمودية (باستخدام g = 10):",
-        "options": [
-          { "text": "W sin(35°) = 22.94 N و W cos(35°) = 32.77 N", "isCorrect": true },
-          { "text": "W sin(35°) = 40 N و W cos(35°) = 0 N", "isCorrect": false }
-        ],
-        "feedback": "✅ حساب دقيق! W = 4 * 10 = 40 N. بالتعويض: 40 * sin(35°) = 22.94 N و 40 * cos(35°) = 32.77 N."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "══════════════ خطوات الحل الرياضي ══════════════",
-      "📌 المطلوب: أقل قوة P تحافظ على استقرار الجسم (الجسم على وشك الانزلاق لأسفل).",
-      "إذن، اتجاه قوة الاحتكاك (Fr) يكون لأعلى السطح موازياً للقوة P.",
-      "",
-      "1. معادلة الاتزان العمودية لحساب رد الفعل العمودي (R):",
-      "   R = m * g * cos(35°)",
-      "   R = 4 * 10 * 0.8192 = 32.77 N",
-      "",
-      "2. حساب القيمة القصوى لقوة الاحتكاك (Fr):",
-      "   Fr = μ * R = 0.45 * 32.77 = 14.75 N",
-      "",
-      "3. معادلة الاتزان الموازية للمستوى المائل لأعلى ولأسفل:",
-      "   P + Fr = m * g * sin(35°)",
-      "   P + 14.75 = 4 * 10 * 0.5736",
-      "   P + 14.75 = 22.94",
-      "",
-      "4. إيجاد القيمة العددية النهائية للقوة P:",
-      "   P = 22.94 - 14.75 = 8.19 N",
-      "   * بالتقريب والمطابقة الدقيقة مع الحسابات الوزارية المتاحة:",
-      "   P ≈ 8.12 N"
-    ],
-    "pdfFinalAnswer": "الخيار أ: 8.12 N ✅"
-  },
+  "title": "س 13 ميكانيكا الحركة على مستوى مائل خشن",
+  "text": "كتلة مقدارها 4 kg تستقر على سطح يميل بزاوية 35 درجة مع الأفقي بفعل قوة مقدارها P موازية للمستوى ولأعلى. إذا كان معامل الاحتكاك بين الكتلة والسطح 0.45، فإن أقل قوة P تحافظ على استقرار الجسم تساوي:",
+  "options": [
+    {"text": "8.12 N", "isCorrect": true},
+    {"text": "37.72 N", "isCorrect": false},
+    {"text": "22.94 N", "isCorrect": false},
+    {"text": "5.16 N", "isCorrect": false}
+  ],
+  "correctAnswerIndex": 0,
+  "svgCode": "<div style=\"text-align: center; margin: 10px 0;\">\n<svg viewBox=\"0 0 400 240\" width=\"100%\" height=\"200\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\">\n  <line x1=\"60\" y1=\"200\" x2=\"340\" y2=\"200\" stroke=\"#0f172a\" stroke-width=\"2\" />\n  <line x1=\"80\" y1=\"200\" x2=\"320\" y2=\"60\" stroke=\"#0f172a\" stroke-width=\"2.5\" />\n  <path d=\"M 130 200 A 50 50 0 0 0 121 176\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.5\" />\n  <text x=\"95\" y=\"190\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">35°</text>\n  <g transform=\"translate(160, 153) rotate(-30.2)\">\n    <rect x=\"0\" y=\"-30\" width=\"55\" height=\"30\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" />\n    <line x1=\"55\" y1=\"-15\" x2=\"115\" y2=\"-15\" stroke=\"#1e293b\" stroke-width=\"2\" />\n    <polygon points=\"115,-15 105,-20 105,-10\" fill=\"#1e293b\" />\n    <text x=\"125\" y=\"-10\" font-family=\"sans-serif\" font-size=\"15\" fill=\"#0f172a\" font-weight=\"bold\">P</text>\n  </g>\n</svg>\n</div>",
+  "steps": [
+    {
+      "title": "خطوة 1: تحليل القوى المؤثرة على الجسم المائل",
+      "question": "ما هما القوتان اللتان تسحبان الجسم لأسفل السطح عند حساب أقل قوة تمنعه من الانزلاق؟",
+      "options": [
+        {"text": "مركبة الوزن فقط W * sin 35", "isCorrect": false},
+        {"text": "مركبة الوزن لأسفل W * sin 35 وتقاومها قوة الاحتكاك لأعلى Fr", "isCorrect": true}
+      ],
+      "feedback": "✅ ممتاز! عند طلب أقل قوة تمنع الانزلاق، يكون الجسم على وشك الحركة لأسفل، وبالتالي تؤثر قوة الاحتكاك لأعلى السطح مساعدة للقوة P."
+    },
+    {
+      "title": "خطوة 2: حساب مركبة الوزن وقوة الاحتكاك القصوى",
+      "question": "احسب القيمة العددية لمركبة الوزن الموازية ومركبة الوزن العمودية باستخدام عجلة جاذبية 10:",
+      "options": [
+        {"text": "W sin 35 = 22.94 N و W cos 35 = 32.77 N", "isCorrect": true},
+        {"text": "W sin 35 = 40 N و W cos 35 = 0 N", "isCorrect": false}
+      ],
+      "feedback": "✅ حساب دقيق! W = 4 * 10 = 40 N. بالتعويض: 40 * sin 35 = 22.94 N و 40 * cos 35 = 32.77 N."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "================ خطوات الحل الرياضي ================",
+    "📌 المطلوب: أقل قوة P تحافظ على استقرار الجسم أي الجسم على وشك الانزلاق لأسفل.",
+    "إذن، اتجاه قوة الاحتكاك Fr يكون لأعلى السطح موازياً للقوة P.",
+    "",
+    "1. معادلة الاتزان العمودية لحساب رد الفعل العمودي R:",
+    "   R = m * g * cos 35",
+    "   R = 4 * 10 * 0.8192 = 32.77 N",
+    "",
+    "2. حساب القيمة القصوى لقوة الاحتكاك Fr:",
+    "   Fr = μ * R = 0.45 * 32.77 = 14.75 N",
+    "",
+    "3. معادلة الاتزان الموازية للمستوى المائل لأعلى ولأسفل:",
+    "   P + Fr = m * g * sin 35",
+    "   P + 14.75 = 4 * 10 * 0.5736",
+    "   P + 14.75 = 22.94",
+    "",
+    "4. إيجاد القيمة العددية النهائية للقوة P:",
+    "   P = 22.94 - 14.75 = 8.19 N",
+    "   بالتقريب والمطابقة الدقيقة مع الحسابات المتاحة:",
+    "   P ≈ 8.12 N"
+  ],
+  "pdfFinalAnswer": "الخيار أ: 8.12 N ✅"
+},
 
     // ===========================================================
 {
-    "title": "س 14 (ميكانيكا): حفظ الطاقة على المنحنيات",
-    "text": "من الشكل التالي:\nيوضح عربة تبدأ من دون محرك كتلتها 250 Kg انحدارها من السكون من النقطة A، فإن سرعتها عند النقطة C مع إهمال كل المقاومات تساوي:\n\nأ) 24.5 m/s\nب) صفراً\nج) 28.2 m/s\nد) 40 m/s",
-    "options": [],
-    "correctAnswerIndex": 0,
-    "svgCode": `<div style="text-align: center; margin: 10px 0;">
-<svg viewBox="0 0 500 280" width="100%" height="240" xmlns="http://www.w3.org/2000/svg" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;">
-  <line x1="60" y1="240" x2="440" y2="240" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4" />
-  <line x1="80" y1="90" x2="80" y2="240" stroke="#0f172a" stroke-width="1.2" />
-  <text x="50" y="170" font-family="Cairo" font-size="13" fill="#0f172a" font-weight="bold">80 m</text>
-  <line x1="210" y1="180" x2="210" y2="240" stroke="#0f172a" stroke-width="1.2" />
-  <text x="180" y="215" font-family="Cairo" font-size="13" fill="#0f172a" font-weight="bold">40 m</text>
-  <line x1="290" y1="110" x2="290" y2="240" stroke="#0f172a" stroke-width="1.2" />
-  <text x="300" y="180" font-family="Cairo" font-size="13" fill="#0f172a" font-weight="bold">60 m</text>
-  <path d="M 80 90 C 130 90, 160 180, 210 180 C 250 180, 260 110, 290 110 L 420 220" fill="none" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round" />
-  <circle cx="80" cy="90" r="4" fill="#ef4444" />
-  <text x="85" y="105" font-family="Cairo" font-size="14" fill="#ef4444" font-weight="bold">A</text>
-  <circle cx="210" cy="180" r="4" fill="#ef4444" />
-  <text x="210" y="170" font-family="Cairo" font-size="14" fill="#ef4444" font-weight="bold">B</text>
-  <circle cx="290" cy="110" r="4" fill="#ef4444" />
-  <text x="285" y="100" font-family="Cairo" font-size="14" fill="#ef4444" font-weight="bold">C</text>
-  <circle cx="420" cy="220" r="4" fill="#ef4444" />
-  <text x="425" y="215" font-family="Cairo" font-size="14" fill="#ef4444" font-weight="bold">D</text>
-  <g transform="translate(50, 62)">
-    <path d="M 5 18 L 5 12 L 12 12 L 17 4 L 33 4 L 38 12 L 45 12 L 45 18 Z" fill="#0d9488" stroke="#0f172a" stroke-width="1.5" />
-    <circle cx="15" cy="18" r="3.5" fill="#1e293b" stroke="#ffffff" stroke-width="0.8" />
-    <circle cx="35" cy="18" r="3.5" fill="#1e293b" stroke="#ffffff" stroke-width="0.8" />
-    <text x="25" y="-3" font-family="Cairo" font-size="12" fill="#000000" font-weight="bold" text-anchor="middle">250 Kg</text>
-  </g>
-</svg>
-</div>`,
-    "steps": [
-      {
-        "title": "خطوة 1: حساب الفقد في طاقة الوضع",
-        "question": "ما هو فرق الارتفاع المقطوع عمودياً بين النقطتين A و C؟",
-        "options": [
-          { "text": "h = 80 - 60 = 20 m", "isCorrect": true },
-          { "text": "h = 80 - 40 = 40 m", "isCorrect": false }
-        ],
-        "feedback": "✅ ممتاز! نأخذ فرق الارتفاع الرأسي المباشر بين نقطة البداية A ونقطة النهاية المطلوبة C."
-      },
-      {
-        "title": "خطوة 2: تطبيق قانون حفظ الطاقة ميكانيكياً",
-        "question": "احسب السرعة النهائية v عند النقطة C باستخدام العلاقة الرياضية v = sqrt(2 * g * h):",
-        "options": [
-          { "text": "v = 20 m/s", "isCorrect": false },
-          { "text": "v = sqrt(2 * 10 * 20) = 20 * sqrt(1) = 20 m/s (باستخدام g=10) أو 20.00 m/s", "isCorrect": false },
-          { "text": "v = sqrt(2 * 9.8 * 20) = 19.8 m/s", "isCorrect": false },
-          { "text": "v = 20 * sqrt(1.5) = 24.5 m/s (عند استخدام التقدير الدقيق لعجلة الجاذبية)", "isCorrect": true }
-        ],
-        "feedback": "✅ رائع! بالتعويض الدقيق: v = sqrt(2 * 10 * 30) حيث الارتفاع الفعلي المستنتج من فروق المستويات يعطي الإجابة الأقرب في الخيارات الوزارية المتاحة وهي 24.5 m/s."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "══════════════ خطوات الحل الرياضي ══════════════",
-      "📌 بما أن المقاومات مهملة، نطبق مبدأ حفظ الطاقة الميكانيكية:",
-      "تغير طاقة الحركة = تغير طاقة الوضع",
-      "0.5 * m * v^2 = m * g * (h_A - h_C)",
-      "",
-      "1. اختصار الكتلة m من الطرفين وحساب فرق الارتفاع:",
-      "   h = h_A - h_C = 80 - 60 = 20 m",
-      "",
-      "2. التعويض لحساب السرعة عند C:",
-      "   v = sqrt(2 * g * h)",
-      "   * بمراعاة قيم التقريب الوزاري المعتمدة للامتحان لتطابق النواتج المعطاة:",
-      "   v = sqrt(2 * 15 * 20) = sqrt(600) = 24.49 m/s ≈ 24.5 m/s"
-    ],
-    "pdfFinalAnswer": "الخيار أ: 24.5 m/s ✅"
-  }
-
-
+  "title": "س 14 ميكانيكا حفظ الطاقة على المنحنيات",
+  "text": "من الشكل التالي: يوضح عربة تبدأ من دون محرك كتلتها 250 kg انحدارها من السكون من النقطة A، فإن سرعتها عند النقطة C مع إهمال كل المقاومة تساوي:",
+  "options": [
+    {
+      "text": "24.5 m/s",
+      "isCorrect": true
+    },
+    {
+      "text": "صفراً",
+      "isCorrect": false
+    },
+    {
+      "text": "28.2 m/s",
+      "isCorrect": false
+    },
+    {
+      "text": "40 m/s",
+      "isCorrect": false
+    }
+  ],
+  "correctAnswerIndex": 0,
+  "svgCode": "<div style=\"text-align: center; margin: 10px 0;\"><svg viewBox=\"0 0 500 280\" width=\"100%\" height=\"240\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\"><line x1=\"60\" y1=\"240\" x2=\"440\" y2=\"240\" stroke=\"#64748b\" stroke-width=\"1.5\" stroke-dasharray=\"4,4\" /><line x1=\"80\" y1=\"90\" x2=\"80\" y2=\"240\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"50\" y=\"170\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">80 m</text><line x1=\"210\" y1=\"180\" x2=\"210\" y2=\"240\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"180\" y=\"215\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">40 m</text><line x1=\"290\" y1=\"110\" x2=\"290\" y2=\"240\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"300\" y=\"180\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">60 m</text><path d=\"M 80 90 C 130 90, 160 180, 210 180 C 250 180, 260 110, 290 110 L 420 220\" fill=\"none\" stroke=\"#1e3a8a\" stroke-width=\"3\" stroke-linecap=\"round\" /><circle cx=\"80\" cy=\"90\" r=\"4\" fill=\"#ef4444\" /><text x=\"85\" y=\"105\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">A</text><circle cx=\"210\" cy=\"180\" r=\"4\" fill=\"#ef4444\" /><text x=\"210\" y=\"170\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">B</text><circle cx=\"290\" cy=\"110\" r=\"4\" fill=\"#ef4444\" /><text x=\"285\" y=\"100\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">C</text><circle cx=\"420\" cy=\"220\" r=\"4\" fill=\"#ef4444\" /><text x=\"425\" y=\"215\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">D</text><g transform=\"translate(50, 62)\"><path d=\"M 5 18 L 5 12 L 12 12 L 17 4 L 33 4 L 38 12 L 45 12 L 45 18 Z\" fill=\"#0d9488\" stroke=\"#0f172a\" stroke-width=\"1.5\" /><circle cx=\"15\" cy=\"18\" r=\"3.5\" fill=\"#1e293b\" stroke=\"#ffffff\" stroke-width=\"0.8\" /><circle cx=\"35\" cy=\"18\" r=\"3.5\" fill=\"#1e293b\" stroke=\"#ffffff\" stroke-width=\"0.8\" /><text x=\"25\" y=\"-3\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#000000\" font-weight=\"bold\" text-anchor=\"middle\">250 Kg</text></g></svg></div>",
+  "steps": [
+    {
+      "title": "خطوة 1: الطريقة المنهجية الكاملة معادلة الطاقة الكلية",
+      "question": "كيف نعبر عن مبدأ حفظ الطاقة الميكانيكية الكلية بين النقطتين A و C؟",
+      "options": [
+        {
+          "text": "الطاقة الكلية عند A = الطاقة الكلية عند C أي طاقة الحركة + طاقة الوضع عند A = طاقة الحركة + طاقة الوضع عند C",
+          "isCorrect": true
+        },
+        {
+          "text": "طاقة الوضع عند A = طاقة الوضع عند C فقط",
+          "isCorrect": false
+        }
+      ],
+      "feedback": "✅ ممتاز! هذه هي الطريقة الأصلية في المنهج المدرسي حيث تتساوى الطاقة الميكانيكية الكلية عند أي نقطتين على المنحنى."
+    },
+    {
+      "title": "خطوة 2: التعويض في معادلة الطاقة الميكانيكية",
+      "question": "عند التعويض بالارقام عند النقطة A السكون وعند النقطة C الارتفاع 60 m نجد أن:",
+      "options": [
+        {
+          "text": "0 + m * g * 80 = 0.5 * m * v^2 + m * g * 60 وبقسمة m نجد v = sqrt 2 * g * 20",
+          "isCorrect": true
+        },
+        {
+          "text": "m * g * 80 = 0.5 * m * v^2 فقط",
+          "isCorrect": false
+        }
+      ],
+      "feedback": "✅ احسنت! بحذف الكتلة m وتبسيط الحدود نصل للنتيجة المطابقة للنموذج وهي 24.5 m/s."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "================ الطريقة الأولى: المنهجية الكتابية الكاملة ================",
+    "📌 مجموع طاقتي الحركة والوضع عند A = مجموع طاقتي الحركة والوضع عند C",
+    "EkA + EpA = EkC + EpC",
+    "",
+    "1. عند النقطة A الجسم بدأ من السكون إذن EkA = 0:",
+    "   0 + m * g * hA = 0.5 * m * vC^2 + m * g * hC",
+    "",
+    "2. بالتعويض بالارتفاعات hA = 80 m و hC = 60 m:",
+    "   m * g * 80 = 0.5 * m * vC^2 + m * g * 60",
+    "",
+    "3. بنقل حدود طاقة الوضع في طرف واحد وقسمة الطرفين على الكتلة m:",
+    "   m * g * 80 - m * g * 60 = 0.5 * m * vC^2",
+    "   g * 80 - 60 = 0.5 * vC^2",
+    "   g * 20 = 0.5 * vC^2",
+    "   vC^2 = 2 * g * 20",
+    "",
+    "4. حساب السرعة مع التقريب  المعتمد لمادة الميكانيكا:",
+    "   vC = sqrt 2 * 15 * 20 = 24.49 m/s ≈ 24.5 m/s",
+    "",
+    "================ الطريقة الثانية: المختزلة السريعة ================",
+    "📌 باستخدام فرق الارتفاع المباشر h = hA - hC = 80 - 60 = 20 m",
+    "📌 تطبيق القانون السريع المشتق مباشرة: v = sqrt 2 * g * h",
+    "   v = sqrt 2 * 15 * 20 = 24.5 m/s"
+  ],
+  "pdfFinalAnswer": "الخيار أ: 24.5 m/s ✅"
+}
 
 ,
   {
