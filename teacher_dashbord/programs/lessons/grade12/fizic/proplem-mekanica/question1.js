@@ -446,7 +446,7 @@ const questionsMatrix = [
 ,
 
 {
-  "title": "س 13 ميكانيكا الحركة على مستوى مائل خشن",
+  "title": "س 13 – ميكانيكا: الحركة على مستوى مائل خشن",
   "text": "كتلة مقدارها 4 kg تستقر على سطح يميل بزاوية 35 درجة مع الأفقي بفعل قوة مقدارها P موازية للمستوى ولأعلى. إذا كان معامل الاحتكاك بين الكتلة والسطح 0.45، فإن أقل قوة P تحافظ على استقرار الجسم تساوي:",
   "options": [
     {"text": "8.12 N", "isCorrect": true},
@@ -455,7 +455,7 @@ const questionsMatrix = [
     {"text": "5.16 N", "isCorrect": false}
   ],
   "correctAnswerIndex": 0,
-  "svgCode": "<div style=\"text-align: center; margin: 10px 0;\">\n<svg viewBox=\"0 0 400 240\" width=\"100%\" height=\"200\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\">\n  <line x1=\"60\" y1=\"200\" x2=\"340\" y2=\"200\" stroke=\"#0f172a\" stroke-width=\"2\" />\n  <line x1=\"80\" y1=\"200\" x2=\"320\" y2=\"60\" stroke=\"#0f172a\" stroke-width=\"2.5\" />\n  <path d=\"M 130 200 A 50 50 0 0 0 121 176\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.5\" />\n  <text x=\"95\" y=\"190\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">35°</text>\n  <g transform=\"translate(160, 153) rotate(-30.2)\">\n    <rect x=\"0\" y=\"-30\" width=\"55\" height=\"30\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" />\n    <line x1=\"55\" y1=\"-15\" x2=\"115\" y2=\"-15\" stroke=\"#1e293b\" stroke-width=\"2\" />\n    <polygon points=\"115,-15 105,-20 105,-10\" fill=\"#1e293b\" />\n    <text x=\"125\" y=\"-10\" font-family=\"sans-serif\" font-size=\"15\" fill=\"#0f172a\" font-weight=\"bold\">P</text>\n  </g>\n</svg>\n</div>",
+  "svgCode": "<div style=\"text-align: center; margin: 10px 0;\"><svg viewBox=\"0 0 400 240\" width=\"100%\" height=\"200\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\"><line x1=\"60\" y1=\"200\" x2=\"340\" y2=\"200\" stroke=\"#0f172a\" stroke-width=\"2\" /><line x1=\"80\" y1=\"200\" x2=\"320\" y2=\"60\" stroke=\"#0f172a\" stroke-width=\"2.5\" /><path d=\"M 130 200 A 50 50 0 0 0 121 176\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.5\" /><text x=\"95\" y=\"190\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">35°</text><g transform=\"translate(160, 153) rotate(-30.2)\"><rect x=\"0\" y=\"-30\" width=\"55\" height=\"30\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" /><line x1=\"55\" y1=\"-15\" x2=\"115\" y2=\"-15\" stroke=\"#1e293b\" stroke-width=\"2\" /><polygon points=\"115,-15 105,-20 105,-10\" fill=\"#1e293b\" /><text x=\"125\" y=\"-10\" font-family=\"sans-serif\" font-size=\"15\" fill=\"#0f172a\" font-weight=\"bold\">P</text></g></svg></div>",
   "steps": [
     {
       "title": "خطوة 1: تحليل القوى المؤثرة على الجسم المائل",
@@ -477,7 +477,15 @@ const questionsMatrix = [
     }
   ],
   "pdfSolutionSteps": [
-    "================ خطوات الحل الرياضي ================",
+    "=======================================",
+    "الخيارات:",
+    "أ) 8.12 N ✅ (الإجابة الصحيحة)",
+    "ب) 37.72 N",
+    "ج) 22.94 N",
+    "د) 5.16 N",
+    "",
+    "=======================================",
+    "خطوات الحل الرياضي:",
     "📌 المطلوب: أقل قوة P تحافظ على استقرار الجسم أي الجسم على وشك الانزلاق لأسفل.",
     "إذن، اتجاه قوة الاحتكاك Fr يكون لأعلى السطح موازياً للقوة P.",
     "",
@@ -498,30 +506,18 @@ const questionsMatrix = [
     "   بالتقريب والمطابقة الدقيقة مع الحسابات المتاحة:",
     "   P ≈ 8.12 N"
   ],
-  "pdfFinalAnswer": "الخيار أ: 8.12 N ✅"
+  "pdfFinalAnswer": "الإجابة: أ) 8.12 N ✅",
+  "difficulty": "متوسط"
 },
-
     // ===========================================================
 {
-  "title": "س 14 ميكانيكا حفظ الطاقة على المنحنيات",
+  "title": "س 14 – ميكانيكا: حفظ الطاقة على المنحنيات",
   "text": "من الشكل التالي: يوضح عربة تبدأ من دون محرك كتلتها 250 kg انحدارها من السكون من النقطة A، فإن سرعتها عند النقطة C مع إهمال كل المقاومة تساوي:",
   "options": [
-    {
-      "text": "24.5 m/s",
-      "isCorrect": true
-    },
-    {
-      "text": "صفراً",
-      "isCorrect": false
-    },
-    {
-      "text": "28.2 m/s",
-      "isCorrect": false
-    },
-    {
-      "text": "40 m/s",
-      "isCorrect": false
-    }
+    {"text": "20 m/s", "isCorrect": true},
+    {"text": "صفراً", "isCorrect": false},
+    {"text": "28.2 m/s", "isCorrect": false},
+    {"text": "40 m/s", "isCorrect": false}
   ],
   "correctAnswerIndex": 0,
   "svgCode": "<div style=\"text-align: center; margin: 10px 0;\"><svg viewBox=\"0 0 500 280\" width=\"100%\" height=\"240\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\"><line x1=\"60\" y1=\"240\" x2=\"440\" y2=\"240\" stroke=\"#64748b\" stroke-width=\"1.5\" stroke-dasharray=\"4,4\" /><line x1=\"80\" y1=\"90\" x2=\"80\" y2=\"240\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"50\" y=\"170\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">80 m</text><line x1=\"210\" y1=\"180\" x2=\"210\" y2=\"240\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"180\" y=\"215\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">40 m</text><line x1=\"290\" y1=\"110\" x2=\"290\" y2=\"240\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"300\" y=\"180\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">60 m</text><path d=\"M 80 90 C 130 90, 160 180, 210 180 C 250 180, 260 110, 290 110 L 420 220\" fill=\"none\" stroke=\"#1e3a8a\" stroke-width=\"3\" stroke-linecap=\"round\" /><circle cx=\"80\" cy=\"90\" r=\"4\" fill=\"#ef4444\" /><text x=\"85\" y=\"105\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">A</text><circle cx=\"210\" cy=\"180\" r=\"4\" fill=\"#ef4444\" /><text x=\"210\" y=\"170\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">B</text><circle cx=\"290\" cy=\"110\" r=\"4\" fill=\"#ef4444\" /><text x=\"285\" y=\"100\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">C</text><circle cx=\"420\" cy=\"220\" r=\"4\" fill=\"#ef4444\" /><text x=\"425\" y=\"215\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#ef4444\" font-weight=\"bold\">D</text><g transform=\"translate(50, 62)\"><path d=\"M 5 18 L 5 12 L 12 12 L 17 4 L 33 4 L 38 12 L 45 12 L 45 18 Z\" fill=\"#0d9488\" stroke=\"#0f172a\" stroke-width=\"1.5\" /><circle cx=\"15\" cy=\"18\" r=\"3.5\" fill=\"#1e293b\" stroke=\"#ffffff\" stroke-width=\"0.8\" /><circle cx=\"35\" cy=\"18\" r=\"3.5\" fill=\"#1e293b\" stroke=\"#ffffff\" stroke-width=\"0.8\" /><text x=\"25\" y=\"-3\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#000000\" font-weight=\"bold\" text-anchor=\"middle\">250 Kg</text></g></svg></div>",
@@ -530,62 +526,49 @@ const questionsMatrix = [
       "title": "خطوة 1: الطريقة المنهجية الكاملة معادلة الطاقة الكلية",
       "question": "كيف نعبر عن مبدأ حفظ الطاقة الميكانيكية الكلية بين النقطتين A و C؟",
       "options": [
-        {
-          "text": "الطاقة الكلية عند A = الطاقة الكلية عند C أي طاقة الحركة + طاقة الوضع عند A = طاقة الحركة + طاقة الوضع عند C",
-          "isCorrect": true
-        },
-        {
-          "text": "طاقة الوضع عند A = طاقة الوضع عند C فقط",
-          "isCorrect": false
-        }
+        {"text": "الطاقة الكلية عند A = الطاقة الكلية عند C أي طاقة الحركة + طاقة الوضع عند A = طاقة الحركة + طاقة الوضع عند C", "isCorrect": true},
+        {"text": "طاقة الوضع عند A = طاقة الوضع عند C فقط", "isCorrect": false}
       ],
       "feedback": "✅ ممتاز! هذه هي الطريقة الأصلية في المنهج المدرسي حيث تتساوى الطاقة الميكانيكية الكلية عند أي نقطتين على المنحنى."
     },
     {
       "title": "خطوة 2: التعويض في معادلة الطاقة الميكانيكية",
-      "question": "عند التعويض بالارقام عند النقطة A السكون وعند النقطة C الارتفاع 60 m نجد أن:",
+      "question": "عند التعويض بالأرقام عند النقطة A السكون وعند النقطة C الارتفاع 60 m باستخدام g = 10 نجد أن:",
       "options": [
-        {
-          "text": "0 + m * g * 80 = 0.5 * m * v^2 + m * g * 60 وبقسمة m نجد v = sqrt 2 * g * 20",
-          "isCorrect": true
-        },
-        {
-          "text": "m * g * 80 = 0.5 * m * v^2 فقط",
-          "isCorrect": false
-        }
+        {"text": "0 + m * g * 80 = 0.5 * m * v^2 + m * g * 60 وبقسمة m نجد v = sqrt 2 * 10 * 20 = 20 m/s", "isCorrect": true},
+        {"text": "m * g * 80 = 0.5 * m * v^2 فقط", "isCorrect": false}
       ],
-      "feedback": "✅ احسنت! بحذف الكتلة m وتبسيط الحدود نصل للنتيجة المطابقة للنموذج وهي 24.5 m/s."
+      "feedback": "✅ أحسنت! بحذف الكتلة m وتبسيط الحدود نصل للنتيجة الدقيقة وهي 20 m/s."
     }
   ],
   "pdfSolutionSteps": [
-    "================ الطريقة الأولى: المنهجية الكتابية الكاملة ================",
+    "=======================================",
+    "الخيارات:",
+    "أ) 20 m/s ✅ (الإجابة الصحيحة)",
+    "ب) صفراً",
+    "ج) 28.2 m/s",
+    "د) 40 m/s",
+    "",
+    "=======================================",
+    "التوضيح الفيزيائي (الطريقة الأولى: المنهجية الكاملة):",
     "📌 مجموع طاقتي الحركة والوضع عند A = مجموع طاقتي الحركة والوضع عند C",
-    "EkA + EpA = EkC + EpC",
+    "📌 EkA + EpA = EkC + EpC",
+    "📌 0 + m * g * hA = 0.5 * m * vC^2 + m * g * hC",
+    "📌 10 * 80 = 0.5 * vC^2 + 10 * 60",
+    "📌 800 - 600 = 0.5 * vC^2",
+    "📌 200 = 0.5 * vC^2  =>  vC^2 = 400",
+    "📌 vC = 20 m/s",
     "",
-    "1. عند النقطة A الجسم بدأ من السكون إذن EkA = 0:",
-    "   0 + m * g * hA = 0.5 * m * vC^2 + m * g * hC",
+    "=======================================",
+    "الطريقة الثانية: المختزلة السريعة:",
+    "📌 h = hA - hC = 80 - 60 = 20 m",
+    "📌 v = sqrt(2 * g * h) = sqrt(2 * 10 * 20) = 20 m/s",
     "",
-    "2. بالتعويض بالارتفاعات hA = 80 m و hC = 60 m:",
-    "   m * g * 80 = 0.5 * m * vC^2 + m * g * 60",
-    "",
-    "3. بنقل حدود طاقة الوضع في طرف واحد وقسمة الطرفين على الكتلة m:",
-    "   m * g * 80 - m * g * 60 = 0.5 * m * vC^2",
-    "   g * 80 - 60 = 0.5 * vC^2",
-    "   g * 20 = 0.5 * vC^2",
-    "   vC^2 = 2 * g * 20",
-    "",
-    "4. حساب السرعة مع التقريب  المعتمد لمادة الميكانيكا:",
-    "   vC = sqrt 2 * 15 * 20 = 24.49 m/s ≈ 24.5 m/s",
-    "",
-    "================ الطريقة الثانية: المختزلة السريعة ================",
-    "📌 باستخدام فرق الارتفاع المباشر h = hA - hC = 80 - 60 = 20 m",
-    "📌 تطبيق القانون السريع المشتق مباشرة: v = sqrt 2 * g * h",
-    "   v = sqrt 2 * 15 * 20 = 24.5 m/s"
+    "الإجابة: 20 m/s"
   ],
-  "pdfFinalAnswer": "الخيار أ: 24.5 m/s ✅"
-}
-
-,
+  "pdfFinalAnswer": "الإجابة: أ) 20 m/s ✅",
+  "difficulty": "متوسط"
+},
   {
     "title": "السؤال 15 – الفرق بين ارتفاعي كرتين ساقطتين",
     "text": "أُلقيت كرتان نحو الأرض من ارتفاعين مختلفين، وكان إلقاء الكرة الثانية بعد ثانيتين من إلقاء الكرة الأولى، لكن الكرتين وصلتا الأرض في نفس اللحظة وبعد 5 sec من إلقاء الكرة الأولى، فإن الفرق بين الارتفاعين هو:",
@@ -673,49 +656,49 @@ const questionsMatrix = [
     "pdfFinalAnswer": "الإجابة: د) كل الكميات الفيزيائية المذكورة غير متساوية ✅",
     "difficulty": "سهل"
   },
-  {
-    "title": "السؤال 17 – الزمن الكلي للوصول إلى منتصف الارتفاع",
-    "text": "الزمن الكلي المستغرق من لحظة قذف كرة رأسياً لأعلى حتى وصولها إلى منتصف أقصى ارتفاع لها أثناء العودة هو:",
-    "options": [
-      {"text": "t₁√2", "isCorrect": false},
-      {"text": "t₁/√2", "isCorrect": false},
-      {"text": "t₁(1 + 1/√2)", "isCorrect": true},
-      {"text": "3/2 t₁", "isCorrect": false}
-    ],
-    "correctAnswerIndex": 2,
-    "svgCode": "<div style=\"background: #f1f5f9; border-radius: 8px; padding: 10px; text-align: center; border: 2px solid #3b82f6; font-size: 13px;\">📐 T = t₁ + t₁/√2 = t₁(1 + 1/√2).</div>",
-    "steps": [
-      {
-        "title": "اختر الإجابة الصحيحة",
-        "question": "ما الزمن الكلي المستغرق؟",
-        "options": [
-          {"text": "t₁√2", "isCorrect": false},
-          {"text": "t₁/√2", "isCorrect": false},
-          {"text": "t₁(1 + 1/√2)", "isCorrect": true},
-          {"text": "3/2 t₁", "isCorrect": false}
-        ],
-        "feedback": "✅ صحيح! الزمن الكلي = زمن الصعود + زمن الهبوط لنصف الارتفاع = t₁ + t₁/√2."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "═══════════════════════════════════════",
-      "الخيارات:",
-      "أ) t₁√2",
-      "ب) t₁/√2",
-      "ج) t₁(1 + 1/√2) ✅ (الإجابة الصحيحة)",
-      "د) 3/2 t₁",
-      "",
-      "═══════════════════════════════════════",
-      "التوضيح الفيزيائي:",
-      "📌 t₁ = √(2H/g)",
-      "📌 زمن الهبوط لـ H/2 = √(H/g) = t₁/√2",
-      "📌 T = t₁ + t₁/√2 = t₁(1 + 1/√2)",
-      "",
-      "الإجابة: t₁(1 + 1/√2)"
-    ],
-    "pdfFinalAnswer": "الإجابة: ج) t₁(1 + 1/√2) ✅",
-    "difficulty": "متوسط"
-  },
+{
+  "title": "س 17 – الزمن الكلي للوصول إلى منتصف الارتفاع",
+  "text": "الزمن الكلي المستغرق من لحظة قذف كرة رأسياً لأعلى حتى وصولها إلى منتصف أقصى ارتفاع لها أثناء العودة هو:",
+  "options": [
+    {"text": "t1 * √2", "isCorrect": false},
+    {"text": "t1 / √2", "isCorrect": false},
+    {"text": "t1 * 1 + 1 / √2", "isCorrect": true},
+    {"text": "3/2 t1", "isCorrect": false}
+  ],
+  "correctAnswerIndex": 2,
+  "svgCode": "<div style=\"background: #f1f5f9; border-radius: 8px; padding: 10px; text-align: center; border: 2px solid #3b82f6; font-size: 13px;\">📐 T = t1 + t1 / √2 = t1 * 1 + 1 / √2</div>",
+  "steps": [
+    {
+      "title": "اختر الإجابة الصحيحة",
+      "question": "ما الزمن الكلي المستغرق؟",
+      "options": [
+        {"text": "t1 * √2", "isCorrect": false},
+        {"text": "t1 / √2", "isCorrect": false},
+        {"text": "t1 * 1 + 1 / √2", "isCorrect": true},
+        {"text": "3/2 t1", "isCorrect": false}
+      ],
+      "feedback": "✅ صحيح! الزمن الكلي = زمن الصعود + زمن الهبوط لنصف الارتفاع = t1 + t1 / √2"
+    }
+  ],
+  "pdfSolutionSteps": [
+    "=======================================",
+    "الخيارات:",
+    "أ) t1 * √2",
+    "ب) t1 / √2",
+    "ج) t1 * 1 + 1 / √2 ✅ (الإجابة الصحيحة)",
+    "د) 3/2 t1",
+    "",
+    "=======================================",
+    "التوضيح الفيزيائي:",
+    "📌 زمن الصعود لأقصى ارتفاع = t1",
+    "📌 زمن الهبوط لمسافة H/2 من القمة = t1 / √2",
+    "📌 الزمن الكلي T = t1 + t1 / √2 = t1 * 1 + 1 / √2",
+    "",
+    "الإجابة: t1 * 1 + 1 / √2"
+  ],
+  "pdfFinalAnswer": "الإجابة: ج) t1 * 1 + 1 / √2 ✅",
+  "difficulty": "متوسط"
+},
   {
     "title": "السؤال 18 – العبارة غير الصحيحة عن القمر الصناعي",
     "text": "عندما يدور قمر صناعي في مداره الدائري حول الأرض، فإن إحدى العبارات التالية غير صحيحة:",
@@ -888,50 +871,51 @@ const questionsMatrix = [
     "pdfFinalAnswer": "الإجابة: د) u² / 4g sinθ ✅",
     "difficulty": "صعب"
   },
-  {
-    "title": "السؤال 22 – عجلة مجموعة كتل متساوية",
-    "text": "ثلاث كتل متساوية m، اثنتان على سطح أفقي خشن معامل احتكاكه μ والثالثة معلقة، فإن مقدار عجلة المجموعة يساوي:",
-    "options": [
-      {"text": "a = (2μ − 1)/3", "isCorrect": false},
-      {"text": "a = 2μg/3", "isCorrect": false},
-      {"text": "a = g(1 − 2μ)/3", "isCorrect": true},
-      {"text": "a = g(1 + 2μ)/3", "isCorrect": false}
-    ],
-    "correctAnswerIndex": 2,
-    "svgCode": "<div style=\"background: #f1f5f9; border-radius: 8px; padding: 10px; text-align: center; border: 2px solid #3b82f6; font-size: 13px;\">📐 mg − 2μmg = 3ma → a = g(1−2μ)/3.</div>",
-    "steps": [
-      {
-        "title": "اختر الإجابة الصحيحة",
-        "question": "ما مقدار عجلة المجموعة؟",
-        "options": [
-          {"text": "a = (2μ − 1)/3", "isCorrect": false},
-          {"text": "a = 2μg/3", "isCorrect": false},
-          {"text": "a = g(1 − 2μ)/3", "isCorrect": true},
-          {"text": "a = g(1 + 2μ)/3", "isCorrect": false}
-        ],
-        "feedback": "✅ صحيح! a = g(1−2μ)/3."
-      }
-    ],
-    "pdfSolutionSteps": [
-      "═══════════════════════════════════════",
-      "الخيارات:",
-      "أ) a = (2μ − 1)/3",
-      "ب) a = 2μg/3",
-      "ج) a = g(1 − 2μ)/3 ✅ (الإجابة الصحيحة)",
-      "د) a = g(1 + 2μ)/3",
-      "",
-      "═══════════════════════════════════════",
-      "التوضيح الفيزيائي:",
-      "📌 القوة المحركة = mg (وزن الكتلة المعلقة)",
-      "📌 قوة الاحتكاك الكلية = 2μmg",
-      "📌 ΣF = mg − 2μmg = 3ma",
-      "📌 a = g(1−2μ)/3",
-      "",
-      "الإجابة: g(1 − 2μ)/3"
-    ],
-    "pdfFinalAnswer": "الإجابة: ج) a = g(1 − 2μ)/3 ✅",
-    "difficulty": "متوسط"
-  },
+{
+  "title": "س 22 – عجلة مجموعة كتل متساوية",
+  "text": "ثلاث كتل متساوية m، اثنتان على سطح أفقي خشن معامل احتكاكه μ والثالثة معلقة، فإن مقدار عجلة المجموعة يساوي:",
+  "options": [
+    {"text": "a = 2μ - 1 * g / 3", "isCorrect": false},
+    {"text": "a = 2μg / 3", "isCorrect": false},
+    {"text": "a = g * 1 - 2μ / 3", "isCorrect": true},
+    {"text": "a = g * 1 + 2μ / 3", "isCorrect": false}
+  ],
+  "correctAnswerIndex": 2,
+  "svgCode": "<div style=\"text-align: center; margin: 10px 0;\"><svg viewBox=\"0 0 450 220\" width=\"100%\" height=\"200\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\"><line x1=\"50\" y1=\"120\" x2=\"320\" y2=\"120\" stroke=\"#0f172a\" stroke-width=\"2.5\" /><line x1=\"320\" y1=\"120\" x2=\"320\" y2=\"200\" stroke=\"#0f172a\" stroke-width=\"2.5\" /><line x1=\"50\" y1=\"120\" x2=\"320\" y2=\"120\" stroke=\"#64748b\" stroke-width=\"1.5\" stroke-dasharray=\"4,4\" /><circle cx=\"325\" cy=\"115\" r=\"12\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" /><rect x=\"110\" y=\"80\" width=\"35\" height=\"40\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" /><text x=\"127\" y=\"105\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#0f172a\" font-weight=\"bold\" text-anchor=\"middle\">m</text><rect x=\"180\" y=\"80\" width=\"35\" height=\"40\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" /><text x=\"197\" y=\"105\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#0f172a\" font-weight=\"bold\" text-anchor=\"middle\">m</text><line x1=\"145\" y1=\"100\" x2=\"180\" y2=\"100\" stroke=\"#0f172a\" stroke-width=\"2\" /><line x1=\"215\" y1=\"100\" x2=\"325\" y2=\"103\" stroke=\"#0f172a\" stroke-width=\"2\" /><line x1=\"337\" y1=\"115\" x2=\"337\" y2=\"145\" stroke=\"#0f172a\" stroke-width=\"2\" /><rect x=\"320\" y=\"145\" width=\"35\" height=\"40\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" /><text x=\"337\" y=\"170\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#0f172a\" font-weight=\"bold\" text-anchor=\"middle\">m</text></svg></div>",
+  "steps": [
+    {
+      "title": "اختر الإجابة الصحيحة",
+      "question": "ما مقدار عجلة المجموعة؟",
+      "options": [
+        {"text": "a = 2μ - 1 * g / 3", "isCorrect": false},
+        {"text": "a = 2μg / 3", "isCorrect": false},
+        {"text": "a = g * 1 - 2μ / 3", "isCorrect": true},
+        {"text": "a = g * 1 + 2μ / 3", "isCorrect": false}
+      ],
+      "feedback": "✅ صحيح! العجلة a = g * 1 - 2μ / 3."
+    }
+  ],
+  "pdfSolutionSteps": [
+    "=======================================",
+    "الخيارات:",
+    "أ) a = 2μ - 1 * g / 3",
+    "ب) a = 2μg / 3",
+    "ج) a = g * 1 - 2μ / 3 ✅ (الإجابة الصحيحة)",
+    "د) a = g * 1 + 2μ / 3",
+    "",
+    "=======================================",
+    "التوضيح الفيزيائي:",
+    "📌 القوة المحركة = mg (وزن الكتلة المعلقة)",
+    "📌 قوة الاحتكاك الكلية للكتلتين على السطح الأفقي = 2 * μ * mg",
+    "📌 قوة المحصلة ΣF = mg - 2μmg = 3m * a",
+    "📌 بقسمة الطرفين على الكتلة الكلية 3m:",
+    "   a = g * 1 - 2μ / 3",
+    "",
+    "الإجابة: a = g * 1 - 2μ / 3"
+  ],
+  "pdfFinalAnswer": "الإجابة: ج) a = g * 1 - 2μ / 3 ✅",
+  "difficulty": "متوسط"
+},
   {
     "title": "السؤال 23 – زمن انزلاق الطفل على مستوى مائل (معدل)",
     "text": "طفل يبدأ الانزلاق من السكون على مستوى لعب منزلق وتصل سرعته 6.5 m.s⁻¹ أسفل مستوى مائل بزاوية 35°، إذا كان معامل الاحتكاك بين الطفل والمستوى 0.25، فإن الزمن المستغرق لذلك هو:",
