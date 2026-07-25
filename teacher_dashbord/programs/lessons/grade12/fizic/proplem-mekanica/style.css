@@ -135,20 +135,20 @@ body {
   }
 
   /* علامة مائية خلفية ذكية */
-  body::before {
-    content: "مدرسة أمجاد أفريقيا - ليبيا - البيضاء";
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-40deg);
-    font-size: 44px;
-    font-weight: bold;
-    color: rgba(148, 163, 184, 0.05) !important;
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: -1;
-  }
-
+body::before {
+  content: "مدرسة أمجاد أفريقيا - ليبيا - البيضاء";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-40deg);
+  font-size: 44px;
+  font-weight: bold;
+  /* تم زيادة الشفافية من 0.05 إلى 0.12 لتغميق النص */
+  color: rgba(148, 163, 184, 0.15) !important;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: -1;
+}
   /* صفحة الغلاف ومنع قصه داخليًا */
   .pdf-cover-page {
     page-break-inside: avoid !important;
@@ -265,4 +265,21 @@ body {
 .pdf-continuous-wrapper {
   width: 100%;
   display: block;
+}
+/* يجعل النص والحرف يظهران في سطر واحد بدون هبوط */
+.option-item {
+  display: inline-block; /* أو display: flex */
+  white-space: nowrap;  /* يمنع نزول النص لسطر جديد */
+}
+/* يمنع انكسار أجزاء السؤال الواحد بين الصفحات عند الطباعة */
+.question-container, .pdf-step-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+/* يمنع نزول الخيار لسطر جديد ويجبر الحرف والنص على البقاء جنباً إلى جنب */
+.pdf-solution-step-item, .option-line {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  white-space: nowrap !important;
 }
