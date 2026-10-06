@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المعلم - منصة الفيزياء</title>
+    <!-- مكتبات الأيقونات والخطوط والتنبيهات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <div class="school-info">
+                <h1>منصة تعليم الفيزياء</h1>
+                <p>الدروس والبرامج التعليمية</p>
+            </div>
+        </div>
+        <div class="teacher-info">
+            <div class="teacher-avatar">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div>
+                <div style="font-weight: 600;">لوحة الطالب</div>
+            </div>
+            <div style="margin-right: auto; margin-left: 20px;">
+                <div id="current-time" style="font-size: 14px;"></div>
+                <div style="font-size: 12px; opacity: 0.8;">توقيت البيضاء</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-container">
+        <!-- حاوية المحتوى -->
+        <div class="content-container">
+            <div class="page-title fade-in">
+                <h1>مرحباً بك في منصة الفيزياء 📚</h1>
+                <p>إدارة الدروس والبرامج التعليمية للصف الثالث الثانوي</p>
+            </div>
+
+            <!-- تبويبات الصفوف -->
+            <div class="grades-tabs fade-in">
+                <div class="grade-tab active" onclick="showGrade('grade4')">
+                    <i class="fas fa-bolt"></i> الكهربائية
+                    <span class="tab-badge">187 طلاب</span>
+                </div>
+                <div class="grade-tab" onclick="showGrade('grade5')">
+                    <i class="fas fa-cogs"></i> الميكانيكا
+                    <span class="tab-badge">187 طلاب</span>
+                </div>
+            </div>
+
+            <!-- محتوى قسم الفيزياء الكهربائية -->
+            <div id="grade4-content" class="grade-content active">
+                <div class="lessons-section fade-in">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-graduation-cap"></i> دروس الفيزياء
+                        </h2>
+                    </div>
+                    
+                    <div class="lessons-grid">
+
+                        <!-- بطاقة 1: حل امتحان 2008 -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-laptop-code" style="font-size: 28px; color: #28d8ac;"></i>
+                                </div>
+                                <h3 class="lesson-title">📘 حل امتحان الفيزياء الكهربائية دفعة 2008</h3>
+                                <div class="lesson-subject">🔴 - الفيزياء</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">🔴 الكهربائية والمغناطيسية والذرية</p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعة</span>
+                                    <span><i class="fas fa-tasks"></i> 56 سؤال</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/fizic/exam-2007/index.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- بطاقة 2: بي دي افات 2009 جميع الأبواب -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-file-pdf" style="font-size: 28px; color: #28d8ac;"></i>
+                                </div>
+                                <h3 class="lesson-title">📘 بي دي افات الفيزياء الكهربائية دفعة 2009 جميع الأبواب</h3>
+                                <div class="lesson-subject">🔴 - الفيزياء - PDF</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">🔴 الكهربائية والمغناطيسية والذرية</p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعة</span>
+                                    <span><i class="fas fa-tasks"></i> جميع الأبواب</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/fizic/generated-bdf-fisizs-allparts.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- بطاقة 3: مكثف الفيزياء الشامل 1 و 2 -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-layer-group" style="font-size: 28px; color: #28d8ac;"></i>
+                                </div>
+                                <h3 class="lesson-title">📘 مكثف الفيزياء الشامل (الجزء الأول والثاني)</h3>
+                                <div class="lesson-subject">🔴 - المكثف الشامل</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">🔴 الكهربائية والمغناطيسية والذرية</p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعة</span>
+                                    <span><i class="fas fa-tasks"></i> 186 تمرين</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/fizic/m-deep-viwe1-2-fizic.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- بطاقة 4: مكثف الفيزياء الشامل الجزء الثاني -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-book-reader" style="font-size: 28px; color: #28d8ac;"></i>
+                                </div>
+                                <h3 class="lesson-title">📘 مكثف الفيزياء الشامل (الجزء الثاني)</h3>
+                                <div class="lesson-subject">🔴 - المكثف الشامل - الجزء الثاني</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">🔴 الكهربائية والمغناطيسية والذرية</p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعة</span>
+                                    <span><i class="fas fa-tasks"></i> 56 تمرين</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/fizic/m2-deep3.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- بطاقة 5: مكثف الفيزياء الشامل الجزء الأول -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-book-open" style="font-size: 28px; color: #28d8ac;"></i>
+                                </div>
+                                <h3 class="lesson-title">📘 مكثف الفيزياء الشامل (الجزء الأول)</h3>
+                                <div class="lesson-subject">🔴 - المكثف الشامل - الجزء الأول</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">🔴 الكهربائية والمغناطيسية والذرية</p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعة</span>
+                                    <span><i class="fas fa-tasks"></i> 56 تمرين</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/fizic/m-deep.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- بطاقة 6: الباب التاسع - الفيزياء النووية -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-atom" style="font-size: 28px; color: #28d8ac;"></i>
+                                </div>
+                                <h3 class="lesson-title">🥉 الفيزياء النووية - الباب التاسع</h3>
+                                <div class="lesson-subject">🔴 - أسئلة الباب التاسع</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">أسئلة الباب التاسع مختارة وتحليل، شرح الدروس، أمثلة محلولة، أسئلة سابقة ورسوم توضيحية.</p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعة</span>
+                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <a href="../../teacher_dashbord/programs/lessons/grade12/fizic/unit_9.html" class="lesson-btn primary">
+                                        <i class="fas fa-eye"></i> معاينة
+                                    </a>
+                                    <button class="lesson-btn secondary" onclick="scheduleLesson('literature_grade5')">
+                                        <i class="fas fa-calendar"></i> جدولة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- بطاقة 7: امتحان الدور الأول (2017-2018) - النصف الأول -->
+                        <div class="lesson-card grade5">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">
+                                    <i class="fas fa-magnet" style="font-size: 28px; color: #28d8ac;"></i>
+                                </div>
+                                <h3 class="lesson-title">📘 امتحان الدور الأول (2017-2018)</h3>
+                                <div class="lesson-subject">🧲 ⚡ 🧭 أسئلة الامتحانات السابقة</div>
+                            </div>
+                            <div class="lesson-content">
+                                <p class="lesson-desc">حل وتفصيل امتحان الدور الأول لسنة 2017-2018.</p>
+                                <div class="lesson-meta">
+                                    <span><i class="far fa-clock"></i> 12 ساعة</span>
+                                    <span><i class="fas fa-tasks"></i> 40 تمرين</span>
+                                </div>
+                                <div class="lesson-status status-upcoming">قادم</div>
+                                <div class="lesson-actions">
+                                    <!-- توقف الكود المرسل هنا -->

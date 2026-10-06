@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توليد بي دي إفات الفيزياء الكهربائية</title>
+    <!-- خط تجوال من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(37, 99, 235, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* الهيدر والعنوان */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* شبكة الفصول */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* بطاقة الفصل */
+        .chapter-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 6px;
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 0 16px 16px 0;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: #cbd5e1;
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-badge {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chapter-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        /* زر الفتح */
+        .btn-launch {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-launch:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-launch svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر الرئيسي -->
+    <header>
+        <h1>توليد بي دي إفات الفيزياء الكهربائية</h1>
+        <p>منظومة إدارة وطباعة كراسات الفصول والتمارين</p>
+
+
+      <a href="../../../../../althanaoya/fizic/mikanika-dashbord.html" class="nav-btn">⚙️ لوحة التحكم</a>
+
+    </header>
+
+    <!-- شبكة الفصول -->
+    <div class="container">
+        <div class="chapters-grid">
+
+            <!-- الفصل الأول -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 1</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل الأول</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل الأول.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل الأول هنا في href -->
+                <a href="m-generation-fisics-part1.html" class="btn-launch">
+                    <span>فتح محرك التوليد</spaspanpannn>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل الثاني -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 2</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل الثاني</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل الثاني.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل الثاني هنا في href -->
+                <a href="m-generation-fisics-part2.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewviewBoxBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل الثالث -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 3</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل الثالث</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل الثالث.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل الثالث هنا في href -->
+                <a href="chapter3.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل الرابع -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 4</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل الرابع</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل الرابع.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل الرابع هنا في href -->
+                <a href="chapter4.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل الخامس -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 5</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل الخامس</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل الخامس.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل الخامس هنا في href -->
+                <a href="chapter5.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل السادس -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 6</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل السادس</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل السادس.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل السادس هنا في href -->
+                <a href="chapter6.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل السابع -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 7</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل السابع</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل السابع.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل السابع هنا في href -->
+                <a href="chapter7.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل الثامن -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 8</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل الثامن</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل الثامن.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل الثامن هنا في href -->
+                <a href="chapter8.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+            <!-- الفصل التاسع -->
+            <div class="chapter-card">
+                <div>
+                    <div class="chapter-header">
+                        <span class="chapter-badge">الوحدة 9</span>
+                    </div>
+                    <h2 class="chapter-title">الفصل التاسع</h2>
+                    <p class="chapter-desc">توليد ملفات PDF الخاصة بأسئلة وتمارين الفصل التاسع.</p>
+                </div>
+                <!-- ضع مسار ملف الفصل التاسع هنا في href -->
+                <a href="chapter9.html" class="btn-launch">
+                    <span>فتح محرك التوليد</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>منظومة توليد بي دي إفات الفيزياء الكهربائية &copy; 2026</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>منصة الفيزياء - مدرسة أمجاد أفريقيا</title>
+  <link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+</style>
+</head>
+<body>
+
+<!-- ===== واجهة التطبيق ===== -->
+<div class="app-container">
+    <div class="header no-print">
+        <h2><i class="fa-solid fa-desktop"></i> منصة الفيزياء</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
+        <span id="question-counter"></span>
+    </div>
+
+    <div class="question-container no-print" id="question-container">
+        <div class="question-meta">
+            <span class="q-source-span" id="q-source"></span>
+        </div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+<div class="options-container" id="options-container"></div>
+
+<div class="feedback-box" id="feedback-box"></div>
+
+<!-- شرح إجابة السؤال -->
+<div class="explanation-box" id="explanation-box" style="display:none;">
+    <span class="explanation-title">💡 شرح الإجابة</span>
+    <div class="explanation-text" id="explanation-text"></div>
+</div>
+    </div>
+
+    <div class="navigation-area no-print">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="print-section no-print">
+        <button class="print-btn" onclick="generatePDF()">
+            <i class="fa-solid fa-file-pdf"></i> طباعة PDF
+        </button>
+        <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+            <i class="fa-brands fa-telegram"></i> البوت التعليمي
+        </a>
+    </div>
+
+    <div id="result-screen" class="hide no-print">
+        <div id="congrats-msg" class="success-message hide">🎉 مبروك أنت ناجح! 🎉</div>
+        <div id="fail-msg" class="hide">😢 حظاً أوفر في المرة القادمة!</div>
+        <p class="score-display">لقد حصلت على درجة: <span id="final-score">0</span> من <span id="total-questions">0</span></p>
+        <div style="text-align:center;margin-top:15px;">
+            <button onclick="location.reload()" style="padding:12px 30px;background:#1a365d;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-family:'Cairo',sans-serif;">
+                🔄 إعادة المحاولة
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== وثيقة PDF القابلة للطباعة ===== -->
+<div id="printable-pdf-document" style="display:none;"></div>
+
+<script src="array1.js"></script>
+<script>
+// ============================================================
+// مصفوفة الأسئلة
+// ============================================================
+console.log("✅ تم تحميل المصفوفة! عدد الأسئلة: " + examQuestions.length);
+
+examQuestions.forEach((q, i) => {
+    console.log(`السؤال ${i+1}: correctAnswer = ${q.correctAnswer}, الإجابة = ${q.options[q.correctAnswer]}`);
+});
+
+// ============================================================
+// متغيرات التحكم
+// ============================================================
+let currentQIndex = 0;
+let userAnswers = {};
+let answeredQuestions = {};
+
+// ============================================================
+// دوال العرض والتنقل
+// ============================================================
+function navigateQuestion(direction) {
+    const newIndex = currentQIndex + direction;
+    if (newIndex >= 0 && newIndex < examQuestions.length) {
+        currentQIndex = newIndex;
+        renderActiveQuestion(currentQIndex);
+    }
+}
+
+function renderActiveQuestion(index) {
+    const data = examQuestions[index];
+    if (!data) return;
+
+    document.getElementById('q-source').innerText = `السؤال ${index + 1}`;
+    document.getElementById('main-question-text').innerText = data.question;
+    document.getElementById('question-counter').innerHTML = `مسألة ${index + 1} / ${examQuestions.length}`;
+
+    // 1. عرض رسم السؤال إن وجد
+    const graphicContainer = document.getElementById('graphic-container');
+    if (data.svg && data.svg.trim() !== "") {
+        graphicContainer.innerHTML = data.svg;
+        graphicContainer.style.display = 'block';
+    } else {
+        graphicContainer.innerHTML = '<p class="no-graphic">⚠️ لا يوجد رسم توضيحي</p>';
+        graphicContainer.style.display = 'block';
+    }
+
+    // 2. عرض خيارات الإجابة
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    data.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span>${opt}</span><i class="fa-regular fa-circle"></i>`;
+        btn.onclick = function() { checkAnswer(index, idx); };
+        
+        if (answeredQuestions[index] !== undefined) {
+            if (answeredQuestions[index] === idx) {
+                btn.classList.add(answeredQuestions[index] === data.correctAnswer ? 'correct' : 'wrong');
+                btn.querySelector('i').className = answeredQuestions[index] === data.correctAnswer ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark';
+            }
+            if (idx === data.correctAnswer) {
+                btn.style.borderColor = '#22c55e';
+                btn.style.background = '#dcfce7';
+            }
+        }
+        optionsContainer.appendChild(btn);
+    });
+
+    document.getElementById('prev-btn').disabled = index === 0;
+    document.getElementById('next-btn').disabled = index === examQuestions.length - 1;
+
+    const feedbackBox = document.getElementById('feedback-box');
+    const explanationBox = document.getElementById('explanation-box');
+    const explanationText = document.getElementById('explanation-text');
+
+    // 3. في حالة إجابة السؤال
+    if (answeredQuestions[index] !== undefined) {
+        const isCorrect = answeredQuestions[index] === data.correctAnswer;
+
+        // عرض النتيجة
+        feedbackBox.className = `feedback-box ${isCorrect ? 'success' : 'error'}`;
+        feedbackBox.innerHTML = isCorrect ? 
+            '<i class="fa-solid fa-check"></i> ✅ إجابة صحيحة! درجة السؤال: 1.5' : 
+            `<i class="fa-solid fa-xmark"></i> ❌ الإجابة الصحيحة هي: ${data.options[data.correctAnswer]}`;
+        feedbackBox.style.display = 'block';
+
+        // إظهار صندوق الشرح
+        explanationBox.style.display = 'block';
+        explanationText.innerText = (data.explanation && data.explanation.trim() !== "") 
+            ? data.explanation 
+            : 'لا يوجد شرح متاح لهذا السؤال.';
+
+        // إنشاء أو تحديث عنصر المخطط الصحيح answerSvgBox
+        let answerSvgBox = document.getElementById('answerSvgBox');
+        if (data.answerSvg && data.answerSvg.trim() !== "") {
+            if (!answerSvgBox) {
+                answerSvgBox = document.createElement('div');
+                answerSvgBox.id = 'answerSvgBox';
+                answerSvgBox.style.textAlign = 'center';
+                answerSvgBox.style.marginTop = '15px';
+                answerSvgBox.style.padding = '12px';
+                answerSvgBox.style.background = '#ffffff';
+                answerSvgBox.style.borderRadius = '10px';
+                answerSvgBox.style.border = '1px solid #cbd5e1';
+                explanationBox.appendChild(answerSvgBox);
+            }
+            answerSvgBox.innerHTML = `
+                <div style="font-weight:bold; margin-bottom:10px; font-size:15px; color:#1e293b;">
+                    📌 المخطط الصحيح:
+                </div>
+                ${data.answerSvg}
+            `;
+            answerSvgBox.style.display = 'block';
+        } else if (answerSvgBox) {
+            answerSvgBox.style.display = 'none';
+        }
+
+    } else {
+        // 4. في حالة عدم إجابة السؤال بعد
+        feedbackBox.style.display = 'none';
+        explanationBox.style.display = 'none';
+        explanationText.innerText = '';
+        
+        const answerSvgBox = document.getElementById('answerSvgBox');
+        if (answerSvgBox) {
+            answerSvgBox.style.display = 'none';
+        }
+    }
+}
+function checkAnswer(index, selectedIdx) {
+    if (answeredQuestions[index] !== undefined) return;
+    answeredQuestions[index] = selectedIdx;
+    userAnswers[index] = selectedIdx;
+    renderActiveQuestion(index);
+}
+
+// ============================================================
+// دالة توليد PDF - تم إضافة دعم المخطط الصحيح (answerSvg)
+// ============================================================
+function generatePDF() {
+    const printableDoc = document.getElementById('printable-pdf-document');
+    printableDoc.innerHTML = '';
+
+    const totalScore = examQuestions.length * 1.5;
+    const passingScore = Math.floor(examQuestions.length * 0.7) * 1.5;
+    const watermarkText = `مدرسة أمجاد إفريقيا\nليبيا البيضاء`;
+
+    function createWatermark() {
+        return `<div class="watermark-text" style="white-space: pre-line;">${watermarkText}</div>`;
+    }
+
+    let htmlContent = '';
+
+    // ===== صفحة الغلاف =====
+    htmlContent += `
+    <div class="pdf-page pdf-cover-page">
+        ${createWatermark()}
+        <div class="content-wrapper" style="position:relative; z-index:1; width:100%;">
+            <div class="school-name">🏫 مدرسة أمجاد إفريقيا - ليبيا البيضاء</div>
+            <div class="main-title">📘 الفيزياء الكهربائية</div>
+            <div class="sub-title">-الوحدة الاولي-  اسئلة متنوعة</div>
+            <div style="font-size:20pt;color:#334155;margin-bottom:15px;">دفعة 2009 - الصف الثالث الثانوي</div>
+            <div class="cover-frame">
+                <h3>📚 كراسة الحلول النموذجية</h3>
+                <h4>الوحدة الاولي- الفيزياء الكهربائية</h4>
+                <div class="cover-subjects">دفعة 2009</div>
+                <div class="year">العام الدراسي 2026 - 2027</div>
+                <div style="font-size:15pt;color:#059669;margin-top:8px;font-weight:bold;">
+                    📊 عدد الأسئلة: ${examQuestions.length} سؤال
+                </div>
+                <div style="font-size:15pt;color:#2563eb;margin-top:4px;font-weight:bold;">
+                    ⭐ كل سؤال: 1.5 درجة | المجموع الكلي: ${totalScore.toFixed(1)} درجة
+                </div>
+                <div style="font-size:14pt;color:#d97706;margin-top:4px;font-weight:bold;">
+                    🎯 درجة النجاح (70%): ${passingScore.toFixed(1)} درجة
+                </div>
+            </div>
+            <div class="dedication">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+            <div style="font-size:14pt;color:#475569;margin-top:6px;">
+                <span style="font-weight:bold;">رابط البوت التعليمي:</span><br>
+                <span style="color:#2563eb;font-size:15pt;">t.me/amjad_africa2027bot</span>
+            </div>
+            <div class="bot-link">© 2026 جميع الحقوق محفوظة - مدرسة أمجاد إفريقيا</div>
+        </div>
+    </div>
+    `;
+
+    // ===== صفحات الأسئلة =====
+    const questionsPerPage = 7;
+    const totalPages = Math.ceil(examQuestions.length / questionsPerPage);
+
+    for (let page = 0; page < totalPages; page++) {
+        const start = page * questionsPerPage;
+        const end = Math.min(start + questionsPerPage, examQuestions.length);
+
+        htmlContent += `
+        <div class="pdf-page">
+            ${createWatermark()}
+            <div class="content-wrapper" style="position:relative; z-index:1; width:100%;">
+                <table class="pdf-question-table" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="pdf-page-header">
+                                    <div class="school-name-header">مدرسة أمجاد إفريقيا - ليبيا البيضاء</div>
+                                    <div class="sub-header">📘 كراسة الحلول النموذجية -  الفيزياء الكهربائية</div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        for (let i = start; i < end; i++) {
+            const q = examQuestions[i];
+            const correctIndex = q.correctAnswer;
+            let correctText = "لم يتم تحديد";
+            if (q.options && q.options[correctIndex] !== undefined) {
+                correctText = q.options[correctIndex];
+            }
+
+            // 1. رسم السؤال الأساسي
+            let svgHTML = "";
+            if (q.svg && q.svg.trim() !== "") {
+                svgHTML = `<div class="pdf-graphic" style="display:block !important; text-align:center; margin:8px 0; max-width:100%; overflow:visible;">${q.svg}</div>`;
+            }
+
+            // 2. رسم الشرح / المخطط الصحيح للـ PDF
+            let answerSvgHTML = "";
+            const currentAnswerSvg = q.answerSvg || q.explanationSvg;
+            if (currentAnswerSvg && currentAnswerSvg.trim() !== "") {
+                answerSvgHTML = `
+                    <div class="pdf-answer-svg" style="display:block !important; text-align:center; margin-top:8px; padding:6px; background:#fff; border-radius:6px; border:1px solid #cbd5e1; max-width:100%; overflow:visible;">
+                        <div style="font-weight:bold; font-size:10pt; margin-bottom:4px; color:#1e293b;">📌 المخطط الصحيح:</div>
+                        <div style="display:inline-block; width:100%; text-align:center;">
+                            ${currentAnswerSvg}
+                        </div>
+                    </div>
+                `;
+            }
+
+            let optionsHTML = q.options.map((opt, idx) => {
+                const isCorrect = idx === correctIndex;
+                return `<span style="background:${isCorrect ? '#dcfce7' : '#f1f5f9'};border-radius:3px;padding:1px 8px;${isCorrect ? 'font-weight:bold;color:#065f46;border:1px solid #22c55e;' : ''}">${opt}</span>`;
+            }).join(' ');
+
+            const hasExplanation = q.explanation && q.explanation.trim() !== "";
+            const hasAnswerSvg = Boolean(currentAnswerSvg && currentAnswerSvg.trim() !== "");
+
+            htmlContent += `
+                        <tr>
+                            <td>
+                                <div class="pdf-question-block" style="page-break-inside: avoid; break-inside: avoid;">
+                                    <div class="pdf-q-title">س ${i + 1}: ${q.question}</div>
+                                    ${svgHTML}
+                                    <div class="pdf-options">
+                                        <span style="font-weight:bold;">الخيارات:</span> ${optionsHTML}
+                                    </div>
+                                    <div class="pdf-correct-answer">
+                                        ✅ الإجابة النموذجية الصحيحة: ${correctText}
+                                    </div>
+
+${(hasExplanation || hasAnswerSvg) ? `
+<div class="pdf-explanation" style="display:block !important; margin-top:6px; padding:6px 10px; background:#f8fafc; border-radius:6px; border-right:4px solid #2563eb;">
+    <div class="pdf-explanation-title" style="font-weight:bold; color:#1e293b; margin-bottom:2px; font-size:10pt;">💡 شرح الإجابة</div>
+    ${hasExplanation ? `
+    <div class="pdf-explanation-text" style="font-size:9.5pt; color:#334155; line-height:1.35; white-space: pre-line; direction: rtl; text-align: right; unicode-bidi: isolate; margin:0;">
+        ${q.explanation
+            .replace(/<br\s*\/?>/gi, '\n')  // تحويل أي وسوم <br> إلى أسطر
+            .replace(/\n\s*\n+/g, '\n')     // حذف كافة الأسطر الفارغة المتتالية ودمجها في سطر واحد
+            .trim()}
+    </div>
+    ` : ''}
+    ${answerSvgHTML}
+</div>
+` : ''}                            </td>
+                        </tr>
+            `;
+        }
+
+        if (page === totalPages - 1) {
+            htmlContent += `
+                        <tr>
+                            <td>
+                                <div class="pdf-summary" style="page-break-inside: avoid;">
+                                    <h2>📊 ملخص الدرجات</h2>
+                                    <div class="pdf-summary-grid">
+                                        <div class="item">
+                                            <div class="label">📄 عدد الأسئلة</div>
+                                            <div class="value">${examQuestions.length}</div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="label">⭐ درجة كل سؤال</div>
+                                            <div class="value">1.5</div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="label">🏆 المجموع الكلي</div>
+                                            <div class="value">${totalScore.toFixed(1)}</div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="label">✅ النجاح (70%)</div>
+                                            <div class="value">${passingScore.toFixed(1)}</div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:5px;padding:6px;background:white;border-radius:4px;border:1px solid #86efac;font-size:11pt;color:#475569;">
+                                        📌 كل سؤال بـ <b style="color:#2563eb;">1.5 درجة</b> | 🎯 النجاح: <b style="color:#d97706;">${passingScore.toFixed(1)}</b> من ${totalScore.toFixed(1)}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+            `;
+        }
+
+        htmlContent += `
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <div class="pdf-footer">
+                                    <span class="school-name-footer">مدرسة أمجاد إفريقيا - ليبيا البيضاء</span> ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+                                    <br>© 2026 جميع الحقوق محفوظة | القسم ${page + 1} من ${totalPages}
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        `;
+    }
+
+    printableDoc.innerHTML = htmlContent;
+    printableDoc.style.display = 'block';
+
+    setTimeout(function() {
+        window.print();
+        setTimeout(function() {
+            printableDoc.style.display = 'none';
+        }, 1000);
+    }, 1200);
+}
+window.onload = function() {
+    renderActiveQuestion(0);
+};
+</script>
+</body>
+</html>
