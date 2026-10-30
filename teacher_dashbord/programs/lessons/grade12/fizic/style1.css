@@ -1369,3 +1369,9 @@ svg {
         font-size: 10px !important;
     }
 }
+/* حل مشكلة انقلابات الأقواس والرموز في PDF */
+.pdf-step, .solution-text, p, li {
+    direction: rtl;
+    text-align: right;
+    unicode-bidi: plaintext; /* يقوم بتحديد اتجاه الرموز تلقائياً حسب السياق */
+}

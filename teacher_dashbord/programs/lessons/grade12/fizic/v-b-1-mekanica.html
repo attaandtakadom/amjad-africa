@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> الميكانيكا -الباب الاول B-1   </title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+    <!-- إضافة KaTeX لعرضلعرضلعرض الصيغ الرياضية -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i>الباب الاول  تمارين B - 1  الميكانيكا    </h2>
+        <span class="school-badge">- مدرسة أمجاد أفريقيا -ليبيا-البيضاء< /span>
+        <span id="question-counter"></span>
+            <a href="../../../../../althanaoya/fizic/mikanika-dashbord.html" class="nav-btn">⚙️ لوحة التحكم</a>
+
+
+
+    </div>
+
+    <div class="question-container">
+        <div class="question-meta">
+            <span class="q-source-span" id="q-source"></span>
+        </div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+    </div>
+
+    <div class="steps-container" id="steps-container"></div>
+
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
+
+<div class="print-section">
+    
+
+<button   onclick="openGoogleDrivePdf()">عرض ملف PDF</button>
+
+    <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+        <i class="fa-brands fa-telegram"></i> البوت التعليمي
+    </a>
+</div>
+
+<div id="printable-pdf-document"></div>
+<div id="dynamic-pdf-questions-area"></div>
+
+<script>
+    // منع التخزين المؤقت
+    document.write('<script src="array-B-1-mekanica.js?v=' + Date.now() + '"><\/script>');
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script src="addphysicslawpage-generate-1-2.js"></script>
+
+<script>
+    let currentQIndex = 0;
+
+    // قائمة الحروف لترتيب الخيارات
+    const arabicLetters = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'];
+
+    // دالة لتنظيف النص وتنسيقه بحروف أ، ب، ج، د...
+    function formatOptionText(text, index) {
+        if (!text) return '';
+        const cleanText = text.replace(/^[أ-يA-Za-z][\)\.\-]\s*/, '');
+        const letter = arabicLetters[index] || (index + 1);
+        return `${letter}) ${cleanText}`;
+    }
+
+    console.log("عدد الأسئلة في المصفوفة: " + questionsMatrix.length);
+
+    function navigateQuestion(direction) {
+        const newIndex = currentQIndex + direction;
+        if (newIndex >= 0 && newIndex < questionsMatrix.length) {
+            currentQIndex = newIndex;
+            renderActiveQuestion(currentQIndex);
+        }
+    }
+
+    function renderActiveQuestion(index) {
+        const data = questionsMatrix[index];
+        if (!data) return;
+
+        document.getElementById('q-source').innerText = data.title;
+        document.getElementById('main-question-text').innerText = data.text;
+        document.getElementById('question-counter').innerHTML = `مسألة ${index + 1} / ${questionsMatrix.length}`;
+
+        const graphicContainer = document.getElementById('graphic-container');
+        if (data.svgCode && data.svgCode.trim() !== "") {
+            graphicContainer.innerHTML = data.svgCode;
+        } else if (data.imagePath && data.imagePath.trim() !== "") {
+            graphicContainer.innerHTML = `<img src="${data.imagePath}" alt="رسم توضيحي">`;
+        } else {
+            graphicContainer.innerHTML = '<p class="no-graphic">⚠️ لا يوجد رسم توضيحي</p>';
+        }
+
+        document.getElementById('prev-btn').disabled = index === 0;
+        document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
+
+        const stepsContainer = document.getElementById('steps-container');
+        stepsContainer.innerHTML = '';
+
+        if (data.steps) {
+            data.steps.forEach((step, sIdx) => {
+                let optionsHTML = '';
+                if (step.options) {
+                    step.options.forEach((opt, optIdx) => {
+                        const rawText = typeof opt === 'object' ? opt.text : opt;
+                        const formattedText = formatOptionText(rawText, optIdx);
+                        optionsHTML += `
+                            <button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}">
+                                <span>${formattedText}</span>
+                                <i class="fa-regular fa-circle"></i>
+                            </button>
+                        `;
+                    });
+                }
+
+                stepsContainer.innerHTML += `
+                    <div class="step-card ${sIdx === 0 ? 'active' : ''}" id="step-card-${sIdx}">
+                        <div class="step-title">${step.title}</div>
+                        <div class="step-question">${step.question}</div>
+                        <div class="options-grid">${optionsHTML}</div>
+                        <div class="feedback-box" id="feedback-${sIdx}"></div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    function checkLiveAnswer(btn, sIdx, isCorrect) {
+        const card = document.getElementById(`step-card-${sIdx}`);
+        const fb = document.getElementById(`feedback-${sIdx}`);
+
+        card.querySelectorAll('.option-btn').forEach(b => {
+            b.classList.remove('correct', 'wrong');
+            b.querySelector('i').className = 'fa-regular fa-circle';
+        });
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            btn.querySelector('i').className = 'fa-solid fa-circle-check';
+            fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+            fb.className = 'feedback-box success';
+            card.classList.add('completed');
+            card.classList.remove('active');
+
+            const nextCard = document.getElementById(`step-card-${sIdx + 1}`);
+            if (nextCard) {
+                nextCard.classList.add('active');
+                nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+            btn.classList.add('wrong');
+            btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+        }
+    }
+
+    function addQuestionsStartPage() {
+        const printableDoc = document.getElementById('printable-pdf-document');
+        
+        const startPage = document.createElement('div');
+        startPage.className = 'pdf-questions-start-page';
+        startPage.style.cssText = `
+            page-break-after: always;
+            break-after: page;
+            padding: 20mm 10mm;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        `;
+        
+        startPage.innerHTML = `
+            <div style="font-size: 60px; margin-bottom: 20px;">📝</div>
+            <h1 style="font-size: 36px; color: #1a365d; font-weight: 800; margin-bottom: 15px;">أسئلة المراجعة النهائية</h1>
+            <div style="width: 60%; height: 3px; background: #2563eb; margin: 15px auto; border-radius: 4px;"></div>
+            <p style="font-size: 20px; color: #475569; line-height: 1.8; max-width: 80%;">
+                مجموعة من الأسئلة المتنوعة<br>
+                مع الحلول النموذجية خطوة بخطوة
+            </p>
+            <p style="font-size: 16px; color: #94a3b8; margin-top: 20px;">
+                ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+            </p>
+        `;
+        
+        printableDoc.appendChild(startPage);
+    }
+
+    // ===== دالة الطباعة العامة (Smart Print) =====
+// ===== دالة الطباعة العامة المحدثة بالكامل (Smart Print) =====
+// ===== دالة الطباعة العامة المحدثة والشاملة (Smart Print) =====
+function openGoogleDrivePdf() {
+    // رابط Google Drive الخاص بك محولاً لنمط المعاينة المباشرة (/preview)
+    const pdfUrl = "https://drive.google.com/file/d/1Ne7ikEZoAHbjsLSScpczB72tXukXCDwG/preview";
+    
+    // فتح الملف في نافذة/تبويب جديد
+    window.open(pdfUrl, '_blank');
+}
+
+window.onload = () => {
+        renderActiveQuestion(0);
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof renderMathInElement === 'function') {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ]
+            });
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* ============================================================
-   style1.css - الأنماط الرئيسية والطباعة الذكية
+   style.css - الأنماط الرئيسية والطباعة الذكية
    ============================================================ */
 
 :root {
@@ -130,7 +130,7 @@ body {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(-40deg);
-        font-size: 44px;
+        font-size: 14px;
         font-weight: bold;
         color: rgba(148, 163, 184, 0.07) !important;
         white-space: nowrap;

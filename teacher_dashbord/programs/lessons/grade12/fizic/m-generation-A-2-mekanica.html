@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>الاحتكاك الميكانيكا - الباب الثاني A-2 و B-2</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+    <!-- إضافة KaTeX لعرض الصيغ الرياضية -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h2><i class="fa-solid fa-desktop"></i> الباب الثاني تمارين A-2 و B-2 الاحتكاك الميكانيكا</h2>
+        <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</span>
+        <span id="question-counter"></span>
+        <a href="generated-bdf-fisizs-allparts.html" class="nav-btn">⚙️ لوحة التحكم</a>
+    </div>
+
+    <div class="question-container">
+        <div class="question-meta">
+            <span class="q-source-span" id="q-source"></span>
+        </div>
+        <div class="question-text" id="main-question-text"></div>
+        <div class="question-graphic-area" id="graphic-container"></div>
+    </div>
+
+    <div class="steps-container" id="steps-container"></div>
+
+    <div class="navigation-area">
+        <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+            <i class="fa-solid fa-arrow-right"></i> السابق
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+            التالي <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
+
+<div class="print-section">
+    <button class="print-btn" onclick="triggerSmartPrint()">
+        <i class="fa-solid fa-file-pdf"></i> طباعة PDF
+    </button>
+    <a href="https://t.me/amjad_africa2027bot" target="_blank" class="bot-link-btn">
+        <i class="fa-brands fa-telegram"></i> البوت التعليمي
+    </a>
+</div>
+
+<div id="printable-pdf-document"></div>
+<div id="dynamic-pdf-questions-area"></div>
+
+<script>
+    document.write('<script src="array-A-2-mekanika.js?v=' + Date.now() + '"><\/script>');
+    document.write('<script src="array-B-2-mekanika.js?v=' + Date.now() + '"><\/script>');
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script src="addphysicslawpage-generate-1-2.js"></script>
+<script>
+
+    let currentQIndex = 0;
+
+    // قائمة الحروف لترتيب الخيارات
+    const arabicLetters = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'];
+
+    // دالة لتنظيف النص وتنسيقه بحروف أ، ب، ج، د...
+    function formatOptionText(text, index) {
+        if (!text) return '';
+        const cleanText = text.replace(/^[أ-يA-Za-z][\)\.\-]\s*/, '');
+        const letter = arabicLetters[index] || (index + 1);
+        return `${letter}) ${cleanText}`;
+    }
+
+    console.log("عدد الأسئلة في المصفوفة A-2: " + (typeof questionsMatrix !== 'undefined' ? questionsMatrix.length : 0));
+
+    function navigateQuestion(direction) {
+        const newIndex = currentQIndex + direction;
+        if (typeof questionsMatrix !== 'undefined' && newIndex >= 0 && newIndex < questionsMatrix.length) {
+            currentQIndex = newIndex;
+            renderActiveQuestion(currentQIndex);
+        }
+    }
+
+    function renderActiveQuestion(index) {
+        if (typeof questionsMatrix === 'undefined' || !questionsMatrix[index]) return;
+        const data = questionsMatrix[index];
+
+        document.getElementById('q-source').innerText = data.title;
+        document.getElementById('main-question-text').innerText = data.text;
+        document.getElementById('question-counter').innerHTML = `مسألة ${index + 1} / ${questionsMatrix.length}`;
+
+        const graphicContainer = document.getElementById('graphic-container');
+        if (data.svgCode && data.svgCode.trim() !== "") {
+            graphicContainer.innerHTML = data.svgCode;
+        } else if (data.imagePath && data.imagePath.trim() !== "") {
+            graphicContainer.innerHTML = `<img src="${data.imagePath}" alt="رسم توضيحي">`;
+        } else {
+            graphicContainer.innerHTML = '<p class="no-graphic">⚠️ لا يوجد رسم توضيحي</p>';
+        }
+
+        document.getElementById('prev-btn').disabled = index === 0;
+        document.getElementById('next-btn').disabled = index === questionsMatrix.length - 1;
+
+        const stepsContainer = document.getElementById('steps-container');
+        stepsContainer.innerHTML = '';
+
+        if (data.steps) {
+            data.steps.forEach((step, sIdx) => {
+                let optionsHTML = '';
+                if (step.options) {
+                    step.options.forEach((opt, optIdx) => {
+                        const rawText = typeof opt === 'object' ? opt.text : opt;
+                        const formattedText = formatOptionText(rawText, optIdx);
+                        optionsHTML += `
+                            <button class="option-btn" onclick="checkLiveAnswer(this, ${sIdx}, ${opt.isCorrect})" data-feedback="${step.feedback}">
+                                <span>${formattedText}</span>
+                                <i class="fa-regular fa-circle"></i>
+                            </button>
+                        `;
+                    });
+                }
+
+                stepsContainer.innerHTML += `
+                    <div class="step-card ${sIdx === 0 ? 'active' : ''}" id="step-card-${sIdx}">
+                        <div class="step-title">${step.title}</div>
+                        <div class="step-question">${step.question}</div>
+                        <div class="options-grid">${optionsHTML}</div>
+                        <div class="feedback-box" id="feedback-${sIdx}"></div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    function checkLiveAnswer(btn, sIdx, isCorrect) {
+        const card = document.getElementById(`step-card-${sIdx}`);
+        const fb = document.getElementById(`feedback-${sIdx}`);
+
+        card.querySelectorAll('.option-btn').forEach(b => {
+            b.classList.remove('correct', 'wrong');
+            b.querySelector('i').className = 'fa-regular fa-circle';
+        });
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            btn.querySelector('i').className = 'fa-solid fa-circle-check';
+            fb.innerHTML = `<i class="fa-solid fa-check"></i> ${btn.getAttribute('data-feedback')}`;
+            fb.className = 'feedback-box success';
+            card.classList.add('completed');
+            card.classList.remove('active');
+
+            const nextCard = document.getElementById(`step-card-${sIdx + 1}`);
+            if (nextCard) {
+                nextCard.classList.add('active');
+                nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+            btn.classList.add('wrong');
+            btn.querySelector('i').className = 'fa-solid fa-circle-xmark';
+        }
+    }
+
+    // دالة الصفحة الأولى من الملخص (المفاهيم والمخطط البياني)
+    function addFrictionTheoryPage1() {
+        const printableDoc = document.getElementById('printable-pdf-document');
+        
+        const page1 = document.createElement('div');
+        page1.className = 'pdf-theory-page-1';
+        page1.style.cssText = `
+            page-break-after: always;
+            break-after: page;
+            padding: 15mm 12mm;
+            text-align: right;
+            font-family: 'Cairo', sans-serif;
+            background: #ffffff;
+            direction: rtl;
+            box-sizing: border-box;
+        `;
+        
+        page1.innerHTML = `
+            <h2 style="font-size: 24px; color: #1a365d; font-weight: 800; margin-bottom: 12px; text-align: center; border-bottom: 3px solid #2563eb; padding-bottom: 6px;">
+                📌 الدليل الشامل لملخص الباب الثاني (الاحتكاك) - الجزء الأول
+            </h2>
+            
+            <div style="background: #f8fafc; padding: 12px 15px; border-radius: 8px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
+                <h3 style="font-size: 16px; color: #1d4ed8; margin-bottom: 6px;">1. مفهوم قوة الاحتكاك (f) والمراحل الثلاث:</h3>
+                <p style="font-size: 13px; color: #334155; line-height: 1.6; margin: 0 0 8px 0;">
+                    قوة مقاومة تنشأ بين سطحين متماسين وتعاكس دائماً اتجاه الحركة المحتملة أو الفعلية للجسم. وتنقسم الحركة تحت تأثير قوة سحب متزايدة (F) إلى ثلاث مراحل رئيسية:
+                </p>
+                <ul style="font-size: 13px; color: #334155; line-height: 1.6; margin: 0; padding-right: 20px;">
+                    <li><b>مرحلة السكون (الاتزان):</b> الجسم ساكن ومتزن، وتكون قوة الاحتكاك تجاوبية مساوية لقوة السحب (<span dir="ltr">f = F</span>).</li>
+                    <li><b>على وشك الحركة (أقصى احتكاك):</b> يصل الاحتكاك للذروة قبل الانزلاق مباشرة (<span dir="ltr">f_max = µR</span>).</li>
+                    <li><b>مرحلة الحركة الفعلية:</b> يتحرك الجسم بعجلة، ويصبح الاحتكاك حركياً ثابتاً (<span dir="ltr">f = µR</span>) وتطبق معادلة نيوتن الثانية: (<span dir="ltr">F - f = ma</span>).</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin: 15px 0; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px;">
+                <div style="font-size: 14px; font-weight: bold; color: #1e293b; margin-bottom: 8px;">مخطط العلاقة البيانية بين قوة السحب (F) وقوة الاحتكاك (f):</div>
+                <div id="svg-graphic-wrapper-1" style="display: flex; justify-content: center; width: 100%;"></div>
+            </div>
+            
+            <div style="text-align: center; font-size: 12px; color: #64748b; margin-top: 20px;">
+                (الصفحة 1 من 2 - ملخص الاحتكاك) ⚡ مدرسة أمجاد أفريقيا
+            </div>
+        `;
+
+        printableDoc.appendChild(page1);
+
+        const svgWrapper = page1.querySelector('#svg-graphic-wrapper-1');
+        const svgNS = "http://www.w3.org/2000/svg";
+        const svgElem = document.createElementNS(svgNS, "svg");
+        svgElem.setAttribute("viewBox", "0 0 650 220");
+        svgElem.setAttribute("style", "width: 100%; max-width: 580px; height: 160px; font-family: system-ui, sans-serif; direction: ltr;");
+        
+        svgElem.innerHTML = `
+            <defs>
+                <marker id="arrow-black" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+                </marker>
+            </defs>
+            <rect width="650" height="220" fill="#ffffff"/>
+            
+            <line x1="80" y1="180" x2="80" y2="20" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+            <text x="30" y="25" font-size="12" font-weight="bold" fill="#1e293b">الاحتكاك (f)</text>
+
+            <line x1="80" y1="180" x2="600" y2="180" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-black)"/>
+            <text x="500" y="205" font-size="12" font-weight="bold" fill="#1e293b">قوة السحب (F)</text>
+
+            <line x1="280" y1="20" x2="280" y2="180" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4"/>
+
+            <line x1="80" y1="180" x2="280" y2="65" stroke="#2563eb" stroke-width="3.5"/>
+            <line x1="280" y1="65" x2="580" y2="65" stroke="#16a34a" stroke-width="3.5"/>
+
+            <circle cx="280" cy="65" r="6" fill="#dc2626"/>
+            <line x1="80" y1="65" x2="280" y2="65" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
+            <text x="15" y="70" font-size="12" font-weight="bold" fill="#dc2626">f = µR</text>
+
+            <text x="175" y="135" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">1. مرحلة السكون (f = F)</text>
+            <text x="280" y="45" font-size="12" font-weight="bold" fill="#b91c1c" text-anchor="middle">2. على وشك الحركة</text>
+            <text x="440" y="90" font-size="12" font-weight="bold" fill="#15803d" text-anchor="middle">3. مرحلة الحركة (F - f = ma)</text>
+        `;
+        svgWrapper.appendChild(svgElem);
+    }
+
+    // دالة الصفحة الثانية من الملخص (قواعد R والفخاخ والأمثلة)
+    function addFrictionTheoryPage2() {
+        const printableDoc = document.getElementById('printable-pdf-document');
+        
+        const page2 = document.createElement('div');
+        page2.className = 'pdf-theory-page-2';
+        page2.style.cssText = `
+            page-break-after: always;
+            break-after: page;
+            padding: 15mm 12mm;
+            text-align: right;
+            font-family: 'Cairo', sans-serif;
+            background: #ffffff;
+            direction: rtl;
+            box-sizing: border-box;
+        `;
+        
+        page2.innerHTML = `
+            <h2 style="font-size: 24px; color: #1a365d; font-weight: 800; margin-bottom: 12px; text-align: center; border-bottom: 3px solid #2563eb; padding-bottom: 6px;">
+                📌 الدليل الشامل لملخص الباب الثاني (الاحتكاك) - الجزء الثاني
+            </h2>
+            
+            <div style="background: #fef2f2; padding: 12px 15px; border-radius: 8px; border: 1px solid #fecaca; margin-bottom: 15px;">
+                <h3 style="font-size: 16px; color: #b91c1c; margin-bottom: 6px;">2. القواعد الأساسية لرد الفعل العمودي (<span dir="ltr">R</span>):</h3>
+                <p style="font-size: 13px; color: #334155; line-height: 1.6; margin: 0 0 6px 0;">
+                    قيمة (<span dir="ltr">R</span>) ليست دائماً مساوية للوزن، بل تتأثر بالاتجاه الرأسي للقوى المؤثرة:
+                </p>
+                <ul style="font-size: 13px; color: #334155; line-height: 1.6; margin: 0; padding-right: 20px;">
+                    <li><b>على مستوى أفقـي (عادي):</b> <span dir="ltr"><b>R = W = mg</b></span></li>
+                    <li><b>قوة مائلة للأعلى (تسحب الجسم):</b> المركبة الرأسية تخفف الضغط على السطح ⇐ <span dir="ltr"><b>R = mg - F sin(θ)</b></span></li>
+                    <li><b>قوة مائلة للأسفل (تضغط على الجسم):</b> المركبة الرأسية تزيد الضغط ⇐ <span dir="ltr"><b>R = mg + F sin(θ)</b></span></li>
+                </ul>
+            </div>
+
+            <div style="background: #fdf4ff; padding: 12px 15px; border-radius: 8px; border: 1px solid #f0abfc; margin-bottom: 15px;">
+                <h3 style="font-size: 16px; color: #86198f; margin-bottom: 6px;">💡 تنبيهات وفخاخ امتحانية للمتفوقين:</h3>
+                <ul style="font-size: 13px; color: #334155; line-height: 1.7; margin: 0; padding-right: 20px;">
+                    <li><b>فخ الاستخدام الخاطئ للقانون:</b> لا تستخدم العلاقة (<span dir="ltr">f = µR</span>) إطلاقاً إلا إذا وجد في نص المسألة عبارة <b>"على وشك الحركة"</b> أو عندما يتحرك الجسم فعلياً.</li>
+                    <li><b>اتجاه الاحتكاك على المائل:</b> قوة الاحتكاك دائماً تعاكس <i>الحركة المحتملة أو الفعلية</i> وليس للأعلى دائماً.</li>
+                    <li><b>نصيحة ذهبية للحل:</b> ابدأ دائماً برسم <b>مخطط الجسم الحر (FBD)</b> وتحديد المحاور بدقة متناهية.</li>
+                </ul>
+            </div>
+
+            <div style="background: #f0fdf4; padding: 12px 15px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                <h3 style="font-size: 16px; color: #15803d; margin-bottom: 6px;">🎯 مثال توضيحي سريع للمهندسين والطلبة:</h3>
+                <p style="font-size: 13px; color: #334155; line-height: 1.6; margin: 0;">
+                    إذا مُنحت كتلة مقدارها (<span dir="ltr">10 kg</span>) على سطح أفقي خشن معامل احتكاكه (<span dir="ltr">0.3</span>)، فإن أقصى قوة احتكاك ساكن يتحملها السطح قبل أن يتحرك الجسم هي: <br>
+                    <span dir="ltr"><b>R = 10 × 10 = 100 N</b></span> ⟸ <span dir="ltr"><b>f_max = 0.3 × 100 = 30 N</b></span>.
+                </p>
+            </div>
+            
+            <div style="text-align: center; font-size: 12px; color: #64748b; margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 10px;">
+                (الصفحة 2 من 2 - ملاحظات الامتحانات) ⚡ إعداد الأستاذة / مدرسة أمجاد أفريقيا (ليبيا - البيضاء) ⚡
+            </div>
+        `;
+
+        printableDoc.appendChild(page2);
+    }
+
+    function addQuestionsStartPage() {
+        const printableDoc = document.getElementById('printable-pdf-document');
+        
+        const startPage = document.createElement('div');
+        startPage.className = 'pdf-questions-start-page';
+        startPage.style.cssText = `
+            page-break-after: always;
+            break-after: page;
+            padding: 20mm 10mm;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        `;
+        
+        startPage.innerHTML = `
+            <div style="font-size: 60px; margin-bottom: 20px;">📝</div>
+            <h1 style="font-size: 36px; color: #1a365d; font-weight: 800; margin-bottom: 15px;">أسئلة المراجعة النهائية</h1>
+            <div style="width: 60%; height: 3px; background: #2563eb; margin: 15px auto; border-radius: 4px;"></div>
+            <p style="font-size: 20px; color: #475569; line-height: 1.8; max-width: 80%;">
+                مجموعة من الأسئلة المتنوعة<br>
+                مع الحلول النموذجية خطوة بخطوة
+            </p>
+            <p style="font-size: 16px; color: #94a3b8; margin-top: 20px;">
+                ⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡
+            </p>
+        `;
+    }
+function addSectionDividerPage(sectionTitle, sectionSubtitle) {
+        const printableDoc = document.getElementById('printable-pdf-document');
+        
+        const dividerPage = document.createElement('div');
+        dividerPage.className = 'pdf-section-divider';
+        dividerPage.style.cssText = `
+            page-break-after: always;
+            break-after: page;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            height: 275mm;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            direction: rtl;
+            box-sizing: border-box;
+            padding: 15mm;
+            margin: 0;
+        `;
+        
+        dividerPage.innerHTML = `
+            <div style="border: 4px solid #1d4ed8; border-radius: 16px; padding: 60px 40px; background: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 92%; height: 85%; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box;">
+                <div style="font-size: 22px; color: #2563eb; font-weight: 700; margin-bottom: 20px;">
+                    📚 تمارين B-2 الباب الثاني: ميكانيكا الاحتكاك
+                </div>
+                <h1 style="font-size: 36px; color: #1a365d; font-weight: 900; margin-bottom: 25px; border-bottom: 4px solid #3b82f6; padding-bottom: 15px; width: 80%;">
+                    ${sectionTitle}
+                </h1>
+                <p style="font-size: 18px; color: #475569; line-height: 1.8; max-width: 85%; margin: 0 0 30px 0;">
+
+                    ${sectionSubtitle}
+                </p>
+                <div style="margin-top: 20px; font-size: 14px; color: #64748b; font-weight: bold;">
+                    ⚡ إعداد الأستاذة / مدرسة أمجاد أفريقيا (ليبيا - البيضاء) ⚡
+                </div>
+            </div>
+        `;
+        
+        printableDoc.appendChild(dividerPage);
+    }    // ===== دالة الطباعة العامة المحدثة والشاملة (Smart Print) =====
+    function triggerSmartPrint() {
+        const printableDoc = document.getElementById('printable-pdf-document');
+
+        // تفريغ المحتوى السابق لتجنب التكرار
+        printableDoc.innerHTML = '';
+        
+        let printStyle = document.getElementById('pdf-print-override-style');
+        if (!printStyle) {
+            printStyle = document.createElement('style');
+            printStyle.id = 'pdf-print-override-style';
+            document.head.appendChild(printStyle);
+        }
+        printStyle.innerHTML = `
+            @media print {
+                .pdf-options-container {
+                    display: flex !important;
+                    flex-wrap: wrap !important;
+                    gap: 6px !important;
+                    direction: rtl !important;
+                    width: 100% !important;
+                    margin: 6px 0 !important;
+                }
+                .pdf-option-item {
+                    flex: 0 0 calc(50% - 4px) !important;
+                    max-width: calc(50% - 4px) !important;
+                    box-sizing: border-box !important;
+                    background: #f8fafc !important;
+                    border: 1px solid #cbd5e1 !important;
+                    border-radius: 4px !important;
+                    padding: 4px 8px !important;
+                    font-size: 13px !important;
+                    text-align: right !important;
+                    direction: rtl !important;
+                }
+            }
+        `;
+
+        // ==========================================
+        // الصفحة 1: ورقة العنوان (الغلاف الرئيسي)
+        // ==========================================
+        const coverPage = document.createElement('div');
+        coverPage.className = 'pdf-cover-page';
+        coverPage.style.cssText = `
+            page-break-after: always;
+            break-after: page;
+            padding: 20mm 10mm;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+        `;
+        coverPage.innerHTML = `
+            <div class="school-name" style="font-size: 22px; color: #1a365d; margin-bottom: 20px;">مدرسة أمجاد افريقيا - ليبيا - البيضاء</div>
+            <div class="main-title" style="font-size: 42px; font-weight: 800; color: #0f172a; margin-bottom: 10px;">الميكانيكا</div>
+            <div class="sub-title" style="font-size: 28px; font-weight: 600; color: #334155; margin-bottom: 20px;">الصف الثالث الثانوي</div>
+            <div class="cover-frame" style="border: 3px solid #1a365d; border-radius: 16px; padding: 30px; margin: 20px 0; background: #f8fafc;">
+                <h3 style="font-size: 30px; color: #1e293b;">📖 الباب الثاني الاحتكاك 📖</h3>
+                <div style="font-size: 20px; color: #64748b;">الميكانيكا</div>
+                <div style="font-size: 24px; font-weight: 700; color: #0f172a; margin-top: 15px;">العام الدراسي 2026 - 2027</div>
+            </div>
+            <div style="font-size: 22px; color: #059669; margin: 15px 0;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+            <div style="font-size: 16px; color: #475569;">
+                رابط البوت التعليمي:<br>
+                <a href="http://t.me/amjad_africa2027bot" style="color: #2563eb; text-decoration: none;">t.me/amjad_africa2027bot</a>
+            </div>
+        `;
+        printableDoc.appendChild(coverPage);
+
+        // ==========================================
+        // الصفحة 2 و 3: أوراق القوانين الفيزيائية وملاخص الاحتكاك
+        // ==========================================
+        if (typeof addFrictionTheoryPage1 === 'function') {
+            addFrictionTheoryPage1();
+        }
+        if (typeof addFrictionTheoryPage2 === 'function') {
+            addFrictionTheoryPage2();
+        }
+        if (typeof addQuestionsStartPage === 'function') {
+            addQuestionsStartPage();
+        }
+
+        // ==========================================
+        // دالة مساعدة لتوليد كتل الأسئلة
+        // ==========================================
+        function renderQuestionBlock(q, questionNumber) {
+            let fontSize = 14;
+            let optionsHtml = '';
+            let optionsList = q.options || [];
+
+            let cleanQuestionText = q.text || '';
+            if (optionsList.length === 0 && cleanQuestionText.includes('(أ)')) {
+                const parts = cleanQuestionText.split(/\((?:أ|ب|ج|د)\)/);
+                cleanQuestionText = parts[0].trim();
+                const matches = q.text.match(/\((?:أ|ب|ج|د)\)\s*[^(\n]+/g);
+                if (matches) {
+                    optionsList = matches.map(m => ({ text: m.replace(/\((?:أ|ب|ج|د)\)\s*/, '').trim() }));
+                }
+            }
+
+            if (optionsList.length > 0) {
+                optionsHtml += `<div class="pdf-options-container" style="display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; width: 100%; direction: rtl;">`;
+                optionsList.forEach((opt, optIdx) => {
+                    const rawText = typeof opt === 'object' ? opt.text : opt;
+                    const formattedText = typeof formatOptionText === 'function' ? formatOptionText(rawText, optIdx) : rawText;
+                    optionsHtml += `
+                        <div class="pdf-option-item" style="flex: 0 0 calc(50% - 4px); max-width: calc(50% - 4px); box-sizing: border-box; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 8px; font-size: ${fontSize}px; text-align: right; direction: rtl;">
+                            📌 <span dir="auto">${formattedText}</span>
+                        </div>
+                    `;
+                });
+                optionsHtml += `</div>`;
+            }
+
+            let stepsHtml = '';
+            if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
+                q.pdfSolutionSteps.forEach(s => {
+                    if (s && s.trim()) {
+                        stepsHtml += `<div style="padding: 2px 0; font-size: ${fontSize}px; line-height: 1.5;">${s}</div>`;
+                    }
+                });
+            }
+
+            let graphicHtml = '';
+            if (q.svgCode && q.svgCode.trim() !== "") {
+                graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0; padding: 4px;">${q.svgCode}</div>`;
+            } else if (q.imagePath && q.imagePath.trim() !== "") {
+                graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0;"><img src="${q.imagePath}" alt="رسم توضيحي" style="max-width: 100%;"></div>`;
+            }
+
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'pdf-question-block';
+            questionDiv.style.cssText = `
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                margin-bottom: 12px !important;
+                padding-bottom: 8px !important;
+                border-bottom: 1px dashed #cbd5e1;
+                display: block;
+                width: 100%;
+            `;
+
+            questionDiv.innerHTML = `
+                <div class="pdf-q-title" style="font-size: ${fontSize + 2}px; font-weight: bold; color: #1a365d; margin-bottom: 3px;">${questionNumber}. ${q.title || ''}</div>
+                <div class="pdf-q-text" style="font-size: ${fontSize + 1}px; line-height: 1.6; color: #2d3748; margin-bottom: 3px;">${cleanQuestionText}</div>
+                ${graphicHtml}
+                ${optionsHtml}
+                <div class="pdf-solution-box" style="margin-top: 4px; padding-top: 4px; border-top: 1px dashed #edf2f7;">
+                    <div class="pdf-sol-steps" style="padding-right: 6px; color: #2d3748;">${stepsHtml || 'لا يوجد حل متاح'}</div>
+                    ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize}px; font-weight: bold; margin-top: 4px; color: #065f46; padding: 2px 6px; background-color: #f0fdf4; border-radius: 4px; display: inline-block;">${q.pdfFinalAnswer}</div>` : ''}
+                </div>
+            `;
+            return questionDiv;
+        }
+
+        // ==========================================
+        // أولاً: عرض تمارين (2-A) مباشرة داخل printableDoc
+        // ==========================================
+        const mainPageA = document.createElement('div');
+        mainPageA.className = 'print-page-box';
+        mainPageA.style.cssText = `page-break-after: auto; break-after: auto; min-height: auto; height: auto; padding: 4mm 6mm 5mm 6mm;`;
+
+        const pairContainerA = document.createElement('div');
+        pairContainerA.className = 'pdf-questions-pair-container';
+        pairContainerA.style.cssText = `display: block; width: 100%;`;
+
+        if (typeof questionsMatrix !== 'undefined' && questionsMatrix.length > 0) {
+            questionsMatrix.forEach((q, index) => {
+                pairContainerA.appendChild(renderQuestionBlock(q, index + 1));
+            });
+        }
+        mainPageA.appendChild(pairContainerA);
+        printableDoc.appendChild(mainPageA);
+
+        // ==========================================
+        // ثانياً: إدراج الصفحة الفاصلة لتمارين (2-B)
+        // ==========================================
+        if (typeof addSectionDividerPage === 'function') {
+            addSectionDividerPage(
+                "تمارين (2-B)", 
+                "مجموعة المسائل الشاملة والمتقدمة لدرس الاحتكاك (تطبيقات متقدمة وعجلة القطار)"
+            );
+        }
+
+        // ==========================================
+        // ثالثاً: عرض تمارين (2-B) من المصفوفة الجديدة
+        // ==========================================
+        const mainPageB = document.createElement('div');
+        mainPageB.className = 'print-page-box';
+        mainPageB.style.cssText = `page-break-after: auto; break-after: auto; min-height: auto; height: auto; padding: 4mm 6mm 5mm 6mm;`;
+
+        const pairContainerB = document.createElement('div');
+        pairContainerB.className = 'pdf-questions-pair-container';
+        pairContainerB.style.cssText = `display: block; width: 100%;`;
+
+        if (typeof exercises2B !== 'undefined' && exercises2B.length > 0) {
+            exercises2B.forEach((q, index) => {
+                pairContainerB.appendChild(renderQuestionBlock(q, index + 1));
+            });
+        }
+        mainPageB.appendChild(pairContainerB);
+        printableDoc.appendChild(mainPageB);
+
+        // ==========================================
+        // تذييل الصفحة الأخيرة
+        // ==========================================
+        const pageFooter = document.createElement('div');
+        pageFooter.className = 'page-footer-number';
+        pageFooter.style.cssText = `
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 5px;
+            margin-top: 6px;
+        `;
+        pageFooter.innerHTML = `⚡ - هذه المذكرة خاصة بطلبة مدرسة أمجاد أفريقيا (ليبيا - البيضاء) - ⚡`;
+        printableDoc.appendChild(pageFooter);
+
+        setTimeout(() => {
+            window.print();
+        }, 400);
+    }
+
+    window.onload = () => {
+        renderActiveQuestion(0);
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof renderMathInElement === 'function') {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ]
+            });
+        }
+    });
+</script>
+</body>
+</html>

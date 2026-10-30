@@ -11,7 +11,7 @@
     <!-- إضافة KaTeX لعرض الصيغ الرياضية -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
-<body>
+<bodybody>
 
 <div class="app-container">
     <div class="header">
@@ -206,44 +206,49 @@ function addQuestionsStartPage() {
     printableDoc.appendChild(startPage);
 }
 
-    // ===== دالة الطباعة =====
-    function triggerSmartPrint() {
+// ===== دالة الطباعة المحسنة لورق A4 =====
+function triggerSmartPrint() {
     const printableDoc = document.getElementById('printable-pdf-document');
     const questionsArea = document.getElementById('dynamic-pdf-questions-area');
 
     printableDoc.innerHTML = '';
     questionsArea.innerHTML = '';
 
-    // ===== الغلاف =====
+    // ===== صفحة الغلاف (مضبوطة لورق A4) =====
     const coverPage = document.createElement('div');
     coverPage.className = 'pdf-cover-page';
     coverPage.style.cssText = `
         page-break-after: always;
         break-after: page;
-        padding: 20mm 10mm;
+        padding: 10mm 15mm;
         text-align: center;
         font-family: 'Cairo', sans-serif;
+        box-sizing: border-box;
     `;
     coverPage.innerHTML = `
-        <div class="school-name" style="font-size: 22px; color: #1a365d; margin-bottom: 20px;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
-        <div class="main-title" style="font-size: 42px; font-weight: 800; color: #0f172a; margin-bottom: 10px;">ميكانيكا-الجزء الاول و الثاني</div>
-        <div class="sub-title" style="font-size: 28px; font-weight: 600; color: #334155; margin-bottom: 20px;">الصف الثالث الثانوي</div>
-        <div class="cover-frame" style="border: 3px solid #1a365d; border-radius: 16px; padding: 30px; margin: 20px 0; background: #f8fafc;">
-            <h3 style="font-size: 30px; color: #1e293b;">📘 كراسة الحلول النموذجية 📘</h3>
-            <h4 style="font-size: 22px; color: #475569; margin: 10px 0;"> -امتحان 2023-2022 أسئلة من امتحانات سابقة</h4>
-            <div style="font-size: 20px; color: #64748b;"> مكثف ميكانيكا  </div>
-            <div style="font-size: 24px; font-weight: 700; color: #0f172a; margin-top: 15px;">العام الدراسي 2025 - 2026</div>
+        <div class="school-name" style="font-size: 16px; font-weight: bold; color: #1a365d; margin-bottom: 10px;">مدرسة أمجاد أفريقيا - ليبيا - البيضاء</div>
+        <div class="main-title" style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 6px; line-height: 1.2;">ميكانيكا - الجزء الأول والثاني</div>
+        <div class="sub-title" style="font-size: 18px; font-weight: 600; color: #334155; margin-bottom: 15px;">الصف الثالث الثانوي</div>
+        
+        <div class="cover-frame" style="border: 2px solid #1a365d; border-radius: 12px; padding: 18px 20px; margin: 15px auto; background: #f8fafc; max-width: 90%;">
+            <h3 style="font-size: 20px; font-weight: bold; color: #1e293b; margin: 0 0 8px 0;">📘 كراسة الحلول النموذجية 📘</h3>
+            <h4 style="font-size: 15px; color: #475569; margin: 6px 0;">- امتحان 2022-2023 أسئلة من امتحانات سابقة -</h4>
+            <div style="font-size: 14px; color: #64748b; margin-top: 4px;">مكثف ميكانيكا</div>
+            <div style="font-size: 16px; font-weight: 700; color: #0f172a; margin-top: 10px; border-top: 1px stroke #cbd5e1; padding-top: 8px;">العام الدراسي 2025 - 2026</div>
         </div>
-        <div style="font-size: 22px; color: #059669; margin: 15px 0;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
-        <div style="font-size: 16px; color: #475569;">
+
+        <div style="font-size: 15px; font-weight: bold; color: #059669; margin: 12px 0;">✨ إهداء إلى طلبتنا المتميزين ✨</div>
+        <div style="font-size: 12px; color: #475569; margin-top: 10px;">
             رابط البوت التعليمي:<br>
-            <a href="http://t.me/amjad_africa2027bot" style="color: #2563eb; text-decoration: none;">t.me/amjad_africa2027bot</a>
+            <a href="http://t.me/amjad_africa2027bot" style="color: #2563eb; text-decoration: none; font-weight: bold;">t.me/amjad_africa2027bot</a>
         </div>
     `;
     printableDoc.appendChild(coverPage);
-addPhysicsLawsPages();
-addQuestionsStartPage();
-    // ===== الصفحة الرئيسية =====
+
+    if (typeof addPhysicsLawsPages === 'function') addPhysicsLawsPages();
+    if (typeof addQuestionsStartPage === 'function') addQuestionsStartPage();
+
+    // ===== الصفحة الرئيسية للأسئلة =====
     const mainPage = document.createElement('div');
     mainPage.className = 'print-page-box';
     mainPage.style.cssText = `
@@ -251,7 +256,8 @@ addQuestionsStartPage();
         break-after: auto;
         min-height: auto;
         height: auto;
-        padding: 4mm 6mm 5mm 6mm;
+        padding: 2mm 4mm;
+        box-sizing: border-box;
     `;
 
     const pairContainer = document.createElement('div');
@@ -263,30 +269,34 @@ addQuestionsStartPage();
 
     questionsMatrix.forEach((q, index) => {
         const questionNumber = index + 1;
-        let fontSize = 16;
+        
+        // معايرة حجوم الخطوط لتناسب طباعة A4
+        let fontSize = 11.5;
         const textLength = (q.text || '').length;
-        if (textLength < 50) fontSize = 18;
-        if (textLength > 100) fontSize = 15;
-        if (textLength > 150) fontSize = 14;
-        if (textLength > 200) fontSize = 13;
+        if (textLength < 60) fontSize = 12.5;
+        else if (textLength > 150) fontSize = 10.5;
 
-        // ===== stepsHtml (بدون إزالة الوسوم) =====
+        // ===== stepsHtml =====
         let stepsHtml = '';
         if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {
             q.pdfSolutionSteps.forEach(s => {
                 if (s && s.trim()) {
-                    // ✅ لا تقم بإزالة وسوم HTML
-                    stepsHtml += `<div style="padding: 2px 0; font-size: ${fontSize}px; line-height: 1.5;">${s}</div>`;
+                    stepsHtml += `<div style="padding: 1px 0; font-size: ${fontSize}px; line-height: 1.35;">${s}</div>`;
                 }
             });
         }
 
-        // ===== graphicHtml (SVG) =====
+        // ===== graphicHtml (ضبط حجم SVG والصور للـ A4) =====
         let graphicHtml = '';
         if (q.svgCode && q.svgCode.trim() !== "") {
-            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0; padding: 4px;">${q.svgCode}</div>`;
+            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0;">
+                <style>.pdf-graphic svg { max-height: 110px !important; width: auto !important; max-width: 80% !important; }</style>
+                ${q.svgCode}
+            </div>`;
         } else if (q.imagePath && q.imagePath.trim() !== "") {
-            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0;"><img src="${q.imagePath}" alt="رسم توضيحي" style="max-width: 100%;"></div>`;
+            graphicHtml = `<div class="pdf-graphic" style="text-align: center; margin: 4px 0;">
+                <img src="${q.imagePath}" alt="رسم توضيحي" style="max-height: 110px; width: auto; max-width: 80%;">
+            </div>`;
         }
 
         const questionDiv = document.createElement('div');
@@ -294,20 +304,27 @@ addQuestionsStartPage();
         questionDiv.style.cssText = `
             page-break-inside: avoid !important;
             break-inside: avoid !important;
-            margin-bottom: 10px !important;
-            padding-bottom: 8px !important;
-            border-bottom: 1px dashed #cbd5e1;
+            margin-bottom: 8px !important;
+            padding-bottom: 6px !important;
+            border-bottom: 1px stroke #e2e8f0;
             display: block;
             width: 100%;
+            box-sizing: border-box;
         `;
 
         questionDiv.innerHTML = `
-            <div class="pdf-q-title" style="font-size: ${fontSize + 3}px; font-weight: bold; color: #1a365d; margin-bottom: 3px;">${questionNumber}. ${q.title || ''}</div>
-            <div class="pdf-q-text" style="font-size: ${fontSize + 1}px; line-height: 1.6; color: #2d3748; margin-bottom: 3px;">${q.text || ''}</div>
+            <div class="pdf-q-title" style="font-size: ${fontSize + 1.5}px; font-weight: bold; color: #1a365d; margin-bottom: 2px; line-height: 1.3;">
+                ${questionNumber}. ${q.title || ''}
+            </div>
+            <div class="pdf-q-text" style="font-size: ${fontSize}px; line-height: 1.4; color: #2d3748; margin-bottom: 3px;">
+                ${q.text || ''}
+            </div>
             ${graphicHtml}
-            <div class="pdf-solution-box" style="margin-top: 3px; padding-top: 3px; border-top: 1px dashed #edf2f7;">
-                <div class="pdf-sol-steps" style="padding-right: 6px; color: #2d3748;">${stepsHtml || 'لا يوجد حل متاح'}</div>
-                ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize + 1}px; font-weight: bold; margin-top: 3px; color: #065f46; padding: 2px 6px; background-color: #f0fdf4; border-radius: 4px; display: inline-block;">${q.pdfFinalAnswer}</div>` : ''}
+            <div class="pdf-solution-box" style="margin-top: 3px; padding-top: 3px; border-top: 1px stroke #edf2f7;">
+                <div class="pdf-sol-steps" style="padding-right: 4px; color: #2d3748;">
+                    ${stepsHtml || 'لا يوجد حل متاح'}
+                </div>
+                ${q.pdfFinalAnswer ? `<div class="pdf-final-ans" style="font-size: ${fontSize}px; font-weight: bold; margin-top: 3px; color: #065f46; padding: 2px 6px; background-color: #f0fdf4; border-radius: 4px; display: inline-block;">${q.pdfFinalAnswer}</div>` : ''}
             </div>
         `;
 
@@ -321,10 +338,10 @@ addQuestionsStartPage();
     pageFooter.className = 'page-footer-number';
     pageFooter.style.cssText = `
         text-align: center;
-        font-size: 11px;
-        color: #666;
-        border-top: 1px solid #ddd;
-        padding-top: 5px;
+        font-size: 10px;
+        color: #64748b;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 4px;
         margin-top: 6px;
     `;
     pageFooter.innerHTML = `⚡ هذه المذكرة خاصة - لا يجوز نسخها ⚡`;
@@ -336,7 +353,8 @@ addQuestionsStartPage();
         window.print();
     }, 500);
 }
-    window.onload = () => {
+
+window.onload = () => {
         renderActiveQuestion(0);
     };
 
