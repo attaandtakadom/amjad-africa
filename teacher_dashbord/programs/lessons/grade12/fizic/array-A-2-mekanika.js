@@ -1,6 +1,6 @@
 const  questionsMatrix = [
 {
-    id: "1-2a",
+    id: "1-(A-2)",
     title: "س 1 (تمارين الكتاب 2-A): قوة الاحتكاك بين قوتين أفقيتين متضادتين",
     text: "يوضح الشكل المقابل قوى أفقية مقدارها (P N) و (Q N) تؤثر في اتجاهين معاكسين على كتلة مقدارها (5 kg) تستقر على سطح أفقي. أوجد مقدار قوة الاحتكاك المؤثرة على الكتلة بدلالة P و Q عندما تكون: أ) P > Q ، ب) Q > P.",
     hint: "بما أن الكتلة مستقرة (ساكنة)، فإن قوة الاحتكاك f تكون في اتجاه يعاكس القوة الأكبر وتساوي الفرق بين القوتين للتحقيق حالة الاتزان (ΣF = 0).",
@@ -57,7 +57,7 @@ const  questionsMatrix = [
 },
 
 {
-    id: "2-2a",
+    id: "2-(A-2)",
     title: "س 2 (تمارين الكتاب 2-A): مدى القيم المحتملة للقوة P على سطح أفقي خشن",
     text: "يوضح الشكل المقابل قوى أفقية مقدارها (P N) و (100 N) تؤثران في اتجاهين معاكسين على كتلة وزنها (50 N) تستقر على سطح أفقي. إذا علمت أن معامل الاحتكاك بين الكتلة والسطح يساوي (0.4)، أوجد مدى القيم المحتملة للقوة (P).",
     hint: "لكي تظل الكتلة مستقرة (متزنة)، يجب ألا يتجاوز الفرق بين القوتين المقدار الأقصى لقوة الاحتكاك (f_max = µR). احسب R من الاتزان الرأسي (R = W = 50 N)، ثم احسب f_max = 0.4 × 50 = 20 N، وتكون القوة P محصورة بين (100 - f_max) و (100 + f_max).",
@@ -119,7 +119,7 @@ const  questionsMatrix = [
 },
 
 {
-    id: "3-2a",
+    id: "3-(A-2)",
     title: "س 3 (تمارين الكتاب 2-A): حساب قوة الاحتكاك لكتلة مستقرة تحت تأثير قوة مائلة لأسفل",
     text: "يوضح الشكل المقابل قوة مقدارها (8 N) تؤثر إلى أسفل وتصنع زاوية قدرها (30°) مع الأفقي على كتلة مقدارها (3 kg) التي تستقر على سطح أفقي. احسب قوة الاحتكاك على الكتلة.",
     hint: "بما أن الكتلة تستقر (في حالة اتزان أفقي)، فإن قوة الاحتكاك f تتوازن تماماً مع المركبة الأفقية للقوة المؤثرة (8 N). بالتالي: f = 8 cos 30°.",
@@ -173,7 +173,7 @@ const  questionsMatrix = [
     pdfFinalAnswer: "الإجابة الصحيحة: أ) قوة الاحتكاك على الكتلة f ≈ 6.93 N ✅"
 },
 {
-    id: "4-2a",
+    id: "4-(A-2)",
     title: "س 4 (تمارين الكتاب 2-A): معامل الاحتكاك والقوة اللازمة لتحريك حقيبة بعجلة",
     text: "يدفع راكب طائرة بقدمه حقيبة كتلتها (15 kg) على الأرض بقوة مقدارها (60 N) لتكون الحقيبة على وشك الحركة. أوجد معامل الاحتكاك بين الحقيبة والأرض. وما مقدار القوة اللازمة لتحريك الحقيبة بعجلة قدرها (0.2 m/s²)؟ (باعتبار g = 10 m/s²).",
     hint: "1. عندما تكون الحقيبة على وشك الحركة، تكون قوة الدفع مساوية للحد الأقصى للاحتكاك (F = f_max = µR)، حيث R = mg = 150 N. من ذلك احسب µ. <br> 2. عند التحرك بعجلة (a = 0.2 m/s²)، نطبق قانون نيوتن الثاني: F' - f = m · a.",
@@ -231,7 +231,7 @@ const  questionsMatrix = [
 },
 
 {
-    id: "5-2a",
+    id: "5-(A-2)",
     title: "س 5 (تمارين الكتاب 2-A): معامل الاحتكاك لكتلة تتحرك بعجلة على سطح أفقي بفعل قوة",
     text: "تُشارع كتلة مقدارها (6 kg) بمقدار (1.25 m/s²) على سطح أفقي بفعل قوة قدرها (22.5 N). احسب معامل الاحتكاك بين الكتلة والسطح. (باعتبار g = 10 m/s²).",
     hint: "1. طبق قانون نيوتن الثاني للحركة: F - f = m · a لإيجاد قوة الاحتكاك f. <br> 2. من قيمة الاحتكاك ومعامل الاتصال العمودي R = mg = 60 N، احسب معامل الاحتكاك من العلاقة: f = µR ⇐ µ = f / R.",
@@ -289,13 +289,40 @@ const  questionsMatrix = [
     pdfFinalAnswer: "الإجابة الصحيحة: أ) معامل الاحتكاك بين الكتلة والسطح µ = 0.25 ✅"
 },
 {
-    id: "6-2a",
+    id: "6-(A-2)",
     title: "س 6 (تمارين الكتاب 2-A): قوة الاحتكاك لكتلة شاحنة تسحب بحبل أفقي بقيم شد مختلفة",
     text: "يصل حبل أفقي من رافعة بشاحنة كتلته (800 kg) يستقر على أرض أفقية. فاذا كان معامل الاحتكاك يساوي (3/4)، ويتبين الشد في الحبل بمقدار (100 N) في كل مرة، أوجد قوة الاحتكاك عندما تكون قيم الشد الآتية: أ) (5900 N) ، ب) (6000 N) ، ج) (6100 N). (باعتبار g = 10 m/s²).",
     hint: "1. احسب أقصى قوة احتكاك (f_max = µR) حيث R = mg = 800 × 10 = 8000 N، وتكون f_max = (3/4) × 8000 = 6000 N. <br> 2. لكل حالة شد (F): إذا كانت F < f_max فالجسم ساكن وقوة الاحتكاك تساوي الشد (f = F). وإذا وصلت F إلى 6000 N يصبح الجسم على وشك الحركة أو في حالة حركة ويبقى الاحتكاك عند أقصى قيمة ثابتة (6000 N).",
     solution: "1. أقصى قوة احتكاك: f_max = (3/4) × (800 × 10) = 6000 N. <br> 2. عند F = 5900 N: الجسم ساكن (f = 5900 N). <br> 3. عند F = 6000 N: الجسم على وشك الحركة (f = 6000 N). <br> 4. عند F = 6100 N: الجسم يتحرك واحتكاكه حركي أقصى (f = 6000 N).",
-    svgCode: "<svg viewBox='0 0 500 240' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><defs><marker id='arrow-blue' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#2563eb'/></marker><marker id='arrow-red' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#dc2626'/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}</style><rect width='500' height='240' fill='#ffffff'/><line x1='50' y1='170' x2='450' y2='170' stroke='#64748b' stroke-width='3'/><rect x='190' y='100' width='120' height='70' fill='#cbd5e1' stroke='#334155' stroke-width='2' rx='4'/><text x='250' y='140' class='label' font-size='14' fill='#0f172a'>800 kg</text><line x1='310' y1='135' x2='400' y2='135' stroke='#2563eb' stroke-width='3' marker-end='url(#arrow-blue)'/><text x='425' y='140' class='label' font-size='13' fill='#2563eb'>الشد F</text><line x1='190' y1='135' x2='100' y2='135' stroke='#dc2626' stroke-width='2.5' marker-end='url(#arrow-red)'/><text x='80' y='140' class='label' font-size='13' fill='#dc2626'>f</text><rect x='40' y='200' width='420' height='25' fill='none'/><text x='250' y='215' class='label' font-size='12' fill='#16a34a'>f_max = 6000 N | تقارن مع قيم الشد F ✅</text></svg>",
-    options: [
+svgCode: `<svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; direction:ltr;">
+    <defs>
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/></marker>
+        <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/></marker>
+        <marker id="arrow-dark" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/></marker>
+    </defs>
+    <style>.lbl { font-family: system-ui, -apple-system, sans-serif; font-weight: bold; text-anchor: middle; font-size: 12px; }</style>
+    
+    <!-- المستوى المائل بزاوية حقيقية 35° -->
+    <polygon points="80,400 480,400 480,120" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+    
+    <!-- قوس زاوية الميل 35° -->
+    <path d="M 150,400 A 70,70 0 0,0 137,360" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="160" y="385" class="lbl" fill="#2563eb" font-size="13">35°</text>
+    
+    <!-- الكتلة والقوى (مستقرة تماماً بدقة على السطح المائل) -->
+    <g transform="translate(280, 260) rotate(-35)">
+        <!-- الكتلة (قاعدة المربع مستقرة تماماً على الخط المائل عند y=0) -->
+        <rect x="-35" y="-70" width="70" height="70" fill="#cbd5e1" stroke="#334155" stroke-width="2" rx="4"/>
+        <text x="0" y="-35" class="lbl" font-size="14" fill="#0f172a">4 kg</text>
+        
+        <!-- القوة المؤثرة P لأعلى المستوى -->
+        <line x1="-35" y1="-35" x2="-105" y2="-35" stroke="#2563eb" stroke-width="2.5" marker-start="url(#arrow-blue)"/>
+        <text x="-120" y="-31" class="lbl" font-size="13" fill="#2563eb">P</text>
+    </g>
+    
+    <!-- نص النتيجة النهائية أسفل الشكل -->
+    <text x="300" y="445" class="lbl" font-size="13" fill="#16a34a">مدى القوة P الممكنة للاتزان ✅</text>
+</svg>`,    options: [
         { text: "أ) 5900 N ، 6000 N ، 6000 N", isCorrect: true },
         { text: "ب) 5900 N ، 6000 N ، 6100 N", isCorrect: false },
         { text: "ج) 6000 N ، 6000 N ، 6000 N", isCorrect: false },
@@ -344,115 +371,269 @@ const  questionsMatrix = [
     pdfFinalAnswer: "الإجابة الصحيحة: أ) قوة الاحتكاك للحالات الثلاث هي: 5900 N ، 6000 N ، 6000 N ✅"
 },
 {
-    id: "7-2a",
-    title: "س 7 (تمارين الكتاب 2-A): اتجاه ومقدار قوة الاحتكاك لكتيلة على مستوى مائل تحت تأثير قوة أفقية",
-    text: "يوضح الشكل المقابل كتلة وزنها (50 N) تستقر على سطح يميل بزاوية (α°) مع الأفقي بفعل قوة مقدارها (P N) تؤثر إلى أعلى السطح. فإذا كان معامل الاحتكاك بين الكتلة والسطح يساوي (0.45)، أوجد مقدار واتجاه قوة الاحتكاك بدلالة (P) عندما تكون قيم (P) الآتية: أ) (P > 50 sin α°) ، ب) (P < 50 sin α°).",
-    hint: "1. حلل مركبة الوزن في اتجاه خط المستوي المائل لأسفل: W_x = 50 sin α°. <br> 2. حلل القوة الأفقية P الموازية للمستوى المائل لأعلى: المركبة هي P cos α° (أو P حسب اتجاه القوة المؤثرة أفقياً بموازاة خط الأكبر ميل أو اتجاه السطح). <br> 3. قارن بين القوة المؤثرة لأعلى ومركبة الوزن لتعيين اتجاه الحركة المحتملة وقوة الاحتكاك.",
-    solution: "1. مركبة الوزن لأسفل: W_x = 50 sin α°. <br> 2. في الحالة (أ) P > 50 sin α°: الحركة المحتملة لأعلى، وقوة الاحتكاك تعمل لأسفل بمقدار f = P cos α° - 50 sin α° (أو حسب صيغة الاتزان). <br> 3. في الحالة (ب) P < 50 sin α°: الحركة المحتملة لأسفل، وقوة الاحتكاك تعمل لأعلى.",
-    svgCode: "<svg viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><defs><marker id='arrow-blue' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#2563eb'/></marker><marker id='arrow-red' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#dc2626'/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}</style><rect width='500' height='250' fill='#ffffff'/><polygon points='80,180 420,180 420,100' fill='#f1f5f9' stroke='#64748b' stroke-width='2'/><rect x='220' y='110' width='60' height='45' fill='#cbd5e1' stroke='#334155' stroke-width='2' rx='3' transform='rotate(-20 250 132)'/><text x='250' y='140' class='label' font-size='12' fill='#0f172a'>50 N</text><rect x='40' y='210' width='420' height='25' fill='none'/><text x='250' y='225' class='label' font-size='12' fill='#16a34a'>دراسة اتجاه الاحتكاك حسب مقارنة P بـ 50 sin α° ✅</text></svg>",
-    options: [
-        { text: "أ) الاحتكاك لأسفل (عند P > 50 sin α°) وإلى أعلى (عند P < 50 sin α°)", isCorrect: true },
-        { text: "ب) الاحتكاك دائماً لأعلى المستوى", isCorrect: false },
-        { text: "ج) الاحتكاك دائماً لأسفل المستوى", isCorrect: false },
-        { text: "د) لا يمكن التحديد بدون قيمة α", isCorrect: false }
-    ],
-    correctAnswerIndex: 0,
-    steps: [
-        {
-            title: "الخطوة 1: تحليل القوى المؤثرة على المائل",
-            question: "ما هي مركبة الوزن الأساسية المؤثرة في اتجاه خط الأكبر ميل لأسفل؟",
-            options: [
-                { text: "W_x = 50 sin α°", isCorrect: true },
-                { text: "W_x = 50 cos α°", isCorrect: false }
-            ],
-            feedback: "✅ صحيح! مركبة الوزن الموازية للمستوى هي 50 sin α°."
-        },
-        {
-            title: "الخطوة 2: تحديد اتجاه الاحتكاك بحسب الحالات",
-            question: "عندما تكون القوة P أكبر من مركبة الوزن (P > 50 sin α°)، إلى أين يتجه الاحتكاك لمانع الحركة؟",
-            options: [
-                { text: "يتجه لأسفل المستوى ليقاوم الحركة لأعلى", isCorrect: true },
-                { text: "يتجه لأعلى المستوى مع القوة P", isCorrect: false }
-            ],
-            feedback: "✅ ممتاز! الاحتكاك دائماً يعاكس اتجاه الحركة المحتملة للجسم."
-        }
-    ],
-    pdfSolutionSteps: [
-        "══════════════ الخيارات ══════════════",
-        "أ) الاحتكاك لأسفل (عند P > 50 sin α°) وإلى أعلى (عند P < 50 sin α°)  ✅ (الإجابة الصحيحة)",
-        "ب) الاحتكاك دائماً لأعلى المستوى",
-        "ج) الاحتكاك دائماً لأسفل المستوى",
-        "د) لا يمكن التحديد بدون قيمة α",
-        "",
-        "══════════════ الحل التفصيلي ══════════════",
-        "1. تحليل مركبات القوى على المستوى المائل بزاوية α:",
-        "   - مركبة الوزن لأسفل المستوى: W_x = 50 sin α°",
-        "   - القوة المؤثرة P تعمل لأعلى المستوى.",
-        "",
-        "2. دراسة الحالات المطلوبة:",
-        "   - الحالة (أ) P > 50 sin α°: القوة تفوق مركبة الوزن، لذا تحاول الكتلة الحركة لأعلى ⟸ قوة الاحتكاك تعمل لأسفل المستوى.",
-        "   - الحالة (ب) P < 50 sin α°: مركبة الوزن تفوق القوة P، لذا تحاول الكتلة الانزلاق لأسفل ⟸ قوة الاحتكاك تعمل لأعلى المستوى مقاومة للنزول.",
-        "",
-        "الإجابة الصحيحة: أ) الاحتكاك يعاكس اتجاه الحركة المحتملة في كل حالة ✅"
-    ],
-    pdfFinalAnswer: "الإجابة الصحيحة: أ) اتجاه ومقدار قوة الاحتكاك يتحدد حسب محصلة القوى واتجاه الحركة المحتملة ✅"
-},
-
-{
-    id: "8-2a",
-    title: "س 8 (تمارين الكتاب 2-A): إيجاد القيم الممكنة للقوة P لكتلة على مستوى مائل",
-    text: "يوضح الشكل المقابل كتلة مقدارها (4 kg) تستقر على سطح يميل بزاوية (35°) مع الأفقي بفعل قوة مقدارها (P N) تؤثر إلى أعلى السطح. فإذا كان معامل الاحتكاك بين الكتلة والسطح يساوي (0.45). أوجد القيم الممكنة للقوة (P). (باعتبار g = 10 m/s²).",
-    hint: "1. احسب مركبة الوزن لأسفل السطح: W_x = mg sin(35°) = 4 × 10 × sin(35°) = 40 sin(35°). <br> 2. احسب رد الفعل العمودي: R = mg cos(35°) = 40 cos(35°). <br> 3. أقصى قوة احتكاك f_max = µR = 0.45 × 40 cos(35°). <br> 4. أوجد مدى القوة P في حالتي الحركة المحتملة لأعلى أو الانزلاق لأسفل.",
-    solution: "1. W_x = 40 sin(35°) ≈ 22.94 N. <br> 2. R = 40 cos(35°) ≈ 32.77 N. <br> 3. f_max = 0.45 × 32.77 ≈ 14.75 N. <br> 4. القوة الدنيا لمنع الانزلاق P_min = W_x - f_max = 22.94 - 14.75 = 8.19 N. <br> 5. القوة العظمى لجعل الكتلة على وشك الحركة لأعلى P_max = W_x + f_max = 22.94 + 14.75 = 37.69 N. <br> المدى: 8.19 N ≤ P ≤ 37.69 N.",
-    svgCode: "<svg viewBox='0 0 500 250' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><defs><marker id='arrow-blue' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#2563eb'/></marker><marker id='arrow-red' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#dc2626'/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}</style><rect width='500' height='250' fill='#ffffff'/><polygon points='80,190 440,190 440,100' fill='#f1f5f9' stroke='#64748b' stroke-width='2'/><text x='110' y='180' class='label' font-size='12' fill='#334155'>35°</text><rect x='220' y='115' width='60' height='45' fill='#cbd5e1' stroke='#334155' stroke-width='2' rx='3' transform='rotate(-35 250 137)'/><text x='250' y='142' class='label' font-size='11' fill='#0f172a'>4 kg</text><rect x='40' y='215' width='420' height='25' fill='none'/><text x='250' y='230' class='label' font-size='12' fill='#16a34a'>مدى القوة: 8.19 N ≤ P ≤ 37.69 N ✅</text></svg>",
+    id: "7-(A-2)",
+    title: "س 7 تمارين الكتاب 2-A: القيم الممكنة لقوة الشد P لكتلة تستقر على مستوى مائل",
+    text: "يوضح الشكل المقابل كتلة مقدارها 4 kg تستقر على سطح يميل بزاوية 35° مع الأفقي بفعل قوة مقدارها P N تؤثر إلى أعلى السطح. فإذا كان معامل الاحتكاك بين الكتلة والسطح يساوي 0.45، أوجد القيم الممكنة للقوة P ليبقى الجسم في حالة اتزان. باعتبار g = 10 m/s².",
+    hint: "1. احسب مركبة الوزن لأسفل المستوى: W_x = mg sin 35° = 4 × 10 × sin 35° = 22.94 N. <br> 2. احسب رد الفعل العمودي: R = mg cos 35° = 4 × 10 × cos 35° = 32.77 N. <br> 3. احسب أقصى قوة احتكاك نهائية: f_max = μ R = 0.45 × 32.77 = 14.75 N. <br> 4. أوجد مدى القوة P الممكنة للاتزان: W_x - f_max ≤ P ≤ W_x + f_max.",
+    solution: "1. مركبة الوزن لأسفل = 40 sin 35° = 22.94 N. <br> 2. أقصى قوة احتكاك f_max = 0.45 × 40 cos 35° = 14.75 N. <br> 3. أقل قيمة للقوة P - على وشك الحركة لأسفل - = 22.94 - 14.75 = 8.19 N. <br> 4. أعلى قيمة للقوة P - على وشك الحركة لأعلى - = 22.94 + 14.75 = 37.69 N. <br> 5. مدى القوة: 8.19 N ≤ P ≤ 37.69 N.",
+    svgCode: `<svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; direction:ltr;">
+        <defs>
+            <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/></marker>
+            <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/></marker>
+            <marker id="arrow-dark" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/></marker>
+        </defs>
+        <style>.lbl { font-family: system-ui, -apple-system, sans-serif; font-weight: bold; text-anchor: middle; font-size: 12px; }</style>
+        
+        <!-- المستوى المائل بزاوية حقيقية 35° -->
+        <polygon points="80,400 480,400 480,120" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        
+        <!-- قوس زاوية الميل 35° -->
+        <path d="M 150,400 A 70,70 0 0,0 137,360" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="160" y="385" class="lbl" fill="#2563eb" font-size="13">35°</text>
+        
+        <!-- الكتلة والقوى (مستقرة تماماً بدقة على السطح المائل) -->
+        <g transform="translate(280, 260) rotate(-35)">
+            <!-- الكتلة (قاعدة المربع مستقرة تماماً على الخط المائل عند y=0) -->
+            <rect x="-35" y="-70" width="70" height="70" fill="#cbd5e1" stroke="#334155" stroke-width="2" rx="4"/>
+            <text x="0" y="-35" class="lbl" font-size="14" fill="#0f172a">4 kg</text>
+            
+            <!-- القوة المؤثرة P لأعلى المستوى -->
+            <line x1="-35" y1="-35" x2="-105" y2="-35" stroke="#2563eb" stroke-width="2.5" marker-start="url(#arrow-blue)"/>
+            <text x="-120" y="-31" class="lbl" font-size="13" fill="#2563eb">P</text>
+        </g>
+        
+        <!-- نص النتيجة النهائية أسفل الشكل -->
+        <text x="300" y="445" class="lbl" font-size="13" fill="#16a34a">8.19 N ≤ P ≤ 37.69 N - مدى القوة P للاتزان ✅</text>
+    </svg>`,
     options: [
         { text: "أ) 8.19 N ≤ P ≤ 37.69 N", isCorrect: true },
         { text: "ب) 5.00 N ≤ P ≤ 20.00 N", isCorrect: false },
-        { text: "ج) 10.50 N ≤ P ≤ 25.00 N", isCorrect: false },
-        { text: "د) 15.00 N ≤ P ≤ 40.00 N", isCorrect: false }
+        { text: "ج) 15.00 N ≤ P ≤ 40.00 N", isCorrect: false },
+        { text: "د) 10.00 N ≤ P ≤ 25.00 N", isCorrect: false }
     ],
     correctAnswerIndex: 0,
     steps: [
         {
-            title: "الخطوة 1: حساب مركبة الوزن ورد الفعل العمودي",
-            question: "إذا كانت الكتلة 4 kg والزاوية 35°، ما هي قيمة مركبة الوزن للأسفل W_x ورد الفعل R؟",
+            title: "الخطوة 1: حساب مركبات الوزن ورد الفعل أفقياً ورأسياً",
+            question: "ما هي قيمة مركبة الوزن الموازية للمستوى W_x ورد الفعل العمودي R لكتلة 4 kg بزاوية 35°؟",
             options: [
-                { text: "W_x = 22.94 N و R = 32.77 N", isCorrect: true },
-                { text: "W_x = 40 N و R = 40 N", isCorrect: false }
+                { text: "W_x = 40 sin 35° = 22.94 N ، R = 40 cos 35° = 32.77 N", isCorrect: true },
+                { text: "W_x = 40 cos 35° = 32.77 N ، R = 40 sin 35° = 22.94 N", isCorrect: false }
             ],
-            feedback: "✅ صحيح! W_x = 40 sin(35°) = 22.94 N و R = 40 cos(35°) = 32.77 N."
+            feedback: "✅ صحيح تماماً! المركبة الموازية للمستوى هي 40 sin 35° = 22.94 N والمركبة العمودية هي 40 cos 35° = 32.77 N."
         },
         {
-            title: "الخطوة 2: حساب أقصى قوة احتكاك ومدى القوة P",
-            question: "ما هو مدى القيم الممكنة للقوة P لكي تظل الكتلة متزنة على المستوى المائل؟",
+            title: "الخطوة 2: حساب أقصى احتكاك f_max وإيجاد مدى P الممكنة",
+            question: "ما قيمة أقصى قوة احتكاك نهائية f_max وما هي الفترة الممكنة للقوة P ليظل الجسم متزناً؟",
             options: [
-                { text: "8.19 N ≤ P ≤ 37.69 N", isCorrect: true },
-                { text: "20.00 N ≤ P ≤ 50.00 N", isCorrect: false }
+                { text: "f_max = 14.75 N ، ومدى القوة هو 8.19 N ≤ P ≤ 37.69 N", isCorrect: true },
+                { text: "f_max = 10.00 N ، ومدى القوة هو 5.00 N ≤ P ≤ 20.00 N", isCorrect: false }
             ],
-            feedback: "✅ ممتاز! f_max = 0.45 × 32.77 = 14.75 N، ومنها P_min = 22.94 - 14.75 = 8.19 N و P_max = 22.94 + 14.75 = 37.69 N."
+            feedback: "✅ ممتاز! f_max = 0.45 × 32.77 = 14.75 N. وبالتالي أقل قوة لمنع الانزلاق P_min = 22.94 - 14.75 = 8.19 N، وأكبر قوة لمنع الحركة لأعلى P_max = 22.94 + 14.75 = 37.69 N."
         }
     ],
     pdfSolutionSteps: [
         "══════════════ الخيارات ══════════════",
         "أ) 8.19 N ≤ P ≤ 37.69 N  ✅ (الإجابة الصحيحة)",
         "ب) 5.00 N ≤ P ≤ 20.00 N",
-        "ج) 10.50 N ≤ P ≤ 25.00 N",
-        "د) 15.00 N ≤ P ≤ 40.00 N",
+        "ج) 15.00 N ≤ P ≤ 40.00 N",
+        "د) 10.00 N ≤ P ≤ 25.00 N",
         "",
         "══════════════ الحل التفصيلي ══════════════",
-        "1. حساب مركبة الوزن ورد الفعل العمودي:",
-        "   - W_x = mg sin(35°) = 4 × 10 × sin(35°) = 40 × 0.5736 = 22.94 N",
-        "   - R = mg cos(35°) = 4 × 10 × cos(35°) = 40 × 0.8192 = 32.77 N",
+        "1. المعطيات:",
+        "- الكتلة m = 4 kg  ⟸  الوزن W = mg = 4 × 10 = 40 N",
+        "- زاوية ميل السطح θ = 35°",
+        "- معامل الاحتكاك μ = 0.45",
         "",
-        "2. حساب أقصى قوة احتكاك (f_max):",
-        "   - f_max = µ · R = 0.45 × 32.77 = 14.75 N",
+        "2. تحليل القوى موازياً وعمودياً على المستوى المائل:",
+        "- مركبة الوزن الموازية لأسفل المستوى: W_x = W · sin 35° = 40 × 0.5736 = 22.94 N",
+        "- رد الفعل العمودي: R = W · cos 35° = 40 × 0.8192 = 32.77 N",
+        "- أقصى قوة احتكاك نهائية: f_max = μ · R = 0.45 × 32.77 = 14.75 N",
         "",
-        "3. إيجاد مدى القيم الممكنة للقوة (P):",
-        "   - القوة الدنيا لمنع الانزلاق لأسفل (الاحتكاك يعمل لأعلى): P_min = W_x - f_max = 22.94 - 14.75 = 8.19 N",
-        "   - القوة العظمى لجعل الكتلة على وشك الحركة لأعلى (الاحتكاك يعمل لأسفل): P_max = W_x + f_max = 22.94 + 14.75 = 37.69 N",
+        "3. إيجاد مدى قيم القوة P للاتزان:",
+        "- أقل قيمة للقوة P عندما تكون الكتلة على وشك الانزلاق لأسفل: P_min = W_x - f_max = 22.94 - 14.75 = 8.19 N",
+        "- أكبر قيمة للقوة P عندما تكون الكتلة على وشك الحركة لأعلى: P_max = W_x + f_max = 22.94 + 14.75 = 37.69 N",
         "",
         "الإجابة الصحيحة: أ) 8.19 N ≤ P ≤ 37.69 N ✅"
     ],
-    pdfFinalAnswer: "الإجابة الصحيحة: أ) مدى القيم الممكنة للقوة هو: 8.19 N ≤ P ≤ 37.69 N ✅"
-}
-]
+    pdfFinalAnswer: "الإجابة الصحيحة: أ) القيم الممكنة للقوة P هي: 8.19 N ≤ P ≤ 37.69 N ✅"
+},
+{
+    id: "8-(A-2)",
+    title: "س 8 تمارين الكتاب 2-A: القيم الممكنة للقوة P لكتلة على مستوى مائل بزاوية 35°",
+    text: "يوضح الشكل المقابل كتلة مقدارها 4 kg تستقر على سطح يميل بزاوية 35° مع الأفقي بفعل قوة مقدارها P N تؤثر إلى أعلى السطح. فإذا كان معامل الاحتكاك بين الكتلة والسطح يساوي 0.45، أوجد القيم الممكنة للقوة P ليبقى الجسم في حالة اتزان. باعتبار g = 10 m/s².",
+    hint: "1. احسب مركبة الوزن لأسفل المستوى: W_x = mg sin 35° = 4 × 10 × sin 35° = 22.94 N. <br> 2. احسب رد الفعل العمودي: R = mg cos 35° = 4 × 10 × cos 35° = 32.77 N. <br> 3. احسب أقصى قوة احتكاك نهائية: f_max = μ R = 0.45 × 32.77 = 14.75 N. <br> 4. أوجد مدى القوة P الممكنة للاتزان: W_x - f_max ≤ P ≤ W_x + f_max.",
+    solution: "1. مركبة الوزن لأسفل = 40 sin 35° = 22.94 N. <br> 2. أقصى قوة احتكاك f_max = 0.45 × 40 cos 35° = 14.75 N. <br> 3. أقل قيمة للقوة P = 22.94 - 14.75 = 8.19 N. <br> 4. أعلى قيمة للقوة P = 22.94 + 14.75 = 37.69 N. <br> 5. مدى القوة P الممكنة للاتزان: 8.19 N ≤ P ≤ 37.69 N.",
+    svgCode: `<svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; direction:ltr;">
+        <defs>
+            <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/></marker>
+            <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/></marker>
+            <marker id="arrow-dark" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/></marker>
+        </defs>
+        <style>.lbl { font-family: system-ui, -apple-system, sans-serif; font-weight: bold; text-anchor: middle; font-size: 12px; }</style>
+        
+        <!-- المستوى المائل بزاوية حقيقية 35° -->
+        <polygon points="80,400 480,400 480,120" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+        
+        <!-- قوس زاوية الميل 35° -->
+        <path d="M 150,400 A 70,70 0 0,0 137,360" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="160" y="385" class="lbl" fill="#2563eb" font-size="13">35°</text>
+        
+        <!-- الكتلة والقوى (مستقرة تماماً بدقة على السطح المائل) -->
+        <g transform="translate(280, 260) rotate(-35)">
+            <!-- الكتلة (قاعدة المربع مستقرة تماماً على الخط المائل عند y=0) -->
+            <rect x="-35" y="-70" width="70" height="70" fill="#cbd5e1" stroke="#334155" stroke-width="2" rx="4"/>
+            <text x="0" y="-35" class="lbl" font-size="14" fill="#0f172a">4 kg</text>
+            
+            <!-- القوة المؤثرة P لأعلى المستوى -->
+            <line x1="-35" y1="-35" x2="-105" y2="-35" stroke="#2563eb" stroke-width="2.5" marker-start="url(#arrow-blue)"/>
+            <text x="-120" y="-31" class="lbl" font-size="13" fill="#2563eb">P</text>
+        </g>
+        
+        <!-- نص النتيجة النهائية أسفل الشكل -->
+        <text x="300" y="445" class="lbl" font-size="13" fill="#16a34a">8.19 N ≤ P ≤ 37.69 N - مدى القوة P للاتزان ✅</text>
+    </svg>`,
+    options: [
+        { text: "أ) 8.19 N ≤ P ≤ 37.69 N", isCorrect: true },
+        { text: "ب) 5.00 N ≤ P ≤ 20.00 N", isCorrect: false },
+        { text: "ج) 15.00 N ≤ P ≤ 40.00 N", isCorrect: false },
+        { text: "د) 10.00 N ≤ P ≤ 25.00 N", isCorrect: false }
+    ],
+    correctAnswerIndex: 0,
+    steps: [
+        {
+            title: "الخطوة 1: حساب مركبة الوزن ورد الفعل العمودي",
+            question: "ما قيمة مركبة الوزن الموازية للمستوى W_x ورد الفعل R لكتلة 4 kg بزاوية 35°؟",
+            options: [
+                { text: "W_x = 40 sin 35° = 22.94 N ، R = 40 cos 35° = 32.77 N", isCorrect: true },
+                { text: "W_x = 40 cos 35° = 32.77 N ، R = 40 sin 35° = 22.94 N", isCorrect: false }
+            ],
+            feedback: "✅ صحيح تماماً! المركبة الموازية للمستوى هي 40 sin 35° = 22.94 N والمركبة العمودية هي 40 cos 35° = 32.77 N."
+        },
+        {
+            title: "الخطوة 2: حساب أقصى احتكاك f_max وإيجاد مدى P الممكنة",
+            question: "ما قيمة أقصى قوة احتكاك f_max وما هي الفترة الممكنة للقوة P للاتزان؟",
+            options: [
+                { text: "f_max = 14.75 N ، ومدى القوة هو 8.19 N ≤ P ≤ 37.69 N", isCorrect: true },
+                { text: "f_max = 10.00 N ، ومدى القوة هو 5.00 N ≤ P ≤ 20.00 N", isCorrect: false }
+            ],
+            feedback: "✅ ممتاز! f_max = 0.45 × 32.77 = 14.75 N. وبذلك تكون القوة P بين 22.94 - 14.75 = 8.19 N و 22.94 + 14.75 = 37.69 N."
+        }
+    ],
+    pdfSolutionSteps: [
+        "══════════════ الخيارات ══════════════",
+        "أ) 8.19 N ≤ P ≤ 37.69 N  ✅ (الإجابة الصحيحة)",
+        "ب) 5.00 N ≤ P ≤ 20.00 N",
+        "ج) 15.00 N ≤ P ≤ 40.00 N",
+        "د) 10.00 N ≤ P ≤ 25.00 N",
+        "",
+        "══════════════ الحل التفصيلي ══════════════",
+        "1. المعطيات:",
+        "- الكتلة m = 4 kg  ⟸  الوزن W = 4 × 10 = 40 N",
+        "- زاوية ميل السطح θ = 35°",
+        "- معامل الاحتكاك μ = 0.45",
+        "",
+        "2. تحليل القوى موازياً وعمودياً على المستوى المائل:",
+        "- مركبة الوزن الموازية لأسفل المستوى: W_x = 40 sin 35° = 22.94 N",
+        "- رد الفعل العمودي: R = 40 cos 35° = 32.77 N",
+        "- أقصى قوة احتكاك نهائية: f_max = μ · R = 0.45 × 32.77 = 14.75 N",
+        "",
+        "3. إيجاد مدى قيم القوة P للاتزان:",
+        "- أقل قيمة للقوة P عندما تكون الكتلة على وشك الانزلاق لأسفل: P_min = W_x - f_max = 22.94 - 14.75 = 8.19 N",
+        "- أكبر قيمة للقوة P عندما تكون الكتلة على وشك الحركة لأعلى: P_max = W_x + f_max = 22.94 + 14.75 = 37.69 N",
+        "",
+        "الإجابة الصحيحة: أ) 8.19 N ≤ P ≤ 37.69 N ✅"
+    ],
+    pdfFinalAnswer: "الإجابة الصحيحة: أ) القيم الممكنة للقوة P هي 8.19 N ≤ P ≤ 37.69 N ✅"
+},
+{
+    id: "9-(A-2)",
+    title: "س 9 (تمارين الكتاب 2-A): المسافة التي تقطعها عملة معدنية تنزلق على لوحة خشبية أفقية",
+    text: "ضربت عملة معدنية كتلتها 5 g وانزلقت على لوحة خشبية أفقية. فإذا كان معامل الاحتكاك يساوي 0.4، وتتحرك العملة بسرعة 1.5 m/s، إلى أي بعد تتحرك العملة قبل أن تقف؟ (باعتبار g = 10 m/s²).",
+    hint: "1. احسب العجلة التقصيرية الناتجة عن قوة الاحتكاك: a = -μ × g = -0.4 × 10 = -4 m/s². <br> 2. استخدم معادلة الحركة للوصول للسكون v = 0: v² = u² + 2as. <br> 3. عوض بالقيم: 0 = (1.5)² + 2(-4)s لإيجاد المسافة s.",
+    solution: "1. العجلة a = -μg = -0.4 × 10 = -4 m/s². <br> 2. السرعة الابتدائية u = 1.5 m/s، والسرعة النهائية v = 0 m/s. <br> 3. معادلة الحركة: v² = u² + 2as ⇐ 0 = 2.25 - 8s ⇐ s = 0.28125 m ≈ 0.28 m (أي 28.1 cm).",
+    svgCode: `<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; direction:ltr;">
+        <defs>
+            <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/></marker>
+            <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/></marker>
+            <marker id="arrow-dark" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/></marker>
+        </defs>
+        <style>.lbl { font-family: system-ui, -apple-system, sans-serif; font-weight: bold; text-anchor: middle; font-size: 12px; }</style>
+        
+        <!-- السطح الخشبي الأفقي -->
+        <line x1="50" y1="200" x2="550" y2="200" stroke="#475569" stroke-width="3"/>
+        
+        <!-- العملة المعدنية في الموضع الابتدائي -->
+        <circle cx="150" cy="185" r="15" fill="#cbd5e1" stroke="#1e293b" stroke-width="2"/>
+        <text x="150" y="189" class="lbl" font-size="10" fill="#0f172a">5 g</text>
+        
+        <!-- سهم السرعة الابتدائية (إلى اليمين) -->
+        <line x1="170" y1="185" x2="230" y2="185" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+        <text x="200" y="173" class="lbl" fill="#2563eb">u = 1.5 m/s</text>
+        
+        <!-- سهم قوة الاحتكاك المعاكسة (إلى اليسار) -->
+        <line x1="130" y1="185" x2="80" y2="185" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+        <text x="105" y="173" class="lbl" fill="#dc2626">f = μR</text>
+        
+        <!-- العملة عند التوقف (v = 0) -->
+        <circle cx="430" cy="185" r="15" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="430" y="189" class="lbl" font-size="10" fill="#64748b">v = 0</text>
+        
+        <!-- المسافة المقطوعة s -->
+        <line x1="150" y1="225" x2="430" y2="225" stroke="#16a34a" stroke-width="1.5" marker-start="url(#arrow-dark)" marker-end="url(#arrow-dark)"/>
+        <text x="290" y="245" class="lbl" font-size="13" fill="#16a34a">المسافة s = 0.28 m ✅</text>
+    </svg>`,
+    options: [
+        { text: "أ) s = 0.28 m - أو 28.1 cm", isCorrect: true },
+        { text: "ب) s = 0.56 m", isCorrect: false },
+        { text: "ج) s = 0.14 m", isCorrect: false },
+        { text: "د) s = 0.42 m", isCorrect: false }
+    ],
+    correctAnswerIndex: 0,
+    steps: [
+        {
+            title: "الخطوة 1: حساب العجلة التقصيرية a",
+            question: "ما قيمة العجلة التقصيرية للعملة إذا كان معامل الاحتكاك 0.4 و g = 10 m/s²؟",
+            options: [
+                { text: "a = -μg = -0.4 × 10 = -4 m/s²", isCorrect: true },
+                { text: "a = -μ/g = -0.04 m/s²", isCorrect: false }
+            ],
+            feedback: "✅ صحيح تماماً! العجلة بفعل الاحتكاك فقط على السطح الأفقي هي a = -μg = -4 m/s²."
+        },
+        {
+            title: "الخطوة 2: حساب المسافة s المقطوعة حتى التوقف",
+            question: "باستخدام v² = u² + 2as مع u = 1.5 m/s و v = 0، كم تبلغ المسافة s؟",
+            options: [
+                { text: "s = 2.25 / 8 = 0.28125 m ≈ 0.28 m", isCorrect: true },
+                { text: "s = 1.5 / 4 = 0.375 m", isCorrect: false }
+            ],
+            feedback: "✅ ممتاز! تتوقف العملة بعد قطع مسافة 0.28 متر تقريباً (أو 28.1 سم)."
+        }
+    ],
+    pdfSolutionSteps: [
+        "══════════════ الخيارات ══════════════",
+        "أ) s = 0.28 m - أو 28.1 cm  ✅ (الإجابة الصحيحة)",
+        "ب) s = 0.56 m",
+        "ج) s = 0.14 m",
+        "د) s = 0.42 m",
+        "",
+        "══════════════ الحل التفصيلي ══════════════",
+        "1. المعطيات:",
+        "- كتلة العملة m = 5 g = 0.005 kg",
+        "- معامل الاحتكاك μ = 0.4",
+        "- السرعة الابتدائية u = 1.5 m/s",
+        "- السرعة النهائية عند التوقف v = 0 m/s",
+        "- عجلة الجاذبية g = 10 m/s²",
+        "",
+        "2. حساب العجلة a:",
+        "- R = mg ، f = μR = μmg",
+        "- F = ma ⟸ -μmg = ma ⟸ a = -μg = -0.4 × 10 = -4 m/s²",
+        "",
+        "3. حساب المسافة المقطوعة s:",
+        "- v² = u² + 2as ⟸ 0 = (1.5)² + 2(-4)s",
+        "- 8s = 2.25 ⟸ s = 0.28125 m ≈ 0.28 m ✅",
+        "",
+        "الإجابة الصحيحة: أ) s = 0.28 m - أو 28.1 cm ✅"
+    ],
+    pdfFinalAnswer: "الإجابة الصحيحة: أ) s = 0.28 m - أو 28.1 cm ✅"
+}]
