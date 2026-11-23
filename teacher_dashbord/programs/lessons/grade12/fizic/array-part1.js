@@ -767,50 +767,47 @@ const questionsMatrix = [
         ],
         "pdfFinalAnswer": "الإجابة الصحيحة: أ) صح"
     },
-    
-     {
-        "id": 16,
-        "title": "سؤال وزارة: التأكد من نوع شحنة قضيب زجاجي",
-        "text": "إذا كان لدينا قضيب من الزجاج مشحون بشحنة موجبة ويراد التأكد من نوع الشحنة التي يحملها، يتم تقريبه من:",
-        "options": [
-            { "text": "كشاف كهربائي غير مشحون", "isCorrect": false },
-            { "text": "موصل معزول وغير مشحون", "isCorrect": false },
-            { "text": "كشاف كهربائي سالب الشحنة", "isCorrect": true },
-            { "text": "كشاف كهربائي موجب الشحنة", "isCorrect": false }
-        ],
-        "svgCode": `<svg viewBox="0 0 300 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
-            <rect width="300" height="140" fill="#ffffff"/>
-            <circle cx="150" cy="40" r="15" fill="#fbbf24" stroke="#333" stroke-width="2"/>
-            <line x1="150" y1="55" x2="150" y2="95" stroke="#333" stroke-width="2"/>
-            <line x1="150" y1="95" x2="130" y2="120" stroke="#d97706" stroke-width="3"/>
-            <line x1="150" y1="95" x2="170" y2="120" stroke="#d97706" stroke-width="3"/>
-            <text x="150" y="44" text-anchor="middle" font-size="10" font-weight="bold" font-family="Cairo">قرص الكشاف</text>
-            <text x="150" y="135" text-anchor="middle" font-size="11" font-weight="bold" font-family="Cairo" fill="#d97706">ورقتان مشحونتان</text>
-            <rect x="210" y="25" width="70" height="15" fill="#93c5fd" stroke="#2563eb" rx="4"/>
-            <text x="245" y="37" text-anchor="middle" font-size="10" font-weight="bold" font-family="Cairo" fill="#1e3a8a">+ قضيب زجاجي</text>
-        </svg>`,
-        "steps": [
-            {
-                "title": "المرحلة الأولى: مبدأ عمل الكشاف الكهربائي",
-                "question": "كيف يمكن معرفة نوع شحنة جسم باستخدام كشاف كهربائي؟",
-                "options": [
-                    { "text": "تقريبه من كشاف مشحون بشحنة معلومة وملاحظة الانفراج", "isCorrect": true },
-                    { "text": "تقريبه من كشاف غير مشحون", "isCorrect": false }
-                ],
-                "feedback": "صحيح! لتحديد نوع الشحنة، نقرب الجسم من كشاف مشحون بشحنة معلومة ونلاحظ ازدياد أو نقصان انفراج الورقتين."
-            }
-        ],
-        "pdfSolutionSteps": [
-            "<div><strong>الحل المفصل:</strong></div>",
-            "<div>لتحديد نوع شحنة جسم باستخدام كشاف كهربائي:</div>",
-            "<div>1. نشحن الكشاف بشحنة معلومة (سالبة مثلاً).</div>",
-            "<div>2. نقرب الجسم المراد فحصه من قرص الكشاف.</div>",
-            "<div>3. إذا تناقص انفراج الورقتين ← الشحنة معاكسة لشحنة الكشاف (موجبة).</div>",
-            "<div>4. إذا ازداد انفراج الورقتين ← الشحنة مماثلة لشحنة الكشاف.</div>"
-        ],
-        "pdfFinalAnswer": "الإجابة الصحيحة: (ج) كشاف كهربائي سالب الشحنة"
-    },
-
+    {
+    "id": 16,
+    "title": "سؤال وزارة: التأكد من نوع شحنة قضيب زجاجي",
+    "text": "إذا كان لدينا قضيب من الزجاج مشحون بشحنة موجبة ويراد التأكد من نوع الشحنة التي يحملها، يتم تقريبه من:",
+    "options": [
+        { "text": "كشاف كهربائي غير مشحون", "isCorrect": false },
+        { "text": "موصل معزول وغير مشحون", "isCorrect": false },
+        { "text": "كشاف كهربائي سالب الشحنة", "isCorrect": false },
+        { "text": "كشاف كهربائي موجب الشحنة", "isCorrect": true }
+    ],
+    "svgCode": `<svg viewBox="0 0 320 150" width="100%" height="150" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="150" fill="#ffffff"/>
+        <circle cx="140" cy="42" r="22" fill="#fbbf24" stroke="#333" stroke-width="2"/>
+        <line x1="140" y1="64" x2="140" y2="100" stroke="#333" stroke-width="2"/>
+        <line x1="140" y1="100" x2="118" y2="125" stroke="#d97706" stroke-width="3"/>
+        <line x1="140" y1="100" x2="162" y2="125" stroke="#d97706" stroke-width="3"/>
+        <text x="140" y="46" text-anchor="middle" font-size="10" font-weight="bold" font-family="Cairo">قرص الكشاف</text>
+        <text x="140" y="142" text-anchor="middle" font-size="11" font-weight="bold" font-family="Cairo" fill="#d97706">زيادة انفراج الورقتين (+)</text>
+        <rect x="215" y="28" width="85" height="22" fill="#93c5fd" stroke="#2563eb" rx="4"/>
+        <text x="257" y="43" text-anchor="middle" font-size="10" font-weight="bold" font-family="Cairo" fill="#1e3a8a">+ قضيب زجاجي</text>
+    </svg>`,
+    "steps": [
+        {
+            "title": "المرحلة الأولى: الاستدلال بزيادة الانفراج",
+            "question": "ماذا يحدث عند تقريب قضيب زجاجي موجب الشحنة من كشاف كهربائي موجب الشحنة؟",
+            "options": [
+                { "text": "يزداد انفراج الورقتين، مما يدل على تماثل الشحنة (موجبة)", "isCorrect": true },
+                { "text": "لا يتأثر الكشاف ولا يتغير الانفراج", "isCorrect": false }
+            ],
+            "feedback": "صحيح! تقريب قضيب موجب من كشاف مشحون بشحنة موجبة يؤدي إلى ازدياد انفراج الورقتين، وهو ما يؤكد أن شحنة القضيب موجبة."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "<div><strong>الحل المفصل:</strong></div>",
+        "<div>لتحديد نوع شحنة القضيب الزجاجي الموجب وفق المنهج:</div>",
+        "<div>1. نُقرّب القضيب الزجاجي المشحون بشحنة موجبة من قرص كشاف كهربائي مشحون بشحنة موجبة.</div>",
+        "<div>2. نلاحظ ازدياد انفراج ورقتي الكشاف نتيجة تنافر الشحنات المتماثلة.</div>",
+        "<div>3. ازدياد الانفراج يؤكد أن شحنة القضيب موجبة مثل شحنة الكشاف.</div>"
+    ],
+    "pdfFinalAnswer": "الإجابة الصحيحة: (د) كشاف كهربائي موجب الشحنة"
+},
 {
         "id": 19,
         "title": "س 2 (2022-2023): توصيل موصل مشحون بالأرض",
