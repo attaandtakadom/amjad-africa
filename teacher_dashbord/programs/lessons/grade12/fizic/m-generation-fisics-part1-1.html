@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>مكثف الفيزياء - مدرسـة أمجاد أفريقيا</title>
+    <title>الباب الاول الفيزياء -   </title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -15,7 +15,7 @@
 
 <div class="app-container">
     <div class="header">
-        <h2><i class="fa-solid fa-desktop"></i>مكثف الفيزياء    </h2>
+        <h2><i class="fa-solid fa-desktop"></i>i> الباب الاول-فيزياء</h2>
         <span class="school-badge">مدرسة أمجاد أفريقيا - ليبيا</span>
         <span id="question-counter"></span>
                     <a href="generated-bdf-fisizs-allparts.html" class="nav-btn">⚙️ لوحة التحكم</a>
@@ -324,30 +324,39 @@ function triggerSmartPrint() {
         let optionsList = q.options || [];
 
         // في حال كانت الخيارات محتواة داخل نص السؤال العام وليس حقل منفصل
-        let cleanQuestionText = q.text || '';
+       let cleanQuestionText = q.text || '';
         if (optionsList.length === 0 && cleanQuestionText.includes('(أ)')) {
-            const parts = cleanQuestionText.split(/\((?:أ\vert{}ب\vert{}ج\vert{}d\vert{}د)\)/);
+            const parts = cleanQuestionText.split(/\((?:أ|ب|ج|d|د)\)/);
             cleanQuestionText = parts[0].trim();
-            const matches = q.text.match(/\((?:أ\vert{}ب\vert{}ج\vert{}د)\)\s*[^(\n]+/g);
+            const matches = q.text.match(/\((?:أ|ب|ج|د)\)\s*[^(\n]+/g);
             if (matches) {
-                optionsList = matches.map(m => ({ text: m.replace(/\((?:أ\vert{}ب\vert{}ج\vert{}د)\)\s*/, '').trim() }));
+                optionsList = matches.map(m => ({ text: m.replace(/\((?:أ|ب|ج|د)\)\s*/, '').trim() }));
             }
         }
 
+        const arabicLetters = ['أ', 'ب', 'ج', 'د', 'هـ'];
+
         if (optionsList.length > 0) {
-            optionsHtml += `<div class="pdf-options-container" style="display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; width: 100%; direction: rtl;">`;
+            optionsHtml += `<div class="pdf-options-container" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; width: 100%; direction: rtl;">`;
             optionsList.forEach((opt, optIdx) => {
-                const rawText = typeof opt === 'object' ? opt.text : opt;
-                const formattedText = formatOptionText(rawText, optIdx);
+                const rawText = (typeof opt === 'object' ? opt.text : opt).trim();
+                // تنظيف أي حرف خيار مسبق لتجنب التكرار
+                const cleanOptText = rawText.replace(/^(?:\(?[أبجدهـ]\)|\d+[\.\-\)])\s*/, '');
+                const letter = arabicLetters[optIdx] || (optIdx + 1);
+                
+                // فحص ما إذا كان محتوى الخيار إنجليزياً أو أرقاماً/رموزاً رياضية لعزل اتجاهه ومنع انعكاس الإشارات
+                const isLtrContent = /^[A-Za-z0-9\-\+\(\)\.\,\s\/\\×÷=<>%μΩ]+$/.test(cleanOptText);
+                const contentDir = isLtrContent ? 'ltr' : 'rtl';
+
                 optionsHtml += `
-                    <div class="pdf-option-item" style="flex: 0 0 calc(50% - 4px); max-width: calc(50% - 4px); box-sizing: border-box; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 8px; font-size: ${fontSize}px; text-align: right; direction: rtl;">
-                        📌 <span dir="auto">${formattedText}</span>
+                    <div class="pdf-option-item" style="flex: 0 0 100%; max-width: 100%; box-sizing: border-box; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; font-size: ${fontSize}px; line-height: 1.75; text-align: right; direction: rtl;">
+                        📌 <span dir="rtl" style="font-weight: bold; margin-left: 6px;">${letter})</span>
+                        <span dir="${contentDir}" style="unicode-bidi: isolate; display: inline-block;">${cleanOptText}</span>
                     </div>
                 `;
             });
             optionsHtml += `</div>`;
         }
-
         // ===== خطوات الحل المفصلة =====
         let stepsHtml = '';
         if (q.pdfSolutionSteps && q.pdfSolutionSteps.length > 0) {

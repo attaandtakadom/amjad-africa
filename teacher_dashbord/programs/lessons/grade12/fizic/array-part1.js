@@ -1122,45 +1122,49 @@ const questionsMatrix = [
         ],
         "pdfFinalAnswer": "الإجابة:أ) صحيح"
     },
-    {
-        "id": 2,
-        "title": "س 4 (2007): القوة الكهربائية كمية متجهة",
-        "text": "القوة الكهربائية كمية متجهة وتعمل على الخط الواصل بين الشحنتين، ويكون اتجاهها للخارج في حالة الشحنات المختلفة (موجبة وسالبة).",
-        "options": [
-            { "text": "صحيح", "isCorrect": false },
-            { "text": "خطأ", "isCorrect": true }
-        ],
-        "svgCode": `<svg width='400' height='150' viewBox='0 0 400 150'>
-            <rect width='400' height='150' fill='#ffffff'/>
-            <circle cx='120' cy='75' r='15' fill='#ef4444'/>
-            <text x='120' y='80' text-anchor='middle' fill='white' font-size='14' font-weight='bold'>+</text>
-            <circle cx='280' cy='75' r='15' fill='#2563eb'/>
-            <text x='280' y='80' text-anchor='middle' fill='white' font-size='14' font-weight='bold'>-</text>
-            <line x1='135' y1='75' x2='265' y2='75' stroke='#333' stroke-width='2' marker-end='url(#arrow)'/>
-            <defs>
-                <marker id='arrow' markerWidth='10' markerHeight='10' refX='9' refY='5' orient='auto'>
-                    <polygon points='0 0, 10 5, 0 10' fill='#333'/>
-                </marker>
-            </defs>
-        </svg>`,
-        "steps": [
-            {
-                "title": "تحديد صحة العبارة",
-                "question": "هل اتجاه القوة الكهربائية بين شحنتين مختلفتين (+ و -) يكون للخارج؟",
-                "options": [
-                    { "text": "خطأ (الاتجاه للداخل بسبب التجاذب)", "isCorrect": true },
-                    { "text": "صحيح", "isCorrect": false }
-                ],
-                "feedback": "خطأ! الشحنات المختلفة تتجاذب، فاتجاه القوة يكون للداخل وليس للخارج."
-            }
-        ],
-        "pdfSolutionSteps": [
-            "<div>- الشحنات <strong>المختلفة</strong> (+ و -): تتجاذب ← اتجاه القوة للداخل.</div>",
-            "<div>- الشحنات <strong>المتشابهة</strong> (+ و + أو - و -): تتنافر ← اتجاه القوة للخارج.</div>"
-        ],
-        "pdfFinalAnswer": "الإجابة: ب)خطأ"
-    },
-    {
+   {
+    "id": 2,
+    "title": "س 4 (2007): القوة الكهربائية كمية متجهة",
+    "text": "القوة الكهربائية كمية متجهة وتعمل على الخط الواصل بين الشحنتين، ويكون اتجاهها للخارج في حالة الشحنات المختلفة (موجبة وسالبة).",
+    "options": [
+        { "text": "صحيح", "isCorrect": false },
+        { "text": "خطأ", "isCorrect": true }
+    ],
+    "svgCode": `<svg viewBox="0 0 400 165" style="width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="165" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="200" y="26" text-anchor="middle" font-size="13" font-weight="bold" font-family="Cairo, sans-serif" fill="#334155">الخط الواصل بين الشحنتين (تجاذب = للداخل)</text>
+        <line x1="85" y1="78" x2="315" y2="78" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4"/>
+        <circle cx="85" cy="78" r="22" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+        <text x="85" y="85" text-anchor="middle" font-size="22" font-weight="bold" font-family="Arial, sans-serif" fill="#b91c1c">+</text>
+        <text x="85" y="118" text-anchor="middle" font-size="12" font-weight="bold" font-family="Cairo, sans-serif" fill="#b91c1c">موجبة</text>
+        <circle cx="315" cy="78" r="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+        <text x="315" y="84" text-anchor="middle" font-size="22" font-weight="bold" font-family="Arial, sans-serif" fill="#1d4ed8">−</text>
+        <text x="315" y="118" text-anchor="middle" font-size="12" font-weight="bold" font-family="Cairo, sans-serif" fill="#1d4ed8">سالبة</text>
+        <line x1="115" y1="78" x2="162" y2="78" stroke="#059669" stroke-width="2.5"/>
+        <polygon points="172,78 160,72 160,84" fill="#059669"/>
+        <text x="143" y="68" text-anchor="middle" font-size="12" font-weight="bold" font-family="Arial, sans-serif" fill="#059669">F</text>
+        <line x1="285" y1="78" x2="238" y2="78" stroke="#059669" stroke-width="2.5"/>
+        <polygon points="228,78 240,72 240,84" fill="#059669"/>
+        <text x="257" y="68" text-anchor="middle" font-size="12" font-weight="bold" font-family="Arial, sans-serif" fill="#059669">F</text>
+        <text x="200" y="148" text-anchor="middle" font-size="12" font-weight="bold" font-family="Cairo, sans-serif" fill="#065f46">المختلفة تتجاذب (للداخل) — والمتماثلة تتنافر (للخارج)</text>
+    </svg>`,
+    "steps": [
+        {
+            "title": "تحديد صحة العبارة",
+            "question": "هل اتجاه القوة الكهربائية بين شحنتين مختلفتين (+ و -) يكون للخارج؟",
+            "options": [
+                { "text": "خطأ (الاتجاه للداخل بسبب التجاذب)", "isCorrect": true },
+                { "text": "صحيح", "isCorrect": false }
+            ],
+            "feedback": "خطأ! الشحنات المختلفة تتجاذب، فاتجاه القوة يكون للداخل وليس للخارج."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "<div>- الشحنات <strong>المختلفة</strong> (+ و -): تتجاذب ← اتجاه القوة للداخل.</div>",
+        "<div>- الشحنات <strong>المتشابهة</strong> (+ و + أو - و -): تتنافر ← اتجاه القوة للخارج.</div>"
+    ],
+    "pdfFinalAnswer": "الإجابة: ب)خطأ"
+}, {
         "id": 3,
         "title": "س 30 (2021-2022): شدة المجال الكهربائي حول بروتون",
         "text": "شدة المجال الكهربائي عند نقطة تبعد 200 cm من بروتون هي:",
@@ -1437,58 +1441,58 @@ const questionsMatrix = [
         ],
         "pdfFinalAnswer": "الإجابة الصحيحة: (ب) A موجبة، B سالبة"
     },
-    {
-        "id": 10,
-        "title": "سؤال وزارة: قانون كولوم والقوة العظمى",
-        "text": "شحنتان كهربائيتان في الهواء والمسافة بينهما (1m)، أي من أزواج الشحنات التالية يعطي أكبر قوة تجاذب ممكّنة بينهما؟",
-        "options": [
-            { "text": "1C , 4C", "isCorrect": false },
-            { "text": "-6C , -3C", "isCorrect": false },
-            { "text": "9C , 2C", "isCorrect": false },
-            { "text": "5C , -2C", "isCorrect": true }
-        ],
-        "svgCode": `<svg viewBox="0 0 200 80" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
-            <rect width="200" height="80" fill="#ffffff"/>
-            <circle cx="40" cy="40" r="12" fill="#dc3545"/>
-            <text x="40" y="44" text-anchor="middle" fill="white" font-size="10" font-weight="bold">+5C</text>
-            <circle cx="160" cy="40" r="12" fill="#198754"/>
-            <text x="160" y="44" text-anchor="middle" fill="white" font-size="10" font-weight="bold">-2C</text>
-            <line x1="52" y1="40" x2="148" y2="40" stroke="#333" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <text x="100" y="30" text-anchor="middle" font-size="11" font-family="Cairo">r = 1m</text>
-        </svg>`,
-        "steps": [
-            {
-                "title": "المرحلة الأولى: شرط التجاذب",
-                "question": "لكي تكون القوة بين شحنتين قوة تجاذب، ما الشرط الواجب توفره في إشارتي الشحنتين؟",
-                "options": [
-                    { "text": "أن تكون الشحنتان مختلفين في الإشارة (+ و -)", "isCorrect": true },
-                    { "text": "أن تكون الشحنتان من نفس الإشارة", "isCorrect": false }
-                ],
-                "feedback": "صحيح! الشحنات المختلفة تتجاذب والشحنات المتشابهة تتنافر."
-            },
-            {
-                "title": "المرحلة الثانية: تحديد القوة الأكبر",
-                "question": "بما أن F تتناسب مع حاصل ضرب القيمة المطلقة للشحنتين |q₁ × q₂|، أي الزوجين التاليين يعطي تجاذباً أكبر؟",
-                "options": [
-                    { "text": "5C و -2C (حاصل الضرب = 10)", "isCorrect": true },
-                    { "text": "1C و 4C (شحنات متشابهة - تنافر)", "isCorrect": false }
-                ],
-                "feedback": "ممتاز! الزوج (5C , -2C) هو الوحيد الذي يقدم قوة تجاذب بقيمة مطلقة تساوي 10."
-            }
-        ],
-        "pdfSolutionSteps": [
-            "<div><strong>المبدأ الفيزيائي:</strong> قانون كولوم: F = k · |q₁ · q₂| / r²</div>",
-            "<div>1. <strong>شرط التجاذب:</strong> التجاذب يحدث فقط بين الشحنات المختلفة في الإشارة (+ و -).</div>",
-            "<div>2. <strong>فحص الخيارات:</strong></div>",
-            "<div>• (1C , 4C) ← تنافر (شحنات موجبة)</div>",
-            "<div>• (-6C , -3C) ← تنافر (شحنات سالبة)</div>",
-            "<div>• (9C , 2C) ← تنافر (شحنات موجبة)</div>",
-            "<div>• (5C , -2C) ← تجاذب بحاصل ضرب |5 × -2| = 10</div>",
-            "<div><strong>الاستنتاج:</strong> الزوج (5C , -2C) يعطي قوة تجاذب وهي الأكبر بين الخيارات.</div>"
-        ],
-        "pdfFinalAnswer": "الإجابة الصحيحة:د) 5C , -2C"
-    },
-    {
+   {
+    "id": 10,
+    "title": "سؤال وزارة: قانون كولوم والقوة العظمى",
+    "text": "شحنتان كهربائيتان في الهواء والمسافة بينهما (<span dir='ltr'>1m</span>)، أي من أزواج الشحنات التالية يعطي أكبر قوة تجاذب؟",
+    "options": [
+        { "text": "<span dir='ltr'>1C , 4C</span>", "isCorrect": false },
+        { "text": "<span dir='ltr'>-6C , -3C</span>", "isCorrect": false },
+        { "text": "<span dir='ltr'>9C , 2C</span>", "isCorrect": false },
+        { "text": "<span dir='ltr'>5C , -2C</span>", "isCorrect": true }
+    ],
+    "svgCode": `<svg viewBox="0 0 360 120" style="width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg">
+        <rect width="360" height="120" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+        <line x1="80" y1="62" x2="280" y2="62" stroke="#64748b" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="180" y="42" text-anchor="middle" font-size="13" font-weight="bold" font-family="Cairo, sans-serif" fill="#334155">r = 1m</text>
+        <circle cx="80" cy="62" r="22" fill="#dc3545"/>
+        <text x="80" y="67" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold" font-family="Arial, sans-serif">+5C</text>
+        <circle cx="280" cy="62" r="22" fill="#198754"/>
+        <text x="280" y="67" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold" font-family="Arial, sans-serif">-2C</text>
+        <text x="180" y="102" text-anchor="middle" font-size="12" font-weight="bold" font-family="Cairo, sans-serif" fill="#065f46">شحنات مختلفة الإشارة ← قوة تجاذب</text>
+    </svg>`,
+    "steps": [
+        {
+            "title": "المرحلة الأولى: شرط التجاذب",
+            "question": "لكي تكون القوة بين شحنتين قوة تجاذب، ما الشرط الواجب توفره في إشارتي الشحنتين؟",
+            "options": [
+                { "text": "أن تكون الشحنتان مختلفتين في الإشارة (<span dir='ltr'>+</span> و <span dir='ltr'>-</span>)", "isCorrect": true },
+                { "text": "أن تكون الشحنتان من نفس الإشارة", "isCorrect": false }
+            ],
+            "feedback": "صحيح! الشحنات المختلفة تتجاذب والشحنات المتشابهة تتنافر."
+        },
+        {
+            "title": "المرحلة الثانية: تحديد القوة الأكبر",
+            "question": "بما أن التجاذب يحدث بين الشحنات المختلفة فقط، أي زوج من الخيارات يعطي قوة تجاذب؟",
+            "options": [
+                { "text": "<span dir='ltr'>5C , -2C</span> (تجاذب: <span dir='ltr'>|5 × -2| = 10</span>)", "isCorrect": true },
+                { "text": "<span dir='ltr'>1C , 4C</span> (شحنات متشابهة - تنافر)", "isCorrect": false }
+            ],
+            "feedback": "ممتاز! الزوج <span dir='ltr'>(5C , -2C)</span> هو الوحيد الذي يحقق التجاذب بين الخيارات."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "<div><strong>المبدأ الفيزيائي:</strong> قانون كولوم: <span dir='ltr'>F = k · |q₁ · q₂| / r²</span></div>",
+        "<div>1. <strong>شرط التجاذب:</strong> التجاذب يحدث فقط بين الشحنات المختلفة في الإشارة (<span dir='ltr'>+</span> و <span dir='ltr'>-</span>).</div>",
+        "<div>2. <strong>فحص الخيارات:</strong></div>",
+        "<div>• <span dir='ltr'>(1C , 4C)</span> ← تنافر (شحنات موجبة)</div>",
+        "<div>• <span dir='ltr'>(-6C , -3C)</span> ← تنافر (شحنات سالبة)</div>",
+        "<div>• <span dir='ltr'>(9C , 2C)</span> ← تنافر (شحنات موجبة)</div>",
+        "<div>• <span dir='ltr'>(5C , -2C)</span> ← <strong>تجاذب</strong> بحاصل ضرب <span dir='ltr'>|5 × -2| = 10</span></div>",
+        "<div><strong>الاستنتاج:</strong> الزوج <span dir='ltr'>(5C , -2C)</span> هو الذي يعطي قوة تجاذب.</div>"
+    ],
+    "pdfFinalAnswer": "الإجابة الصحيحة: د) <span dir='ltr'>5C , -2C</span>"
+}, {
         "id": 11,
         "title": "سؤال وزارة: المجال الكهربائي داخل موصل",
         "text": "كرة موصلة نصف قطرها 10 cm وشحنتها 5 C، ما هو مقدار المجال الكهربائي عند نقطة تبعد 5 cm من مركزها؟",
