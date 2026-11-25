@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>محاكي بيئة الفيجوال بيسك 6.0 - Microsoft Visual Basic 6.0 Simulator</title>
+  <style>
+    :root {
+      --vb-gray: #d4d0c8;
+      --vb-light: #ffffff;
+      --vb-shadow: #808080;
+      --vb-dark-shadow: #404040;
+      --vb-blue: #0a246a;
+      --vb-blue-grad: #a6caf0;
+      --vb-workspace: #808080;
+      --vb-select: #000080;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Tahoma", "Segoe UI", Arial, sans-serif;
+      font-size: 12px;
+      background-color: var(--vb-gray);
+      color: #000;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Classic Windows 98/2000 3D Borders */
+    .bevel-out {
+      border-top: 2px solid var(--vb-light);
+      border-left: 2px solid var(--vb-light);
+      border-right: 2px solid var(--vb-dark-shadow);
+      border-bottom: 2px solid var(--vb-dark-shadow);
+      background: var(--vb-gray);
+    }
+
+    .bevel-out-thin {
+      border-top: 1px solid var(--vb-light);
+      border-left: 1px solid var(--vb-light);
+      border-right: 1px solid var(--vb-shadow);
+      border-bottom: 1px solid var(--vb-shadow);
+      background: var(--vb-gray);
+    }
+
+    .bevel-in {
+      border-top: 2px solid var(--vb-shadow);
+      border-left: 2px solid var(--vb-shadow);
+      border-right: 2px solid var(--vb-light);
+      border-bottom: 2px solid var(--vb-light);
+      background: #fff;
+    }
+
+    .bevel-in-thin {
+      border-top: 1px solid var(--vb-shadow);
+      border-left: 1px solid var(--vb-shadow);
+      border-right: 1px solid var(--vb-light);
+      border-bottom: 1px solid var(--vb-light);
+    }
+
+    /* Top Title Bar */
+    .ide-titlebar {
+      background: linear-gradient(90deg, var(--vb-blue), var(--vb-blue-grad));
+      color: #fff;
+      padding: 3px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 12px;
+      direction: ltr;
+    }
+
+    .ide-title-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .vb-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 16px;
+      background: #fff;
+      color: #003399;
+      font-weight: 900;
+      font-size: 10px;
+      border: 1px solid #000;
+    }
+
+    .ide-badge-mode {
+      background: #ffffcc;
+      color: #000;
+      padding: 1px 6px;
+      border: 1px solid #000;
+      font-size: 11px;
+    }
+
+    .guide-trigger-btn {
+      background: #ffeb3b;
+      color: #000;
+      border: 1px solid #000;
+      padding: 2px 10px;
+      font-weight: bold;
+      font-family: "Tahoma", sans-serif;
+      cursor: pointer;
+      direction: rtl;
+    }
+
+    .guide-trigger-btn:hover {
+      background: #fff176;
+    }
+
+    /* Menu Bar */
+    .menu-bar {
+      display: flex;
+      align-items: center;
+      padding: 2px 6px;
+      border-bottom: 1px solid var(--vb-shadow);
+      direction: ltr;
+      gap: 2px;
+      position: relative;
+    }
+
+    .menu-item {
+      padding: 2px 8px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .menu-item:hover, .menu-item.active {
+      background: var(--vb-blue);
+      color: #fff;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 190px;
+      z-index: 9999;
+      padding: 2px;
+      color: #000;
+    }
+
+    .menu-item.active .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-entry {
+      padding: 4px 12px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .dropdown-entry:hover {
+      background: var(--vb-blue);
+      color: #fff;
+    }
+
+    .dropdown-sep {
+      height: 1px;
+      background: var(--vb-shadow);
+      border-bottom: 1px solid var(--vb-light);
+      margin: 3px 2px;
+    }
+
+    /* Standard Toolbar */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      padding: 3px 6px;
+      border-top: 1px solid var(--vb-light);
+      border-bottom: 1px solid var(--vb-shadow);
+      direction: ltr;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .tb-btn {
+      width: 24px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--vb-gray);
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 0;
+    }
+
+    .tb-btn:hover:not(:disabled) {
+      border-top: 1px solid var(--vb-light);
+      border-left: 1px solid var(--vb-light);
+      border-right: 1px solid var(--vb-shadow);
+      border-bottom: 1px solid var(--vb-shadow);
+    }
+
+    .tb-btn:active:not(:disabled), .tb-btn.pressed {
+      border-top: 1px solid var(--vb-shadow);
+      border-left: 1px solid var(--vb-shadow);
+      border-right: 1px solid var(--vb-light);
+      border-bottom: 1px solid var(--vb-light);
+      background: #e4e1db;
+    }
+
+    .tb-btn:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .tb-sep {
+      width: 2px;
+      height: 18px;
+      border-left: 1px solid var(--vb-shadow);
+      border-right: 1px solid var(--vb-light);
+      margin: 0 3px;
+    }
+
+    .coord-readout {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+      font-size: 11px;
+      background: var(--vb-gray);
+      padding: 2px 6px;
+      border: 1px inset #fff;
+    }
+
+    /* Main Workspace Layout (LTR to match authentic VB6 IDE) */
+    .ide-main {
+      flex: 1;
+      display: flex;
+      direction: ltr;
+      overflow: hidden;
+    }
+
+    /* Left Toolbox */
+    .toolbox-pane {
+      width: 74px;
+      display: flex;
+      flex-direction: column;
+      padding: 2px;
+      flex-shrink: 0;
+    }
+
+    .pane-header {
+      background: var(--vb-blue);
+      color: #fff;
+      font-weight: bold;
+      font-size: 11px;
+      padding: 2px 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .toolbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      padding: 4px 2px;
+    }
+
+    .tool-btn {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--vb-gray);
+      border: 1px solid transparent;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .tool-btn:hover {
+      border-top: 1px solid var(--vb-light);
+      border-left: 1px solid var(--vb-light);
+      border-right: 1px solid var(--vb-shadow);
+      border-bottom: 1px solid var(--vb-shadow);
+    }
+
+    .tool-btn.active {
+      border-top: 1px solid var(--vb-shadow);
+      border-left: 1px solid var(--vb-shadow);
+      border-right: 1px solid var(--vb-light);
+      border-bottom: 1px solid var(--vb-light);
+      background: #eae7e1;
+    }
+
+    .toolbox-hint {
+      margin-top: auto;
+      padding: 4px;
+      font-size: 10px;
+      text-align: center;
+      direction: rtl;
+      background: #ffffe1;
+      border: 1px solid var(--vb-shadow);
+      line-height: 1.35;
+    }
+
+    /* Center MDI Designer Area */
+    .mdi-workspace {
+      flex: 1;
+      background-color: var(--vb-workspace);
+      position: relative;
+      overflow: auto;
+      padding: 14px;
+      border-top: 2px solid var(--vb-shadow);
+      border-left: 2px solid var(--vb-shadow);
+    }
+
+    .mdi-child-window {
+      display: inline-flex;
+      flex-direction: column;
+      min-width: 440px;
+      min-height: 350px;
+      background: var(--vb-gray);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .mdi-child-header {
+      background: var(--vb-blue);
+      color: #fff;
+      padding: 2px 6px;
+      font-size: 11px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mdi-designer-canvas {
+      flex: 1;
+      background: #c0c0c0;
+      padding: 12px;
+      position: relative;
+      overflow: auto;
+    }
+
+    /* The VB6 Form1 */
+    .vb-form {
+      position: relative;
+      background-color: #d4d0c8;
+      border-top: 2px solid var(--vb-light);
+      border-left: 2px solid var(--vb-light);
+      border-right: 2px solid var(--vb-dark-shadow);
+      border-bottom: 2px solid var(--vb-dark-shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vb-form-titlebar {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #fff;
+      padding: 3px 6px;
+      font-weight: bold;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .vb-win-btns {
+      display: flex;
+      gap: 2px;
+    }
+
+    .vb-win-btn {
+      width: 15px;
+      height: 13px;
+      background: var(--vb-gray);
+      color: #000;
+      font-size: 9px;
+      line-height: 11px;
+      text-align: center;
+      border-top: 1px solid #fff;
+      border-left: 1px solid #fff;
+      border-right: 1px solid #404040;
+      border-bottom: 1px solid #404040;
+    }
+
+    .vb-form-body {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      /* Classic VB6 8px grid dots */
+      background-image: radial-gradient(#000000 1px, transparent 1px);
+      background-size: 8px 8px;
+    }
+
+    .vb-form-body.run-mode {
+      background-image: none;
+    }
+
+    /* Form Resize Handle */
+    .form-resize-br {
+      position: absolute;
+      right: -5px;
+      bottom: -5px;
+      width: 8px;
+      height: 8px;
+      background: #000080;
+      border: 1px solid #fff;
+      cursor: nwse-resize;
+      z-index: 30;
+    }
+
+    /* Controls placed on Form */
+    .vb-control-wrapper {
+      position: absolute;
+      cursor: move;
+      box-sizing: border-box;
+    }
+
+    .vb-control-wrapper.run-mode {
+      cursor: default;
+    }
+
+    .vb-control-inner {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Tahoma", sans-serif;
+    }
+
+    /* Specific Control Visuals */
+    .ctrl-label {
+      padding: 2px 4px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .ctrl-textbox {
+      background: #fff;
+      border-top: 2px solid var(--vb-shadow);
+      border-left: 2px solid var(--vb-shadow);
+      border-right: 2px solid var(--vb-light);
+      border-bottom: 2px solid var(--vb-light);
+      padding: 2px 4px;
+      width: 100%;
+      height: 100%;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      outline: none;
+    }
+
+    .ctrl-button {
+      width: 100%;
+      height: 100%;
+      background: var(--vb-gray);
+      border-top: 2px solid var(--vb-light);
+      border-left: 2px solid var(--vb-light);
+      border-right: 2px solid var(--vb-dark-shadow);
+      border-bottom: 2px solid var(--vb-dark-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2px 6px;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    .vb-control-wrapper.run-mode .ctrl-button:active {
+      border-top: 2px solid var(--vb-dark-shadow);
+      border-left: 2px solid var(--vb-dark-shadow);
+      border-right: 2px solid var(--vb-light);
+      border-bottom: 2px solid var(--vb-light);
+    }
+
+    .ctrl-checkbox, .ctrl-option {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 4px;
+      height: 100%;
+    }
+
+    .ctrl-frame {
+      border: 1px groove #fff;
+      height: 100%;
+      padding: 8px 6px 4px 6px;
+      position: relative;
+    }
+
+    .ctrl-frame-title {
+      position: absolute;
+      top: -7px;
+      left: 8px;
+      padding: 0 3px;
+      background: inherit;
+    }
+
+    .ctrl-listbox {
+      background: #fff;
+      border-top: 2px solid var(--vb-shadow);
+      border-left: 2px solid var(--vb-shadow);
+      border-right: 2px solid var(--vb-light);
+      border-bottom: 2px solid var(--vb-light);
+      height: 100%;
+      padding: 2px 4px;
+    }
+
+    .ctrl-combobox {
+      background: #fff;
+      border-top: 2px solid var(--vb-shadow);
+      border-left: 2px solid var(--vb-shadow);
+      border-right: 2px solid var(--vb-light);
+      border-bottom: 2px solid var(--vb-light);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 4px;
+    }
+
+    .combo-arrow {
+      width: 16px;
+      height: 100%;
+      background: var(--vb-gray);
+      border-left: 1px solid var(--vb-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+    }
+
+    /* PictureBox Control */
+    .ctrl-picturebox {
+      width: 100%;
+      height: 100%;
+      border-top: 2px solid var(--vb-shadow);
+      border-left: 2px solid var(--vb-shadow);
+      border-right: 2px solid var(--vb-light);
+      border-bottom: 2px solid var(--vb-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ctrl-picturebox img {
+      max-width: 100%;
+      max-height: 100%;
+      pointer-events: none;
+    }
+
+    .ctrl-picturebox.stretch-mode img {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      object-fit: fill;
+    }
+
+    .ctrl-picturebox.clip-mode img {
+      width: auto;
+      height: auto;
+      max-width: none;
+      max-height: none;
+      object-fit: none;
+    }
+
+    .picturebox-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #404040;
+      font-size: 11px;
+      text-align: center;
+      padding: 4px;
+      line-height: 1.3;
+    }
+
+    /* 8 Selection Handles */
+    .vb-control-wrapper.selected {
+      outline: 1px dotted #000080;
+    }
+
+    .handle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #000080;
+      border: 1px solid #fff;
+      z-index: 20;
+    }
+
+    .handle.nw { top: -4px; left: -4px; cursor: nwse-resize; }
+    .handle.n  { top: -4px; left: calc(50% - 3px); cursor: ns-resize; }
+    .handle.ne { top: -4px; right: -4px; cursor: nesw-resize; }
+    .handle.e  { top: calc(50% - 3px); right: -4px; cursor: ew-resize; }
+    .handle.se { bottom: -4px; right: -4px; cursor: nwse-resize; }
+    .handle.s  { bottom: -4px; left: calc(50% - 3px); cursor: ns-resize; }
+    .handle.sw { bottom: -4px; left: -4px; cursor: nesw-resize; }
+    .handle.w  { top: calc(50% - 3px); left: -4px; cursor: ew-resize; }
+
+    /* Code View inside MDI */
+    .code-editor-view {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      background: #fff;
+      padding: 6px;
+    }
+
+    .code-editor-view.active {
+      display: flex;
+    }
+
+    .code-textarea {
+      flex: 1;
+      width: 100%;
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      border: 1px inset #808080;
+      padding: 8px;
+      direction: ltr;
+      resize: none;
+      line-height: 1.5;
+    }
+
+    /* Right Docked Panels: Project Explorer, Properties, Form Layout */
+    .right-dock {
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      border-left: 2px solid var(--vb-shadow);
+      background: var(--vb-gray);
+      flex-shrink: 0;
+    }
+
+    .dock-panel {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 2px solid var(--vb-shadow);
+    }
+
+    /* Project Explorer */
+    .project-tree {
+      background: #fff;
+      padding: 6px;
+      height: 92px;
+      overflow-y: auto;
+      font-size: 11px;
+    }
+
+    .proj-toolbar {
+      display: flex;
+      gap: 4px;
+      padding: 2px 4px;
+      background: var(--vb-gray);
+      border-bottom: 1px solid var(--vb-shadow);
+    }
+
+    .proj-mini-btn {
+      padding: 1px 6px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .tree-node {
+      padding: 2px 4px;
+      cursor: pointer;
+    }
+
+    .tree-node.active {
+      background: var(--vb-blue);
+      color: #fff;
+    }
+
+    /* Properties Window */
+    .properties-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+    }
+
+    .prop-object-select {
+      width: 100%;
+      padding: 2px 4px;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      border: 1px inset #808080;
+    }
+
+    .prop-grid-container {
+      flex: 1;
+      background: #fff;
+      overflow-y: auto;
+      border-top: 1px solid var(--vb-shadow);
+    }
+
+    .prop-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .prop-table td {
+      border: 1px solid #d4d0c8;
+      padding: 2px 5px;
+      height: 21px;
+    }
+
+    .prop-name-cell {
+      width: 44%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .prop-name-cell.active-prop {
+      background: var(--vb-blue);
+      color: #fff;
+    }
+
+    .prop-val-cell {
+      width: 56%;
+      background: #fff;
+      padding: 0 !important;
+    }
+
+    .prop-input {
+      width: 100%;
+      height: 19px;
+      border: none;
+      padding: 0 4px;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
+      outline: none;
+    }
+
+    .prop-color-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 3px;
+    }
+
+    .prop-color-input {
+      width: 24px;
+      height: 16px;
+      border: 1px solid #000;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .prop-picture-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3px;
+      padding: 1px 3px;
+    }
+
+    .prop-picture-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 10px;
+      color: #222;
+      flex: 1;
+    }
+
+    .prop-mini-action {
+      padding: 0 4px;
+      font-size: 10px;
+      cursor: pointer;
+      height: 16px;
+      line-height: 14px;
+      flex-shrink: 0;
+    }
+
+    .prop-desc-box {
+      height: 54px;
+      padding: 4px 6px;
+      background: var(--vb-gray);
+      border-top: 1px solid var(--vb-shadow);
+      font-size: 11px;
+      direction: rtl;
+      overflow-y: auto;
+      line-height: 1.35;
+    }
+
+    /* Form Layout Window */
+    .form-layout-panel {
+      height: 115px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .layout-monitor-area {
+      flex: 1;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+
+    .monitor-screen {
+      width: 120px;
+      height: 76px;
+      background: #008080;
+      border: 4px solid #808080;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .mini-form-preview {
+      position: absolute;
+      width: 44px;
+      height: 32px;
+      background: var(--vb-gray);
+      border: 1px solid #000;
+      top: 14px;
+      left: 20px;
+      cursor: grab;
+    }
+
+    .mini-form-preview::before {
+      content: "";
+      display: block;
+      height: 5px;
+      background: #000080;
+    }
+
+    /* Bottom Status Bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 8px;
+      border-top: 1px solid var(--vb-shadow);
+      font-size: 11px;
+      background: var(--vb-gray);
+    }
+
+    /* Modals: Guide & Classic VB6 MsgBox */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .vb-dialog {
+      width: 480px;
+      max-width: 94vw;
+      background: var(--vb-gray);
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    }
+
+    .vb-dialog-body {
+      padding: 14px;
+      direction: rtl;
+      line-height: 1.6;
+      font-size: 12px;
+    }
+
+    .vb-dialog-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 14px 14px;
+      direction: rtl;
+    }
+
+    .vb-std-btn {
+      min-width: 85px;
+      padding: 4px 12px;
+      background: var(--vb-gray);
+      border-top: 2px solid var(--vb-light);
+      border-left: 2px solid var(--vb-light);
+      border-right: 2px solid var(--vb-dark-shadow);
+      border-bottom: 2px solid var(--vb-dark-shadow);
+      cursor: pointer;
+      font-family: "Tahoma", sans-serif;
+      font-size: 12px;
+    }
+
+    .vb-std-btn:active {
+      border-top: 2px solid var(--vb-dark-shadow);
+      border-left: 2px solid var(--vb-dark-shadow);
+      border-right: 2px solid var(--vb-light);
+      border-bottom: 2px solid var(--vb-light);
+    }
+
+    .activity-card {
+      background: #fff;
+      border: 1px solid var(--vb-shadow);
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden File Picker for PictureBox -->
+  <input type="file" id="pictureFileInput" accept="image/*" style="display:none;" />
+
+  <!-- Title Bar -->
+  <div class="ide-titlebar">
+    <div class="ide-title-left">
+      <span class="vb-logo">VB</span>
+      <span id="ideTitleText">Project1 - Microsoft Visual Basic [design]</span>
+      <span class="ide-badge-mode" id="modeBadge">وضع التصميم (Design)</span>
+    </div>
+    <button class="guide-trigger-btn" onclick="openGuideModal()">📘 دليل الطالب والأنشطة التفاعلية</button>
+  </div>
+
+  <!-- Menu Bar -->
+  <div class="menu-bar" id="menuBar">
+    <div class="menu-item" onclick="toggleMenu(this)">File
+      <div class="dropdown-menu bevel-out">
+        <div class="dropdown-entry" onclick="newProject()"><span>New Project</span><span>Ctrl+N</span></div>
+        <div class="dropdown-entry" onclick="loadSampleProject()"><span>Load Sample Form (نموذج جاهز)</span><span></span></div>
+        <div class="dropdown-sep"></div>
+        <div class="dropdown-entry" onclick="exportDesignSummary()"><span>Save / Print Summary</span><span>Ctrl+S</span></div>
+      </div>
+    </div>
+    <div class="menu-item" onclick="toggleMenu(this)">Edit
+      <div class="dropdown-menu bevel-out">
+        <div class="dropdown-entry" onclick="cutSelected()"><span>Cut (قص)</span><span>Ctrl+X</span></div>
+        <div class="dropdown-entry" onclick="copySelected()"><span>Copy (نسخ)</span><span>Ctrl+C</span></div>
+        <div class="dropdown-entry" onclick="pasteClipboard()"><span>Paste (لصق)</span><span>Ctrl+V</span></div>
+        <div class="dropdown-sep"></div>
+        <div class="dropdown-entry" onclick="deleteSelected()"><span>Delete (حذف)</span><span>Del</span></div>
+      </div>
+    </div>
+    <div class="menu-item" onclick="toggleMenu(this)">View
+      <div class="dropdown-menu bevel-out">
+        <div class="dropdown-entry" onclick="switchView('code')"><span>Code (نافذة الكود)</span><span>F7</span></div>
+        <div class="dropdown-entry" onclick="switchView('object')"><span>Object (تصميم النموذج)</span><span>Shift+F7</span></div>
+      </div>
+    </div>
+    <div class="menu-item" onclick="toggleMenu(this)">Format
+      <div class="dropdown-menu bevel-out">
+        <div class="dropdown-entry" onclick="centerFormInCanvas()"><span>Center in Form</span><span></span></div>
+        <div class="dropdown-entry" onclick="toggleGrid()"><span>Toggle Grid Dots</span><span></span></div>
+      </div>
+    </div>
+    <div class="menu-item" onclick="toggleMenu(this)">Run
+      <div class="dropdown-menu bevel-out">
+        <div class="dropdown-entry" onclick="startRunMode()"><span>Start (تشغيل البرنامج)</span><span>F5</span></div>
+        <div class="dropdown-entry" onclick="stopRunMode()"><span>End (إيقاف)</span><span></span></div>
+      </div>
+    </div>
+    <div class="menu-item" onclick="openGuideModal()">Help (مساعدة)</div>
+  </div>
+
+  <!-- Standard Toolbar -->
+  <div class="toolbar">
+    <button class="tb-btn" title="مشروع جديد (New Project)" onclick="newProject()">📄</button>
+    <button class="tb-btn" title="تحميل نموذج جاهز للتجربة" onclick="loadSampleProject()">📂</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" id="btnCut" title="قص (Cut)" onclick="cutSelected()">✂️</button>
+    <button class="tb-btn" id="btnCopy" title="نسخ (Copy)" onclick="copySelected()">📋</button>
+    <button class="tb-btn" id="btnPaste" title="لصق (Paste)" onclick="pasteClipboard()">📥</button>
+    <button class="tb-btn" id="btnDelete" title="حذف الأداة المحددة (Delete)" onclick="deleteSelected()">🗑️</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" id="btnRun" title="تشغيل البرنامج Start (F5)" onclick="startRunMode()" style="color:#0066cc;font-weight:bold;">▶</button>
+    <button class="tb-btn" id="btnStop" title="إيقاف التشغيل End" onclick="stopRunMode()" disabled style="color:#990000;font-weight:bold;">■</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" title="إظهار التصميم (View Object)" onclick="switchView('object')">🖥️</button>
+    <button class="tb-btn" title="إظهار الكود (View Code)" onclick="switchView('code')">📝</button>
+
+    <div class="coord-readout">
+      <span id="readoutPos">Left: 0, Top: 0</span>
+      <span id="readoutSize">Width: 380, Height: 270</span>
+    </div>
+  </div>
+
+  <!-- Main Workspace -->
+  <div class="ide-main">
+
+    <!-- Left Toolbox -->
+    <div class="toolbox-pane bevel-out-thin">
+      <div class="pane-header">
+        <span>Toolbox</span>
+        <span>×</span>
+      </div>
+      <div class="toolbox-grid" id="toolboxGrid">
+        <!-- Pointer (Wide Arrow) -->
+        <button class="tool-btn active" data-tool="Pointer" title="Pointer (السهم العريض - أداة التحديد والتحريك)" onclick="selectTool('Pointer')">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path d="M5 3 L19 14 L12 15 L15 21 L12 22 L9 16 L5 20 Z" fill="#000" stroke="#fff" stroke-width="1"/>
+          </svg>
+        </button>
+
+        <!-- Label -->
+        <button class="tool-btn" data-tool="Label" title="Label (أداة التسمية - لعرض نص ثابت)" onclick="selectTool('Label')">
+          <span style="font-family:Times New Roman,serif;font-weight:bold;font-size:17px;">A</span>
+        </button>
+
+        <!-- TextBox -->
+        <button class="tool-btn" data-tool="TextBox" title="TextBox (مربع النص - لإدخال وعرض النصوص)" onclick="selectTool('TextBox')">
+          <span style="border:1px inset #808080;background:#fff;padding:0 3px;font-size:10px;font-weight:bold;">ab|</span>
+        </button>
+
+        <!-- CommandButton -->
+        <button class="tool-btn" data-tool="CommandButton" title="CommandButton (زر الأمر - لتنفيذ إجراء عند النقر)" onclick="selectTool('CommandButton')">
+          <span class="bevel-out-thin" style="padding:1px 4px;font-size:9px;font-weight:bold;">CMD</span>
+        </button>
+
+        <!-- CheckBox -->
+        <button class="tool-btn" data-tool="CheckBox" title="CheckBox (خانة الاختيار)" onclick="selectTool('CheckBox')">
+          <span style="border:1px solid #000;background:#fff;width:13px;height:13px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;">✓</span>
+        </button>
+
+        <!-- OptionButton -->
+        <button class="tool-btn" data-tool="OptionButton" title="OptionButton (زر الخيار الدائري)" onclick="selectTool('OptionButton')">
+          <span style="border:1px solid #000;background:#fff;border-radius:50%;width:13px;height:13px;display:inline-flex;align-items:center;justify-content:center;">
+            <span style="width:5px;height:5px;background:#000;border-radius:50%;display:block;"></span>
+          </span>
+        </button>
+
+        <!-- Frame -->
+        <button class="tool-btn" data-tool="Frame" title="Frame (الإطار - لتجميع الأدوات)" onclick="selectTool('Frame')">
+          <span style="border:1px solid #404040;width:16px;height:13px;position:relative;display:inline-block;">
+            <span style="position:absolute;top:-4px;left:2px;background:#d4d0c8;font-size:6px;padding:0 1px;">XY</span>
+          </span>
+        </button>
+
+        <!-- ListBox -->
+        <button class="tool-btn" data-tool="ListBox" title="ListBox (مربع القائمة)" onclick="selectTool('ListBox')">
+          <span style="border:1px solid #404040;background:#fff;width:15px;height:14px;display:inline-flex;flex-direction:column;justify-content:space-around;padding:1px;">
+            <span style="height:1px;background:#000;"></span>
+            <span style="height:1px;background:#000;"></span>
+            <span style="height:1px;background:#000;"></span>
+          </span>
+        </button>
+
+        <!-- ComboBox -->
+        <button class="tool-btn" data-tool="ComboBox" title="ComboBox (مربع التحرير والسرد)" onclick="selectTool('ComboBox')">
+          <span style="border:1px solid #404040;background:#fff;width:17px;height:12px;display:inline-flex;align-items:center;justify-content:flex-end;">
+            <span style="background:#d4d0c8;border-left:1px solid #404040;font-size:7px;padding:0 1px;">▼</span>
+          </span>
+        </button>
+
+        <!-- PictureBox -->
+        <button class="tool-btn" data-tool="PictureBox" title="PictureBox (مربع الصورة - لإدراج وعرض الصور)" onclick="selectTool('PictureBox')">
+          <span style="border:1px solid #404040;background:#fff;width:17px;height:13px;display:inline-flex;align-items:flex-end;justify-content:space-between;padding:1px;overflow:hidden;">
+            <span style="width:4px;height:4px;border-radius:50%;background:#e6a100;align-self:flex-start;"></span>
+            <span style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid #2e7d32;"></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="toolbox-hint" id="toolboxHint">
+        <strong>الأداة الحالية:</strong><br/>السهم العريض (Pointer)<br/>انقر على أداة ثم ارسمها داخل النموذج أو اسحبها.
+      </div>
+    </div>
+
+    <!-- Center MDI Designer / Code Area -->
+    <div class="mdi-workspace" id="mdiWorkspace">
+      <div class="mdi-child-window bevel-out">
+        <div class="mdi-child-header">
+          <span id="mdiChildTitle">Project1 - Form1 (Form)</span>
+          <div style="display:flex;gap:3px;">
+            <button class="vb-win-btn" title="عرض التصميم" onclick="switchView('object')">🎨</button>
+            <button class="vb-win-btn" title="عرض الكود" onclick="switchView('code')">{}</button>
+          </div>
+        </div>
+
+        <!-- Designer View -->
+        <div class="mdi-designer-canvas" id="designerView">
+          <div class="vb-form" id="vbForm" style="width: 380px; height: 270px;">
+            <div class="vb-form-titlebar" id="formTitlebar" onclick="selectObject('Form1')">
+              <span id="formCaptionDisplay">Form1</span>
+              <div class="vb-win-btns">
+                <span class="vb-win-btn">_</span>
+                <span class="vb-win-btn">□</span>
+                <span class="vb-win-btn">×</span>
+              </div>
+            </div>
+            <div class="vb-form-body" id="vbFormBody"></div>
+            <div class="form-resize-br" id="formResizeHandle" title="اسحب لتغيير حجم النموذج Form1"></div>
+          </div>
+        </div>
+
+        <!-- Code View -->
+        <div class="code-editor-view" id="codeView">
+          <div style="margin-bottom:4px;font-size:11px;direction:rtl;background:#ffffe1;padding:4px 6px;border:1px solid #808080;">
+            💡 <strong>محرر الكود المبسط:</strong> عند النقر على أي زر (CommandButton) أثناء وضع التشغيل، ستظهر رسالة <code>MsgBox</code> بالأسفل:
+          </div>
+          <textarea class="code-textarea" id="codeTextarea" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Docked Panels -->
+    <div class="right-dock">
+
+      <!-- 1. Project Explorer -->
+      <div class="dock-panel">
+        <div class="pane-header">
+          <span>Project - Project1</span>
+          <span>×</span>
+        </div>
+        <div class="proj-toolbar">
+          <button class="proj-mini-btn bevel-out-thin" title="عرض الكود (View Code)" onclick="switchView('code')">📝 Code</button>
+          <button class="proj-mini-btn bevel-out-thin" title="عرض التصميم (View Object)" onclick="switchView('object')">🖥️ Object</button>
+        </div>
+        <div class="project-tree">
+          <div style="font-weight:bold;">📁 Project1 (Project1.vbp)</div>
+          <div style="padding-left:14px;">
+            <div>📂 Forms</div>
+            <div class="tree-node active" id="treeFormNode" onclick="switchView('object'); selectObject('Form1');">
+              📄 Form1 (Form1.frm)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Properties Window -->
+      <div class="dock-panel properties-panel">
+        <div class="pane-header">
+          <span id="propHeaderTitle">Properties - Form1</span>
+          <span>×</span>
+        </div>
+        <div style="padding:3px;background:var(--vb-gray);">
+          <select class="prop-object-select" id="objectSelector" onchange="selectObject(this.value)">
+            <option value="Form1">Form1 Form</option>
+          </select>
+        </div>
+        <div class="prop-grid-container">
+          <table class="prop-table" id="propertiesTable"></table>
+        </div>
+        <div class="prop-desc-box" id="propDescBox">
+          <strong>شرح الخاصية:</strong> انقر على أي خاصية في الجدول أعلاه لمعرفة وظيفتها باللغة العربية.
+        </div>
+      </div>
+
+      <!-- 3. Form Layout Window -->
+      <div class="dock-panel form-layout-panel">
+        <div class="pane-header">
+          <span>Form Layout</span>
+          <span>×</span>
+        </div>
+        <div class="layout-monitor-area">
+          <div class="monitor-screen" id="monitorScreen" title="يمثل شاشة الكمبيوتر ومكان ظهور النموذج">
+            <div class="mini-form-preview" id="miniFormPreview" title="اسحب لتحديد موضع ظهور النموذج على الشاشة"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span id="statusText" style="direction:rtl;">جاهز — انقر على أداة من صندوق الأدوات (Toolbox) على اليسار ثم انقر أو اسحب داخل Form1 لإضافتها.</span>
+    <span style="direction:ltr;">VB6 Educational Simulator</span>
+  </div>
+
+  <!-- Student Guide Modal -->
+  <div class="modal-overlay" id="guideModal">
+    <div class="vb-dialog bevel-out">
+      <div class="ide-titlebar" style="direction:rtl;">
+        <span>📘 دليل الطالب والأنشطة التطبيقية</span>
+        <button class="vb-win-btn" onclick="closeGuideModal()">×</button>
+      </div>
+      <div class="vb-dialog-body">
+        <p style="margin-top:0;">مرحباً بك في <strong>محاكي الفيجوال بيسك 6.0</strong>. صُمم هذا المحاكي لمساعدتك على التدرب على واجهة البرنامج وخطوات تصميم النماذج من متصفحك مباشرة:</p>
+
+        <div class="activity-card">
+          <strong>النشاط الأول: التعرف على السهم العريض (Pointer) وإضافة الأدوات</strong><br/>
+          1. اختر أداة <strong>Label (A)</strong> أو <strong>TextBox (ab|)</strong> أو <strong>PictureBox</strong> أو <strong>CommandButton</strong> من صندوق الأدوات يساراً.<br/>
+          2. انقر أو اسحب داخل <strong>Form1</strong> لوضع الأداة.<br/>
+          3. لاحظ أن البرنامج يعيد تفعيل <strong>السهم العريض (Pointer)</strong> تلقائياً لتتمكن من سحب الأداة أو تغيير حجمها من المقابض الثمانية.
+        </div>
+
+        <div class="activity-card">
+          <strong>النشاط الثاني: إدراج صورة في PictureBox وتعديل الخصائص</strong><br/>
+          1. أضف أداة <strong>PictureBox</strong> داخل النموذج وحددها.<br/>
+          2. في نافذة الخصائص على اليمين، اضغط زر <strong>اختيار...</strong> بجانب خاصية <strong>Picture</strong> لتحميل صورة من جهازك (أو انقر نقراً مزدوجاً على مربع الصورة في وضع التصميم).<br/>
+          3. غيّر خاصية <strong>PictureMode</strong> بين ملاءمة الإطار (<strong>Stretch</strong>) أو الحجم الأصلي (<strong>Clip</strong>) وعدّل الخلفية والأبعاد.
+        </div>
+
+        <div class="activity-card">
+          <strong>النشاط الثالث: تشغيل البرنامج (Run - F5)</strong><br/>
+          اضغط على زر التشغيل الأزرق <strong>▶</strong> في شريط الأدوات العلوي لتجربة النموذج كما يراه المستخدم، ثم اضغط زر الإيقاف <strong>■</strong> للعودة إلى التصميم.
+        </div>
+      </div>
+      <div class="vb-dialog-actions">
+        <button class="vb-std-btn" onclick="loadSampleProject(); closeGuideModal();">📂 تحميل نموذج جاهز للتجربة</button>
+        <button class="vb-std-btn" onclick="closeGuideModal()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Classic VB6 MsgBox Modal -->
+  <div class="modal-overlay" id="vbMsgBoxModal">
+    <div class="vb-dialog bevel-out" style="width:340px;">
+      <div class="ide-titlebar" style="direction:ltr;">
+        <span id="msgBoxTitle">Project1</span>
+        <button class="vb-win-btn" onclick="closeMsgBox()">×</button>
+      </div>
+      <div class="vb-dialog-body" style="display:flex;align-items:center;gap:12px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#fff;border:2px solid #003399;color:#003399;font-weight:bold;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">i</div>
+        <div id="msgBoxContent" style="font-size:13px;">تم النقر على زر الأمر!</div>
+      </div>
+      <div class="vb-dialog-actions">
+        <button class="vb-std-btn" onclick="closeMsgBox()">موافق (OK)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Property Descriptions in Arabic
+    const PROPERTY_DESCRIPTIONS = {
+      "(Name)": "الاسم البرمجي للأداة (Name): يُستخدم للإشارة إلى الأداة داخل الكود البرمجي (مثل Command1 أو txtName أو Picture1).",
+      "Caption": "العنوان (Caption): النص الذي يظهر على شريط عنوان النموذج أو على الأداة مثل Label و CommandButton.",
+      "Text": "النص (Text): النص المكتوب داخل مربع النص (TextBox) أو مربع التحرير والسرد.",
+      "Picture": "الصورة (Picture): تحدد ملف الصورة المعروض داخل مربع الصورة (PictureBox) من جهازك.",
+      "PictureMode": "طريقة عرض الصورة (PictureMode): تحدد كيف تُعرض الصورة داخل PictureBox (ملاءمة الإطار Stretch أو الحجم الأصلي Clip).",
+      "BackColor": "لون الخلفية (BackColor): يحدد لون خلفية النموذج أو الأداة.",
+      "ForeColor": "لون المقدمة/الخط (ForeColor): يحدد لون النص المكتوب داخل الأداة.",
+      "FontSize": "حجم الخط (FontSize): يحدد حجم حروف النص المعروض داخل الأداة.",
+      "FontBold": "خط عريض (FontBold): يجعل النص سميكاً وعريضاً (True) أو عادياً (False).",
+      "Alignment": "المحاذاة (Alignment): تحدد اتجاه محاذاة النص (يسار، يمين، وسط).",
+      "Left": "البُعد الأفقي (Left): المسافة بين الحافة اليسرى للأداة والحافة اليسرى للنموذج.",
+      "Top": "البُعد الرأسي (Top): المسافة بين الحافة العلوية للأداة والحافة العلوية للنموذج.",
+      "Width": "العرض (Width): عرض الأداة أو النموذج.",
+      "Height": "الارتفاع (Height): ارتفاع الأداة أو النموذج.",
+      "Enabled": "التمكين (Enabled): يحدد ما إذا كانت الأداة فعّالة وتستجيب للمستخدم (True) أم معطلة (False).",
+      "Visible": "الظهور (Visible): يحدد ما إذا كانت الأداة مرئية عند تشغيل البرنامج (True) أم مخفية (False)."
+    };
+
+    // Application State
+    let state = {
+      mode: "design", // "design" | "run"
+      view: "object", // "object" | "code"
+      activeTool: "Pointer",
+      selectedId: "Form1",
+      showGrid: true,
+      clipboard: null,
+      pendingPictureTargetId: null,
+      counters: {
+        Label: 0,
+        TextBox: 0,
+        CommandButton: 0,
+        CheckBox: 0,
+        OptionButton: 0,
+        Frame: 0,
+        ListBox: 0,
+        ComboBox: 0,
+        PictureBox: 0
+      },
+      form: {
+        id: "Form1",
+        type: "Form",
+        name: "Form1",
+        caption: "Form1",
+        backColor: "#d4d0c8",
+        width: 380,
+        height: 270
+      },
+      controls: []
+    };
+
+    // Default sizes when clicking on Form
+    const DEFAULT_SIZES = {
+      Label: { width: 110, height: 24 },
+      TextBox: { width: 130, height: 26 },
+      CommandButton: { width: 115, height: 34 },
+      CheckBox: { width: 115, height: 24 },
+      OptionButton: { width: 115, height: 24 },
+      Frame: { width: 160, height: 100 },
+      ListBox: { width: 120, height: 80 },
+      ComboBox: { width: 130, height: 24 },
+      PictureBox: { width: 140, height: 110 }
+    };
+
+    const formEl = document.getElementById("vbForm");
+    const formBodyEl = document.getElementById("vbFormBody");
+    const formCaptionEl = document.getElementById("formCaptionDisplay");
+    const objectSelectorEl = document.getElementById("objectSelector");
+    const propTableEl = document.getElementById("propertiesTable");
+    const propHeaderEl = document.getElementById("propHeaderTitle");
+    const propDescEl = document.getElementById("propDescBox");
+    const statusTextEl = document.getElementById("statusText");
+    const pictureFileInput = document.getElementById("pictureFileInput");
+
+    // Initialize
+    function init() {
+      setupDrawingOnForm();
+      setupFormResize();
+      setupFormLayoutMiniDrag();
+      setupPictureFilePicker();
+      setupKeyboardShortcuts();
+      renderAll();
+    }
+
+    function setStatus(msg) {
+      statusTextEl.textContent = msg;
+    }
+
+    // PictureBox File Picker Handler
+    function setupPictureFilePicker() {
+      pictureFileInput.addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        const targetId = state.pendingPictureTargetId || state.selectedId;
+        state.pendingPictureTargetId = null;
+        pictureFileInput.value = "";
+
+        if (!file) return;
+        const ctrl = state.controls.find(c => c.id === targetId && c.type === "PictureBox");
+        if (!ctrl) return;
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          ctrl.pictureSrc = ev.target.result;
+          ctrl.pictureName = file.name;
+          renderAll();
+          setStatus(`تم تحميل الصورة (${file.name}) داخل ${ctrl.name}.`);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function triggerPictureUpload(ctrlId) {
+      state.pendingPictureTargetId = ctrlId;
+      pictureFileInput.click();
+    }
+
+    function clearPicture(ctrlId) {
+      const ctrl = state.controls.find(c => c.id === ctrlId && c.type === "PictureBox");
+      if (!ctrl) return;
+      ctrl.pictureSrc = "";
+      ctrl.pictureName = "(None)";
+      renderAll();
+      setStatus(`تمت إزالة الصورة من ${ctrl.name}.`);
+    }
+
+    // Toolbox Tool Selection
+    function selectTool(toolName) {
+      if (state.mode === "run") return;
+      state.activeTool = toolName;
+      document.querySelectorAll(".tool-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tool === toolName);
+      });
+
+      const hintEl = document.getElementById("toolboxHint");
+      if (toolName === "Pointer") {
+        formBodyEl.style.cursor = "default";
+        hintEl.innerHTML = "<strong>الأداة الحالية:</strong><br/>السهم العريض (Pointer)<br/>لتحديد الأدوات وتحريكها وتغيير حجمها.";
+        setStatus("أداة السهم العريض (Pointer) نشطة: انقر على أي أداة لتحديدها أو سحبها.");
+      } else {
+        formBodyEl.style.cursor = "crosshair";
+        hintEl.innerHTML = `<strong>الأداة المختارة:</strong><br/>${toolName}<br/>انقر أو اسحب داخل Form1 لرسمها.`;
+        setStatus(`انقر أو اسحب داخل Form1 لوضع أداة ${toolName}.`);
+      }
+    }
+
+    // Draw/Drop new control onto Form1
+    function setupDrawingOnForm() {
+      let isDrawing = false;
+      let startX = 0, startY = 0;
+      let ghostEl = null;
+
+      formBodyEl.addEventListener("mousedown", (e) => {
+        if (state.mode === "run") return;
+        if (e.target !== formBodyEl) return;
+
+        if (state.activeTool === "Pointer") {
+          selectObject("Form1");
+          return;
+        }
+
+        const rect = formBodyEl.getBoundingClientRect();
+        startX = Math.round((e.clientX - rect.left) / 8) * 8;
+        startY = Math.round((e.clientY - rect.top) / 8) * 8;
+        isDrawing = true;
+
+        ghostEl = document.createElement("div");
+        ghostEl.style.position = "absolute";
+        ghostEl.style.left = startX + "px";
+        ghostEl.style.top = startY + "px";
+        ghostEl.style.border = "1px dashed #000080";
+        ghostEl.style.background = "rgba(0, 0, 128, 0.08)";
+        ghostEl.style.pointerEvents = "none";
+        formBodyEl.appendChild(ghostEl);
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isDrawing || !ghostEl) return;
+        const rect = formBodyEl.getBoundingClientRect();
+        const currX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+        const currY = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+
+        const x = Math.min(startX, currX);
+        const y = Math.min(startY, currY);
+        const w = Math.abs(currX - startX);
+        const h = Math.abs(currY - startY);
+
+        ghostEl.style.left = x + "px";
+        ghostEl.style.top = y + "px";
+        ghostEl.style.width = w + "px";
+        ghostEl.style.height = h + "px";
+      });
+
+      window.addEventListener("mouseup", (e) => {
+        if (!isDrawing) return;
+        isDrawing = false;
+        const rect = formBodyEl.getBoundingClientRect();
+        const currX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+        const currY = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+
+        let x = Math.round(Math.min(startX, currX) / 8) * 8;
+        let y = Math.round(Math.min(startY, currY) / 8) * 8;
+        let w = Math.round(Math.abs(currX - startX) / 8) * 8;
+        let h = Math.round(Math.abs(currY - startY) / 8) * 8;
+
+        if (ghostEl) {
+          ghostEl.remove();
+          ghostEl = null;
+        }
+
+        const def = DEFAULT_SIZES[state.activeTool] || { width: 110, height: 28 };
+        if (w < 16 || h < 14) {
+          w = def.width;
+          h = def.height;
+        }
+
+        createControl(state.activeTool, x, y, w, h);
+        // Authentic VB6 behavior: return automatically to Pointer after drawing
+        selectTool("Pointer");
+      });
+    }
+
+    function createControl(type, left, top, width, height) {
+      state.counters[type] = (state.counters[type] || 0) + 1;
+      const num = state.counters[type];
+      const prefixMap = {
+        Label: "Label",
+        TextBox: "Text",
+        CommandButton: "Command",
+        CheckBox: "Check",
+        OptionButton: "Option",
+        Frame: "Frame",
+        ListBox: "List",
+        ComboBox: "Combo",
+        PictureBox: "Picture"
+      };
+      const baseName = `${prefixMap[type]}${num}`;
+
+      const ctrl = {
+        id: baseName,
+        type: type,
+        name: baseName,
+        caption: type !== "TextBox" && type !== "ListBox" && type !== "PictureBox" ? baseName : "",
+        text: type === "TextBox" || type === "ComboBox" ? baseName : "",
+        pictureSrc: "",
+        pictureName: "(None)",
+        pictureMode: "stretch", // "stretch" | "clip"
+        backColor: (type === "TextBox" || type === "ListBox" || type === "ComboBox" || type === "PictureBox") ? "#ffffff" : "#d4d0c8",
+        foreColor: "#000000",
+        fontSize: 12,
+        fontBold: false,
+        alignment: type === "CommandButton" ? "center" : "right",
+        left: left,
+        top: top,
+        width: width,
+        height: height,
+        enabled: true,
+        visible: true,
+        clickMessage: `مرحباً! لقد قمت بالنقر على الزر (${baseName})`
+      };
+
+      state.controls.push(ctrl);
+      state.selectedId = ctrl.id;
+      renderAll();
+      setStatus(`تمت إضافة ${baseName} وعاد المؤشر تلقائياً إلى السهم العريض (Pointer).`);
+    }
+
+    // Select Form1 or a Control
+    function selectObject(id) {
+      state.selectedId = id;
+      renderAll();
+    }
+
+    // Render Entire IDE State
+    function renderAll() {
+      renderFormAndControls();
+      renderObjectSelector();
+      renderPropertiesTable();
+      updateToolbarState();
+      updateCodeEditor();
+    }
+
+    function renderFormAndControls() {
+      formEl.style.width = state.form.width + "px";
+      formEl.style.height = state.form.height + "px";
+      formBodyEl.style.backgroundColor = state.form.backColor;
+      formCaptionEl.textContent = state.form.caption;
+
+      formBodyEl.classList.toggle("run-mode", state.mode === "run");
+      if (state.mode === "design" && state.showGrid) {
+        formBodyEl.style.backgroundImage = "radial-gradient(#000000 1px, transparent 1px)";
+      } else {
+        formBodyEl.style.backgroundImage = "none";
+      }
+
+      document.getElementById("formResizeHandle").style.display =
+        (state.mode === "design" && state.selectedId === "Form1") ? "block" : "none";
+
+      formBodyEl.innerHTML = "";
+
+      state.controls.forEach(ctrl => {
+        if (state.mode === "run" && !ctrl.visible) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "vb-control-wrapper";
+        if (state.mode === "run") wrapper.classList.add("run-mode");
+        if (state.mode === "design" && state.selectedId === ctrl.id) {
+          wrapper.classList.add("selected");
+        }
+
+        wrapper.style.left = ctrl.left + "px";
+        wrapper.style.top = ctrl.top + "px";
+        wrapper.style.width = ctrl.width + "px";
+        wrapper.style.height = ctrl.height + "px";
+        wrapper.style.fontSize = ctrl.fontSize + "px";
+        wrapper.style.fontWeight = ctrl.fontBold ? "bold" : "normal";
+        wrapper.style.color = ctrl.foreColor;
+        if (!ctrl.enabled) wrapper.style.opacity = "0.55";
+
+        // Inner Control Content
+        let inner;
+        if (ctrl.type === "Label") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-label";
+          inner.style.backgroundColor = ctrl.backColor;
+          inner.style.justifyContent = ctrl.alignment === "center" ? "center" : (ctrl.alignment === "right" ? "flex-end" : "flex-start");
+          inner.textContent = ctrl.caption;
+        } else if (ctrl.type === "TextBox") {
+          inner = document.createElement("input");
+          inner.type = "text";
+          inner.className = "ctrl-textbox";
+          inner.style.backgroundColor = ctrl.backColor;
+          inner.style.textAlign = ctrl.alignment;
+          inner.value = ctrl.text;
+          inner.readOnly = state.mode === "design";
+          inner.disabled = !ctrl.enabled;
+          inner.addEventListener("input", (e) => {
+            ctrl.text = e.target.value;
+          });
+        } else if (ctrl.type === "CommandButton") {
+          inner = document.createElement("button");
+          inner.type = "button";
+          inner.className = "ctrl-button";
+          inner.style.backgroundColor = ctrl.backColor;
+          inner.textContent = ctrl.caption;
+          inner.disabled = !ctrl.enabled;
+          if (state.mode === "run") {
+            inner.addEventListener("click", () => {
+              showVbMsgBox(state.form.caption, ctrl.clickMessage);
+            });
+          }
+        } else if (ctrl.type === "CheckBox") {
+          inner = document.createElement("label");
+          inner.className = "vb-control-inner ctrl-checkbox";
+          inner.style.backgroundColor = ctrl.backColor;
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.disabled = state.mode === "design" || !ctrl.enabled;
+          const span = document.createElement("span");
+          span.textContent = ctrl.caption;
+          inner.appendChild(cb);
+          inner.appendChild(span);
+        } else if (ctrl.type === "OptionButton") {
+          inner = document.createElement("label");
+          inner.className = "vb-control-inner ctrl-option";
+          inner.style.backgroundColor = ctrl.backColor;
+          const rb = document.createElement("input");
+          rb.type = "radio";
+          rb.name = "vbOptionGroup";
+          rb.disabled = state.mode === "design" || !ctrl.enabled;
+          const span = document.createElement("span");
+          span.textContent = ctrl.caption;
+          inner.appendChild(rb);
+          inner.appendChild(span);
+        } else if (ctrl.type === "Frame") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-frame";
+          inner.style.backgroundColor = ctrl.backColor;
+          const title = document.createElement("span");
+          title.className = "ctrl-frame-title";
+          title.textContent = ctrl.caption;
+          inner.appendChild(title);
+        } else if (ctrl.type === "ListBox") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-listbox";
+          inner.style.backgroundColor = ctrl.backColor;
+          inner.innerHTML = "<div>Item 1</div><div>Item 2</div><div>Item 3</div>";
+        } else if (ctrl.type === "ComboBox") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-combobox";
+          inner.style.backgroundColor = ctrl.backColor;
+          inner.innerHTML = `<span>${ctrl.text || ctrl.name}</span><span class="combo-arrow">▼</span>`;
+        } else if (ctrl.type === "PictureBox") {
+          inner = document.createElement("div");
+          inner.className = `vb-control-inner ctrl-picturebox ${ctrl.pictureMode === "stretch" ? "stretch-mode" : "clip-mode"}`;
+          inner.style.backgroundColor = ctrl.backColor;
+
+          if (ctrl.pictureSrc) {
+            const img = document.createElement("img");
+            img.src = ctrl.pictureSrc;
+            img.alt = ctrl.pictureName || ctrl.name;
+            inner.appendChild(img);
+          } else {
+            const ph = document.createElement("div");
+            ph.className = "picturebox-placeholder";
+            ph.innerHTML = `<div>🖼️ ${ctrl.name}</div><div style="font-size:9px;color:#666;">اختر صورة من Properties</div>`;
+            inner.appendChild(ph);
+          }
+
+          if (state.mode === "design") {
+            inner.addEventListener("dblclick", (e) => {
+              e.stopPropagation();
+              selectObject(ctrl.id);
+              triggerPictureUpload(ctrl.id);
+            });
+          }
+        }
+
+        wrapper.appendChild(inner);
+
+        // Design Mode Dragging & 8 Resize Handles
+        if (state.mode === "design") {
+          wrapper.addEventListener("mousedown", (e) => {
+            if (e.target.classList.contains("handle")) return;
+            e.stopPropagation();
+            selectObject(ctrl.id);
+            startDragControl(e, ctrl);
+          });
+
+          if (state.selectedId === ctrl.id) {
+            ["nw", "n", "ne", "e", "se", "s", "sw", "w"].forEach(dir => {
+              const h = document.createElement("div");
+              h.className = `handle ${dir}`;
+              h.addEventListener("mousedown", (e) => {
+                e.stopPropagation();
+                startResizeControl(e, ctrl, dir);
+              });
+              wrapper.appendChild(h);
+            });
+          }
+        }
+
+        formBodyEl.appendChild(wrapper);
+      });
+
+      updateCoordinateReadout();
+    }
+
+    // Dragging Control in Design Mode
+    function startDragControl(e, ctrl) {
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const origLeft = ctrl.left;
+      const origTop = ctrl.top;
+
+      function onMove(ev) {
+        const dx = ev.clientX - startX;
+        const dy = ev.clientY - startY;
+        ctrl.left = Math.max(0, Math.round((origLeft + dx) / 4) * 4);
+        ctrl.top = Math.max(0, Math.round((origTop + dy) / 4) * 4);
+        renderFormAndControls();
+      }
+
+      function onUp() {
+        window.removeEventListener("mousemove", onMove);
+        window.removeEventListener("mouseup", onUp);
+        renderPropertiesTable();
+      }
+
+      window.addEventListener("mousemove", onMove);
+      window.addEventListener("mouseup", onUp);
+    }
+
+    // Resizing Control via 8 Handles
+    function startResizeControl(e, ctrl, dir) {
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const orig = { left: ctrl.left, top: ctrl.top, width: ctrl.width, height: ctrl.height };
+
+      function onMove(ev) {
+        const dx = ev.clientX - startX;
+        const dy = ev.clientY - startY;
+
+        if (dir.includes("e")) ctrl.width = Math.max(20, orig.width + dx);
+        if (dir.includes("s")) ctrl.height = Math.max(16, orig.height + dy);
+        if (dir.includes("w")) {
+          const newW = Math.max(20, orig.width - dx);
+          ctrl.left = orig.left + (orig.width - newW);
+          ctrl.width = newW;
+        }
+        if (dir.includes("n")) {
+          const newH = Math.max(16, orig.height - dy);
+          ctrl.top = orig.top + (orig.height - newH);
+          ctrl.height = newH;
+        }
+        renderFormAndControls();
+      }
+
+      function onUp() {
+        window.removeEventListener("mousemove", onMove);
+        window.removeEventListener("mouseup", onUp);
+        renderPropertiesTable();
+      }
+
+      window.addEventListener("mousemove", onMove);
+      window.addEventListener("mouseup", onUp);
+    }
+
+    // Resizing Form1
+    function setupFormResize() {
+      const handle = document.getElementById("formResizeHandle");
+      handle.addEventListener("mousedown", (e) => {
+        e.stopPropagation();
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const origW = state.form.width;
+        const origH = state.form.height;
+
+        function onMove(ev) {
+          state.form.width = Math.max(200, origW + (ev.clientX - startX));
+          state.form.height = Math.max(160, origH + (ev.clientY - startY));
+          renderFormAndControls();
+        }
+
+        function onUp() {
+          window.removeEventListener("mousemove", onMove);
+          window.removeEventListener("mouseup", onUp);
+          renderPropertiesTable();
+        }
+
+        window.addEventListener("mousemove", onMove);
+        window.addEventListener("mouseup", onUp);
+      });
+    }
+
+    // Properties Window Rendering
+    function renderObjectSelector() {
+      objectSelectorEl.innerHTML = "";
+      const formOpt = document.createElement("option");
+      formOpt.value = "Form1";
+      formOpt.textContent = `${state.form.name} Form`;
+      objectSelectorEl.appendChild(formOpt);
+
+      state.controls.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c.id;
+        opt.textContent = `${c.name} ${c.type}`;
+        objectSelectorEl.appendChild(opt);
+      });
+
+      objectSelectorEl.value = state.selectedId;
+    }
+
+    function getSelectedObject() {
+      if (state.selectedId === "Form1") return state.form;
+      return state.controls.find(c => c.id === state.selectedId) || state.form;
+    }
+
+    function renderPropertiesTable() {
+      const obj = getSelectedObject();
+      propHeaderEl.textContent = `Properties - ${obj.name}`;
+      propTableEl.innerHTML = "";
+
+      const rows = [];
+      rows.push({ key: "(Name)", prop: "name", type: "text" });
+
+      if (obj.type === "Form") {
+        rows.push({ key: "Caption", prop: "caption", type: "text" });
+        rows.push({ key: "BackColor", prop: "backColor", type: "color" });
+        rows.push({ key: "Width", prop: "width", type: "number" });
+        rows.push({ key: "Height", prop: "height", type: "number" });
+      } else if (obj.type === "PictureBox") {
+        rows.push({ key: "Picture", prop: "pictureSrc", type: "picture" });
+        rows.push({ key: "PictureMode", prop: "pictureMode", type: "picmode" });
+        rows.push({ key: "BackColor", prop: "backColor", type: "color" });
+        rows.push({ key: "Left", prop: "left", type: "number" });
+        rows.push({ key: "Top", prop: "top", type: "number" });
+        rows.push({ key: "Width", prop: "width", type: "number" });
+        rows.push({ key: "Height", prop: "height", type: "number" });
+        rows.push({ key: "Enabled", prop: "enabled", type: "bool" });
+        rows.push({ key: "Visible", prop: "visible", type: "bool" });
+      } else {
+        if (obj.type === "TextBox" || obj.type === "ComboBox") {
+          rows.push({ key: "Text", prop: "text", type: "text" });
+        } else if (obj.type !== "ListBox") {
+          rows.push({ key: "Caption", prop: "caption", type: "text" });
+        }
+        rows.push({ key: "BackColor", prop: "backColor", type: "color" });
+        rows.push({ key: "ForeColor", prop: "foreColor", type: "color" });
+        rows.push({ key: "FontSize", prop: "fontSize", type: "number" });
+        rows.push({ key: "FontBold", prop: "fontBold", type: "bool" });
+        rows.push({ key: "Alignment", prop: "alignment", type: "align" });
+        rows.push({ key: "Left", prop: "left", type: "number" });
+        rows.push({ key: "Top", prop: "top", type: "number" });
+        rows.push({ key: "Width", prop: "width", type: "number" });
+        rows.push({ key: "Height", prop: "height", type: "number" });
+        rows.push({ key: "Enabled", prop: "enabled", type: "bool" });
+        rows.push({ key: "Visible", prop: "visible", type: "bool" });
+      }
+
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+        const tdName = document.createElement("td");
+        tdName.className = "prop-name-cell";
+        tdName.textContent = r.key;
+        tdName.onclick = () => {
+          document.querySelectorAll(".prop-name-cell").forEach(el => el.classList.remove("active-prop"));
+          tdName.classList.add("active-prop");
+          propDescEl.innerHTML = `<strong>${r.key}:</strong> ${PROPERTY_DESCRIPTIONS[r.key] || ""}`;
+        };
+
+        const tdVal = document.createElement("td");
+        tdVal.className = "prop-val-cell";
+
+        if (r.type === "picture") {
+          const wrap = document.createElement("div");
+          wrap.className = "prop-picture-row";
+
+          const lbl = document.createElement("span");
+          lbl.className = "prop-picture-label";
+          lbl.title = obj.pictureName || "(None)";
+          lbl.textContent = obj.pictureSrc ? (obj.pictureName || "Image") : "(None)";
+
+          const pickBtn = document.createElement("button");
+          pickBtn.type = "button";
+          pickBtn.className = "prop-mini-action bevel-out-thin";
+          pickBtn.textContent = "...";
+          pickBtn.title = "اختيار صورة من الجهاز";
+          pickBtn.onclick = () => triggerPictureUpload(obj.id);
+
+          const clearBtn = document.createElement("button");
+          clearBtn.type = "button";
+          clearBtn.className = "prop-mini-action bevel-out-thin";
+          clearBtn.textContent = "×";
+          clearBtn.title = "إزالة الصورة";
+          clearBtn.onclick = () => clearPicture(obj.id);
+
+          wrap.appendChild(lbl);
+          wrap.appendChild(pickBtn);
+          wrap.appendChild(clearBtn);
+          tdVal.appendChild(wrap);
+        } else if (r.type === "picmode") {
+          const sel = document.createElement("select");
+          sel.className = "prop-input";
+          sel.innerHTML = `
+            <option value="stretch">Stretch (ملاءمة الإطار)</option>
+            <option value="clip">Clip (الحجم الأصلي)</option>
+          `;
+          sel.value = obj[r.prop] || "stretch";
+          sel.addEventListener("change", (e) => {
+            obj[r.prop] = e.target.value;
+            renderFormAndControls();
+          });
+          tdVal.appendChild(sel);
+        } else if (r.type === "color") {
+          const wrap = document.createElement("div");
+          wrap.className = "prop-color-row";
+          const colorInp = document.createElement("input");
+          colorInp.type = "color";
+          colorInp.className = "prop-color-input";
+          colorInp.value = obj[r.prop];
+          const hexLabel = document.createElement("span");
+          hexLabel.textContent = obj[r.prop].toUpperCase();
+
+          colorInp.addEventListener("input", (e) => {
+            obj[r.prop] = e.target.value;
+            hexLabel.textContent = e.target.value.toUpperCase();
+            renderFormAndControls();
+          });
+
+          wrap.appendChild(colorInp);
+          wrap.appendChild(hexLabel);
+          tdVal.appendChild(wrap);
+        } else if (r.type === "bool") {
+          const sel = document.createElement("select");
+          sel.className = "prop-input";
+          sel.innerHTML = `<option value="true">True</option><option value="false">False</option>`;
+          sel.value = String(obj[r.prop]);
+          sel.addEventListener("change", (e) => {
+            obj[r.prop] = e.target.value === "true";
+            renderFormAndControls();
+          });
+          tdVal.appendChild(sel);
+        } else if (r.type === "align") {
+          const sel = document.createElement("select");
+          sel.className = "prop-input";
+          sel.innerHTML = `
+            <option value="left">0 - Left Justify</option>
+            <option value="right">1 - Right Justify</option>
+            <option value="center">2 - Center</option>
+          `;
+          sel.value = obj[r.prop];
+          sel.addEventListener("change", (e) => {
+            obj[r.prop] = e.target.value;
+            renderFormAndControls();
+          });
+          tdVal.appendChild(sel);
+        } else {
+          const inp = document.createElement("input");
+          inp.type = r.type;
+          inp.className = "prop-input";
+          inp.value = obj[r.prop];
+          inp.addEventListener("input", (e) => {
+            if (r.type === "number") {
+              const num = parseInt(e.target.value, 10);
+              if (!isNaN(num)) obj[r.prop] = Math.max(0, num);
+            } else {
+              obj[r.prop] = e.target.value;
+              if (r.prop === "name") renderObjectSelector();
+            }
+            renderFormAndControls();
+          });
+          tdVal.appendChild(inp);
+        }
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdVal);
+        propTableEl.appendChild(tr);
+      });
+    }
+
+    function updateCoordinateReadout() {
+      const obj = getSelectedObject();
+      const left = obj.left || 0;
+      const top = obj.top || 0;
+      document.getElementById("readoutPos").textContent = `Left: ${left}, Top: ${top}`;
+      document.getElementById("readoutSize").textContent = `Width: ${obj.width}, Height: ${obj.height}`;
+    }
+
+    // Run & Design Mode Switching
+    function startRunMode() {
+      state.mode = "run";
+      switchView("object");
+      document.getElementById("ideTitleText").textContent = "Project1 - Microsoft Visual Basic [run]";
+      const badge = document.getElementById("modeBadge");
+      badge.textContent = "وضع التشغيل (Run)";
+      badge.style.background = "#90ee90";
+      document.getElementById("btnRun").disabled = true;
+      document.getElementById("btnStop").disabled = false;
+      renderAll();
+      setStatus("البرنامج قيد التشغيل (Run Mode): يمكنك الكتابة في مربعات النص والنقر على الأزرار.");
+    }
+
+    function stopRunMode() {
+      state.mode = "design";
+      document.getElementById("ideTitleText").textContent = "Project1 - Microsoft Visual Basic [design]";
+      const badge = document.getElementById("modeBadge");
+      badge.textContent = "وضع التصميم (Design)";
+      badge.style.background = "#ffffcc";
+      document.getElementById("btnRun").disabled = false;
+      document.getElementById("btnStop").disabled = true;
+      renderAll();
+      setStatus("تم إيقاف التشغيل والعودة إلى وضع التصميم (Design Mode).");
+    }
+
+    // Object vs Code View
+    function switchView(viewName) {
+      state.view = viewName;
+      const designerEl = document.getElementById("designerView");
+      const codeEl = document.getElementById("codeView");
+      const titleEl = document.getElementById("mdiChildTitle");
+
+      if (viewName === "code") {
+        designerEl.style.display = "none";
+        codeEl.classList.add("active");
+        titleEl.textContent = "Project1 - Form1 (Code)";
+        updateCodeEditor();
+      } else {
+        codeEl.classList.remove("active");
+        designerEl.style.display = "block";
+        titleEl.textContent = "Project1 - Form1 (Form)";
+      }
+    }
+
+    function updateCodeEditor() {
+      const area = document.getElementById("codeTextarea");
+      const buttons = state.controls.filter(c => c.type === "CommandButton");
+      if (buttons.length === 0) {
+        area.value = "' أضف زر أمر (CommandButton) على النموذج لعرض حدث النقر الخاص به هنا\nPrivate Sub Form_Load()\n    Form1.Caption = \"" + state.form.caption + "\"\nEnd Sub";
+      } else {
+        area.value = buttons.map(b =>
+          `Private Sub ${b.name}_Click()\n    MsgBox "${b.clickMessage}"\nEnd Sub`
+        ).join("\n\n");
+      }
+    }
+
+    document.getElementById("codeTextarea").addEventListener("input", (e) => {
+      const matches = [...e.target.value.matchAll(/Private Sub (\w+)_Click\(\)\s*MsgBox\s*"([^"]*)"/g)];
+      matches.forEach(m => {
+        const btn = state.controls.find(c => c.name === m[1]);
+        if (btn) btn.clickMessage = m[2];
+      });
+    });
+
+    // Cut, Copy, Paste, Delete
+    function updateToolbarState() {
+      const hasCtrl = state.selectedId !== "Form1" && state.mode === "design";
+      document.getElementById("btnCut").disabled = !hasCtrl;
+      document.getElementById("btnCopy").disabled = !hasCtrl;
+      document.getElementById("btnDelete").disabled = !hasCtrl;
+      document.getElementById("btnPaste").disabled = !state.clipboard || state.mode === "run";
+    }
+
+    function copySelected() {
+      if (state.selectedId === "Form1") return;
+      const ctrl = state.controls.find(c => c.id === state.selectedId);
+      if (ctrl) {
+        state.clipboard = JSON.parse(JSON.stringify(ctrl));
+        updateToolbarState();
+        setStatus(`تم نسخ الأداة ${ctrl.name}.`);
+      }
+    }
+
+    function cutSelected() {
+      copySelected();
+      deleteSelected();
+    }
+
+    function pasteClipboard() {
+      if (!state.clipboard || state.mode === "run") return;
+      const copy = JSON.parse(JSON.stringify(state.clipboard));
+      state.counters[copy.type] = (state.counters[copy.type] || 0) + 1;
+      const newName = `${copy.type === "CommandButton" ? "Command" : copy.type === "TextBox" ? "Text" : copy.type === "PictureBox" ? "Picture" : copy.type}${state.counters[copy.type]}`;
+      copy.id = newName;
+      copy.name = newName;
+      copy.left += 16;
+      copy.top += 16;
+      state.controls.push(copy);
+      state.selectedId = copy.id;
+      renderAll();
+      setStatus(`تم لصق نسخة جديدة باسم ${newName}.`);
+    }
+
+    function deleteSelected() {
+      if (state.selectedId === "Form1" || state.mode === "run") return;
+      state.controls = state.controls.filter(c => c.id !== state.selectedId);
+      state.selectedId = "Form1";
+      renderAll();
+      setStatus("تم حذف الأداة المحددة.");
+    }
+
+    // Project Templates & Reset
+    function newProject() {
+      stopRunMode();
+      state.controls = [];
+      state.counters = {};
+      state.form = {
+        id: "Form1",
+        type: "Form",
+        name: "Form1",
+        caption: "Form1",
+        backColor: "#d4d0c8",
+        width: 380,
+        height: 270
+      };
+      state.selectedId = "Form1";
+      renderAll();
+      setStatus("تم إنشاء مشروع جديد فارغ (Form1).");
+    }
+
+    function loadSampleProject() {
+      stopRunMode();
+      newProject();
+      state.form.caption = "بطاقة ترحيب الطالب";
+      state.form.backColor = "#e8f0fe";
+      state.form.width = 410;
+      state.form.height = 275;
+
+      createControl("Label", 115, 16, 180, 26);
+      Object.assign(state.controls[0], {
+        caption: "أدخل اسمك في المربع أدناه:",
+        backColor: "#e8f0fe",
+        fontBold: true,
+        fontSize: 13
+      });
+
+      createControl("TextBox", 105, 50, 200, 28);
+      Object.assign(state.controls[1], {
+        text: "طالب الصف الثالث",
+        alignment: "center",
+        fontSize: 13
+      });
+
+      createControl("PictureBox", 145, 88, 120, 82);
+      Object.assign(state.controls[2], {
+        backColor: "#ffffff"
+      });
+
+      createControl("CommandButton", 140, 182, 130, 34);
+      Object.assign(state.controls[3], {
+        caption: "اضغط للترحيب",
+        fontBold: true,
+        clickMessage: "أهلاً وسهلاً بك في درس الفيجوال بيسك!"
+      });
+
+      state.selectedId = "Form1";
+      renderAll();
+      setStatus("تم تحميل نموذج تطبيقي جاهز! جرب اختيار صورة لمربع PictureBox أو اضغط التشغيل ▶.");
+    }
+
+    function toggleGrid() {
+      state.showGrid = !state.showGrid;
+      renderFormAndControls();
+    }
+
+    function centerFormInCanvas() {
+      const canvas = document.getElementById("designerView");
+      formEl.style.marginLeft = Math.max(0, (canvas.clientWidth - state.form.width) / 2 - 12) + "px";
+    }
+
+    function exportDesignSummary() {
+      const lines = [
+        `النموذج: ${state.form.name} | العنوان: ${state.form.caption} | اللون: ${state.form.backColor}`,
+        `عدد الأدوات المضافة: ${state.controls.length}`,
+        ...state.controls.map(c => {
+          if (c.type === "PictureBox") {
+            return `- ${c.name} (PictureBox): الصورة=${c.pictureName || "(None)"}، العرض=${c.pictureMode}`;
+          }
+          return `- ${c.name} (${c.type}): النص="${c.caption || c.text}"، الخلفية=${c.backColor}`;
+        })
+      ];
+      showVbMsgBox("ملخص تصميم الطالب", lines.join("\n"));
+    }
+
+    // Form Layout Mini Monitor Dragging
+    function setupFormLayoutMiniDrag() {
+      const mini = document.getElementById("miniFormPreview");
+      const screen = document.getElementById("monitorScreen");
+      let dragging = false, sx = 0, sy = 0, ol = 0, ot = 0;
+
+      mini.addEventListener("mousedown", (e) => {
+        dragging = true;
+        sx = e.clientX;
+        sy = e.clientY;
+        ol = mini.offsetLeft;
+        ot = mini.offsetTop;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        const maxL = screen.clientWidth - mini.offsetWidth;
+        const maxT = screen.clientHeight - mini.offsetHeight;
+        mini.style.left = Math.max(0, Math.min(maxL, ol + (e.clientX - sx))) + "px";
+        mini.style.top = Math.max(0, Math.min(maxT, ot + (e.clientY - sy))) + "px";
+      });
+
+      window.addEventListener("mouseup", () => { dragging = false; });
+    }
+
+    // Menus & Modals
+    function toggleMenu(el) {
+      const wasActive = el.classList.contains("active");
+      document.querySelectorAll(".menu-item").forEach(m => m.classList.remove("active"));
+      if (!wasActive) el.classList.add("active");
+    }
+
+    window.addEventListener("click", (e) => {
+      if (!e.target.closest(".menu-item")) {
+        document.querySelectorAll(".menu-item").forEach(m => m.classList.remove("active"));
+      }
+    });
+
+    function openGuideModal() {
+      document.getElementById("guideModal").classList.add("open");
+    }
+
+    function closeGuideModal() {
+      document.getElementById("guideModal").classList.remove("open");
+    }
+
+    function showVbMsgBox(title, text) {
+      document.getElementById("msgBoxTitle").textContent = title || "Project1";
+      document.getElementById("msgBoxContent").style.whiteSpace = "pre-line";
+      document.getElementById("msgBoxContent").textContent = text;
+      document.getElementById("vbMsgBoxModal").classList.add("open");
+    }
+
+    function closeMsgBox() {
+      document.getElementById("vbMsgBoxModal").classList.remove("open");
+    }
+
+    // Keyboard Shortcuts
+    function setupKeyboardShortcuts() {
+      window.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+        if (e.key === "Delete") deleteSelected();
+        if (e.key === "F5") {
+          e.preventDefault();
+          startRunMode();
+        }
+        if (e.ctrlKey && e.key.toLowerCase() === "c") copySelected();
+        if (e.ctrlKey && e.key.toLowerCase() === "x") cutSelected();
+        if (e.ctrlKey && e.key.toLowerCase() === "v") pasteClipboard();
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

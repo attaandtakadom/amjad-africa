@@ -135,64 +135,77 @@ const  questionsMatrix = [
 {
     id: 9,
     title: "س 9 (تمارين الكتاب 1-A): توازن مصباح معلق بسلسلتين مائلتين",
-    text: "مصباح مثبت في حالة توازن بسلسلتين ثبتتا إلى نقطتين (A) و (B) في نفس المستوى، وكان طولهما (0.3 m) و (0.4 m) والمسافة بينهما (0.5 m). إذا كان الشد في السلسلة الطويلة (36 N)، أوجد الشد في السلسلة القصيرة وكتلة المصباح (باعتبار g = 10 m/s²).",
-    hint: "لاحظ أن أطوال المثلث (0.3, 0.4, 0.5) تحقق نظرية فيثاغورث (0.3² + 0.4² = 0.5²)، إذن المثلث قائم الزاوية بين السلسلتين.",
-    solution: "خطوة 1: إثبات أن المثلث قائم وزوايا الميل هي (3/5 و 4/5). <br> خطوة 2: تطبيق الاتزان الأفقي (ΣFx = 0) لإيجاد الشد في السلسلة القصيرة (48 N). <br> خطوة 3: تطبيق الاتزان الرأسي (ΣFy = 0) لحساب الوزن والكتلة (6 kg).",
-    svgCode: "<svg viewBox='0 0 500 280' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><defs><marker id='arrow-blue' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#2563eb'/></marker><marker id='arrow-green' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#16a34a'/></marker><marker id='arrow-red' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#dc2626'/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}.card{fill:#f0fdf4;stroke:#bbf7d0;stroke-width:1.5;rx:8;}</style><rect width='500' height='280' fill='#ffffff'/><line x1='50' y1='60' x2='450' y2='60' stroke='#64748b' stroke-width='3'/><text x='50' y='45' class='label' font-size='14' fill='#475569'>A</text><text x='450' y='45' class='label' font-size='14' fill='#475569'>B</text><text x='250' y='45' class='label' font-size='13' fill='#64748b'>المسافة = 0.5 m</text><line x1='50' y1='60' x2='270' y2='200' stroke='#2563eb' stroke-width='3' marker-end='url(#arrow-blue)'/><text x='140' y='115' class='label' font-size='13' fill='#2563eb'>T1 (طويلة 0.4m) = 36 N</text><line x1='450' y1='60' x2='270' y2='200' stroke='#16a34a' stroke-width='3' marker-end='url(#arrow-green)'/><text x='370' y='115' class='label' font-size='13' fill='#16a34a'>T2 (قصيرة 0.3m)</text><circle cx='270' cy='200' r='8' fill='#dc2626'/><line x1='270' y1='200' x2='270' y2='255' stroke='#dc2626' stroke-width='3' marker-end='url(#arrow-red)'/><text x='295' y='235' class='label' font-size='13' fill='#dc2626'>الوزن W = mg</text><rect x='40' y='258' width='420' height='20' fill='none'/><text x='250' y='272' class='label' font-size='12' fill='#15803d'>مثلث الأطوال (0.3 - 0.4 - 0.5) قائم الزاوية ✅</text></svg>",
+    text: "مصباح مثبت في حالة توازن بسلسلتين ثبتتا إلى نقطتين (A) و (B) في نفس المستوى، وكان طولهما (0.3 m) و (0.4 m) والمسافة بينهما (0.5 m). إذا كان الشد في السلسلة الطويلة (T₁ = 36 N)، أوجد الشد في السلسلة القصيرة (T₂) وكتلة المصباح (باعتبار g = 10 m/s²).",
+    hint: "💡 كيف يكتشف الطالب مثلث فيثاغورس بسرعة؟ انظر لأطوال الأضلاع (0.3، 0.4، 0.5) وتجاهل الفاصلة العشرية لتصبح (3، 4، 5) — وهو أشهر مثلث قائم الزاوية في الرياضيات! هذا يعني فوراً أن الزاوية بين السلسلتين قائمة (90°)، مما يغنيك عن استخدام الآلة الحاسبة لإيجاد الزوايا.",
+    solution: "خطوة 1: اكتشاف المثلث القائم (3-4-5) واستخراج نسب الزوايا θ₁ و θ₂.<br>خطوة 2: تطبيق الاتزان الأفقي (T₂ cos θ₂ = T₁ cos θ₁) لإيجاد T₂ = 48 N.<br>خطوة 3: تطبيق الاتزان الرأسي (W = T₁ sin θ₁ + T₂ sin θ₂) لإيجاد الوزن (60 N) والكتلة (6 kg).",
+    svgCode: "<svg viewBox='0 0 500 300' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><defs><marker id='arrow-blue' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#2563eb'/></marker><marker id='arrow-green' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#16a34a'/></marker><marker id='arrow-red' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#dc2626'/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}</style><rect width='500' height='300' fill='#ffffff'/><!-- السقف --><line x1='50' y1='60' x2='450' y2='60' stroke='#64748b' stroke-width='3'/><text x='45' y='48' class='label' font-size='15' fill='#1e293b'>B</text><text x='455' y='48' class='label' font-size='15' fill='#1e293b'>A</text><text x='250' y='45' class='label' font-size='13' fill='#475569'>0.5 m</text><!-- خط أفقي متقطع عند المصباح لإظهار التبادل Z --><line x1='150' y1='200' x2='390' y2='200' stroke='#94a3b8' stroke-width='1.5' stroke-dasharray='5,5'/><!-- السلسلة الطويلة T1 (من B إلى المصباح) --><line x1='270' y1='200' x2='60' y2='66' stroke='#2563eb' stroke-width='3' marker-end='url(#arrow-blue)'/><text x='135' y='110' class='label' font-size='13' fill='#2563eb'>T₁ = 36 N (0.4 m)</text><!-- السلسلة القصيرة T2 (من A إلى المصباح) --><line x1='270' y1='200' x2='440' y2='66' stroke='#16a34a' stroke-width='3' marker-end='url(#arrow-green)'/><text x='385' y='110' class='label' font-size='13' fill='#16a34a'>T₂ (0.3 m)</text><!-- الزوايا في الأعلى (عند B و A) --><path d='M 95 60 A 45 45 0 0 1 88 84' fill='none' stroke='#2563eb' stroke-width='1.5'/><text x='110' y='82' class='label' font-size='13' fill='#2563eb'>θ₁</text><path d='M 405 60 A 45 45 0 0 0 415 88' fill='none' stroke='#16a34a' stroke-width='1.5'/><text x='390' y='84' class='label' font-size='13' fill='#16a34a'>θ₂</text><!-- الزوايا بالتبادل في الأسفل عند المصباح (حرف Z) --><path d='M 225 200 A 45 45 0 0 1 232 176' fill='none' stroke='#2563eb' stroke-width='1.5'/><text x='208' y='188' class='label' font-size='13' fill='#2563eb'>θ₁</text><path d='M 315 200 A 45 45 0 0 0 305 172' fill='none' stroke='#16a34a' stroke-width='1.5'/><text x='332' y='188' class='label' font-size='13' fill='#16a34a'>θ₂</text><!-- المصباح والوزن --><circle cx='270' cy='200' r='8' fill='#dc2626'/><line x1='270' y1='200' x2='270' y2='265' stroke='#dc2626' stroke-width='3' marker-end='url(#arrow-red)'/><text x='310' y='245' class='label' font-size='13' fill='#dc2626'>W = mg</text><text x='250' y='290' class='label' font-size='12' fill='#15803d'>الزاوية بين السلسلتين قائمة (90°) من مثلث (3 - 4 - 5) ✅</text></svg>",
     options: [
-        { text: "أ) الشد في القصيرة = 48 N ، الكتلة = 6 kg", isCorrect: true },
-        { text: "ب) الشد في القصيرة = 36 N ، الكتلة = 4 kg", isCorrect: false },
-        { text: "ج) الشد في القصيرة = 60 N ، الكتلة = 8 kg", isCorrect: false },
-        { text: "د) الشد في القصيرة = 48 N ، الكتلة = 10 kg", isCorrect: false }
+        { text: "أ) T₂ = 48 N ، الكتلة m = 6 kg", isCorrect: true },
+        { text: "ب) T₂ = 36 N ، الكتلة m = 4 kg", isCorrect: false },
+        { text: "ج) T₂ = 60 N ، الكتلة m = 8 kg", isCorrect: false },
+        { text: "د) T₂ = 48 N ، الكتلة m = 10 kg", isCorrect: false }
     ],
     correctAnswerIndex: 0,
     steps: [
         {
-            title: "الخطوة 1: التحقق من هندسة الشكل (نظرية فيثاغورث)",
-            question: "بما أن أطوال الأضلاع هي (0.3, 0.4, 0.5)، فما طبيعة المثلث الناتج؟",
+            title: "الخطوة 1: كيف نفهم هندسة الشكل؟ (مثلث فيثاغورس)",
+            question: "إذا تجاهلنا الفاصلة العشرية في الأطوال (0.3، 0.4، 0.5) لتصبح (3، 4، 5)، ماذا نستنتج؟",
             options: [
-                { text: "مثلث قائم الزاوية، لأن 0.3² + 0.4² = 0.5²", isCorrect: true },
-                { text: "مثلث متطابق الأضلاع", isCorrect: false }
+                { text: "المثلث قائم الزاوية (3² + 4² = 5²)، فنستخرج sin و cos مباشرة من الأضلاع", isCorrect: true },
+                { text: "نحتاج لحساب الزوايا بالمنقلة", isCorrect: false }
             ],
-            feedback: "✅ صحيح! زاوية تعليق المصباح قائمة (90°)، مما يسهل حساب نسب الجتا والجيب مباشرة."
+            feedback: "✅ أحسنت! الأرقام (3، 4، 5) تعني فوراً أن الزاوية بين السلسلتين 90°، وبالتالي السقف (0.5 m) هو الوتر."
         },
         {
-            title: "الخطوة 2: تطبيق الاتزان الأفقي (ΣFx = 0)",
-            question: "كيف نثبت أن الشد في السلسلة القصيرة يساوي 48 N؟",
+            title: "الخطوة 2: حساب الشد T₂ من الاتزان الأفقي",
+            question: "بتطبيق شرط الاتزان الأفقي (المركبة اليمينية = المركبة اليسارية): T₂ cos θ₂ = T₁ cos θ₁، كم يساوي T₂؟",
             options: [
-                { text: "بمساواة المركبة الأفقية للشد الأول بالمركبة الأفقية للشد الثاني: T₂ × (0.3/0.5) = T₁ × (0.4/0.5)", isCorrect: true },
-                { text: "بجمع الشدين معاً", isCorrect: false }
+                { text: "T₂ × (0.3 / 0.5) = 36 × (0.4 / 0.5)  ⇐  T₂ = 48 N", isCorrect: true },
+                { text: "T₂ = 36 N", isCorrect: false }
             ],
-            feedback: "✅ ممتاز! T₂ × 0.3 = 36 × 0.4 ⇐ T₂ = 14.4 / 0.3 = 48 N."
+            feedback: "✅ ممتاز! لاحظ أن المقام (0.5) يُختصر من الطرفين فتصبح المعادلة بسيطة جداً: 0.3 T₂ = 36 × 0.4."
+        },
+        {
+            title: "الخطوة 3: حساب كتلة المصباح من الاتزان الرأسي",
+            question: "مجموع مركبتي الشد لأعلى يساوي الوزن لأسفل (W = T₁ sin θ₁ + T₂ sin θ₂). كم تبلغ الكتلة m؟",
+            options: [
+                { text: "W = 36×(0.3/0.5) + 48×(0.4/0.5) = 60 N  ⇐  m = 6 kg", isCorrect: true },
+                { text: "W = 84 N  ⇐  m = 8.4 kg", isCorrect: false }
+            ],
+            feedback: "✅ رائع! بقسمة الوزن الكلي (60 N) على عجلة الجاذبية (10) نحصل على الكتلة 6 kg."
         }
     ],
     pdfSolutionSteps: [
         "══════════════ الخيارات ══════════════",
-        "أ) الشد في القصيرة = 48 N ، الكتلة = 6 kg  ✅ (الإجابة الصحيحة)",
-        "ب) الشد في القصيرة = 36 N ، الكتلة = 4 kg",
-        "ج) الشد في القصيرة = 60 N ، الكتلة = 8 kg",
-        "د) الشد في القصيرة = 48 N ، الكتلة = 10 kg",
+        "أ) T₂ = 48 N ، الكتلة m = 6 kg  ✅ (الإجابة الصحيحة)",
+        "ب) T₂ = 36 N ، الكتلة m = 4 kg",
+        "ج) T₂ = 60 N ، الكتلة m = 8 kg",
+        "د) T₂ = 48 N ، الكتلة m = 10 kg",
         "",
-        "══════════════ الحل التفصيلي ══════════════",
-        "1. التحقق الهندسي:",
-        "   (0.3)² + (0.4)² = 0.09 + 0.16 = 0.25 = (0.5)²  ⟸ المثلث قائم الزاوية.",
+        "══════════════ فكرة الحل الذهنية ══════════════",
+        "• انظر للأطوال (0.3 ، 0.4 ، 0.5) بدون فواصل ستجدها (3 ، 4 ، 5) — أشهر مثلث قائم لفيثاغورس!",
+        "• هذا يعني أن الزاوية عند المصباح قائمة (90°)، والضلع الأكبر (0.5 m) هو الوتر.",
+        "• بالتبادل (حرف Z)، الزاوية θ₁ عند B تساوي θ₁ عند المصباح، والزاوية θ₂ عند A تساوي θ₂ عند المصباح.",
+        "• من المثلث القائم نستنتج النسب المثلثية مباشرة دون آلة حاسبة:",
+        "   - للزاوية θ₁:  cos θ₁ = المجاور/الوتر = 0.4 / 0.5  |  sin θ₁ = المقابل/الوتر = 0.3 / 0.5",
+        "   - للزاوية θ₂:  cos θ₂ = المجاور/الوتر = 0.3 / 0.5  |  sin θ₂ = المقابل/الوتر = 0.4 / 0.5",
         "",
-        "2. بالتحليل الأفقي (ΣFx = 0):",
-        "   T_short × cos(θ_short) = T_long × cos(θ_long)",
-        "   T_short × (0.3 / 0.5) = 36 × (0.4 / 0.5)",
-        "   T_short × 0.3 = 14.4  ⟸  T_short = 48 N  ✅",
+        "══════════════ خطوات الحل المبسطة ══════════════",
+        "1. الاتزان الأفقي (القوى يميناً = القوى يساراً):",
+        "   T₂ cos θ₂ = T₁ cos θ₁",
+        "   T₂ × (0.3 / 0.5) = 36 × (0.4 / 0.5)",
+        "   بحذف (0.5) من الطرفين:  0.3 T₂ = 14.4  ⟸  T₂ = 48 N  ✅",
         "",
-        "3. بالتحليل الرأسي (ΣFy = 0) لإيجاد الكتلة:",
-        "   الوزن W = T_short × sin(θ_short) + T_long × sin(θ_long)",
-        "   W = 48 × (0.4 / 0.5) + 36 × (0.3 / 0.5)",
-        "   W = 38.4 + 21.6 = 60 N",
-        "   الكتلة m = W / g = 60 / 10 = 6 kg  ✅",
+        "2. الاتزان الرأسي (القوى لأعلى = الوزن لأسفل):",
+        "   W = T₁ sin θ₁ + T₂ sin θ₂",
+        "   W = 36 × (0.3 / 0.5) + 48 × (0.4 / 0.5)",
+        "   W = 21.6 + 38.4 = 60 N",
         "",
-        "الإجابة الصحيحة: أ) الشد في القصيرة = 48 N ، الكتلة = 6 kg ✅"
+        "3. حساب الكتلة (m):",
+        "   m = W / g = 60 / 10 = 6 kg  ✅"
     ],              
-    pdfFinalAnswer: "الإجابة الصحيحة: أ) الشد في السلسلة القصيرة = 48 N ، وكتلة المصباح = 6 kg ✅"
+    pdfFinalAnswer: "الإجابة الصحيحة: أ) T₂ = 48 N ، وكتلة المصباح m = 6 kg ✅"
 },
-
 {
   "title": "س 49:دفعت 2008 مقدار الشد في الخيط الأفقي",
   "text": "كرة وزنها 200 N مثبتة على سطح مائل خشن بواسطة خيط أفقي AB، فإذا كانت قوة الاحتكاك مساوية لمقدار الشد في الخيط، فإن مقدار الشد يساوي:\n\nأ) 53.6 N\nب) 170 N\nج) 85 N\nد) 115.5 N",
@@ -203,7 +216,7 @@ const  questionsMatrix = [
     { "text": "د) 115.5 N", "isCorrect": false }
   ],
   "correctAnswerIndex": 0,
-  "svgCode": "<div style=\"text-align: center; margin: 10px 0;\"><svg viewBox=\"0 0 450 260\" width=\"100%\" height=\"220\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\"><line x1=\"80\" y1=\"220\" x2=\"280\" y2=\"220\" stroke=\"#64748b\" stroke-width=\"1.5\" stroke-dasharray=\"4,4\" /><line x1=\"80\" y1=\"220\" x2=\"340\" y2=\"70\" stroke=\"#0f172a\" stroke-width=\"2.5\" /><path d=\"M 120 220 A 40 40 0 0 0 113 200\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"128\" y=\"212\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">30°</text><circle cx=\"246\" cy=\"102\" r=\"20\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" /><circle cx=\"246\" cy=\"102\" r=\"2.5\" fill=\"#0f172a\" /><line x1=\"246\" y1=\"82\" x2=\"320\" y2=\"81.5\" stroke=\"#94a3b8\" stroke-width=\"1.5\" stroke-dasharray=\"3,3\" /><circle cx=\"246\" cy=\"82\" r=\"3\" fill=\"#0f172a\" /><circle cx=\"320\" cy=\"81.5\" r=\"3\" fill=\"#0f172a\" /><text x=\"241\" y=\"74\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#0f172a\" font-weight=\"bold\">A</text><text x=\"326\" y=\"78\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#0f172a\" font-weight=\"bold\">B</text><g><line x1=\"246\" y1=\"102\" x2=\"298\" y2=\"72\" stroke=\"#0284c7\" stroke-width=\"2\" /><polygon points=\"298,72 288,74 293,82\" fill=\"#0284c7\" /><text x=\"301\" y=\"67\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#0284c7\" font-weight=\"bold\">T cos 30°</text></g><g><line x1=\"246\" y1=\"102\" x2=\"286\" y2=\"79\" stroke=\"#dc2626\" stroke-width=\"2\" /><polygon points=\"286,79 276,81 281,89\" fill=\"#dc2626\" /><text x=\"291\" y=\"92\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#dc2626\" font-weight=\"bold\">f</text></g><g><line x1=\"246\" y1=\"102\" x2=\"176.7\" y2=\"142\" stroke=\"#ea580c\" stroke-width=\"2\" /><polygon points=\"176.7,142 186.7,140 181.7,132\" fill=\"#ea580c\" /><text x=\"105\" y=\"157\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#ea580c\" font-weight=\"bold\">W sin 30°</text></g></svg></div>",
+  "svgCode": "<div style=\"text-aligntext-align: center; margin: 10px 0;\"><svg viewBox=\"0 0 450 260\" width=\"100%\" height=\"220\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;\"><line x1=\"80\" y1=\"220\" x2=\"280\" y2=\"220\" stroke=\"#64748b\" stroke-width=\"1.5\" stroke-dasharray=\"4,4\" /><line x1=\"80\" y1=\"220\" x2=\"340\" y2=\"70\" stroke=\"#0f172a\" stroke-width=\"2.5\" /><path d=\"M 120 220 A 40 40 0 0 0 113 200\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.2\" /><text x=\"128\" y=\"212\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#0f172a\" font-weight=\"bold\">30°</text><circle cx=\"246\" cy=\"102\" r=\"20\" fill=\"#f8fafc\" stroke=\"#0f172a\" stroke-width=\"2\" /><circle cx=\"246\" cy=\"102\" r=\"2.5\" fill=\"#0f172a\" /><line x1=\"246\" y1=\"82\" x2=\"320\" y2=\"81.5\" stroke=\"#94a3b8\" stroke-width=\"1.5\" stroke-dasharray=\"3,3\" /><circle cx=\"246\" cy=\"82\" r=\"3\" fill=\"#0f172a\" /><circle cx=\"320\" cy=\"81.5\" r=\"3\" fill=\"#0f172a\" /><text x=\"241\" y=\"74\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#0f172a\" font-weight=\"bold\">A</text><text x=\"326\" y=\"78\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#0f172a\" font-weight=\"bold\">B</text><g><line x1=\"246\" y1=\"102\" x2=\"298\" y2=\"72\" stroke=\"#0284c7\" stroke-width=\"2\" /><polygon points=\"298,72 288,74 293,82\" fill=\"#0284c7\" /><text x=\"301\" y=\"67\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#0284c7\" font-weight=\"bold\">T cos 30°</text></g><g><line x1=\"246\" y1=\"102\" x2=\"286\" y2=\"79\" stroke=\"#dc2626\" stroke-width=\"2\" /><polygon points=\"286,79 276,81 281,89\" fill=\"#dc2626\" /><text x=\"291\" y=\"92\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#dc2626\" font-weight=\"bold\">f</text></g><g><line x1=\"246\" y1=\"102\" x2=\"176.7\" y2=\"142\" stroke=\"#ea580c\" stroke-width=\"2\" /><polygon points=\"176.7,142 186.7,140 181.7,132\" fill=\"#ea580c\" /><text x=\"105\" y=\"157\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#ea580c\" font-weight=\"bold\">W sin 30°</text></g></svg></div>",
   "steps": [
     {
       "title": "خطوة 1: تحليل القوى المؤثرة موازياً للمستوى",
