@@ -1444,7 +1444,7 @@ const questionsMatrix = [
    {
     "id": 10,
     "title": "سؤال وزارة: قانون كولوم والقوة العظمى",
-    "text": "شحنتان كهربائيتان في الهواء والمسافة بينهما (<span dir='ltr'>1m</span>)، أي من أزواج الشحنات التالية يعطي أكبر قوة تجاذب؟",
+    "text": "شحنتان كهربائيتان في الهواء والمسافة بينهما (<span dir='ltr'>1m</span>)، أي من أزواج الشحنات التالية يعطي أكبر قوة تجاذب ممكّنة بينهما؟",
     "options": [
         { "text": "<span dir='ltr'>1C , 4C</span>", "isCorrect": false },
         { "text": "<span dir='ltr'>-6C , -3C</span>", "isCorrect": false },
@@ -1473,12 +1473,12 @@ const questionsMatrix = [
         },
         {
             "title": "المرحلة الثانية: تحديد القوة الأكبر",
-            "question": "بما أن التجاذب يحدث بين الشحنات المختلفة فقط، أي زوج من الخيارات يعطي قوة تجاذب؟",
+            "question": "بما أن <span dir='ltr'>F</span> تتناسب مع حاصل ضرب القيمة المطلقة للشحنتين <span dir='ltr'>|q₁ × q₂|</span>، أي الزوجين التاليين يعطي تجاذباً؟",
             "options": [
                 { "text": "<span dir='ltr'>5C , -2C</span> (تجاذب: <span dir='ltr'>|5 × -2| = 10</span>)", "isCorrect": true },
                 { "text": "<span dir='ltr'>1C , 4C</span> (شحنات متشابهة - تنافر)", "isCorrect": false }
             ],
-            "feedback": "ممتاز! الزوج <span dir='ltr'>(5C , -2C)</span> هو الوحيد الذي يحقق التجاذب بين الخيارات."
+            "feedback": "ممتاز! الزوج <span dir='ltr'>(5C , -2C)</span> هو الوحيد الذي تتخالف فيه إشارتا الشحنتين فيحدث تجاذب."
         }
     ],
     "pdfSolutionSteps": [
@@ -1843,54 +1843,58 @@ const questionsMatrix = [
         "pdfFinalAnswer": "الإجابة الصحيحة: ب) 0.63 m"
     },
     {
-        "id": 23,
-        "title": "س 31 (2022-2023): تأثير المسافة على القوة الكهربائية",
-        "text": "في نفس الوسط إذا قلت المسافة بين شحنتين إلى النصف فإن القوة الكهربائية بينهما:",
-        "options": [
-            { "text": "أ) تقل إلى النصف", "isCorrect": false },
-            { "text": "ب) تزداد إلى ضعف", "isCorrect": false },
-            { "text": "ج) تزداد أربعة أمثال", "isCorrect": true },
-            { "text": "د) تقل إلى الربع", "isCorrect": false }
-        ],
-        "correctAnswerIndex": 2,
-        "svgCode": `<svg viewBox="0 0 300 110" width="100%" height="110" xmlns="http://www.w3.org/2000/svg">
-            <rect width="300" height="110" fill="#ffffff" rx="8"/>
-            <rect x="15" y="15" width="270" height="80" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="6"/>
-            <text x="150" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b" font-family="Cairo">قانون كولوم: F ∝ 1 / r²</text>
-            <text x="150" y="62" text-anchor="middle" font-size="12" fill="#475569" font-family="Cairo">عندما r' = ½ r  ⇐  F' = 1 / (½)² = 4 F</text>
-            <text x="150" y="84" text-anchor="middle" font-size="12" font-weight="bold" fill="#16a34a" font-family="Cairo">تزداد القوة الكهربائية إلى 4 أمثال</text>
-        </svg>`,
-        "steps": [
-            {
-                "title": "المرحلة الأولى: العلاقة بين القوة والمسافة",
-                "question": "كيف تتناسب القوة الكهربائية المتبادلة بين شحنتين مع المسافة بينهما وفق قانون كولوم؟",
-                "options": [
-                    { "text": "تتناسب عكسياً مع مربع المسافة (F ∝ 1/r²)", "isCorrect": true },
-                    { "text": "تتناسب عكسياً مع المسافة خطياً (F ∝ 1/r)", "isCorrect": false }
-                ],
-                "feedback": "صحيح! تناسب القوة هو تناسب عكسي مع مربع المسافة."
-            },
-            {
-                "title": "المرحلة الثانية: حساب التغير في القوة",
-                "question": "عند التعويض بـ (r' = ½ r) في قانون التربيع العكسي، ماذا يصبح مقدار القوة الجديدة F'؟",
-                "options": [
-                    { "text": "F' = 4 F (تزداد 4 أمثال)", "isCorrect": true },
-                    { "text": "F' = 2 F (تزداد للضعف)", "isCorrect": false }
-                ],
-                "feedback": "ممتاز! قسمة 1 على (1/2)² تعطي 4، بالتالي تزداد القوة أربعة أمثال."
-            }
-        ],
-        "pdfSolutionSteps": [
-            "<div><strong>الحل المفصل:</strong></div>",
-            "<div>1. صيغة قانون كولوم: F = k · Q₁ · Q₂ / r²</div>",
-            "<div>2. العلاقة بين القوة والمسافة هي علاقة تناسب عكسي مع مربع المسافة (F ∝ 1/r²).</div>",
-            "<div>3. بفرض المسافة الجديدة r' = ½ r:</div>",
-            "<div>4. F' = k · Q₁ · Q₂ / (½ r)² = k · Q₁ · Q₂ / (¼ r²) = 4 × F</div>",
-            "<div>5. بالتالي تزداد القوة أربعة أمثال قيمتها الأصلية.</div>"
-        ],
-        "pdfFinalAnswer": "الإجابة الصحيحة: ج) تزداد أربعة أمثال"
-    },
-    
+    "id": 23,
+    "title": "س 31 (2022-2023): تأثير المسافة على القوة الكهربائية",
+    "text": "في نفس الوسط إذا قلت المسافة بين شحنتين إلى النصف فإن القوة الكهربائية بينهما:",
+    "options": [
+        { "text": "أ) تقل إلى النصف", "isCorrect": false },
+        { "text": "ب) تزداد إلى ضعف", "isCorrect": false },
+        { "text": "ج) تزداد أربعة أمثال", "isCorrect": true },
+        { "text": "د) تقل إلى الربع", "isCorrect": false }
+    ],
+    "correctAnswerIndex": 2,
+    "svgCode": `<svg viewBox="0 0 340 125" style="width: 100%; max-width: 340px; height: auto; display: block; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg">
+        <rect width="340" height="125" fill="#ffffff" rx="8"/>
+        <rect x="10" y="10" width="320" height="105" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="8"/>
+        <text x="170" y="36" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b" font-family="Cairo, sans-serif">
+            تلميح — قانون كولوم: <tspan dir="ltr">F ∝ 1 / r²</tspan>
+        </text>
+        <text x="170" y="64" text-anchor="middle" font-size="12" fill="#475569" font-family="Cairo, sans-serif">
+            عندما تقل المسافة إلى النصف (<tspan dir="ltr" font-weight="bold">1/2 r</tspan>) تصبح القوة <tspan dir="ltr" font-weight="bold">4F</tspan>
+        </text>
+        <text x="170" y="94" text-anchor="middle" font-size="13" font-weight="bold" fill="#16a34a" font-family="Cairo, sans-serif">
+            تزداد القوة الكهربائية إلى 4 أمثال
+        </text>
+    </svg>`,
+    "steps": [
+        {
+            "title": "المرحلة الأولى: العلاقة بين القوة والمسافة",
+            "question": "كيف تتناسب القوة الكهربائية المتبادلة بين شحنتين مع المسافة بينهما وفق قانون كولوم؟",
+            "options": [
+                { "text": "تتناسب عكسياً مع مربع المسافة (<span dir='ltr'>F ∝ 1/r²</span>)", "isCorrect": true },
+                { "text": "تتناسب عكسياً مع المسافة خطياً (<span dir='ltr'>F ∝ 1/r</span>)", "isCorrect": false }
+            ],
+            "feedback": "صحيح! تناسب القوة هو تناسب عكسي مع مربع المسافة."
+        },
+        {
+            "title": "المرحلة الثانية: حساب التغير في القوة",
+            "question": "عندما تقل المسافة بين الشحنتين إلى النصف (<span dir='ltr'>1/2 r</span>)، ماذا يحدث للقوة الكهربائية بينهما؟",
+            "options": [
+                { "text": "تزداد إلى أربعة أمثال (<span dir='ltr'>4F</span>)", "isCorrect": true },
+                { "text": "تزداد إلى الضعف (<span dir='ltr'>2F</span>)", "isCorrect": false }
+            ],
+            "feedback": "ممتاز! لأن المسافة في المقام مربّعة، فنقصانها إلى <span dir='ltr'>1/2</span> يجعل القوة تزداد أربعة أمثال."
+        }
+    ],
+    "pdfSolutionSteps": [
+        "<div><strong>الحل المفصل:</strong></div>",
+        "<div><strong>1. قانون كولوم:</strong> <span dir='ltr'>F = k · Q₁ · Q₂ / r²</span></div>",
+        "<div><strong>2. نوع العلاقة:</strong> القوة تتناسب عكسياً مع مربع المسافة (<span dir='ltr'>F ∝ 1/r²</span>).</div>",
+        "<div><strong>3. التعويض بنصف المسافة (<span dir='ltr'>1/2 r</span>):</strong> <span dir='ltr'>F' = k · Q₁ · Q₂ / (1/2 r)² = k · Q₁ · Q₂ / (1/4 r²) = 4F</span></div>",
+        "<div><strong>4. النتيجة:</strong> تزداد القوة الكهربائية إلى أربعة أمثال قيمتها الأصلية.</div>"
+    ],
+    "pdfFinalAnswer": "الإجابة الصحيحة: ج) تزداد أربعة أمثال"
+},
     {
         "id": 26,
         "title": "س 27 (2022-2023): مولد فان دي جراف",
