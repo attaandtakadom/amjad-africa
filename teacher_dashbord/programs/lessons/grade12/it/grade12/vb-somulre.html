@@ -2,930 +2,16 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
+
+   <link rel="stylesheet" href="style.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>محاكي بيئة الفيجوال بيسك 6.0 - Microsoft Visual Basic 6.0 Simulator</title>
-  <style>
-    :root {
-      --vb-gray: #d4d0c8;
-      --vb-light: #ffffff;
-      --vb-shadow: #808080;
-      --vb-dark-shadow: #404040;
-      --vb-blue: #0a246a;
-      --vb-blue-grad: #a6caf0;
-      --vb-workspace: #808080;
-      --vb-select: #000080;
-    }
-
-    * {
-      box-sizing: border-box;
-      user-select: none;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Tahoma", "Segoe UI", Arial, sans-serif;
-      font-size: 12px;
-      background-color: var(--vb-gray);
-      color: #000;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    /* Classic Windows 98/2000 3D Borders */
-    .bevel-out {
-      border-top: 2px solid var(--vb-light);
-      border-left: 2px solid var(--vb-light);
-      border-right: 2px solid var(--vb-dark-shadow);
-      border-bottom: 2px solid var(--vb-dark-shadow);
-      background: var(--vb-gray);
-    }
-
-    .bevel-out-thin {
-      border-top: 1px solid var(--vb-light);
-      border-left: 1px solid var(--vb-light);
-      border-right: 1px solid var(--vb-shadow);
-      border-bottom: 1px solid var(--vb-shadow);
-      background: var(--vb-gray);
-    }
-
-    .bevel-in {
-      border-top: 2px solid var(--vb-shadow);
-      border-left: 2px solid var(--vb-shadow);
-      border-right: 2px solid var(--vb-light);
-      border-bottom: 2px solid var(--vb-light);
-      background: #fff;
-    }
-
-    .bevel-in-thin {
-      border-top: 1px solid var(--vb-shadow);
-      border-left: 1px solid var(--vb-shadow);
-      border-right: 1px solid var(--vb-light);
-      border-bottom: 1px solid var(--vb-light);
-    }
-
-    /* Top Title Bar */
-    .ide-titlebar {
-      background: linear-gradient(90deg, var(--vb-blue), var(--vb-blue-grad));
-      color: #fff;
-      padding: 3px 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: bold;
-      font-size: 12px;
-      direction: ltr;
-    }
-
-    .ide-title-left {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .vb-logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 16px;
-      background: #fff;
-      color: #003399;
-      font-weight: 900;
-      font-size: 10px;
-      border: 1px solid #000;
-    }
-
-    .ide-badge-mode {
-      background: #ffffcc;
-      color: #000;
-      padding: 1px 6px;
-      border: 1px solid #000;
-      font-size: 11px;
-    }
-
-    .guide-trigger-btn {
-      background: #ffeb3b;
-      color: #000;
-      border: 1px solid #000;
-      padding: 2px 10px;
-      font-weight: bold;
-      font-family: "Tahoma", sans-serif;
-      cursor: pointer;
-      direction: rtl;
-    }
-
-    .guide-trigger-btn:hover {
-      background: #fff176;
-    }
-
-    /* Menu Bar */
-    .menu-bar {
-      display: flex;
-      align-items: center;
-      padding: 2px 6px;
-      border-bottom: 1px solid var(--vb-shadow);
-      direction: ltr;
-      gap: 2px;
-      position: relative;
-    }
-
-    .menu-item {
-      padding: 2px 8px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .menu-item:hover, .menu-item.active {
-      background: var(--vb-blue);
-      color: #fff;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      min-width: 190px;
-      z-index: 9999;
-      padding: 2px;
-      color: #000;
-    }
-
-    .menu-item.active .dropdown-menu {
-      display: block;
-    }
-
-    .dropdown-entry {
-      padding: 4px 12px;
-      display: flex;
-      justify-content: space-between;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .dropdown-entry:hover {
-      background: var(--vb-blue);
-      color: #fff;
-    }
-
-    .dropdown-sep {
-      height: 1px;
-      background: var(--vb-shadow);
-      border-bottom: 1px solid var(--vb-light);
-      margin: 3px 2px;
-    }
-
-    /* Standard Toolbar */
-    .toolbar {
-      display: flex;
-      align-items: center;
-      padding: 3px 6px;
-      border-top: 1px solid var(--vb-light);
-      border-bottom: 1px solid var(--vb-shadow);
-      direction: ltr;
-      gap: 3px;
-      flex-wrap: wrap;
-    }
-
-    .tb-btn {
-      width: 24px;
-      height: 22px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--vb-gray);
-      border: 1px solid transparent;
-      cursor: pointer;
-      font-size: 12px;
-      padding: 0;
-    }
-
-    .tb-btn:hover:not(:disabled) {
-      border-top: 1px solid var(--vb-light);
-      border-left: 1px solid var(--vb-light);
-      border-right: 1px solid var(--vb-shadow);
-      border-bottom: 1px solid var(--vb-shadow);
-    }
-
-    .tb-btn:active:not(:disabled), .tb-btn.pressed {
-      border-top: 1px solid var(--vb-shadow);
-      border-left: 1px solid var(--vb-shadow);
-      border-right: 1px solid var(--vb-light);
-      border-bottom: 1px solid var(--vb-light);
-      background: #e4e1db;
-    }
-
-    .tb-btn:disabled {
-      opacity: 0.45;
-      cursor: default;
-    }
-
-    .tb-sep {
-      width: 2px;
-      height: 18px;
-      border-left: 1px solid var(--vb-shadow);
-      border-right: 1px solid var(--vb-light);
-      margin: 0 3px;
-    }
-
-    .coord-readout {
-      margin-left: auto;
-      display: flex;
-      gap: 10px;
-      font-size: 11px;
-      background: var(--vb-gray);
-      padding: 2px 6px;
-      border: 1px inset #fff;
-    }
-
-    /* Main Workspace Layout (LTR to match authentic VB6 IDE) */
-    .ide-main {
-      flex: 1;
-      display: flex;
-      direction: ltr;
-      overflow: hidden;
-    }
-
-    /* Left Toolbox */
-    .toolbox-pane {
-      width: 74px;
-      display: flex;
-      flex-direction: column;
-      padding: 2px;
-      flex-shrink: 0;
-    }
-
-    .pane-header {
-      background: var(--vb-blue);
-      color: #fff;
-      font-weight: bold;
-      font-size: 11px;
-      padding: 2px 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .toolbox-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      padding: 4px 2px;
-    }
-
-    .tool-btn {
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--vb-gray);
-      border: 1px solid transparent;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .tool-btn:hover {
-      border-top: 1px solid var(--vb-light);
-      border-left: 1px solid var(--vb-light);
-      border-right: 1px solid var(--vb-shadow);
-      border-bottom: 1px solid var(--vb-shadow);
-    }
-
-    .tool-btn.active {
-      border-top: 1px solid var(--vb-shadow);
-      border-left: 1px solid var(--vb-shadow);
-      border-right: 1px solid var(--vb-light);
-      border-bottom: 1px solid var(--vb-light);
-      background: #eae7e1;
-    }
-
-    .toolbox-hint {
-      margin-top: auto;
-      padding: 4px;
-      font-size: 10px;
-      text-align: center;
-      direction: rtl;
-      background: #ffffe1;
-      border: 1px solid var(--vb-shadow);
-      line-height: 1.35;
-    }
-
-    /* Center MDI Designer Area */
-    .mdi-workspace {
-      flex: 1;
-      background-color: var(--vb-workspace);
-      position: relative;
-      overflow: auto;
-      padding: 14px;
-      border-top: 2px solid var(--vb-shadow);
-      border-left: 2px solid var(--vb-shadow);
-    }
-
-    .mdi-child-window {
-      display: inline-flex;
-      flex-direction: column;
-      min-width: 440px;
-      min-height: 350px;
-      background: var(--vb-gray);
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-    }
-
-    .mdi-child-header {
-      background: var(--vb-blue);
-      color: #fff;
-      padding: 2px 6px;
-      font-size: 11px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .mdi-designer-canvas {
-      flex: 1;
-      background: #c0c0c0;
-      padding: 12px;
-      position: relative;
-      overflow: auto;
-    }
-
-    /* The VB6 Form1 */
-    .vb-form {
-      position: relative;
-      background-color: #d4d0c8;
-      border-top: 2px solid var(--vb-light);
-      border-left: 2px solid var(--vb-light);
-      border-right: 2px solid var(--vb-dark-shadow);
-      border-bottom: 2px solid var(--vb-dark-shadow);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .vb-form-titlebar {
-      background: linear-gradient(90deg, #000080, #1084d0);
-      color: #fff;
-      padding: 3px 6px;
-      font-weight: bold;
-      font-size: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .vb-win-btns {
-      display: flex;
-      gap: 2px;
-    }
-
-    .vb-win-btn {
-      width: 15px;
-      height: 13px;
-      background: var(--vb-gray);
-      color: #000;
-      font-size: 9px;
-      line-height: 11px;
-      text-align: center;
-      border-top: 1px solid #fff;
-      border-left: 1px solid #fff;
-      border-right: 1px solid #404040;
-      border-bottom: 1px solid #404040;
-    }
-
-    .vb-form-body {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      /* Classic VB6 8px grid dots */
-      background-image: radial-gradient(#000000 1px, transparent 1px);
-      background-size: 8px 8px;
-    }
-
-    .vb-form-body.run-mode {
-      background-image: none;
-    }
-
-    /* Form Resize Handle */
-    .form-resize-br {
-      position: absolute;
-      right: -5px;
-      bottom: -5px;
-      width: 8px;
-      height: 8px;
-      background: #000080;
-      border: 1px solid #fff;
-      cursor: nwse-resize;
-      z-index: 30;
-    }
-
-    /* Controls placed on Form */
-    .vb-control-wrapper {
-      position: absolute;
-      cursor: move;
-      box-sizing: border-box;
-    }
-
-    .vb-control-wrapper.run-mode {
-      cursor: default;
-    }
-
-    .vb-control-inner {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: "Tahoma", sans-serif;
-    }
-
-    /* Specific Control Visuals */
-    .ctrl-label {
-      padding: 2px 4px;
-      display: flex;
-      align-items: flex-start;
-    }
-
-    .ctrl-textbox {
-      background: #fff;
-      border-top: 2px solid var(--vb-shadow);
-      border-left: 2px solid var(--vb-shadow);
-      border-right: 2px solid var(--vb-light);
-      border-bottom: 2px solid var(--vb-light);
-      padding: 2px 4px;
-      width: 100%;
-      height: 100%;
-      font-family: inherit;
-      font-size: inherit;
-      color: inherit;
-      outline: none;
-    }
-
-    .ctrl-button {
-      width: 100%;
-      height: 100%;
-      background: var(--vb-gray);
-      border-top: 2px solid var(--vb-light);
-      border-left: 2px solid var(--vb-light);
-      border-right: 2px solid var(--vb-dark-shadow);
-      border-bottom: 2px solid var(--vb-dark-shadow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2px 6px;
-      font-family: inherit;
-      font-size: inherit;
-      color: inherit;
-    }
-
-    .vb-control-wrapper.run-mode .ctrl-button:active {
-      border-top: 2px solid var(--vb-dark-shadow);
-      border-left: 2px solid var(--vb-dark-shadow);
-      border-right: 2px solid var(--vb-light);
-      border-bottom: 2px solid var(--vb-light);
-    }
-
-    .ctrl-checkbox, .ctrl-option {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 2px 4px;
-      height: 100%;
-    }
-
-    .ctrl-frame {
-      border: 1px groove #fff;
-      height: 100%;
-      padding: 8px 6px 4px 6px;
-      position: relative;
-    }
-
-    .ctrl-frame-title {
-      position: absolute;
-      top: -7px;
-      left: 8px;
-      padding: 0 3px;
-      background: inherit;
-    }
-
-    .ctrl-listbox {
-      background: #fff;
-      border-top: 2px solid var(--vb-shadow);
-      border-left: 2px solid var(--vb-shadow);
-      border-right: 2px solid var(--vb-light);
-      border-bottom: 2px solid var(--vb-light);
-      height: 100%;
-      padding: 2px 4px;
-    }
-
-    .ctrl-combobox {
-      background: #fff;
-      border-top: 2px solid var(--vb-shadow);
-      border-left: 2px solid var(--vb-shadow);
-      border-right: 2px solid var(--vb-light);
-      border-bottom: 2px solid var(--vb-light);
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-left: 4px;
-    }
-
-    .combo-arrow {
-      width: 16px;
-      height: 100%;
-      background: var(--vb-gray);
-      border-left: 1px solid var(--vb-shadow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 9px;
-    }
-
-    /* PictureBox Control */
-    .ctrl-picturebox {
-      width: 100%;
-      height: 100%;
-      border-top: 2px solid var(--vb-shadow);
-      border-left: 2px solid var(--vb-shadow);
-      border-right: 2px solid var(--vb-light);
-      border-bottom: 2px solid var(--vb-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ctrl-picturebox img {
-      max-width: 100%;
-      max-height: 100%;
-      pointer-events: none;
-    }
-
-    .ctrl-picturebox.stretch-mode img {
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      max-height: none;
-      object-fit: fill;
-    }
-
-    .ctrl-picturebox.clip-mode img {
-      width: auto;
-      height: auto;
-      max-width: none;
-      max-height: none;
-      object-fit: none;
-    }
-
-    .picturebox-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #404040;
-      font-size: 11px;
-      text-align: center;
-      padding: 4px;
-      line-height: 1.3;
-    }
-
-    /* 8 Selection Handles */
-    .vb-control-wrapper.selected {
-      outline: 1px dotted #000080;
-    }
-
-    .handle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: #000080;
-      border: 1px solid #fff;
-      z-index: 20;
-    }
-
-    .handle.nw { top: -4px; left: -4px; cursor: nwse-resize; }
-    .handle.n  { top: -4px; left: calc(50% - 3px); cursor: ns-resize; }
-    .handle.ne { top: -4px; right: -4px; cursor: nesw-resize; }
-    .handle.e  { top: calc(50% - 3px); right: -4px; cursor: ew-resize; }
-    .handle.se { bottom: -4px; right: -4px; cursor: nwse-resize; }
-    .handle.s  { bottom: -4px; left: calc(50% - 3px); cursor: ns-resize; }
-    .handle.sw { bottom: -4px; left: -4px; cursor: nesw-resize; }
-    .handle.w  { top: calc(50% - 3px); left: -4px; cursor: ew-resize; }
-
-    /* Code View inside MDI */
-    .code-editor-view {
-      display: none;
-      flex-direction: column;
-      flex: 1;
-      background: #fff;
-      padding: 6px;
-    }
-
-    .code-editor-view.active {
-      display: flex;
-    }
-
-    .code-textarea {
-      flex: 1;
-      width: 100%;
-      font-family: "Courier New", monospace;
-      font-size: 13px;
-      border: 1px inset #808080;
-      padding: 8px;
-      direction: ltr;
-      resize: none;
-      line-height: 1.5;
-    }
-
-    /* Right Docked Panels: Project Explorer, Properties, Form Layout */
-    .right-dock {
-      width: 280px;
-      display: flex;
-      flex-direction: column;
-      border-left: 2px solid var(--vb-shadow);
-      background: var(--vb-gray);
-      flex-shrink: 0;
-    }
-
-    .dock-panel {
-      display: flex;
-      flex-direction: column;
-      border-bottom: 2px solid var(--vb-shadow);
-    }
-
-    /* Project Explorer */
-    .project-tree {
-      background: #fff;
-      padding: 6px;
-      height: 92px;
-      overflow-y: auto;
-      font-size: 11px;
-    }
-
-    .proj-toolbar {
-      display: flex;
-      gap: 4px;
-      padding: 2px 4px;
-      background: var(--vb-gray);
-      border-bottom: 1px solid var(--vb-shadow);
-    }
-
-    .proj-mini-btn {
-      padding: 1px 6px;
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    .tree-node {
-      padding: 2px 4px;
-      cursor: pointer;
-    }
-
-    .tree-node.active {
-      background: var(--vb-blue);
-      color: #fff;
-    }
-
-    /* Properties Window */
-    .properties-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 220px;
-    }
-
-    .prop-object-select {
-      width: 100%;
-      padding: 2px 4px;
-      font-family: "Tahoma", sans-serif;
-      font-size: 11px;
-      font-weight: bold;
-      border: 1px inset #808080;
-    }
-
-    .prop-grid-container {
-      flex: 1;
-      background: #fff;
-      overflow-y: auto;
-      border-top: 1px solid var(--vb-shadow);
-    }
-
-    .prop-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-    }
-
-    .prop-table td {
-      border: 1px solid #d4d0c8;
-      padding: 2px 5px;
-      height: 21px;
-    }
-
-    .prop-name-cell {
-      width: 44%;
-      background: #fff;
-      cursor: pointer;
-    }
-
-    .prop-name-cell.active-prop {
-      background: var(--vb-blue);
-      color: #fff;
-    }
-
-    .prop-val-cell {
-      width: 56%;
-      background: #fff;
-      padding: 0 !important;
-    }
-
-    .prop-input {
-      width: 100%;
-      height: 19px;
-      border: none;
-      padding: 0 4px;
-      font-family: "Tahoma", sans-serif;
-      font-size: 11px;
-      outline: none;
-    }
-
-    .prop-color-row {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 0 3px;
-    }
-
-    .prop-color-input {
-      width: 24px;
-      height: 16px;
-      border: 1px solid #000;
-      padding: 0;
-      cursor: pointer;
-    }
-
-    .prop-picture-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 3px;
-      padding: 1px 3px;
-    }
-
-    .prop-picture-label {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 10px;
-      color: #222;
-      flex: 1;
-    }
-
-    .prop-mini-action {
-      padding: 0 4px;
-      font-size: 10px;
-      cursor: pointer;
-      height: 16px;
-      line-height: 14px;
-      flex-shrink: 0;
-    }
-
-    .prop-desc-box {
-      height: 54px;
-      padding: 4px 6px;
-      background: var(--vb-gray);
-      border-top: 1px solid var(--vb-shadow);
-      font-size: 11px;
-      direction: rtl;
-      overflow-y: auto;
-      line-height: 1.35;
-    }
-
-    /* Form Layout Window */
-    .form-layout-panel {
-      height: 115px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .layout-monitor-area {
-      flex: 1;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px;
-    }
-
-    .monitor-screen {
-      width: 120px;
-      height: 76px;
-      background: #008080;
-      border: 4px solid #808080;
-      border-radius: 3px;
-      position: relative;
-    }
-
-    .mini-form-preview {
-      position: absolute;
-      width: 44px;
-      height: 32px;
-      background: var(--vb-gray);
-      border: 1px solid #000;
-      top: 14px;
-      left: 20px;
-      cursor: grab;
-    }
-
-    .mini-form-preview::before {
-      content: "";
-      display: block;
-      height: 5px;
-      background: #000080;
-    }
-
-    /* Bottom Status Bar */
-    .status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2px 8px;
-      border-top: 1px solid var(--vb-shadow);
-      font-size: 11px;
-      background: var(--vb-gray);
-    }
-
-    /* Modals: Guide & Classic VB6 MsgBox */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35);
-      z-index: 10000;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-overlay.open {
-      display: flex;
-    }
-
-    .vb-dialog {
-      width: 480px;
-      max-width: 94vw;
-      background: var(--vb-gray);
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
-    }
-
-    .vb-dialog-body {
-      padding: 14px;
-      direction: rtl;
-      line-height: 1.6;
-      font-size: 12px;
-    }
-
-    .vb-dialog-actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 0 14px 14px;
-      direction: rtl;
-    }
-
-    .vb-std-btn {
-      min-width: 85px;
-      padding: 4px 12px;
-      background: var(--vb-gray);
-      border-top: 2px solid var(--vb-light);
-      border-left: 2px solid var(--vb-light);
-      border-right: 2px solid var(--vb-dark-shadow);
-      border-bottom: 2px solid var(--vb-dark-shadow);
-      cursor: pointer;
-      font-family: "Tahoma", sans-serif;
-      font-size: 12px;
-    }
-
-    .vb-std-btn:active {
-      border-top: 2px solid var(--vb-dark-shadow);
-      border-left: 2px solid var(--vb-dark-shadow);
-      border-right: 2px solid var(--vb-light);
-      border-bottom: 2px solid var(--vb-light);
-    }
-
-    .activity-card {
-      background: #fff;
-      border: 1px solid var(--vb-shadow);
-      padding: 8px 10px;
-      margin-bottom: 8px;
-    }
-  </style>
+  
 </head>
 <body>
 
-  <!-- Hidden File Picker for PictureBox -->
+  <!-- Hidden File Picker for PictureBox & Image -->
   <input type="file" id="pictureFileInput" accept="image/*" style="display:none;" />
 
   <!-- Title Bar -->
@@ -935,7 +21,7 @@
       <span id="ideTitleText">Project1 - Microsoft Visual Basic [design]</span>
       <span class="ide-badge-mode" id="modeBadge">وضع التصميم (Design)</span>
     </div>
-    <button class="guide-trigger-btn" onclick="openGuideModal()">📘 دليل الطالب والأنشطة التفاعلية</button>
+    <button class="guide-trigger-btn" onclick="openGuideModal()">📘 دليل الطالب والأنشطة</button>
   </div>
 
   <!-- Menu Bar -->
@@ -961,6 +47,10 @@
       <div class="dropdown-menu bevel-out">
         <div class="dropdown-entry" onclick="switchView('code')"><span>Code (نافذة الكود)</span><span>F7</span></div>
         <div class="dropdown-entry" onclick="switchView('object')"><span>Object (تصميم النموذج)</span><span>Shift+F7</span></div>
+        <div class="dropdown-sep"></div>
+        <div class="dropdown-entry" onclick="toggleDockPanel('project')"><span id="menuToggleProject">✓ Project Explorer (المستكشف)</span><span></span></div>
+        <div class="dropdown-entry" onclick="toggleDockPanel('properties')"><span id="menuToggleProps">✓ Properties Window (الخصائص)</span><span></span></div>
+        <div class="dropdown-entry" onclick="toggleDockPanel('layout')"><span id="menuToggleLayout">✓ Form Layout Window (اللاوت)</span><span></span></div>
       </div>
     </div>
     <div class="menu-item" onclick="toggleMenu(this)">Format
@@ -975,7 +65,10 @@
         <div class="dropdown-entry" onclick="stopRunMode()"><span>End (إيقاف)</span><span></span></div>
       </div>
     </div>
-    <div class="menu-item" onclick="openGuideModal()">Help (مساعدة)</div>
+    <div class="menu-item" onclick="openGuideModal()">Help</div>
+    <button onclick="openPrintReport()" style="margin-left:auto; background:#0a246a; color:#fff; border:1px solid #fff; padding:2px 10px; font-family:'Tahoma',sans-serif; font-size:11px; font-weight:bold; cursor:pointer; direction:rtl;">
+      🖨️ طباعة التصميم (PDF)
+    </butbuttonton>
   </div>
 
   <!-- Standard Toolbar -->
@@ -996,7 +89,7 @@
 
     <div class="coord-readout">
       <span id="readoutPos">Left: 0, Top: 0</span>
-      <span id="readoutSize">Width: 380, Height: 270</span>
+      <span id="readoutSize">Width: 360, Height: 250</span>
     </div>
   </div>
 
@@ -1007,77 +100,115 @@
     <div class="toolbox-pane bevel-out-thin">
       <div class="pane-header">
         <span>Toolbox</span>
-        <span>×</span>
       </div>
       <div class="toolbox-grid" id="toolboxGrid">
-        <!-- Pointer (Wide Arrow) -->
+        <!-- 1. Pointer (Wide Arrow) -->
         <button class="tool-btn active" data-tool="Pointer" title="Pointer (السهم العريض - أداة التحديد والتحريك)" onclick="selectTool('Pointer')">
-          <svg width="18" height="18" viewBox="0 0 24 24">
+          <svg width="16" height="16" viewBox="0 0 24 24">
             <path d="M5 3 L19 14 L12 15 L15 21 L12 22 L9 16 L5 20 Z" fill="#000" stroke="#fff" stroke-width="1"/>
           </svg>
         </button>
 
-        <!-- Label -->
-        <button class="tool-btn" data-tool="Label" title="Label (أداة التسمية - لعرض نص ثابت)" onclick="selectTool('Label')">
-          <span style="font-family:Times New Roman,serif;font-weight:bold;font-size:17px;">A</span>
+        <!-- 2. Label -->
+        <button class="tool-btn" data-tool="Label" title="Label (أداة التسمية)" onclick="selectTool('Label')">
+          <span style="font-family:Times New Roman,serif;font-weight:bold;font-size:16px;">A</span>
         </button>
 
-        <!-- TextBox -->
-        <button class="tool-btn" data-tool="TextBox" title="TextBox (مربع النص - لإدخال وعرض النصوص)" onclick="selectTool('TextBox')">
-          <span style="border:1px inset #808080;background:#fff;padding:0 3px;font-size:10px;font-weight:bold;">ab|</span>
+        <!-- 3. TextBox -->
+        <button class="tool-btn" data-tool="TextBox" title="TextBox (مربع النص)" onclick="selectTool('TextBox')">
+          <span style="border:1px inset #808080;background:#fff;padding:0 2px;font-size:9px;font-weight:bold;">ab|</span>
         </button>
 
-        <!-- CommandButton -->
-        <button class="tool-btn" data-tool="CommandButton" title="CommandButton (زر الأمر - لتنفيذ إجراء عند النقر)" onclick="selectTool('CommandButton')">
-          <span class="bevel-out-thin" style="padding:1px 4px;font-size:9px;font-weight:bold;">CMD</span>
+        <!-- 4. CommandButton -->
+        <button class="tool-btn" data-tool="CommandButton" title="CommandButton (زر الأمر)" onclick="selectTool('CommandButton')">
+          <span class="bevel-out-thin" style="padding:1px 3px;font-size:8px;font-weight:bold;">CMD</span>
         </button>
 
-        <!-- CheckBox -->
-        <button class="tool-btn" data-tool="CheckBox" title="CheckBox (خانة الاختيار)" onclick="selectTool('CheckBox')">
-          <span style="border:1px solid #000;background:#fff;width:13px;height:13px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;">✓</span>
+        <!-- 5. CheckBox -->
+        <button class="tool-btn" data-tool="CheckBox" title="CheckBox (صندوق الفحص / خانة الاختيار)" onclick="selectTool('CheckBox')">
+          <span style="border:1px solid #000;background:#fff;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:bold;">✓</span>
         </button>
 
-        <!-- OptionButton -->
-        <button class="tool-btn" data-tool="OptionButton" title="OptionButton (زر الخيار الدائري)" onclick="selectTool('OptionButton')">
-          <span style="border:1px solid #000;background:#fff;border-radius:50%;width:13px;height:13px;display:inline-flex;align-items:center;justify-content:center;">
-            <span style="width:5px;height:5px;background:#000;border-radius:50%;display:block;"></span>
+        <!-- 6. OptionButton -->
+        <button class="tool-btn" data-tool="OptionButton" title="OptionButton (زر الاختيار الدائري)" onclick="selectTool('OptionButton')">
+          <span style="border:1px solid #000;background:#fff;border-radius:50%;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;">
+            <span style="width:4px;height:4px;background:#000;border-radius:50%;display:block;"></span>
           </span>
         </button>
 
-        <!-- Frame -->
-        <button class="tool-btn" data-tool="Frame" title="Frame (الإطار - لتجميع الأدوات)" onclick="selectTool('Frame')">
-          <span style="border:1px solid #404040;width:16px;height:13px;position:relative;display:inline-block;">
-            <span style="position:absolute;top:-4px;left:2px;background:#d4d0c8;font-size:6px;padding:0 1px;">XY</span>
+        <!-- 7. Frame -->
+        <button class="tool-btn" data-tool="Frame" title="Frame (الإطار)" onclick="selectTool('Frame')">
+          <span style="border:1px solid #404040;width:15px;height:12px;position:relative;display:inline-block;">
+            <span style="position:absolute;top:-4px;left:2px;background:#d4d0c8;font-size:5px;padding:0 1px;">XY</span>
           </span>
         </button>
 
-        <!-- ListBox -->
+        <!-- 8. ListBox -->
         <button class="tool-btn" data-tool="ListBox" title="ListBox (مربع القائمة)" onclick="selectTool('ListBox')">
-          <span style="border:1px solid #404040;background:#fff;width:15px;height:14px;display:inline-flex;flex-direction:column;justify-content:space-around;padding:1px;">
+          <span style="border:1px solid #404040;background:#fff;width:14px;height:13px;display:inline-flex;flex-direction:column;justify-content:space-around;padding:1px;">
             <span style="height:1px;background:#000;"></span>
             <span style="height:1px;background:#000;"></span>
             <span style="height:1px;background:#000;"></span>
           </span>
         </button>
 
-        <!-- ComboBox -->
-        <button class="tool-btn" data-tool="ComboBox" title="ComboBox (مربع التحرير والسرد)" onclick="selectTool('ComboBox')">
-          <span style="border:1px solid #404040;background:#fff;width:17px;height:12px;display:inline-flex;align-items:center;justify-content:flex-end;">
-            <span style="background:#d4d0c8;border-left:1px solid #404040;font-size:7px;padding:0 1px;">▼</span>
+        <!-- 9. ComboBox -->
+        <button class="tool-btn" data-tool="ComboBox" title="ComboBox (أداة السرد / مربع التحرير والسرد)" onclick="selectTool('ComboBox')">
+          <span style="border:1px solid #404040;background:#fff;width:16px;height:11px;display:inline-flex;align-items:center;justify-content:flex-end;">
+            <span style="background:#d4d0c8;border-left:1px solid #404040;font-size:6px;padding:0 1px;">▼</span>
           </span>
         </button>
 
-        <!-- PictureBox -->
-        <button class="tool-btn" data-tool="PictureBox" title="PictureBox (مربع الصورة - لإدراج وعرض الصور)" onclick="selectTool('PictureBox')">
-          <span style="border:1px solid #404040;background:#fff;width:17px;height:13px;display:inline-flex;align-items:flex-end;justify-content:space-between;padding:1px;overflow:hidden;">
+        <!-- 10. PictureBox -->
+        <button class="tool-btn" data-tool="PictureBox" title="PictureBox (صندوق الصور)" onclick="selectTool('PictureBox')">
+          <span style="border:1px solid #404040;background:#fff;width:16px;height:12px;display:inline-flex;align-items:flex-end;justify-content:space-between;padding:1px;overflow:hidden;">
             <span style="width:4px;height:4px;border-radius:50%;background:#e6a100;align-self:flex-start;"></span>
-            <span style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid #2e7d32;"></span>
+            <span style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:6px solid #2e7d32;"></span>
           </span>
+        </button>
+
+        <!-- 11. HScrollBar -->
+        <button class="tool-btn" data-tool="HScrollBar" title="HScrollBar (شريط الانزلاق / التمرير الأفقي)" onclick="selectTool('HScrollBar')">
+          <span style="border:1px solid #404040;background:#fff;width:17px;height:9px;display:inline-flex;align-items:center;justify-content:space-between;font-size:5px;">
+            <span>◀</span>
+            <span style="width:5px;height:7px;background:#d4d0c8;border:1px solid #404040;"></span>
+            <span>▶</span>
+          </span>
+        </button>
+
+        <!-- 12. Timer -->
+        <button class="tool-btn" data-tool="Timer" title="Timer (المؤقت)" onclick="selectTool('Timer')">
+          <span style="font-size:12px;">⏱️</span>
+        </button>
+
+        <!-- 13. DirListBox (Yellow Folder) -->
+        <button class="tool-btn" data-tool="DirListBox" title="DirListBox (صندوق الدلائل)" onclick="selectTool('DirListBox')">
+          <span style="font-size:13px;">📁</span>
+        </button>
+
+        <!-- 14. FileListBox -->
+        <button class="tool-btn" data-tool="FileListBox" title="FileListBox (صندوق قائمة أسماء الملفات)" onclick="selectTool('FileListBox')">
+          <span style="font-size:12px;">📄</span>
+        </button>
+
+        <!-- 15. Image -->
+        <button class="tool-btn" data-tool="Image" title="Image (أداة الصور Image)" onclick="selectTool('Image')">
+          <span style="font-size:12px;">🖼️</span>
+        </button>
+
+        <!-- 16. Data -->
+        <button class="tool-btn" data-tool="Data" title="Data (أداة قاعدة البيانات Data)" onclick="selectTool('Data')">
+          <span style="font-size:12px;">🗄️</span>
+        </button>
+
+        <!-- 17. OLE -->
+        <button class="tool-btn" data-tool="OLE" title="OLE (أداة ربط أو تضمين OLE)" onclick="selectTool('OLE')">
+          <span style="font-size:8px;font-weight:bold;border:1px solid #0a246a;padding:0 2px;background:#fff;color:#0a246a;">OLE</span>
         </button>
       </div>
 
       <div class="toolbox-hint" id="toolboxHint">
-        <strong>الأداة الحالية:</strong><br/>السهم العريض (Pointer)<br/>انقر على أداة ثم ارسمها داخل النموذج أو اسحبها.
+        <strong>الأداة:</strong> السهم العريض (Pointer)<br/>انقر على أداة ثم انقر داخل Form1.
       </div>
     </div>
 
@@ -1094,7 +225,7 @@
 
         <!-- Designer View -->
         <div class="mdi-designer-canvas" id="designerView">
-          <div class="vb-form" id="vbForm" style="width: 380px; height: 270px;">
+          <div class="vb-form" id="vbForm" style="width: 360px; height: 250px;">
             <div class="vb-form-titlebar" id="formTitlebar" onclick="selectObject('Form1')">
               <span id="formCaptionDisplay">Form1</span>
               <div class="vb-win-btns">
@@ -1111,7 +242,7 @@
         <!-- Code View -->
         <div class="code-editor-view" id="codeView">
           <div style="margin-bottom:4px;font-size:11px;direction:rtl;background:#ffffe1;padding:4px 6px;border:1px solid #808080;">
-            💡 <strong>محرر الكود المبسط:</strong> عند النقر على أي زر (CommandButton) أثناء وضع التشغيل، ستظهر رسالة <code>MsgBox</code> بالأسفل:
+            💡 <strong>محرر الكود المبسط:</strong> عند النقر على أي زر (CommandButton) أثناء وضع التشغيل، ستظهر رسالة <code>MsgBox</code>:
           </div>
           <textarea class="code-textarea" id="codeTextarea" spellcheck="false"></textarea>
         </div>
@@ -1119,13 +250,13 @@
     </div>
 
     <!-- Right Docked Panels -->
-    <div class="right-dock">
+    <div class="right-dock" id="rightDock">
 
       <!-- 1. Project Explorer -->
-      <div class="dock-panel">
+      <div class="dock-panel" id="panelProject">
         <div class="pane-header">
           <span>Project - Project1</span>
-          <span>×</span>
+          <button class="pane-close-btn" title="إغلاق نافذة المستكشف (يمكن إظهارها من View)" onclick="toggleDockPanel('project', false)">×</button>
         </div>
         <div class="proj-toolbar">
           <button class="proj-mini-btn bevel-out-thin" title="عرض الكود (View Code)" onclick="switchView('code')">📝 Code</button>
@@ -1143,10 +274,10 @@
       </div>
 
       <!-- 2. Properties Window -->
-      <div class="dock-panel properties-panel">
+      <div class="dock-panel properties-panel" id="panelProperties">
         <div class="pane-header">
           <span id="propHeaderTitle">Properties - Form1</span>
-          <span>×</span>
+          <button class="pane-close-btn" title="إغلاق نافذة الخصائص (يمكن إظهارها من View)" onclick="toggleDockPanel('properties', false)">×</button>
         </div>
         <div style="padding:3px;background:var(--vb-gray);">
           <select class="prop-object-select" id="objectSelector" onchange="selectObject(this.value)">
@@ -1157,15 +288,15 @@
           <table class="prop-table" id="propertiesTable"></table>
         </div>
         <div class="prop-desc-box" id="propDescBox">
-          <strong>شرح الخاصية:</strong> انقر على أي خاصية في الجدول أعلاه لمعرفة وظيفتها باللغة العربية.
+          <strong>شرح الخاصية:</strong> انقر على أي خاصية في الجدول أعلاه لمعرفة وظيفتها.
         </div>
       </div>
 
       <!-- 3. Form Layout Window -->
-      <div class="dock-panel form-layout-panel">
+      <div class="dock-panel form-layout-panel" id="panelLayout">
         <div class="pane-header">
           <span>Form Layout</span>
-          <span>×</span>
+          <button class="pane-close-btn" title="إغلاق نافذة اللاوت (يمكن إظهارها من View)" onclick="toggleDockPanel('layout', false)">×</button>
         </div>
         <div class="layout-monitor-area">
           <div class="monitor-screen" id="monitorScreen" title="يمثل شاشة الكمبيوتر ومكان ظهور النموذج">
@@ -1179,7 +310,7 @@
 
   <!-- Status Bar -->
   <div class="status-bar">
-    <span id="statusText" style="direction:rtl;">جاهز — انقر على أداة من صندوق الأدوات (Toolbox) على اليسار ثم انقر أو اسحب داخل Form1 لإضافتها.</span>
+    <span id="statusText" style="direction:rtl;">جاهز — اختر أداة من Toolbox ثم انقر أو اسحب داخل Form1 لإضافتها.</span>
     <span style="direction:ltr;">VB6 Educational Simulator</span>
   </div>
 
@@ -1191,29 +322,25 @@
         <button class="vb-win-btn" onclick="closeGuideModal()">×</button>
       </div>
       <div class="vb-dialog-body">
-        <p style="margin-top:0;">مرحباً بك في <strong>محاكي الفيجوال بيسك 6.0</strong>. صُمم هذا المحاكي لمساعدتك على التدرب على واجهة البرنامج وخطوات تصميم النماذج من متصفحك مباشرة:</p>
+        <p style="margin-top:0;">مرحباً بك في <strong>محاكي الفيجوال بيسك 6.0</strong>. يمكنك التدرب على واجهة البرنامج وخصائص الأدوات مباشرة:</p>
 
         <div class="activity-card">
-          <strong>النشاط الأول: التعرف على السهم العريض (Pointer) وإضافة الأدوات</strong><br/>
-          1. اختر أداة <strong>Label (A)</strong> أو <strong>TextBox (ab|)</strong> أو <strong>PictureBox</strong> أو <strong>CommandButton</strong> من صندوق الأدوات يساراً.<br/>
-          2. انقر أو اسحب داخل <strong>Form1</strong> لوضع الأداة.<br/>
-          3. لاحظ أن البرنامج يعيد تفعيل <strong>السهم العريض (Pointer)</strong> تلقائياً لتتمكن من سحب الأداة أو تغيير حجمها من المقابض الثمانية.
+          <strong>1. إضافة الأدوات وتحريكها:</strong><br/>
+          اختر أداة من <strong>Toolbox</strong> ثم انقر أو اسحب داخل <strong>Form1</strong> لوضعها، ويعود المؤشر تلقائياً إلى <strong>السهم العريض (Pointer)</strong> لتحديد الأداة وتحريكها أو تغيير حجمها.
         </div>
 
         <div class="activity-card">
-          <strong>النشاط الثاني: إدراج صورة في PictureBox وتعديل الخصائص</strong><br/>
-          1. أضف أداة <strong>PictureBox</strong> داخل النموذج وحددها.<br/>
-          2. في نافذة الخصائص على اليمين، اضغط زر <strong>اختيار...</strong> بجانب خاصية <strong>Picture</strong> لتحميل صورة من جهازك (أو انقر نقراً مزدوجاً على مربع الصورة في وضع التصميم).<br/>
-          3. غيّر خاصية <strong>PictureMode</strong> بين ملاءمة الإطار (<strong>Stretch</strong>) أو الحجم الأصلي (<strong>Clip</strong>) وعدّل الخلفية والأبعاد.
+          <strong>2. إغلاق النوافذ وإظهارها من View:</strong><br/>
+          يمكنك إغلاق نافذة المستكشف أو الخصائص أو اللاوت بالضغط على <strong>×</strong> لتوفير مساحة للنموذج، وإعادتها من قائمة <strong>View</strong> في الأعلى.
         </div>
 
         <div class="activity-card">
-          <strong>النشاط الثالث: تشغيل البرنامج (Run - F5)</strong><br/>
-          اضغط على زر التشغيل الأزرق <strong>▶</strong> في شريط الأدوات العلوي لتجربة النموذج كما يراه المستخدم، ثم اضغط زر الإيقاف <strong>■</strong> للعودة إلى التصميم.
+          <strong>3. إدراج صورة وتشغيل البرنامج:</strong><br/>
+          لإدراج صورة في <strong>PictureBox</strong> أو <strong>Image</strong>، حدد الأداة واضغط <strong>...</strong> بجانب خاصية <strong>Picture</strong>، ثم جرّب زر التشغيل <strong>▶</strong>.
         </div>
       </div>
       <div class="vb-dialog-actions">
-        <button class="vb-std-btn" onclick="loadSampleProject(); closeGuideModal();">📂 تحميل نموذج جاهز للتجربة</button>
+        <button class="vb-std-btn" onclick="loadSampleProject(); closeGuideModal();">📂 تحميل نموذج جاهز</button>
         <button class="vb-std-btn" onclick="closeGuideModal()">إغلاق</button>
       </div>
     </div>
@@ -1235,71 +362,73 @@
       </div>
     </div>
   </div>
-
+<!-- Printable Student Report Container -->
+  <div id="printReportSheet"></div>
   <script>
-    // Property Descriptions in Arabic
     const PROPERTY_DESCRIPTIONS = {
-      "(Name)": "الاسم البرمجي للأداة (Name): يُستخدم للإشارة إلى الأداة داخل الكود البرمجي (مثل Command1 أو txtName أو Picture1).",
-      "Caption": "العنوان (Caption): النص الذي يظهر على شريط عنوان النموذج أو على الأداة مثل Label و CommandButton.",
-      "Text": "النص (Text): النص المكتوب داخل مربع النص (TextBox) أو مربع التحرير والسرد.",
-      "Picture": "الصورة (Picture): تحدد ملف الصورة المعروض داخل مربع الصورة (PictureBox) من جهازك.",
-      "PictureMode": "طريقة عرض الصورة (PictureMode): تحدد كيف تُعرض الصورة داخل PictureBox (ملاءمة الإطار Stretch أو الحجم الأصلي Clip).",
-      "BackColor": "لون الخلفية (BackColor): يحدد لون خلفية النموذج أو الأداة.",
-      "ForeColor": "لون المقدمة/الخط (ForeColor): يحدد لون النص المكتوب داخل الأداة.",
-      "FontSize": "حجم الخط (FontSize): يحدد حجم حروف النص المعروض داخل الأداة.",
-      "FontBold": "خط عريض (FontBold): يجعل النص سميكاً وعريضاً (True) أو عادياً (False).",
-      "Alignment": "المحاذاة (Alignment): تحدد اتجاه محاذاة النص (يسار، يمين، وسط).",
-      "Left": "البُعد الأفقي (Left): المسافة بين الحافة اليسرى للأداة والحافة اليسرى للنموذج.",
-      "Top": "البُعد الرأسي (Top): المسافة بين الحافة العلوية للأداة والحافة العلوية للنموذج.",
-      "Width": "العرض (Width): عرض الأداة أو النموذج.",
-      "Height": "الارتفاع (Height): ارتفاع الأداة أو النموذج.",
-      "Enabled": "التمكين (Enabled): يحدد ما إذا كانت الأداة فعّالة وتستجيب للمستخدم (True) أم معطلة (False).",
-      "Visible": "الظهور (Visible): يحدد ما إذا كانت الأداة مرئية عند تشغيل البرنامج (True) أم مخفية (False)."
+      "(Name)": "الاسم البرمجي للأداة (Name) المستخدم في الكود.",
+      "Caption": "العنوان أو النص الظاهر على النموذج أو الأداة.",
+      "Text": "النص المكتوب داخل مربع النص (TextBox) أو أداة السرد.",
+      "Picture": "اختيار ملف صورة من الجهاز لعرضه داخل الأداة.",
+      "PictureMode": "طريقة عرض الصورة (Stretch لملاءمة الإطار أو Clip للحجم الأصلي).",
+      "Value": "القيمة الحالية للأداة (مثل قيمة شريط الانزلاق).",
+      "Interval": "الفاصل الزمني للمؤقت (Timer) بالمللي ثانية.",
+      "BackColor": "لون خلفية النموذج أو الأداة.",
+      "ForeColor": "لون الخط أو النص.",
+      "FontSize": "حجم الخط.",
+      "FontBold": "جعل الخط عريضاً (True) أو عادياً (False).",
+      "Alignment": "محاذاة النص (يسار، يمين، وسط).",
+      "Left": "البُعد الأفقي عن الحافة اليسرى للنموذج.",
+      "Top": "البُعد الرأسي عن الحافة العلوية للنموذج.",
+      "Width": "عرض الأداة أو النموذج.",
+      "Height": "ارتفاع الأداة أو النموذج.",
+      "Enabled": "تفعيل الأداة (True) أو تعطيلها (False).",
+      "Visible": "إظهار الأداة (True) أو إخفاؤها (False)."
     };
 
-    // Application State
     let state = {
-      mode: "design", // "design" | "run"
-      view: "object", // "object" | "code"
+      mode: "design",
+      view: "object",
       activeTool: "Pointer",
       selectedId: "Form1",
       showGrid: true,
       clipboard: null,
       pendingPictureTargetId: null,
-      counters: {
-        Label: 0,
-        TextBox: 0,
-        CommandButton: 0,
-        CheckBox: 0,
-        OptionButton: 0,
-        Frame: 0,
-        ListBox: 0,
-        ComboBox: 0,
-        PictureBox: 0
+      panels: {
+        project: true,
+        properties: true,
+        layout: true
       },
+      counters: {},
       form: {
         id: "Form1",
         type: "Form",
         name: "Form1",
         caption: "Form1",
         backColor: "#d4d0c8",
-        width: 380,
-        height: 270
+        width: 360,
+        height: 250
       },
       controls: []
     };
 
-    // Default sizes when clicking on Form
     const DEFAULT_SIZES = {
-      Label: { width: 110, height: 24 },
-      TextBox: { width: 130, height: 26 },
-      CommandButton: { width: 115, height: 34 },
-      CheckBox: { width: 115, height: 24 },
-      OptionButton: { width: 115, height: 24 },
-      Frame: { width: 160, height: 100 },
-      ListBox: { width: 120, height: 80 },
-      ComboBox: { width: 130, height: 24 },
-      PictureBox: { width: 140, height: 110 }
+      Label: { width: 105, height: 24 },
+      TextBox: { width: 120, height: 25 },
+      CommandButton: { width: 105, height: 32 },
+      CheckBox: { width: 110, height: 24 },
+      OptionButton: { width: 110, height: 24 },
+      Frame: { width: 150, height: 90 },
+      ListBox: { width: 110, height: 70 },
+      ComboBox: { width: 120, height: 24 },
+      PictureBox: { width: 125, height: 90 },
+      HScrollBar: { width: 130, height: 18 },
+      Timer: { width: 42, height: 32 },
+      DirListBox: { width: 120, height: 76 },
+      FileListBox: { width: 115, height: 76 },
+      Image: { width: 115, height: 80 },
+      Data: { width: 145, height: 24 },
+      OLE: { width: 110, height: 65 }
     };
 
     const formEl = document.getElementById("vbForm");
@@ -1312,8 +441,8 @@
     const statusTextEl = document.getElementById("statusText");
     const pictureFileInput = document.getElementById("pictureFileInput");
 
-    // Initialize
     function init() {
+      applyMobileDefaultPanelState();
       setupDrawingOnForm();
       setupFormResize();
       setupFormLayoutMiniDrag();
@@ -1322,11 +451,44 @@
       renderAll();
     }
 
+    // On narrow mobile screens, keep Form1 clear unless user opens right panels from View
+    function applyMobileDefaultPanelState() {
+      if (window.innerWidth <= 768) {
+        state.panels.project = false;
+        state.panels.layout = false;
+      }
+      syncDockPanelsVisibility();
+    }
+
+    function toggleDockPanel(panelKey, forceVal) {
+      const nextVal = typeof forceVal === "boolean" ? forceVal : !state.panels[panelKey];
+      state.panels[panelKey] = nextVal;
+      syncDockPanelsVisibility();
+      setStatus(nextVal ? `تم إظهار نافذة ${panelKey}.` : `تم إغلاق نافذة ${panelKey} — يمكنك إعادتها من قائمة View.`);
+    }
+
+    function syncDockPanelsVisibility() {
+      const pProj = document.getElementById("panelProject");
+      const pProps = document.getElementById("panelProperties");
+      const pLayout = document.getElementById("panelLayout");
+      const dock = document.getElementById("rightDock");
+
+      pProj.classList.toggle("hidden-panel", !state.panels.project);
+      pProps.classList.toggle("hidden-panel", !state.panels.properties);
+      pLayout.classList.toggle("hidden-panel", !state.panels.layout);
+
+      const anyVisible = state.panels.project || state.panels.properties || state.panels.layout;
+      dock.classList.toggle("all-closed", !anyVisible);
+
+      document.getElementById("menuToggleProject").textContent = `${state.panels.project ? "✓" : "☐"} Project Explorer (المستكشف)`;
+      document.getElementById("menuToggleProps").textContent = `${state.panels.properties ? "✓" : "☐"} Properties Window (الخصائص)`;
+      document.getElementById("menuToggleLayout").textContent = `${state.panels.layout ? "✓" : "☐"} Form Layout Window (اللاوت)`;
+    }
+
     function setStatus(msg) {
       statusTextEl.textContent = msg;
     }
 
-    // PictureBox File Picker Handler
     function setupPictureFilePicker() {
       pictureFileInput.addEventListener("change", (e) => {
         const file = e.target.files && e.target.files[0];
@@ -1335,7 +497,7 @@
         pictureFileInput.value = "";
 
         if (!file) return;
-        const ctrl = state.controls.find(c => c.id === targetId && c.type === "PictureBox");
+        const ctrl = state.controls.find(c => c.id === targetId && (c.type === "PictureBox" || c.type === "Image"));
         if (!ctrl) return;
 
         const reader = new FileReader();
@@ -1355,7 +517,7 @@
     }
 
     function clearPicture(ctrlId) {
-      const ctrl = state.controls.find(c => c.id === ctrlId && c.type === "PictureBox");
+      const ctrl = state.controls.find(c => c.id === ctrlId && (c.type === "PictureBox" || c.type === "Image"));
       if (!ctrl) return;
       ctrl.pictureSrc = "";
       ctrl.pictureName = "(None)";
@@ -1363,7 +525,6 @@
       setStatus(`تمت إزالة الصورة من ${ctrl.name}.`);
     }
 
-    // Toolbox Tool Selection
     function selectTool(toolName) {
       if (state.mode === "run") return;
       state.activeTool = toolName;
@@ -1374,16 +535,15 @@
       const hintEl = document.getElementById("toolboxHint");
       if (toolName === "Pointer") {
         formBodyEl.style.cursor = "default";
-        hintEl.innerHTML = "<strong>الأداة الحالية:</strong><br/>السهم العريض (Pointer)<br/>لتحديد الأدوات وتحريكها وتغيير حجمها.";
-        setStatus("أداة السهم العريض (Pointer) نشطة: انقر على أي أداة لتحديدها أو سحبها.");
+        hintEl.innerHTML = "<strong>الأداة:</strong> السهم العريض (Pointer)<br/>لتحديد الأدوات وتحريكها.";
+        setStatus("أداة السهم العريض (Pointer) نشطة.");
       } else {
         formBodyEl.style.cursor = "crosshair";
-        hintEl.innerHTML = `<strong>الأداة المختارة:</strong><br/>${toolName}<br/>انقر أو اسحب داخل Form1 لرسمها.`;
-        setStatus(`انقر أو اسحب داخل Form1 لوضع أداة ${toolName}.`);
+        hintEl.innerHTML = `<strong>الأداة:</strong> ${toolName}<br/>انقر أو اسحب داخل Form1.`;
+        setStatus(`انقر أو اسحب داخل Form1 لإضافة ${toolName}.`);
       }
     }
 
-    // Draw/Drop new control onto Form1
     function setupDrawingOnForm() {
       let isDrawing = false;
       let startX = 0, startY = 0;
@@ -1419,15 +579,10 @@
         const currX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
         const currY = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
 
-        const x = Math.min(startX, currX);
-        const y = Math.min(startY, currY);
-        const w = Math.abs(currX - startX);
-        const h = Math.abs(currY - startY);
-
-        ghostEl.style.left = x + "px";
-        ghostEl.style.top = y + "px";
-        ghostEl.style.width = w + "px";
-        ghostEl.style.height = h + "px";
+        ghostEl.style.left = Math.min(startX, currX) + "px";
+        ghostEl.style.top = Math.min(startY, currY) + "px";
+        ghostEl.style.width = Math.abs(currX - startX) + "px";
+        ghostEl.style.height = Math.abs(currY - startY) + "px";
       });
 
       window.addEventListener("mouseup", (e) => {
@@ -1447,14 +602,13 @@
           ghostEl = null;
         }
 
-        const def = DEFAULT_SIZES[state.activeTool] || { width: 110, height: 28 };
+        const def = DEFAULT_SIZES[state.activeTool] || { width: 105, height: 26 };
         if (w < 16 || h < 14) {
           w = def.width;
           h = def.height;
         }
 
         createControl(state.activeTool, x, y, w, h);
-        // Authentic VB6 behavior: return automatically to Pointer after drawing
         selectTool("Pointer");
       });
     }
@@ -1471,20 +625,29 @@
         Frame: "Frame",
         ListBox: "List",
         ComboBox: "Combo",
-        PictureBox: "Picture"
+        PictureBox: "Picture",
+        HScrollBar: "HScroll",
+        Timer: "Timer",
+        DirListBox: "Dir",
+        FileListBox: "File",
+        Image: "Image",
+        Data: "Data",
+        OLE: "OLE"
       };
-      const baseName = `${prefixMap[type]}${num}`;
+      const baseName = `${prefixMap[type] || type}${num}`;
 
       const ctrl = {
         id: baseName,
         type: type,
         name: baseName,
-        caption: type !== "TextBox" && type !== "ListBox" && type !== "PictureBox" ? baseName : "",
-        text: type === "TextBox" || type === "ComboBox" ? baseName : "",
+        caption: ["TextBox", "ListBox", "PictureBox", "HScrollBar", "Timer", "DirListBox", "FileListBox", "Image", "Data", "OLE"].includes(type) ? "" : baseName,
+        text: (type === "TextBox" || type === "ComboBox") ? baseName : "",
         pictureSrc: "",
         pictureName: "(None)",
-        pictureMode: "stretch", // "stretch" | "clip"
-        backColor: (type === "TextBox" || type === "ListBox" || type === "ComboBox" || type === "PictureBox") ? "#ffffff" : "#d4d0c8",
+        pictureMode: "stretch",
+        scrollValue: 50,
+        interval: 1000,
+        backColor: ["TextBox", "ListBox", "ComboBox", "PictureBox", "DirListBox", "FileListBox"].includes(type) ? "#ffffff" : "#d4d0c8",
         foreColor: "#000000",
         fontSize: 12,
         fontBold: false,
@@ -1495,7 +658,7 @@
         height: height,
         enabled: true,
         visible: true,
-        clickMessage: `مرحباً! لقد قمت بالنقر على الزر (${baseName})`
+        clickMessage: `مرحباً! لقد قمت بالنقر على (${baseName})`
       };
 
       state.controls.push(ctrl);
@@ -1504,13 +667,11 @@
       setStatus(`تمت إضافة ${baseName} وعاد المؤشر تلقائياً إلى السهم العريض (Pointer).`);
     }
 
-    // Select Form1 or a Control
     function selectObject(id) {
       state.selectedId = id;
       renderAll();
     }
 
-    // Render Entire IDE State
     function renderAll() {
       renderFormAndControls();
       renderObjectSelector();
@@ -1556,7 +717,6 @@
         wrapper.style.color = ctrl.foreColor;
         if (!ctrl.enabled) wrapper.style.opacity = "0.55";
 
-        // Inner Control Content
         let inner;
         if (ctrl.type === "Label") {
           inner = document.createElement("div");
@@ -1573,9 +733,7 @@
           inner.value = ctrl.text;
           inner.readOnly = state.mode === "design";
           inner.disabled = !ctrl.enabled;
-          inner.addEventListener("input", (e) => {
-            ctrl.text = e.target.value;
-          });
+          inner.addEventListener("input", (e) => { ctrl.text = e.target.value; });
         } else if (ctrl.type === "CommandButton") {
           inner = document.createElement("button");
           inner.type = "button";
@@ -1584,9 +742,7 @@
           inner.textContent = ctrl.caption;
           inner.disabled = !ctrl.enabled;
           if (state.mode === "run") {
-            inner.addEventListener("click", () => {
-              showVbMsgBox(state.form.caption, ctrl.clickMessage);
-            });
+            inner.addEventListener("click", () => showVbMsgBox(state.form.caption, ctrl.clickMessage));
           }
         } else if (ctrl.type === "CheckBox") {
           inner = document.createElement("label");
@@ -1629,9 +785,9 @@
           inner.className = "vb-control-inner ctrl-combobox";
           inner.style.backgroundColor = ctrl.backColor;
           inner.innerHTML = `<span>${ctrl.text || ctrl.name}</span><span class="combo-arrow">▼</span>`;
-        } else if (ctrl.type === "PictureBox") {
+        } else if (ctrl.type === "PictureBox" || ctrl.type === "Image") {
           inner = document.createElement("div");
-          inner.className = `vb-control-inner ctrl-picturebox ${ctrl.pictureMode === "stretch" ? "stretch-mode" : "clip-mode"}`;
+          inner.className = `vb-control-inner ${ctrl.type === "PictureBox" ? "ctrl-picturebox" : "ctrl-image-ctl"} ${ctrl.pictureMode === "stretch" ? "stretch-mode" : "clip-mode"}`;
           inner.style.backgroundColor = ctrl.backColor;
 
           if (ctrl.pictureSrc) {
@@ -1642,7 +798,7 @@
           } else {
             const ph = document.createElement("div");
             ph.className = "picturebox-placeholder";
-            ph.innerHTML = `<div>🖼️ ${ctrl.name}</div><div style="font-size:9px;color:#666;">اختر صورة من Properties</div>`;
+            ph.innerHTML = `<div>${ctrl.type === "PictureBox" ? "🖼️" : "🌄"} ${ctrl.name}</div><div style="font-size:9px;color:#666;">Picture من Properties</div>`;
             inner.appendChild(ph);
           }
 
@@ -1653,11 +809,57 @@
               triggerPictureUpload(ctrl.id);
             });
           }
+        } else if (ctrl.type === "HScrollBar") {
+          inner = document.createElement("input");
+          inner.type = "range";
+          inner.min = 0;
+          inner.max = 100;
+          inner.value = ctrl.scrollValue ?? 50;
+          inner.style.width = "100%";
+          inner.style.height = "100%";
+          inner.style.margin = "0";
+          inner.disabled = state.mode === "design" || !ctrl.enabled;
+          inner.addEventListener("input", (e) => { ctrl.scrollValue = Number(e.target.value); });
+        } else if (ctrl.type === "Timer") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-timer";
+          inner.innerHTML = `<span>⏱️</span><span>${ctrl.name}</span>`;
+        } else if (ctrl.type === "DirListBox") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-dirlistbox";
+          inner.style.backgroundColor = ctrl.backColor;
+          inner.innerHTML = `
+            <div style="color:#b8860b;font-weight:bold;">📁 C:\\</div>
+            <div style="padding-left:8px;color:#d4a017;">📁 Projects</div>
+            <div style="padding-left:16px;color:#e6b800;">📁 VB6</div>
+          `;
+        } else if (ctrl.type === "FileListBox") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-filelistbox";
+          inner.style.backgroundColor = ctrl.backColor;
+          inner.innerHTML = `
+            <div>📄 Form1.frm</div>
+            <div>📄 Project1.vbp</div>
+            <div>📄 photo.bmp</div>
+          `;
+        } else if (ctrl.type === "Data") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-datacontrol";
+          inner.innerHTML = `
+            <span class="data-nav-btn">|<</span>
+            <span class="data-nav-btn"><</span>
+            <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${ctrl.name}</span>
+            <span class="data-nav-btn">></span>
+            <span class="data-nav-btn">>|</span>
+          `;
+        } else if (ctrl.type === "OLE") {
+          inner = document.createElement("div");
+          inner.className = "vb-control-inner ctrl-ole";
+          inner.innerHTML = `<span>OLE</span><span style="font-size:8px;color:#555;">${ctrl.name}</span>`;
         }
 
         wrapper.appendChild(inner);
 
-        // Design Mode Dragging & 8 Resize Handles
         if (state.mode === "design") {
           wrapper.addEventListener("mousedown", (e) => {
             if (e.target.classList.contains("handle")) return;
@@ -1685,7 +887,6 @@
       updateCoordinateReadout();
     }
 
-    // Dragging Control in Design Mode
     function startDragControl(e, ctrl) {
       const startX = e.clientX;
       const startY = e.clientY;
@@ -1693,10 +894,8 @@
       const origTop = ctrl.top;
 
       function onMove(ev) {
-        const dx = ev.clientX - startX;
-        const dy = ev.clientY - startY;
-        ctrl.left = Math.max(0, Math.round((origLeft + dx) / 4) * 4);
-        ctrl.top = Math.max(0, Math.round((origTop + dy) / 4) * 4);
+        ctrl.left = Math.max(0, Math.round((origLeft + (ev.clientX - startX)) / 4) * 4);
+        ctrl.top = Math.max(0, Math.round((origTop + (ev.clientY - startY)) / 4) * 4);
         renderFormAndControls();
       }
 
@@ -1710,7 +909,6 @@
       window.addEventListener("mouseup", onUp);
     }
 
-    // Resizing Control via 8 Handles
     function startResizeControl(e, ctrl, dir) {
       const startX = e.clientX;
       const startY = e.clientY;
@@ -1745,7 +943,6 @@
       window.addEventListener("mouseup", onUp);
     }
 
-    // Resizing Form1
     function setupFormResize() {
       const handle = document.getElementById("formResizeHandle");
       handle.addEventListener("mousedown", (e) => {
@@ -1772,7 +969,6 @@
       });
     }
 
-    // Properties Window Rendering
     function renderObjectSelector() {
       objectSelectorEl.innerHTML = "";
       const formOpt = document.createElement("option");
@@ -1800,15 +996,14 @@
       propHeaderEl.textContent = `Properties - ${obj.name}`;
       propTableEl.innerHTML = "";
 
-      const rows = [];
-      rows.push({ key: "(Name)", prop: "name", type: "text" });
+      const rows = [{ key: "(Name)", prop: "name", type: "text" }];
 
       if (obj.type === "Form") {
         rows.push({ key: "Caption", prop: "caption", type: "text" });
         rows.push({ key: "BackColor", prop: "backColor", type: "color" });
         rows.push({ key: "Width", prop: "width", type: "number" });
         rows.push({ key: "Height", prop: "height", type: "number" });
-      } else if (obj.type === "PictureBox") {
+      } else if (obj.type === "PictureBox" || obj.type === "Image") {
         rows.push({ key: "Picture", prop: "pictureSrc", type: "picture" });
         rows.push({ key: "PictureMode", prop: "pictureMode", type: "picmode" });
         rows.push({ key: "BackColor", prop: "backColor", type: "color" });
@@ -1818,10 +1013,23 @@
         rows.push({ key: "Height", prop: "height", type: "number" });
         rows.push({ key: "Enabled", prop: "enabled", type: "bool" });
         rows.push({ key: "Visible", prop: "visible", type: "bool" });
+      } else if (obj.type === "HScrollBar") {
+        rows.push({ key: "Value", prop: "scrollValue", type: "number" });
+        rows.push({ key: "Left", prop: "left", type: "number" });
+        rows.push({ key: "Top", prop: "top", type: "number" });
+        rows.push({ key: "Width", prop: "width", type: "number" });
+        rows.push({ key: "Height", prop: "height", type: "number" });
+        rows.push({ key: "Enabled", prop: "enabled", type: "bool" });
+        rows.push({ key: "Visible", prop: "visible", type: "bool" });
+      } else if (obj.type === "Timer") {
+        rows.push({ key: "Interval", prop: "interval", type: "number" });
+        rows.push({ key: "Enabled", prop: "enabled", type: "bool" });
+        rows.push({ key: "Left", prop: "left", type: "number" });
+        rows.push({ key: "Top", prop: "top", type: "number" });
       } else {
         if (obj.type === "TextBox" || obj.type === "ComboBox") {
           rows.push({ key: "Text", prop: "text", type: "text" });
-        } else if (obj.type !== "ListBox") {
+        } else if (!["ListBox", "DirListBox", "FileListBox", "Data", "OLE"].includes(obj.type)) {
           rows.push({ key: "Caption", prop: "caption", type: "text" });
         }
         rows.push({ key: "BackColor", prop: "backColor", type: "color" });
@@ -1881,15 +1089,9 @@
         } else if (r.type === "picmode") {
           const sel = document.createElement("select");
           sel.className = "prop-input";
-          sel.innerHTML = `
-            <option value="stretch">Stretch (ملاءمة الإطار)</option>
-            <option value="clip">Clip (الحجم الأصلي)</option>
-          `;
+          sel.innerHTML = `<option value="stretch">Stretch (ملاءمة)</option><option value="clip">Clip (أصلي)</option>`;
           sel.value = obj[r.prop] || "stretch";
-          sel.addEventListener("change", (e) => {
-            obj[r.prop] = e.target.value;
-            renderFormAndControls();
-          });
+          sel.addEventListener("change", (e) => { obj[r.prop] = e.target.value; renderFormAndControls(); });
           tdVal.appendChild(sel);
         } else if (r.type === "color") {
           const wrap = document.createElement("div");
@@ -1900,13 +1102,11 @@
           colorInp.value = obj[r.prop];
           const hexLabel = document.createElement("span");
           hexLabel.textContent = obj[r.prop].toUpperCase();
-
           colorInp.addEventListener("input", (e) => {
             obj[r.prop] = e.target.value;
             hexLabel.textContent = e.target.value.toUpperCase();
             renderFormAndControls();
           });
-
           wrap.appendChild(colorInp);
           wrap.appendChild(hexLabel);
           tdVal.appendChild(wrap);
@@ -1915,24 +1115,14 @@
           sel.className = "prop-input";
           sel.innerHTML = `<option value="true">True</option><option value="false">False</option>`;
           sel.value = String(obj[r.prop]);
-          sel.addEventListener("change", (e) => {
-            obj[r.prop] = e.target.value === "true";
-            renderFormAndControls();
-          });
+          sel.addEventListener("change", (e) => { obj[r.prop] = e.target.value === "true"; renderFormAndControls(); });
           tdVal.appendChild(sel);
         } else if (r.type === "align") {
           const sel = document.createElement("select");
           sel.className = "prop-input";
-          sel.innerHTML = `
-            <option value="left">0 - Left Justify</option>
-            <option value="right">1 - Right Justify</option>
-            <option value="center">2 - Center</option>
-          `;
+          sel.innerHTML = `<option value="left">0 - Left</option><option value="right">1 - Right</option><option value="center">2 - Center</option>`;
           sel.value = obj[r.prop];
-          sel.addEventListener("change", (e) => {
-            obj[r.prop] = e.target.value;
-            renderFormAndControls();
-          });
+          sel.addEventListener("change", (e) => { obj[r.prop] = e.target.value; renderFormAndControls(); });
           tdVal.appendChild(sel);
         } else {
           const inp = document.createElement("input");
@@ -1960,13 +1150,10 @@
 
     function updateCoordinateReadout() {
       const obj = getSelectedObject();
-      const left = obj.left || 0;
-      const top = obj.top || 0;
-      document.getElementById("readoutPos").textContent = `Left: ${left}, Top: ${top}`;
+      document.getElementById("readoutPos").textContent = `Left: ${obj.left || 0}, Top: ${obj.top || 0}`;
       document.getElementById("readoutSize").textContent = `Width: ${obj.width}, Height: ${obj.height}`;
     }
 
-    // Run & Design Mode Switching
     function startRunMode() {
       state.mode = "run";
       switchView("object");
@@ -1977,7 +1164,7 @@
       document.getElementById("btnRun").disabled = true;
       document.getElementById("btnStop").disabled = false;
       renderAll();
-      setStatus("البرنامج قيد التشغيل (Run Mode): يمكنك الكتابة في مربعات النص والنقر على الأزرار.");
+      setStatus("البرنامج قيد التشغيل (Run Mode).");
     }
 
     function stopRunMode() {
@@ -1989,10 +1176,9 @@
       document.getElementById("btnRun").disabled = false;
       document.getElementById("btnStop").disabled = true;
       renderAll();
-      setStatus("تم إيقاف التشغيل والعودة إلى وضع التصميم (Design Mode).");
+      setStatus("تم إيقاف التشغيل والعودة إلى وضع التصميم.");
     }
 
-    // Object vs Code View
     function switchView(viewName) {
       state.view = viewName;
       const designerEl = document.getElementById("designerView");
@@ -2017,9 +1203,7 @@
       if (buttons.length === 0) {
         area.value = "' أضف زر أمر (CommandButton) على النموذج لعرض حدث النقر الخاص به هنا\nPrivate Sub Form_Load()\n    Form1.Caption = \"" + state.form.caption + "\"\nEnd Sub";
       } else {
-        area.value = buttons.map(b =>
-          `Private Sub ${b.name}_Click()\n    MsgBox "${b.clickMessage}"\nEnd Sub`
-        ).join("\n\n");
+        area.value = buttons.map(b => `Private Sub ${b.name}_Click()\n    MsgBox "${b.clickMessage}"\nEnd Sub`).join("\n\n");
       }
     }
 
@@ -2031,7 +1215,6 @@
       });
     });
 
-    // Cut, Copy, Paste, Delete
     function updateToolbarState() {
       const hasCtrl = state.selectedId !== "Form1" && state.mode === "design";
       document.getElementById("btnCut").disabled = !hasCtrl;
@@ -2046,28 +1229,23 @@
       if (ctrl) {
         state.clipboard = JSON.parse(JSON.stringify(ctrl));
         updateToolbarState();
-        setStatus(`تم نسخ الأداة ${ctrl.name}.`);
       }
     }
 
-    function cutSelected() {
-      copySelected();
-      deleteSelected();
-    }
+    function cutSelected() { copySelected(); deleteSelected(); }
 
     function pasteClipboard() {
       if (!state.clipboard || state.mode === "run") return;
       const copy = JSON.parse(JSON.stringify(state.clipboard));
       state.counters[copy.type] = (state.counters[copy.type] || 0) + 1;
-      const newName = `${copy.type === "CommandButton" ? "Command" : copy.type === "TextBox" ? "Text" : copy.type === "PictureBox" ? "Picture" : copy.type}${state.counters[copy.type]}`;
+      const newName = `${copy.type}${state.counters[copy.type]}`;
       copy.id = newName;
       copy.name = newName;
-      copy.left += 16;
-      copy.top += 16;
+      copy.left += 12;
+      copy.top += 12;
       state.controls.push(copy);
       state.selectedId = copy.id;
       renderAll();
-      setStatus(`تم لصق نسخة جديدة باسم ${newName}.`);
     }
 
     function deleteSelected() {
@@ -2075,118 +1253,61 @@
       state.controls = state.controls.filter(c => c.id !== state.selectedId);
       state.selectedId = "Form1";
       renderAll();
-      setStatus("تم حذف الأداة المحددة.");
     }
 
-    // Project Templates & Reset
     function newProject() {
       stopRunMode();
       state.controls = [];
       state.counters = {};
-      state.form = {
-        id: "Form1",
-        type: "Form",
-        name: "Form1",
-        caption: "Form1",
-        backColor: "#d4d0c8",
-        width: 380,
-        height: 270
-      };
+      state.form = { id: "Form1", type: "Form", name: "Form1", caption: "Form1", backColor: "#d4d0c8", width: 360, height: 250 };
       state.selectedId = "Form1";
       renderAll();
-      setStatus("تم إنشاء مشروع جديد فارغ (Form1).");
     }
 
     function loadSampleProject() {
       stopRunMode();
       newProject();
-      state.form.caption = "بطاقة ترحيب الطالب";
+      state.form.caption = "نموذج التدريب";
       state.form.backColor = "#e8f0fe";
-      state.form.width = 410;
-      state.form.height = 275;
-
-      createControl("Label", 115, 16, 180, 26);
-      Object.assign(state.controls[0], {
-        caption: "أدخل اسمك في المربع أدناه:",
-        backColor: "#e8f0fe",
-        fontBold: true,
-        fontSize: 13
-      });
-
-      createControl("TextBox", 105, 50, 200, 28);
-      Object.assign(state.controls[1], {
-        text: "طالب الصف الثالث",
-        alignment: "center",
-        fontSize: 13
-      });
-
-      createControl("PictureBox", 145, 88, 120, 82);
-      Object.assign(state.controls[2], {
-        backColor: "#ffffff"
-      });
-
-      createControl("CommandButton", 140, 182, 130, 34);
-      Object.assign(state.controls[3], {
-        caption: "اضغط للترحيب",
-        fontBold: true,
-        clickMessage: "أهلاً وسهلاً بك في درس الفيجوال بيسك!"
-      });
-
+      createControl("Label", 90, 16, 170, 24);
+      Object.assign(state.controls[0], { caption: "أهلاً بك في الفيجوال بيسك", backColor: "#e8f0fe", fontBold: true });
+      createControl("TextBox", 95, 48, 160, 26);
+      Object.assign(state.controls[1], { text: "نص تجريبي", alignment: "center" });
+      createControl("CommandButton", 120, 88, 110, 32);
+      Object.assign(state.controls[2], { caption: "اختبار", clickMessage: "تم تنفيذ الحدث بنجاح!" });
       state.selectedId = "Form1";
       renderAll();
-      setStatus("تم تحميل نموذج تطبيقي جاهز! جرب اختيار صورة لمربع PictureBox أو اضغط التشغيل ▶.");
     }
 
-    function toggleGrid() {
-      state.showGrid = !state.showGrid;
-      renderFormAndControls();
-    }
+    function toggleGrid() { state.showGrid = !state.showGrid; renderFormAndControls(); }
 
     function centerFormInCanvas() {
       const canvas = document.getElementById("designerView");
-      formEl.style.marginLeft = Math.max(0, (canvas.clientWidth - state.form.width) / 2 - 12) + "px";
+      formEl.style.marginLeft = Math.max(0, (canvas.clientWidth - state.form.width) / 2 - 10) + "px";
     }
 
     function exportDesignSummary() {
-      const lines = [
-        `النموذج: ${state.form.name} | العنوان: ${state.form.caption} | اللون: ${state.form.backColor}`,
-        `عدد الأدوات المضافة: ${state.controls.length}`,
-        ...state.controls.map(c => {
-          if (c.type === "PictureBox") {
-            return `- ${c.name} (PictureBox): الصورة=${c.pictureName || "(None)"}، العرض=${c.pictureMode}`;
-          }
-          return `- ${c.name} (${c.type}): النص="${c.caption || c.text}"، الخلفية=${c.backColor}`;
-        })
-      ];
-      showVbMsgBox("ملخص تصميم الطالب", lines.join("\n"));
+      showVbMsgBox("ملخص التصميم", `النموذج: ${state.form.caption}\nعدد الأدوات: ${state.controls.length}`);
     }
 
-    // Form Layout Mini Monitor Dragging
     function setupFormLayoutMiniDrag() {
       const mini = document.getElementById("miniFormPreview");
       const screen = document.getElementById("monitorScreen");
       let dragging = false, sx = 0, sy = 0, ol = 0, ot = 0;
 
       mini.addEventListener("mousedown", (e) => {
-        dragging = true;
-        sx = e.clientX;
-        sy = e.clientY;
-        ol = mini.offsetLeft;
-        ot = mini.offsetTop;
+        dragging = true; sx = e.clientX; sy = e.clientY; ol = mini.offsetLeft; ot = mini.offsetTop;
       });
 
       window.addEventListener("mousemove", (e) => {
         if (!dragging) return;
-        const maxL = screen.clientWidth - mini.offsetWidth;
-        const maxT = screen.clientHeight - mini.offsetHeight;
-        mini.style.left = Math.max(0, Math.min(maxL, ol + (e.clientX - sx))) + "px";
-        mini.style.top = Math.max(0, Math.min(maxT, ot + (e.clientY - sy))) + "px";
+        mini.style.left = Math.max(0, Math.min(screen.clientWidth - mini.offsetWidth, ol + (e.clientX - sx))) + "px";
+        mini.style.top = Math.max(0, Math.min(screen.clientHeight - mini.offsetHeight, ot + (e.clientY - sy))) + "px";
       });
 
       window.addEventListener("mouseup", () => { dragging = false; });
     }
 
-    // Menus & Modals
     function toggleMenu(el) {
       const wasActive = el.classList.contains("active");
       document.querySelectorAll(".menu-item").forEach(m => m.classList.remove("active"));
@@ -2199,13 +1320,8 @@
       }
     });
 
-    function openGuideModal() {
-      document.getElementById("guideModal").classList.add("open");
-    }
-
-    function closeGuideModal() {
-      document.getElementById("guideModal").classList.remove("open");
-    }
+    function openGuideModal() { document.getElementById("guideModal").classList.add("open"); }
+    function closeGuideModal() { document.getElementById("guideModal").classList.remove("open"); }
 
     function showVbMsgBox(title, text) {
       document.getElementById("msgBoxTitle").textContent = title || "Project1";
@@ -2214,25 +1330,85 @@
       document.getElementById("vbMsgBoxModal").classList.add("open");
     }
 
-    function closeMsgBox() {
-      document.getElementById("vbMsgBoxModal").classList.remove("open");
-    }
+    function closeMsgBox() { document.getElementById("vbMsgBoxModal").classList.remove("open"); }
 
-    // Keyboard Shortcuts
     function setupKeyboardShortcuts() {
       window.addEventListener("keydown", (e) => {
         if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
         if (e.key === "Delete") deleteSelected();
-        if (e.key === "F5") {
-          e.preventDefault();
-          startRunMode();
-        }
+        if (e.key === "F5") { e.preventDefault(); startRunMode(); }
         if (e.ctrlKey && e.key.toLowerCase() === "c") copySelected();
         if (e.ctrlKey && e.key.toLowerCase() === "x") cutSelected();
         if (e.ctrlKey && e.key.toLowerCase() === "v") pasteClipboard();
       });
     }
+function openPrintReport() {
+      const studentName = prompt("أدخل اسم الطالب لكتابته على ورقة التصميم:", "اسم الطالب");
+      if (studentName === null) return;
 
+      // إلغاء تحديد أي أداة مؤقتاً لإخفاء مربعات التحديد الثمانية أثناء الطباعة
+      const prevSelected = state.selectedId;
+      state.selectedId = "";
+      renderFormAndControls();
+
+      const clonedForm = document.getElementById("vbForm").cloneNode(true);
+      clonedForm.style.margin = "0 auto";
+      clonedForm.style.boxShadow = "none";
+      const resizeHandle = clonedForm.querySelector(".form-resize-br");
+      if (resizeHandle) resizeHandle.remove();
+
+      // إعادة التحديد كما كان في المحاكي
+      state.selectedId = prevSelected;
+      renderFormAndControls();
+
+      const today = new Date().toLocaleDateString("ar-LY");
+      const controlsRows = state.controls.length
+        ? state.controls.map((c, idx) => `
+            <tr>
+              <td>${idx + 1}</td>
+              <td dir="ltr">${c.name}</td>
+              <td dir="ltr">${c.type}</td>
+              <td>${c.caption || c.text || c.pictureName || "-"}</td>
+              <td dir="ltr">${c.backColor}</td>
+            </tr>
+          `).join("")
+        : `<tr><td colspan="5" style="text-align:center;">لم يتم إضافة أدوات بعد على النموذج</td></tr>`;
+
+      const sheet = document.getElementById("printReportSheet");
+      sheet.innerHTML = `
+        <div class="print-header-box">
+          <h2 style="margin:0 0 6px 0; color:#0a246a;">ورقة نشاط عملي — تصميم واجهة فيجوال بيسك (VB 6.0)</h2>
+          <div style="display:flex; justify-content:space-between; font-size:13px;">
+            <span><strong>اسم الطالب:</strong> ${studentName.trim() || "غير محدد"}</span>
+            <span><strong>التاريخ:</strong> ${today}</span>
+          </div>
+          <div style="margin-top:4px; font-size:12px;">
+            <strong>عنوان النموذج (Caption):</strong> ${state.form.caption} &nbsp;|&nbsp;
+            <strong>عدد الأدوات المستخدمة:</strong> ${state.controls.length}
+          </div>
+        </div>
+
+        <h3 style="margin:6px 0;">1. معاينة النموذج المصمم (Form1):</h3>
+        <div class="print-form-stage" dir="ltr" id="printFormTarget"></div>
+
+        <h3 style="margin:6px 0;">2. جدول الأدوات والخصائص المستخدمة:</h3>
+        <table class="print-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>الاسم البرمجي (Name)</th>
+              <th>نوع الأداة</th>
+              <th>النص / المحتوى</th>
+              <th>لون الخلفية</th>
+            </tr>
+          </thead>
+          <tbody>${controlsRows}</tbody>
+        </table>
+      `;
+
+      document.getElementById("printFormTarget").appendChild(clonedForm);
+      setTimeout(() => window.print(), 150);
+    }
     init();
   </script>
 </body>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>محاكي فيجوال بيزك</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#d4d0c8;font:12px Tahoma,"Segoe UI",Arial,sans-serif;color:#000;display:flex;flex-direction:column;min-width:1000px;min-height:600px;user-select:none;overflow:auto}
+#top{background:linear-gradient(90deg,#0a246a,#a6caf0);color:#fff;font-weight:bold;padding:3px 8px}
+#menu{display:flex;gap:2px;padding:1px 4px;position:relative;z-index:50}
+.mi{position:relative;padding:3px 8px}.mi:hover,.mi.o{background:#0a246a;color:#fff}
+.dd{display:none;position:absolute;left:0;top:100%;background:#d4d0c8;color:#000;min-width:230px;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:2px}
+.mi.o .dd{display:block}.dd div{padding:4px 18px}.dd div:hover{background:#0a246a;color:#fff}.dd hr{margin:2px 0}
+#tb{display:flex;gap:2px;padding:2px 4px;border-top:1px solid #fff;border-bottom:1px solid #808080;align-items:center}
+.tbtn{font:12px Tahoma,Arial;padding:3px 8px;background:#d4d0c8;border:2px solid;border-color:#fff #808080 #808080 #fff;cursor:pointer;color:#000}
+.tbtn:active{border-color:#808080 #fff #fff #808080}
+.sep{width:2px;height:20px;border-left:1px solid #808080;border-right:1px solid #fff;margin:0 4px}
+#main{flex:1;display:flex;min-height:0;gap:3px;padding:3px}
+.pn{background:#d4d0c8;border:2px solid;border-color:#fff #808080 #808080 #fff;display:flex;flex-direction:column;min-height:0}
+.pt{background:#0a246a;color:#fff;padding:1px 4px;font-size:11px}
+.bd{background:#fff;overflow:auto;flex:1;margin:2px;border:1px solid #808080}
+#tx{display:grid;grid-template-columns:32px 32px;gap:2px;padding:4px;align-content:start}
+.tl{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:2px solid;border-color:#fff #808080 #808080 #fff;cursor:pointer;font-size:13px}
+.tl.on{border-color:#808080 #fff #fff #808080;background:#eee}
+#cen{flex:1;background:#808080;overflow:auto;padding:12px;min-width:0;display:flex;flex-direction:column;border:2px solid;border-color:#808080 #fff #fff #808080}
+#formwin{align-self:flex-start;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:3px}
+.tbar{background:linear-gradient(90deg,#0a246a,#a6caf0);color:#fff;font-weight:bold;padding:2px 6px}
+#form{position:relative;overflow:hidden;margin-top:3px;border:1px solid #404040}
+.design #form,.fm{background-image:radial-gradient(#000 .7px,transparent .8px);background-size:8px 8px}
+.c{position:absolute;z-index:1;display:flex}
+.c>*:not(.h){flex:1;min-width:0;font:inherit;color:inherit}
+.design .c>*:not(.h){pointer-events:none}.design .c{cursor:move}
+.c.sel{outline:1px dashed #000}
+.h{position:absolute;width:7px;height:7px;background:#000;z-index:5}
+.lb{white-space:pre-wrap;align-self:flex-start;padding:2px}
+.c input:not([type]),.c select{border:2px solid;border-color:#808080 #fff #fff #808080;background:#fff;font:inherit;padding:1px 3px;color:#000}
+.c button{border:2px solid;border-color:#fff #404040 #404040 #fff;background:inherit;font:inherit;color:inherit}
+.c label{display:flex;align-items:center;gap:4px}.c label input{flex:none}
+.c fieldset{border:1px solid #808080;margin:0;padding:0 4px}
+.ls{background:#fff;color:#000;border:2px solid;border-color:#808080 #fff #fff #808080;overflow:auto}
+.ls div{padding:0 3px}.ls div.on{background:#0a246a;color:#fff}
+.rub{position:absolute;border:1px dashed #000;z-index:9}
+#pr{position:absolute;left:4px;top:4px;white-space:pre;pointer-events:none;z-index:0}
+#codewin{display:none;flex:1;flex-direction:column;background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;padding:3px;min-height:380px}
+#code{flex:1;border:2px solid;border-color:#808080 #fff #fff #808080;font:14px Consolas,"Courier New",monospace;white-space:pre;tab-size:4;resize:none;direction:ltr;user-select:text;outline:0;margin-top:2px}
+#rt{width:230px;display:flex;flex-direction:column;gap:3px}
+#pg table{width:100%;border-collapse:collapse}
+#pg td{border:1px solid #d4d0c8;padding:0 3px;height:20px;white-space:nowrap}
+#pg td input,#pg td select{width:100%;border:0;font:inherit;padding:0;background:transparent;user-select:text;color:#000}
+#pg td:first-child{width:80px;background:#f4f4f4}
+.scr{margin:6px auto;width:128px;height:96px;background:#008080;border:2px solid #404040;position:relative}
+#lf{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#d4d0c8;border:1px solid #000}
+#st{padding:2px 8px;border-top:1px solid #808080}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;z-index:99}
+.dl{background:#d4d0c8;border:2px solid;border-color:#fff #404040 #404040 #fff;min-width:300px;max-width:520px;padding:3px}
+.db{padding:14px;display:flex;gap:12px;align-items:flex-start;user-select:text;white-space:pre-wrap}
+.dl input{user-select:text}.bt{display:flex;gap:8px;justify-content:center;padding:6px}.bt button{min-width:72px}.ic{font-size:26px}
+#sheet{display:none}
+#sheet h2{text-align:center;margin:0 0 8px}#sheet h3{margin:14px 0 6px}
+#sheet .meta{display:flex;justify-content:space-between;border-bottom:2px solid #000;padding:6px 0}
+#sheet table{border-collapse:collapse;width:100%}#sheet td,#sheet th{border:1px solid #000;padding:3px 6px;text-align:center;font-size:12px}
+#sheet pre{direction:ltr;text-align:left;border:1px solid #888;padding:8px;font:12px Consolas,monospace;white-space:pre-wrap}
+.wt{display:inline-block;border:2px solid #000;background:#d4d0c8}
+@media print{body>*:not(#sheet){display:none!important}html,body{height:auto;overflow:visible;min-width:0}
+#sheet{display:block;direction:rtl;font:14px Arial,sans-serif;background:#fff;color:#000;padding:8mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head>
+<body class="design">
+<div id="top">Project1 - Visual Basic Simulator <span id="mode">[design]</span> · محاكي فيجوال بيزك</div>
+<div id="menu"></div><div id="tb"></div>
+<div id="main">
+ <div class="pn" style="width:80px"><div class="pt">Toolbox</div><div id="tx"></div></div>
+ <div id="cen">
+  <div id="formwin"><div class="tbar" id="ftitle"></div><div id="form"><div id="pr"></div></div></div>
+  <div id="codewin"><div class="tbar">Project1 - Code</div>
+   <div style="display:flex;gap:6px;padding:3px 0"><select id="co" style="flex:1"></select><select id="cp" style="flex:1"></select></div>
+   <textarea id="code" spellcheck="false"></textarea></div>
+ </div>
+ <div id="rt">
+  <div class="pn" style="height:150px"><div class="pt">Project Explorer</div><div class="bd" id="ex"></div></div>
+  <div class="pn" style="flex:1"><div class="pt">Properties</div><select id="os"></select><div class="bd" id="pg"></div></div>
+  <div class="pn" style="height:140px"><div class="pt">Form Layout</div><div class="scr"><div id="lf"></div></div></div>
+ </div>
+</div>
+<div id="st"></div><div id="sheet"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const T={label:{p:"Label",w:88,h:24},text:{p:"Text",w:112,h:24},button:{p:"Command",w:96,h:32},check:{p:"Check",w:104,h:24},option:{p:"Option",w:104,h:24},frame:{p:"Frame",w:160,h:104},list:{p:"List",w:112,h:88},combo:{p:"Combo",w:112,h:24}};
+const TN={label:"Label",text:"TextBox",button:"CommandButton",check:"CheckBox",option:"OptionButton",frame:"Frame",list:"ListBox",combo:"ComboBox"};
+const EV={form:["Load","Click","DblClick"],label:["Click","DblClick"],text:["Change","Click"],button:["Click"],check:["Click"],option:["Click"],frame:["Click"],list:["Click","DblClick"],combo:["Click","Change"]};
+const TOOLS=[["","↖","Pointer"],["label","A","Label"],["text","ab","TextBox"],["button","▭","CommandButton"],["check","☑","CheckBox"],["option","◉","OptionButton"],["frame","▢","Frame"],["list","☰","ListBox"],["combo","▾","ComboBox"]];
+let M,sel,tool=null,running=false,snap,P,cnt={},last={};
+const F=$("#form"),PR=$("#pr"),sn=v=>Math.round(v/8)*8,elOf=c=>F.querySelector(`[data-n="${c.name}"]`);
+
+function dlg(t,h,b){return new Promise(r=>{const o=document.createElement("div");o.className="ov";o.innerHTML=`<div class=dl><div class=tbar>${esc(t)}</div><div class=db>${h}</div><div class=bt>${b.map((x,i)=>`<button class=tbtn data-i=${i}>${x}</button>`).join("")}</div></div>`;document.body.append(o);o.onclick=e=>{const k=e.target.closest("button");if(k){o.remove();r({i:+k.dataset.i,o})}};o.onkeydown=e=>{if(e.key=="Enter")o.querySelector("button").click()};(o.querySelector("input")||o.querySelector("button")).focus()})}
+function drag(e,fn,done){const sx=e.clientX,sy=e.clientY,mv=ev=>fn(ev.clientX-sx,ev.clientY-sy),up=()=>{removeEventListener("mousemove",mv);removeEventListener("mouseup",up);done&&done()};addEventListener("mousemove",mv);addEventListener("mouseup",up);e.preventDefault()}
+
+/* ---------- model / design surface ---------- */
+function newP(){M={form:{name:"Form1",caption:"Form1",backcolor:"#f0f0f0",width:480,height:320},ctrls:[],code:""};cnt={};$("#code").value="";sel="form";fmt();draw();props();showView("obj")}
+function fmt(){const f=M.form;Object.assign(F.style,{width:f.width+"px",height:f.height+"px",backgroundColor:f.backcolor});$("#ftitle").textContent=f.caption;$("#lf").style.cssText=`width:${Math.min(100,f.width/10.24)}%;height:${Math.min(100,f.height/7.68)}%`}
+function add(t,x,y,w,h,o){const k=T[t];cnt[t]=(cnt[t]||0)+1;const n=k.p+cnt[t];
+ const c={type:t,name:n,left:Math.max(0,x),top:Math.max(0,y),width:w||k.w,height:h||k.h,backcolor:["text","list","combo"].includes(t)?"#ffffff":t=="button"?"#d4d0c8":"",forecolor:"#000000",fontsize:13,enabled:true,visible:true};
+ if(["label","button","check","option","frame"].includes(t))c.caption=n;
+ if(t=="text"||t=="combo")c.text=n;if(t=="check")c.value=0;if(t=="option")c.value=false;if(t=="list"||t=="combo"){c.items=[];c.sel=-1}
+ Object.assign(c,o);M.ctrls.push(c);select(c);return c}
+function mk(c){const d=document.createElement("div"),t=c.type,n=esc(c.caption),dis=c.enabled?"":" disabled";d.className="c";d.dataset.n=c.name;
+ const s=d.style;Object.assign(s,{left:c.left+"px",top:c.top+"px",width:c.width+"px",height:c.height+"px",color:c.forecolor,fontSize:c.fontsize+"px",zIndex:t=="frame"?0:1});if(c.backcolor)s.background=c.backcolor;
+ if(!c.visible){running?s.display="none":s.opacity=.45}
+ d.innerHTML=t=="label"?`<span class=lb>${n}</span>`:t=="text"?`<input value="${esc(c.text)}"${dis}>`:t=="button"?`<button${dis}>${n}</button>`
+ :t=="check"?`<label><input type=checkbox${c.value==1?" checked":""}${dis}>${n}</label>`:t=="option"?`<label><input type=radio name=o${c.value?" checked":""}${dis}>${n}</label>`
+ :t=="frame"?`<fieldset><legend>${n}</legend></fieldset>`:t=="list"?`<div class=ls>${c.items.map((x,i)=>`<div class="${i==c.sel?"on":""}" data-i=${i}>${esc(x)}</div>`).join("")}</div>`
+ :`<select${dis}>${c.items.includes(c.text)?"":`<option selected>${esc(c.text)}</option>`}${c.items.map(x=>`<option${x==c.text?" selected":""}>${esc(x)}</option>`).join("")}</select>`;
+ if(!running&&sel===c){d.classList.add("sel");const L={nw:[0,0],n:[50,0],ne:[100,0],e:[100,50],se:[100,100],s:[50,100],sw:[0,100],w:[0,50]};for(const p in L){const h=document.createElement("i");h.className="h";h.dataset.p=p;h.style.cssText=`left:calc(${L[p][0]}% - 4px);top:calc(${L[p][1]}% - 4px);cursor:${p}-resize`;d.append(h)}}
+ if(running){const nm=c.name.toLowerCase(),q=d.querySelector("input,select"),ev=e=>disp(nm+"_"+e);
+  d.onclick=e=>{e.stopPropagation();if(["button","label","frame"].includes(t))ev("click");if(t=="list"){const i=e.target.dataset.i;if(i!=null){c.sel=+i;rd1(c);ev("click")}}};
+  d.ondblclick=e=>{e.stopPropagation();ev("dblclick")};
+  if(t=="text")q.oninput=()=>{c.text=q.value;ev("change")};
+  if(t=="check")q.onchange=()=>{c.value=q.checked?1:0;ev("click")};
+  if(t=="option")q.onchange=()=>{M.ctrls.forEach(o=>o.type=="option"&&(o.value=false));c.value=true;ev("click")};
+  if(t=="combo")q.onchange=()=>{c.text=q.value;c.sel=c.items.indexOf(q.value);ev("click");ev("change")}}
+ return d}
+const rd1=c=>{const o=elOf(c);o&&o.replaceWith(mk(c))};
+function draw(){[...F.children].forEach(x=>x!==PR&&x.remove());M.ctrls.forEach(c=>F.insertBefore(mk(c),PR));status()}
+function place(c){const e=elOf(c);e&&Object.assign(e.style,{left:c.left+"px",top:c.top+"px",width:c.width+"px",height:c.height+"px"});status()}
+function status(){$("#st").textContent=running?"Running... / قيد التشغيل":sel&&sel!="form"?`${sel.name}    Left: ${sel.left}   Top: ${sel.top}   Width: ${sel.width}   Height: ${sel.height}`:"Ready - اسحب الأدوات من Toolbox إلى الفورم، وانقر مرتين على الأداة لكتابة الكود"}
+function select(x){sel=x;draw();props()}
+function del(){if(running||!sel||sel=="form")return;M.ctrls=M.ctrls.filter(c=>c!==sel);select("form")}
+function setTool(t){tool=t||null;document.querySelectorAll(".tl").forEach(b=>b.classList.toggle("on",(b.dataset.t||null)==tool));F.style.cursor=tool?"crosshair":""}
+F.onmousedown=e=>{if(running)return;const h=e.target.closest(".h"),d=e.target.closest(".c");
+ if(h){const c=sel,o={...c},p=h.dataset.p;drag(e,(dx,dy)=>{let l=o.left,t=o.top,w=o.width,hh=o.height;
+  if(p.includes("e"))w=Math.max(8,sn(o.width+dx));if(p.includes("s"))hh=Math.max(8,sn(o.height+dy));
+  if(p.includes("w")){w=Math.max(8,sn(o.width-dx));l=o.left+o.width-w}if(p.includes("n")){hh=Math.max(8,sn(o.height-dy));t=o.top+o.height-hh}
+  Object.assign(c,{left:l,top:t,width:w,height:hh});place(c)},props);return}
+ if(d){const c=M.ctrls.find(x=>x.name==d.dataset.n),now=Date.now();
+  if(last.n==c.name&&now-last.t<400){last={};showCode();return}last={n:c.name,t:now};
+  if(sel!==c)select(c);const l=c.left,t=c.top;drag(e,(dx,dy)=>{c.left=Math.max(0,sn(l+dx));c.top=Math.max(0,sn(t+dy));place(c)},props);return}
+ if(tool)return rub(e);select("form")};
+function rub(e){const r=F.getBoundingClientRect(),x0=sn(e.clientX-r.left),y0=sn(e.clientY-r.top),b=document.createElement("div");b.className="rub";F.append(b);let w=0,h=0;
+ drag(e,(dx,dy)=>{w=sn(dx);h=sn(dy);Object.assign(b.style,{left:Math.min(x0,x0+w)+"px",top:Math.min(y0,y0+h)+"px",width:Math.abs(w)+"px",height:Math.abs(h)+"px"})},()=>{b.remove();const t=tool;add(t,Math.min(x0,x0+w),Math.min(y0,y0+h),Math.abs(w)<16?0:Math.abs(w),Math.abs(h)<16?0:Math.abs(h));setTool(null)})}
+F.ondblclick=e=>{if(!running&&e.target===F)showCode("Form")};
+F.onclick=()=>running&&disp("form_click");
+F.ondragover=e=>e.preventDefault();
+F.ondrop=e=>{e.preventDefault();const t=e.dataTransfer.getData("text");if(!T[t]||running)return;const r=F.getBoundingClientRect();add(t,sn(e.clientX-r.left),sn(e.clientY-r.top))};
+
+/* ---------- properties ---------- */
+function props(){const f=sel=="form"||!sel,c=f?M.form:sel;
+ $("#os").innerHTML=[`<option${f?" selected":""}>${esc(M.form.name)} Form</option>`,...M.ctrls.map(x=>`<option${x===c?" selected":""}>${esc(x.name)} ${TN[x.type]}</option>`)].join("");
+ const ks=f?["name","caption","backcolor","width","height"]:["name",...["caption","text","value","items"].filter(k=>c[k]!==undefined),"left","top","width","height","backcolor","forecolor","fontsize","enabled","visible"];
+ $("#pg").innerHTML="<table>"+ks.map(k=>{let v=c[k],i;if(k=="items")v=v.join(",");const a=`data-k=${k}`,chk=k=="value"&&c.type=="check";
+  i=/color/.test(k)?`<input type=color ${a} value="${v||"#f0f0f0"}">`:typeof v=="boolean"||chk?`<select ${a}>${(chk?[0,1]:["True","False"]).map(o=>`<option${(chk?v==o:String(v)==o.toLowerCase())?" selected":""}>${o}</option>`).join("")}</select>`:`<input ${a} value="${esc(v)}">`;
+  return`<tr><td>${{name:"(Name)",backcolor:"BackColor",forecolor:"ForeColor",fontsize:"FontSize",items:"List"}[k]||k[0].toUpperCase()+k.slice(1)}</td><td>${i}</td></tr>`}).join("")+"</table>"}
+$("#os").onchange=e=>{if(!running){const i=e.target.selectedIndex;select(i?M.ctrls[i-1]:"form")}};
+$("#pg").onchange=e=>{const el=e.target,k=el.dataset.k;if(!k||running)return;let v=el.value;const f=sel=="form"||!sel,c=f?M.form:sel;
+ if(k=="name"){if(!/^[A-Za-z_]\w*$/.test(v)||[M.form.name,...M.ctrls.map(o=>o.name)].some(n=>n.toLowerCase()==v.toLowerCase()&&n!==c.name)){dlg("Name","<div class=ic>⚠</div><div>اسم غير صالح أو مكرر / Invalid or duplicate name</div>",["OK"]);props();return}c.name=v}
+ else if(["left","top","width","height","fontsize"].includes(k))c[k]=Math.max(k=="fontsize"?6:0,+v||0);
+ else if(k=="enabled"||k=="visible")c[k]=v=="True";
+ else if(k=="value")c.value=c.type=="check"?+v:v=="True";
+ else if(k=="items"){c.items=v?v.split(","):[]}
+ else c[k]=v;
+ if(f)fmt();draw();props()};
+
+/* ---------- code window ---------- */
+function showView(v){$("#formwin").style.display=v=="obj"?"block":"none";$("#codewin").style.display=v=="code"?"flex":"none"}
+const evList=o=>EV[o=="Form"?"form":(M.ctrls.find(x=>x.name==o)||{}).type]||[];
+function fillCo(o,e){$("#co").innerHTML=["Form",...M.ctrls.map(c=>c.name)].map(n=>`<option value=${n}${n==o?" selected":""}>${n=="Form"?M.form.name:n}</option>`).join("");$("#cp").innerHTML=evList(o).map(x=>`<option${x==e?" selected":""}>${x}</option>`).join("")}
+function showCode(o,e){if(running)return;if(!o)o=sel&&sel!="form"?sel.name:"Form";if(!e)e=evList(o)[0]||"Click";
+ const ta=$("#code"),re=new RegExp("sub\\s+"+o+"_"+e+"\\s*\\(","i");
+ if(!re.test(ta.value))ta.value+=(ta.value&&!/\n$/.test(ta.value)?"\n":"")+(ta.value?"\n":"")+`Private Sub ${o}_${e}()\n    \nEnd Sub\n`;
+ M.code=ta.value;fillCo(o,e);showView("code");const i=ta.value.search(re),j=ta.value.indexOf("\n",i)+1,p=j+ta.value.slice(j).match(/^ */)[0].length;ta.focus();ta.setSelectionRange(p,p)}
+$("#co").onchange=e=>showCode(e.target.value);$("#cp").onchange=e=>showCode($("#co").value,e.target.value);
+$("#code").oninput=e=>M.code=e.target.value;
+$("#code").onkeydown=e=>{if(e.key=="Tab"){e.preventDefault();e.target.setRangeText("    ",e.target.selectionStart,e.target.selectionEnd,"end");M.code=e.target.value}};
+
+/* ---------- VB -> JS compiler ---------- */
+const sp=(s,c)=>{let d=0,q=0,p=[],b="";for(const x of s){if(x=='"')q^=1;if(!q){if(x=="(")d++;if(x==")")d--}if(x==c&&!d&&!q){p.push(b);b=""}else b+=x}p.push(b);return p};
+function compile(src,rt){
+ const L=src.replace(/ _\r?\n/g," ").split(/\r?\n/),procs=new Set(["msgbox","inputbox"]),arrs=new Set(),evs=[],st=[];let cur=null,k=0;
+ L.forEach(l=>{const m=l.match(/^\s*(?:(?:public|private|friend)\s+)?(?:sub|function)\s+(\w+)/i);if(m){procs.add(m[1].toLowerCase());evs.push(m[1].toLowerCase())}else if(/^\s*(dim|static|public|private|global)\s/i.test(l))l.replace(/(\w+)\s*\(\s*\d*\s*\)/g,(a,n)=>arrs.add(n.toLowerCase()))});
+ const ex=s=>{const a=sp(s,"&");if(a.length>1)return a.map(x=>"fmtn("+ex(x)+")").join("+''+");
+  const S=[];s=s.replace(/"(?:[^"]|"")*"/g,m=>(S.push(JSON.stringify(m.slice(1,-1).replace(/""/g,'"'))),"\u0001"+(S.length-1)+"\u0001"));
+  s=s.toLowerCase().replace(/<>/g,"!=").replace(/(?<![<>=!])=(?!=)/g,"==").replace(/&/g,"+''+").replace(/\band\b/g,"&&").replace(/\bor\b/g,"||").replace(/\bnot\b/g,"!").replace(/\bmod\b/g,"%").replace(/\^/g,"**").replace(/([\w.]+)\s*\\\s*([\w.]+)/g,"Math.trunc($1/$2)");
+  arrs.forEach(n=>{const r=new RegExp("(?<![\\w.])"+n+"\\s*\\(");let m;while(m=r.exec(s)){let i=m.index+m[0].length,d=1;while(i<s.length&&d){if(s[i]=="(")d++;else if(s[i]==")")d--;i++}s=s.slice(0,m.index)+n+"["+s.slice(m.index+m[0].length,i-1)+"]"+s.slice(i)}});
+  procs.forEach(n=>s=s.replace(new RegExp("(?<![\\w.])"+n+"(?=\\s*\\()","g"),"await "+n));
+  return s.replace(/\u0001(\d+)\u0001/g,(m,i)=>S[i])};
+ const args=s=>sp(s,",").map(ex).join(","),G='if(++_w>3e6)throw Error("Infinite loop");';
+ const cond=m=>m[1].toLowerCase()=="while"?ex(m[2]):`!(${ex(m[2])})`;
+ const tr=l=>{l=l.trim();if(!l||/^(option|on\s+error|randomize|attribute|version)\b/i.test(l))return"";let m;
+  if(m=l.match(/^(?:(?:public|private|friend)\s+)?(sub|function)\s+(\w+)\s*(?:\(([^)]*)\))?(?:\s+as\s+(\w+))?/i)){const n=m[2].toLowerCase(),fn=/function/i.test(m[1]);cur=fn?n:null;
+   const ps=(m[3]||"").split(",").map(p=>p.replace(/\b(byval|byref|optional)\b/gi,"").replace(/\bas\s+\w+/i,"").trim().toLowerCase()).filter(Boolean);
+   return`async function ${n}(${ps}){`+(fn?`var ${n}=${/string/i.test(m[4]||"")?'""':0};`:"")}
+  if(/^end\s+(sub|function)$/i.test(l)){const r=cur?`return ${cur};`:"";cur=null;return r+"}"}
+  if(/^exit\s+(sub|function)$/i.test(l))return cur?`return ${cur};`:"return;";
+  if(/^exit\s+(for|do|while)$/i.test(l))return"break;";
+  if(/^(end|unload\s+me)$/i.test(l))return'throw "VBEND";';
+  if(m=l.match(/^(?:(?:public|private)\s+)?const\s+(\w+)(?:\s+as\s+\w+)?\s*=\s*(.*)$/i))return`var ${m[1].toLowerCase()}=${ex(m[2])};`;
+  if(m=l.match(/^(?:dim|static|public|private|global)\s+(.*)$/i))return m[1].split(/,(?![^(]*\))/).map(it=>{const q=it.trim().match(/^(\w+)\s*(?:\(\s*(\d*)\s*\))?(?:\s+as\s+(\w+))?/i);if(!q)throw Error("Syntax error");const n=q[1].toLowerCase(),t=(q[3]||"").toLowerCase(),i=t=="string"?'""':t=="boolean"?"false":"0";return q[2]!==undefined?`var ${n}=new Array(${+q[2]+1}).fill(${i});`:`var ${n}=${i};`}).join("");
+  if(m=l.match(/^if\s+(.*?)\s+then\s*(.*)$/i)){if(!m[2])return`if(${ex(m[1])}){`;const[a,b]=m[2].split(/\s+else\s+/i);return`if(${ex(m[1])}){${tr(a)}}`+(b?`else{${tr(b)}}`:"")}
+  if(m=l.match(/^elseif\s+(.*?)\s+then$/i))return`}else if(${ex(m[1])}){`;
+  if(/^else$/i.test(l))return"}else{";if(/^end\s+if$/i.test(l))return"}";
+  if(m=l.match(/^select\s+case\s+(.*)$/i))return`{const _s=${ex(m[1])};if(false){`;
+  if(/^case\s+else$/i.test(l))return"}else{";
+  if(m=l.match(/^case\s+(.*)$/i))return"}else if("+sp(m[1],",").map(x=>{x=x.trim();let q;if(q=x.match(/^is\s*(<>|<=|>=|<|>|=)\s*(.*)$/i))return`_s${{"=":"==","<>":"!="}[q[1]]||q[1]}${ex(q[2])}`;if(q=x.match(/^(.*?)\s+to\s+(.*)$/i))return`(_s>=${ex(q[1])}&&_s<=${ex(q[2])})`;return`_s==${ex(x)}`}).join("||")+"){";
+  if(/^end\s+select$/i.test(l))return"}}";
+  if(m=l.match(/^for\s+(\w+)\s*=\s*(.*?)\s+to\s+(.*?)(?:\s+step\s+(.*))?$/i)){const v=m[1].toLowerCase(),j=k++;return`for(var ${v}=${ex(m[2])},_e${j}=${ex(m[3])},_t${j}=${m[4]?ex(m[4]):1};_t${j}>0?${v}<=_e${j}:${v}>=_e${j};${v}+=_t${j}){`}
+  if(/^next\b/i.test(l))return"}";
+  if(m=l.match(/^while\s+(.*)$/i)){st.push("}}");return`{let _w=0;while(${ex(m[1])}){${G}`}
+  if(/^wend$/i.test(l))return st.pop();
+  if(m=l.match(/^do(?:\s+(while|until)\s+(.*))?$/i)){if(m[1]){st.push("}}");return`{let _w=0;while(${cond(m)}){${G}`}st.push("D");return`{let _w=0;do{${G}`}
+  if(m=l.match(/^loop(?:\s+(while|until)\s+(.*))?$/i)){const s=st.pop();if(s!="D")return s;return`}while(${m[1]?cond(m):"true"});}`}
+  l=l.replace(/^(let|set|call)\s+/i,"");
+  if(m=l.match(/^([\w.]+(?:\(.*?\))?(?:\.\w+)?)\s*=(?!=)\s*(.*)$/))return`${ex(m[1])}=${ex(m[2])};`;
+  if(m=l.match(/^([\w.]+)\s*\((.*)\)$/)||l.match(/^([\w.]+)\s+(.+)$/)){const f=ex(m[1]);return(procs.has(f)?"await ":"")+f+"("+args(m[2])+");"}
+  if(/^[\w.]+$/.test(l)){const f=ex(l);return(procs.has(f)?"await ":"")+f+"();"}
+  throw Error("Syntax error")};
+ const js=L.map((l,i)=>{try{return tr(l.replace(/^((?:[^"']|"(?:[^"]|"")*")*)'.*$/,"$1").replace(/^\s*rem\b.*/i,""))}catch(e){throw{msg:`Line ${i+1}: ${e.message||"Syntax error"}\n${l.trim()}`}}}).join("\n");
+ let f;try{f=new Function("rt",`with(rt){${js}\nreturn{${evs.join(",")}}}`)}catch(e){throw{msg:"Syntax error in code: "+e.message}}
+ return f(rt)}
+
+/* ---------- runtime ---------- */
+function mkRt(){const rt={},num=x=>{const n=parseFloat(String(x).replace(/,/g,""));return isNaN(n)?0:n},fn=x=>typeof x=="number"?+x.toPrecision(12):x;
+ Object.assign(rt,{vbinformation:64,vbcritical:16,vbexclamation:48,vbquestion:32,vbokonly:0,vbokcancel:1,vbyesno:4,vbyes:6,vbno:7,vbok:1,vbcancel:2,vbcrlf:"\n",vbnewline:"\n",vbchecked:1,vbunchecked:0,vbred:"#ff0000",vbgreen:"#00ff00",vbblue:"#0000ff",vbyellow:"#ffff00",vbwhite:"#ffffff",vbblack:"#000000",fmtn:fn,
+  val:num,str:n=>(n>=0?" ":"")+n,len:s=>String(s).length,ucase:s=>String(s).toUpperCase(),lcase:s=>String(s).toLowerCase(),left:(s,n)=>String(s).slice(0,n),right:(s,n)=>n>0?String(s).slice(-n):"",mid:(s,a,l)=>String(s).substr(a-1,l??1e9),trim:s=>String(s).trim(),
+  instr:(a,b,c)=>typeof a=="number"?String(b).indexOf(c,a-1)+1:String(a).indexOf(b)+1,int:Math.floor,fix:Math.trunc,sqr:Math.sqrt,abs:Math.abs,sgn:Math.sign,sin:Math.sin,cos:Math.cos,tan:Math.tan,atn:Math.atan,log:Math.log,exp:Math.exp,rnd:()=>Math.random(),
+  round:(x,d=0)=>Math.round(x*10**d)/10**d,cint:Math.round,cdbl:num,cstr:String,chr:String.fromCharCode,asc:s=>String(s).charCodeAt(0),space:n=>" ".repeat(n),replace:(s,a,b)=>String(s).split(a).join(b),strreverse:s=>[...String(s)].reverse().join(""),isnumeric:s=>String(s).trim()!==""&&!isNaN(s),
+  format:(x,f="")=>{f=String(f);const d=/fixed/i.test(f)?2:(f.split(".")[1]||"").length;return d?(+x).toFixed(d):String(x)},
+  rgb:(r,g,b)=>"#"+[r,g,b].map(v=>(v&255).toString(16).padStart(2,"0")).join(""),now:()=>new Date().toLocaleString(),date:()=>new Date().toLocaleDateString(),time:()=>new Date().toLocaleTimeString(),
+  print:(x="")=>{PR.append(String(fn(x))+"\n")},cls:()=>{PR.textContent=""},
+  msgbox:(m,f=0,t="Project1")=>{const b=f&7,B=b==4?[["Yes",6],["No",7]]:b==1?[["OK",1],["Cancel",2]]:[["OK",1]];return dlg(t,`<div class=ic>${{16:"✖",32:"❓",48:"⚠",64:"ℹ"}[f&112]||""}</div><div dir=auto>${esc(fn(m))}</div>`,B.map(x=>x[0])).then(r=>B[r.i][1])},
+  inputbox:(p,t="Project1",d="")=>dlg(t,`<div dir=auto>${esc(p)}<br><input id=ib dir=auto value="${esc(d)}" style="width:260px;margin-top:6px"></div>`,["OK","Cancel"]).then(r=>r.i?"":r.o.querySelector("#ib").value)});
+ const fm=M.form;rt.me=rt[fm.name.toLowerCase()]=new Proxy({},{get:(_,k)=>k=="print"?rt.print:k=="cls"?rt.cls:fm[k],set:(_,k,v)=>{fm[k]=["width","height"].includes(k)?+v:v;fmt();return true}});
+ M.ctrls.forEach(c=>rt[c.name.toLowerCase()]=wrap(c,fn));return rt}
+function wrap(c,fn){const rd=()=>{if(running)rd1(c)},X={additem:v=>{c.items.push(String(v));rd()},clear:()=>{c.items=[];c.sel=-1;c.text="";rd()},removeitem:i=>{c.items.splice(i,1);c.sel=-1;rd()},setfocus:()=>{const e=elOf(c)?.querySelector("input,button,select");e&&e.focus()},list:i=>c.items[i]};
+ return new Proxy({},{get:(_,k)=>k in X?X[k]:k=="listcount"?c.items.length:k=="listindex"?c.sel:k=="text"&&c.type=="list"?c.items[c.sel]??"":c[k],
+  set:(_,k,v)=>{if(k=="listindex"){c.sel=+v;if(c.type=="combo")c.text=c.items[c.sel]??""}else if(["left","top","width","height","fontsize"].includes(k))c[k]=+v;else if(["enabled","visible"].includes(k))c[k]=!!v;
+   else if(k=="value")c.value=c.type=="check"?(v==1||v===true||v===-1?1:0):!!v;else if(["caption","text","backcolor","forecolor"].includes(k))c[k]=String(fn(v));else return true;rd();return true}})}
+async function disp(n){const f=P&&P[n];if(!f||!running)return;try{await f()}catch(e){if(e==="VBEND")stop();else if(running)dlg("Run-time error",`<div class=ic>✖</div><div>${esc(e.message||e)}</div>`,["End"]).then(stop)}}
+function run(){if(running)return;let rt;snap=JSON.stringify([M.form,M.ctrls]);
+ try{rt=mkRt();P=compile(M.code,rt)}catch(e){dlg("Compile error",`<div class=ic>✖</div><div>${esc(e.msg||e.message||e)}</div>`,["OK"]);return}
+ running=true;sel="form";document.body.className="run";$("#mode").textContent="[run]";PR.textContent="";showView("obj");draw();props();disp("form_load")}
+function stop(){if(!running)return;running=false;[M.form,M.ctrls]=JSON.parse(snap);document.querySelectorAll(".ov").forEach(o=>o.remove());P=null;document.body.className="design";$("#mode").textContent="[design]";PR.textContent="";sel="form";fmt();draw();props()}
+
+/* ---------- print student work ---------- */
+async function printF(){if(running)stop();showView("obj");
+ const r=await dlg("طباعة الفورم - Print Form",`<div dir=rtl style="line-height:2.1">اسم الطالب: <input id=sn dir=auto><br>الصف / الشعبة: <input id=sc dir=auto><br><label><input type=checkbox id=ic checked> طباعة الكود البرمجي</label><br><label><input type=checkbox id=ip checked> طباعة جدول خصائص الأدوات</label></div>`,["🖨 طباعة","إلغاء"]);
+ if(r.i)return;const g=id=>esc(r.o.querySelector("#"+id).value)||"..........",cb=id=>r.o.querySelector("#"+id).checked;
+ const fc=F.cloneNode(true);fc.removeAttribute("id");fc.className="fm";fc.querySelectorAll(".h,#pr").forEach(x=>x.remove());fc.querySelectorAll(".sel").forEach(x=>x.classList.remove("sel"));
+ const w=document.createElement("div");w.className="wt";w.innerHTML=`<div class=tbar>${esc(M.form.caption)}</div>`;w.append(fc);if(M.form.width>680)w.style.zoom=680/(M.form.width+8);
+ $("#sheet").innerHTML=`<h2>واجب الحاسوب - تصميم برنامج بلغة Visual Basic</h2><div class=meta><span>اسم الطالب: ${g("sn")}</span><span>الصف: ${g("sc")}</span><span>التاريخ: ${new Date().toLocaleDateString("ar")}</span></div><h3>1) تصميم الفورم</h3><div id=pf></div>`
+  +(cb("ip")?`<h3>2) خصائص الأدوات</h3><table><tr><th>Name</th><th>Type</th><th>Caption / Text</th><th>Left</th><th>Top</th><th>Width</th><th>Height</th></tr>${M.ctrls.map(c=>`<tr><td>${esc(c.name)}</td><td>${TN[c.type]}</td><td dir=auto>${esc(c.caption??c.text??"")}</td><td>${c.left}</td><td>${c.top}</td><td>${c.width}</td><td>${c.height}</td></tr>`).join("")||"<tr><td colspan=7>-</td></tr>"}</table>`:"")
+  +(cb("ic")?`<h3>3) الكود البرمجي</h3><pre>${esc(M.code)||"(لا يوجد كود)"}</pre>`:"");
+ $("#pf").append(w);setTimeout(()=>{try{print()}catch(e){dlg("Print","<div dir=rtl>تعذرت الطباعة داخل هذه النافذة. افتح الصفحة في تبويب جديد ثم أعد المحاولة.</div>",["OK"])}},150)}
+
+/* ---------- example, menus, toolbar ---------- */
+function ex1(){newP();Object.assign(M.form,{caption:"Add Two Numbers",width:400,height:240});const A=(t,l,tp,o)=>add(t,l,tp,0,0,o);
+ A("label",24,24,{caption:"First number:"});A("text",160,24,{text:""});A("label",24,64,{caption:"Second number:"});A("text",160,64,{text:""});A("button",160,112,{caption:"Add"});A("label",24,160,{caption:"Result:"});A("label",160,160,{caption:"",fontsize:18});
+ sel="form";$("#code").value=M.code=`Private Sub Command1_Click()\n    Dim a As Double, b As Double\n    a = Val(Text1.Text)\n    b = Val(Text2.Text)\n    Label4.Caption = a + b\n    If a + b > 100 Then\n        MsgBox "Big result! " & (a + b), vbInformation\n    End If\nEnd Sub\n`;fmt();draw();props()}
+const about=()=>dlg("About",`<div class=ic>ℹ</div><div dir=rtl>محاكي بسيط لبيئة Visual Basic للتدريس.\n1) اسحب أداة من Toolbox إلى الفورم (أو اختر الأداة وارسمها).\n2) انقر مرتين على الأداة لكتابة الكود.\n3) اضغط Start (F5) للتشغيل.\n4) اطبع عمل الطالب بزر Print Form.</div>`,["OK"]);
+const MENUS={File:[["New Project",newP],["Load Example: Add two numbers",ex1],["-"],["Print Form...   Ctrl+P",printF]],Edit:[["Delete   Del",del],["Select Form",()=>select("form")]],View:[["Code   F7",()=>showCode()],["Object",()=>showView("obj")]],Run:[["Start   F5",run],["End",stop]],Help:[["About",about]]};
+$("#menu").innerHTML=Object.entries(MENUS).map(([k,v])=>`<span class=mi>${k}<div class=dd>${v.map((x,i)=>x[1]?`<div data-i=${i}>${x[0]}</div>`:"<hr>").join("")}</div></span>`).join("");
+document.addEventListener("click",e=>{const mi=e.target.closest(".mi"),it=e.target.closest(".dd div"),was=mi&&mi.classList.contains("o");document.querySelectorAll(".mi.o").forEach(x=>x.classList.remove("o"));
+ if(it){MENUS[mi.firstChild.textContent][+it.dataset.i][1]()}else if(mi&&!was)mi.classList.add("o")});
+const TB=[["📄","New",newP],0,["▶ Start","Start (F5)",run],["■ End","End",stop],0,["{ } Code","View Code (F7)",()=>showCode()],["▣ Object","View Object",()=>showView("obj")],0,["🖨 Print Form / طباعة الفورم","Print student work",printF]];
+$("#tb").innerHTML=TB.map((b,i)=>b?`<button class=tbtn data-i=${i} title="${b[1]}">${b[0]}</button>`:"<i class=sep></i>").join("");
+$("#tb").onclick=e=>{const b=e.target.closest("button");b&&TB[b.dataset.i][2]()};
+$("#tx").innerHTML=TOOLS.map(t=>`<div class=tl data-t="${t[0]}" title="${t[2]}" draggable=${!!t[0]}>${t[1]}</div>`).join("");
+$("#tx").ondragstart=e=>{const b=e.target.closest(".tl");b&&e.dataTransfer.setData("text",b.dataset.t)};
+$("#tx").onclick=e=>{const b=e.target.closest(".tl");b&&!running&&setTool(b.dataset.t)};
+$("#tx").ondblclick=e=>{const b=e.target.closest(".tl"),t=b&&b.dataset.t;if(t&&!running){const k=T[t];add(t,sn(F.clientWidth/2-k.w/2),sn(F.clientHeight/2-k.h/2));setTool(null)}};
+$("#ex").innerHTML=`<div>📁 Project1 (Project1)</div><div style="padding-left:16px">📂 Forms</div><div style="padding-left:32px;cursor:default" id=ef>📄 Form1 (Form1.frm)</div><div style="padding:6px 2px"><button class=tbtn onclick="showCode()">View Code</button> <button class=tbtn onclick="showView('obj')">View Object</button></div>`;
+$("#ef").onclick=()=>{if(!running){select("form");showView("obj")}};
+addEventListener("keydown",e=>{if(e.key=="F5"){e.preventDefault();run()}else if(e.key=="F7"){e.preventDefault();showCode()}else if(e.ctrlKey&&e.key=="p"){e.preventDefault();printF()}else if(e.key=="Delete"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))del()});
+newP();setTool(null);
+</script></body></html>
