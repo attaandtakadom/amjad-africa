@@ -127,79 +127,79 @@ const  questionsMatrix = [
         "الإجابة الصحيحة: أ) العجلة = 5 m/s² ، وقوة الاتصال العمودية R = 10m N ✅"
     ],
     pdfFinalAnswer: "الإجابة الصحيحة: أ) العجلة = 5 m/s² ، وقوة الاتصال العمودية R = 10m N ✅"
-},
-{
+},{
     id: 9,
-    title: "س 9 (تمارين الكتاب 1-A): توازن مصباح معلق بسلسلتين مائلتين",
-    text: "مصباح مثبت في حالة توازن بسلسلتين ثبتتا إلى نقطتين (A) و (B) في نفس المستوى، وكان طولهما (0.3 m) و (0.4 m) والمسافة بينهما (0.5 m). إذا كان الشد في السلسلة الطويلة (T₁ = 36 N)، أوجد الشد في السلسلة القصيرة (T₂) وكتلة المصباح (باعتبار g = 10 m/s²).",
-    hint: "💡 كيف يكتشف الطالب مثلث فيثاغورس بسرعة؟ انظر لأطوال الأضلاع (0.3، 0.4، 0.5) وتجاهل الفاصلة العشرية لتصبح (3، 4، 5) — وهو أشهر مثلث قائم الزاوية في الرياضيات! هذا يعني فوراً أن الزاوية بين السلسلتين قائمة (90°)، مما يغنيك عن استخدام الآلة الحاسبة لإيجاد الزوايا.",
-    solution: "خطوة 1: اكتشاف المثلث القائم (3-4-5) واستخراج نسب الزوايا θ₁ و θ₂.<br>خطوة 2: تطبيق الاتزان الأفقي (T₂ cos θ₂ = T₁ cos θ₁) لإيجاد T₂ = 48 N.<br>خطوة 3: تطبيق الاتزان الرأسي (W = T₁ sin θ₁ + T₂ sin θ₂) لإيجاد الوزن (60 N) والكتلة (6 kg).",
-    svgCode: "<svg viewBox='0 0 500 300' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><defs><marker id='arrow-blue' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#2563eb'/></marker><marker id='arrow-green' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#16a34a'/></marker><marker id='arrow-red' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#dc2626'/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}</style><rect width='500' height='300' fill='#ffffff'/><!-- السقف --><line x1='50' y1='60' x2='450' y2='60' stroke='#64748b' stroke-width='3'/><text x='45' y='48' class='label' font-size='15' fill='#1e293b'>B</text><text x='455' y='48' class='label' font-size='15' fill='#1e293b'>A</text><text x='250' y='45' class='label' font-size='13' fill='#475569'>0.5 m</text><!-- خط أفقي متقطع عند المصباح لإظهار التبادل Z --><line x1='150' y1='200' x2='390' y2='200' stroke='#94a3b8' stroke-width='1.5' stroke-dasharray='5,5'/><!-- السلسلة الطويلة T1 (من B إلى المصباح) --><line x1='270' y1='200' x2='60' y2='66' stroke='#2563eb' stroke-width='3' marker-end='url(#arrow-blue)'/><text x='135' y='110' class='label' font-size='13' fill='#2563eb'>T₁ = 36 N (0.4 m)</text><!-- السلسلة القصيرة T2 (من A إلى المصباح) --><line x1='270' y1='200' x2='440' y2='66' stroke='#16a34a' stroke-width='3' marker-end='url(#arrow-green)'/><text x='385' y='110' class='label' font-size='13' fill='#16a34a'>T₂ (0.3 m)</text><!-- الزوايا في الأعلى (عند B و A) --><path d='M 95 60 A 45 45 0 0 1 88 84' fill='none' stroke='#2563eb' stroke-width='1.5'/><text x='110' y='82' class='label' font-size='13' fill='#2563eb'>θ₁</text><path d='M 405 60 A 45 45 0 0 0 415 88' fill='none' stroke='#16a34a' stroke-width='1.5'/><text x='390' y='84' class='label' font-size='13' fill='#16a34a'>θ₂</text><!-- الزوايا بالتبادل في الأسفل عند المصباح (حرف Z) --><path d='M 225 200 A 45 45 0 0 1 232 176' fill='none' stroke='#2563eb' stroke-width='1.5'/><text x='208' y='188' class='label' font-size='13' fill='#2563eb'>θ₁</text><path d='M 315 200 A 45 45 0 0 0 305 172' fill='none' stroke='#16a34a' stroke-width='1.5'/><text x='332' y='188' class='label' font-size='13' fill='#16a34a'>θ₂</text><!-- المصباح والوزن --><circle cx='270' cy='200' r='8' fill='#dc2626'/><line x1='270' y1='200' x2='270' y2='265' stroke='#dc2626' stroke-width='3' marker-end='url(#arrow-red)'/><text x='310' y='245' class='label' font-size='13' fill='#dc2626'>W = mg</text><text x='250' y='290' class='label' font-size='12' fill='#15803d'>الزاوية بين السلسلتين قائمة (90°) من مثلث (3 - 4 - 5) ✅</text></svg>",
+    title: "س 9 — تمارين الكتاب 1-A: توازن مصباح معلق بسلسلتين مائلتين",
+    text: "مصباح مثبت في حالة توازن بسلسلتين ثبتتا إلى نقطتين A و B في مستوى أفقي واحد، طول السلسلة الأولى 0.4 m وطول السلسلة الثانية 0.3 m، والمسافة بين النقطتين A و B تساوي 0.5 m. إذا كان الشد في السلسلة الطويلة T₁ = 36 N، أوجد الشد في السلسلة القصيرة T₂ وكتلة المصباح m باعتبار g = 10 m/s².",
+    hint: "💡 فكرة الحل السريعة: لاحظ أطوال الأضلاع 0.3 و 0.4 و 0.5 — بدون فواصل عشرية تصبح 3 و 4 و 5، وهو مثلث قائم الزاوية! إذن الزاوية بين السلسلتين قائمة 90°، والضلع 0.5 m هو الوتر، فنستخرج sin و cos مباشرة من أطوال الأضلاع دون آلة حاسبة.",
+    solution: "خطوة 1: من المثلث القائم 3-4-5 نستخرج النسب المثلثية للزاويتين θ₁ و θ₂.<br>خطوة 2: من الاتزان الأفقي T₂ cos θ₂ = T₁ cos θ₁ نجد أن T₂ = 48 N.<br>خطوة 3: من الاتزان الرأسي W = T₁ sin θ₁ + T₂ sin θ₂ نجد أن الوزن W = 60 N ومنه الكتلة m = 6 kg.",
+    svgCode: `<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; direction:ltr;"><defs><marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}</style><rect width="500" height="300" fill="#ffffff"/><line x1="50" y1="60" x2="450" y2="60" stroke="#64748b" stroke-width="3"/><text x="45" y="48" class="label" font-size="15" fill="#1e293b">B</text><text x="455" y="48" class="label" font-size="15" fill="#1e293b">A</text><text x="250" y="45" class="label" font-size="13" fill="#475569">0.5 m</text><line x1="150" y1="200" x2="390" y2="200" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,5"/><line x1="270" y1="200" x2="60" y2="66" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/><text x="135" y="110" class="label" font-size="13" fill="#2563eb">T₁ = 36 N | 0.4 m</text><line x1="270" y1="200" x2="440" y2="66" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green)"/><text x="385" y="110" class="label" font-size="13" fill="#16a34a">T₂ | 0.3 m</text><path d="M 95 60 A 45 45 0 0 1 88 84" fill="none" stroke="#2563eb" stroke-width="1.5"/><text x="110" y="82" class="label" font-size="13" fill="#2563eb">θ₁</text><path d="M 405 60 A 45 45 0 0 0 415 88" fill="none" stroke="#16a34a" stroke-width="1.5"/><text x="390" y="84" class="label" font-size="13" fill="#16a34a">θ₂</text><path d="M 225 200 A 45 45 0 0 1 232 176" fill="none" stroke="#2563eb" stroke-width="1.5"/><text x="208" y="188" class="label" font-size="13" fill="#2563eb">θ₁</text><path d="M 315 200 A 45 45 0 0 0 305 172" fill="none" stroke="#16a34a" stroke-width="1.5"/><text x="332" y="188" class="label" font-size="13" fill="#16a34a">θ₂</text><circle cx="270" cy="200" r="8" fill="#dc2626"/><line x1="270" y1="200" x2="270" y2="265" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/><text x="310" y="245" class="label" font-size="13" fill="#dc2626">W = mg</text><text x="250" y="290" class="label" font-size="12" fill="#15803d">الزاوية بين السلسلتين قائمة 90° من مثلث 3 - 4 - 5 ✅</text></svg>`,
     options: [
-        { text: "أ) T₂ = 48 N ، الكتلة m = 6 kg", isCorrect: true },
-        { text: "ب) T₂ = 36 N ، الكتلة m = 4 kg", isCorrect: false },
-        { text: "ج) T₂ = 60 N ، الكتلة m = 8 kg", isCorrect: false },
-        { text: "د) T₂ = 48 N ، الكتلة m = 10 kg", isCorrect: false }
+        { text: "أ) T₂ = 48 N ، والكتلة m = 6 kg", isCorrect: true },
+        { text: "ب) T₂ = 36 N ، والكتلة m = 4 kg", isCorrect: false },
+        { text: "ج) T₂ = 60 N ، والكتلة m = 8 kg", isCorrect: false },
+        { text: "د) T₂ = 48 N ، والكتلة m = 10 kg", isCorrect: false }
     ],
     correctAnswerIndex: 0,
     steps: [
         {
-            title: "الخطوة 1: كيف نفهم هندسة الشكل؟ (مثلث فيثاغورس)",
-            question: "إذا تجاهلنا الفاصلة العشرية في الأطوال (0.3، 0.4، 0.5) لتصبح (3، 4، 5)، ماذا نستنتج؟",
+            title: "الخطوة 1: استنتاج هندسة الشكل من مثلث فيثاغورس",
+            question: "الأطوال 0.3 m و 0.4 m و 0.5 m تمثل أضلاع مثلث 3-4-5 القائم. ما قيمة النسب المثلثية للزاويتين θ₁ و θ₂؟",
             options: [
-                { text: "المثلث قائم الزاوية (3² + 4² = 5²)، فنستخرج sin و cos مباشرة من الأضلاع", isCorrect: true },
-                { text: "نحتاج لحساب الزوايا بالمنقلة", isCorrect: false }
+                { text: "cos θ₁ = 0.4 ÷ 0.5 ، sin θ₁ = 0.3 ÷ 0.5  |  cos θ₂ = 0.3 ÷ 0.5 ، sin θ₂ = 0.4 ÷ 0.5", isCorrect: true },
+                { text: "cos θ₁ = 0.3 ÷ 0.5 ، sin θ₁ = 0.4 ÷ 0.5  |  cos θ₂ = 0.4 ÷ 0.5 ، sin θ₂ = 0.3 ÷ 0.5", isCorrect: false }
             ],
-            feedback: "✅ أحسنت! الأرقام (3، 4، 5) تعني فوراً أن الزاوية بين السلسلتين 90°، وبالتالي السقف (0.5 m) هو الوتر."
+            feedback: "✅ أحسنت! الزاوية عند المصباح قائمة 90° والوتر هو السقف 0.5 m، فنقسم المجاور على الوتر لـ cos والمقابل على الوتر لـ sin."
         },
         {
             title: "الخطوة 2: حساب الشد T₂ من الاتزان الأفقي",
-            question: "بتطبيق شرط الاتزان الأفقي (المركبة اليمينية = المركبة اليسارية): T₂ cos θ₂ = T₁ cos θ₁، كم يساوي T₂؟",
+            question: "بتطبيق شرط الاتزان الأفقي: T₂ × cos θ₂ = T₁ × cos θ₁، ما قيمة T₂؟",
             options: [
-                { text: "T₂ × (0.3 / 0.5) = 36 × (0.4 / 0.5)  ⇐  T₂ = 48 N", isCorrect: true },
-                { text: "T₂ = 36 N", isCorrect: false }
+                { text: "T₂ × 0.6 = 36 × 0.8  ⟸  0.6 T₂ = 28.8  ⟸  T₂ = 48 N", isCorrect: true },
+                { text: "T₂ × 0.8 = 36 × 0.6  ⟸  0.8 T₂ = 21.6  ⟸  T₂ = 27 N", isCorrect: false }
             ],
-            feedback: "✅ ممتاز! لاحظ أن المقام (0.5) يُختصر من الطرفين فتصبح المعادلة بسيطة جداً: 0.3 T₂ = 36 × 0.4."
+            feedback: "✅ ممتاز! وبإمكانك أيضاً اختصار المقام 0.5 من الطرفين مباشرة: 0.3 × T₂ = 36 × 0.4 ⟸ T₂ = 48 N."
         },
         {
-            title: "الخطوة 3: حساب كتلة المصباح من الاتزان الرأسي",
-            question: "مجموع مركبتي الشد لأعلى يساوي الوزن لأسفل (W = T₁ sin θ₁ + T₂ sin θ₂). كم تبلغ الكتلة m؟",
+            title: "الخطوة 3: حساب الوزن W وكتلة المصباح m من الاتزان الرأسي",
+            question: "مجموع مركبتي الشد لأعلى يساوي الوزن لأسفل: W = T₁ × sin θ₁ + T₂ × sin θ₂. ما قيمة W و m؟",
             options: [
-                { text: "W = 36×(0.3/0.5) + 48×(0.4/0.5) = 60 N  ⇐  m = 6 kg", isCorrect: true },
-                { text: "W = 84 N  ⇐  m = 8.4 kg", isCorrect: false }
+                { text: "W = 36 × 0.6 + 48 × 0.8 = 21.6 + 38.4 = 60 N  ⟸  m = 60 ÷ 10 = 6 kg", isCorrect: true },
+                { text: "W = 36 + 48 = 84 N  ⟸  m = 8.4 kg", isCorrect: false }
             ],
-            feedback: "✅ رائع! بقسمة الوزن الكلي (60 N) على عجلة الجاذبية (10) نحصل على الكتلة 6 kg."
+            feedback: "✅ رائع! الوزن الكلي W = 60 N وبقسمته على g = 10 نحصل على الكتلة m = 6 kg."
         }
     ],
     pdfSolutionSteps: [
         "══════════════ الخيارات ══════════════",
-        "أ) T₂ = 48 N ، الكتلة m = 6 kg  ✅ (الإجابة الصحيحة)",
-        "ب) T₂ = 36 N ، الكتلة m = 4 kg",
-        "ج) T₂ = 60 N ، الكتلة m = 8 kg",
-        "د) T₂ = 48 N ، الكتلة m = 10 kg",
+        "أ) T₂ = 48 N ، والكتلة m = 6 kg  ✅ (الإجابة الصحيحة)",
+        "ب) T₂ = 36 N ، والكتلة m = 4 kg",
+        "ج) T₂ = 60 N ، والكتلة m = 8 kg",
+        "د) T₂ = 48 N ، والكتلة m = 10 kg",
         "",
-        "══════════════ فكرة الحل الذهنية ══════════════",
-        "• انظر للأطوال (0.3 ، 0.4 ، 0.5) بدون فواصل ستجدها (3 ، 4 ، 5) — أشهر مثلث قائم لفيثاغورس!",
-        "• هذا يعني أن الزاوية عند المصباح قائمة (90°)، والضلع الأكبر (0.5 m) هو الوتر.",
-        "• بالتبادل (حرف Z)، الزاوية θ₁ عند B تساوي θ₁ عند المصباح، والزاوية θ₂ عند A تساوي θ₂ عند المصباح.",
-        "• من المثلث القائم نستنتج النسب المثلثية مباشرة دون آلة حاسبة:",
-        "   - للزاوية θ₁:  cos θ₁ = المجاور/الوتر = 0.4 / 0.5  |  sin θ₁ = المقابل/الوتر = 0.3 / 0.5",
-        "   - للزاوية θ₂:  cos θ₂ = المجاور/الوتر = 0.3 / 0.5  |  sin θ₂ = المقابل/الوتر = 0.4 / 0.5",
+        "══════════════ 1. النسب المثلثية من المثلث القائم ══════════════",
+        "• الأطوال 0.3 m و 0.4 m و 0.5 m تحقق فيثاغورس: 0.3² + 0.4² = 0.5²",
+        "• إذن المثلث قائم الزاوية عند المصباح 90°، والوتر يساوي 0.5 m.",
+        "• للزاوية θ₁:  cos θ₁ = 0.4 ÷ 0.5 = 0.8   |   sin θ₁ = 0.3 ÷ 0.5 = 0.6",
+        "• للزاوية θ₂:  cos θ₂ = 0.3 ÷ 0.5 = 0.6   |   sin θ₂ = 0.4 ÷ 0.5 = 0.8",
         "",
-        "══════════════ خطوات الحل المبسطة ══════════════",
-        "1. الاتزان الأفقي (القوى يميناً = القوى يساراً):",
-        "   T₂ cos θ₂ = T₁ cos θ₁",
-        "   T₂ × (0.3 / 0.5) = 36 × (0.4 / 0.5)",
-        "   بحذف (0.5) من الطرفين:  0.3 T₂ = 14.4  ⟸  T₂ = 48 N  ✅",
+        "══════════════ 2. إيجاد الشد T₂ من الاتزان الأفقي ══════════════",
+        "• القوى يميناً = القوى يساراً:",
+        "   T₂ × cos θ₂ = T₁ × cos θ₁",
+        "   T₂ × 0.6 = 36 × 0.8",
+        "   0.6 T₂ = 28.8",
+        "   T₂ = 28.8 ÷ 0.6 = 48 N  ✅",
         "",
-        "2. الاتزان الرأسي (القوى لأعلى = الوزن لأسفل):",
-        "   W = T₁ sin θ₁ + T₂ sin θ₂",
-        "   W = 36 × (0.3 / 0.5) + 48 × (0.4 / 0.5)",
+        "══════════════ 3. إيجاد الوزن W والكتلة m من الاتزان الرأسي ══════════════",
+        "• القوى لأعلى = الوزن لأسفل:",
+        "   W = T₁ × sin θ₁ + T₂ × sin θ₂",
+        "   W = 36 × 0.6 + 48 × 0.8",
         "   W = 21.6 + 38.4 = 60 N",
         "",
-        "3. حساب الكتلة (m):",
-        "   m = W / g = 60 / 10 = 6 kg  ✅"
-    ],              
+        "• حساب الكتلة m:",
+        "   m = W ÷ g",
+        "   m = 60 ÷ 10 = 6 kg  ✅"
+    ],
     pdfFinalAnswer: "الإجابة الصحيحة: أ) T₂ = 48 N ، وكتلة المصباح m = 6 kg ✅"
 },
 {
