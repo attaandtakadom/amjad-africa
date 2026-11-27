@@ -1,28 +1,27 @@
 const  questionsMatrix = [
-
 {
     id: 17,
     title: "س  تمرين الكتاب A-1 رقم 17: اتزان جسم يسحبه رجل وتدفعه ابنته بقوتين مائلتين بسرعة ثابتة",
-    text: "يجُرُّ رجلٌ جسماً كتلتُه (40 kg) على سطح أفقي بقوة (140 N) تميل على الأفقي بزاوية قدرها (30°)، وتدفع ابنتُه بقوة (50 N) في الاتجاه الأسفل بزاوية (10°) مع الأفقي. إذا كان الجسم يتحرك بسرعة ثابتة، احسب قوة الاحتكاك (F) وقوة الاتصال العمودية بين الجسم والأرض (R)، ووضح أن قيمة معامل الاحتكاك تقَع بين (0.50 و 0.51).",
-    hint: "بما أن الجسم يتحرك بسرعة ثابتة، فإن العجلة تساوي صفراً (حالة اتزان). قم بتحليل القوتين (قوة الرجل وقوة الابنة) إلى مركبتين أفقية ورأسية، ثم طبق شروط الاتزان: ΣFx = 0 و ΣFy = 0.",
-    solution: "خطوة 1: تحليل القوتين أفقياً ورأسياً. <br> خطوة 2: تطبيق الاتزان الأفقي (ΣFx = 0) لإيجاد قوة الاحتكاك: F = 140 cos(30°) + 50 cos(10°) ≈ 170.49 N. <br> خطوة 3: تطبيق الاتزان الرأسي (ΣFy = 0) لإيجاد قوة الاتصال العمودية: R = mg + 50 sin(10°) - 140 sin(30°) ≈ 338.68 N. <br> خطوة 4: حساب معامل الاحتكاك: µ = F / R ≈ 0.503، وهي تقع بين 0.50 و 0.51.",
-    svgCode: "<svg viewBox='0 0 500 280' xmlns='http://www.w3.org/2000/svg' style='background:#ffffff; direction:ltr;'><defs><marker id='arrow-blue' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#2563eb'/></marker><marker id='arrow-green' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#16a34a'/></marker><marker id='arrow-red' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#dc2626'/></marker><marker id='arrow-purple' viewBox='0 0 10 10' refX='6' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M 0 1 L 10 5 L 0 9 z' fill='#9333ea'/></marker></defs><style>.label{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}</style><rect width='500' height='280' fill='#ffffff'/><line x1='30' y1='200' x2='470' y2='200' stroke='#64748b' stroke-width='4'/><rect x='200' y='140' width='100' height='60' fill='#cbd5e1' stroke='#475569' stroke-width='2' rx='4'/><text x='250' y='175' class='label' font-size='14' fill='#1e293b'>m = 40 kg</text><line x1='250' y1='140' x2='250' y2='70' stroke='#16a34a' stroke-width='3' marker-end='url(#arrow-green)'/><text x='250' y='55' class='label' font-size='13' fill='#16a34a'>R (قوة الاتصال)</text><line x1='250' y1='200' x2='250' y2='260' stroke='#dc2626' stroke-width='3' marker-end='url(#arrow-red)'/><text x='250' y='275' class='label' font-size='13' fill='#dc2626'>W = 400 N</text><line x1='300' y1='150' x2='410' y2='90' stroke='#2563eb' stroke-width='3' marker-end='url(#arrow-blue)'/><text x='400' y='80' class='label' font-size='13' fill='#2563eb'>F1 = 140 N (30°)</text><line x1='200' y1='150' x2='100' y2='170' stroke='#9333ea' stroke-width='3' marker-end='url(#arrow-purple)'/><text x='90' y='160' class='label' font-size='13' fill='#9333ea'>F2 = 50 N (10° أسفل)</text><line x1='200' y1='190' x2='110' y2='190' stroke='#dc2626' stroke-width='3' marker-end='url(#arrow-red)'/><text x='150' y='215' class='label' font-size='13' fill='#dc2626'>F (الاحتكاك)</text></svg>",
+    text: "يجُرُّ رجلٌ جسماً كتلتُه (40 kg) على سطح أفقي بقوة (140 N) تميل على الأفقي بزاوية قدرها (30°)، وتدفع ابنتُه بقوة (50 N) في الاتجاه الأسفل بزاوية (10°) مع الأفقي. إذا كان الجسم يتحرك بسرعة ثابتة، احسب المقاومة (F) وقوة الاتصال العمودية بين الجسم والأرض (R)، ووضح أن النسبة بين F إلى R (المقاومة إلى قوة الاتصال العمودية) تقَع بين (0.50 و 0.51).",
+    hint: "بما أن الجسم يتحرك بسرعة ثابتة، فإن العجلة تساوي صفراً (حالة اتزان). قم بتحليل القوتين (قوة سحب الرجل لأعلى وقوة دفع الابنة لأسفل) إلى مركبتين أفقية ورأسية، ثم طبق شروط الاتزان: ΣFx = 0 و ΣFy = 0، وبعدها اقسم قيمة المقاومة F على قوة الاتصال العمودية R.",
+    solution: "خطوة 1: تحليل القوتين أفقياً ورأسياً مع مراعاة اتجاه السحب لأعلى والدفع لأسفل. <br> خطوة 2: تطبيق الاتزان الأفقي (ΣFx = 0) لإيجاد المقاومة: F = 140 cos(30°) + 50 cos(10°) ≈ 170.48 N. <br> خطوة 3: تطبيق الاتزان الرأسي (ΣFy = 0) لإيجاد قوة الاتصال العمودية: R = mg + 50 sin(10°) - 140 sin(30°) ≈ 338.68 N. <br> خطوة 4: قسمة F على R لإيجاد النسبة: F / R = 170.48 / 338.68 ≈ 0.503، وهي تقع بين (0.50 و 0.51).",
+    svgCode: `<svg viewBox="0 0 580 330" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; direction:ltr;"><defs><marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/></marker><marker id="arr-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/></marker><marker id="arr-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/></marker><marker id="arr-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#9333ea"/></marker></defs><style>.lbl{font-family:system-ui,-apple-system,sans-serif;font-weight:bold;text-anchor:middle;}.ang{font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:bold;}</style><rect width="580" height="330" fill="#ffffff"/><line x1="30" y1="215" x2="550" y2="215" stroke="#64748b" stroke-width="4"/><rect x="230" y="150" width="110" height="65" fill="#cbd5e1" stroke="#475569" stroke-width="2" rx="4"/><text x="285" y="187" class="lbl" font-size="14" fill="#1e293b">m = 40 kg</text><line x1="285" y1="150" x2="285" y2="65" stroke="#16a34a" stroke-width="3" marker-end="url(#arr-green)"/><text x="285" y="52" class="lbl" font-size="12" fill="#16a34a">R (اتصال عمودية ↑)</text><line x1="285" y1="215" x2="285" y2="285" stroke="#dc2626" stroke-width="3" marker-end="url(#arr-red)"/><text x="285" y="303" class="lbl" font-size="12" fill="#dc2626">W = 400 N (↓)</text><line x1="340" y1="165" x2="495" y2="165" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,4"/><line x1="340" y1="165" x2="475" y2="87" stroke="#2563eb" stroke-width="3" marker-end="url(#arr-blue)"/><path d="M 390 165 A 50 50 0 0 0 383 140" fill="none" stroke="#2563eb" stroke-width="2"/><text x="412" y="153" class="ang" fill="#2563eb">30°</text><line x1="340" y1="165" x2="455" y2="165" stroke="#2563eb" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-blue)"/><line x1="455" y1="165" x2="455" y2="103" stroke="#2563eb" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-blue)"/><text x="460" y="74" class="lbl" font-size="12" fill="#2563eb">سحب الأب: 140 N (↑)</text><line x1="95" y1="118" x2="230" y2="150" stroke="#9333ea" stroke-width="3" marker-end="url(#arr-purple)"/><line x1="85" y1="150" x2="230" y2="150" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,4"/><path d="M 175 150 A 55 55 0 0 1 177 137" fill="none" stroke="#9333ea" stroke-width="2"/><text x="155" y="146" class="ang" fill="#9333ea">10°</text><line x1="95" y1="118" x2="95" y2="148" stroke="#9333ea" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-purple)"/><line x1="95" y1="150" x2="215" y2="150" stroke="#9333ea" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-purple)"/><text x="125" y="104" class="lbl" font-size="12" fill="#9333ea">دفع البنت: 50 N (↓)</text><line x1="230" y1="198" x2="110" y2="198" stroke="#dc2626" stroke-width="3" marker-end="url(#arr-red)"/><text x="165" y="234" class="lbl" font-size="12" fill="#dc2626">F (المقاومة ←)</text></svg>`,
     options: [
-        { text: "أ) F ≈ 170.5 N ، R ≈ 338.7 N ، µ ≈ 0.503", isCorrect: true },
-        { text: "ب) F ≈ 150.0 N ، R ≈ 400.0 N ، µ ≈ 0.375", isCorrect: false },
-        { text: "ج) F ≈ 185.2 N ، R ≈ 310.5 N ، µ ≈ 0.596", isCorrect: false },
-        { text: "د) F ≈ 121.2 N ، R ≈ 370.0 N ، µ ≈ 0.328", isCorrect: false }
+        { text: "أ) F ≈ 170.5 N ، R ≈ 338.7 N ، والنسبة F / R ≈ 0.503 (تقع بين 0.50 و 0.51)", isCorrect: true },
+        { text: "ب) F ≈ 150.0 N ، R ≈ 400.0 N ، والنسبة F / R = 0.375", isCorrect: false },
+        { text: "ج) F ≈ 185.2 N ، R ≈ 310.5 N ، والنسبة F / R ≈ 0.596", isCorrect: false },
+        { text: "د) F ≈ 121.2 N ، R ≈ 370.0 N ، والنسبة F / R ≈ 0.328", isCorrect: false }
     ],
     correctAnswerIndex: 0,
     steps: [
         {
-            title: "الخطوة 1: تطبيق الاتزان الأفقي لحساب قوة الاحتكاك (F)",
+            title: "الخطوة 1: تطبيق الاتزان الأفقي لحساب المقاومة (F)",
             question: "بما أن الجسم يتحرك بسرعة ثابتة، فما معادلة الاتزان الأفقي (ΣFx = 0)؟",
             options: [
                 { text: "F = 140 cos(30°) + 50 cos(10°)", isCorrect: true },
                 { text: "F = 140 cos(30°) - 50 cos(10°)", isCorrect: false }
             ],
-            feedback: "✅ صحيح! قوة سحب الرجل وقوة دفع الابنة تعملان معاً في الاتجاه الأفقي للأمام ضد قوة الاحتكاك F = 121.24 + 49.24 = 170.48 N."
+            feedback: "✅ صحيح! مركبتا قوة سحب الرجل وقوة دفع الابنة تعملان معاً في الاتجاه الأفقي ضد المقاومة F: F = 121.24 + 49.24 = 170.48 N."
         },
         {
             title: "الخطوة 2: تطبيق الاتزان الرأسي لحساب قوة الاتصال العمودية (R)",
@@ -31,27 +30,27 @@ const  questionsMatrix = [
                 { text: "R + 140 sin(30°) = mg + 50 sin(10°)", isCorrect: true },
                 { text: "R = mg + 140 sin(30°) + 50 sin(10°)", isCorrect: false }
             ],
-            feedback: "✅ ممتاز! مركبـة قوة الرجل لأعلى تخفف من الضغط، بينما مركبة قوة الابنة لأسفل تزيد الضغط: R = 400 + 8.68 - 70 = 338.68 N."
+            feedback: "✅ ممتاز! السحب لأعلى (140 sin 30° ↑) يرفع الجسم قليلاً، بينما الدفع لأسفل (50 sin 10° ↓) يضغطه نحو الأسفل مع الوزن: R = 400 + 8.68 - 70 = 338.68 N."
         },
         {
-            title: "الخطوة 3: حساب معامل الاحتكاك (µ)",
-            question: "كيف نتحقق من أن معامل الاحتكاك يقع بين 0.50 و 0.51؟",
+            title: "الخطوة 3: حساب النسبة بين F إلى R",
+            question: "كيف نحسب النسبة بين المقاومة (F) وقوة الاتصال العمودية (R)؟",
             options: [
-                { text: "بقسمة F على R: µ = 170.48 / 338.68 ≈ 0.503", isCorrect: true },
-                { text: "بضرب F في R: µ = 170.48 × 338.68", isCorrect: false }
+                { text: "بقسمة F على R: F / R = 170.48 / 338.68 ≈ 0.503", isCorrect: true },
+                { text: "بقسمة R على F: R / F = 338.68 / 170.48 ≈ 1.987", isCorrect: false }
             ],
-            feedback: "✅ إجابة صحيحة! القيمة الناتجة هي 0.503 وهي بالفعل محصورة بين 0.50 و 0.51."
+            feedback: "✅ أحسنت! عند قسمة F على R ينتج 170.48 / 338.68 ≈ 0.503، وهذه القيمة تقع بالفعل بين (0.50 و 0.51)."
         }
     ],
     pdfSolutionSteps: [
         "══════════════ الخيارات ══════════════",
-        "أ) F ≈ 170.5 N ، R ≈ 338.7 N ، µ ≈ 0.503  ✅ (الإجابة الصحيحة)",
-        "ب) F ≈ 150.0 N ، R ≈ 400.0 N ، µ ≈ 0.375",
-        "ج) F ≈ 185.2 N ، R ≈ 310.5 N ، µ ≈ 0.596",
-        "د) F ≈ 121.2 N ، R ≈ 370.0 N ، µ ≈ 0.328",
+        "أ) F ≈ 170.5 N ، R ≈ 338.7 N ، والنسبة F / R ≈ 0.503 (تقع بين 0.50 و 0.51)  ✅ (الإجابة الصحيحة)",
+        "ب) F ≈ 150.0 N ، R ≈ 400.0 N ، والنسبة F / R = 0.375",
+        "ج) F ≈ 185.2 N ، R ≈ 310.5 N ، والنسبة F / R ≈ 0.596",
+        "د) F ≈ 121.2 N ، R ≈ 370.0 N ، والنسبة F / R ≈ 0.328",
         "",
         "══════════════ الحل التفصيلي ══════════════",
-        "1. حساب قوة الاحتكاك (F) من الاتزان الأفقي (ΣFx = 0):",
+        "1. حساب المقاومة (F) من الاتزان الأفقي (ΣFx = 0):",
         "   F = 140 × cos(30°) + 50 × cos(10°)",
         "   F = 140 × 0.8660 + 50 × 0.9848",
         "   F = 121.24 + 49.24 = 170.48 N ≈ 170.5 N  ✅",
@@ -62,17 +61,14 @@ const  questionsMatrix = [
         "   R + 70 = 400 + 8.68",
         "   R = 408.68 - 70 = 338.68 N ≈ 338.7 N  ✅",
         "",
-        "3. إثبات قيمة معامل الاحتكاك (µ):",
-        "   µ = F / R",
-        "   µ = 170.48 / 338.68 ≈ 0.5033",
-        "   بما أن 0.50 < 0.5033 < 0.51، فالقيمة تقع بالفعل بين (0.50 و 0.51) ✅",
+        "3. حساب النسبة بين F إلى R:",
+        "   النسبة = F / R = 170.48 / 338.68 ≈ 0.503",
+        "   بما أن 0.50 < 0.503 < 0.51، فإن النسبة تقع بالفعل بين (0.50 و 0.51) ✅",
         "",
-        "الإجابة الصحيحة: أ) F ≈ 170.5 N ، R ≈ 338.7 N ، µ ≈ 0.503 ✅"
+        "الإجابة الصحيحة: أ) F ≈ 170.5 N ، R ≈ 338.7 N ، والنسبة F / R ≈ 0.503 (تقع بين 0.50 و 0.51) ✅"
     ],
-    pdfFinalAnswer: "الإجابة الصحيحة: أ) قوة الاحتكاك F ≈ 170.5 N، قوة الاتصال العمودية R ≈ 338.7 N، ومعامل الاحتكاك µ ≈ 0.503 (يقع بين 0.50 و 0.51) ✅"
-},
-
-{
+    pdfFinalAnswer: "الإجابة الصحيحة: أ) المقاومة F ≈ 170.5 N، قوة الاتصال العمودية R ≈ 338.7 N، والنسبة بين F إلى R تساوي 170.48 / 338.68 ≈ 0.503 وتقع بين (0.50 و 0.51) ✅"
+},{
     id: 7,
     title: "س 7 (تمارين 1-A): حركة جسم على منضدة أفقية بقوة مائلة ومقاومة",
     text: "يستقر جسم كتلته (4m kg) على منضدة أفقية أثرت عليه قوة قدرها (50m N) تميل بزاوية حادة (θ°) مع الأفق، فإذا كان (tan θ = 3/4) ومقدار مقاومة الحركة (20m N)، أوجد العجلة (a) التي يتحرك بها الجسم، ثم أوجد مقدار قوة الاتصال العمودية (R) بدلالة m (باعتبار g = 10 m/s²).",
